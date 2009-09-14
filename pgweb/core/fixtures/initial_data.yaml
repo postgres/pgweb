@@ -48,5 +48,1925 @@
    "reldate": "2009-03-17", 
    "latestminor": 21
   }
+ }, 
+ {
+  "pk": 1, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Afghanistan", 
+   "tld": "af"
+  }
+ }, 
+ {
+  "pk": 2, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Albania", 
+   "tld": "al"
+  }
+ }, 
+ {
+  "pk": 3, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Algeria", 
+   "tld": "dz"
+  }
+ }, 
+ {
+  "pk": 4, 
+  "model": "core.country", 
+  "fields": {
+   "name": "American Samoa", 
+   "tld": "as"
+  }
+ }, 
+ {
+  "pk": 5, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Andorra", 
+   "tld": "ad"
+  }
+ }, 
+ {
+  "pk": 6, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Angola", 
+   "tld": "ao"
+  }
+ }, 
+ {
+  "pk": 7, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Anguilla", 
+   "tld": "ai"
+  }
+ }, 
+ {
+  "pk": 8, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Antarctica", 
+   "tld": "aq"
+  }
+ }, 
+ {
+  "pk": 9, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Antigua and Barbuda", 
+   "tld": "ag"
+  }
+ }, 
+ {
+  "pk": 10, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Argentina", 
+   "tld": "ar"
+  }
+ }, 
+ {
+  "pk": 11, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Armenia", 
+   "tld": "am"
+  }
+ }, 
+ {
+  "pk": 12, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Aruba", 
+   "tld": "aw"
+  }
+ }, 
+ {
+  "pk": 13, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Australia", 
+   "tld": "au"
+  }
+ }, 
+ {
+  "pk": 14, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Austria", 
+   "tld": "at"
+  }
+ }, 
+ {
+  "pk": 15, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Azerbaijan", 
+   "tld": "az"
+  }
+ }, 
+ {
+  "pk": 16, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Bahamas, The", 
+   "tld": "bs"
+  }
+ }, 
+ {
+  "pk": 17, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Bahrain", 
+   "tld": "bh"
+  }
+ }, 
+ {
+  "pk": 18, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Bangladesh", 
+   "tld": "bd"
+  }
+ }, 
+ {
+  "pk": 19, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Barbados", 
+   "tld": "bb"
+  }
+ }, 
+ {
+  "pk": 20, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Belarus", 
+   "tld": "by"
+  }
+ }, 
+ {
+  "pk": 21, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Belgium", 
+   "tld": "be"
+  }
+ }, 
+ {
+  "pk": 22, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Belize", 
+   "tld": "bz"
+  }
+ }, 
+ {
+  "pk": 23, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Benin", 
+   "tld": "bj"
+  }
+ }, 
+ {
+  "pk": 24, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Bermuda", 
+   "tld": "bm"
+  }
+ }, 
+ {
+  "pk": 25, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Bhutan", 
+   "tld": "bt"
+  }
+ }, 
+ {
+  "pk": 26, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Bolivia", 
+   "tld": "bo"
+  }
+ }, 
+ {
+  "pk": 27, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Bosnia and Herzegovina", 
+   "tld": "ba"
+  }
+ }, 
+ {
+  "pk": 28, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Botswana", 
+   "tld": "bw"
+  }
+ }, 
+ {
+  "pk": 29, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Bouvet Island", 
+   "tld": "bv"
+  }
+ }, 
+ {
+  "pk": 30, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Brazil", 
+   "tld": "br"
+  }
+ }, 
+ {
+  "pk": 31, 
+  "model": "core.country", 
+  "fields": {
+   "name": "British Indian Ocean Territory", 
+   "tld": "io"
+  }
+ }, 
+ {
+  "pk": 32, 
+  "model": "core.country", 
+  "fields": {
+   "name": "British Virgin Islands", 
+   "tld": "vg"
+  }
+ }, 
+ {
+  "pk": 33, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Brunei", 
+   "tld": "bn"
+  }
+ }, 
+ {
+  "pk": 34, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Bulgaria", 
+   "tld": "bg"
+  }
+ }, 
+ {
+  "pk": 35, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Burkina Faso", 
+   "tld": "bf"
+  }
+ }, 
+ {
+  "pk": 36, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Burma", 
+   "tld": "mm"
+  }
+ }, 
+ {
+  "pk": 37, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Burundi", 
+   "tld": "bi"
+  }
+ }, 
+ {
+  "pk": 38, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Cambodia", 
+   "tld": "kh"
+  }
+ }, 
+ {
+  "pk": 39, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Cameroon", 
+   "tld": "cm"
+  }
+ }, 
+ {
+  "pk": 40, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Canada", 
+   "tld": "ca"
+  }
+ }, 
+ {
+  "pk": 41, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Cape Verde", 
+   "tld": "cv"
+  }
+ }, 
+ {
+  "pk": 42, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Cayman Islands", 
+   "tld": "ky"
+  }
+ }, 
+ {
+  "pk": 43, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Central African Republic", 
+   "tld": "cf"
+  }
+ }, 
+ {
+  "pk": 44, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Chad", 
+   "tld": "td"
+  }
+ }, 
+ {
+  "pk": 45, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Chile", 
+   "tld": "cl"
+  }
+ }, 
+ {
+  "pk": 46, 
+  "model": "core.country", 
+  "fields": {
+   "name": "China", 
+   "tld": "cn"
+  }
+ }, 
+ {
+  "pk": 47, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Christmas Island", 
+   "tld": "cx"
+  }
+ }, 
+ {
+  "pk": 48, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Cocos (Keeling) Islands", 
+   "tld": "cc"
+  }
+ }, 
+ {
+  "pk": 49, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Colombia", 
+   "tld": "co"
+  }
+ }, 
+ {
+  "pk": 50, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Comoros", 
+   "tld": "km"
+  }
+ }, 
+ {
+  "pk": 51, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Congo, Democratic Republic of the", 
+   "tld": "cd"
+  }
+ }, 
+ {
+  "pk": 52, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Congo, Republic of the", 
+   "tld": "cg"
+  }
+ }, 
+ {
+  "pk": 53, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Cook Islands", 
+   "tld": "ck"
+  }
+ }, 
+ {
+  "pk": 54, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Costa Rica", 
+   "tld": "cr"
+  }
+ }, 
+ {
+  "pk": 55, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Cote d'Ivoire", 
+   "tld": "ci"
+  }
+ }, 
+ {
+  "pk": 56, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Croatia", 
+   "tld": "hr"
+  }
+ }, 
+ {
+  "pk": 57, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Cuba", 
+   "tld": "cu"
+  }
+ }, 
+ {
+  "pk": 58, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Cyprus", 
+   "tld": "cy"
+  }
+ }, 
+ {
+  "pk": 59, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Czech Republic", 
+   "tld": "cz"
+  }
+ }, 
+ {
+  "pk": 60, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Denmark", 
+   "tld": "dk"
+  }
+ }, 
+ {
+  "pk": 61, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Djibouti", 
+   "tld": "dj"
+  }
+ }, 
+ {
+  "pk": 62, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Dominica", 
+   "tld": "dm"
+  }
+ }, 
+ {
+  "pk": 63, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Dominican Republic", 
+   "tld": "do"
+  }
+ }, 
+ {
+  "pk": 64, 
+  "model": "core.country", 
+  "fields": {
+   "name": "East Timor", 
+   "tld": "tp"
+  }
+ }, 
+ {
+  "pk": 65, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Ecuador", 
+   "tld": "ec"
+  }
+ }, 
+ {
+  "pk": 66, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Egypt", 
+   "tld": "eg"
+  }
+ }, 
+ {
+  "pk": 67, 
+  "model": "core.country", 
+  "fields": {
+   "name": "El Salvador", 
+   "tld": "sv"
+  }
+ }, 
+ {
+  "pk": 68, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Equatorial Guinea", 
+   "tld": "gq"
+  }
+ }, 
+ {
+  "pk": 69, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Eritrea", 
+   "tld": "er"
+  }
+ }, 
+ {
+  "pk": 70, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Estonia", 
+   "tld": "ee"
+  }
+ }, 
+ {
+  "pk": 71, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Ethiopia", 
+   "tld": "et"
+  }
+ }, 
+ {
+  "pk": 72, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Falkland Islands (Islas Malvinas)", 
+   "tld": "fk"
+  }
+ }, 
+ {
+  "pk": 73, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Faroe Islands", 
+   "tld": "fo"
+  }
+ }, 
+ {
+  "pk": 74, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Fiji", 
+   "tld": "fj"
+  }
+ }, 
+ {
+  "pk": 75, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Finland", 
+   "tld": "fi"
+  }
+ }, 
+ {
+  "pk": 76, 
+  "model": "core.country", 
+  "fields": {
+   "name": "France", 
+   "tld": "fr"
+  }
+ }, 
+ {
+  "pk": 77, 
+  "model": "core.country", 
+  "fields": {
+   "name": "French Guiana", 
+   "tld": "gf"
+  }
+ }, 
+ {
+  "pk": 78, 
+  "model": "core.country", 
+  "fields": {
+   "name": "French Polynesia", 
+   "tld": "pf"
+  }
+ }, 
+ {
+  "pk": 79, 
+  "model": "core.country", 
+  "fields": {
+   "name": "French Southern and Antarctic Lands", 
+   "tld": "tf"
+  }
+ }, 
+ {
+  "pk": 80, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Gabon", 
+   "tld": "ga"
+  }
+ }, 
+ {
+  "pk": 81, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Gambia, The", 
+   "tld": "gm"
+  }
+ }, 
+ {
+  "pk": 82, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Georgia", 
+   "tld": "ge"
+  }
+ }, 
+ {
+  "pk": 83, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Germany", 
+   "tld": "de"
+  }
+ }, 
+ {
+  "pk": 84, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Ghana", 
+   "tld": "gh"
+  }
+ }, 
+ {
+  "pk": 85, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Gibraltar", 
+   "tld": "gi"
+  }
+ }, 
+ {
+  "pk": 86, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Greece", 
+   "tld": "gr"
+  }
+ }, 
+ {
+  "pk": 87, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Greenland", 
+   "tld": "gl"
+  }
+ }, 
+ {
+  "pk": 88, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Grenada", 
+   "tld": "gd"
+  }
+ }, 
+ {
+  "pk": 89, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Guadeloupe", 
+   "tld": "gp"
+  }
+ }, 
+ {
+  "pk": 90, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Guam", 
+   "tld": "gu"
+  }
+ }, 
+ {
+  "pk": 91, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Guatemala", 
+   "tld": "gt"
+  }
+ }, 
+ {
+  "pk": 92, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Guernsey", 
+   "tld": "gg"
+  }
+ }, 
+ {
+  "pk": 93, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Guinea", 
+   "tld": "gn"
+  }
+ }, 
+ {
+  "pk": 94, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Guinea-Bissau", 
+   "tld": "gw"
+  }
+ }, 
+ {
+  "pk": 95, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Guyana", 
+   "tld": "gy"
+  }
+ }, 
+ {
+  "pk": 96, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Haiti", 
+   "tld": "ht"
+  }
+ }, 
+ {
+  "pk": 97, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Heard Island and McDonald Islands", 
+   "tld": "hm"
+  }
+ }, 
+ {
+  "pk": 98, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Holy See (Vatican City)", 
+   "tld": "va"
+  }
+ }, 
+ {
+  "pk": 99, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Honduras", 
+   "tld": "hn"
+  }
+ }, 
+ {
+  "pk": 100, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Hong Kong", 
+   "tld": "hk"
+  }
+ }, 
+ {
+  "pk": 101, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Hungary", 
+   "tld": "hu"
+  }
+ }, 
+ {
+  "pk": 102, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Iceland", 
+   "tld": "is"
+  }
+ }, 
+ {
+  "pk": 103, 
+  "model": "core.country", 
+  "fields": {
+   "name": "India", 
+   "tld": "in"
+  }
+ }, 
+ {
+  "pk": 104, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Indonesia", 
+   "tld": "id"
+  }
+ }, 
+ {
+  "pk": 105, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Iran", 
+   "tld": "ir"
+  }
+ }, 
+ {
+  "pk": 106, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Iraq", 
+   "tld": "iq"
+  }
+ }, 
+ {
+  "pk": 107, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Ireland", 
+   "tld": "ie"
+  }
+ }, 
+ {
+  "pk": 108, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Israel", 
+   "tld": "il"
+  }
+ }, 
+ {
+  "pk": 109, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Italy", 
+   "tld": "it"
+  }
+ }, 
+ {
+  "pk": 110, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Jamaica", 
+   "tld": "jm"
+  }
+ }, 
+ {
+  "pk": 111, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Japan", 
+   "tld": "jp"
+  }
+ }, 
+ {
+  "pk": 112, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Jersey", 
+   "tld": "je"
+  }
+ }, 
+ {
+  "pk": 113, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Jordan", 
+   "tld": "jo"
+  }
+ }, 
+ {
+  "pk": 114, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Kazakhstan", 
+   "tld": "kz"
+  }
+ }, 
+ {
+  "pk": 115, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Kenya", 
+   "tld": "ke"
+  }
+ }, 
+ {
+  "pk": 116, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Kiribati", 
+   "tld": "ki"
+  }
+ }, 
+ {
+  "pk": 117, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Korea, North", 
+   "tld": "kp"
+  }
+ }, 
+ {
+  "pk": 118, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Korea, South", 
+   "tld": "kr"
+  }
+ }, 
+ {
+  "pk": 119, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Kuwait", 
+   "tld": "kw"
+  }
+ }, 
+ {
+  "pk": 120, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Kyrgyzstan", 
+   "tld": "kg"
+  }
+ }, 
+ {
+  "pk": 121, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Laos", 
+   "tld": "la"
+  }
+ }, 
+ {
+  "pk": 122, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Latvia", 
+   "tld": "lv"
+  }
+ }, 
+ {
+  "pk": 123, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Lebanon", 
+   "tld": "lb"
+  }
+ }, 
+ {
+  "pk": 124, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Lesotho", 
+   "tld": "ls"
+  }
+ }, 
+ {
+  "pk": 125, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Liberia", 
+   "tld": "lr"
+  }
+ }, 
+ {
+  "pk": 126, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Libya", 
+   "tld": "ly"
+  }
+ }, 
+ {
+  "pk": 127, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Liechtenstein", 
+   "tld": "li"
+  }
+ }, 
+ {
+  "pk": 128, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Lithuania", 
+   "tld": "lt"
+  }
+ }, 
+ {
+  "pk": 129, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Luxembourg", 
+   "tld": "lu"
+  }
+ }, 
+ {
+  "pk": 130, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Macau", 
+   "tld": "mo"
+  }
+ }, 
+ {
+  "pk": 131, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Macedonia, The Former Yugoslav Republic of", 
+   "tld": "mk"
+  }
+ }, 
+ {
+  "pk": 132, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Madagascar", 
+   "tld": "mg"
+  }
+ }, 
+ {
+  "pk": 133, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Malawi", 
+   "tld": "mw"
+  }
+ }, 
+ {
+  "pk": 134, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Malaysia", 
+   "tld": "my"
+  }
+ }, 
+ {
+  "pk": 135, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Maldives", 
+   "tld": "mv"
+  }
+ }, 
+ {
+  "pk": 136, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Mali", 
+   "tld": "ml"
+  }
+ }, 
+ {
+  "pk": 137, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Malta", 
+   "tld": "mt"
+  }
+ }, 
+ {
+  "pk": 138, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Man, Isle of", 
+   "tld": "im"
+  }
+ }, 
+ {
+  "pk": 139, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Marshall Islands", 
+   "tld": "mh"
+  }
+ }, 
+ {
+  "pk": 140, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Martinique", 
+   "tld": "mq"
+  }
+ }, 
+ {
+  "pk": 141, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Mauritania", 
+   "tld": "mr"
+  }
+ }, 
+ {
+  "pk": 142, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Mauritius", 
+   "tld": "mu"
+  }
+ }, 
+ {
+  "pk": 143, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Mayotte", 
+   "tld": "yt"
+  }
+ }, 
+ {
+  "pk": 144, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Mexico", 
+   "tld": "mx"
+  }
+ }, 
+ {
+  "pk": 145, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Micronesia, Federated States of", 
+   "tld": "fm"
+  }
+ }, 
+ {
+  "pk": 146, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Moldova", 
+   "tld": "md"
+  }
+ }, 
+ {
+  "pk": 147, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Monaco", 
+   "tld": "mc"
+  }
+ }, 
+ {
+  "pk": 148, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Mongolia", 
+   "tld": "mn"
+  }
+ }, 
+ {
+  "pk": 149, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Montserrat", 
+   "tld": "ms"
+  }
+ }, 
+ {
+  "pk": 150, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Morocco", 
+   "tld": "ma"
+  }
+ }, 
+ {
+  "pk": 151, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Mozambique", 
+   "tld": "mz"
+  }
+ }, 
+ {
+  "pk": 152, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Namibia", 
+   "tld": "na"
+  }
+ }, 
+ {
+  "pk": 153, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Nauru", 
+   "tld": "nr"
+  }
+ }, 
+ {
+  "pk": 154, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Nepal", 
+   "tld": "np"
+  }
+ }, 
+ {
+  "pk": 155, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Netherlands", 
+   "tld": "nl"
+  }
+ }, 
+ {
+  "pk": 156, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Netherlands Antilles", 
+   "tld": "an"
+  }
+ }, 
+ {
+  "pk": 157, 
+  "model": "core.country", 
+  "fields": {
+   "name": "New Caledonia", 
+   "tld": "nc"
+  }
+ }, 
+ {
+  "pk": 158, 
+  "model": "core.country", 
+  "fields": {
+   "name": "New Zealand", 
+   "tld": "nz"
+  }
+ }, 
+ {
+  "pk": 159, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Nicaragua", 
+   "tld": "ni"
+  }
+ }, 
+ {
+  "pk": 160, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Niger", 
+   "tld": "ne"
+  }
+ }, 
+ {
+  "pk": 161, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Nigeria", 
+   "tld": "ng"
+  }
+ }, 
+ {
+  "pk": 162, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Niue", 
+   "tld": "nu"
+  }
+ }, 
+ {
+  "pk": 163, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Norfolk Island", 
+   "tld": "nf"
+  }
+ }, 
+ {
+  "pk": 164, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Northern Mariana Islands", 
+   "tld": "mp"
+  }
+ }, 
+ {
+  "pk": 165, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Norway", 
+   "tld": "no"
+  }
+ }, 
+ {
+  "pk": 166, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Oman", 
+   "tld": "om"
+  }
+ }, 
+ {
+  "pk": 167, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Pakistan", 
+   "tld": "pk"
+  }
+ }, 
+ {
+  "pk": 168, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Palau", 
+   "tld": "pw"
+  }
+ }, 
+ {
+  "pk": 169, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Panama", 
+   "tld": "pa"
+  }
+ }, 
+ {
+  "pk": 170, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Papua New Guinea", 
+   "tld": "pg"
+  }
+ }, 
+ {
+  "pk": 171, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Paraguay", 
+   "tld": "py"
+  }
+ }, 
+ {
+  "pk": 172, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Peru", 
+   "tld": "pe"
+  }
+ }, 
+ {
+  "pk": 173, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Philippines", 
+   "tld": "ph"
+  }
+ }, 
+ {
+  "pk": 174, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Pitcairn Islands", 
+   "tld": "pn"
+  }
+ }, 
+ {
+  "pk": 175, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Poland", 
+   "tld": "pl"
+  }
+ }, 
+ {
+  "pk": 176, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Portugal", 
+   "tld": "pt"
+  }
+ }, 
+ {
+  "pk": 177, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Puerto Rico", 
+   "tld": "pr"
+  }
+ }, 
+ {
+  "pk": 178, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Qatar", 
+   "tld": "qa"
+  }
+ }, 
+ {
+  "pk": 179, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Reunion", 
+   "tld": "re"
+  }
+ }, 
+ {
+  "pk": 180, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Romania", 
+   "tld": "ro"
+  }
+ }, 
+ {
+  "pk": 181, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Russia", 
+   "tld": "ru"
+  }
+ }, 
+ {
+  "pk": 182, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Rwanda", 
+   "tld": "rw"
+  }
+ }, 
+ {
+  "pk": 183, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Saint Helena", 
+   "tld": "sh"
+  }
+ }, 
+ {
+  "pk": 184, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Saint Kitts and Nevis", 
+   "tld": "kn"
+  }
+ }, 
+ {
+  "pk": 185, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Saint Lucia", 
+   "tld": "lc"
+  }
+ }, 
+ {
+  "pk": 186, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Saint Pierre and Miquelon", 
+   "tld": "pm"
+  }
+ }, 
+ {
+  "pk": 187, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Saint Vincent and the Grenadines", 
+   "tld": "vc"
+  }
+ }, 
+ {
+  "pk": 188, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Samoa", 
+   "tld": "ws"
+  }
+ }, 
+ {
+  "pk": 189, 
+  "model": "core.country", 
+  "fields": {
+   "name": "San Marino", 
+   "tld": "sm"
+  }
+ }, 
+ {
+  "pk": 190, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Sao Tome and Principe", 
+   "tld": "st"
+  }
+ }, 
+ {
+  "pk": 191, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Saudi Arabia", 
+   "tld": "sa"
+  }
+ }, 
+ {
+  "pk": 192, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Senegal", 
+   "tld": "sn"
+  }
+ }, 
+ {
+  "pk": 193, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Serbia and Montenegro", 
+   "tld": "yu"
+  }
+ }, 
+ {
+  "pk": 194, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Seychelles", 
+   "tld": "sc"
+  }
+ }, 
+ {
+  "pk": 195, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Sierra Leone", 
+   "tld": "sl"
+  }
+ }, 
+ {
+  "pk": 196, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Singapore", 
+   "tld": "sg"
+  }
+ }, 
+ {
+  "pk": 197, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Slovakia", 
+   "tld": "sk"
+  }
+ }, 
+ {
+  "pk": 198, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Slovenia", 
+   "tld": "si"
+  }
+ }, 
+ {
+  "pk": 199, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Solomon Islands", 
+   "tld": "sb"
+  }
+ }, 
+ {
+  "pk": 200, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Somalia", 
+   "tld": "so"
+  }
+ }, 
+ {
+  "pk": 201, 
+  "model": "core.country", 
+  "fields": {
+   "name": "South Africa", 
+   "tld": "za"
+  }
+ }, 
+ {
+  "pk": 202, 
+  "model": "core.country", 
+  "fields": {
+   "name": "South Georgia and the South Sandwich Islands", 
+   "tld": "gs"
+  }
+ }, 
+ {
+  "pk": 203, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Spain", 
+   "tld": "es"
+  }
+ }, 
+ {
+  "pk": 204, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Sri Lanka", 
+   "tld": "lk"
+  }
+ }, 
+ {
+  "pk": 205, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Sudan", 
+   "tld": "sd"
+  }
+ }, 
+ {
+  "pk": 206, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Suriname", 
+   "tld": "sr"
+  }
+ }, 
+ {
+  "pk": 207, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Svalbard", 
+   "tld": "sj"
+  }
+ }, 
+ {
+  "pk": 208, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Swaziland", 
+   "tld": "sz"
+  }
+ }, 
+ {
+  "pk": 209, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Sweden", 
+   "tld": "se"
+  }
+ }, 
+ {
+  "pk": 210, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Switzerland", 
+   "tld": "ch"
+  }
+ }, 
+ {
+  "pk": 211, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Syria", 
+   "tld": "sy"
+  }
+ }, 
+ {
+  "pk": 212, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Taiwan", 
+   "tld": "tw"
+  }
+ }, 
+ {
+  "pk": 213, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Tajikistan", 
+   "tld": "tj"
+  }
+ }, 
+ {
+  "pk": 214, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Tanzania", 
+   "tld": "tz"
+  }
+ }, 
+ {
+  "pk": 215, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Thailand", 
+   "tld": "th"
+  }
+ }, 
+ {
+  "pk": 216, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Togo", 
+   "tld": "tg"
+  }
+ }, 
+ {
+  "pk": 217, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Tokelau", 
+   "tld": "tk"
+  }
+ }, 
+ {
+  "pk": 218, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Tonga", 
+   "tld": "to"
+  }
+ }, 
+ {
+  "pk": 219, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Trinidad and Tobago", 
+   "tld": "tt"
+  }
+ }, 
+ {
+  "pk": 220, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Tunisia", 
+   "tld": "tn"
+  }
+ }, 
+ {
+  "pk": 221, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Turkey", 
+   "tld": "tr"
+  }
+ }, 
+ {
+  "pk": 222, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Turkmenistan", 
+   "tld": "tm"
+  }
+ }, 
+ {
+  "pk": 223, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Turks and Caicos Islands", 
+   "tld": "tc"
+  }
+ }, 
+ {
+  "pk": 224, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Tuvalu", 
+   "tld": "tv"
+  }
+ }, 
+ {
+  "pk": 225, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Uganda", 
+   "tld": "ug"
+  }
+ }, 
+ {
+  "pk": 226, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Ukraine", 
+   "tld": "ua"
+  }
+ }, 
+ {
+  "pk": 227, 
+  "model": "core.country", 
+  "fields": {
+   "name": "United Arab Emirates", 
+   "tld": "ae"
+  }
+ }, 
+ {
+  "pk": 228, 
+  "model": "core.country", 
+  "fields": {
+   "name": "United Kingdom", 
+   "tld": "uk"
+  }
+ }, 
+ {
+  "pk": 229, 
+  "model": "core.country", 
+  "fields": {
+   "name": "United States", 
+   "tld": "us"
+  }
+ }, 
+ {
+  "pk": 230, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Uruguay", 
+   "tld": "uy"
+  }
+ }, 
+ {
+  "pk": 231, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Uzbekistan", 
+   "tld": "uz"
+  }
+ }, 
+ {
+  "pk": 232, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Vanuatu", 
+   "tld": "vu"
+  }
+ }, 
+ {
+  "pk": 233, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Venezuela", 
+   "tld": "ve"
+  }
+ }, 
+ {
+  "pk": 234, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Vietnam", 
+   "tld": "vn"
+  }
+ }, 
+ {
+  "pk": 235, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Virgin Islands", 
+   "tld": "vi"
+  }
+ }, 
+ {
+  "pk": 236, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Wallis and Futuna", 
+   "tld": "wf"
+  }
+ }, 
+ {
+  "pk": 237, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Western Sahara", 
+   "tld": "eh"
+  }
+ }, 
+ {
+  "pk": 238, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Yemen", 
+   "tld": "ye"
+  }
+ }, 
+ {
+  "pk": 239, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Zambia", 
+   "tld": "zm"
+  }
+ }, 
+ {
+  "pk": 240, 
+  "model": "core.country", 
+  "fields": {
+   "name": "Zimbabwe", 
+   "tld": "zw"
+  }
  }
 ]
