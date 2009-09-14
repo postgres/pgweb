@@ -1,0 +1,84 @@
+{%extends "base/page.html"%}
+{%block title%}Downloads{%endblock%}
+{%block contents%}
+<div id="pgDownloadsWrap">
+
+<h1>Downloads</h1>
+
+<h2>PostgreSQL Core Distribution</h2>
+
+<p>The core of the PostgreSQL object-relational database management system is available in several source and binary formats.
+The full package includes:</p>
+
+<ul>
+	<li>The core server with full documentation (html, man)</li>
+	<li>Several command line tools (e.g. psql, pg_ctl, pg_dump, pg_restore)</li>
+	<li>C library (libpq) and embedded C processor (ecpg)</li>
+	<li>Several server-side procedural languages (e.g. plpgsql, pltcl, plperl)</li>
+	<li>Several popular add-on packages (e.g. metaphone, pgcrypto and other useful enhancements)</li>
+</ul>
+
+<p>In addition, some 'one click' installers include additional packages such as pgAdmin and PostGIS.</a>
+
+<h3>Binary packages</h3>
+
+<p>Pre-built binary packages are available for a number of different operating systems:</p>
+
+<div align="center">
+<a href="/download/freebsd">FreeBSD</a> &middot; <a href="/download/linux">Linux</a> &middot; <a href="/download/macosx">Mac OS X</a> &middot; <a href="/download/solaris">Solaris</a> &middot; <a href="/download/windows">Windows</a>
+</div>
+
+<h3>Source code</h3>
+
+<p>You can download the <a href="/ftp/source/">source code</a> from a mirror site using our File Browser</a>
+
+<h3>3rd party distributions</h3>
+
+<ul>
+	<li><a href="http://www.enterprisedb.com/products/postgres_plus/download.do">Postgres Plus</a> - 'one click' installers for Linux, Mac, and Win32, which include many of the most commonly used components and helper applications. Published by <a href="http://www.enterprisedb.com">EnterpriseDB</a>.</li>
+	<li>'LAPP', 'MAPP' and 'WAPP' (Linux/Mac/Windows + Apache + PHP + PostgreSQL) stacks are available from <a href="http://bitnami.org/article/apache-php-and-postgresql-all-in-one">BitNami</a>. Sponsored by <a href="http://bitrock.com">BitRock</a>.</li>
+</ul>
+
+<h3>Live CDs/Software appliances</h3>
+
+<p>Live CDs are bootable CD images that allow you to run and play with PostgreSQL and a selection of related tools and 
+software, without installing anything on your PC. Software appliances are similarly pre-configured, but are designed to run in a virtual machine or be installed onto real hardware. Note that as complete operating systems, these distributions may not be updated immediately when new versions of PostgreSQL are released.</p>
+
+<ul>
+	<li><a href="http://pg-live.info/">pg_live</a> - a Xubuntu based live CD designed and optimized expressly for the PostgreSQL Database administrator and enthusiast. Sponsored by <a href="http://www.otg-nc.com">Open Technology Group</a>.</li>
+
+	<li><a href="http://yum.pgsqlrpms.org/livecd.php">PostgreSQL Live CD</a> - a Fedora based PostgreSQL live CD, 
+	containing packages from the PostgreSQL Yum repository. Maintained by Devrim G&Uuml;ND&Uuml;Z at 
+	<a href="http://www.commandprompt.com">Command Prompt</a>.</li>
+
+	<li><a href="http://www.turnkeylinux.org/appliances/postgresql">TurnKey PostgreSQL</a> - An Ubuntu based live CD and software appliance featuring a Mac OS X-themed Web management interface and a Python configuration and installation console. Published by <a href="http://www.turnkeylinux.org/">TurnKey Linux</a>.</li>
+
+</ul>
+
+<h3>Development snapshots (unstable)</h3>
+
+<p>There are source code and binary <a href="/download/snapshots">development snapshots</a> of the current development code
+available for testing and evaluation of new features. Note that these builds should be used <b>for testing purposes
+only</b>, and not for production systems.</p>
+
+<h2>Additional software</h2>
+
+<h3>Software Catalogue</h3>
+
+<p>There is much software available that is not bundled with PostgreSQL. The <a href="/download/product-categories">Software 
+Catalogue</a> offers a listing of many commercial and Open Source applications, interfaces and extensions to PostgreSQL
+that you may find useful.</p>
+
+<p>If you wish to have your product listed in the catalogue, please fill out this <a href="/download/submitproduct">form</a>.</p>
+
+<h3>pgFoundry</h3>
+
+<p><a href="http://pgfoundry.org/">pgFoundry</a> is home to a huge array of PostgreSQL related projects. As well as 
+downloading software, you can observe or participate in the development activities of the projects that interest you.</p>
+
+<h2>File Browser</h2>
+<p>You can download most of the software we publish from a mirror site using our <a href="/ftp/">File Browser</a>. If you prefer, 
+you can browse the <a href="{master_server}/download/mirrors-ftp">download mirrors</a> directly.</p>
+
+</div>
+{%endblock%}

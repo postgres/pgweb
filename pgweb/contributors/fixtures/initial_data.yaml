@@ -1,0 +1,52 @@
+[
+ {
+  "pk": 1, 
+  "model": "contributors.contributortype", 
+  "fields": {
+   "detailed": true, 
+   "typename": "Core Team", 
+   "extrainfo": "", 
+   "sortorder": 100
+  }
+ }, 
+ {
+  "pk": 2, 
+  "model": "contributors.contributortype", 
+  "fields": {
+   "detailed": true, 
+   "typename": "Major Contributors", 
+   "extrainfo": "", 
+   "sortorder": 200
+  }
+ }, 
+ {
+  "pk": 4, 
+  "model": "contributors.contributortype", 
+  "fields": {
+   "detailed": false, 
+   "typename": "Contributors", 
+   "extrainfo": "", 
+   "sortorder": 300
+  }
+ }, 
+ {
+  "pk": 3, 
+  "model": "contributors.contributortype", 
+  "fields": {
+   "detailed": true, 
+   "typename": "Hackers Emeritus", 
+   "extrainfo": "The following hackers were previously part of the core team. Although they no longer work on the project, they are included here in recognition of their valuable contributions over the years.", 
+   "sortorder": 400
+  }
+ }, 
+ {
+  "pk": 5, 
+  "model": "contributors.contributortype", 
+  "fields": {
+   "detailed": false, 
+   "typename": "Past Contributors", 
+   "extrainfo": "", 
+   "sortorder": 500
+  }
+ }
+]

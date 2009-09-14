@@ -1,0 +1,51 @@
+{%extends "base/page.html"%}
+{%block title%}Sponsors{%endblock%}
+{%block contents%}
+
+<h1>Sponsors</h1>
+
+<p><span class="txtMediumGrey">The following is a categorized list of significant sponsors to PostgreSQL.
+Sponsors are listed in alphabetical order within each section, with just the location of the head office
+for each company shown.
+</span></p>
+
+{% for s in sponsors %}
+{%ifchanged s.sponsortype %}
+{%if not forloop.first %}
+ </table>
+</div>
+
+{%endif%}
+<div class="tblBasic">
+<table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+<tr>
+	<td><h1>{{s.sponsortype.typename}}</h1></td>
+	<td class="colFirst" colspan="2">{{s.sponsortype.description}}</td>
+</tr>
+
+{%endifchanged%}
+<tr>
+	<td class="colFirst" width="125"><img src="/media/img/about/sponsors/{{s.logoname}}" alt="{{s.name}} logo" /></td>
+	<td class="colMid"><a href="{{s.url}}">{{s.name}}</a></td>
+	<td class="colLast" width="150">{{s.country}}</td>
+</tr>
+{%endfor%}
+ </table>
+</div>
+
+<div class="tblBasic">
+<table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+<tr class="lastrow">
+<th colspan="3">Sponsorship levels are meant to provide the general public and idea of how levels are determined.
+	They are not set in stone and all sponsorship recognition shall be determined on its own merits by the
+	<a href="http://wiki.postgresql.org/wiki/Sponsoring">Sponsorship Committee</a> as determined by a simple majority vote.
+</th>
+
+</tr>
+
+</table>
+
+</div>
+
+{%endblock%}
+

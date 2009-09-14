@@ -1,0 +1,11 @@
+{%extends "base/page.html"%}
+{%block title%}Quotes{%endblock%}
+{%block contents%}
+<h1>Quotes</h1>
+<dl>
+{% for obj in quotes %}
+ <dt>{{obj.quote|safe}}</dt>
+ <dd><b>{{obj.who}}, <a href="{{obj.link}}">{{obj.org}}</a></b></dd>
+{% endfor %}
+</dl>
+{%endblock%}

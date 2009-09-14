@@ -1,0 +1,179 @@
+{%extends "base/base.html" %}
+{%block title%}Welcome{%endblock%}
+{%block layoutblock%}
+        <div id="pgFrontContainer">
+          <div id="pgFrontMain">
+            <div id="pgFrontFeature">
+              <div id="pgFrontFeatureContent">
+                <h1 id="txtFrontFeatureHeading">
+                 PostgreSQL 8.4 Release Now Available
+                </h1>
+                <p>
+                After more than a year of development work, the next version of PostgreSQL, the world's most advanced
+                Open Source database is now available for download.
+                </p>
+		<div id="txtFrontFeatureLink">
+                  <br/>
+                  <img src="/layout/images/blt_blu_arrow.png" width="6" height="6" alt="" /><a href="/about/news.1108" title="Release Announcement">Release Announcement</a><br />
+                  <img src="/layout/images/blt_blu_arrow.png" width="6" height="6" alt="" /><a href="/docs/8.4/static/release-8-4.html" title="Release Notes">Release Notes</a><br />
+                  <img src="/layout/images/blt_blu_arrow.png" width="6" height="6" alt="" /><a href="/download" title="Download">Download</a><br />
+                </div>
+              </div>
+            </div> <!-- pgFrontFeature -->
+            <div id="pgFrontUSSContainer">
+              <div id="pgFrontUser">
+                <div id="pgFrontUserInner">
+                  <div id="pgFrontUserWrap">
+                    <h2><img src="/media/img/hdr/hdr_featureduser.png" width="104" height="10" alt="Featured User" /></h2>
+                    <div id="pgFrontUserContent">
+                      <div id="txtFrontUserText">{{quote.quote}}</div>
+                      <div id="txtFrontUserName"><b>{{quote.who}}, <a href="{{quote.link}}">{{quote.org}}</a></b></div>
+                      <div id="txtFrontUserLink">
+                          <img src="/layout/images/blt_blu_arrow.png" width="6" height="5" alt="" /><a href="/about/casestudies">Case Studies</a><span class="txtDivider">|</span><a href="/about/quotesarchive" title="See more quotes">More Quotes</a><span class="txtDivider">|</span><a href="/about/users" title="See featured users">Featured Users</a>
+                      </div>
+                    </div>
+                  </div> <!-- pgFrontUserWrap -->
+                </div>
+              </div>
+            </div> <!-- pgFrontUSSContainer -->
+          </div> <!-- pgFrontMain -->
+        </div> <!-- pgFrontContainer -->
+        <div id="pgFrontRightContainer">
+          <div id="pgFrontLatestReleases">
+            <h2><img src="/media/img/hdr/hdr_latestreleases.png" width="120" height="10" alt="Latest Releases" /></h2>
+            <div id="pgFrontLatestReleasesWrap">
+             {%for v in versions %}
+             <b>{{v.tree}}.{{v.latestminor}}</b> &middot; {{v.reldate}} &middot; <a href="/docs/{{v.tree}}/static/{{v.relnotes}}">Notes</a>
+             <br />
+             {%endfor%}
+            </div>
+	    <div id="pgFrontLatestReleasesNote"><b><a href="/download">Download</a></b> | <a href="/versions.rss" title="Versions RSS Feed"><img class="pgRSSImage" src="/media/img/misc/ico_rss.png" width="28" height="13" alt="Versions RSS Feed" /></a><br /><a href="/support/versioning">Why should I upgrade?</a></div>
+          </div> <!-- pgFrontLatestreleases -->
+          <div id="pgFrontShortcuts">
+            <h2><img src="/media/img/hdr/hdr_shortcuts.png" width="85" height="10" alt="Shortcuts" /></h2>
+            <div id="pgFrontShortcutsWrap">
+              <ul id="pgFrontShortcutsList">
+                <li>
+                  <a href="/support/security.html">Security</a>
+                </li>
+                <li>
+                  <a href="/community/international">International Sites</a>
+                </li>
+                <li>
+                  <a href="/community/lists">Mailing Lists</a>
+                </li>
+                <li>
+                  <a href="http://www.pgfoundry.org/">pgFoundry</a>
+                </li>
+                <li>
+                  <a href="http://wiki.postgresql.org/">Wiki</a>
+                </li>
+                <li>
+                  <a href="/support/submitbug">Report a Bug</a>
+                </li>
+                <li>
+                  <a href="/docs/faq/">FAQs</a>
+                </li>
+              </ul>
+            </div>
+          </div> <!-- pgFrontShortcuts -->
+          <div id="pgFrontSupportUs">
+            <h2><img src="/media/img/hdr/hdr_supportus.png" width="81" height="10" alt="Support Us" /></h2>
+            <div id="pgFrontSupportUsWrap">
+              <div id="txtFrontSupportUsText">
+                PostgreSQL is free. Please support our work by making a <a href=\"/about/donate\">donation</a>.
+              </div>
+            </div>
+          </div> <!-- pgFrontSupportUs -->
+        </div> <!-- pgFrontRightContainer -->
+        <div id="pgFrontBottomContainer">
+         <div id="pgFrontNews" class="txtNewsEvent">
+           <a href="/about/newsarchive">  
+           <img src="/media/img/hdr/hdr_latestnews.png" width="90" height="10" alt="Latest News" />
+           </a>
+           <div class="pgNewsEventsWrap">
+             {% for n in news %}
+             <p>
+              <span class="txtDate">{{n.date}}</span> <br/>
+              <a href="/about/news/{{n.id}}/">{{n.title}}</a>
+             </p>
+             {% endfor %}
+             <div>
+               <img class="pgArrowImage" src="/layout/images/blt_blu_arrow.png" width="6" height="5" alt="" />
+               <ul class="pgRSSBottomList">
+                 <li>
+                   <a href="/about/newsarchive" title="More News">More</a>
+                 </li>
+                 <li>
+                  <a href="{master_server}/about/submitnews">Submit News</a>
+                 </li>
+                 <li class="last-child">
+                   <a href="/news.rss" title="News RSS Feed"><img class="pgRSSImage" src="/media/img/misc/ico_rss.png" width="28" height="13" alt="News RSS Feed" /></a>
+                 </li>
+               </ul>
+             </div>
+           </div>
+         </div> <!-- pgFrontNews -->
+         <div id="pgFrontPlanet">
+           <a href="http://planet.postgresql.org">
+           <img src="/media/img/hdr/hdr_planetpg.png" width="140" height="10" alt="Planet PostgreSQL" />
+           </a>
+           <div id="pgFrontPlanetWrap">
+            <!-- BEGIN planet_loop -->
+            <p>
+              <span class="txtDate">{date}</span><br />
+              <a href="{link}">{title}</a>
+            </p>
+            <!-- END planet_loop -->
+            <div>
+             <img class="pgArrowImage" src="/layout/images/blt_blu_arrow.png" width="6" height="5" alt="" />
+             <ul class="pgRSSBottomList">
+              <li>
+               <a href="http://planet.postgresql.org" title="More Blog Posts">More</a>
+              </li>
+              <li class="last-child">
+               <a href="http://planet.postgresql.org/rss20.xml" title="PlanetPostgreSQL RSS Feed"><img class="pgRSSImage" src="/media/img/misc/ico_rss.png" width="28" height="13" alt="PlanetPostgreSQL RSS Feed" /></a>
+              </li>
+             </ul>
+            </div>            
+           </div> <!-- pgFrontPlanetWrap -->
+         </div> <!-- pgFrontPlanet -->
+         <div id="pgFrontEvents" class="txtNewsEvent">
+           <a href="/about/eventarchive">
+           <img src="/media/img/hdr/hdr_upcomingevents.png" width="123" height="10" alt="Upcoming Events" />
+           </a>
+           <div class="pgNewsEventsWrap">
+           {% for e in events %}
+            <p>
+             <span class="txtDate">{{e.displaydate|safe}}</span><br />
+             <a href="/about/event/{{e.id}}/">{{e.title}}</a><br/> ({{e.locationstring}})
+            </p>
+           {% endfor %}
+           </div>
+           <a href="/about/eventarchive">
+           <img src="/media/img/hdr/hdr_upcomingtraining.png" alt="Upcoming training" />
+           </a>
+           <div class="pgNewsEventsWrap">
+             <div id="pgFrontTrainingSummary">
+               Include Dave's magic training blurb here later!
+               <!-- INCLUDE about/training-summary.html -->
+             </div>
+             <div>
+               <img class="pgArrowImage" src="/layout/images/blt_blu_arrow.png" width="6" height="5" alt="" />
+               <ul class="pgRSSBottomList">
+                 <li>
+                   <a href="/about/eventarchive" title="More Events">More</a>
+                 </li>
+                 <li>
+                  <a href="{master_server}/about/submitevent">Submit Event</a>
+                 </li>
+                 <li class="last-child">
+                  <a href="/events.rss" title="Events RSS Feed"><img class="pgRSSImage" src="/media/img/misc/ico_rss.png" width="28" height="13" alt="Events RSS Feed" /></a>
+                 </li>
+               </ul>
+             </div>
+           </div> <!-- pgNewsEventsWrap -->
+         </div> <!-- pgFrontEvent -->
+        </div> <!-- pgFrontBottomContainer -->
+{%endblock%}
+

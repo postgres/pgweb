@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr">
+ <head>
+  <title>PostgreSQL: {%block title%}{%endblock%}</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <style type="text/css" media="screen" title="Normal Text">@import url("/media/css/base.css");</style>
+  <style type="text/css" media="screen" title="Normal Text">@import url("/media/css/geckofixes.css");</style>
+  <link rel="alternate" type="application/rss+xml" title="PostgreSQL News" href="/feeds/news/" />
+  <link rel="alternate" type="application/rss+xml" title="PostgreSQL Events" href="/feeds/events/" />
+ </head>
+ <body>
+  <div id="pgContainerWrap">
+   <div id="pgContainer">
+    <div id="pgHeaderContainer">
+	 <div id="pgHeader">
+	  <div id="pgHeaderLogoLeft">
+	   <a href="http://www.postgresql.org/"><img alt="PostgreSQL" height="80" width="230" src="/media/img/layout/hdr_left.png" /></a>
+	  </div>
+	  <div id="pgHeaderLogoRight">
+	   <a href="/"><img width="210" height="80" alt="The world's most advanced open source database." src="/media/img/layout/hdr_right.png" /></a>
+	  </div>
+	 </div> <!-- pgHeader -->
+
+	 <div id="pgTopNav">
+	  <div id="pgTopNavLeft"><img width="7" height="23" alt="" src="/media/img/layout/nav_lft.png" /></div>
+	  <div id="pgTopNavRight"><img width="7" height="23" alt="" src="/media/img/layout/nav_rgt.png" /></div>
+	  <ul id="pgTopNavList">
+	   <li><a href="/" title="Home">Home</a></li>
+	   <li><a href="/about" title="About">About</a></li>
+	   <li><a href="/download" title="Download">Download</a></li>
+	   <li><a href="/docs" title="Documentation">Documentation</a></li>
+	   <li><a href="/community" title="Community">Community</a></li>
+	   <li><a href="/developer" title="Developers">Developers</a></li>
+	   <li><a href="/support" title="Support">Support</a></li>
+	   <li><a href="/account" title="Your account">Your account</a></li>
+	  </ul>
+	 </div> <!-- pgTopNav -->
+	</div> <!-- pgHeaderContainer -->
+	<div id="pgContent">
+{%block layoutblock%}{%endblock%}
+     <br class="pgClearBoth" />
+    </div> <!-- pgContent -->
+	<div id="pgFooter">
+         <a class="navFooter" href="/about/privacypolicy">Privacy Policy</a> |
+         <a class="navFooter" href="/about/website">About the website</a><br/>
+	 Copyright &copy; 1996-2009 PostgreSQL Global Development Group
+	</div> <!-- pgFooter -->
+   </div>
+  </div> <!-- pgContainerWrap -->
+ </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr">
+<head>
+    <title>PostgreSQL: Documentation: Manuals: {{title}}</title>
+    <style type="text/css" media="screen" title="Normal Text">@import url("/media/css/docs.css");</style>
+    <link rel="alternate stylesheet" media="screen" href="/media/css/docs_large.css" type="text/css" title="Large Text" />
+    <script type="text/javascript" src="/media/js/styleswitcher.js"></script>
+    <script type="text/javascript" src="/media/js/geckostyle.js"></script>
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script><script type="text/javascript">_uacct = "UA-1345454-1";urchinTracker();</script>
+</head>
+<body>
+<div id="docHeader">
+	<div id="docHeaderLogo">
+		<a href="/" title="PostgreSQL"><img src="/media/img/docs/hdr_logo.png" width="206" height="80" alt="PostgreSQL" /></a>
+	</div>
+</div>
+
+<div id="docContainerWrap">
+<div id="docContainer">
+<div id="docNavSearchContainer">
+<div id="docSearch">
+	<form action="http://search.postgresql.org/search" method="get">
+	<div>
+	<input type="hidden" name="u" value="/docs/{{doc_nav_version}}/{{doc_type}}/" /> 
+	<label for="q">Search Documentation:&nbsp;</label><input type="text" id="q" name="q" size="20" onfocus="if( this.value==this.defaultValue ) this.value='';" value="Search" /><input id="submit" type="submit" value="Search" />
+	</div>
+	</form>
+        <div id="docTextSize">Text Size: <a href="#" onclick="setActiveStyleSheet('Normal Text'); return false;" onkeypress="return false;" title="Normal Text Size">Normal</a> / <a href="#" onclick="setActiveStyleSheet('Large Text'); return false;" onkeypress="return false;" title="Large Text Size">Large</a></div>
+</div>
+<div id="docNav">
+<a href="/" title="Home">Home</a> &rarr; <a href="/docs" title="Documentation">Documentation</a> &rarr; <a href="/docs/manuals" title="Manuals">Manuals</a> &rarr; <a href="/docs/{{doc_nav_version}}/{{doc_type}}/{{doc_index_filename}}">PostgreSQL {{doc_nav_version}}</a>
+</div>
+</div>
+
+<div id="docContent">
+{{page_content|safe}}
+{comments}
+</div>
+
+<div id="docFooter">
+    <a href="/about/privacypolicy">Privacy Policy</a> | FIXME<br />
+Copyright &copy; 1996-2009 PostgreSQL Global Development Group
+</div>
+</div>
+</div>
+</body>
+</html>

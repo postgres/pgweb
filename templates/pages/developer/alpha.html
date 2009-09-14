@@ -1,0 +1,39 @@
+{%extends "base/page.html"%}
+{%block title%}Alpha Information{%endblock%}
+{%block contents%}
+<h1>Alpha Information</h1>
+
+<p>
+PostgreSQL alpha releases are snapshots of development code.  They are
+intended to preview and test upcoming features and to provide the
+possibility for early feedback.  They should not be used in production
+installations or active development projects.  While the PostgreSQL
+code is continuously subject to a number of automated and manual
+tests, alpha releases might have serious bugs.  Also features may be
+changed incompatibly or removed at any time during the development
+cycle.
+</p>
+<p>
+The development cycle of a PostgreSQL major release alternates between
+periods of development and periods of integration work, called <a href="http://commitfest.postgresql.org/">commit
+fests</a>, normally one month each.  Alpha releases are planned to be
+produced at the end of every commit fest, thus every two months.
+Since the first commit fest starts within a month from the beginning
+of development altogether, early alpha releases are <i>not</i> indicative of
+the likely feature set of the final release.
+</p>
+<p>
+The current alpha is 8.5Alpha1, which is the first Alpha ever released by the 
+PostgreSQL Project.  As Alpha releases are intended for developers, it is available
+in source code form.  Binary releases for some platforms may be available later.</p>
+<ul>
+ <li><a href="/ftp/source/8.5alpha1/">Download 8.5Alpha1</a></li>
+ <li><a href="http://developer.postgresql.org/pgdocs/postgres/release-8.5.html">8.5Alpha1 Release Notes</a></li>
+</ul>
+<p>
+Issues you discover while testing the Alpha releases should be reported on the 
+<a href="http://archives.postgresql.org/pgsql-hackers/">pgsql-hackers mailing list</a>,
+or by using our <a href="/support/submitbug">Bug Report Form</a>.  
+Please make sure you indicate which alpha you're using.
+</p>
+{%endblock%}

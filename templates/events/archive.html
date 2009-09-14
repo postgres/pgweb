@@ -1,0 +1,11 @@
+{%extends "base/page.html"%}
+{%block title%}Event archive{%endblock%}
+{%block contents%}
+<h1>Event archive</h1>
+{%for obj in events %}
+<h2><a href="/about/event/{{obj.id}}/">{{obj.title}}</a></h2>
+{%include "events/inc_event.html"%}
+{%endfor%}
+<p><a href="/account/events/new/">Submit event</a></p>
+{%endblock%}
+

@@ -1,0 +1,27 @@
+{%extends "base/base.html" %}
+{%block layoutblock%}
+<div id="pgSideWrap">
+ <div id="pgSideNav">
+  <ul>
+   {%for m in navmenu%}
+   {%if not forloop.first %}</li>{%endif%}
+   <li{%if forloop.last%} class="last-child"{%endif%}><a href="{{m.link}}">{{m.title}}</a>
+    {%if m.submenu %}
+     <ul>
+     {%for sm in m.submenu %}
+      <li{%if forloop.last%} class="last-child"{%endif%}><a href="{{sm.link}}">{{sm.title}}</a></li>
+     {%endfor%}
+     </ul>
+    {%endif%}
+    {%if forloop.last%}
+   </li>
+    {%endif%}
+   {%endfor%}
+  </ul>
+ </div>
+</div> <!-- pgSideWrap -->
+<div id="pgContentWrap">
+{%block contents%}{%endblock%}
+</div> <!-- pgContentWrap -->
+{%endblock%}
+

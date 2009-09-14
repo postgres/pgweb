@@ -1,0 +1,30 @@
+{%extends "base/page.html"%}
+{%block contents%}
+<h1>Your account</h1>
+<p>
+This page contains information about your postgresql.org account.
+</p>
+
+<h1>Submitted data</h1>
+<p>
+Submitted data should be moved to a subpage!
+</p>
+
+<h2>News articles</h2>
+<ul>
+{%for article in newsarticles%}
+<li><a {%if not article.approved%} style="color:red;"{%endif%} href="/account/news/{{article.id}}/">{{article}}</a></li>
+{%endfor%}
+</ul>
+<a href="/account/news/new/">Submit news</a>
+
+<h2>Events</h2>
+<ul>
+{%for event in events%}
+<li><a {%if not event.approved%} style="color:red;"{%endif%} href="/account/events/{{event.id}}/">{{event}}</a></li>
+{%endfor%}
+</ul>
+<a href="/account/events/new/">Submit event</a>
+
+{%endblock%}
+

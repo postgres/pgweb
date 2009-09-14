@@ -1,0 +1,52 @@
+[
+ {
+  "pk": 1, 
+  "model": "core.version", 
+  "fields": {
+   "relnotes": "release-8-4.html", 
+   "tree": "8.4", 
+   "reldate": "2009-07-01", 
+   "latestminor": 0
+  }
+ }, 
+ {
+  "pk": 2, 
+  "model": "core.version", 
+  "fields": {
+   "relnotes": "release-8-3-7.html", 
+   "tree": "8.3", 
+   "reldate": "2009-03-17", 
+   "latestminor": 7
+  }
+ }, 
+ {
+  "pk": 3, 
+  "model": "core.version", 
+  "fields": {
+   "relnotes": "release-8-2-13.html", 
+   "tree": "8.2", 
+   "reldate": "2009-03-17", 
+   "latestminor": 13
+  }
+ }, 
+ {
+  "pk": 4, 
+  "model": "core.version", 
+  "fields": {
+   "relnotes": "release.html#RELEASE-8-1-17", 
+   "tree": "8.1", 
+   "reldate": "2009-03-17", 
+   "latestminor": 17
+  }
+ }, 
+ {
+  "pk": 5, 
+  "model": "core.version", 
+  "fields": {
+   "relnotes": "release.html#RELEASE-8-0-21", 
+   "tree": "8.0", 
+   "reldate": "2009-03-17", 
+   "latestminor": 21
+  }
+ }
+]

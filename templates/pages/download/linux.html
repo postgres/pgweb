@@ -1,0 +1,66 @@
+{%extends "base/page.html"%}
+{%block title%}Linux packages{%endblock%}
+{%block contents%}
+
+<h1>Linux packages</h1>
+
+<h2>One click installer</h2>
+
+<p>One click installers are available for 32 and 64 bit Linux distributions and include PostgreSQL, 
+pgAdmin, PL/Java and the PL/pgSQL debugger plugin. The installer has been tested with a number of 
+recent Linux distributions and should work on Ubuntu 6.06 and above, Fedora 6 and above, CentOS/Red Hat 
+Enterprise Linux 4 and above and others.</p>
+
+<p><b>Note: The one click installers do not integrate with platform-specific packaging systems. If you need
+RPM, APT or Portage integration, please use the packages below.</b></p>
+
+<ul>
+    <li>Download for <b><a href="http://www.enterprisedb.com/products/pgdownload.do#linux">32bit Linux</a></b><br />&nbsp;</li>
+    <li>Download for <b><a href="http://www.enterprisedb.com/products/pgdownload.do#linux-x64">64bit Linux</a></b></li>
+</ul>
+
+<p><i>The one click installers are maintained by Dave Page at <a href="http://www.enterprisedb.com">EnterpriseDB</a>.</i></p>
+
+<h2>CentOS, Fedora and RHEL Yum Repository</h2>
+
+<p>RPMs for CentOS, Fedora and Red Hat Enterprise Linux are available from the <a href="http://yum.pgsqlrpms.org/">PostgreSQL
+Yum repository</a>. Platform-specific RPM packages of PostgreSQL are available as well as a variety of related projects
+such as <a href="http://www.pgadmin.org">pgAdmin</a> and <a href="http://www.postgis.org">PostGIS</a>.</p>
+
+<p>A list of packages available from the Yum Repository can be found <a href="http://yum.pgsqlrpms.org/news-packagesreadyJan192008.php">here</a>.</p>
+
+<p>To setup your system to use the repository, please see the <b><a href="http://yum.pgsqlrpms.org/howtoyum.php">Yum HOWTO</a></b>.
+
+<p><i>The PostgreSQL Yum repository is maintained by Devrim G&Uuml;ND&Uuml;Z at <a href="http://www.commandprompt.com">Command Prompt</a>.</i></p>
+
+<h2>Debian Apt</h2>
+
+<p><a href="http://www.debian.org">Debian</a> users may install PostgreSQL using the apt utility. For 
+details on the use of apt on Debian, please see the documentation.</p>
+
+<p>A <a href="http://packages.debian.org/search?keywords=postgresql&searchon=names&suite=stable&section=all">list</a>
+of PostgreSQL Debian packages is available from the package search tool.</p>
+
+<p><i>The PostgreSQL packages for Debian are maintained by Martin Pitt.</i></p>
+
+<h2>Gentoo Portage</h2>
+
+<p><a href="http://www.gentoo.org">Gentoo</a> users may install PostgreSQL using the portage system. For 
+details on the use of Gentoo's Portage, please see the documentation.</p>
+
+<h2>SUSE RPMs</h2>
+
+<p>RPMs for SUSE Linux and openSUSE are available from the <a href="https://build.opensuse.org/">openSUSE Build Service</a> 
+in the project <i>server:database:postgresql</i>.  Platform-specific RPM packages are available for PostgreSQL 
+as well as a variety of related software.  Use the <a href="http://software.opensuse.org/search">search facility</a> to find 
+suitable packages. Documentation is also available there.</p>
+
+<p><i>The PostgreSQL packages for SUSE are maintained by Reinhard Max.</i></p>
+
+<h2>Ubuntu Apt</h2>
+
+<p><a href="http://www.ubuntu.com">Ubuntu</a> users may install PostgreSQL using the apt utility. For 
+details on the use of apt on Ubuntu, please see the documentation.</p>
+
+<p><i>The PostgreSQL packages for Ubuntu are maintained by Martin Pitt.</i></p>
+{%endblock%}

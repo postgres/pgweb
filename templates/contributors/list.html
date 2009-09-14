@@ -1,0 +1,49 @@
+{%extends "base/page.html"%}
+{%load pgfilters%}
+{%block title%}Contributor Profiles{%endblock%}
+{%block contents%}
+<h1>Contributor Profiles</h1>
+<p>These are the fine people that make PostgreSQL what it is today!</p>
+
+
+{%for t in contributortypes%}
+<h2>{{t.typename}}</h2>
+{%if t.extrainfo%}<p>{{t.extrainfo}}</p>{%endif%}
+<div class="tblBasic">
+ <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+  {%if t.detailed%}
+  <tr>
+   <th class="colFirst">Contributor</th>
+   <th class="colLast">Contribution</th>
+  </tr>
+  {%endif%}
+  {%for c in t.contributor_set.all %}
+   {%if t.detailed%}
+    <tr>
+     <td class="colFirst">{{c.firstname}} {{c.lastname}} ({{c.email|hidemail}})
+      {%if c.company %}<br/><a href="{{c.companyurl}}">{{c.company}}</a>{%endif%}
+      <br/>{{c.location}}</td>
+     <td class="colLast">{{c.contribution}}</td>
+     </tr>
+   {%else%}
+    {%if forloop.counter0|divisibleby:"2" %}
+     <tr>
+      <td>{{c.firstname}} {{c.lastname}}{%if c.email%} ({{c.email|hidemail}}){%endif%}</td>
+      {%if forloop.last%}
+      <td></td>
+     </tr>
+      {%endif%}
+    {%else%}
+      <td>{{c.firstname}} {{c.lastname}}{%if c.email%} ({{c.email|hidemail}}){%endif%}
+     </tr>
+    {%endif%}
+   {%endif%}
+  {%endfor%}
+ </table>
+</div>
+{%endfor%}
+
+<p>All contributors are listed in alphabetical order.
+Please report omissions or corrections to the <a href="mailto:webmaster@postgresql.org">webmaster</a>.</p>
+{%endblock%}
+

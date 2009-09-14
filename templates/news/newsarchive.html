@@ -1,0 +1,11 @@
+{%extends "base/page.html"%}
+{%block title%}News archive{%endblock%}
+{%block contents%}
+<h1>News archive</h1>
+{%for obj in news %}
+<h2><a href="/about/news/{{obj.id}}/">{{obj.title}}</a></h2>
+{%include "news/inc_newsitem.html"%}
+{%endfor%}
+<p><a href="//account/news/new/">Submit news</a></p>
+{%endblock%}
+

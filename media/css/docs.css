@@ -1,0 +1,210 @@
+/* PostgreSQL.org Documentation Style */
+
+@import url("global.css");
+@import url("table.css");
+@import url("text.css");
+
+body {
+  font-size: 76%;
+}
+
+/* Container Definitions */
+
+#docContainerWrap {
+  text-align: center; /* Win IE5 */
+}
+
+#docContainer {
+  margin: 0 auto;
+  width: 90%;
+  padding-bottom: 2em;
+  display: block;
+  text-align: left; /* Win IE5 */
+}
+
+#docHeader {
+  background-image: url("/media/img/docs/bg_hdr.png");
+  height: 83px;
+  margin: 0px;
+  padding: 0px;
+  display: block;
+}
+
+#docHeaderLogo {
+  position: relative;
+  width: 206px;
+  height: 83px;
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+  margin-left: 20px;
+}
+
+#docHeaderLogo img { border: 0px; }
+
+#docNavSearchContainer {
+  padding-bottom: 2px;
+}
+
+#docNav {
+  position: relative;
+  text-align: left;
+  margin-left: 10px;
+  margin-top: 5px;
+  color: #666;
+  font-size: 0.95em;
+}
+
+#docSearch {
+  position: relative;
+  text-align: right;
+  padding: 0;
+  margin: 0;
+  color: #666;
+}
+
+#docTextSize {
+  text-align: right;
+  white-space: nowrap;
+  margin-top: 7px;
+  font-size: 0.95em;
+}
+
+#docSearch form {
+	position: relative;
+	top: 5px;
+	right: 0;
+	margin: 0; /* need for IE Mac */
+	text-align: right; /* need for IE Mac */
+	white-space: nowrap; /* for Opera */
+}
+
+#docSearch form label { color: #666; font-size: 0.95em; }
+#docSearch form input { font-size: 0.95em; }
+	
+#docSearch form #submit {
+	font-size: 0.95em;
+	background: #7A7A7A;
+	color: #fff;
+	border-right: 1px solid #7A7A7A;
+	border-bottom: 1px solid #7A7A7A;
+	border-top: 1px solid #7A7A7A;
+	border-left: 1px solid #7A7A7A;
+	padding: 1px 4px;
+}
+	
+#docSearch form #q {
+	width: 170px;
+	font-size: 0.95em;
+	border:	1px solid #7A7A7A;
+	background: #E1E1E1;
+        color: #000000;
+	padding: 2px;
+}
+
+.frmDocSearch {
+  padding: 0;
+  margin: 0;
+  display: inline;
+}
+
+.inpDocSearch {
+  padding: 0;
+  margin: 0;
+  color: #000;
+}
+
+#docContent {
+  position: relative;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 40px;
+}
+
+#docFooter {
+  position: relative;
+  font-size: 0.9em; 
+  color: #666; 
+  line-height: 1.3em; 
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#docComments {
+  margin-top: 10px;
+}
+
+#docClear {
+  clear: both;
+  margin: 0;
+  padding: 0;
+}
+
+/* Heading Definitions */
+
+h1 {
+  font-weight: bold; 
+  color: #EC5800; 
+  font-size: 1.4em;
+}
+
+h2 {
+  font-weight: bold; 
+  color: #666; 
+  font-size: 1.2em;
+}
+
+h3 { 
+  font-weight: bold; 
+  color: #666; 
+  font-size: 1.1em;
+}
+
+/* Text Styles */
+
+.txtCurrentLocation {
+  font-weight: bold;
+}
+
+p, ol, ul, li {
+  line-height: 1.5em;
+}
+
+.txtCommentsWrap {
+  border: 2px solid #F5F5F5; 
+  width: 100%;
+}
+
+.txtCommentsContent {
+  background: #F5F5F5;
+  padding: 3px;
+}
+
+.txtCommentsPoster {
+  float: left;
+}
+
+.txtCommentsDate {
+  float: right;
+}
+
+.txtCommentsComment {
+  padding: 3px;
+}
+
+/* Link Styles */
+
+#docNav a {
+  font-weight: bold;
+}
+
+
+a:link                          { color:#0066A2; text-decoration: underline; }
+a:visited                       { color:#004E66; text-decoration: underline; }
+a:active                        { color:#0066A2; text-decoration: underline; }
+a:hover                         { color:#000000; text-decoration: underline; }
+
+#docFooter a:link                { color:#666; text-decoration: underline; }
+#docFooter a:visited             { color:#666; text-decoration: underline; }
+#docFooter a:active              { color:#666; text-decoration: underline; }
+#docFooter a:hover               { color:#000000; text-decoration: underline; }

@@ -1,0 +1,28 @@
+{%extends "base/page.html"%}
+{%block title%}{{title}}{%endblock%}
+{%block contents%}
+<h1>{{title}}</h1>
+
+{%if support%}
+<p>Commercial support is available from many different companies providing professional services
+to the PostgreSQL community.</p>
+{%else%}
+<p>Many companies provide hosting solutions based on PostgreSQL. Some also provide complete
+solutions including support contracts.</p>
+{%endif%}
+
+<p>If your company would like to be listed here, please fill out this <a href="/account/services/new/">form</a>.</p>
+
+<p>Please select a region:</p>
+
+<ul>
+{%for rl, rn in regions%}
+ <li><a href="/support/professional_{{what}}/{{rl}}/">{{rn}}</a></li>
+{%endfor%}
+</ul>
+
+<p>For more companies that provide PostgreSQL related consulting we also suggest you check 
+<a href="http://www.opensourcexperts.com/Index/index_html/PostgreSQL/index.html">Open Source Experts</a>.</p>
+
+{%endblock%}
+

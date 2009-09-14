@@ -1,0 +1,24 @@
+1,3c1,3
+< {%extends "base/page.html"%}
+< {%block title%}Books{%endblock%}
+< {%block contents%}
+---
+> <!-- BEGIN page_title_block -->
+> Books
+> <!-- END page_title_block -->
+13a14,24
+> 		<a href="http://www.amazon.de/PostgreSQL-Datenbankpraxis-Anwender-Administratoren-Entwickler/dp/3937514694/"><img src="/layout/images/docs/books/PB_Titel_PostgreSQL_small.png" alt="PostgreSQL.  Datenbankpraxis für Anwender, Administratoren und Entwickler (Broschiert)" /></a>
+> 	</td>
+>         <td class="colLast">
+> 		<b>Title</b>: PostgreSQL. Datenbankpraxis für Anwender, Administratoren und Entwickler (Broschiert)<br />
+> 		<b>Author</b>: Andreas Scherbaum<br />
+> 		<b>Format</b>: Paperback<br />
+> 		<b>Published</b>: August 2009<br />
+> 	</td>
+> </tr>
+> <tr>
+>         <td class="colFirst">
+22a34
+> 
+275d286
+< {%endblock%}

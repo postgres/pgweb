@@ -1,0 +1,54 @@
+{%extends "base/page.html"%}
+{%block title%}Community{%endblock%}
+{%block contents%}
+<div id="pgCommunityWrap">
+<div id="pgCommunity">
+<h1>Community</h1>
+
+<p>PostgreSQL is well supported by its active community. Current developments are chronicled in the <a href="/community/weeklynews">PostgreSQL Weekly News</a> and there are more than a dozen <a href="/community/lists">mailing lists</a> available, categorized into topics like administration, announcements, jobs, performance, and SQL. We also have several <a href="http://pugs.postgresql.org/">PostgreSQL User Groups</a> in the world, and there is also an active <a href="/community/irc">IRC</a> community.</p>
+
+<p>In addition to the resources available on this site, there are also links to <a href="/community/international">international sites</a> that contain PostgreSQL information in various languages. PostgreSQL community <a href="/community/resources">resources</a> are also highlighted in this section of the website.</p>
+</div>
+</div>
+
+<!-- BEGIN survey_block -->
+<div id="pgSurveyWrap">
+<div id="pgSurvey">
+  <dl>
+    <dt>User Survey</dt>
+    <dd>{survey_question}</dd>
+    <dd>
+      <form method="post" action="{master_server}/vote">
+      <p>
+      <input type="hidden" name="action" value="vote"/>
+      <input type="hidden" name="surveyid" value="{survey_id}"/>
+      <!-- BEGIN survey_option_loop -->
+      <input type="radio" name="answer" value="{option_num}" id="surv_opt_{option_num}" /><label for="surv_opt_{option_num}">{option_text}</label><br />
+      <!-- END survey_option_loop -->
+      </p>
+      <p><input id="surveySubmit" type="submit" name="submit" value="Vote" /></p>
+      </form>
+    </dd>
+    <dd><a href="/community/survey.{survey_id}">Results</a></dd>
+  </dl>
+</div>
+</div>
+<!-- END survey_block -->
+
+<!-- BEGIN planet_block -->
+<div id="pgPlanetWrap">
+<div id="pgPlanet">
+ <dl>
+  <dt>Planet PostgreSQL</dt>
+  <dd><ul>
+   <!-- BEGIN planet_loop -->
+    <li><a href="{link}">{title}</a></li>
+   <!-- END planet_loop -->
+  </ul></dd>
+  <dd><a href="http://planet.postgresql.org">More</a></dd>
+ </dl>
+</div>
+</div>
+
+<!-- END planet_block -->
+{%endblock%}

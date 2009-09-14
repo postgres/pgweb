@@ -1,0 +1,12 @@
+div.markdownpreview {
+   margin-top: 2px;
+   border: 1px solid black;
+   float: left;
+   overflow: auto;
+}
+
+div.markdownpreview p {
+   margin-left: 0px !important;
+   padding-left: 0px !important;
+}
+

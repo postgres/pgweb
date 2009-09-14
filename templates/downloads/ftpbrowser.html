@@ -1,0 +1,47 @@
+{%extends "base/page.html"%}
+{%block title%}File Browser{%endblock%}
+{%block contents%}
+<h1>File Browser</h1>
+<h3><a href="/ftp/">Top</a>{%for b in breadcrumbs%} &rarr; <a href="/ftp/{{b.path}}/">{{b.name}}</a>{%endfor%}</h3>
+
+{%if directories%}
+<h2>Directories</h2>
+<div>
+<table border="0" cellpadding="0" cellspacing="0" width="90%">
+{%for dir in directories%}
+ <tr><td><a href="{{dir.url}}"><img src="/media/img/ftp/folder.png" alt="{{dir.link}}" /></a>&nbsp;<a href="{{dir.url}}">{{dir.link}}</a></td></tr>
+{%endfor%}
+</table>
+</div>
+{%endif%}
+
+{%if files%}
+<h2>Files</h2>
+<div id="pgFtpContent">
+<table border="0" cellpadding="0" cellspacing="0" width="90%">
+{%for file in files%}
+<tr><td><a href="/download/mirrors-ftp/{{basepath}}/{{file.name}}"><img src="/media/img/ftp/file.png" alt="{{file.name}}" /></a>&nbsp;<a href="/download/mirrors-ftp/{{basepath}}/{{file.name}}">{{file.name}}</a></td><td>{{file.mtime}}</td><td>{{file.size|filesizeformat}}</td></tr>
+{%endfor%}
+</table>
+</div>
+{%endif%}
+
+
+{%if maintainer%}
+<h2>Current Maintainer</h2>
+<pre>{{maintainer}}</pre>
+{%endif%}
+
+
+{%if readme%}
+<h2>README File</h2>
+<pre>{{readme}}</pre>
+{%endif%}
+
+{%if messagefile%}
+<h2>MESSAGE File</h2>
+<pre>{{messagefile}}</pre>
+{%endif%}
+
+{%endblock%}
+

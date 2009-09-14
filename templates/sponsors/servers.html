@@ -1,0 +1,43 @@
+{%extends "base/page.html"%}
+{%block title%}Servers{%endblock%}
+{%block contents%}
+
+<h1>Servers</h1>
+
+<p>
+The servers that power the services of postgresql.org are provided by
+different companies and organisations around the world. 
+</p>
+
+<div class="tblBasic">
+<table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+<tr>
+	<th class="colFirst">Name</th>
+	<th class="colMid">Provider</th>
+	<th class="colMid">Decic.</th>
+	<th class="colMid">Perf.</th>
+	<th class="colMid">OS</th>
+	<th class="colMid">Location</th>
+	<th class="colLast">Usage</th>	
+</tr>
+
+{% for s in servers %}
+<tr>
+	<td class="colFirst">{{s.name}}</td>
+	<td class="colMid">
+	{%for p in s.sponsors.all %}
+		<a href="{{p.url}}">{{p.name}}</a>{%if not forloop.last%}, {%endif%}
+	{%endfor%}
+	</td>
+	<td class="colMid">{{s.dedicated}}</td>
+	<td class="colMid">{{s.performance}}</td>
+	<td class="colMid">{{s.os}}</td>
+	<td class="colMid">{{s.location}}</td>
+	<td class="colLast">{{s.usage}}</td>
+</tr>
+{% endfor %}
+ </table>
+</div>
+
+{%endblock%}
+
