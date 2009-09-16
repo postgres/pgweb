@@ -17,3 +17,4 @@ def home(request):
 		'events': myevents,
 	}, NavContext(request, 'account'))
 
+

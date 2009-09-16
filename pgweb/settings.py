@@ -70,6 +70,10 @@ TEMPLATE_DIRS = (
     '../templates/',
 )
 
+LOGIN_URL='/account/login/'
+LOGIN_REDIRECT_URL='/account/'
+LOGOUT_URL='/account/logout/'
+
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
