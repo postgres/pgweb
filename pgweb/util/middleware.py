@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect, HttpResponse
+from django.conf import settings
 
 # Use thread local storage to pass the username down. 
 # http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser
@@ -19,6 +20,16 @@ class PgMiddleware(object):
 		# We implement the SSL verification in a middleware and not just a decorator, because
 		# if we do it just in a decorator we'd have to add a decorator for each and every
 		# view that *doesn't* require SSL. This is much easier, of course.
+
+		if hasattr(settings,'NO_HTTPS_REDIRECT') and settings.NO_HTTPS_REDIRECT:
+			return None
+
+		# Don't redirect the admin interface, since the code is out of our control and we can't
+		# give it the decorator require_ssl. We expect the web server config to deal with
+		# redirecting *to* SSL here.
+		if request.path.startswith('/admin'):
+			return None
+
 		if view_func.__name__ == '_require_ssl':
 			# This view requires SSL, so check if we have it
 			if not request.is_secure():

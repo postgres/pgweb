@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from datetime import date
 
+from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form
 
@@ -25,6 +26,7 @@ def item(request, itemid, throwaway=None):
 		'obj': event,
 	}, NavContext(request, 'about'))
 
+@ssl_required
 @login_required
 def form(request, itemid):
 	return simple_form(Event, itemid, request, EventForm)
