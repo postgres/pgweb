@@ -7,8 +7,8 @@
   <link rel="shortcut icon" href="/favicon.ico" />
   <style type="text/css" media="screen" title="Normal Text">@import url("/media/css/base.css");</style>
   <style type="text/css" media="screen" title="Normal Text">@import url("/media/css/geckofixes.css");</style>
-  <link rel="alternate" type="application/rss+xml" title="PostgreSQL News" href="/feeds/news/" />
-  <link rel="alternate" type="application/rss+xml" title="PostgreSQL Events" href="/feeds/events/" />
+  <link rel="alternate" type="application/rss+xml" title="PostgreSQL News" href="{{link_root}}/feeds/news/" />
+  <link rel="alternate" type="application/rss+xml" title="PostgreSQL Events" href="{{link_root}}/feeds/events/" />
  </head>
  <body>
   <div id="pgContainerWrap">
@@ -27,14 +27,14 @@
 	  <div id="pgTopNavLeft"><img width="7" height="23" alt="" src="/media/img/layout/nav_lft.png" /></div>
 	  <div id="pgTopNavRight"><img width="7" height="23" alt="" src="/media/img/layout/nav_rgt.png" /></div>
 	  <ul id="pgTopNavList">
-	   <li><a href="/" title="Home">Home</a></li>
-	   <li><a href="/about" title="About">About</a></li>
-	   <li><a href="/download" title="Download">Download</a></li>
-	   <li><a href="/docs" title="Documentation">Documentation</a></li>
-	   <li><a href="/community" title="Community">Community</a></li>
-	   <li><a href="/developer" title="Developers">Developers</a></li>
-	   <li><a href="/support" title="Support">Support</a></li>
-	   <li><a href="/account" title="Your account">Your account</a></li>
+	   <li><a href="{{link_root}}/" title="Home">Home</a></li>
+	   <li><a href="{{link_root}}/about" title="About">About</a></li>
+	   <li><a href="{{link_root}}/download" title="Download">Download</a></li>
+	   <li><a href="{{link_root}}/docs" title="Documentation">Documentation</a></li>
+	   <li><a href="{{link_root}}/community" title="Community">Community</a></li>
+	   <li><a href="{{link_root}}/developer" title="Developers">Developers</a></li>
+	   <li><a href="{{link_root}}/support" title="Support">Support</a></li>
+	   <li><a href="{{link_root}}/account" title="Your account">Your account</a></li>
 	  </ul>
 	 </div> <!-- pgTopNav -->
 	</div> <!-- pgHeaderContainer -->
@@ -43,8 +43,8 @@
      <br class="pgClearBoth" />
     </div> <!-- pgContent -->
 	<div id="pgFooter">
-         <a class="navFooter" href="/about/privacypolicy">Privacy Policy</a> |
-         <a class="navFooter" href="/about/website">About the website</a><br/>
+         <a class="navFooter" href="{{link_root}}/about/privacypolicy">Privacy Policy</a> |
+         <a class="navFooter" href="{{link_root}}/about/website">About the website</a><br/>
 	 Copyright &copy; 1996-2009 PostgreSQL Global Development Group
 	</div> <!-- pgFooter -->
    </div>

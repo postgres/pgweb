@@ -1,4 +1,5 @@
 from django.template import RequestContext
+from django.conf import settings
 
 # This is the whole site navigation structure. Stick in a smarter file?
 sitenav = {
@@ -87,4 +88,14 @@ class NavContext(RequestContext):
 		else:
 			navsection = {}
 		self.update({'navmenu': navsection})
+
+
+# Template context processor to add information about the root link
+def RootLinkContextProcessor(request):
+	if request.is_secure():
+		return {
+			'link_root': settings.SITE_ROOT,
+		}
+	else:
+		return {}
 
