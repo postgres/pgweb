@@ -30,7 +30,8 @@ class AuthBackend(ModelBackend):
 				# Value 1 in field 1 means the login succeeded. In this case,
 				# create a user in the django system, and migrate all settings
 				# we can think of.
-				user = User(username=username, password=password, email=rows[0][3], first_name=rows[0][2])
+				user = User(username=username, email=rows[0][3], first_name=rows[0][2])
+				user.set_password(password)
 				user.save()
 				return user
 			# Any other value in field 1 means login failed, so tell django we did
