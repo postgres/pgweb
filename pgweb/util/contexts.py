@@ -88,3 +88,13 @@ class NavContext(RequestContext):
 			navsection = {}
 		self.update({'navmenu': navsection})
 
+
+# Template context processor to add information about the root link
+def RootLinkContextProcessor(request):
+	if request.is_secure():
+		return {
+			'link_root': settings.SITE_ROOT,
+		}
+	else:
+		return {}
+

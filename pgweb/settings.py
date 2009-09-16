@@ -70,6 +70,12 @@ TEMPLATE_DIRS = (
     '../templates/',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+	'django.core.context_processors.auth',
+	'django.core.context_processors.media',
+	'util.contexts.RootLinkContextProcessor',
+)
+
 LOGIN_URL='/account/login/'
 LOGIN_REDIRECT_URL='/account/'
 LOGOUT_URL='/account/logout/'
@@ -94,6 +100,8 @@ INSTALLED_APPS = [
     'pgweb.sponsors',
 ]
 
+
+SITE_ROOT="http://www.postgresql.org"
 
 # Load local settings overrides
 from settings_local import *
