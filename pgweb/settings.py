@@ -80,6 +80,10 @@ LOGIN_URL='/account/login/'
 LOGIN_REDIRECT_URL='/account/'
 LOGOUT_URL='/account/logout/'
 
+AUTHENTICATION_BACKENDS = (
+    'util.auth.AuthBackend',
+)
+
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
