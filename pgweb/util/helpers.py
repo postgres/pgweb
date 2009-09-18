@@ -23,8 +23,14 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 		# Generate form
 		form = formclass(instance=instance)
 
+	if hasattr(instancetype, 'markdown_fields'):
+		markdownfields = instancetype.markdown_fields
+	else:
+		markdownfields = None
+
 	return render_to_response(formtemplate, {
 		'form': form,
 		'formitemtype': instance._meta.verbose_name,
+		'markdownfields': markdownfields,
 	}, NavContext(request, navsection))
 

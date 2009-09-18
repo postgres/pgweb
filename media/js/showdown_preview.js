@@ -3,7 +3,7 @@
 
 var converter = null;
 
-function attach_showdown_preview(objid) {
+function attach_showdown_preview(objid, admin) {
 	if (!converter) {
 		converter = new Showdown.converter();
 	}
@@ -13,16 +13,26 @@ function attach_showdown_preview(objid) {
 	   alert('Could not locate object ' + objid + ' in DOM');
 	   return;
 	}
-	obj.style.cssFloat = 'left';
-	obj.style.marginRight = '10px';
+
 	newdiv = document.createElement('div');
 	newdiv.className = 'markdownpreview';
-	obj.style.width = newdiv.style.width = "400px";
-	obj.style.height = newdiv.style.height = "200px";
+
+	if (admin) {
+		obj.style.cssFloat = 'left';
+		obj.style.marginRight = '10px';
+		obj.style.width = newdiv.style.width = "400px";
+		obj.style.height = newdiv.style.height = "200px";
+	}
 
 	obj.preview_div = newdiv;
 
 	obj.parentNode.insertBefore(newdiv, obj.nextSibling);
+
+	if (!admin) {
+	   infospan = document.createElement('span');
+	   infospan.innerHTML = 'This field supports markdown. See below for a preview.';
+	   obj.parentNode.insertBefore(infospan, newdiv);
+	}
 
 	update_markdown(obj, newdiv);
 

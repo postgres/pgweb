@@ -635,6 +635,23 @@ img.pgArrowImage {
   clear: both;
 }
 
+/* Generic forms class */
+TABLE.pgGenericFormTable TR {
+   vertical-align: top;
+}
+
+TABLE.pgGenericFormTable TR TD INPUT {
+   width: 100%;
+}
+
+TABLE.pgGenericFormTable TR TD TEXTAREA {
+   width: 100%;
+}
+
+TABLE.pgGenericFormTable TR TD DIV.markdownpreview {
+   width: 100%;
+}
+
 /* Misc Classes */
 
 .pgClearBoth {

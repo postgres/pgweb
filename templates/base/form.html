@@ -2,10 +2,26 @@
 {%block contents%}
 <h1>Edit {{formitemtype}}</h1>
 <form method="post" action=".">
-<table>
+<table class="pgGenericFormTable">
 {{form.as_table}}
 </table>
 <input type="submit" value="Save">
 </form>
+{%endblock%}
+
+{% block extrahead %}
+{{ block.super }}
+{%if markdownfields%}
+<link rel="stylesheet" type="text/css" href="/media/css/showdown_preview.css" />
+<script type="text/javascript" src="/media/showdown/showdown.js"></script>
+<script type="text/javascript" src="/media/js/showdown_preview.js"></script>
+<script language="javascript">
+   window.onload = function() {
+      {%for mdf in markdownfields %}
+         attach_showdown_preview('id_{{mdf}}', 0);
+      {%endfor%}
+   }
+</script>
+{%endif%}
 {%endblock%}
 
