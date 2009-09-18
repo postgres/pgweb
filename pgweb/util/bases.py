@@ -12,7 +12,6 @@ class PgModel(object):
 	def PreSaveHandler(self):
 		"""If send_notification is set to True, send a default formatted notification mail"""
 		
-		print "Handler called!"
 		if not self.send_notification:
 			return
 
@@ -22,6 +21,8 @@ class PgModel(object):
 			# If any of these come back as None, it means that nothing actually changed,
 			# or that we don't care to send out notifications about it.
 			return
+
+		cont = self._build_url() + "\n\n" + cont
 
 		print "Sending notification to %s" % settings.NOTIFICATION_EMAIL
 		print "Generate subject: %s by %s\nGenerate contents: %s\n------------------------------" % (subj, get_current_user(), cont)
@@ -70,6 +71,21 @@ class PgModel(object):
 			return "This object does not know how to express itself."
 
 		return "\n".join(['%s: %s' % (n, getattr(self, n)) for n in fieldlist])
+
+	def _build_url(self):
+		if self.id:
+			return "%s/admin/%s/%s/%s/" % (
+				settings.SITE_ROOT,
+				self._meta.app_label,
+				self._meta.module_name,
+				self.id,
+			)
+		else:
+			return "%s/admin/%s/%s/" % (
+				settings.SITE_ROOT,
+				self._meta.app_label,
+				self._meta.module_name,
+			)
 
 	def full_text_diff(self, oldobj):
 		fieldlist = self._get_all_notification_fields()
