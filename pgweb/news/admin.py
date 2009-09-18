@@ -1,4 +1,4 @@
-from django.contrib import admin
+from util.admin import register_markdown
 from models import *
 
-admin.site.register(NewsArticle)
+register_markdown(NewsArticle)

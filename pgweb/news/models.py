@@ -11,10 +11,10 @@ class NewsArticle(PgModel, models.Model):
 	content = models.TextField(null=False, blank=False)
 
 	send_notification = True
+	markdown_fields = ('content',)
 	
 	def __unicode__(self):
 		return "%s: %s" % (self.date, self.title)
 	
 	class Meta:
 		ordering = ('-date',)
-

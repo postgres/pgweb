@@ -23,6 +23,7 @@ class Event(models.Model, PgModel):
 	details = models.TextField(blank=False, null=False)
 	
 	send_notification = True
+	markdown_fields = ('summary', 'details', )
 	
 	def __unicode__(self):
 		return "%s: %s" % (self.startdate, self.title)

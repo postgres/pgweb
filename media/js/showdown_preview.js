@@ -20,17 +20,24 @@ function attach_showdown_preview(objid) {
 	obj.style.width = newdiv.style.width = "400px";
 	obj.style.height = newdiv.style.height = "200px";
 
+	obj.preview_div = newdiv;
+
 	obj.parentNode.insertBefore(newdiv, obj.nextSibling);
 
 	update_markdown(obj, newdiv);
 
-	window.onkeyup = obj.onkeyup = function() {
+	window.onkeyup = function() {
 		/* Using a timer make sure we only update max 4 times / second */
 		if (obj.current_timeout) {
 			clearTimeout(obj.current_timeout);
 		}
 		obj.current_timeout = setTimeout(function() {
-			update_markdown(obj, newdiv);
+			e = document.getElementsByTagName('textarea');
+			for (i= 0; i < e.length; i++) {
+				if (e[i].preview_div) {
+					update_markdown(e[i], e[i].preview_div);
+				}
+			}
 		}, 250);
 	};
 }

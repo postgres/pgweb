@@ -1,0 +1,25 @@
+{% extends "admin/change_form.html" %}
+{% block form_top %}
+<p>
+Note that the summary field can use
+<a href="http://en.wikipedia.org/wiki/Markdown">markdown</a> markup.
+</p>
+{%endblock%}
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="/media/css/showdown_preview.css" />
+<script type="text/javascript" src="/media/showdown/showdown.js"></script>
+<script type="text/javascript" src="/media/js/showdown_preview.js"></script>
+<script language="javascript">
+   window.onload = function() {
+      tael = document.getElementsByTagName('textarea');
+      for (i = 0; i < tael.length; i++) {
+         if (tael[i].className.indexOf('markdown_preview') >= 0) {
+           attach_showdown_preview(tael[i].id);
+         }
+      }
+   }
+</script>
+{%endblock%}
+
