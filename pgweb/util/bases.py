@@ -1,3 +1,6 @@
+from email.mime.text import MIMEText
+from subprocess import Popen, PIPE
+
 from django.db.models.signals import pre_save
 from django.db import models
 from django.conf import settings
@@ -24,8 +27,19 @@ class PgModel(object):
 
 		cont = self._build_url() + "\n\n" + cont
 
-		print "Sending notification to %s" % settings.NOTIFICATION_EMAIL
-		print "Generate subject: %s by %s\nGenerate contents: %s\n------------------------------" % (subj, get_current_user(), cont)
+
+		# Build the mail text
+		msg = MIMEText(cont, _charset='utf-8')
+		msg['Subject'] = "%s by %s" % (subj, get_current_user())
+		msg['To'] = settings.NOTIFICATION_EMAIL
+		msg['From'] = settings.NOTIFICATION_FROM
+
+		if hasattr(settings,'SUPPRESS_NOTIFICATIONS') and settings.SUPPRESS_NOTIFICATIONS:
+			print msg.as_string()
+		else:
+			pipe = Popen("sendmail -t", shell=True, stdin=PIPE).stdin
+			pipe.write(msg.as_string())
+			pipe.close()
 
 		
 	def _get_changes_texts(self):
