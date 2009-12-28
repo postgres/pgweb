@@ -55,3 +55,25 @@ class Organisation(PgModel, models.Model):
 	class Meta:
 		ordering = ('name',)
 
+
+# Basic classes for importing external RSS feeds, such as planet
+class ImportedRSSFeed(models.Model):
+	internalname = models.CharField(max_length=32, null=False, blank=False, unique=True)
+	url = models.URLField(null=False, blank=False)
+
+	def __unicode__(self):
+		return self.internalname
+
+class ImportedRSSItem(models.Model):
+	feed = models.ForeignKey(ImportedRSSFeed)
+	title = models.CharField(max_length=100, null=False, blank=False)
+	url = models.URLField(null=False, blank=False)
+	posttime = models.DateTimeField(null=False, blank=False)
+
+	def __unicode__(self):
+		return self.title
+
+	@property
+	def date(self):
+		return self.posttime.strftime("%Y-%m-%d")
+

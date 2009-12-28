@@ -119,12 +119,12 @@
            <img src="/media/img/hdr/hdr_planetpg.png" width="140" height="10" alt="Planet PostgreSQL" />
            </a>
            <div id="pgFrontPlanetWrap">
-            <!-- BEGIN planet_loop -->
+            {%for post in planet%}
             <p>
-              <span class="txtDate">{date}</span><br />
-              <a href="{link}">{title}</a>
+              <span class="txtDate">{{post.date}}</span><br />
+              <a href="{{post.url}}">{{post.title}}</a>
             </p>
-            <!-- END planet_loop -->
+            {%endfor%}
             <div>
              <img class="pgArrowImage" src="/layout/images/blt_blu_arrow.png" width="6" height="5" alt="" />
              <ul class="pgRSSBottomList">

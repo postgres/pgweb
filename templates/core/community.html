@@ -33,21 +33,18 @@
 </div>
 {%endif%}
 
-<p>FIXME</p>
-<!-- BEGIN planet_block -->
 <div id="pgPlanetWrap">
 <div id="pgPlanet">
  <dl>
   <dt>Planet PostgreSQL</dt>
   <dd><ul>
-   <!-- BEGIN planet_loop -->
-    <li><a href="{link}">{title}</a></li>
-   <!-- END planet_loop -->
+   {%for post in planet%}
+    <li><a href="{{post.url}}">{{post.title}}</a></li>
+   {%endfor%}
   </ul></dd>
   <dd><a href="http://planet.postgresql.org">More</a></dd>
  </dl>
 </div>
 </div>
 
-<!-- END planet_block -->
 {%endblock%}

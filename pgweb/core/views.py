@@ -11,7 +11,7 @@ from pgweb.util.helpers import simple_form
 from news.models import NewsArticle
 from events.models import Event
 from quotes.models import Quote
-from models import Version
+from models import Version, ImportedRSSFeed, ImportedRSSItem
 
 # models needed for the pieces on the community page
 from survey.models import Survey
@@ -26,6 +26,7 @@ def home(request):
 	events = Event.objects.select_related('country').filter(approved=True).filter(training=False)[:3]
 	quote = Quote.objects.filter(approved=True).order_by('?')[0]
 	versions = Version.objects.all()
+	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:5]
 
 	return render_to_response('index.html', {
 		'title': 'The world\'s most advanced open source database',
@@ -33,6 +34,7 @@ def home(request):
 		'events': events,
 		'quote': quote,
 		'versions': versions,
+		'planet': planet,
 	})
 
 # Community main page (contains surveys and potentially more)
@@ -42,8 +44,10 @@ def community(request):
 		s = s[0]
 	except:
 		s = None
+	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:7]
 	return render_to_response('core/community.html', {
 		'survey': s,
+		'planet': planet,
 	}, NavContext(request, 'community'))
 
 # Generic fallback view for static pages
