@@ -20,7 +20,7 @@ class LicenceType(models.Model):
 		return self.typename
 
 class Product(PgModel, models.Model):
-	name = models.CharField(max_length=100, null=False, blank=False)
+	name = models.CharField(max_length=100, null=False, blank=False, unique=True)
 	approved = models.BooleanField(null=False, default=False)
 	publisher = models.ForeignKey(Organisation, null=False)
 	url = models.URLField(null=False, blank=False)

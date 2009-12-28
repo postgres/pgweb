@@ -37,7 +37,7 @@ class OrganisationType(models.Model):
 		return self.typename
 
 class Organisation(PgModel, models.Model):
-	name = models.CharField(max_length=100, null=False, blank=False)
+	name = models.CharField(max_length=100, null=False, blank=False, unique=True)
 	approved = models.BooleanField(null=False, default=False)
 	address = models.TextField(null=False, blank=True)
 	url = models.URLField(null=False, blank=False)
