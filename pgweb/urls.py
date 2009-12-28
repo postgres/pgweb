@@ -29,6 +29,8 @@ urlpatterns = patterns('',
     (r'^about/quotesarchive/$', 'quotes.views.allquotes'),
     
     (r'^ftp/(.*/)?$', 'downloads.views.ftpbrowser'),
+    (r'^download/product-categories/$', 'downloads.views.categorylist'),
+    (r'^download/products/(\d+)(-.*)?/$', 'downloads.views.productlist'),
 
     (r'^docs/(current|\d\.\d)/(static|interactive)/(.*).html$', 'docs.views.docpage'),
     

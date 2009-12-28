@@ -9,15 +9,21 @@ from pgweb.util.contexts import NavContext
 
 from pgweb.news.models import NewsArticle
 from pgweb.events.models import Event
+from pgweb.core.models import Organisation
+from pgweb.downloads.models import Product
 
 @ssl_required
 @login_required
 def home(request):
 	myarticles = NewsArticle.objects.filter(submitter=request.user)
 	myevents = Event.objects.filter(submitter=request.user)
+	myorgs = Organisation.objects.filter(submitter=request.user)
+	myproducts = Product.objects.filter(publisher__submitter=request.user)
 	return render_to_response('account/index.html', {
 		'newsarticles': myarticles,
 		'events': myevents,
+		'organisations': myorgs,
+		'products': myproducts,
 	}, NavContext(request, 'account'))
 
 @ssl_required

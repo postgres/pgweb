@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import pre_save
+from pgweb.util.bases import PgModel
+
+from datetime import datetime
 
 class Version(models.Model):
 	tree = models.DecimalField(max_digits=3, decimal_places=1, null=False, blank=False)
@@ -27,4 +29,29 @@ class Country(models.Model):
 
 	def __unicode__(self):
 		return self.name
+
+class OrganisationType(models.Model):
+	typename = models.CharField(max_length=32, null=False, blank=False)
+
+	def __unicode__(self):
+		return self.typename
+
+class Organisation(PgModel, models.Model):
+	name = models.CharField(max_length=100, null=False, blank=False)
+	approved = models.BooleanField(null=False, default=False)
+	address = models.TextField(null=False, blank=True)
+	url = models.URLField(null=False, blank=False)
+	email = models.EmailField(null=False, blank=True)
+	phone = models.CharField(max_length=100, null=False, blank=True)
+	orgtype = models.ForeignKey(OrganisationType, null=False, blank=False)
+	submitter = models.ForeignKey(User, null=False, blank=False)
+	lastconfirmed = models.DateTimeField(null=False, blank=False, default=datetime.now())
+
+	send_notification = True
+
+	def __unicode__(self):
+		return self.name
+
+	class Meta:
+		ordering = ('name',)
 

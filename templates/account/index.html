@@ -1,4 +1,5 @@
 {%extends "base/page.html"%}
+{%block title%}Your account{%endblock%}
 {%block contents%}
 <h1>Your account</h1>
 <p>
@@ -25,6 +26,22 @@ Submitted data should be moved to a subpage!
 {%endfor%}
 </ul>
 <a href="/account/events/new/">Submit event</a>
+
+<h2>Organisations</h2>
+<ul>
+{%for org in organisations%}
+<li><a {%if not org.approved%} style="color:red;"{%endif%} href="/account/organisations/{{org.id}}">{{org}}</a></li>
+{%endfor%}
+</ul>
+<a href="/account/organisations/new/">New organisation</a>
+
+<h2>Products</h2>
+<ul>
+{%for product in products%}
+<li><a {%if not product.approved%} style="color:red;"{%endif%} href="/account/products/{{product.id}}">{{product}}</a></li>
+{%endfor%}
+</ul>
+<a href="/account/products/new/">New product</a>
 
 {%endblock%}
 

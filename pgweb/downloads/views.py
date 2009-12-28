@@ -7,8 +7,16 @@ from django.conf import settings
 import os
 from datetime import datetime
 
+from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
+from pgweb.util.helpers import simple_form
 
+from models import *
+from forms import *
+
+#######
+# FTP browser
+#######
 def _getfiledata(root, paths):
 	for path in paths:
 		fn = "%s/%s" % (root,path)
@@ -94,4 +102,29 @@ def ftpbrowser(request, subpath):
 		'messagesfile': _getfile(fspath, '.messages'),
 		'maintainer': _getfile(fspath, 'CURRENT_MAINTAINER'),
 	}, NavContext(request, 'download'))
+
+
+
+#######
+# Product catalogue
+#######
+def categorylist(request):
+	categories = Category.objects.all()
+	return render_to_response('downloads/categorylist.html', {
+		'categories': categories,
+	}, NavContext(request, 'download'))
+
+def productlist(request, catid, junk=None):
+	category = get_object_or_404(Category, pk=catid)
+	products = Product.objects.select_related('publisher','licencetype').filter(category=category, approved=True)
+	return render_to_response('downloads/productlist.html', {
+		'category': category,
+		'products': products,
+		'productcount': len(products),
+	}, NavContext(request, 'download'))
+
+@ssl_required
+@login_required
+def productform(request, itemid):
+	return simple_form(Product, itemid, request, ProductForm)
 

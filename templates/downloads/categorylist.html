@@ -1,0 +1,26 @@
+{%extends "base/page.html"%}
+{%block title%}Software Catalogue - Product Categories{%endblock%}
+{%block contents%}
+<h1>Software Catalogue - Product Categories</h1>
+
+<p>PostgreSQL-related interfaces, extensions and software are available from a
+wide variety of Open Source projects, companies and individuals. To help you find
+the software you need, the pages below describe many of these products. This is
+by no means an exhaustive list however.</p>
+
+<p>Please note that the PostgreSQL Global Development Group do not endorse or
+recommend any products listed, and cannot vouch for the quality or reliability
+of any of them.</p>
+
+<p>If you would like your product to be listed in the catalogue, please fill
+out this <a href="/account/products/new/">form</a>.</p>
+
+<ul>
+
+{%for cat in categories%}
+<li><a href="/download/products/{{cat.id}}-{{cat.catname|slugify}}/">{{cat.catname}}</a></li>
+{%endfor%}
+</ul>
+
+{%endblock%}
+

@@ -1,14 +1,21 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.template import TemplateDoesNotExist, loader, Context
+from django.contrib.auth.decorators import login_required
 
+from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
+from pgweb.util.helpers import simple_form
 
 # models needed for the pieces on the frontpage
 from news.models import NewsArticle
 from events.models import Event
 from quotes.models import Quote
 from models import Version
+
+# models and forms needed for core objects
+from models import Organisation
+from forms import OrganisationForm
 
 # Front page view
 def home(request):
@@ -43,4 +50,10 @@ def fallback(request, url):
 	except:
 		navsect = ''
 	return HttpResponse(t.render(NavContext(request, navsect)))
+
+# Edit-forms for core objects
+@ssl_required
+@login_required
+def organisationform(request, itemid):
+	return simple_form(Organisation, itemid, request, OrganisationForm)
 

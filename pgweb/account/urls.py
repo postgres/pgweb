@@ -8,6 +8,10 @@ urlpatterns = patterns('',
     (r'^news/(.*)/$', 'news.views.form'),
     (r'^events/(.*)/$', 'events.views.form'),
 
+    # Software catalogue
+    (r'^organisations/(.*)/$', 'core.views.organisationform'),
+    (r'^products/(.*)/$', 'downloads.views.productform'),
+
     # Log in
     (r'^login/$', 'account.views.login'),
 
