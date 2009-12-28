@@ -2,6 +2,12 @@
 {%block contents%}
 <h1>Edit {{formitemtype}}</h1>
 <form method="post" action=".">
+{%if form_intro%}
+<p>
+{{form_intro|safe}}
+</p>
+{%endif%}
+
 <table class="pgGenericFormTable">
 {{form.as_table}}
 </table>

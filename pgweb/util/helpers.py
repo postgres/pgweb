@@ -38,5 +38,6 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 		'form': form,
 		'formitemtype': instance._meta.verbose_name,
 		'markdownfields': markdownfields,
+		'form_intro': hasattr(form, 'form_intro') and form.form_intro or None,
 	}, NavContext(request, navsection))
 
