@@ -1,0 +1,34 @@
+{%extends "base/page.html"%}
+{%block title%}Survey Results: {{survey}}{%endblock%}
+{%block contents%}
+<h1>Survey Results</h1>
+<p>The current results of our <b>{{survey}}</b> survey are:</p>
+
+<div class="tblBasic">
+<table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+    <tr>
+        <th class="colFirst">Answer</th>
+        <th class="colMid">Responses</th>
+        <th class="colLast">Percentage</th>
+    </tr>
+{%for a in survey.completeanswers%}
+    <tr>
+        <td class="colFirst">{{a.option}}</td>
+        <td class="colMid">{{a.votes}}</td>
+        <td class="colLast">{{a.votespercent}}%</td>
+    </tr>
+{%endfor%}
+    <tr class="lastrow">
+        <td class="colFirst"><b>Total</b></td>
+        <td class="colMid">{{survey.totalvotes}}</td>
+        <td class="colLast"></td>
+    </tr>
+</table>
+
+<h2>Other Surveys</h2>
+<ul>
+  {%for s in surveylist%}
+  <li><a href="/community/survey/{{s.id}}-{{s.question|slugify}}/">{{s.question}}</a></li>
+  {%endfor%}
+</ul>
+{%endblock%}

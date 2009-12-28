@@ -13,6 +13,9 @@ from events.models import Event
 from quotes.models import Quote
 from models import Version
 
+# models needed for the pieces on the community page
+from survey.models import Survey
+
 # models and forms needed for core objects
 from models import Organisation
 from forms import OrganisationForm
@@ -32,6 +35,16 @@ def home(request):
 		'versions': versions,
 	})
 
+# Community main page (contains surveys and potentially more)
+def community(request):
+	s = Survey.objects.filter(current=True)
+	try:
+		s = s[0]
+	except:
+		s = None
+	return render_to_response('core/community.html', {
+		'survey': s,
+	}, NavContext(request, 'community'))
 
 # Generic fallback view for static pages
 def fallback(request, url):

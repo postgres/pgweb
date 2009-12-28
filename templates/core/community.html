@@ -11,30 +11,29 @@
 </div>
 </div>
 
-<!-- BEGIN survey_block -->
+{%if survey%}
 <div id="pgSurveyWrap">
 <div id="pgSurvey">
   <dl>
     <dt>User Survey</dt>
-    <dd>{survey_question}</dd>
+    <dd>{{survey.question}}</dd>
     <dd>
-      <form method="post" action="{master_server}/vote">
+      <form method="post" action="/community/survey/vote/{{survey.id}}/">
       <p>
-      <input type="hidden" name="action" value="vote"/>
-      <input type="hidden" name="surveyid" value="{survey_id}"/>
-      <!-- BEGIN survey_option_loop -->
-      <input type="radio" name="answer" value="{option_num}" id="surv_opt_{option_num}" /><label for="surv_opt_{option_num}">{option_text}</label><br />
-      <!-- END survey_option_loop -->
+      {%for q in survey.questions%}
+      <input type="radio" name="answer" value="{{q.value}}" id="surv_opt_{{q.value}}" /><label for="surv_opt_{{q.value}}">{{q.text}}</label><br />
+      {%endfor%}
       </p>
       <p><input id="surveySubmit" type="submit" name="submit" value="Vote" /></p>
       </form>
     </dd>
-    <dd><a href="/community/survey.{survey_id}">Results</a></dd>
+    <dd><a href="/community/survey/{{survey.id}}-{{survey|slugify}}/">Results</a></dd>
   </dl>
 </div>
 </div>
-<!-- END survey_block -->
+{%endif%}
 
+<p>FIXME</p>
 <!-- BEGIN planet_block -->
 <div id="pgPlanetWrap">
 <div id="pgPlanet">

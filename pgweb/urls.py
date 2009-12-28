@@ -33,9 +33,12 @@ urlpatterns = patterns('',
     (r'^download/products/(\d+)(-.*)?/$', 'downloads.views.productlist'),
 
     (r'^docs/(current|\d\.\d)/(static|interactive)/(.*).html$', 'docs.views.docpage'),
-    
+
+    (r'^community/$', 'core.views.community'),
     (r'^community/contributors/$', 'contributors.views.completelist'),
     (r'^community/lists/$', 'lists.views.root'),
+    (r'^community/survey/vote/(\d+)/$', 'survey.views.vote'),
+    (r'^community/survey[/\.](\d+)(-.*)?/$', 'survey.views.results'),
 
     (r'^support/professional_(support|hosting)/$', 'profserv.views.root'),
     (r'^support/professional_(support|hosting)[/_](.*)/$', 'profserv.views.region'),
