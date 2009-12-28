@@ -8,8 +8,12 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 	else:
 		# Regular news item, attempt to edit it
 		instance = get_object_or_404(instancetype, pk=itemid)
-		if not instance.submitter == request.user:
-			raise Exception("You are not the owner of this item!")
+		if hasattr(instance, 'submitter'):
+			if not instance.submitter == request.user:
+				raise Exception("You are not the owner of this item!")
+		elif hasattr(instance, 'verify_submitter'):
+			if not instance.verify_submitter(request.user):
+				raise Exception("You are not the owner of this item!")
 	
 	if request.method == 'POST':
 		# Process this form
@@ -22,6 +26,8 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 	else:
 		# Generate form
 		form = formclass(instance=instance)
+		if hasattr(form, 'filter_by_user'):
+			form.filter_by_user(request.user)
 
 	if hasattr(instancetype, 'markdown_fields'):
 		markdownfields = instancetype.markdown_fields
