@@ -37,6 +37,7 @@ urlpatterns = patterns('',
     (r'^community/$', 'core.views.community'),
     (r'^community/contributors/$', 'contributors.views.completelist'),
     (r'^community/lists/$', 'lists.views.root'),
+    (r'^community/lists/subscribe/$', 'lists.views.subscribe'),
     (r'^community/survey/vote/(\d+)/$', 'survey.views.vote'),
     (r'^community/survey[/\.](\d+)(-.*)?/$', 'survey.views.results'),
 
