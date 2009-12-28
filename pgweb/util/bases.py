@@ -77,7 +77,8 @@ class PgModel(object):
 		if self.notify_fields:
 			return self.notify_fields
 		else:
-			return [n for n in self._meta.get_all_field_names() if not n in ('approved', 'submitter', 'id', )]
+			# Include all field names except specified ones, that are "direct" (by get_field_by_name()[2])
+			return [n for n in self._meta.get_all_field_names() if not n in ('approved', 'submitter', 'id', ) and self._meta.get_field_by_name(n)[2]]
 	
 	def full_text_representation(self):
 		fieldlist = self._get_all_notification_fields()
