@@ -1,11 +1,11 @@
 from email.mime.text import MIMEText
-from subprocess import Popen, PIPE
 
 from django.db.models.signals import pre_save
 from django.db import models
 from django.conf import settings
 
 from util.middleware import get_current_user
+from util.misc import sendmail
 
 class PgModel(object):
 	send_notification = False
@@ -37,9 +37,7 @@ class PgModel(object):
 		if hasattr(settings,'SUPPRESS_NOTIFICATIONS') and settings.SUPPRESS_NOTIFICATIONS:
 			print msg.as_string()
 		else:
-			pipe = Popen("sendmail -t", shell=True, stdin=PIPE).stdin
-			pipe.write(msg.as_string())
-			pipe.close()
+			sendmail(msg)
 
 		
 	def _get_changes_texts(self):

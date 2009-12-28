@@ -1,3 +1,5 @@
+from subprocess import Popen, PIPE
+
 def prettySize(size):
 	if size < 1024:
 		return "%s bytes" % size
@@ -7,4 +9,9 @@ def prettySize(size):
 			continue
 		else:
 			return "%s %s" % (round(size/float(lim/2**10),2).__str__(),suf)
+
+def sendmail(msg):
+	pipe = Popen("sendmail -t", shell=True, stdin=PIPE).stdin
+	pipe.write(msg.as_string())
+	pipe.close()
 
