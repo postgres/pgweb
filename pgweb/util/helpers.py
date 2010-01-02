@@ -41,3 +41,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 		'form_intro': hasattr(form, 'form_intro') and form.form_intro or None,
 	}, NavContext(request, navsection))
 
+def add_xml_element(xml, name, value):
+	xml.startElement(name, {})
+	xml.characters(value)
+	xml.endElement(name)

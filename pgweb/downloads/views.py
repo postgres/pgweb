@@ -3,6 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required
 from django.db import connection, transaction
+from django.utils.xmlutils import SimplerXMLGenerator
 from django.conf import settings
 
 import os
@@ -11,7 +12,7 @@ import urlparse
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
-from pgweb.util.helpers import simple_form
+from pgweb.util.helpers import simple_form, add_xml_element
 
 from models import *
 from forms import *
@@ -119,6 +120,7 @@ def mirrorselect(request, path):
 		near_mirrors = Mirror.objects.filter(mirror_active=True, mirror_private=False, mirror_dns=True).extra(where=["mirror_last_rsync>(now() - '48 hours'::interval)","country_code IN (SELECT lower(countrycode) FROM iptocountry WHERE %s BETWEEN startip AND endip)" % numericip]).order_by('country_name', 'mirror_index')
 	except:
 		near_mirrors = None
+	# same as in mirrors_xml
 	all_mirrors = Mirror.objects.filter(mirror_active=True, mirror_private=False, mirror_dns=True).extra(where=["mirror_last_rsync>(now() - '48 hours'::interval)"]).order_by('country_name', 'mirror_index')
 	return render_to_response('downloads/mirrorselect.html', {
 		'path': path,
@@ -175,6 +177,26 @@ def mirror_redirect_old(request):
 		urlpieces.netloc,
 		path,
 	)
+
+def mirrors_xml(request):
+	# Same as in mirrorselect
+	all_mirrors = Mirror.objects.filter(mirror_active=True, mirror_private=False, mirror_dns=True).extra(where=["mirror_last_rsync>(now() - '48 hours'::interval)"]).order_by('country_name', 'mirror_index')	
+
+	resp = HttpResponse(mimetype='text/xml')
+	x = SimplerXMLGenerator(resp, 'utf8')
+	x.startDocument()
+	x.startElement('mirrors', {})
+	for m in all_mirrors:
+		for protocol in m.get_all_protocols():
+			x.startElement('mirror', {})
+			add_xml_element(x, 'country', m.country_name)
+			add_xml_element(x, 'path', m.host_path)
+			add_xml_element(x, 'protocol', protocol)
+			add_xml_element(x, 'hostname', m.get_host_name())
+			x.endElement('mirror')
+	x.endElement('mirrors')
+	x.endDocument()
+	return resp
 
 #######
 # Product catalogue

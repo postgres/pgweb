@@ -50,6 +50,12 @@ class Mirror(models.Model):
 			# http with alternate_at_root - thus, ignore the path element
 			return self.get_host_name()
 
+	def get_all_protocols(self):
+		if self.alternate_protocol:
+			return ('ftp', 'http', )
+		else:
+			return ('ftp', )
+
 class Category(models.Model):
 	catname = models.CharField(max_length=100, null=False, blank=False)
 	blurb = models.TextField(null=False, blank=True)
