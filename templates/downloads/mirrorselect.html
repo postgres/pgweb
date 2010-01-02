@@ -1,0 +1,37 @@
+{%extends "base/page.html"%}
+{%block title%}Choose a download mirror{%endblock%}
+{%block extrahead%}
+<style>
+div.mirrorselect {
+//   border: 1px solid black;
+   display: inline-block;
+   width: 110px;
+   text-align: center;
+   height: 50px;
+}
+</style>
+{%endblock%}
+{%block contents%}
+<h1>Choose a download mirror</h1>
+<p><b>Downloading: </b> {{path}}</p>
+
+
+{%if near_mirrors%}
+<p><b>We think these mirrors are near you:</b></p>
+<div id="nearmirrorwrap">
+ {%for mirror in near_mirrors%}
+  {%include "downloads/inc_mirror.html"%}
+ {%endfor%}
+</div>
+{%endif%}
+
+<p><b>Choose any other mirror in the world:</b></p>
+<div id="mainmirrorwrap">
+ {%for mirror in all_mirrors%}
+  {%include "downloads/inc_mirror.html"%}
+ {%endfor%}
+</div>
+
+<p><a href="/mirror/howto">Read this</a> if you would like to host a mirror.</p>
+{%endblock%}
+

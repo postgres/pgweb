@@ -2,10 +2,12 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required
+from django.db import connection, transaction
 from django.conf import settings
 
 import os
 from datetime import datetime
+import urlparse
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
@@ -103,7 +105,76 @@ def ftpbrowser(request, subpath):
 		'maintainer': _getfile(fspath, 'CURRENT_MAINTAINER'),
 	}, NavContext(request, 'download'))
 
+def _get_numeric_ip(request):
+	try:
+		ip = request.META['REMOTE_ADDR']
+		p = ip.split('.')
+		return int(p[0])*16777216 + int(p[1])*65536 + int(p[2])*256 + int(p[3])
+	except:
+		return None
 
+def mirrorselect(request, path):
+	try:
+		numericip = _get_numeric_ip(request)
+		near_mirrors = Mirror.objects.filter(mirror_active=True, mirror_private=False, mirror_dns=True).extra(where=["mirror_last_rsync>(now() - '48 hours'::interval)","country_code IN (SELECT lower(countrycode) FROM iptocountry WHERE %s BETWEEN startip AND endip)" % numericip]).order_by('country_name', 'mirror_index')
+	except:
+		near_mirrors = None
+	all_mirrors = Mirror.objects.filter(mirror_active=True, mirror_private=False, mirror_dns=True).extra(where=["mirror_last_rsync>(now() - '48 hours'::interval)"]).order_by('country_name', 'mirror_index')
+	return render_to_response('downloads/mirrorselect.html', {
+		'path': path,
+		'all_mirrors': all_mirrors,
+		'near_mirrors': near_mirrors,
+		'masterserver': settings.MASTERSITE_ROOT,
+	}, NavContext(request, 'download'))
+
+def _mirror_redirect_internal(request, scheme, host, path):
+	# Log the access
+	curs = connection.cursor()
+	curs.execute("""INSERT INTO clickthrus (scheme, host, path, country)
+VALUES (%(scheme)s, %(host)s, %(path)s, (
+SELECT countrycode FROM iptocountry WHERE %(ip)s BETWEEN startip and endip LIMIT 1))""", {
+		'scheme': scheme,
+		'host': host,
+		'path': path,
+		'ip': _get_numeric_ip(request),
+})
+	transaction.commit_unless_managed()
+
+	# Redirect!
+	newurl = "%s://%s/%s" % (scheme, host, path)
+	return HttpResponseRedirect(newurl)
+
+def mirror_redirect(request, mirrorid, protocol, path):
+	try:
+		mirror = Mirror.objects.get(pk=mirrorid)
+	except Mirror.NotFound:
+		raise Http404("Specified mirror not found")
+
+	return _mirror_redirect_internal(
+		request,
+		protocol=='h' and 'http' or 'ftp',
+		mirror.get_root_path(protocol),
+		path,
+	)
+
+def mirror_redirect_old(request):
+	# Version of redirect that takes parameters in the querystring. This is
+	# only used by the stackbuilder.
+	if not request.GET['sb'] == "1":
+		raise Http404("Page not found, you should be using the new URL format!")
+
+	urlpieces = urlparse.urlparse(request.GET['url'])
+	if urlpieces.query:
+		path = "%s?%s" % (urlpieces.path, urlpieces.query)
+	else:
+		path = urlpieces.path
+
+	return _mirror_redirect_internal(
+		request,
+		urlpieces.scheme,
+		urlpieces.netloc,
+		path,
+	)
 
 #######
 # Product catalogue

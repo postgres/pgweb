@@ -6,6 +6,50 @@ from pgweb.core.models import Organisation
 
 from datetime import datetime
 
+class Mirror(models.Model):
+	country_name = models.CharField(max_length=50, null=False, blank=False)
+	country_code = models.CharField(max_length=2, null=False, blank=False)
+	mirror_created = models.DateTimeField(null=False, blank=False, default=datetime.now())
+	mirror_last_rsync = models.DateTimeField(null=False, blank=False, default=datetime(1970,1,1))
+	mirror_index = models.IntegerField(null=False)
+	host_addr = models.IPAddressField(null=True, default='0.0.0.0')
+	host_path = models.CharField(max_length=100, null=True)
+	host_sponsor = models.CharField(max_length=100, null=True)
+	host_contact = models.CharField(max_length=100, null=True)
+	host_email = models.CharField(max_length=100, null=True)
+	host_notes = models.TextField(null=True)
+	rsync_host1 = models.CharField(max_length=100, null=True)
+	rsync_host2 = models.CharField(max_length=100, null=True)
+	mirror_active = models.BooleanField(null=False, default=True)
+	mirror_dns = models.BooleanField(null=False, default=False)
+	mirror_private = models.BooleanField(null=False, default=False)
+	host_use_cname = models.BooleanField(null=True, default=False)
+	host_cname_host = models.CharField(max_length=100, null=True)
+	mirror_primary = models.BooleanField(null=False, default=False)
+	error_count = models.IntegerField(null=False, default=0)
+	alternate_protocol = models.BooleanField(null=False, default=False)
+	alternate_at_root = models.BooleanField(null=False, default=False)
+
+	class Meta:
+		db_table='mirrors'
+
+	def __unicode__(self):
+		return "%s.%s" % (self.country_code, self.mirror_index)
+
+	def get_host_name(self):
+		if self.mirror_index == 0:
+			return "ftp.%s.postgresql.org" % self.country_code
+		else:
+			return "ftp%s.%s.postgresql.org" % (self.mirror_index, self.country_code)
+
+	def get_root_path(self, method):
+		if method == 'f' or not self.alternate_at_root:
+			# FTP method, or http with same path, build complete one
+			return ("%s/%s" % (self.get_host_name(), self.host_path)).replace('//','/').rstrip('/')
+		else:
+			# http with alternate_at_root - thus, ignore the path element
+			return self.get_host_name()
+
 class Category(models.Model):
 	catname = models.CharField(max_length=100, null=False, blank=False)
 	blurb = models.TextField(null=False, blank=True)

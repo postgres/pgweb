@@ -107,6 +107,7 @@ INSTALLED_APPS = [
 
 
 SITE_ROOT="http://www.postgresql.org"
+MASTERSITE_ROOT="http://wwwmaster.postgresql.org"
 
 # Load local settings overrides
 from settings_local import *

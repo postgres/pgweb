@@ -29,8 +29,11 @@ urlpatterns = patterns('',
     (r'^about/quotesarchive/$', 'quotes.views.allquotes'),
     
     (r'^ftp/(.*/)?$', 'downloads.views.ftpbrowser'),
+    (r'^download/mirrors-ftp/+(.*)$', 'downloads.views.mirrorselect'),
     (r'^download/product-categories/$', 'downloads.views.categorylist'),
     (r'^download/products/(\d+)(-.*)?/$', 'downloads.views.productlist'),
+    (r'^redir/(\d+)/([hf])/([a-zA-Z0-9/\._-]+)$', 'downloads.views.mirror_redirect'),
+    (r'^redir$', 'downloads.views.mirror_redirect_old'),
 
     (r'^docs/(current|\d\.\d)/(static|interactive)/(.*).html$', 'docs.views.docpage'),
 
