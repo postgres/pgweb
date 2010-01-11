@@ -23,7 +23,7 @@ class Mirror(models.Model):
 	mirror_active = models.BooleanField(null=False, default=True)
 	mirror_dns = models.BooleanField(null=False, default=False)
 	mirror_private = models.BooleanField(null=False, default=False)
-	host_use_cname = models.BooleanField(null=True, default=False)
+	host_use_cname = models.BooleanField(null=False, default=False)
 	host_cname_host = models.CharField(max_length=100, null=True)
 	mirror_primary = models.BooleanField(null=False, default=False)
 	error_count = models.IntegerField(null=False, default=0)
