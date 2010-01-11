@@ -1,0 +1,37 @@
+<p>Please ensure you have read the
+<a href="/docs/current/static/bug-reporting.html">bug reporting guidelines</a>
+before reporting a bug. In particular, please re-read the
+<a href="/docs/current/static/">documentation</a> to verify that what you are
+trying is possible. If the documentation is not clear, please report that, too;
+it is a documentation bug. If a program does something different from what the
+documentation says, that is also a bug.</p>
+
+<p>Poor performance is not necessarily a bug. Read the documentation or ask on
+one of the <a href="/community/lists/">mailing lists</a> for help in tuning
+your applications. Failing to comply to the SQL standard is not necessarily a
+bug either, unless compliance for the specific feature is explicitly claimed.</p>
+
+<p>Before you continue, check on the
+<a href="http://wiki.postgresql.org/wiki/Todo">TODO list</a> and in the
+<a href="/docs/faq/">FAQ</a> to see if your bug is already known. If you cannot
+decode the information on the TODO list, report your problem so we can clarify
+the TODO list.</p>
+
+<p>To report a security bug, please send an email to
+<a href="mailto:security@postgresql.org">security@postgresql.org</a>. All
+other bugs will be forwarded to the
+<a href="http://archives.postgresql.org/pgsql-bugs/">pgsql-bugs</a> mailing
+list where they will be publicly archived.</p>
+
+<p>Make sure you are running the latest available minor release for your major
+<a href="/support/versioning">version</a> before reporting a bug. The current
+list of supported versions is
+{%for ver in supportedversions%}{{ver}}{%if not forloop.last%}, {%endif%}{%endfor%}.
+</p>
+
+<p>This bug report form should only be used for reporting bugs and problems
+with the PostgreSQL database.  Problems with database connectors such as ODBC
+and JDBC, graphical administration tools such as pgAdmin or other external
+projects <b>should not be reported here</b>; please report to those projects
+directly.  For products closely connected with PostgreSQL, there may be an
+appropriate <a href='/community/lists'>mailing list</a> available.</p>

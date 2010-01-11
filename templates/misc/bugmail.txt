@@ -1,0 +1,11 @@
+The following bug has been logged on the website:
+
+Bug reference:      {{bugid}}
+Logged by:          {{bug.name|wordwrap:76}}
+Email address:      {{bug.email|wordwrap:76}}
+PostgreSQL version: {{bug.pgversion|wordwrap:76}}
+Operating system:   {{bug.os|wordwrap:76}}
+Description:        {{bug.shordesc|wordwrap:76}}
+
+{{bug.details|wordwrap:76}}
+

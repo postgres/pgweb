@@ -103,6 +103,7 @@ INSTALLED_APPS = [
     'pgweb.lists',
     'pgweb.sponsors',
     'pgweb.survey',
+    'pgweb.misc',
 ]
 
 
