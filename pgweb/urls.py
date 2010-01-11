@@ -26,6 +26,8 @@ urlpatterns = patterns('',
     (r'^about/news/(\d+)(-.*)?/$', 'news.views.item'),
     (r'^about/eventarchive/$', 'events.views.archive'),
     (r'^about/event/(\d+)(-.*)?/$', 'events.views.item'),
+    (r'^about/featurematrix/$', 'featurematrix.views.root'),
+    (r'^about/featurematrix/detail/(\d+)/$', 'featurematrix.views.detail'),
     (r'^about/quotesarchive/$', 'quotes.views.allquotes'),
     
     (r'^ftp/(.*/)?$', 'downloads.views.ftpbrowser'),

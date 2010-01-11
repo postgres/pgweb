@@ -1,0 +1,55 @@
+{%extends "base/page.html"%}
+{%block title%}Feature Matrix{%endblock%}
+{%block extrahead%}
+<style>
+td.fm_no { background-color: #ffdddd !important; }
+td.fm_yes {  background-color: #ddffdd !important; }
+td.fm_obs { background-color: #ddddff !important; }
+td.fm_unk { background-color: #ffffaa !important; }
+</style>
+{%endblock%}
+{%block contents%}
+<h1>Feature Matrix</h1>
+<p>
+This table outlines which features were added in which version. To get more
+information about a feature, click the link or hover the mouse pointer over
+the text.
+</p>
+<h2>Groups</h2>
+<ul>
+{%for group in groups %}
+ <li><a href="#{{group.group.groupname|slugify}}">{{group.group.groupname}}</a></li>
+{%endfor%}
+</ul>
+
+<p>&nbsp;</p>
+
+<div class="tblBasic">
+<table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+{%for group in groups %}
+ <tr>
+  <th class="colFirst"><a name="{{group.group.groupname|slugify}}">{{group.group.groupname}}</a></th>
+  {%for col in group.group.columns %}
+  <th class="{%if forloop.last%}colLast{%else%}colMid{%endif%}">{{col}}</th>
+  {%endfor%}
+ </tr>
+ {%for feature in group.features%}
+  <tr valign="top" {%if forloop.last%}class="lastrow"{%endif%}>
+  <td class="colFirst" {%if feature.featuredescription%}title="{{feature.featuredescription|truncatewords:15}}"{%endif%}>
+   {% if feature.featuredescription %}
+    <a href="{{feature.featurelink}}">{{feature.featurename}}</a>
+   {%else%}
+    {{feature.featurename}}
+   {%endif%}
+  </td>
+  {%for col in feature.columns%}
+  <td class="{%if forloop.last%}colLast{%else%}colMid{%endif%} fm_{{col.class}}">{{col.str}}</td>
+  {%endfor%}
+  </tr>
+ {%endfor%}
+{%endfor%}
+</table>
+</div>
+
+{%endblock%}
+

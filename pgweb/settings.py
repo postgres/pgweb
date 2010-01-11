@@ -104,6 +104,7 @@ INSTALLED_APPS = [
     'pgweb.sponsors',
     'pgweb.survey',
     'pgweb.misc',
+    'pgweb.featurematrix',
 ]
 
 
