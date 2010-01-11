@@ -37,6 +37,7 @@ urlpatterns = patterns('',
     (r'^mirrors.xml$', 'downloads.views.mirrors_xml'),
 
     (r'^docs/(current|\d\.\d)/(static|interactive)/(.*).html$', 'docs.views.docpage'),
+    (r'^docs/(current|\d\.\d)/(static|interactive)/$', 'docs.views.docsrootpage'),
 
     (r'^community/$', 'core.views.community'),
     (r'^community/contributors/$', 'contributors.views.completelist'),

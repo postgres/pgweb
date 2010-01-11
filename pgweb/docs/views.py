@@ -22,4 +22,6 @@ def docpage(request, version, typ, filename):
 		'page_content': page.content,
 		'doc_index_filename': 'index.html',
 	})
-	
+
+def docsrootpage(request, version, typ):
+	return docpage(request, version, typ, 'index')
