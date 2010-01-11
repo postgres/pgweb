@@ -1,6 +1,8 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from pgweb.util.contexts import NavContext
 from django.http import HttpResponseRedirect
+from django.template import Context
+from django.template.loader import get_template
 
 def simple_form(instancetype, itemid, request, formclass, formtemplate='base/form.html', redirect='/account/', navsection='account'):
 	if itemid == 'new':
@@ -40,6 +42,9 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 		'markdownfields': markdownfields,
 		'form_intro': hasattr(form, 'form_intro') and form.form_intro or None,
 	}, NavContext(request, navsection))
+
+def template_to_string(templatename, attrs = {}):
+	return get_template(templatename).render(Context(attrs))
 
 def add_xml_element(xml, name, value):
 	xml.startElement(name, {})
