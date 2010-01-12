@@ -10,7 +10,7 @@ import os
 from datetime import datetime
 import urlparse
 
-from pgweb.util.decorators import ssl_required
+from pgweb.util.decorators import ssl_required, nocache
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form, add_xml_element
 
@@ -114,6 +114,7 @@ def _get_numeric_ip(request):
 	except:
 		return None
 
+@nocache
 def mirrorselect(request, path):
 	try:
 		numericip = _get_numeric_ip(request)
@@ -146,6 +147,7 @@ SELECT countrycode FROM iptocountry WHERE %(ip)s BETWEEN startip and endip LIMIT
 	newurl = "%s://%s/%s" % (scheme, host, path)
 	return HttpResponseRedirect(newurl)
 
+@nocache
 def mirror_redirect(request, mirrorid, protocol, path):
 	try:
 		mirror = Mirror.objects.get(pk=mirrorid)
@@ -159,6 +161,7 @@ def mirror_redirect(request, mirrorid, protocol, path):
 		path,
 	)
 
+@nocache
 def mirror_redirect_old(request):
 	# Version of redirect that takes parameters in the querystring. This is
 	# only used by the stackbuilder.
