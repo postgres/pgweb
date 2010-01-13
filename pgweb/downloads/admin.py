@@ -14,8 +14,12 @@ class ProductAdmin(MarkdownPreviewAdmin):
 	search_fields = ('name', 'description', )
 	ordering = ('name', )
 
+class StackBuilderAppAdmin(admin.ModelAdmin):
+	list_display = ('textid', 'name', 'platform', 'version', )
+	filter_horizontal = ('dependencies', )
+
 admin.site.register(Mirror, MirrorAdmin)
 admin.site.register(Category)
 admin.site.register(LicenceType)
 admin.site.register(Product, ProductAdmin)
-
+admin.site.register(StackBuilderApp, StackBuilderAppAdmin)

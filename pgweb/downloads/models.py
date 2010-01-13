@@ -91,3 +91,37 @@ class Product(PgModel, models.Model):
 
 	class Meta:
 		ordering = ('name',)
+
+class StackBuilderApp(models.Model):
+	textid = models.CharField(max_length=100, null=False, blank=False)
+	version = models.CharField(max_length=20, null=False, blank=False)
+	platform = models.CharField(max_length=20, null=False, blank=False,
+		choices= (('windows', 'Windows'), ('osx', 'Mac OS X'),
+			('linux', 'Linux (32-bit)'), ('linux-x64', 'Linux (64-bit)'))
+	)
+	name = models.CharField(max_length=500, null=False, blank=False)
+	active = models.BooleanField(null=False, blank=False, default=True)
+	description = models.TextField(null=False, blank=False)
+	category = models.CharField(max_length=100, null=False, blank=False)
+	pgversion = models.CharField(max_length=5, null=False, blank=True)
+	edbversion = models.CharField(max_length=5, null=False, blank=True)
+	format = models.CharField(max_length=5, null=False, blank=False,
+		choices = (('bin', 'Linux .bin'), ('app', 'Mac .app'),
+			   ('pkg', 'Mac .pkg'), ('mpkg', 'Mac .mpkg'),
+			   ('exe', 'Windows .exe'), ('msi', 'Windows .msi'))
+	)
+	installoptions = models.CharField(max_length=500, null=False, blank=True)
+	upgradeoptions = models.CharField(max_length=500, null=False, blank=True)
+	checksum = models.CharField(max_length=32, null=False, blank=False)
+	mirrorpath = models.CharField(max_length=500, null=False, blank=True)
+	alturl = models.URLField(max_length=500, null=False, blank=True)
+	dependencies = models.ManyToManyField("self", blank=True)
+	versionkey = models.CharField(max_length=500, null=False, blank=False)
+
+	def __unicode__(self):
+		return "%s %s %s" % (self.textid, self.version, self.platform)
+
+	class Meta:
+		unique_together = ('textid', 'version', 'platform', )
+		ordering = ('textid', 'name', 'platform', )
+

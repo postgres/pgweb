@@ -223,3 +223,37 @@ def productlist(request, catid, junk=None):
 def productform(request, itemid):
 	return simple_form(Product, itemid, request, ProductForm)
 
+#######
+# Stackbuilder
+#######
+def applications_v2_xml(request):
+	all_apps = StackBuilderApp.objects.select_related().filter(active=True)
+
+	resp = HttpResponse(mimetype='text/xml')
+	x = PgXmlHelper(resp, skipempty=True)
+	x.startDocument()
+	x.startElement('applications', {})
+	for a in all_apps:
+		x.startElement('application', {})
+		x.add_xml_element('id', a.textid)
+		x.add_xml_element('platform', a.platform)
+		x.add_xml_element('version', a.version)
+		x.add_xml_element('name', a.name)
+		x.add_xml_element('description', a.description)
+		x.add_xml_element('category', a.category)
+		x.add_xml_element('pgversion', a.pgversion)
+		x.add_xml_element('edbversion', a.edbversion)
+		x.add_xml_element('format', a.format)
+		x.add_xml_element('installoptions', a.installoptions)
+		x.add_xml_element('upgradeoptions', a.upgradeoptions)
+		x.add_xml_element('checksum', a.checksum)
+		x.add_xml_element('mirrorpath', a.mirrorpath)
+		x.add_xml_element('alturl', a.alturl)
+		x.add_xml_element('versionkey', a.versionkey)
+		for dep in a.dependencies.all():
+			x.add_xml_element('dependency', dep.textid)
+		x.endElement('application')
+	x.endElement('applications')
+	x.endDocument()
+	return resp
+
