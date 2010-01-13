@@ -3,6 +3,7 @@ from pgweb.util.contexts import NavContext
 from django.http import HttpResponseRedirect
 from django.template import Context
 from django.template.loader import get_template
+import django.utils.xmlutils
 
 def simple_form(instancetype, itemid, request, formclass, formtemplate='base/form.html', redirect='/account/', navsection='account'):
 	if itemid == 'new':
@@ -46,7 +47,15 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 def template_to_string(templatename, attrs = {}):
 	return get_template(templatename).render(Context(attrs))
 
-def add_xml_element(xml, name, value):
-	xml.startElement(name, {})
-	xml.characters(value)
-	xml.endElement(name)
+
+class PgXmlHelper(django.utils.xmlutils.SimplerXMLGenerator):
+	def __init__(self, outstream, skipempty=False):
+		django.utils.xmlutils.SimplerXMLGenerator.__init__(self, outstream, 'utf-8')
+		self.skipempty = skipempty
+
+	def add_xml_element(self, name, value):
+		if self.skipempty and value=='': return
+		self.startElement(name, {})
+		self.characters(value)
+		self.endElement(name)
+

@@ -3,7 +3,6 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required
 from django.db import connection, transaction
-from django.utils.xmlutils import SimplerXMLGenerator
 from django.conf import settings
 
 import os
@@ -12,7 +11,7 @@ import urlparse
 
 from pgweb.util.decorators import ssl_required, nocache
 from pgweb.util.contexts import NavContext
-from pgweb.util.helpers import simple_form, add_xml_element
+from pgweb.util.helpers import simple_form, PgXmlHelper
 
 from models import *
 from forms import *
@@ -186,16 +185,16 @@ def mirrors_xml(request):
 	all_mirrors = Mirror.objects.filter(mirror_active=True, mirror_private=False, mirror_dns=True).extra(where=["mirror_last_rsync>(now() - '48 hours'::interval)"]).order_by('country_name', 'mirror_index')	
 
 	resp = HttpResponse(mimetype='text/xml')
-	x = SimplerXMLGenerator(resp, 'utf8')
+	x = PgXmlHelper(resp)
 	x.startDocument()
 	x.startElement('mirrors', {})
 	for m in all_mirrors:
 		for protocol in m.get_all_protocols():
 			x.startElement('mirror', {})
-			add_xml_element(x, 'country', m.country_name)
-			add_xml_element(x, 'path', m.host_path)
-			add_xml_element(x, 'protocol', protocol)
-			add_xml_element(x, 'hostname', m.get_host_name())
+			x.add_xml_element('country', m.country_name)
+			x.add_xml_element('path', m.host_path)
+			x.add_xml_element('protocol', protocol)
+			x.add_xml_element('hostname', m.get_host_name())
 			x.endElement('mirror')
 	x.endElement('mirrors')
 	x.endDocument()
