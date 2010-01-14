@@ -2,6 +2,10 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count
+from django.db import connection
+
+from datetime import date
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
@@ -22,16 +26,24 @@ from forms import OrganisationForm
 
 # Front page view
 def home(request):
-	news = NewsArticle.objects.filter(approved=True)[:3]
-	events = Event.objects.select_related('country').filter(approved=True).filter(training=False)[:3]
+	news = NewsArticle.objects.filter(approved=True)[:5]
+	events = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gt=date.today).order_by('startdate')[:3]
 	quote = Quote.objects.filter(approved=True).order_by('?')[0]
 	versions = Version.objects.all()
 	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:5]
+
+	traininginfo = Event.objects.filter(approved=True, training=True).extra(where=("startdate <= (CURRENT_DATE + '6 Months'::interval) AND enddate >= CURRENT_DATE",)).aggregate(Count('id'), Count('country', distinct=True))
+	# can't figure out how to make django do this
+	curs = connection.cursor()
+	curs.execute("SELECT * FROM (SELECT DISTINCT(org) FROM events_event WHERE startdate <= (CURRENT_DATE + '6 Months'::interval) AND enddate >= CURRENT_DATE AND approved AND training AND org IS NOT NULL AND NOT org='') x ORDER BY random() LIMIT 3")
+	trainingcompanies = [r[0] for r in curs.fetchall()]
 
 	return render_to_response('index.html', {
 		'title': 'The world\'s most advanced open source database',
 		'news': news,
 		'events': events,
+		'traininginfo': traininginfo,
+		'trainingcompanies': trainingcompanies,
 		'quote': quote,
 		'versions': versions,
 		'planet': planet,

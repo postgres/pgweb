@@ -1,6 +1,21 @@
 {%extends "base/page.html"%}
+{%load markup%}
 {%block contents%}
 <h1>{{obj.title}}</h1>
-{%include "events/inc_event.html"%}
+<div class="eventdate">Posted on <b>{{obj.displaydate|safe}}</b></div>
+<div>Location: {{obj.locationstring}}</div>
+<p>
+{{obj.details|markdown:"safe"}}
+</p>
+{%if obj.has_submitter%}
+<p>Posted by {{obj.submitter.email}}.</p>
+{%else%}
+<p><i>This event has been migrated from a previous version of the PostgreSQL
+website. We apologise for any formatting issues caused by the migration.</i></p>
+{%endif%}
+<p>
+<i><b>Note:</b> The PostgreSQL Global Development Group does not endorse any
+events run by third parties. No guarantee of the quality of events is offered
+whatsoever.</i>
+</p>
 {%endblock%}
-

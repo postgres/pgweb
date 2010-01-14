@@ -23,10 +23,16 @@ class Event(models.Model, PgModel):
 	details = models.TextField(blank=False, null=False)
 	
 	send_notification = True
-	markdown_fields = ('summary', 'details', )
+	markdown_fields = ('details', )
 	
 	def __unicode__(self):
 		return "%s: %s" % (self.startdate, self.title)
+
+	@property
+	def has_submitter(self):
+		# If submitter is 0 it means migrated, so have no submitter
+		if self.submitter_id == 0: return False
+		return True
 
 	@property
 	def displaydate(self):
@@ -41,5 +47,5 @@ class Event(models.Model, PgModel):
 		return "%s, %s" % (self.city, self.country)
 
 	class Meta:
-		ordering = ('startdate',)
+		ordering = ('-startdate','-enddate',)
 

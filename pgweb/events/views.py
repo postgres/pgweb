@@ -13,9 +13,13 @@ from models import Event
 from forms import EventForm
 
 def archive(request, paging=None):
-	event = Event.objects.filter(approved=True).filter(enddate__gt=date.today)
+	events = Event.objects.select_related('country').filter(approved=True).filter(training=False, enddate__gt=date.today).order_by('startdate', 'enddate',)
+	training = Event.objects.select_related('country').filter(approved=True).filter(training=True, enddate__gt=date.today).order_by('startdate', 'enddate',)
 	return render_to_response('events/archive.html', {
-		'events': event,
+		'eventblocks': (
+			{ 'name': 'Events', 'events': events, },
+			{ 'name': 'Training', 'events': training, },
+		),
 	}, NavContext(request, 'about'))
 
 def item(request, itemid, throwaway=None):
