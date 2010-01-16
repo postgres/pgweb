@@ -2,7 +2,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr">
 <head>
-    <title>PostgreSQL: Documentation: Manuals: {{title}}</title>
+    <title>PostgreSQL: Documentation: Manuals: {{page.title}}</title>
     <style type="text/css" media="screen" title="Normal Text">@import url("/media/css/docs.css");</style>
     <link rel="alternate stylesheet" media="screen" href="/media/css/docs_large.css" type="text/css" title="Large Text" />
     <script type="text/javascript" src="/media/js/styleswitcher.js"></script>
@@ -34,9 +34,43 @@
 </div>
 
 <div id="docContent">
-{{page_content|safe}}
-{comments}
+{{page.content|safe}}
 </div>
+
+<div id="docComments">
+{%for comment in comments%}
+{%if forloop.first%}<h2>Comments</h2>{%endif%}
+<br />
+<div class="txtCommentsWrap">
+<div class="txtCommentsContent">
+<div class="txtCommentsPoster">{{comment.poster}}</div>
+<div class="txtCommentsDate">{{comment.posted_at}}</div>
+<br style="clear: both;" />
+</div>
+<div class="txtCommentsComment">{{comment.comment}}</div>
+</div>
+{%endfor%}
+
+{%if can_comment%}
+<h2>Add Comment</h2>
+<p>
+Please use this form to add your own comments regarding your experience with
+particular features of PostgreSQL, clarifications of the documentation, or
+hints for other users. Please note, this is <strong>not</strong> a support
+forum, and your IP address will be logged. If you have a question or need help,
+please see the <a href="http://www.postgresql.org/docs/faq/">faq</a>, try a
+<a href="http://www.postgresql.org/community/lists/">mailing list</a>, or join
+us on <a href="http://www.postgresql.org/community/irc">IRC</a>.
+Note that submissions containing URLs or other keywords commonly found in
+'spam' comments may be silently discarded. Please contact the
+<a href="mailto:webmaster@postgresql.org">webmaster</a> if you think this
+is happening to you in error.
+</p>
+<p>
+Proceed to the <a href="/account/comments/new/{{page.version}}/{{page.file}}/">comment form</a>.
+</p>
+</div>
+{%endif%}
 
 <div id="docFooter">
     <a href="/about/privacypolicy">Privacy Policy</a> | FIXME<br />
