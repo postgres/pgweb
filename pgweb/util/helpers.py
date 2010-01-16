@@ -5,7 +5,7 @@ from django.template import Context
 from django.template.loader import get_template
 import django.utils.xmlutils
 
-def simple_form(instancetype, itemid, request, formclass, formtemplate='base/form.html', redirect='/account/', navsection='account'):
+def simple_form(instancetype, itemid, request, formclass, formtemplate='base/form.html', redirect='/account/', navsection='account', fixedfields=None):
 	if itemid == 'new':
 		instance = instancetype()
 	else:
@@ -24,6 +24,9 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 		if form.is_valid():
 			r = form.save(commit=False)
 			r.submitter = request.user
+			if fixedfields:
+				for k,v in fixedfields.items():
+					setattr(r, k, v)
 			r.save()
 			return HttpResponseRedirect(redirect)
 	else:
