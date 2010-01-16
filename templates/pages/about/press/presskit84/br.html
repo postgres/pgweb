@@ -1,0 +1,120 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 8.4 Press Kit{%endblock%}
+{%block contents%}
+
+<h1>Kit de imprensa do PostgreSQL 8.4</h1>
+
+<h2>Conteúdo</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Texto Original do Comunicado à Imprensa</a><br />
+ &nbsp; <a href="#additional_features">Lista de funcionalidades</a><br />
+ &nbsp; <a href="#download">Onde Baixar</a><br />
+ &nbsp; <a href="#docs">Documentação</a><br />
+ &nbsp; <a href="#license">Licença</a><br />
+ &nbsp; <a href="#contact">Contatos</a><br />
+ &nbsp; <a href="#quoted_companies">Texto Completo das Citações e Informações das Empresas</a><br />
+ &nbsp; <a href="#companies">Suporte Corporativo</a><br />
+</p>
+
+<a name="original_release"></a><h2>Texto Original do Comunicado à Imprensa</h2>
+
+<p><b>1 de Julho de 2009</b> O Grupo de Desenvolvimento Global do PostgreSQL lançou a versão 8.4, continuando o rápido desenvolvimento do banco de dados de código aberto mais avançado do mundo. Esta versão contém várias melhorias para tornar a administração, consulta e programação de bancos de dados PostgreSQL mais fáceis do que nunca. Com 293 modificações entre novos recursos e melhorias na versão 8.4, existem agora mais motivos para escolher o PostgreSQL para o seu próximo projeto.</p>
+
+<p>As mudanças mais numerosas no PostgreSQL 8.4 são ferramentas e comandos para administração e monitoramento novos ou melhorados. Cada usuário tem sua funcionalidade favorita que tornará o seu dia-a-dia com o PostgreSQL mais fácil e produtivo.</p>
+
+<p><i>"Nós usamos o PostgreSQL há 7 anos e estamos aguardando muitos dos recursos da 8.4, em particular a permissão de colunas, a configuração regional (locales) por banco de dados, buscas parciais em índices GIN e exceções definidas pelo usuário,"</i> disse Jeffrey Webster, CTO da ZooLoo.com. <i>"PostgreSQL nos permitiu crescer sem sacrificar a integridade dos dados."</i></p>
+
+<p>Entre as melhorias mais populares estão:</p>
+<ul>
+<li><b>Restauração Paralela de Bases de Dados</b>, aumentando a velocidade de recuperação de cópia de segurança (backup) em até 8 vezes</li>
+<li><b>Permissões por Coluna</b>, permitindo um controle mais granular de dados sigilosos</li>
+<li><b>Suporte a Configuração Regional por Banco de Dados</b>, tornando o PostgreSQL mais útil em ambientes com múltiplos idiomas</li>
+<li><b>Upgrades In-place</b> com o pg_migrator beta, permitindo migrações da 8.3 para a 8.4 sem tirar o banco do ar por muito tempo</li>
+<li><b>Novas Ferramentas de Monitoramento de Consultas</b>, dando aos administradores mais detalhes sobre a atividade das consultas</li>
+</ul>
+
+<p>A versão 8.4 facilita a análise de dados implementando funcionalidades avançadas do ANSI SQL2003 como <b>windowing functions</b>, <b>common table expressions</b> e <b>junções recursivas</b>. <i>"Essas estruturas de consulta aumentam substancialmente a expressividade do dialeto SQL do PostgreSQL, permitindo aos usuários formularem perguntas interessantes em uma única consulta que seria impossível formular anteriormente,"</i> explica Sailesh Krishnamurthy, Fundador da Truviso. Melhorias nas funções armazenadas (stored procedures), como <b>parâmetros padrão</b> e <b>listas de parâmetros variáveis</b>, tornam a programação no servidor de banco de dados mais simples e compacta.</p>
+
+<p><i>A nova versão também aumenta a performance de aplicações,</i> como comenta Kevin Grittner, Administrador de Bancos de Dados para o Sistema Judicial de Wisconsin (EUA), <i>"O PostgreSQL continua a melhorar performance em cada nova versão. A versão 8.4 adiciona muitas otimizações, tais como semi-junções e anti-junções, que trazem melhorias dramáticas em tempo de execução para nossas consultas mais exigentes."</i></p>
+
+<p>Essas funcionalidades significam que o PostgreSQL 8.4 servirá mais usuários que nunca, tal como o projeto OpenStreetMap. <i>"Quando estávamos planejando a nova versão da API do OpenStreetMap, ficou claro que precisaríamos de um banco de dados de classe mundial que não só traz as funcionalidades certas, mas também roda bem com a capacidade de escalonar que precisamos. Apesar de haver muitos bancos de dados disponíveis, o PostgreSQL foi a escolha óbvia,"</i> segundo Tom Hughes, administrador de sistemas do OpenStreetMap.</p>
+
+
+<h2>Comunicado Estendido</h2>
+
+<a name="additional_features"></a><h2>Lista de Funcionalidades</h2>
+<p>
+A versão 8.4 tem um número de novas funcionalidades sem precedentes. Nós criamos páginas adicionais para catalogá-las:
+</p>
+<ul>
+<li><a href="/about/press/features84">Lista completa de funcionalidades (em Inglês)</a></li>
+<li><a href="/about/featurematrix">Matriz de Funcionalidades (em Inglês)</a></li>
+<li><a href="/docs/8.4/static/release-8-4.html">Notas de Lançamento</a></li>
+</ul>
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Página de Downloads</a>, com links para instaladores e ferramentas.</li>
+<li><a href="/ftp/source/v8.4.0">Código Fonte</a></li>
+<li><a href="/download/windows">Instaladores para Windows</a></li>
+<li><a href="/download/linux">Instaladores para Linux</a> e repositórios de pacotes</li>
+<li><a href="/download/solaris">Pacotes para Solaris</a></li>
+<li><a href="/download/macosx">Instaladores para Mac OSX</a></li>
+<li><a href="/download/freebsd">Ports para FreeBSD</a></li>
+<li><a href="http://pgfoundry.org/projects/pg-migrator/">Projeto pg_migrator</a></li>
+<li><a href="http://www.pgfoundry.org">Componentes Adicionais</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">Software que Trabalha com o PostgreSQL e Software Comercial</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentação</h2>
+
+<p>Documentação e páginas de manual são instaladas com o PostgreSQL, mas fique à vontade para navegar, pesquisar e comentar na nossa compreensiva e interativa <a href="/docs/8.4/interactive">documentação online</a>.</p>
+
+<a name="license"></a><h2>Licença</h2>
+<p>
+O PostgreSQL usa a <a href="/about/licence">licença BSD</a>, que requer apenas que o código fonte licenciado mantenha seu direito de cópia e informação da licença. Esta
+<a href="http://www.opensource.org/licenses/bsd-license.php">licença certificada pela OSI</a> é amplamente vista como flexível e amigável à empresas, já que ela não restringe o uso do PostgreSQL com aplicações comerciais e proprietárias. Juntamente com suporte de múltiplas empresas e propriedade pública do código, a licença BSD torna o PostgreSQL muito popular com fabricantes que querem anexar um banco de dados com seus próprios produtos sem medo de ônus financeiro, prisão à um só fabricante, ou mudanças nos termos de licenças.
+</p>
+
+<a name="contact"></a><h2>Contatos</h2>
+
+<p>Páginas da Web</p>
+<ul>
+<li><a href="http://www.postgresql.org">Página inicial do PostgreSQL</a></li>
+</ul>
+
+<p>Perguntas da Imprensa</p>
+<p>Brasil<br />
+Roberto Mello<br />
+<a href="br@postgresql.org">br@postgresql.org</a><br />
+92-9128-4346</p>
+
+<p>Para contatos em outras regiões, vide <a href="/about/press/contact">nossa lista de contatos internacionais.</a></p>
+
+<a name="quoted_companies"></a><h2>Texto Completo das Citações e Informações das Empresas</h2>
+
+<p>Contatos abaixo comunicam-se apenas em Inglês.</p>
+
+<p><i>"Nós usamos o PostgreSQL há 7 anos e estamos aguardando muitos dos recursos da 8.4, em particular a permissão de colunas, a configuração regional (locales) por banco de dados, buscas parciais em índices GIN e exceções definidas pelo usuário,"</i> diz Jeffrey Webster, CTO da ZooLoo.com. <i>"PostgreSQL nos permitiu crescer sem sacrificar a integridade dos dados."</i><br />
+Contato: <a href="mailto:melissa@zooloo.com">Melissa</a> ou visite <a href="http://www.zooloo.com/">ZooLoo.com</a></p>
+
+<p><i>A nova versão também aumenta a performance de aplicações,</i> como comenta Kevin Grittner, Administrador de Bancos de Dados para o Sistema Judicial de Wisconsin (EUA), <i>O PostgreSQL continua a melhorar performance em cada nova versão. A versão 8.4 adiciona muitas otimizações, tais como semi-junções e anti-junções, que trazem melhorias dramáticas em tempo de execução para nossas consultas mais exigentes.</i><br />
+Contato: <a href="mailto:Kevin.Grittner@wicourts.gov">Kevin Grittner</a> ou visite <a href="http://www.wicourts.gov/">Wisconsin Court System</a> </p>
+
+<p><i>"Essas estruturas de consulta aumentam substancialmente a expressividade do dialeto SQL do PostgreSQL, permitindo aos usuários formularem perguntas interessantes em uma única consulta que seria impossível formular anteriormente,"</i> explica Sailesh Krishnamurthy, Fundador e Vice Presidente de Tecnologia da Truviso. <br />
+Contato: <a href="mailto:info@truviso.com">e-mail para Informações</a> ou visite <a href="http://www.truviso.com">Truviso</a>.</p>
+
+<p><i>Quando estávamos planejando a nova versão da API do OpenStreetMap, ficou claro que precisaríamos de um banco de dados de classe mundial que não só traz as funcionalidades certas, mas também roda bem com a capacidade de escalonar que precisamos. O PostgreSQL nos permite suportar consistência nas bases de dados ao usar chaves estrangeiras e atualizações transacionais ao mesmo tempo que damos nossos administradores de sistemas as ferramentas requeridas para trabalhar com nosso banco de dados de 850Gb, gerenciando o desenvolvimento continuado  de nossa estrutura de tabelas e aspectos operacionais como instantâneos (snapshots) consistentes do banco de dados. Apesar de haver muitos bancos de dados disponíveis, o PostgreSQL foi a escolha óbvia,</i> segundo Tom Hughes, administrador de sistemas do OpenStreetMap.<br />
+Contato: <a href="mailto:webmaster@openstreetmap.org">Tom Hughes</a> ou visite <a href="http://www.openstreetmap.org">OpenStreetMap</a>.</p>
+
+<a name="companies"></a><h2>Suporte Corporativo</h2>
+
+<p>O PostgreSQL é beneficiado pelo suporte de muitas empresas, que patrocinam desenvolvedores, fornecem recursos de hospedagem, e nos dão suporte financeiro.  Os maiores patrocinadores de longo prazo estão listados na nossa <a href="/about/sponsors">página de patrocinadores de desenvolvimento.</a></p>
+
+<p>Existe também uma grande comunidade de <a href="/support/professional_support">empresas que oferecem Suporte ao PostgreSQL</a>, desde consultores individuais até empresas multinacionais.</p>
+
+<p><a href="/about/donate">Doações</a> são aceitas.</p>
+
+
+
+{%endblock%}

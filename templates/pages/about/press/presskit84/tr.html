@@ -1,0 +1,138 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 8.4 Basın Bülteni{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 8.4 Basın Bülteni</h1>
+
+<h2>İçindekiler</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Orijinal Basın Duyurusu</a><br />
+ &nbsp; <a href="#additional_features">Özellik Listesi</a><br />
+ &nbsp; <a href="#download">İndirebileceğiniz Adresler</a><br />
+ &nbsp; <a href="#docs">Belgeler</a><br />
+ &nbsp; <a href="#license">Lisans</a><br />
+ &nbsp; <a href="#contact">Bağlantılar</a><br />
+ &nbsp; <a href="#quoted_companies">Alıntıların tam metinleri ve Şirket Bilgileri</a><br />
+ &nbsp; <a href="#companies">Şirket Desteği</a><br />
+</p>
+
+<a name="original_release"></a><h2>Orijinal Basın Duyurusu</h2>
+
+<p><b>1 Temmuz 2009</b> PostgreSQL Global Development Group, dünyanın en gelişmiş açık kaynak kodlu veritabanı sunucusu olan PostgreSQL'in 8.4 sürümünü duyurdu. Bu sürüm PostgreSQL yönetimini, 
+sorgulamalarını ve programlamasını öncekinden daha da kolaylaştırmıştır. 293 yeni ya da geliştirilmiş özellikleri ile 8.4 sürümü ile PostgreSQL'i sıradaki projenizde kullanmanız için daha da fazla 
+neden var.</p>
+
+<p>PostgreSQL 8.4' deki en çok sayıdaki yeni özellik yeni ve geliştirilmiş yönetim ve gözlemleme araçları ve komutlarıdır. Her kullanıcı günlük çalışmalarında PostgreSQL'i daha kolay ve yönetebilecek favori özelliklerini bulacaktır.</p>
+
+<p><i>ZooLoo.com'un CTO'su Jeffrey Webster, PostgreSQL'i yedi yıldan beri kullandıklarını ve  kolon izinleri, veritabanı bazlı yerel seçimi ve GIN indexleri için parçalı eşleşmeler gibi 8.4 
+özelliklerini şimdiden  beklediklerini söyledi ve ekledi: "PostgreSQL veri bütünlüğünden feragat ettirmeden büyümemizi sağladı."</i></p>
+
+<p>En popüler geliştirmeler arasında şunlar vardır:</p>
+<ul>
+<li><b>Veritabanlarının Paralel Geriyüklemesi</b>, yedeklerin geriyüklenmesini 8 kata kadar hızlandırır</li>
+<li><b>Kolon Bazlı İzinler</b> ile hassas verinin daha iyi kontrol edilmesi mümkündür</li>
+<li><b>Veritabanı Bazlı Dil Karşılaştırması Desteği</b> ile PostgreSQL'i çok dilli ortamlarda daha iyi kullanabilirsiniz</li>
+<li><b>Disk Üzerinde Güncelleme</b> pg_migrator beta sürümü ile 8.3'den 8.4'e geçiş büyük zaman geçirmeden geçiş mümkündür</li>
+<li><b>Yeni Sorgu Gözlemleme Araçları</b> veritabanı yöneticilerine sorgu etkinlikleri hakkında daha fazla bilgi verecektir</li>
+</ul>
+
+<p>8.4 sürümü veri analizini gelişmiş bir ANSI SQL2003 özelliği olan <b>windowing functions</b>, <b>common table expressions</b> ve <b>recursive joins</b> ile daha da kolaylaştırmıştır. Truviso kurucusu 
+Sailesh Krishnamurthy <i>"Bu sorgu yapıları PostgreSQL'in SQL dialektiğini azımsanmayacak şekilde arttırıyor ve kullanıcıların tek bir sorguda daha ilginç ve önceden sorulması mümkün olmayan soruları 
+sormasına izin veriyor"</i> dedi. Saklı yordamlara (stored procedure) eklenen <b>öntanımlı parametreler</b> ve <b>variadic parametreler</b> gibi özelliklerle veritabanı sunucusu programlaması daha 
+basit ve özlü bir hale gelmiştir.</p>
+
+<p>Bu sürüm, Wisconsin Court Systems'den Kevin Grittner'ın da belirttiği gibi, uygulama başarımlarını da arttırıyor: <i>"PostgreSQL her yeni ana sürümde başarımını arttırmaya devam ediyor. 8.4 sürümü 
+semi-joinler ve anti-joinler gibi çeşitli optimizasyonlar ekledi ve büyük sorgularımızın çalışma sürelerini dikkat çekici derecede düşürdü"</i></p>
+
+<p>Bu özellikler PostgreSQL 8.4'ün daha önceden olmadığı kadar fazla yeni kullanıcıya hizmet vereceğinin bir işaretidir. Bunlardan birisi de OpenStreetMap projesi. OpenStreetMap sistem yöneticisi 
+Tom Hughes bu konuda şunları söyledi: <i>" OpenStreepMap API'ının yeni sürümünü planlarken sadece özellikleri için değil, aynı zamanda ölçeklenebilir bir dünya sınıfında veritabanı sunucusu aradığımız 
+kesinleşti. Çok fazla açık kaynak kodlu veritabanı olmasına rağmen PostgreSQL gözle görülür derecede önde olan seçimdi."</i></p>
+
+<h2>Genişletilmiş Bülten</h2>
+
+<a name="additional_features"></a><h2>Özellik listesi</h2>
+<p>
+8.4 sürümü eşine rastlanmadık sayıda yeni özellikler içermektedir. Bunları düzenlemek için ek sayfalar yarattık:
+</p>
+<ul>
+<li><a href="/about/press/features84">Özelliklerin tam listesi(Sadece İngilizce)</a></li>
+<li><a href="/about/featurematrix">Özellik Matriksi (Sadece İngilizce)</a></li>
+<li><a href="/docs/8.4/static/release-8-4.html">Sürüm notları</a></li>
+</ul>
+<a name="download"></a><h2>İndirme</h2>
+<ul>
+<li><a href="/download">İndirme için gerekli bağlantılar</a></li>
+<li><a href="/ftp/source/v8.4.0">Kaynak Kodu</a></li>
+<li><a href="/download/windows">Windows Kurulum Programı</a></li>
+<li><a href="/download/linux">Linux Kurulum Programları</a> ve paket depoları</li>
+<li><a href="/download/solaris">Solaris Paketleri</a></li>
+<li><a href="/download/macosx">Mac OSX Kurulum Programları</a></li>
+<li><a href="/download/freebsd">FreeBSD Portları</a></li>
+<li><a href="http://pgfoundry.org/projects/pg-migrator/">pg_migrator Projesi</a></li>
+<li><a href="http://www.pgfoundry.org">Seçimsel bileşenler ve eklentiler</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">İlişkili ve Ticari Yazılımlar</a></li>
+</ul>
+
+<a name="docs"></a><h2>Belgeler</h2>
+
+<p>HTML belgeler ve man sayfaları PostgreSQL ile kurulurlar, ancak isterseniz <a href="/docs/8.4/interactive">etkileşimli çevrimiçi belgelerimizde</a> arama yapabilir, gezinebilir ve yorum 
+yapabilirsiniz.</p>
+
+<a name="license"></a><h2>Lisans</h2>
+<p>
+PostgreSQL sadece lisanslanan kaynak kodun haklarını ve lisans bilgisinin tutulmasını yeterli gören <a href="/about/licence">BSD lisansı</a> ile dağıtılmaktadır. Bu <a 
+href="http://www.opensource.org/licenses/bsd-license.php">OSI sertifikalı lisans</a>  esnekliği ve kurumlara sağladığı kolaylık nedeniyle beğenilmektedir -- çünkü PostgreSQL'in kodunun ticari ya da 
+kapalı kodlu uygulamalarda kullamına izin vermektedir. Çoklu şirket desteği ve kodun herkes tarafından sahiplenilmesi nedeniyle BSD lisansı PostgreSQL'i kendi ürünlerine gömmek isteyen firmaların lisans 
+ücreti, üreticiye bağımlılık ve lisansın değişmesi konularındaki korkularını ortadan kaldırmaktadır.</p>
+
+<a name="contact"></a><h2>Bağlantılar</h2>
+
+<p>Web Sayfaları</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL ana sayfası</a></li>
+<!--<li><a href="YOUR LOCALIZED POSTGRES PAGE">NAME OF YOUR LOCALIZED POSTGRES PAGE</a></li>-->
+</ul>
+
+<p>Basın Bilgileri</p>
+<p>Türkiye<br />
+Devrim GÜNDÜZ<br />
+<a href="mailto:devrim@PostgreSQL.org">devrim@PostgreSQL.org</a><br />
+0 532 633 9886</p>
+
+<p>Diğer bölgelerdeki bağlantılar için <a href="/about/press/contact">uluslararası bağlantı listemize</a> bakabilirsiniz.</p>
+
+<a name="quoted_companies"></a><h2>Alıntıların Tam Metinleri ve Şirket Bilgileri</h2>
+
+<p>Aşağıdaki bağlantılar sadece İngilizce'dir.</p>
+
+<p><i>"PostgreSQL'i yedi yıldan beri kullanıyoruz. Kolon izinleri, veritabanı bazlı yerel seçimi ve GIN indexleri için parçalı eşleşmeler gibi 8.4 özelliklerini şimdiden bekliyoruz. PostgreSQL veri 
+bütünlüğünden feragat ettirmeden büyümemizi sağladı."</i><br />
+Bağlantı: <a href="mailto:melissa@zooloo.com">Melissa</a> Web Sayfası: <a href="http://www.zooloo.com/">ZooLoo.com</a></p>
+
+<p><i>"PostgreSQL her yeni ana sürümde başarımını arttırmaya devam ediyor. 8.4 sürümü semi-joinler ve anti-joinler gibi çeşitli optimizasyonlar ekledi ve büyük sorgularımızın çalışma sürelerini dikkat 
+çekici derecede düşürdü." Kevin Grittner, Database Administrator, Consolidated Court Automation Programs, Wisconsin Court System. </i><br />
+Bağlantı: <a href="mailto:Kevin.Grittner@wicourts.gov">Kevin Grittner</a> Web Sayfası: <a href="http://www.wicourts.gov/">Wisconsin Court System</a> </p>
+
+<p><i>"Bu sorgu yapıları PostgreSQL'in SQL dialektiğini azımsanmayacak şekilde arttırıyor ve kullanıcıların tek bir sorguda daha ilginç ve önceden sorulması mümkün olmayan soruları sormasına izin 
+veriyor"</i>Sailesh Krishnamurthy, Founder and VP Techology, Truviso.<br />
+Bağlantı: <a href="mailto:info@truviso.com">Bilgi e-postası</a> Web Sayfası: <a href="http://www.truviso.com">Truviso</a>.</p>
+
+<p><i>"OpenStreepMap API'ının yeni sürümünü planlarken sadece özellikleri için değil, aynı zamanda ölçeklenebilir bir dünya sınıfında veritabanı sunucusu aradığımız kesinleşti. PostgreSQL foreign keyler ve 
+transaction destekli güncellemeler ile veritabanı bütünlüğünü desteklerken sistem yöneticilerimize 850 GB'lık veritabanımızı yönetbilmeleri için gerekli araçları sağladı. Bu araçlarla kararlı veritabanı 
+snapshotları gibi operasyonel durumları ve tablo yapılarımızın sürekli gelişimini yönetebilmeyi sağladık. Çok fazla açık kaynak kodlu veritabanı olmasına rağmen PostgreSQL gözle görülür derecede önde 
+olan seçimdi."</i>Tom Hughes, OpenStreetMap projesi sistem yöneticisi<br />
+Bağlantı: <a href="mailto:webmaster@openstreetmap.org">Tom Hughes</a> Web Sayfası: <a href="http://www.openstreetmap.org">OpenStreetMap</a>.</p>
+
+<a name="companies"></a><h2>Şirket Desteği</h2>
+
+<p>PostgreSQL geliştiricilere sponsor olan, bulundurma hizmeti sağlayan ve bize maddi destek sağlayan şirketlerin desteğini almaktadır. En büyük uzun dönemli sponsorlarımızı <a 
+href="/about/sponsors">geliştirme sponsorları sayfasında</a> görebilirsiniz.</p>
+
+<p>Aynı zamanda bireysel danışmanlardan çok uluslu şirketelere kadar <a href="/support/professional_support">PostgreSQL desteği sunan şirketler</a> de bulunmaktadır.</p>
+
+<p><a href="/about/donate">Katkılar</a> kabul edilmektedir.</p>
+
+
+
+{%endblock%}

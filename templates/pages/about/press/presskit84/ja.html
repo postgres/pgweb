@@ -1,0 +1,190 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 8.4プレスキット{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 8.4プレスキット</h1>
+
+<h2>目次</h2>
+
+<p>
+ &nbsp; <a href="#original_release">リリース原文</a><br />
+ &nbsp; <a href="#additional_features">機能一覧</a><br />
+ &nbsp; <a href="#download">ダウンロード</a><br />
+ &nbsp; <a href="#docs">文書</a><br />
+ &nbsp; <a href="#license">ライセンス</a><br />
+ &nbsp; <a href="#contact">問い合わせ先</a><br />
+ &nbsp; <a href="#quoted_companies">引用した企業について</a><br />
+ &nbsp; <a href="#companies">法人サポート</a><br />
+</p>
+
+<a name="original_release"></a><h2>リリース原文</h2>
+
+<p>
+<b>2009年7月1日</b>
+最も先端的なオープンソースデータベースを開発し続けたPostgreSQLグローバル開発グループは、本日バージョン8.4をリリースしました。
+このリリースには、管理作業、問い合わせ処理、PostgreSQLデータベースのプログラミングを以前に比べより容易にするための改良が大量に含まれています。
+バージョン8.4において行われた293項目にわたる新機能の追加および既存の機能の改良により、次のプロジェクトにはPostgreSQLを選択してもよいのではないか、という理由が更に加わりました。
+</p>
+
+<p>
+PostgreSQL 8.4では、管理や監視用のツール/コマンドの追加および改良が過去のアップグレードの中でも最も多くなされています。
+PostgreSQLを活用したいとするユーザは各自それぞれ、自分が良いと思う機能を使って、日常の作業をより容易に、そしてより生産的に行うことができます。
+</p>
+
+<p>
+ZooLoo.com CEOのJeffrey Websterは次のように述べています。
+<i>
+「これまで7年間PostgreSQLを使用していました。
+8.4の多くの機能、特に列レベル権限、データベース単位のロケール、GINインデックスにおける部分一致、ユーザ定義の例外といった機能を期待しています。
+PostgreSQLによりデータ整合性を失うことなく成長することができました。」
+</i>
+</p>
+
+<p>中でも最も好評な改良点を以下に記します。</p>
+<ul>
+<li><b>並列データベースリストア</b>, バックアップからのリストア速度を最大8倍向上します。</li>
+<li><b>列単位の権限</b>, 取扱いに注意すべきデータに対してより細かな制御を可能にします。</li>
+<li><b>データベース単位の照合順サポート</b>, 複数言語環境におけるPostgreSQLをより使いやすくします。</li>
+<li><b>その場でのアップグレード</b> pg_migratorベータ版により長い停止時間を伴わない8.3から8.4へのアップグレードが可能です。</li>
+<li><b>新しい問い合わせ監視ツール</b>, 問い合わせ処理により多くの視野を管理者に提供します。</li>
+</ul>
+
+<p>
+バージョン8.4では、<b>ウィンドウ関数</b>、<b>共通テーブル式</b>、<b>再帰結合</b>といった先端のANSI SQL2003機能を通してより容易にデータ解析を行うことができます。
+Truviso創立者Sailesh Krishnamurthyは次のように述べています。
+<i>「これらの問い合わせ構造はPostgreSQLのSQL言語の表現力を大きく増やしました。
+ユーザはこれまでできなかったような問い合わせを単一の問い合わせで行うことができるようになりました。」
+</i>
+<b>デフォルトパラメータ</b>や<b>可変長数のパラメータ</b>といったストアドプロシージャでの改良により、データベースサーバプログラミングはより単純、かつ、小規模になりました。
+</p>
+
+<p>
+またこの新しいリリースはアプリケーションの性能を大きく向上します。
+Wisconsin Courts Systemのデータベース管理者は次のようにコメントしています。
+<i>
+「PostgreSQLはこれまですべてのメジャーリリースで継続して性能を向上させています。
+我々の使用するもっとも困難な問い合わせの一部について実行時性能を大きく向上させた、半結合、アンチ結合など多くの最適化がバージョン8.4に加えられました。」
+</i></p>
+
+<p>
+これらの機能は、PostgreSQL 8.4がOpenStreetMapプロジェクトなどこれまでより多くのユーザの必要を満たすことを意味します。
+OpenStreetMapシステム管理者Tom Hughesは次のように述べています。
+<i>
+「新しいバージョンのOpenStreetMap APIを計画していた時、適切な機能ボックスを動かすだけでなく、実際に必要スケールで十分動作するあらゆる分野のカバーを提供するデータベースが必要であることが明確になりました。
+利用可能なオープンソースデータベースは多くありましたが、PostgreSQLを選択することが明白でした。」
+</i>
+</p>
+
+<h2>拡張版リリース</h2>
+
+<a name="additional_features"></a><h2>機能一覧</h2>
+<p>
+バージョン8.4ではかつてないほど多くの新機能があります。
+これらを分類したページを別途作成しました。
+</p>
+<ul>
+<li><a href="/about/press/features84">全機能一覧（英語のみ）</a></li>
+<li><a href="/about/featurematrix">機能マトリクス（英語のみ）</a></li>
+<li><a href="/docs/8.4/static/release-8-4.html">リリースノート</a></li>
+</ul>
+<a name="download"></a><h2>ダウンロード</h2>
+<ul>
+<li><a href="/download">ダウンロードページ</a>。インストーラやツールへのリンクもあります。</li>
+<li><a href="/ftp/source/v8.4.0">ソースコード</a></li>
+<li><a href="/download/windows">Windowsインストーラ</a></li>
+<li><a href="/download/linux">Linuxインストーラ</a>およびパッケージリポジトリ</li>
+<li><a href="/download/solaris">Solarisパッケージ</a></li>
+<li><a href="/download/macosx">Mac OSXインストーラ</a></li>
+<li><a href="/download/freebsd">FreeBSDポート</a></li>
+<li><a href="http://pgfoundry.org/projects/pg-migrator/">pg_migratorプロジェクト</a></li>
+<li><a href="http://www.pgfoundry.org">オプションのコンポーネントとアドオン</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">関連ソフトウェアおよび商用ソフトウェア</a></li>
+</ul>
+
+<a name="docs"></a><h2>文書</h2>
+
+<p>
+HTML文書およびマニュアルページはPostgreSQLでインストールされますが、拡張可能かつ対話式の<a href="/docs/8.4/interactive">オンライン文書</a>で閲覧、検索、コメント付を自由に行ってください。</p>
+
+<a name="license"></a><h2>ライセンス</h2>
+<p>
+PostgreSQLは<a href="/about/licence">BSDライセンス</a>を使用しています。
+このライセンスでは、ライセンスを受けるソースコードがそのコピーライトとライセンス情報を含有することのみを要求します。
+この<a href="http://www.opensource.org/licenses/bsd-license.php">OSI認証ライセンス</a>は、柔軟かつビジネスに利用しやすいため広く評価されています。
+このため、商用アプリケーションや私有アプリケーションにおけるPostgreSQLの使用は制限されていません。
+複数企業のサポートとソースコードの公的所有と相俟って、このBSDライセンスにより、料金・ベンダ独占化・ライセンス条項の変更などの心配をすることなく製品への組み込み用データベースを求めるベンダにPostgreSQLは非常に人気があります。
+</p>
+
+<a name="contact"></a><h2>問い合わせ先</h2>
+
+<p>WWWページ</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL home page</a></li>
+<li><a href="http://www.postgresql.jp">日本PostgreSQLユーザ会</a></li>
+</ul>
+
+<p>問い合わせ先</p>
+<p>日本PostgreSQLユーザ会<br />
+広報担当：稲葉<br />
++81-3-5951-1214<br />
+<a href="mailto:jpug-staff@postgresql.jp">jpug-staff@postgresql.jp</a></p>
+</p>
+
+<p>
+日本以外の問い合わせ先については<a href="/about/press/contact">問い合わせ先一覧</a>を参照してください。
+</p>
+
+<a name="quoted_companies"></a><h2>引用した企業について</h2>
+
+<p>以下への問い合わせは英語のみです。</p>
+
+<p>
+ZooLoo.com CEOであるJeffrey Websterは次のように述べています。
+<i>
+「これまで7年間PostgreSQLを使用していました。
+8.4の多くの機能、特に列レベル権限、データベース単位のロケール、GINインデックスにおける部分一致、ユーザ定義の例外といった機能を期待しています。
+PostgreSQLによりデータ整合性を失うことなく成長することができました。」
+</i><br />
+問い合わせ先：<a href="mailto:melissa@zooloo.com">Melissa</a>または<a href="http://www.zooloo.com/">ZooLoo.com</a></p>を参照ください。
+</p>
+
+<p>
+Wisconsin Courts System Consolidated Court Automation Programsのデータベース管理者Kevin Grittnerは次のように述べています。
+<i>
+「PostgreSQLはこれまですべてのメジャーリリースで継続して性能を向上させています。
+我々の使用するもっとも困難な問い合わせの一部について実行時性能を大きく向上させた、半結合、アンチ結合など多くの最適化がバージョン8.4に加えられました。」
+</i><br />
+問い合わせ先：<a href="mailto:Kevin.Grittner@wicourts.gov">Kevin Grittner</a>または<a href="http://www.wicourts.gov/">Wisconsin Court System</a>を参照ください。
+</p>
+
+<p>
+Truviso創立者兼VP TechologyのSailesh Krishnamurthyは次のように述べています。
+<i>「これらの問い合わせ構造はPostgreSQLのSQL言語の表現力を大きく増やしました。
+ユーザはこれまでできなかったような問い合わせを単一の問い合わせで行うことができるようになりました。」
+</i>
+<br />
+問い合わせ先：<a href="mailto:info@truviso.com">Info e-mail</a>または<a href="http://www.truviso.com">Truviso</a>を参照ください。</p>
+
+<p>
+OpenStreetMapシステム管理者Tom Hughesは次のように述べています。
+<i>
+「新しいバージョンのOpenStreetMap APIを計画していた時、適切な機能ボックスを動かすだけでなく、実際に必要スケールで十分動作するあらゆる分野のカバーを提供するデータベースが必要であることが明確になりました。
+PostgreSQLにより我々は外部キーを使用したデータベース一貫性およびトランザクション化された更新をサポートすることができました。
+さらにシステム管理者に850Gbのデータベースでテーブル構造の継続した開発保守や一貫性を持つデータベーススナップショットといった操作性などの作業を行うために必要なツールを提供することもできました。
+利用可能なオープンソースデータベースは多くありましたが、PostgreSQLを選択することが明白でした。」
+<br />
+問い合わせ先：<a href="mailto:webmaster@openstreetmap.org">Tom Hughes</a>または<a href="http://www.openstreetmap.org">OpenStreetMap</a>を参照ください。</p>
+
+<a name="companies"></a><h2>法人サポート</h2>
+
+<p>PostgreSQLは、企業による多くサポートを受けています。これらスポンサー企業は開発者の後援、ホスティングリソースの提供や金銭的なサポートを行います。大規模、長期のスポンサーの一覧は<a href="/about/sponsors">開発スポンサーページ</a>にあります。</p>
+
+<p>
+また、個別のコンサルティングから多国企業まで、<a href="/support/professional_support">PostgreSQLサポートを提供する企業</a>という大規模なコミュニティもあります。
+</p>
+
+<p><a href="/about/donate">寄付</a>は喜んで受け付けます。</p>
+
+
+
+{%endblock%}

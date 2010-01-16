@@ -1,0 +1,132 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 8.4 Pressemappe{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 8.4 Pressemappe</h1>
+
+<h2>Inhalt</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Die offizielle Presseerkl&auml;rung</a><br />
+ &nbsp; <a href="#additional_features">Feature Liste</a><br />
+ &nbsp; <a href="#download">Downloads</a><br />
+ &nbsp; <a href="#docs">Dokumentation</a><br />
+ &nbsp; <a href="#license">Lizenz</a><br />
+ &nbsp; <a href="#contact">Kontakt</a><br />
+ &nbsp; <a href="#quoted_companies">Voller Text der Zitate und Firmeninformationen</a><br />
+ &nbsp; <a href="#companies">Kommerzieller Support</a><br />
+</p>
+
+<a name="original_release"></a><h2>Die offizielle Presseerkl&auml;rung</h2>
+
+<p><b>1. Juli 2009</b> Die PostgreSQL Global Development Group hat Version 8.4 ver&ouml;ffentlicht und setzt damit die kontinuierliche Entwicklung der fortschrittlichsten Open Source Datenbank der Welt fort. Dieses Release enth&auml;lt eine F&uuml;lle an Verbesserungen um die Administration, Anfragen und das Programmieren von PostgreSQL-Datenbanken noch einfacher als zuvor zu gestalten. Mit 293 neuen oder verbesserten Features in Version 8.4 gibt es noch mehr Gr&uuml;nde, PostgreSQL f&uuml;r Ihr n&auml;chstes Projekt zu w&auml;hlen.</p>
+
+<p>Die zahlreichsten &Auml;nderungen in PostgreSQL 8.4 sind neue oder verbesserte Administrations- und Monitoringwerkzeuge und Befehle. Jeder Benutzer hat seine eigenen favorisierten Features die die t&auml;gliche Arbeit mit PostgreSQL vereinfachen und die Produktivität erh&ouml;hen.</p>
+
+<p><i>"Wir nutzen PostgreSQL nun seit sieben Jahren und wir sind sehr gespannt auf die vielen Features in 8.4, vor allem spaltenbasierte Zugriffsrechte, Locales per Datenbank, partielle Vergleiche f&uuml;r GIN-Indexe und benutzerdefinierte Exceptions,"</i> sagt Jeffrey Webster, CTO bei ZooLoo.com. <i>"PostgreSQL hat es uns erlaubt, zu wachsen ohne die Datensicherheit zu opfern."</i></p>
+
+<p>Zu den am meisten erwarteten Funktionen geh&ouml;ren:</p>
+<ul>
+<li><b>Paralleles Wiederherstellen</b>, bis zu 8x schnellere Wiederherstellung eines Backups</li>
+<li><b>Spaltenbasierte Berechtigungen</b>, die es erm&ouml;glichen den Zugriff auf sensible Daten besser zu regulieren</li>
+<li><b>Datenbankbezogene Kollationen</b>, somit ist eine Verwendung in mehrsprachigen Umgebungen wesentlich einfacher m&ouml;glich</li>
+<li><b>In-Place Upgrades</b> mit pg_migrator - als Beta verf&uuml;gbar - erm&ouml;glichen es, Updates von 8.3 zu 8.4 durchzuf&uuml;hren und die Downtime m&ouml;glichst klein zu halten</li>
+<li><b>Neue &Uuml;berwachungsm&ouml;glichkeiten</b>, die einen genaueren Einblick in die Aktivit&auml;t von PostgreSQL erm&ouml;glichen</li>
+</ul>
+
+<p>Version 8.4 vereinfacht die Datenanalyse durch die Unterst&uuml;tzung von mehr ANSI SQL2003 Funktionen. Dazu z&auml;hlen unter anderem <b>Windowing-Functions</b>, <b>Common-Table-Expressions</b> und <b>rekursive Queries</b>. <i>"Diese Abfragem&ouml;glichkeiten erh&ouml;hen die Ausdruckskraft von PostgreSQLs SQL-Dialekt: Der Benutzer kann nun im Gegensatz zu fr&uuml;heren Versionen interessante Abfragen an die Datenbank zu einer Abfrage zusammenfassen,"</i> erkl&auml;rt Sailesh Krishnamurthy, Gr&uuml;nder von Truviso. Zu den Weiterentwicklungen bei gespeicherten Prozeduren (Stored Procedures) geh&ouml;ren <b>Standardwerte f&uuml;r Funktionsparameter</b> und Funktionen die eine <b>unterschiedliche Anzahl an Parametern (variadic functions)</b> entgegennehmen.</p>
+
+<p>Die neue Version bringt auch Geschwindigkeitsverbesserungen, meint Kevin Grittner, Datenbank Administrator f&uuml;r <i>"Wisconsin Courts System"</i> und beschreibt dies so: <i>"PostgreSQL verbessert nach wie vor in jedem gro&szlig;en Versionsschritt die Geschwindigkeit. Version 8.4 enth&auml;lt Verbesserungen f&uuml;r Semi-Joins und Anti-Joins, die eine erhebliche Verk&uuml;rzung der Laufzeit bei unseren anspruchsvollsten Abfragen bewirken."</i></p>
+
+<p>F&uuml;r PostgreSQL bedeuten diese Funktionen, dass es f&uuml;r mehr Leute die Datenbank der Wahl wird, wie f&uuml;r das OpenStreetMap-Projekt. <i>"Als wir die neue Version der OpenStreetMap-API planten wurde uns klar, dass wir eine Datenbank brauchen, die nicht nur die richtigen Funktionen bietet sondern auch in der Gr&ouml;&szlig;enordnung wie wir sie brauchen noch gut funktioniert. Obwohl es viele Open Source Datenbanken gibt, war PostgreSQL die erste Wahl."</i> sagt Tom Hughes, OpenStreetMap System Administrator.</p>
+
+
+<h2>Erweiterte Ver&ouml;ffentlichung</h2>
+
+<a name="additional_features"></a><h2>Feature Liste</h2>
+<p>
+Version 8.4 hat eine beispiellose Anzahl an neuen Features. Wir haben zus&auml;tziche Seiten erstellt, um diese zu katalogisieren:
+</p>
+<ul>
+<li><a href="/about/press/features84">Komplette Liste der Features (nur auf Englisch)</a></li>
+<li><a href="/about/featurematrix">Feature Matrix (nur auf Englisch)</a></li>
+<li><a href="/docs/8.4/static/release-8-4.html">Release Notes</a></li>
+</ul>
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Downloads Seite</a>, mit Links zu Paketen und Werkzeugen.</li>
+<li><a href="/ftp/source/v8.4.0">Source Code</a></li>
+<li><a href="/download/windows">Windows Pakete</a></li>
+<li><a href="/download/linux">Linux Pakete</a> und Paket-Repositories</li>
+<li><a href="/download/solaris">Solaris Pakete</a></li>
+<li><a href="/download/macosx">Mac OSX Pakete</a></li>
+<li><a href="/download/freebsd">FreeBSD Ports</a></li>
+<li><a href="http://pgfoundry.org/projects/pg-migrator/">pg_migrator Projekt</a></li>
+<li><a href="http://www.pgfoundry.org">Optionale Komponenten und Add-Ons</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">Verwandte und kommerzielle Software</a></li>
+</ul>
+
+<a name="docs"></a><h2>Dokumentation</h2>
+
+<p>HTML Dokumentation und Manpages werden mit PostgreSQL installiert, aber Sie k&ouml;nnen die umfangreiche, interaktive <a href="/docs/8.4/interactive">Online Dokumentation</a> durchsuchen und kommentieren.</p>
+
+<a name="license"></a><h2>Lizenz</h2>
+<p>
+PostgreSQL nutzt die <a href="/about/licence">BSD Lizenz</a>, welche nur verlangt, dass der lizensierte Source Code die Copyright- und Lizenzinformationen enth&auml;lt. Diese <a href="http://www.opensource.org/licenses/bsd-license.php">OSI-zertifizierte Lizenz</a> wird weitl&auml;ufig als flexibel und unternehmensfreundlich eingesch&auml;tzt, da sie die Nutzung von PostgreSQL in kommerziellen und propri&auml;teren Anwendungen nicht verbietet. Die Unterst&uuml;tzung durch viele Unternehmen und der &ouml;ffentlich verf&uuml;gbare Code machen PostgreSQL durch die BSD Lizenz sehr popul&auml;r bei Anbietern, die eine Datenbank in ihre eigenen Produkte integrieren m&ouml;chten, ohne Geb&uuml;hren, Vendor Lock-In oder &Auml;nderungen in der Lizenzierung bef&uuml;rchten zu m&uuml;ssen.
+</p>
+
+<a name="contact"></a><h2>Kontakt</h2>
+
+<p>Web Pages</p>
+<ul>
+<li><a href="http://www.postgresql.org/">PostgreSQL Webseite</a></li>
+<li><a href="http://www.pgug.de/">Deutsche PostgreSQL Usergruppe</a></li>
+</ul>
+
+<p>Presseanfragen</p>
+<p>Deutschland<br />
+Andreas Scherbaum<br />
+<a href="mailto:de@postgresql.org">de@postgresql.org</a><br />
++49 391 5596779</p>
+
+<p>F&uuml;r Kontakte in anderen Regionen, siehe die <a href="/about/press/contact">internationale Kontaktliste</a>.</p>
+
+<a name="quoted_companies"></a><h2>Voller Text der Zitate und Firmeninformationen</h2>
+
+<p>Die untenstehenden Kontakte sind nur in Englisch verf&uuml;gbar.</p>
+
+<p><i>"Wir nutzen PostgreSQL nun seit sieben Jahren und wir sind sehr gespannt auf die vielen Features in 8.4, vor allem spaltenbasierte Zugriffsrechte, Locales per Datenbank, partielle Vergleiche f&uuml;r GIN-Indexe und benutzerdefinierte Exceptions,"</i> sagt Jeffrey Webster, CTO bei ZooLoo.com. <i>"PostgreSQL hat es uns erlaubt, zu wachsen ohne die Datensicherheit zu opfern."</i><br />
+Kontakt: <a href="mailto:melissa@zooloo.com">Melissa</a> oder besuche <a href="http://www.zooloo.com/">ZooLoo.com</a></p>
+
+<p><i>"PostgreSQL verbessert nach wie vor in jedem gro&szlig;en Versionsschritt die Geschwindigkeit,"</i> 
+sagt Kevin Grittner, Datenbank Administrator, Consolidated Court Automation Programs, Wisconsin Court System.
+<i>"Version 8.4 enth&auml;lt Verbesserungen f&uuml;r Semi-Joins und Anti-Joins, die eine erhebliche Verk&uuml;rzung der Laufzeit bei unseren anspruchsvollsten Abfragen bewirken."</i><br />
+Kontakt: <a href="mailto:Kevin.Grittner@wicourts.gov">Kevin Grittner</a> oder besuche <a href="http://www.wicourts.gov/">Wisconsin Court System</a> </p>
+
+<p><i>"Diese Abfragem&ouml;glichkeiten erh&ouml;hen die Ausdruckskraft von PostgreSQLs SQL-Dialekt: Der Benutzer kann nun im Gegensatz zu fr&uuml;heren Versionen interessante Abfragen an die Datenbank zu einer Abfrage zusammenfassen,"</i> erklärt Sailesh Krishnamurthy, Gründer und VP Techology, Truviso.<br />
+Kontakt: <a href="mailto:info@truviso.com">Info E-Mail</a> oder besuche <a href="http://www.truviso.com">Truviso</a>.</p>
+
+<p><i>"Als wir die neue Version der OpenStreetMap-API planten wurde uns
+klar, dass wir eine Datenbank brauchen, die nicht nur die richtigen
+Funktionen bietet sondern auch in der Größenordnung wie wir sie brauchen
+noch gut funktioniert. PostgreSQL erlaubt es uns, Datenkonsistenz mit
+Hilfe von Foreign Keys und Updates in Transaktionen sicherzustellen,
+während unsere Systemadministratoren die Werkzeuge haben, die nötig sind,
+um mit unserer 850GB großen Datenbank zu arbeiten, die fortlaufende
+Entwicklung unserer Tabellenstrukturen zu managen und operationale
+Aspekte wie konsistente Datenbank-Snapshots gegeben sind. Obwohl es
+viele Open Source Datenbanken gibt, war PostgreSQL die erste Wahl,"</i>
+sagt Tom Hughes, OpenStreetMap Projekt, System Administrator.<br />
+Kontakt: <a href="mailto:webmaster@openstreetmap.org">Tom Hughes</a> oder besuche <a href="http://www.openstreetmap.org">OpenStreetMap</a>.</p>
+
+<a name="companies"></a><h2>Kommerzieller Support</h2>
+
+<p>PostgreSQL erfreut sich der Unterst&uuml;tzung zahlreicher Unternehmen, welche Entwickler sponsoren, Hosting anbieten und finanzielle Unterst&uuml;tzung leisten. Die gr&ouml;&szlig;ten Langzeitsponsoren sind auf unserer <a href="/about/sponsors">Sponsoren Seite</a> aufgef&uuml;hrt.</p>
+
+<p>Es gibt au&szlig;erdem eine gro&szlig;e Community von <a href="/support/professional_support">Unternehmen, die PostgreSQL Support</a> anbieten, von einzelnen Beratern bis zu multinationalen Unternehmen.</p>
+
+<p><a href="/about/donate">Spenden</a> sind gern gesehen.</p>
+
+
+
+{%endblock%}
