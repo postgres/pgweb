@@ -70,7 +70,9 @@ urlpatterns = patterns('',
     # Legacy URLs from the old website, that are likely to be used from other
     # sites or press releases or such
     ###
-    (r'^about/press/presskit(\d+).html.(\w+)$', 'pgweb.legacyurl.views.presskit'),
+    (r'^about/press/presskit(\d+)\.html\.(\w+)$', 'pgweb.legacyurl.views.presskit'),
+    (r'^about/news\.(\d+)$', 'pgweb.legacyurl.views.news'),
+    (r'^about/event\.(\d+)$', 'pgweb.legacyurl.views.event'),
     
     # Uncomment the next line to enable the admin:
     (r'^admin/(.*)', admin.site.root),
