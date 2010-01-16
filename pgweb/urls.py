@@ -53,8 +53,8 @@ urlpatterns = patterns('',
     (r'^support/professional_(support|hosting)[/_](.*)/$', 'profserv.views.region'),
     (r'^support/submitbug/$', 'misc.views.submitbug'),
 
-    (r'about/sponsors/$', 'pgweb.sponsors.views.sponsors'),
-    (r'about/servers/$', 'pgweb.sponsors.views.servers'),
+    (r'^about/sponsors/$', 'pgweb.sponsors.views.sponsors'),
+    (r'^about/servers/$', 'pgweb.sponsors.views.servers'),
     
     ###
     # RSS feeds
