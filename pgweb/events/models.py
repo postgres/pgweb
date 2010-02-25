@@ -3,13 +3,13 @@ from django.contrib.auth.models import User
 from datetime import date
 from pgweb.util.bases import PgModel
 
-from core.models import Country
+from core.models import Country, Organisation
 
 class Event(models.Model, PgModel):
 	submitter = models.ForeignKey(User, null=False, blank=False)
 	approved = models.BooleanField(null=False, blank=False, default=False)
 
-	org = models.CharField(max_length=70, null=False, blank=False)
+	org = models.ForeignKey(Organisation, null=False, blank=False)
 	title = models.CharField(max_length=100, null=False, blank=False)
 	city = models.CharField(max_length=50, null=False, blank=False)
 	state = models.CharField(max_length=50, null=False, blank=True)	

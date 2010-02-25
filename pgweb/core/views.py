@@ -35,7 +35,7 @@ def home(request):
 	traininginfo = Event.objects.filter(approved=True, training=True).extra(where=("startdate <= (CURRENT_DATE + '6 Months'::interval) AND enddate >= CURRENT_DATE",)).aggregate(Count('id'), Count('country', distinct=True))
 	# can't figure out how to make django do this
 	curs = connection.cursor()
-	curs.execute("SELECT * FROM (SELECT DISTINCT(org) FROM events_event WHERE startdate <= (CURRENT_DATE + '6 Months'::interval) AND enddate >= CURRENT_DATE AND approved AND training AND org IS NOT NULL AND NOT org='') x ORDER BY random() LIMIT 3")
+	curs.execute("SELECT * FROM (SELECT DISTINCT(core_organisation.name) FROM events_event INNER JOIN core_organisation ON org_id=core_organisation.id WHERE startdate <= (CURRENT_DATE + '6 Months'::interval) AND enddate >= CURRENT_DATE AND events_event.approved AND training AND org_id IS NOT NULL) x ORDER BY random() LIMIT 3")
 	trainingcompanies = [r[0] for r in curs.fetchall()]
 
 	return render_to_response('index.html', {
