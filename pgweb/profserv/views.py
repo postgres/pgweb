@@ -44,7 +44,7 @@ def region(request, servtype, regionname):
 
 	# DB model is a bit funky here, so use the extra-where functionality to filter properly.
 	# Field names are cleaned up earlier, so it's safe against injections.
-	services = ProfessionalService.objects.filter(approved=True).extra(where=["region_%s AND provides_%s" % (regionname, what),])
+	services = ProfessionalService.objects.select_related('organisation').filter(approved=True).extra(where=["region_%s AND provides_%s" % (regionname, what),])
 	
 	return render_to_response('profserv/list.html', {
 		'title': title,
