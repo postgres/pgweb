@@ -49,8 +49,10 @@ class Event(models.Model, PgModel):
 	
 	@property
 	def locationstring(self):
-		#FIXME, deal with state etc
-		return "%s, %s" % (self.city, self.country)
+		if self.state:
+			return "%s, %s, %s" % (self.city, self.state, self.country)
+		else:
+			return "%s, %s" % (self.city, self.country)
 
 	class Meta:
 		ordering = ('-startdate','-enddate',)
