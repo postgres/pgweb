@@ -12,7 +12,10 @@ class OrganisationAdmin(admin.ModelAdmin):
 	filter_horizontal = ('managers', )
 	search_fields = ('name', )
 
-admin.site.register(Version)
+class VersionAdmin(admin.ModelAdmin):
+	list_display = ('versionstring', 'reldate', 'current', )
+
+admin.site.register(Version, VersionAdmin)
 admin.site.register(OrganisationType)
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(ImportedRSSFeed)

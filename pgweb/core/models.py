@@ -9,9 +9,29 @@ class Version(models.Model):
 	latestminor = models.IntegerField(null=False, blank=False, default=0)
 	reldate = models.DateField(null=False, blank=False)
 	relnotes = models.CharField(max_length=32, null=False, blank=False)
+	current = models.BooleanField(null=False, blank=False, default=False)
 
 	def __unicode__(self):
+		return self.versionstring
+
+	@property
+	def versionstring(self):
 		return "%s.%s" % (self.tree, self.latestminor)
+
+	def save(self):
+		# Make sure only one version at a time can be the current one.
+		# (there may be some small race conditions here, but the likelyhood
+		# that two admins are editing the version list at the same time...)
+		if self.current:
+			previous = Version.objects.filter(current=True)
+			for p in previous:
+				if not p == self:
+					p.current = False
+					p.save() # primary key check avoids recursion
+
+		# Now that we've made any previously current ones non-current, we are
+		# free to save this one.
+		super(Version, self).save()
 
 	class Meta:
 		ordering = ('-tree', )

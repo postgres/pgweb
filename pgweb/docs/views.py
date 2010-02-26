@@ -3,34 +3,40 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required
 
+from decimal import Decimal
+
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form
+
+from pgweb.core.models import Version
 
 from models import DocPage, DocComment
 from forms import DocCommentForm
 
 def docpage(request, version, typ, filename):
+	# Get the current version both to map the /current/ url, and to later
+	# determine if we allow comments on this page.
+	currver = Version.objects.filter(current=True)[0].tree
 	if version == 'current':
-		#FIXME: get from settings
-		ver = '8.4'
+		ver = currver
 	else:
-		ver = version
+		ver = Decimal(version)
+
 	page = get_object_or_404(DocPage, version=ver, file="%s.html" % filename)
 
 	if typ=="interactive":
 		comments = DocComment.objects.filter(version=ver, file="%s.html" % filename, approved=True).order_by('posted_at')
 	else:
 		comments = None
-	
+
 	return render_to_response('docs/docspage.html', {
 		'page': page,
 		'title': page.title,
-		'doc_nav_version': version,
+		'doc_nav_version': ver,
 		'doc_type': typ,
 		'comments': comments,
-		#FIXME: along with above, get from settings
-		'can_comment': (typ=="interactive" and ver=='8.4'),
+		'can_comment': (typ=="interactive" and ver==currver),
 		'doc_index_filename': 'index.html',
 	})
 
