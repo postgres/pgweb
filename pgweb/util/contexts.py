@@ -81,6 +81,7 @@ sitenav = {
 			{'title': 'Products',       'link':'/account/edit/products/'},
 			{'title': 'Organisations',  'link':'/account/edit/organisations/'},
 		]},
+		{'title': 'Change password',    'link':'/account/changepwd/'},
 		{'title': 'Logout',             'link':'/account/logout'},
 	],
 }
