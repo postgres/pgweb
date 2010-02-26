@@ -3,7 +3,10 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
     (r'^$', 'account.views.home'),
-    
+
+    # List of items to edit
+    (r'^edit/(.*)/$', 'account.views.listobjects'),
+
     # News & Events
     (r'^news/(.*)/$', 'news.views.form'),
     (r'^events/(.*)/$', 'events.views.form'),

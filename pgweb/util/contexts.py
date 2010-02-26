@@ -75,6 +75,12 @@ sitenav = {
 	],
 	'account': [
 		{'title': 'Your account',         'link':'/account'},
+		{'title': 'Edit data',          'link':'/account', 'submenu': [
+			{'title': 'News Articles',  'link':'/account/edit/news/'},
+			{'title': 'Events',         'link':'/account/edit/events/'},
+			{'title': 'Products',       'link':'/account/edit/products/'},
+			{'title': 'Organisations',  'link':'/account/edit/organisations/'},
+		]},
 		{'title': 'Logout',             'link':'/account/logout'},
 	],
 }

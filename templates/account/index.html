@@ -3,45 +3,77 @@
 {%block contents%}
 <h1>Your account</h1>
 <p>
-This page contains information about your postgresql.org account.
+From this section, you can manage all information on this site connected
+to your PostgreSQL community account. Other than your basic profile
+information, this includes news and events, professional services and
+comments. Note that most of the data you submit to this site needs to be
+approved by a moderator before it's published.
 </p>
-
-<h1>Submitted data</h1>
 <p>
-Submitted data should be moved to a subpage!
+To submit a new record, or to edit an existing record, select the
+type of record in the menu on the left.
 </p>
 
-<h2>News articles</h2>
+<h2>Permissions model</h2>
+<p>
+News, Events, Products and Professional Services are attached to an
+Organisation. One or more persons can be given permissions to manage
+the data for an organisation. If you do not have permissions for an
+organisation and think you should have, you need to contact the current
+managers for that organisation.
+</p>
+
+<h2>Migrated data</h2>
+<p>
+For most of the data migrated from the old website has unfortunately not
+been connected to the proper organisations and accounts. If you have any
+data submitted that is not properly connected to you (most likely this
+will be your account not being connected to the proper organisation(s)),
+please contact <a href="webmaster@postgresql.org">webmaster@postgresql.org</a>
+and let us know which objects to connect together.
+</p>
+
+<h2>Submissions awaiting moderation</h2>
+<p>
+You have submitted the following objects that are still waiting moderator
+approval before they are published:
+</p>
+
+{%if newsarticles%}
+<h3>News articles</h3>
 <ul>
 {%for article in newsarticles%}
-<li><a {%if not article.approved%} style="color:red;"{%endif%} href="/account/news/{{article.id}}/">{{article}}</a></li>
+<li><a href="/account/news/{{article.id}}/">{{article}}</a></li>
 {%endfor%}
 </ul>
-<a href="/account/news/new/">Submit news</a>
+{%endif%}
 
-<h2>Events</h2>
+{%if events%}
+<h3>Events</h3>
 <ul>
 {%for event in events%}
-<li><a {%if not event.approved%} style="color:red;"{%endif%} href="/account/events/{{event.id}}/">{{event}}</a></li>
+<li><a href="/account/events/{{event.id}}/">{{event}}</a></li>
 {%endfor%}
 </ul>
-<a href="/account/events/new/">Submit event</a>
+{%endif%}
 
-<h2>Organisations</h2>
+{%if organisations%}
+<h3>Organisations</h3>
 <ul>
 {%for org in organisations%}
-<li><a {%if not org.approved%} style="color:red;"{%endif%} href="/account/organisations/{{org.id}}">{{org}}</a></li>
+<li><a href="/account/organisations/{{org.id}}">{{org}}</a></li>
 {%endfor%}
 </ul>
-<a href="/account/organisations/new/">New organisation</a>
+{%endif%}
 
-<h2>Products</h2>
+{%if products%}
+<h3>Products</h3>
 <ul>
 {%for product in products%}
-<li><a {%if not product.approved%} style="color:red;"{%endif%} href="/account/products/{{product.id}}">{{product}}</a></li>
+<li><a href="/account/products/{{product.id}}">{{product}}</a></li>
 {%endfor%}
 </ul>
-<a href="/account/products/new/">New product</a>
+{%endif%}
 
 {%endblock%}
 
