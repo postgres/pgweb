@@ -83,7 +83,18 @@ class PgModel(object):
 		if not fieldlist:
 			return "This object does not know how to express itself."
 
-		return "\n".join(['%s: %s' % (n, getattr(self, n)) for n in fieldlist])
+		return "\n".join(['%s: %s' % (n, self._get_attr_value(n)) for n in fieldlist])
+
+	def _get_attr_value(self, fieldname):
+		try:
+			return getattr(self, fieldname)
+		except ValueError, v:
+			# NOTE! If the object is brand new, and it has a many-to-many relationship, we can't
+			# access this data yet. So just return that it's not available yet.
+			if v.message.find('instance needs to have a primary key value before a many-to-many relationship can be used') > -1:
+				return "<not available yet>"
+			else:
+				raise v
 
 	def _build_url(self):
 		if self.id:
