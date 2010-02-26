@@ -1,13 +1,13 @@
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 
-def presskit(self, version, language):
+def presskit(request, version, language):
 	return HttpResponseRedirect("/about/press/presskit%s/%s/" % (
 		version, language)
 	)
 
-def news(self, newsid):
+def news(request, newsid):
 	return HttpResponseRedirect("/about/news/%s/" % newsid)
 
-def event(self, eventid):
+def event(request, eventid):
 	return HttpResponseRedirect("/about/event/%s/" % eventid)
 
