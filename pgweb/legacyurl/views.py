@@ -11,3 +11,6 @@ def news(request, newsid):
 def event(request, eventid):
 	return HttpResponseRedirect("/about/event/%s/" % eventid)
 
+def signup(request):
+	return HttpResponseRedirect("/account/signup/")
+

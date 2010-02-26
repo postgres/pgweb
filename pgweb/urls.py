@@ -73,7 +73,8 @@ urlpatterns = patterns('',
     (r'^about/press/presskit(\d+)\.html\.(\w+)$', 'pgweb.legacyurl.views.presskit'),
     (r'^about/news\.(\d+)$', 'pgweb.legacyurl.views.news'),
     (r'^about/event\.(\d+)$', 'pgweb.legacyurl.views.event'),
-    
+    (r'^community/signup', 'pgweb.legacyurl.views.signup'),
+
     # Uncomment the next line to enable the admin:
     (r'^admin/(.*)', admin.site.root),
 
