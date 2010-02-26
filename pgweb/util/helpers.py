@@ -32,8 +32,9 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 	else:
 		# Generate form
 		form = formclass(instance=instance)
-		if hasattr(form, 'filter_by_user'):
-			form.filter_by_user(request.user)
+
+	if hasattr(form, 'filter_by_user'):
+		form.filter_by_user(request.user)
 
 	if hasattr(instancetype, 'markdown_fields'):
 		markdownfields = instancetype.markdown_fields
