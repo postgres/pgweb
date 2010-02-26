@@ -7,8 +7,8 @@
 <p>
 {{obj.details|markdown:"safe"}}
 </p>
-{%if obj.has_submitter%}
-<p>Posted by {{obj.submitter.email}}.</p>
+{%if obj.has_organisation%}
+<p>Posted by {{obj.org}}{%if obj.org.email%} ({{obj.org.email}}){%endif%}.</p>
 {%else%}
 <p><i>This event has been migrated from a previous version of the PostgreSQL
 website. We apologise for any formatting issues caused by the migration.</i></p>

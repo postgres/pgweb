@@ -87,7 +87,7 @@ class Product(PgModel, models.Model):
 		return self.name
 
 	def verify_submitter(self, user):
-		return (user == self.publisher.submitter)
+		return (len(self.publisher.managers.filter(pk=user.pk)) == 1)
 
 	class Meta:
 		ordering = ('name',)

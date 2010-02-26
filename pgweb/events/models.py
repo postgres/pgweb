@@ -6,7 +6,6 @@ from pgweb.util.bases import PgModel
 from core.models import Country, Organisation
 
 class Event(models.Model, PgModel):
-	submitter = models.ForeignKey(User, null=False, blank=False)
 	approved = models.BooleanField(null=False, blank=False, default=False)
 
 	org = models.ForeignKey(Organisation, null=False, blank=False)
@@ -28,11 +27,18 @@ class Event(models.Model, PgModel):
 	def __unicode__(self):
 		return "%s: %s" % (self.startdate, self.title)
 
+	def verify_submitter(self, user):
+		return (len(self.org.managers.filter(pk=user.pk)) == 1)
+
 	@property
-	def has_submitter(self):
-		# If submitter is 0 it means migrated, so have no submitter
-		if self.submitter_id == 0: return False
-		return True
+	def has_organisation(self):
+		mgrs = self.org.managers.all()
+		if len(mgrs) == 1:
+			if mgrs[0].pk == 0:
+				return False # Migration organisation
+			else:
+				return True # Has an actual organisation
+		return False # Has no organisastion at all
 
 	@property
 	def displaydate(self):

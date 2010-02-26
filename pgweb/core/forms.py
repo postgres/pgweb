@@ -5,5 +5,5 @@ from models import Organisation
 class OrganisationForm(forms.ModelForm):
 	class Meta:
 		model = Organisation
-		exclude = ('lastconfirmed', 'approved', 'submitter', )
+		exclude = ('lastconfirmed', 'approved', 'managers', )
 

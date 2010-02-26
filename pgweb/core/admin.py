@@ -9,7 +9,8 @@ class OrganisationAdmin(admin.ModelAdmin):
 	list_display = ('name', 'approved', 'lastconfirmed',)
 	list_filter = ('approved',)
 	ordering = ('name', )
-
+	filter_horizontal = ('managers', )
+	search_fields = ('name', )
 
 admin.site.register(Version)
 admin.site.register(OrganisationType)

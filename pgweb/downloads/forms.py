@@ -9,8 +9,7 @@ If you have not done so, use <a href="/account/organisations/new/">this form</a>
 	def __init__(self, *args, **kwargs):
 		super(ProductForm, self).__init__(*args, **kwargs)
 	def filter_by_user(self, user):
-		print "Filter to user %s" % user
-		self.fields['publisher'].queryset = Organisation.objects.filter(submitter=user)
+		self.fields['publisher'].queryset = Organisation.objects.filter(managers=user, approved=True)
 	class Meta:
 		model = Product
 		exclude = ('lastconfirmed', 'approved', )

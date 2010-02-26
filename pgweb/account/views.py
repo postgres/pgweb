@@ -15,10 +15,10 @@ from pgweb.downloads.models import Product
 @ssl_required
 @login_required
 def home(request):
-	myarticles = NewsArticle.objects.filter(submitter=request.user)
-	myevents = Event.objects.filter(submitter=request.user)
-	myorgs = Organisation.objects.filter(submitter=request.user)
-	myproducts = Product.objects.filter(publisher__submitter=request.user)
+	myarticles = NewsArticle.objects.filter(org__managers=request.user)
+	myevents = Event.objects.filter(org__managers=request.user)
+	myorgs = Organisation.objects.filter(managers=request.user)
+	myproducts = Product.objects.filter(publisher__managers=request.user)
 	return render_to_response('account/index.html', {
 		'newsarticles': myarticles,
 		'events': myevents,

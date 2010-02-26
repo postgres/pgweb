@@ -44,7 +44,7 @@ class Organisation(PgModel, models.Model):
 	email = models.EmailField(null=False, blank=True)
 	phone = models.CharField(max_length=100, null=False, blank=True)
 	orgtype = models.ForeignKey(OrganisationType, null=False, blank=False)
-	submitter = models.ForeignKey(User, null=False, blank=False)
+	managers = models.ManyToManyField(User, null=False, blank=False)
 	lastconfirmed = models.DateTimeField(null=False, blank=False, default=datetime.now())
 
 	send_notification = True
