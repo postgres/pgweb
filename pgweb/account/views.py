@@ -116,7 +116,11 @@ def signup(request):
 	return render_to_response('base/form.html', {
 			'form': form,
 			'formitemtype': 'Account',
-			'form_intro': 'This is the intro text',
+			'form_intro': """
+To sign up for a free community account, enter your preferred userid and email address.
+Note that a community account is only needed if you want to submit information - all
+content is available for reading without an account.
+""",
 			'savebutton': 'Sign up',
 	}, NavContext(request, 'account'))
 
