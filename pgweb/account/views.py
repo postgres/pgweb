@@ -34,19 +34,19 @@ def home(request):
 
 objtypes = {
 	'news': {
-		'title': 'News articles',
+		'title': 'News article',
 		'objects': lambda u: NewsArticle.objects.filter(org__managers=u),
 	},
 	'events': {
-		'title': 'Events',
+		'title': 'Event',
 		'objects': lambda u: Event.objects.filter(org__managers=u),
     },
 	'products': {
-		'title': 'Products',
+		'title': 'Product',
 		'objects': lambda u: Product.objects.filter(publisher__managers=u),
 	},
 	'organisations': {
-		'title': 'Organisations',
+		'title': 'Organisation',
 		'objects': lambda u: Organisation.objects.filter(managers=u),
 	},
 }

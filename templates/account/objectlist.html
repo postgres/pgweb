@@ -1,7 +1,7 @@
 {%extends "base/page.html"%}
 {%block title%}Your account{%endblock%}
 {%block contents%}
-<h1>{{title}}</h1>
+<h1>{{title}}s</h1>
 <p>
 Objects in red are awaiting moderator approval. Note that modifying a previously
 approved object <i>may</i> result in it being un-approved if the changes are
@@ -12,6 +12,10 @@ extensive.
 <li><a {%if not o.approved%} "style='color:red;'" {%endif%}href="/account/{{suburl}}/{{o.id}}/">{{o}}</a></li>
 {%endfor%}
 </ul>
+
+<p>
+<a href="/account/{{suburl}}/new/">Submit {{title}}</a>.
+</p>
 
 {%endblock%}
 
