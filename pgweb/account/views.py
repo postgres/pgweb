@@ -122,6 +122,7 @@ Note that a community account is only needed if you want to submit information -
 content is available for reading without an account.
 """,
 			'savebutton': 'Sign up',
+			'operation': 'New',
 	}, NavContext(request, 'account'))
 
 

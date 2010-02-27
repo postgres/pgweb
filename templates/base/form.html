@@ -1,6 +1,6 @@
 {%extends "base/page.html"%}
 {%block contents%}
-<h1>Edit {{formitemtype}}</h1>
+<h1>{{operation|default:"Edit"}} {{formitemtype}}</h1>
 <form method="post" action=".">
 {%if form_intro%}
 <p>
