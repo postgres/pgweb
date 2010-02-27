@@ -117,6 +117,7 @@ def signup(request):
 			'form': form,
 			'formitemtype': 'Account',
 			'form_intro': 'This is the intro text',
+			'savebutton': 'Sign up',
 	}, NavContext(request, 'account'))
 
 
