@@ -34,3 +34,6 @@ class DocComment(PgModel, models.Model):
 			return "%s %s" % (self.submitter.first_name, self.submitter.last_name)
 		else:
 			return ''
+
+	def __unicode__(self):
+		return "%s ver %s: %s" % (self.file, self.version, self.comment[:50])
