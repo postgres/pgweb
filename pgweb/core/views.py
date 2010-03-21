@@ -24,6 +24,11 @@ from survey.models import Survey
 from models import Organisation
 from forms import OrganisationForm
 
+# models needed to generate unapproved list
+from docs.models import DocComment
+from downloads.models import Product
+from profserv.models import ProfessionalService
+
 # Front page view
 def home(request):
 	news = NewsArticle.objects.filter(approved=True)[:5]
@@ -88,3 +93,28 @@ def organisationform(request, itemid):
 			'managers': (request.user, ),
 			})
 
+
+# Pending moderation requests (this is part of the /admin/ interface :O)
+def _generate_unapproved(objects):
+	if not len(objects): return None
+	return { 'name': objects[0]._meta.verbose_name_plural, 'entries':
+			 [{'url': '/admin/%s/%s/%s/' % (x._meta.app_label, x._meta.module_name, x.pk), 'title': unicode(x)} for x in objects]
+			 }
+
+
+@login_required
+def admin_pending(request):
+	n = NewsArticle.objects.filter(approved=False)
+	app_list = [
+		_generate_unapproved(NewsArticle.objects.filter(approved=False)),
+		_generate_unapproved(Event.objects.filter(approved=False)),
+		_generate_unapproved(Organisation.objects.filter(approved=False)),
+		_generate_unapproved(DocComment.objects.filter(approved=False)),
+		_generate_unapproved(Product.objects.filter(approved=False)),
+		_generate_unapproved(ProfessionalService.objects.filter(approved=False)),
+		_generate_unapproved(Quote.objects.filter(approved=False)),
+		]
+
+	return render_to_response('core/admin_pending.html', {
+			'app_list': [x for x in app_list if x],
+			})

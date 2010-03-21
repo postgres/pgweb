@@ -1,0 +1,21 @@
+{%extends "admin/base.html"%}
+{%block breadcrumbs%}
+<div class="breadcrumbs"><a href="/admin/">Home</a> &rsaquo; Pending
+{%endblock%}
+
+{%block content%}
+<div id="content-main">
+{%for app in app_list %}
+  <div class="module">
+    <table summary="Pending {{app.name}}" width="600">
+      <caption><a class="section">Pending {{app.name}}</a></caption>
+      {%for entry in app.entries%}
+      <tr class="row{%cycle '1' '2'%}">
+	<td><a href="{{entry.url}}">{{entry.title}}</a></td>
+      </tr>
+      {%endfor%}
+    </table>
+  </div>
+{%endfor%}
+</div>
+{%endblock%}
