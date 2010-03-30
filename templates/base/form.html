@@ -9,7 +9,22 @@
 {%endif%}
 
 <table class="pgGenericFormTable">
-{{form.as_table}}
+{%if form.errors%}
+ <tr class="errorheader">
+  <td colspan="2">Please correct the errors below, and re-submit the form.</td>
+ </tr>
+{%endif%}
+{%for field in form%}
+ {%if field.errors %}
+ <tr class="error">
+  <td colspan="2">{{field.errors.as_ul}}</td>
+ </tr>
+ {%endif%}
+ <tr {%if field.errors%}class="errorinfo"{%endif%}>
+  <th>{{field.label_tag}}</th>
+  <td>{{field}}</td>
+ </tr>
+{%endfor%}
 </table>
 <input type="submit" value="{{savebutton|default:"Save"}}">
 </form>

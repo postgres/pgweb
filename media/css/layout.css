@@ -644,12 +644,31 @@ TABLE.pgGenericFormTable TR TD INPUT {
    width: 100%;
 }
 
+TABLE.pgGenericFormTable TR TD SELECT {
+   width: 100%;
+}
+
 TABLE.pgGenericFormTable TR TD TEXTAREA {
    width: 100%;
 }
 
 TABLE.pgGenericFormTable TR TD DIV.markdownpreview {
    width: 100%;
+}
+
+TABLE.pgGenericFormTable TR.error {
+   background-color: red;
+   color: white;
+}
+
+TABLE.pgGenericFormTable TR.errorinfo {
+   background-color: #FFFFCC;
+}
+
+TABLE.pgGenericFormTable TR.errorheader TD {
+   background-color: #FFFFCC;
+   border: 1px solid red;
+   padding: 2px 2px 2px 2px;
 }
 
 /* Misc Classes */
