@@ -7,7 +7,7 @@ from django.db import connection
 
 from datetime import date
 
-from pgweb.util.decorators import ssl_required
+from pgweb.util.decorators import ssl_required, cache
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form
 
