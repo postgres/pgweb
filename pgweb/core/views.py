@@ -30,6 +30,7 @@ from downloads.models import Product
 from profserv.models import ProfessionalService
 
 # Front page view
+@cache(minutes=10)
 def home(request):
 	news = NewsArticle.objects.filter(approved=True)[:5]
 	events = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gt=date.today).order_by('startdate')[:3]
