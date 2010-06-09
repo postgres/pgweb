@@ -24,10 +24,10 @@ class PgMiddleware(object):
 		if hasattr(settings,'NO_HTTPS_REDIRECT') and settings.NO_HTTPS_REDIRECT:
 			return None
 
-		# Don't redirect the admin interface, since the code is out of our control and we can't
-		# give it the decorator require_ssl. We expect the web server config to deal with
-		# redirecting *to* SSL here.
+		# Always redirect the admin interface to https
 		if request.path.startswith('/admin'):
+			if not request.is_secure():
+				return HttpResponseRedirect(request.build_absolute_uri().replace('http://','https://',1))
 			return None
 
 		if view_func.__name__ == '_require_ssl':
