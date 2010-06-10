@@ -13,10 +13,12 @@ admin.autodiscover()
 from core.feeds import VersionFeed
 from news.feeds import NewsFeed
 from events.feeds import EventFeed
+from pwn.feeds import PwnFeed
 feeds = {
 	'versions': VersionFeed,
 	'news': NewsFeed,
 	'events': EventFeed,
+	'weeklynews': PwnFeed,
 }
 
 urlpatterns = patterns('',
@@ -48,6 +50,8 @@ urlpatterns = patterns('',
     (r'^community/lists/subscribe/$', 'lists.views.subscribe'),
     (r'^community/survey/vote/(\d+)/$', 'survey.views.vote'),
     (r'^community/survey[/\.](\d+)(-.*)?/$', 'survey.views.results'),
+	(r'^community/weeklynews/$', 'pwn.views.index'),
+	(r'^community/weeklynews/pwn(\d{4})(\d{2})(\d{2})/$', 'pwn.views.post'),
 
     (r'^support/professional_(support|hosting)/$', 'profserv.views.root'),
     (r'^support/professional_(support|hosting)[/_](.*)/$', 'profserv.views.region'),
@@ -59,7 +63,7 @@ urlpatterns = patterns('',
     ###
     # RSS feeds
     ###
-    (r'^(versions|news|events).rss$', 'django.contrib.syndication.views.feed', {'feed_dict':feeds}),
+    (r'^(versions|news|events|weeklynews).rss$', 'django.contrib.syndication.views.feed', {'feed_dict':feeds}),
 
     ###
     # Special secttions

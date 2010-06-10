@@ -1,0 +1,22 @@
+{%extends "base/page.html"%}
+{%block title%}Weekly News{%endblock%}
+{%block contents%}
+<h1>Weekly News</h1>
+<p>
+The PostgreSQL Weekly News is a community newsletter, summarising the news and events
+of the past week, focussing primarily on the development of PostgreSQL.
+</p>
+<p>
+To receive the Weekly News in your inbox, please subscribe to the
+<a href="/community/lists/subscribe">pgsql-announce@postgresql.org</a>
+mailing list.
+</p>
+
+<ul>
+{%for post in posts %}
+ <li><a href="pwn{{post.linkdate}}/">{{post.nicedate}}</a></li>
+{%endfor%}
+</ul>
+
+{%endblock%}
+

@@ -1,0 +1,11 @@
+{%extends "base/page.html"%}
+{%load markup%}
+{%block title%}PostgreSQL Weekly News - {{post.nicedate}}{%endblock%}
+{%block contents%}
+<h1>PostgreSQL Weekly News - {{post.nicedate}}</h1>
+<p>
+{{post.intro|markdown}}
+</p>
+{{post.content|markdown}}
+{%endblock%}
+
