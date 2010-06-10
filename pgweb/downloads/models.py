@@ -77,7 +77,7 @@ class Product(PgModel, models.Model):
 	category = models.ForeignKey(Category, null=False)
 	licencetype = models.ForeignKey(LicenceType, null=False)
 	description = models.TextField(null=False, blank=False)
-	price = models.CharField(max_length=100, null=False, blank=True)
+	price = models.CharField(max_length=200, null=False, blank=True)
 	lastconfirmed = models.DateTimeField(null=False, blank=False, default=datetime.now())
 
 	send_notification = True
