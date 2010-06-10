@@ -13,8 +13,8 @@ from models import Event
 from forms import EventForm
 
 def archive(request, paging=None):
-	events = Event.objects.select_related('country').filter(approved=True).filter(training=False, enddate__gt=date.today).order_by('-startdate', '-enddate',)
-	training = Event.objects.select_related('country').filter(approved=True).filter(training=True, enddate__gt=date.today).order_by('-startdate', '-enddate',)
+	events = Event.objects.select_related('country').filter(approved=True).filter(training=False, enddate__gt=date.today).order_by('enddate', 'startdate',)
+	training = Event.objects.select_related('country').filter(approved=True).filter(training=True, enddate__gt=date.today).order_by('enddate', 'startdate',)
 	return render_to_response('events/archive.html', {
 		'eventblocks': (
 			{ 'name': 'Events', 'events': events, },
