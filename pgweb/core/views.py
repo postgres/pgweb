@@ -33,7 +33,7 @@ from profserv.models import ProfessionalService
 @cache(minutes=10)
 def home(request):
 	news = NewsArticle.objects.filter(approved=True)[:5]
-	events = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gt=date.today).order_by('startdate')[:3]
+	events = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gt=date.today).order_by('-startdate')[:3]
 	quote = Quote.objects.filter(approved=True).order_by('?')[0]
 	versions = Version.objects.all()
 	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:5]
