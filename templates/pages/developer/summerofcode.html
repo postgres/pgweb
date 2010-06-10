@@ -1,0 +1,149 @@
+{%extends "base/page.html"%}
+{%block title%}Google Summer of Code Program{%endblock%}
+{%block contents%}
+
+<div id="CONTENTWRAP">
+<h1>PostgreSQL and Google Summer of Code</h1>
+
+<p>The PostgreSQL Project is participating in the Google <a
+href="http://socghop.appspot.com/">Summer of Code 2010</a> program. This program endeavors to fund students to contribute to an open source project over the summer break.</p>
+
+<ul>
+<li><a href="#ideas">Example Proposal Ideas</a>
+
+<ul>
+
+<li><a href="#todo">Core Code / TODO Items</a></li>
+
+<li><a href="#infrastructure">Infrastructure</a></li>
+
+<li><a href="#extapps">External Applications</a></li>
+</ul>
+</li>
+
+<li><a href="#mentors">Possible Mentors</a></li>
+
+<li><a href="#proposals">Proposal Guidelines</a></li>
+
+<li><a href="#past">Previously Accepted Projects</a></li>
+
+<li><a href="#faq">Frequently Asked Questions</a></li>
+</ul>
+
+<a id="ideas" name="ideas"></a>
+<h2>Example Proposal Ideas</h2>
+<p>The PostgreSQL Project has a wide range of opinions on what it feels are acceptable GSoC projects. The examples listed here are meant only as a suggestion of things we would likely find useful, but you should not feel obligated to pick from this list by any means. If you have just discovered a new algorithm as part of your thesis work, we would love to see a proposal implementing that in PostgreSQL. The point is that all proposals will be evaluated on their own merits, so be creative.
+
+<a id="todo" name="todo"></a>
+<h3>Core Source Code</h3>
+<ul>
+<li><strong>TODO Items</strong>: A number of the items on our TODO list have been marked as good projects for beginners who are new to the PostgreSQL code. Items on this list have the advantage of already having general community agreement that the feature is desireable. These items should also have some general discussion available in the mailing list archives to help get you started. You can find these items on the <a href="http://wiki.postgresql.org/wiki/Todo">TODO</a> list, they will be marked with an [E].
+</li>
+<li><strong>DDL Functions</strong>: Create a SQL-callable function capable of generating DDL scripts for objects within the database.</li>
+<li><strong>EXPLAIN Enhancements</strong>: Add information to EXPLAIN documenting I/O activity, discarded plans, costing detail, memory usage and more.</li>
+<li><strong>Text-Array Indexing</strong>: Add support for indexing text or multi-typed array data, capable of supporting indexed queries, similar to intarray.</li>
+</ul>
+
+<a id="infrastructure" name="infrastructure"></a>
+<h3>Infrastructure</h3>
+<ul>
+<li><strong>Enhance Buildfarm to test external packages, patches, or performance</strong>: The PostgreSQL project maintains a public buildfarm that continuously communicates with several machines that checkout and build the PostgreSQL source on a regular basis. The idea behind this project is to extend the current buildfarm code to allow it download external modules and report back on their build status, to download unapplied patches and test them, or to run performance tests. </li>
+<li><strong>Create "Performance-Farm" framework for continuous performance regression testing</strong>: Similar to the buildfarm, the idea behind this project is to create a public infrastructure that continuously communicates with several machines that checkout and build the PostgreSQL source on a regular basis, running and reporting on agreed performance benchmarks. </li>  
+</ul>
+
+<a id="extapps" name="extapps"></a>
+<h3>External Applications</h3>
+<ul>
+<li><strong>pgAdmin III / phpPgAdmin Enhancements</strong>: PostgreSQL supports a number of popular GUI Tools that are not distributed with the core project. Projects like these often have their own TODO lists and compatibility issues with the core PotgreSQL that need development. We welcome ideas for these projects as well.</li>
+<li><strong>Procedural Language Improvements</strong>: PostgreSQL provides support for more than a dozen different procedural languages, however the level of support varies depending on the language implementation. Enhancing support of these procedural languages might include fixing build issues, adding SPI support, adding trigger support, adding support for IN/OUT parameters and more.</li>
+<li><strong>Replication</strong>: PostgreSQL provides a wide range of replication solutions for varying types of replication needs. Many of these projects need assistance with building against different versions of PostgreSQL, installation and setup, administrative tools, and general bugfixing.</li>
+<li><strong>Teaching & Learning Tools</strong>: External tools to help in teaching the internals of PostgreSQL such as enhanced visual EXPLAIN, graphical models of the query engine, educational guides to the code, and interactive tools to demonstrate various query types.
+<li><strong>PostGIS & GEOS</strong>: Add performance and feature enhancements to PostgreSQL's geographic data support.</li>
+</ul>
+<p>Additional projects may be found by browsing the <a href="http://projects.postgresql.org">PostgreSQL Development Projects</a> website.</p>
+
+<a id="mentors" name="mentors"></a>
+<h2>Mentors</h2>
+
+<p>PostgreSQL follows an open community development model, so student projects are likely to be reviewed and commented on by any and all members of the PostgreSQL community. This also means that we may be able to find mentors for additional projects by reaching out to this community. If you are interested in working on a project not explicitly mentioned above, you may want to contact one of the Summer of Code liaisons below about writing a proposal.</p>
+
+
+<ul>
+	<li>Robert Treat &lt;xzilla @t users.sourceforge.net&gt;, OmniTI Inc., PHP-based projects and infrastructure</li>
+	<li>Selena Deckelmann &lt;selenamarie @t gmail.com&gt;, End Point Inc., user groups and applications</li>
+	<li>Dave Page &lt;dpage @t pgadmin.org&gt;, EnterpriseDB, pgAdmin, GUI tools, and Windows</li>
+</ul>
+
+<p>If your project is not selected for funding by Google, but you still think you have a
+feasible project proposal, then please email our developers mailing list at <a
+href="mailto:pgsql-hackers@postgresql.org">pgsql-hackers@postgresql.org</a>.</p>
+
+<a id="proposals" name="proposals"></a>
+
+<h2>Proposal Guidelines</h2>
+
+<p><a href="http://socghop.appspot.com/document/show/gsoc_program/google/gsoc2010/faqs#student_apply">Apply to Summer of Code</a></p>
+
+<p>Students are responsible for writing a proposal and submitting it to Google before the
+application deadline. The following outline was adapted from the Perl Foundation <a
+href="http://www.perlfoundation.org/how_to_write_a_proposal">open source proposal
+HOWTO</a>. A strong proposal will include:</p>
+
+<ul>
+<li><strong>Benefits to the PostgreSQL Community</strong> - a good project will not just be
+fun to work on, but also generally useful to others.</li>
+
+<li><strong>Deliverables</strong> - It is very important to list quantifiable results
+here</li>
+
+<li><strong>Project Schedule</strong> - How long will the project take? When can you
+begin work?</li>
+
+<li><strong>Bio</strong> - Who are you? What makes you the best person to work on this
+project?</li>
+
+<li><strong>Contact</strong> - How can we contact if we have questions about your project? 
+Can you supply us with an email/IM/phone method for being contacted, in case of emergency?</li>
+</ul>
+
+<p>Please also see our additional <a href="/developer/summerofcodeadvice">Advice to Students</a> <strong>before</strong> submitting a proposal.</p>
+
+<p>We would prefer that development discussion occur on our project mailing lists when possible, with special recognition being given to those students who vet their proposal with community developers before submitting their proposal to Google SoC. This is not required, but can have a large impact on the chances of your proposal being accepted, so please don't be shy. In any case, you will be required to keep open lines of communication with your mentor should you be accepted, so if you have circumstances that may affect this, please explain them up front in your proposal.</p>
+
+<a id="past" name="past"></a>
+<h2>Previously Accepted Projects</h2>
+<ul>
+	<li>Enhanced Aggregate Support</li>
+	<li>Full Disjunctions</li>
+	<li>Hashing DISTINCT Clause Implementation</li>
+	<li>ECPG Cleanup</li>
+	<li>Initial support of XMLType for PostgreSQL </li>
+	<li>phpPgAdmin FTS support and other improvements</li>
+	<li>pgAdmin graphical query tool and TSQL-like client scripting support</li>
+	<li>xlog viewer</li>
+</ul>
+
+<p>More information on these projects can be found on Google's PostgreSQL SoC pages: (<a href="http://code.google.com/soc/2008/postgres/about.html">2008</a> | <a href="http://code.google.com/soc/2008/postgres/about.html">2007</a> | <a href="http://code.google.com/soc/2006/pgsql/about.html">2006</a>)</p>
+
+
+<a id="faq" name="faq"></a>
+
+<h2>Frequently Asked Questions</h2>
+
+<ul>
+<li>
+<p><strong>Am I eligible?</strong></p>
+
+<p>Please see the Google <a href="http://socghop.appspot.com/document/show/gsoc_program/google/gsoc2010/faqs#eligibility">Eligibility FAQ</a> for all questions about eligibility.</p>
+
+</li>
+
+<li>
+<p><strong>When is the proposal deadline?</strong></p>
+
+<p>According to the <a href="http://socghop.appspot.com/document/show/gsoc_program/google/gsoc2010/faqs#timeline">Summer of Code FAQ</a>, the deadline for submitting student proposals is April 9th, 2010 (19:00 UTC). Please remember that proposals must submitted to Google themselves<!-- (via the <a href="http://code.google.com/soc/student_step1.html">student application form</a>) -->, although we are happy to discuss any proposals with you ahead of time.</p>
+</li>
+
+</ul>
+</div>
+{%endblock%}

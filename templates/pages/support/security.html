@@ -12,6 +12,7 @@ For reporting non-security bugs, please see the <a href="/support/submitbug">Rep
 </p>
 
 <p>
+
 The PostgreSQL Global Development Group (PGDG) takes security seriously,
 allowing our users to place their trust in the web sites and applications
 built around PostgreSQL. Our approach covers fail-safe configuration options,
@@ -44,7 +45,7 @@ in this list. New vulnerabilities in these versions are no longer patched.
 Vulnerabilities list which major releases they were present
 in, and which version they are fixed in for each. If the vulnerability
 was exploitable without a valid login, this is also stated. They also
-list a severity, but we urge all users to read the description
+list a vulnerability class, but we urge all users to read the description
 to determine if the bug affects specific installations or not.
 </p>
 
@@ -53,10 +54,86 @@ to determine if the bug affects specific installations or not.
   <tr>
    <th class="colFirst">Reference</th>
    <th class="colMid">Affected<br/>versions</th>
+
    <th class="colMid">Fixed in</th>
    <th class="colMid"><a href="#comp">Component</a></th>
-   <th class="colMid"><a href="#sec">Sev</a></th>
+   <th class="colMid"><a href="#cls">Class</a></th>
    <th class="colLast">Description</th>
+  </tr>
+
+  <tr valign="top">
+
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1169">CVE-2010-1169</a></td>
+   <td class="colMid">8.4, 8.3, 8.2, 8.1, 8.0, 7.4</td>
+   <td class="colMid">8.4.4, 8.3.11, 8.2.17, 8.1.21, 8.0.25, 7.4.29</td>
+   <td class="colMid">core server, limited deployments</td>
+   <td class="colMid">C</td>
+   <td class="colLast">A vulnerability in Safe.pm and PL/Perl can allow an authenticated user to run arbitrary Perl code on the database 
+                       server if PL/Perl is installed and enabled.</td>
+
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1170">CVE-2010-1170</a></td>
+   <td class="colMid">8.4, 8.3, 8.2, 8.1, 8.0, 7.4</td>
+   <td class="colMid">8.4.4, 8.3.11, 8.2.17, 8.1.21, 8.0.25, 7.4.29</td>
+   <td class="colMid">core server, limited deployments</td>
+
+   <td class="colMid">C</td>
+   <td class="colLast">Insecure permissions on the pltcl_modules table could allow an authenticated user to run arbitrary Tcl code on the
+                       database server if PL/Tcl is installed and enabled.</td>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4034">CVE-2009-4034</a></td>
+   <td class="colMid">8.4, 8.3, 8.2, 8.1, 8.0, 7.4</td>
+
+   <td class="colMid">8.4.2, 8.3.9, 8.2.15, 8.1.19, 8.0.23, 7.4.27</td>
+   <td class="colMid">client, core server, limited deployments</td>
+   <td class="colMid">A</td>
+   <td class="colLast">NULL Bytes in SSL Certificates can be used to falsify client or server authentication. This only affects users who have SSL enabled, perform certificate name validation or client certificate authentication, and where the Certificate Authority (CA) has been tricked into issuing invalid certificates. The use of a CA that can be trusted to always issue valid certificates is recommended to ensure you are not vulnerable to this issue.</td>
+  </tr>
+
+  <tr valign="top">
+
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-4136">CVE-2009-4136</a></td>
+   <td class="colMid">8.4, 8.3, 8.2, 8.1, 8.0, 7.4</td>
+   <td class="colMid">8.4.2, 8.3.9, 8.2.15, 8.1.19, 8.0.23, 7.4.27</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">C</td>
+   <td class="colLast">Privilege escalation via changing session state in an index function. This closes a corner case related to vulnerabilities CVE-2009-3230 and CVE-2007-6600 (below).</td>
+
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3229">CVE-2009-3229</a></td>
+   <td class="colMid">8.4, 8.3, 8.2</td>
+   <td class="colMid">8.4.1, 8.3.8, 8.2.14</td>
+   <td class="colMid">core server</td>
+
+   <td class="colMid">D</td>
+   <td class="colLast">Authenticated non-superusers can shut down the backend server by re-LOAD-ing libraries in $libdir/plugins, if any libraries are present there.</td>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3230">CVE-2009-3230</a></td>
+   <td class="colMid">8.4, 8.3, 8.2, 8.1, 8.0, 7.4</td>
+
+   <td class="colMid">8.4.1, 8.3.8, 8.2.14, 8.1.18, 8.0.22, 7.4.26</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">C</td>
+   <td class="colLast">The fix for issue CVE-2007-6600 (below) failed to include protection against misuse of RESET SESSION AUTHORIZATION.</td>
+  </tr>
+
+  <tr valign="top">
+
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-3231">CVE-2009-3231</a></td>
+   <td class="colMid">8.3, 8.2</td>
+   <td class="colMid">8.3.8, 8.2.14</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">A</td>
+   <td class="colLast">If PostgreSQL is configured with LDAP authentication, and your LDAP configuration allows anonymous binds, it is possible for a user to authenticate themselves with an empty password.</td>
+
   </tr>
 
   <tr valign="top">
@@ -64,6 +141,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">8.3, 8.2, 8.1, 8.0, 7.4</td>
    <td class="colMid">8.3.7, 8.2.13, 8.1.17, 8.0.21, 7.4.25</td>
    <td class="colMid">core server</td>
+
    <td class="colMid">D</td>
    <td class="colLast">It is possible to cause a momentary denial of service when there is a failure to convert a localized error message to the client-specified encoding. A valid login is required to exploit this vulnerability.</td>
   </tr>
@@ -71,6 +149,7 @@ to determine if the bug affects specific installations or not.
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6600">CVE-2007-6600</a><br/><a href="/about/news.905">Announcement</a></td>
    <td class="colMid">8.2, 8.1, 8.0, 7.4, 7.3</td>
+
    <td class="colMid">8.2.6, 8.1.11, 8.0.15, 7.4.19, 7.3.21</td>
    <td class="colMid">core server</td>
    <td class="colMid">C</td>
@@ -78,11 +157,13 @@ to determine if the bug affects specific installations or not.
   </tr>
 
   <tr valign="top">
+
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4769">CVE-2007-4769</a><br/><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-4772">CVE-2007-4772</a><br/><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6067">CVE-2007-6067</a><br/><a href="/about/news.905">Announcement</a></td>
    <td class="colMid">8.2, 8.1, 8.0, 7.4</td>
    <td class="colMid">8.2.6, 8.1.11, 8.0.15, 7.4.19</td>
    <td class="colMid">core server</td>
    <td class="colMid">B</td>
+
    <td class="colLast">Three vulnearbilities in the regular expression handling libraries can be exploited to cause a backend crash, infinite loops or memory exhaustion. This vulnearbility can be exploited through frontend applications that allow unfiltered regular expressions to be passed in queries.</td>
   </tr>
 
@@ -90,6 +171,7 @@ to determine if the bug affects specific installations or not.
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6601">CVE-2007-6601</a><br/><a href="/about/news.905">Announcement</a></td>
    <td class="colMid">8.2, 8.1, 8.0, 7.4, 7.3</td>
    <td class="colMid">8.2.6, 8.1.11, 8.0.15, 7.4.19, 7.3.21</td>
+
    <td class="colMid">contrib module</td>
    <td class="colMid">C</td>
    <td class="colLast">DBLink functions combined with local trust or ident access control could be used by a malicious user togain superuser privileges. A valid login is required to exploit this vulnerability.</td>
@@ -97,6 +179,7 @@ to determine if the bug affects specific installations or not.
 
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-2138">CVE-2007-2138</a><br/><a href="/about/news.791">Announcement</a></td>
+
    <td class="colMid">8.2, 8.1, 8.0, 7.4, 7.3</td>
    <td class="colMid">8.2.4, 8.1.9, 8.0.13, 7.4.17, 7.3.19</td>
    <td class="colMid">core server</td>
@@ -110,6 +193,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">8.2.2, 8.1.7, 8.0.11</td>
    <td class="colMid">core server</td>
    <td class="colMid">C</td>
+
    <td class="colLast">A vulnerability involving changing the data type of a table column can easily be exploited to cause a backend crash, and in principle might be used to read database content that the user should not be able to access.</td>
   </tr>
 
@@ -117,6 +201,7 @@ to determine if the bug affects specific installations or not.
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-0555">CVE-2007-0555</a></td>
    <td class="colMid">8.2, 8.1, 8.0, 7.4, 7.3</td>
    <td class="colMid">8.2.2, 8.1.7, 8.0.11, 7.4.16, 7.3.13</td>
+
    <td class="colMid">core server</td>
    <td class="colMid">C</td>
    <td class="colLast">A vulnerability allows suppressing the normal checks that a SQL function returns the data type it's declared to do. These errors can easily be exploited to cause a backend crash, and in principle might be used to read database content that the user should not be able to access.</td>
@@ -124,6 +209,7 @@ to determine if the bug affects specific installations or not.
 
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-5542">CVE-2006-5542</a><br/><a href="http://www.postgresql.org/about/news.664">Announcement</a></td>
+
    <td class="colMid">8.1</td>
    <td class="colMid">8.1.5</td>
    <td class="colMid">core server</td>
@@ -137,6 +223,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">8.1.5, 8.0.9, 7.4.14</td>
    <td class="colMid">core server</td>
    <td class="colMid">D</td>
+
    <td class="colLast">A bug in the coercion of unknown literals to ANYARRAY can cause a denial of service. A valid login is required to exploit this vulnerability.</td>
   </tr>
 
@@ -144,6 +231,7 @@ to determine if the bug affects specific installations or not.
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-5540">CVE-2006-5540</a><br/><a href="http://www.postgresql.org/about/news.664">Announcement</a></td>
    <td class="colMid">8.1</td>
    <td class="colMid">8.1.5</td>
+
    <td class="colMid">core server</td>
    <td class="colMid">D</td>
    <td class="colLast">A bug in the handling of aggregates in UPDATE can cause a denial of service. A valid login is required to exploit this vulnerability.</td>
@@ -151,6 +239,7 @@ to determine if the bug affects specific installations or not.
 
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-2314">CVE-2006-2314</a><br/><a href="/docs/techdocs.52">FAQ</a></td>
+
    <td class="colMid">8.1, 8.0, 7.4, 7.3</td>
    <td class="colMid">8.1.4, 8.0.8, 7.4.13, 7.3.15</td>
    <td class="colMid">core server</td>
@@ -164,6 +253,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">8.1.4, 8.0.8, 7.4.13, 7.3.15</td>
    <td class="colMid">core server</td>
    <td class="colMid">A</td>
+
    <td class="colLast">An attacker able to submit crafted strings to an application that will embed those strings in SQL commands can use invalidly-encoded multibyte characters to bypass standard string-escaping methods, resulting in possible SQL injection.</td>
   </tr>
 
@@ -171,6 +261,7 @@ to determine if the bug affects specific installations or not.
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-0553">CVE-2006-0553</a><br/><a href="http://archives.postgresql.org/pgsql-announce/2006-02/msg00008.php">Announcement</a></td>
    <td class="colMid">8.1</td>
    <td class="colMid">8.1.3</td>
+
    <td class="colMid">core server</td>
    <td class="colMid">C</td>
    <td class="colLast">A bug in the handling of SET ROLE allows escalation of privileges to any other database user, including superuser. A valid login is required to exploit this vulnerability.</td>
@@ -178,6 +269,7 @@ to determine if the bug affects specific installations or not.
 
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-0678">CVE-2006-0678</a><br/><a href="http://archives.postgresql.org/pgsql-announce/2006-02/msg00008.php">Announcement</a></td>
+
    <td class="colMid">8.0, 7.4, 7.3</td>
    <td class="colMid">8.0.7, 7.4.12, 7.3.14</td>
    <td class="colMid">core server</td>
@@ -191,6 +283,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">8.1.2, 8.0.6</td>
    <td class="colMid">core server, win32 only</td>
    <td class="colMid">B</td>
+
    <td class="colLast">On Windows only, the postmaster will exit if too many connection requests arrive simultaneously. This does not affect existing database connections, but will prevent new connections from being established until the postmaster is manually restarted.</td>
   </tr>
 
@@ -198,6 +291,7 @@ to determine if the bug affects specific installations or not.
    <td class="colFirst"><a href="http://archives.postgresql.org/pgsql-announce/2006-01/msg00001.php">Announcement</a></td>
    <td class="colMid">8.1, 8.0, 7.4, 7.3</td>
    <td class="colMid">8.1.2, 8.0.6, 7.4.11, 7.3.13</td>
+
    <td class="colMid">contrib module</td>
    <td class="colMid"></td>
    <td class="colLast">There is a signedness bug in Openwall gen_salt code that pgcrypto uses. This makes the salt space for md5 and xdes algorithms a lot smaller than it should be. This only affects the gen_salt() function with md5 or xdes.</td>
@@ -206,6 +300,7 @@ to determine if the bug affects specific installations or not.
   <tr valign="top">
    <td class="colFirst"><a href="http://www.postgresql.org/docs/8.0/static/release-8-0-3.html">Release notes</a></td>
    <td class="colMid">8.0, 7.4</td>
+
    <td class="colMid">8.0.3, 7.4.8</td>
    <td class="colMid">core server</td>
    <td class="colMid">D</td>
@@ -213,12 +308,14 @@ to determine if the bug affects specific installations or not.
   </tr>
 
   <tr valign="top">
+
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-1410">CVE-2005-1410</a><br/><a href="http://archives.postgresql.org/pgsql-announce/2005-05/msg00001.php">Announcement</a></td>
    <td class="colMid">8.0, 7.4</td>
    <td class="colMid">8.0.3, 7.4.8</td>
    <td class="colMid">contrib module</td>
    <td class="colMid">D</td>
    <td class="colLast">The tsearch2 contrib module declares several functions as internal even though they don't take an internal argument. This allows attackers to cause a denial of service and may possibly have other impacts. A valid login is required to exploit this vulnerability.<br/>Note! See the <a href="http://archives.postgresql.org/pgsql-announce/2005-05/msg00001.php">announcement</a> for special upgrade instructions.</td>
+
   </tr>
 
   <tr valign="top">
@@ -226,12 +323,14 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">8.0, 7.4, 7.3</td>
    <td class="colMid">8.0.3, 7.4.8, 7.3.10</td>
    <td class="colMid">core server</td>
+
    <td class="colMid">D</td>
    <td class="colLast">Public EXECUTE access is given to certain character conversion functions that are not designed to be safe against malicious arguments. This can cause at least a denial of service. A valid login is required to exploit this vulnerability.<br/>Note! See the <a href="http://archives.postgresql.org/pgsql-announce/2005-05/msg00001.php">announcement</a> for special upgrade instructions.</td>
   </tr>
 
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0247">CVE-2005-0247</a></td>
+
    <td class="colMid">8.0, 7.4</td>
    <td class="colMid">8.0.2, 7.4.8</td>
    <td class="colMid">core server</td>
@@ -245,6 +344,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">8.0.1, 7.4.7, 7.3.9</td>
    <td class="colMid">contrib module</td>
    <td class="colMid">D</td>
+
    <td class="colLast">The intagg contrib module allows attackers to cause a denial of service. A valid login is required to exploit this vulnerability.</td>
   </tr>
 
@@ -252,6 +352,7 @@ to determine if the bug affects specific installations or not.
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0245">CVE-2005-0245</a></td>
    <td class="colMid">8.0, 7.4, 7.3</td>
    <td class="colMid">8.0.1, 7.4.7, 7.3.10</td>
+
    <td class="colMid">core server</td>
    <td class="colMid">C</td>
    <td class="colLast">Multiple buffer overflows in the PL/PGSQL parser may allow attackers to execute arbitrary code. A valid login is required to exploit this vulnerability.</td>
@@ -259,6 +360,7 @@ to determine if the bug affects specific installations or not.
 
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2005-0244">CVE-2005-0244</a></td>
+
    <td class="colMid">8.0, 7.4, 7.3</td>
    <td class="colMid">8.0.1, 7.4.7, 7.3.9</td>
    <td class="colMid">core server</td>
@@ -272,6 +374,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">8.0.1, 7.4.7, 7.3.9</td>
    <td class="colMid">core server</td>
    <td class="colMid">C</td>
+
    <td class="colLast">Any database user is permitted to load arbitrary shared libraries using the LOAD command. A valid login is required to exploit this vulnerability.</td>
   </tr>
 
@@ -279,6 +382,7 @@ to determine if the bug affects specific installations or not.
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0977">CVE-2005-0977</a></td>
    <td class="colMid">7.4, 7.3</td>
    <td class="colMid">7.4.6, 7.3.8</td>
+
    <td class="colMid">client contrib module</td>
    <td class="colMid"></td>
    <td class="colLast">Contrib script make_oidjoins_check uses unsafe temporary files. This script is not a user-facing script.</td>
@@ -287,52 +391,27 @@ to determine if the bug affects specific installations or not.
   <tr valign="top">
    <td class="colFirst"><a href="http://www.postgresql.org/docs/7.4/static/release-7-4-3.html">Release notes</a></td>
    <td class="colMid">7.4</td>
+
    <td class="colMid">7.4.3</td>
    <td class="colMid">core server</td>
    <td class="colMid">C</td>
    <td class="colLast">A buffer overrun vulnerability exists in the enlargeStringInfo function and can be triggered by injecting bogus data in the datastream of an existing connection. A valid login is required to exploit this vulnerability.</td>
   </tr>
-  
-  <tr valign="top">
-   <td class="colFirst"><a href="http://www.postgresql.org/docs/7.3/static/release-7-3-6.html">Release notes</a></td>
-   <td class="colMid">7.3</td>
-   <td class="colMid">7.3.6</td>
-   <td class="colMid">core server</td>
-   <td class="colMid">C</td>
-   <td class="colLast">A patch applied in 7.3.3 to fix a corner case in rule permissions checks turns out to have disabled rule-related permissions checks in many not-so-corner cases. This would for example allow users to insert into views they weren't supposed to have permission to insert into. A valid login is required to exploit this vulnerability.</td>
-  </tr>
-  
-  <tr valign="top">
-   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2003-0901">CVE-2003-0901</a></td>
-   <td class="colMid">7.3</td>
-   <td class="colMid">7.3.4</td>
-   <td class="colMid">core server</td>
-   <td class="colMid">C</td>
-   <td class="colLast">A buffer overflow in the to_ascii function allows attackers to execute arbitrary code. A valid login is required to exploit this vulnerability.</td>
-  </tr>
-
-  <tr valign="top" class="lastrow">
-   <td class="colFirst"><a href="http://www.postgresql.org/docs/7.3/static/release-7-3-2.html">Release notes</a></td>
-   <td class="colMid">7.3</td>
-   <td class="colMid">7.3.2</td>
-   <td class="colMid">core server</td>
-   <td class="colMid">C</td>
-   <td class="colLast">The fastpath function interface did not properly check for permissions before executing a function. A valid login is required to exploit this vulnerability.</td>
-  </tr>
  </table>
 </div>
 
-<a name="sec"></a>
-<h2>Severities</h2>
+<a name="cls"></a>
+<h2>Vulnerability Classes</h2>
 <p>
-The following severity references are used in the above table:
+The following vulnerability class references are used in the above table:
 </p>
 
 <div class="tblBasic">
  <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
   <tr>
-   <th class="colFirst">Severity</th>
+   <th class="colFirst">Class</th>
    <th class="colLast">Description</th>
+
   </tr>
 
   <tr valign="top">
@@ -347,6 +426,7 @@ The following severity references are used in the above table:
 
   <tr valign="top">
    <td class="colFirst">C</td>
+
    <td class="colLast">A vulnerabilty that is exploitable for privilege escalation, but requiring a valid prior login.</td>
   </tr>
 
@@ -356,6 +436,7 @@ The following severity references are used in the above table:
   </tr>
   
  </table>
+
 </div>
 
 <a name="comp"></a>
@@ -368,6 +449,7 @@ The following component references are used in the above table:
  <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
   <tr>
    <th class="colFirst">Component</th>
+
    <th class="colLast">Description</th>
   </tr>
 
@@ -384,6 +466,7 @@ The following component references are used in the above table:
   <tr valign="top">
    <td class="colFirst">contrib module</td>
    <td class="colLast">This vulnerability exists in a contrib modules. Contrib modules are not installed by default when PostgreSQL is installed from source. They may be installed by binary packages.</td>
+
   </tr>
 
   <tr valign="top" class="lastrow">
@@ -393,5 +476,6 @@ The following component references are used in the above table:
 
  </table>
 </div>
+
 
 {%endblock%}
