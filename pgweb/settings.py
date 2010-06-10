@@ -111,6 +111,8 @@ INSTALLED_APPS = [
 SITE_ROOT="http://www.postgresql.org"
 MASTERSITE_ROOT="http://wwwmaster.postgresql.org"
 
+FTP_PICKLE="/usr/local/pgweb/ftpsite.pickle"
+
 # Load local settings overrides
 from settings_local import *
 

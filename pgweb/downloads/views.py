@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect, HttpResponseServerError
 from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required
 from django.db import connection, transaction
@@ -8,6 +8,7 @@ from django.conf import settings
 import os
 from datetime import datetime
 import urlparse
+import cPickle as pickle
 
 from pgweb.util.decorators import ssl_required, nocache
 from pgweb.util.contexts import NavContext
@@ -19,46 +20,6 @@ from forms import *
 #######
 # FTP browser
 #######
-def _getfiledata(root, paths):
-	for path in paths:
-		fn = "%s/%s" % (root,path)
-		if not os.path.isfile(fn):
-			continue
-		stat = os.stat(fn)
-		yield {
-			'name':path,
-			'mtime': datetime.fromtimestamp(stat.st_mtime),
-			'size': stat.st_size,
-		}
-
-def _getdirectorydata(root, paths):
-	for path in paths:
-		fn = "%s/%s" % (root,path)
-		if not os.path.isdir(fn):
-			continue
-		if os.path.islink(fn):
-			# This is a link, so change the url to point directly
-			# to the link target. We'll just assume the link
-			# is safe. Oh, and links must be relative
-			yield {
-				'link': path,
-				'url': os.readlink(fn),
-			}
-		else:
-			yield {
-				'link': path,
-				'url': path,
-			}
-
-def _getfile(root, filename):
-	fn = "%s/%s" % (root,filename)
-	if os.path.isfile(fn):
-		f = open(fn)
-		r = f.read()
-		f.close()
-		return r
-	return None
-
 def ftpbrowser(request, subpath):
 	if subpath:
 		# An actual path has been selected. Fancy!
@@ -67,20 +28,35 @@ def ftpbrowser(request, subpath):
 			# Just claim it doesn't exist if the user tries to do this
 			# type of bad thing
 			raise Http404
-		fspath = os.path.join(settings.FTP_ROOT, subpath)
+		subpath = subpath.strip('/')
 	else:
-		fspath = settings.FTP_ROOT
 		subpath=""
 
-	if not os.path.isdir(fspath):
+	# Pickle up the list of things we need
+	try:
+		f = open(settings.FTP_PICKLE, "rb")
+		allnodes = pickle.load(f)
+		f.close()
+	except Exception, e:
+		return HttpResponseServerError("Failed to load ftp site information: %s" % e)
+
+	if not allnodes.has_key(subpath):
 		raise Http404
 
-	everything = [n for n in os.listdir(fspath) if not n.startswith('.')]
+	node = allnodes[subpath]
+	del allnodes
 
-	directories = list(_getdirectorydata(fspath, everything))
+	# Add all directories
+	directories = [{'link': k, 'url': k} for k,v in node.items() if v['t'] == 'd']
+	# Add all symlinks (only directoreis supported)
+	directories.extend([{'link': k, 'url': v['d']} for k,v in node.items() if v['t'] == 'l'])
+
+	# Add a link to the parent directory
 	if subpath:
 		directories.append({'link':'[Parent Directory]', 'url':'..'})
-	files = list(_getfiledata(fspath, everything))
+
+	# Fetch files
+	files = [{'name': k, 'mtime': v['t'], 'size': v['s']} for k,v in node.items() if v['t'] == 'f']
 	
 	breadcrumbs = []
 	if subpath:
@@ -95,14 +71,21 @@ def ftpbrowser(request, subpath):
 				breadroot = pathpiece
 			breadcrumbs.append({'name': pathpiece, 'path': breadroot});
 
+	# Check if there are any "content files" we should render directly on the webpage
+	file_readme = node.has_key('README') and node['README']['c'] or None;
+	file_message = node.has_key('.message') and node['.message']['c'] or None;
+	file_maintainer = node.has_key('CURRENT_MAINTAINER') and node['CURRENT_MAINTAINER']['c'] or None;
+
+	del node
+
 	return render_to_response('downloads/ftpbrowser.html', {
 		'basepath': subpath.rstrip('/'),
 		'directories': sorted(directories),
 		'files': sorted(files),
 		'breadcrumbs': breadcrumbs,
-		'readme': _getfile(fspath, 'README'),
-		'messagesfile': _getfile(fspath, '.messages'),
-		'maintainer': _getfile(fspath, 'CURRENT_MAINTAINER'),
+		'readme': file_readme,
+		'messagefile': file_message,
+		'maintainer': file_maintainer,
 	}, NavContext(request, 'download'))
 
 def _get_numeric_ip(request):
