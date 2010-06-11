@@ -3,4 +3,8 @@
 <p>
 {{obj.content|markdown:"safe"}}
 </p>
+{%if obj.is_migrated%}
+<p><i>This post has been migrated from a previous version of the PostgreSQL
+website. We apologise for any formatting issues caused by the migration.</i></p>
+{%endif%}
 
