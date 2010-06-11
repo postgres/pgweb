@@ -51,6 +51,14 @@
  }, 
  {
   "pk": 1, 
+  "model": "core.importedrssfeed",
+  "fields": {
+   "internalname": "planet",
+   "url": "http://planet.postgresql.org/rss20_short.xml"
+  }
+ },
+ {
+  "pk": 1,
   "model": "core.country", 
   "fields": {
    "name": "Afghanistan", 
