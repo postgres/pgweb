@@ -14,3 +14,5 @@ def event(request, eventid):
 def signup(request):
 	return HttpResponseRedirect("/account/signup/")
 
+def html_extension(request, prior_to_html):
+	return HttpResponseRedirect("/%s" % prior_to_html)

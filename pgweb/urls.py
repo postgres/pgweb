@@ -92,6 +92,9 @@ urlpatterns = patterns('',
         'document_root': '../media',
     }),
 
+	# If we're getting an attempt for something ending in HTML, just get rid of it
+	(r'^(.*)\.html$', 'pgweb.legacyurl.views.html_extension'),
+
     # Fallback for static pages, must be at the bottom
     (r'^(.*)/$', 'pgweb.core.views.fallback'),
 )
