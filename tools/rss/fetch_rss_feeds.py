@@ -3,18 +3,27 @@
 import feedparser
 import psycopg2
 import socket
+import sys
+import os
+from datetime import datetime
 
+# Set up for accessing django
+from django.core.management import setup_environ
+sys.path.append(os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), '../../pgweb'))
+import settings
+setup_environ(settings)
+
+from core.models import ImportedRSSFeed, ImportedRSSItem
+from django.db import transaction
 
 # Set timeout for loading RSS feeds
 socket.setdefaulttimeout(20)
 
-
-db = psycopg2.connect('host=/tmp dbname=pgweb')
-curs = db.cursor()
-curs.execute("SELECT id,internalname,url FROM core_importedrssfeed")
-for id,internalname,url in curs.fetchall():
+transaction.enter_transaction_management()
+transaction.managed()
+for importfeed in ImportedRSSFeed.objects.all():
 	try:
-		feed = feedparser.parse(url)
+		feed = feedparser.parse(importfeed.url)
 		
 		if not hasattr(feed, 'status'):
 			# bozo_excpetion can seemingly be set when there is no error as well,
@@ -25,16 +34,15 @@ for id,internalname,url in curs.fetchall():
 		if feed.status != 200:
 			raise Exception('Feed returned status %s' % feed.status)
 		for entry in feed.entries:
-			curs.execute("""INSERT INTO core_importedrssitem (feed_id, title, url, posttime)
-SELECT %(feed)s, %(title)s, %(url)s, %(posttime)s
-WHERE NOT EXISTS (SELECT * FROM core_importedrssitem c2 WHERE c2.feed_id=%(feed)s AND c2.url=%(url)s)""", {
-				'feed': id,
-				'title': entry.title,
-				'url': entry.link,
-				'posttime': entry.date,
-			})
+			try:
+				item = ImportedRSSItem.objects.get(feed=importfeed, url=entry.link)
+			except ImportedRSSItem.DoesNotExist:
+				item = ImportedRSSItem(feed=importfeed,
+									   title=entry.title[:100],
+									   url=entry.link,
+									   posttime=datetime.strptime(entry.date, "%a, %d %b %Y %H:%M:%S %Z"),
+									   )
+				item.save()
+		transaction.commit()
 	except Exception, e:
-		print "Failed to load %s: %s" % (internalname, e)
-
-db.commit()
-
+		print "Failed to load %s: %s" % (importfeed, e)
