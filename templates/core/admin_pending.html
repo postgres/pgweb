@@ -1,13 +1,19 @@
-{%extends "admin/base.html"%}
+{%extends "admin/base_site.html"%}
+
 {%block breadcrumbs%}
-<div class="breadcrumbs"><a href="/admin/">Home</a> &rsaquo; Pending
+<div class="breadcrumbs"><a href="/admin/">Home</a> &rsaquo; Pending</div>
 {%endblock%}
 
+{% block bodyclass %}change-list{% endblock %}
+{% block coltype %}flex{% endblock %}
+
 {%block content%}
+<h1>Pending moderation</h1>
+
 <div id="content-main">
 {%for app in app_list %}
   <div class="module">
-    <table summary="Pending {{app.name}}" width="600">
+    <table summary="Pending {{app.name}}" width="100%">
       <caption><a class="section">Pending {{app.name}}</a></caption>
       {%for entry in app.entries%}
       <tr class="row{%cycle '1' '2'%}">
