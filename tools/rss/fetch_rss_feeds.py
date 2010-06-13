@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import feedparser
-import psycopg2
 import socket
 import sys
 import os
