@@ -68,6 +68,7 @@ ROOT_URLCONF = 'pgweb.urls'
 
 TEMPLATE_DIRS = (
     '../templates/',
+	'../../templates', # Sometimes called in subdirectories, should never hurt to have both
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

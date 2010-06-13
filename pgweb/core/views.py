@@ -10,6 +10,7 @@ from datetime import date
 from pgweb.util.decorators import ssl_required, cache
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form
+from pgweb.util.moderation import get_all_pending_moderations
 
 # models needed for the pieces on the frontpage
 from news.models import NewsArticle
@@ -23,11 +24,6 @@ from survey.models import Survey
 # models and forms needed for core objects
 from models import Organisation
 from forms import OrganisationForm
-
-# models needed to generate unapproved list
-from docs.models import DocComment
-from downloads.models import Product
-from profserv.models import ProfessionalService
 
 # Front page view
 @cache(minutes=10)
@@ -95,27 +91,10 @@ def organisationform(request, itemid):
 			})
 
 
-# Pending moderation requests (this is part of the /admin/ interface :O)
-def _generate_unapproved(objects):
-	if not len(objects): return None
-	return { 'name': objects[0]._meta.verbose_name_plural, 'entries':
-			 [{'url': '/admin/%s/%s/%s/' % (x._meta.app_label, x._meta.module_name, x.pk), 'title': unicode(x)} for x in objects]
-			 }
-
-
+# List of all unapproved objects, for the special admin page
 @login_required
 def admin_pending(request):
-	n = NewsArticle.objects.filter(approved=False)
-	app_list = [
-		_generate_unapproved(NewsArticle.objects.filter(approved=False)),
-		_generate_unapproved(Event.objects.filter(approved=False)),
-		_generate_unapproved(Organisation.objects.filter(approved=False)),
-		_generate_unapproved(DocComment.objects.filter(approved=False)),
-		_generate_unapproved(Product.objects.filter(approved=False)),
-		_generate_unapproved(ProfessionalService.objects.filter(approved=False)),
-		_generate_unapproved(Quote.objects.filter(approved=False)),
-		]
-
+	print list(get_all_pending_moderations())
 	return render_to_response('core/admin_pending.html', {
-			'app_list': [x for x in app_list if x],
+			'app_list': get_all_pending_moderations(),
 			})

@@ -1,0 +1,8 @@
+The following items are currently pending moderation:
+
+{%for item in items %}
+{{item.name|capfirst}}: {{item.count}} items.{%endfor%}
+
+Moderators; please check and moderate these items as soon as possible!
+
+https://wwwmaster.postgresql.org/admin/pending/
