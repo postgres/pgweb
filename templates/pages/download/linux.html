@@ -3,25 +3,42 @@
 {%block contents%}
 
 <h1>Linux packages</h1>
+<p>
+PostgreSQL is available integrated with the package management on most Linux platforms. When available,
+this is the recommended way to install PostgreSQL, since it provides proper integration with the
+operating system, including automatic patching and other management functionality.</p>
+<p>
+Should packages not be available for your distribution, or there are issues with your package manager,
+there are <a href="#oneclick">graphical installers</a> available. Finally, most Linux systems make it
+easy to <a href="/ftp/source/">build from source</a>.
+</p>
 
-<h2>One click installer</h2>
+<ul>
+ <li><a href="#oneclick">Graphical installer</a></li>
+ <li><a href="#yum">CentOS, Fedora and RHEL Yum Repository</a></li>
+ <li><a href="#debian">Debian apt</a></li>
+ <li><a href="#ubuntu">Ubuntu apt</a></li>
+ <li><a href="#gentoo">Gentoo Portage</a></li>
+ <li><a href="#suse">SuSE RPM</a></li>
+</ul>
+
+<h2><a name="oneclick">Graphical installer</a></h2>
 
 <p>One click installers are available for 32 and 64 bit Linux distributions and include PostgreSQL, 
 pgAdmin, PL/Java and the PL/pgSQL debugger plugin. The installer has been tested with a number of 
 recent Linux distributions and should work on Ubuntu 6.06 and above, Fedora 6 and above, CentOS/Red Hat 
 Enterprise Linux 4 and above and others.</p>
+<p>
+<a href="http://www.enterprisedb.com/products/pgdownload.do">Download</a> the packages from
+EnterpriseDB.
+</p>
 
-<p><b>Note: The one click installers do not integrate with platform-specific packaging systems. If you need
-RPM, APT or Portage integration, please use the packages below.</b></p>
-
-<ul>
-    <li>Download for <b><a href="http://www.enterprisedb.com/products/pgdownload.do#linux">32bit Linux</a></b><br />&nbsp;</li>
-    <li>Download for <b><a href="http://www.enterprisedb.com/products/pgdownload.do#linux-x64">64bit Linux</a></b></li>
-</ul>
+<p><b>Note: The one click installers do not integrate with platform-specific packaging systems. If you want 
+operating system integration, please use the packages listed below.</b></p>
 
 <p><i>The one click installers are maintained by Dave Page at <a href="http://www.enterprisedb.com">EnterpriseDB</a>.</i></p>
 
-<h2>CentOS, Fedora and RHEL Yum Repository</h2>
+<h2><a name="yum">CentOS, Fedora and RHEL Yum Repository</a></h2>
 
 <p>RPMs for CentOS, Fedora and Red Hat Enterprise Linux are available from the <a href="http://yum.pgsqlrpms.org/">PostgreSQL
 Yum repository</a>. Platform-specific RPM packages of PostgreSQL are available as well as a variety of related projects
@@ -31,9 +48,7 @@ such as <a href="http://www.pgadmin.org">pgAdmin</a> and <a href="http://www.pos
 
 <p>To setup your system to use the repository, please see the <b><a href="http://yum.pgsqlrpms.org/howtoyum.php">Yum HOWTO</a></b>.
 
-<p><i>The PostgreSQL Yum repository is maintained by Devrim G&Uuml;ND&Uuml;Z at <a href="http://www.commandprompt.com">Command Prompt</a>.</i></p>
-
-<h2>Debian Apt</h2>
+<h2><a name="debian">Debian Apt</a></h2>
 
 <p><a href="http://www.debian.org">Debian</a> users may install PostgreSQL using the apt utility. For 
 details on the use of apt on Debian, please see the documentation.</p>
@@ -43,12 +58,19 @@ of PostgreSQL Debian packages is available from the package search tool.</p>
 
 <p><i>The PostgreSQL packages for Debian are maintained by Martin Pitt.</i></p>
 
-<h2>Gentoo Portage</h2>
+<h2><a name="ubuntu">Ubuntu Apt</a></h2>
+
+<p><a href="http://www.ubuntu.com">Ubuntu</a> users may install PostgreSQL using the apt utility. For 
+details on the use of apt on Ubuntu, please see the documentation.</p>
+
+<p><i>The PostgreSQL packages for Ubuntu are maintained by Martin Pitt.</i></p>
+
+<h2><a name="gentoo">Gentoo Portage</a></h2>
 
 <p><a href="http://www.gentoo.org">Gentoo</a> users may install PostgreSQL using the portage system. For 
 details on the use of Gentoo's Portage, please see the documentation.</p>
 
-<h2>SUSE RPMs</h2>
+<h2><a name="suse">SUSE RPMs</a></h2>
 
 <p>RPMs for SUSE Linux and openSUSE are available from the <a href="https://build.opensuse.org/">openSUSE Build Service</a> 
 in the project <i>server:database:postgresql</i>.  Platform-specific RPM packages are available for PostgreSQL 
@@ -56,11 +78,4 @@ as well as a variety of related software.  Use the <a href="http://software.open
 suitable packages. Documentation is also available there.</p>
 
 <p><i>The PostgreSQL packages for SUSE are maintained by Reinhard Max.</i></p>
-
-<h2>Ubuntu Apt</h2>
-
-<p><a href="http://www.ubuntu.com">Ubuntu</a> users may install PostgreSQL using the apt utility. For 
-details on the use of apt on Ubuntu, please see the documentation.</p>
-
-<p><i>The PostgreSQL packages for Ubuntu are maintained by Martin Pitt.</i></p>
 {%endblock%}
