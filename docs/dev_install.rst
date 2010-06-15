@@ -10,8 +10,8 @@ with. Here's a quick step-by-step on how to do that:
    and *markdown* (these are python libraries, so prefix python- for Debian
    packages, for example).
 #. Make sure you have downloaded and installed PostgreSQL (tested only
-   with *version 8.4* and later, but doesn't use any functionality that
-   didn't exist for quite a while by then).
+   with *version 8.4* and later, but doesn't use any advanced
+   functionality so it should work with other versions)
 
 #. Create a database in your PostgreSQL installation called pgweb
    (other names are of course possible, but that's the standard one)

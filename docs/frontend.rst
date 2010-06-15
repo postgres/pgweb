@@ -40,7 +40,7 @@ django project can override this default, by specifying the
 "Cache-control: s-maxage=xxx" http header on the response. This is
 done by using the @cache() decorator on the view method. Caching
 should be kept lower for pages that have frequently updating data,
-such as the front page or the result of surveys page.
+such as the front page or the survey results page.
 
 Finally, there is a form on the admin web interface that lets the
 administrator manually expire specific pages using a varnish process

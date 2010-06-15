@@ -17,9 +17,9 @@ Database access
 ---------------
 In all places where database access is simple, the django ORM is used
 to access the data. In the few places where more advanced queries are
-necessary, direct queries to the database are used. There exists no
+necessary, direct queries to the database are used. There is no
 intention to keep the database structure independent of database
-used - it's all designed to use PostgreSQL. Therefor, using PostgreSQL
+used - it's all designed to use PostgreSQL. Therefore, using PostgreSQL
 specific syntax in these direct queries is not a problem.
 
 Module split
