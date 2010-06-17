@@ -48,5 +48,5 @@ def vote(request, surveyid):
 	setattr(answers, attrname, getattr(answers, attrname)+1)
 	answers.save()
 
-	return HttpResponseRedirect("/community/survey/%s/" % ansnum)
+	return HttpResponseRedirect("/community/survey/%s/" % surveyid)
 
