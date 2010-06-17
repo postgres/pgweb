@@ -6,11 +6,13 @@ from django.db.models import Count
 from django.db import connection
 
 from datetime import date
+from os import uname
 
 from pgweb.util.decorators import ssl_required, cache
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form
 from pgweb.util.moderation import get_all_pending_moderations
+from pgweb.util.misc import get_client_ip, is_behind_cache
 
 # models needed for the pieces on the frontpage
 from news.models import NewsArticle
@@ -90,6 +92,14 @@ def organisationform(request, itemid):
 			'managers': (request.user, ),
 			})
 
+# Basic information about the connection
+def system_information(request):
+	return render_to_response('core/system_information.html', {
+			'server': uname()[1],
+			'behind_cache': is_behind_cache(request),
+			'cache_server': is_behind_cache(request) and request['REMOTE_ADDR'] or None,
+			'client_ip': get_client_ip(request),
+	})
 
 # List of all unapproved objects, for the special admin page
 @login_required

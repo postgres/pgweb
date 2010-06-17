@@ -79,6 +79,9 @@ urlpatterns = patterns('',
     (r'^about/event\.(\d+)$', 'pgweb.legacyurl.views.event'),
     (r'^community/signup', 'pgweb.legacyurl.views.signup'),
 
+    # Some basic information about the connection (for debugging purposes)
+	(r'^system_information/$', 'pgweb.core.views.system_information'),
+
 	# Override some URLs in admin, to provide our own pages
 	(r'^admin/pending/$', 'pgweb.core.views.admin_pending'),
     # Uncomment the next line to enable the admin:

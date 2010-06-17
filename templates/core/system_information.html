@@ -1,0 +1,14 @@
+{%extends "base/page.html"%}
+{%block title%}System information{%endblock%}
+{%block contents%}
+<h1>System Information</h1>
+
+<p>
+Page generated on server: {{server}}<br/>
+Page generated at: {% now "r" %}<br/>
+Behind cache: {{behind_cache|yesno|capfirst}}<br/>
+Cache server: {{cache_server}}<br/>
+Client IP: {{client_ip}}<br/>
+</p>
+
+{%endblock%}
