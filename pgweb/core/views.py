@@ -98,7 +98,7 @@ def system_information(request):
 	return render_to_response('core/system_information.html', {
 			'server': uname()[1],
 			'behind_cache': is_behind_cache(request),
-			'cache_server': is_behind_cache(request) and request['REMOTE_ADDR'] or None,
+			'cache_server': is_behind_cache(request) and request.META['REMOTE_ADDR'] or None,
 			'client_ip': get_client_ip(request),
 	})
 
