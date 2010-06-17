@@ -3,6 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseServerError, HttpResp
 from django.db import connection
 
 from pgweb.util.contexts import NavContext
+from pgweb.util.misc import get_client_ip
 
 from models import Survey, SurveyAnswer, SurveyLock
 
@@ -26,12 +27,7 @@ def vote(request, surveyid):
 	attrname = "tot%s" % ansnum
 
 	# Do IP based locking...
-	try:
-		addr = request.META.get('REMOTE_ADDR')
-		if addr == None or addr == "":
-			raise Exception()
-	except:
-		return HttpResponseServerError("Unable to determine client IP address")
+	addr = get_client_ip(request)
 
 	# Clean out any old junk
 	curs = connection.cursor()

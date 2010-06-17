@@ -13,6 +13,7 @@ import cPickle as pickle
 from pgweb.util.decorators import ssl_required, nocache
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form, PgXmlHelper
+from pgweb.util.misc import get_client_ip
 
 from models import *
 from forms import *
@@ -90,7 +91,7 @@ def ftpbrowser(request, subpath):
 
 def _get_numeric_ip(request):
 	try:
-		ip = request.META['REMOTE_ADDR']
+		ip = get_client_ip(request)
 		p = ip.split('.')
 		return int(p[0])*16777216 + int(p[1])*65536 + int(p[2])*256 + int(p[3])
 	except:
