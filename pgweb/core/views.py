@@ -93,7 +93,7 @@ def organisationform(request, itemid):
 			})
 
 # Basic information about the connection
-@cache(minutes=2)
+@cache(seconds=30)
 def system_information(request):
 	return render_to_response('core/system_information.html', {
 			'server': uname()[1],
