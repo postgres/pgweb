@@ -1,5 +1,6 @@
 from subprocess import Popen, PIPE
 from email.mime.text import MIMEText
+from django.conf import settings
 
 from pgweb.util.helpers import template_to_string
 
