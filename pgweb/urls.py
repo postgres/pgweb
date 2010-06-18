@@ -59,7 +59,9 @@ urlpatterns = patterns('',
 
     (r'^about/sponsors/$', 'pgweb.sponsors.views.sponsors'),
     (r'^about/servers/$', 'pgweb.sponsors.views.servers'),
-    
+
+	(r'^robots.txt$', 'pgweb.core.views.robots'),
+
     ###
     # RSS feeds
     ###

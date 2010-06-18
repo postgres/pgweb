@@ -92,6 +92,21 @@ def organisationform(request, itemid):
 			'managers': (request.user, ),
 			})
 
+# robots.txt
+def robots(request):
+	if not is_behind_cache(request):
+		# If we're not serving this through one of our Varnish caches, we allow *nothing* to be indexed
+		return HttpResponse("User-agent: *\nDisallow: /\n", mimetype='text/plain')
+	else:
+		# Regular website
+		return HttpResponse("""User-agent: *
+Disallow: /admin/
+Disallow: /account/
+
+Sitemap: http://www.postgresql.org/sitemap.xml
+""", mimetype='text/plain')
+
+
 # Basic information about the connection
 @cache(seconds=30)
 def system_information(request):
