@@ -43,6 +43,9 @@ def docpage(request, version, typ, filename):
 def docsrootpage(request, version, typ):
 	return docpage(request, version, typ, 'index')
 
+def redirect_root(request, version):
+	return HttpResponseRedirect("/docs/%s/static/" % version)
+
 @ssl_required
 @login_required
 def commentform(request, itemid, version, filename):

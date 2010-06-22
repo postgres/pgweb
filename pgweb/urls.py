@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import *
+from django.views.generic.simple import redirect_to
 
 # Register our save signal handlers
 from pgweb.util.bases import register_basic_signal_handlers
@@ -43,6 +44,7 @@ urlpatterns = patterns('',
 
     (r'^docs/(current|\d\.\d)/(static|interactive)/(.*).html$', 'docs.views.docpage'),
     (r'^docs/(current|\d\.\d)/(static|interactive)/$', 'docs.views.docsrootpage'),
+    (r'^docs/(current|\d\.\d)/$', 'docs.views.redirect_root'),
 
     (r'^community/$', 'core.views.community'),
     (r'^community/contributors/$', 'contributors.views.completelist'),
@@ -80,6 +82,21 @@ urlpatterns = patterns('',
     (r'^about/news\.(\d+)$', 'pgweb.legacyurl.views.news'),
     (r'^about/event\.(\d+)$', 'pgweb.legacyurl.views.event'),
     (r'^community/signup', 'pgweb.legacyurl.views.signup'),
+
+    ###
+    # These URLs were legacy even on the old site...
+    ###
+    (r'^developer/sourcecode/$', redirect_to, {'url': '/developer/coding/' }),
+    (r'^developer/bios/$', redirect_to, {'url': '/community/contributors/' }),
+    (r'^docs/techdocs.*', redirect_to, {'url': 'http://wiki.postgresql.org/' }),
+    (r'^docs/faqs.FAQ.html$', redirect_to, {'url': 'http://wiki.postgresql.org/wiki/FAQ' }),
+    (r'^docs/faqs.FAQ_DEV.*', redirect_to, {'url': 'http://wiki.postgresql.org/wiki/Development_information' }),
+    (r'^docs/faqs.TODO.*', redirect_to, {'url': 'http://wiki.postgresql.org/wiki/Todo' }),
+
+    ###
+    # Links included in emails on the lists (do we need to check this for XSS?)
+    ###
+    (r'^mailpref/([a-z0-9_-]+)/$', 'pgweb.legacyurl.views.mailpref'),
 
     # Some basic information about the connection (for debugging purposes)
 	(r'^system_information/$', 'pgweb.core.views.system_information'),
