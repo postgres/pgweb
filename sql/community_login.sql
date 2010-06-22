@@ -11,7 +11,7 @@ RETURNS record
 AS $$
 BEGIN
    SELECT
-     auth_user.username,
+     lower(auth_user.username),
      trim(auth_user.first_name || ' ' || auth_user.last_name),
      auth_user.email,
      '', -- we don't do authorblurbs anymore, but the API has them...

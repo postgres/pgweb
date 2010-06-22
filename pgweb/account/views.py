@@ -93,7 +93,7 @@ def signup(request):
 			# Attempt to create the user here
 			# XXX: Do we need to validate something else?
 
-			user = User.objects.create_user(form.cleaned_data['username'], form.cleaned_data['email'])
+			user = User.objects.create_user(form.cleaned_data['username'].lower(), form.cleaned_data['email'])
 			user.first_name = form.cleaned_data['first_name']
 			user.last_name = form.cleaned_data['last_name']
 			user.save()

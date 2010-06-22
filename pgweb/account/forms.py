@@ -22,7 +22,7 @@ class SignupForm(forms.Form):
 		return email2
 
 	def clean_username(self):
-		username = self.cleaned_data['username']
+		username = self.cleaned_data['username'].lower()
 
 		try:
 			u = User.objects.get(username=username)
