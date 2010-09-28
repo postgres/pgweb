@@ -8,7 +8,6 @@ from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form
 
 from models import ProfessionalService
-#from forms import NewsArticleForm
 
 regions = (
    ('africa','Africa'),
