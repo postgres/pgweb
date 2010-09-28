@@ -5,14 +5,15 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.db import connection
 
-from datetime import date
+from datetime import date, datetime
 from os import uname
 
 from pgweb.util.decorators import ssl_required, cache
 from pgweb.util.contexts import NavContext
-from pgweb.util.helpers import simple_form
+from pgweb.util.helpers import simple_form, PgXmlHelper
 from pgweb.util.moderation import get_all_pending_moderations
 from pgweb.util.misc import get_client_ip, is_behind_cache
+from pgweb.util.sitestruct import get_all_pages_struct
 
 # models needed for the pieces on the frontpage
 from news.models import NewsArticle
@@ -109,6 +110,25 @@ Disallow: /account/
 Sitemap: http://www.postgresql.org/sitemap.xml
 """, mimetype='text/plain')
 
+
+# Sitemap (XML format)
+@cache(hours=6)
+def sitemap(request):
+	resp = HttpResponse(mimetype='text/xml')
+	x = PgXmlHelper(resp)
+	x.startDocument()
+	x.startElement('urlset', {'xmlns': 'http://www.sitemaps.org/schemas/sitemap/0.9'})
+	pages = 0
+	for p in get_all_pages_struct():
+		pages+=1
+		x.startElement('url', {})
+		x.add_xml_element('loc', 'http://www.postgresql.org/%s' % p[0])
+		if p[1]:
+			x.add_xml_element('priority', unicode(p[1]))
+		x.endElement('url')
+	x.endElement('urlset')
+	x.endDocument()
+	return resp
 
 # Basic information about the connection
 @cache(seconds=30)
