@@ -70,7 +70,7 @@ urlpatterns = patterns('',
     (r'^(versions|news|events|weeklynews).rss$', 'django.contrib.syndication.views.feed', {'feed_dict':feeds}),
 
     ###
-    # Special secttions
+    # Special sections
     ###
     (r'account/', include('account.urls')),
 
