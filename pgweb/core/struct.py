@@ -10,5 +10,5 @@ def get_struct():
 		r=root[19:] # Cut out ../templates/pages
 		for f in files:
 			if f.endswith('.html'):
-				yield (os.path.join(r, f),
+				yield (os.path.join(r, f)[:-5] + "/",
 					   None)
