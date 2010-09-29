@@ -1,0 +1,201 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.0 Press Kit (NL){%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.0 Press Kit (NL)</h1>
+
+<h2>Inhoud</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Tekst van de Originele Release</a><br />
+ &nbsp; <a href="#additional_features">Feature lijst</a><br />
+ &nbsp; <a href="#download">Waar te Downloaden</a><br />
+ &nbsp; <a href="#docs">Documentatie</a><br />
+ &nbsp; <a href="#license">Licentie</a><br />
+ &nbsp; <a href="#contact">Kontakt</a><br />
+ &nbsp; <a href="#quoted_companies">Volledige tekst Quotes en Bedrijfsinformatie</a><br />
+ &nbsp; <a href="#companies">Sponsor Bedrijven</a><br />
+</p>
+
+<a name="original_release"></a><h2>Tekst van de Originele Release</h2>
+<p>
+20 SEPTEMBER 2010: PostgreSQL Global Development Group presenteert: release 9.0 van PostgreSQL, 's werelds beste open source relationele database.  Deze major release bevat verbeteringen in beveiliging, applicatie-ondersteuning, monitoring, prestatie, and opslag van gespecialiseerde data. Gebruikers zijn vooral enthousiast over PostgreSQL's nieuwe replicatie and hot-standby mogelijkheden, die schaalbaarheid vergroten en cloud hosting vergemakkelijken.
+</p><p>
+"Ingebouwde replicatie en de mogelijkheid om hot-standby servers te bevragen zijn al jaren de meest gevraagde features", zegt Simon Riggs, CTO van 2nQuadrant en 'lead contributor' van hot standby.  "Efficiente low-latency streaming replicatie beschermt uw data, terwijl door Hot Standby de cost-of-ownership flink omlaagkomt. In proprietaire producten is deze feature een add-on die duizenden dollars kost."
+</p><p>
+PostgreSQL 9.0 bevat vele belangrijke verbeteringen die elk aspekt van database applicatie-ontwerp beinvloeden, zoals: ondersteuning voor 64-bit Windows, conditionele triggers en kolom-triggers, upgrade-in-place voor versie 8.3 en 8.4, deferrable unique constraints, en high-performance event messaging.  Zie voor een komplete lijst van nieuwe features onze release informatie pagina.
+</p><p>
+"Als een van de grootste Internet registries is Afilias blij met de in-place upgrade, waarmee we naar nieuwe database versies kunnen upgraden zonder storing van onze database met 16-miljoen domain names," zegt Afilias CTO Ram Mohan.
+</p><p>
+"We zijn zeer enthousiast over the nieuwe features... in het bijzonder zien we uit naar deferrable unique constraints als een mogelijkheid voor versnelde updates en upgrades voor onze klanten," zegt Paolo Juvara, CTO van OpenBravo.
+</p><p>
+Marc Balmer, oprichter van Micro Systems in Zwitserland, is meer geinteresseerd in de sterk verbeterde LISTEN/NOTIFY event messaging mogelijkheden: "De nieuwe data payload optie in asynchrone notificaties willen we gebruiken in de volgende versie van ons remote data display programma."
+</p><p>
+Dankzij bijdragen van ontwikkelaars en bedrijven wereldwijd, zoals NTT Open Source, EnterpriseDB, 2ndQuadrant, Red Hat, en vele anderen, is zowel gebruik als ontwikkeling van PostgreSQL sterker groeiend dan ooit tevoren.
+</p><p>
+"Hier bij CAIXA bank gebruiken we PostgreSQL in mission-critical financiele omgeving omdat het de kwaliteit en ondersteuning biedt voor onze activiteiten," zegt Clarice Coppetti, IT Vice President, CAIXA Bank, Brazilie. "De nieuwe versie demonstreert weer dat PostgreSQL zich in hoog tempo ontwikkelt en zo blijft voldoen aan onze business eisen."
+</p><p>
+Over PostgreSQL: PostgreSQL is het betere open source database system, met een wereldwijde community van duizenden users en medewerkers en tientallen bedrijven en organisaties.  Het PostgreSQL Project omspant 20 jaar engineering, beginnnende bij de Universiteit van California, Berkeley, en tegenwoordig met een ongekend hoog ontwikkelings-tempo. Niet alleen heeft PostgreSQL een volledige feature-set zoals de top proprietaire database systemen, maar overtreft deze in geavanceerde database features, uitbreidbaarheid, veiligheid en stabiliteit.  Lees meer over PostgreSQL en de postgres community at www.postgresql.org.
+</p>
+
+<h2>Uitgebreide Release Informatie</h2>
+
+<a name="additional_features"></a><h2>Feature lijst</h2>
+<p>
+Versie 9.0 heeft een groot aantal nieuwe features, waaruit de gestaag toenemende groei van onze ontwikkelaar community  valt af te lezen:
+</p>
+<h3>
+Replicatie en Schaalbaarheid
+</h3>
+<ul>
+<li>Hot Standby</li>
+<li>Streaming Replication</li>
+</ul>
+<h3>
+Administratie en Beveiliging
+</h3>
+<ul>
+<li>Geintegreerde Upgrade-in-Place (pg_upgrade)</li>
+<li>RADIUS Authenticatie</li>
+<li>Password kwaliteits-controle (passwordcheck)</li>
+<li>Eenvoudiger Database Permissies Administratie Opdrachten (GRANT ON ALL en DEFAULT PERMISSIONS)</li>
+</ul>
+
+<h3>
+Database Ontwerp en SQL
+</h3>
+<ul>
+<li>Uitstelbare Unieke Constraints (Deferrable Unique Constraints)</li>
+<li>Conditionele Triggers</li>
+<li>Kolom Triggers</li>
+<li>Ordering in Aggregaties</li>
+<li>Nieuwe Windowing Functions (ROWS PRECEDING en FOLLOWING)</li>
+</ul>
+
+<h3>
+Stored Procedures
+</h3>
+<ul>
+<li>Anonieme Procedure Code Blok (DO opdracht)</li>
+<li>Verbeterde Perl en Python Stored Procedures (o.a. support for Python 3)</li>
+<li>Named Parameter Calls</li>
+</ul>
+
+<h3>
+Prestaties en Geavanceerde Features
+</h3>
+<ul>
+<li>Verbeterde Event Messaging (LISTEN/NOTIFY)</li>
+<li>64-bit Windows Ondersteuning</li>
+<li>Optimisatie voor ORM-gegenereerde Queries (JOIN verwijdering)</li>
+<li>Unique Keys voor Non-Scalar Data (Exclusion Constraints)</li>
+<li>Uitgebreider ondersteuning voor Key-value Data (HStore)</li>
+<li>JSON en XML Explain Plans</li>
+</ul>
+
+<h3>
+Meer Informatie over deze Features
+</h3>
+<p>
+Voor uitleg van deze en andere features, zie de volgende links (meest in het Engels):
+</p>
+<ul>
+<li><a href="/docs/9.0/static/release-9-0.html">Release Notes</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What's_new_in_PostgreSQL_9.0">What's New In 9.0</a></li>
+<li><a href="/about/featurematrix">Feature matrix</a></li>
+</ul>
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Downloads page</a> with links to installers and tools.</li>
+<li><a href="/ftp/source/v9.0.0">Source Code</a></li>
+<li><a href="/download/windows">Windows Installers</a></li>
+<li><a href="/download/linux">Linux Installers</a> en package repositories</li>
+<li><a href="/download/solaris">Solaris Packages</a></li>
+<li><a href="/download/macosx">Mac OSX Installers</a></li>
+<li><a href="/download/freebsd">FreeBSD Ports</a></li>
+<li><a href="http://www.pgfoundry.org">Optional Components en Add-Ons</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">Verwante en Commerciele Software</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentation</h2>
+
+<p>HTML documentatie en man pages worden met PostgreSQL mee-geinstalleerd, maar U kunt ook lezen, doorzoeken, en commentaar achterlaten op de interactieve <a href="/docs/9.0/interactive">online documentation</a> (Engels).</p>
+
+<a name="license"></a><h2>Licentie</h2>
+<p>
+PostgreSQL hanteert de <a href="/about/licence">PostgreSQL Licentie</a>, een BSD-achtige licentie die slechts voorschrijft dat de code de licentie en copyright vermelding behoudt. Deze 
+<a href="http://www.opensource.org/licenses/postgresql">OSI-gecertificeerde licentie</a> wordt alom als flexibel en business-friendly gewaardeerd, omdat het de mogelijkheid vrijlaat om PostgreSQL in commerciele en proprietaire toepassingen te gebruiken.  In combinatie met de vele ondersteunende bedrijven en het publiek eigendom van de code, maakt dit PostgreSQL tot een  populaire keus bij software bedrijven die een database in hun eigen product willen opnemen zonder bang te hoeven zijn voor boetes, afhankelijkheden, of veranderingen in licentie bepalingen.
+</p>
+
+<a name="contact"></a><h2>Kontakt</h2>
+
+<p>Web Pagina's</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL home page</a></li>
+<li><a href="http://www.postgresql.nl">PostgreSQL Nederland</a></li>
+</ul>
+
+<!--  Gevik  -->
+<p>Pers Inlichtingen</p>
+<p>Nederland<br />
+Gevik Babakhani<br />
+<a href="mailto:nl@POSTGRESQL.ORG">nl@postgresql.org</a><br />
++31 6 2000 62 65</p>
+
+<p>Voor addressen in andere landen, zie <a href="/about/press/contact">onze internationale lijst van kontakten.</a></p>
+
+<a name="quoted_companies"></a><h2>Volledige Tekst Quotes en Bedrijfsinformatie</h2>
+
+<p>
+PostgreSQL 9.0 heeft de aandacht van database gebruikers in de zakenwereld in de hele wereld.  De hier volgende quotes demonstreren het enthusiasme van bedrijven in Engeland, Canada, Spanje, Zwitserland, en Brazilie, voor de nieuwe features.
+U kunt kontakt met ons opnemen voor een interview met een van deze bedrijven (Kontakt-informatie hieronder; zie ook de vermelde talen).
+</p>
+
+<h3>2ndQuadrant</h3>
+<p>
+"Ingebouwde replicatie en de mogelijkheid om hot-standby servers te bevragen zijn al jaren de meest gevraagde features", zegt Simon Riggs, CTO van 2nQuadrant en 'lead contributor' van hot standby.  "Efficiente low-latency streaming replicatie beschermt uw data, terwijl door Hot Standby de cost-of-ownership flink omlaagkomt. In proprietaire producten is deze feature een add-on die duizenden dollars kost."
+</p>
+<p>
+<i>Over 2ndQuadrant:</i> <a href="http://www.2ndquadrant.com">2ndQuadrant</a> is een wereldwijde consultancy bedrijf dat zich specialiseert  in PostgreSQL database services, met klanten in meer dan 15 landen.  De consultants van 2ndQuadrant hebben  belangrijke features toegevoegd aan iedere van de zes laatste PostgreSQL releases. Kontakt: <a href="mailto:info@2ndQuadrant.com">info@2ndQuadrant.com</a> +44 8707667756 (Engels, Italiaans, Frans)
+</p>
+
+<h3>Afilias</h3>
+<p>
+"Als een van de grootste Internet registries is Afilias blij met de in-place upgrade, waarmee we naar nieuwe database versies kunnen upgraden zonder storing van onze database met 16-miljoen domain names.  Bovendien zien wij uit naar de Hot Standby en  Streaming Replication features, als aanvulling op de solide replicatie die Slony al eerder bood.  De voortdurende  feature-uitbreidingen geven PostgreSQL flexibilitetit, en kracht en soliditeit maken het geschikt voor mission-critical taken", zegt Afilias CTO Ram Mohan.
+</p>
+<p>
+<i>Over  Afilias</i>: <a href="http://www.afilias.info">Afilias</a> is een provider van Internet infrastructure services over de hele wereld.  Afilias' betrouwbare, veilige, schaalbare, en wereldwijd beschikbare technologie ondersteunt een breed scala aan  toepassingen, onder andere: Internet domain registry services, Managed DNS, en services in de RFID en supply chain market met  Afilias Discovery Services. Voor meer informatie over Afilias zie <a href="http://www.afilias.info">onze home pagina</a> of neem kontakt op met <a href="mailto:hread@afilias.info">Heather Read</a> (alleen Engels)
+</p>
+
+<h3>Openbravo</h3>
+<p>
+"Openbravo is een enthusiast gebruiker van PostgreSQL.  Wij embedden PostgreSQL in onze Cloud Appliances en we vertrouwen op PostgreSQL in onze Ubuntu packages.  Hoewel ons produkt meerdere databases ondersteunt, is 93% van de installaties gebaseerd op PostgreSQL.  Iedere nieuwe PostgreSQL release leverde verhoogde betrouwbaarheid en prestaties en we verwachten dat 9.0 die traditie zal voortzetten.  Wij zijn heel enthusiast over de nieuwe features in PostgreSQL.  In het bijzonder zien we uit naar de uitstelbare unieke constraints als een mogelijkheid voor versnelde updates en upgrades voor onze klanten.  De nieuw ingebouwde binaire replicatie zal aantrekkelijk zijn voor onze grotere klanten, die redundancy en high-availability nastreven. Tot slot is onze ontwikkeling ook uit op de nieuwe VACUUM FULL opdracht.  We hebben al de nodige testen gedaan en we hebben geen echte problemen gevonden.  Er waren wat kleine incompatibiliteiten die we verwachten triviaal op te kunnen lossen.  Openbravo zal PostgreSQL 9.0 ondersteunen zodra het beschikbaar komt en we zullen het als standaard deployment optie gebruiken zodra het in de belangrijkste Linux distributies wordt ondersteund", zegt Paolo Juvara, CTO, OpenBravo.
+</p>
+<p>
+<i>Over Openbravo</i>: <a href="http://www.openbravo.com">Openbravo</a> ontwikkelt Openbravo ERP, een web-based commerciele ERP oplossing voor MKBs - het eerste echte alternatief voor proprietaire software.  Het bedrijf biedt Enterprise Resource Planning (ERP) en Point-of-Sale (PoS) oplossingen, die de meest populaire in de markt zijn, meer dan 1.5 miljoen maal gedownload, en gebruikt in meer dan 50 landen.  Kontakt: <a href="mailto:media@openbravo.com">Carme Zaragoza</a> +34 932725947 (Spaans, Engels)
+</p>
+
+<h3>micro systems</h3>
+<p>
+Marc Balmer, oprichter van Micro Systems in Zwitserland, is meer geinteresseerd in de sterk verbeterde LISTEN/NOTIFY event-messaging mogelijkheden: "De nieuwe data payload optie in asynchrone notificatie zullen we gebruiken in de volgende versie van ons remote data display programma arcapos, onze ticketing- en retail point-of-sale oplossing voor direntuinen en musea."
+</p>
+<p>
+<i>Over micro systems</i>: <a href="http://www.msys.ch">micro systems</a> is een Zwitsers Consultancy en Software bedrijf dat zicht met name richt op stabiele open source produkten zoals BSD Unix en PostgreSQL in commerciele setting. Micro systems brengt het beste van open source naar haar klanten.  Kontakt: <a href="mailto:vera@msys.ch">Vera Hardmeier</a>, +41 61 383 50 10 (Duits, Engels)
+</p>
+
+<h3>CAIXA Bank</h3>
+<p>
+"Hier bij CAIXA bank gebruiken we PostgreSQL in een mission-critical financiele omgeving omdat het de kwaliteit en ondersteuning biedt voor onze activiteiten," zegt Clarice Coppetti, IT Vice President, CAIXA Bank, Brazilie. "Deze nieuwe versie demonstreert weer dat PostgreSQL zich in hoog tempo ontwikkelt en blijft voldoen aan onze business eisen."
+</p>
+<p>
+<i>Over CAIXA</i>: <a href="http://www.caixa.gov.br/">CAIXA</a> is een belangrijke organisatie van de Brasiliaanse federale overheid en is aanwezig in het leven van miljoenen Brazilianen.  Het instituut is 100% openbaar en bedient niet alleen de klanten van de bank, maar de hele braziliaanse bevolking via de loterijen, de stedelijke infrastruktuur investering, en uitbetalingen van de sociale programmas FGTS, PIS, en werkeloosheidsuitkeringen.  Via al deze kanalen behandelde CAIXA In 2009 150 miljard R$, een bedrag wat overeenkomt met 6% van het BNP.  Doordat CAIXA actief is in huisvesting, stedelijke ontwikkeling, en de dienstensector, speelt het een belangrijke rol in de ontwikkeling van sociale rechtvaardigheid.  CAIXA draagt bij aan een verbetering van de levenskwaliteit van de bevolking, in het bijzonder die met  lage inkomens. <a href="http://www.caixa.gov.br/">CAIXA home page</a> (alleen Portugees)
+</p>
+
+<a name="companies"></a><h2>Sponsor Bedrijven</h2>
+
+<p>PostgreSQL wordt ondersteund door vele bedrijven die ontwikkelaars sponsoren, hosting leveren, en financiele steun geven.  De grootste en langdurigste sponsors zijn te vinden op onze <a href="/about/sponsors">sponsors pagina.</a></p>
+
+<p>Er is ook een grote groep van <a href="/support/professional_support">bedrijven die PostgreSQL ondersteuning bieden</a>, van individuele consultants tot aan multinationale bedrijven.</p>
+
+<p><a href="/about/donate">Donaties</a> worden graag geaccepteerd.</p>
+{%endblock%}

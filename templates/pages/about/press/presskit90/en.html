@@ -1,0 +1,246 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.0 Press Kit{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.0 Press Kit</h1>
+
+<h2>Contents</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Text of Original Release</a><br />
+ &nbsp; <a href="#additional_features">Feature List</a><br />
+ &nbsp; <a href="#download">Where to Download</a><br />
+ &nbsp; <a href="#docs">Documentation</a><br />
+ &nbsp; <a href="#license">License</a><br />
+ &nbsp; <a href="#contact">Contacts</a><br />
+ &nbsp; <a href="#quoted_companies">Full Text of Quotes and Company Information</a><br />
+ &nbsp; <a href="#companies">Corporate Support</a><br />
+ &nbsp; <a href="#images">Logos & Images</a><br />
+ &nbsp; <a href="#translations">Official Translations of this Document</a><br />
+</p>
+
+<a name="original_release"></a><h2>Original Press Release</h2>
+<p>
+20 SEPTEMBER 2010: The PostgreSQL Global Development Group announces the release of PostgreSQL 9.0, the latest version of the world's leading open source relational database. This major release features advances in security, application support, monitoring, performance, and storage of specialty data. Users are particularly excited about PostgreSQL 9.0's new replication and hot standby capabilities, which will accelerate adoption in cloud hosting and scalable applications.
+</p><p>
+"The built-in replication in 9.0 and ability to query a hot standby have been the most requested PostgreSQL features for many years," said Simon Riggs, CTO of 2ndQuadrant and lead contributor to hot standby. "Efficient, low latency streaming replication protects your data better, while hot standby significantly reduces total cost of ownership. In proprietary products, this capability is an add-on which costs thousands of dollars."
+</p><p>
+PostgreSQL 9.0 includes more than a dozen other major improvements that will enhance every aspect of database application design and performance, including: 64-bit Windows support, conditional and per-column triggers, upgrade-in-place from 8.3 and 8.4, deferrable unique constraints, and high-performance event messaging. For a complete list of new features, see our release information page.
+</p><p>
+"As one of the world's largest operators of core Internet infrastructure registries, Afilias is pleased to see PostgreSQL 9.0 add in-place upgrades, which allow us to upgrade to new versions of the database system with minimal disruption to our 16-million-strong domain name database," said Afilias CTO Ram Mohan.
+</p><p>
+"We are very excited about the new features ... in particular, we look forward to the deferrable unique constraints as an opportunity to speed up updates and upgrades for our customers," said Paolo Juvara, CTO of OpenBravo.
+</p><p>
+Marc Balmer, founder of Micro Systems in Switzerland, is more interested in the greatly improved LISTEN/NOTIFY event messaging capability: "The new data payload option in asynchronous notifications will power the next version of our remote data display programs."
+</p><p>
+Thanks to the contributions of developers and companies around the world, such as NTT Open Source, EnterpriseDB, 2ndQuadrant, Red Hat and many others, user adoption and development momentum is greater than ever.
+</p><p>
+"Here in CAIXA bank we use PostgreSQL in mission-critical financial environments because it has the quality to support our operations," said Clarice Coppetti, IT Vice President, CAIXA Bank, Brazil. "The new version shows that PostgreSQL is improving rapidly to keep meeting our business needs."
+</p><p>
+About PostgreSQL: PostgreSQL is the leading open source database system, with a global community of thousands of users and contributors and dozens of companies and organizations.  The PostgreSQL Project has over 20 years of engineering, starting at the University of California, Berkeley, and an unmatched pace of development today. PostgreSQL's mature feature set not only matches top proprietary database systems, but exceeds them in advanced database features, extensibility, security and stability.  Learn more about PostgreSQL and participate in our community at www.postgresql.org.
+</p>
+
+<h2>Extended Release Information</h2>
+
+<a name="additional_features"></a><h2>Feature List</h2>
+<p>
+Version 9.0 has an unprecedented number of new major features, demonstrating the accelerating growth of our contributor community over the last year:
+</p>
+<h3>
+Replication and Scalability
+</h3>
+<ul>
+<li>Hot Standby</li>
+<li>Streaming Replication</li>
+</ul>
+<h3>
+Administration and Security
+</h3>
+<ul>
+<li>Integrated Upgrade-in-Place (pg_upgrade)</li>
+<li>RADIUS Authentication</li>
+<li>Password Strength Checking (passwordcheck)</li>
+<li>Easier Database Permissions Management Commands (GRANT ON ALL and DEFAULT PERMISSIONS)</li>
+</ul>
+
+<h3>
+Database Design and SQL
+</h3>
+<ul>
+<li>Deferrable Unique Constraints</li>
+<li>Conditional Triggers</li>
+<li>Column Triggers</li>
+<li>Ordering in Aggregates</li>
+<li>New Windowing Functions (ROWS PRECEDING and FOLLOWING)</li>
+</ul>
+
+<h3>
+Stored Procedures
+</h3>
+<ul>
+<li>Anonymous Procedure Code Blocks (DO statement)</li>
+<li>Improved Perl and Python Stored Procedures (including support for Python 3)</li>
+<li>Named Parameters in Stored Procedure Calls</li>
+</ul>
+
+<h3>
+Performance and Advanced Features
+</h3>
+<ul>
+<li>Improved Event Messaging (LISTEN/NOTIFY)</li>
+<li>64-bit Windows Support</li>
+<li>Optimization for ORM-Generated Queries (JOIN removal)</li>
+<li>Unique Keys for Non-Scalar Data (Exclusion Constraints)</li>
+<li>Expanded Support for Key-value Data (HStore)</li>
+<li>JSON and XML Explain Plans</li>
+</ul>
+
+<h3>
+More Information About These Features
+</h3>
+<p>
+For explanations of these features and others, please see the following resources:
+</p>
+<ul>
+<li><a href="/docs/9.0/static/release-9-0.html">Release Notes</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What's_new_in_PostgreSQL_9.0">What's New In 9.0</a></li>
+<li><a href="/about/featurematrix">Feature matrix (English only)</a></li>
+<li><a href="/about/press/faq">Frequently Asked Questions</a></li>
+</ul>
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Downloads page</a>, with links to installers and tools.</li>
+<li><a href="/ftp/source/v9.0.0">Source Code</a></li>
+<li><a href="/download/windows">Windows Installers</a></li>
+<li><a href="/download/linux">Linux Installers</a> and package repositories</li>
+<li><a href="/download/solaris">Solaris Packages</a></li>
+<li><a href="/download/macosx">Mac OSX Installers</a></li>
+<li><a href="/download/freebsd">FreeBSD Ports</a></li>
+<li><a href="http://www.pgfoundry.org">Optional Components and Add-Ons</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">Related and Commercial Software</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentation</h2>
+
+<p>HTML documentation and man pages are installed with PostgreSQL, but feel free to browse, search and comment on our extensive, interactive <a href="/docs/9.0/interactive">online documentation</a>.</p>
+
+<a name="license"></a><h2>License</h2>
+<p>
+PostgreSQL uses the <a href="/about/licence">PostgreSQL License</a>, a BSD-like license which only requires that the licensed source code maintain its copyright and licensing information. This
+<a href="http://www.opensource.org/licenses/postgresql">OSI-certified license</a> is widely appreciated as flexible and business-friendly, since it does not restrict the use of PostgreSQL with commercial and proprietary applications. Together with multi-company support and public ownership of the code, the BSD license makes PostgreSQL very popular with vendors wanting to embed a database in their own products without fear of fees, vendor lock-in, or changes in licensing terms.
+</p>
+
+<a name="contact"></a><h2>Contacts</h2>
+
+<p>Web Pages</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL home page</a></li>
+</ul>
+
+<p>Press Inquiries</p>
+<p>USA<br />Bruce Momjian
+<br/>Selena Deckelmann
+<br/>Josh Berkus
+<br /><a href="mailto:press@postgresql.org">press@postgresql.org</a>
+<br />Phone: +1 347-6-PGSQL-9 (or +1-347-674-7759)
+
+<p>United Kingdom<br />
+Simon Riggs<br />
+<a href="uk@postgresql.org">uk@postgresql.org</a><br />
++44-7900-255520</p>
+
+<p>Ireland<br />
+Raymond O'Donnell<br />
+<a href="ie@postgresql.org">ie@postgresql.org</a><br />
++353 (0)87 2241365</p>
+
+<p>Australia<br />
+Charles Duffy<br /> 
+<a href="au@postgresql.org">au@postgresql.org</a><br /> 
+(02) 9452 9163</p>
+
+<p>For contacts in other regions, see <a href="/about/press/contact">our international contact list.</a></p>
+
+<a name="quoted_companies"></a><h2>Full Text of Quotes and Company Information</h2>
+
+<p>
+PostgreSQL 9.0 has attracted great interest from business database users around the world.  The following quotes show the enthusiasm of companies in England, Canada, Spain, Switzerland and Brazil for its new features.  Contact us to arrange an interview with any of these companies. (Contacts below answer in the listed languages only.)
+</p>
+
+<h3>2ndQuadrant</h3>
+<p>
+"The built-in replication features in 9.0 and ability to query a hot standby have been the most requested PostgreSQL features for many years," said Simon Riggs, CTO of 2ndQuadrant. "Efficient, low latency streaming replication protects your data better, while hot standby significantly reduces total cost of ownership. In proprietary products, this capability is an add-on costing thousands of dollars."
+</p>
+<p>
+<i>About 2ndQuadrant:</i> <a href="http://www.2ndquadrant.com">2ndQuadrant</a> is a global consulting and support company specializing in PostgreSQL database services, with clients in over 15 countries. The company's consultants have contributed major features in each of the last six releases of PostgreSQL. Contact: <a href="mailto:info@2ndQuadrant.com">info@2ndQuadrant.com</a> +44 8707667756 (English, Italian, French, Spanish, Estonian)
+</p>
+<h3>Afilias</h3>
+<p>
+"As one of the world's largest operators of core Internet infrastructure registries, Afilias is pleased to see PostgreSQL 9.0 add In-Place upgrades, which allow us to upgrade to new versions of the database system with minimal disruption to our 16 million strong domain name database. In addition, we look forward to using the Hot Standby and Streaming Replication features, which supplement the robust replication already existing via Slony. These kinds of feature additions continue to make a strong case for why mission-critical technology tasks can continue to depend on the power, flexibility and robustness of PostgreSQL," said Afilias CTO Ram Mohan.
+</p>
+<p>
+<i>About Afilias</i>: <a href="http://www.afilias.info">Afilias</a> is a global provider of Internet infrastructure services that connect people to their data. Afilias' reliable, secure, scalable, and globally available technology supports a wide range of applications including Internet domain registry services, Managed DNS, and services in the RFID and supply chain market with its Afilias Discovery Services. For more information on Afilias please visit <a href="http://www.afilias.info">our home page</a> or contact <a href="mailto:hread@afilias.info">Heather Read</a> (English Only)
+</p>
+<h3>Openbravo</h3>
+<p>
+"Openbravo has been an enthusiastic user of PostgreSQL. We embed PostgreSQL in our Cloud Appliances and we rely on PostgreSQL in our Ubuntu packages. While the product supports multiple databases, 93% of Openbravo deployments are on PostgreSQL. Every new release of PostgreSQL has delivered increased reliability and performance and we expect 9.0 to continue in that tradition. We are very excited about the new features coming with PostgreSQL. In particular, we look forward to the deferrable unique constraints as an opportunity to speed up updates and upgrades for our customers. The new built in, binary, log based replication will appeal to our larger users looking for redundancy and high availability. Finally, all of our development are looking for the new VACUUM FULL command. We have already done some preliminary testing based on PostgreSQL 9.0 and we have not found any significant issue. We detected some minor incompatibilities but we expect their resolution to be trivial. Openbravo intends to start supporting PostgreSQL 9.0 as soon as it becomes production and to start adopting it as the default deployment option as soon as it is supported in the major Linux distributions," said Paolo Juvara, CTO, OpenBravo.
+</p>
+<p>
+<i>About Openbravo</i>: <a href="http://www.openbravo.com">Openbravo</a> is the award-winning developer of Openbravo ERP, a web-based commercial open source ERP solution for SMBs -- the industry's first real alternative to proprietary software. The company's Enterprise Resource Planning (ERP) and Point of Sale (PoS) solutions, the most popular in their market, have been downloaded more than 1.5 million times and are used in over 50 countries. Contact: <a href="media@openbravo.com">Carme Zaragoza</a> +34 932725947 (Spanish, English)
+</p>
+<h3>micro systems</h3>
+<p>
+Marc Balmer, founder of micro systems in Switzerland, is more interested in the new LISTEN/NOTIFY features: "The new data payload option in asychronous notifications will power the next version of our remote data display programs for arcapos, our ticketing and retail point of sale solution for zoos and museums."
+</p>
+<p>
+<i>About micro systems</i>: <a href="http://www.msys.ch">micro systems</a> is a Swiss Consulting and
+Development company focused on mature open source products such as BSD Unix and PostgreSQL in commercial settings. micro systems brings the best of open source to its customers and gives back to open source communities. Contact: <a href="vera@msys.ch">Vera Hardmeier</a>, +41 61 383 50 10 (German, English)
+</p>
+<h3>CAIXA Bank</h3>
+<p>
+"Here in CAIXA bank we use Postgresql in mission-critical financial environments because it has the quality to support our operations," said Clarice Coppetti, IT Vice President, CAIXA Bank, Brazil. "The new version shows that PostgreSQL is improving rapidly to keep meeting our business needs."
+</p>
+<p>
+<i>About CAIXA</i>: <a href="http://www.caixa.gov.br/">CAIXA</a> is the main agent for the Federal government's public policies and is present in the life of millions of Brazilians. The Institution is 100% public and serves not only its bank clients, but the whole Brazilian population through the Lotteries, the urban infrastructure investments and the social programs payments, FGTS, PIS and Unemployment Benefit. Through all these axis, CAIXA has repassed over R$ 150 billion to the economy in 2009, an amount which represents around 6% of the GDP. By acting in the sectors of housing, basic sanitation, infrastructure and services, CAIXA plays a primordial role in the promotion of urban development and social justice in the country, contributing to improve the population's quality of life, particularly the lower income ones. <a href="http://www.caixa.gov.br/">CAIXA home page</a> (Portuguese Only)
+</p>
+
+<a name="companies"></a><h2>Corporate Support</h2>
+
+<p>PostgreSQL enjoys the support of numerous companies, who sponsor developers, provide hosting resources, and give us financial support.  The largest long-term sponsors are listed on our <a href="/about/sponsors">development sponsors page.</a></p>
+
+<p>There is also a large community of <a href="/support/professional_support">companies offering PostgreSQL Support</a>, from individual consultants to multinational companies.</p>
+
+<p><a href="/about/donate">Donations</a> gladly accepted.</p>
+
+<a name="images"></a><h2>Logos & Images</h2>
+
+<ul>
+<li><a href="http://pgfoundry.org/docman/view.php/1000089/13727/slonik_with_teal_text_and_black_tagline.pdf">PostgreSQL logo and project slogan</a> (BSD license; free to use)</li>
+<li><a href="http://pgfoundry.org/docman/view.php/1000089/54/elephant.pdf">PostgreSQL elephant mascot</a> ("Slonik") (BSD license; free to use)</li>
+<li><a href="http://pgfoundry.org/docman/view.php/1000089/13724/postgreSQL_blue.pdf">PostgreSQL 9.0 promotional graphic</a> (BSD license; free to use)</li>
+<li><a href="http://fuzzychef.smugmug.com/Conferences/oscon2010/IMG20100721112728/945746467_5SCvo-L.jpg">PostgreSQL volunteers in 9.0 shirts</a> (credit: Josh Berkus, 2010)</li>
+<li><a href="http://www.flickr.com/photos/selenamarie/3549757160/in/set-72157618454881817/">PostgreSQL developers at developer summit</a> (credit: Selena Decklemann, 2009)</li>
+</ul>
+
+<a name="translations"></a><h2>Official Translations of This Document</h2>
+
+<ul>
+<li><a href="/about/press/presskit90.html.br">Brazilian Portuguese</a></li>
+<li><a href="/about/press/presskit90.html.zh_cn">Chinese</a></li>
+<li><a href="/about/press/presskit90.html.nl">Dutch</a></li>
+<li><a href="/about/press/presskit90.html.fr">French</a></li>
+<li><a href="/about/press/presskit90.html.de">German</a></li>
+<li><a href="/about/press/presskit90.html.el">Greek</a></li>
+<li><a href="/about/press/presskit90.html.it">Italian</a></li>
+<li><a href="/about/press/presskit90.html.ja">Japanese</a></li>
+<li><a href="/about/press/presskit90.html.pt">Portuguese (Iberian)</a></li>
+<li><a href="/about/press/presskit90.html.ro">Romanian</a></li>
+<li><a href="/about/press/presskit90.html.ru">Russian</a></li>
+<li><a href="/about/press/presskit90.html.es">Spanish</a></li>
+<li><a href="/about/press/presskit90.html.tr">Turkish</a></li>
+</ul
+
+
+
+
+{%endblock%}

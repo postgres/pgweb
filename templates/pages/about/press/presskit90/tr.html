@@ -1,0 +1,200 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.0 Basın Bülteni{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.0 Basın Bilteni</h1>
+
+<h2>Contents</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Orijinal Basın Duyurusu</a><br />
+ &nbsp; <a href="#additional_features">Özellik Listesi</a><br />
+ &nbsp; <a href="#download">Nereden İndirebilirsiniz?</a><br />
+ &nbsp; <a href="#docs">Belgeler</a><br />
+ &nbsp; <a href="#license">Lisans</a><br />
+ &nbsp; <a href="#contact">Bağlantılar</a><br />
+ &nbsp; <a href="#quoted_companies">Alıntıların Tam Metinleri ve Şirket Bilgileri</a><br />
+ &nbsp; <a href="#companies">Şirket Desteği</a><br />
+</p>
+
+<a name="original_release"></a><h2>Orijinal Basın Duyurusu</h2>
+<p>
+20 Eylül 2010: PostgreSQL Global Development Group, dünyanın lider açık kaynak kodlu ilişkisel veritabanı sunucusu olan PostgreSQL'in 9.0 sürümünü duyurdu. Bu ana sürüm güvenlik, uygulama desteği, gözlemleme, performans ve özel verilerin saklanması konusundaki özelliklerini daha da geliştirmiştir. Bu sürüm ayrıca özellikle yeni replikasyon yetenekleri ile kullanıcılar tarafından beklenmektedir. Bu özelliklerle cloud hosting ve ölçeklenebilir uygulamalara uyum daha da artmıştır.
+</p><p>
+2ndQuadrant'ın CTO'su ve hot standby özelliğinin ana geliştiricisi Simon Riggs, "9.0 sürümündeki gömülü replikasyon ve hot standby sunuculardan salt okunur sorgu çekebilme özellikleri, PostgreSQL'de uzun yıllardır beklenen bir özellikti." dedi, ve devam etti: "Verimli, düşük gecikme süreli replikasyon verinizi daha iyi korur, ayrıca hot standby toplam sahip olma (TCO) maliyetinizi belirgin derecede düşürür. Ticari veritabanlarında bunlar ek özellik olarak gelir ve binlerce dolara malolur."
+</p><p>
+PostgreSQL 9.0, 64-bit Windows desteği, seçimsel ve kolon bazlı triggerlar, disk üzerinde güncelleme desteği, ertelenebilir tekil kısıtlamalar ve yüksek başarımlı mesajlaşma gibi özelliklerle veritabanı tasarımı ve başarımının her aşamasını geliştiren yeni özelliklerle gelmektedir. Yeni özelliklerin tam listesi için sürüm bilgi sayfasına bakabilirsiniz.
+</p><p>
+Afilias CTO'su Ram Mohan'ın yeni sürüm hakkındaki yorumu: "Dünyanın önde gelen alan adı kayıt noktalarından birisi olarak, PostgreSQL 9.0 ile birlikte gelen disk üzerinde güncelleme özelliğini görmekten çok memnunuz. Bu özellik, yeni sürümlere geçişimizi çok kolaylaştıracak ve 16 milyonluk alan adı veritabanımız çok kısa süre kapalı kalacaktır."
+</p><p>
+OpenBravo CTO'su Paolo Juvara, "Yeni özellikler çok heyecan verici -- özellikle ertelenebilir tekil kısıtlamalar müşterilerimizin update sorgularını çok hızlandıracaktır." dedi.
+</p><p>
+İsveç'deki Micro Systems'ın kurucusu olan Marc Balmer, geliştirilmiş LISTEN/NOTIFY yetenekleri hakkında konuştu: "Asenkron bildirimlerdeki yeni veri yükleme seçeneği, arcapos uygulamamızı daha da kuvvetlendirecektir."
+</p><p>
+Geliştiricilerimize, ve aralarında NTT Open Source, EnterpriseDB, 2ndQuadrant, Red Hat'in de olduğu şirketlere bu yeni sürüme katkıları için teşekkür ederiz.
+</p><p>
+"CAIXA Bank'da görev kritik finansal ortamlarda, operasyonlarımızı destekleyecek kaliteye sahip olduğu için PostgreSQL'i kullanıyoruz. PostgreSQL'in yeni sürümü, PostgreSQL'in iş gereksinimlerimizi karşılamak için ne kadar hızlı geliştirdiğini gösteriyor."
+</p><p>
+PostgreSQL hakkında: PostgreSQL dünyanın önde gelen açık kaynak kodlu veritabanı sunucusudur. Binlerce kişilik kullanıcı ve geliştirici grubu ve onlarca kurum ve organizasyonun desteğini arkasına almıştır. PostgreSQL projesi 20 yıllık eşsiz mühendislik çalışmasının ürünüdür. PostgreSQL'in oturmuş özellikleri sadece en üst seviyedeki ticari veritabanları ile aynı olmakta kalmıyor, aynı zamanda kararlılık, güvenlik, genişletilebilirlik ve gelişmiş veritabanı özellikleri açısından birçoğunu geride bırakıyor. Ayrıntılı bilgi almak ve topluluğa katılmak için www.PostgreSQL.org adresini ziyaret edebilirsiniz. 
+</p>
+
+<h2>Genişletilmiş Basın Bülteni</h2>
+
+<a name="additional_features"></a><h2>Özellik Listesi</h2>
+<p>
+9.0 sürümü, geliştirici sayımızdaki ivmelenen artışın bir göstergesi olarak, eşine az rastlanır derecede yeni büyük özellikler içermektedir:
+</p>
+<h3>
+Replikasyon ve Ölçeklenebilirlik
+</h3>
+<ul>
+<li>Hot Standby</li>
+<li>Streaming Replication</li>
+</ul>
+<h3>
+Yönetim ve Güvenlik
+</h3>
+<ul>
+<li>Bütünleştirilmiş ve disk üzerinde ana sürüm güncelleme desteği (pg_upgrade)</li>
+<li>RADIUS Yetkilendirmesi</li>
+<li>Parola Kuvvet Kontrolü (passwordcheck)</li>
+<li>Daha Kolay Veritabanı Yönetim Komutları (GRANT ON ALL ve DEFAULT PERMISSIONS)</li>
+</ul>
+
+<h3>
+Veritabanı Tasarımı ve SQL
+</h3>
+<ul>
+<li>Ertelenebilir Tekil Kısıtlamalar (Deferrable Unique Constraints)</li>
+<li>Duruma bağlı Tetikleyiciler (Trigger)</li>
+<li>Kolon Bazı Tetikleyiciler (Trigger)</li>
+<li>Yeni Windowing Fonksiyonları (ROWS PRECEDING ve FOLLOWING)</li>
+</ul>
+
+<h3>
+Stored Procedurelar
+</h3>
+<ul>
+<li>Anonim Procedure Kod Blokları (DO ifadeleri)</li>
+<li>Geliştirilmiş Perl ve Python Stored Procedure desteği (Python 3 desteği dahil)</li>
+<li>Stored Procedure Çağrılarında Named Parameter Desteği</li>
+</ul>
+
+<h3>
+Başarım ve Gelişmiş Özellikler
+</h3>
+<ul>
+<li>Gelişmiş Event Messaging (LISTEN/NOTIFY)</li>
+<li>64-bit Windows Desteği</li>
+<li>ORM tarafından üretilmiş sorguların optimizasyonu (JOIN kaldırılması)</li>
+<li>Sayısal olmayan veriler için tekil anahtarlar (Exclusion Constraints)</li>
+<li>Anahtar-değerli veri için gelişmiş destek (HStore)</li>
+<li>JSON ve XML formatında EXPLAIN Plan Çıktıları</li>
+</ul>
+
+<h3>Bu özellikler hakkında daha fazla bilgi</h3>
+<p>
+Bu özellikler hakkında daha fazla bilgi almak için aşağıdaki kaynaklara gözatabilirsiniz:
+</p>
+<ul>
+<li><a href="/docs/9.0/static/release-9-0.html">Sürüm Notları</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What's_new_in_PostgreSQL_9.0">9.0'da gelen yeni özellikler</a></li>
+<li><a href="/about/featurematrix">Özellik Matriksi (Sadece İngilizce)</a></li>
+</ul>
+<a name="download"></a><h2>Nereden İndirebilirim?</h2>
+<ul>
+<li><a href="/download">Ana İndirme Sayfası</a></li>
+<li><a href="/ftp/source/v9.0.0">Kaynak Kodu</a></li>
+<li><a href="/download/windows">Windows Kurulum Paketleri</a></li>
+<li><a href="/download/linux">Linux Kurulum Paketleri ve paket depoları</a></li>
+<li><a href="/download/solaris">Solaris Paketleri</a></li>
+<li><a href="/download/macosx">Mac OSX Kurulum Paketleri</a></li>
+<li><a href="/download/freebsd">FreeBSD Port</a></li>
+<li><a href="http://www.pgfoundry.org">Seçimsel Bileşenler ve Eklentiler</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">İlgili ve Ticari Yazılımlar</a></li>
+</ul>
+
+<a name="docs"></a><h2>Belgeler</h2>
+
+<p>
+HTML belgeler ve yardım sayfaları PostgreSQL ile kurulurlar, ancak isterseniz <a href="/docs/9.0/interactive">etkileşimli çevrimiçi belgelerimizde</a> arama yapabilir, gezinebilir ve yorum yapabilirsiniz.
+</p>
+
+<a name="license"></a><h2>Lisans</h2>
+<p>
+PostgreSQL sadece lisanslanan kaynak kodun haklarını ve lisans bilgisinin tutulmasını yeterli gören ve BSD lisansına benzeyen <a href="/about/licence">PostgreSQL Lisansını</a> kullanır. Bu <a href="http://www.opensource.org/licenses/postgresql">OSI sertifikalı lisans</a> esnekliği ve kurumlara sağladığı kolaylık nedeniyle beğenilmektedir -- çünkü PostgreSQL'in kodunun ticari ya da kapalı kodlu uygulamalarda kullanımına izin vermektedir. Çoklu şirket desteği ve kodun herkes tarafından sahiplenilmesi nedeniyle BSD lisansı PostgreSQL'i kendi ürünlerine gömmek isteyen firmaların lisans ücreti, üreticiye bağımlılık ve lisansın değişmesi konularındaki korkularını ortadan kaldırmaktadır.
+</p>
+
+<a name="contact"></a><h2>Bağlantılar</h2>
+
+<p>Web Sayfaları</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL ana sayfası</a></li>
+<li><a href="http://www.postgresql.org.tr">PostgreSQL Türkiye Ana Sayfası</a></li>
+</ul>
+
+<p>Basın Bilgisi</p>
+<p>Türkiye<br />
+Devrim GÜNDÜZ<br />
+<a href="mailto:devrim@PostgreSQL.org">devrim@PostgreSQL.org</a><br />
++90 532 6339886</p>
+
+<p>
+Diğer bölgelerdeki bağlantılar için <a href="/about/press/contact">uluslararası bağlantı listemize</a> bakabilirsiniz.</a></p>
+
+<a name="quoted_companies"></a><h2>Alıntıların Tam Metinleri ve Şirket Bilgileri</h2>
+
+<p>
+PostgreSQL 9.0 sürümü dünyanın her yerindeki veritabanı kullanıcılarından oldukça çok ilgi görmüştür. Aşağıdaki alıntılar İngiltere, Kanada, İspanya, İsviçre ve Brezilya'dan şirketlerin yeni özellikler ile ilgili duygularını yansıtmaktadır. (Bağlantıya geçilebilecek diller sadece aşağıda belirtilen dillerde geçerlidir)
+</p>
+
+<h3>2ndQuadrant</h3>
+<p>
+2ndQuadrant'ın CTO'su ve hot standby özelliğinin ana geliştiricisi Simon Riggs, "9.0 sürümündeki gömülü replikasyon ve hot standby sunuculardan salt okunur sorgu çekebilme özellikleri, PostgreSQL'de uzun yıllardır beklenen bir özellikti." dedi, ve devam etti: "Verimli, düşük gecikme süreli replikasyon verinizi daha iyi korur, ayrıca hot standby toplam sahip olma (TCO) maliyetinizi belirgin derecede düşürür. Ticari veritabanlarında bunlar ek özellik olarak gelir ve binlerce dolara malolur."
+</p>
+<p>
+<i>2ndQuadrant hakkında:</i> <a href="http://www.2ndquadrant.com">2ndQuadrant</a>  15'in üzerindeki ülkedeki müşterileri ile PostgreSQL veritabanı servisleri üzerine uzmanlaşmış uluslararası bir danışmanlık ve destek şirketidir. Şirket danışmanları, PostgreSQL son 6 sürümündeki ana özelliklere destek vermişlerdir ve geliştirmişlerdir. Bağlantı:<a href="mailto:info@2ndQuadrant.com">info@2ndQuadrant.com</a> +44 8707667756 (İngilizce, İtalyanca, Fransızca, İspanyolca, Estonca)
+</p>
+
+<h3>Afilias</h3>
+<p>
+Afilias CTO'su Ram Mohan'ın yeni sürüm hakkındaki yorumu: "Dünyanın önde gelen alan adı kayıt noktalarından birisi olarak, PostgreSQL 9.0 ile birlikte gelen disk üzerinde güncelleme özelliğini görmekten çok memnunuz. Bu özellik, yeni sürümlere geçişimizi çok kolaylaştıracak ve 16 milyonluk alan adı veritabanımız çok kısa süre kapalı kalacaktır. Ayrıca, Hot Standby ve Streaming replikasyon özellikleri de Slony-I'ı tamamlayıcı bir replikasyon yöntemi olacaktır. Bu tür özelliklerin PostgreSQL'e eklenmesi, PostgreSQL'in güç, esneklik ve kararlılığın görev-kritik teknolojilerin kullanımında ne kadar doğru bir tercih olduğunu göstermektedir." 
+</p>
+<p>
+<i>Afilias hakkında</i>: <a href="http://www.afilias.info">Afilias</a> is a global provider of Internet infrastructure services that connect people to their data. Afilias reliable, secure, scalable, and globally available technology supports a wide range of applications including Internet domain registry services, Managed DNS, and services in the RFID and supply chain market with its Afilias Discovery Services. For more information on Afilias please visit <a href="http://www.afilias.info">our home page</a> or contact <a href="mailto:hread@afilias.info">Heather Read</a> (English Only)
+</p>
+
+<h3>Openbravo</h3>
+<p>
+"Openbravo has been an enthusiastic user of PostgreSQL. We embed PostgreSQL in our Cloud Appliances and we rely on PostgreSQL in our Ubuntu packages. While the product supports multiple databases, 93% of Openbravo deployments are on PostgreSQL. Every new release of PostgreSQL has delivered increased reliability and performance and we expect 9.0 to continue in that tradition. We are very excited about the new features coming with PostgreSQL. In particular, we look forward to the deferrable unique constraints as an opportunity to speed up updates and upgrades for our customers. The new built in, binary, log-based replication will appeal to our larger users looking for redundancy and high availability. Finally, all of our development are looking for the new VACUUM FULL command. We have already done some preliminary testing based on PostgreSQL 9.0 and we have not found any significant issues. We detected some minor incompatibilities but we expect their resolution to be trivial. Openbravo intends to start supporting PostgreSQL 9.0 as soon as it becomes production and to start adopting it as the default deployment option as soon as it is supported in the major Linux distributions," said Paolo Juvara, CTO, OpenBravo.
+</p>
+<p>
+<i>Openbravo Hakkında</i>: <a href="http://www.openbravo.com">Openbravo</a> is the award-winning developer of Openbravo ERP, a web-based commercial open source ERP solution for SMBs -- the industry's first real alternative to proprietary software. The company's Enterprise Resource Planning (ERP) and Point of Sale (PoS) solutions, the most popular in their market, have been downloaded more than 1.5 million times and are used in over 50 countries. Contact: <a href="mailto:media@openbravo.com">Carme Zaragoza</a> +34 932725947 (Spanish, English)
+</p>
+
+<h3>micro systems</h3>
+<p>
+Bir İsveç firması olan micro systems'ın kurucusu olan Marc Balmer, yeni LISTEN/NOTIFY özellikleri hakkında konuştu: "Asenkron bildirimlerdeki yeni veri yükleme seçeneği, müzeler ve hayvanat bahçelerinde kullanılan arcapos uygulamamızın yeni neslinin daha da iyi çalışmasına neden olacaktır."
+</p>
+<p>
+<i>micro systems hakkında: </i><a href="http://www.msys.ch">micro systems</a> İsveç danışmanlık ve yazılım şirketidir. BSD Unix ve PostgreSQL gibi oturmuş açık kaynak kodlu yazılımlara odaklanmıştır ve aynı zamanda açık kaynak kod topluluklarına da bilgi aktarmaktadır. İletişim: Contact: <a href="mailto:vera@msys.ch">Vera Hardmeier</a>, +41 61 383 50 10 (Almanca, İngilizce)
+</p>
+
+<h3>CAIXA Bank</h3>
+<p>
+Brezilya'daki CAIXA Bank'in IT yöneticisi Clarice Coppetti: "CAIXA Bank'da görev kritik finansal ortamlarda, operasyonlarımızı destekleyecek kaliteye sahip olduğu için PostgreSQL'i kullanıyoruz. PostgreSQL'in yeni sürümü, PostgreSQL'in iş gereksinimlerimizi karşılamak için ne kadar hızlı geliştirildiğini gösteriyor."
+</p>
+<p>
+<i>CAIXA hakkında</i>: <a href="http://www.caixa.gov.br/">CAIXA</a> is the main agent for the Federal government's public policies and is present in the life of millions of Brazilians. The Institution is 100% public and serves not only its bank clients, but the whole Brazilian population through the Lotteries, the urban infrastructure investments and the social programs payments, FGTS, PIS and Unemployment Benefit. Through all these axis, CAIXA has repassed over R$ 150 billion to the economy in 2009, an amount which represents around 6% of the GDP. By acting in the sectors of housing, basic sanitation, infrastructure and services, CAIXA plays a primordial role in the promotion of urban development and social justice in the country, contributing to improve the population's quality of life, particularly the lower income ones. <a href="http://www.caixa.gov.br/">CAIXA home page</a> (Portuguese Only)
+</p>
+
+<a name="companies"></a><h2>Şirket Desteği</h2>
+
+<p>
+PostgreSQL geliştiricilere sponsor olan, bulundurma hizmeti sağlayan ve bize maddi destek sağlayan şirketlerin desteğini almaktadır. En büyük uzun dönemli sponsorlarımızı <a href="/about/sponsors">geliştirme sponsorları sayfasında</a> görebilirsiniz.</p>
+
+<p>Ayrıca, bağımsız danışmanlardan uluslararası şirketlere kadar çok sayıda <a href="/support/professional_support">PostgreSQL desteği veren kişi/kurum</a> bulunmaktadır,</p>
+
+
+
+{%endblock%}

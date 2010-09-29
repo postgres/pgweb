@@ -1,0 +1,210 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.0 版发布宣传资料{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.0版发布宣传资料</h1>
+
+<h2>目录</h2>
+
+<p>
+ &nbsp; <a href="#original_release">新版本发布说明的原文</a><br />
+ &nbsp; <a href="#additional_features">特性列表</a><br />
+ &nbsp; <a href="#download">下载地址</a><br />
+ &nbsp; <a href="#docs">文档</a><br />
+ &nbsp; <a href="#license">版权声明</a><br />
+ &nbsp; <a href="#contact">联系方式</a><br />
+ &nbsp; <a href="#quoted_companies">相关商业公司信息</a><br />
+ &nbsp; <a href="#companies">企业支持</a><br />
+</p>
+
+<a name="original_release"></a><h2>新版本发布说明的原文</h2>
+<p>
+2010/09/20: PostgreSQL全球开发组宣布业界领先的开源关系数据库PostgreSQL9.0版发布，该版本进一步强化在安全、应用程序支持、监控、性能和特殊数据的存储等方面领先功能。用户尤其对9.0版本中的数据复制和即时热备功能特别关注，这些功能也将加速PostgreSQL在云计算和大规模可伸缩应用方面的使用。
+</p><p>
+“内置有数据复制功能和对处于即进备份状态的服务器查询的功能是用户多年以来一直提出要增加的功能”，2ndQuadrant公司的CTO，Simon Riggs说道，他也是即时备份功能的主要代码贡献人员，"有效、少等待的流式复制技术可以更好地保护你的数据，同时，即时备份也大大减少了公司的数据成本，对一些商业化的数据库来说，这项能力一般是附加模块，需要用户额外支付几千美元”。
+</p><p>
+PostgreSQL 9.0版本包括一系列其他的更新，这些更新增强了数据库应用程序设计和性能方面的能力，包括：64位Windows平台支持，有条件和列级触发器，从8.3或8.4自动升级，可延尽的唯一键约束，高性能的事件信息。可以浏览新版本的发布页面以获得完整的新特性列表。
+</p><p>
+“作为世界上最大的核心Internet基础设施供应商之一，Afilias公司很高兴地看到PostgreSQL 9.0增加了自动升级功能，这样我们就可以将我们的1600的域名数据库无中断地升级至新版本”， Afilias公司的CTO，Ram Mohan先生说道。
+</p><p>
+“我们对新版本中的一些新特性很兴奋，尤其是我们看到可延迟的唯一键约束功能，这对我们的客户将提高更新和升级的速度”，OpenBravo公司的CTO，Paolo Juvara说道。
+</p><p>
+瑞士Micro系统公司的创始人Marc Balmer先生对重大改进后的LISTEN/NOTIFY的事件信息处理机制感兴趣，“新的数据处理方式在异步通知方面将对我们的远程数据显示程序提供更强的支持”。
+</p><p>
+感谢开发人员的贡献以及世界上众多公司的支持，如NTT开源公司、EnterpriseDB公司、2ndQuadrant公司、Red Hat公司和其他公司，更多用户的使用和更强的开发动力已超过以往任何时候。
+</p><p>
+“我们是CAIXA银行，我们在关键的财务环境下使用PostgreSQL，因为它已完全具备了支持我们业务操作的水平”，巴西CAIXA银行的IT副总裁，Clarice Coppetti说道，“新版本的PostgreSQL显示出它满足我们商务需要的能力”。
+</p><p>
+关于POSTGRESQL： PostgreSQL是业内领先的开源数据库系统，它的开发和支持来自于一个由数千名用户组成的全球社区和全球几十家公司或组织，PostgreSQL项目有20年以上的历史，起源于加利福利亚的伯克利大学，经历了无数次开发升级。PostgreSQL的专业特性不仅包含最高级的商业数据库系统的功能，还在高级数据库特性、扩展性、安全性和稳定性方面超越了它们，更多详情可浏览：http://www.postgresql.org 网站。
+</p>
+
+<h2>新版本发布说明（扩充部分）</h2>
+
+<a name="additional_features"></a><h2>特性列表</h2>
+<p>
+9.0版本增加了数量空前多的新特性，显示了去年以来社区的加速成长：
+</p>
+<h3>
+数据复制和可伸缩性
+</h3>
+<ul>
+<li>即时备份</li>
+<li>流式复制</li>
+</ul>
+<h3>
+数据库管理和安全性
+</h3>
+<ul>
+<li>集成自动升级功能(pg_upgrade)</li>
+<li>RADIUS授权</li>
+<li>密码强度检查(passwordcheck)</li>
+<li>更方便的数据库权限管理指令(GRANT ON ALL and DEFAULT PERMISSIONS)</li>
+</ul>
+
+<h3>
+数据库设计和SQL
+</h3>
+<ul>
+<li>可延迟的唯一键约束</li>
+<li>条件式触发器</li>
+<li>列级触发器</li>
+<li>聚合排序</li>
+<li>新的窗口功能(ROW PRECEDING and FOLLOWING)</li>
+</ul>
+
+<h3>
+存储过程
+</h3>
+<ul>
+<li>匿名存储过程代码块功能(DO 语句)</li>
+<li>改进的Perl 和Python存储过程 (包括对Python 3的支持)</li>
+<li>可命名参数的函数调用</li>
+</ul>
+
+<h3>
+性能和高级特性
+</h3>
+<ul>
+<li>改进的事件信息通知机制(LISTEN/NOTIFY)</li>
+<li>64位Windows平台支持</li>
+<li>对ORM生成的查询优化(JOIN removal)</li>
+<li>非标量数据的唯一键(Exclusion约束)</li>
+<li>对Key-value（键-值）类数据的扩充支持(HStore)</li>
+<li>JSON 和XML 格式的查询计划展示</li>
+</ul>
+
+<h3>
+关于这些特性的更多信息
+</h3>
+<p>
+有关这些特性的更多解释，请浏览下列资源：
+</p>
+<ul>
+<li><a href="/docs/9.0/static/release-9-0.html">发布声明</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What's_new_in_PostgreSQL_9.0">9.0版本的新特性</a></li>
+<li><a href="/about/featurematrix">特性矩阵</a></li>
+</ul>
+<a name="download"></a><h2>下载</h2>
+<ul>
+<li><a href="/download">下载页面</a> 包括安装程序和一些工具软件</li>
+<li><a href="/ftp/source/v9.0.0">原代码</a></li>
+<li><a href="/download/windows">Windows平台的安装程序</a></li>
+<li><a href="/download/linux">Linux平台的安装程序</a> 和一些软件包的版本库</li>
+<li><a href="/download/solaris">Solaris平台安装程序</a></li>
+<li><a href="/download/macosx">Mac OSX平台安装程序</a></li>
+<li><a href="/download/freebsd">FreeBSD平台安装程序</a></li>
+<li><a href="http://www.pgfoundry.org">可选增值模块或附件</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">相关商业软件</a></li>
+</ul>
+
+<a name="docs"></a><h2>文档</h2>
+
+<p>HTML文档和man手册页会和PostgreSQL同步安装，用户也可以免费地通过在线方式对<a href="/docs/9.0/interactive">在线文档</a>进行浏览、搜索、回复意见。</p>
+
+<a name="license"></a><h2>版权声明</h2>
+<p>
+PostgreSQL 使用<a href="/about/licence">PostgreSQL版权</a>，它是类似BSD的版权，只要求对有版权的源代码保留其版权和授权的信息即可。
+由于这个经 <a href="http://www.opensource.org/licenses/postgresql">OSI认证的版权</a>不限制PostgreSQL在商业环境和有版权的应用程序中使用，因此被公认为是非常有灵活性和对商业应用是友好的。加上有多个公司的支持和源代码归属公共所有，我们的版权使得PostgreSQL在那些希望在自己的产品里嵌入数据库的厂商中很流行，因为他们不用担心费用、嵌入软件的版权锁以及版权条款的改变。
+</p>
+
+<a name="contact"></a><h2>联系方式</h2>
+
+<p>相关网站</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL的网站</a></li>
+<li><a href="http://www.pgsqldb.org">PostgreSQL中文社区网站</a></li>
+</ul>
+
+
+<p>联系人：<br />
+何伟平<br />
+北京<br />
+<a href="mailto:laserhenry@gmail.com">laserhenry@gmail.com</a><br />
+<br />
+周到京<br />
+合肥<br />
+086013515513326<br />
+<a href="mailto:cn@postgresql.org">cn@postgresql.org</a>
+</p>
+
+<p>要查询特定地区的联系人，可浏览<a href="/about/press/contact">我们的全球联系人员列表。</a></p>
+
+
+
+<a name="quoted_companies"></a><h2>相关商业公司信息</h2>
+
+<p>
+PostgreSQL 9.0版本引起了全球商业数据库用户的极大兴趣，下列文字显示了英国、加拿大、西班牙、瑞士和巴西等国用户对他们关注的新特性的热情。可以联系我们安排和他们任何一个公司进行采访。（仅限括号中所列的语言）
+</p>
+
+<h3>2ndQuadrant公司</h3>
+<p>
+“内置有数据复制功能和对处于即进备份状态的服务器查询的功能是用户多年以来一直提出要增加的功能”，2ndQuadrant公司的CTO，Simon Riggs说道，他也是即时备份功能的主要代码贡献人员，"有效、少等待的流式复制技术可以更好地保护你的数据，同时，即时备份也大大减少了公司的数据成本，对一些商业化的数据库来说，这项能力一般是附加模块，需要用户额外支付几千美元”。
+</p>
+<p>
+<i>关于2ndQuadrant公司:</i> <a href="http://www.2ndquadrant.com">2ndQuadrant公司</a> 是全球专业的PostgreSQL咨询和服务提供商，它的客户已遍及15个国家。该公司的开发人员也向最近六个PostgreSQL的大版本升级贡献了主要特性的代码。联系方式：<a href="mailto:info@2ndQuadrant.com">info@2ndQuadrant.com</a> +44 8707667756 (英语、意大利语和法语)
+</p>
+
+<h3>Afilias公司</h3>
+<p>
+“作为世界上最大的核心Internet基础设施供应商之一，Afilias公司很高兴地看到PostgreSQL 9.0增加了自动升级功能，这样我们就可以将我们的1600的域名数据库无中断地升级至新版本，另外，我们也期待使用即时备份和流式复制功能，它将能达到目前我们已使用Slony所实现的功能。这些高级功能也显示了为何关键业务应用可以依赖强大、灵活和健壮的PostgreSQL”， Afilias公司的CTO，Ram Mohan先生说道。
+</p>
+<p>
+<i>关于Afilias公司</i>: <a href="http://www.afilias.info">Afilias公司</a> 是全球Internet基础设施服务供应商。Afilias公司可靠、安全、可伸缩以及在全球范围内可提供的技术服务，支持了其在互联网域名注册、DNS管理、RFID服务和供应链市场的搜索服务等方面的业务，更多关于Afilias公司的信息请访问<a href="http://www.afilias.info">我们的网站</a> 或联系 <a href="mailto:hread@afilias.info">Heather Read</a> (仅英语)
+</p>
+
+<h3>Openbravo公司</h3>
+<p>
+“Openbravo公司一直是PostgreSQL的忠实用户，我们在我们的云应用里嵌入了PostgreSQL，我们在我们的Ubuntu程序里也依赖PostgreSQL。虽然我们的产品支持多数据库，但93%的Openbravo公司交付的系统是基于PostgreSQL。每一个新的PostgreSQL版本的发布总是提高了可靠性和性能，我们期待9.0版本持续保持这个传统。我们对PostgreSQL的新特性很兴奋，特别是看到可延迟的唯一键约束功能，这对我们的客户将提高更新和升级的速度。新的内置的基于日志的复制功能也会在冗余和高可用性方面吸引更多用户。特别地是我们所有的开发人员都期待新的VACUUM FULL指令。我们已经做了一些基于PostgreSQL9.0版本初步的测试，我们还没有发现任何严重的问题。当然，我们发现了一些小的不兼容性，它们的影响倒不大。Openbravo公司一旦等PostgreSQL9.0正式版本发布就会支持新的版本，并且只要PostgreSQL9.0支持主要的Linux发布版本，我们就将它作为我们以后交付系统的缺省数据库软件”，OpenBravo公司的CTO，Paolo Juvara说道。
+</p>
+<p>
+<i>关于Openbravo</i>: <a href="http://www.openbravo.com">Openbravo公司</a>是屡获大奖的Openbravo ERP软件的开发商，这是一个适用于中小企业的基于WEB的开源商业ERP软件，-- 它是业内第一个商业软件真正可替换的软件。公司的ERP和Pos解决方案是市场上最流行的方案，已有150万次的下载，超过50个国家的用户在使用。联系方式： <a href="mailto:media@openbravo.com">Carme Zaragoza</a> +34 932725947 (西班牙语、英语)
+</p>
+
+<h3>micro systems公司</h3>
+<p>
+瑞士Micro系统公司的创始人Marc Balmer先生对重大改进后的LISTEN/NOTIFY的事件信息处理机制感兴趣，“新的数据处理方式在异步通知方面将对我们的远程数据显示程序提供更强的支持，如在动物园和博物馆的条码扫描、票务、和销售终端”。
+</p>
+<p>
+<i>关于 micro systems</i>: <a href="http://www.msys.ch">micro systems公司</a> 是瑞士致力于专业开源产品服务的咨询和服务商，如BSD Unix软件和PostgreSQL的商业支持。micro systems公司为客户带来最好的开源软件，并反馈给开源社区。联系方式：<a href="mailto:vera@msys.ch">Vera Hardmeier</a>, +41 61 383 50 10 (德国、英语)
+</p>
+
+<h3>CAIXA 银行</h3>
+<p>
+“我们是CAIXA银行，我们在关键的财务环境下使用PostgreSQL，因为它已完全具备了支持我们业务操作的水平”，巴西CAIXA银行的IT副总裁，Clarice Coppetti说道，“新版本的PostgreSQL显示出它满足我们商务需要的能力”。
+</p>
+<p>
+<i>关于CAIXA银行</i>: <a href="http://www.caixa.gov.br/">CAIXA</a> 银行是联邦政府公共政策（发挥作用）的主导因素，它与巴西数百万人员的日常生活紧密相关。该机构是100%公共的，它不仅服务于银行客户， 而且通过彩票、城市基础设施投资、社会福利以及失业救济等方式面向整个巴西民众，通过这些方式，CAIXA在2009收入达到1500亿巴西元，约占巴西GDP的6%，通过还在房地产、 基础卫生领域、服务等行业的多元化发展，CAIXA对城市发展、社会公平、提高普通民众尤其是低收入人群的生活等方面发挥了一个重要的角色。<a href="http://www.caixa.gov.br/">CAIXA网站</a> (仅葡萄牙语)
+</p>
+
+<a name="companies"></a><h2>企业支持</h2>
+
+<p>PostgreSQL获得了一大批公司的支持，他们资助开发人员，提供网上资源以及给予了资金上的支持。一些较大的且长期支持的公司名单列在我们的 <a href="/about/sponsors">开发支持页面</a></p>
+
+<p>还有<a href="/support/professional_support">大量的公司</a>提供从独立顾问到跨国公司的 PostgreSQL 支持。</p>
+
+<p><a href="/about/donate">各种捐助</a> 将被很乐于接受。</p>
+
+
+
+{%endblock%}

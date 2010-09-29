@@ -1,0 +1,202 @@
+{%extends "base/page.html"%}
+{%block title%}<h1>Kit de Imprensa do PostgreSQL 9.0</h1>{%endblock%}
+{%block contents%}
+
+
+
+<h2>Índice</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Nota de Imprensa Original</a><br />
+ &nbsp; <a href="#capacidades_adicionais">Lista das novas funcionalidades</a><br />
+ &nbsp; <a href="#download">Onde descarregar</a><br />
+ &nbsp; <a href="#docs">Documentação</a><br />
+ &nbsp; <a href="#license">Licença</a><br />
+ &nbsp; <a href="#contact">Contactos</a><br />
+ &nbsp; <a href="#quoted_companies">Textos na íntegra das citações e informações das respectivas empresas</a><br />
+ &nbsp; <a href="#companies">Apoio ao PostgreSQL por parte de empresas</a><br />
+</p>
+
+<a name="original_release"></a><h2>Nota de Imprensa Original</h2>
+<p>
+10 de SETEMBRO de 2010: O Grupo de Desenvolvimento Global do PostgreSQL anuncia a chegada do PostgreSQL 9.0, a última versão da base de dados relacional open source mais avançada do mundo. Esta edição maior do programa traz avanços nos quesitos da segurança, do apoio a aplicações, da monitorização, do desempenho e do armazenamento de dados de cariz pouco usual e mais específico. Os utilizadores estão particularmente ansiosos para conhecer as novas valências do PostgreSQL 9.0, ou sejam, replicação em fluxo e <i>hot standby</i> - que irão acelerar a adopção do PostgreSQL em ambientes de alojamento cloud e aplicações escaláveis.
+</p><p>
+"A capacidade de replicação própria, construída dentro da versão 9.0, e a capacidade de consultar bases de dados em <i>hot standby</i> têm sido as mais solicitadas pelos utilizadores do PostgreSQL ao longo dos anos," disse Simon Riggs, CTO da empresa 2ndQuadrant e o leader do grupo que trabalhou e contribuiu para o <i>hot standby</i>. "A replicação eficiente, em streaming de baixa latência, protege melhor os dados, enquanto o <i>hot standby</i> reduz significativamente o custo total de posse. Em produtos proprietários esta capacidade não vem incluída - tem que ser comprada separadamente - e custa milhares de dólares."
+</p><p>
+O PostgreSQL 9.0 inclui mais de uma dúzia de outros avanços de primeira grandeza que irão melhorar o trabalho em diferentes áreas, seja da concepção de aplicações em bases de dados, seja do desempenho, incluindo: apoio 64-bit em Windows, gatilhos condicionais e por coluna, capacidade de fazer upgrades directos das versões 8.3 e 8.4, restrições de unicidade postergáveis, e mensagens assíncronas de alto desempenho. Para ver a lista completa das novas capacidades do programa, consulte a nossa página de informação sobre a versão 9.0.
+</p><p>
+"Na qualidade de um dos maiores operadores de infra-estruturas de registos de domínio da Internet em todo o mundo, a Afilias regozija-se com o facto de agora o PostgreSQL ser capaz de fazer actualizações in-loco integradas (upgrades directos) que nos permitem fazer upgrades para novas versões do sistema de bases de dados com um mínimo de disrupções para a nossa base de dados de 16 milhões de nomes de domínios", disse o CTO da Afilias, Ram Mohan.
+</p><p>
+"Estamos muito ansiosos por experimentar as novas valências do programa... em particular as Restrições de Unicidade Postergáveis (Deferrable Unique Constraints), como uma oportunidade para acelerar actualizações e upgrades para os nossos clientes," disse Paolo Juvara, CTO da OpenBravo.
+</p><p>
+Marc Balmer, fundador da Micro Systems, Suiça, está mais interessado nas Mensagens Assíncronas Melhoradas (LISTEN/NOTIFY): "A nova opção de Envio de Dados em Notificações Assíncronas vai catapultar a próxima geração dos nossos programas de apresentação remota de dados."
+</p><p>
+Graças às contribuições de developers e empresas à escala global, tais como NTT Open Source, EnterpriseDB, 2ndQuadrant, Red Hat e muitas outras, a aderência de mais utilizadores e a dinâmica de desenvolvimento do programa são hoje as maiores de sempre.
+</p><p>
+"Aqui na CAIXA ECONÓMICA FEDERAL, usamos o PostgreSQL em ambientes financeiros de importância crítica porque ele tem a qualidade para suportar as nossas operações," disse Clarice Coppetti, Vice Presidente para a área IT, CAIXA ECONÓMICA FEDERAL, Bank, Brasil. "A nova versão demonstra que o PostgreSQL está a melhorar rapidamente para continuar a ser capaz de atender às necessidades dos nossos negócios."
+</p><p>
+Sobre o PostgreSQL: PostgreSQL é o sistema de base de dados open source líder mundial, com uma comunidade global de milhares de utilizadores e <i>developers</i> e dezenas de empresas e organizações. O Projecto PostgreSQL tem mais de 20 anos de engenharia, com início na Universidade da California, Berkeley, e um ritmo de desenvolvimeto sem paralelo hoje. O conjunto maduro de caracterísiticas do PostgreSQL não só iguala o dos sistemas de bases de dados proprietários do topo, com também os ultrapassa no capítulo das valências avançadas, extensibilidade, segurança e estabilidade.  Descubra mais acerca do PostgreSQL e torne-se membro da nossa comunidade em www.postgresql.org.
+</p>
+
+<h2>Informação Extensiva da nova Versão</h2>
+
+<a name="capacidades_adicionais"></a><h2>Lista das novas funcionalidades</h2>
+<p>
+A versão 9.0 traz uma quantidade sem precedentes de novas funcionalidades de primeira grandeza, demonstrando o ritmo acelerado de crescimento da nossa comunidade de contributors ao longo do último ano:
+</p>
+<h3>
+Replicação e Escalabildade
+</h3>
+<ul>
+<li>Hot Standby</li>
+<li>Replicação em Fluxo (Streaming Replication)</li>
+</ul>
+
+<h3>
+Administração e Segurança
+</h3>
+<ul>
+<li>Atualização in Loco Integrada (pg_upgrade)</li>
+<li>Autenticação do tipo RADIUS</li>
+<li>Verificação da Força das Passwords (passwordcheck)</li>
+<li>Comandos para a gestão mais facilitada da base de dados das permissões (GRANT ON ALL and DEFAULT PERMISSIONS)</li>
+</ul>
+
+<h3>
+Concepção das bases de dados e SQL
+</h3>
+<ul>
+<li>Restrições de Unicidade Postergáveis</li>
+<li>Gatilhos Condicionais</li>
+<li>Gatilhos de Colunas</li>
+<li>Ordenamento em Agregados</li>
+<li>Novas Funções do tipo Windowing (RANGE PRECEEDING e FOLLOWING)</li>
+</ul>
+
+<h3>
+Stored Procedures (Procedimentos Armazenados)
+</h3>
+<ul>
+<li>Blocos de código do Procedimento Anónimo (DO statement)</li>
+<li>Procedimentos Armazenados Pearl e Python melhorados (incluindo apoio para Python 3)</li>
+<li>Chamadas de parâmetro com nome</li>
+</ul>
+
+<h3>
+Funcionalidades Avançadas e de Desempenho
+</h3>
+<ul>
+<li>Event Messaging (LISTEN/NOTIFY) melhorado</li>
+<li>Apoio para 64-bit Windows</li>
+<li>Optimização de Consultas do tipo ORM (remoção de JOINs)</li>
+<li>Chaves dedicadas para dados do tipo Non-Scalar (Exclusion Constraints)</li>
+<li>Apoio ampliado para dados do tipo Key-value (HStore)</li>
+<li>Planos Explain JSON e XML</li>
+</ul>
+
+<h3>
+Mais informação acerca destas funcionalidades
+</h3>
+<p>
+Para uma explicação detalhada destas funcionalidades e outras, por favor consulte os seguintes recursos online:
+</p>
+<ul>
+<li><a href="/docs/9.0/static/release-9-0.html">Release Notes</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What's_new_in_PostgreSQL_9.0">What's New In 9.0</a></li>
+<li><a href="/about/featurematrix">Feature matrix (somente em Inglês)</a></li>
+</ul>
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Downloads page</a> com links para installers e outras ferramentas.</li>
+<li><a href="/ftp/source/v9.0.0">Source Code</a></li>
+<li><a href="/download/windows">Windows Installers</a></li>
+<li><a href="/download/linux">Linux Installers</a> e repositório de pacotes de instalação</li>
+<li><a href="/download/solaris">Solaris Packages</a></li>
+<li><a href="/download/macosx">Mac OSX Installers</a></li>
+<li><a href="/download/freebsd">FreeBSD Ports</a></li>
+<li><a href="http://www.pgfoundry.org">Componentes Opcionais e Add-Ons</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">Software relacionado e Comercial</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentação</h2>
+
+<p>A documentação HTML e as man pages são instaladas com o PostgreSQL, mas sinta-se livre para navegar, pesquisar e comentar a nossa extensa e interactiva <a href="/docs/9.0/interactive">documentação online</a>.</p>
+
+<a name="license"></a><h2>Licença</h2>
+<p>
+O PostgreSQL usa a <a href="/about/licence">PostgreSQL License</a>, uma licença semelhante à licença BSD que apenas requer que o código fonte licenciado mantenha o seu copyright e respectiva informação do licenciamento. Esta <a href="http://www.opensource.org/licenses/postgresql">licença certificada pela OSI</a> é largamente apreciada como sendo flexivel e favorável ao desenvolvimento de negócios, uma vez que não restringe o uso do PostgreSQL integrado com aplicações comerciais e proprietárias. E juntamente com a assistência técnica assegurada por muitas empresas e a posse pública do código, a nossa licença faz com que o PostgreSQL seja muito popular e querido junto dos vendedores que pretendam embutir uma base de dados dentro dos seus próprios produtos sem receios de taxas, dependência de vendedores (vendor lock-in) ou alterações dos termos das licenças.
+</p>
+
+<a name="contact"></a><h2>Contactos</h2>
+
+<p>Web Pages</p>
+<ul>
+<li><a href="http://www.postgresql.org">Sítio Internet do PostgreSQL</a></li>
+<li><a href="http://www.casadimagens.com">PostgreSQL - Contacto Regional em Cabo Verde</a></li>
+</ul>
+
+<p>Referências para a Media (Press Inquiries)</p>
+<p>Região: CABO VERDE<br />
+Nome do Contacto Regional: CIPRIANO FERNANDES<br />
+<a href="mailto:RC@POSTGRESQL.ORG">Endereço de Email</a><br />
+Phones: +238 262 95 44; +238 981 43 63 (mobile)</p>
+
+<p>Para contactos noutras regiões, consulte a <a href="/about/press/contact">nossa lista internacional de contactos.</a></p>
+
+<a name="quoted_companies"></a><h2>Textos na íntegra das citações acima referidas e informações acerca das respectivas empresas</h2>
+
+<p>
+O PostgreSQL 9.0 tem atraído um grande interesse dos utilizadores de bases de dados de apoio a negócios em todo o mundo. A título de exemplo, as seguintes citações mostram o entusiasmo de empresas da Inglaterra, Canadá, Espanha, Suiça e Brasil, para com as novas funcionalidades do versão 9.0. Contacte-nos para acertar entrevistas com qualquer dessas companhias. (Os contactos apresentados a seguir respondem apenas nas línguas indicadas).
+</p>
+
+<h3>2ndQuadrant</h3>
+<p>
+"A capacidade de replicação própria, construída dentro da versão 9.0, e a capacidade de consultar bases de dados em <i>hot standby</i> têm sido as mais solicitadas pelos utilizadores do PostgreSQL ao longo dos anos," disse Simon Riggs, CTO da empresa 2ndQuadrant e principal responsável pela implementação do Hot Standby. "A replicação em fluxo eficiente e com baixa latência protege melhor os dados, enquanto o <i>hot standby</i> reduz significativamente o custo total de posse. Em produtos proprietários esta capacidade não vem incluída (tendo que ser comprada separadamente) e custa milhares de dólares."
+</p>
+<p>
+<i>Sobre a 2ndQuadrant:</i> <a href="http://www.2ndquadrant.com">2ndQuadrant</a> é uma empresa global de consultoria e a assistência técnica, especializada em serviços de bases de dados baseados no PostgreSQL, com clientes em mais de 15 países. Os consultores desta empresa têm contribuído com funcionalidades de primeira grandeza para cada uma das últimas seis versões do PostgreSQL. Contacto: <a href="mailto:info@2ndQuadrant.com">info@2ndQuadrant.com</a> +44 8707667756 (Inglês, Italiano, Francês).
+</p>
+
+<h3>Afilias</h3>
+<p>
+"Na qualidade de um dos maiores operadores de infra-estruturas de registos de domínio da Internet em todo o mundo, a Afilias regozija-se com o facto de agora o PostgreSQL ser capaz de fazer actualizações in-loco integradas (Upgrade-in-Place) que nos permitem fazer actualizações para novas versões do sistema de bases de dados com um mínimo de disrupções para a nossa base de dados de 16 milhões de nomes de domínios. Adicionalmente, ansiamos começar a usar as novas funcionalidades Hot Standby e Replicação em Fluxo (Streaming Replication), que complementam a robusta replicação já disponibilizada pelo Slony. Estas funcionalidades que continuam a ser acrescentadas ao PostgreSQL reforçam as razões por que as tarefas com uma tolerância mínima contra falhas (mission-critical technology tasks) podem continuar a depender da potência, flexibilidade e robustez do PostgreSQL," disse o CTO da Afilias, Ram Mohan.
+</p>
+<p>
+<i>Sobre a Afilias</i>: <a href="http://www.afilias.info">Afilias</a> é um provedor global de serviços de infra-estruturas da Internet que ligam as pessoas aos seus dados. A sua tecnologia confiável, segura, escalável e disponibilizada globalmente, apoia uma vasta gama de aplicações, incluindo serviços de registo de domínios, Gestão de DNS e serviços no mercado RFID e no cadeia do mercado de fornecimentos, por intermédio dos seu departamento Afilias Discovery Services. Para mais informações sobre Afilias por favor visite <a href="http://www.afilias.info">o nosso sítio Internet</a> ou contacte <a href="mailto:hread@afilias.info">Heather Read</a> (Somente em inglês).
+</p>
+
+<h3>Openbravo</h3>
+<p>
+"Openbravo tem sido um utilizador entusiástico do PostgreSQL. Embutimos o PostgreSQL no nosso sistema Cloud Appliances e dependemos do PostgreSQL nos nossos pacotes para o Ubuntu. Embora o produto suporte múltiplos sistemas de bases de dados, 93% das colocações da Openbravo são baseadas no PostgreSQL. Cada nova versão do PostgreSQL tem significado confiabilidade e desempenho aumentados e esperamos que a versão 9.0 continue nessa tradição. Aguardamos com  ansiedade a chegada das novas funcionalidades do PostgreSQL. De um modo especial, esperamos as <i>Restrições de Unicidade Postergáveis</i> como uma oportunidade para acelerar actualizações e upgrades para os nossos clientes. O novo sistema de replicação interno, binário e baseado em logs, irá certamente satisfazer a nossa larga base de utilizadores à procura de redundâncias e alta disponibilidade. Finalmente, toda a nossa equipa de desenvolvimento de software espera ansiosamente pelo novo comando VACUUM FULL. Já realizámos alguns testes preliminares baseados na versão 9.0 e não encontrámos qualquer problema de maior. Apenas descobrimos algumas incompatibilidades mas pensamos que a sua resolução será muito fácil. Openbravo tenciona começar a apoiar o PostgreSQL 9.0 assim que a versão de produção for disponibilizada e começar a usá-lo como a base pre-definida para as nossas colocações no mercado logo que seja suportada pelas distribuições Linux mais importantes," Paolo Juvara, CTO, OpenBravo.
+</p>
+<p>
+<i>Sobre a Openbravo</i>: <a href="http://www.openbravo.com">Openbravo</a> é o aclamado e mui premiado <i>developer</i> do Openbravo ERP, uma solução ERP comercial opensource, baseada na Net, para pequenas e médias empresas - a primeira solução da indústria em alternativa real ao software proprietário. As soluções Enterprise Resource Planning (ERP) e Point of Sale (PoS), as mais populares nos seus respectivos mercados, foram já descarregadas mais de um mihão e meio de vezes para mais de 50 países. Contacto: <a href="mailto:media@openbravo.com">Carme Zaragoza</a> +34 932725947 (Espanhol, Inglês)
+</p>
+
+<h3>micro systems</h3>
+<p>
+Marc Balmer, fundador da empresa founder of <i>micro systems</i> na Suíça, está mais interessado nas novas funcionalidades LISTEN/NOTIFY: "A nova opção de Envio de Dados em Notificações Asíncronas (LISTEN/NOTIFY), vai catapultar a próxima geração dos nossos programas de apresentação remota de dados para o <i>arcapos</i>, a nossa solução para emissão de bilhetes e PoS a retalho para jardins zoológicos e museus."
+</p>
+<p>
+<i>Sobre a micro systems</i>: <a href="http://www.msys.ch">micro systems</a> é uma empresa suiça de consultoria e de desenvolvimento focalizada em produtos open source maduros tais como o BSD Unix e PostgreSQL em ambientes comerciais. A <i>micro systems</i> leva o melhor do open source aos seus clientes e contribui de volta às comunidades open source. Contacto: <a href="mailto:vera@msys.ch">Vera Hardmeier</a>, +41 61 383 50 10 (Alemão, Inglês)
+</p>
+
+<h3>Banco CAIXA ECONÓMICA FEDERAL</h3>
+<p>
+"Aqui na CAIXA ECONÓMICA FEDERAL, usamos o PostgreSQL em ambientes financeiros de importância crítica porque ele tem a qualidade necessária para suportar as nossas operações," disse Clarice Coppetti, Vice Presidente para a área IT, Banco CAIXA, Brasil. "A nova versão demonstra que o PostgreSQL está a melhorar rapidamente para continuar a ser capaz de atender às necessidades dos nossos negócios."
+</p>
+<p>
+<i>Sobre a CAIXA</i>: <a href="http://www.caixa.gov.br/">A CAIXA</a> é a principal agência do Governo Federal do Brasil para a implementação de políticas públicas e está presente na vida de milhões de brasileiros. A instituição é 100% pública e serve não somente os seus clientes bancários mas também toda a população brasileira através das Lotarias, investimentos de infra-estruturação urbana, e programas de pagamento de fundos e pensões sociais, FGTS, PIS e subsídios de desemprego. Através de todas estes eixos de intervenção a CAIXA repassou, somente em 2009, mais de R$ 150 biliões de reais à economia, um montante que representa cerca de 6% do GDP. Trabalhando nos sectores de habitação, redes sanitárias básicas, infraestruturas e serviços, a CAIXA desempenha um papel primordial na promoção do desenvolvimento urbano e da justiça social no país, contribuindo para a melhoria da qualidade de vida da população, particularmente a de baixa renda. <a href="http://www.caixa.gov.br/">Sítio Internet da CAIXA</a> (em Português, Espanhol e Inglês).
+</p>
+
+<a name="companies"></a><h2>Apoio ao PostgreSQL por parte de empresas</h2>
+
+<p>O PostgreSQL goza do apoio de numerosas empresas, que patrocinam <i>developers</i>, providenciam recursos de alojamento e dão apoio financeiro.  Os maiores sponsors de longa data estão listados na nossa <a href="/about/sponsors">página de sponsors de desenvolvimento.</a></p>
+
+<p>Existe igualmente uma grande comunidade de <a href="/support/professional_support">empresas que oferecem Assistência Técnica ao PostgreSQL</a>, desde consultores individuais a empresas multinacionais.</p>
+
+<p><a href="/about/donate">Donativos</a> são agradecidamente aceites.</p>
+
+
+
+{%endblock%}

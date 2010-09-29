@@ -1,0 +1,201 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.0 Press Kit{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.0 Press Kit</h1>
+
+<h2>Conținut</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Comunicatul de presă</a><br />
+ &nbsp; <a href="#additional_features">Lista facilităților</a><br />
+ &nbsp; <a href="#download">Download</a><br />
+ &nbsp; <a href="#docs">Documentație</a><br />
+ &nbsp; <a href="#license">Licențiere</a><br />
+ &nbsp; <a href="#contact">Date de contact</a><br />
+ &nbsp; <a href="#quoted_companies">Citate și informații despre companiile citate</a><br />
+ &nbsp; <a href="#companies">Suport tehnic de tip corporate</a><br />
+</p>
+
+<a name="original_release"></a><h2>Comunicatul de presă</h2>
+<p>
+20 SEPTEMBRIE 2010: PostgreSQL Global Development Group anunţă lansarea oficială a PostgreSQL 9.0, recunoscutul sistem open-source de gestiune a bazelor de date relaţionale. Noua versiune aduce progrese majore în domeniile: securitate, suport, monitorizare, performanţă, şi stocarea unor noi tipuri de date specifice. Numeroşi utilizatori şi-au exprimat entuziasmul creat de introducerea facilităţilor de replicare şi de hot standby, care vor accelera adoptarea PostgreSQL 9.0 pentru aplicaţiile de tip cloud hosting şi pentru aplicaţiile care necesită scalabilitate avansată.
+</p><p>
+"Includerea unei soluţii de replicare şi posibilitatea de a executa cereri pe un server hot standby au fost timp de mulţi ani facilităţile cele mai cerute de către utilizatori," a zis Simon Riggs, CTO al 2ndQuadrant şi contribuitor principal la implementarea hot standby. "Replicarea de tip streaming, eficientă şi cu latenţă scăzută, protejează datele mai bine, în timp ce hot standby reduce semnificativ TCO (total cost of ownership). În cazul produselor comerciale, aceste facilităţi costă de obicei mii de dolari."
+</p><p>
+PostgreSQL 9.0 include o serie de imbunătăţiri majore, fiind atins fiecare aspect al conceperii şi performanţelor aplicaţiilor bazate pe baze de date. Acestea includ: suport pentru Windows pe 64 biţi, triggere condiţionale, triggere la nivel de coloane, upgrade "in-place" de la 8.3 la 8.4, deferrable unique constraints, şi un sistem de mesaje de înaltă performanţă. Lista completă a noilor facilităţi poate fi găsită în release notes.
+</p><p>
+"Fiind unul dintre cei mai mari operatori de înregistrare a domeniilor Internet şi alte servicii conexe, Afilias apreciază că introducerea posibilităţii de in-place upgrade în PostgreSQL 9.0 va permite upgrade-ul la versiunile următoare cu un impact minim asupra bazei noastre de date care conţine informaţiile despre numele de domenii"  a declarat Ram Mohan, CTO la Afilias.
+</p><p>
+"Suntem foarte încîntaţi de noile facilităţi introduse în noul PostgreSQL. În particular, considerăm că deferrable unique constraints ne va permite să rapidizăm update-urile şi upgrade-urile," a spus Paolo Juvara, CTO la OpenBravo.
+</p><p>
+Marc Balmer, fondator al companiei elveţiene Micro Systems , este interesat în primul rînd de îmbunătăţirile aduse sistemului de mesaje bazat pe LISTEN/NOTIFY : "Opţiunea data payload pentru notificările asincrone va asigura baza pentru noua generaţie a aplicaţiilor noastre de vizualizare a datelor de la distanţă."
+</p><p>
+Adoptarea PostgreSQL şi accelerarea dezvoltării sunt mai puternice ca oricînd datorită contribuţiilor venite din partea a numeroşi dezvoltatori şi companii din toată lumea printre care se numără NTT Open Source, EnterpriseDB, 2ndQuadrant, Red Hat şi multe altele.
+</p><p>
+"La CAIXA Bank folosim PostgreSQL într-un mediu financiar de tip mission-critical deoarece are toate calităţile necesare pentru a putea face faţă necesităţilor impuse de activitatea noastră," a declarat Clarice Coppetti, IT Vice President, CAIXA Bank, Brazilia. "Noua versiune arată ca PostgreSQL se dezvoltă rapid, corespunzînd pe deplin necesităţilor afacerii noastre."
+</p><p>
+Despre PostgreSQL: PostgreSQL este sistemul open-source de gestiune a bazelor de date de referinţă, avînd in spate o comunitate puternica de utilizatori, companii şi organizaţii din întreaga lume.  Proiectul PostgreSQL are peste 20 de ani, avînd orginea la University of California, Berkeley. PostgreSQL oferă un set de facilităţi matur care nu numai că este la nivelul sistemelor de baze comerciale de top, însa chiar exceleaza prin facilităţile avansate, extensibilitate, securitate şi stabilitate. Pentru a afla mai multe despre PostgreSQL puteţi accesa www.postgresql.org.
+</p>
+
+<h2>Informații suplimentare despre lansare</h2>
+
+<a name="additional_features"></a><h2>Lista facilităților</h2>
+<p>
+Versiunea 9.0 include un număr mare de noi facilități majore datorită efortului depus de contributori, al căror număr a crescut accelerat în ultimul an.
+</p>
+<h3>
+Replicare și Scalabilitate
+</h3>
+<ul>
+<li>Hot Standby</li>
+<li>Replicare Streaming</li>
+</ul>
+<h3>
+Administrare și Securitate
+</h3>
+<ul>
+<li>Upgrade-in-Place (pg_upgrade)</li>
+<li>Autentificare RADIUS</li>
+<li>Posibilitatea de a configura gradul de complexitate a parolelor (passwordcheck)</li>
+<li>Comenzi mai facile pentru gestionarea permisiunilor (GRANT ON ALL și DEFAULT PERMISSIONS)</li>
+</ul>
+
+<h3>
+Design-ul bazelor de date şi SQL
+</h3>
+<ul>
+<li>Deferrable Unique Constraints</li>
+<li>Triggere condiționate</li>
+<li>Posibilitatea de a defini triggere la nivel de coloane</li>
+<li>Ordonare pentru funcţiile de tip agregat</li>
+<li>Noi funcții în categoria Windowing (ROWS PRECEDING și FOLLOWING)</li>
+</ul>
+
+<h3>
+Proceduri Stocate
+</h3>
+<ul>
+<li>Blocuri anonime (instrucțiunea DO)</li>
+<li>Îmbunătățiri la procedurile stocate Perl și Python (inclusiv suport pentru Python 3)</li>
+<li>Named Parameter Calls</li>
+</ul>
+
+<h3>
+Performanță și Facilități Avansate
+</h3>
+<ul>
+<li>Sistem imbunatatit de mesagerie (LISTEN/NOTIFY)</li>
+<li>Suport pentru Windows 64-biți</li>
+<li>Optimizări pentru query-uri generate de ORM (JOIN removal)</li>
+<li>Chei unice pentru date ne-scalare (Exclusion Constraints)</li>
+<li>Suport extins pentru date de tip cheie-valoare (HStore)</li>
+<li>Planuri de execuție disponibile în formate noi (JSON și XML) </li>
+</ul>
+
+<h3>
+Înformații suplimentare despre facilităţile enumerate 
+</h3>
+<p>
+Pentru detalii despre facilităţile menţionate în secţiunea anterioară vă invităm să consultaţi următoarele surse de informaţii:
+</p>
+<ul>
+<li><a href="/docs/9.0/static/release-9-0.html">Release Notes</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What's_new_in_PostgreSQL_9.0">Ce aduce nou PostgreSQL 9.0</a></li>
+<li><a href="/about/featurematrix">Matricea facilităților (în engleză)</a></li>
+</ul>
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Pagina Downloads </a> conține link-uri către kiturile de instalare și alte unelte.</li>
+<li><a href="/ftp/source/v9.0.0">Codul sursă</a></li>
+<li><a href="/download/windows">Kit-ul de PostgreSQL pentru Windows</a></li>
+<li><a href="/download/linux">Kit-uri pentru diverse distribuții Linux </a> </li>
+<li><a href="/download/solaris">Pachete Solaris</a></li>
+<li><a href="/download/macosx">Lit-ul pentru Mac OSX</a></li>
+<li><a href="/download/freebsd">FreeBSD Ports</a></li>
+<li><a href="http://www.pgfoundry.org">Componente opționale</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">Related and Commercial Software</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentație</h2>
+
+<p>Documentația în format HTML si paginile man sunt instalate odată cu PostgreSQL. În plus, documentația este disponibilă și <a href="/docs/9.0/interactive">online</a>, cu posibilități de căutare și de adăugare de comentarii.</p>
+
+<a name="license"></a><h2>Licențiere</h2>
+<p>
+PostgreSQL utilizează <a href="/about/licence">licența PostgreSQL </a>, o licență derivată din cea BSD care impune doar ca sursele să păstreze copyright-ul și licențierea. Este o licență 
+<a href="http://www.opensource.org/licenses/postgresql">certificată OSI</a> , fiind apreciată pentru flexibilitatea și avantajele pe care le oferă companiilor: nu restricționează în nici un fel utilizarea PostgreSQL pentru aplicații comerciale și/sau proprietare. Datorită suportului tehnic disponibil și a faptului că codul sursă este public, licența permite ca PostgreSQL să fie foarte popular printre comapniile care doresc să includă un motor de baze de date în produsele lor fără a avea griji cu costurile licențelor, dependența de furnizor sau modificarea unilaterală a clauzelor licenței. 
+</p>
+
+<a name="contact"></a><h2>Date de Contact</h2>
+
+<p>Web</p>
+<ul>
+<li><a href="http://www.postgresql.org">Site-ul oficial PostgreSQL</a></li>
+</ul>
+
+<p>Press Inquiries</p>
+<p>România<br />
+Adrian Maier<br />
+<a href="mailto:ro@postgresql.org">ro@postgresql.org</a><br />
+
+<p>Datele de contact corespunzătoare altor regiuni pot fi găsite în <a href="/about/press/contact">lista completă a datelor de contact.</a></p>
+
+<a name="quoted_companies"></a><h2>Citate şi informaţii despre companiile citate</h2>
+
+<p>
+PostgreSQL 9.0 a atras interes din partea multor utilizatori de baze de date din lume.  În continuare sunt prezentate citate care surprind entuziasmul produs de facilitățile noii versiuni de PostgreSQL unor companii din Anglia, Canada, Spania, Elveția și Brazilia.  Există posibilitatea de a contacta reprezentanții acestor companii (datele de contact sunt precizate pentru fiecare companie în parte, împreună cu lista de limbi în care se poate comunica cu persoanele respective).
+</p>
+
+<h3>2ndQuadrant</h3>
+<p>
+"Includerea unei soluții de replicare și posibilitatea de a executa cereri pe un server hot standby au fost timp de mulți ani facilităţile cele mai cerute de către utilizatori" a zis Simon Riggs, CTO al 2ndQuadrant şi contribuitor principal la implementarea hot standby. "Replicarea de tip streaming, eficientă și cu latență scăzută, protejează datele mai bine , în timp ce hot standby reduce semnificativ TCO (total cost of ownership). În cazul produselor comerciale, aceste facilități costă de obicei mii de dolari."
+</p>
+<p>
+<i>Despre 2ndQuadrant:</i> <a href="http://www.2ndquadrant.com">2ndQuadrant</a> este o compania multinatională specializată în servicii de consultanță și suport pentru baze PostgreSQL , avînd clienți în peste 15 țări. Consultanții companiei au contribuit la implementarea a multe facilități majore introduse în fiecare dintre ultimele 6 versiuni de PostgreSQL. Contact: <a href="mailto:info@2ndQuadrant.com">info@2ndQuadrant.com</a> +44 8707667756 (English, Italian, French)
+</p>
+
+<h3>Afilias</h3>
+<p>
+"Fiind unul dintre cei mai mari operatori de înregistrare domenii Internet și alte servicii conexe, Afilias apreciază că introducerea posibilitații de in-place upgrade în PostgreSQL 9.0 va permite upgrade-ul la versiunile următoare cu un impact minim asupra bazei de date care conțîne informațiile despre numele de domenii. În plus, de-abia așteptăm să folosim Hot Standby și Replicarea Streaming , care suplimentează posibilitățile de replicare deja existente bazate pe Slony. Acest tip de facilități reprezintă motive puternice pentru care tehnologiile de tip mission critical pot fi construite pe baza puterii, flexibilității și robusteței oferite de PostgreSQL," a declarat Ram Mohanm, CTO la Afilias .
+</p>
+<p>
+<i>Despre Afilias</i>: <a href="http://www.afilias.info">Afilias</a> este un furnizor global de servicii de infrastructură Internet . Tehnologiile fiabile, sigure, scalabile și disponibile global ale Afilias includ o gamă largă de aplicații care includ printre altele înregistrarea de domenii Internet, DNS, și servicii bazate pe RFID pentru lanțurile de magazine . Mai multe informații despre Afilias pot fi găsite pe <a href="http://www.afilias.info">www.afilias.info</a>. Contact: <a href="mailto:hread@afilias.info">Heather Read</a> (English Only)
+</p>
+
+<h3>Openbravo</h3>
+<p>
+"Openbravo este deja de mult timp un utilizator entuziast al PostgreSQL. Deși produsele noastre suportă mai multe tipuri de baze de date,  93% dintre instalările de Openbravo folosesc PostgreSQL. Fiecare versiune nouă de PostgreSQL a adus fiabilitate și performanțe sporite , astfel încât ne așteptăm ca 9.0 să continue această tradiție. Suntem foarte încântați de noile facilități introduse în noul PostgreSQL. În particular, considerăm că deferrable unique constraints ne va permite să rapidizăm update-urile și upgrade-urile . Noua replicare binară bazată pe log-uri va fi interesantă pentru clienții care au baze de date de mari dimensiuni, avînd nevoie de redundanță și disponibilitate sporită. În final, echipa de dezvoltare așteaptă noua comandă VACUUM FULL . Am realizat deja teste preliminare cu PostgreSQL 9.0 și nu am întâlnit probleme importante. Am găsit câteva incompatibilități minore însă considerăm ca vor fi rezolvate uşor. Openbravo intenționează să suporte PostgreSQL 9.0 imediat după lansare și să îl adopte ca opțiune implicită îmediat după ce este inclus în distribuțiile Linux majore." a declarat Paolo Juvara, CTO, OpenBravo.
+</p>
+<p>
+<i>Despre Openbravo</i>: <a href="http://www.openbravo.com">Openbravo</a> este dezvoltatorul principal al Openbravo ERP, o soluție ERP open source de mare succes -- prima alternativă reală la software-ul proprietar. Soluțiile Enterprise Resource Planning (ERP) și Point of Sale (PoS) ale companiei sunt cele mai populare în segmentul său de piață, fiind descărcate de peste 1.5 milioane de ori și folosite în peste 50 de țări. Contact: <a href="mailto:media@openbravo.com">Carme Zaragoza</a> +34 932725947 (Spanish, English)
+</p>
+
+<h3>micro systems</h3>
+<p>
+Marc Balmer, fondator al companiei 'micro systems' din Elveția, este interesat în primul rînd de îmbunătățirile aduse sistemului de mesaje bazat pe LISTEN/NOTIFY : "Opțiunea data payload pentru notificările asincrone va asigura baza pentru noua generaţie a aplicațiilor noastre de vizualizare a datelor de la distanță (arcapos), precum și pentru soluțiile noastre de ticketing și retail point of sale instalate în muzee și grădini zoologice."
+</p>
+<p>
+<i>Despre micro systems</i>: <a href="http://www.msys.ch">micro systems</a> este o companie elvețiană de consultanță și
+dezvoltare software care se concentrează pe construirea de soluții comerciale folosind la bază tehnologii open source mature cum sunt BSD Unix și PostgreSQL. micro systems aduce clienților săi tehnologii de top open source, iar în același timp contribuie în cadrul comunităților open source corespunzătoare. Contact: <a href="mailto:vera@msys.ch">Vera Hardmeier</a>, +41 61 383 50 10 (German, English)
+</p>
+
+<h3>CAIXA Bank</h3>
+<p>
+"La CAIXA Bank folosim PostgreSQL într-un mediu financiar de tip mission-critical deoarece are toate calitățile necesare pentru a putea face față necesităților impuse de activitatea noastră," a declarat Clarice Coppetti, IT Vice President, CAIXA Bank, Brazilia. "Noua versiune arată că PostgreSQL se dezvoltă rapid, corespunzînd pe deplin necesităților afacerii noastre."
+</p>
+<p>
+<i>Despre CAIXA Bank</i>: <a href="http://www.caixa.gov.br/">CAIXA</a> este principalul agent prin care guvernul federal își promoveaza politicile publice, fiind prezent în viețile a milioane de brazilieni. Instituția este publică în proporție de 100% și deservește nu numai clienții care au nevoie de servicii bancare, ci întreaga populație braziliană prin loterii, investiții în infrastructura urbană și programele de plăți sociale, FGTS, PIS și ajutorul de șomaj. Prin implicarea sa în aceste domenii diverse, CAIXA a redistribuit peste 150 miliarde de reali - o sumă ce reprezintă aproximativ 6% din produsul intern brut. Acționînd în domeniul imobiliar, în sistemul sanitar, în infrastructură și servicii, CAIXA joacă un rol primordial în dezvoltarea urbană și justiția socială a țării, contribuind la îmbunătățirea calitații vieții - în particular a segmentului de populație cu venituri scăzute. <a href="http://www.caixa.gov.br/">CAIXA home page</a> (Portuguese Only)
+</p>
+
+<a name="companies"></a><h2>Suport oferit de companii</h2>
+
+<p>PostgreSQL beneficiază de suport din partea a numeroase comapnii care sponsorizeză dezvoltatorii, oferă găzduire pentru servere, sau asigură suport financiar. Lista celor mai importanți sponsori pe termen lung poate fi consultată <a href="/about/sponsors">aici</a> .</p>
+
+<p>Există de asemenea o listă lungă de <a href="/support/professional_support">companii care oferă suport tehnic și servicii PostgreSQL </a>.</p>
+
+<p>Persoanele dispuse să acorde donații proiectului PostgreSQL pot găsi informații <a href="/about/donate">aici</a> .</p>
+
+
+
+{%endblock%}
