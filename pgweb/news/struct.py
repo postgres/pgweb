@@ -5,6 +5,9 @@ from models import NewsArticle
 def get_struct():
 	now = date.today()
 
+	# We intentionally don't put /about/newsarchive/ in the sitemap,
+	# since we don't care about getting it indexed.
+
 	for n in NewsArticle.objects.filter(approved=True):
 		yearsold = (now - n.date).days / 365
 		if yearsold > 4:
