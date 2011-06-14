@@ -39,7 +39,6 @@ class DocComment(PgModel, models.Model):
 	@property
 	def poster(self):
 		if self.submitter_id > 0:
-			print self.submitter
 			return "%s %s" % (self.submitter.first_name, self.submitter.last_name)
 		else:
 			return ''

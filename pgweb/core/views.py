@@ -143,7 +143,6 @@ def system_information(request):
 # List of all unapproved objects, for the special admin page
 @login_required
 def admin_pending(request):
-	print list(get_all_pending_moderations())
 	return render_to_response('core/admin_pending.html', {
 			'app_list': get_all_pending_moderations(),
 			})
