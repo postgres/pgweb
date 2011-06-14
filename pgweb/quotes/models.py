@@ -9,7 +9,9 @@ class Quote(models.Model, PgModel):
 	link = models.URLField(null=False, blank=False)
 	
 	send_notification = True
-	
+
+	purge_urls = ('about/quotesarchive/', '/$', )
+
 	def __unicode__(self):
 		if len(self.quote) > 75:
 			return "%s..." % self.quote[:75]

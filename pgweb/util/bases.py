@@ -1,16 +1,30 @@
 from email.mime.text import MIMEText
 
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.db import models
 from django.conf import settings
 
 from util.middleware import get_current_user
-from util.misc import sendmail
+from util.misc import sendmail, varnish_purge
 
 class PgModel(object):
 	send_notification = False
+	purge_urls = ()
 	notify_fields = None
 	modifying_user = None
+
+	def PostSaveHandler(self):
+		"""
+		If a set of URLs are available as purge_urls, then send commands
+		to the cache to purge those urls.
+		"""
+		if callable(self.purge_urls):
+			purgelist = self.purge_urls()
+		else:
+			if not self.purge_urls: return
+			purgelist = self.purge_urls
+		map(varnish_purge, purgelist)
+
 
 	def PreSaveHandler(self):
 		"""If send_notification is set to True, send a default formatted notification mail"""
@@ -131,6 +145,11 @@ def my_pre_save_handler(sender, **kwargs):
 	if isinstance(instance, PgModel):
 		instance.PreSaveHandler()
 
+def my_post_save_handler(sender, **kwargs):
+	instance = kwargs['instance']
+	if isinstance(instance, PgModel):
+		instance.PostSaveHandler()
+
 def register_basic_signal_handlers():
 	pre_save.connect(my_pre_save_handler)
-
+	post_save.connect(my_post_save_handler)

@@ -12,6 +12,13 @@ class NewsArticle(PgModel, models.Model):
 
 	send_notification = True
 	markdown_fields = ('content',)
+
+	def purge_urls(self):
+		yield '/about/news/%s/' % self.pk
+		yield '/about/newsarchive/'
+		yield 'news.rss'
+		# FIXME: when to expire the front page?
+		yield '/$'
 	
 	def __unicode__(self):
 		return "%s: %s" % (self.date, self.title)

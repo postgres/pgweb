@@ -108,6 +108,7 @@ urlpatterns = patterns('',
 
 	# Override some URLs in admin, to provide our own pages
 	(r'^admin/pending/$', 'pgweb.core.views.admin_pending'),
+	(r'^admin/purge/$', 'pgweb.core.views.admin_purge'),
     # Uncomment the next line to enable the admin:
     (r'^admin/(.*)', admin.site.root),
 

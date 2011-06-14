@@ -1,0 +1,24 @@
+{%extends "admin/base_site.html"%}
+
+{%block breadcrumbs%}
+<div class="breadcrumbs"><a href="/admin/">Home</a> &rsaquo; Pending</div>
+{%endblock%}
+
+{% block bodyclass %}change-list{% endblock %}
+{% block coltype %}flex{% endblock %}
+
+{%block content%}
+<h1>Purge URL from Varnish</h1>
+
+<div id="content-main">
+{%if purge_completed %}
+  <div class="module">
+    Purge completed: {{purge_completed}}
+  </div>
+{%endif%}
+ <form method="POST" action=".">
+URL (regex): <input type="text" name="url">
+  <input type="submit" value="Purge" />
+ </form>
+</div>
+{%endblock%}

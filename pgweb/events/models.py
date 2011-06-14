@@ -24,6 +24,13 @@ class Event(models.Model, PgModel):
 	send_notification = True
 	markdown_fields = ('details', )
 	
+	def purge_urls(self):
+		yield '/about/event/%s/' % self.pk
+		yield '/about/eventarchive/'
+		yield 'events.rss'
+		# FIXME: when to expire the front page?
+		yield '/$'
+
 	def __unicode__(self):
 		return "%s: %s" % (self.startdate, self.title)
 

@@ -36,6 +36,11 @@ class Version(models.Model):
 	class Meta:
 		ordering = ('-tree', )
 
+	def purge_urls(self):
+		yield '/$'
+		yield 'versions.rss'
+		# FIXME: probably a lot more?
+
 
 class Country(models.Model):
 	name = models.CharField(max_length=100, null=False, blank=False)

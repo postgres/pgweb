@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from pgweb.core.models import Organisation
 from pgweb.util.bases import PgModel
 
-class ProfessionalService(models.Model):
+class ProfessionalService(PgModel, models.Model):
 	submitter = models.ForeignKey(User, null=False, blank=False)
 	approved = models.BooleanField(null=False, blank=False, default=False)
 
@@ -28,6 +28,7 @@ class ProfessionalService(models.Model):
 	provides_hosting = models.BooleanField(null=False, default=False)
 	interfaces = models.CharField(max_length=512, null=True, blank=True)
 	
+	purge_urls = ('support/professional_', )
 	
 	send_notification = True
 	

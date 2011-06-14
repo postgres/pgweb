@@ -1,9 +1,9 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
-from django.db import connection
+from django.db import connection, transaction
 
 from datetime import date, datetime
 from os import uname
@@ -12,7 +12,7 @@ from pgweb.util.decorators import ssl_required, cache
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form, PgXmlHelper
 from pgweb.util.moderation import get_all_pending_moderations
-from pgweb.util.misc import get_client_ip, is_behind_cache
+from pgweb.util.misc import get_client_ip, is_behind_cache, varnish_purge
 from pgweb.util.sitestruct import get_all_pages_struct
 
 # models needed for the pieces on the frontpage
@@ -147,3 +147,18 @@ def admin_pending(request):
 	return render_to_response('core/admin_pending.html', {
 			'app_list': get_all_pending_moderations(),
 			})
+
+# Purge objects from varnish, for the admin pages
+@login_required
+def admin_purge(request):
+	if request.method == 'POST':
+		url = request.POST['url']
+		if url == '':
+			return HttpResponseRedirect('.')
+		varnish_purge(url)
+		transaction.commit_unless_managed()
+		return render_to_response('core/admin_purge.html', {
+				'purge_completed': '^%s' % url,
+				})
+	else:
+		return render_to_response('core/admin_purge.html')

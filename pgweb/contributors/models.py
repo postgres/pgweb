@@ -1,19 +1,22 @@
 from django.db import models
 
+from pgweb.util.bases import PgModel
 
-class ContributorType(models.Model):
+class ContributorType(PgModel, models.Model):
 	typename = models.CharField(max_length=32, null=False, blank=False)
 	sortorder = models.IntegerField(null=False, default=100)
 	extrainfo = models.TextField(null=True, blank=True)
 	detailed = models.BooleanField(null=False, default=True)
-	
+
+	purge_urls = ('community/contributors/', )
+
 	def __unicode__(self):
 		return self.typename
 	
 	class Meta:
 		ordering = ('sortorder',)
 
-class Contributor(models.Model):
+class Contributor(PgModel, models.Model):
 	ctype = models.ForeignKey(ContributorType)
 	lastname = models.CharField(max_length=100, null=False, blank=False)
 	firstname = models.CharField(max_length=100, null=False, blank=False)
@@ -22,6 +25,8 @@ class Contributor(models.Model):
 	companyurl = models.URLField(max_length=100, null=True, blank=True)
 	location = models.CharField(max_length=100, null=True, blank=True)
 	contribution = models.TextField(null=True, blank=True)
+
+	purge_urls = ('community/contributors/', )
 
 	def __unicode__(self):
 		return "%s %s" % (self.firstname, self.lastname)

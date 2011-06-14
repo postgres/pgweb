@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from pgweb.util.bases import PgModel
+
 from datetime import datetime
 
 # internal text/value object
@@ -14,7 +16,7 @@ class SurveyAnswerValues(object):
 		self.votes = votes
 		self.votespercent = votespercent
 
-class Survey(models.Model):
+class Survey(PgModel, models.Model):
 	question = models.CharField(max_length=100, null=False, blank=False)
 	opt1 = models.CharField(max_length=100, null=False, blank=False)
 	opt2 = models.CharField(max_length=100, null=False, blank=False)
@@ -26,6 +28,8 @@ class Survey(models.Model):
 	opt8 = models.CharField(max_length=100, null=False, blank=True)
 	posted = models.DateTimeField(null=False, default=datetime.now)
 	current = models.BooleanField(null=False, default=False)
+
+	purge_urls = ('community/survey', )
 
 	def __unicode__(self):
 		return self.question
@@ -78,7 +82,7 @@ class Survey(models.Model):
 		# free to save this one.
 		super(Survey, self).save()
 
-class SurveyAnswer(models.Model):
+class SurveyAnswer(PgModel, models.Model):
 	survey = models.ForeignKey(Survey, null=False, blank=False, primary_key=True)
 	tot1 = models.IntegerField(null=False, default=0)
 	tot2 = models.IntegerField(null=False, default=0)
@@ -88,6 +92,8 @@ class SurveyAnswer(models.Model):
 	tot6 = models.IntegerField(null=False, default=0)
 	tot7 = models.IntegerField(null=False, default=0)
 	tot8 = models.IntegerField(null=False, default=0)
+
+	purge_urls = ('community/survey', )
 
 class SurveyLock(models.Model):
 	ipaddr = models.IPAddressField(null=False, blank=False)

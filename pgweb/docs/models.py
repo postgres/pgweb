@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from pgweb.util.bases import PgModel
+from pgweb.core.models import Version
 
 from datetime import datetime
 
@@ -23,6 +24,14 @@ class DocComment(PgModel, models.Model):
 	approved = models.BooleanField(blank=False, default=False)
 
 	send_notification = True
+
+	def purge_urls(self):
+		yield '/docs/%s/interactive/%s' % (self.version, self.file)
+		try:
+			if Version.objects.get(tree=self.version).current:
+				yield '/docs/current/interactive/%s' % self.file
+		except Version.DoesNotExist:
+			pass
 
 	class Meta:
 		ordering = ('-posted_at',)

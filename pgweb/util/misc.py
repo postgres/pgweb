@@ -1,5 +1,6 @@
 from subprocess import Popen, PIPE
 from email.mime.text import MIMEText
+from django.db import connection
 from django.conf import settings
 
 from pgweb.util.helpers import template_to_string
@@ -58,3 +59,14 @@ def get_client_ip(request):
 			return request.META['REMOTE_ADDR']
 	else:
 		return request.META['REMOTE_ADDR']
+
+
+
+
+def varnish_purge(url):
+	"""
+	Purge the specified URL from Varnish. Will add initial anchor to the URL,
+	but no trailing one, so by default a wildcard match is done.
+	"""
+	url = '^%s' % url
+	connection.cursor().execute("SELECT varnish_purge(%s)", (url, ))

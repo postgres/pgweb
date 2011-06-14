@@ -1,5 +1,7 @@
 from django.db import models
 
+from pgweb.util.bases import PgModel
+
 choices_map = {
  0: {'str': 'No',       'class': 'no', 'bgcolor': '#ffdddd'},
  1: {'str': 'Yes',      'class': 'yes', 'bgcolor': '#ddffdd'},
@@ -8,9 +10,11 @@ choices_map = {
 }
 choices = [(k, v['str']) for k,v in choices_map.items()]
 
-class FeatureGroup(models.Model):
+class FeatureGroup(PgModel, models.Model):
 	groupname = models.CharField(max_length=100, null=False, blank=False)
 	groupsort = models.IntegerField(null=False, blank=False)
+
+	purge_urls = ('about/featurematrix/', )
 
 	def __unicode__(self):
 		return self.groupname
@@ -20,7 +24,7 @@ class FeatureGroup(models.Model):
 		# Return a list of all the columns for the matrix
 		return [b for a,b in versions]
 
-class Feature(models.Model):
+class Feature(PgModel, models.Model):
 	group = models.ForeignKey(FeatureGroup, null=False, blank=False)
 	featurename = models.CharField(max_length=100, null=False, blank=False)
 	featuredescription = models.TextField(null=False, blank=True)
@@ -32,6 +36,8 @@ class Feature(models.Model):
 	v83 = models.IntegerField(null=False, blank=False, default=0, verbose_name="8.3", choices=choices)
 	v84 = models.IntegerField(null=False, blank=False, default=0, verbose_name="8.4", choices=choices)
 	v85 = models.IntegerField(null=False, blank=False, default=0, verbose_name="8.5a3", choices=choices)
+
+	purge_urls = ('about/featurematrix/.*', )
 
 	def __unicode__(self):
 		# To make it look good in the admin interface, just don't render it
