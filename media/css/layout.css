@@ -88,23 +88,21 @@
   font-size: 0.8em; 
 }
 
-#pgSearch form #submit {
+#pgSearch form #submit,
+#pgSearch form #q {
   font-size: 0.8em;
   background: #FFFFFF;
   color: #000000;
-  border-right: 1px solid #7A7A7A;
-  border-bottom: 1px solid #7A7A7A;
-  border-top: 1px solid #7A7A7A;
-  border-left: 1px solid #7A7A7A;
+  border: 1px solid #7A7A7A;
+}
+
+#pgSearch form #submit {
+
   padding: 1px 4px;
 }
 
 #pgSearch form #q {
-  font-size: 0.8em;
   width: 140px;
-  border: 1px solid #7A7A7A;
-  background: #FFFFFF;
-  color: #000000;
   padding: 2px;
 }
 
@@ -438,10 +436,7 @@ img.pgArrowImage {
   font-size: 0.9em;
   background: #F5F5F5;
   color: #000000;
-  border-right: 1px solid #7A7A7A;
-  border-bottom: 1px solid #7A7A7A;
-  border-top: 1px solid #7A7A7A;
-  border-left: 1px solid #7A7A7A;
+  border: 1px solid #7A7A7A;
   padding: 1px 4px;
 }
 
@@ -640,18 +635,9 @@ TABLE.pgGenericFormTable TR {
    vertical-align: top;
 }
 
-TABLE.pgGenericFormTable TR TD INPUT {
-   width: 100%;
-}
-
-TABLE.pgGenericFormTable TR TD SELECT {
-   width: 100%;
-}
-
-TABLE.pgGenericFormTable TR TD TEXTAREA {
-   width: 100%;
-}
-
+TABLE.pgGenericFormTable TR TD INPUT,
+TABLE.pgGenericFormTable TR TD SELECT,
+TABLE.pgGenericFormTable TR TD TEXTAREA,
 TABLE.pgGenericFormTable TR TD DIV.markdownpreview {
    width: 100%;
 }
@@ -668,7 +654,7 @@ TABLE.pgGenericFormTable TR.errorinfo {
 TABLE.pgGenericFormTable TR.errorheader TD {
    background-color: #FFFFCC;
    border: 1px solid red;
-   padding: 2px 2px 2px 2px;
+   padding: 2px;
 }
 
 /* Misc Classes */
