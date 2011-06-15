@@ -1,7 +1,15 @@
 {%extends "base/page.html"%}
+{%load markup%}
 {%block title%}{{obj.title}}{%endblock%}
 {%block contents%}
 <h1>{{obj.title}}</h1>
-{%include "news/inc_newsitem.html"%}
+<div class="newsdate">Posted on <b>{{obj.date}}</b></div>
+<p>
+{{obj.content|markdown:"safe"}}
+</p>
+{%if obj.is_migrated%}
+<p><i>This post has been migrated from a previous version of the PostgreSQL
+website. We apologise for any formatting issues caused by the migration.</i></p>
+{%endif%}
 {%endblock%}
 
