@@ -97,6 +97,7 @@ urlpatterns = patterns('',
     (r'^docs/faqs.FAQ.html$', redirect_to, {'url': 'http://wiki.postgresql.org/wiki/FAQ' }),
     (r'^docs/faqs.FAQ_DEV.*', redirect_to, {'url': 'http://wiki.postgresql.org/wiki/Development_information' }),
     (r'^docs/faqs.TODO.*', redirect_to, {'url': 'http://wiki.postgresql.org/wiki/Todo' }),
+    (r'^about/license/$', redirect_to, {'url': '/about/licence'}),
 
     ###
     # Links included in emails on the lists (do we need to check this for XSS?)
