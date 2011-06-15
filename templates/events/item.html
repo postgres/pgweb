@@ -1,5 +1,6 @@
 {%extends "base/page.html"%}
 {%load markup%}
+{%block title%}{{obj.title}}{%endblock%}
 {%block contents%}
 <h1>{{obj.title}}</h1>
 <div class="eventdate">Posted on <b>{{obj.displaydate|safe}}</b></div>
