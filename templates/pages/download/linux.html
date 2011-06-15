@@ -14,12 +14,20 @@ easy to <a href="/ftp/source/">build from source</a>.
 </p>
 
 <ul>
- <li><a href="#oneclick">Graphical installer</a></li>
- <li><a href="#yum">CentOS, Fedora and RHEL Yum Repository</a></li>
- <li><a href="#debian">Debian apt</a></li>
- <li><a href="#ubuntu">Ubuntu apt</a></li>
- <li><a href="#gentoo">Gentoo Portage</a></li>
- <li><a href="#suse">SuSE RPM</a></li>
+ <li>Cross-Platform Installers</li>
+ <ul>
+     <li><a href="#oneclick">Graphical installer</a></li>
+     <li><a href="#multibinary">Binary Packages (RPM & DEB)</a></li>
+ </ul>
+<br />
+ <li>Platform-Specific Installers</li>
+ <ul>
+     <li><a href="#yum">CentOS, Fedora and RHEL Yum Repository</a></li>
+     <li><a href="#debian">Debian apt</a></li>
+     <li><a href="#ubuntu">Ubuntu apt</a></li>
+     <li><a href="#gentoo">Gentoo Portage</a></li>
+     <li><a href="#suse">SuSE RPM</a></li>
+ </ul>
 </ul>
 
 <h2><a name="oneclick">Graphical installer</a></h2>
@@ -33,10 +41,17 @@ Enterprise Linux 4 and above and others.</p>
 EnterpriseDB.
 </p>
 
-<p><b>Note: The one click installers do not integrate with platform-specific packaging systems. If you want 
-operating system integration, please use the packages listed below.</b></p>
+<p><b>Note: The one click installers do not integrate with platform-specific packaging systems.</b></p>
 
 <p><i>The one click installers are maintained by Dave Page at <a href="http://www.enterprisedb.com">EnterpriseDB</a>.</i></p>
+
+<h2><a name="multibinary">Binary Packages (RPM & DEB)</a></h2>
+<p>Cross-distribution server binaries wrapped in RPM and DEB format for use with your native OS
+package manager. These packages allow for side-by-side versions of the database (i.e pg_upgrade compatible)
+without losing the power of the native package manager. The RPM has been tested on Fedora 6 and above,
+CentOS/Red Hat Enterprise Linux 4 and others.  The DEB has been tested on Ubuntu 6.06 and above.</p>
+<p><a href="http://www.openscg.org/postgresql/packages">Download</a> the packages from OpenSCG.</p>
+<p><i>The multi-platform binary packages are maintained by <a href="http://www.openscg.org">OpenSCG</a></i></p>
 
 <h2><a name="yum">CentOS, Fedora and RHEL Yum Repository</a></h2>
 
@@ -78,4 +93,5 @@ as well as a variety of related software.  Use the <a href="http://software.open
 suitable packages. Documentation is also available there.</p>
 
 <p><i>The PostgreSQL packages for SUSE are maintained by Reinhard Max.</i></p>
+
 {%endblock%}

@@ -13,7 +13,7 @@ PostgreSQL major releases include new features and occur roughly once every year
 </p>
 
 <p>
-Major releases usually change the internal format of system tables and data files.  These changes are often complex, so we don't maintain backward compatibility for data files.  A dump/reload of the database is required for major upgrades.
+Major releases usually change the internal format of system tables and data files.  These changes are often complex, so we do not maintain backward compatibility of all stored data.  A dump/reload of the database or use of the <a href="http://www.postgresql.org/docs/current/static/pgupgrade.html">pg_upgrade</a> module is required for major upgrades.
 </p>
 
 <p>
@@ -23,4 +23,7 @@ Minor releases are numbered by increasing the third part of the version number, 
 <p>
 Upgrading to a minor release does not require a dump and restore; merely stop the database server, install the updated binaries, and restart the server.  For some releases, manual changes may be required to complete the upgrade, so always read the release notes before upgrading.
 </p>
+
+<p>The <a href="http://wiki.postgresql.org/wiki/PostgreSQL_Release_Support_Policy">PostgreSQL release support policy</a>
+explains the support lifecycle you can expect from the community for a given PostgreSQL major release.</p>
 {%endblock%}

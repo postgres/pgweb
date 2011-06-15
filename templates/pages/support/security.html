@@ -36,8 +36,8 @@ criteria.
 
 <p>
 The following table lists all known security issues.
-Please note that versions prior to 7.4 are no longer
-supported and vulnerabilities for these versions are not included
+Please note that versions prior to 8.2 are no longer
+supported and vulnerabilities for these versions may not be included
 in this list. New vulnerabilities in these versions are no longer patched.
 </p>
 
@@ -59,6 +59,24 @@ to determine if the bug affects specific installations or not.
    <th class="colMid"><a href="#comp">Component</a></th>
    <th class="colMid"><a href="#cls">Class</a></th>
    <th class="colLast">Description</th>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4015">CVE-2010-4015</a></td>
+   <td class="colMid">9.0, 8.4, 8.3, 8.2</td>
+   <td class="colMid"> 9.0.3, 8.4.7, 8.3.14, 8.2.20</td>
+   <td class="colMid">contrib module</td>
+   <td class="colMid">C</td>
+   <td class="colLast">An authenticated database user can cause a buffer overrun by calling functions from the intarray optional module with certain parameters.</a></td>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3433">CVE-2010-3433</a></td>
+   <td class="colMid">9.0, 8.4, 8.3, 8.2, 8.1, 8.0, 7.4</td>
+   <td class="colMid">9.0.1, 8.4.5, 8.3.12, 8.2.18, 8.1.22, 8.0.26, 7.4.30</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">C</td>
+   <td class="colLast">An authenticated database user can manipulate modules and tied variables in some external procedural languages to execute code with enhanced privileges.<a href="http://wiki.postgresql.org/wiki/20101005securityrelease">Details</a></td>
   </tr>
 
   <tr valign="top">
