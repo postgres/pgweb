@@ -51,10 +51,11 @@ def ftpbrowser(request, subpath):
 	directories = [{'link': k, 'url': k} for k,v in node.items() if v['t'] == 'd']
 	# Add all symlinks (only directoreis supported)
 	directories.extend([{'link': k, 'url': v['d']} for k,v in node.items() if v['t'] == 'l'])
+	directories.sort()
 
 	# Add a link to the parent directory
 	if subpath:
-		directories.append({'link':'[Parent Directory]', 'url':'..'})
+		directories.insert(0, {'link':'[Parent Directory]', 'url':'..'})
 
 	# Fetch files
 	files = [{'name': k, 'mtime': v['t'], 'size': v['s']} for k,v in node.items() if v['t'] == 'f']
@@ -81,7 +82,7 @@ def ftpbrowser(request, subpath):
 
 	return render_to_response('downloads/ftpbrowser.html', {
 		'basepath': subpath.rstrip('/'),
-		'directories': sorted(directories),
+		'directories': directories,
 		'files': sorted(files),
 		'breadcrumbs': breadcrumbs,
 		'readme': file_readme,
@@ -96,7 +97,6 @@ def _get_numeric_ip(request):
 		return int(p[0])*16777216 + int(p[1])*65536 + int(p[2])*256 + int(p[3])
 	except:
 		return None
-
 @nocache
 def mirrorselect(request, path):
 	try:
