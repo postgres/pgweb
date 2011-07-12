@@ -7,8 +7,10 @@ def get_struct():
 
 	# We intentionally don't put /about/eventarchive/ in the sitemap,
 	# since we don't care about getting it indexed.
+	# We only show events in the future, so only index events in the
+	# future...
 
-	for n in Event.objects.filter(approved=True):
+	for n in Event.objects.filter(approved=True, enddate__gt=date.today):
 		yearsold = (now - n.startdate).days / 365
 		if yearsold > 4:
 			yearsold = 4
