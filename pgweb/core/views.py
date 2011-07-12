@@ -38,7 +38,7 @@ def home(request):
 		quote = Quote.objects.filter(approved=True).order_by('?')[0]
 	except:
 		pass # if there is no quote available, just ignore error
-	versions = Version.objects.all()
+	versions = Version.objects.filter(supported=True)
 	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:5]
 
 	traininginfo = Event.objects.filter(approved=True, training=True).extra(where=("startdate <= (CURRENT_DATE + '6 Months'::interval) AND enddate >= CURRENT_DATE",)).aggregate(Count('id'), Count('country', distinct=True))
