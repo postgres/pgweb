@@ -4,12 +4,12 @@ from datetime import date
 
 from django.conf import settings
 
-from models import Product
+from models import Category
 
 def get_struct():
 	# Products
-	for p in Product.objects.filter(approved=True):
-		yield ('download/products/%s/' % p.category_id,
+	for c in Category.objects.all():
+		yield ('download/products/%s/' % c.id,
 			   0.3)
 
 	# FTP browser
