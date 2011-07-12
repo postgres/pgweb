@@ -7,6 +7,7 @@ from django.db import connection, transaction
 
 from datetime import date, datetime
 from os import uname
+import urllib
 
 from pgweb.util.decorators import ssl_required, cache
 from pgweb.util.contexts import NavContext
@@ -122,7 +123,7 @@ def sitemap(request):
 	for p in get_all_pages_struct():
 		pages+=1
 		x.startElement('url', {})
-		x.add_xml_element('loc', 'http://www.postgresql.org/%s' % p[0])
+		x.add_xml_element('loc', 'http://www.postgresql.org/%s' % urllib.quote(p[0]))
 		if p[1]:
 			x.add_xml_element('priority', unicode(p[1]))
 		x.endElement('url')
