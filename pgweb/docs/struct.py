@@ -6,7 +6,7 @@ def get_struct():
 	now = date.today()
 	currentversion = Version.objects.get(current=True)
 
-	for d in DocPage.objects.all():
+	for d in DocPage.objects.all().extra(where=['version in (select tree from core_version where supported)']):
 		yield ('docs/%s/static/%s' % (d.version, d.file),
 			   None)
 		#FIXME ^ do something smart with priorities on older

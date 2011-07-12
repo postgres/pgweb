@@ -10,6 +10,7 @@ class Version(models.Model):
 	reldate = models.DateField(null=False, blank=False)
 	relnotes = models.CharField(max_length=32, null=False, blank=False)
 	current = models.BooleanField(null=False, blank=False, default=False)
+	supported = models.BooleanField(null=False, blank=False, default=True)
 
 	def __unicode__(self):
 		return self.versionstring
