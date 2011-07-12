@@ -23,10 +23,15 @@ def docpage(request, version, typ, filename):
 	else:
 		ver = Decimal(version)
 
-	page = get_object_or_404(DocPage, version=ver, file="%s.html" % filename)
+	if ver < Decimal("7.1"):
+		extension = "htm"
+	else:
+		extension = "html"
+
+	page = get_object_or_404(DocPage, version=ver, file="%s.%s" % (filename, extension))
 
 	if typ=="interactive":
-		comments = DocComment.objects.filter(version=ver, file="%s.html" % filename, approved=True).order_by('posted_at')
+		comments = DocComment.objects.filter(version=ver, file="%s.%s" % (filename, extension), approved=True).order_by('posted_at')
 	else:
 		comments = None
 
