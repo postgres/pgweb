@@ -13,7 +13,7 @@ class OrganisationAdmin(admin.ModelAdmin):
 	search_fields = ('name', )
 
 class VersionAdmin(admin.ModelAdmin):
-	list_display = ('versionstring', 'reldate', 'current', )
+	list_display = ('versionstring', 'reldate', 'supported', 'current', )
 
 admin.site.register(Version, VersionAdmin)
 admin.site.register(OrganisationType)
