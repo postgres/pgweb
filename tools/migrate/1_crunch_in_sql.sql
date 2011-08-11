@@ -45,6 +45,8 @@ SELECT setval('featurematrix_featuregroup_id_seq', max(id)) FROM featurematrix_f
 CREATE TABLE public.users_old AS SELECT * FROM oldweb.users;
 
 -- stackbuilder!
+TRUNCATE TABLE downloads_stackbuilderapp CASCADE;
+
 -- First, let's get the apps, minus dependencies
 INSERT INTO downloads_stackbuilderapp (textid, version, platform, name,
 	active, description, category, pgversion, edbversion, format,
@@ -68,6 +70,7 @@ where not dependencies='{}';
 
 --
 -- Document comments
+TRUNCATE TABLE docs_doccomment;
 INSERT INTO docs_doccomment (id, version, file, comment, posted_at, submitter_id, approved)
 SELECT
  id, version, file, comment, posted_at, 0, approved
