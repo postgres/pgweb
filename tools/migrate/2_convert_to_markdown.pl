@@ -12,8 +12,8 @@ if (!$ARGV[0]) {
 }
 $dbh = DBI->connect("dbi:Pg:" . $ARGV[0], '', '', { AutoCommit=> 0});
 
-#print "Converting news...\n";
-#News();
+print "Converting news...\n";
+News();
 print "Converting events..\n";
 Events();
 print "Converting quotes...\n";
