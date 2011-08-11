@@ -35,7 +35,8 @@ class Feature(PgModel, models.Model):
 	v82 = models.IntegerField(null=False, blank=False, default=0, verbose_name="8.2", choices=choices)
 	v83 = models.IntegerField(null=False, blank=False, default=0, verbose_name="8.3", choices=choices)
 	v84 = models.IntegerField(null=False, blank=False, default=0, verbose_name="8.4", choices=choices)
-	v85 = models.IntegerField(null=False, blank=False, default=0, verbose_name="8.5a3", choices=choices)
+	v90 = models.IntegerField(null=False, blank=False, default=0, verbose_name="9.0", choices=choices)
+	v91 = models.IntegerField(null=False, blank=False, default=0, verbose_name="9.1", choices=choices)
 
 	purge_urls = ('about/featurematrix/.*', )
 

@@ -18,7 +18,7 @@ INSERT INTO featurematrix_featuregroup(id, groupname, groupsort)
 
 /* for each version */
 INSERT INTO featurematrix_feature (id, group_id, featurename, featuredescription,
-	v74, v80, v81, v82, v83, v84, v85)
+	v74, v80, v81, v82, v83, v84, v90, v91)
  SELECT
   f.featureid, f.groupid, f.featurename, COALESCE(f.featuredescription,''),
   COALESCE(f74.state, 0),
@@ -27,7 +27,8 @@ INSERT INTO featurematrix_feature (id, group_id, featurename, featuredescription
   COALESCE(f82.state, 0),
   COALESCE(f83.state, 0),
   COALESCE(f84.state, 0),
-  COALESCE(f85.state, 0)
+  COALESCE(f90.state, 0),
+  COALESCE(f91.state, 0)
  FROM oldweb.features_features f
  LEFT JOIN oldweb.features_matrix f74 ON (f.featureid = f74.feature AND f74.version=1)
  LEFT JOIN oldweb.features_matrix f80 ON (f.featureid = f80.feature AND f80.version=2)
@@ -35,7 +36,8 @@ INSERT INTO featurematrix_feature (id, group_id, featurename, featuredescription
  LEFT JOIN oldweb.features_matrix f82 ON (f.featureid = f82.feature AND f82.version=4)
  LEFT JOIN oldweb.features_matrix f83 ON (f.featureid = f83.feature AND f83.version=5)
  LEFT JOIN oldweb.features_matrix f84 ON (f.featureid = f84.feature AND f84.version=6)
- LEFT JOIN oldweb.features_matrix f85 ON (f.featureid = f85.feature AND f85.version=6)
+ LEFT JOIN oldweb.features_matrix f90 ON (f.featureid = f90.feature AND f90.version=7)
+ LEFT JOIN oldweb.features_matrix f91 ON (f.featureid = f91.feature AND f91.version=8)
 ;
 
 SELECT setval('featurematrix_feature_id_seq', max(id)) FROM featurematrix_feature;
