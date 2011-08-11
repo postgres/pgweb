@@ -58,7 +58,7 @@ def ftpbrowser(request, subpath):
 		directories.insert(0, {'link':'[Parent Directory]', 'url':'..'})
 
 	# Fetch files
-	files = [{'name': k, 'mtime': v['t'], 'size': v['s']} for k,v in node.items() if v['t'] == 'f']
+	files = [{'name': k, 'mtime': v['d'], 'size': v['s']} for k,v in node.items() if v['t'] == 'f']
 	
 	breadcrumbs = []
 	if subpath:
