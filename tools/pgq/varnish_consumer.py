@@ -138,7 +138,7 @@ if __name__=="__main__":
 	if len(sys.argv) > 2 and sys.argv[1] == "-logfile":
 		# Redirect to whatever is in sys.argv[2]
 		# (yes, this is a really ugly way of doing things..)
-		f = open(sys.argv[2], "w+", 0)
+		f = open(sys.argv[2], "a", 0)
 		sys.stdout = f
 
 	# Trap signals that shut us down, so we can kill off our subprocesses
