@@ -7,7 +7,14 @@ import os
 import tarfile
 import re
 import tidy
-import psycopg2
+
+# Set up for accessing django
+from django.core.management import setup_environ
+sys.path.append(os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), '../../pgweb'))
+import settings
+setup_environ(settings)
+
+from django.db import connection, transaction
 
 pagecount = 0
 
@@ -62,8 +69,14 @@ if not os.path.isfile(tarfilename):
 
 tf = tarfile.open(tarfilename)
 
-db = psycopg2.connect('host=/tmp dbname=pgweb')
-curs = db.cursor()
+curs = connection.cursor()
+# Verify that the version exists, and what we're loading
+curs.execute("SELECT latestminor FROM core_version WHERE tree=%(v)s", {'v': ver})
+r = curs.fetchall()
+if len(r) != 1:
+	print "Version %s not found in the system, cannot load!" % ver
+	sys.exit(1)
+
 # Remove any old docs for this version (still protected by a transaction while
 # we perform the load)
 curs.execute("DELETE FROM docs WHERE version=%(v)s", {'v': ver})
@@ -82,6 +95,7 @@ for member in tf:
 				load_doc_file(inner_member.name, inner_tar.extractfile(inner_member))
 tf.close()
 
-db.commit()
+transaction.commit_unless_managed()
+
 print "Done (%i pages)." % pagecount
 
