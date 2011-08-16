@@ -7,7 +7,7 @@ class SignupForm(forms.Form):
 	first_name = forms.CharField(max_length=30)
 	last_name = forms.CharField(max_length=30)
 	email = forms.EmailField()
-	email2 = forms.EmailField()
+	email2 = forms.EmailField(label="Repeat email")
 
 	def clean_email2(self):
 		# If the primary email checker had an exception, the data will be gone
