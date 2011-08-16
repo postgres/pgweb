@@ -9,7 +9,7 @@ from models import Survey, SurveyAnswer, SurveyLock
 
 def results(request, surveyid, junk=None):
 	survey = get_object_or_404(Survey, pk=surveyid)
-	surveylist = Survey.objects.all()
+	surveylist = Survey.objects.all().order_by('-posted')
 
 	return render_to_response('survey/results.html', {
 		'survey': survey,
