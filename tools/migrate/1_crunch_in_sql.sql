@@ -168,3 +168,16 @@ SELECT id, tot1, tot2, tot3, tot4, tot5, tot6, tot7, tot8
 FROM oldweb.surveys;
 
 SELECT setval('survey_survey_id_seq', max(id)) FROM survey_survey;
+
+-- mailinglists
+TRUNCATE TABLE lists_mailinglist CASCADE;
+TRUNCATE TABLE lists_mailinglistgroup CASCADE;
+
+INSERT INTO lists_mailinglistgroup (id, groupname, sortkey)
+SELECT id, name, sortkey FROM oldweb.listgroups;
+
+INSERT INTO lists_mailinglist (id, group_id, listname, active, externallink, description, shortdesc)
+SELECT id, grp, name, active::boolean, NULL, description, coalesce(shortdesc,'') FROM oldweb.lists;
+
+SELECT setval('lists_mailinglist_id_seq', max(id)) FROM lists_mailinglist;
+SELECT setval('lists_mailinglistgroup_id_seq', max(id)) FROM lists_mailinglistgroup;
