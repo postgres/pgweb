@@ -17,15 +17,15 @@ class SurveyAnswerValues(object):
 		self.votespercent = votespercent
 
 class Survey(PgModel, models.Model):
-	question = models.CharField(max_length=100, null=False, blank=False)
-	opt1 = models.CharField(max_length=100, null=False, blank=False)
-	opt2 = models.CharField(max_length=100, null=False, blank=False)
-	opt3 = models.CharField(max_length=100, null=False, blank=True)
-	opt4 = models.CharField(max_length=100, null=False, blank=True)
-	opt5 = models.CharField(max_length=100, null=False, blank=True)
-	opt6 = models.CharField(max_length=100, null=False, blank=True)
-	opt7 = models.CharField(max_length=100, null=False, blank=True)
-	opt8 = models.CharField(max_length=100, null=False, blank=True)
+	question = models.CharField(max_length=500, null=False, blank=False)
+	opt1 = models.CharField(max_length=500, null=False, blank=False)
+	opt2 = models.CharField(max_length=500, null=False, blank=False)
+	opt3 = models.CharField(max_length=500, null=False, blank=True)
+	opt4 = models.CharField(max_length=500, null=False, blank=True)
+	opt5 = models.CharField(max_length=500, null=False, blank=True)
+	opt6 = models.CharField(max_length=500, null=False, blank=True)
+	opt7 = models.CharField(max_length=500, null=False, blank=True)
+	opt8 = models.CharField(max_length=500, null=False, blank=True)
 	posted = models.DateTimeField(null=False, default=datetime.now)
 	current = models.BooleanField(null=False, default=False)
 

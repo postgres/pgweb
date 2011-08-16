@@ -153,3 +153,18 @@ description, COALESCE(price,'') , products.lastconfirmed
 FROM oldweb.products
 INNER JOIN oldweb.organisations oo ON publisher=oo.id
 INNER JOIN oldweb.product_categories ON category=product_categories.id;
+
+
+-- Surveys
+TRUNCATE TABLE survey_surveyanswer CASCADE;
+TRUNCATE TABLE survey_survey CASCADE;
+
+INSERT INTO survey_survey (id, question, opt1, opt2, opt3, opt4, opt5, opt6, opt7, opt8, posted, current)
+SELECT surveyid, question, coalesce(opt1,''), coalesce(opt2,''), coalesce(opt3,''), coalesce(opt4,''), coalesce(opt5,''), coalesce(opt6,''), coalesce(opt7,''), coalesce(opt8,''), modified, current
+FROM oldweb.survey_questions INNER JOIN oldweb.surveys ON surveys.id=survey_questions.surveyid;
+
+INSERT INTO survey_surveyanswer (survey_id, tot1, tot2, tot3, tot4, tot5, tot6, tot7, tot8)
+SELECT id, tot1, tot2, tot3, tot4, tot5, tot6, tot7, tot8
+FROM oldweb.surveys;
+
+SELECT setval('survey_survey_id_seq', max(id)) FROM survey_survey;
