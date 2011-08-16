@@ -21,4 +21,5 @@ if len(counts):
 					   "core/moderation_report.txt",
 					   {
 			'items': counts,
+			'mastersite': settings.MASTERSITE_ROOT,
 			})

@@ -5,4 +5,4 @@ The following items are currently pending moderation:
 
 Moderators; please check and moderate these items as soon as possible!
 
-https://wwwmaster.postgresql.org/admin/pending/
+{{mastersite}}/admin/pending/

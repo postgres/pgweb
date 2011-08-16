@@ -106,7 +106,7 @@ def signup(request):
 							   form.cleaned_data['email'],
 							   'Your new postgresql.org community account',
 							   'account/new_account_email.txt',
-							   { 'uid': int_to_base36(user.id), 'token': token, 'user': user}
+							   { 'uid': int_to_base36(user.id), 'token': token, 'user': user, 'mastersite': settings.MASTERSITE_ROOT}
 							   )
 
 			return HttpResponseRedirect('/account/signup/complete/')

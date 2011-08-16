@@ -3,6 +3,6 @@ PostgreSQL community account.
 
 Please go to the following page and choose a new password:
 
-https://wwwmaster.postgresql.org/account/reset/{{uid}}-{{token}}/
+{{mastersite}}/account/reset/{{uid}}-{{token}}/
 
 Your username, in case you've forgotten, is {{user.username}}.
