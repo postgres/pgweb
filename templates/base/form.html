@@ -1,4 +1,5 @@
 {%extends "base/page.html"%}
+{%block title%}{{operation|default:"Edit"}} {{formitemtype}}{%endblock%}
 {%block contents%}
 <h1>{{operation|default:"Edit"}} {{formitemtype}}</h1>
 <form method="post" action=".">
