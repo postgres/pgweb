@@ -57,6 +57,13 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 def template_to_string(templatename, attrs = {}):
 	return get_template(templatename).render(Context(attrs))
 
+def HttpServerError(msg):
+	r = render_to_response('errors/500.html', {
+			'message': msg,
+			})
+	r.status_code = 500
+	return r
+
 
 class PgXmlHelper(django.utils.xmlutils.SimplerXMLGenerator):
 	def __init__(self, outstream, skipempty=False):

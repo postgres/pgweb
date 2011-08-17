@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 import django.contrib.auth.views as authviews
-from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseServerError
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.utils.http import int_to_base36
@@ -10,6 +10,7 @@ from django.conf import settings
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
 from pgweb.util.misc import send_template_mail
+from pgweb.util.helpers import HttpServerError
 
 from pgweb.news.models import NewsArticle
 from pgweb.events.models import Event
@@ -84,7 +85,7 @@ def resetpwd(request):
 @ssl_required
 def signup(request):
 	if request.user.is_authenticated():
-		return HttpResponseServerError("You must log out before you can sign up for a new account")
+		return HttpServerError("You must log out before you can sign up for a new account")
 
 	if request.method == 'POST':
 		# Attempt to create user then, eh?

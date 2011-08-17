@@ -1,10 +1,11 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponse, Http404, HttpResponseServerError, HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.db import connection
 from django.template.defaultfilters import slugify
 
 from pgweb.util.contexts import NavContext
 from pgweb.util.misc import get_client_ip
+from pgweb.util.helpers import HttpServerError
 
 from models import Survey, SurveyAnswer, SurveyLock
 
@@ -24,7 +25,7 @@ def vote(request, surveyid):
 	try:
 		ansnum = int(request.POST['answer'])
 		if ansnum < 1 or ansnum > 8:
-			return HttpResponseServerError("Invalid answer")
+			return HttpServerError("Invalid answer")
 	except:
 		# When no answer is given, redirect to results instead
 		return HttpResponseRedirect("/community/survey/%s-%s" % (surv.id, slugify(surv.question)))
@@ -40,7 +41,7 @@ def vote(request, surveyid):
 	# Check if we are locked
 	lock = SurveyLock.objects.filter(ipaddr=addr)
 	if len(lock) > 0:
-		return HttpResponseServerError("Too many requests from your IP in the past 15 minutes")
+		return HttpServerError("Too many requests from your IP in the past 15 minutes")
 
 	# Generate a new lock item, and store it
 	lock = SurveyLock(ipaddr=addr)

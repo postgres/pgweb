@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponse, Http404, HttpResponseRedirect, HttpResponseServerError
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required
 from django.db import connection, transaction
@@ -12,7 +12,7 @@ import cPickle as pickle
 
 from pgweb.util.decorators import ssl_required, nocache
 from pgweb.util.contexts import NavContext
-from pgweb.util.helpers import simple_form, PgXmlHelper
+from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.misc import get_client_ip
 
 from models import *
@@ -39,7 +39,7 @@ def ftpbrowser(request, subpath):
 		allnodes = pickle.load(f)
 		f.close()
 	except Exception, e:
-		return HttpResponseServerError("Failed to load ftp site information: %s" % e)
+		return HttpServerError("Failed to load ftp site information: %s" % e)
 
 	if not allnodes.has_key(subpath):
 		raise Http404
