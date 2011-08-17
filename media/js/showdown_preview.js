@@ -30,7 +30,7 @@ function attach_showdown_preview(objid, admin) {
 
 	if (!admin) {
 	   infospan = document.createElement('span');
-	   infospan.innerHTML = 'This field supports markdown. See below for a preview.';
+	   infospan.innerHTML = 'This field supports <a href="http://daringfireball.net/projects/markdown/basics">markdown</a>. See below for a preview.';
 	   obj.parentNode.insertBefore(infospan, newdiv);
 	}
 
