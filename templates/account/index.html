@@ -33,6 +33,7 @@ please contact <a href="webmaster@postgresql.org">webmaster@postgresql.org</a>
 and let us know which objects to connect together.
 </p>
 
+{%if newsarticles or events or organisations or products %}
 <h2>Submissions awaiting moderation</h2>
 <p>
 You have submitted the following objects that are still waiting moderator
@@ -73,6 +74,8 @@ approval before they are published:
 <li><a href="/account/products/{{product.id}}">{{product}}</a></li>
 {%endfor%}
 </ul>
+{%endif%}
+
 {%endif%}
 
 {%endblock%}
