@@ -143,6 +143,7 @@ def system_information(request):
 
 # List of all unapproved objects, for the special admin page
 @login_required
+@user_passes_test(lambda u: u.is_superuser)
 def admin_pending(request):
 	return render_to_response('core/admin_pending.html', {
 			'app_list': get_all_pending_moderations(),
@@ -150,6 +151,7 @@ def admin_pending(request):
 
 # Purge objects from varnish, for the admin pages
 @login_required
+@user_passes_test(lambda u: u.is_superuser)
 def admin_purge(request):
 	if request.method == 'POST':
 		url = request.POST['url']
