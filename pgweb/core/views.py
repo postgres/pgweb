@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import TemplateDoesNotExist, loader, Context
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Count
 from django.db import connection, transaction
 
@@ -27,7 +27,7 @@ from survey.models import Survey
 
 # models and forms needed for core objects
 from models import Organisation
-from forms import OrganisationForm
+from forms import OrganisationForm, MergeOrgsForm
 
 # Front page view
 @cache(minutes=10)
@@ -162,3 +162,39 @@ def admin_purge(request):
 				})
 	else:
 		return render_to_response('core/admin_purge.html')
+
+# Merge two organisations
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+@transaction.commit_on_success
+def admin_mergeorg(request):
+	if request.method == 'POST':
+		form = MergeOrgsForm(data=request.POST)
+		if form.is_valid():
+			# Ok, try to actually merge organisations, by moving all objects
+			# attached
+			f = form.cleaned_data['merge_from']
+			t = form.cleaned_data['merge_into']
+			for e in f.event_set.all():
+				e.org = t
+				e.save()
+			for n in f.newsarticle_set.all():
+				n.org = t
+				n.save()
+			for p in f.product_set.all():
+				p.publisher = t
+				p.save()
+			for p in f.professionalservice_set.all():
+				p.organisation = t
+				p.save()
+			# Now that everything is moved, we can delete the organisation
+			f.delete()
+			
+			return HttpResponseRedirect("/admin/core/organisation/")
+		# Else fall through to re-render form with errors
+	else:
+		form = MergeOrgsForm()
+
+	return render_to_response('core/admin_mergeorg.html', {
+			'form': form,
+    })

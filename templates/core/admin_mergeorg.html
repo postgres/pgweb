@@ -1,0 +1,20 @@
+{%extends "admin/base_site.html"%}
+
+{%block breadcrumbs%}
+<div class="breadcrumbs"><a href="/admin/">Home</a> &rsaquo; <a href="/admin/core/organisation/">Organisations</a> &rsaquo; Merge organisations</div>
+{%endblock%}
+
+{% block bodyclass %}change-list{% endblock %}
+{% block coltype %}flex{% endblock %}
+
+{%block content%}
+<div id="content-main">
+<h1>Merge organisations</h1>
+<form method="post" action=".">
+<table>
+{{form.as_table}}
+</table>
+<input type="submit" value="Merge organisations">
+</form>
+</div>
+{%endblock%}
