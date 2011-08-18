@@ -1,0 +1,21 @@
+{%extends "base/page.html"%}
+{%block title%}Organisatoins{%endblock%}
+{%block contents%}
+<h1>Organisations</h1>
+<p>
+The following organisations are registered in our database:
+</p>
+<table>
+ <tr>
+  <th>Organisation</th>
+  <th>Manager</th>
+ </tr>
+{%for o in orgs%}
+ <tr>
+  <td>{{o.name}}</td>
+  <td>{%for m in o.managers.all%}{{m.first_name}} {{m.last_name}}{%if not forloop.last%}<br/>{%endif%}{%endfor%}</td>
+ </tr>
+{%endfor%}
+</table>
+{%endblock%}
+

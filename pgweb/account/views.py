@@ -66,6 +66,15 @@ def listobjects(request, objtype):
 	}, NavContext(request, 'account'))
 
 @ssl_required
+@login_required
+def orglist(request):
+	orgs = Organisation.objects.filter(approved=True)
+
+	return render_to_response('account/orglist.html', {
+			'orgs': orgs,
+	}, NavContext(request, 'account'))
+
+@ssl_required
 def login(request):
 	return authviews.login(request, template_name='account/login.html')
 

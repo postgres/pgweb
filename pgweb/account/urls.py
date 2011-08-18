@@ -15,6 +15,9 @@ urlpatterns = patterns('',
     (r'^organisations/(.*)/$', 'core.views.organisationform'),
     (r'^products/(.*)/$', 'downloads.views.productform'),
 
+    # Organisation information
+	(r'^orglist/$', 'account.views.orglist'),
+
     # Docs comments
     (r'^comments/(new)/(.*)/(.*)/$', 'docs.views.commentform'),
 
