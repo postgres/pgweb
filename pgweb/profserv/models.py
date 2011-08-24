@@ -8,7 +8,7 @@ class ProfessionalService(PgModel, models.Model):
 	submitter = models.ForeignKey(User, null=False, blank=False)
 	approved = models.BooleanField(null=False, blank=False, default=False)
 
-	organisation = models.ForeignKey(Organisation, null=False, blank=False)
+	organisation = models.ForeignKey(Organisation, null=False, blank=False, unique=True)
 	description = models.TextField(null=False,blank=False)
 	employees = models.CharField(max_length=32, null=True, blank=True)
 	locations = models.CharField(max_length=128, null=True, blank=True)

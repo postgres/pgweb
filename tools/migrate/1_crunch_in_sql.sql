@@ -122,6 +122,8 @@ SELECT id, 0 FROM core_organisation
 WHERE id NOT IN (SELECT organisation_id FROM core_organisation_managers);
 
 -- Add professional services
+ALTER TABLE profserv_professionalservice DROP CONSTRAINT profserv_professionalservice_organisation_id_key;
+
 INSERT INTO profserv_professionalservice (submitter_id, approved, organisation_id, description, employees, locations,
 region_africa,region_asia,region_europe,region_northamerica,region_oceania,region_southamerica,
 hours,languages,customerexample,experience,contact,url,provides_support,provides_hosting,interfaces)
@@ -129,6 +131,21 @@ SELECT 0, approved, (SELECT id FROM core_organisation WHERE core_organisation.na
 region_africa,region_asia,region_europe,region_northamerica,region_oceania,region_southamerica,
 hours,languages,customerexample,experience,contact,url,provides_support,provides_hosting,interfaces
 FROM oldweb.profserv;
+
+DELETE FROM profserv_professionalservice WHERE id IN (
+   SELECT id FROM profserv_professionalservice
+   WHERE organisation_id IN (
+     SELECT organisation_id FROM profserv_professionalservice
+     GROUP BY organisation_id HAVING count(*)>1)
+   AND id NOT IN (
+     SELECT min(id) FROM profserv_professionalservice
+     GROUP BY organisation_id HAVING count(*)>1)
+);
+
+ALTER TABLE profserv_professionalservice
+ADD CONSTRAINT profserv_professionalservice_organisation_id_key
+UNIQUE (organisation_id);
+
 
 -- Add product categories and license types
 TRUNCATE TABLE downloads_category RESTART IDENTITY CASCADE;
