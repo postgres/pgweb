@@ -16,6 +16,7 @@ from pgweb.news.models import NewsArticle
 from pgweb.events.models import Event
 from pgweb.core.models import Organisation
 from pgweb.downloads.models import Product
+from pgweb.profserv.models import ProfessionalService
 
 from forms import SignupForm
 
@@ -26,11 +27,13 @@ def home(request):
 	myevents = Event.objects.filter(org__managers=request.user, approved=False)
 	myorgs = Organisation.objects.filter(managers=request.user, approved=False)
 	myproducts = Product.objects.filter(publisher__managers=request.user, approved=False)
+	myprofservs = ProfessionalService.objects.filter(organisation__managers=request.user, approved=False)
 	return render_to_response('account/index.html', {
 		'newsarticles': myarticles,
 		'events': myevents,
 		'organisations': myorgs,
 		'products': myproducts,
+		'profservs': myprofservs,
 	}, NavContext(request, 'account'))
 
 objtypes = {
@@ -45,6 +48,10 @@ objtypes = {
 	'products': {
 		'title': 'Product',
 		'objects': lambda u: Product.objects.filter(publisher__managers=u),
+	},
+	'services': {
+		'title': 'Professional service',
+		'objects': lambda u: ProfessionalService.objects.filter(organisation__managers=u),
 	},
 	'organisations': {
 		'title': 'Organisation',

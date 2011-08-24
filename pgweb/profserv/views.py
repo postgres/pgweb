@@ -4,10 +4,12 @@ from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
+from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form
 
 from models import ProfessionalService
+from forms import ProfessionalServiceForm
 
 regions = (
    ('africa','Africa'),
@@ -54,3 +56,9 @@ def region(request, servtype, regionname):
 		'services': services,
 	}, NavContext(request, 'support'))
 
+
+# Forms to edit
+@ssl_required
+@login_required
+def profservform(request, itemid):
+	return simple_form(ProfessionalService, itemid, request, ProfessionalServiceForm)

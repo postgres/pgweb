@@ -18,6 +18,9 @@ urlpatterns = patterns('',
     # Organisation information
 	(r'^orglist/$', 'account.views.orglist'),
 
+    # Professional services
+    (r'^services/(.*)/$', 'profserv.views.profservform'),
+
     # Docs comments
     (r'^comments/(new)/(.*)/(.*)/$', 'docs.views.commentform'),
 
