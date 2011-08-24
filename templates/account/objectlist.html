@@ -9,7 +9,7 @@ extensive.
 </p>
 <ul>
 {%for o in objects%}
-<li><a {%if not o.approved%} "style='color:red;'" {%endif%}href="/account/{{suburl}}/{{o.id}}/">{{o}}</a></li>
+<li><a {%if not o.approved%} style="color:red;" {%endif%}href="/account/{{suburl}}/{{o.id}}/">{{o}}</a></li>
 {%endfor%}
 </ul>
 
