@@ -32,7 +32,7 @@ class AuthBackend(ModelBackend):
 				# create a user in the django system, and migrate all settings
 				# we can think of.
 				namepieces = rows[0][2].split(None, 2)
-				if len(namepieces) == 1: namepieces[1] = ''
+				if len(namepieces) == 1: namepieces.append('')
 				user = User(username=username.lower(), email=rows[0][3], first_name=namepieces[0], last_name=namepieces[1])
 				user.set_password(password)
 				user.save()
