@@ -113,7 +113,7 @@ urlpatterns = patterns('',
 	(r'^admin/mergeorg/$', 'pgweb.core.views.admin_mergeorg'),
 
     # Uncomment the next line to enable the admin:
-    (r'^admin/(.*)', admin.site.root),
+    (r'^admin/', include(admin.site.urls)),
 
     # This should not happen in production - serve by the webserver natively!
     url(r'^media/(.*)$', 'django.views.static.serve', {
