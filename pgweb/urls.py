@@ -106,6 +106,8 @@ urlpatterns = patterns('',
 
     # Some basic information about the connection (for debugging purposes)
 	(r'^system_information/$', 'pgweb.core.views.system_information'),
+	# Sync timestamp, for automirror
+	(r'^web_sync_timestamp$', 'pgweb.core.views.sync_timestamp'),
 
 	# Override some URLs in admin, to provide our own pages
 	(r'^admin/pending/$', 'pgweb.core.views.admin_pending'),

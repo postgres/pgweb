@@ -141,6 +141,13 @@ def system_information(request):
 			'client_ip': get_client_ip(request),
 	})
 
+# Sync timestamp for automirror. Keep it around for 30 seconds
+# Basically just a check that we can access the backend still...
+@cache(seconds=30)
+def sync_timestamp(request):
+	return HttpResponse(datetime.now().strftime("%Y-%m-%d %H:%M:%S\n"),
+						mimetype='text/plain')
+
 # List of all unapproved objects, for the special admin page
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
