@@ -22,10 +22,14 @@ import httplib
 import signal
 import sys
 import time
+import datetime
 from ConfigParser import ConfigParser
 from multiprocessing import Process
 
 import pgq
+
+def print_t(s):
+	print "%s: %s" % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), s)
 
 class VarnishPurger(pgq.Consumer):
 	"""
@@ -43,14 +47,14 @@ class VarnishPurger(pgq.Consumer):
 			if ev.type == 'P':
 				# 'P' events means purge. Currently it's the only event
 				# type we support.
-				print "Purging '%s' on %s" % (ev.data, self.frontend)
+				print_t("Purging '%s' on %s" % (ev.data, self.frontend))
 				try:
 					if self.do_purge(ev.data):
 						ev.tag_done()
 				except Exception, e:
-					print "Failed to purge '%s' on '%s': %s" % (ev.data, self.frontend, e)
+					print_t("Failed to purge '%s' on '%s': %s" % (ev.data, self.frontend, e))
 			else:
-				print "Unknown event type '%s'" % ev.type
+				print_t("Unknown event type '%s'" % ev.type)
 
 
 	def do_purge(self, url):
@@ -67,7 +71,7 @@ class VarnishPurger(pgq.Consumer):
 		if resp.status == 200:
 			return True
 
-		print "Varnish purge returned status %s (%s)" % (resp.status, resp.reason)
+		print_t("Varnish purge returned status %s (%s)" % (resp.status, resp.reason))
 		return False
 
 
@@ -94,7 +98,7 @@ class PurgerProcess(object):
 		signal.signal(signal.SIGHUP, signal.SIG_DFL)
 
 		# Start and run the consumer
-		print "Initiating run of %s" % self.frontend
+		print_t("Initiating run of %s" % self.frontend)
 		self.purger = VarnishPurger(frontend)
 		self.purger.start()
 
@@ -105,16 +109,16 @@ class PurgerProcess(object):
 		"""
 		if not self.process.is_alive():
 			# Ugh!
-			print "Process for '%s' died!" % self.frontend
+			print_t("Process for '%s' died!" % self.frontend)
 			self.process.join()
-			print "Attempting restart of '%s'!" % self.frontend
+			print_t("Attempting restart of '%s'!" % self.frontend)
 			self.start()
 
 	def terminate(self):
 		"""
 		Terminate the process runing this purger.
 		"""
-		print "Terminating process for '%s'" % self.frontend
+		print_t("Terminating process for '%s'" % self.frontend)
 		self.process.terminate()
 		self.process.join()
 
@@ -125,7 +129,7 @@ global purgers
 purgers = []
 
 def sighandler(signal, frame):
-	print "Received terminating signal, shutting down subprocesses"
+	print_t("Received terminating signal, shutting down subprocesses")
 	for p in purgers:
 		p.terminate()
 	sys.exit(0)
