@@ -1,0 +1,186 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.1 Press Kit{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.1 Press Kit</h1>
+
+<h2>Contents</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Text of Original Release</a><br />
+ &nbsp; <a href="#features">Details of Features</a><br />
+ &nbsp; <a href="#anniversary">25 Years of Database Innovation</a><br /> 
+ &nbsp; <a href="#download">Where to Download</a><br />
+ &nbsp; <a href="#docs">Documentation</a><br />
+ &nbsp; <a href="#license">License</a><br />
+ &nbsp; <a href="#contact">Contacts</a><br />
+ &nbsp; <a href="#quoted_companies">Full Text of Quotes and Company Information</a><br />
+ &nbsp; <a href="#companies">Corporate Support</a><br />
+</p>
+
+<a name="original_release"></a><h2>Original Press Release</h2>
+<p>
+<b>12 SEPTEMBER 2011:</b> The PostgreSQL Global Development Group announces the release of PostgreSQL 9.1.  This latest version of the leading open source database offers innovative technology, unmatched extensibility, and new features such as synchronous replication, K-Nearest Neighbor indexing, and foreign data wrappers.  
+</p><p>
+"PostgreSQL 9.1 provides some of the most advanced enterprise capabilities of any open source database, and is backed by a vibrant and innovative community with proven customer success.  PostgreSQL is well positioned for building and running applications in the cloud," said Charles Fan, Sr. VP R&amp;D, VMware.
+</p><p>
+<h3>Responding to Users</h3>
+<p>
+Version 9.1 delivers several features which users have been requesting for years, removing roadblocks to deploying new or ported applications on PostgreSQL.  These include:
+</p><ul>
+<li><b>Synchronous Replication</b>: enable high-availability with consistency across multiple servers</li>
+<li><b>Per-Column Collations</b>: support linguistically-correct sorting per database, table or column.</li>
+<li><b>Unlogged Tables</b>: greatly improves performance for ephemeral data</li>
+</ul><p>
+"Heroku runs the largest PostgreSQL database-as-a-service in the world," said James Lindenbaum, Heroku co-founder. "The release of synchronous data replication with 9.1 provides our customers with innovative new ways of protecting mission-critical data, and validates PostgreSQL as one of the fastest-moving datastores available."
+</p>
+<h3>Advancing the State of the Art</h3>
+<p>
+Our community of contributors innovates with cutting-edge features.  Version 9.1 includes several which are new to the database industry, such as:
+</p><ul>
+<li><b>K-Nearest-Neighbor Indexing</b>: index on "distance" for faster location and text-search queries</li>
+<li><b>Serializable Snapshot Isolation</b>: keeps concurrent transactions consistent without blocking, using "true serializability"</li>
+<li><b>Writeable Common Table Expressions</b>: execute complex multi-stage data updates in a single query</li>
+<li><b>Security-Enhanced Postgres</b>: deploy military-grade security and Mandatory Access Control</li>
+</ul><p>
+"OpenERP has always relied on the enterprise-class features of PostgreSQL to provide a fast, reliable and scalable foundation for the Business Applications supporting our customers' operations every day. Data integrity in highly concurrent and transactional contexts is a critical topic for us, and we're very enthusiastic about the new Serializable Snapshot Isolation of PostgreSQL 9.1!"  said Olivier Dony, OpenERP Community Manager.
+</p>
+<h3>Extending the Database Engine</h3>
+<p>
+PostgreSQL's extensibility enables users to add new functionality to a running production database, and use them for tasks no other database system can perform.  Version 9.1 adds new extensibility tools, including:
+</p><ul>
+<li><b>Foreign Data Wrappers</b>: attach and query other databases from PostgreSQL</li>
+<li><b>Extensions</b>: easily create, load, and manage new database features</li>
+</ul><p>
+All of the above features, and more, are detailed on the <a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.1">What's New In 9.1</a> wiki page, as well as our <a href="http://www.postgresql.org/docs/current/static/release-9-1">release notes</a>.
+</p><p>
+In PostgreSQL's 25th year of database development, our community continues to advance database technology with every annual release.  Download version 9.1 now and experience the most advanced open source database system in the world.
+</p><p>
+<b>About PostgreSQL</b>: PostgreSQL is the leading open source database system, with a global community of thousands of users and contributors and dozens of companies and organizations.  The PostgreSQL Project builds on 25 years of engineering, starting at the University of California, Berkeley, and has an unmatched pace of development today. PostgreSQL's mature feature set not only matches top proprietary database systems, but exceeds them in advanced database features, extensibility, security and stability.  Learn more about PostgreSQL and participate in our community at http://www.postgresql.org.
+</p>
+
+<h2>Extended Release Information</h2>
+
+<a name="features"></a><h2>Details of Features</h2>
+
+<h3>Responding to Users</h3>
+<p>
+Version 9.1 delivers several features which users have been requesting for years, removing roadblocks to deploying new or ported applications on PostgreSQL.  These include:
+</p><dl>
+<dt><b>Synchronous Replication for Clustering:</b></dt><dd> Enable high-availability with consistency across multiple nodes, by deploying PostgreSQL clusters using synchronous replication. Synchronous replication supports "2-safe replication" which ensures transactions have been confirmed by a standby server in addition to the master, greatly limiting the possibility of data loss. Only PostgreSQL has transaction-level synchronous replication, allowing users to choose per transaction between response time and data safety.</dd>
+<dt><b>Per-column Collations for Multi-lingual Databases:</b></dt><dd> Users can now set the collation for strings on a single column.  This permits true multilingual databases, where each text column is a different language, and indexes and sorts correctly for that language.</dd>
+<dt><b>Unlogged Tables to Improve Performance:</b></dt><dd> When performance is more important than durability, unlogged tables provide a way to improve performance while keeping the data managed within PostgreSQL. Removing logging reduces I/O overhead, yielding performance improvements up to 10 times faster when compared to logged tables. Scenarios expected to leverage unlogged tables include web session data, real time logging, ETL and temporary/intermediate tables for functions.</dd>
+</dl>
+<h3>Advancing the State of the Art</h3>
+<p>
+Our community is innovating, delivering cutting-edge features which are new to the database industry.  Some of these features are only available on PostgreSQL.
+</p><dl>
+<dt><b>Powerful Similarity Searches with K-Nearest-Neighbor (KNN) Indexing:</b></dt><dd> Create new applications using PostgreSQL KNN-GiST indexes, which provide innovative indexing to avoid expensive table scans. KNN enhances PostgreSQL's query capabilities by using mathematical "distance" for indexing and searches. These indexes can be used to enhance common text searches, text-similarity searches, geospatial location comparisons and other queries. Example searches that took 2 seconds without the index returned in 20 ms with this feature. Text search indexes can be also now be configured to provide indexing support for LIKE '%string%' queries without changing any SQL.  PostgreSQL is among the first database systems to have KNN.</dd>
+<dt><b>Serializable Snapshot Isolation:</b></dt><dd> Allows users to enforce arbitrarily complex user-defined business rules within the database without blocking, by automatically detecting live race conditions in your SQL transactions at runtime.  This feature currently exists only in PostgreSQL.</dd>
+<dt><b>Writeable Common Table Expressions (wCTE):</b></dt><dd> Supports the relational integrity of your data by allowing you to update multiple, cascading, related records in a single statement.  By using the results of one query to execute another query, you can update recursively, hierarchically, across foreign keys, or even more creatively.  PostgreSQL provides the most complete and flexible implementation of this SQL feature available.</dd>
+<dt><b>Security-Enhanced Postgres (SE-Postgres):</b></dt><dd> Deploy military-grade security and mandatory access control with full-integration support for Security-Enhanced Linux (SE-Linux). SE-Linux is a NSA project that modifies the Linux kernel with security-related functions.  It has been endorsed by and included with major Linux distributions including, but not limited to, Red Hat, CentOS, Debian and Ubuntu.  PostgreSQL is the only database system which has tight integration with SE-Linux.</dd>
+</dl>
+
+<h3>Extending the Database Engine</h3>
+<p>
+PostgreSQL's extensibility enables users to add new functionality to a running production database, and use them for tasks no other database system can perform. Version 9.1 adds critical new extensibility features, including: 
+</p><dl>
+<dt><b>Foreign Data Wrappers (FDW):</b></dt><dd> As part of our standards-compliant SQL/MED support for querying data outside the PostgreSQL database, FDWs allow users to create "drivers" and attach external data sources, which can be used as read-only tables.  FDWs make PostgreSQL a powerful tool for enterprise data integration, and they make migration easier.  FDWs initially available from the community include comma-separated-value (CSV) files, Oracle, MySQL, CouchDB, and even Twitter sources.  And many more are expected in the near future.</dd>
+<dt><b>Extensions:</b></dt><dd> While PostgreSQL has always been extensible, now users can easily create, load, upgrade, and manage any of dozens of database extensions using the EXTENSION database object.  The new site PGXN.org offers a repository for contributing and downloading extensions.</dd>
+</dl>
+<p>
+For explanations of these features and others, please see the following resources:
+</p>
+<ul>
+<li><a href="/docs/9.1/static/release-9-1.html">Release Notes</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.1">What's New In PostgreSQL 9.1</a></li>
+<li><a href="/about/featurematrix">Feature matrix (English only)</a></li>
+</ul>
+
+<a name="anniversary"></a><h2>25 Years of Database Innovation</h2>
+<p>
+The POSTGRES project was inaugurated at the University of California, Berkeley, in June 1986 with the publication of the original POSTGRES design by Lawrence A. Rowe and Michael R. Stonebraker.  In the 25 years since then, POSTGRES became an open source project, converted to using SQL, changed its name to PostgreSQL, and became one of the leading relational databases.  Today, our community competes with some of the largest software companies in the world to deliver new database functionality and better performance.
+</p><p>
+There have been 23 releases of POSTGRES and PostgreSQL, including version 9.1.  PostgreSQL is the only major SQL database system to have consistent, featureful releases every year.
+</p>
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Downloads page</a> with links to installers and tools.</li>
+<li><a href="/ftp/source/v9.1.0">Source Code</a></li>
+<li><a href="/download/windows">Windows Installers</a></li>
+<li><a href="/download/linux">Linux Installers</a> and package repositories</li>
+<li><a href="/download/solaris">Solaris Packages</a></li>
+<li><a href="/download/macosx">Mac OSX Installers</a></li>
+<li><a href="/download/freebsd">FreeBSD Ports</a></li>
+<li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+<li><a href="http://www.pgfoundry.org">Optional Components and Add-Ons</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">Related and Commercial Software</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentation</h2>
+
+<p>
+HTML documentation and man pages are installed with PostgreSQL, but feel free to browse, search and comment on our extensive, interactive <a href="/docs/9.1/interactive">online documentation</a>.
+</p>
+
+<a name="license"></a><h2>License</h2>
+<p>
+PostgreSQL uses the <a href="/about/licence">PostgreSQL License</a>, a BSD-like license which only requires that the licensed source code maintain its copyright and licensing information. This
+<a href="http://www.opensource.org/licenses/postgresql">OSI-certified license</a> is widely appreciated as flexible and business-friendly, since it does not restrict the use of PostgreSQL with commercial and proprietary applications. Together with multi-company support and public ownership of the code, our license makes PostgreSQL very popular with vendors wanting to embed a database in their own products without fear of fees, vendor lock-in, or changes in licensing terms.
+</p>
+
+<a name="contact"></a><h2>Contacts</h2>
+
+<p>Web Pages</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL home page</a></li>
+</ul>
+
+<p>Press Inquiries</p>
+<p>USA and General Inquries<br />
+PostgreSQL PR Team<br />
+<a href="mailto:press@postgresql.org">press@postgresql.org</a><br />
++1 347-6-PGSQL-9 (or +1-347-674-7759) </p>
+
+<p>Ireland<br />
+Raymond O'Donnell<br />
+<a href="mailto:it@postgresql.org">ie@postgresql.org</a><br />
++353 (0)87 2241365</p>
+
+<p>United Kingdom<br />
+Simon Riggs<br />
+<a href="mailto:uk@postgresql.org">uk@postgresql.org</a><br />
++44-7900-255520</p>
+
+<p>For contacts in other regions, see <a href="/about/press/contact">our international contact list.</a></p>
+
+<a name="quoted_companies"></a><h2>Full Text of Quotes and Company Information</h2>
+<p>
+<i>"PostgreSQL 9.1 provides some of the most advanced enterprise capabilities of any open source database, and is backed by a vibrant and innovative community with proven customer success.  PostgreSQL is well positioned for building and running applications in the cloud,"</i> said Charles Fan, Sr. VP R&amp;D, VMware.
+</p><p>
+<b>About VMWare:</b> <a href="http://vmware.com">VMware</a> (NYSE:VMW), the global leader in virtualization and cloud infrastructure, delivers customer-proven solutions that accelerate IT by reducing complexity and enabling more flexible, agile service delivery. VMware enables enterprises to adopt a cloud model that addresses their unique business challenges. VMware's approach accelerates the transition to cloud computing while preserving existing investments and improving security and control. With more than 250,000 customers and 25,000 partners, VMware solutions help organizations of all sizes lower costs, increase business agility and ensure freedom of choice.  Contact: <a href="mailto:prinquiries@vmware.com">VMWare PR</a> or phone +1 (650) 427-2485
+</p><p>
+<i>"Heroku runs the largest PostgreSQL database-as-a-service in the world,"</i> said James Lindenbaum, Heroku co-founder. <i>"The release of synchronous data replication with 9.1 provides our customers with innovative new ways of protecting mission-critical data, and validates PostgreSQL as one of the fastest-moving datastores available."</i>
+</p><p>
+<b>About Heroku:</b> <a href="http://www.heroku.com">Heroku</a> is the leading open platform as a service (PaaS) focused on ease of use, automation, and reliability. Headquartered in San Francisco, CA, Heroku
+is a passionate and active supporter of Ruby technologies and cloud architecture. Heroku was recently named to the "Dow Jones FASTech 50 Start-ups to Watch" list, recognized as a Gartner "Cool Vendor in Application Platforms as a Service" in April 2010, named to the Always OnDemand Top 100 Private Companies, and recognized as a "Best Products of 2009" and "Best Platform of 2010" by ReadWriteWeb. In April 2011, Heroku was
+named #2 on its annual list of "Best Places to Work" in the Bay Area by the San Francisco Business Times. For more information, please visit <a href="http://www.heroku.com">our web page</a> and <a href="http://blog.heroku.com">our blog</a> or follow <a href="http://twitter.com/heroku">Heroku on Twitter</a>. Heroku is a wholly owned subsidiary of salesforce.com. Contact: <a href="mailto:jill@blackswansmedia.com">Jill Ratkevic</a>
+</p><p>
+<i>"OpenERP has always relied on the enterprise-class features of PostgreSQL to provide a fast, reliable and scalable foundation for the Business Applications supporting our customers' operations every day. Data integrity in highly concurrent and transactional contexts is a critical topic for us, and we're very enthusiastic about the new Serializable Snapshot Isolation of PosgtreSQL 9.1! Synchronous replication and more performance optimizations are two other reasons we are looking forward to the next release of PostgreSQL, truly the epitome of Open Source software,"</i> said Olivier Dony, OpenERP Community Manager.
+</p><p>
+<b>About OpenERP:</b> <a href="http://www.openerp.com">OpenERP S.A.</a> is the editor of OpenERP, a comprehensive Open Source Business Application Suite, including CRM, Sales, Accounting, Project Management, Warehouse Management, Manufacturing, Human Resources, and more. Founded in 2005 by CEO Fabien Pinckaers, OpenERP thrives in a unique ecosystem combining the resources of its community, partner
+network and editor. The community (1500 active members as of August 2011) contributes every day to the enrichment of OpenERP. The network of partners, established in more than 65 countries, deploys the solution
+locally. Also available as an online service (SaaS), OpenERP is one of the most installed business suites worldwide (1,000 downloads/day). Media Contact: <a href="mailto:press@openerp.com">Nicoleta Gherlea</a> +32-2-290-34-90
+</p>
+
+<a name="companies"></a><h2>Corporate Support</h2>
+
+<p>PostgreSQL enjoys the support of numerous companies, who sponsor developers, provide hosting resources, and give us financial support.  The largest long-term sponsors are listed on our <a href="/about/sponsors">development sponsors page.</a></p>
+
+<p>There is also a large community of <a href="/support/professional_support">companies offering PostgreSQL Support</a>, from individual consultants to multinational companies.</p>
+
+<p><a href="/about/donate">Donations</a> gladly accepted.</p>
+
+
+
+{%endblock%}

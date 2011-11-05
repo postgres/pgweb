@@ -1,0 +1,177 @@
+{%extends "base/page.html"%}
+{%block title%}Kit de Imprensa do PostgreSQL 9.1{%endblock%}
+{%block contents%}
+
+<h1>Kit de Imprensa do PostgreSQL 9.1</h1>
+
+<h2>Conteúdo</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Texto original das notas de lançamento</a><br />
+ &nbsp; <a href="#features">Detalhes dos recursos</a><br />
+ &nbsp; <a href="#anniversary">25 anos de inovação em bancos de dados</a><br /> 
+ &nbsp; <a href="#download">Onde baixar</a><br />
+ &nbsp; <a href="#docs">Doações</a><br />
+ &nbsp; <a href="#license">Licença</a><br />
+ &nbsp; <a href="#contact">Contatos</a><br />
+ &nbsp; <a href="#quoted_companies">Texto integral das citações e informações sobre as empresas</a><br />
+ &nbsp; <a href="#companies">Suporte corporativo</a><br />
+</p>
+
+<a name="original_release"></a><h2>Texto original das notas de lançamento</h2>
+<p>
+<b>12 SETEMBRO 2011:</b> 
+O Grupo de Desenvolvimento Global do PostgreSQL anuncia o lançamento do PostgreSQL 9.1. A última versão do banco de dados de código aberto líder oferece tecnologia inovadora, extensibilidade ímpar, e novos recursos tais como replicação síncrona, indexação de K-vizinhos mais próximos e conectores para fontes de dados externas.  
+</p><p>
+"O PostgreSQL 9.1 provê algumas das mais avançadas capacidades dentre os bancos de dados de código aberto, e é apoiado por uma comunidade inovadora e vibrante com sucesso comprovado no mercado. O PostgreSQL é uma ótima opção para construir e rodar aplicações na nuvem," disse Charles Fan, Sr. VP R&amp;D, VMware.
+</p><p>
+<h3>Respondendo a pedidos</h3>
+<p>
+A versão 9.1 traz diversas melhorias que os usuários pediam há anos, removendo empecilhos para desenvolver novas ou portar aplicações para o PostgreSQL. Aquelas incluem:
+</p><ul>
+<li><b>Replicação Síncrona</b>: habilita alta disponibilidade com consistência entre múltiplos servidores.</li>
+<li><b>Colação por coluna</b>: suporte a ordenamento linguisticamente correto por banco de dados, tabela ou coluna.</li>
+<li><b>Tabelas sem log de transação</b>: grande melhoria de performance para dados efêmeros.</li>
+</ul><p>
+"O Heroku roda o maior banco-de-dados-como-serviço de PostgreSQL do mundo," disse James Lindenbaum, cofundador do Heroku. "O lançamento da replicação síncrona de dados com o 9.1 dá aos nossos clientes formas inovadoras de proteger dados de missão crítica, e confirma o PostgreSQL como uma das opções de armazenamento de dados de evolução mais rápida disponíveis."
+</p>
+<h3>Avançando o estado da arte</h3>
+<p>
+Nossa comunidade de desenvolvedores inova com recursos de ponta. A versão 9.1 inclui diversas novidades à indústria de bancos de dados, tais como:
+</p><ul>
+<li><b>Indexação de K-vizinhos mais próximos</b>: índices sobre "distância" para buscas mais rápidas de locais e pesquisas de texto</li>
+<li><b>Isolamento de Snapshot Serializável</b>: mantém as transações concorrentes consistentes sem bloquear</li>
+<li><b>Common Table Expressions para gravação</b>: execute atualizações complexas em diversos estágios em um único comando</li>
+<li><b>Security-Enhanced Postgres</b>: instale controles de seguraça com padrões militares e controle de acesso obrigatórios</li>
+</ul><p>
+"O OpenERP sempre se apoiou nos recursos de nível corporativo do PostgreSQL para atingir uma base rápida confiável e escalável para as aplicações comerciais dando suporte às operações cotidianas de nossos clientes. Integridade de dados em ambientes transacionais de alta concorrência é um tópico importantíssimo para nós, e estamos muito entusiasmados com o novo Isolamento de Snapshot Serializável do PostgreSQL 9.1!"  disse Olivier Dony, Gerente de Comunidade OpenERP.
+</p>
+<h3>Estendendo o Motor do Banco de Dados</h3>
+<p>
+A extensibilidade do PostgreSQL possibilita aos usuários adicionar novos recursos a um banco de dados de produção em execução, e utilizá-los para tarefas que nenhum outro banco de dados poderia atender. A versão 9.1 adiciona novas ferramentas de extensibilidade, incluindo:
+</p><ul>
+<li><b>Foreign Data Wrappers</b>: anexe e consulte outros bancos de dados do PostgreSQL</li>
+<li><b>Extensões</b>: crie, carregue e gerencie facilmente novos recursos no banco de dados</li>
+</ul>
+Todos os recursos acima, e outros, estão detalhados na página do Wiki <a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.1">What's New In 9.1</a> em inglês, assim como nossas <a href="http://www.postgresql.org/docs/current/static/release-9-1">notas de lançamento</a>.
+</p><p>
+No vigésimo quinto ano de desenvolvimento do PostgreSQL, nossa comunidade continua avançando a tecnologia de bancos de dados a cada versão anual. Baixe a versão 9.1 agora e experiencie o sistema de bancos de dados de código aberto mais avançado do mundo.
+</p><p>
+<b>Sobre o PostgreSQL</b>: O PostgreSQL é o sistema de banco de dados de código aberto mais avançado do mundo, com uma comunidade global de milhares de usuários, desenvolvedores, dezenas de empresas e organizações. O projeto PostgreSQL tem 25 anos de engenharia, começando da Universidade da Califórnia, Berkeley, e uma velocidade de desenvolvimento sem igual hoje. O conjunto maduro de recursos do PostgreSQL não apenas se iguala ao dos sistemas de banco de dados proprietários mais avançados, mas os supera em recursos avançados, extensibilidade, segurança e estabilidade. Saiba mais sobre o PostgreSQL e participe da nossa comunidade em <a href="http://www.postgresql.org">http://www.postgresql.org</a>.
+</p>
+
+<h2>Mais informações de lançamento</h2>
+
+<a name="features"></a><h2>Detalhes dos recursos</h2>
+
+<h3>Atendendo a pedidos</h3>
+<p>
+A versão 9.1 traz diversas melhorias que os usuários pediam há anos: remove empecilhos para desenvolver novas aplicações portá-las para o PostgreSQL. Aquelas incluem:
+</p><dl>
+<dt><b>Replicação síncrona para clustering:</b></dt><dd> Oferece alta disponibilidade com consistência entre múltiplos nós, através de clusters usando replicação síncrona. A replicação síncrona suporta efetivação em dois estágios, o que confirma as transações que tenham sido recebidas com sucesso por um servidor em standby além do mestre, limitando enormemente as possibilidades de perda de dados. Apenas o PostgreSQL tem a replicação síncrona em nível de transação, permitindo que o usuário escolha em cada transação entre tempo de resposta e segurança dos dados.</dd>
+<dt><b>Colação por coluna para bancos multi-idioma:</b></dt><dd> Usuários podem agora definir a colação para strings em uma coluna específica.  Isso permite bancos de dados verdadeiramente multi-idioma, onde cada coluna de texto está em um idioma diferente, e índices ordenam corretamente para aquele idioma.</dd>
+<dt><b>Tabelas sem log de transação para melhor performance:</b></dt><dd> Quando a performance é mais importante que a durabilidade dos dados, tabelas sem logs de transação fornecem uma forma de aumentar a velocidade mantendo os dados gerenciados dentro do PostgreSQL. Remover o log reduz a sobrecarga de I/O, gerando melhorias de até 10 vezes na velocidade quando comparada às tabelas com log. Cenários que podem se aproveitar de tabelas sem log incluem dados de sessões web, registros de dados em tempo real, ETL e dados temporários ou intermediários para funções.</dd>
+</dl>
+<h3>Avançando o estado da arte</h3>
+<p>
+Nossa comunidade de desenvolvedores inova com recursos de ponta. A versão 9.1 inclui diversas novidades à indústria de bancos de dados. Algumas destas estão disponíveis somente no PostgreSQL.
+</p><dl>
+<dt><b>Poderosas pesquisas por similaridade com indexação de K-vizinhos-mais-próximos (K-Nearest-Neighbor - KNN):</b></dt><dd> Crie novas aplicações usando os índices KNN-GiST, que permitem uma indexação inovadora evitando as caras varreduras sequenciais. O KNN melhora a capacidade de consulta do PostgreSQL usando a distância matemática para indexação e pesquisa. Esses índices podem ser usados para melhorar pesquisas comuns de texto, pesquisas por similaridade de texto, localização geo-espacial e outros tipos de consulta. Algumas consultas de exemplo que levavam 2 segundos sem o índice retornaram em 20 ms com esse recurso. Índices de pesquisa de texto podem agora ser configuradas para fornecer suporte às consultas com LIKE '%texto%' sem modificar os comandos SQL. O PostgreSQL está entre os primeiros SGBDs a ter o índice KNN.</dd>
+<dt><b>Isolamento de Snapshot Serializável:</b></dt><dd> Permite aos usuários definirem regras de negócio arbitrariamente complexas dentro do banco de dados sem bloquear, automaticamente detectando condições de corrida nas transações SQL em tempo de execução. Esse recurso existe atualmente somente no PostgreSQL.</dd>
+<dt><b>Common Table Expressions para gravação (wCTE):</b></dt><dd> Suporte à integridade relacional dos seus dados permitindo a atualização de registros múltiplos, em cascata, e relacionados em um simples comando. Usando os resultados de uma consulta para executar outra, você pode atualizar recursivamente, hierarquicamente, usando chaves estrangeiras ou de formas ainda mais criativas. O PostgreSQL provê a implementação mais completa e flexível desse recurso SQL no mercado.</dd>
+<dt><b>Security-Enhanced Postgres (SE-Postgres):</b></dt><dd> Instale controles de seguraça com padrões militares e controle de acesso obrigatórios com integração completa com o Security-Enhanced Linux (SE-Linux). SE-Linux é um projeto da NSA que modifica o kernel do Linux com funcões relacionadas à segurança. Ele foi recomendado por e incluido em grandes distribuições Linux, incluindo, entre outras, Red Hat, CentOS, Debian e Ubuntu. O PostgreSQL é o único banco de dados com uma integração tão forte com o SE-Linux.</dd>
+</dl>
+
+<h3>Estendendo o Motor do Banco de Dados</h3>
+<p>
+A extensibilidade do PostgreSQL possibilita aos usuários adicionar novos recursos a um banco de dados de produção em execução, e utilizá-los para tarefas que nenhum outro banco de dados poderia atender. A versão 9.1 adiciona novas ferramentas de extensibilidade, incluindo:
+</p><dl>
+<dt><b>Foreign Data Wrappers (FDW):</b></dt><dd> Como parte do suporte à conformidade com padrões SQL/MED para consultar dados fora do PostgreSQL, os FDWs permitem que usuários criem "drivers" e anexem fontes de dados externas, que podem ser usadas como tabelas somente de leitura. Os FDWs fazem do PostgreSQL uma poderosa ferramenta para integração de dados corporativos, e eles tornam migrações mais fáceis. Os FDWs inicialmente disponibilizados pela comunidade de desenvolvedores incluem fontes de dados para valores separados por vírgula (CSV), Oracle, MySQL, CouchDB, e até Twitter.  E muitos mais são esperados em um futuro próximo.</dd>
+<dt><b>Extensões:</b></dt><dd> Mesmo que o PostgreSQL tenha sido sempre extensível, agora usuários podem facilmente criar, carregar, atualizar e gerenciar dúzias de extensões do banco de dados usando o objeto EXTENSION. O novo site PGXN.org oferece um repositório para contribuir e baixar extensões.</dd>
+</dl>
+<p>
+Para explicações desses recursos e de outros, por favor veja as seguintes fontes:
+</p>
+<ul>
+<li><a href="/docs/9.1/static/release-9-1.html">Notas de Lançamento</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.1">O que há de novo no PostgreSQL 9.1 (em inglês)</a></li>
+<li><a href="/about/featurematrix">Matriz de Recursos (em inglês)</a></li>
+</ul>
+
+<a name="anniversary"></a><h2>25 anos de inovação em bancos de dados</a></h2>
+<p>
+O projeto POSTGRES foi inaugurado na Universidade da California, Berkeley, em junho de 1986 com a publicação do projeto original do POSTGRES por Lawrence A. Rowe e Michael R. Stonebraker.  Nesses 25 anos, o POSTGRES teve seu código aberto, foi convertido para usar SQL, mudou seu nome para PostgreSQL, e tornou-se um dos sistemas de bancos de dados mais avançados do mundo. Hoje nossa comunidade compete com algumas das maiores empresas de software do mundo a fim de entregar novas funcionalidades e melhor performance.
+</p><p>
+Houveram 23 versões do POSTGRES e PostgreSQL, incluindo a versão 9.1. O PostgreSQL é o único grande banco de dados SQL a ter lançamentos consistentes e cheios de recursos a cada ano.
+</p>
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Página de downloads</a> com links para instaladores e ferramentas.</li>
+<li><a href="/ftp/source/v9.1.0">Código Fonte</a></li>
+<li><a href="/download/windows">Intaladores para Windows</a></li>
+<li><a href="/download/linux">Instaladores para Linux</a> e repositórios de pacotes</li>
+<li><a href="/download/solaris">Pacotes para Solaris</a></li>
+<li><a href="/download/macosx">Instaladores para Mac OSX</a></li>
+<li><a href="/download/freebsd">FreeBSD Ports</a></li>
+<li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+<li><a href="http://www.pgfoundry.org">Componentes opcionais e extensões</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">Softwares relacionados e comerciais</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentação</h2>
+
+<p>
+Documentação HTML e man pages são instaladas com o PostgreSQL, mas fique à vontade para navegar, pesquisar e comentar em nossa extensa e interativa <a href="/docs/9.1/interactive">documentação online</a>.
+</p>
+
+<a name="license"></a><h2>Licença</h2>
+<p>
+O PostgreSQL usa a <a href="/about/licence">Licença PostgreSQL</a>, uma licença estilo BSD que exige apenas que o código aberto licenciado mantenha suas informações de copyright. Essa 
+<a href="http://www.opensource.org/licenses/postgresql">Licença certificada pela OSI</a> é amplamente reconhecida como flexível e ótima para uso comercial, pois ela não restringe o uso do PostgreSQL com aplicações comerciais e proprietárias. Junto com o suporte de diversas empresas e propriedade pública do código, nossa licença faz do PostgreSQL muito popular entre fornecedores que desejam embarcar um sistema de bancos de dados nos seus produtos sem medo de taxas, dependência de terceiros ou mudanças nos termos da licença.
+</p>
+
+<a name="contact"></a><h2>Contatos</h2>
+
+<p>Web Pages</p>
+<ul>
+<li><a href="http://www.postgresql.org">Página do PostgreSQL</a></li>
+<li><a href="http://www.postgresql.org.br">PostgreSQL BR</a></li>
+</ul>
+
+<p>Press Inquiries</p>
+<p>Brasil<br />
+Diogo de Oliveira Biazus<br />
+<a href="mailto:BR@POSTGRESQL.ORG">br@postgresql.org</a><br />
+51 91858411</p>
+
+<p>Para contato em outras regiões consulte <a href="/about/press/contact">nossa lista de contatos internacionais</a></p>
+
+<a name="quoted_companies"></a><h2>Texto integral das citações e informações sobre as empresas</h2>
+<p>
+"O PostgreSQL 9.1 provê algumas das mais avançadas capacidades dentre os bancos de dados de código aberto, é apoiado por uma comunidade inovadora e vibrante com sucesso comprovado no mercado. O PostgreSQL é uma ótima opção para construir e rodar aplicações na nuvem," disse Charles Fan, Sr. VP R&amp;D, VMware.
+</p><p>
+<b>Sobre a VMWare:</b> <a href="http://vmware.com">VMware</a> (NYSE:VMW), o líder global em virtualização e infraestrutura de nuvem, entrega soluções testadas e comprovadas que aceleram a TI reduzindo a complexidade e possibilitando fornecimento mais ágil e flexível de serviços. A VMware capacita as corporações a adotarem um modelo de nuvem que soluciona seus desafios de negócio. A abordagem da VMware's acelera a transição para computação em nuvem enquanto preserva investimentos já presentes e melhora a segurança e o controle. Com mais de 250.000 clientes e 25.000 parceiros, as soluções da VMware ajudam organizações de todos os tamanhos a reduzir custos, aumentar agilidade e garantir a liberdade de escolha. Contact: <a href="mailto:prinquiries@vmware.com">VMWare PR</a> ou telefone +1 (650) 427-2485
+</p><p>
+"O Heroku roda o maior banco-de-dados-como-serviço de PostgreSQL do mundo," disse James Lindenbaum, cofundador do Heroku. "O lançamento de replicação síncrona de dados com o 9.1 dá aos nossos clientes formas inovadoras de proteger dados de missão crítica, e confirma o PostgreSQL como uma das opções de armazenamento de dados de evolução mais rápida disponíveis."
+</p><p>
+<b>Sobre a Heroku:</b> A <a href="http://www.heroku.com">Heroku</a> é a plataforma como serviço líder de mercado, focada em facilidade de uso, automação e confiabilidade. Localizada em San Francisco, CA, a Heroku
+é uma apoiadora apaixonada e ativa das tecnologias Ruby e arquitetura em nuvem. A Heroku foi recentemente listada na lista "Dow Jones FASTech 50 Start-ups to Watch", reconhecida pela Gartner como "Cool Vendor in Application Platforms as a Service" em abril de 2010, listada em "Always OnDemand Top 100 Private Companies", e reconhecida como "Best Products of 2009" e "Best Platform of 2010" pela ReadWriteWeb. Em abril de 2011, a Heroku ficou em segundo lugar na lista anual de "Best Places to Work" na área de baia pela "San Francisco Business Times". Para mais informações, favor consultar <a href="http://www.heroku.com">nossa página</a> e <a href="http://blog.heroku.com">nosso blog</a> ou siga <a href="http://twitter.com/heroku">Heroku no Twitter</a>. A Heroku é uma subsidiária da salesforce.com. Contato: <a href="mailto:jill@blackswansmedia.com">Jill Ratkevic</a>
+</p><p>
+"O OpenERP sempre se apoiou nos recursos de nível corporativo do PostgreSQL para atingir uma base rápida confiável e escalável para as aplicações comerciais dando suporte às operações cotidianas de nossos clientes. Integridade de dados em ambientes transacionais de alta concorrência é um tópico importantíssimo para nós, e estamos muito entusiasmados com o novo Isolamento de Snapshot Serializável do PostgreSQL 9.1!"  disse Olivier Dony, Gerente de Comunidade OpenERP. A replicação síncrona e mais otimizações de performance são duas outras razões pelas quais estamos aguardando a próxima versão do PostgreSQL, realmente é a epítome do software de código aberto," disse Olivier Dony, Gerente de comunidade do OpenERP.
+</p><p>
+<b>Sobre a OpenERP:</b> A <a href="http://www.openerp.com">OpenERP S.A.</a> é a produtora do OpenERP, uma ampla suíte de aplicações comerciais de código aberto, incluindo CRM, Vendas, Contabilidade, Gerenciamento de Projeto,Estoque, Manufatura, Recursos Humanos e mais. Fundada em 2005 pelo CEO Fabien Pinckaers, a OpenERP floresce em um ecossistema único combinando os recursos de sua comunidade, rede de parceiros e produtora.
+A comunidade (1500 membros ativos em agosto de 2011) contribui todos os dias com melhorias no OpenERP. A rede de parceiros, estabelecida em mais de 65 países, implanta a solução regionalmente.
+Também disponível como um serviço online (SaaS), o OpenERP é uma das suítes de aplicativos comerciais mais instaladas no mundo (1,000 downloads/dia). Contato para mídia: <a href="mailto:press@openerp.com">Nicoleta Gherlea</a> +32-2-290-34-90
+</p>
+
+<a name="companies"></a><h2>Suporte corporativo</h2>
+
+<p>O PostgreSQL tem o suporte de inúmeras empresas, que patrocinam desenvolvedores, fornecem recursos para hospedagem, e dão apoio financeiro. Os maiores patrocinadores de longa data estão listados em nossa <a href="/about/sponsors">página de patrocinadores do desenvolvimento.</a></p>
+
+<p>Existe também uma grande comunidade de <a href="/support/professional_support">de empresas oferecendo suporte ao PostgreSQL</a>, de consultores individuais à empresas multinacionais.</p>
+
+<p><a href="/about/donate">Doações</a> serão aceitas de bom grado.</p>
+
+
+
+{%endblock%}

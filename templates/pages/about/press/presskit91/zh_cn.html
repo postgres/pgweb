@@ -1,0 +1,196 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.1 版发布宣传资料{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.1 版发布宣传资料</h1>
+
+<h2>目录</h2>
+
+<p>
+ &nbsp; <a href="#original_release">新版本发布说明的原文</a><br />
+ &nbsp; <a href="#features">特性列表</a><br />
+ &nbsp; <a href="#anniversary">25的的数据库创新</a><br /> 
+ &nbsp; <a href="#download">下载地址</a><br />
+ &nbsp; <a href="#docs">文档</a><br />
+ &nbsp; <a href="#license">版权声明</a><br />
+ &nbsp; <a href="#contact">联系方式</a><br />
+ &nbsp; <a href="#quoted_companies">相关商业公司信息</a><br />
+ &nbsp; <a href="#companies">企业支持</a><br />
+</p>
+
+<a name="original_release"></a><h2>新版本发布说明的原文</h2>
+<p>
+<b>2011/09/12:</b> PostgreSQL全球开发组宣布业界领先的开源关系数据库PostgreSQL9.1版发布，该版本增加了很多创新性的技术、强大的可扩展性以及类似同步复制、最近相邻索引和外部数据封装等功能。  
+</p><p>
+“PostgreSQL 9.1版本提供了开源数据库最为高端的企业级功能， 它的背后是一个充满生气和创新能力的、是经证明可以引导客户走向成功的社区。PostgreSQL也在创建和运行云计算方面做好了准备，“ VMware公司的研发副总裁Charles Fan说道。
+</p><p>
+<h3>对用户要求的响应</h3>
+<p>
+9.1版本增加了几项用户一直以来申请增加的功能，为用户在PostgreSQL基础上发布新的应用扫清了障碍，这些功能包括：
+
+</p><ul>
+<li><b>同步复制</b>: 允许跨多服务器进行高可靠性复制。</li>
+<li><b>字段级编码</b>: 支持对数据库、表、列进行多编码的排序。</li>
+<li><b>非日志型表</b>: 极大地提升了对临时保存数据的性能。</li>
+</ul><p>
+“Heroku运行着一个世界上最大的PostgreSQL数据库”， Heroku公司的创始人之一，James Lindenbaum先生说道，”9.1版本提供的同步复制技术给我们客户带来了创新的方法来保护关键事务数据，并且也验证了PostgreSQL在快速增长的数据仓库方面应用的能力。“
+</p>
+<h3>（艺术级）的高级功能</h3>
+<p>
+社区的开发人员创新地开发了几项最前沿的功能，9.1版本包括以下几项数据库业界全新的功能，如：
+</p><ul>
+<li><b>最近相邻索引技术</b>: 索引是按照”距离“来达到在查询中快速定位和文字搜索。</li>
+<li><b>可串行化的快照隔离</b>: 使用”真正的可串行化“，确保并行事务的一致性。</li>
+<li><b>可更新的CTE功能</b>: 在一个查询中执行复杂的多阶段数据更新。</li>
+<li><b>安全增强型版本</b>: 发布军队安全级和强制存取控制的版本。</li>
+</ul><p>
+”OpenERP软件依赖于具有企业级特性的PostgreSQL，来为我们用户的每天操作实现快速、安全和可伸缩性的商业应用。在高并发和复杂事务条件下的数据集成性对我们来说是关键，我们对新的PostgreSQL9.1版本中可串行化快照隔离技术非常感兴趣！“OpenERP社区经理Olivier Dony说道。
+</p>
+<h3>可扩展的数据库引擎</h3>
+<p>
+PostgreSQL的可扩展性允许用户增加新的功能来运行生产环境的数据库，并且可以执行一些其他数据库系统无法完成的任务，9.1版本增加的新可扩展性工具，包括：
+
+</p><ul>
+<li><b>外部数据源封装器</b>: 允许从PostgreSQL中附加或查询其他数据库内容。</li>
+<li><b>扩充功能</b>: 可以很方便地创建、加载和管理新的数据库功能。</li>
+</ul>
+所有上述新特性以及其他更多的功能，在<a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.1">9.1版本新增功能列表</a>页面中有显示，同样在<a href="http://www.postgresql.org/docs/current/static/release-9-1">发布声明中也有</a>。
+</p><p>
+在PostgreSQL25年的开发过程中，我们社区将持续致力于开发新的数据库技术，并每年发布一个新的大版本。现在可以下载9.1版本并体验世界上最为强大的开源数据库系统。
+
+</p><p>
+<b>关于POSTGRESQL</b>: PostgreSQL是业内领先的开源数据库系统，它的开发和支持来自于一个由数千名用户组成的全球社区和全球几十家公司或组织，PostgreSQL项目有25年以上的历史，起源于加利福利亚的伯克利大学，经历了无数次开发升级。PostgreSQL的专业特性不仅包含最高级的商业数据库系统的功能，还在高级数据库特性、扩展性、安全性和稳定性方面超越了它们，更多详情可浏览：http://www.postgresql.org 网站。
+</p>
+
+<h2>新版本发布说明（扩充部分）</h2>
+
+<a name="features"></a><h2>新特性列表</h2>
+
+<h3>对用户要求的响应</h3>
+<p>
+9.1版本增加了几项用户一直以来申请增加的功能，为用户在PostgreSQL基础上发布新的应用扫清了障碍，这些功能包括：
+</p><dl>
+<dt><b>集群的同步复制:</b></dt><dd> 通过布置使用同步复制技术的PostgreSQL集群，允许跨多服务器节点进行高可靠性复制。同步复制支持“２路安全复制”技术，该技术通过主服务器和额外的备份服务器保证事务的确认，极大地减少了数据损失的发生风险。目前仅PostgreSQL支持事务级的同步复制，这项技术允许用户在响应时间和数据安全方面根据事务进行选择。</dd>
+<dt><b>可按字段级控制的多编码数据库:</b></dt><dd> 用户现在可对某一字段设置不同的字符编码，这样才是真正的允许多编码数据库，每一字段可以有不同的编码，索引和排序也相应地参照这个编码执行。</dd>
+<dt><b>高性能的非日志型表:</b></dt><dd> 当用户对性能要求高于稳定性时，非日志型表提供了一个方式允许用户在PostgreSQL中以高性能的方式管理和操作数据。它可以减少了I/O的操作，相比日志型数据表提高了10倍以上的速度。该技术适用于session数据、实时日志、ETL以及其他需临时/中间记录等一些功能。</dd>
+</dl>
+<h3>（艺术级）的高级功能</h3>
+<p>
+我们社区的开发人员创新地开发了几项最前沿的功能，9.1版本包括以下几项数据库业界全新的功能，如：
+</p><dl>
+<dt><b>强大的相似性搜索（KNN索引）:</b></dt><dd> 使用PostgreSQL KNN-Gist索引创建一个新的应用可以避免费用的数据表扫描。通过使用数学上的“距离”计算用于索引和搜索，KNN技术增强了PostgreSQL的查询能力。这些索引可用于增强一般的文字搜索、文本相似性搜索、地理空间位置比较和其他查询。在一个无索引的表搜索中，不使用KNN功能搜索需花2秒，而使用后仅需20ms。文字搜索经过配置在不改变任何SQL语句的情况下，也可以支持类似 LIKE '%string%'样的查询。PostgreSQL是业界内第一个使用KNN技术的数据库系统。</dd>
+<dt><b>可串行化的快照隔离:</b></dt><dd> 通过在事务运行时自动侦测已使用的冲突条件来允许用户强制多次地执行复杂的用户自定义的商业规则而不会有阻隔。这个功能目前也是仅PostgreSQL具有。</dd>
+<dt><b>可更新的CTE功能 (wCTE):</b></dt><dd> 支持用户在一个语句内执行多个、级联、相关记录的更新。通过使用一个查询的结果去执行另一个查询，用户可以递归地、分级地、跨外键地或是更加创新的方式来更新数据。PostgreSQL为这项SQL特性提供了一个最为完整和有灵活性解决方案。</dd>
+<dt><b>安全增强型版本 (SE-Postgres):</b></dt><dd> 通过与SE-Linux的全集成，发布军队安全级和强制存取控制的版本。SE-Linux是通过修改Linux核心来强化安全相关功能的NSA项目。它现已支持主要的Linux发布版本，包括但不限于Red Hat, CentOS, Debian 和 Ubuntu。PostgreSQL是唯一与SE-Linux集成的数据库系统。</dd>
+</dl>
+
+<h3>可扩展的数据库引擎</h3>
+<p>
+PostgreSQL的可扩展性允许用户增加新的功能来运行生产环境的数据库，并且可以执行一些其他数据库系统无法完成的任务，9.1版本增加的新可扩展性工具，包括：
+ 
+</p><dl>
+<dt><b>外部数据源封装器 (FDW):</b></dt><dd> 为了查询PostgreSQL数据库之外数据，作为SQL/MED标准兼容的一项功能，FDW功能允许用户创建驱动程序连接外部数据源，这样这些数据就成为了PostgreSQL内部只读的表。FDW功能使PostgreSQL成为企业数据集成的一个强大工具，这也使得数据迁移很容易。FDW目前开始支持CSV格式文件、Oracle、MySQL、CouchDB、甚至还有Twitter数据源。更多的数据库支持最近也将提供。</dd>
+<dt><b>扩充功能:</b></dt><dd> 尽管PostgreSQL一直就有扩充功能，但现在用户通过使用EXTENSION功能可以更加容易地创建、加载、升级和管理一大堆数据库的扩展。 新的网站PGXN.org上提供了很多可下载的扩展模块。</dd>
+</dl>
+<p>
+对上述特性或其他特性的详细解释，也可以参见下列文档：
+</p>
+<ul>
+<li><a href="/docs/9.1/static/release-9-1.html">发布声明</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.1">9.1版本的新特性</a></li>
+<li><a href="/about/featurematrix">特性矩阵 (仅英文)</a></li>
+</ul>
+
+<a name="anniversary"></a><h2>25年的数据库创新</a></h2>
+<p>
+POSTGRES项目起源于加利福利亚的伯克利大学，最早源于1986年6月发布的POSTGRES，它是由Lawrence A. Rowe 和 Michael R. Stonebraker设计的。从那以后的25年里，POSTGRES成为一个开源项目，转换为使用SQL，改其名称为PostgreSQL，并成为领先的关系数据库系统。今天，我们的社区在开发新的数据库功能以及提升性能方面可以和一些世界上最大的软件公司相媲美。
+</p><p>
+包括9.1版本，POSTGRES 和 PostgreSQL共发布了23个大的版本。PostgreSQL是仅有的可以持续每年发布新的大版本的主要数据库软件。
+</p>
+
+
+
+<a name="download"></a><h2>下载</h2>
+<ul>
+<li><a href="/download">下载页面</a> 包括安装程序和一些工具软件</li>
+<li><a href="/ftp/source/v9.1.0">原代码</a></li>
+<li><a href="/download/windows">Windows平台的安装程序</a></li>
+<li><a href="/download/linux">Linux平台的安装程序</a> 和一些软件包的版本库</li>
+<li><a href="/download/solaris">Solaris平台安装程序</a></li>
+<li><a href="/download/macosx">Mac OSX平台安装程序</a></li>
+<li><a href="/download/freebsd">FreeBSD平台安装程序</a></li>
+<li><a href="http://pgxn.org">PostgreSQL扩展模块网</a></li>
+<li><a href="http://www.pgfoundry.org">可选增值模块或附件</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">相关商业软件</a></li>
+</ul>
+
+
+
+
+<a name="docs"></a><h2>文档</h2>
+
+<p>HTML文档和man手册页会和PostgreSQL同步安装，用户也可以免费地通过在线方式对<a href="/docs/9.1/interactive">在线文档</a>进行浏览、搜索、回复意见。</p>
+
+
+<a name="license"></a><h2>版权声明</h2>
+<p>
+PostgreSQL 使用<a href="/about/licence">PostgreSQL版权</a>，它是类似BSD的版权，只要求对有版权的源代码保留其版权和授权的信息即可。
+由于这个经 <a href="http://www.opensource.org/licenses/postgresql">OSI认证的版权</a>不限制PostgreSQL在商业环境和有版权的应用程序中使用，因此被公认为是非常有灵活性和对商业应用是友好的。加上有多个公司的支持和源代码归属公共所有，我们的版权使得PostgreSQL在那些希望在自己的产品里嵌入数据库的厂商中很流行，因为他们不用担心费用、嵌入软件的版权锁以及版权条款的改变。
+</p>
+
+
+<a name="contact"></a><h2>联系方式</h2>
+
+<p>相关网站</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL的网站</a></li>
+<li><a href="http://www.pgsqldb.org">PostgreSQL中文社区网站</a></li>
+</ul>
+
+
+<p>联系人：<br />
+何伟平<br />
+北京<br />
+<a href="mailto:laserhenry@gmail.com">laserhenry@gmail.com</a><br />
+<br />
+周到京<br />
+合肥<br />
+086013515513326<br />
+<a href="mailto:cn@postgresql.org">cn@postgresql.org</a>
+</p>
+
+<p>要查询特定地区的联系人，可浏览<a href="/about/press/contact">我们的全球联系人员列表。</a></p>
+
+
+
+<a name="quoted_companies"></a><h2>相关商业公司信息</h2>
+<p>
+“PostgreSQL 9.1版本提供了开源数据库最为高端的企业级功能， 它的背后是一个充满生气和创新能力的、是经证明可以引导客户走向成功的社区。PostgreSQL也在创建和运行云计算方面做好了准备，” VMware公司的研发副总裁Charles Fan说道。
+</p><p>
+<b>关于VMWare公司:</b> <a href="http://vmware.com">VMware</a> (NYSE:VMW)，虚拟环境和云计算架构的全球领先供应商，该公司可以交付经用户验证的、可以减少IT复杂性而增加灵活性的解决方案。VMware公司允许企业采用云计算模式以适应商业上的挑战。它也加速了企业在保护现有投资的前提下加速向云计算模式的转变并提升企业的数据安全和控制。该公司现有超过250,000名客户和25,000合作者，VMware的解决方案帮助各种企业降低成本、增加商业灵活性以及保证选择的自由。联系方式: <a href="mailto:prinquiries@vmware.com">VMWare PR</a> 或电话 +1 (650) 427-2485
+</p><p>
+
+“Heroku运行着一个世界上最大的PostgreSQL数据库”， Heroku公司的创始人之一，James Lindenbaum先生说道，”9.1版本提供的同步复制技术给我们客户带来了创新的方法来保护关键事务数据，并且也验证了PostgreSQL在快速增长的数据仓库方面应用的能力。“
+</p><p>
+<b>关于Heroku公司:</b> <a href="http://www.heroku.com">Heroku</a> 公司是一家致力于提供易用、自动化、可靠性高的开放平台的服务商，总部位于加州的三藩市。Heroku公司是Ruby技术和云计算架构的积极支持者。它最近被选为“道琼斯FASTech咨询委员会50家初创公司观察"表之一，2010年4月被高德纳咨询公司列为”最棒的应用平台服务商“, 被onDemand公司列为最好的100私人公司，被ReadWriteWeb网站列为”2009最佳产品“和”2010最佳平台“。2011/04，Heroku公司被三藩市的商业周刊列为海湾区”最佳工作地点“第2名。更多信息可浏览 <a href="http://www.heroku.com">网站</a> 和 <a href="http://blog.heroku.com">博客</a> 或是 <a href="http://twitter.com/heroku"> Twitter</a>。Heroku公司完全拥有salesforce.com网站，联系方式：<a href="mailto:jill@blackswansmedia.com">Jill Ratkevic</a>
+</p><p>
+
+”OpenERP软件依赖于具有企业级特性的PostgreSQL，来为我们用户的每天操作实现快速、安全和可伸缩性的商业应用。在高并发和复杂事务条件下的数据集成性对我们来说是关键，我们对新的PostgreSQL9.1版本中可串行化快照隔离技术非常感兴趣！同步复制技术和性能优化是两个我们期待新版本PostgreSQL的主要原因，PostgreSQL是开源软件的典型代表。“OpenERP社区经理Olivier Dony说道。
+</p><p>
+<b>关于OpenERP:</b> <a href="http://www.openerp.com">OpenERP S.A.</a> 是OpenERP的开发公司，OpenERP是一个综合的开源商业应用套件，包括CRM、销售、财务、项目管理、仓库管理、制造、人力资源及更多功能。2005年由现CEO Fabien Pinckaers创建，OpenERP形成了社区、合作者、开发者一个完整唯一的生态链。社区（2011/08统计有1500名活跃成员）每天都在向OpenERP贡献新的活力。遍布于65个国家的网络上的合作者可以在本地交付系统。OpenERP也提供在线服务(SAAS)，它是世界上安装最多的商业套件（每天多达1000次下载）。联系方式：<a href="mailto:press@openerp.com">Nicoleta Gherlea</a> +32-2-290-34-90
+</p>
+
+
+
+<a name="companies"></a><h2>企业支持</h2>
+
+<p>PostgreSQL获得了一大批公司的支持，他们资助开发人员，提供网上资源以及给予了资金上的支持。一些较大的且长期支持的公司名单列在我们的 <a href="/about/sponsors">开发支持页面</a></p>
+
+<p>还有<a href="/support/professional_support">大量的公司</a>提供从独立顾问到跨国公司的 PostgreSQL 支持。</p>
+
+
+<p><a href="/about/donate">各种捐助</a> 将被很乐于接受。</p>
+
+
+
+{%endblock%}

@@ -1,0 +1,230 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.1 Press Kit{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.1 Press Kit</h1>
+
+<h2>Contenido</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Nota Original de Lanzamiento</a><br />
+ &nbsp; <a href="#features">Detalle de Caracter&iacute;sticas</a><br />
+ &nbsp; <a href="#anniversary">25 A&ntilde;os de Innovaci&oacute;n en Base de Datos</a><br /> 
+ &nbsp; <a href="#download">Donde Descargarlo</a><br />
+ &nbsp; <a href="#docs">Documentaci&oacute;n</a><br />
+ &nbsp; <a href="#license">Licencia</a><br />
+ &nbsp; <a href="#contact">Contactos</a><br />
+ &nbsp; <a href="#quoted_companies">Texto Completo de las Citas e Informaci&oacute;n de las Compa&ntilde;&iacute;as</a><br />
+ &nbsp; <a href="#companies">Soporte Corporativo</a><br />
+</p>
+
+<a name="original_release"></a><h2>Nota Original de Lanzamiento</h2>
+<p>
+<b>12 DE SEPTIEMBRE DEL 2011:</b> El Equipo Global de Desarrollo de PostgreSQL da a conocer el lanzamiento de PostgreSQL 9.1. Esta &uacute;ltima actualizaci&oacute;n de la base de datos de c&oacute;digo abierto l&iacute;der ofrece tecnolog&iacute;a innovadora, extensibilidad sin igual, y nuevas caracter&iacute;sticas como replicaci&oacute;n sincr&oacute;nica, m&eacute;todo de indexado "K-Nearest Neighbor", y conectores de datos for&aacute;neos.
+</p><p>
+"PostgreSQL 9.1 provee algunas de las m&aacute;s avanzadas caracter&iacute;sticas empresariales de cualquier base de datos de c&oacute;digo abierto, y es soportado por una entusiasta e innovativa comunidad con probados casos de &eacute;xito. PostgreSQL esta muy bien preparada para construir y correr aplicaciones en la nube." palabras de Charles Fan, Sr. VP R&amp;D, VMware.
+</p><p>
+<h3>Respondiendo a los usuarios</h3>
+<p>
+La versi&oacute;n 9.1 ofrece muchas caracter&iacute;sticas que los usuarios han estado solicitando por a&ntilde;os, retirando obst&aacute;culos para el despliegue de aplicaciones nuevas o migradas en PostgreSQL. Estas incluyen:
+</p><ul>
+<li><b>Replicaci&oacute;n Sincr&oacute;nica</b>: permitiendo alta disponibilidad con consistencia sobre multiples servidores.</li>
+<li><b>Regionalizaci&oacute;n por columna</b>: soportando correctamente el ordenamiento por lenguaje en las bases de datos, tablas o columnas.</li>
+<li><b>Tablas unlogged</b>: importante incremento del rendimiento para datos ef&iacute;meros</li>
+</ul><p>
+"Heroku tiene la 'base de datos como servicio' en PostgreSQL m&aacute;s grande del mundo," dice James Lindenbaum, co-fundador de Heroku , "la disponibilidad de replicaci&oacute;n de datos sincr&oacute;nica en 9.1 provee a nuestros clientes nuevas e innovadoras formas de protejer sus datos de misi&oacute;n cr&iacute;tica, y valida a PostgreSQL como uno de los almacenes de datos de m&aacute;s r&aacute;pido crecimiento disponibles."
+</p>
+<h3>Avanzando en el Estado del Arte</h3>
+<p>
+Nuestra comunidad de colaboradores innova con caracter&iacute;sticas de vanguardia, la versi&oacute;n 9.1 incluye muchas que son nuevas en la indsutria de las bases de datos, como por ejemplo:
+
+</p><ul>
+<li><b>Indexamiento de los K vecinos m&aacute;s pr&oacute;ximos (K-Nearest-Neighbor)</b>: &iacute;ndices sobre "distancia" para consultas r&aacute;pidas de ubicaci&oacute;n y b&uacute;squedas de texto</li>
+<li><b> Nivel de Aislamiento Serializable a trav&eacute;s de "Snapshots"</b>: mantiene consistentes multiples transacciones concurrentes sin el uso de bloqueos, usando "verdadera serializaci&oacute;n"</li>
+<li><b>Writeable Common Table Expressions</b>: ejecuta actualizaciones multi-fases complejas en una simple consulta</li>
+<li><b>Security-Enhanced Postgres</b>: despliega seguridad de nivel militar y control de acceso mandatorio</li>
+</ul><p>
+"OpenERP siempre a confiado en las caracter&iacute;sticas de clase empresarial de PostgreSQL para proporcionar una base r&aacute;pida, confiable y escalable para las Aplicaciones de Negocio que soportan las operaciones de nuestros clientes todos los d&iacute;as. La integridad de datos en un contexto de alta concurrencia y transaccionalidad es un aspecto cr&iacute;tico para nosotros, ¡y estamos muy entusiasmados sobre el nuevo nivel de Aislamiento Serializable a trav&eacute;s de "Snapshots" en PostgreSQL 9.1!" dijo Olivier Dony, OpenERP Community Manager.
+</p>
+<h3>Extendiendo el Motor de Base de Datos</h3>
+<p>
+La extensibilidad de PostgreSQL permite a los usuarios a&ntilde;adir nuevas funcionalidades en bases de datos que corren en producci&oacute;n, y usar estas para tareas que no puede realizar ning&uacute;n otro sistema de base de datos. La versi&oacute;n 9.1 a&ntilde;ade nuevas herramientas de extensibilidad, incluyendo:
+</p><ul>
+<li><b>conectores de datos foráneos</b>: a&ntilde;ada y consulte fuentes de datos externas desde PostgreSQL</li>
+<li><b>Extensiones</b>: cree, cargue, y administre f&aacute;cilmente nuevas caracter&iacute;sticas de la base de datos</li>
+</ul>
+Todas las caracter&iacute;sticas mencionadas, y m&aacute;s, son detalladas en la paǵina de nuestro wiki <a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.1">"Que hay de nuevo en 9.1"</a>, asi como en nuestras <a href="http://www.postgresql.org/docs/current/static/release-9-1">nota de versi&oacute;n</a>.
+</p><p>
+Con 25 a&ntilde;os de desarrollo en la bases de datos PostgreSQL, nuestra comunidad contin&uacute;a a la cabeza de la tecnolog&iacute;a de bases de datos con cada lanzamiento anual. Descarge la versi&oacute;n 9.1 ahora y experimente con el sistema de bases de datos de c&oacute;digo abierto m&aacute;s avanzado del mundo.
+</p><p>
+<b>Acerca de PostgreSQL</b>: PostgreSQL es el l&iacute;der en sistemas de bases de datos de c&oacute;digo abierto, con una comunidad mundial de miles de usuarios y contribuyentes y docenas de empresas y organizaciones. El proyecto PostgreSQL se basa en 25 a&ntilde;os de ingenier&iacute;a, a partir de la Universidad de California, Berkeley, y tiene un ritmo sin precedentes de desarrollo en la actualidad. El conjunto de caracter&iacute;sticas maduras que tiene PostgreSQL no s&oacute;lo rivaliza con sistemas de bases de datos propietarias, sino que los supera en caracter&iacute;sticas avanzadas, extensibilidad, seguridad y estabilidad. Obtenga m&aacute;s informaci&oacute;n sobre PostgreSQL y participe en nuestra comunidad en <a href="http://www.postgresql.org">http://www.postgresql.org</a>.
+</p>
+
+<h2>Informaci&oacute;n Adicional</h2>
+
+<a name="features"></a><h2>Detalle de caracter&iacute;sticas</h2>
+
+<h3>Respondiendo a los Usuarios</h3>
+<p>
+La versi&oacute;n 9.1 ofrece muchas caracter&iacute;sticas que los usuarios han estado solicitando por a&ntilde;os, retirando obst&aacute;culos para el despliegue de aplicaciones nuevas o migradas en PostgreSQL. Estas incluyen:
+</p><dl>
+<dt><b>Replicaci&oacute;n Sincr&oacute;nica para Cl&uacute;steres:</b></dt><dd> Permitiendo alta disponibilidad con consistencia a trav&eacute;s de m&uacute;ltiples nodos, mediante la implementaci&oacute;n de cl&uacute;steres de servidores PostgreSQL usando replicaci&oacute;n sincr&oacute;nica. La replicaci&oacute;n s&iacute;ncr&oacute;nica soporta "2-safe replication" que asegura que las transacciones han sido confirmadas por una r&eacute;plica del servidor maestro, limitando grandemente la posibilidad de perdida de datos. Solo PostgreSQL soporta replicaci&oacute;n sincr&oacute;nica a nivel de transacciones, permitiendo a los usuarios escoger, para sus transacciones, entre tiempo de respuesta y seguridad de sus datos.</dd>
+<dt><b>Regionalizaci&oacute;n por columna para bases de datos multiling&uuml;es:</b></dt><dd> Ahora los usuarios pueden configurar la regionalizaci&oacute;n de los textos por cada columna.  Esto permite verdaderas bases de datos multiling&uuml;es donde cada columna de texto tiene un diferente lenguaje y los &iacute;ndices y ordenamientos se efect&uacute;an correctamente para ese lenguaje.</dd>
+<dt><b>Tablas Unlogged para incrementar el rendimiento:</b></dt><dd>Cuando el rendimiento es m&aacute;s importante que la durabilidad, las tablas unlogged proporcionan una manera de mejorar el rendimiento, manteniendo los datos manejados dentro de PostgreSQL. La eliminaci&oacute;n del registro de la tabla reduce la carga de E/S, produciendo mejoras en el rendimiento de hasta 10 veces m&aacute;s r&aacute;pido en comparaci&oacute;n con las tablas registradas. Escenarios esperados para las tablas unlogged incluyen datos de sesiones web, registro en tiempo real, ETL y tablas temporales/intermedias para funciones.</dd>
+</dl>
+<h3>Avanzando el Estado del Arte</h3>
+<p>
+Nuestra comunidad esta innovando, entregando caracter&iacute;sticas de vanguardia que son nuevas en la industria de bases de datos. Algunas de estas caracter&iacute;sticas estan disponibles solo en PostgreSQL.
+</p><dl>
+<dt><b>Poderosa B&uacute;squeda de Similitudes Usando el M&eacute;todo de Indexado de los K Vecinos M&aacute;s Pr&oacute;ximos (K-Nearest-Neighbor, KNN):</b></dt><dd> Cree nuevas aplicaciones usando los &iacute;ndices KNN-GiST de Postgresql, los cuales ofrecen un indexado innovador que evita b&uacute;squedas costosas en las tablas. KNN mejora las capacidades de consulta de PostgreSQL usando "distancia" matem&aacute;tica para b&uacute;squedas e indexado. Estos &iacute;ndices pueden ser usados para mejorar b&uacute;squedas comunes en texto, b&uacute;squedas de textos similares, localizaci&oacute;n geoespacial y otros tipos de consultas. B&uacute;squedas de ejemplo que tomaban 2 segundos sin usar est&eacute; &iacute;ndice tomar&oacute;n ahora 20ms utilizandolo. Los &iacute;ndices para b&uacute;squedas de texto pueden ahora ser configurados para proveer soporte a consultas LIKE '%string%' sin cambiar nada en el SQL. Postgresql est&aacute; entre los primeros sistemas de bases de datos en tener KNN.</dd>
+<dt><b>Nivel de Aislamiento Serializable a trav&eacute;s de "Snapshots":</b></dt><dd> Permite a los usuarios hacer cumplir reglas de negocio definidas por el usuario arbitrariamente complejas dentro de la base de datos sin bloqueos, mediante la detecci&oacute;n autom&aacute;tica de condiciones de carrera en sus transacciones SQL en tiempo de ejecuci&oacute;n. Esta caracter&iacute;stica en la actualidad s&oacute;lo existe en PostgreSQL.</dd>
+<dt><b>Writeable Common Table Expressions (wCTE):</b></dt><dd> Soporta la integridad relacional de sus datos permitiendole actualizar en m&uacute;ltiples registros relacionados, en cascada, en una sola sentencia. Usando el resultado de una consulta para ejecutar otra, se puede actualizar de forma recursiva, jer&aacute;rquica, a trav&eacute;s de claves externas, o de formas m&aacute;s creativas. PostgreSQL proporciona la implementaci&oacute;n m&aacute;s completa y flexible disponible de esta caracter&iacute;stica.</dd>
+<dt><b>Security-Enhanced Postgres (SE-Postgres):</b></dt><dd> Implementa seguridad de grado militar y control de acceso mandatorio proveyendo completa integraci&oacute;n con Security-Enhanced Linux (SE-Linux). SE-Linux es un proyecto de la NSA, que modifica el kernel de Linux con funciones relacionadas a seguridad. Que ha sido respaldado por e incluido en las principales distribuciones de Linux, incluyendo pero no limitado a, Red Hat, CentOS, Debian y Ubuntu. PostgreSQL es el &uacute;nico sistema de base de datos que tiene una estrecha integraci&oacute;n con SE-Linux.</dd>
+</dl>
+
+<h3>Extendiendo el Motor de Base de Datos</h3>
+<p>
+La extensibilidad de PostgreSQL permite a los usuarios a&ntilde;adir nuevas funcionalidades en bases de datos que corren en producci&oacute;n, y usar estas para tareas que no puede realizar ning&uacute;n otro sistema de base de datos. La versi&oacute;n 9.1 a&ntilde;ade nuevas caracter&iacute;sticas cr&iacute;ticas de extensibilidad, incluyendo:
+</p><dl>
+<dt><b>Conectores de Datos For&aacute;neos (Foreign Data Wrappers, FDW):</b></dt><dd> Como parte de nuestro cumplimiento de los est&aacute;ndares soportamos SQL/MED para consultas de datos fuera de la base de datos PostgreSQL, FDWs permite a los usuarios crear "drivers" y a&ntilde;adir fuentes de datos externas que pueden ser usadas como tablas de solo lectura.  FDWs hace a PostgreSQL una poderosa herramienta para integraci&oacute;n de datos empresarial, y hace m&aacute;s sencillas las migraciones. FDWs inicialmente disponibles a la comunidad incluyen soporte de las siguientes fuentes: archivos separados por comas (CSV), Oracle, MySQL, CouchDB, e incluso Twitter. Y esperamos contar con muchas m&aacute;s en un futuro cercano.</dd>
+<dt><b>Extensiones:</b></dt><dd> Aunque PostgreSQL siempre ha sido extendible, ahora los usuarios pueden crear, cargar, actualizar y administrar m&aacute;s f&aacute;cilmente las docenas de extensiones disponbiles utilizando el objeto de base de datos EXTENSION. El nuevo website PGXN.org ofrece un repositorio para obtener extensiones y contribuir con estas.</dd>
+</dl>
+<p>
+Para explicaciones de est&aacute;s caracter&iacute;sticas y otras, por favor consulte las siguientes fuentes:
+</p>
+<ul>
+<li><a href="/docs/9.1/static/release-9-1.html">Notas de Versi&oacute;n</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.1">Que hay de nuevo en 9.1</a></li>
+<li><a href="/about/featurematrix">Matr&iacute;z de Caracter&iacute;sticas (Solo en Ingl&eacute;s)</a></li>
+</ul>
+
+<a name="anniversary"></a><h2>25 a&ntilde;os de innovaci&oacute;n en bases de datos</a></h2>
+<p>
+El proyecto POSTGRES se inaugur&oacute; en la Universidad de California, Berkeley, en Junio de 1986 con la publicaci&oacute;n del dise&ntilde;o original de POSTGRES por Lawrence A. Rowe y Michael R. Stonebraker. En los 25 a&ntilde;os transcurridos desde entonces, POSTGRES se convirti&oacute; en un proyecto de c&oacute;digo abierto, convertido al uso de SQL, cambi&oacute; su nombre a PostgreSQL, y se ha convertido en uno de las bases de datos relacionales l&iacute;deres. Hoy nuestra comunidad compite con algunas de las m&aacute;s grandes compa&ntilde;&iacute;as en el mundo para ofrecer nuevas funcionalidades en bases de datos y mejor rendimiento.
+</p><p>
+Ha habido 23 lanzamientos de POSTGRES y PostgreSQL, incluyendo la versi&oacute;n 9.1.  PostgreSQL es el &uacute;nico sistema de bases de datos importante que consistentemente tiene lanzamientos cada a&ntilde;o con muchas nuevas caracter&iacute;sticas.
+</p>
+<a name="download"></a><h2>Descargas</h2>
+<ul>
+<li><a href="/download">P&aacute;gina de Descargas</a> con enlaces a herramientas e instaladores.</li>
+<li><a href="/ftp/source/v9.1.0">C&oacute;digo Fuente</a></li>
+<li><a href="/download/windows">Instaladores de Windows</a></li>
+<li><a href="/download/linux">Instaladores de Linux </a> y repositorios de paquetes</li>
+<li><a href="/download/solaris">Paquetes para Solaris</a></li>
+<li><a href="/download/macosx">Instaladores de Mac OSX</a></li>
+<li><a href="/download/freebsd">FreeBSD Ports</a></li>
+<li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+<li><a href="http://www.pgfoundry.org">Componentes adicionales y Add-Ons</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">Software comercial y relacionado</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentaci&oacute;n</h2>
+
+<p>
+Documentaci&oacute;n HTML y "man pages" son instalados con PostgreSQL; a&uacute;n as&iacute;, sientase libre de leer, buscar y comentar en nuestra extensa e interactiva <a href="/docs/9.1/interactive">documentaci&oacute;n en l&iacute;nea</a>.
+</p>
+
+<a name="license"></a><h2>Licencia</h2>
+<p>
+PostgreSQL usa la <a href="/about/licence">Licencia PostgreSQL</a>, basada en la licencia BSD que solo requiere que el c&oacute;digo licenciado matenga la informaci&oacute;n de la licencia y el copyright. Esta licencia esta que certificada por la
+<a href="http://www.opensource.org/licenses/postgresql">OSI</a>, es ampliamente apreciada como flexible y adecuada para los negocios dado que no restringe el uso de PostgreSQL com productos comerciales y privativos. Junto con el soporte de m&uacute;ltiples compa&ntilde;&iacute;as, la disponibilidad del c&oacute;digo fuente y nuestra licencia hace que PostgreSQL sea muy popular entre los proveedores deseossos de incluir una base de datos en sus propios productos sin preocuparse por gastos, comisiones o cambios en los terminos de licenciamiento.
+</p>
+
+<a name="contact"></a><h2>Contactos</h2>
+
+<p>P&aacute;ginas WEB</p>
+<ul>
+<li><a href="http://www.postgresql.org">P&aacute;gina Principal de PostgreSQL</a></li>
+<li><a href="http://www.postgresql.org.es">Portal en Espa&ntilde;ol sobre PostgreSQL</a></li>
+</ul>
+
+<p>Consultas de Prensa</p>
+<p>Argentina<br />
+Mariano Reingart
+<br /><a href="mailto:ar@postgresql.org">ar@postgresql.org</a>
+<br />Phone: +54 (011) 4450-0716
+<br /><a href="http://www.arpug.com.ar/">http://www.arpug.com.ar/</a>
+</p>
+<p>Brazil<br />
+Roberto Mello
+<br /><a href="mailto:br@postgresql.org">br@postgresql.org</a>
+<br />Phone: +55 92 91284346 / 36630649
+<br />Skype: rlbmello
+<br /><a href="http://www.postgresql.org.br">http://www.postgresql.org.br</a>
+</p>
+<p>Chile<br />
+&Aacute;lvaro Herrera
+<br /><a href="mailto:alvherre@postgresql.org">alvherre@postgresql.org</a>
+<br />Phone: +56-9-74990919
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+<p>Colombia<br />
+Juan Romero
+<br /><a href="mailto:co@postgresql.org">co@postgresql.org</a>
+<br />Cell: 57-3166958503
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+<p>Cuba<br />
+Gilberto Castillo Mart&iacute;nz
+<br /><a href="mailto:cu@postgresql.org">cu@postgresql.org</a>
+<br />Phone: (537)-5-2881491
+<br /><a href="http://postgresql.uci.cu/">http://postgresql.uci.cu/</a>
+</p>
+<p>Ecuador<br />
+Jaime Casanova
+<br /><a href="mailto:ec@postgresql.org">ec@postgresql.org</a>
+<br />Cell: 59387171157
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+<p>Panam&aacute;<br />
+Santiago Zarate
+<br /><a href="mailto:pa@postgresql.org">pa@postgresql.org</a>
+<br />Cell: +(507) 64271684
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+<p>Per&uacute;<br />
+Ernesto Qui&ntilde;ones
+<br /><a href="mailto:pe@postgresql.org">pe@postgresql.org</a>
+<br />Phone: (51)(1)5645424
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+<p>España<br />
+Emanuel Calvo Franco
+<br /><a href="mailto:es@postgresql.org">es@postgresql.org</a>
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+<p>Uruguay<br />
+Fernando Fontana
+<br /><a href="mailto:uy@postgresql.org">uy@postgresql.org</a>
+<br />Phone: 59899639046
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+
+<p>Para contactos en otras regiones por favor consulte nuestra <a href="/about/press/contact">lista de contactos internacionales.</a></p>
+
+<a name="quoted_companies"></a><h2>Texto Completo de las Citas e Informaci&oacute;n de las Compan&iacute;as</h2>
+<p>
+<i>"PostgreSQL 9.1 provee algunas de las m&aacute;s avanzadas capacidades empresariales de cualquier base de datos de c&oacute;digo abierto, y es soportado por una entusiasta e innovativa comunidad con probados casos de &eacute;xito. PostgreSQL esta muy bien preparada para construir y correr aplicaciones en la nube." </i> palabras de Charles Fan, Sr. VP R&amp;D, VMware.
+</p><p>
+<b>Sobre VMWare:</b> <a href="http://vmware.com">VMware</a> (NYSE:VMW), l&iacute;der mundial en virtualizaci&oacute;n e infraestructura en la nube, ofrece a sus clientes soluciones de optimizaci&oacute;n TI reduciendo la complejidad y ofreciendo un servicio flexible y eficiente. VMware ofrece a las empresas adoptar el modelo de "nube" para concentrarse &uacute;nicamente en su negocio. La ventaja de VMware es acelerar la transici&oacute;n a la computaci&oacute;n en la nube mientras preserva la inversi&oacute;n y mejora la seguridad y el control. Contando con m&aacute;s de 250,000 clientes y 25,000 socios, las soluciones VMware ayudan a organizaciones de todos los tama&ntilde;os a mantener los costos bajos, incrementar la agilidad en los negocios y asegurar la libertad de opci&oacute;n.  Contactos: <a href="mailto:prinquiries@vmware.com">VMWare PR</a> o por tel&eacute;fono al +1 (650) 427-2485
+</p><p>
+<i>"Heroku tiene la 'base de datos como servicio' en PostgreSQL m&aacute;s grande del mundo,"</i> dice James Lindenbaum, co-fundador de Heroku , <i>"la disponibilidad de replicaci&oacute;n de datos sincr&oacute;nica en 9.1 provee a nuestros clientes nuevas e innovadoras formas de protejer sus datos de misi&oacute;n cr&iacute;tica, y valida a PostgreSQL como uno de los almacenes de datos de m&aacute;s r&aacute;pido crecimiento disponibles."</i>
+</p><p>
+<b>Sobre Heroku:</b> <a href="http://www.heroku.com">Heroku</a> es el l&iacute;der de Plataformas abiertas como Servicio (open platform as a service - PaaS) enfocado en facilidad de uso, atuomatizaci&oacute;n y confiabilidad. Con oficinas centrales en San Francisco, California, Heroku
+es un apasionado y activo colaborador de las tecnolog&iacute;as basadas en Ruby y de la arquitectura en la nube. Heroku fue recientemente nombrada en la lista "Dow Jones FASTech 50 Start-ups to Watch", reconocida como Gartner "Cool Vendor in Application Platforms as a Service" en Abril del 2010, nombrada entre las Top100 de las empresas privadas Always ONDemand, y reconocida como uno de "Los mejores productos del 2009" y "Mejor plataforma del 2010" por ReadWriteWeb. En abril del 2011, Heroku fue nominada #2 en la lista anual de "Los mejores lugares para trabajar" en Bay Area por el San Francisco Business Times. Para m&aacute;s informaci&oacute;n, por favor visite <a href="http://www.heroku.com">nuestro web site</a> y <a href="http://blog.heroku.com">nuestro blog</a> o siganos en el <a href="http://twitter.com/heroku">Twitter de Heroku</a>. Heroku es una subsidiaria de salesforce.com. Contactos: <a href="mailto:jill@blackswansmedia.com">Jill Ratkevic</a>
+</p><p>
+<i>"OpenERP siempre a confiado en las caracter&iacute;sticas de clase empresarial de PostgreSQL para proporcionar una base r&aacute;pida, confiable y escalable para las Aplicaciones de Negocio que soportan las operaciones de nuestros clientes todos los d&iacute;as. La integridad de datos en un contexto de alta concurrencia y transaccionalidad es un aspecto cr&iacute;tico para nosotros, ¡y estamos muy entusiasmados sobre el nuevo nivel de Aislamiento Serializable a trav&eacute;s de "Snapshots" en PostgreSQL 9.1!"</i> palabras de Olivier Dony, OpenERP Community Manager.
+</p><p>
+<b>Sobre OpenERP:</b> <a href="http://www.openerp.com">OpenERP S.A.</a> es el editor de OpenERP, una Open Source Business Application Suite (suite de aplicaciones para negocios de c&oacute;digo abierto), que incluye CRM, Ventas, Contabilidad , Administraci&oacute;n de Proyectos, Administraci&oacute;n de Bodegas, Manufactura, Recursos Humanos, y mucho m&aacute;s. Fundada en 2005 por su CEO Fabien Pinckaers, OpenERP se desarrolla en un ecosistema &uacute;nico que combina los recursos de su comunidad, socios de red y editores. La comunidad (1500 miembros activos a Agosto del 2011) contribuye todos los d&iacute;as en el enriquecimiento de OpenERP. La red de socios est&aacute; establecida en m&aacute;s de 65 paises desplegando la soluci&oacute;n localmente. Adem&aacute;s se encuentra disponible como servicio en l&iacute;nea (SaaS), OpenERP es una de las suites para negocios m&aacute;s instaladas alrededor del mundo (1,000 descargas por d&iacute;a). Contacto: <a href="mailto:press@openerp.com">Nicoleta Gherlea</a> +32-2-290-34-90
+</p>
+
+<a name="companies"></a><h2>Soporte corporativo</h2>
+
+<p>PostgreSQL disfruta del soporte de numerosas empresas las cuales auspician desarrolladores, proveen recursos de hosting y nos facilitan soporte financiero. Nuestros auspiciantes a largo plazo est&aacute;n listados en nuestra p&aacute;gina de <a href="/about/sponsors">Lista de auspiciantes.</a></p>
+
+<p>Contamos con una gran comunidad de <a href="/support/professional_support">compa&ntilde;&iacute;as ofreciendo Soporte en PostgreSQL</a>, desde consultores individuales hasta compa&ntilde;&iacute;as multinacionales.</p>
+
+<p>Las <a href="/about/donate">Donaciones</a> ser&aacute;n grandemente agradecidas.</p>
+
+
+{%endblock%}
