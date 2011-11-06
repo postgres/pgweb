@@ -97,22 +97,18 @@ def _get_numeric_ip(request):
 		return int(p[0])*16777216 + int(p[1])*65536 + int(p[2])*256 + int(p[3])
 	except:
 		return None
+
 @nocache
 def mirrorselect(request, path):
-	try:
-		numericip = _get_numeric_ip(request)
-		near_mirrors = Mirror.objects.filter(mirror_active=True, mirror_private=False, mirror_dns=True).extra(where=["mirror_last_rsync>(now() - '48 hours'::interval)","country_code IN (SELECT lower(countrycode) FROM iptocountry WHERE %s BETWEEN startip AND endip)" % numericip]).order_by('country_name', 'mirror_index')
-	except:
-		near_mirrors = None
-	# same as in mirrors_xml
-	all_mirrors = Mirror.objects.filter(mirror_active=True, mirror_private=False, mirror_dns=True).extra(where=["mirror_last_rsync>(now() - '48 hours'::interval)"]).order_by('country_name', 'mirror_index')
-	return render_to_response('downloads/mirrorselect.html', {
-		'path': path,
-		'all_mirrors': all_mirrors,
-		'near_mirrors': near_mirrors,
-		'masterserver': settings.MASTERSITE_ROOT,
-	}, NavContext(request, 'download'))
+	# We have given up on the advanced mirror network things, and will just
+	# redirect this to ftp.mirrors.postgresql.org for now...
+	# Since requests hit our internal servers, we're also not going to
+	# bother logging them - logging will be handled by those servers
+	return HttpResponseRedirect("http://ftp.postgresql.org/pub/%s" % path)
 
+# Accesses asking for a specific mirror will keep doing that for now.
+# At some time in the future we might consider hijacking them and sending
+# them to our master mirrors again.
 def _mirror_redirect_internal(request, scheme, host, path):
 	# Log the access
 	curs = connection.cursor()
