@@ -40,7 +40,7 @@ class Version(PgModel, models.Model):
 	def purge_urls(self):
 		yield '/$'
 		yield '/support/submitbug'
-		yield 'versions.rss'
+		yield '/versions.rss'
 
 
 class Country(models.Model):
