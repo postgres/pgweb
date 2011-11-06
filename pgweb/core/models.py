@@ -4,7 +4,7 @@ from pgweb.util.bases import PgModel
 
 from datetime import datetime
 
-class Version(models.Model):
+class Version(PgModel, models.Model):
 	tree = models.DecimalField(max_digits=3, decimal_places=1, null=False, blank=False)
 	latestminor = models.IntegerField(null=False, blank=False, default=0)
 	reldate = models.DateField(null=False, blank=False)
@@ -39,8 +39,8 @@ class Version(models.Model):
 
 	def purge_urls(self):
 		yield '/$'
+		yield '/support/submitbug'
 		yield 'versions.rss'
-		# FIXME: probably a lot more?
 
 
 class Country(models.Model):
