@@ -145,8 +145,10 @@ def system_information(request):
 # Basically just a check that we can access the backend still...
 @cache(seconds=30)
 def sync_timestamp(request):
-	return HttpResponse(datetime.now().strftime("%Y-%m-%d %H:%M:%S\n"),
-						mimetype='text/plain')
+	s = datetime.now().strftime("%Y-%m-%d %H:%M:%S\n")
+	r = HttpResponse(s,	mimetype='text/plain')
+	r['Content-Length'] = len(s)
+	return r
 
 # List of all unapproved objects, for the special admin page
 @login_required
