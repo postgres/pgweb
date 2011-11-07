@@ -45,6 +45,7 @@ def subscribe(request):
 
 	return render_to_response('base/form.html', {
 		'form': form,
+		'operation': 'Subscribe',
 		'form_intro': """
 Please do not subscribe to mailing lists using e-mail accounts protected by
 mail-back anti-spam systems. These are extremely annoying to the list maintainers
