@@ -81,7 +81,7 @@ class Product(PgModel, models.Model):
 	publisher = models.ForeignKey(Organisation, null=False)
 	url = models.URLField(null=False, blank=False)
 	category = models.ForeignKey(Category, null=False)
-	licencetype = models.ForeignKey(LicenceType, null=False)
+	licencetype = models.ForeignKey(LicenceType, null=False, verbose_name="Licence type")
 	description = models.TextField(null=False, blank=False)
 	price = models.CharField(max_length=200, null=False, blank=True)
 	lastconfirmed = models.DateTimeField(null=False, blank=False, default=datetime.now())
