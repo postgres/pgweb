@@ -56,6 +56,7 @@ objtypes = {
 	'organisations': {
 		'title': 'Organisation',
 		'objects': lambda u: Organisation.objects.filter(managers=u),
+		'submit_header': 'Before submitting a new Organisation, please verify on the list of <a href="/account/orglist">current organisations</a> if the organisation already exists. If it does, please contact the manager of the organisation to gain permissions.',
 	},
 }
 
@@ -69,6 +70,7 @@ def listobjects(request, objtype):
 	return render_to_response('account/objectlist.html', {
 	    'objects': o['objects'](request.user),
 		'title': o['title'],
+		'submit_header': o.has_key('submit_header') and o['submit_header'] or None,
 		'suburl': objtype,
 	}, NavContext(request, 'account'))
 

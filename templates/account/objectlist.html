@@ -13,6 +13,9 @@ extensive.
 {%endfor%}
 </ul>
 
+{%if submit_header%}
+<p>{{submit_header|safe}}</p>
+{%endif%}
 <p>
 <a href="/account/{{suburl}}/new/">Submit {{title}}</a>
 </p>
