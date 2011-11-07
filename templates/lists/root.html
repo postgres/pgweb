@@ -42,7 +42,7 @@ receiving mail).</p>
 {%endifchanged%}
 <tr>
     <td class="colFirst"><a href="http://archives.postgresql.org/{{l.listname}}/">{{l.maybe_shortdesc}}</a></td>
-    <td class="colLast">{{l.description}}</td>
+    <td class="colLast">{{l.description|safe}}</td>
 </tr>
 {%endfor%}
  </table>
