@@ -63,11 +63,17 @@ class Category(models.Model):
 	def __unicode__(self):
 		return self.catname
 
+	class Meta:
+		ordering = ('catname',)
+
 class LicenceType(models.Model):
 	typename = models.CharField(max_length=100, null=False, blank=False)
 
 	def __unicode__(self):
 		return self.typename
+
+	class Meta:
+		ordering = ('typename',)
 
 class Product(PgModel, models.Model):
 	name = models.CharField(max_length=100, null=False, blank=False, unique=True)
