@@ -1,0 +1,65 @@
+{%extends "base/page.html"%}
+{%block title%}Donate{%endblock%}
+{%block contents%}
+
+<h1>Donate to PostgreSQL</h1>
+
+<p>PostgreSQL donations are managed by the <a href="http://wiki.PostgreSQL.org/wiki/SponsorShip">Fund raising Group</a>. The money donated goes to many vital services that the PostgreSQL community needs including advocacy materials, conference expenses, legal expenses, and travel costs.</p>
+
+<h3>Donate by Credit Card (preferred)</h3>
+<p>Donation via credit card is handled through USA ePay using the form below. 
+<!-- begin PaySimple form -->
+</p>
+<form id="form1" method="post" action="https://www.usaepay.com/interface/epayform/">
+<div class="tblBasic"> 
+<table border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+  <tr><td class="colFirst" valign="top">
+         <h3>Donate: </h3>
+         <select name="UMamount" size="6">
+            <option value="10.00">10.00 USD</option>
+            <option value="20.00">20.00 USD</option>
+            <option value="50.00">50.00 USD</option>
+            <option value="100.00">100.00 USD</option>
+            <option value="250.00">250.00 USD</option>
+            <option value="500.00">500.00 USD</option>
+         </select>
+         <p>
+  </td>
+  <td>
+  <h3>For other amounts or to donate via American, Canadian Check or Money Order:</h3>
+  <p>Write the check to Software in the Public Interest, Inc. <strong>Very Important: Put "PostgreSQL" in the Memo field.</strong>
+  Then mail check or money order to: <br /> <br />
+  Software in the Public Interest, Inc.<br />
+  P.O. Box 501248<br />
+  Indianapolis, IN 46250-6248<br />
+  United States<br />
+  </td>
+  </tr>
+  <tr>
+     <td id="cp_submit_609397530555" colspan="2" class="colFirst" align="left">
+        PostgreSQL donations are processed via Paysimple (third party)
+        and deposited into the PostgreSQL account at Software in the Public
+        Interest.<br />
+        <input name="UMdescription" value="PostgreSQL General Contribution" type="hidden">
+        <input name="UMkey" value="faI13GX2IiFk4j415yTWXIGo7i3Hb6M5" type="hidden"> 
+        <input name="UMcommand" value="sale" type="hidden" />
+        <input type="submit" class="cp_button_609397530555" tabindex="2" value="Donate via SPI" />
+        <input name="UMcommand" value="sale" type="hidden" />
+     </td>
+  </tr>
+
+</tbody></table>
+</div>
+</form>
+
+
+<h3>Tax deductibility</h3>
+<p>Please be aware that PostgreSQL contributions may or may not be tax exempt. For more information please see the <a href="http://www.spi-inc.org/donations">SPI website</a> and your local tax advisor. If you would like to donate non-monetary items such as computers or other equipment, please contact <a
+href="mailto:josh@postgresql.org">Josh Berkus</a>.</p>
+ 
+<h2>Infrastucture Donations</h2>
+<p>There are many companies that donate <a href="/about/servers">servers.</a></p>
+
+ 
+{%endblock%}
