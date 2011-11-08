@@ -198,3 +198,12 @@ SELECT id, grp, name, active::boolean, NULL, description, coalesce(shortdesc,'')
 
 SELECT setval('lists_mailinglist_id_seq', max(id)) FROM lists_mailinglist;
 SELECT setval('lists_mailinglistgroup_id_seq', max(id)) FROM lists_mailinglistgroup;
+
+-- contributors
+TRUNCATE TABLE contributors_contributor;
+INSERT INTO contributors_contributor (ctype_id, lastname, firstname, email, company, companyurl, location, contribution)
+SELECT ct.id, lastname, firstname, email, company, companyurl, location, contribution
+FROM oldweb.developers d
+INNER JOIN oldweb.developers_types dt ON dt.type=d.type
+INNER JOIN contributors_contributortype ct ON ct.typename=dt.typename;
+SELECT setval('contributors_contributor_id_seq', max(id)) FROM contributors_contributor;
