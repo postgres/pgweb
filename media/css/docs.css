@@ -309,7 +309,8 @@ blockquote.TIP code {
   box-shadow: none;
 }
 
-.emphasis {
+.emphasis,
+.c2 {
   font-weight: bold;
 }
 
