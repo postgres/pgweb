@@ -63,6 +63,10 @@ ol, ul, li {/*
 p {
   font-size: 1.0em;
   line-height: 1.2em;
+  margin: 1.2em 0em;
+}
+
+td p {
   margin: 0em 0em 1.2em;
 }
 
