@@ -40,7 +40,8 @@ def submitbug(request):
 
 	return render_to_response('base/form.html', {
 		'form': form,
-		'formitemtype': 'Bug report',
+		'formitemtype': 'bug report',
+		'operation': 'Submit',
 		'form_intro': template_to_string('misc/bug_header.html', {
 			'supportedversions': versions,
 		}),
