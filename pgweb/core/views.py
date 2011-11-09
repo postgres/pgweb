@@ -96,9 +96,7 @@ def fallback(request, url):
 @ssl_required
 @login_required
 def organisationform(request, itemid):
-	return simple_form(Organisation, itemid, request, OrganisationForm, fixedfields={
-			'managers': (request.user, ),
-			})
+	return simple_form(Organisation, itemid, request, OrganisationForm)
 
 # robots.txt
 def robots(request):

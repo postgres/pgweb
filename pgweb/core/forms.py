@@ -2,11 +2,50 @@ from django import forms
 from django.forms import ValidationError
 
 from models import Organisation
+from django.contrib.auth.models import User
 
 class OrganisationForm(forms.ModelForm):
+	remove_manager = forms.ModelMultipleChoiceField(required=False, queryset=None, label="Current manage", help_text="Select one or more managers to remove")
+	add_manager = forms.EmailField(required=False)
+
 	class Meta:
 		model = Organisation
 		exclude = ('lastconfirmed', 'approved', 'managers', )
+
+	def __init__(self, *args, **kwargs):
+		super(OrganisationForm, self).__init__(*args, **kwargs)
+		self.fields['remove_manager'].queryset = self.instance.managers.all()
+
+	def clean_add_manager(self):
+		if self.cleaned_data['add_manager']:
+			# Something was added as manager - let's make sure the user exists
+			try:
+				u = User.objects.get(email=self.cleaned_data['add_manager'])
+			except User.DoesNotExist:
+				raise ValidationError("User with email %s not found" % self.cleaned_data['add_manager'])
+
+		return self.cleaned_data['add_manager']
+
+	def clean_remove_manager(self):
+		if self.cleaned_data['remove_manager']:
+			removecount = 0
+			for toremove in self.cleaned_data['remove_manager']:
+				if toremove in self.instance.managers.all():
+					removecount += 1
+
+			if len(self.instance.managers.all()) - removecount <= 0:
+				raise ValidationError("Cannot remove all managers from an organsation!")
+		return self.cleaned_data['remove_manager']
+
+	def save(self, commit=True):
+		model = super(OrganisationForm, self).save(commit=False)
+		if self.cleaned_data['add_manager']:
+			model.managers.add(User.objects.get(email=self.cleaned_data['add_manager']))
+		if self.cleaned_data['remove_manager']:
+			for toremove in self.cleaned_data['remove_manager']:
+				model.managers.remove(toremove)
+
+		return model
 
 class MergeOrgsForm(forms.Form):
 	merge_into = forms.ModelChoiceField(queryset=Organisation.objects.all())
