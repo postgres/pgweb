@@ -201,7 +201,8 @@ def productlist(request, catid, junk=None):
 @ssl_required
 @login_required
 def productform(request, itemid):
-	return simple_form(Product, itemid, request, ProductForm)
+	return simple_form(Product, itemid, request, ProductForm,
+					   redirect='/account/edit/products/')
 
 #######
 # Stackbuilder

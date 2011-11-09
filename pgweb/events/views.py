@@ -33,5 +33,6 @@ def item(request, itemid, throwaway=None):
 @ssl_required
 @login_required
 def form(request, itemid):
-	return simple_form(Event, itemid, request, EventForm)
+	return simple_form(Event, itemid, request, EventForm,
+					   redirect='/account/edit/events/')
 

@@ -61,4 +61,5 @@ def region(request, servtype, regionname):
 @ssl_required
 @login_required
 def profservform(request, itemid):
-	return simple_form(ProfessionalService, itemid, request, ProfessionalServiceForm)
+	return simple_form(ProfessionalService, itemid, request, ProfessionalServiceForm,
+					   redirect='/account/edit/services/')

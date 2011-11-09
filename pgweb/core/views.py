@@ -96,7 +96,8 @@ def fallback(request, url):
 @ssl_required
 @login_required
 def organisationform(request, itemid):
-	return simple_form(Organisation, itemid, request, OrganisationForm)
+	return simple_form(Organisation, itemid, request, OrganisationForm,
+					   redirect='/account/edit/organisations/')
 
 # robots.txt
 def robots(request):

@@ -27,5 +27,6 @@ def item(request, itemid, throwaway=None):
 @ssl_required
 @login_required
 def form(request, itemid):
-	return simple_form(NewsArticle, itemid, request, NewsArticleForm)
+	return simple_form(NewsArticle, itemid, request, NewsArticleForm,
+					   redirect='/account/edit/news/')
 
