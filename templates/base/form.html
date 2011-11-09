@@ -22,7 +22,8 @@
  </tr>
  {%endif%}
  <tr {%if field.errors%}class="errorinfo"{%endif%}>
-  <th>{{field.label_tag}}</th>
+  <th>{{field.label_tag}}{%if field.help_text %}<br/>
+   <span class="formfieldhelp">{{field.help_text}}</span>{%endif%}</th>
   <td>{{field}}</td>
  </tr>
 {%endfor%}

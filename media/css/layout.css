@@ -657,6 +657,11 @@ TABLE.pgGenericFormTable TR.errorheader TD {
    padding: 2px;
 }
 
+TABLE.pgGenericFormTable TR TH SPAN.formfieldhelp {
+   font-weight: normal;
+   font-style: italic;
+}
+
 /* Misc Classes */
 
 .pgClearBoth {
