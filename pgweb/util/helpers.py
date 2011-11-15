@@ -26,6 +26,11 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 			r.submitter = request.user
 			r.save()
 
+			# If we have a callback with the current user
+			if hasattr(form, 'apply_submitter'):
+				form.apply_submitter(r, request.user)
+				r.save()
+
 			# In case fixedfields include a manytomany field, we need to make sure the main form is saved first,
 			# so we can access the field without an exception.
 			if fixedfields:

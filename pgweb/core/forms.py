@@ -14,7 +14,11 @@ class OrganisationForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(OrganisationForm, self).__init__(*args, **kwargs)
-		self.fields['remove_manager'].queryset = self.instance.managers.all()
+		if self.instance and self.instance.pk:
+			self.fields['remove_manager'].queryset = self.instance.managers.all()
+		else:
+			del self.fields['remove_manager']
+			del self.fields['add_manager']
 
 	def clean_add_manager(self):
 		if self.cleaned_data['add_manager']:
@@ -39,13 +43,16 @@ class OrganisationForm(forms.ModelForm):
 
 	def save(self, commit=True):
 		model = super(OrganisationForm, self).save(commit=False)
-		if self.cleaned_data['add_manager']:
+		if self.cleaned_data.has_key('add_manager') and self.cleaned_data['add_manager']:
 			model.managers.add(User.objects.get(email=self.cleaned_data['add_manager']))
-		if self.cleaned_data['remove_manager']:
+		if self.cleaned_data.has_key('remove_manager') and self.cleaned_data['remove_manager']:
 			for toremove in self.cleaned_data['remove_manager']:
 				model.managers.remove(toremove)
 
 		return model
+
+	def apply_submitter(self, model, User):
+		model.managers.add(User)
 
 class MergeOrgsForm(forms.Form):
 	merge_into = forms.ModelChoiceField(queryset=Organisation.objects.all())
