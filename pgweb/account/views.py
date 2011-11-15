@@ -8,7 +8,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 
 from pgweb.util.decorators import ssl_required
-from pgweb.util.contexts import NavContext, sitenav
+from pgweb.util.contexts import NavContext
 from pgweb.util.misc import send_template_mail
 from pgweb.util.helpers import HttpServerError
 
@@ -85,8 +85,7 @@ def orglist(request):
 
 @ssl_required
 def login(request):
-	return authviews.login(request, template_name='account/login.html',
-						   extra_context={'navmenu': sitenav['account']})
+	return authviews.login(request, template_name='account/login.html')
 
 @ssl_required
 def logout(request):
@@ -94,14 +93,12 @@ def logout(request):
 
 @ssl_required
 def changepwd(request):
-	return authviews.password_change(request, template_name='account/password_change.html',
-									 extra_context={'navmenu': sitenav['account']})
+	return authviews.password_change(request, template_name='account/password_change.html')
 
 @ssl_required
 def resetpwd(request):
 	return authviews.password_reset(request, template_name='account/password_reset.html',
-									email_template_name='account/password_reset_email.txt',
-									extra_context={'navmenu': sitenav['account']})
+									email_template_name='account/password_reset_email.txt')
 
 @ssl_required
 def signup(request):
