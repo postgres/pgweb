@@ -310,8 +310,13 @@ blockquote.TIP code {
 }
 
 .emphasis,
-.c2 {
+.c2,
+.c4 {
   font-weight: bold;
+}
+
+.REPLACEABLE {
+  font-style: italic;
 }
 
 /* Table Styles */
