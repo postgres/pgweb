@@ -5,7 +5,7 @@
 <dl>
 {% for obj in quotes %}
  <dt>{{obj.quote|safe}}</dt>
- <dd><b>{{obj.who}}, <a href="{{obj.link}}">{{obj.org}}</a></b></dd>
+ <dd class="quote_source">{{obj.who}}, <a href="{{obj.link}}">{{obj.org}}</a></dd>
 {% endfor %}
 </dl>
 {%endblock%}
