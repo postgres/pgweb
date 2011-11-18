@@ -13,12 +13,12 @@ UPDDIR=$(dirname $0)
 cd $UPDDIR
 
 # Pull changes from the it repo
-git pull -q|grep -v "up to date"
+git pull -q >/dev/null 2>&1
 
 # Figure out if something changed
 git log -n1 --pretty=oneline > /tmp/pgweb.update
 if [ -f "lastupdate" ]; then
-   cmp lastupdate /tmp/pgweb.update
+   cmp lastupdate /tmp/pgweb.update >/dev/null 2>&1
    if [ "$?" == "0" ]; then
       # No change, so don't reload
       rm -f /tmp/pgweb.update
@@ -27,7 +27,7 @@ if [ -f "lastupdate" ]; then
 fi
 
 # Cause reload
-echo Reloading website due to updates
+#echo Reloading website due to updates
 pkill -f pgweb/manage.py
 
 # Update the file listing the latest update
