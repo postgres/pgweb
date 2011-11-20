@@ -9,25 +9,59 @@ CREATE OR REPLACE FUNCTION community_login(INOUT userid_p text, password_p text,
   OUT matrixeditor integer) 
 RETURNS record
 AS $$
+DECLARE
+   stored_userid text;
+   stored_fullname text;
+   stored_email text;
+   stored_lastlogin timestamptz;
+   stored_pwd text;
 BEGIN
+   -- Lecagy parameters from previous versions
+   authorblurb := '';
+   communitydoc_superuser := 0;
+   matrixeditor := 0;
+
+   -- Look for user
    SELECT
      lower(auth_user.username),
      trim(auth_user.first_name || ' ' || auth_user.last_name),
      auth_user.email,
-     '', -- we don't do authorblurbs anymore, but the API has them...
-     0, -- we don't do communitydoc_superuser either...
      last_login,
-     0 -- nor do we do matrix editor
-   INTO userid_p,fullname,email,authorblurb,communitydoc_superuser,_last_login,matrixeditor
+     auth_user.password
+   INTO stored_userid,stored_fullname,stored_email,stored_lastlogin,stored_pwd
    FROM auth_user WHERE
-     lower(auth_user.username) = lower(userid_p) AND
-     encode(pgcrypto.digest(split_part(auth_user.password, '$', 2) || password_p, 'sha1'), 'hex') =
-       split_part(auth_user.password, '$', 3);
+     lower(auth_user.username) = lower(userid_p);
    IF FOUND THEN
-      success := 1;
-      UPDATE auth_user SET last_login=CURRENT_TIMESTAMP WHERE auth_user.username=userid_p;
+      -- User exists, verify password
+     IF encode(pgcrypto.digest(split_part(stored_pwd, '$', 2) || password_p, 'sha1'), 'hex') = split_part(stored_pwd, '$', 3) THEN
+         success := 1;
+	 userid_p := stored_userid;
+	 fullname := stored_fullname;
+	 email := stored_email;
+	 _last_login := stored_lastlogin;
+         UPDATE auth_user SET last_login=CURRENT_TIMESTAMP WHERE auth_user.username=stored_userid;
+     ELSE
+     -- User exists, but wrong password
+        success := 0;
+     END IF;
    ELSE
-      success := 0;
+     -- User does not exist, look it up in the old system.
+     -- XXX: we don't support migrating users yet, should we? currently
+     -- they are only migrated when they log into the main website.
+     SELECT users_old.userid,users_old.fullname,users_old.email,users_old.lastlogin
+     INTO stored_userid,stored_fullname,stored_email,stored_lastlogin
+     FROM users_old WHERE lower(users_old.userid)=lower(userid_p) AND
+     substring(users_old.pwdhash, 30) = pgcrypto.crypt(password_p, substring(users_old.pwdhash, 1, 29));
+     IF FOUND THEN
+         success := 1;
+	 userid_p := stored_userid;
+	 fullname := stored_fullname;
+	 email := stored_email;
+	 _last_login := stored_lastlogin;
+         UPDATE users_old SET lastlogin=CURRENT_TIMESTAMP WHERE users_old.userid=stored_userid;
+     ELSE
+        success := 0;
+     END IF;
    END IF;
 END
 $$
