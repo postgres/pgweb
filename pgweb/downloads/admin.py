@@ -14,9 +14,22 @@ class ProductAdmin(MarkdownPreviewAdmin):
 	search_fields = ('name', 'description', )
 	ordering = ('name', )
 
+def duplicate_stackbuilderapp(modeladmin, request, queryset):
+	# Duplicate each individual selected object, but turn off
+	# the active flag if it's on.
+	for o in queryset:
+		o.id = None # Triggers creation of a new object
+		o.active = False
+		o.textid = o.textid + "_new"
+		o.save()
+
+duplicate_stackbuilderapp.short_description = "Duplicate application"
+
 class StackBuilderAppAdmin(admin.ModelAdmin):
-	list_display = ('textid', 'name', 'platform', 'version', )
+	list_display = ('textid', 'active', 'name', 'platform', 'version', )
 	filter_horizontal = ('dependencies', )
+	actions = [duplicate_stackbuilderapp, ]
+
 
 admin.site.register(Mirror, MirrorAdmin)
 admin.site.register(Category)
