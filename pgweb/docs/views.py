@@ -20,10 +20,14 @@ def docpage(request, version, typ, filename):
 	currver = Version.objects.filter(current=True)[0].tree
 	if version == 'current':
 		ver = currver
+	elif version == 'devel':
+		if not typ == 'static':
+			raise Http404("Only static version of developer docs available")
+		ver = Decimal(0.0)
 	else:
 		ver = Decimal(version)
 
-	if ver < Decimal("7.1"):
+	if ver < Decimal("7.1") and ver > Decimal(0.0):
 		extension = "htm"
 	else:
 		extension = "html"
@@ -38,7 +42,7 @@ def docpage(request, version, typ, filename):
 	return render_to_response('docs/docspage.html', {
 		'page': page,
 		'title': page.title,
-		'doc_nav_version': ver,
+		'doc_nav_version': ver > 0 and ver or "devel",
 		'doc_type': typ,
 		'comments': comments,
 		'can_comment': (typ=="interactive" and ver==currver),

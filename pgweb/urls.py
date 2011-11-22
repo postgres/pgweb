@@ -42,9 +42,9 @@ urlpatterns = patterns('',
     (r'^mirrors.xml$', 'downloads.views.mirrors_xml'),
     (r'^applications-v2.xml$', 'downloads.views.applications_v2_xml'),
 
-    (r'^docs/(current|\d\.\d)/(static|interactive)/(.*).html?$', 'docs.views.docpage'),
-    (r'^docs/(current|\d\.\d)/(static|interactive)/$', 'docs.views.docsrootpage'),
-    (r'^docs/(current|\d\.\d)/$', 'docs.views.redirect_root'),
+    (r'^docs/(current|devel|\d\.\d)/(static|interactive)/(.*).html?$', 'docs.views.docpage'),
+    (r'^docs/(current|devel|\d\.\d)/(static|interactive)/$', 'docs.views.docsrootpage'),
+    (r'^docs/(current|devel|\d\.\d)/$', 'docs.views.redirect_root'),
 
     (r'^community/$', 'core.views.community'),
     (r'^community/contributors/$', 'contributors.views.completelist'),
