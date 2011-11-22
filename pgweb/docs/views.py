@@ -23,11 +23,11 @@ def docpage(request, version, typ, filename):
 	elif version == 'devel':
 		if not typ == 'static':
 			raise Http404("Only static version of developer docs available")
-		ver = Decimal(0.0)
+		ver = Decimal(0)
 	else:
 		ver = Decimal(version)
 
-	if ver < Decimal("7.1") and ver > Decimal(0.0):
+	if ver < Decimal("7.1") and ver > Decimal(0):
 		extension = "htm"
 	else:
 		extension = "html"
