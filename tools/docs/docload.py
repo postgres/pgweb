@@ -7,6 +7,8 @@ import os
 import tarfile
 import re
 import tidy
+from optparse import OptionParser
+
 
 # Set up for accessing django
 from django.core.management import setup_environ
@@ -17,6 +19,7 @@ setup_environ(settings)
 from django.db import connection, transaction
 
 pagecount = 0
+quiet = False
 
 re_titlematch = re.compile('<title\s*>([^<]+)</title\s*>', re.IGNORECASE)
 
@@ -38,7 +41,7 @@ def load_doc_file(filename, f):
 		title = tm.group(1)
 	else:
 		title = ""
-	print "--- file: %s (%s) ---" % (filename, title)
+	if not quiet: print "--- file: %s (%s) ---" % (filename, title)
 
 	s = tidy.parseString(contents.encode('utf-8'), **tidyopts)
 	curs.execute("INSERT INTO docs (file, version, title, content) VALUES (%(f)s, %(v)s, %(t)s, %(c)s)",{
@@ -50,16 +53,18 @@ def load_doc_file(filename, f):
 	global pagecount
 	pagecount += 1
 
-## Your typical usage message
-def Usage():
-	print "Usage: docload.py <version> <tarfile>"
-	sys.exit(1)
-
 ## Main execution
 
-if len(sys.argv) != 3:
-	Usage()
+parser = OptionParser(usage="usage: %prog [options] <version> <tarfile>")
+parser.add_option("-q", "--quiet", action="store_true", dest="quiet",
+				  help="Run quietly")
+(options, args) = parser.parse_args()
 
+if len(args) != 2:
+	parser.print_usage()
+	sys.exit(1)
+
+quiet = options.quiet
 ver = sys.argv[1]
 tarfilename = sys.argv[2]
 
@@ -97,5 +102,5 @@ tf.close()
 
 transaction.commit_unless_managed()
 
-print "Done (%i pages)." % pagecount
+if not quiet: print "Done (%i pages)." % pagecount
 
