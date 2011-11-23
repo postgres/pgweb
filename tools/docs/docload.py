@@ -100,6 +100,9 @@ for member in tf:
 				load_doc_file(inner_member.name, inner_tar.extractfile(inner_member))
 tf.close()
 
+# Issue varnish purge for all docs of this version
+curs.execute("SELECT varnish_purge('^/docs/' || %(v)s || '/')", {'v': ver})
+
 transaction.commit_unless_managed()
 
 if not quiet: print "Done (%i pages)." % pagecount
