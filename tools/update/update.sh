@@ -33,3 +33,8 @@ pkill -f pgweb/manage.py
 # Update the file listing the latest update
 mv -f /tmp/pgweb.update lastupdate
 
+# Unconditionally update the static content (we don't need to reload
+# lighttpd for htis, so there is no need to actually check for last
+# updates or anything like that)
+cd $UPDDIR/../../../pgweb-static
+git pull -q >/dev/null 2>&1
