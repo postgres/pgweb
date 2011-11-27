@@ -10,7 +10,7 @@ class Quote(PgModel, models.Model):
 	
 	send_notification = True
 
-	purge_urls = ('about/quotesarchive/', '/$', )
+	purge_urls = ('/about/quotesarchive/', '/$', )
 
 	def __unicode__(self):
 		if len(self.quote) > 75:
