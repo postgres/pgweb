@@ -24,7 +24,6 @@ with. Here's a quick step-by-step on how to do that:
 	DEBUG=True
 	TEMPLATE_DEBUG=DEBUG
 	SUPPRESS_NOTIFICATIONS=True
-	MASTERSITE_ROOT="http://localhost:8000"
 	SITE_ROOT="http://localhost:8000"
 	NO_HTTPS_REDIRECT=True
 #. In the pgweb directory run the following command to create all

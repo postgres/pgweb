@@ -115,7 +115,6 @@ INSTALLED_APPS = [
 # In particular, adjust the email addresses
 ###
 SITE_ROOT="http://www.postgresql.org"                  # Root of working URLs
-MASTERSITE_ROOT="http://wwwmaster.postgresql.org"      # Root of working master web
 FTP_PICKLE="/usr/local/pgweb/ftpsite.pickle"           # Location of file with current contents from ftp site
 NOTIFICATION_EMAIL="someone@example.com"               # Address to send notifications *to*
 NOTIFICATION_FROM="someone@example.com"                # Address to send notifications *from*
