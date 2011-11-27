@@ -5,7 +5,6 @@ from pgweb.core.models import Organisation
 from pgweb.util.bases import PgModel
 
 class ProfessionalService(PgModel, models.Model):
-	submitter = models.ForeignKey(User, null=False, blank=False)
 	approved = models.BooleanField(null=False, blank=False, default=False)
 
 	organisation = models.ForeignKey(Organisation, null=False, blank=False, unique=True)
@@ -32,6 +31,9 @@ class ProfessionalService(PgModel, models.Model):
 	
 	send_notification = True
 	
+	def verify_submitter(self, user):
+		return (len(self.organisation.managers.filter(pk=user.pk)) == 1)
+
 	def __unicode__(self):
 		return self.organisation.name
 	
