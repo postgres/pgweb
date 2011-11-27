@@ -96,6 +96,10 @@ for member in tf:
 		f = tf.extractfile(member)
 		inner_tar = tarfile.open(fileobj=f)
 		for inner_member in inner_tar:
+			# Some old versions have index.html as a symlink - so let's
+			# just ignore all symlinks to be on the safe side.
+			if inner_member.issym(): continue
+
 			if inner_member.name.endswith('.html') or inner_member.name.endswith('.htm'):
 				load_doc_file(inner_member.name, inner_tar.extractfile(inner_member))
 tf.close()
