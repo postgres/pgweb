@@ -89,6 +89,10 @@ urlpatterns = patterns('',
     (r'^community/signup', 'pgweb.legacyurl.views.signup'),
 
     ###
+    # Images that are used from other community sites
+    ###
+    (r'^layout/images/(?P<f>[a-z0-9_\.]+)$', redirect_to, {'url': '/media/img/layout/%(f)s' }),
+    ###
     # These URLs were legacy even on the old site...
     ###
     (r'^developer/sourcecode/$', redirect_to, {'url': '/developer/coding/' }),
