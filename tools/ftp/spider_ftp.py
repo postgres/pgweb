@@ -3,7 +3,7 @@
 #
 # spider_ftp.py - spider the ftp site and generate an output file with all
 #                 the metadata we require, that can be transferred over to
-#                 the wwwmaster server.
+#                 the master web server.
 #
 
 import sys
