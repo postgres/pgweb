@@ -29,7 +29,7 @@ class Survey(PgModel, models.Model):
 	posted = models.DateTimeField(null=False, default=datetime.now)
 	current = models.BooleanField(null=False, default=False)
 
-	purge_urls = ('community/survey', )
+	purge_urls = ('/community/survey', )
 
 	def __unicode__(self):
 		return self.question
@@ -93,7 +93,7 @@ class SurveyAnswer(PgModel, models.Model):
 	tot7 = models.IntegerField(null=False, default=0)
 	tot8 = models.IntegerField(null=False, default=0)
 
-	purge_urls = ('community/survey', )
+	purge_urls = ('/community/survey', )
 
 class SurveyLock(models.Model):
 	ipaddr = models.IPAddressField(null=False, blank=False)

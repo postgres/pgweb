@@ -14,7 +14,7 @@ class FeatureGroup(PgModel, models.Model):
 	groupname = models.CharField(max_length=100, null=False, blank=False)
 	groupsort = models.IntegerField(null=False, blank=False)
 
-	purge_urls = ('about/featurematrix/', )
+	purge_urls = ('/about/featurematrix/', )
 
 	def __unicode__(self):
 		return self.groupname
@@ -38,7 +38,7 @@ class Feature(PgModel, models.Model):
 	v90 = models.IntegerField(null=False, blank=False, default=0, verbose_name="9.0", choices=choices)
 	v91 = models.IntegerField(null=False, blank=False, default=0, verbose_name="9.1", choices=choices)
 
-	purge_urls = ('about/featurematrix/.*', )
+	purge_urls = ('/about/featurematrix/.*', )
 
 	def __unicode__(self):
 		# To make it look good in the admin interface, just don't render it

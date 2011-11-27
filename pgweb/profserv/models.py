@@ -28,7 +28,7 @@ class ProfessionalService(PgModel, models.Model):
 	provides_hosting = models.BooleanField(null=False, default=False)
 	interfaces = models.CharField(max_length=512, null=True, blank=True, verbose_name="Interfaces (for hosting)")
 	
-	purge_urls = ('support/professional_', )
+	purge_urls = ('/support/professional_', )
 	
 	send_notification = True
 	

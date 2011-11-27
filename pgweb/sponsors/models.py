@@ -8,8 +8,9 @@ class SponsorType(PgModel, models.Model):
 	typename = models.CharField(max_length=32, null=False, blank=False)
 	description = models.TextField(null=False, blank=False)
 	sortkey = models.IntegerField(null=False, default=10)
+	# sortkey==0 --> do not show in list
 
-	purge_urls = ('about/servers/', 'about/sponsors/', )
+	purge_urls = ('/about/servers/', '/about/sponsors/', )
 
 	def __unicode__(self):
 		return self.typename
@@ -24,7 +25,7 @@ class Sponsor(PgModel, models.Model):
 	logoname = models.CharField(max_length=64, null=False, blank=False)
 	country = models.ForeignKey(Country, null=False)
 
-	purge_urls = ('about/sponsors/', )
+	purge_urls = ('/about/sponsors/', )
 
 	def __unicode__(self):
 		return self.name
@@ -41,7 +42,7 @@ class Server(PgModel, models.Model):
 	location = models.CharField(max_length=128, null=False, blank=False)
 	usage = models.TextField(null=False, blank=False)
 	
-	purge_urls = ('about/servers/', )
+	purge_urls = ('/about/servers/', )
 
 	def __unicode__(self):
 		return self.name

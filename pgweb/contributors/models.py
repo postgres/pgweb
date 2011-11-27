@@ -8,7 +8,7 @@ class ContributorType(PgModel, models.Model):
 	extrainfo = models.TextField(null=True, blank=True)
 	detailed = models.BooleanField(null=False, default=True)
 
-	purge_urls = ('community/contributors/', )
+	purge_urls = ('/community/contributors/', )
 
 	def __unicode__(self):
 		return self.typename
@@ -26,7 +26,7 @@ class Contributor(PgModel, models.Model):
 	location = models.CharField(max_length=100, null=True, blank=True)
 	contribution = models.TextField(null=True, blank=True)
 
-	purge_urls = ('community/contributors/', )
+	purge_urls = ('/community/contributors/', )
 
 	def __unicode__(self):
 		return "%s %s" % (self.firstname, self.lastname)

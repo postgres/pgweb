@@ -6,7 +6,7 @@ class MailingListGroup(PgModel, models.Model):
 	groupname = models.CharField(max_length=64, null=False, blank=False)
 	sortkey = models.IntegerField(null=False, default=10)
 
-	purge_urls = ('community/lists/', )
+	purge_urls = ('/community/lists/', )
 
 	def __unicode__(self):
 		return self.groupname
@@ -22,7 +22,7 @@ class MailingList(PgModel, models.Model):
 	description = models.TextField(null=False, blank=True)
 	shortdesc = models.TextField(null=False, blank=True)
 
-	purge_urls = ('community/lists/', )
+	purge_urls = ('/community/lists/', )
 
 	@property
 	def maybe_shortdesc(self):
