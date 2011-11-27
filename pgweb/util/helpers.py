@@ -5,12 +5,15 @@ from django.template import Context
 from django.template.loader import get_template
 import django.utils.xmlutils
 
-def simple_form(instancetype, itemid, request, formclass, formtemplate='base/form.html', redirect='/account/', navsection='account', fixedfields=None):
+def simple_form(instancetype, itemid, request, formclass, formtemplate='base/form.html', redirect='/account/', navsection='account', fixedfields=None, createifempty=False):
 	if itemid == 'new':
 		instance = instancetype()
 	else:
-		# Regular news item, attempt to edit it
-		instance = get_object_or_404(instancetype, pk=itemid)
+		# Regular form item, attempt to edit it
+		if createifempty:
+			(instance, wascreated) = instancetype.objects.get_or_create(pk=itemid)
+		else:
+			instance = get_object_or_404(instancetype, pk=itemid)
 		if hasattr(instance, 'submitter'):
 			if not instance.submitter == request.user:
 				raise Exception("You are not the owner of this item!")
