@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.backends import ModelBackend
 from django.db import connection
 
+from pgweb.core.models import UserProfile
+
 # Special version of the authentication backend, so we can deal with migration
 # of accounts from the old community login system. Once we consider all accounts
 # migrated, we can remove this one and use the default backend.
@@ -36,6 +38,16 @@ class AuthBackend(ModelBackend):
 				user = User(username=username.lower(), email=rows[0][3], first_name=namepieces[0], last_name=namepieces[1])
 				user.set_password(password)
 				user.save()
+
+				# Create a userprofile if we have to
+				print "Bleh"
+				print "\"%s\"" % rows[0][8]
+				if rows[0][8]:
+					print "Do something!"
+					profile = UserProfile(user=user)
+					profile.sshkey = rows[0][8]
+					print "Saved it"
+					profile.save()
 
 				# Now delete the user in the old system so nobody can use it
 				curs.execute('SELECT * FROM community_login_old_delete(%s)', (username.lower(), ))

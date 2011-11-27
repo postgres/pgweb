@@ -1,6 +1,7 @@
 from django import forms
 
 from django.contrib.auth.models import User
+from pgweb.core.models import UserProfile
 
 class SignupForm(forms.Form):
 	username = forms.CharField(max_length=30)
@@ -38,3 +39,8 @@ class SignupForm(forms.Form):
 		except User.DoesNotExist:
 			return email
 		raise forms.ValidationError("A user with this email address is already registered")
+
+class UserProfileForm(forms.ModelForm):
+	class Meta:
+		model = UserProfile
+		exclude = ('user',)

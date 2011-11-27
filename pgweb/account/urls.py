@@ -4,6 +4,8 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('',
     (r'^$', 'account.views.home'),
 
+	# Profile
+	(r'^profile/$', 'account.views.profile'),
     # List of items to edit
     (r'^edit/(.*)/$', 'account.views.listobjects'),
 

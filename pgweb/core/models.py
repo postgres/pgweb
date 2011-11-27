@@ -103,3 +103,9 @@ class ImportedRSSItem(models.Model):
 	def date(self):
 		return self.posttime.strftime("%Y-%m-%d")
 
+
+# Extra attributes for users (if they have them)
+class UserProfile(models.Model):
+	user = models.ForeignKey(User, null=False, blank=False, unique=True, primary_key=True)
+	sshkey = models.TextField(null=False, blank=True, verbose_name="SSH key", help_text= "Paste one or more public keys in OpenSSH format, one per line.")
+	lastmodified = models.DateTimeField(null=False, blank=False, auto_now=True)

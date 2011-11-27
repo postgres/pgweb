@@ -10,15 +10,15 @@ from django.conf import settings
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
 from pgweb.util.misc import send_template_mail
-from pgweb.util.helpers import HttpServerError
+from pgweb.util.helpers import HttpServerError, simple_form
 
 from pgweb.news.models import NewsArticle
 from pgweb.events.models import Event
-from pgweb.core.models import Organisation
+from pgweb.core.models import Organisation, UserProfile
 from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
 
-from forms import SignupForm
+from forms import SignupForm, UserProfileForm
 
 @ssl_required
 @login_required
@@ -59,6 +59,12 @@ objtypes = {
 		'submit_header': 'Before submitting a new Organisation, please verify on the list of <a href="/account/orglist">current organisations</a> if the organisation already exists. If it does, please contact the manager of the organisation to gain permissions.',
 	},
 }
+
+@ssl_required
+@login_required
+def profile(request):
+	return simple_form(UserProfile, request.user.pk, request,
+					   UserProfileForm, createifempty=True)
 
 @ssl_required
 @login_required

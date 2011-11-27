@@ -111,12 +111,12 @@ $$ LANGUAGE 'sql';
 CREATE OR REPLACE FUNCTION community_login_old(INOUT userid_p text, password_p text,
   OUT success integer, OUT fullname text, OUT email text, OUT authorblurb text,
   OUT communitydoc_superuser integer, OUT last_login timestamp with time zone,
-  OUT matrixeditor integer) 
+  OUT matrixeditor integer, OUT sshkey text) 
 RETURNS record
 AS $$
 BEGIN
-   SELECT users_old.userid,users_old.fullname,users_old.email,users_old.authorblurb,users_old.communitydoc_superuser,users_old.lastlogin,users_old.matrixeditor
-     INTO userid_p,fullname,email,authorblurb,communitydoc_superuser,last_login,matrixeditor
+   SELECT users_old.userid,users_old.fullname,users_old.email,users_old.authorblurb,users_old.communitydoc_superuser,users_old.lastlogin,users_old.matrixeditor,users_old.sshkey
+     INTO userid_p,fullname,email,authorblurb,communitydoc_superuser,last_login,matrixeditor, sshkey
      FROM users_old WHERE lower(users_old.userid)=lower(userid_p) AND
      substring(users_old.pwdhash, 30) = pgcrypto.crypt(password_p, substring(users_old.pwdhash, 1, 29));
 -- bf salts are always 29 chars!
