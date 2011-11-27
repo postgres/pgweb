@@ -36,7 +36,7 @@ def submitbug(request):
 	else:
 		form = SubmitBugForm()
 
-	versions = Version.objects.all()
+	versions = Version.objects.filter(supported=True)
 
 	return render_to_response('base/form.html', {
 		'form': form,

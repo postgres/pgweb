@@ -5,7 +5,7 @@ from pgweb.core.models import Version
 class _version_choices():
 	def __iter__(self):
 		yield ('-1', '** Select version')
-		for v in Version.objects.all():
+		for v in Version.objects.filter(supported=True):
 			for minor in range(v.latestminor,-1,-1):
 				s = "%s.%s" % (v.tree, minor)
 				yield (s,s)
