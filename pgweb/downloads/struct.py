@@ -12,10 +12,5 @@ def get_struct():
 		yield ('download/products/%s/' % c.id,
 			   0.3)
 
-	# FTP browser
-	f = open(settings.FTP_PICKLE, "rb")
-	allnodes = pickle.load(f)
-	f.close()
-
-	for d in allnodes.keys():
-		yield ('ftp/%s' % d, None)
+	# Don't index the ftp browser for now - it doesn't really contain
+	# anything useful to search
