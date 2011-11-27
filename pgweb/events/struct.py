@@ -14,5 +14,5 @@ def get_struct():
 		yearsold = (now - n.startdate).days / 365
 		if yearsold > 4:
 			yearsold = 4
-		yield ('about/events/%s/' % n.id,
+		yield ('about/event/%s/' % n.id,
 			   0.5-(yearsold/10.0))
