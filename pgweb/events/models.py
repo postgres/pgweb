@@ -5,7 +5,7 @@ from pgweb.util.bases import PgModel
 
 from core.models import Country, Organisation
 
-class Event(models.Model, PgModel):
+class Event(PgModel, models.Model):
 	approved = models.BooleanField(null=False, blank=False, default=False)
 
 	org = models.ForeignKey(Organisation, null=False, blank=False)
