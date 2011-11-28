@@ -10,12 +10,12 @@ import sys
 import os
 from datetime import datetime
 import cPickle as pickle
-#from pprint import pprint
+import codecs
 
 allnodes = {}
 
 def read_file(fn):
-	f = open(fn, "r")
+	f = codecs.open(fn, 'r', encoding='utf-8', errors='replace')
 	t = f.read()
 	f.close()
 	return t
