@@ -7,6 +7,7 @@ from django.db import connection, transaction
 
 from datetime import date, datetime
 from os import uname
+import re
 import urllib
 
 from pgweb.util.decorators import ssl_required, cache
@@ -71,9 +72,14 @@ def community(request):
 		'planet': planet,
 	}, NavContext(request, 'community'))
 
+
+re_staticfilenames = re.compile("^[0-9A-Z/_-]+$", re.IGNORECASE)
 # Generic fallback view for static pages
 def fallback(request, url):
 	if url.find('..') > -1:
+		raise Http404('Page not found.')
+
+	if not re_staticfilenames.match(url):
 		raise Http404('Page not found.')
 
 	try:
