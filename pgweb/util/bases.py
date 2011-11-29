@@ -101,7 +101,11 @@ class PgModel(object):
 
 	def _get_attr_value(self, fieldname):
 		try:
-			return getattr(self, fieldname)
+			# see if this is a Many-to-many field, if yes, we want to print out a pretty list
+			value = getattr(self, fieldname)
+			if isinstance(self._meta.get_field_by_name(fieldname)[0], models.ManyToManyField):
+				return ", ".join(map(lambda x: unicode(x), value.all()))
+			return value
 		except ValueError, v:
 			# NOTE! If the object is brand new, and it has a many-to-many relationship, we can't
 			# access this data yet. So just return that it's not available yet.
@@ -132,9 +136,9 @@ class PgModel(object):
 		
 		s = "\n\n".join(["%s from: %s\n%s to:   %s" % (
 			n,
-			getattr(oldobj, n),
+			oldobj._get_attr_value(n),
 			n,
-			getattr(self, n),
+			self._get_attr_value(n),
 		) for n in fieldlist if not getattr(oldobj,n)==getattr(self,n)])
 		if not s: return None
 		return s
