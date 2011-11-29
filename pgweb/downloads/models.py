@@ -102,8 +102,12 @@ class StackBuilderApp(models.Model):
 	textid = models.CharField(max_length=100, null=False, blank=False)
 	version = models.CharField(max_length=20, null=False, blank=False)
 	platform = models.CharField(max_length=20, null=False, blank=False,
-		choices= (('windows', 'Windows'), ('osx', 'Mac OS X'),
+		choices= (('windows', 'Windows (32-bit)'), ('windows-x64', 'Windows (64-bit)'), ('osx', 'Mac OS X'),
 			('linux', 'Linux (32-bit)'), ('linux-x64', 'Linux (64-bit)'))
+	)
+	secondaryplatform = models.CharField(max_length=20, null=False, blank=True,
+		choices= (('', 'None'), ('windows', 'Windows (32-bit)'), ('windows-x64', 'Windows (64-bit)'),
+			('osx', 'Mac OS X'), ('linux', 'Linux (32-bit)'), ('linux-x64', 'Linux (64-bit)'))
 	)
 	name = models.CharField(max_length=500, null=False, blank=False)
 	active = models.BooleanField(null=False, blank=False, default=True)
