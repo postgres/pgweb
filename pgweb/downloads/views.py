@@ -218,6 +218,7 @@ def applications_v2_xml(request):
 		x.startElement('application', {})
 		x.add_xml_element('id', a.textid)
 		x.add_xml_element('platform', a.platform)
+		x.add_xml_element('secondaryplatform', a.secondaryplatform)
 		x.add_xml_element('version', a.version)
 		x.add_xml_element('name', a.name)
 		x.add_xml_element('description', a.description)
