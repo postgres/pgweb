@@ -130,7 +130,7 @@ def _mirror_redirect_internal(request, scheme, host, path):
 def mirror_redirect(request, mirrorid, protocol, path):
 	try:
 		mirror = Mirror.objects.get(pk=mirrorid)
-	except Mirror.NotFound:
+	except Mirror.DoesNotExist:
 		raise Http404("Specified mirror not found")
 
 	return _mirror_redirect_internal(
