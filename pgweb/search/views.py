@@ -116,6 +116,12 @@ def search(request):
 					})
 	query = request.REQUEST['q']
 
+	# Anti-stefan prevention
+	if len(query) > 1000:
+		return render_to_response('search/sitesearch.html', {
+			'search_error': "Search term too long.",
+			})
+
 	# Is the request being paged?
 	if request.REQUEST.has_key('p'):
 		try:
