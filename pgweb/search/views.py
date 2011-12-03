@@ -68,7 +68,9 @@ def search(request):
 		else:
 			listsort = 'r'
 
-		if dateval == -1 or not dateval:
+		if not dateval:
+			dateval = 365
+		if dateval == -1:
 			firstdate = None
 		else:
 			firstdate = datetime.datetime.today()-datetime.timedelta(days=dateval)
