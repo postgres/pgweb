@@ -55,6 +55,8 @@ urlpatterns = patterns('',
 	(r'^community/weeklynews/$', 'pwn.views.index'),
 	(r'^community/weeklynews/pwn(\d{4})(\d{2})(\d{2})/$', 'pwn.views.post'),
 
+    (r'^search/$', 'search.views.search'),
+
     (r'^support/professional_(support|hosting)/$', 'profserv.views.root'),
     (r'^support/professional_(support|hosting)[/_](.*)/$', 'profserv.views.region'),
     (r'^support/submitbug/$', 'misc.views.submitbug'),

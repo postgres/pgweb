@@ -1,0 +1,61 @@
+{%extends "base/page.html"%}
+{%block title%}Search results{%endblock%}
+{%block contents%}
+
+<form method="get" action="/search/">
+ <input type="hidden" name="m" value="1">
+ <div class="tblBasic">
+  <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey" width="590">
+   <tr>
+    <td class="colFirst">Search for</td>
+    <th class="colLast"><input type="text" name="q" value="{{query}}" /> <input type="submit" value="Search" /></th>
+   </tr>
+   <tr>
+    <td class="colFirstR">List:</td>
+    <td class="colLast"><select name="l">
+<option value="">-- All lists</option>
+{%for l in lists %}
+{%ifchanged l.group%}
+<option value="{{l.group.negid}}"{%if l.group.negid = listid%} SELECTED{%endif%}>-- {{l.group}}</option>
+{%endifchanged%}
+<option value="{{l.id}}"{%if l.id = listid%} SELECTED{%endif%}>{{l}}</option>
+{%endfor%}
+    </select></td>
+   </tr>
+   <tr>
+    <td class="colFirstR">Post date:</td>
+    <td class="colLast"><select name="d">{%for d in dates%}
+     <option value="{{d.val}}"{%if d.val = dateval %} SELECTED{%endif%}>{{d.text}}</option>{%endfor%}
+    </select></td>
+   </tr>
+   <tr class="lastrow">
+    <td class="colFirst" align="right">Sort by:</td>
+    <td class="colLast"><select name="s">{%for s in sortoptions%}
+      <option value="{{s.val}}"{%if s.selected%} SELECTED{%endif%}>{{s.text}}</option>{%endfor%}
+     </select></td>
+   </tr>
+  </table>
+ </div>
+</form>
+
+<div id="pgSearchContent">
+ {%if search_error %}
+ <div>{{search_error}}</div>
+ {%else%}
+  <!-- docbot goes here -->
+  {%if hitcount = 0 %}
+   <p>Your search for <b>{{query}}</b> returned no hits.</p>
+  {%else%}
+   <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount = 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
+   {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
+   {%for hit in hits %}
+    {{forloop.counter0|add:firsthit}}. <a href="http://archives.postgresql.org/{{hit.list}}/{{hit.year}}-{{hit.month}}/msg{{hit.msgnum}}.php">{{hit.subject}}</a> [{{hit.rank}}]<br/>
+{{hit.abstract|safe}}<br/>
+<a href="http://archives.postgresql.org/{{hit.list}}/{{hit.year}}-{{hit.month}}/msg{{hit.msgnum}}.php">http://archives.postgresql.org/{{hit.list}}/{{hit.year}}-{{hit.month}}/msg{{hit.msgnum}}.php</a><br/>
+    <br/>
+   {%endfor%}
+   {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
+  {%endif%}
+ {%endif%}
+</div>
+{%endblock%}
