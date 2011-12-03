@@ -160,7 +160,7 @@ def sync_timestamp(request):
 
 # List of all unapproved objects, for the special admin page
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_staff)
 def admin_pending(request):
 	return render_to_response('core/admin_pending.html', {
 			'app_list': get_all_pending_moderations(),
