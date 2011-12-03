@@ -150,7 +150,7 @@ def search(request):
 		conn.close()
 		totalhits = int(hits[-1][1])
 		querystr = "?m=1&q=%s&l=%s&d=%s&s=%s" % (
-			urllib.quote_plus(query),
+			urllib.quote_plus(query.encode('utf-8')),
 			listid or '',
 			dateval,
 			listsort
@@ -195,7 +195,7 @@ def search(request):
 		conn.close()
 		totalhits = int(hits[-1][5])
 		querystr = "?q=%s&a=%s&u=%s" % (
-			urllib.quote_plus(query),
+			urllib.quote_plus(query.encode('utf-8')),
 			allsites and "1" or "0",
 			suburl and urllib.quote_plus(suburl) or '',
 			)
