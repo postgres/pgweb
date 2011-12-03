@@ -8,6 +8,10 @@ class MailingListGroup(PgModel, models.Model):
 
 	purge_urls = ('/community/lists/', )
 
+	@property
+	def negid(self):
+		return -self.id
+
 	def __unicode__(self):
 		return self.groupname
 	
