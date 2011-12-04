@@ -52,19 +52,27 @@ def search(request):
 
 		if request.REQUEST.has_key('l'):
 			if request.REQUEST['l'] != '':
-				listid = int(request.REQUEST['l'])
+				try:
+					listid = int(request.REQUEST['l'])
+				except:
+					listid = None
 			else:
 				listid = None
 		else:
 			listid = None
 
 		if request.REQUEST.has_key('d'):
-			dateval = int(request.REQUEST['d'])
+			try:
+				dateval = int(request.REQUEST['d'])
+			except:
+				dateval = None
 		else:
 			dateval = None
 
 		if request.REQUEST.has_key('s'):
 			listsort = request.REQUEST['s']
+			if listsort != 'r' and listsort != 'd':
+				listsort = 'r'
 		else:
 			listsort = 'r'
 
