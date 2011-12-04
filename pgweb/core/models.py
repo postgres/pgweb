@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from pgweb.util.bases import PgModel
+from pgweb.util.misc import varnish_purge
 
 from datetime import datetime
 
@@ -86,6 +87,11 @@ class Organisation(PgModel, models.Model):
 class ImportedRSSFeed(models.Model):
 	internalname = models.CharField(max_length=32, null=False, blank=False, unique=True)
 	url = models.URLField(null=False, blank=False)
+	purgepattern = models.CharField(max_length=512, null=False, blank=True, help_text="NOTE! Pattern will be automatically anchored with ^ at the beginning, but you must lead with a slash in most cases - and don't forget to include the trailing $ in most cases")
+
+	def purge_related(self):
+		if self.purgepattern:
+			varnish_purge(self.purgepattern)
 
 	def __unicode__(self):
 		return self.internalname

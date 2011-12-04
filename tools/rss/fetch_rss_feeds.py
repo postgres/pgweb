@@ -32,6 +32,7 @@ for importfeed in ImportedRSSFeed.objects.all():
 			raise Exception('Feed load error with no exception!')
 		if feed.status != 200:
 			raise Exception('Feed returned status %s' % feed.status)
+		fetchedsomething = False
 		for entry in feed.entries:
 			try:
 				item = ImportedRSSItem.objects.get(feed=importfeed, url=entry.link)
@@ -42,6 +43,9 @@ for importfeed in ImportedRSSFeed.objects.all():
 									   posttime=datetime.strptime(entry.date, "%a, %d %b %Y %H:%M:%S %Z"),
 									   )
 				item.save()
+				fetchedsomething = True
+		if fetchedsomething:
+			importfeed.purge_related()
 		transaction.commit()
 	except Exception, e:
 		print "Failed to load %s: %s" % (importfeed, e)
