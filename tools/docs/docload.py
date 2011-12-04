@@ -105,6 +105,10 @@ for member in tf:
 tf.close()
 
 # Issue varnish purge for all docs of this version
+if ver == "0":
+	# Special handling of developer docs...
+	ver = "devel"
+
 curs.execute("SELECT varnish_purge('^/docs/' || %(v)s || '/')", {'v': ver})
 
 transaction.commit_unless_managed()
