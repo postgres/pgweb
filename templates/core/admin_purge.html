@@ -16,9 +16,24 @@
     Purge completed: {{purge_completed}}
   </div>
 {%endif%}
+
  <form method="POST" action=".">
 URL (regex): <input type="text" name="url">
   <input type="submit" value="Purge" />
  </form>
+
+{%if latest_purges %}
+  <div class="module">
+    <table summary="Latest purges" width="100%">
+      <caption><a class="section">Latest purges</a></caption>
+      {%for p in latest_purges%}
+      <tr class="row{%cycle '1' '2'%}">
+	<td>{{p.t|date:"c"}}</td>
+	<td>{{p.u}}</td>
+      </tr>
+      {%endfor%}
+    </table>
+  </div>
+{%endif%}
 </div>
 {%endblock%}

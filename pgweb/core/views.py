@@ -176,11 +176,19 @@ def admin_purge(request):
 			return HttpResponseRedirect('.')
 		varnish_purge(url)
 		transaction.commit_unless_managed()
-		return render_to_response('core/admin_purge.html', {
-				'purge_completed': '^%s' % url,
-				})
+		completed = '^%s' % url
 	else:
-		return render_to_response('core/admin_purge.html')
+		completed = None
+
+	# Fetch list of latest purges
+	curs = connection.cursor()
+	curs.execute("SELECT ev_time, ev_data FROM pgq.event_1 WHERE ev_type='P' ORDER BY ev_time DESC LIMIT 20")
+	latest = [{'t': r[0], 'u': r[1]} for r in curs.fetchall()]
+
+	return render_to_response('core/admin_purge.html', {
+			'purge_completed': completed,
+			'latest_purges': latest,
+			})
 
 # Merge two organisations
 @login_required
