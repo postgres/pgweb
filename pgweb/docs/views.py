@@ -32,6 +32,13 @@ def docpage(request, version, typ, filename):
 	else:
 		extension = "html"
 
+	if ver < Decimal("7.1") and ver > Decimal(0):
+		indexname = "postgres.htm"
+	elif ver == Decimal("7.1"):
+		indexname = "postgres.html"
+	else:
+		indexname = "index.html"
+
 	page = get_object_or_404(DocPage, version=ver, file="%s.%s" % (filename, extension))
 
 	if typ=="interactive":
@@ -46,7 +53,7 @@ def docpage(request, version, typ, filename):
 		'doc_type': typ,
 		'comments': comments,
 		'can_comment': (typ=="interactive" and ver==currver),
-		'doc_index_filename': 'index.html',
+		'doc_index_filename': indexname,
 	})
 
 def docsrootpage(request, version, typ):
