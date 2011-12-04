@@ -104,6 +104,9 @@ for member in tf:
 				load_doc_file(inner_member.name, inner_tar.extractfile(inner_member))
 tf.close()
 
+# Update the docs loaded timestamp
+curs.execute("UPDATE core_version SET docsloaded=CURRENT_TIMESTAMP WHERE tree=%(v)s", {'v': ver})
+
 # Issue varnish purge for all docs of this version
 if ver == "0":
 	# Special handling of developer docs...

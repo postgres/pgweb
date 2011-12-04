@@ -12,6 +12,7 @@ class Version(PgModel, models.Model):
 	relnotes = models.CharField(max_length=32, null=False, blank=False)
 	current = models.BooleanField(null=False, blank=False, default=False)
 	supported = models.BooleanField(null=False, blank=False, default=True)
+	docsloaded = models.DateTimeField(null=True, blank=True, help_text="The timestamp of the latest docs load. Really only used for developer docs for now, but set for all of them.")
 
 	def __unicode__(self):
 		return self.versionstring

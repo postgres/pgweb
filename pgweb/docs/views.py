@@ -15,6 +15,7 @@ from models import DocPage, DocComment
 from forms import DocCommentForm
 
 def docpage(request, version, typ, filename):
+	loaddate = None
 	# Get the current version both to map the /current/ url, and to later
 	# determine if we allow comments on this page.
 	currver = Version.objects.filter(current=True)[0].tree
@@ -24,6 +25,7 @@ def docpage(request, version, typ, filename):
 		if not typ == 'static':
 			raise Http404("Only static version of developer docs available")
 		ver = Decimal(0)
+		loaddate = Version.objects.get(tree=Decimal(0)).docsloaded
 	else:
 		ver = Decimal(version)
 
@@ -54,6 +56,7 @@ def docpage(request, version, typ, filename):
 		'comments': comments,
 		'can_comment': (typ=="interactive" and ver==currver),
 		'doc_index_filename': indexname,
+		'loaddate': loaddate,
 	})
 
 def docsrootpage(request, version, typ):
