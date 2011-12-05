@@ -16,7 +16,7 @@ class NewsArticle(PgModel, models.Model):
 	def purge_urls(self):
 		yield '/about/news/%s/' % self.pk
 		yield '/about/newsarchive/'
-		yield 'news.rss'
+		yield '/news.rss'
 		# FIXME: when to expire the front page?
 		yield '/$'
 	
