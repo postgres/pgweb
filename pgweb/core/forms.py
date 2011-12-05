@@ -5,7 +5,7 @@ from models import Organisation
 from django.contrib.auth.models import User
 
 class OrganisationForm(forms.ModelForm):
-	remove_manager = forms.ModelMultipleChoiceField(required=False, queryset=None, label="Current manage", help_text="Select one or more managers to remove")
+	remove_manager = forms.ModelMultipleChoiceField(required=False, queryset=None, label="Current manager(s)", help_text="Select one or more managers to remove")
 	add_manager = forms.EmailField(required=False)
 
 	class Meta:
