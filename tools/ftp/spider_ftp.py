@@ -11,6 +11,7 @@ import os
 from datetime import datetime
 import cPickle as pickle
 import codecs
+import urllib2
 
 allnodes = {}
 
@@ -56,15 +57,29 @@ def parse_directory(dirname, rootlen):
 
 def Usage():
 	print "Usage: spider_ftp.py <ftp_root> <pickle_file>"
+	print ""
+	print "If <pickle_file> starts with http[s]://, the file will be uploaded"
+	print "to that URL instead of written to the filesystem."
 	sys.exit(1)
 
 if len(sys.argv) != 3: Usage()
 
 parse_directory(sys.argv[1], len(sys.argv[1]))
 
-f = open(sys.argv[2] + ".tmp", "wb")
-pickle.dump(allnodes, f)
-f.close()
-os.rename(sys.argv[2] + ".tmp", sys.argv[2])
+if sys.argv[2].startswith("http://") or sys.argv[2].startswith("https://"):
+	o = urllib2.build_opener(urllib2.HTTPHandler)
+	r = urllib2.Request(sys.argv[2], data=pickle.dumps(allnodes))
+	r.add_header('Content-type', 'application/octet-stream')
+	r.get_method = lambda: 'PUT'
+	u = o.open(r)
+	x = u.read()
+	if x != "NOT CHANGED" and x != "OK":
+		print "Failed to upload: %s" % x
+		sys.exit(1)
+else:
+	f = open(sys.argv[2] + ".tmp", "wb")
+	pickle.dump(allnodes, f)
+	f.close()
+	os.rename(sys.argv[2] + ".tmp", sys.argv[2])
 
 #pprint(allnodes)

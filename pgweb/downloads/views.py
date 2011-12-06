@@ -13,7 +13,7 @@ import cPickle as pickle
 from pgweb.util.decorators import ssl_required, nocache
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
-from pgweb.util.misc import get_client_ip
+from pgweb.util.misc import get_client_ip, varnish_purge
 
 from models import *
 from forms import *
@@ -97,6 +97,43 @@ def _get_numeric_ip(request):
 		return int(p[0])*16777216 + int(p[1])*65536 + int(p[2])*256 + int(p[3])
 	except:
 		return None
+
+
+# Accept an upload of the ftpsite pickle. This is fairly resource consuming,
+# and not very optimized, but that's why we limit it so that only the ftp
+# server(s) can post it.
+# There is no concurrency check - the ftp site better not send more than one
+# file in parallel.
+@ssl_required
+def uploadftp(request):
+	if request.method != 'PUT':
+		return HttpServerError("Invalid method")
+	if not request.META['REMOTE_ADDR'] in settings.FTP_MASTERS:
+		return HttpServerError("Invalid client address")
+	# We have the data in request.raw_post_data. Attempt to load it as
+	# a pickle to make sure it's properly formatted
+	throwaway = pickle.loads(request.raw_post_data)
+
+	# Next, check if it's the same as the current file
+	f = open(settings.FTP_PICKLE, "rb")
+	x = f.read()
+	f.close()
+	if x == request.raw_post_data:
+		# Don't rewrite the file or purge any data if nothing changed
+		return HttpResponse("NOT CHANGED", content_type="text/plain")
+
+	# File has changed - let's write it!
+	f = open("%s.new" % settings.FTP_PICKLE, "wb")
+	f.write(request.raw_post_data)
+	f.close()
+	os.rename("%s.new" % settings.FTP_PICKLE, settings.FTP_PICKLE)
+
+	# Purge it out of varnish so we start responding right away
+	varnish_purge("/ftp")
+	transaction.commit_unless_managed()
+
+	# Finally, indicate to the client that we're happy
+	return HttpResponse("OK", content_type="text/plain")
 
 @nocache
 def mirrorselect(request, path):

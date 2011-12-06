@@ -126,6 +126,8 @@ NO_HTTPS_REDIRECT=False                                # Set to true to disable 
                                                        # developing locally
 FRONTEND_SERVERS=()                                    # A tuple containing the *IP addresses* of all the
                                                        # varnish frontend servers in use.
+FTP_MASTERS=()										   # A tuple containing the *IP addresses* of all machines
+                                                       # trusted to upload ftp structure data
 
 # Load local settings overrides
 from settings_local import *

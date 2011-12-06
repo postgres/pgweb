@@ -41,6 +41,7 @@ urlpatterns = patterns('',
     (r'^redir$', 'downloads.views.mirror_redirect_old'),
     (r'^mirrors.xml$', 'downloads.views.mirrors_xml'),
     (r'^applications-v2.xml$', 'downloads.views.applications_v2_xml'),
+    (r'^download/uploadftp/', 'downloads.views.uploadftp'),
 
     (r'^docs/(current|devel|\d\.\d)/(static|interactive)/(.*).html?$', 'docs.views.docpage'),
     (r'^docs/(current|devel|\d\.\d)/(static|interactive)/$', 'docs.views.docsrootpage'),
