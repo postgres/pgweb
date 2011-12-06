@@ -70,6 +70,7 @@ if sys.argv[2].startswith("http://") or sys.argv[2].startswith("https://"):
 	o = urllib2.build_opener(urllib2.HTTPHandler)
 	r = urllib2.Request(sys.argv[2], data=pickle.dumps(allnodes))
 	r.add_header('Content-type', 'application/octet-stream')
+	r.add_header('Host', 'www.postgresql.org')
 	r.get_method = lambda: 'PUT'
 	u = o.open(r)
 	x = u.read()
