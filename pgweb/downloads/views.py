@@ -144,7 +144,10 @@ def mirror_redirect(request, mirrorid, protocol, path):
 def mirror_redirect_old(request):
 	# Version of redirect that takes parameters in the querystring. This is
 	# only used by the stackbuilder.
-	if not request.GET['sb'] == "1":
+	try:
+		if not request.GET['sb'] == "1":
+			raise Http404("Page not found, you should be using the new URL format!")
+	except:
 		raise Http404("Page not found, you should be using the new URL format!")
 
 	urlpieces = urlparse.urlparse(request.GET['url'])
