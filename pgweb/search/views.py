@@ -181,7 +181,7 @@ def search(request):
 				'hits': [{
 						'list': h[0],
 						'year': h[1],
-						'month': h[2],
+						'month': "%02d" % h[2],
 						'msgnum': "%05d" % h[3],
 						'date': h[4],
 						'subject': h[5],
