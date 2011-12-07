@@ -27,6 +27,11 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 		if form.is_valid():
 			r = form.save(commit=False)
 			r.submitter = request.user
+			# Set fixed fields. Note that this will not work if the fixed fields are ManyToMany,
+			# but we'll fix that sometime in the future
+			if fixedfields:
+				for k,v in fixedfields.items():
+					setattr(r, k, v)
 			r.save()
 
 			# If we have a callback with the current user
@@ -34,12 +39,6 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 				form.apply_submitter(r, request.user)
 				r.save()
 
-			# In case fixedfields include a manytomany field, we need to make sure the main form is saved first,
-			# so we can access the field without an exception.
-			if fixedfields:
-				for k,v in fixedfields.items():
-					setattr(r, k, v)
-				r.save()
 			return HttpResponseRedirect(redirect)
 	else:
 		# Generate form
