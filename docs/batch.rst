@@ -22,10 +22,11 @@ nice-looking).
 ftp/spider_ftp.py
 -----------------
 This script needs to be run on the *ftp server*, not on the
-webserver. It will generate a python pickle file that should then be
-copied to the webserver to serve as the basis for the ftp browser (so
-it's not required to sync the entire ftp site to the webserver). The
-copying of the pickle file is not included in the script.
+webserver. It will generate a python pickle file that is then automatically
+uploaded to the webserver, which will write it down (thus, this is
+the one directory where the webserver does need write permissions).
+The IP address of the machine(s) allowed to upload the ftp pickle
+are defined in settings.FTP_MASTERS.
 
 moderation/moderation_report.py
 -------------------------------

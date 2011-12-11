@@ -5,12 +5,12 @@ So, you're ready to contribute to pgweb, and you want to set up a
 local working copy of the website code, so you have something to work
 with. Here's a quick step-by-step on how to do that:
 
-1. Make sure you have downloaded and installed django *version 1.1*
+1. Make sure you have downloaded and installed django *version 1.2*
    (or later). You will also need the dependencies *psycopg2*, *yaml*
    and *markdown* (these are python libraries, so prefix python- for Debian
    packages, for example).
 #. Make sure you have downloaded and installed PostgreSQL (tested only
-   with *version 8.4* and later, but doesn't use any advanced
+   with *version 9.0* and later, but doesn't use any advanced
    functionality so it should work with other versions)
 
 #. Create a database in your PostgreSQL installation called pgweb
@@ -31,6 +31,13 @@ with. Here's a quick step-by-step on how to do that:
    installation::
 
    ./manage.py syncdb
+
+#. A few functions are required, or at least recommended in order to
+   test all of the system. The SQL scripts in the directory sql/ needs
+   to be run in the database. Note that for a local dev install
+   without varnish frontends, you should use the *varnish_local.sql*
+   script, and not use the *varnish.sql* script.
+
 #. To load some initial data for some tables (far from all at this
    point), in the pgweb directory, run the following command::
 
