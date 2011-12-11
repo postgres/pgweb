@@ -33,6 +33,15 @@ pkill -f pgweb/manage.py
 # Update the file listing the latest update
 mv -f /tmp/pgweb.update lastupdate
 
+# Hit the web app a couple of times, since in some cases lighttpd
+# generates a 503 error on the first one or two hits. Make sure
+# we eat these up, instead of the mirror checker or even worse,
+# an end user.
+wget --header "Host: www.postgresql.org" http://localhost/web_sync_timestamp -O /dev/null -q
+sleep 1
+wget --header "Host: www.postgresql.org" http://localhost/web_sync_timestamp -O /dev/null -q
+
+
 # Unconditionally update the static content (we don't need to reload
 # lighttpd for htis, so there is no need to actually check for last
 # updates or anything like that)
