@@ -1,4 +1,5 @@
 {%extends "base/page.html"%}
+{%load markup%}
 {%block title%}Event archive{%endblock%}
 {%block contents%}
 
@@ -14,7 +15,7 @@ whatsoever.</i>
 <div>Date: <b>{{event.displaydate|safe}}</b></div>
 <div>Location: <b>{{event.locationstring}}</b></div>
 <p>
-{{event.summary}}
+{{event.summary|markdown:"safe"}}
 </p>
 {%endfor%}
 {%endfor%}

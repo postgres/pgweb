@@ -18,11 +18,11 @@ class Event(PgModel, models.Model):
 	startdate = models.DateField(null=False, blank=False)
 	enddate = models.DateField(null=False, blank=False)
 	
-	summary = models.TextField(blank=False, null=False)
-	details = models.TextField(blank=False, null=False)
+	summary = models.TextField(blank=False, null=False, help_text="A short introduction (shown on the events listing page)")
+	details = models.TextField(blank=False, null=False, help_text="Complete event description")
 	
 	send_notification = True
-	markdown_fields = ('details', )
+	markdown_fields = ('details', 'summary', )
 	
 	def purge_urls(self):
 		yield '/about/event/%s/' % self.pk
