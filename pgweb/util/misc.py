@@ -6,7 +6,7 @@ from django.conf import settings
 from pgweb.util.helpers import template_to_string
 
 def sendmail(msg):
-	pipe = Popen("sendmail -t", shell=True, stdin=PIPE).stdin
+	pipe = Popen("/usr/sbin/sendmail -t", shell=True, stdin=PIPE).stdin
 	pipe.write(msg.as_string())
 	pipe.close()
 
