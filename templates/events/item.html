@@ -3,7 +3,7 @@
 {%block title%}{{obj.title}}{%endblock%}
 {%block contents%}
 <h1>{{obj.title}}</h1>
-<div class="eventdate">Posted on <b>{{obj.displaydate|safe}}</b></div>
+<div class="eventdate">Date: <b>{{obj.displaydate|safe}}</b></div>
 <div>Location: {{obj.locationstring}}</div>
 {{obj.details|markdown:"safe"}}
 {%if obj.has_organisation%}
