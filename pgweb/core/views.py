@@ -38,7 +38,8 @@ def home(request):
 	try:
 		quote = Quote.objects.filter(approved=True).order_by('?')[0]
 	except:
-		pass # if there is no quote available, just ignore error
+		# if there is no quote available, just ignore error
+		quote = None
 	versions = Version.objects.filter(supported=True)
 	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:5]
 
