@@ -59,7 +59,6 @@ class PgModel(object):
 			oldobj = self.__class__.objects.get(pk=self.pk)
 		except self.DoesNotExist, e:
 			return ('A new %s has been added' % self._meta.verbose_name, self.full_text_representation())
-		
 		if hasattr(self,'approved'):
 			# This object has the capability to do approving. Apply the following logic:
 			# 1. If object was unapproved, and is still unapproved, don't send notification
@@ -139,7 +138,7 @@ class PgModel(object):
 			oldobj._get_attr_value(n),
 			n,
 			self._get_attr_value(n),
-		) for n in fieldlist if not getattr(oldobj,n)==getattr(self,n)])
+		) for n in fieldlist if oldobj._get_attr_value(n) != self._get_attr_value(n)])
 		if not s: return None
 		return s
 
