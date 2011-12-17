@@ -41,13 +41,9 @@ class AuthBackend(ModelBackend):
 				user.save()
 
 				# Create a userprofile if we have to
-				print "Bleh"
-				print "\"%s\"" % rows[0][8]
 				if rows[0][8]:
-					print "Do something!"
 					profile = UserProfile(user=user)
 					profile.sshkey = rows[0][8]
-					print "Saved it"
 					profile.save()
 
 				# Now delete the user in the old system so nobody can use it
