@@ -115,6 +115,8 @@ INSTALLED_APPS = [
 #
 # In particular, adjust the email addresses
 ###
+SESSION_COOKIE_SECURE=True                             # Allow our session only over https
+SESSION_COOKIE_DOMAIN="www.postgresql.org"             # Don't allow access by other postgresql.org sites
 SITE_ROOT="http://www.postgresql.org"                  # Root of working URLs
 FTP_PICKLE="/usr/local/pgweb/ftpsite.pickle"           # Location of file with current contents from ftp site
 NOTIFICATION_EMAIL="someone@example.com"               # Address to send notifications *to*
