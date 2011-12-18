@@ -12,6 +12,10 @@
 UPDDIR=$(dirname $0)
 cd $UPDDIR
 
+# Sleep 20 seconds to avoid interfering with the automirror scripts that
+# also run exactly on the minute.
+sleep 20
+
 # Pull changes from the it repo
 git pull -q >/dev/null 2>&1
 
