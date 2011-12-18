@@ -1,11 +1,16 @@
 from django.contrib.auth.models import User
 import django.contrib.auth.views as authviews
 from django.http import HttpResponseRedirect, HttpResponse, Http404
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.http import int_to_base36
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
+
+import base64
+import urllib
+from Crypto.Cipher import AES
+from Crypto import Random
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
@@ -18,6 +23,7 @@ from pgweb.core.models import Organisation, UserProfile
 from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
 
+from models import CommunityAuthSite
 from forms import SignupForm, UserProfileForm
 
 @ssl_required
@@ -155,3 +161,46 @@ content is available for reading without an account.
 def signup_complete(request):
 	return render_to_response('account/signup_complete.html', {
 	}, NavContext(request, 'account'))
+
+
+
+####
+## Community authentication endpoint
+####
+@ssl_required
+@login_required
+def communityauth(request, siteid):
+	# When we reach this point, the user *has* already been authenticated.
+	# The request variable "su" *may* contain a suburl and should in that
+	# case be passed along to the site we're authenticating for. And of
+	# course, we fill a structure with information about the user.
+
+	site = get_object_or_404(CommunityAuthSite, pk=siteid)
+
+	info = {
+		'u': request.user.username,
+		'f': request.user.first_name,
+		'l': request.user.last_name,
+		'e': request.user.email,
+		}
+	if request.GET.has_key('su'):
+		if request.GET['su'].startswith('/'):
+			info.update({
+					'su': request.GET['su']
+					})
+
+	# URL-encode the structure
+	s = urllib.urlencode(info)
+
+	# Encrypt it with the shared key (and IV!)
+	r = Random.new()
+	iv = r.read(16) # Always 16 bytes for AES
+	encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_CBC, iv)
+	cipher = encryptor.encrypt(s + ' ' * (16-(len(s) % 16))) #Pad to even 16 bytes
+
+	# Generate redirect
+	return HttpResponseRedirect("%s?i=%s&d=%s" % (
+			site.redirecturl,
+			base64.b64encode(iv, "-_"),
+			base64.b64encode(cipher, "-_"),
+			))

@@ -1,3 +1,9 @@
 from django.db import models
 
-# Create your models here.
+class CommunityAuthSite(models.Model):
+	name = models.CharField(max_length=100, null=False, blank=False)
+	redirecturl = models.URLField(max_length=200, null=False, blank=False)
+	cryptkey = models.CharField(max_length=100, null=False, blank=False)
+
+	def __unicode__(self):
+		return self.name
