@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from util.admin import register_markdown, MarkdownPreviewAdmin
+from util.admin import MarkdownPreviewAdmin
 from models import *
 
 class EventAdmin(MarkdownPreviewAdmin):

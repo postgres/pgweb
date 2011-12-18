@@ -1,4 +1,11 @@
-from util.admin import register_markdown
+from django.contrib import admin
+
+from util.admin import MarkdownPreviewAdmin
 from models import *
 
-register_markdown(NewsArticle)
+class NewsArticleAdmin(MarkdownPreviewAdmin):
+	list_display = ('title', 'org', 'date', 'approved', )
+	list_filter = ('approved', )
+	search_fields = ('org', 'content', 'title', )
+
+admin.site.register(NewsArticle, NewsArticleAdmin)
