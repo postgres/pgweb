@@ -2,8 +2,6 @@ The PostgreSQL website
 ======================
 
 The code in this repository is what backs the website at www.postgresql.org.
-At least, it will do so starting sometime summer 2010 if things go according
-to plans.
 
 The authoritative repository for this code is on git.postgresql.org, but it's
 free to be mirrored anywhere.
