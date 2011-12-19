@@ -167,15 +167,40 @@ def signup_complete(request):
 ####
 ## Community authentication endpoint
 ####
+from django.views.decorators.csrf import csrf_protect
+
 @ssl_required
-@login_required
+@csrf_protect
 def communityauth(request, siteid):
+	# Get whatever site the user is trying to log in to.
+	site = get_object_or_404(CommunityAuthSite, pk=siteid)
+
+	if request.GET.has_key('su'):
+		su = request.GET['su']
+		if not su.startswith('/'):
+			su = None
+	else:
+		su = None
+
+	# Verify if the user is authenticated, and if he/she is not, generate
+	# a login form that has information about which site is being logged
+	# in to, and basic information about how the community login system
+	# works.
+	if not request.user.is_authenticated():
+		if su:
+			suburl = "?su=%s" % su
+		else:
+			suburl = ""
+		return render_to_response('account/communityauth.html', {
+				'sitename': site.name,
+				'next': '/account/auth/%s/%s' % (siteid, suburl),
+				}, NavContext(request, 'account'))
+
+
 	# When we reach this point, the user *has* already been authenticated.
 	# The request variable "su" *may* contain a suburl and should in that
 	# case be passed along to the site we're authenticating for. And of
 	# course, we fill a structure with information about the user.
-
-	site = get_object_or_404(CommunityAuthSite, pk=siteid)
 
 	info = {
 		'u': request.user.username,
@@ -183,11 +208,8 @@ def communityauth(request, siteid):
 		'l': request.user.last_name,
 		'e': request.user.email,
 		}
-	if request.GET.has_key('su'):
-		if request.GET['su'].startswith('/'):
-			info.update({
-					'su': request.GET['su']
-					})
+	if su:
+		info['su'] = request.GET['su']
 
 	# URL-encode the structure
 	s = urllib.urlencode(info)
