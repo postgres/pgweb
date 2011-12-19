@@ -25,7 +25,7 @@ class Sponsor(PgModel, models.Model):
 	logoname = models.CharField(max_length=64, null=False, blank=False)
 	country = models.ForeignKey(Country, null=False)
 
-	purge_urls = ('/about/sponsors/', )
+	purge_urls = ('/about/sponsors/', '/about/servers/', )
 
 	def __unicode__(self):
 		return self.name
