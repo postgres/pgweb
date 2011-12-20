@@ -53,6 +53,24 @@ class PgModel(object):
 		else:
 			sendmail(msg)
 
+	def delete(self):
+		# We can't compare the object, but we should be able to construct something anyway
+		if self.send_notification:
+			subject = "%s id %s has been deleted by %s" % (
+				self._meta.verbose_name,
+				self.id,
+				get_current_user())
+			msg = MIMEText(self.full_text_representation(), _charset='utf-8')
+			msg['Subject'] = subject
+			msg['To'] = settings.NOTIFICATION_EMAIL
+			msg['From'] = settings.NOTIFICATION_FROM
+			if hasattr(settings,'SUPPRESS_NOTIFICATIONS') and settings.SUPPRESS_NOTIFICATIONS:
+				print msg.as_string()
+			else:
+				sendmail(msg)
+
+		# Now call our super to actually delete the object
+		super(PgModel, self).delete()
 		
 	def _get_changes_texts(self):
 		try:
