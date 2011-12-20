@@ -83,7 +83,7 @@ $$ LANGUAGE 'sql';
 CREATE OR REPLACE FUNCTION community_login_exists(userid text)
 RETURNS boolean
 AS $$
-   SELECT EXISTS (SELECT * FROM auth_user WHERE username=$1);
+   SELECT EXISTS (SELECT * FROM auth_user WHERE lower(username)=lower($1));
 $$ LANGUAGE 'sql';
 
 --
