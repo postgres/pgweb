@@ -74,6 +74,10 @@ The flow of an authentication in the 2.0 system is fairly simple:
      The email address of the user logged in
    su
      The suburl to redirect to (optional)
+   t
+     The timestamp of the authentication, in seconds-since-epoch. This
+     should be validated against the current time, and authentication
+     tokens older than e.g. 10 seconds should be refused.
 
 #. This dictionary of information is then URL-encoded.
 #. The resulting URL-encoded string is padded with spaces to an even

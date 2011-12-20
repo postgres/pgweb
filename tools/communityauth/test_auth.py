@@ -10,6 +10,7 @@ from Crypto import Random
 from Crypto.Cipher import AES
 from urllib import quote_plus
 import base64
+import time
 import urllib
 from optparse import OptionParser
 
@@ -50,7 +51,11 @@ if __name__ == "__main__":
 	if options.suburl:
 		info['su'] = options.suburl
 
-	s = urllib.urlencode(info)
+	# Turn this into an URL. Make sure the timestamp is always first, that makes
+	# the first block more random..
+	# Since this is a fake authentication, put it 5 minutes into the future to
+	# give more time to copy/paste it.
+	s = "t=%s&%s" % (int(time.time()+300), urllib.urlencode(info))
 
 	r = Random.new()
 	iv = r.read(16)

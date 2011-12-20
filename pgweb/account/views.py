@@ -11,6 +11,7 @@ import base64
 import urllib
 from Crypto.Cipher import AES
 from Crypto import Random
+import time
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
@@ -211,8 +212,9 @@ def communityauth(request, siteid):
 	if su:
 		info['su'] = request.GET['su']
 
-	# URL-encode the structure
-	s = urllib.urlencode(info)
+	# Turn this into an URL. Make sure the timestamp is always first, that makes
+	# the first block more random..
+	s = "t=%s&%s" % (int(time.time()), urllib.urlencode(info))
 
 	# Encrypt it with the shared key (and IV!)
 	r = Random.new()
