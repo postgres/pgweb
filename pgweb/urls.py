@@ -132,6 +132,9 @@ urlpatterns = patterns('',
         'document_root': '../media',
     }),
 
+    # Crash testing URL :-)
+    (r'^crashtest/$', 'pgweb.misc.views.crashtest'),
+
 	# If we're getting an attempt for something ending in HTML, just get rid of it
 	(r'^(.*)\.html$', 'pgweb.legacyurl.views.html_extension'),
 

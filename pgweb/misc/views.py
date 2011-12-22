@@ -3,6 +3,8 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.db import connection
 from django.conf import settings
 
+import os
+
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import template_to_string
 from pgweb.util.misc import send_template_mail
@@ -47,3 +49,11 @@ def submitbug(request):
 		}),
 	}, NavContext(request, 'support'))
 
+
+# A crash testing URL. If the file /tmp/crashtest exists, raise a http 500
+# error. Otherwise, just return a fixed text response
+def crashtest(request):
+	if os.path.exists('/tmp/crashtest'):
+		raise Exception('This is a manual test of a crash!')
+	else:
+		return HttpResponse('Crash testing disabled', content_type='text/plain')
