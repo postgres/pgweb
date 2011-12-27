@@ -119,7 +119,7 @@ Logging out
 -----------
 If the community site implements functionality to log the user out, it
 should also send a redirect to the main website to cause a logout from
-this site as well. If tihs is not done, it will appear to the user as if
+this site as well. If this is not done, it will appear to the user as if
 the logout didn't work, since upon next login the user is redirected and
 automatically logged in again.
 
