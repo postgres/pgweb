@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.http import int_to_base36
 from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth import logout as django_logout
 from django.conf import settings
 
 import base64
@@ -228,3 +229,16 @@ def communityauth(request, siteid):
 			base64.b64encode(iv, "-_"),
 			base64.b64encode(cipher, "-_"),
 			))
+
+
+@ssl_required
+@csrf_protect
+def communityauth_logout(request, siteid):
+	# Get whatever site the user is trying to log in to.
+	site = get_object_or_404(CommunityAuthSite, pk=siteid)
+
+	if request.user.is_authenticated():
+		django_logout(request)
+
+	# Redirect user back to the specified suburl
+	return HttpResponseRedirect("%s?s=logout" % site.redirecturl)

@@ -114,3 +114,23 @@ The flow of an authentication in the 2.0 system is fairly simple:
    community site redirects to this location. If it's not present, then
    the community site will redirect so some default location on the
    site.
+
+Logging out
+-----------
+If the community site implements functionality to log the user out, it
+should also send a redirect to the main website to cause a logout from
+this site as well. If tihs is not done, it will appear to the user as if
+the logout didn't work, since upon next login the user is redirected and
+automatically logged in again.
+
+The flow for a logout request is trivial:
+
+#. The community website logs the user out of the local instance, however
+   that works.
+#. The community website redirects the user to
+   https://www.postgresql.org/account/auth/<id>/logout/ (where the id
+   number is the same id as during login)
+#. The main website will log the user out of the community site
+#. The main website redirects the user back to the community website,
+   at the URL <redirection_url>?s=logout (where redirection_url is the
+   same URL as when logging in)

@@ -6,6 +6,7 @@ urlpatterns = patterns('',
 
     # Community authenticatoin
     (r'^auth/(\d+)/$', 'account.views.communityauth'),
+    (r'^auth/(\d+)/logout/$', 'account.views.communityauth_logout'),
 
 	# Profile
 	(r'^profile/$', 'account.views.profile'),

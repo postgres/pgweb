@@ -18,6 +18,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth import login as django_login
+from django.contrib.auth import logout as django_logout
 from django.conf import settings
 
 import base64
@@ -47,9 +48,20 @@ def login(request):
 	else:
 		return HttpResponseRedirect(settings.PGAUTH_REDIRECT)
 
+# Handle logout requests by logging out of this site and then
+# redirecting to log out from the main site as well.
+def logout(request):
+	if request.user.is_authenticated():
+		django_logout(request)
+	return HttpResponseRedirect("%slogout/" % settings.PGAUTH_REDIRECT)
+
 # Receive an authentication response from the main website and try
 # to log the user in.
 def auth_receive(request):
+	if request.GET.has_key('s') and request.GET['s'] == "logout":
+		# This was a logout request
+		return HttpResponseRedirect('/')
+
 	if not request.GET.has_key('i'):
 		raise Exception("Missing IV")
 	if not request.GET.has_key('d'):
