@@ -12,6 +12,10 @@
 #   AuthBackend in this module.
 # * (And of course, register for a crypto key with the main authentication
 #   provider website)
+# * If the application uses the django admin interface, the login screen
+#   has to be replaced with something similar to login.html in this
+#   directory (adjust urls, and name it admin/login.html in any template
+#   directory that's processed before the default django.contrib.admin)
 #
 
 from django.http import HttpResponseRedirect
