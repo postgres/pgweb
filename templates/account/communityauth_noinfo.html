@@ -1,0 +1,25 @@
+{%extends "base/page.html"%}
+{%block contents%}
+<h1>Community authentication</h1>
+<p>
+The website you are trying to log in to ({{sitename}}) is using the
+postgresql.org community login system. In this system you create a
+central account that is used to log into most postgresql.org services.
+Once you are logged into this account, you will automatically be
+logged in to the associated postgresql.org services. Note that this
+single sign on is only used for official postgresql.org websites.
+</p>
+<p>
+Your account does not have all the fields filled out required to perform
+community authentication. The required fields are:
+<ul>
+ <li>First name</li>
+ <li>Last name</li>
+ <li>Email address</li>
+</ul>
+
+Please go to your <a href="/account/profile/">account profile</a> and
+complete these fields, and then try again.
+</p>
+{%endblock%}
+
