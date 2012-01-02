@@ -26,7 +26,7 @@ from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
 
 from models import CommunityAuthSite
-from forms import SignupForm, UserProfileForm
+from forms import SignupForm, UserForm, UserProfileForm
 
 @ssl_required
 @login_required
@@ -71,8 +71,29 @@ objtypes = {
 @ssl_required
 @login_required
 def profile(request):
-	return simple_form(UserProfile, request.user.pk, request,
-					   UserProfileForm, createifempty=True)
+	# We always have the user, but not always the profile. And we need a bit
+	# of a hack around the normal forms code since we have two different
+	# models on a single form.
+	(profile, created) = UserProfile.objects.get_or_create(pk=request.user.pk)
+
+	if request.method == 'POST':
+		# Process this form
+		userform = UserForm(data=request.POST, instance=request.user)
+		profileform = UserProfileForm(data=request.POST, instance=profile)
+
+		if userform.is_valid() and profileform.is_valid():
+			userform.save()
+			profileform.save()
+			return HttpResponseRedirect("/account/")
+	else:
+		# Generate form
+		userform = UserForm(instance=request.user)
+		profileform = UserProfileForm(instance=profile)
+
+	return render_to_response('account/userprofileform.html', {
+			'userform': userform,
+			'profileform': profileform,
+			}, NavContext(request, "account"))
 
 @ssl_required
 @login_required
@@ -203,6 +224,10 @@ def communityauth(request, siteid):
 	# The request variable "su" *may* contain a suburl and should in that
 	# case be passed along to the site we're authenticating for. And of
 	# course, we fill a structure with information about the user.
+
+	if request.user.first_name=='' or request.user.last_name=='' or request.user.email=='':
+		return render_to_response('account/communityauth_noinfo.html', {
+				}, NavContext(request, 'account'))
 
 	info = {
 		'u': request.user.username,
