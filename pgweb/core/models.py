@@ -13,6 +13,8 @@ class Version(PgModel, models.Model):
 	current = models.BooleanField(null=False, blank=False, default=False)
 	supported = models.BooleanField(null=False, blank=False, default=True)
 	docsloaded = models.DateTimeField(null=True, blank=True, help_text="The timestamp of the latest docs load. Really only used for developer docs for now, but set for all of them.")
+	firstreldate = models.DateField(null=False, blank=False, help_text="The date of the .0 release in this tree")
+	eoldate = models.DateField(null=False, blank=False, help_text="The planned EOL date for this tree")
 
 	def __unicode__(self):
 		return self.versionstring
