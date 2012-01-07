@@ -73,6 +73,11 @@ def community(request):
 		'planet': planet,
 	}, NavContext(request, 'community'))
 
+# List of supported versions
+def versions(request):
+	return render_to_response('support/versioning.html', {
+			'versions': Version.objects.filter(tree__gt=0),
+	}, NavContext(request, 'support'))
 
 re_staticfilenames = re.compile("^[0-9A-Z/_-]+$", re.IGNORECASE)
 # Generic fallback view for static pages

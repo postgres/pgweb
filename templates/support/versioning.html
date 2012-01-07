@@ -24,6 +24,49 @@ Minor releases are numbered by increasing the third part of the version number, 
 Upgrading to a minor release does not require a dump and restore; merely stop the database server, install the updated binaries, and restart the server.  For some releases, manual changes may be required to complete the upgrade, so always read the release notes before upgrading.
 </p>
 
-<p>The <a href="http://wiki.postgresql.org/wiki/PostgreSQL_Release_Support_Policy">PostgreSQL release support policy</a>
-explains the support lifecycle you can expect from the community for a given PostgreSQL major release.</p>
+<h2>PostgreSQL release support policy</h2>
+<p>
+The PostgreSQL project aims to fully support a major release for
+<b>five years</b>.
+</p>
+
+<p>
+After a release falls out of full support, we may (at our committers'
+discretion) continue to apply further critical fixes to the source code,
+on a best-effort basis. No formal releases or binary packages will be
+produced by the project, but the updated source code will be available
+from our source code control system.
+</p>
+
+<p>
+This policy will be followed on a best-effort basis. In extreme cases it
+may not be possible to support a release for the planned lifetime; for
+example if a serious bug is found that cannot be resolved in a given major
+version without significant risk to the stability of the code or loss of
+application compatibility. In such cases, early retirement of a major
+version may be required.
+</p>
+
+<h2>End Of Life (EOL) dates</h2>
+<div class="tblBasic">
+ <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+  <tr>
+   <th class="colFirst">Version</th>
+   <th class="colMid">Current minor</th>
+   <th class="colMid">Supported</th>
+   <th class="colMid">First release date</th>
+   <th class="colLast">EOL date</th>
+  </tr>
+
+{%for v in versions%}
+  <tr {%if forloop.last%}class="lastrow"{%endif%}>
+   <td class="colFirst">{{v.tree}}</td>
+   <td class="colMid">{{v.tree}}.{{v.latestminor}}</td>
+   <td class="colMid">{{v.supported|yesno:"Yes,No"}}</td>
+   <td class="colMid">{{v.firstreldate|date:"F Y"}}</td>
+   <td class="colLast">{{v.eoldate|date:"F Y"}}</td>
+  </tr>
+{%endfor%}
+ </table>
+</div>
 {%endblock%}
