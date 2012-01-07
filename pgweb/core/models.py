@@ -44,6 +44,7 @@ class Version(PgModel, models.Model):
 	def purge_urls(self):
 		yield '/$'
 		yield '/support/submitbug'
+		yield '/support/versioning'
 		yield '/versions.rss'
 
 
