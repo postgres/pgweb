@@ -230,10 +230,10 @@ def communityauth(request, siteid):
 				}, NavContext(request, 'account'))
 
 	info = {
-		'u': request.user.username,
-		'f': request.user.first_name,
-		'l': request.user.last_name,
-		'e': request.user.email,
+		'u': request.user.username.encode('utf-8'),
+		'f': request.user.first_name.encode('utf-8'),
+		'l': request.user.last_name.encode('utf-8'),
+		'e': request.user.email.encode('utf-8'),
 		}
 	if su:
 		info['su'] = request.GET['su']
