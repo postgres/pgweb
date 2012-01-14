@@ -1,0 +1,20 @@
+Script load order and description:
+
+1) Load schema.sql
+    Creates all tables
+
+2) Load tsearch.sql
+    Configures full text indexing
+
+3) Load functions.sql
+    Creates PL/pgsql functions
+
+4) Load data.sql
+    Loads sites, exclusions and lists. It's either this or restore a backup
+    of those tables.
+
+-> recommended to perform initial indexing here, for performance reasons
+
+5) indexes.sql
+    Create fulltext indexes and date index
+

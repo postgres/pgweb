@@ -1,0 +1,4 @@
+[search]
+db=dbname=search
+web=www.postgresql.org
+frontendip=1.2.3.4
