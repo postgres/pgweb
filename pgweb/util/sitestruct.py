@@ -4,7 +4,7 @@ def get_all_pages_struct():
 	"""
 	Return an iterator over all distinct pages on the site.
 	Each page is returned as a tuple consisting of:
-	(url, search weight)
+	(url, search weight, last_modified)
 
 	It will do so by looking for the module "struct" in all
 	installed applications, and calling the get_struct() function
