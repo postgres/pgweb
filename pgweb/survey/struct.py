@@ -1,3 +1,3 @@
 def get_struct():
-	yield ('community/surveys/', None)
+	pass
 	# XXX: bother with individual surveys?
