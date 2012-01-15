@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
 from email.mime.text import MIMEText
+import simplejson as json
 
 from pgweb.util.contexts import NavContext
 from pgweb.util.misc import sendmail
@@ -52,3 +53,19 @@ mail-back anti-spam systems. These are extremely annoying to the list maintainer
 and other members, and you may be automatically unsubscribed."""
 	}, NavContext(request, "community"))
 
+def listinfo(request):
+	resp = HttpResponse(mimetype='application/json')
+	groupdata = [ {
+			'id': g.id,
+			'name': g.groupname,
+			} for g in MailingListGroup.objects.all()]
+	listdata = [ {
+			'id': l.id,
+			'name': l.listname,
+			'groupid': l.group_id,
+			'active': l.active,
+			'shortdesc': l.shortdesc,
+			'description': l.description,
+			} for l in MailingList.objects.all()]
+	json.dump({'groups': groupdata, 'lists': listdata}, resp)
+	return resp
