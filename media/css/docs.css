@@ -310,8 +310,7 @@ blockquote.TIP code {
 }
 
 .emphasis,
-.c2,
-.c4 {
+.c2 {
   font-weight: bold;
 }
 
