@@ -7,3 +7,7 @@ register = template.Library()
 def hidemail(value):
 	return value.replace('@', ' at ')
 
+@register.filter(name='class_name')
+def class_name(ob):
+	return ob.__class__.__name__
+

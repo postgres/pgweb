@@ -1,4 +1,5 @@
 {%extends "base/page.html"%}
+{%load pgfilters%}
 {%block title%}{{operation|default:"Edit"}} {{formitemtype}}{%endblock%}
 {%block contents%}
 <h1>{{operation|default:"Edit"}} {{formitemtype}}</h1>
@@ -22,10 +23,17 @@
  </tr>
  {%endif%}
  <tr {%if field.errors%}class="errorinfo"{%endif%}>
-  <th>{{field.label_tag}}{%if field.help_text %}<br/>
-   <span class="formfieldhelp">{{field.help_text}}</span>{%endif%}</th>
+  <th>{{field.label_tag}}{%if field.help_text%}{%if field.field.widget|class_name == "Textarea"%}<br/>
+   <span class="formfieldhelp">{{field.help_text|safe}}</span>{%endif%}{%endif%}
+  </th>
   <td>{{field}}</td>
  </tr>
+{%if field.help_text %}{%if field.field.widget|class_name != "Textarea"%}
+<tr>
+  <th></th>
+  <td><span class="formfieldhelp">{{field.help_text|safe}}</span></td>
+</tr>
+{%endif%}{%endif%}
 {%endfor%}
 </table>
 <input type="submit" value="{{savebutton|default:"Save"}}" />
