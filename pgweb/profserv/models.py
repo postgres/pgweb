@@ -7,7 +7,8 @@ from pgweb.util.bases import PgModel
 class ProfessionalService(PgModel, models.Model):
 	approved = models.BooleanField(null=False, blank=False, default=False)
 
-	organisation = models.ForeignKey(Organisation, null=False, blank=False, unique=True)
+	organisation = models.ForeignKey(Organisation, null=False, blank=False, unique=True,
+									 help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or webmaster@postgresql.org if none are listed.")
 	description = models.TextField(null=False,blank=False)
 	employees = models.CharField(max_length=32, null=True, blank=True)
 	locations = models.CharField(max_length=128, null=True, blank=True)
