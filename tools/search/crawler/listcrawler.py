@@ -29,6 +29,9 @@ def doit(opt):
 	listinfo = [(id,name) for id,name in curs.fetchall()]
 	c = MultiListCrawler(listinfo, conn, opt.status_interval, opt.commit_interval)
 	n = c.crawl(opt.full, opt.month)
+
+	# Update total counts
+	curs.execute("WITH t AS (SELECT list,count(*) AS c FROM messages GROUP BY list) UPDATE lists SET pagecount=t.c FROM t WHERE id=t.list")
 	conn.commit()
 
 	log("Indexed %s messages" % n)
