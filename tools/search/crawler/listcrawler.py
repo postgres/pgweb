@@ -19,8 +19,9 @@ def doit(opt):
 	curs = conn.cursor()
 
 	if opt.list:
-		curs.execute("SELECT id,name FROM lists WHERE name=%(name)s", {
-				'name': opt.list,
+		# Multiple lists can be specified with a comma separator (no spaces)
+		curs.execute("SELECT id,name FROM lists WHERE name=ANY(%(names)s)", {
+				'names': opt.list.split(','),
 				})
 	else:
 		curs.execute("SELECT id,name FROM lists WHERE active ORDER BY id")
