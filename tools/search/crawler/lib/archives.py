@@ -143,7 +143,7 @@ class MultiListCrawler(object):
 			# Past the end of the month
 			return False
 		elif resp.status != 200:
-			raise Exception("%s/%s/%s/%s returned status %s" % (listname, year, month, msgnum, reps.status))
+			raise Exception("%s/%s/%s/%s returned status %s" % (listname, year, month, msgnum, resp.status))
 
 		# Else we have the message!
 		p = ArchivesParser()
