@@ -61,7 +61,7 @@ class MultiListCrawler(object):
 							'month': d.month,
 							})
 					x = curs.fetchall()
-					if x[0][0]:
+					if x[0][0] != None:
 						maxmsg = x[0][0]
 					else:
 						maxmsg = -1
