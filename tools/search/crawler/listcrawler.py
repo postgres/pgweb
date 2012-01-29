@@ -32,6 +32,8 @@ def doit(opt):
 
 	# Update total counts
 	curs.execute("WITH t AS (SELECT list,count(*) AS c FROM messages GROUP BY list) UPDATE lists SET pagecount=t.c FROM t WHERE id=t.list")
+	# Indicate when we crawled
+	curs.execute("UPDATE lastcrawl SET lastcrawl=CURRENT_TIMESTAMP")
 	conn.commit()
 
 	log("Indexed %s messages" % n)

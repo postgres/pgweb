@@ -43,3 +43,7 @@ CREATE TABLE site_excludes (
 );
 ALTER TABLE site_excludes ADD CONSTRAINT pk_site_excludes PRIMARY KEY (site,suburlre);
 
+CREATE TABLE lastcrawl (
+   lastcrawl timestamptz NOT NULL
+);
+INSERT INTO lastcrawl VALUES (CURRENT_TIMESTAMP);
