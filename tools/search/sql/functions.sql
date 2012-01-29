@@ -102,7 +102,7 @@ BEGIN
        END IF;
        RETURN QUERY SELECT hit.siteid, hit.baseurl::text, hit.suburl::text, webpages.title::text, ts_headline(webpages.txt,tsq,'StartSel="[[[[[[",StopSel="]]]]]]"'), hit.ts_rank_cd::float FROM webpages WHERE webpages.site=hit.siteid AND webpages.suburl=hit.suburl;
     END LOOP;
-    RETURN QUERY SELECT pagecount, NULL::text, NULL::text, NULL::text, NULL::text, pagecount::float;
+    RETURN QUERY SELECT pagecount, NULL::text, NULL::text, NULL::text, NULL::text, hits::float;
 END;
 $$
 LANGUAGE 'plpgsql';
