@@ -31,7 +31,7 @@
    <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount = 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
    {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
    {%for hit in hits %}
-    {{forloop.counter0|add:firsthit}}. <a href="{{hit.url}}">{{hit.title}}</a> [{{hit.rank}}]<br/>
+    {{forloop.counter0|add:firsthit}}. <a href="{{hit.url}}">{{hit.title}}</a> [{{hit.rank|floatformat:2}}]<br/>
     <div>...{{hit.abstract|safe}}...</div>
     <a href="{{hit.url}}">{{hit.url}}</a><br/>
     <br/>
