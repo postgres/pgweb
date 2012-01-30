@@ -2,6 +2,7 @@ CREATE TABLE lists (
    id int NOT NULL PRIMARY KEY,
    name varchar(64) NOT NULL,
    active bool NOT NULL,
+   grp int NOT NULL,
    pagecount int NOT NULL
 );
 

@@ -19,9 +19,9 @@ if __name__=="__main__":
 	u.close()
 
 	# We don't care about the groups here, just the lists!
-	curs.execute("SELECT id, name, active FROM lists")
+	curs.execute("SELECT id, name, groupid, active FROM lists")
 	lists = curs.fetchall()
-	for id, name, active in lists:
+	for id, name, groupid, active in lists:
 		thislist = [x for x in obj['lists'] if x['id'] == id]
 		if len(thislist) == 0:
 			log("List %s should be removed, do that manually!" % name)
@@ -35,11 +35,15 @@ if __name__=="__main__":
 			if thislist[0]['active'] != active:
 				log("Changing active flag for %s to %s" % (l['name'], l['active']))
 				curs.execute("UPDATE lists SET active=%(active)s WHERE id=%(id)s", l)
+			if thislist[0]['groupid'] != groupid:
+				log("Changing group for %s to %s" % (l['name'], l['groupid']))
+				curs.execute("UPDATE lists SET groupid=%(groupid)s WHERE id=%(id)s", l)
+
 	for l in obj['lists']:
 		thislist = [x for x in lists if x[0] == l['id']]
 		if len(thislist) == 0:
 			log("Adding list %s" % l['name'])
-			curs.execute("INSERT INTO lists (id, name, active, pagecount) VALUES (%(id)s, %(name)s, %(active)s, 0)",
+			curs.execute("INSERT INTO lists (id, name, groupid, active, pagecount) VALUES (%(id)s, %(name)s, %(groupid)s, %(active)s, 0)",
 						 l)
 
 	conn.commit()
