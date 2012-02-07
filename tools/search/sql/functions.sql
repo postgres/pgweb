@@ -82,13 +82,13 @@ BEGIN
 
     IF allsites THEN
         SELECT INTO pagecount sum(sites.pagecount) FROM sites;
-        OPEN curs FOR SELECT sites.id AS siteid, sites.baseurl, webpages.suburl, ts_rank_cd(fti,tsq) FROM webpages INNER JOIN sites ON webpages.site=sites.id WHERE fti @@ tsq ORDER BY ts_rank_cd(fti,tsq) DESC LIMIT 1000;
+        OPEN curs FOR SELECT sites.id AS siteid, sites.baseurl, webpages.suburl, ts_rank_cd(fti,tsq) * relprio AS ts_rank_cd FROM webpages INNER JOIN sites ON webpages.site=sites.id WHERE fti @@ tsq ORDER BY ts_rank_cd(fti,tsq) * relprio DESC LIMIT 1000;
     ELSE
         SELECT INTO pagecount sites.pagecount FROM sites WHERE id=1;
         IF _suburl IS NULL THEN
-            OPEN curs FOR SELECT sites.id AS siteid, sites.baseurl, webpages.suburl, ts_rank_cd(fti,tsq) FROM webpages INNER JOIN sites ON webpages.site=sites.id WHERE fti @@ tsq AND site=1 ORDER BY ts_rank_cd(fti,tsq) DESC LIMIT 1000;
+            OPEN curs FOR SELECT sites.id AS siteid, sites.baseurl, webpages.suburl, ts_rank_cd(fti,tsq) * relprio AS ts_rank_cd FROM webpages INNER JOIN sites ON webpages.site=sites.id WHERE fti @@ tsq AND site=1 ORDER BY ts_rank_cd(fti,tsq) * relprio DESC LIMIT 1000;
         ELSE
-            OPEN curs FOR SELECT sites.id AS siteid, sites.baseurl, webpages.suburl, ts_rank_cd(fti,tsq) FROM webpages INNER JOIN sites ON webpages.site=sites.id WHERE fti @@ tsq AND site=1 AND webpages.suburl LIKE _suburl||'%' ORDER BY ts_rank_cd(fti,tsq) DESC LIMIT 1000;
+            OPEN curs FOR SELECT sites.id AS siteid, sites.baseurl, webpages.suburl, ts_rank_cd(fti,tsq) * relprio AS ts_rank_cd FROM webpages INNER JOIN sites ON webpages.site=sites.id WHERE fti @@ tsq AND site=1 AND webpages.suburl LIKE _suburl||'%' ORDER BY ts_rank_cd(fti,tsq) * relprio DESC LIMIT 1000;
         END IF;
     END IF;
     LOOP
@@ -100,7 +100,7 @@ BEGIN
        IF (hits < startofs+1) OR (hits > startofs+hitsperpage) THEN
           CONTINUE;
        END IF;
-       RETURN QUERY SELECT hit.siteid, hit.baseurl::text, hit.suburl::text, webpages.title::text, ts_headline(webpages.txt,tsq,'StartSel="[[[[[[",StopSel="]]]]]]"'), hit.ts_rank_cd::float FROM webpages WHERE webpages.site=hit.siteid AND webpages.suburl=hit.suburl;
+       RETURN QUERY SELECT hit.siteid, hit.baseurl::text, hit.suburl::text, webpages.title::text, ts_headline(webpages.txt,tsq,'StartSel="[[[[[[",StopSel="]]]]]]"'), hit.ts_rank_cd::float * relprio FROM webpages WHERE webpages.site=hit.siteid AND webpages.suburl=hit.suburl;
     END LOOP;
     RETURN QUERY SELECT pagecount, NULL::text, NULL::text, NULL::text, NULL::text, hits::float;
 END;
