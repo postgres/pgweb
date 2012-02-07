@@ -164,14 +164,14 @@ class BaseSiteCrawler(object):
 		try:
 			# Unfortunatley, persistent connections seem quite unreliable,
 			# so create a new one for each page.
-			h = httplib.HTTPConnection(host=self.serverip and self.serverip or self.hostname,
-									   port=80,
-									   strict=True,
-									   timeout=10)
-			h.putrequest("GET", url)
-			h.putheader("User-agent","pgsearch/0.2")
 			if self.serverip:
+				h = httplib.HTTPConnection(host=self.serverip, port=80, strict=True, timeout=10)
+				h.putrequest("GET", url, skip_host=1)
 				h.putheader("Host", self.hostname)
+			else:
+				h = httplib.HTTPConnection(host=self.hostname, port=80, strict=True, timeout=10)
+				h.putrequest("GET", url)
+			h.putheader("User-agent","pgsearch/0.2")
 			h.putheader("Connection","close")
 			if self.scantimes.has_key(url):
 				h.putheader("If-Modified-Since", formatdate(time.mktime(self.scantimes[url].timetuple())))
