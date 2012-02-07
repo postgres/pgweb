@@ -61,10 +61,6 @@ class SitemapSiteCrawler(BaseSiteCrawler):
 		super(SitemapSiteCrawler, self).__init__(hostname, dbconn, siteid, serverip)
 
 	def init_crawl(self):
-		# We need to seed the crawler with every URL we've already seen, since
-		# we don't recrawl the contents if they haven't changed.
-		allpages = self.scantimes.keys()
-
 		# Fetch the sitemap. We ignore robots.txt in this case, and
 		# assume it's always under /sitemap.xml
 		u = urllib.urlopen("http://%s/sitemap.xml" % self.hostname)
