@@ -55,7 +55,7 @@
 <div class="txtCommentsDate">{{comment.posted_at}}</div>
 <br style="clear: both;" />
 </div>
-<div class="txtCommentsComment">{{comment.comment}}</div>
+<div class="txtCommentsComment">{{comment.comment|linebreaks}}</div>
 </div>
 {%endfor%}
 
