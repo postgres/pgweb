@@ -176,7 +176,7 @@ def admin_pending(request):
 
 # Purge objects from varnish, for the admin pages
 @login_required
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_staff)
 def admin_purge(request):
 	if request.method == 'POST':
 		url = request.POST['url']
