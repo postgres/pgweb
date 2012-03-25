@@ -15,8 +15,8 @@ class Event(PgModel, models.Model):
 	country = models.ForeignKey(Country, null=False, blank=False)
 	
 	training = models.BooleanField(null=False, blank=False, default=False)
-	startdate = models.DateField(null=False, blank=False)
-	enddate = models.DateField(null=False, blank=False)
+	startdate = models.DateField(null=False, blank=False, verbose_name="Start date")
+	enddate = models.DateField(null=False, blank=False, verbose_name="End date")
 	
 	summary = models.TextField(blank=False, null=False, help_text="A short introduction (shown on the events listing page)")
 	details = models.TextField(blank=False, null=False, help_text="Complete event description")
