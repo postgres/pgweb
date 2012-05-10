@@ -34,7 +34,7 @@ from forms import OrganisationForm, MergeOrgsForm
 @cache(minutes=10)
 def home(request):
 	news = NewsArticle.objects.filter(approved=True)[:5]
-	events = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gt=date.today).order_by('enddate', 'startdate')[:3]
+	events = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gte=date.today).order_by('enddate', 'startdate')[:3]
 	try:
 		quote = Quote.objects.filter(approved=True).order_by('?')[0]
 	except:
