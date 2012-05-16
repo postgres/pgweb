@@ -9,7 +9,7 @@ def get_struct():
 	# Can't use a model here, because we don't (for some reason) have a
 	# hard link to the versions table here
 	curs = connection.cursor()
-	curs.execute("SELECT d.version, d.file, v.docsloaded FROM docs d INNER JOIN core_version v ON v.tree=d.version WHERE d.version > 0 ORDER BY d.version DESC")
+	curs.execute("SELECT d.version, d.file, v.docsloaded FROM docs d INNER JOIN core_version v ON v.tree=d.version WHERE d.version > 0 AND v.latestminor >= 0 ORDER BY d.version DESC")
 
 	# Start priority is higher than average but lower than what we assign
 	# to the current version of the docs.
