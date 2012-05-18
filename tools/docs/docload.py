@@ -115,6 +115,7 @@ if ver == "0":
 curs.execute("SELECT varnish_purge('^/docs/' || %(v)s || '/')", {'v': ver})
 
 transaction.commit_unless_managed()
+connection.close()
 
 if not quiet: print "Done (%i pages)." % pagecount
 
