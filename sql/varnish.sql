@@ -2,7 +2,7 @@ BEGIN;
 
 --
 -- Create a function to purge from varnish cache
--- By defalut this adds the object to a pgq queue,
+-- By default this adds the object to a pgq queue,
 -- but this function can be replaced with a void one
 -- when running a development version.
 --

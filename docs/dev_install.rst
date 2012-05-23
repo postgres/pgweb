@@ -5,7 +5,7 @@ So, you're ready to contribute to pgweb, and you want to set up a
 local working copy of the website code, so you have something to work
 with. Here's a quick step-by-step on how to do that:
 
-1. Make sure you have downloaded and installed django *version 1.2*
+#. Make sure you have downloaded and installed django *version 1.2*
    (or later). You will also need the dependencies *psycopg2*, *yaml*
    and *markdown* (these are python libraries, so prefix python- for Debian
    packages, for example).
@@ -28,6 +28,7 @@ with. Here's a quick step-by-step on how to do that:
 	NO_HTTPS_REDIRECT=True
 	SESSION_COOKIE_SECURE=False
 	SESSION_COOKIE_DOMAIN=None
+        DATABASE_NAME="pgweb"
 #. In the pgweb directory run the following command to create all
    tables and indexes, as well as create a superuser for your local
    installation::
