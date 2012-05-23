@@ -79,7 +79,7 @@ if __name__=="__main__":
 	pwd = GenPasswd(12)
 	print "New password: %s" % pwd
 
-	namepieces = rows[0][2].split(None, 2)
+	namepieces = rows[0][1].split(None, 2)
 	if len(namepieces) == 0: namepieces = ['', '']
 	if len(namepieces) == 1: namepieces.append('')
 	print "Creating new user record..."
