@@ -77,12 +77,12 @@ urlpatterns = patterns('',
     ###
     # Special sections
     ###
-    (r'account/', include('account.urls')),
+    (r'^account/', include('account.urls')),
 
 	###
 	# Sitemap (FIXME: support for >50k urls!)
 	###
-	(r'sitemap.xml', 'pgweb.core.views.sitemap'),
+	(r'^sitemap.xml', 'pgweb.core.views.sitemap'),
 
     ###
     # Legacy URLs from the old website, that are likely to be used from other
