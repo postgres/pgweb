@@ -1,0 +1,12 @@
+<p>
+  <%= label_tag :settings_authsite_id, "Auth site ID" %>
+  <%= text_field_tag 'settings[authsite_id]', settings['authsite_id'], :size => 5 %>
+</p>
+<p>
+  <%= label_tag :settings_cipher_key, "Cipher key (Base64)" %>
+  <%= text_field_tag 'settings[cipher_key]', settings['cipher_key'] %>
+</p>
+<p>
+  <%= label_tag :settings_default_url, "Default URL (/)" %>
+  <%= text_field_tag 'settings[default_url]', settings['default_url'] %>
+</p>
