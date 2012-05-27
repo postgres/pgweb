@@ -34,7 +34,7 @@ class Feature(PgModel, models.Model):
 	featurename = models.CharField(max_length=100, null=False, blank=False)
 	featuredescription = models.TextField(null=False, blank=True)
 	#WARNING! All fields that start with "v" will be considered versions!
-	v74 = FeatureMatrixField(verbose_name="7.4")
+	v74 = FeatureMatrixField(verbose_name="7.4", visible_default=False)
 	v80 = FeatureMatrixField(verbose_name="8.0")
 	v81 = FeatureMatrixField(verbose_name="8.1")
 	v82 = FeatureMatrixField(verbose_name="8.2")
@@ -42,6 +42,7 @@ class Feature(PgModel, models.Model):
 	v84 = FeatureMatrixField(verbose_name="8.4")
 	v90 = FeatureMatrixField(verbose_name="9.0")
 	v91 = FeatureMatrixField(verbose_name="9.1")
+	v92 = FeatureMatrixField(verbose_name="9.2")
 
 	purge_urls = ('/about/featurematrix/.*', )
 
