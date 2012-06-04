@@ -62,6 +62,24 @@ to determine if the bug affects specific installations or not.
   </tr>
 
   <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2143">CVE-2012-2143</a></td>
+   <td class="colMid">9.1, 9.0, 8.4, 8.3</td>
+   <td class="colMid">9.1.4, 9.0.8, 8.4.12, 8.3.19</td>
+   <td class="colMid">contrib module</td>
+   <td class="colMid">C</td>
+   <td class="colLast">Passwords containing the byte 0x80 passed to the crypt() function in pg_crypto are incorrectly truncated if DES encryption was used</td>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0866">CVE-2012-2655</a></td>
+   <td class="colMid">9.1, 9.0, 8.4, 8.3</td>
+   <td class="colMid">9.1.4, 9.0.8, 8.4.12, 8.3.19</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">D</td>
+   <td class="colLast">SECURITY DEFINER and SET attributes on procedural call handlers are not ignored and can be used to crash the server</td>
+  </tr>
+
+  <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0866">CVE-2012-0866</a></td>
    <td class="colMid">9.1, 9.0, 8.4, 8.3</td>
    <td class="colMid">9.1.3, 9.0.7, 8.4.11, 8.3.18</td>
