@@ -28,11 +28,11 @@ function attach_showdown_preview(objid, admin) {
 
 	obj.parentNode.insertBefore(newdiv, obj.nextSibling);
 
-	if (!admin) {
-	   infospan = document.createElement('span');
-	   infospan.innerHTML = 'This field supports <a href="http://daringfireball.net/projects/markdown/basics">markdown</a>. See below for a preview.';
-	   obj.parentNode.insertBefore(infospan, newdiv);
-	}
+	obj.infospan_html_base = admin ? '' : 'This field supports <a href="http://daringfireball.net/projects/markdown/basics">markdown</a>. See below for a preview.';
+
+	obj.infospan = document.createElement('span');
+	obj.infospan.innerHTML = obj.infospan_html_base;
+	obj.parentNode.insertBefore(obj.infospan, newdiv);
 
 	update_markdown(obj, newdiv);
 
@@ -52,9 +52,30 @@ function attach_showdown_preview(objid, admin) {
 	};
 }
 
+/*
+ * Use regexp to do trivial HTML cleaning. The actual cleaning will happen
+ * serverside later, so it doesn't matter that the regexps are far from
+ * perfect - it should just be enough to alert the user that he/she is
+ * using invalid markup.
+ */
+var _update_markdown_reopen = new RegExp("<([^\s/][^>]*)>", "g");
+var _update_markdown_reclose = new RegExp("</([^>]+)>", "g");
 function update_markdown(src, dest) {
 	if (src.value != src.lastvalue) {
 		src.lastvalue = src.value;
-		dest.innerHTML = converter.makeHtml(src.value);
+		if (_update_markdown_reclose.test(src.value) || _update_markdown_reopen.test(src.value)) {
+		    dest.innerHTML = converter.makeHtml(src.value.replace(_update_markdown_reopen, '[HTML REMOVED]').replace(_update_markdown_reclose,'[HTML REMOVED2]'));
+		    if (!src.last_had_html) {
+			src.last_had_html = true;
+			src.infospan.innerHTML = src.infospan_html_base + '<br/><span style="color: red;">You seem to be using HTML in your input - this will be filtered. Please use markdown instead!</span>';
+		    }
+		}
+		else {
+		    dest.innerHTML = converter.makeHtml(src.value);
+		    if (src.last_had_html) {
+			src.last_had_html = false;
+			src.infospan.innerHTML = src.infospan_html_base;
+		    }
+		}
 	}
 }
