@@ -51,7 +51,7 @@ div.NAVHEADER table {
   padding-bottom: 2px;
 }
 
-#docNav {
+#docNav, #docVersions {
   position: relative;
   text-align: left;
   margin-left: 10px;
