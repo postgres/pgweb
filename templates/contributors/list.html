@@ -19,7 +19,7 @@
   {%endif%}
   {%for c in t.contributor_set.all %}
    {%if t.detailed%}
-    <tr>
+    <tr{%if forloop.last%} class="lastrow"{%endif%}>
      <td class="colFirst">{{c.firstname}} {{c.lastname}} ({{c.email|hidemail}})
       {%if c.company %}<br/><a href="{{c.companyurl}}">{{c.company}}</a>{%endif%}
       <br/>{{c.location}}</td>
@@ -27,14 +27,14 @@
      </tr>
    {%else%}
     {%if forloop.counter0|divisibleby:"2" %}
-     <tr>
-      <td>{{c.firstname}} {{c.lastname}}{%if c.email%} ({{c.email|hidemail}}){%endif%}</td>
+     <tr{%if forloop.revcounter0 < 2 %} class="lastrow"{%endif%}>
+      <td class="colFirst">{{c.firstname}} {{c.lastname}}{%if c.email%} ({{c.email|hidemail}}){%endif%}</td>
       {%if forloop.last%}
-      <td></td>
+      <td class="colLast"></td>
      </tr>
       {%endif%}
     {%else%}
-      <td>{{c.firstname}} {{c.lastname}}{%if c.email%} ({{c.email|hidemail}}){%endif%}</td>
+      <td class="colLast">{{c.firstname}} {{c.lastname}}{%if c.email%} ({{c.email|hidemail}}){%endif%}</td>
      </tr>
     {%endif%}
    {%endif%}
