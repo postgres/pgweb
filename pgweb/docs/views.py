@@ -23,7 +23,7 @@ def docpage(request, version, typ, filename):
 		ver = currver
 	elif version == 'devel':
 		if not typ == 'static':
-			raise Http404("Only static version of developer docs available")
+			return HttpResponseRedirect("/docs/devel/static/%s.html" % filename)
 		ver = Decimal(0)
 		loaddate = Version.objects.get(tree=Decimal(0)).docsloaded
 	else:
