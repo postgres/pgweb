@@ -119,3 +119,19 @@ class UserProfile(models.Model):
 	user = models.ForeignKey(User, null=False, blank=False, unique=True, primary_key=True)
 	sshkey = models.TextField(null=False, blank=True, verbose_name="SSH key", help_text= "Paste one or more public keys in OpenSSH format, one per line.")
 	lastmodified = models.DateTimeField(null=False, blank=False, auto_now=True)
+
+# Notifications sent for any moderated content.
+# Yes, we uglify it by storing the type of object as a string, so we don't
+# end up with a bazillion fields being foreign keys. Ugly, but works.
+class ModerationNotification(models.Model):
+	objectid = models.IntegerField(null=False, blank=False, db_index=True)
+	objecttype = models.CharField(null=False, blank=False, max_length=100)
+	text = models.TextField(null=False, blank=False)
+	author = models.CharField(null=False,  blank=False, max_length=100)
+	date = models.DateTimeField(null=False, blank=False, auto_now=True)
+
+	def __unicode__(self):
+		return "%s id %s (%s): %s" % (self.objecttype, self.objectid, self.date, self.text[:50])
+
+	class Meta:
+		ordering = ('-date', )

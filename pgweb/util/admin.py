@@ -1,4 +1,11 @@
 from django.contrib import admin
+from django.conf import settings
+
+from email.mime.text import MIMEText
+
+from pgweb.core.models import ModerationNotification
+from util.misc import sendmail
+
 
 class PgwebAdmin(admin.ModelAdmin):
 	"""
@@ -17,6 +24,108 @@ class PgwebAdmin(admin.ModelAdmin):
 			fld.widget.attrs['class'] = fld.widget.attrs['class'] + ' markdown_preview'
 		return fld
 
+	def change_view(self, request, object_id, extra_context=None):
+		if self.model.send_notification:
+			# Anything that sends notification supports manual notifications
+			if extra_context == None:
+				extra_context = dict()
+			extra_context['notifications'] = ModerationNotification.objects.filter(objecttype=self.model.__name__, objectid=object_id).order_by('date')
+
+		return super(PgwebAdmin, self).change_view(request, object_id, extra_context)
+
+	def save_model(self, request, obj, form, change):
+		if change and self.model.send_notification:
+			# We only do processing if something changed, not when adding
+			# a new object.
+			if request.POST['new_notification']:
+				# Need to send off a new notification. We'll also store
+				# it in the database for future reference, of course.
+				if not obj.org.email:
+					# Should not happen because we remove the form field. Thus
+					# a hard exception is ok.
+					raise Exception("Organization does not have an email, canot send notification!")
+				n = ModerationNotification()
+				n.objecttype = obj.__class__.__name__
+				n.objectid = obj.id
+				n.text = request.POST['new_notification']
+				n.author = request.user.username
+				n.save()
+
+				# Now send an email too
+				msgstr = _get_notification_text(request.POST.has_key('remove_after_notify'),
+												obj,
+												request.POST['new_notification'])
+
+				msg = MIMEText(msgstr, _charset='utf-8')
+				msg['Subject'] = "postgresql.org moderation notification"
+				msg['To'] = obj.org.email
+				msg['From'] = settings.NOTIFICATION_FROM
+				if hasattr(settings,'SUPPRESS_NOTIFICATIONS') and settings.SUPPRESS_NOTIFICATIONS:
+					print msg.as_string()
+				else:
+					sendmail(msg)
+
+				# Also generate a mail to the moderators
+				msg = MIMEText(_get_moderator_notification_text(request.POST.has_key('remove_after_notify'),
+																obj,
+																request.POST['new_notification'],
+																request.user.username
+																),
+							   _charset='utf-8')
+				msg['Subject'] = "Moderation comment on %s %s" % (obj.__class__._meta.verbose_name, obj.id)
+				msg['To'] = settings.NOTIFICATION_EMAIL
+				msg['From'] = settings.NOTIFICATION_FROM
+				if hasattr(settings,'SUPPRESS_NOTIFICATIONS') and settings.SUPPRESS_NOTIFICATIONS:
+					print msg.as_string()
+				else:
+					sendmail(msg)
+
+				if request.POST.has_key('remove_after_notify'):
+					# Object should not be saved, it should be deleted
+					obj.delete()
+					return
+
+
+		# Either no notifications, or done with notifications
+		super(PgwebAdmin, self).save_model(request, obj, form, change)
+
+
 def register_pgwebadmin(model):
 	admin.site.register(model, PgwebAdmin)
 
+
+def _get_notification_text(remove, obj, txt):
+	objtype = obj.__class__._meta.verbose_name
+	if remove:
+		return """You recently submitted a %s to postgresql.org.
+
+This submission has been rejected by a moderator, with the following comment:
+
+%s
+""" % (objtype, txt)
+	else:
+		return """You recently submitted a %s to postgresql.org.
+
+During moderation, this item has received comments that need to be
+addressed before it can be approved. The comment given by the moderator is:
+
+%s
+
+Please go to https://www.postgresql.org/account/ and make any changes
+request, and your submission will be re-moderated.
+""" % (objtype, txt)
+
+
+
+def _get_moderator_notification_text(remove, obj, txt, moderator):
+	return """Moderator %s made a comment to a pending object:
+Object type: %s
+Object id: %s
+Comment: %s
+Delete after comment: %s
+""" % (moderator,
+	   obj.__class__._meta.verbose_name,
+	   obj.id,
+	   txt,
+	   remove and "Yes" or "No",
+	   )

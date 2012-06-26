@@ -20,4 +20,5 @@ admin.site.register(OrganisationType)
 admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(ImportedRSSFeed)
 admin.site.register(ImportedRSSItem)
+admin.site.register(ModerationNotification)
 

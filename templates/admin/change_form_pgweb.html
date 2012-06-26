@@ -23,3 +23,24 @@ Note that the summary field can use
 </script>
 {%endblock%}
 
+{%if notifications%}
+{%block after_field_sets%}
+<h4>Notifications sent for this item</h4>
+<ul>
+ {%for n in notifications%}
+ <li>{{n.text}} by {{n.author}} sent at {{n.date}}</li>
+ {%empty%}
+ <li>No notifications sent for this item</li>
+ {%endfor%}
+</ul>
+<p>
+{%if original.org.email%}
+New notification: <input type="text" name="new_notification" style="width:400px;" /> (<b>Note!</b> This comment is emailed to the organization!)<br/>
+<input type="checkbox" name="remove_after_notify">Delete after notification</>
+{%else%}
+Organisation has <b>no email</b>, so cannot send notifications to it!
+{%endif%}
+</p>
+<hr/>
+{%endblock%}
+{%endif%}
