@@ -36,6 +36,25 @@ class PgwebAdmin(admin.ModelAdmin):
 
 		return super(PgwebAdmin, self).change_view(request, object_id, extra_context)
 
+	# Remove the builtin delete_selected action, so it doesn't
+	# conflict with the custom one.
+	def get_actions(self, request):
+		actions = super(PgwebAdmin, self).get_actions(request)
+		del actions['delete_selected']
+		return actions
+
+	# Define a custom delete_selected action. This is required because the
+	# default one uses the delete functionality in QuerySet, which bypasses
+	# the delete() operation on the model, and thus won't send out our
+	# notifications. Manually calling delete() on each one will be slightly
+	# slower, but will send proper notifications - and it's not like this
+	# is something that happens often enough that we care about performance.
+	def custom_delete_selected(self, request, queryset):
+		for x in queryset:
+			x.delete()
+	custom_delete_selected.short_description = "Delete selected items"
+	actions=['custom_delete_selected']
+
 	def save_model(self, request, obj, form, change):
 		if change and self.model.send_notification:
 			# We only do processing if something changed, not when adding
