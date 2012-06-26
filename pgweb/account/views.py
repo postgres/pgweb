@@ -34,8 +34,8 @@ def home(request):
 	myarticles = NewsArticle.objects.filter(org__managers=request.user, approved=False)
 	myevents = Event.objects.filter(org__managers=request.user, approved=False)
 	myorgs = Organisation.objects.filter(managers=request.user, approved=False)
-	myproducts = Product.objects.filter(publisher__managers=request.user, approved=False)
-	myprofservs = ProfessionalService.objects.filter(organisation__managers=request.user, approved=False)
+	myproducts = Product.objects.filter(org__managers=request.user, approved=False)
+	myprofservs = ProfessionalService.objects.filter(org__managers=request.user, approved=False)
 	return render_to_response('account/index.html', {
 		'newsarticles': myarticles,
 		'events': myevents,
@@ -55,11 +55,11 @@ objtypes = {
     },
 	'products': {
 		'title': 'Product',
-		'objects': lambda u: Product.objects.filter(publisher__managers=u),
+		'objects': lambda u: Product.objects.filter(org__managers=u),
 	},
 	'services': {
 		'title': 'Professional service',
-		'objects': lambda u: ProfessionalService.objects.filter(organisation__managers=u),
+		'objects': lambda u: ProfessionalService.objects.filter(org__managers=u),
 	},
 	'organisations': {
 		'title': 'Organisation',

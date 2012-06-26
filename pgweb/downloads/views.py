@@ -231,7 +231,7 @@ def categorylist(request):
 
 def productlist(request, catid, junk=None):
 	category = get_object_or_404(Category, pk=catid)
-	products = Product.objects.select_related('publisher','licencetype').filter(category=category, approved=True)
+	products = Product.objects.select_related('org','licencetype').filter(category=category, approved=True)
 	return render_to_response('downloads/productlist.html', {
 		'category': category,
 		'products': products,

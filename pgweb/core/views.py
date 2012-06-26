@@ -217,7 +217,7 @@ def admin_mergeorg(request):
 				n.org = t
 				n.save()
 			for p in f.product_set.all():
-				p.publisher = t
+				p.org = t
 				p.save()
 			for p in f.professionalservice_set.all():
 				p.organisation = t
