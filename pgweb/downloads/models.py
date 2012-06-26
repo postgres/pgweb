@@ -78,7 +78,7 @@ class LicenceType(models.Model):
 class Product(PgModel, models.Model):
 	name = models.CharField(max_length=100, null=False, blank=False, unique=True)
 	approved = models.BooleanField(null=False, default=False)
-	publisher = models.ForeignKey(Organisation, null=False)
+	org = models.ForeignKey(Organisation, db_column="publisher_id", null=False)
 	url = models.URLField(null=False, blank=False)
 	category = models.ForeignKey(Category, null=False)
 	licencetype = models.ForeignKey(LicenceType, null=False, verbose_name="Licence type")
@@ -93,7 +93,7 @@ class Product(PgModel, models.Model):
 		return self.name
 
 	def verify_submitter(self, user):
-		return (len(self.publisher.managers.filter(pk=user.pk)) == 1)
+		return (len(self.org.managers.filter(pk=user.pk)) == 1)
 
 	class Meta:
 		ordering = ('name',)

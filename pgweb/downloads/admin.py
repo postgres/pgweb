@@ -9,7 +9,7 @@ class MirrorAdmin(admin.ModelAdmin):
 	ordering = ('country_code', )
 
 class ProductAdmin(PgwebAdmin):
-	list_display = ('name', 'publisher', 'approved', 'lastconfirmed',)
+	list_display = ('name', 'org', 'approved', 'lastconfirmed',)
 	list_filter = ('approved',)
 	search_fields = ('name', 'description', )
 	ordering = ('name', )
