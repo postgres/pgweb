@@ -1,11 +1,10 @@
 {% extends "admin/change_form_pgweb.html" %}
 {% block after_field_sets %}
-<p>
-Previous 10 posts by this organization:
+{{block.super}}
+<h4>Previous 10 posts by this organization:</h4>
 <ul>
 {%for p in latest %}
 <li>{{p.date}}: {{p.title}}</li>
 {%endfor%}
 </ul>
-</p>
 {% endblock %}
