@@ -7,8 +7,9 @@ from pgweb.util.bases import PgModel
 class ProfessionalService(PgModel, models.Model):
 	approved = models.BooleanField(null=False, blank=False, default=False)
 
-	organisation = models.ForeignKey(Organisation, null=False, blank=False, unique=True,
-									 help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or webmaster@postgresql.org if none are listed.")
+	org = models.ForeignKey(Organisation, null=False, blank=False, unique=True,
+							db_column="organisation_id",
+							help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or webmaster@postgresql.org if none are listed.")
 	description = models.TextField(null=False,blank=False)
 	employees = models.CharField(max_length=32, null=True, blank=True)
 	locations = models.CharField(max_length=128, null=True, blank=True)
@@ -33,11 +34,11 @@ class ProfessionalService(PgModel, models.Model):
 	send_notification = True
 	
 	def verify_submitter(self, user):
-		return (len(self.organisation.managers.filter(pk=user.pk)) == 1)
+		return (len(self.org.managers.filter(pk=user.pk)) == 1)
 
 	def __unicode__(self):
-		return self.organisation.name
+		return self.org.name
 	
 	class Meta:
-		ordering = ('organisation__name',)
+		ordering = ('org__name',)
 

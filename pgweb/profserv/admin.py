@@ -1,4 +1,4 @@
-from django.contrib import admin
+from util.admin import register_pgwebadmin
 from models import *
 
-admin.site.register(ProfessionalService)
+register_pgwebadmin(ProfessionalService)
