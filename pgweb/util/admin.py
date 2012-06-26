@@ -20,8 +20,9 @@ class PgwebAdmin(admin.ModelAdmin):
 	def formfield_for_dbfield(self, db_field, **kwargs):
 		fld = admin.ModelAdmin.formfield_for_dbfield(self, db_field, **kwargs)
 
-		if db_field.name in self.model.markdown_fields:
-			fld.widget.attrs['class'] = fld.widget.attrs['class'] + ' markdown_preview'
+		if hasattr(self.model, 'markdown_fields'):
+			if db_field.name in self.model.markdown_fields:
+				fld.widget.attrs['class'] = fld.widget.attrs['class'] + ' markdown_preview'
 		return fld
 
 	def change_view(self, request, object_id, extra_context=None):
