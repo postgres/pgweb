@@ -13,6 +13,8 @@ class PgwebAdmin(admin.ModelAdmin):
 	* Markdown preview for markdown capable textfields (specified by
 	  including them in a class variable named markdown_capable that is a tuple
 	  of field names)
+	* Add an admin field for "notification", that can be sent to the submitter
+	  of an item to inform them of moderation issues.
 	"""
 
 	change_form_template = 'admin/change_form_pgweb.html'
