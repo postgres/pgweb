@@ -1,5 +1,5 @@
 from django.contrib import admin
-from util.admin import register_markdown, MarkdownPreviewAdmin
+from util.admin import PgwebAdmin
 from models import *
 
 class MirrorAdmin(admin.ModelAdmin):
@@ -8,7 +8,7 @@ class MirrorAdmin(admin.ModelAdmin):
 	search_fields = ('country_name', 'host_sponsor', 'host_notes', )
 	ordering = ('country_code', )
 
-class ProductAdmin(MarkdownPreviewAdmin):
+class ProductAdmin(PgwebAdmin):
 	list_display = ('name', 'publisher', 'approved', 'lastconfirmed',)
 	list_filter = ('approved',)
 	search_fields = ('name', 'description', )

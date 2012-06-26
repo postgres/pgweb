@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from util.admin import MarkdownPreviewAdmin
+from util.admin import PgwebAdmin
 from models import *
 
-class NewsArticleAdmin(MarkdownPreviewAdmin):
+class NewsArticleAdmin(PgwebAdmin):
 	list_display = ('title', 'org', 'date', 'approved', )
 	list_filter = ('approved', )
 	search_fields = ('content', 'title', )

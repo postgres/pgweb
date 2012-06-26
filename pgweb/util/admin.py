@@ -1,13 +1,14 @@
 from django.contrib import admin
 
-class MarkdownPreviewAdmin(admin.ModelAdmin):
+class PgwebAdmin(admin.ModelAdmin):
 	"""
-	ModelAdmin wrapper that will enable preview fields for all markdown capable
-	textfields in the model (specified by including them in a class variable
-	named markdown_capable that is a tuple of field names)
+	ModelAdmin wrapper that will enable a few pg specific things:
+	* Markdown preview for markdown capable textfields (specified by
+	  including them in a class variable named markdown_capable that is a tuple
+	  of field names)
 	"""
 
-	change_form_template = 'admin/change_form_markdown.html'
+	change_form_template = 'admin/change_form_pgweb.html'
 
 	def formfield_for_dbfield(self, db_field, **kwargs):
 		fld = admin.ModelAdmin.formfield_for_dbfield(self, db_field, **kwargs)
@@ -16,6 +17,6 @@ class MarkdownPreviewAdmin(admin.ModelAdmin):
 			fld.widget.attrs['class'] = fld.widget.attrs['class'] + ' markdown_preview'
 		return fld
 
-def register_markdown(model):
-	admin.site.register(model, MarkdownPreviewAdmin)
+def register_pgwebadmin(model):
+	admin.site.register(model, PgwebAdmin)
 
