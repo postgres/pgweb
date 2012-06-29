@@ -9,6 +9,7 @@ class ProfessionalService(PgModel, models.Model):
 
 	org = models.ForeignKey(Organisation, null=False, blank=False, unique=True,
 							db_column="organisation_id",
+							verbose_name="organisation",
 							help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or webmaster@postgresql.org if none are listed.")
 	description = models.TextField(null=False,blank=False)
 	employees = models.CharField(max_length=32, null=True, blank=True)

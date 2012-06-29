@@ -9,7 +9,7 @@ If you have not done so, use <a href="/account/organisations/new/">this form</a>
 	def __init__(self, *args, **kwargs):
 		super(ProfessionalServiceForm, self).__init__(*args, **kwargs)
 	def filter_by_user(self, user):
-		self.fields['organisation'].queryset = Organisation.objects.filter(managers=user, approved=True)
+		self.fields['org'].queryset = Organisation.objects.filter(managers=user, approved=True)
 	class Meta:
 		model = ProfessionalService
 		exclude = ('submitter', 'approved', )
