@@ -78,7 +78,7 @@ class LicenceType(models.Model):
 class Product(PgModel, models.Model):
 	name = models.CharField(max_length=100, null=False, blank=False, unique=True)
 	approved = models.BooleanField(null=False, default=False)
-	org = models.ForeignKey(Organisation, db_column="publisher_id", null=False)
+	org = models.ForeignKey(Organisation, db_column="publisher_id", null=False, verbose_name="Organisation")
 	url = models.URLField(null=False, blank=False)
 	category = models.ForeignKey(Category, null=False)
 	licencetype = models.ForeignKey(LicenceType, null=False, verbose_name="Licence type")
