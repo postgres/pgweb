@@ -79,6 +79,20 @@ pre {
   font-size: 1.0em;
 }
 
+div#pgContentWrap code {
+  font-size: 1.2em;
+  padding: 1em;
+  margin: 2ex 0 2ex 2ex;
+  background: #F7F7F7;
+  border: 1px solid #CFCFCF;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -khtml-border-radius: 8px;
+  border-radius: 8px;
+  display: block;
+  overflow: auto;
+}
+
 strong, b {
   font-weight: bold;
 }

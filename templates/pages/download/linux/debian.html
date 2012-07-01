@@ -1,0 +1,61 @@
+{%extends "base/page.html"%}
+{%block title%}Linux downloads (Debian){%endblock%}
+{%block contents%}
+
+<h1>Linux downloads (Debian)</h1>
+<p>
+PostgreSQL is available in all Debian versions by default. However, the
+stable versions of Debians "snapshot" a specific version of PostgreSQL
+that is then supported throughout the lifetime of that Debian version.
+Other versions are available in the Debian <i>backports</i> repositories.
+</p>
+<p>
+Should packages not be available for your distribution, or there are
+issues with your package manager, there are graphical installers available.
+</p>
+<p>
+Finally, most Linux systems make it easy to build from source.
+</p>
+
+<h2>Included in distribution</h2>
+<p>
+Debian includes PostgreSQL by default. To install PostgreSQL on
+Debian, use the <i>apt-get</i> (or other apt-driving) command:
+</p>
+<code>
+apt-get install postgresql-9.1
+</code>
+</p>
+<p>
+The repository contains many different packages including third party
+addons. The most command and important packages are (substitute the
+version number as required):
+</p>
+<ul>
+ <li>postgresql-client-9.1 - client libraries and client binaries</li>
+ <li>postgresql-9.1 - core database server</li>
+ <li>postgresql-contrib-9.1 - additional supplied modules</li>
+ <li>libpq-dev - libraries and headers for C language frontend development</li>
+ <li>postgresql-server-dev-9.1 - libraries and headers for C language backend development</li>
+ <li>pgadmin3 - pgAdmin III graphical administration utility</li>
+</ul>
+
+<h2>Debian backports</h2>
+<p>
+Newer versions of PostgreSQL for older versions of Debians are available
+in <a href="http://backports.debian.org/">Debian backports</a>. For
+information on how to enable and use the backports repository, please
+see the
+<a href="http://backports-master.debian.org/Instructions/">backports instructions</a> page at Debian.
+</p>
+<p>
+Once backports is enabled, you can install PostgreSQL the same way as with
+the builtin repositories.
+</p>
+
+<h2>Graphical installer</h2>
+{%include "pages/download/linux/linux_oneclick.inc" %}
+
+<h2>Build from source</h2>
+{%include "pages/download/linux/linux_source.inc" %}
+{%endblock%}

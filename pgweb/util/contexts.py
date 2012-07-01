@@ -22,7 +22,10 @@ sitenav = {
 		{'title': 'Licence',            'link':'/about/licence/'},
 	],
 	'download': [
-		{'title': 'Downloads',          'link':'/download/'},
+		{'title': 'Downloads',          'link':'/download/', 'submenu': [
+				{'title': 'Binary',		'link':'/download/'},
+				{'title': 'Source',		'link':'/ftp/source/'}
+		]},
 		{'title': 'Software Catalogue', 'link':'/download/product-categories/'},
 		{'title': 'pgFoundry',          'link':'http://pgfoundry.org/'},
 		{'title': 'File Browser',       'link':'/ftp/'},

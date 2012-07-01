@@ -7,57 +7,88 @@
 
 <h2>PostgreSQL Core Distribution</h2>
 
-<p>The core of the PostgreSQL object-relational database management system is available in several source and binary formats.
-The full package includes:</p>
-
-<ul>
-	<li>The core server with full documentation (html, man)</li>
-	<li>Several command line tools (e.g. psql, pg_ctl, pg_dump, pg_restore)</li>
-	<li>C library (libpq) and embedded C processor (ecpg)</li>
-	<li>Several server-side procedural languages (e.g. plpgsql, pltcl, plperl)</li>
-	<li>Several popular add-on packages (e.g. metaphone, pgcrypto and other useful enhancements)</li>
-</ul>
-
-<p>In addition, some 'one click' installers include additional packages such as pgAdmin and PostGIS.</p>
+<p>
+The core of the PostgreSQL object-relational database management system
+is available in several source and binary formats.
+</p>
 
 <h3>Binary packages</h3>
 
-<p>Pre-built binary packages are available for a number of different operating systems:</p>
-
-<div align="center">
-<a href="/download/freebsd">FreeBSD</a> &middot; <a href="/download/linux">Linux</a> &middot; <a href="/download/openbsd">OpenBSD</a> &middot; <a href="/download/macosx">Mac OS X</a> &middot; <a href="/download/solaris">Solaris</a> &middot; <a href="/download/windows">Windows</a>
-</div>
+<p>
+Pre-built binary packages are available for a number of different operating
+systems:
+</p>
+<ul>
+ <li>BSD
+  <ul>
+   <li><a href="/download/freebsd/">FreeBSD</a></li>
+   <li><a href="/download/openbsd/">OpenBSD</a></li>
+  </ul>
+ </li>
+ <li>Linux
+  <ul>
+   <li><a href="/download/linux/redhat/">RedHat/CentOS/Fedora/Scientific</a> families Linux</li>
+   <li><a href="/download/linux/debian/">Debian</a> GNU/Linux</li>
+   <li><a href="/download/linux/ubuntu/">Ubuntu</a> Linux</li>
+   <li><a href="/download/linux/suse/">SuSE</a> and OpenSuSE</li>
+   <li><a href="/download/linux/">Other</a> Linux</li>
+  </ul>
+ </li>
+ <li><a href="/download/macosx/">Mac OS X</a></li>
+ <li><a href="/download/solaris/">Solaris</a></li>
+ <li><a href="/download/windows/">Windows</a></li>
+</ul>
 
 <h3>Source code</h3>
 
-<p>You can download the <a href="/ftp/source/">source code</a> from a mirror site using our File Browser</a>
+<p>
+The source code can be found in the main <a href="/ftp/source">file browser</a>
+or you can access the source control repository directly
+at <a href="http://git.postgresql.org/gitweb/?p=postgresql.git;a=summary">git.postgresql.org</a>.
+Instructions for building from source can be found in the
+<a href="/docs/current/static/installation.html">documentation</a>.
+</p>
 
-<h3>Beta/RC Releases and Development snapshots (unstable)</h3>
+<h3>Beta/RC Releases and development snapshots (unstable)</h3>
 
-<p>There are source code and binary <a href="/download/snapshots">packages</a> of beta and release candidates, and of 
-the current development code available for testing and evaluation of new features. Note that these builds should
- be used <b>for testing purposes only</b>, and not for production systems.</p>
+<p>
+There are source code and binary <a href="/download/snapshots">packages</a>
+of beta and release candidates, and of the current development code available
+for testing and evaluation of new features. Note that these builds should
+be used <b>for testing purposes only</b>, and not for production systems.
+</p>
 
-<h3>3rd party distributions</h3>
+<h2>3rd party distributions</h2>
 
-<ul>
-	<li><a href="http://www.openscg.org/postgresql">Java PostgreSQL Server Bundles</a> provide an integrated download of the latest &amp; greatest versions of PostgreSQL &amp; OpenJDK with Tomcat, JBoss or Resin. Built by the <a href="http://www.openscg.com">Open Source Computing Group</a>.</li>
-	<li>'LAPP', 'MAPP' and 'WAPP' (Linux/Mac/Windows + Apache + PHP + PostgreSQL) stacks are available from <a href="http://bitnami.org/article/apache-php-and-postgresql-all-in-one">BitNami</a>. Sponsored by <a href="http://bitrock.com">BitRock</a>.</li>
-</ul>
+<h3>Live CD</h3>
+<p>
+<a href="http://www.pglivecd.org">PostgreSQL Live CD</a> is a Fedora based
+PostgreSQL live CD, containing packages from the PostgreSQL Yum repository.
+Live CDs are bootable CD images that allow you to run and test PostgreSQL
+and a selection of related tools and software, without installing anything
+on your PC.
+</p>
 
-<h3>Live CDs/Software appliances</h3>
+<h3>Java PostgreSQL Server Bundles</h3>
+<p>
+Integrated <a href="http://www.openscg.org/postgresql">downloads</a> of the
+latest &amp; greatest versions of PostgreSQL &amp; OpenJDK with Tomcat,
+JBoss or Resin are available from OpenSCG.
+</p>
 
-<p>Live CDs are bootable CD images that allow you to run and play with PostgreSQL and a selection of related tools and 
-software, without installing anything on your PC. Software appliances are similarly pre-configured, but are designed to run in a virtual machine or be installed onto real hardware. Note that as complete operating systems, these distributions may not be updated immediately when new versions of PostgreSQL are released.</p>
+<h3>Live CD and virtual machine appliance</h3>
+<p>
+<a href="http://www.turnkeylinux.org/appliances/postgresql">TurnKey PostgreSQL</a>
+is an Ubuntu based live CD and software appliance featuring a Mac OS X-themed
+Web management interface and a Python configuration and installation console.
+</p>
 
-<ul>
-	<li><a href="http://www.pglivecd.org">PostgreSQL Live CD</a> - a Fedora based PostgreSQL live CD, 
-	containing packages from the PostgreSQL Yum repository. Maintained by Devrim G&Uuml;ND&Uuml;Z at 
-	<a href="http://www.EnterpriseDB.com">EnterpriseDB</a> .</li>
-
-	<li><a href="http://www.turnkeylinux.org/appliances/postgresql">TurnKey PostgreSQL</a> - An Ubuntu based live CD and software appliance featuring a Mac OS X-themed Web management interface and a Python configuration and installation console. Published by <a href="http://www.turnkeylinux.org/">TurnKey Linux</a>.</li>
-
-</ul>
+<h3>Ready to run stacks</h3>
+<p>
+'LAPP', 'MAPP' and 'WAPP' (Linux/Mac/Windows + Apache + PHP + PostgreSQL)
+stacks are available from
+<a href="http://bitnami.org/tag/postgresql">BitNami</a>.
+</p>
 
 <h2>Additional software</h2>
 

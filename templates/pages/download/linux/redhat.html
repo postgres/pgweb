@@ -1,0 +1,136 @@
+{%extends "base/page.html"%}
+{%block title%}Linux downloads (RedHat/CentOS/Fedora/Scientific){%endblock%}
+{%block contents%}
+
+<h1>Linux downloads (RedHat/CentOS/Fedora/Scientific)</h1>
+<p>
+PostgreSQL is available on these platforms by default. However,
+each version of the platform normally "snapshots" a specific version of
+PostgreSQL that is then supported throughout the lifetime of this platform.
+Since this can often mean a different version than preferred, the PostgreSQL
+project provides a repository of packages of all supported versions.
+</p>
+<p>
+Should packages not be available for your distribution, or there are
+issues with your package manager, there are graphical installers available.
+</p>
+<p>
+Finally, most Linux systems make it easy to build from source.
+</p>
+
+<h2>Included in distribution</h2>
+<p>
+These distributions all include PostgreSQL by default. To install
+PostgreSQL from these repositories, use the <i>yum</i> command:
+</p>
+<p>
+<code>
+yum install postgresql
+</code>
+</p>
+<p>
+Which version of PostgreSQL you get will depend on the version of
+the distribution:
+<div class="tblBasic">
+ <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+  <tr>
+   <th class="colFirst">Distribution</th>
+   <th class="colLast">Version</th>
+  </tr>
+  <tr>
+   <td class="colFirst">RHEL/CentOS/SL 5</td>
+   <td class="colLast">8.1 (also supplies package postgresql84)</td>
+  </tr>
+  <tr>
+   <td class="colFirst">RHEL/CentOS/SL 6</td>
+   <td class="colLast">8.4</td>
+  </tr>
+  <tr class="lastrow">
+   <td class="colFirst">Fedora 16, 17</td>
+   <td class="colLast">9.1</td>
+  </tr>
+ </table>
+</div>
+</p>
+
+<p>
+The repository contains many different packages including third party
+addons. The most command and important packages are (substitute the
+version number as required):
+</p>
+<ul>
+ <li>postgresql - client libraries and client binaries</li>
+ <li>postgresql-server - core database server</li>
+ <li>postgresql-contrib - additional supplied modules</li>
+ <li>postgresql-devel - libraries and headers for C language development</li>
+ <li>pgadmin3 - pgAdmin III graphical administration utility</li>
+</ul>
+
+<h3>Post-installation</h3>
+<p>
+Due to policies for RedHat style distributions, the PostgreSQL installation
+will not be enabled for automatic start or have the database initialized
+automatically. To make your database installation complete, you need to
+perform these two steps:
+<code>
+service postgresql initdb<br/>
+chkconfig postgresql on
+</code>
+</p>
+
+<h2>PostgreSQL Yum Repository</h2>
+<p>
+If the version supplied by your operating system is not the one you want,
+you can use the PostgreSQL Yum Repository. This repository will integrate
+with your normal systems and patch management, and provide automatic
+updates for all supported versions of PostgreSQL throughout the support
+<a href="/support/versioning/">lifetime</a> of PostgreSQL.
+</p>
+<p>
+To use the yum repository, you must first install the <i>repository RPM</i>.
+To do this, download the correct RPM from the
+<a href="http://yum.postgresql.org/repopackages.php">repository RPM listing</a>,
+and install it with commands like:
+</p>
+<p>
+<code>
+rpm -i http://yum.postgresql.org/9.2/redhat/rhel-6-x86_64/pgdg-redhat92-9.2-6.noarch.rpm
+</code>
+</p>
+<p>
+Once this is done, you can proceed to install and update packages the
+same way as the ones included in the distribution.
+</p>
+<p>
+<code>
+yum install postgresql91-server postgresql91-contrib<br/>
+service postgresql-9.1 initdb<br/>
+chkconfig postgresql-9.1 on
+</code>
+</p>
+<p>
+Package names in the
+PostgreSQL yum repository follows the same standard as the ones included
+in the main repositories, but include the version number, such as:
+</p>
+<ul>
+ <li>postgresql91</li>
+ <li>postgresql91-server</li>
+ <li>postgresql91-contrib</li>
+ <li>pgadmin3_91</li>
+</ul>
+
+<h2>Direct RPM download</h2>
+<p>
+If you cannot, or do not want to, use the yum based installation method,
+all the RPMs that are in the yum repository are available for
+<a href="http://yum.postgresql.org/rpmchart.php">direct download</a>
+and manual installation as well.
+</p>
+
+<h2>Graphical installer</h2>
+{%include "pages/download/linux/linux_oneclick.inc" %}
+
+<h2>Build from source</h2>
+{%include "pages/download/linux/linux_source.inc" %}
+{%endblock%}

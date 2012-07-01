@@ -1,31 +1,46 @@
 {%extends "base/page.html"%}
-{%block title%}Windows packages{%endblock%}
+{%block title%}Windows installers{%endblock%}
 {%block contents%}
 
-<h1>Windows packages</h1>
+<h1>Windows installers</h1>
 
-<p>The Windows installer for PostgreSQL includes the PostgreSQL server, <a href="http://www.pgadmin.org">pgAdmin III</a>; a graphical tool for managing and developing your databases, and StackBuilder; a package manager that can be used to download and install additional PostgreSQL applications and drivers.</p>
+<p>
+The Windows installers for PostgreSQL includes the PostgreSQL server,
+<a href="http://www.pgadmin.org">pgAdmin III</a>; a graphical tool
+for managing and developing your databases, and StackBuilder; a
+package manager that can be used to download and install additional
+PostgreSQL applications and drivers.
+</p>
 
 <h2>One click installer</h2>
 
-<p>The one click installer is designed to be as straightforward as possible and the fastest way to get up and running with PostgreSQL on Windows.</p>
+<p>
+The one click installer is designed to be as straightforward as possible
+and the fastest way to get up and running with PostgreSQL on Windows.
+</p>
 
-<ul>
-    <li><b><a href="http://www.enterprisedb.com/products/pgdownload.do#windows">Download</a></b> the one click installer</li>
-</ul>
+<p>
+<a href="http://www.enterprisedb.com/products/pgdownload.do#windows">Download</a>
+the installer from EnterpriseDB for all supported versions.
+</p>
 
-<p><i>Advanced users</i> can also download a <a href="http://www.enterprisedb.com/products/pgbindownload.do">zip archive</a> of the binaries, without the installer.</p>
-
-<p><i>The one click installer is maintained by Dave Page at <a href="http://www.enterprisedb.com">EnterpriseDB</a>.</i></p>
+<p>
+<i>Advanced users</i> can also download a
+<a href="http://www.enterprisedb.com/products/pgbindownload.do">zip archive</a>
+of the binaries, without the installer. This is not recommended for normal
+installations, it is intended for users who wish to include PostgreSQL as
+part of another application installer.
+</p>
 
 <h2>pgInstaller</h2>
 
-<p>pgInstaller is a Windows Installer package that offers advanced configuration options. pgInstaller packages are only being maintained for PostgreSQL 8.3.</p>
-
-<ul>
-    <li><b><a href="/ftp/binary">Download</a></b> pgInstaller from the win32 subdirectory of the version you require from our file browser.</li>
-</ul>
-
-<p><i>pgInstaller is maintained by Dave Page and Magnus Hagander.</i></p>
+<p>
+pgInstaller is a Windows Installer package that offers advanced
+configuration options. pgInstaller packages are only being maintained
+for PostgreSQL 8.3.
+</p>
+<p>
+<a href="/ftp/binary">Download</a> pgInstaller from the win32 subdirectory of the version you require from our file browser.
+</p>
 
 {%endblock%}

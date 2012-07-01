@@ -4,51 +4,92 @@
 
 <h1>Beta/RC Releases and Development snapshots (unstable)</h1>
 
-<p>Beta and Release Candidate packages are built prior to the release of new major versions of PostgreSQL. They are not
-built continually.</p>
+<p>
+Beta and Release Candidate packages are built prior to the release of
+new major versions of PostgreSQL. They are not built continually.
+</p>
 
-<p>Development snapshots are built from the latest source code and alpha/beta/rc versions that the developers are working on. These are 'bleeding edge'
-versions of PostgreSQL and <font color="red"><b>should not be used in production systems</b></font> as they have had little or no testing or quality control.</p>
+<p>
+Development snapshots are built from the latest source code and
+alpha/beta/rc versions that the developers are working on.
+These are 'bleeding edge' versions of PostgreSQL and
+<font color="red"><b>should not be used in production systems</b></font>
+as they have had little or no testing or quality control.
+</p>
 
-<p>The latest development version of the documentation is also 
+<p>
+The latest development version of the documentation is also 
 <a href="/docs/devel/static/index.html">available online</a>.
+</p>
+
+<h2>RedHat, CentOS, Fedora and ScientificLinux</h2>
+<p>
+RPMs for RedHat, CentOS, Fedora and ScientificLinux are available from the
+<a href="http://yum.postgresql.org/">PostgreSQL Yum repository</a>.
+</p>
+<p>
+To setup the repository for these versions, follow the same instructions
+as for the <a href="/download/linux/redhat/">normal</a> yum repository on these
+platforms.
+</p>
+
+<p>
+Typically only Beta and Release Candidate packages are available in the
+Yum repository.
+</p>
+
+<h2>Ubuntu Linux</h2>
+<p>
+DEBs for Ubuntu are available from the
+<a href="https://launchpad.net/~pitti/+archive/postgresql">Ubuntu backports PPA</a>
+repository.
+</p>
+<p>
+To setup the repository for these versions, follow the same instructions
+as for the <a href="/download/linux/ubuntu/">normal</a> PPA repository.
+</p>
+<p>
+Typically only Beta and Release Candidate packages are available in
+the PPA repository.
+</p>
+
 
 <h2>One click installer</h2>
+<p>
+One click installers are available for 32 and 64 bit Linux distributions,
+Mac OS X and Windows and include PostgreSQL, pgAdmin and the PL/pgSQL
+debugger plugin.
+</p>
 
-<p>One click installers are available for 32 and 64 bit Linux distributions, Mac OS X and Windows and 
-include PostgreSQL, pgAdmin and the PL/pgSQL debugger plugin.</p>
-
-<p>Typically only Beta and Release Candidate packages are available in the installer distribution.</p>
+<p>
+Typically only Beta and Release Candidate packages are available in
+the installer distribution.
+</p>
 
 <p><b>Note: The one click installers do not integrate with platform-specific packaging systems on Linux. If you need
-RPM packages for CentOS, Fedora or RHEL please use the packages below.</b></p>
+RPM packages for CentOS, Fedora or RHEL please use the packages above.</b></p>
 
-<ul>
-    <li>Download for <b><a href="http://www.enterprisedb.com/products/pgdevdownload.do#linux">32bit Linux</a></b><br />&nbsp;</li>
-    <li>Download for <b><a href="http://www.enterprisedb.com/products/pgdevdownload.do#linux-x64">64bit Linux</a></b><br />&nbsp;</li>
-    <li>Download for <b><a href="http://www.enterprisedb.com/products/pgdevdownload.do#osx">Mac OS X 10.4+</a></b><br />&nbsp;</li>
-    <li>Download for <b><a href="http://www.enterprisedb.com/products/pgdevdownload.do#windows">Windows</a></b></li>
-</ul>
-
-<p><i>The one click installers are maintained by Dave Page at <a href="http://www.enterprisedb.com">EnterpriseDB</a>.</i></p>
-
-<h2>CentOS, Fedora and RHEL Yum Repository</h2>
-
-<p>RPMs for CentOS, Fedora and Red Hat Enterprise Linux are available from the 
-<a href="http://yum.postgresql.org/">PostgreSQL Yum repository</a>. 
-
-<p>To setup your system to use the repository, please see the <b><a href="http://yum.postgresql.org/howtoyum.php">Yum HOWTO</a></b>.
-
-<p>Typically only Beta and Release Candidate packages are available in the Yum repository.</p>
+<p>
+<a href="http://www.enterprisedb.com/products/pgdevdownload.do">Download</a>
+the one click installer for all platforms.
+</p>
 
 <h2>Source code</h2>
 
-<p>Beta and Release Candidate tarballs are <a href="/ftp/source/">made available alongside</a> the release tarballs 
-during the final phases of the development cycle of new major versions of PostgreSQL.</p>
+<p>
+Beta and Release Candidate tarballs are <a href="/ftp/source/">made available
+alongside</a> the release tarballs during the final phases of the development
+cycle of new major versions of PostgreSQL.
+</p>
 
-<p>Source code tarballs are built automatically every night on the official PostgreSQL development server. The 
-<a href="/ftp/snapshot/dev/">development snapshot</a> is taken from the HEAD of the GIT repository, and 
-includes the new features being worked on for the next release.</p>
-
+<p>
+Source code tarballs are built automatically every night on the official
+PostgreSQL development server. The 
+<a href="/ftp/snapshot/dev/">development snapshot</a> is taken from the
+head of the git repository, and includes the new features being worked
+on for the next release. There are also "branch tip" snapshots built from
+all supported <a href="/ftp/snapshot/">stable branches</a>, which contains
+all bugfixes that are scheduled for the next release.
+</p>
 
 {%endblock%}

@@ -3,36 +3,74 @@
 {%block contents%}
 
 <h1>Mac OS X packages</h1>
+<p>
+PostgreSQL is the default database on Mac OS X Server as of version 10.7.
+The standard version of Mac OS X includes only the PostgreSQL commandline
+client utilities.
+</p>
+<p>
+Mac OS X Server 10.7 ships with PostgreSQL 9.0. Minor updates are provided
+by Apple, but not necessarily right after a new PostgreSQL minor release.
+</p>
+<p>
+There are several other installers available for PostgreSQL on Mac OS X,
+which is the recommended way to install.
+</p>
 
 <h2>One click installer</h2>
 
-<p>A one click installer for PostgreSQL 8.3 and 8.4 is available for for Mac OS X 10.4 and above on Intel and PPC 
-and includes PostgreSQL, pgAdmin and the StackBuilder utility for installing additional packages. Installers for 
-PostgreSQL 9.0 and 9.1 support Max OS X 10.5 and above on 32 and 64 bit Intel CPUs.</p>
+<p>
+A one click installer is available for for Mac OS X that includes PostgreSQL,
+pgAdmin, PL/Java and the PL/pgSQL debugger plugin. The installer for
+PostgreSQL 8.3 and 8.4 supports Mac OS X 10.4 and above on Intel and PPC. For
+PostgreSQL 9.0 and later, Mac OS X 10.5 and above are supported for 32 and
+64-bit Intel CPUs.
+</p>
 
-<ul>
-    <li>Download for <b><a href="http://www.enterprisedb.com/products/pgdownload.do#osx">Mac OS X 10.4+</a></b></li>
-</ul>
+<p>
+<a href="http://www.enterprisedb.com/products/pgdownload.do#osx">Download</a>
+the installer from EnterpriseDB for all supported versions.
+</p>
 
-<p><i>The one click installer is maintained by Dave Page at <a href="http://www.enterprisedb.com">EnterpriseDB</a>.</i></p>
+{%comment%}
+Not released yet (just beta), and nobody on packagers handling it
+
+<h2>Postgres.app</h2>
+<p>
+<a href="http://postgresapp.com">Postgres.app</a> is a native Mac OS X app
+designed for developer who wants a
+"desktop style" installer. It is not intended for server deployments, but
+makes starting and stopping and general handling of a local PostgreSQL
+server for development easy.
+</p>
+{%endcomment%}
 
 <h2>Fink</h2>
 
-<p>PostgreSQL packages are available for Mac OS X from the <a href="http://www.finkproject.org/">Fink
-Project</a>. Please see the Fink documentation for information on how to install packages.</p>
+<p>
+PostgreSQL packages are available for Mac OS X from the
+<a href="http://www.finkproject.org/">Fink Project</a>.
+Please see the Fink documentation for information on how to install packages.
+</p>
 
-<p>A list of <a href="http://pdb.finkproject.org/pdb/browse.php?summary=postgresql">PostgreSQL
-packages</a> can be found using the package search tool on the Fink website.</p>
-
-<p><i>The PostgreSQL Fink packages are maintained by Benjamin Reed.</i></p>
+<p>
+A list of
+<a href="http://pdb.finkproject.org/pdb/browse.php?summary=postgresql">PostgreSQL packages</a>
+can be found using the package search tool on the Fink website.
+</p>
 
 <h2>MacPorts</h2>
 
-<p>PostgreSQL packages are also available for Mac OS X from the <a href="http://www.macports.org/">MacPorts
-Project</a>. Please see the MacPorts documentation for information on how to install ports.</p>
+<p>
+PostgreSQL packages are also available for Mac OS X from the
+<a href="http://www.macports.org/">MacPorts Project</a>. Please see the
+MacPorts documentation for information on how to install ports.
+</p>
 
-<p>A list of <a href="http://www.macports.org/ports.php?by=name&substr=postgresql">PostgreSQL 
-packages</a> can be found using the portfiles search tool on the MacPorts website.</p>
+<p>
+A list of
+<a href="http://www.macports.org/ports.php?by=name&substr=postgresql">PostgreSQL packages</a>
+can be found using the portfiles search tool on the MacPorts website.
+</p>
 
-<p><i>The PostgreSQL MacPorts are maintained by Jyrki Wahlstedt and Markus Weissmann.</i></p>
 {%endblock%}
