@@ -125,7 +125,9 @@ class StackBuilderApp(models.Model):
 	checksum = models.CharField(max_length=32, null=False, blank=False)
 	mirrorpath = models.CharField(max_length=500, null=False, blank=True)
 	alturl = models.URLField(max_length=500, null=False, blank=True)
-	dependencies = models.ManyToManyField("self", blank=True)
+	txtdependencies = models.CharField(max_length=1000, null=False, blank=True,
+									   verbose_name='Dependencies',
+									   help_text='Comma separated list of text dependencies, no spaces!')
 	versionkey = models.CharField(max_length=500, null=False, blank=False)
 
 	def __unicode__(self):

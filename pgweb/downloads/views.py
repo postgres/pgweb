@@ -272,8 +272,8 @@ def applications_v2_xml(request):
 		x.add_xml_element('mirrorpath', a.mirrorpath)
 		x.add_xml_element('alturl', a.alturl)
 		x.add_xml_element('versionkey', a.versionkey)
-		for dep in a.dependencies.all():
-			x.add_xml_element('dependency', dep.textid)
+		for dep in a.txtdependencies.split(','):
+			x.add_xml_element('dependency', dep)
 		x.endElement('application')
 	x.endElement('applications')
 	x.endDocument()
