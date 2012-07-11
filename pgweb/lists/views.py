@@ -58,6 +58,7 @@ def listinfo(request):
 	groupdata = [ {
 			'id': g.id,
 			'name': g.groupname,
+			'sort': g.sortkey,
 			} for g in MailingListGroup.objects.all()]
 	listdata = [ {
 			'id': l.id,
