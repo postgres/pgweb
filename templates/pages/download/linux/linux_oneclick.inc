@@ -1,3 +1,4 @@
+<h2>Graphical installer</h2>
 <p>
 One click installers are available for 32 and 64 bit Linux distributions
 and include PostgreSQL, pgAdmin and the StackBuilder utility for installation
