@@ -161,4 +161,6 @@ CREATE OR REPLACE VIEW users_keys AS
 	   users_old.sshkey_last_update
     FROM users_old
     WHERE users_old.sshkey IS NOT NULL
-    AND users_old.sshkey <> ''::text;
+    AND users_old.sshkey <> ''::text
+    AND NOT EXISTS (SELECT * FROM auth_user a WHERE a.username=users_old.userid)
+;
