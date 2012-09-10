@@ -85,6 +85,11 @@ urlpatterns = patterns('',
 	(r'^sitemap.xml', 'pgweb.core.views.sitemap'),
 
     ###
+    # Workaround for broken links pushed in press release
+    ###
+    (r'^downloads/$', redirect_to, {'url': '/download/'}),
+
+    ###
     # Legacy URLs from the old website, that are likely to be used from other
     # sites or press releases or such
     ###
