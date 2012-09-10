@@ -1,0 +1,192 @@
+﻿{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.2 Press Kit{%endblock%}
+{%block contents%}
+
+
+
+
+<h1>Δελτίο Τύπου για την PostgreSQL 9.2</h1>
+
+<h2>Περιεχόμενα</h2>
+  
+
+<p>
+ &nbsp; <a href="#original_release">Κείμενο Αρχικής Έκδοσης</a><br />
+ &nbsp; <a href="#features">Λίστα Χαρακτηριστικών</a><br />
+ &nbsp; <a href="#download">Τοποθεσίες Λήψης</a><br />
+ &nbsp; <a href="#docs">Τεκμηρίωση</a><br />
+ &nbsp; <a href="#license">Άδεια χρήσης</a><br />
+ &nbsp; <a href="#contact">Επικοινωνία</a><br />
+ &nbsp; <a href="#logos">Logos and Graphics</a><br />
+ &nbsp; <a href="#quoted_companies">Ανακοινωσεις εταιριων</a><br />
+ &nbsp; <a href="#events">Events</a><br />
+ &nbsp; <a href="#companies">Εταιρική Υποστήριξη</a><br />
+</p>
+
+
+<a name="original_release"></a><h2>Πρωτότυπο Δελτίο Τύπου</h2>
+
+<p>
+10 Σεπτεμβρίου 2012: 
+
+Η Ομάδα Ανάπτυξης PostgreSQL (PostgreSQL Global Development Group) ανακοινώνει την έκδοση 9.2,
+την πιο πρόσφατη έκδοση της ηγετικής βάσης δεδομένων ανοικτού κώδικα.
+Από την ανακοίνωση της beta έκδοσης το Μάιο, Developers και Vendors την έχουν εγκωμιάσει    
+ως ένα άλμα προς τα εμπρός σε απόδοση, scalability και ευελιξία. Αναμένεται μαζική μετάβαση των χρηστών σε αυτήν την έκδοση.
+</p><p>
+
+«Η PostgreSQL 9.2 έχει εγγενή υποστήριξη JSON, covering indexes, replication, βελτιώσεις στην απόδοση  και πολλά άλλα χαρακτηριστικά.
+Περιμένουμε με ανυπομονησία την έκδοση αυτή και θα την καταστήσουμε άμεσα διαθέσιμη ως Early Access  μόλις κυκλοφορήσει από την κοινότητα PostgreSQL», είπε ο Ines Sombra, Επικεφαλής Data Engineer στην Engine Yard.
+</p>
+
+
+<h3>Βελτιωμένες Επιδόσεις και Δυνατότητες Scalability</h3>
+<p>
+Με την προσθήκη δυνατότητας χρήσης έως και 64 πυρηνών (επεξεργαστών) με γραμμική αύξηση απόδοσης, index-only scans και μειώσεις στην κατανάλωση ρεύματος της CPU, η PostgreSQL 9.2 βελτιώνει σημαντικά τη δυνατότητα scalability και προσδίδει ευελιξία στην ανάπτυξη εφαρμογών διαχείρισης μεγάλου φόρτου εργασίας. Οργανισμοί όπως η U.S. Federal Aviation Administration και η Heroku.com συντηρούν εφαρμογές πάνω σε PostgreSQL, ενώ η HP την υιοθέτησε για χρήση από το λογισμικό απομακρυσμένης υποστήριξης και τη συμπεριέλαβε στα πακέτα λύσεων βασισμένα σε HP-UX/Itanium.
+</p><p>
+
+
+
+Βελτιώσεις στις δυνατότητες κάθετης κλιμάκωσης (vertical scalability), δίνουν στην PostgreSQL τη δυνατότητα αποτελεσματικότερης αξιοποίησης του hardware σε μεγαλύτερους servers. Οι εξελίξεις στη διαχείριση κλειδώματος (lock management), στη δυνατότητα εγγραφής σε αποθηκευτικά μέσα (write efficiency), στις διαδικασίες index-only access, καθώς και σε άλλες χαμηλού επιπέδου λειτουργίες επιτρέπουν τη διαχείριση ακόμα μεγαλύτερου φόρτου εργασίας. Σε αριθμούς αυτά σημαίνουν:
+</p>
+<ul>
+<li>Έως 350,000 ερωτήσεις ανάγνωσης (read queries) ανά δευτερόλεπτο (περισσότερο από τετραπλάσια ταχύτητα)</li>
+<li>Ερωτήσεις με χρήση index-only scan για εφαρμογές data warehousing (έως 20 φορές γρηγορότερα)</li>
+<li>Έως 14,000 data writes ανά δευτερόλεπτο (5 φορές ταχύτερα)</li>
+</ul>
+<p>
+Επίσης, η προσθήκη δυνατότητας cascading replication επιτρέπει στους χρήστες να χρησιμοποιούν μεγαλύτερα stacks από horizontally scaled servers.
+</p><p>
+«Ο διαδικτυακός τόπος NewsBlur  (social news reader) βασίζεται στη χρήση της Postgres για την αποθήκευση εκατομμυρίων εγγραφών που αφορούν sites και subscriptions. Σταθερά και αξιόπιστα για χρόνια», είπε ο Samuel Clay, ιδρυτής του NewsBlur.com. «Παρακολουθούμε και χρησιμοποιούμε σταθερά τις πιο πρόσφατες εκδόσεις (9.1 τώρα, ενώ μετακινούμαστε σύντομα στην 9.2 κυρίως για χρήση του cascading replication) από την έκδοση 8.4 και μετά.»
+</p>
+<h3>Ευέλικτη Υποστήριξη για Ανάπτυξη Εφαρμογών</h3>
+<p>
+Η ευελιξία της PostgreSQL αντανακλάται στην ποικιλομορφία των οργανισμών που την έχουν υιοθετήσει. Για παράδειγμα η NASA, η Chicago Mercantile Exchange, καθώς και η Instagram βασίζονται στην PostgreSQL για τη λειτουργία mission-critical εφαρμογών. Η έκδοση 9.2 επεκτείνει αυτή την ευελιξία ακόμα περισσότερο, περιλαμβάνοντας υποστήριξη σε Range Types και JSON, επιτρέποντας εντελώς νέους τρόπους χρήσης της PostgreSQL.
+</p><p>
+Τα Range Types δίνουν τη δυνατότητα δημιουργίας βελτιωμένων ημερολογιακών, επιστημονικών και οικονομικών εφαρμογών. Καμία άλλη γνωστή βάση σχεσιακών δεδομένων δεν έχει αυτό το χαρακτηριστικό, το οποίο επιτρέπει την έξυπνη διαχείριση εγγραφών που αφορούν διαστήματα χρόνου και αριθμών.
+</p><p>
+Στην PostgreSQL 9.2, τα αποτελέσματα ερωτημάτων μπορούν να επιστραφούν σε μορφή JSON. Σε συνδυασμό με τις νέες γλώσσες PL/V8 Javascript και PL/Coffee, καθώς και το προαιρετικό component HStore (key-value data type), οι χρήστες μπορούν πλέον να χρησιμοποιούν την PostgreSQL όπως μια "NoSQL" document database, διατηρώντας παράλληλα την αξιοπιστία, την ευελιξία και τις επιδόσεις της PostgreSQL.
+</p><p>
+«Η εγγενής υποστήριξη JSON στην PostgresSQL παρέχει έναν αποτελεσματικό μηχανισμό για δημιουργία και αποθήκευση εγγράφων μέσω web APIs. Χρησιμοποιούμε front-end libraries όπως η jQuery για να ζητήσουμε δεδομένα σε δενδροειδή μορφή ή μορφή πίνακα. Τα νέα χαρακτηριστικά την καθιστούν εύχρηστη και αποδοτικότερη στην ανάκτηση δεδομένων σε μορφή JSON», είπε ο Taras Mitran, Senior Architect της IVC Inc.
+</p><p>
+<b>Σχετικά με την PostgreSQL</b>: Η PostgreSQL αποτελεί ένα κορυφαίο σύστημα βάσεων δεδομένων ανοικτού κώδικα, με μια παγκόσμια κοινότητα χιλιάδων χρηστών και contributors, καθώς και δεκάδες επιχειρήσεις και οργανισμούς. Το Project PostgreSQL βασίζεται σε 25 χρόνια ανάπτυξης, ξεκινώντας από το Πανεπιστήμιο της Καλιφόρνιας, Berkeley, και έχει σταθερό ρυθμό ανάπτυξης έως σήμερα. Το σύνολο ώριμων χαρακτηριστικών της  PostgreSQL όχι μόνο ειναι εφάμιλλο δυνατοτήτων με κορυφαία proprietary συστήματα βάσεων δεδομένων, αλλά σε πολλές περιπτώσεις υπερτερεί σε προηγμένα χαρακτηριστικά επεκτασιμότητας, ασφάλειας και σταθερότητας.
+Μάθετε περισσότερα για την PostgreSQL και δηλώστε συμμετοχή στην κοινότητά μας <a href="http://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+
+<h2>Αναλυτικές Πληροφορίες Έκδοσης</h2>
+
+<a name="features"></a><h2>Λεπτομέρειες Χαρακτηριστικών</h2>
+
+<p>
+Για την επεξήγηση των παραπάνω και όχι μόνο χαρακτηριστικών, μπορείτε να επισκεφθείτε τις παρακάτω πηγές:
+</p>
+<ul>
+<li><a href="/docs/9.2/static/release-9-2.html">Release Notes</a></li>
+<li><a href="/docs/9.2/static/index.html">9.2 Documentation</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.2">What's New In PostgreSQL 9.2</a></li>
+<li><a href="/about/featurematrix">Feature matrix (English only)</a></li>
+<li><a href="http://code.google.com/p/plv8js/wiki/PLV8">PL/V8 and PL/Coffee Javascript plug-in</a></li>
+</ul>
+
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Downloads page</a> με συνδέσμους προγραμμάτων εγκατάστασης και εργαλείων για Windows, Linux, OSX, BSD και Solaris.</li>
+<li><a href="/ftp/source/v9.2.0">Πηγαίος Κώδικας</a></li>
+<li><a href="http://code.google.com/p/plv8js/downloads/list">PL/V8 και PL/Coffee</a></li>
+<li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">Σχετικό και Εμπορικό Λογισμικό</a></li>
+</ul>
+
+
+
+<a name="docs"></a><h2>Τεκμηρίωση</h2>
+
+<p>
+Τεκμηρίωση HTML και σελίδες man εγκαθίστανται μαζί με την PostgreSQL, αλλά μπορείτε να περιηγηθείτε, να αναζητήσετε και να σχολιάσετε την εκτεταμένη, διαδραστική
+<a href="/docs/9.2/interactive">online τεκμηρίωση</a>.
+</p>
+
+
+
+
+
+
+<a name="license"></a><h2>Άδεια χρήσης</h2>
+<p>
+Η PostgreSQL χρησιμοποιεί την <a href="/about/licence">άδεια χρήσης PostgreSQL</a>, μια παρόμοια με BSD άδεια που προϋποθέτει μόνο τη διατήρηση των στοιχείων πνευματικών δεδομένων
+και άδειας χρήσης του πηγαίου κώδικα που αφορά.<br />
+Αυτή η <a href="http://www.opensource.org/licenses/postgresql">πιστοποιημένη κατά OSI άδεια χρήσης</a>  αξιολογείται ευρέως ως ευέλικτη και φιλική προς τις επιχειρήσεις,
+καθώς δεν περιορίζει τη χρήση της PostgreSQL από εμπορικές και ιδιόκτητες εφαρμογές. Μαζί με την υποστήριξη πολλών εταιριών και τη δημόσια ιδιοκτησία του κώδικα, η άδειά μας καθιστά την PostgreSQL πολύ δημοφιλή στους προμηθευτές που θέλουν να ενσωματώσουν μια βάση δεδομένων στο δικό τους προϊόν χωρίς να φοβούνται τις χρεώσεις, το vendor lock-in ή τις αλλαγές στους όρους της Άδειας Χρήσης.
+</p>
+
+
+<a name="contact"></a><h2>Επικοινωνία</h2>
+
+<p>Web Pages</p>
+<ul>
+<li><a href="http://www.postgresql.org">Αρχική σελίδα PostgreSQL</a></li>
+<li><a href="/about/press">PostgreSQL Press Page</a></li>
+</ul>
+
+
+<p><b>Πληροφορίες:</b><br />
+Κώστας Μαϊστρέλης<br />
+Τοπικός εκπρόσωπος επικοινωνίας της PostgreSQL<br />
+Κινητό: +306946071060<br />
+<a href="mailto:el@postgresql.org">el@postgresql.org</a></p>
+<p>Για επικοινωνία με άλλες περιοχές, δείτε <a href="/about/press/contact">τη λίστα μας με τις διεθνείς επαφές.</a></p>
+
+
+<a name="logos"></a><h2>Logos & Graphics</h2>
+
+<img src="http://developer.postgresql.org/~josh/graphics/logos/elephant-64.png" />
+
+<ul>
+<li><a href="http://developer.postgresql.org/~josh/graphics/logos/elephant.pdf">PostgreSQL Elephant Logo, PDF format</a></li>
+<li><a href="http://developer.postgresql.org/~josh/graphics/logos/elephant.png">PostgreSQL Elephant Logo, PNG format</a></li>
+<li><a href="http://developer.postgresql.org/~josh/graphics/logos/elephant-64.png">PostgreSQL Elephant, Tiny</a></li>
+<li><a href="http://developer.postgresql.org/~josh/graphics/logos/logo.pdf">PostgreSQL Text Logo, PDF</a></li>
+<li><a href="http://developer.postgresql.org/~josh/graphics/logos/slonik_with_teal_text_and_black_tagline.pdf">PostgreSQL Banner with Logo, Elephant and Slogan</a></li>
+</ul>
+
+Όλα τα λογότυπα διατίθενται για τροποποίηση και αναδιανομή κάτω από την άδεια PostgreSQL License.  Το όνομα PostgreSQL και το λογότυπό της είναι σήμα κατατεθέν της PostgreSQL Community Association of Canada.
+
+<a name="events"></a><h2>Events</h2>
+
+<p>
+Η Κοινότητα PostgreSQL φιλοξενεί πολλές εκδηλώσεις και συνέδρια. Τα ακόλουθα events συμπεριλαμβάνουν ομιλίες, εισαγωγικά σεμινάρια και επιδείξεις 
+πολλών από τα νέα χαρακτηριστικά της έκδοσης 9.2:
+</p>
+<ul>
+<li><a href="/about/event/1439/">PostgreSQL 9.2 Full Throttle Database Live Webcast</a>, 11 Σεπτεμβρίου</li>
+<li><a
+href="http://postgresopen.org/2012/">Postgres Open 2012</a>, Σικάγο, 17 εως 19 Σεπτεμβρίου</li>
+<li><a
+href="http://2012.pgconf.eu/">PGConf.EU 2012</a>, Πράγα, 23 εως 25 Οκτωβρίου</li>
+</ul>
+
+
+<a name="quoted_companies"></a><h2>Ανακοινώσεις Εταιριών</a></h2>
+ 
+<p>
+<b>Η EngineYard</b> είναι ηγετική πλατφόρμα υπηρεσιών  <a href="http://www.engineyard.com/platform-as-a-service">Platform as a
+Service (PaaS)</a>, η οποία ενδυναμώνει την καινοτομία <a href="http://www.engineyard.com/products/cloud"> στην ανάπτυξη cloud εφαρμογών</a> γρηγορότερα, ευκολότερα και οικονομικότερα. Με μεγάλη τεχνογνωσία, ισχυρή οργάνωση υποδομών, μεγάλη υποστήριξη από την κοινότητα ανοιχτού λογισμικού, και παγκόσμιου κύρους υπηρεσίες, η Engine Yard παρέχει μια ολοκληρωμένη εμπορική λύση που επιτρέπει στους developers να επικεντρώνονται στη δημιουργία σημαντικών εφαρμογών, αντί να αναλώνονται στη διαχείριση της πλατφόρμας τους. Χιλιάδες πελάτες σε 58 χώρες, από εκρηκτικά ανερχόμενες Web startups έως εταιρίες που κατέχουν μια θέση στη λίστα του περιοδικού Fortune με τις 500 καλύτερες επιχειρήσεις, βασίζονται στην Engine Yard για να μετατρέψουν το cloud computing σε ανταγωνιστικό πλεονέκτημα. Με έδρα στο Σαν Φρανσίσκο της Καλιφόρνια, η Engine Yard υποστηρίζεται από την Benchmark Capital, την New Enterprise Associates και την Amazon.com. Επαφή: <a href="mailto:mhick@bhavacom.com">Melissa Hick</a>, 510-984-1525
+</p><p>
+<b><a href="http://newsblur.com">Το NewsBlur</a></b> είναι ένας social news reader που απευθύνεται σε ανθρώπους που απολαμβάνουν την ανάγνωση ειδήσεων. Το NewsBlur είναι ένας εκπληκτικός τόπος για να διαβάσετε τις καλύτερες ιστορίες από τους φίλους σας και τα αγαπημένα σας blogs.  Επαφή (μόνο Αγγλικά): <a href="mailto:samuel@newsblur.com">Samuel Clay</a>
+</p><p>
+<b><a href="http://www.ivc.com">Η IVC, Inc.</a></b> είναι μια εταιρία τεχνολογίας προσανατολισμένη σε επιχειρήσεις, που βρίσκεται κοντά στο Research Triangle Park, στη Βόρεια Καρολίνα (NC), και προσφέρει ολοκληρωμένες λύσεις για βραχυπρόθεσμα αλλά και πολυετή projects από το 1987. Η IVC αναπτύσσει και παρέχει υποστήριξη από την πρωτοτυποποίηση έως την τελική εγκατάσταση προσαρμοσμένων εφαρμογών, specialty integration, data analytics, και mobile solutions.  Οι υποστηριζόμενες από βάσεις δεδομένων εφαρμογές μας χρησιμοποιούνται καθημερινά από εκατοντάδες εταιρίες της λίστας Fortune 1000 όπως οι: Time Warner Cable, AstraZeneca, Kaiser, Progress Energy, Charles Schwab, και State Street. Επαφή (μόνο Αγγλικά): <a href="mailto:steve@ivc.com">Steve</a>, (919) 439-7792
+</p>
+
+<a name="companies"></a><h2>Εταιρική Υποστήριξη</h2>
+
+<p>
+Η PostgreSQL χαίρει της υποστήριξης πολλών εταιριών, οι οποίες χορηγούν προγραμματιστές, προσφέρουν πόρους φιλοξενίας και παρέχουν οικονομική υποστήριξη,
+συμπεριλαμβανομένων των EnterpriseDB, 2ndQuadrant, NTT, HP, VMWare και πολλών άλλων.</p>
+
+<p>Υπάρχει επίσης μια μεγάλη κοινότητα <a href="/support/professional_support">εταιριών που προσφέρουν υποστήριξη στην PostgreSQL</a>, 
+από μεμονωμένους συμβούλους μέχρι πολυεθνικές εταιρίες.</p>
+
+<p><a href="/about/donate">Δωρεές</a> γίνονται ευχαρίστως δεκτές.</p>
+
+
+{%endblock%}

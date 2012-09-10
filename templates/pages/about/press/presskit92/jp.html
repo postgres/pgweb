@@ -1,0 +1,163 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.2プレスキット{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.2プレスキット</h1>
+
+<h2>目次</h2>
+
+<p>
+ &nbsp; <a href="#original_release"></a><br />
+ &nbsp; <a href="#features">機能に関する詳細</a><br />
+ &nbsp; <a href="#download">ダウンロード先</a><br />
+ &nbsp; <a href="#docs">文書</a><br />
+ &nbsp; <a href="#license">ライセンス</a><br />
+ &nbsp; <a href="#contact">連絡先</a><br />
+ &nbsp; <a href="#quoted_companies">引用した企業について</a><br />
+ &nbsp; <a href="#companies">法人サポート</a><br />
+</p>
+
+<a name="original_release"></a><h2>プレスリリース原文</h2>
+
+<p>
+2012年9月10日：PostgreSQL Global Development Groupは、オープンソースデータベースのリーダーであるPostgreSQLの最新バージョンPostgreSQL 9.2のリリースをアナウンスします。
+今年5月のベータ版のアナウンス以降、アプリケーション開発者やベンダは、性能、スケーラビリティ、柔軟性という点でPostgreSQLが大きく躍進したことを高く評価してきました。
+PostgreSQL Global Development Groupでは、ユーザがこれまで以上にこの最新バージョンへ移行していくものと予想しています。
+</p><p>
+EngineYardのLead Data EngineerであるInes Sombra氏は以下のようにコメントしています。
+「PostgreSQL 9.2ではネイティブなJSONサポートの他にもインデックス、レプリケーションおよび性能の改良やより多くの機能が提供されます。
+私たちはこのリリースを切望しており、PostgreSQLコミュニティによるリリースの後すぐに（EnginsYardの提供するPaaSプラットフォームの）Earlyアクセス版で利用できるようにするつもりです。」
+</p>
+<h3>性能およびスケーラビリティの改良</h3>
+<p>
+垂直スケーラビリティ（スケールアップ）の向上により、大規模なサーバにおいてハードウェアリソースを効率的に使用するためのPostgreSQLの能力が向上しました。
+ロック管理、ディスク書き込みの効率、インデックスオンリーアクセスやその他の低レベルな演算を改善することで、PostgreSQLはより大規模なワークロードでも扱えるようになりました。
+数値的には以下のとおりです。
+</p>
+<ul>
+<li>1秒当たり最大350,000回の参照クエリの実行（4倍以上の高速化）</li>
+<li>データウェアハウス用クエリのためのインデックスオンリースキャン（最大20倍の高速化）</li>
+<li>1秒当たり最大14,000回のデータ書き込み（約5倍の高速化）</li>
+</ul>
+<p>
+また、レプリケーションのカスケード機能の追加により、PostgreSQL 9.2では水平方向にスケールさせるための、より大きな階層アーキテクチャを実現できるようになりました。
+</p><p>
+NewsBlur.comの創業者であるSamuel Clay氏は以下のように述べています。
+「ソーシャルニュースリーダNewsBlurは数百万のサイトと投稿を格納するためにPostgresに依存しており、長年、堅牢かつ信頼できる状態を保っています。
+私たちはバージョン8.4以降現在に至るまで、継続して常に最新版を活用しています（現在は9.1ですが、PostgreSQL単体でのレプリケーションのカスケード機能を使うためにすぐに9.2に移行します）。」
+</p>
+<h3>柔軟なアプリケーション開発者のサポート</h3>
+<p>
+PostgreSQLの柔軟性は、PostgreSQLを導入したユーザー組織の多様性を反映しています。
+たとえば、NASA、FAA、シカゴマーカンタイル取引所、InstagramはすべてミッションクリティカルなアプリケーションにおいてPostgreSQLに依存しています。
+バージョン9.2ではさらに、RANGE型、JSONなど、アプリケーション開発者がまったく新しい分野にPostgreSQLを使用できるように柔軟性を拡張しました。
+</p><p>
+RANGE型により、アプリケーション開発者は、より優れたカレンダ処理、科学技術、財務アプリケーションを作成することができます。
+他の主だったSQLデータベースは、時間や数値の区間をスマートに扱うことができるこの機能をサポートしていません。
+</p><p>
+PostgreSQL 9.2では、問い合わせ結果をJSONデータ型として返すことができます。
+新しいPL/v8 JavascriptやPL/Coffeeデータベースプログラミング拡張、最適なHStore Key-Valueストアと組み合わせることにより、ユーザはPostgreSQLの信頼性、柔軟性、性能を維持したまま、PostgreSQLを"NoSQL"ドキュメント型データベースのように使用することができるようになりました。
+</p><p>
+INV IncのSenior ArchitectであるTaras Mitran氏は次のように述べています。
+「PostgreSQLにおけるネイティブなJSONサポートは、Web API用のドキュメントの作成・格納における効率的な仕組みを提供します。
+私たちは表形式およびツリー形式のデータを要求するためにjQueryのようなフロントエンドライブラリを使用しています。新機能によってこれが容易になりますし、JSONとしてデータを受け取るという点で性能面での利点もあります。」
+</p><p>
+<b>PostgreSQLについて</b>: PostgreSQLは、数千のユーザ、貢献者、数十の企業や団体からなるグローバルなコミュニティを持つ、先駆的なオープンソースデータベースシステムです。
+カリフォルニア大学バークレイ校から始まったPostgreSQLプロジェクトの開発は25年経過しており、今日では他と比較にならないペースでその開発が進んでいます。
+PostgreSQLの成熟した機能群は、業界トップの商用データベースシステムに匹敵するだけではなく、先端的なデータベース機能、拡張性、セキュリティ、安定性という点でそれらを超えるものになっています。
+PostgreSQLの詳細については<a href="http://www.postgresql.org">PostgreSQL.org</a>にある私たちのコミュニティを参照ください。またコミュニティへの協力をお待ちしています。
+</p>
+
+<h2>詳細リリース情報</h2>
+
+<a name="features"></a><h2>機能詳細</h2>
+
+<p>
+上記機能やその他に関する説明については、下記リソースを参照してください。
+</p>
+<ul>
+<li><a href="/docs/9.2/static/release-9-2.html">リリースノート</a></li>
+<li><a href="/docs/9.2/static/index.html">9.2 文書</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.2">PostgreSQL 9.2の新機能</a></li>
+<li><a href="/about/featurematrix">機能マトリックス（英語のみ）</a></li>
+<li><a href="http://code.google.com/p/plv8js/wiki/PLV8">PL/v8およびPL/Coffee Javascriptプラグイン</a></li>
+</ul>
+
+<a name="download"></a><h2>ダウンロード</h2>
+<ul>
+<li><a href="/download">ダウンロードページ</a> インストーラやツールへのリンクもあります。</li>
+<li><a href="/ftp/source/v9.2.0">ソースコード</a></li>
+<li><a href="/download/windows">Windowsインストーラ</a></li>
+<li><a href="/download/linux">Linuxインストーラ</a>およびパッケージレポジトリ</li>
+<li><a href="/download/solaris">Solarisパッケージ</a></li>
+<li><a href="/download/macosx">Mac OSXインストーラ</a></li>
+<li><a href="/download/freebsd">FreeBSD Ports</a></li>
+<li><a href="http://code.google.com/p/plv8js/downloads/list">PL/v8およびPL/Coffee</a></li>
+<li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">関連ソフトウェアおよび商用ソフトウェア</a></li>
+</ul>
+
+<a name="docs"></a><h2>文書</h2>
+
+<p>
+<p>
+HTML文書およびマニュアルページはPostgreSQLでインストールされますが、拡張可能かつ対話式の<a href="/docs/9.2/interactive">オンライン文書</a>で閲覧、検索、コメント記入を自由に行ってください。
+</p>
+
+<a name="license"></a><h2>ライセンス</h2>
+<p>
+PostgreSQLは<a href="/about/licence">PostgreSQLライセンス</a>を使用しています。
+これはBSDライセンスと似たライセンスであり、ソースコードに元のコピーライトとライセンス情報を含めることのみを要求しています。
+この<a href="http://www.opensource.org/licenses/postgresql">OSI認証ライセンス</a>は、商用のプロプライエタリアプリケーションにおけるPostgreSQLの使用を制限しないため、柔軟かつビジネスに利用しやすいことにより広く評価されています。
+複数の企業によるサポートやソースコードが公的に所有されていることとあいまって、このライセンス条項によって、料金・ベンダロックイン・ライセンス条項の変更などの心配が不要な自社製品への組込用データベースを求めるベンダに、PostgreSQLは非常に人気があります。 
+</p>
+
+<a name="contact"></a><h2>問い合わせ先</h2>
+
+<p>Webページ</p>
+<ul>
+<li><a href="http://www.postgresql.org/">PostgreSQLホームページ</a></li>
+<li><a href="http://www.postgresql.jp/">日本PostgreSQLユーザ会</a></li>
+</ul>
+
+<p>問い合わせ先</p>
+<p>
+日本PostgreSQLユーザ会<br>
+<a href="mailto:jpug-staff@postgresql.jp">jpug-staff@postgresql.jp</a><br>
++81-3-5979-2729 </p>
+
+<p>日本以外の問い合わせ先については<a href="/about/press/contact">問い合わせ先一覧</a>を参照してください。 </p>
+
+<a name="quoted_companies"></a><h2>引用した企業について</h2>
+<p>
+<b>EngineYard</b>は、より高速、簡単、コスト効率良く<a href="http://www.engineyard.com/products/cloud">クラウドアプリケーション開発</a>のイノベーションを加速する<a href="http://www.engineyard.com/platform-as-a-service">Platform as a Service (PaaS)</a>の先駆的企業です。
+深い専門技術、強力なインフラストラクチャの統合、オープンソースコミュニティの強力なサポート、ワールドクラスのサービスによって、
+開発者がプラットフォームの管理を行うことなく優れたアプリケーションの開発に注力することができる商用レベルのソリューションを提供します。
+急速に広がるWebスタートアップからFortune 500に載る企業まで、58ヶ国に渡る数千のユーザがクラウドによって競争的優位性を最大化するためにEngine Yardを利用しています。
+本社はカリフォルニアサンフランシスコにあります。
+Engine Yardは、（ベンチャーキャピタルである）Benchmark CapitalとNew Enterprise Associates、および（クラウドプロバイダである）Amazon.comからの出資を受けています。
+問い合わせ先：<a href="mailto:mhick@bhavacom.com">Melissa Hick</a>, 510-984-1525
+</p><p>
+<b><a href="http://newsblur.com">NewsBlur</a></b>は楽しみながらニュースを読みたい人々のために構築されたソーシャルニュースリーダです。
+NewsBlurは、友人や好みのブログからもっとも良いニュース記事を読むための素晴らしい場所を提供しています。
+問い合わせ先（英語のみ）：<a href="mailto:samuel@newsblur.com">Samuel Clay</a>
+</p><p>
+<b><a href="http://www.ivc.com">IVC, Inc.</a></b>は1987年の設立以降、ノースカロライナ州リサーチ・トライアングル・パーク近くに本拠を持つ、短期から複数年に渡るプロジェクトに対する完全なソリューションを提供する、ビジネス指向の技術企業です。
+IVCは、
+独自アプリケーション、特殊なインテグレーション、データ解析、モバイルソリューションのためのプロトタイピングから完全なデプロイまで、開発および技術支援を行っています。
+データベースを利用しているIVCのソフトウェアアプリケーションは、Time Warner Cable、AstraZeneca、Kaiser、Progress Energy、Charles Schwab、State Streetなど、フォーチュン1000の企業のうち数百社で日々使用されています。
+問い合わせ先（英語のみ）：<a href="mailto:steve@ivc.com">Steve</a>, (919) 439-7792
+</p>
+
+<a name="companies"></a><h2>企業による支援</h2>
+
+<p>
+PostgreSQLの開発は多くの企業による支援を受けており、これらスポンサー企業は開発者の雇用や支援、ホスティングリソースの提供や金銭的なサポートを行っています。
+大規模、長期のスポンサーの一覧は<a href="/about/sponsors">開発スポンサーページ</a>にあります。
+</p>
+
+<p>また、個人コンサルタントから多国籍企業まで、<a href="/support/professional_support">PostgreSQLサポートを提供する企業</a>という大規模なコミュニティもあります。</p>
+
+<p>PostgreSQLコミュニティでは<a href="/about/donate">寄付</a>も歓迎してます。</p>
+
+{%endblock%}

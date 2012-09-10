@@ -1,0 +1,182 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.2 Press Kit{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.2 Press Kit</h1>
+
+<h2>Contents</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Text of Original Release</a><br />
+ &nbsp; <a href="#features">More About The Features</a><br />
+ &nbsp; <a href="#download">Where to Download</a><br />
+ &nbsp; <a href="#docs">Documentation</a><br />
+ &nbsp; <a href="#license">License</a><br />
+ &nbsp; <a href="#contact">Contacts</a><br />
+ &nbsp; <a href="#logos">Logos and Graphics</a><br />
+ &nbsp; <a href="#quoted_companies">Quoted Company Information</a><br />
+ &nbsp; <a href="#events">Events</a><br />
+ &nbsp; <a href="#companies">Corporate Support</a><br />
+</p>
+
+<a name="original_release"></a><h2>Original Press Release</h2>
+
+<p>
+10 SEPTEMBER 2012: The PostgreSQL Global Development Group announces PostgreSQL 9.2, the latest release of the leader in open source databases. Since the beta release was announced in May, developers and vendors have praised it as a leap forward in performance, scalability and flexibility.  Users are expected to switch to this version in record numbers.
+</p><p>
+"PostgreSQL 9.2 will ship with native JSON support, covering indexes, replication and performance improvements, and many more features. We are eagerly awaiting this release and will make it available in Early Access as soon as it's released by the PostgreSQL community," said Ines Sombra, Lead Data Engineer, Engine Yard.
+</p>
+<h3>Improved Performance and Scalability</h3>
+<p>
+With the addition of linear scalability to 64 cores, index-only scans and reductions in CPU power consumption, PostgreSQL 9.2 has significantly improved scalability and developer flexibility for the most demanding workloads.  Organizations like the U.S. Federal Aviation Administration and Heroku.com run applications on PostgreSQL, and HP has adopted it for their remote support software and to power their HP-UX/Itanium solutions.
+</p><p>
+Improvements in vertical scalability increase PostgreSQL's ability to efficiently utilize hardware resources on larger servers. Advances in lock management, write efficiency, index-only access and other low-level operations allow PostgreSQL to handle even larger-volume workloads.  Numerically, this means:
+</p>
+<ul>
+<li>Up to 350,000 read queries per second (more than 4X faster)</li>
+<li>Index-only scans for data warehousing queries (up to 20X faster)</li>
+<li>Up to 14,000 data writes per second (5X faster)</li>
+</ul>
+<p>
+Also, the addition of cascading replication enables users to run even larger stacks of horizontally scaled servers under PostgreSQL 9.2.
+</p><p>
+"NewsBlur, a social news reader, relies on Postgres for storing millions of sites and subscriptions. Solid and reliable for years," said Samuel Clay, founder of NewsBlur.com. "We're consistently on the bleeding edge (9.1 now, moving to 9.2 soon for the cascading replication alone) and it's been a pleasure since 8.4."
+</p>
+<h3>Flexible Developer Support</h3>
+<p>
+The flexibility of PostgreSQL is reflected in the diversity of organisations that have adopted it. For example NASA, the Chicago Mercantile Exchange and Instagram all rely on it to perform mission-critical applications.  Version 9.2 extends this flexibility even further by including support for Range Types and JSON, allowing developers to use PostgreSQL in completely new ways.
+</p><p>
+Range Types allow developers to create better calendaring, scientific, and financial applications. No other major SQL database supports this feature, which enables intelligent handling of blocks of time and numbers.
+</p><p>
+With PostgreSQL 9.2, query results can be returned as JSON data types. Combined with the new PL/V8 Javascript and PL/Coffee database programming extensions, and the optional HStore key-value store, users can now utilize PostgreSQL like a "NoSQL" document database, while retaining PostgreSQL's reliability, flexibility and performance.
+</p><p>
+"Native JSON support in PostgresSQL provides an efficient mechanism for creating and storing documents for web APIs.  We use front-end libraries like jQuery to request tabular and tree-structured data; and the new features make it convenient and provide performance advantages in retrieving that data as JSON, " said Taras Mitran, Senior Architect, IVC Inc.
+</p><p>
+<b>About PostgreSQL</b>: PostgreSQL is the leading open source database system, with a global community of thousands of users and contributors and dozens of companies and organizations.  The PostgreSQL Project builds on 25 years of engineering, starting at the University of California, Berkeley, and has an unmatched pace of development today. PostgreSQL's mature feature set not only matches top proprietary database systems, but exceeds them in advanced database features, extensibility, security and stability.  Learn more about PostgreSQL and participate in our community at <a href="http://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+
+<h2>Extended Release Information</h2>
+
+<a name="features"></a><h2>Details of Features</h2>
+
+<p>
+For explanations of the above features and others, please see the following resources:
+</p>
+<ul>
+<li><a href="/docs/9.2/static/release-9-2.html">Release Notes</a></li>
+<li><a href="/docs/9.2/static/index.html">9.2 Documentation</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.2">What's New In PostgreSQL 9.2</a></li>
+<li><a href="/about/featurematrix">Feature matrix (English only)</a></li>
+<li><a href="http://code.google.com/p/plv8js/wiki/PLV8">PL/V8 and PL/Coffee Javascript plug-in</a></li>
+</ul>
+
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Downloads page</a> with links to Windows, Linux, OSX, BSD and Solaris installers and tools.</li>
+<li><a href="/ftp/source/v9.2.0">Source Code</a></li>
+<li><a href="http://code.google.com/p/plv8js/downloads/list">PL/V8 and PL/Coffee</a></li>
+<li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">Related and Commercial Software</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentation</h2>
+
+<p>
+HTML documentation and man pages are installed with PostgreSQL, but feel free to browse, search and comment on our extensive, interactive <a href="/docs/9.2/interactive">online documentation</a>.
+</p>
+
+<a name="license"></a><h2>License</h2>
+<p>
+PostgreSQL uses the <a href="/about/licence">PostgreSQL License</a>, a BSD-like license which only requires that the licensed source code maintain its copyright and licensing information. This
+<a href="http://www.opensource.org/licenses/postgresql">OSI-certified license</a> is widely appreciated as flexible and business-friendly, since it does not restrict the use of PostgreSQL with commercial and proprietary applications. Together with multi-company support and public ownership of the code, our license makes PostgreSQL very popular with vendors wanting to embed a database in their own products without fear of fees, vendor lock-in, or changes in licensing terms.
+</p>
+
+<a name="contact"></a><h2>Contacts</h2>
+
+<p>Web Pages</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL home page</a></li>
+<li><a href="/about/press">PostgreSQL Press Page</a></li>
+</ul>
+
+<b><p>English-Language Press Inquiries</p></b>
+
+<p>USA and General Inquries<br />
+PostgreSQL PR Team<br />
+<a href="mailto:press@postgresql.org">press@postgresql.org</a><br />
++1 347-6-PGSQL-9 (or +1-347-674-7759) </p>
+
+<p>Ireland<br />
+Raymond O'Donnell<br />
+<a href="mailto:it@postgresql.org">ie@postgresql.org</a><br />
++353 (0)87 2241365</p>
+
+<p>United Kingdom<br />
+Simon Riggs<br />
+<a href="mailto:uk@postgresql.org">uk@postgresql.org</a><br />
++44-7900-255520</p>
+
+<p>Sweden<br />
+Magnus Hagander
+<br /><a href="mailto:se@postgresql.org">se@postgresql.org</a>
+<br />Cell: +46-708-969691
+</p>
+
+<p>Australia<br />
+Rob Napier<br />
+<a href="mailto:uk@postgresql.org">au@postgresql.org</a><br />
++61 43 44 00 000</p>
+
+<p>Malaysia<br />
+Chris Travers
+<br /><a href="mailto:my@postgresql.org">my@postgresql.org</a>
+</p>
+
+<p>For contacts in other regions, see <a href="/about/press/contact">our international contact list.</a></p>
+
+<a name="logos"></a><h2>Logos & Graphics</h2>
+
+<img src="http://developer.postgresql.org/~josh/graphics/logos/elephant-64.png" />
+
+<ul>
+<li><a href="http://developer.postgresql.org/~josh/graphics/logos/elephant.pdf">PostgreSQL Elephant Logo, PDF format</a></li>
+<li><a href="http://developer.postgresql.org/~josh/graphics/logos/elephant.png">PostgreSQL Elephant Logo, PNG format</a></li>
+<li><a href="http://developer.postgresql.org/~josh/graphics/logos/elephant-64.png">PostgreSQL Elephant, Tiny</a></li>
+<li><a href="http://developer.postgresql.org/~josh/graphics/logos/logo.pdf">PostgreSQL Text Logo, PDF</a></li>
+<li><a href="http://developer.postgresql.org/~josh/graphics/logos/slonik_with_teal_text_and_black_tagline.pdf">PostgreSQL Banner with Logo, Elephant and Slogan</a></li>
+</ul>
+
+All logos are availble for modification and redistribution under The PostgreSQL License.  The PostgreSQL name and logo are trademarks of The PostgreSQL Community Association of Canada.
+
+<a name="events"></a><h2>Events</h2>
+
+<p>
+The PostgreSQL Community hosts many events and conferences.  The following events will have talks, tutorials and demonstrations of many of the new 9.2 features:
+</p>
+<ul>
+<li><a href="/about/event/1439/">PostgreSQL 9.2 Full Throttle Database Live Webcast</a>, September 11</li>
+<li><a
+href="http://postgresopen.org/2012/">Postgres Open 2012</a>, Chicago, September 17 to 19</li>
+<li><a
+href="http://2012.pgconf.eu/">PGConf.EU 2012</a>, Prague, October 23 to 25</li>
+</ul>
+
+<a name="quoted_companies"></a><h2>Quoted Company Information</h2>
+<p>
+<b>EngineYard</b> is the leading <a href="http://www.engineyard.com/platform-as-a-service">Platform as a
+Service (PaaS)</a>, empowering <a href="http://www.engineyard.com/products/cloud">cloud application development</a> innovation more rapidly, easily and cost effectively. With deep technical expertise, powerful infrastructure orchestration, strong support of the open source community, and world-class service, Engine Yard provides a complete commercial grade solution that enables developers to focus on creating great applications, instead of managing their platform. Thousands of customers in 58 countries, from explosive-growth Web startups to Fortune 500 enterprises, rely on Engine Yard to leverage the cloud for competitive advantage. Headquartered in San Francisco, Calif., Engine Yard is backed by Benchmark Capital, New Enterprise Associates and Amazon.com. Contact: <a href="mailto:mhick@bhavacom.com">Melissa Hick</a>, 510-984-1525
+</p><p>
+<b><a href="http://newsblur.com">NewsBlur</a></b> is a social news reader built for people who want to enjoy reading the news. NewsBlur is a great place to read the best stories from your friends and favorite blogs.  Contact (English-only): <a href="mailto:samuel@newsblur.com">Samuel Clay</a>
+</p><p>
+<b><a href="http://www.ivc.com">IVC, Inc.</a></b> is a business oriented technology company, located near Research Triangle Park, NC, providing complete solutions for short-term and multi-year projects since 1987. IVC develops and provides assistance in prototyping to full-scale deployment for custom applications, specialty integration, data analytics, and mobile solutions.  Our database-backed software applications are used daily by hundreds of Fortune 1000 companies such as: Time Warner Cable, AstraZeneca, Kaiser, Progress Energy, Charles Schwab, and State Street. Contact (English only): <a href="mailto:steve@ivc.com">Steve</a>, (919) 439-7792
+</p>
+
+<a name="companies"></a><h2>Corporate Support</h2>
+
+<p>PostgreSQL enjoys the support of numerous companies, who sponsor developers, provide hosting resources, and give us financial support, including Red Hat, EnterpriseDB, 2ndQuadrant, NTT, HP, VMWare, and many others.</a></p>
+
+<p>There is also a large community of <a href="/support/professional_support">companies offering PostgreSQL Support</a>, from individual consultants to multinational companies.</p>
+
+<p><a href="/about/donate">Donations</a> gladly accepted.</p>
+
+{%endblock%}

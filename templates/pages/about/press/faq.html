@@ -5,31 +5,34 @@
 <h1>Frequently Asked Questions</h1>
 
 <p><b>Q: What is the current version of PostgreSQL?</b><br />
-A: 9.0, which was released September 20, 2010.</p>
+A: 9.2, which was released September 10, 2012.</p>
 
-<p><b>Q: 9.0?  Does that mean it's PostgreSQL's ninth release?</b><br />
-A: No, it's approximately our 21st release.  We release a new version of PostgreSQL every year, which is unique among SQL databases.  Because of the long history of our project the first two decimals are major releases.  Thus 7.4, 8.0 and 8.3 were all major releases.  Minor releases have numbers like 8.4.4. This is similar to how Linux, Apache, and MySQL number their versions.</p>
+<p><b>Q: 9.2?  Does that mean it's a minor release?</b><br />
+A: No, it's approximately our 23rd major release in 26 years of development.  We release a new version of PostgreSQL every year, which is unique among SQL databases.  Because of the long history of our project the first two decimals are major releases.  Thus 9.1, 9.0 and 8.4 were all major releases.  Minor releases have numbers like 9.1.5. This is similar to how Linux, Apache, and MySQL number their versions.</p>
 
 <p><b>Q: How is PostgreSQL licensed? How much does it cost?</b><br />
 A: PostgreSQL is released under the OSI-approved PostgreSQL License.  There is no fee, even for use in commercial software products.  Please see <a href="http://www.postgresql.org/about/licence">http://www.postgresql.org/about/licence</a></p>
 
 <p><b>Q: How many developers work on PostgreSQL?</b><br />
-A: Over 200.  As with other open source projects, of course, we depend on hundreds of community members for documentation, translations, advocacy, conferences, website development, infrastructure, and peer-to-peer support.</p>
+A: About 200.  As with other open source projects, of course, we depend on hundreds of community members for documentation, translations, advocacy, conferences, website development, infrastructure, and peer-to-peer support.</p>
 
 <p><b>Q: How many PostgreSQL users are there, worldwide?</b><br />
-A: Our wide distribution through the open source world and liberal licensing make that a difficult question to answer with any accuracy.  A previous version, 8.0, had an estimated one million downloads within a seven months of release.  However, most users get PostgreSQL with a Linux distribution, or with some of the many other products, OSS software, and hardware devices that include PostgreSQL.  SDMagazine in a survey in summer 2004 estimated us as the 5th most popular SQL database system in the US for new projects, we are the most popular database download on Freshmeat, and many people have called us the most popular major database system in Japan.  We have approximately 30,000 people on our community mailing lists, but of course many users do not subscribe to a list.</p>
+A: Our wide distribution through the open source world and liberal licensing make that a difficult question to answer with any accuracy.  451Research estimates that around 30% of tech companies use PostgreSQL for core applications as of 2012, and around 11% of Debian users worldwide install PostgreSQL. A previous version, 8.0, had an estimated one million downloads within a seven months of release.  However, most users get PostgreSQL with a Linux distribution, or with some of the many other products, OSS software, and hardware devices that include PostgreSQL.  SDMagazine in a survey in summer 2004 estimated us as the 5th most popular SQL database system in the US for new projects, we are the most popular database download on Freshmeat, and many people have called us the most popular major database system in Japan.  We have approximately 35,000 people on our community mailing lists, but of course many users do not subscribe to a list.</p>
 
 <p><b>Q: Can we talk to some of your users?</b><br />
 A: Please contact press@postgresql.org and our press volunteers will try to arrange a contact.</p>
 
 <p><b>Q: What company owns PostgreSQL?</b><br />
-A: None.  We are an unincorporated association of volunteers and companies who share code under the PostgreSQL License.   The PostgreSQL project involves more than a dozen companies who either support PostgreSQL contributors or directly contribute corporate projects to our repository.  Our major corporate sponsors are on the <a href="/about/sponsors">sponsors page,</a> and there are many more companies who contribute to the project in other ways.</p>
+A: None.  We are an unincorporated association of volunteers and companies who share code under the PostgreSQL License.   The PostgreSQL project involves a couple dozen companies who either support PostgreSQL contributors or directly contribute corporate projects to our repository.  Some of our major corporate sponsors are on the <a href="/about/sponsors">sponsors page,</a> and there are many more companies who contribute to the project in other ways.</p>
 
 <p><b>Q: Where can people get support for PostgreSQL?</b><br />
-A: There are several companies which provide paid support for PostgreSQL.  Most of them are regional in nature.  People should contact the nearest regional contact volunteer to be connected with one or more companies, or check our <a href="/support/professional_support">professional services list</a>.</p>
+A: There are several companies which provide paid support for PostgreSQL.  Most of them are regional in nature.  People should contact the nearest regional contact volunteer to be connected with one or more companies, or check our <a href="/support/professional_services">professional services list</a>.</p>
 
-<p><b>Q: What's the relationship between the PostgreSQL Project, EnterpriseDB, 2ndQuadrant, CommandPrompt, SRA, Greenplum and others?</b><br />
+<p><b>Q: What's the relationship between the PostgreSQL Project, EnterpriseDB, 2ndQuadrant, CommandPrompt, SRA, Heroku, VMWare and others?</b><br />
 A: The PostgreSQL project enjoys the support of multiple companies who sell products or services built with PostgreSQL, and in turn contribute code, money and staff time to the project.  None of them "own" PostgreSQL, nor is any individual company responsible for PostgreSQL code development. This is the same as Linux, Apache and FreeBSD.</p>
+
+<p><b>Q: Does PostgreSQL run on the Cloud?</b><br />
+A: Yes.  Like other open source databases, PostgreSQL is easy to run in virtual containers and is highly portable.   Many companies have support for PostgreSQL in cloud hosting environments, including Heroku, VMware, Engine Yard, Scalr, EnterpriseDB, and Red Hat.</p>
 
 <p><b>Q: How does PostgreSQL compare to MySQL?</b><br />
 A: This is a topic that can start several hours of discussion.  As a quick summary, MySQL is the "easy-to-use, web developer" database, and PostgreSQL is the "feature-rich, standards-compliant" database. PostgreSQL is liberally licensed and owned by its community; MySQL is GPL-licensed and owned by Oracle.  Beyond that, each database user should make his own evaluation; open source software makes doing comparisons very easy.</p>
@@ -38,35 +41,26 @@ A: This is a topic that can start several hours of discussion.  As a quick summa
 A: Our feature set is generally considered to be very competitive with other leading SQL RDBMSes.  Certainly there are features some of them have which we don't, and the reverse is also true.  To date, only a few benchmarks have been published showing PostgreSQL to be within 10-30% of proprietary competitors.  However, we have had many users migrate from other database systems &ndash; primarily Oracle and Informix &ndash; and they are completely satisfied with the performance of their PostgreSQL systems.</p>
 
 <p><b>Q: How does PostgreSQL compare to &quot;NoSQL&quot;?</b><br />
-A: The term &quot;NoSQL&quot; covers such a diverse array of non-relational database implementations ... from tiny embedded databases like TokyoCabinet to massive clustered data processing platforms like Hadoop ... that it's impossible to comment on them as a general class.  Non-relational databases preceded relational databases and have existed alongside them for forty years, so choosing between relational and nonrelational databases is nothing new.  Users should choose the database whose features, implementation, and community support their current application needs.  Further, using multiple different databases for large projects is fast becoming the norm, and PostgreSQL users are no exception.</p>
+A: The term &quot;NoSQL&quot; covers such a diverse array of non-relational database implementations ... from tiny embedded databases like BerkeleyDB to massive clustered data processing platforms like Hadoop ... that it's impossible to comment on them as a general class.  Non-relational databases preceded relational databases and have existed alongside them for forty years, so choosing between relational and nonrelational databases is nothing new.  Users should choose the database whose features, implementation, and community support their current application needs.  Further, using multiple different databases for large projects is fast becoming the norm, and PostgreSQL users are no exception.</p>
 
 <p><b>Q: Are there any published benchmarks for PostgreSQL?</b><br />
-A: To date there is one: a <a href="http://www.spec.org/jAppServer2004/results/res2007q3/jAppServer2004-20070703-00073.html">SpecJAppserver2004 benchmark</a>, which at time of publication was within 10% of the leading commercial SQL RDBMS. The community is working with our corporate sponsors to publish further benchmarks with other agencies and at higher levels of performance.</p>
-
-<p><b>Q: How does PostgreSQL compare to Ingres?   Is there a relationship between the two projects?</b><br />
-A: Currently, we have a shared history but no shared code with Ingres.  Our developers have contact with the Ingres engineers, as we do with all open source database developers, but we have not done a direct comparison of the two DBMSes.</p>
-
-<p><b>Q: Is 9.0's replication expected to be the only replication in the future?</b><br />
-A: No.  While 9.0's binary replication is extremely popular, it does not fit all replication tasks.  We expect Slony-I, Bucardo, pgPool2, Londiste and other tools to continue being widely used among users who have specific or advanced needs.  Examples include replicating only specific tables, replicating between different PostgreSQL versions, or offline multi-master replication.</p>
+A: To date there is one: a <a href="http://www.spec.org/jAppServer2004/results/res2007q3/jAppServer2004-20070703-00073.html">SpecJAppserver2004 benchmark</a>, which at time of publication was within 10% of the leading commercial SQL RDBMS. We are not certain when another benchmark will be published, as verifiable benchmarks are expensive and time-consuming for a not-for-profit community to undertake.</p>
 
 <p><b>Q: When will PostgreSQL get database server clustering?</b><br />
-A: We already have it.  Since no one type of clustering satisfies all needs, we have several different clustering tools which take various clustering approaches.  The open source projects PostgresXC, GridSQL, pgCluster, pgPool2, CyberCluster and Sequoia are available, as well as proprietary tools Greenplum Database, and Uni/Cluster.  For more advanced clustering options, see Skype's Skytools or the experimental project Postgres-R.  Also, PostgreSQL is supported by filesystem-based clustering systems for failover, including ones from Red Hat, Microsoft, Veritas and Oracle.</p>
-
-<p><b>Q: Does PostgreSQL run on the Cloud?</b><br />
-A: Yes.  Like other open source databases, PostgreSQL is easy to run in virtual containers and is highly portable.   Several companies have support for PostgreSQL in cloud hosting environments, including Heroku, GoGrid and Joyent.</p>
+A: We already have it.  Since no one type of clustering satisfies all needs, we have several different clustering tools which take various clustering approaches.  The open source projects PostgresXC, Stado and pgPool2 are available, as well as proprietary tools such as StormDB, Greenplum Database, Aster Data, Hadapt and several others.  For more advanced clustering options, see Skype's Skytools or the experimental project Postgres-R, which is being commercialized as TransLattice.  Also, PostgreSQL is supported by filesystem-based clustering systems for failover, including ones from Red Hat, Microsoft, Veritas and Oracle.</p>
 
 <p><b>Q: Has PostgreSQL won any awards?</b><br />
-A:Several.  Most recently, we won <a href="http://www.developer.com/design/article.php/10925_3721761_1">the 2008 Developer.com Award for best Database Tool</a>.  Other awards we've won over the years are
-listed on our <a href="http://www.postgresql.org/about/awards">awards page</a>. 
+A: Several.  Most recently, we won <a href="http://www.developer.com/design/article.php/10925_3721761_1">the 2008 Developer.com Award for best Database Tool</a>.  Other awards we've won over the years are
+listed on our <a href="http://www.postgresql.org/about/awards">awards page</a>.
 </p>
 
-<p><b>Q: When will 9.1 come out?</b><br />
-A: The PostgreSQL project begins work on the next version of PostgreSQL in July of each year, and it generally takes 12 to 15 months to work to a release. So expect 9.1 sometime in mid to late 2011.  We are the only major SQL database which releases every year.</p>
+<p><b>Q: When will 9.3 come out?</b><br />
+A: The PostgreSQL project begins work on the next version of PostgreSQL in July of each year, and it generally takes 12 to 15 months to work to a release. So expect 9.3 sometime in mid to late 2013.  We are the only major SQL database which releases every year.</p>
 
-<p><b>Q: What features will 9.1 have?</b><br />
-A: As always, we can't be certain what will go in and what won't; the project has strict quality standards that not all patches can make before deadline.   All we can tell you is what's being worked on, which includes: synchronous replication, JSON support, security labels, nearest-neighbor geographic searches, SQL/MED external data connections, column-level collations, and index-only access.  By the time 9.1 is released, though, this feature list will have changed considerably.</p>
+<p><b>Q: What features will 9.3 have?</b><br />
+A: As always, we can't be certain what will go in and what won't; the project has strict quality standards that not all patches can make before deadline.   All we can tell you is what's being worked on, which includes: federated databases, parallel backup, new partial replication options, event triggers, an embedded database mode, and of course more performance improvements.  By the time 9.3 is released, though, this feature list will have changed considerably.</p>
 
 <p><b>Q: How do you pronounce PostgreSQL</b><br />
-A: post-GRES-que-ell, per this <a href="/files/postgresql.mp3">audio file</a>.  Many people, however, just say "post-GRES".</p>  
+A: post-GRES-que-ell, per this <a href="/files/postgresql.mp3">audio file</a>.  Many people, however, just say "post-GREZ".</p>
 
 {%endblock%}

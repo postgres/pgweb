@@ -1,0 +1,129 @@
+{%extends "base/page.html"%}
+{%block title%}Kit de Imprensa do PostgreSQL 9.2{%endblock%}
+{%block contents%}
+
+<h1>Kit de Imprensa do PostgreSQL 9.2</h1>
+
+<h2>Conteúdo</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Texto Original das Notas de Lançamento</a><br />
+ &nbsp; <a href="#features">Detalhes das Funcionalidades</a><br />
+ &nbsp; <a href="#download">Onde Baixar</a><br />
+ &nbsp; <a href="#docs">Documentação</a><br />
+ &nbsp; <a href="#license">Licença</a><br />
+ &nbsp; <a href="#contact">Contatos</a><br />
+ &nbsp; <a href="#quoted_companies">Informação sobre Empresas Citadas</a><br />
+ &nbsp; <a href="#companies">Suporte Corporativo</a><br />
+</p>
+
+<a name="original_release"></a><h2>Texto Original das Notas de Lançamento</h2>
+
+<p>
+10 DE SETEMBRO DE 2012: O Grupo de Desenvolvimento Global do PostgreSQL anuncia o PostgreSQL 9.2, a última versão do líder dos bancos de dados de código aberto. Desde que a versão beta foi anunciada em Maio, desenvolvedores e fornecedores têm o elogiado como um salto em performance, escalabilidade e flexibilidade. Usuários devem mudar para esta versão em número recorde.
+</p><p>
+"PostgreSQL 9.2 virá com suporte nativo a JSON, índices abrangentes, melhorias na replicação e no desempenho, e muitos outras funcionalidades. Estamos aguardando ansiosamente este lançamento e disponibilizaremos no Early Access assim que for lançado pela comunidade PostgreSQL," disse Ines Sombra, Engenheiro de Dados Chefe, Engine Yard.
+</p>
+<h3>Melhorias em Desempenho e Escalabilidade</h3>
+<p>
+Melhorias em escalabilidade vertical aumentam a capacidade do PostgreSQL em utilizar eficientemente recursos de hardware em grandes servidores. Avanços no gerenciamento de bloqueios, eficiência na escrita, acesso somente com índices e outras operações de baixo nível permitem ao PostgreSQL lidar até mesmo com volumes maiores de cargas de trabalho. Numericamente, isso significa:
+</p>
+<ul>
+<li>Até 350.000 consultas de leitura por segundo (mais do que 4x mais rápido)</li>
+<li>Buscas apenas com índices para consultas de data warehouse (até 20x mais rápido)</li>
+<li>Até 14.000 escritas de dados por segundo (5x mais rápido)</li>
+<li>Até 30% de redução no consumo de energia da CPU</li>
+</ul>
+<p>
+Além disso, a adição de replicação em cascata permite aos usuários executarem pilhas ainda maiores de servidores escalados horizontalmente no PostgreSQL 9.2.
+</p><p>
+"NewsBlur, um leitor de notícias sociais, depende do Postgres para armazenar milhões de sites e assinaturas. Sólido e confiável a anos," disse Samuel Clay, fundador do NewsBlur.com. "Estamos constantemente atualizando (9.1 agora, mudando para 9.2 em breve por causa da replicação em cascata) e tem sido um prazer desde 8.4."
+</p>
+<h3>Flexibilidade ao Desenvolvedor</h3>
+<p>
+A flexibilidade do PostgreSQL é refletida na diversidade de organizações que o adotaram. Por exemplo, a HP, a NASA, a FAA,Chicago Mercantile Exchange e Instagram todos dependem dele para executar aplicações de missão crítica. A versão 9.2 estende essa flexibilidade ainda mais, incluindo suporte a Tipos para Intervalos e JSON, permitindo aos desenvolvedores utilizarem o PostgreSQL de maneiras totalmente novas.
+</p><p>
+Tipos para Intervalos permitem desenvolvedores criarem melhores aplicações de agendamento, científicas e financeiras. Nenhum outro grande banco de dados SQL suporta essa funcionalidade, que permite a manipulação inteligente de blocos de tempo e números.
+</p><p>
+Com o PostgreSQL 9.2, os resultados da consulta podem ser devolvidos como tipos de dados JSON. Combinado com as novas extensões do banco de dados PL/V8 Javascript e PL/Coffee, e o armazenamento opcional de chave-valor HStore, os usuários podem agora utilizar o PostgreSQL como um banco de dados "NoSQL" de documentos, mantendo a confiabilidade, flexibilidade e performance do PostgreSQL.
+</p><p>
+"Suporte nativo a JSON no PostgreSQL fornece um mecanismo eficiente para criação e armazenamento de documentos para APIs web. Nós usamos bibliotecas cliente como jQuery para solicitar dados tabulares e em forma de árvore; e as novas funcionalidades o tornam conveniente e fornecem vantagens de desempenho na recuperação daqueles dados como JSON, " disse Taras Mitran, Arquiteto Sênior, IVC Inc.
+</p><p>
+<b>Sobre PostgreSQL</b>: PostgreSQL é um sistema de banco de dados líder de código aberto, com uma comunidade global de milhares de usuários e colaboradores e dezenas de empresas e organizações. O Projeto PostgreSQL foi construído ao longo de 25 anos de engenharia, iniciando na Universidade da Califórnia, Berkeley, e tem um ritmo inigualável de desenvolvimento hoje. Conjunto de funcionalidades maduras do PostgreSQL não só se igualam aos principais sistemas de bancos de dados proprietários, mas os supera em funcionalidades avançadas, extensibilidade, segurança e estabilidade. Saiba mais sobre o PostgreSQL e participe da nossa comunidade em <a href="http://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+
+<h2>Informações Adicionais</h2>
+
+<a name="features"></a><h2>Detalhes das Funcionalidades</h2>
+
+<p>
+Para explicações sobre as funcionalidades acima e outras, visite as seguintes páginas:
+</p>
+<ul>
+<li><a href="/docs/9.2/static/release-9-2.html">Notas de Lançamento</a></li>
+<li><a href="/docs/9.2/static/index.html">Documentação 9.2</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.2">O Que Há de Novo no PostgreSQL 9.2</a></li>
+<li><a href="/about/featurematrix">Matriz de Funcionalidades (em inglês)</a></li>
+<li><a href="http://code.google.com/p/plv8js/wiki/PLV8">Linguagens Procedurais Javascript PL/V8 e PL/Coffee</a></li>
+</ul>
+
+<a name="download"></a><h2>Onde Baixar</h2>
+<ul>
+<li><a href="/download">Página de downloads</a> com links para instaladores e ferramentas.</li>
+<li><a href="/ftp/source/v9.2.0">Código Fonte</a></li>
+<li><a href="/download/windows">Instaladores para Windows</a></li>
+<li><a href="/download/linux">Instaladores para Linux</a> e repositórios de pacotes</li>
+<li><a href="/download/solaris">Pacotes para Solaris</a></li>
+<li><a href="/download/macosx">Instaladores para Mac OSX</a></li>
+<li><a href="/download/freebsd">FreeBSD Ports</a></li>
+<li><a href="http://code.google.com/p/plv8js/downloads/list">PL/V8 and PL/Coffee</a></li>
+<li><a href="http://pgxn.org">Rede de Extensões do PostgreSQL</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">Softwares Relacionados e Comerciais</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentação</h2>
+
+<p>
+Documentação HTML e man pages são instalados com o PostgreSQL, mas fique a vontade para navegar, pesquisar e comentar na nossa vasta <a href="/docs/9.2/interactive">documentação online</a> interativa.
+</p>
+
+<a name="license"></a><h2>Licença</h2>
+<p>
+PostgreSQL usa a <a href="/about/license">Licença PostgreSQL</a>, uma licença estilo BSD que só requer que o código fonte licenciado mantenha as informações sobre o direito autoral e a licença. Essa <a href="http://www.opensource.org/licenses/postgresql">Licença certificada pela OSI</a> é amplamente reconhecida como flexível e ideal para negócios, uma vez que ela não restringe o uso do PostgreSQL com aplicações comerciais e proprietárias. Juntamente com apoio de várias empresas e a propriedade pública do código, nossa licença torna o PostgreSQL muito popular entre empresas que desejam incorporar um banco de dados em seus produtos sem medo de taxas, aprisionamento tecnológico ou mudanças nos termos da licença.
+</p>
+
+<a name="contact"></a><h2>Contatos</h2>
+
+<p>Páginas na Web</p>
+<ul>
+<li><a href="http://www.postgresql.org">Página do PostgreSQL</a></li>
+<li><a href="http://www.postgresql.org.br">Comunidade Brasileira de PostgreSQL</a></li>
+</ul>
+
+<p>Informação à Imprensa</p>
+<p>Brasil<br />
+Euler Taveira de Oliveira<br />
+<a href="mailto:br@postgresql.org">br@postgresql.org</a><br />
++55 63 84594598</p>
+
+<p>Para contatos em outras regiões, visite <a href="/about/press/contact">nossa lista de contatos internacionais</a>.</p>
+
+<a name="quoted_companies"></a><h2>Informação sobre Empresas Citadas</h2>
+<p>
+<b>Engine Yard</b> é a principal <a href="http://www.engineyard.com/platform-as-a-service">Plataforma como um
+Serviço (PaaS)</a>, fornecendo poder de inovação ao <a href="http://www.engineyard.com/products/cloud">desenvolvimento de aplicações para nuvem</a> com mais rapidez, facilidade e baixo custo. Com profundo conhecimento técnico, orquestração de infraestrutura poderosa, forte apoio da comunidade de código aberto e serviço de classe mundial, Engine Yard fornece uma grade completa de soluções comerciais que permite aos desenvolvedores concentrarem na criação de grandes aplicações, ao invés de gerenciar a sua plataforma. Milhares de clientes em 58 países, de startups Web com crescimento explosivo a empresas do Fortune 500, contam com a Engine Yard para alavancar a nuvem como vantagem competitiva. Com sede em São Francisco, na Califórnia, Engine Yard é fomentada por Benchmark Capital, New Enterprise Associates e Amazon.com. Contato: <a href="mailto:mhick@bhavacom.com">Melissa Hick</a>, 510-984-1525
+</p><p>
+<b><a href="http://newsblur.com">NewsBlur</a></b> é um leitor de notícias sociais construído para pessoas que querem desfrutar da leitura de notícias. NewsBlur é um ótimo local para ler as melhores histórias de seus amigos e blogs favoritos. Contato (em inglês): <a href="mailto:samuel@newsblur.com">Samuel Clay</a>
+</p><p>
+<b><a href="http://www.ivc.com">IVC, Inc.</a></b> é uma empresa de tecnologia orientada a negócios, localizada próximo a Research Triangle Park, NC, fornecendo soluções completas para projetos de curto e longo prazo desde 1987. IVC desenvolve e fornece assistência na criação de protótipos para implantação em larga escala de aplicações personalizadas, especialmente integração, análise de dados e soluções móveis. Nossas aplicações são utilizadas diariamente por centenas de empresas da Fortune 1000 tais como: Time Warner Cable, AstraZeneca, Kaiser, Progress Energy, Charles Schwab e State Street. Contato (em inglês): <a href="mailto:steve@ivc.com">Steve</a>, (919) 439-7792
+</p>
+
+<a name="companies"></a><h2>Suporte Corporativo</h2>
+
+<p>O PostgreSQL tem o apoio de várias empresas, que patrocinam desenvolvedores, fornecem hospedagem e nos dão apoio financeiro. Os maiores patrocinadores de longa data estão listados em nossa <a href="/about/sponsors">página de patrocinadores</a>.</p>
+
+<p>Existe também uma grande comunidade de <a href="/support/professional_support">empresas oferecendo suporte ao PostgreSQL</a>, de consultores individuais a empresas multinacionais.</p>
+
+<p><a href="/about/donate">Doações</a> são aceitas de bom grado.</p>
+
+{%endblock%}

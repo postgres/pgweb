@@ -1,0 +1,182 @@
+{%extends "base/page.html"%}
+{%block title%}Kit de Premsa de PostgreSQL 9.2{%endblock%}
+{%block contents%}
+<h1>Kit de Premsa de PostgreSQL 9.2</h1>
+
+<h2>continguts</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Nota Original de Llançament</a><br />
+ &nbsp; <a href="#features">Detall de característiques</a><br />
+ &nbsp; <a href="#download">On descarregar</a><br />
+ &nbsp; <a href="#docs">Documentació</a><br />
+ &nbsp; <a href="#license">Llicència</a><br />
+ &nbsp; <a href="#contact">Contactes</a><br />
+ &nbsp; <a href="#quoted_companies">Informació de les companyies de les cites</a><br />
+ &nbsp; <a href="#companies">Suport corporatiu</a><br />
+</p>
+
+<a name="original_release"></a><h2>Comunicat de Premsa Oficial</h2>
+
+<p>
+10 setembre 2012: El Grup Global de Desenvolupament de PostgreSQL anuncia PostgreSQL 9.2, l'última versió del motor líder en bases de dades de codi obert. Des de l'anunci del beta al maig, els comercialitzadors i desenvolupadors l'han elogiat com un salt endavant en termes en el rendiment, l'escalabilitat i la flexibilitat. S'esperen xifres rècord d'usuaris que migraran a aquesta versió.
+</p><p>
+"PostgreSQL 9.2 es s'allibera amb suport natiu per JSON, índexs de cobertura, millores de replicació i d'acompliment, i moltes altres característiques. Esperem aquesta versió amb ànsies i la posarem a disposició de Early Access quant surti al mercat des de la comunitat PostgreSQL ", diu Ines Ombra, Lead Data Engineer, Engine Yard.
+</p>
+<h3>Rendiment i escalabilitat millorats</h3>
+<p>
+Les millores en l'escalabilitat vertical de PostgreSQL milloren la utilització eficient dels recursos de maquinari en servidors més potents. Els avenços en gestió de bloquejos, eficiència en escriptura, accés de només índexs i en altres operacions de baix nivell permeten que PostgreSQL pugui manejar càrregues de treball de volum encara més gran. En números, això significa:
+</p>
+<ul>
+<li>Fins a 350.000 consultes de lectura per segon (més de 4 vegades més ràpid)</li>
+<li>Consultes en magatzems de dades amb accés només d'índexs (2-20 vegades més ràpid)</li>
+<li>Fins a 14.000 escriptures de dades per segon (5 vegades més ràpid)</li>
+<li>Fins a un 30% de reducció de consum d'energia per la CPU</li>
+</ul>
+<p>
+A més, la incorporació de replicació en cascada permet als usuaris processar lots més grans mitjançant servidors escalats horitzontalment sota PostgreSQL 9.2.
+</p><p>
+"NewsBlur, un lector social de notícies, utilitza Postgres per a l'emmagatzematge de milions de llocs web i subscripcions. Sòlid i fiable durant anys ", diu Samuel Clay, fundador de NewsBlur.com. "Ens mantenim constantment a l'avantguarda (actualment amb 9.1 i migrant a 9.2 només per la replicació en cascada) i tot ha estat satisfactori des 8.4".
+</p>
+<h3>Suport flexible per a programadors</h3>
+<p>
+La flexibilitat de PostgreSQL es reflecteix en la diversitat de les organitzacions que l'han adoptat. Per exemple, la NASA, la FAA, Chicago Mercantile Exchange i Instagram confien en ell per realitzar aplicacions de missió crítica. La versió 9.2 amplia encara més aquesta flexibilitat mitjançant la inclusió de suport per Range Types i JSON, el que permet als desenvolupadors utilitzar PostgreSQL de maneres completament noves.
+</p><p>
+Tipus de rang permet als desenvolupadors crear millors aplicacions de agendamiento, científiques i financeres. Cap altre motor SQL implementa aquesta característiques, la qual permet gestió intel · ligent d'intervals de temps i nombres.
+</p><p>
+Amb PostgreSQL 9.2, el resultat d'una consulta es pot tornar en forma de dades JSON. Combinat amb les noves extensions de programació PL/V8 per Javascript i PL / Coffee, i el magatzem de clau-valor HStore, els usuaris ara poden utilitzar PostgreSQL com a base de dades de documents "NoSQL", mantenint al mateix temps la fiabilitat, flexibilitat i rendiment de PostgreSQL.
+</p><p>
+"El suport natiu per JSON en PostgreSQL proporciona un mecanisme eficaç per a la creació i l'emmagatzematge de documents per APIs web. Utilitzem biblioteques front-end com jQuery per sol · licitar dades en estructures tabulars i d'arbre; aquesta nova característica fa convenient l'extracció d'aquestes dades en format JSON, proveint avantatges de rendiment ", diu Tares Mitran, Arquitecte Sènior, IVC Inc.
+</p><p>
+<b>Sobre PostgreSQL</b>: PostgreSQL és líder entre els gestors de bases de dades de codi obert, i compta amb una comunitat global de milers de contribuents i usuaris, i dotzenes de companyies i organitzacions. El Projecte PostgreSQL té més de 20 anys d'enginyeria, des dels seus inicis a la Universitat de Berkeley, Califòrnia, amb un ritme de desenvolupament actual sense precedents. El conjunt de funcionalitats de PostgreSQL no només és comparable als millors sistemes gestors de dades propietaris, sinó que les superen en característiques avançades, extensibilitat, seguretat i estabilitat. Més informació sobre PostgreSQL i participi en la nostra comunitat en <a href="http://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+
+<h2>Informació estesa de llançament</h2>
+
+<a name="features"> </a> <h2> Detall de característiques </h2>
+
+<p>
+Per a una explicació de les característiques abans esmentades, vegi els següents recursos:
+</p>
+<ul>
+<li> <a href="/docs/9.2/static/release-9-2.html"> Notes de versió </a> </li>
+<li> <a href="/docs/9.2/static/index.html"> Documentació 09/02 </a> </li>
+<li> <a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.2"> hi ha de nou en PostgreSQL 9/2 </a> </li>
+<li> <a href="/about/featurematrix"> Matriu de característiques (Només en anglès) </a> </li>
+<li> <a href="http://code.google.com/p/plv8js/wiki/PLV8"> PL/v8 i PL/Coffee Javascript connectors </a> </li>
+</ul>
+
+<a name="download"> </a> <h2> Descàrregues </h2>
+<ul>
+<li> <a href="/download"> Pàgina de descàrregues </a> amb enllaços a instal·ladors i eines. </li>
+<li> <a href="/ftp/source/v9.2.0"> Codi font </a> </li>
+<li> <a href="/download/windows"> Instal · ladors per a Windows </a> </li>
+<li> <a href="/download/linux"> Instal·ladors de Linux </a> i ubicacions de rèpliques </li>
+<li> <a href="/download/solaris"> Paquets per Solaris </a> </li>
+<li> <a href="/download/macosx"> Instal·ladors per a Mac OSX </a> </li>
+<li> <a href="/download/freebsd"> FreeBSD Ports </a> </li>
+<li> <a href="http://code.google.com/p/plv8js/downloads/list"> PL/v8 i PL/Coffee </a> </li>
+<li> <a href="http://pgxn.org"> Xarxa de Extensions per PostgreSQL </a> </li>
+<li> <a href="http://www.postgresql.org/download/product-categories"> Programari comercial i Relacionat </a> </li>
+</ul>
+
+<a name="docs"> </a> <h2> Documentaición </h2>
+
+<p>
+Documentació  HTML i "pàgines man" s’instal·len amb PostgreSQL. A més a més, poden buscar i comentar en la nostra extensa i interactiva <a href="/docs/9.2/interactive"> documentació en línia </a>.
+</p>
+
+<a name="license"></a><h2>Llicència</h2>
+<p>
+PostgreSQL utilitza la <a href="/about/licence"> Llicència PostgreSQL </a>, basada en la llicència BSD que només requereix que el codi llicenciat matenga la informació de la llicència i el copyright. Aquesta llicència certificada per la
+<a href="http://www.opensource.org/licenses/postgresql"> OSI </a>, és àmpliament apreciada com flexible i adequada per als negocis ja que no restringeix l'ús de PostgreSQL com productes comercials i privatius. Juntament amb el suport de múltiples companyies, la disponibilitat del codi font i la nostra llicència fa que PostgreSQL sigui molt popular entre els proveïdors que desitgen d'incloure una base de dades en els seus propis productes sense preocupar-se per despeses, comissions o canvis en els termes de llicència.
+</p>
+
+<a name="contact"> </a> <h2> Contactes </h2>
+
+<p> Pàgines Web </p>
+<ul>
+<li> <a href="http://www.postgresql.org"> Pàgina Principal de PostgreSQL </a> </li>
+<li> <a href="http://www.postgresql.org.es"> Portal en espanyol sobre PostgreSQL </a> </li>
+</ul>
+
+<p>Consultes de Premsa</p>
+<p>Argentina<br />
+Mariano Reingart
+<br /><a href="mailto:ar@postgresql.org">ar@postgresql.org</a>
+<br />Phone: +54 (011) 4450-0716
+<br /><a href="http://www.postgresql.org.ar/">http://www.postgresql.org.ar/</a>
+</p>
+<p>Brazil<br />
+Euler Taveira de Oliveira
+<br /><a href="mailto:br@postgresql.org">br@postgresql.org</a>
+<br />Phone: +55 (63) 84594598
+<br /><a href="http://www.postgresql.org.br">http://www.postgresql.org.br</a>
+</p>
+<p>Chile<br />
+Álvaro Herrera
+<br /><a href="mailto:alvherre@postgresql.org">alvherre@postgresql.org</a>
+<br />Phone: +56-9-74990919
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+<p>Colombia<br />
+Juan Romero
+<br /><a href="mailto:co@postgresql.org">co@postgresql.org</a>
+<br />Cell: 57-3166958503
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+<p>Cuba<br />
+Gilberto Castillo Martínez
+<br /><a href="mailto:cu@postgresql.org">cu@postgresql.org</a>
+<br />Phone: (537)-5-2881491
+<br /><a href="http://postgresql.uci.cu/">http://postgresql.uci.cu/</a>
+</p>
+<p>Ecuador<br />
+Jaime Casanova
+<br /><a href="mailto:ec@postgresql.org">ec@postgresql.org</a>
+<br />Cell: +59387171157
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+<p>Panamá<br />
+Santiago Zarate
+<br /><a href="mailto:pa@postgresql.org">pa@postgresql.org</a>
+<br />Cell: +(507) 64271684
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+<p>Perú<br />
+Ernesto Qui&ntilde;ones
+<br /><a href="mailto:pe@postgresql.org">pe@postgresql.org</a>
+<br />Phone: (51)(1)5645424
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+<p>España<br />
+Emanuel Calvo
+<br /><a href="mailto:es@postgresql.org">es@postgresql.org</a>
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+<p>Uruguay<br />
+Fernando Fontana
+<br /><a href="mailto:uy@postgresql.org">uy@postgresql.org</a>
+<br />Phone: 59899639046
+<br /><a href="http://www.postgresql.org.es/">http://www.postgresql.org.es/</a>
+</p>
+
+<p> Per contactes en altres regions si us plau consulti la nostra <a href="/about/press/contact"> llista de contactes internacionals. </a> </p>
+
+<a name="quoted_companies"> </a> <h2> Informació de les Companyies de Reunió </h2>
+<p>
+<b> EngineYard </b> és la líder en proveir <a href="http://www.engineyard.com/platform-as-a-service"> Platforma com Servei (PAAS, per les seves sigles en anglès)</a>, permetent la innovació i el ràpid <a href="http://www.engineyard.com/products/cloud"> desenvolupament d'aplicacions en el núvol</a>, de manera fà cil i econòmica. Amb coneixements tècnics profunds, orquestració potent d'infraestructura, el suport decidit de la comunitat de codi obert, i servei de classe mundial, Engine Yard ofereix una solució completa de qualitat comercial que permet als desenvolupadors centrar-se en la creació de grans aplicacions, en lloc de la gestió de la seva plataforma. Milers de clients en 58 països, des startups Webi d'explosiu creixement hastade empreses Fortune 500, depenen de Engine Yard per aprofitar el núvol per obtenir un avantatge competitiu. Amb seu a San Francisco, Califòrnia, Engine Yard té el suport de Benchmark Capital, New Enterprise Associates i Amazon.com. Contacte: <a href="mailto:mhick@bhavacom.com">Melissa Hick</a>, 510-984-1525
+</p>
+<b> <a href="http://newsblur.com"> NewsBlur </a> </b> és un lector de notícies socials construïdes per les persones que vulguin gaudir de la lectura de les notícies. NewsBlur és un gran lloc per llegir les millors històries dels teus amics i blocs preferits. Contacte (Només anglès): <a href="mailto:samuel@newsblur.com">Samuel Clay</a>
+</p>
+<b> <a href="http://www.ivc.com"> IVC, Inc </a> </b> és una empresa orientada al negoci de la tecnologia, que és a prop de Research Triangle Park, Carolina del Nord, oferint solucions completes per a projectes a curt termini i plurianuals des de 1987. IVC desenvolupa i proveeix assistència en prototips a gran escala d'implementació d'aplicacions a mida, integració d'especialitat, anàlisi de dades, i solucions mòbils. La nostra aplicacions recolzades per base de dades s'utilitzen a diari per centenars de companyies de Fortune 1000, com ara: Time Warner Cable, AstraZeneca, Kaiser, Progress Energy, Charles Schwab, i State Street. Contacte (Només anglès): <a href="mailto:steve@ivc.com"> Steve </a>, (919) 439-7792
+</p>
+<a name="companies"> </a> <h2> Suport Corporatiu </h2>
+
+<p> PostgreSQL gaudeix del suport de nombroses empreses les quals afavoreixen desenvolupadors, proveeixen recursos d'allotjament i ens faciliten suport financer. Els nostres patrocinadors a llarg termini està llistat en la nostra pàgina de <a href="/about/sponsors"> llista de patrocinadors del desenvolupament. </A> </p>
+
+<p> Comptem amb una gran comunitat d'<a href="/support/professional_support"> companyies oferint Suport a PostgreSQL </a>, des consultors individuals fins a companyies multinacionals. </p>
+
+<p> Les <a href="/about/donate"> Les donacions </a> seran enormement agraïdes. </p>
+
+{%endblock%}

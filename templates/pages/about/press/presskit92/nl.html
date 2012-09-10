@@ -1,0 +1,121 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.2 Press Kit{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.2 Press Kit</h1>
+
+<h2>Inhoud</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Persbericht</a><br />
+ &nbsp; <a href="#features">Lijst van features</a><br />
+ &nbsp; <a href="#download">Downloads</a><br />
+ &nbsp; <a href="#docs">Documentatie</a><br />
+ &nbsp; <a href="#license">Licentie</a><br />
+ &nbsp; <a href="#contact">Contactinformatie</a><br />
+ &nbsp; <a href="#quoted_companies">Geciteerd bedrijfsinformatie (EN)</a><br />
+ &nbsp; <a href="#companies">Corporate Support (EN)</a><br />
+</p>
+
+<a name="original_release"></a><h2>Persbericht</h2>
+
+<p>
+10 SEPTEMBER 2012: PostgreSQL Global Development Group brengt PostgreSQL 9.2, de nieuwste release van de koploper in open source databases. Sinds de beta release in mei hebben zowel ontwikkelaars en gebruikers het geprezen als een grote vooruitgang in performance, schaalbaarheid en flexibiliteit. Naar verwachting zullen velen op deze versie omschakelen.
+</p><p>
+"PostgreSQL 9.2 heeft JSON ondersteuning, covering indexes, verbeteringen in replicatie, prestatie en meer features. Wij wachten met spanning op deze release en maken het in Early Access beschikbaar zodra de PostgreSQL community het vrijgeeft" zegt Ines Sombra, Hoofd Data Ingenieur, EngineYard.
+</p>
+<h3>Verbeterde prestaties en schaalbaarheid</h3>
+<p>
+Verbeteringen in verticale schaalbaarheid maken PostgreSQL effici&euml;nter in het gebruik van hardware van grotere servers.  Door verbeteringen in lock-management, schrijf-efficiency, index-only toegang en andere low-level operaties verwerkt PostgreSQL grotere workloads; uitgedrukt in getallen:
+</p>
+<ul>
+<li>tot 350.000 lees-statements per seconde (meer dan 4X sneller)</li>
+<li>Index-only toegang voor datawarehouse queries (2-20X sneller)</li>
+<li>tot 14.000 schrijf-statements per seconde (5X sneller)</li>
+<li>tot 30% afname in CPU stroomverbruik</li>
+</ul>
+<p>
+Door de nieuwe optie van Cascading Replication is onder PostgreSQL 9.2 de horizontale schaalbaarheid sterk toegenomen.
+</p><p>
+"NewsBlur, een social news reader, gebruikt Postgres voor opslag van miljoenen sites en registraties.  Postgres is al jaren solide en betrouwbaar", zegt Samuel Clay, oprichter van NewsBlur.com. "We zijn voortdurend op de allernieuwste versie (op dit moment 9.1 en zo snel mogelijk naar 9.2 - alleen al om cascading replication) en het is een plezier om te gebruiken, al vanaf 8.4."
+</p>
+<h3>Flexibele ondersteuning ontwikkelaars</h3>
+<p>
+De flexibiliteit van PostgreSQL wordt weerspiegeld door de verscheidenheid van organisaties die het gebruiken: NASA, de FAA (de Amerikaanse luchtvaartautoriteit), de Chicago Mercantile Exchange, en Instagram gebruiken het in essenti&euml;le applicaties.  Versie 9.2 vergroot deze flexibiliteit verder door ondersteuning van Range Types en JSON, waardoor ontwikkelaars PostgreSQL op een totaal nieuwe manier kunnen gebruiken.
+</p><p>
+Het nieuwe Range Type maakt betere rooster-, wetenschappelijke en financi&euml;le applicaties mogelijk.  Geen van de andere grote SQL databases ondersteunt dit feature, waarmee intelligente verwerking van tijdsblokken and getalsbereiken mogelijk wordt.
+</p><p>
+In PostgreSQL 9.2 kunnen resultaten worden opgevraagd als JSON data types.  In combinatie met de nieuwe PL/V8 Javascript en PL/Coffee database programmeer extensies en HStore key-value opslag, kan PostgreSQL gebruikt worden als "NoSQL" document database, maar de betrouwbaarheid, flexibiliteit en performance van PostgreSQL.
+</p><p>
+"De JSON ondersteuning in PostgresSQL geeft een effici&euml;nt mechanisme voor het maken en opslaan van documenten voor web API's.  Wij gebruiken front-end libraries zoals jQuery om data op te vragen in tabel- en boom-structuur; en de nieuwe features maken het halen van data als JSON snel en gemakkelijk", zegt Taras Mitran, Senior Architect, IVC Inc.
+</p><p>
+<b>Over PostgreSQL</b>: PostgreSQL is de toonaangevende open source database, met een wereldwijde community van duizenden gebruikers en contributors, en tientallen bedrijven en organisaties.  Het 'PostgreSQL Project' berust op meer dan 25 jaar ervaring, beginnend op de Universiteit van California, Berkeley, en ontwikkelt zich tegenwoordig ongekend snel. PostgreSQL heeft niet alleen een volledige feature-set als de top proprietaire database systemen maar overtreft deze zelfs in geavanceerde features, extensibiliteit, veiligheid en stabiliteit.  Leer meer over PostgreSQL en neem deel in onze community op http://www.postgresql.org. 
+
+</p>
+
+<h2>Uitgebreide release-informatie</h2>
+
+<a name="features"></a><h2>Lijst van features</h2>
+
+<p>
+Voor meer informatie:
+</p>
+<ul>
+<li><a href="/docs/9.2/static/release-9-2.html">Release Notes</a></li>
+<li><a href="/docs/9.2/static/index.html">9.2 Documentatie</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.2">Wat is nieuw in PostgreSQL 9.2</a></li>
+<li><a href="/about/featurematrix">Feature matrix (English only)</a></li>
+<li><a href="http://code.google.com/p/plv8js/wiki/PLV8">PL/v8 en PL/Coffee Javascript plug-ins</a></li>
+</ul>
+
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Download pagina</a></li>
+<li><a href="/ftp/source/v9.2.0">Source Code</a></li>
+<li><a href="http://code.google.com/p/plv8js/downloads/list">PL/v8 en PL/Coffee</a></li>
+<li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+<li><a href="http://www.postgresql.org/download/product-categories">PostgreSQL-gerelateerde en commerci&euml;le software</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentatie</h2>
+
+<p>
+HTML documentatie en man pages worden mee-geinstalleerd met PostgreSQL, maar je kunt ook gebruikmaken van onze uitgebreide, interactieve <a href="/docs/9.2/interactive">online documentatie</a>.
+</p>
+
+<a name="license"></a><h2>Licentie</h2>
+<p>PostgreSQL gebruikt de <a href="/about/licence">PostgreSQL licentie</a>, die slechts vereist dat in de gelicenseerde broncode de auteursrecht-vermelding en licentie-informatie gehandhaafd blijft.  Deze <a href="http://www.opensource.org/licenses/postgresql">OSI-gecertificeerde licentie</a> wordt wijd gewaardeerd als flexibel en "business-friendly", aangezien het het gebruik van PostgreSQL met commerci&euml;le en proprietaire toepassingen niet beperkt. Samen met de "multi-company" ondersteuning en het publieke eigendom van de code, maakt de BSD licentie PostgreSQL zeer populair bij bedrijven die een database in hun eigen producten willen meeleveren zonder bang te hoeven zijn voor extra kosten, "vendor lock-in", of veranderingen in licentie-overeenkomst.</p>
+
+<a name="contact"></a><h2>Contactinformatie</h2>
+
+<p>Web Pagina's</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL home page</a></li>
+</ul>
+
+<p>Voor meer informatie:</p>
+Gevik Babakhani<br />
+<a href="mailto:nl@postgresql.org">nl@postgresql.org</a><br />
++31 6 2000 6265</p>
+
+<p>Voor contactinformatie in andere regio's, zie <a href="/about/press/contact">onze internationale contacten lijst</a></p>
+
+<a name="quoted_companies"></a><h2>Geciteerd bedrijfsinformatie (EN)</h2>
+<p>
+<b>EngineYard</b> is the leading <a href="http://www.engineyard.com/platform-as-a-service">Platform as a
+Service (PaaS)</a>, empowering <a href="http://www.engineyard.com/products/cloud">cloud application development</a> innovation more rapidly, easily and cost effectively. With deep technical expertise, powerful infrastructure orchestration, strong support of the open source community, and world-class service, Engine Yard provides a complete commercial grade solution that enables developers to focus on creating great applications, instead of managing their platform. Thousands of customers in 58 countries, from explosive-growth Web startups to Fortune 500 enterprises, rely on Engine Yard to leverage the cloud for competitive advantage. Headquartered in San Francisco, Calif., Engine Yard is backed by Benchmark Capital, New Enterprise Associates and Amazon.com. Contact: <a href="mailto:mhick@bhavacom.com">Melissa Hick</a>, 510-984-1525
+</p><p>
+<b><a href="http://newsblur.com">NewsBlur</a></b> is a social news reader built for people who want to enjoy reading the news. NewsBlur is a great place to read the best stories from your friends and favorite blogs.  Contact (English-only): <a href="mailto:samuel@newsblur.com">Samuel Clay</a>
+</p><p>
+<b><a href="http://www.ivc.com">IVC, Inc.</a></b> is a business oriented technology company, located near Research Triangle Park, NC, providing complete solutions for short-term and multi-year projects since 1987. IVC develops and provides assistance in prototyping to full-scale deployment for custom applications, specialty integration, data analytics, and mobile solutions.  Our database-backed software applications are used daily by hundreds of Fortune 1000 companies such as: Time Warner Cable, AstraZeneca, Kaiser, Progress Energy, Charles Schwab, and State Street. Contact (English only): <a href="mailto:steve@ivc.com">Steve</a>, (919) 439-7792
+</p>
+
+<a name="companies"></a><h2>Steun van bedrijven</h2>
+
+<p>PostgreSQL wordt gesteund door talrijke bedrijven, die ontwikkelaars sponsoren, hosting verzorgen en ons financi&euml;le steun geven, onder andere: Red Hat, EnterpriseDB, 2ndQuadrant, NTT, HP, VMWare.</a></p>
+
+<p>Er is ook een grote gemeenschap van <a href="/support/professional_support">bedrijven die commerci&euml;le PostgreSQL support aanbieden</a>, in grootte vari&euml;rend van individuele consultants tot multinationale bedrijven.</p>
+
+<p><a href="/about/donate">Donaties</a> graag geaccepteerd.</p>
+
+{%endblock%}
