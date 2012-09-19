@@ -9,7 +9,7 @@ from pgweb.util.helpers import simple_form
 from models import Sponsor, Server
 
 def sponsors(request):
-	sponsors = Sponsor.objects.select_related().filter(sponsortype__sortkey__gt=0).order_by('sponsortype__sortkey' ,'name')
+	sponsors = Sponsor.objects.select_related().filter(sponsortype__sortkey__gt=0).order_by('sponsortype__sortkey' ,'?')
 	return render_to_response('sponsors/sponsors.html', {
 		'sponsors': sponsors,
 	}, NavContext(request, 'about'))
