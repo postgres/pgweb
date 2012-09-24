@@ -76,11 +76,13 @@ tf = tarfile.open(tarfilename)
 
 curs = connection.cursor()
 # Verify that the version exists, and what we're loading
-curs.execute("SELECT latestminor FROM core_version WHERE tree=%(v)s", {'v': ver})
+curs.execute("SELECT current FROM core_version WHERE tree=%(v)s", {'v': ver})
 r = curs.fetchall()
 if len(r) != 1:
 	print "Version %s not found in the system, cannot load!" % ver
 	sys.exit(1)
+
+iscurrent = r[0][0]
 
 # Remove any old docs for this version (still protected by a transaction while
 # we perform the load)
@@ -113,6 +115,8 @@ if ver == "0":
 	ver = "devel"
 
 curs.execute("SELECT varnish_purge('^/docs/' || %(v)s || '/')", {'v': ver})
+if iscurrent:
+	curs.execute("SELECT varnish_purge('^/docs/current/')")
 
 transaction.commit_unless_managed()
 connection.close()
