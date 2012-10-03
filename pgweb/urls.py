@@ -123,6 +123,9 @@ urlpatterns = patterns('',
 	# Sync timestamp, for automirror
 	(r'^web_sync_timestamp$', 'pgweb.core.views.sync_timestamp'),
 
+    # API endpoints
+    (r'^api/varnish/purge/$', 'pgweb.core.views.api_varnish_purge'),
+
 	# Override some URLs in admin, to provide our own pages
 	(r'^admin/pending/$', 'pgweb.core.views.admin_pending'),
 	(r'^admin/purge/$', 'pgweb.core.views.admin_purge'),

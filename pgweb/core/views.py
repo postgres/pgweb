@@ -4,6 +4,7 @@ from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Count
 from django.db import connection, transaction
+from django.conf import settings
 
 from datetime import date, datetime
 from os import uname
@@ -12,7 +13,7 @@ import urllib
 
 from pgweb.util.decorators import ssl_required, cache
 from pgweb.util.contexts import NavContext
-from pgweb.util.helpers import simple_form, PgXmlHelper
+from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.moderation import get_all_pending_moderations
 from pgweb.util.misc import get_client_ip, is_behind_cache, varnish_purge
 from pgweb.util.sitestruct import get_all_pages_struct
@@ -197,6 +198,20 @@ def admin_purge(request):
 			'purge_completed': completed,
 			'latest_purges': latest,
 			})
+
+@ssl_required
+def api_varnish_purge(request):
+	if not request.META['REMOTE_ADDR'] in settings.VARNISH_PURGERS:
+		return HttpServerError("Invalid client address")
+	if request.method != 'POST':
+		raise HttpServerError("Can't use this way")
+	n = int(request.POST['n'])
+	curs = connection.cursor()
+	for i in range(0, n):
+		expr = request.POST['p%s' % i]
+		curs.execute("SELECT varnish_purge_expr(%s)", (expr, ))
+	transaction.commit_unless_managed()
+	return HttpResponse("Purged %s entries\n" % n)
 
 # Merge two organisations
 @login_required
