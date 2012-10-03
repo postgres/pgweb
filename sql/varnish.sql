@@ -13,4 +13,9 @@ AS $$
    SELECT pgq.insert_event('varnish', 'P', $1);
 $$ LANGUAGE 'sql';
 
+CREATE OR REPLACE FUNCTION varnish_purge_expr(expr text)
+RETURNS bigint
+AS $$
+  SELECT pgq.insert_event('varnish', 'X', $1);
+$$ LANGUAGE 'sql';
 COMMIT;

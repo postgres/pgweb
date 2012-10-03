@@ -45,25 +45,31 @@ class VarnishPurger(pgq.Consumer):
 
 		for ev in ev_list:
 			if ev.type == 'P':
-				# 'P' events means purge. Currently it's the only event
-				# type we support.
+				# 'P' events means purge.
 				print_t("Purging '%s' on %s" % (ev.data, self.frontend))
 				try:
 					if self.do_purge(ev.data):
 						ev.tag_done()
 				except Exception, e:
 					print_t("Failed to purge '%s' on '%s': %s" % (ev.data, self.frontend, e))
+			elif ev.type == 'X':
+				# 'X' events means ban expression (rather than just urls)
+				print_t("Purging expression '%s' on %s" % (ev.data, self.frontend))
+				try:
+					if self.do_purge_expr(ev.data):
+						ev.tag_done()
+				except Exception, e:
+					print_t("Failed to purge expression '%s' on '%s': %s" % (ev.data, self.frontend, e))
 			else:
 				print_t("Unknown event type '%s'" % ev.type)
 
 
-	def do_purge(self, url):
+	def internal_purge(self, headers):
 		"""
 		Send the actual purge request, by contacting the frontend this
 		purger is running for and sending a GET request to the special URL
 		with our regexp in a special header.
 		"""
-		headers = {'X-Purge-URL': url}
 		conn = httplib.HTTPConnection('%s.postgresql.org' % self.frontend)
 		conn.request("GET", "/varnish-purge-url", '', headers)
 		resp = conn.getresponse()
@@ -74,6 +80,11 @@ class VarnishPurger(pgq.Consumer):
 		print_t("Varnish purge returned status %s (%s)" % (resp.status, resp.reason))
 		return False
 
+	def do_purge(self, url):
+		return self.internal_purge({'X-Purge-URL': url})
+
+	def do_purge_expr(self, expr):
+		return self.internal_purge({'X-Purge-Expr': expr})
 
 class PurgerProcess(object):
 	"""

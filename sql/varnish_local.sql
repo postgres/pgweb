@@ -12,4 +12,10 @@ AS $$
    SELECT 1::bigint;
 $$ LANGUAGE 'sql';
 
+CREATE OR REPLACE FUNCTION varnish_purge_expr(url text)
+RETURNS bigint
+AS $$
+   SELECT 1::bigint;
+$$ LANGUAGE 'sql';
+
 COMMIT;
