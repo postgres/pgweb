@@ -74,9 +74,9 @@ def ftpbrowser(request, subpath):
 			breadcrumbs.append({'name': pathpiece, 'path': breadroot});
 
 	# Check if there are any "content files" we should render directly on the webpage
-	file_readme = node.has_key('README') and node['README']['c'] or None;
-	file_message = node.has_key('.message') and node['.message']['c'] or None;
-	file_maintainer = node.has_key('CURRENT_MAINTAINER') and node['CURRENT_MAINTAINER']['c'] or None;
+	file_readme = (node.has_key('README') and node['README']['t']=='f') and node['README']['c'] or None;
+	file_message = (node.has_key('.message') and node['.message']['t']=='f') and node['.message']['c'] or None;
+	file_maintainer = (node.has_key('CURRENT_MAINTAINER') and node['CURRENT_MAINTAINER']['t'] == 'f') and node['CURRENT_MAINTAINER']['c'] or None;
 
 	del node
 
