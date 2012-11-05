@@ -128,12 +128,15 @@ def logout(request):
 
 @ssl_required
 def changepwd(request):
-	return authviews.password_change(request, template_name='account/password_change.html')
+	return authviews.password_change(request,
+									 template_name='account/password_change.html',
+									 post_change_redirect='/account/changepwd/done/')
 
 @ssl_required
 def resetpwd(request):
 	return authviews.password_reset(request, template_name='account/password_reset.html',
-									email_template_name='account/password_reset_email.txt')
+									email_template_name='account/password_reset_email.txt',
+									post_reset_redirect='/account/reset/done/')
 
 @ssl_required
 def change_done(request):
@@ -144,8 +147,12 @@ def reset_done(request):
 	return authviews.password_reset_done(request, template_name='account/password_reset_done.html')
 
 @ssl_required
-def reset_confirm(request):
-	return authviews.password_reset_confirm(request, template_name='account/password_reset_confirm.html')
+def reset_confirm(request, uidb36, token):
+	return authviews.password_reset_confirm(request,
+											uidb36=uidb36,
+											token=token,
+											template_name='account/password_reset_confirm.html',
+											post_reset_redirect='/account/reset/complete/')
 
 @ssl_required
 def reset_complete(request):
