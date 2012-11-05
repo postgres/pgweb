@@ -136,6 +136,22 @@ def resetpwd(request):
 									email_template_name='account/password_reset_email.txt')
 
 @ssl_required
+def change_done(request):
+	return authviews.password_change_done(request, template_name='account/password_change_done.html')
+
+@ssl_required
+def reset_done(request):
+	return authviews.password_reset_done(request, template_name='account/password_reset_done.html')
+
+@ssl_required
+def reset_confirm(request):
+	return authviews.password_reset_confirm(request, template_name='account/password_reset_confirm.html')
+
+@ssl_required
+def reset_complete(request):
+	return authviews.password_reset_complete(request, template_name='account/password_reset_complete.html')
+
+@ssl_required
 def signup(request):
 	if request.user.is_authenticated():
 		return HttpServerError("You must log out before you can sign up for a new account")
