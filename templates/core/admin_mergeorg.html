@@ -10,7 +10,7 @@
 {%block content%}
 <div id="content-main">
 <h1>Merge organisations</h1>
-<form method="post" action=".">
+<form method="post" action=".">{% csrf_token %}
 <table>
 {{form.as_table}}
 </table>

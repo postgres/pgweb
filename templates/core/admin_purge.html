@@ -17,7 +17,7 @@
   </div>
 {%endif%}
 
- <form method="POST" action=".">
+ <form method="POST" action=".">{% csrf_token %}
 URL (regex): <input type="text" name="url">
   <input type="submit" value="Purge" />
  </form>

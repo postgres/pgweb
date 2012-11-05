@@ -190,10 +190,8 @@ def signup_complete(request):
 ####
 ## Community authentication endpoint
 ####
-from django.views.decorators.csrf import csrf_protect
 
 @ssl_required
-@csrf_protect
 def communityauth(request, siteid):
 	# Get whatever site the user is trying to log in to.
 	site = get_object_or_404(CommunityAuthSite, pk=siteid)
@@ -257,7 +255,6 @@ def communityauth(request, siteid):
 
 
 @ssl_required
-@csrf_protect
 def communityauth_logout(request, siteid):
 	# Get whatever site the user is trying to log in to.
 	site = get_object_or_404(CommunityAuthSite, pk=siteid)

@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.db import connection
 from django.template.defaultfilters import slugify
+from django.views.decorators.csrf import csrf_exempt
 
 from pgweb.util.contexts import NavContext
 from pgweb.util.misc import get_client_ip
@@ -18,6 +19,8 @@ def results(request, surveyid, junk=None):
 		'surveylist': surveylist,
 	}, NavContext(request, 'community'))
 
+# Served over insecure HTTP, the Varnish proxy strips cookies
+@csrf_exempt
 def vote(request, surveyid):
 	surv = get_object_or_404(Survey, pk=surveyid)
 
