@@ -30,7 +30,7 @@ class PgMiddleware(object):
 				return HttpResponseRedirect(request.build_absolute_uri().replace('http://','https://',1))
 			return None
 
-		if view_func.__name__ == '_require_ssl':
+		if getattr(view_func, 'ssl_required', False):
 			# This view requires SSL, so check if we have it
 			if not request.is_secure():
 				# May need to deal with ports specified here?
