@@ -213,7 +213,7 @@ def api_varnish_purge(request):
 	if not request.META['REMOTE_ADDR'] in settings.VARNISH_PURGERS:
 		return HttpServerError("Invalid client address")
 	if request.method != 'POST':
-		raise HttpServerError("Can't use this way")
+		return HttpServerError("Can't use this way")
 	n = int(request.POST['n'])
 	curs = connection.cursor()
 	for i in range(0, n):
