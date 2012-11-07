@@ -12,7 +12,7 @@ from os import uname
 import re
 import urllib
 
-from pgweb.util.decorators import ssl_required, cache
+from pgweb.util.decorators import ssl_required, cache, nocache
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.moderation import get_all_pending_moderations
@@ -148,6 +148,12 @@ def sitemap(request):
 	x.endElement('urlset')
 	x.endDocument()
 	return resp
+
+@nocache
+def csrf_failure(request, reason=''):
+	return render_to_response('errors/csrf_failure.html', {
+			'reason': reason,
+			})
 
 # Basic information about the connection
 @cache(seconds=30)

@@ -65,6 +65,8 @@ MIDDLEWARE_CLASSES = [
     'util.middleware.PgMiddleware',
 ]
 
+CSRF_FAILURE_VIEW='pgweb.core.views.csrf_failure'
+
 ROOT_URLCONF = 'pgweb.urls'
 
 TEMPLATE_DIRS = (

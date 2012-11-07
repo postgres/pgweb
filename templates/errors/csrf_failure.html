@@ -1,0 +1,19 @@
+{%extends "base/page.html"%}
+{%block title%}Cross Site Request Detected{%endblock%}
+{%block contents%}
+<h1>Cross Site Request Detected</h1>
+<p>
+Your request to access this resource failed because the system detected
+a Cross Site Request. This is either caused by a legitimiate attempt to
+inject data, or by your system not being configured to allow validation
+of the request.
+</p>
+<p>
+The most common reason for tihs error is that your browser
+<b>does not allow cookies</b> on this request. Cookies are required for the
+cross site protection to work.
+</p>
+<p>
+The internal reason given was: <i>{{reason}}</i>
+</p>
+{%endblock%}
