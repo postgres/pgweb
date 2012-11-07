@@ -31,6 +31,7 @@ from survey.models import Survey
 # models and forms needed for core objects
 from models import Organisation
 from forms import OrganisationForm, MergeOrgsForm
+from django.template.context import RequestContext
 
 # Front page view
 @cache(minutes=10)
@@ -185,7 +186,6 @@ def admin_pending(request):
 # Purge objects from varnish, for the admin pages
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-@csrf_exempt
 def admin_purge(request):
 	if request.method == 'POST':
 		url = request.POST['url']
@@ -205,7 +205,7 @@ def admin_purge(request):
 	return render_to_response('core/admin_purge.html', {
 			'purge_completed': completed,
 			'latest_purges': latest,
-			})
+			}, RequestContext(request))
 
 @ssl_required
 @csrf_exempt
@@ -226,7 +226,6 @@ def api_varnish_purge(request):
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 @transaction.commit_on_success
-@csrf_exempt
 def admin_mergeorg(request):
 	if request.method == 'POST':
 		form = MergeOrgsForm(data=request.POST)
@@ -257,4 +256,4 @@ def admin_mergeorg(request):
 
 	return render_to_response('core/admin_mergeorg.html', {
 			'form': form,
-    })
+    }, RequestContext(request))

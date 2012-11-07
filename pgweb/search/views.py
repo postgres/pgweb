@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
 from pgweb.util.decorators import cache
@@ -37,6 +38,7 @@ def generate_pagelinks(pagenum, totalpages, querystring):
 		yield '<a href="%s&p=%s">Next</a>' % (querystring, pagenum+1)
 
 
+@csrf_exempt
 @cache(minutes=15)
 def search(request):
 	# Perform a general web search
