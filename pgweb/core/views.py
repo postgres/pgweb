@@ -152,9 +152,11 @@ def sitemap(request):
 
 @nocache
 def csrf_failure(request, reason=''):
-	return render_to_response('errors/csrf_failure.html', {
+	resp = render_to_response('errors/csrf_failure.html', {
 			'reason': reason,
 			})
+	resp.status_code = 403 # Forbidden
+	return resp
 
 # Basic information about the connection
 @cache(seconds=30)
