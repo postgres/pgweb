@@ -58,7 +58,7 @@ This page in other versions:
 	{%if ver.version == page.version %}
 	<b>{{ver.display_version}}</b>
 	{% else %}
-	<a href="/docs/{{ver.display_version}}/{{doc_type}}/{{ver.file}}" title="This page in version {{ver.display_version}}">{{ver.display_version}}</a>
+	<a href="/docs/{{ver.display_version}}/{{doc_type}}/{{ver.file}}" title="This page in version {{ver.display_version}}" rel="nofollow">{{ver.display_version}}</a>
 	{%endif%}
 {%endfor%}
 {%endif%}
