@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.views.decorators.csrf import csrf_exempt
 from django.db import connection
 from django.conf import settings
 
@@ -13,6 +14,7 @@ from pgweb.core.models import Version
 
 from forms import *
 
+@csrf_exempt
 def submitbug(request):
 	if request.method == 'POST':
 		form = SubmitBugForm(request.POST)
@@ -44,6 +46,7 @@ def submitbug(request):
 		'form': form,
 		'formitemtype': 'bug report',
 		'operation': 'Submit',
+		'nocsrf': True,
 		'form_intro': template_to_string('misc/bug_header.html', {
 			'supportedversions': versions,
 		}),

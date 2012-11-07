@@ -3,7 +3,7 @@
 {%block title%}{{operation|default:"Edit"}} {{formitemtype}}{%endblock%}
 {%block contents%}
 <h1>{{operation|default:"Edit"}} {{formitemtype}}</h1>
-<form method="post" action=".">{% csrf_token %}
+<form method="post" action=".">{%if not nocsrf%}{% csrf_token %}{%endif%}
 {%if form_intro%}
 <p>
 {{form_intro|safe}}
