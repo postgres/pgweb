@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Count
 from django.db import connection, transaction
 from django.conf import settings
@@ -178,6 +179,7 @@ def admin_pending(request):
 # Purge objects from varnish, for the admin pages
 @login_required
 @user_passes_test(lambda u: u.is_staff)
+@csrf_exempt
 def admin_purge(request):
 	if request.method == 'POST':
 		url = request.POST['url']
@@ -200,6 +202,7 @@ def admin_purge(request):
 			})
 
 @ssl_required
+@csrf_exempt
 def api_varnish_purge(request):
 	if not request.META['REMOTE_ADDR'] in settings.VARNISH_PURGERS:
 		return HttpServerError("Invalid client address")
@@ -217,6 +220,7 @@ def api_varnish_purge(request):
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
 @transaction.commit_on_success
+@csrf_exempt
 def admin_mergeorg(request):
 	if request.method == 'POST':
 		form = MergeOrgsForm(data=request.POST)
