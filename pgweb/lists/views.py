@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import TemplateDoesNotExist, loader, Context
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
@@ -20,6 +21,7 @@ def root(request):
 		'lists': lists,
 	}, NavContext(request, 'community'))
 
+@csrf_exempt
 def subscribe(request):
 	if request.POST:
 		form = SubscribeForm(request.POST)
