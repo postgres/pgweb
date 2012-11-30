@@ -201,8 +201,8 @@ def admin_purge(request):
 
 	# Fetch list of latest purges
 	curs = connection.cursor()
-	curs.execute("SELECT ev_time, ev_data FROM pgq.event_1 WHERE ev_type IN ('P', 'X') ORDER BY ev_time DESC LIMIT 20")
-	latest = [{'t': r[0], 'u': r[1]} for r in curs.fetchall()]
+	curs.execute("SELECT ev_time, ev_type, ev_data FROM pgq.event_1 WHERE ev_type IN ('P', 'X') ORDER BY ev_time DESC LIMIT 20")
+	latest = [{'t': r[0], 'ty': r[1], 'u': r[2]} for r in curs.fetchall()]
 
 	return render_to_response('core/admin_purge.html', {
 			'purge_completed': completed,

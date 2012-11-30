@@ -29,6 +29,7 @@ URL (regex, ^ is auto-added): <input type="text" name="url">
       {%for p in latest_purges%}
       <tr class="row{%cycle '1' '2'%}">
 	<td>{{p.t|date:"c"}}</td>
+	<td>{{p.ty}}</td>
 	<td>{{p.u}}</td>
       </tr>
       {%endfor%}
