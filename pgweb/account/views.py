@@ -257,7 +257,7 @@ def communityauth(request, siteid):
 		'e': request.user.email.encode('utf-8'),
 		}
 	if su:
-		info['su'] = request.GET['su']
+		info['su'] = request.GET['su'].encode('utf-8')
 
 	# Turn this into an URL. Make sure the timestamp is always first, that makes
 	# the first block more random..
