@@ -7,7 +7,8 @@
 PostgreSQL is available in all Ubuntu versions by default. However,
 Ubuntu "snapshots" a specific version of PostgreSQL that is then
 supported throughout the lifetime of that Ubuntu version. Other
-versions of PostgreSQL are available through a <i>PPA</i> (Personal
+versions of PostgreSQL are available through the PostgreSQL apt
+repository, as well as through a <i>PPA</i> (Personal
 Package Archive - the Ubuntu standard for addon repositories)
 repository.
 </p>
@@ -41,6 +42,50 @@ version number as required):
  <li>postgresql-server-dev-9.1 - libraries and headers for C language backend development</li>
  <li>pgadmin3 - pgAdmin III graphical administration utility</li>
 </ul>
+
+<h2>PostgreSQL Apt Repository</h2>
+<p>
+If the version included in your version of Debian is not the one you want,
+you can use the PostgreSQL Apt Repository. This repository will integrate
+with your normal systems and patch management, and provide automatic
+updates for all supported versions of PostgreSQL throughout the support
+<a href="/support/versionning/">lifetime</a> of PostgreSQL.
+</p>
+<p>
+Not all Ubuntu releases are currently supported in the apt repository. For
+an up to date list of supported releases, please see the apt page on
+<a href="http://wiki.postgresql.org/wiki/Apt">the wiki</a>.
+</p>
+<p>
+To use the apt repository, follow these steps:
+<ul>
+ <li>Import the repository signing key
+   <code>wget -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -</code>
+ </li>
+ <li>Edit the file <i>/etc/apt/sources.list.d/pgdg.list</i>, and add a line
+   for the repository, substituting the proper "codename" for your release
+   <code>deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main</code>
+ </li>
+ <li>Configure apt's package pinning to prefer the PGDG packages over the standard ones in <i>/etc/apt/preferences.d/pgdg.pref</i>
+   <code>
+Package: *<br/>
+Pin: release o=apt.postgresql.org<br/>
+Pin-Priority: 500
+   </code>
+ </li>
+ <li>Update the package lists, and install the pgdg-keyring package to automatically get repository key updates
+   <code>
+sudo apt-get update<br/>
+sudo apt-get install pgdg-keyring
+   </code>
+ </li>
+</ul>
+</p>
+<p>
+For more information about the apt repository, including answers to frequent
+questions, please see the apt page on
+<a href="http://wiki.postgresql.org/wiki/Apt">the wiki</a>.
+</p>
 
 <h2>Ubuntu PPA</h2>
 <p>

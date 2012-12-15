@@ -7,7 +7,8 @@
 PostgreSQL is available in all Debian versions by default. However, the
 stable versions of Debians "snapshot" a specific version of PostgreSQL
 that is then supported throughout the lifetime of that Debian version.
-Other versions are available in the Debian <i>backports</i> repositories.
+The PostgreSQL project also maintains an apt repository with all supported
+of PostgreSQL available.
 </p>
 <p>
 Should packages not be available for your distribution, or there are
@@ -39,6 +40,45 @@ version number as required):
  <li>postgresql-server-dev-9.1 - libraries and headers for C language backend development</li>
  <li>pgadmin3 - pgAdmin III graphical administration utility</li>
 </ul>
+
+<h2>PostgreSQL Apt Repository</h2>
+<p>
+If the version included in your version of Debian is not the one you want,
+you can use the PostgreSQL Apt Repository. This repository will integrate
+with your normal systems and patch management, and provide automatic
+updates for all supported versions of PostgreSQL throughout the support
+<a href="/support/versionning/">lifetime</a> of PostgreSQL.
+</p>
+<p>
+To use the apt repository, follow these steps:
+<ul>
+ <li>Import the repository signing key
+   <code>wget -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -</code>
+ </li>
+ <li>Edit the file <i>/etc/apt/sources.list.d/pgdg.list</i>, and add a line
+   for the repository, substituting the proper "codename" for your release
+   <code>deb http://apt.postgresql.org/pub/repos/apt/ squeeze-pgdg main</code>
+ </li>
+ <li>Configure apt's package pinning to prefer the PGDG packages over the standard ones in <i>/etc/apt/preferences.d/pgdg.pref</i>
+   <code>
+Package: *<br/>
+Pin: release o=apt.postgresql.org<br/>
+Pin-Priority: 500
+   </code>
+ </li>
+ <li>Update the package lists, and install the pgdg-keyring package to automatically get repository key updates
+   <code>
+sudo apt-get update<br/>
+sudo apt-get install pgdg-keyring
+   </code>
+ </li>
+</ul>
+</p>
+<p>
+For more information about the apt repository, including answers to frequent
+questions, please see the apt page on
+<a href="http://wiki.postgresql.org/wiki/Apt">the wiki</a>.
+</p>
 
 <h2>Debian backports</h2>
 <p>
