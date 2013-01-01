@@ -47,7 +47,10 @@ if __name__=="__main__":
 	contents = urllib.urlopen(sys.argv[1]).read()
 
 	# Try to figure out where the actual contents start :)
-	firstline = contents.splitlines().index('<div id="pgContentWrap">')
+	try:
+		firstline = contents.splitlines().index('<div id="pgContentWrap">')
+	except ValueError:
+		firstline = 0
 
 	# Generate a form body
 	body = encode_multipart_formdata([
