@@ -45,6 +45,9 @@ class Event(PgModel, models.Model):
 				return False # Migration organisation
 			else:
 				return True # Has an actual organisation
+		elif len(mgrs) > 1:
+			# More than one manager means it must be new
+			return True
 		return False # Has no organisastion at all
 
 	@property
