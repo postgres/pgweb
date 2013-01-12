@@ -6,11 +6,20 @@ from django.conf import settings
 from pgweb.util.decorators import cache
 
 import datetime
+import httplib
 import urllib
 import psycopg2
+import simplejson as json
 
 from lists.models import MailingList, MailingListGroup
 
+# Conditionally import memcached library. Everything will work without
+# it, so we allow development installs to run without it...
+try:
+	import pylibmc
+	has_memcached=True
+except:
+	has_memcached=False
 
 def generate_pagelinks(pagenum, totalpages, querystring):
 	# Generate a list of links to page through a search result
@@ -80,10 +89,6 @@ def search(request):
 
 		if not dateval:
 			dateval = 365
-		if dateval == -1:
-			firstdate = None
-		else:
-			firstdate = datetime.datetime.today()-datetime.timedelta(days=dateval)
 
 		sortoptions = (
 			{'val':'r', 'text': 'Rank', 'selected': not (request.REQUEST.has_key('s') and request.REQUEST['s'] == 'd')},
@@ -143,34 +148,57 @@ def search(request):
 
 	firsthit = (pagenum - 1) * hitsperpage + 1
 
-	# Get ourselves a connection
-	try:
-		conn = psycopg2.connect(settings.SEARCH_DSN)
-		curs = conn.cursor()
-	except:
-		return render_to_response('search/sitesearch.html', {
-				'search_error': 'Could not connect to search database.'
-				})
-
 	if searchlists:
-		# perform the query for list archives search
-		curs.execute("SELECT * from archives_search(%(query)s, %(listid)s, %(firstdate)s, NULL, %(firsthit)s, %(hitsperpage)s, %(sort)s)", {
-				'query': query,
-				'firsthit': firsthit - 1,
-				'hitsperpage': hitsperpage,
-				'listid': listid,
-				'firstdate': firstdate,
-				'sort': listsort,
-				})
-		hits = curs.fetchall()
-		conn.close()
-		totalhits = int(hits[-1][1])
+		# Lists are searched by passing the work down using a http
+		# API. In the future, we probably want to do everything
+		# through a http API and merge hits, but that's for later
+		p = {
+			'q': query,
+			's': listsort,
+			}
+		if listid:
+			if listid < 0:
+				# This is a list group, we expand that on the web server
+				p['l'] = ','.join([str(x.id) for x in MailingList.objects.filter(group=-listid)])
+			else:
+				p['l'] = listid
+		if dateval:
+			p['d'] = dateval
+		urlstr = urllib.urlencode(p)
+		# If memcached is available, let's try it
+		hits = None
+		if has_memcached:
+			memc = pylibmc.Client(['127.0.0.1',], binary=True, behaviors={'tcp_nodelay':True})
+			try:
+				hits = memc.get(urlstr)
+			except Exception, e:
+				# If we had an exception, don't try to store either
+				memc = None
+		if not hits:
+			# No hits found - so try to get them from the search server
+			c = httplib.HTTPConnection(settings.ARCHIVES_SEARCH_SERVER, strict=True, timeout=5)
+			c.request('POST', '/archives-search/', urlstr)
+			r = c.getresponse()
+			if r.status != 200:
+				memc = None
+				return render_to_response('search/listsearch.html', {
+						'search_error': 'Error talking to search server: %s' % r.reason,
+						})
+			hits = json.loads(r.read())
+			if has_memcached and memc:
+				# Store them in memcached too! But only for 10 minutes...
+				# And always compress it, just because we can
+				memc.set(urlstr, hits, 60*10, 1)
+				memc = None
+
+		totalhits = len(hits)
 		querystr = "?m=1&q=%s&l=%s&d=%s&s=%s" % (
 			urllib.quote_plus(query.encode('utf-8')),
 			listid or '',
 			dateval,
 			listsort
 			)
+
 		return render_to_response('search/listsearch.html', {
 				'hitcount': totalhits,
 				'firsthit': firsthit,
@@ -181,23 +209,32 @@ def search(request):
 									   totalhits / hitsperpage + 1,
 									   querystr)),
 				'hits': [{
-						'list': h[0],
-						'year': h[1],
-						'month': "%02d" % h[2],
-						'msgnum': "%05d" % h[3],
-						'date': h[4],
-						'subject': h[5],
-						'author': h[6],
-						'abstract': h[7].replace("[[[[[[", "<b>").replace("]]]]]]","</b>"),
-						'rank': h[8],
-						} for h in hits[:-1]],
+						'list': h['l'],
+						'date': h['d'],
+						'subject': h['s'],
+						'author': h['f'],
+						'messageid': h['m'],
+						'abstract': h['a'],
+						'rank': h['r'],
+						} for h in hits[firsthit-1:firsthit+hitsperpage-1]],
 				'sortoptions': sortoptions,
 				'lists': MailingList.objects.all().order_by("group__sortkey"),
 				'listid': listid,
 				'dates': dateoptions,
 				'dateval': dateval,
 				})
+
 	else:
+		# Website search is still done by making a regular pgsql connection
+		# to the search server.
+		try:
+			conn = psycopg2.connect(settings.SEARCH_DSN)
+			curs = conn.cursor()
+		except:
+			return render_to_response('search/sitesearch.html', {
+					'search_error': 'Could not connect to search database.'
+					})
+
 		# perform the query for general web search
 		curs.execute("SELECT * FROM site_search(%(query)s, %(firsthit)s, %(hitsperpage)s, %(allsites)s, %(suburl)s)", {
 				'query': query,
