@@ -193,6 +193,13 @@ def search(request):
 				memc.set(urlstr, hits, 60*10, 1)
 				memc = None
 
+		if isinstance(hits, dict):
+			# This is not just a list of hits.
+			# Right now the only supported dict result is a messageid
+			# match, but make sure that's what it is.
+			if hits['messageidmatch'] == 1:
+				return HttpResponseRedirect("/message-id/%s" % query)
+
 		totalhits = len(hits)
 		querystr = "?m=1&q=%s&l=%s&d=%s&s=%s" % (
 			urllib.quote_plus(query.encode('utf-8')),
