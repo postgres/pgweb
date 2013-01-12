@@ -218,7 +218,6 @@ def search(request):
 									   totalhits / hitsperpage + 1,
 									   querystr)),
 				'hits': [{
-						'list': h['l'],
 						'date': h['d'],
 						'subject': h['s'],
 						'author': h['f'],
