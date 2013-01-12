@@ -49,10 +49,10 @@
    <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount = 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
    {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
    {%for hit in hits %}
-    {{forloop.counter0|add:firsthit}}. <a href="http://archives.postgresql.org/message-id/{{hit.messageid}}">{{hit.subject}}</a> [{{hit.rank|floatformat:2}}]<br/>
+    {{forloop.counter0|add:firsthit}}. <a href="http://www.postgresql.org/message-id/{{hit.messageid}}">{{hit.subject}}</a> [{{hit.rank|floatformat:2}}]<br/>
     From {{hit.author}} on {{hit.date}}.<br/>
 {{hit.abstract|safe}}<br/>
-<a href="http://archives.postgresql.org/message-id/{{hit.messageid}}">http://archives.postgresql.org/message-id/{{hit.messageid}}</a><br/>
+<a href="http://www.postgresql.org/message-id/{{hit.messageid}}">http://www.postgresql.org/message-id/{{hit.messageid}}</a><br/>
     <br/>
    {%endfor%}
    {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
