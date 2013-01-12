@@ -10,6 +10,7 @@ import httplib
 import urllib
 import psycopg2
 import simplejson as json
+import socket
 
 from lists.models import MailingList, MailingListGroup
 
@@ -180,7 +181,12 @@ def search(request):
 			c = httplib.HTTPConnection(settings.ARCHIVES_SEARCH_SERVER, strict=True, timeout=5)
 			c.request('POST', '/archives-search/', urlstr)
 			c.sock.settimeout(20) # Set a 20 second timeout
-			r = c.getresponse()
+			try:
+				r = c.getresponse()
+			except socket.timeout:
+				return render_to_response('search/listsearch.html', {
+						'search_error': 'Timeout when talking to search server. Please try your search again later, or with a more restrictive search terms.',
+						})
 			if r.status != 200:
 				memc = None
 				return render_to_response('search/listsearch.html', {
