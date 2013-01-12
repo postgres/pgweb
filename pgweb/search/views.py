@@ -168,7 +168,8 @@ def search(request):
 		# If memcached is available, let's try it
 		hits = None
 		if has_memcached:
-			memc = pylibmc.Client(['127.0.0.1',], binary=True, behaviors={'tcp_nodelay':True})
+			memc = pylibmc.Client(['127.0.0.1',], binary=True)
+			# behavior not supported on pylibmc in squeeze:: behaviors={'tcp_nodelay':True})
 			try:
 				hits = memc.get(urlstr)
 			except Exception, e:
