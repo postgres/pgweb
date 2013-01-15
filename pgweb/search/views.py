@@ -154,7 +154,7 @@ def search(request):
 		# API. In the future, we probably want to do everything
 		# through a http API and merge hits, but that's for later
 		p = {
-			'q': query,
+			'q': query.encode('utf-8'),
 			's': listsort,
 			}
 		if listid:
