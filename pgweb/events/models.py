@@ -10,9 +10,10 @@ class Event(PgModel, models.Model):
 
 	org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or webmaster@postgresql.org if none are listed.")
 	title = models.CharField(max_length=100, null=False, blank=False)
-	city = models.CharField(max_length=50, null=False, blank=False)
+	isonline = models.BooleanField(null=False, default=False, verbose_name="Online event")
+	city = models.CharField(max_length=50, null=False, blank=True)
 	state = models.CharField(max_length=50, null=False, blank=True)	
-	country = models.ForeignKey(Country, null=False, blank=False)
+	country = models.ForeignKey(Country, null=True, blank=True)
 	
 	training = models.BooleanField(null=False, blank=False, default=False)
 	startdate = models.DateField(null=False, blank=False, verbose_name="Start date")
@@ -59,7 +60,9 @@ class Event(PgModel, models.Model):
 	
 	@property
 	def locationstring(self):
-		if self.state:
+		if self.isonline:
+			return "online"
+		elif self.state:
 			return "%s, %s, %s" % (self.city, self.state, self.country)
 		else:
 			return "%s, %s" % (self.city, self.country)
