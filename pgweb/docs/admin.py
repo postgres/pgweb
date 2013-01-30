@@ -11,6 +11,7 @@ approve_doccomment.short_description = 'Approve comment'
 
 class DocCommentAdmin(admin.ModelAdmin):
 	list_display = ('file', 'version', 'posted_at', 'approved', )
+	list_filter = ('approved', )
 	actions = [approve_doccomment, ]
 
 admin.site.register(DocComment, DocCommentAdmin)
