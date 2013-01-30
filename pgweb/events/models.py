@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from datetime import date
 from pgweb.util.bases import PgModel
 
-from core.models import Country, Organisation
+from core.models import Country, Language, Organisation
 
 class Event(PgModel, models.Model):
 	approved = models.BooleanField(null=False, blank=False, default=False)
@@ -14,6 +14,7 @@ class Event(PgModel, models.Model):
 	city = models.CharField(max_length=50, null=False, blank=True)
 	state = models.CharField(max_length=50, null=False, blank=True)	
 	country = models.ForeignKey(Country, null=True, blank=True)
+	language = models.ForeignKey(Language, null=True, blank=True, default=Language.english, help_text="Primary language for event. When multiple languages, specify this in the event description")
 	
 	training = models.BooleanField(null=False, blank=False, default=False)
 	startdate = models.DateField(null=False, blank=False, verbose_name="Start date")

@@ -5,6 +5,7 @@
 <h1>{{obj.title}}</h1>
 <div class="eventdate">Date: <b>{{obj.displaydate|safe}}</b></div>
 <div>Location: {{obj.locationstring}}</div>
+{%if obj.language%}<div>Language: {{obj.language}}</div>{%endif%}
 {{obj.details|markdown:"safe"}}
 {%if obj.has_organisation%}
 <p>Posted by {{obj.org}}{%if obj.org.email%} ({{obj.org.email}}){%endif%}.</p>

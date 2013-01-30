@@ -15,6 +15,7 @@ whatsoever.</i>
 <div><a href="/about/event/{{event.id}}/">{{event.title}}</a></div>
 <div>Date: <b>{{event.displaydate|safe}}</b></div>
 <div>Location: <b>{{event.locationstring}}</b></div>
+{%if event.language%}<div>Language: <b>{{event.language}}</b></div>{%endif%}
 <p>
 {{event.summary|markdown:"safe"}}
 </p>
