@@ -16,7 +16,7 @@ def main(request):
 	events = Event.objects.select_related('country').filter(approved=True).filter(training=False, enddate__gt=date.today).order_by('enddate', 'startdate',)
 	training = Event.objects.select_related('country').filter(approved=True).filter(training=True, enddate__gt=date.today).order_by('enddate', 'startdate',)
 	return render_to_response('events/archive.html', {
-		'title': 'Current events',
+		'title': 'Upcoming events',
 		'eventblocks': (
 			{ 'name': 'Events', 'events': events, 'link': '',},
 			{ 'name': 'Training', 'events': training, 'link': 'training/',},
