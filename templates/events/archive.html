@@ -1,10 +1,11 @@
 {%extends "base/page.html"%}
 {%load markup%}
-{%block title%}Event archive{%endblock%}
+{%block title%}{{title}}{%endblock%}
 {%block contents%}
 
+<h1>{{title}}</h1>
 {%for eventblock in eventblocks%}
-<h1><a name="{{eventblock.name}}">{{eventblock.name}}</a></h1>
+{%if eventblocks|length > 1%}<h2><a name="{{eventblock.name}}">{{eventblock.name}}</a></h2>{%endif%}
 <p>
 <i><b>Note:</b> The PostgreSQL Global Development Group does not endorse any
 events run by third parties. No guarantee of the quality of events is offered
@@ -18,8 +19,13 @@ whatsoever.</i>
 {{event.summary|markdown:"safe"}}
 </p>
 {%endfor%}
+{%if not archive%}
+<p><a href="/about/eventarchive/{{eventblock.link}}">Older {{eventblock.name}}</a></p>
+{%endif%}
 {%endfor%}
 
+{%if not archive%}
 <p><a href="/account/events/new/">Submit event</a></p>
+{%endif%}
 {%endblock%}
 

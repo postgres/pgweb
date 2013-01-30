@@ -27,7 +27,7 @@ class Event(PgModel, models.Model):
 	
 	def purge_urls(self):
 		yield '/about/event/%s/' % self.pk
-		yield '/about/eventarchive/'
+		yield '/about/events/'
 		yield '/events.rss'
 		# FIXME: when to expire the front page?
 		yield '/$'
