@@ -53,6 +53,33 @@
       {%endfor%}
    }
 </script>
+{%if toggle_fields%}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+<script language="javascript">
+{%for f in toggle_fields%}
+function toggle_{{f.name}}() {
+   v = $('#id_{{f.name}}').prop('checked');
+{%for c in f.fields%}
+{%if f.invert%}
+   if (v) {
+{%else%}
+   if (!v) {
+{%endif%}
+      $('#id_{{c}}').attr('disabled', true);
+   } else {
+      $('#id_{{c}}').removeAttr('disabled');
+   }
+{%endfor%}
+}
+$(document).ready(function() {
+   $('#id_{{f.name}}').change(function() {
+      toggle_{{f.name}}();
+   });
+   toggle_{{f.name}}();
+});
+{%endfor%}
+</script>
+{%endif%}
 {%endif%}
 {%endblock%}
 
