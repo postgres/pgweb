@@ -1,0 +1,1582 @@
+- fields: {alpha2: aa, alpha3term: '', frenchname: afar, name: Afar}
+  model: core.language
+  pk: aar
+- fields: {alpha2: ab, alpha3term: '', frenchname: abkhaze, name: Abkhazian}
+  model: core.language
+  pk: abk
+- fields: {alpha2: '', alpha3term: '', frenchname: aceh, name: Achinese}
+  model: core.language
+  pk: ace
+- fields: {alpha2: '', alpha3term: '', frenchname: acoli, name: Acoli}
+  model: core.language
+  pk: ach
+- fields: {alpha2: '', alpha3term: '', frenchname: adangme, name: Adangme}
+  model: core.language
+  pk: ada
+- fields: {alpha2: '', alpha3term: '', frenchname: "adygh\xE9", name: Adyghe; Adygei}
+  model: core.language
+  pk: ady
+- fields: {alpha2: '', alpha3term: '', frenchname: 'afro-asiatiques, langues', name: Afro-Asiatic
+      languages}
+  model: core.language
+  pk: afa
+- fields: {alpha2: '', alpha3term: '', frenchname: afrihili, name: Afrihili}
+  model: core.language
+  pk: afh
+- fields: {alpha2: af, alpha3term: '', frenchname: afrikaans, name: Afrikaans}
+  model: core.language
+  pk: afr
+- fields: {alpha2: '', alpha3term: '', frenchname: "a\xEFnou", name: Ainu}
+  model: core.language
+  pk: ain
+- fields: {alpha2: ak, alpha3term: '', frenchname: akan, name: Akan}
+  model: core.language
+  pk: aka
+- fields: {alpha2: '', alpha3term: '', frenchname: akkadien, name: Akkadian}
+  model: core.language
+  pk: akk
+- fields: {alpha2: sq, alpha3term: sqi, frenchname: albanais, name: Albanian}
+  model: core.language
+  pk: alb
+- fields: {alpha2: '', alpha3term: '', frenchname: "al\xE9oute", name: Aleut}
+  model: core.language
+  pk: ale
+- fields: {alpha2: '', alpha3term: '', frenchname: 'algonquines, langues', name: Algonquian
+      languages}
+  model: core.language
+  pk: alg
+- fields: {alpha2: '', alpha3term: '', frenchname: altai du Sud, name: Southern Altai}
+  model: core.language
+  pk: alt
+- fields: {alpha2: am, alpha3term: '', frenchname: amharique, name: Amharic}
+  model: core.language
+  pk: amh
+- fields: {alpha2: '', alpha3term: '', frenchname: anglo-saxon (ca.450-1100), name: 'English,
+      Old (ca.450-1100)'}
+  model: core.language
+  pk: ang
+- fields: {alpha2: '', alpha3term: '', frenchname: angika, name: Angika}
+  model: core.language
+  pk: anp
+- fields: {alpha2: '', alpha3term: '', frenchname: 'apaches, langues', name: Apache
+      languages}
+  model: core.language
+  pk: apa
+- fields: {alpha2: ar, alpha3term: '', frenchname: arabe, name: Arabic}
+  model: core.language
+  pk: ara
+- fields: {alpha2: '', alpha3term: '', frenchname: "aram\xE9en d'empire (700-300 BCE)",
+    name: Official Aramaic (700-300 BCE); Imperial Aramaic (700-300 BCE)}
+  model: core.language
+  pk: arc
+- fields: {alpha2: an, alpha3term: '', frenchname: aragonais, name: Aragonese}
+  model: core.language
+  pk: arg
+- fields: {alpha2: hy, alpha3term: hye, frenchname: "arm\xE9nien", name: Armenian}
+  model: core.language
+  pk: arm
+- fields: {alpha2: '', alpha3term: '', frenchname: mapudungun; mapuche; mapuce, name: Mapudungun;
+      Mapuche}
+  model: core.language
+  pk: arn
+- fields: {alpha2: '', alpha3term: '', frenchname: arapaho, name: Arapaho}
+  model: core.language
+  pk: arp
+- fields: {alpha2: '', alpha3term: '', frenchname: 'artificielles, langues', name: Artificial
+      languages}
+  model: core.language
+  pk: art
+- fields: {alpha2: '', alpha3term: '', frenchname: arawak, name: Arawak}
+  model: core.language
+  pk: arw
+- fields: {alpha2: as, alpha3term: '', frenchname: assamais, name: Assamese}
+  model: core.language
+  pk: asm
+- fields: {alpha2: '', alpha3term: '', frenchname: "asturien; bable; l\xE9onais; asturol\xE9\
+      onais", name: Asturian; Bable; Leonese; Asturleonese}
+  model: core.language
+  pk: ast
+- fields: {alpha2: '', alpha3term: '', frenchname: 'athapascanes, langues', name: Athapascan
+      languages}
+  model: core.language
+  pk: ath
+- fields: {alpha2: '', alpha3term: '', frenchname: 'australiennes, langues', name: Australian
+      languages}
+  model: core.language
+  pk: aus
+- fields: {alpha2: av, alpha3term: '', frenchname: avar, name: Avaric}
+  model: core.language
+  pk: ava
+- fields: {alpha2: ae, alpha3term: '', frenchname: avestique, name: Avestan}
+  model: core.language
+  pk: ave
+- fields: {alpha2: '', alpha3term: '', frenchname: awadhi, name: Awadhi}
+  model: core.language
+  pk: awa
+- fields: {alpha2: ay, alpha3term: '', frenchname: aymara, name: Aymara}
+  model: core.language
+  pk: aym
+- fields: {alpha2: az, alpha3term: '', frenchname: "az\xE9ri", name: Azerbaijani}
+  model: core.language
+  pk: aze
+- fields: {alpha2: '', alpha3term: '', frenchname: 'banda, langues', name: Banda languages}
+  model: core.language
+  pk: bad
+- fields: {alpha2: '', alpha3term: '', frenchname: "bamil\xE9k\xE9, langues", name: Bamileke
+      languages}
+  model: core.language
+  pk: bai
+- fields: {alpha2: ba, alpha3term: '', frenchname: bachkir, name: Bashkir}
+  model: core.language
+  pk: bak
+- fields: {alpha2: '', alpha3term: '', frenchname: baloutchi, name: Baluchi}
+  model: core.language
+  pk: bal
+- fields: {alpha2: bm, alpha3term: '', frenchname: bambara, name: Bambara}
+  model: core.language
+  pk: bam
+- fields: {alpha2: '', alpha3term: '', frenchname: balinais, name: Balinese}
+  model: core.language
+  pk: ban
+- fields: {alpha2: eu, alpha3term: eus, frenchname: basque, name: Basque}
+  model: core.language
+  pk: baq
+- fields: {alpha2: '', alpha3term: '', frenchname: basa, name: Basa}
+  model: core.language
+  pk: bas
+- fields: {alpha2: '', alpha3term: '', frenchname: 'baltes, langues', name: Baltic
+      languages}
+  model: core.language
+  pk: bat
+- fields: {alpha2: '', alpha3term: '', frenchname: bedja, name: Beja; Bedawiyet}
+  model: core.language
+  pk: bej
+- fields: {alpha2: be, alpha3term: '', frenchname: "bi\xE9lorusse", name: Belarusian}
+  model: core.language
+  pk: bel
+- fields: {alpha2: '', alpha3term: '', frenchname: bemba, name: Bemba}
+  model: core.language
+  pk: bem
+- fields: {alpha2: bn, alpha3term: '', frenchname: bengali, name: Bengali}
+  model: core.language
+  pk: ben
+- fields: {alpha2: '', alpha3term: '', frenchname: "berb\xE8res, langues", name: Berber
+      languages}
+  model: core.language
+  pk: ber
+- fields: {alpha2: '', alpha3term: '', frenchname: bhojpuri, name: Bhojpuri}
+  model: core.language
+  pk: bho
+- fields: {alpha2: bh, alpha3term: '', frenchname: langues biharis, name: Bihari languages}
+  model: core.language
+  pk: bih
+- fields: {alpha2: '', alpha3term: '', frenchname: bikol, name: Bikol}
+  model: core.language
+  pk: bik
+- fields: {alpha2: '', alpha3term: '', frenchname: bini; edo, name: Bini; Edo}
+  model: core.language
+  pk: bin
+- fields: {alpha2: bi, alpha3term: '', frenchname: bichlamar, name: Bislama}
+  model: core.language
+  pk: bis
+- fields: {alpha2: '', alpha3term: '', frenchname: blackfoot, name: Siksika}
+  model: core.language
+  pk: bla
+- fields: {alpha2: '', alpha3term: '', frenchname: 'bantoues, autres langues', name: Bantu
+      (Other)}
+  model: core.language
+  pk: bnt
+- fields: {alpha2: bs, alpha3term: '', frenchname: bosniaque, name: Bosnian}
+  model: core.language
+  pk: bos
+- fields: {alpha2: '', alpha3term: '', frenchname: braj, name: Braj}
+  model: core.language
+  pk: bra
+- fields: {alpha2: br, alpha3term: '', frenchname: breton, name: Breton}
+  model: core.language
+  pk: bre
+- fields: {alpha2: '', alpha3term: '', frenchname: 'batak, langues', name: Batak languages}
+  model: core.language
+  pk: btk
+- fields: {alpha2: '', alpha3term: '', frenchname: bouriate, name: Buriat}
+  model: core.language
+  pk: bua
+- fields: {alpha2: '', alpha3term: '', frenchname: bugi, name: Buginese}
+  model: core.language
+  pk: bug
+- fields: {alpha2: bg, alpha3term: '', frenchname: bulgare, name: Bulgarian}
+  model: core.language
+  pk: bul
+- fields: {alpha2: my, alpha3term: mya, frenchname: birman, name: Burmese}
+  model: core.language
+  pk: bur
+- fields: {alpha2: '', alpha3term: '', frenchname: blin; bilen, name: Blin; Bilin}
+  model: core.language
+  pk: byn
+- fields: {alpha2: '', alpha3term: '', frenchname: caddo, name: Caddo}
+  model: core.language
+  pk: cad
+- fields: {alpha2: '', alpha3term: '', frenchname: "am\xE9rindiennes de L'Am\xE9rique\
+      \ centrale, langues", name: Central American Indian languages}
+  model: core.language
+  pk: cai
+- fields: {alpha2: '', alpha3term: '', frenchname: karib; galibi; carib, name: Galibi
+      Carib}
+  model: core.language
+  pk: car
+- fields: {alpha2: ca, alpha3term: '', frenchname: catalan; valencien, name: Catalan;
+      Valencian}
+  model: core.language
+  pk: cat
+- fields: {alpha2: '', alpha3term: '', frenchname: 'caucasiennes, langues', name: Caucasian
+      languages}
+  model: core.language
+  pk: cau
+- fields: {alpha2: '', alpha3term: '', frenchname: cebuano, name: Cebuano}
+  model: core.language
+  pk: ceb
+- fields: {alpha2: '', alpha3term: '', frenchname: 'celtiques, langues; celtes, langues',
+    name: Celtic languages}
+  model: core.language
+  pk: cel
+- fields: {alpha2: ch, alpha3term: '', frenchname: chamorro, name: Chamorro}
+  model: core.language
+  pk: cha
+- fields: {alpha2: '', alpha3term: '', frenchname: chibcha, name: Chibcha}
+  model: core.language
+  pk: chb
+- fields: {alpha2: ce, alpha3term: '', frenchname: "tch\xE9tch\xE8ne", name: Chechen}
+  model: core.language
+  pk: che
+- fields: {alpha2: '', alpha3term: '', frenchname: "djaghata\xEF", name: Chagatai}
+  model: core.language
+  pk: chg
+- fields: {alpha2: zh, alpha3term: zho, frenchname: chinois, name: Chinese}
+  model: core.language
+  pk: chi
+- fields: {alpha2: '', alpha3term: '', frenchname: chuuk, name: Chuukese}
+  model: core.language
+  pk: chk
+- fields: {alpha2: '', alpha3term: '', frenchname: mari, name: Mari}
+  model: core.language
+  pk: chm
+- fields: {alpha2: '', alpha3term: '', frenchname: 'chinook, jargon', name: Chinook
+      jargon}
+  model: core.language
+  pk: chn
+- fields: {alpha2: '', alpha3term: '', frenchname: choctaw, name: Choctaw}
+  model: core.language
+  pk: cho
+- fields: {alpha2: '', alpha3term: '', frenchname: chipewyan, name: Chipewyan; Dene
+      Suline}
+  model: core.language
+  pk: chp
+- fields: {alpha2: '', alpha3term: '', frenchname: cherokee, name: Cherokee}
+  model: core.language
+  pk: chr
+- fields: {alpha2: cu, alpha3term: '', frenchname: "slavon d'\xE9glise; vieux slave;\
+      \ slavon liturgique; vieux bulgare", name: Church Slavic; Old Slavonic; Church
+      Slavonic; Old Bulgarian; Old Church Slavonic}
+  model: core.language
+  pk: chu
+- fields: {alpha2: cv, alpha3term: '', frenchname: tchouvache, name: Chuvash}
+  model: core.language
+  pk: chv
+- fields: {alpha2: '', alpha3term: '', frenchname: cheyenne, name: Cheyenne}
+  model: core.language
+  pk: chy
+- fields: {alpha2: '', alpha3term: '', frenchname: 'chames, langues', name: Chamic
+      languages}
+  model: core.language
+  pk: cmc
+- fields: {alpha2: '', alpha3term: '', frenchname: copte, name: Coptic}
+  model: core.language
+  pk: cop
+- fields: {alpha2: kw, alpha3term: '', frenchname: cornique, name: Cornish}
+  model: core.language
+  pk: cor
+- fields: {alpha2: co, alpha3term: '', frenchname: corse, name: Corsican}
+  model: core.language
+  pk: cos
+- fields: {alpha2: '', alpha3term: '', frenchname: "cr\xE9oles et pidgins bas\xE9\
+      s sur l'anglais", name: 'Creoles and pidgins, English based'}
+  model: core.language
+  pk: cpe
+- fields: {alpha2: '', alpha3term: '', frenchname: "cr\xE9oles et pidgins bas\xE9\
+      s sur le fran\xE7ais", name: 'Creoles and pidgins, French-based '}
+  model: core.language
+  pk: cpf
+- fields: {alpha2: '', alpha3term: '', frenchname: "cr\xE9oles et pidgins bas\xE9\
+      s sur le portugais", name: 'Creoles and pidgins, Portuguese-based '}
+  model: core.language
+  pk: cpp
+- fields: {alpha2: cr, alpha3term: '', frenchname: cree, name: Cree}
+  model: core.language
+  pk: cre
+- fields: {alpha2: '', alpha3term: '', frenchname: "tatar de Crim\xE9", name: Crimean
+      Tatar; Crimean Turkish}
+  model: core.language
+  pk: crh
+- fields: {alpha2: '', alpha3term: '', frenchname: "cr\xE9oles et pidgins", name: 'Creoles
+      and pidgins '}
+  model: core.language
+  pk: crp
+- fields: {alpha2: '', alpha3term: '', frenchname: kachoube, name: Kashubian}
+  model: core.language
+  pk: csb
+- fields: {alpha2: '', alpha3term: '', frenchname: 'couchitiques, langues', name: Cushitic
+      languages}
+  model: core.language
+  pk: cus
+- fields: {alpha2: cs, alpha3term: ces, frenchname: "tch\xE8que", name: Czech}
+  model: core.language
+  pk: cze
+- fields: {alpha2: '', alpha3term: '', frenchname: dakota, name: Dakota}
+  model: core.language
+  pk: dak
+- fields: {alpha2: da, alpha3term: '', frenchname: danois, name: Danish}
+  model: core.language
+  pk: dan
+- fields: {alpha2: '', alpha3term: '', frenchname: dargwa, name: Dargwa}
+  model: core.language
+  pk: dar
+- fields: {alpha2: '', alpha3term: '', frenchname: 'dayak, langues', name: Land Dayak
+      languages}
+  model: core.language
+  pk: day
+- fields: {alpha2: '', alpha3term: '', frenchname: delaware, name: Delaware}
+  model: core.language
+  pk: del
+- fields: {alpha2: '', alpha3term: '', frenchname: esclave (athapascan), name: Slave
+      (Athapascan)}
+  model: core.language
+  pk: den
+- fields: {alpha2: '', alpha3term: '', frenchname: dogrib, name: Dogrib}
+  model: core.language
+  pk: dgr
+- fields: {alpha2: '', alpha3term: '', frenchname: dinka, name: Dinka}
+  model: core.language
+  pk: din
+- fields: {alpha2: dv, alpha3term: '', frenchname: maldivien, name: Divehi; Dhivehi;
+      Maldivian}
+  model: core.language
+  pk: div
+- fields: {alpha2: '', alpha3term: '', frenchname: dogri, name: Dogri}
+  model: core.language
+  pk: doi
+- fields: {alpha2: '', alpha3term: '', frenchname: 'dravidiennes, langues', name: Dravidian
+      languages}
+  model: core.language
+  pk: dra
+- fields: {alpha2: '', alpha3term: '', frenchname: bas-sorabe, name: Lower Sorbian}
+  model: core.language
+  pk: dsb
+- fields: {alpha2: '', alpha3term: '', frenchname: douala, name: Duala}
+  model: core.language
+  pk: dua
+- fields: {alpha2: '', alpha3term: '', frenchname: "n\xE9erlandais moyen (ca. 1050-1350)",
+    name: 'Dutch, Middle (ca.1050-1350)'}
+  model: core.language
+  pk: dum
+- fields: {alpha2: nl, alpha3term: nld, frenchname: "n\xE9erlandais; flamand", name: Dutch;
+      Flemish}
+  model: core.language
+  pk: dut
+- fields: {alpha2: '', alpha3term: '', frenchname: dioula, name: Dyula}
+  model: core.language
+  pk: dyu
+- fields: {alpha2: dz, alpha3term: '', frenchname: dzongkha, name: Dzongkha}
+  model: core.language
+  pk: dzo
+- fields: {alpha2: '', alpha3term: '', frenchname: efik, name: Efik}
+  model: core.language
+  pk: efi
+- fields: {alpha2: '', alpha3term: '', frenchname: "\xE9gyptien", name: Egyptian (Ancient)}
+  model: core.language
+  pk: egy
+- fields: {alpha2: '', alpha3term: '', frenchname: ekajuk, name: Ekajuk}
+  model: core.language
+  pk: eka
+- fields: {alpha2: '', alpha3term: '', frenchname: "\xE9lamite", name: Elamite}
+  model: core.language
+  pk: elx
+- fields: {alpha2: en, alpha3term: '', frenchname: anglais, name: English}
+  model: core.language
+  pk: eng
+- fields: {alpha2: '', alpha3term: '', frenchname: anglais moyen (1100-1500), name: 'English,
+      Middle (1100-1500)'}
+  model: core.language
+  pk: enm
+- fields: {alpha2: eo, alpha3term: '', frenchname: "esp\xE9ranto", name: Esperanto}
+  model: core.language
+  pk: epo
+- fields: {alpha2: et, alpha3term: '', frenchname: estonien, name: Estonian}
+  model: core.language
+  pk: est
+- fields: {alpha2: ee, alpha3term: '', frenchname: "\xE9w\xE9", name: Ewe}
+  model: core.language
+  pk: ewe
+- fields: {alpha2: '', alpha3term: '', frenchname: "\xE9wondo", name: Ewondo}
+  model: core.language
+  pk: ewo
+- fields: {alpha2: '', alpha3term: '', frenchname: fang, name: Fang}
+  model: core.language
+  pk: fan
+- fields: {alpha2: fo, alpha3term: '', frenchname: "f\xE9ro\xEFen", name: Faroese}
+  model: core.language
+  pk: fao
+- fields: {alpha2: '', alpha3term: '', frenchname: fanti, name: Fanti}
+  model: core.language
+  pk: fat
+- fields: {alpha2: fj, alpha3term: '', frenchname: fidjien, name: Fijian}
+  model: core.language
+  pk: fij
+- fields: {alpha2: '', alpha3term: '', frenchname: filipino; pilipino, name: Filipino;
+      Pilipino}
+  model: core.language
+  pk: fil
+- fields: {alpha2: fi, alpha3term: '', frenchname: finnois, name: Finnish}
+  model: core.language
+  pk: fin
+- fields: {alpha2: '', alpha3term: '', frenchname: 'finno-ougriennes, langues', name: Finno-Ugrian
+      languages}
+  model: core.language
+  pk: fiu
+- fields: {alpha2: '', alpha3term: '', frenchname: fon, name: Fon}
+  model: core.language
+  pk: fon
+- fields: {alpha2: fr, alpha3term: fra, frenchname: "fran\xE7ais", name: French}
+  model: core.language
+  pk: fre
+- fields: {alpha2: '', alpha3term: '', frenchname: "fran\xE7ais moyen (1400-1600)",
+    name: 'French, Middle (ca.1400-1600)'}
+  model: core.language
+  pk: frm
+- fields: {alpha2: '', alpha3term: '', frenchname: "fran\xE7ais ancien (842-ca.1400)",
+    name: 'French, Old (842-ca.1400)'}
+  model: core.language
+  pk: fro
+- fields: {alpha2: '', alpha3term: '', frenchname: frison septentrional, name: Northern
+      Frisian}
+  model: core.language
+  pk: frr
+- fields: {alpha2: '', alpha3term: '', frenchname: frison oriental, name: Eastern
+      Frisian}
+  model: core.language
+  pk: frs
+- fields: {alpha2: fy, alpha3term: '', frenchname: frison occidental, name: Western
+      Frisian}
+  model: core.language
+  pk: fry
+- fields: {alpha2: ff, alpha3term: '', frenchname: peul, name: Fulah}
+  model: core.language
+  pk: ful
+- fields: {alpha2: '', alpha3term: '', frenchname: frioulan, name: Friulian}
+  model: core.language
+  pk: fur
+- fields: {alpha2: '', alpha3term: '', frenchname: ga, name: Ga}
+  model: core.language
+  pk: gaa
+- fields: {alpha2: '', alpha3term: '', frenchname: gayo, name: Gayo}
+  model: core.language
+  pk: gay
+- fields: {alpha2: '', alpha3term: '', frenchname: gbaya, name: Gbaya}
+  model: core.language
+  pk: gba
+- fields: {alpha2: '', alpha3term: '', frenchname: 'germaniques, langues', name: Germanic
+      languages}
+  model: core.language
+  pk: gem
+- fields: {alpha2: ka, alpha3term: kat, frenchname: "g\xE9orgien", name: Georgian}
+  model: core.language
+  pk: geo
+- fields: {alpha2: de, alpha3term: deu, frenchname: allemand, name: German}
+  model: core.language
+  pk: ger
+- fields: {alpha2: '', alpha3term: '', frenchname: "gu\xE8ze", name: Geez}
+  model: core.language
+  pk: gez
+- fields: {alpha2: '', alpha3term: '', frenchname: kiribati, name: Gilbertese}
+  model: core.language
+  pk: gil
+- fields: {alpha2: gd, alpha3term: '', frenchname: "ga\xE9lique; ga\xE9lique \xE9\
+      cossais", name: Gaelic; Scottish Gaelic}
+  model: core.language
+  pk: gla
+- fields: {alpha2: ga, alpha3term: '', frenchname: irlandais, name: Irish}
+  model: core.language
+  pk: gle
+- fields: {alpha2: gl, alpha3term: '', frenchname: galicien, name: Galician}
+  model: core.language
+  pk: glg
+- fields: {alpha2: gv, alpha3term: '', frenchname: manx; mannois, name: Manx}
+  model: core.language
+  pk: glv
+- fields: {alpha2: '', alpha3term: '', frenchname: 'allemand, moyen haut (ca. 1050-1500)',
+    name: 'German, Middle High (ca.1050-1500)'}
+  model: core.language
+  pk: gmh
+- fields: {alpha2: '', alpha3term: '', frenchname: 'allemand, vieux haut (ca. 750-1050)',
+    name: 'German, Old High (ca.750-1050)'}
+  model: core.language
+  pk: goh
+- fields: {alpha2: '', alpha3term: '', frenchname: gond, name: Gondi}
+  model: core.language
+  pk: gon
+- fields: {alpha2: '', alpha3term: '', frenchname: gorontalo, name: Gorontalo}
+  model: core.language
+  pk: gor
+- fields: {alpha2: '', alpha3term: '', frenchname: gothique, name: Gothic}
+  model: core.language
+  pk: got
+- fields: {alpha2: '', alpha3term: '', frenchname: grebo, name: Grebo}
+  model: core.language
+  pk: grb
+- fields: {alpha2: '', alpha3term: '', frenchname: "grec ancien (jusqu'\xE0 1453)",
+    name: 'Greek, Ancient (to 1453)'}
+  model: core.language
+  pk: grc
+- fields: {alpha2: el, alpha3term: ell, frenchname: "grec moderne (apr\xE8s 1453)",
+    name: 'Greek, Modern (1453-)'}
+  model: core.language
+  pk: gre
+- fields: {alpha2: gn, alpha3term: '', frenchname: guarani, name: Guarani}
+  model: core.language
+  pk: grn
+- fields: {alpha2: '', alpha3term: '', frenchname: "suisse al\xE9manique; al\xE9manique;\
+      \ alsacien", name: Swiss German; Alemannic; Alsatian}
+  model: core.language
+  pk: gsw
+- fields: {alpha2: gu, alpha3term: '', frenchname: goudjrati, name: Gujarati}
+  model: core.language
+  pk: guj
+- fields: {alpha2: '', alpha3term: '', frenchname: gwich'in, name: Gwich'in}
+  model: core.language
+  pk: gwi
+- fields: {alpha2: '', alpha3term: '', frenchname: haida, name: Haida}
+  model: core.language
+  pk: hai
+- fields: {alpha2: ht, alpha3term: '', frenchname: "ha\xEFtien; cr\xE9ole ha\xEFtien",
+    name: Haitian; Haitian Creole}
+  model: core.language
+  pk: hat
+- fields: {alpha2: ha, alpha3term: '', frenchname: haoussa, name: Hausa}
+  model: core.language
+  pk: hau
+- fields: {alpha2: '', alpha3term: '', frenchname: "hawa\xEFen", name: Hawaiian}
+  model: core.language
+  pk: haw
+- fields: {alpha2: he, alpha3term: '', frenchname: "h\xE9breu", name: Hebrew}
+  model: core.language
+  pk: heb
+- fields: {alpha2: hz, alpha3term: '', frenchname: herero, name: Herero}
+  model: core.language
+  pk: her
+- fields: {alpha2: '', alpha3term: '', frenchname: hiligaynon, name: Hiligaynon}
+  model: core.language
+  pk: hil
+- fields: {alpha2: '', alpha3term: '', frenchname: langues himachalis; langues paharis
+      occidentales, name: Himachali languages; Western Pahari languages}
+  model: core.language
+  pk: him
+- fields: {alpha2: hi, alpha3term: '', frenchname: hindi, name: Hindi}
+  model: core.language
+  pk: hin
+- fields: {alpha2: '', alpha3term: '', frenchname: hittite, name: Hittite}
+  model: core.language
+  pk: hit
+- fields: {alpha2: '', alpha3term: '', frenchname: hmong, name: Hmong; Mong}
+  model: core.language
+  pk: hmn
+- fields: {alpha2: ho, alpha3term: '', frenchname: hiri motu, name: Hiri Motu}
+  model: core.language
+  pk: hmo
+- fields: {alpha2: hr, alpha3term: '', frenchname: croate, name: Croatian}
+  model: core.language
+  pk: hrv
+- fields: {alpha2: '', alpha3term: '', frenchname: haut-sorabe, name: Upper Sorbian}
+  model: core.language
+  pk: hsb
+- fields: {alpha2: hu, alpha3term: '', frenchname: hongrois, name: Hungarian}
+  model: core.language
+  pk: hun
+- fields: {alpha2: '', alpha3term: '', frenchname: hupa, name: Hupa}
+  model: core.language
+  pk: hup
+- fields: {alpha2: '', alpha3term: '', frenchname: iban, name: Iban}
+  model: core.language
+  pk: iba
+- fields: {alpha2: ig, alpha3term: '', frenchname: igbo, name: Igbo}
+  model: core.language
+  pk: ibo
+- fields: {alpha2: is, alpha3term: isl, frenchname: islandais, name: Icelandic}
+  model: core.language
+  pk: ice
+- fields: {alpha2: io, alpha3term: '', frenchname: ido, name: Ido}
+  model: core.language
+  pk: ido
+- fields: {alpha2: ii, alpha3term: '', frenchname: yi de Sichuan, name: Sichuan Yi;
+      Nuosu}
+  model: core.language
+  pk: iii
+- fields: {alpha2: '', alpha3term: '', frenchname: 'ijo, langues', name: Ijo languages}
+  model: core.language
+  pk: ijo
+- fields: {alpha2: iu, alpha3term: '', frenchname: inuktitut, name: Inuktitut}
+  model: core.language
+  pk: iku
+- fields: {alpha2: ie, alpha3term: '', frenchname: interlingue, name: Interlingue;
+      Occidental}
+  model: core.language
+  pk: ile
+- fields: {alpha2: '', alpha3term: '', frenchname: ilocano, name: Iloko}
+  model: core.language
+  pk: ilo
+- fields: {alpha2: ia, alpha3term: '', frenchname: interlingua (langue auxiliaire
+      internationale), name: Interlingua (International Auxiliary Language Association)}
+  model: core.language
+  pk: ina
+- fields: {alpha2: '', alpha3term: '', frenchname: 'indo-aryennes, langues', name: Indic
+      languages}
+  model: core.language
+  pk: inc
+- fields: {alpha2: id, alpha3term: '', frenchname: "indon\xE9sien", name: Indonesian}
+  model: core.language
+  pk: ind
+- fields: {alpha2: '', alpha3term: '', frenchname: "indo-europ\xE9ennes, langues",
+    name: Indo-European languages}
+  model: core.language
+  pk: ine
+- fields: {alpha2: '', alpha3term: '', frenchname: ingouche, name: Ingush}
+  model: core.language
+  pk: inh
+- fields: {alpha2: ik, alpha3term: '', frenchname: inupiaq, name: Inupiaq}
+  model: core.language
+  pk: ipk
+- fields: {alpha2: '', alpha3term: '', frenchname: 'iraniennes, langues', name: Iranian
+      languages}
+  model: core.language
+  pk: ira
+- fields: {alpha2: '', alpha3term: '', frenchname: 'iroquoises, langues', name: Iroquoian
+      languages}
+  model: core.language
+  pk: iro
+- fields: {alpha2: it, alpha3term: '', frenchname: italien, name: Italian}
+  model: core.language
+  pk: ita
+- fields: {alpha2: jv, alpha3term: '', frenchname: javanais, name: Javanese}
+  model: core.language
+  pk: jav
+- fields: {alpha2: '', alpha3term: '', frenchname: lojban, name: Lojban}
+  model: core.language
+  pk: jbo
+- fields: {alpha2: ja, alpha3term: '', frenchname: japonais, name: Japanese}
+  model: core.language
+  pk: jpn
+- fields: {alpha2: '', alpha3term: '', frenchname: "jud\xE9o-persan", name: Judeo-Persian}
+  model: core.language
+  pk: jpr
+- fields: {alpha2: '', alpha3term: '', frenchname: "jud\xE9o-arabe", name: Judeo-Arabic}
+  model: core.language
+  pk: jrb
+- fields: {alpha2: '', alpha3term: '', frenchname: karakalpak, name: Kara-Kalpak}
+  model: core.language
+  pk: kaa
+- fields: {alpha2: '', alpha3term: '', frenchname: kabyle, name: Kabyle}
+  model: core.language
+  pk: kab
+- fields: {alpha2: '', alpha3term: '', frenchname: kachin; jingpho, name: Kachin;
+      Jingpho}
+  model: core.language
+  pk: kac
+- fields: {alpha2: kl, alpha3term: '', frenchname: groenlandais, name: Kalaallisut;
+      Greenlandic}
+  model: core.language
+  pk: kal
+- fields: {alpha2: '', alpha3term: '', frenchname: kamba, name: Kamba}
+  model: core.language
+  pk: kam
+- fields: {alpha2: kn, alpha3term: '', frenchname: kannada, name: Kannada}
+  model: core.language
+  pk: kan
+- fields: {alpha2: '', alpha3term: '', frenchname: 'karen, langues', name: Karen languages}
+  model: core.language
+  pk: kar
+- fields: {alpha2: ks, alpha3term: '', frenchname: kashmiri, name: Kashmiri}
+  model: core.language
+  pk: kas
+- fields: {alpha2: kr, alpha3term: '', frenchname: kanouri, name: Kanuri}
+  model: core.language
+  pk: kau
+- fields: {alpha2: '', alpha3term: '', frenchname: kawi, name: Kawi}
+  model: core.language
+  pk: kaw
+- fields: {alpha2: kk, alpha3term: '', frenchname: kazakh, name: Kazakh}
+  model: core.language
+  pk: kaz
+- fields: {alpha2: '', alpha3term: '', frenchname: kabardien, name: Kabardian}
+  model: core.language
+  pk: kbd
+- fields: {alpha2: '', alpha3term: '', frenchname: khasi, name: Khasi}
+  model: core.language
+  pk: kha
+- fields: {alpha2: '', alpha3term: '', frenchname: "kho\xEFsan, langues", name: Khoisan
+      languages}
+  model: core.language
+  pk: khi
+- fields: {alpha2: km, alpha3term: '', frenchname: khmer central, name: Central Khmer}
+  model: core.language
+  pk: khm
+- fields: {alpha2: '', alpha3term: '', frenchname: khotanais; sakan, name: Khotanese;
+      Sakan}
+  model: core.language
+  pk: kho
+- fields: {alpha2: ki, alpha3term: '', frenchname: kikuyu, name: Kikuyu; Gikuyu}
+  model: core.language
+  pk: kik
+- fields: {alpha2: rw, alpha3term: '', frenchname: rwanda, name: Kinyarwanda}
+  model: core.language
+  pk: kin
+- fields: {alpha2: ky, alpha3term: '', frenchname: kirghiz, name: Kirghiz; Kyrgyz}
+  model: core.language
+  pk: kir
+- fields: {alpha2: '', alpha3term: '', frenchname: kimbundu, name: Kimbundu}
+  model: core.language
+  pk: kmb
+- fields: {alpha2: '', alpha3term: '', frenchname: konkani, name: Konkani}
+  model: core.language
+  pk: kok
+- fields: {alpha2: kv, alpha3term: '', frenchname: kom, name: Komi}
+  model: core.language
+  pk: kom
+- fields: {alpha2: kg, alpha3term: '', frenchname: kongo, name: Kongo}
+  model: core.language
+  pk: kon
+- fields: {alpha2: ko, alpha3term: '', frenchname: "cor\xE9en", name: Korean}
+  model: core.language
+  pk: kor
+- fields: {alpha2: '', alpha3term: '', frenchname: kosrae, name: Kosraean}
+  model: core.language
+  pk: kos
+- fields: {alpha2: '', alpha3term: '', frenchname: "kpell\xE9", name: Kpelle}
+  model: core.language
+  pk: kpe
+- fields: {alpha2: '', alpha3term: '', frenchname: karatchai balkar, name: Karachay-Balkar}
+  model: core.language
+  pk: krc
+- fields: {alpha2: '', alpha3term: '', frenchname: "car\xE9lien", name: Karelian}
+  model: core.language
+  pk: krl
+- fields: {alpha2: '', alpha3term: '', frenchname: 'krou, langues', name: Kru languages}
+  model: core.language
+  pk: kro
+- fields: {alpha2: '', alpha3term: '', frenchname: kurukh, name: Kurukh}
+  model: core.language
+  pk: kru
+- fields: {alpha2: kj, alpha3term: '', frenchname: kuanyama; kwanyama, name: Kuanyama;
+      Kwanyama}
+  model: core.language
+  pk: kua
+- fields: {alpha2: '', alpha3term: '', frenchname: koumyk, name: Kumyk}
+  model: core.language
+  pk: kum
+- fields: {alpha2: ku, alpha3term: '', frenchname: kurde, name: Kurdish}
+  model: core.language
+  pk: kur
+- fields: {alpha2: '', alpha3term: '', frenchname: kutenai, name: Kutenai}
+  model: core.language
+  pk: kut
+- fields: {alpha2: '', alpha3term: '', frenchname: "jud\xE9o-espagnol", name: Ladino}
+  model: core.language
+  pk: lad
+- fields: {alpha2: '', alpha3term: '', frenchname: lahnda, name: Lahnda}
+  model: core.language
+  pk: lah
+- fields: {alpha2: '', alpha3term: '', frenchname: lamba, name: Lamba}
+  model: core.language
+  pk: lam
+- fields: {alpha2: lo, alpha3term: '', frenchname: lao, name: Lao}
+  model: core.language
+  pk: lao
+- fields: {alpha2: la, alpha3term: '', frenchname: latin, name: Latin}
+  model: core.language
+  pk: lat
+- fields: {alpha2: lv, alpha3term: '', frenchname: letton, name: Latvian}
+  model: core.language
+  pk: lav
+- fields: {alpha2: '', alpha3term: '', frenchname: lezghien, name: Lezghian}
+  model: core.language
+  pk: lez
+- fields: {alpha2: li, alpha3term: '', frenchname: limbourgeois, name: Limburgan;
+      Limburger; Limburgish}
+  model: core.language
+  pk: lim
+- fields: {alpha2: ln, alpha3term: '', frenchname: lingala, name: Lingala}
+  model: core.language
+  pk: lin
+- fields: {alpha2: lt, alpha3term: '', frenchname: lituanien, name: Lithuanian}
+  model: core.language
+  pk: lit
+- fields: {alpha2: '', alpha3term: '', frenchname: mongo, name: Mongo}
+  model: core.language
+  pk: lol
+- fields: {alpha2: '', alpha3term: '', frenchname: lozi, name: Lozi}
+  model: core.language
+  pk: loz
+- fields: {alpha2: lb, alpha3term: '', frenchname: luxembourgeois, name: Luxembourgish;
+      Letzeburgesch}
+  model: core.language
+  pk: ltz
+- fields: {alpha2: '', alpha3term: '', frenchname: luba-lulua, name: Luba-Lulua}
+  model: core.language
+  pk: lua
+- fields: {alpha2: lu, alpha3term: '', frenchname: luba-katanga, name: Luba-Katanga}
+  model: core.language
+  pk: lub
+- fields: {alpha2: lg, alpha3term: '', frenchname: ganda, name: Ganda}
+  model: core.language
+  pk: lug
+- fields: {alpha2: '', alpha3term: '', frenchname: luiseno, name: Luiseno}
+  model: core.language
+  pk: lui
+- fields: {alpha2: '', alpha3term: '', frenchname: lunda, name: Lunda}
+  model: core.language
+  pk: lun
+- fields: {alpha2: '', alpha3term: '', frenchname: luo (Kenya et Tanzanie), name: Luo
+      (Kenya and Tanzania)}
+  model: core.language
+  pk: luo
+- fields: {alpha2: '', alpha3term: '', frenchname: lushai, name: Lushai}
+  model: core.language
+  pk: lus
+- fields: {alpha2: mk, alpha3term: mkd, frenchname: "mac\xE9donien", name: Macedonian}
+  model: core.language
+  pk: mac
+- fields: {alpha2: '', alpha3term: '', frenchname: madourais, name: Madurese}
+  model: core.language
+  pk: mad
+- fields: {alpha2: '', alpha3term: '', frenchname: magahi, name: Magahi}
+  model: core.language
+  pk: mag
+- fields: {alpha2: mh, alpha3term: '', frenchname: marshall, name: Marshallese}
+  model: core.language
+  pk: mah
+- fields: {alpha2: '', alpha3term: '', frenchname: maithili, name: Maithili}
+  model: core.language
+  pk: mai
+- fields: {alpha2: '', alpha3term: '', frenchname: makassar, name: Makasar}
+  model: core.language
+  pk: mak
+- fields: {alpha2: ml, alpha3term: '', frenchname: malayalam, name: Malayalam}
+  model: core.language
+  pk: mal
+- fields: {alpha2: '', alpha3term: '', frenchname: mandingue, name: Mandingo}
+  model: core.language
+  pk: man
+- fields: {alpha2: mi, alpha3term: mri, frenchname: maori, name: Maori}
+  model: core.language
+  pk: mao
+- fields: {alpha2: '', alpha3term: '', frenchname: "austron\xE9siennes, langues",
+    name: Austronesian languages}
+  model: core.language
+  pk: map
+- fields: {alpha2: mr, alpha3term: '', frenchname: marathe, name: Marathi}
+  model: core.language
+  pk: mar
+- fields: {alpha2: '', alpha3term: '', frenchname: "massa\xEF", name: Masai}
+  model: core.language
+  pk: mas
+- fields: {alpha2: ms, alpha3term: msa, frenchname: malais, name: Malay}
+  model: core.language
+  pk: may
+- fields: {alpha2: '', alpha3term: '', frenchname: moksa, name: Moksha}
+  model: core.language
+  pk: mdf
+- fields: {alpha2: '', alpha3term: '', frenchname: mandar, name: Mandar}
+  model: core.language
+  pk: mdr
+- fields: {alpha2: '', alpha3term: '', frenchname: "mend\xE9", name: Mende}
+  model: core.language
+  pk: men
+- fields: {alpha2: '', alpha3term: '', frenchname: irlandais moyen (900-1200), name: 'Irish,
+      Middle (900-1200)'}
+  model: core.language
+  pk: mga
+- fields: {alpha2: '', alpha3term: '', frenchname: mi'kmaq; micmac, name: Mi'kmaq;
+      Micmac}
+  model: core.language
+  pk: mic
+- fields: {alpha2: '', alpha3term: '', frenchname: minangkabau, name: Minangkabau}
+  model: core.language
+  pk: min
+- fields: {alpha2: '', alpha3term: '', frenchname: "langues non cod\xE9es", name: Uncoded
+      languages}
+  model: core.language
+  pk: mis
+- fields: {alpha2: '', alpha3term: '', frenchname: "m\xF4n-khmer, langues", name: Mon-Khmer
+      languages}
+  model: core.language
+  pk: mkh
+- fields: {alpha2: mg, alpha3term: '', frenchname: malgache, name: Malagasy}
+  model: core.language
+  pk: mlg
+- fields: {alpha2: mt, alpha3term: '', frenchname: maltais, name: Maltese}
+  model: core.language
+  pk: mlt
+- fields: {alpha2: '', alpha3term: '', frenchname: mandchou, name: Manchu}
+  model: core.language
+  pk: mnc
+- fields: {alpha2: '', alpha3term: '', frenchname: manipuri, name: Manipuri}
+  model: core.language
+  pk: mni
+- fields: {alpha2: '', alpha3term: '', frenchname: 'manobo, langues', name: Manobo
+      languages}
+  model: core.language
+  pk: mno
+- fields: {alpha2: '', alpha3term: '', frenchname: mohawk, name: Mohawk}
+  model: core.language
+  pk: moh
+- fields: {alpha2: mn, alpha3term: '', frenchname: mongol, name: Mongolian}
+  model: core.language
+  pk: mon
+- fields: {alpha2: '', alpha3term: '', frenchname: "mor\xE9", name: Mossi}
+  model: core.language
+  pk: mos
+- fields: {alpha2: '', alpha3term: '', frenchname: multilingue, name: Multiple languages}
+  model: core.language
+  pk: mul
+- fields: {alpha2: '', alpha3term: '', frenchname: 'mounda, langues', name: Munda
+      languages}
+  model: core.language
+  pk: mun
+- fields: {alpha2: '', alpha3term: '', frenchname: muskogee, name: Creek}
+  model: core.language
+  pk: mus
+- fields: {alpha2: '', alpha3term: '', frenchname: mirandais, name: Mirandese}
+  model: core.language
+  pk: mwl
+- fields: {alpha2: '', alpha3term: '', frenchname: marvari, name: Marwari}
+  model: core.language
+  pk: mwr
+- fields: {alpha2: '', alpha3term: '', frenchname: 'maya, langues', name: Mayan languages}
+  model: core.language
+  pk: myn
+- fields: {alpha2: '', alpha3term: '', frenchname: erza, name: Erzya}
+  model: core.language
+  pk: myv
+- fields: {alpha2: '', alpha3term: '', frenchname: 'nahuatl, langues', name: Nahuatl
+      languages}
+  model: core.language
+  pk: nah
+- fields: {alpha2: '', alpha3term: '', frenchname: "nord-am\xE9rindiennes, langues",
+    name: North American Indian languages}
+  model: core.language
+  pk: nai
+- fields: {alpha2: '', alpha3term: '', frenchname: napolitain, name: Neapolitan}
+  model: core.language
+  pk: nap
+- fields: {alpha2: na, alpha3term: '', frenchname: nauruan, name: Nauru}
+  model: core.language
+  pk: nau
+- fields: {alpha2: nv, alpha3term: '', frenchname: navaho, name: Navajo; Navaho}
+  model: core.language
+  pk: nav
+- fields: {alpha2: nr, alpha3term: '', frenchname: "nd\xE9b\xE9l\xE9 du Sud", name: 'Ndebele,
+      South; South Ndebele'}
+  model: core.language
+  pk: nbl
+- fields: {alpha2: nd, alpha3term: '', frenchname: "nd\xE9b\xE9l\xE9 du Nord", name: 'Ndebele,
+      North; North Ndebele'}
+  model: core.language
+  pk: nde
+- fields: {alpha2: ng, alpha3term: '', frenchname: ndonga, name: Ndonga}
+  model: core.language
+  pk: ndo
+- fields: {alpha2: '', alpha3term: '', frenchname: 'bas allemand; bas saxon; allemand,
+      bas; saxon, bas', name: 'Low German; Low Saxon; German, Low; Saxon, Low'}
+  model: core.language
+  pk: nds
+- fields: {alpha2: ne, alpha3term: '', frenchname: "n\xE9palais", name: Nepali}
+  model: core.language
+  pk: nep
+- fields: {alpha2: '', alpha3term: '', frenchname: nepal bhasa; newari, name: Nepal
+      Bhasa; Newari}
+  model: core.language
+  pk: new
+- fields: {alpha2: '', alpha3term: '', frenchname: nias, name: Nias}
+  model: core.language
+  pk: nia
+- fields: {alpha2: '', alpha3term: '', frenchname: "nig\xE9ro-kordofaniennes, langues",
+    name: Niger-Kordofanian languages}
+  model: core.language
+  pk: nic
+- fields: {alpha2: '', alpha3term: '', frenchname: "niu\xE9", name: Niuean}
+  model: core.language
+  pk: niu
+- fields: {alpha2: nn, alpha3term: '', frenchname: "norv\xE9gien nynorsk; nynorsk,\
+      \ norv\xE9gien", name: 'Norwegian Nynorsk; Nynorsk, Norwegian'}
+  model: core.language
+  pk: nno
+- fields: {alpha2: nb, alpha3term: '', frenchname: "norv\xE9gien bokm\xE5l", name: "Bokm\xE5\
+      l, Norwegian; Norwegian Bokm\xE5l"}
+  model: core.language
+  pk: nob
+- fields: {alpha2: '', alpha3term: '', frenchname: "noga\xEF; nogay", name: Nogai}
+  model: core.language
+  pk: nog
+- fields: {alpha2: '', alpha3term: '', frenchname: 'norrois, vieux', name: 'Norse,
+      Old'}
+  model: core.language
+  pk: non
+- fields: {alpha2: 'no', alpha3term: '', frenchname: "norv\xE9gien", name: Norwegian}
+  model: core.language
+  pk: nor
+- fields: {alpha2: '', alpha3term: '', frenchname: n'ko, name: N'Ko}
+  model: core.language
+  pk: nqo
+- fields: {alpha2: '', alpha3term: '', frenchname: pedi; sepedi; sotho du Nord, name: Pedi;
+      Sepedi; Northern Sotho}
+  model: core.language
+  pk: nso
+- fields: {alpha2: '', alpha3term: '', frenchname: 'nubiennes, langues', name: Nubian
+      languages}
+  model: core.language
+  pk: nub
+- fields: {alpha2: '', alpha3term: '', frenchname: newari classique, name: Classical
+      Newari; Old Newari; Classical Nepal Bhasa}
+  model: core.language
+  pk: nwc
+- fields: {alpha2: ny, alpha3term: '', frenchname: chichewa; chewa; nyanja, name: Chichewa;
+      Chewa; Nyanja}
+  model: core.language
+  pk: nya
+- fields: {alpha2: '', alpha3term: '', frenchname: nyamwezi, name: Nyamwezi}
+  model: core.language
+  pk: nym
+- fields: {alpha2: '', alpha3term: '', frenchname: "nyankol\xE9", name: Nyankole}
+  model: core.language
+  pk: nyn
+- fields: {alpha2: '', alpha3term: '', frenchname: nyoro, name: Nyoro}
+  model: core.language
+  pk: nyo
+- fields: {alpha2: '', alpha3term: '', frenchname: nzema, name: Nzima}
+  model: core.language
+  pk: nzi
+- fields: {alpha2: oc, alpha3term: '', frenchname: "occitan (apr\xE8s 1500); proven\xE7\
+      al", name: "Occitan (post 1500); Proven\xE7al"}
+  model: core.language
+  pk: oci
+- fields: {alpha2: oj, alpha3term: '', frenchname: ojibwa, name: Ojibwa}
+  model: core.language
+  pk: oji
+- fields: {alpha2: or, alpha3term: '', frenchname: oriya, name: Oriya}
+  model: core.language
+  pk: ori
+- fields: {alpha2: om, alpha3term: '', frenchname: galla, name: Oromo}
+  model: core.language
+  pk: orm
+- fields: {alpha2: '', alpha3term: '', frenchname: osage, name: Osage}
+  model: core.language
+  pk: osa
+- fields: {alpha2: os, alpha3term: '', frenchname: "oss\xE8te", name: Ossetian; Ossetic}
+  model: core.language
+  pk: oss
+- fields: {alpha2: '', alpha3term: '', frenchname: turc ottoman (1500-1928), name: 'Turkish,
+      Ottoman (1500-1928)'}
+  model: core.language
+  pk: ota
+- fields: {alpha2: '', alpha3term: '', frenchname: 'otomi, langues', name: Otomian
+      languages}
+  model: core.language
+  pk: oto
+- fields: {alpha2: '', alpha3term: '', frenchname: 'papoues, langues', name: Papuan
+      languages}
+  model: core.language
+  pk: paa
+- fields: {alpha2: '', alpha3term: '', frenchname: pangasinan, name: Pangasinan}
+  model: core.language
+  pk: pag
+- fields: {alpha2: '', alpha3term: '', frenchname: pahlavi, name: Pahlavi}
+  model: core.language
+  pk: pal
+- fields: {alpha2: '', alpha3term: '', frenchname: pampangan, name: Pampanga; Kapampangan}
+  model: core.language
+  pk: pam
+- fields: {alpha2: pa, alpha3term: '', frenchname: pendjabi, name: Panjabi; Punjabi}
+  model: core.language
+  pk: pan
+- fields: {alpha2: '', alpha3term: '', frenchname: papiamento, name: Papiamento}
+  model: core.language
+  pk: pap
+- fields: {alpha2: '', alpha3term: '', frenchname: palau, name: Palauan}
+  model: core.language
+  pk: pau
+- fields: {alpha2: '', alpha3term: '', frenchname: 'perse, vieux (ca. 600-400 av.
+      J.-C.)', name: 'Persian, Old (ca.600-400 B.C.)'}
+  model: core.language
+  pk: peo
+- fields: {alpha2: fa, alpha3term: fas, frenchname: persan, name: Persian}
+  model: core.language
+  pk: per
+- fields: {alpha2: '', alpha3term: '', frenchname: 'philippines, langues', name: Philippine
+      languages}
+  model: core.language
+  pk: phi
+- fields: {alpha2: '', alpha3term: '', frenchname: "ph\xE9nicien", name: Phoenician}
+  model: core.language
+  pk: phn
+- fields: {alpha2: pi, alpha3term: '', frenchname: pali, name: Pali}
+  model: core.language
+  pk: pli
+- fields: {alpha2: pl, alpha3term: '', frenchname: polonais, name: Polish}
+  model: core.language
+  pk: pol
+- fields: {alpha2: '', alpha3term: '', frenchname: pohnpei, name: Pohnpeian}
+  model: core.language
+  pk: pon
+- fields: {alpha2: pt, alpha3term: '', frenchname: portugais, name: Portuguese}
+  model: core.language
+  pk: por
+- fields: {alpha2: '', alpha3term: '', frenchname: "pr\xE2krit, langues", name: Prakrit
+      languages}
+  model: core.language
+  pk: pra
+- fields: {alpha2: '', alpha3term: '', frenchname: "proven\xE7al ancien (jusqu'\xE0\
+      \ 1500)", name: "Proven\xE7al, Old (to 1500)"}
+  model: core.language
+  pk: pro
+- fields: {alpha2: ps, alpha3term: '', frenchname: pachto, name: Pushto; Pashto}
+  model: core.language
+  pk: pus
+- fields: {alpha2: '', alpha3term: '', frenchname: "r\xE9serv\xE9e \xE0 l'usage local",
+    name: Reserved for local use}
+  model: core.language
+  pk: qaa-qtz
+- fields: {alpha2: qu, alpha3term: '', frenchname: quechua, name: Quechua}
+  model: core.language
+  pk: que
+- fields: {alpha2: '', alpha3term: '', frenchname: rajasthani, name: Rajasthani}
+  model: core.language
+  pk: raj
+- fields: {alpha2: '', alpha3term: '', frenchname: rapanui, name: Rapanui}
+  model: core.language
+  pk: rap
+- fields: {alpha2: '', alpha3term: '', frenchname: "rarotonga; maori des \xEEles Cook",
+    name: Rarotongan; Cook Islands Maori}
+  model: core.language
+  pk: rar
+- fields: {alpha2: '', alpha3term: '', frenchname: 'romanes, langues', name: Romance
+      languages}
+  model: core.language
+  pk: roa
+- fields: {alpha2: rm, alpha3term: '', frenchname: romanche, name: Romansh}
+  model: core.language
+  pk: roh
+- fields: {alpha2: '', alpha3term: '', frenchname: tsigane, name: Romany}
+  model: core.language
+  pk: rom
+- fields: {alpha2: ro, alpha3term: ron, frenchname: roumain; moldave, name: Romanian;
+      Moldavian; Moldovan}
+  model: core.language
+  pk: rum
+- fields: {alpha2: rn, alpha3term: '', frenchname: rundi, name: Rundi}
+  model: core.language
+  pk: run
+- fields: {alpha2: '', alpha3term: '', frenchname: "aroumain; mac\xE9do-roumain",
+    name: Aromanian; Arumanian; Macedo-Romanian}
+  model: core.language
+  pk: rup
+- fields: {alpha2: ru, alpha3term: '', frenchname: russe, name: Russian}
+  model: core.language
+  pk: rus
+- fields: {alpha2: '', alpha3term: '', frenchname: sandawe, name: Sandawe}
+  model: core.language
+  pk: sad
+- fields: {alpha2: sg, alpha3term: '', frenchname: sango, name: Sango}
+  model: core.language
+  pk: sag
+- fields: {alpha2: '', alpha3term: '', frenchname: iakoute, name: Yakut}
+  model: core.language
+  pk: sah
+- fields: {alpha2: '', alpha3term: '', frenchname: "indiennes d'Am\xE9rique du Sud,\
+      \ autres langues", name: South American Indian (Other)}
+  model: core.language
+  pk: sai
+- fields: {alpha2: '', alpha3term: '', frenchname: 'salishennes, langues', name: Salishan
+      languages}
+  model: core.language
+  pk: sal
+- fields: {alpha2: '', alpha3term: '', frenchname: samaritain, name: Samaritan Aramaic}
+  model: core.language
+  pk: sam
+- fields: {alpha2: sa, alpha3term: '', frenchname: sanskrit, name: Sanskrit}
+  model: core.language
+  pk: san
+- fields: {alpha2: '', alpha3term: '', frenchname: sasak, name: Sasak}
+  model: core.language
+  pk: sas
+- fields: {alpha2: '', alpha3term: '', frenchname: santal, name: Santali}
+  model: core.language
+  pk: sat
+- fields: {alpha2: '', alpha3term: '', frenchname: sicilien, name: Sicilian}
+  model: core.language
+  pk: scn
+- fields: {alpha2: '', alpha3term: '', frenchname: "\xE9cossais", name: Scots}
+  model: core.language
+  pk: sco
+- fields: {alpha2: '', alpha3term: '', frenchname: selkoupe, name: Selkup}
+  model: core.language
+  pk: sel
+- fields: {alpha2: '', alpha3term: '', frenchname: "s\xE9mitiques, langues", name: Semitic
+      languages}
+  model: core.language
+  pk: sem
+- fields: {alpha2: '', alpha3term: '', frenchname: "irlandais ancien (jusqu'\xE0 900)",
+    name: 'Irish, Old (to 900)'}
+  model: core.language
+  pk: sga
+- fields: {alpha2: '', alpha3term: '', frenchname: langues des signes, name: Sign
+      Languages}
+  model: core.language
+  pk: sgn
+- fields: {alpha2: '', alpha3term: '', frenchname: chan, name: Shan}
+  model: core.language
+  pk: shn
+- fields: {alpha2: '', alpha3term: '', frenchname: sidamo, name: Sidamo}
+  model: core.language
+  pk: sid
+- fields: {alpha2: si, alpha3term: '', frenchname: singhalais, name: Sinhala; Sinhalese}
+  model: core.language
+  pk: sin
+- fields: {alpha2: '', alpha3term: '', frenchname: 'sioux, langues', name: Siouan
+      languages}
+  model: core.language
+  pk: sio
+- fields: {alpha2: '', alpha3term: '', frenchname: "sino-tib\xE9taines, langues",
+    name: Sino-Tibetan languages}
+  model: core.language
+  pk: sit
+- fields: {alpha2: '', alpha3term: '', frenchname: 'slaves, langues', name: Slavic
+      languages}
+  model: core.language
+  pk: sla
+- fields: {alpha2: sk, alpha3term: slk, frenchname: slovaque, name: Slovak}
+  model: core.language
+  pk: slo
+- fields: {alpha2: sl, alpha3term: '', frenchname: "slov\xE8ne", name: Slovenian}
+  model: core.language
+  pk: slv
+- fields: {alpha2: '', alpha3term: '', frenchname: sami du Sud, name: Southern Sami}
+  model: core.language
+  pk: sma
+- fields: {alpha2: se, alpha3term: '', frenchname: sami du Nord, name: Northern Sami}
+  model: core.language
+  pk: sme
+- fields: {alpha2: '', alpha3term: '', frenchname: 'sames, langues', name: Sami languages}
+  model: core.language
+  pk: smi
+- fields: {alpha2: '', alpha3term: '', frenchname: sami de Lule, name: Lule Sami}
+  model: core.language
+  pk: smj
+- fields: {alpha2: '', alpha3term: '', frenchname: sami d'Inari, name: Inari Sami}
+  model: core.language
+  pk: smn
+- fields: {alpha2: sm, alpha3term: '', frenchname: samoan, name: Samoan}
+  model: core.language
+  pk: smo
+- fields: {alpha2: '', alpha3term: '', frenchname: sami skolt, name: Skolt Sami}
+  model: core.language
+  pk: sms
+- fields: {alpha2: sn, alpha3term: '', frenchname: shona, name: Shona}
+  model: core.language
+  pk: sna
+- fields: {alpha2: sd, alpha3term: '', frenchname: sindhi, name: Sindhi}
+  model: core.language
+  pk: snd
+- fields: {alpha2: '', alpha3term: '', frenchname: "sonink\xE9", name: Soninke}
+  model: core.language
+  pk: snk
+- fields: {alpha2: '', alpha3term: '', frenchname: sogdien, name: Sogdian}
+  model: core.language
+  pk: sog
+- fields: {alpha2: so, alpha3term: '', frenchname: somali, name: Somali}
+  model: core.language
+  pk: som
+- fields: {alpha2: '', alpha3term: '', frenchname: 'songhai, langues', name: Songhai
+      languages}
+  model: core.language
+  pk: son
+- fields: {alpha2: st, alpha3term: '', frenchname: sotho du Sud, name: 'Sotho, Southern'}
+  model: core.language
+  pk: sot
+- fields: {alpha2: es, alpha3term: '', frenchname: espagnol; castillan, name: Spanish;
+      Castilian}
+  model: core.language
+  pk: spa
+- fields: {alpha2: sc, alpha3term: '', frenchname: sarde, name: Sardinian}
+  model: core.language
+  pk: srd
+- fields: {alpha2: '', alpha3term: '', frenchname: sranan tongo, name: Sranan Tongo}
+  model: core.language
+  pk: srn
+- fields: {alpha2: sr, alpha3term: '', frenchname: serbe, name: Serbian}
+  model: core.language
+  pk: srp
+- fields: {alpha2: '', alpha3term: '', frenchname: "s\xE9r\xE8re", name: Serer}
+  model: core.language
+  pk: srr
+- fields: {alpha2: '', alpha3term: '', frenchname: 'nilo-sahariennes, langues', name: Nilo-Saharan
+      languages}
+  model: core.language
+  pk: ssa
+- fields: {alpha2: ss, alpha3term: '', frenchname: swati, name: Swati}
+  model: core.language
+  pk: ssw
+- fields: {alpha2: '', alpha3term: '', frenchname: sukuma, name: Sukuma}
+  model: core.language
+  pk: suk
+- fields: {alpha2: su, alpha3term: '', frenchname: soundanais, name: Sundanese}
+  model: core.language
+  pk: sun
+- fields: {alpha2: '', alpha3term: '', frenchname: soussou, name: Susu}
+  model: core.language
+  pk: sus
+- fields: {alpha2: '', alpha3term: '', frenchname: "sum\xE9rien", name: Sumerian}
+  model: core.language
+  pk: sux
+- fields: {alpha2: sw, alpha3term: '', frenchname: swahili, name: Swahili}
+  model: core.language
+  pk: swa
+- fields: {alpha2: sv, alpha3term: '', frenchname: "su\xE9dois", name: Swedish}
+  model: core.language
+  pk: swe
+- fields: {alpha2: '', alpha3term: '', frenchname: syriaque classique, name: Classical
+      Syriac}
+  model: core.language
+  pk: syc
+- fields: {alpha2: '', alpha3term: '', frenchname: syriaque, name: Syriac}
+  model: core.language
+  pk: syr
+- fields: {alpha2: ty, alpha3term: '', frenchname: tahitien, name: Tahitian}
+  model: core.language
+  pk: tah
+- fields: {alpha2: '', alpha3term: '', frenchname: 'tai, langues', name: Tai languages}
+  model: core.language
+  pk: tai
+- fields: {alpha2: ta, alpha3term: '', frenchname: tamoul, name: Tamil}
+  model: core.language
+  pk: tam
+- fields: {alpha2: tt, alpha3term: '', frenchname: tatar, name: Tatar}
+  model: core.language
+  pk: tat
+- fields: {alpha2: te, alpha3term: '', frenchname: "t\xE9lougou", name: Telugu}
+  model: core.language
+  pk: tel
+- fields: {alpha2: '', alpha3term: '', frenchname: temne, name: Timne}
+  model: core.language
+  pk: tem
+- fields: {alpha2: '', alpha3term: '', frenchname: tereno, name: Tereno}
+  model: core.language
+  pk: ter
+- fields: {alpha2: '', alpha3term: '', frenchname: tetum, name: Tetum}
+  model: core.language
+  pk: tet
+- fields: {alpha2: tg, alpha3term: '', frenchname: tadjik, name: Tajik}
+  model: core.language
+  pk: tgk
+- fields: {alpha2: tl, alpha3term: '', frenchname: tagalog, name: Tagalog}
+  model: core.language
+  pk: tgl
+- fields: {alpha2: th, alpha3term: '', frenchname: "tha\xEF", name: Thai}
+  model: core.language
+  pk: tha
+- fields: {alpha2: bo, alpha3term: bod, frenchname: "tib\xE9tain", name: Tibetan}
+  model: core.language
+  pk: tib
+- fields: {alpha2: '', alpha3term: '', frenchname: "tigr\xE9", name: Tigre}
+  model: core.language
+  pk: tig
+- fields: {alpha2: ti, alpha3term: '', frenchname: tigrigna, name: Tigrinya}
+  model: core.language
+  pk: tir
+- fields: {alpha2: '', alpha3term: '', frenchname: tiv, name: Tiv}
+  model: core.language
+  pk: tiv
+- fields: {alpha2: '', alpha3term: '', frenchname: tokelau, name: Tokelau}
+  model: core.language
+  pk: tkl
+- fields: {alpha2: '', alpha3term: '', frenchname: klingon, name: Klingon; tlhIngan-Hol}
+  model: core.language
+  pk: tlh
+- fields: {alpha2: '', alpha3term: '', frenchname: tlingit, name: Tlingit}
+  model: core.language
+  pk: tli
+- fields: {alpha2: '', alpha3term: '', frenchname: tamacheq, name: Tamashek}
+  model: core.language
+  pk: tmh
+- fields: {alpha2: '', alpha3term: '', frenchname: tonga (Nyasa), name: Tonga (Nyasa)}
+  model: core.language
+  pk: tog
+- fields: {alpha2: to, alpha3term: '', frenchname: "tongan (\xCEles Tonga)", name: Tonga
+      (Tonga Islands)}
+  model: core.language
+  pk: ton
+- fields: {alpha2: '', alpha3term: '', frenchname: tok pisin, name: Tok Pisin}
+  model: core.language
+  pk: tpi
+- fields: {alpha2: '', alpha3term: '', frenchname: tsimshian, name: Tsimshian}
+  model: core.language
+  pk: tsi
+- fields: {alpha2: tn, alpha3term: '', frenchname: tswana, name: Tswana}
+  model: core.language
+  pk: tsn
+- fields: {alpha2: ts, alpha3term: '', frenchname: tsonga, name: Tsonga}
+  model: core.language
+  pk: tso
+- fields: {alpha2: tk, alpha3term: '', frenchname: "turkm\xE8ne", name: Turkmen}
+  model: core.language
+  pk: tuk
+- fields: {alpha2: '', alpha3term: '', frenchname: tumbuka, name: Tumbuka}
+  model: core.language
+  pk: tum
+- fields: {alpha2: '', alpha3term: '', frenchname: 'tupi, langues', name: Tupi languages}
+  model: core.language
+  pk: tup
+- fields: {alpha2: tr, alpha3term: '', frenchname: turc, name: Turkish}
+  model: core.language
+  pk: tur
+- fields: {alpha2: '', alpha3term: '', frenchname: "alta\xEFques, langues", name: Altaic
+      languages}
+  model: core.language
+  pk: tut
+- fields: {alpha2: '', alpha3term: '', frenchname: tuvalu, name: Tuvalu}
+  model: core.language
+  pk: tvl
+- fields: {alpha2: tw, alpha3term: '', frenchname: twi, name: Twi}
+  model: core.language
+  pk: twi
+- fields: {alpha2: '', alpha3term: '', frenchname: touva, name: Tuvinian}
+  model: core.language
+  pk: tyv
+- fields: {alpha2: '', alpha3term: '', frenchname: oudmourte, name: Udmurt}
+  model: core.language
+  pk: udm
+- fields: {alpha2: '', alpha3term: '', frenchname: ougaritique, name: Ugaritic}
+  model: core.language
+  pk: uga
+- fields: {alpha2: ug, alpha3term: '', frenchname: "ou\xEFgour", name: Uighur; Uyghur}
+  model: core.language
+  pk: uig
+- fields: {alpha2: uk, alpha3term: '', frenchname: ukrainien, name: Ukrainian}
+  model: core.language
+  pk: ukr
+- fields: {alpha2: '', alpha3term: '', frenchname: umbundu, name: Umbundu}
+  model: core.language
+  pk: umb
+- fields: {alpha2: '', alpha3term: '', frenchname: "ind\xE9termin\xE9e", name: Undetermined}
+  model: core.language
+  pk: und
+- fields: {alpha2: ur, alpha3term: '', frenchname: ourdou, name: Urdu}
+  model: core.language
+  pk: urd
+- fields: {alpha2: uz, alpha3term: '', frenchname: ouszbek, name: Uzbek}
+  model: core.language
+  pk: uzb
+- fields: {alpha2: '', alpha3term: '', frenchname: "va\xEF", name: Vai}
+  model: core.language
+  pk: vai
+- fields: {alpha2: ve, alpha3term: '', frenchname: venda, name: Venda}
+  model: core.language
+  pk: ven
+- fields: {alpha2: vi, alpha3term: '', frenchname: vietnamien, name: Vietnamese}
+  model: core.language
+  pk: vie
+- fields: {alpha2: vo, alpha3term: '', frenchname: "volap\xFCk", name: "Volap\xFCk"}
+  model: core.language
+  pk: vol
+- fields: {alpha2: '', alpha3term: '', frenchname: vote, name: Votic}
+  model: core.language
+  pk: vot
+- fields: {alpha2: '', alpha3term: '', frenchname: 'wakashanes, langues', name: Wakashan
+      languages}
+  model: core.language
+  pk: wak
+- fields: {alpha2: '', alpha3term: '', frenchname: walamo, name: Walamo}
+  model: core.language
+  pk: wal
+- fields: {alpha2: '', alpha3term: '', frenchname: waray, name: Waray}
+  model: core.language
+  pk: war
+- fields: {alpha2: '', alpha3term: '', frenchname: washo, name: Washo}
+  model: core.language
+  pk: was
+- fields: {alpha2: cy, alpha3term: cym, frenchname: gallois, name: Welsh}
+  model: core.language
+  pk: wel
+- fields: {alpha2: '', alpha3term: '', frenchname: 'sorabes, langues', name: Sorbian
+      languages}
+  model: core.language
+  pk: wen
+- fields: {alpha2: wa, alpha3term: '', frenchname: wallon, name: Walloon}
+  model: core.language
+  pk: wln
+- fields: {alpha2: wo, alpha3term: '', frenchname: wolof, name: Wolof}
+  model: core.language
+  pk: wol
+- fields: {alpha2: '', alpha3term: '', frenchname: "kalmouk; o\xEFrat", name: Kalmyk;
+      Oirat}
+  model: core.language
+  pk: xal
+- fields: {alpha2: xh, alpha3term: '', frenchname: xhosa, name: Xhosa}
+  model: core.language
+  pk: xho
+- fields: {alpha2: '', alpha3term: '', frenchname: yao, name: Yao}
+  model: core.language
+  pk: yao
+- fields: {alpha2: '', alpha3term: '', frenchname: yapois, name: Yapese}
+  model: core.language
+  pk: yap
+- fields: {alpha2: yi, alpha3term: '', frenchname: yiddish, name: Yiddish}
+  model: core.language
+  pk: yid
+- fields: {alpha2: yo, alpha3term: '', frenchname: yoruba, name: Yoruba}
+  model: core.language
+  pk: yor
+- fields: {alpha2: '', alpha3term: '', frenchname: 'yupik, langues', name: Yupik languages}
+  model: core.language
+  pk: ypk
+- fields: {alpha2: '', alpha3term: '', frenchname: "zapot\xE8que", name: Zapotec}
+  model: core.language
+  pk: zap
+- fields: {alpha2: '', alpha3term: '', frenchname: symboles Bliss; Bliss, name: Blissymbols;
+      Blissymbolics; Bliss}
+  model: core.language
+  pk: zbl
+- fields: {alpha2: '', alpha3term: '', frenchname: zenaga, name: Zenaga}
+  model: core.language
+  pk: zen
+- fields: {alpha2: '', alpha3term: '', frenchname: amazighe standard marocain, name: Standard
+      Moroccan Tamazight}
+  model: core.language
+  pk: zgh
+- fields: {alpha2: za, alpha3term: '', frenchname: zhuang; chuang, name: Zhuang; Chuang}
+  model: core.language
+  pk: zha
+- fields: {alpha2: '', alpha3term: '', frenchname: "zand\xE9, langues", name: Zande
+      languages}
+  model: core.language
+  pk: znd
+- fields: {alpha2: zu, alpha3term: '', frenchname: zoulou, name: Zulu}
+  model: core.language
+  pk: zul
+- fields: {alpha2: '', alpha3term: '', frenchname: zuni, name: Zuni}
+  model: core.language
+  pk: zun
+- fields: {alpha2: '', alpha3term: '', frenchname: pas de contenu linguistique; non
+      applicable, name: No linguistic content; Not applicable}
+  model: core.language
+  pk: zxx
+- fields: {alpha2: '', alpha3term: '', frenchname: zaza; dimili; dimli; kirdki; kirmanjki;
+      zazaki, name: Zaza; Dimili; Dimli; Kirdki; Kirmanjki; Zazaki}
+  model: core.language
+  pk: zza

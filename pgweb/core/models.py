@@ -61,6 +61,27 @@ class Country(models.Model):
 	def __unicode__(self):
 		return self.name
 
+class Language(models.Model):
+	# Import data from http://www.loc.gov/standards/iso639-2/ISO-639-2_utf-8.txt
+	# (yes, there is a UTF16 BOM in the UTF8 file)
+	# (and yes, there is a 7 length value in a field specified as 3 chars)
+	alpha3 = models.CharField(max_length=7, null=False, blank=False, primary_key=True)
+	alpha3term = models.CharField(max_length=3, null=False, blank=True)
+	alpha2 = models.CharField(max_length=2, null=False, blank=True)
+	name = models.CharField(max_length=100, null=False, blank=False)
+	frenchname = models.CharField(max_length=100, null=False, blank=False)
+
+	class Meta:
+		ordering = ('name', )
+
+	def __unicode__(self):
+		return self.name
+
+	# Get the english language to use for default in foreign keys
+	@staticmethod
+	def english():
+		return Language.objects.get(pk='eng')
+
 class OrganisationType(models.Model):
 	typename = models.CharField(max_length=32, null=False, blank=False)
 
