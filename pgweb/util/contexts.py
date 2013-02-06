@@ -48,7 +48,7 @@ sitenav = {
 		{'title': 'Contributors',       'link':'/community/contributors/'},
 		{'title': 'Mailing Lists',      'link':'/community/lists/', 'submenu': [
 			{'title': 'Subscribe',  'link':'/community/lists/subscribe/'},
-			{'title': 'Archives',   'link':'http://archives.postgresql.org/'},
+			{'title': 'Archives',   'link':'/list/'},
 		]},
 		{'title': 'IRC',                'link':'/community/irc/'},
 		{'title': 'Featured Users',     'link':'/about/users/'},
