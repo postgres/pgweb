@@ -10,3 +10,13 @@ div.markdownpreview p {
    padding-left: 0px !important;
 }
 
+/* Override some things from django admin interface */
+div.adminmarkdownpreview h2 {
+    background: none !important;
+    color: rgb(102, 102, 102) !important;
+    font-size: 22px !important;
+}
+
+div.adminmarkdownpreview ul,ol {
+   margin-left: 0px !important;
+}

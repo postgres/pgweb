@@ -22,6 +22,7 @@ function attach_showdown_preview(objid, admin) {
 		obj.style.marginRight = '10px';
 		obj.style.width = newdiv.style.width = "400px";
 		obj.style.height = newdiv.style.height = "200px";
+		newdiv.className = newdiv.className + ' adminmarkdownpreview';
 	}
 
 	obj.preview_div = newdiv;
