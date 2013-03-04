@@ -5,3 +5,13 @@
 body {
 	font-size: 93%;
 }
+
+#pgTopNav,
+#pgTopNavLeft,
+#pgTopNavRight {
+	height: 57px;
+}
+
+#pgTopNavList {
+	line-height: 1.8em;
+}
