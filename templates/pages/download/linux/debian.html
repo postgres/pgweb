@@ -26,7 +26,6 @@ Debian, use the <i>apt-get</i> (or other apt-driving) command:
 <code>
 apt-get install postgresql-9.1
 </code>
-</p>
 <p>
 The repository contains many different packages including third party
 addons. The most command and important packages are (substitute the
@@ -41,6 +40,15 @@ version number as required):
  <li>pgadmin3 - pgAdmin III graphical administration utility</li>
 </ul>
 
+<script type="text/javascript">
+ <!--
+ function updateSeries(select) {
+  var deb = document.getElementById('series-deb');
+  deb.innerHTML = select.value;
+ }
+ -->
+</script>
+
 <h2>PostgreSQL Apt Repository</h2>
 <p>
 If the version included in your version of Debian is not the one you want,
@@ -51,29 +59,27 @@ updates for all supported versions of PostgreSQL throughout the support
 </p>
 <p>
 To use the apt repository, follow these steps:
+</p>
 <ul>
- <li>Import the repository signing key
-   <code>wget -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add -</code>
+ <li>
+  <select id="field.series" name="field.series" onchange='updateSeries(this);'>
+   <option selected="selected" value="YOUR_DEBIAN_VERSION_HERE">Choose your Debian version</option>
+   <option value="wheezy">Wheezy (7.0)</option>
+   <option value="squeeze">Squeeze (6.0)</option>
+  </select>
  </li>
- <li>Edit the file <i>/etc/apt/sources.list.d/pgdg.list</i>, and add a line
-   for the repository, substituting the proper "codename" for your release
-   <code>deb http://apt.postgresql.org/pub/repos/apt/ squeeze-pgdg main</code>
+ <li>Create the file <i>/etc/apt/sources.list.d/pgdg.list</i>, and add a line
+ for the repository
+ <code>deb http://apt.postgresql.org/pub/repos/apt/ <span id="series-deb">YOUR_DEBIAN_VERSION_HERE</span>-pgdg main</code>
  </li>
- <li>Configure apt's package pinning to prefer the PGDG packages over the standard ones in <i>/etc/apt/preferences.d/pgdg.pref</i>
+ <li>Import the repository signing key, and update the package lists
    <code>
-Package: *<br/>
-Pin: release o=apt.postgresql.org<br/>
-Pin-Priority: 500
-   </code>
- </li>
- <li>Update the package lists, and install the pgdg-keyring package to automatically get repository key updates
-   <code>
-sudo apt-get update<br/>
-sudo apt-get install pgdg-keyring
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \<br/>
+&nbsp;&nbsp;sudo apt-key add -<br/>
+sudo apt-get update
    </code>
  </li>
 </ul>
-</p>
 <p>
 For more information about the apt repository, including answers to frequent
 questions, please see the apt page on
