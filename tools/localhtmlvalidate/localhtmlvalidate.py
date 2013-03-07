@@ -64,6 +64,7 @@ if __name__=="__main__":
 	# Now submit it to the w3c validator
 	h = httplib.HTTP("validator.w3.org")
 	h.putrequest("POST", "/check")
+	h.putheader("User-Agent: localcheck-tester/0.0")
 	h.putheader("content-type", "multipart/form-data; boundary=%s" % BOUNDARY)
 	h.putheader("content-length", str(len(body)))
 	h.endheaders()
