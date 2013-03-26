@@ -1,5 +1,7 @@
 from django import forms
 
+import re
+
 from django.contrib.auth.models import User
 from pgweb.core.models import UserProfile
 
@@ -25,6 +27,8 @@ class SignupForm(forms.Form):
 	def clean_username(self):
 		username = self.cleaned_data['username'].lower()
 
+		if not re.match('^[a-z0-9_@\.-]+$', username):
+			raise forms.ValidationError("Invalid character in user name. Only a-z, 0-9, _, @, . and - allowed.")
 		try:
 			u = User.objects.get(username=username)
 		except User.DoesNotExist:
