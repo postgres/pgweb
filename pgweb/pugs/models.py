@@ -13,5 +13,7 @@ class PUG(PgModel, models.Model):
     website_url = models.TextField(null=True, blank=True)
     mailing_list_url = models.TextField(null=True, blank=True)
 
+	purge_urls = ('/community/user-groups/', )
+
     def __unicode__(self):
         return self.title
