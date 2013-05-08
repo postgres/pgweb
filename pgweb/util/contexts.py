@@ -51,6 +51,7 @@ sitenav = {
 			{'title': 'Archives',   'link':'/list/'},
 		]},
 		{'title': 'IRC',                'link':'/community/irc/'},
+		{'title': 'Local User Groups',  'link':'/community/user-groups/'},
 		{'title': 'Featured Users',     'link':'/about/users/'},
 		{'title': 'International Sites','link':'/community/international/'},
 		{'title': 'Propaganda',         'link':'/community/propaganda/'},

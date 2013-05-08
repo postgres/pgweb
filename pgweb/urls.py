@@ -56,6 +56,7 @@ urlpatterns = patterns('',
     (r'^community/lists/listinfo/$', 'lists.views.listinfo'),
     (r'^community/survey/vote/(\d+)/$', 'survey.views.vote'),
     (r'^community/survey[/\.](\d+)(-.*)?/$', 'survey.views.results'),
+    (r'^community/user-groups/$', 'pugs.views.index'),
 	(r'^community/weeklynews/$', 'pwn.views.index'),
 	(r'^community/weeklynews/pwn(\d{4})(\d{2})(\d{2})/$', 'pwn.views.post'),
 

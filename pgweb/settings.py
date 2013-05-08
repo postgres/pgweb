@@ -110,6 +110,7 @@ INSTALLED_APPS = [
     'pgweb.featurematrix',
 	'pgweb.pwn',
 	'pgweb.search',
+    'pgweb.pugs',
 ]
 
 
