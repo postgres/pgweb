@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import ValidationError
 
 from pgweb.core.models import Organisation
 from models import Event
@@ -27,6 +28,18 @@ class EventForm(forms.ModelForm):
 				self._errors['country'] = self.error_class(['Country must be specified for non-online events'])
 				del cleaned_data['country']
 		return cleaned_data
+
+	def clean_startdate(self):
+		if self.instance.pk and self.instance.approved:
+			if self.cleaned_data['startdate'] != self.instance.startdate:
+				raise ValidationError("You cannot change the dates on events that have been approved")
+		return self.cleaned_data['startdate']
+
+	def clean_enddate(self):
+		if self.instance.pk and self.instance.approved:
+			if self.cleaned_data['enddate'] != self.instance.enddate:
+				raise ValidationError("You cannot change the dates on events that have been approved")
+		return self.cleaned_data['enddate']
 
 	class Meta:
 		model = Event
