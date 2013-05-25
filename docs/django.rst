@@ -12,8 +12,8 @@ coding practices used there.
 Functions and classes should be documented in-line, through comments
 or docstrings.
 
-The site is currently deployed on Django 1.2 (being the standard version
-in Debian Squeeze), so all testing should be done against this version.
+The site is currently deployed on Django 1.5 (being the standard version
+in Debian Wheezy), so all testing should be done against this version.
 
 Database access
 ---------------
