@@ -27,14 +27,14 @@ class PgwebAdmin(admin.ModelAdmin):
 				fld.widget.attrs['class'] = fld.widget.attrs['class'] + ' markdown_preview'
 		return fld
 
-	def change_view(self, request, object_id, extra_context=None):
+	def change_view(self, request, object_id, form_url='', extra_context=None):
 		if self.model.send_notification:
 			# Anything that sends notification supports manual notifications
 			if extra_context == None:
 				extra_context = dict()
 			extra_context['notifications'] = ModerationNotification.objects.filter(objecttype=self.model.__name__, objectid=object_id).order_by('date')
 
-		return super(PgwebAdmin, self).change_view(request, object_id, extra_context)
+		return super(PgwebAdmin, self).change_view(request, object_id, form_url, extra_context)
 
 	# Remove the builtin delete_selected action, so it doesn't
 	# conflict with the custom one.
