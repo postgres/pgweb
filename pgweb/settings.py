@@ -52,14 +52,15 @@ SECRET_KEY = 'REALLYCHANGETHISINSETTINGS_LOCAL.PY'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
+	'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.load_template_source',
 )
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+	'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'util.middleware.PgMiddleware',
@@ -75,7 +76,8 @@ TEMPLATE_DIRS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-	'django.core.context_processors.auth',
+	'django.contrib.auth.context_processors.auth',
+	'django.contrib.messages.context_processors.messages',
 	'django.core.context_processors.media',
 	'util.contexts.RootLinkContextProcessor',
 )
@@ -91,6 +93,7 @@ AUTHENTICATION_BACKENDS = (
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.admin',
     'django.contrib.markup',
