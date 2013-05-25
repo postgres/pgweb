@@ -15,12 +15,6 @@ from core.feeds import VersionFeed
 from news.feeds import NewsFeed
 from events.feeds import EventFeed
 from pwn.feeds import PwnFeed
-feeds = {
-	'versions': VersionFeed,
-	'news': NewsFeed,
-	'events': EventFeed,
-	'weeklynews': PwnFeed,
-}
 
 urlpatterns = patterns('',
     (r'^$', 'pgweb.core.views.home'),
@@ -75,7 +69,10 @@ urlpatterns = patterns('',
     ###
     # RSS feeds
     ###
-    (r'^(versions|news|events|weeklynews).rss$', 'django.contrib.syndication.views.feed', {'feed_dict':feeds}),
+    (r'^versions.rss$', VersionFeed()),
+    (r'^news.rss$', NewsFeed()),
+    (r'^events.rss$', EventFeed()),
+    (r'^weeklynews.rss$', PwnFeed()),
 
     ###
     # Special sections
