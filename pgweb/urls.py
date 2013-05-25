@@ -135,9 +135,6 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
 
     # This should not happen in production - serve by the webserver natively!
-    url(r'^media/(.*)$', 'django.views.static.serve', {
-        'document_root': '../media',
-    }),
     url(r'^(favicon.ico)$', 'django.views.static.serve', {
         'document_root': '../media',
     }),
