@@ -59,90 +59,10 @@ if (pg_num_rows($q) == 0) {
    */
   $token = md5(microtime() . mt_rand(0, 0x7fffffff));
 
-  /* Hardcoded default options.. Ugly, but it works.. */
-  $options=<<<EOT
-quickbar=1
-underline=2
-cols=80
-rows=25
-searchlimit=20
-contextlines=5
-contextchars=50
-skin=postgresql
-math=1
-rcdays=7
-rclimit=50
-wllimit=250
-highlightbroken=1
-stubthreshold=0
-previewontop=1
-editsection=1
-editsectiononrightclick=0
-showtoc=1
-showtoolbar=1
-date=ISO 8601
-imagesize=2
-thumbsize=2
-rememberpassword=0
-enotifwatchlistpages=1
-enotifusertalkpages=1
-enotifminoredits=1
-enotifrevealaddr=0
-shownumberswatching=0
-fancysig=0
-externaleditor=0
-externaldiff=0
-showjumplinks=1
-numberheadings=0
-uselivepreview=0
-watchlistdays=3
-variant=
-language=en
-searchNs0=1
-nickname=
-timecorrection=
-ajaxsearch=
-searchNs1=0
-searchNs2=0
-searchNs3=0
-searchNs4=0
-searchNs5=0
-searchNs6=0
-searchNs7=0
-searchNs8=0
-searchNs9=0
-searchNs10=0
-searchNs11=0
-searchNs12=0
-searchNs13=0
-searchNs14=0
-searchNs15=0
-disablemail=1
-justify=0
-hideminor=0
-extendwatchlist=0
-usenewrc=0
-editondblclick=0
-editwidth=0
-watchcreations=0
-watchdefault=0
-watchmoves=0
-watchdeletion=0
-minordefault=0
-previewonfirst=0
-nocache=0
-forceeditsummary=0
-watchlisthideown=0
-watchlisthidebots=0
-watchlisthideminor=0
-ccmeonemails=1
-diffonly=0
-EOT;
-
   /*
    * Try to create a user..
    */
-  $q = pg_query_params($db, "INSERT INTO mwuser (user_name, user_real_name, user_password, user_newpassword, user_newpass_time, user_token, user_email, user_email_token, user_email_token_expires, user_email_authenticated, user_options, user_touched, user_registration, user_editcount, user_hidden) VALUES ($1, $2, NULL, NULL, NULL, $3, $4, NULL, '2000-01-01 00:00:00', CURRENT_TIMESTAMP, $5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0) RETURNING user_token, user_id, user_real_name, user_email", array(ucfirst(strtolower($data['u'])), $data['f'] . ' ' . $data['l'], $token, $data['e'], $options));
+  $q = pg_query_params($db, "INSERT INTO mwuser (user_name, user_real_name, user_password, user_newpassword, user_newpass_time, user_token, user_email, user_email_token, user_email_token_expires, user_email_authenticated, user_options, user_touched, user_registration, user_editcount, user_hidden) VALUES ($1, $2, NULL, NULL, NULL, $3, $4, NULL, '2000-01-01 00:00:00', CURRENT_TIMESTAMP, $5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0) RETURNING user_token, user_id, user_real_name, user_email", array(ucfirst(strtolower($data['u'])), $data['f'] . ' ' . $data['l'], $token, $data['e'], ''));
   if (pg_num_rows($q) != 1) {
     print "Failed to add user!";
     pg_close($db);
