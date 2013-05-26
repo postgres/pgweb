@@ -32,7 +32,7 @@ for reference on the first row).
 
 Configuration
 +++++++++++++
-Edit the settings in `pgauth_conf.php` to set steid, key and URLs. The
+Edit the settings in `pgauth_conf.php` to set siteid, key and URLs. The
 database connectoin string configured here is for the authentication
 provider to connect to the mediawiki database, not to the community auth
 database.
