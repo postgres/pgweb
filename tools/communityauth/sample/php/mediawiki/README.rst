@@ -24,7 +24,7 @@ lighttpd::
         url.rewrite-once = (
 		"^/wiki/([^?]*)(?:\?(.*))?" => "/index.php?title=$1&$2",
 		"^/index.php\?title=Special:UserLogin&returnto=(.*)" => "/pgauth/login.php?r=$1",
-		"^/index.php\?title=Special:UserLogout&returnto=(.*)" => "/pgauth/logout.php",
+		"^/index.php\?title=Special:UserLogout&returnto=" => "/pgauth/logout.php",
         )
 
 It should be added after the regular mediawiki rewrites (included here
