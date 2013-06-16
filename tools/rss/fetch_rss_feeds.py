@@ -40,7 +40,7 @@ for importfeed in ImportedRSSFeed.objects.all():
 				item = ImportedRSSItem(feed=importfeed,
 									   title=entry.title[:100],
 									   url=entry.link,
-									   posttime=datetime.strptime(entry.date, "%a, %d %b %Y %H:%M:%S %Z"),
+									   posttime=datetime(*(entry.published_parsed[0:6])),
 									   )
 				item.save()
 				fetchedsomething = True
