@@ -6,7 +6,7 @@
 <div class="eventdate">Date: <b>{{obj.displaydate|safe}}</b></div>
 <div>Location: {{obj.locationstring}}</div>
 {%if obj.language%}<div>Language: {{obj.language}}</div>{%endif%}
-{{obj.details|markdown:"safe"}}
+{{obj.details|markdown}}
 {%if obj.has_organisation%}
 <p>Posted by {{obj.org}}{%if obj.org.email%} ({{obj.org.email}}){%endif%}.</p>
 {%else%}

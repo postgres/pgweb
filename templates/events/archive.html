@@ -17,7 +17,7 @@ whatsoever.</i>
 <div>Location: <b>{{event.locationstring}}</b></div>
 {%if event.language%}<div>Language: <b>{{event.language}}</b></div>{%endif%}
 <p>
-{{event.summary|markdown:"safe"}}
+{{event.summary|markdown}}
 </p>
 {%endfor%}
 {%if not archive%}
