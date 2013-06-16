@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.db import connection, transaction
 from django.conf import settings
 
@@ -105,6 +106,7 @@ def _get_numeric_ip(request):
 # There is no concurrency check - the ftp site better not send more than one
 # file in parallel.
 @ssl_required
+@csrf_exempt
 def uploadftp(request):
 	if request.method != 'PUT':
 		return HttpServerError("Invalid method")
