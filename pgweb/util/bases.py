@@ -126,7 +126,9 @@ class PgModel(object):
 		except ValueError, v:
 			# NOTE! If the object is brand new, and it has a many-to-many relationship, we can't
 			# access this data yet. So just return that it's not available yet.
-			if v.message.find('instance needs to have a primary key value before a many-to-many relationship can be used') > -1:
+			# XXX: This is an ugly way to find it out, and is dependent on
+			#      the version of django used. But I've found no better way...
+			if v.message.find('" needs to have a value for field "') and v.message.find('" before this many-to-many relationship can be used.') > -1:
 				return "<not available yet>"
 			else:
 				raise v
