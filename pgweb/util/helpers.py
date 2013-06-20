@@ -58,6 +58,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 		'markdownfields': markdownfields,
 		'form_intro': hasattr(form, 'form_intro') and form.form_intro or None,
 		'toggle_fields': hasattr(form, 'toggle_fields') and form.toggle_fields or None,
+		'jquery': hasattr(form, 'jquery') and form.jquery or None,
 		'savebutton': (itemid == "new") and "New" or "Save",
 		'operation': (itemid == "new") and "New" or "Edit",
 	}, NavContext(request, navsection))

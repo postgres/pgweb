@@ -1,0 +1,10 @@
+{%extends "base/form.html"%}
+{% block extrahead %}
+{{ block.super }}
+<script language="javascript">
+$(function() {
+   var part = document.URL.substring(document.URL.indexOf('#')+1);
+   $('#id_lists').val(part);
+});
+</script>
+{%endblock%}

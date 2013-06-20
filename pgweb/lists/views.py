@@ -46,9 +46,10 @@ def subscribe(request):
 		# GET, so render up the form
 		form = SubscribeForm()
 
-	return render_to_response('base/form.html', {
+	return render_to_response('lists/subscribe_form.html', {
 		'form': form,
 		'operation': 'Subscribe',
+		'jquery': True,
 		'form_intro': """
 Please do not subscribe to mailing lists using e-mail accounts protected by
 mail-back anti-spam systems. These are extremely annoying to the list maintainers
