@@ -10,6 +10,7 @@ from django.conf import settings
 
 import base64
 import urllib
+import re
 from Crypto.Cipher import AES
 from Crypto import Random
 import time
@@ -219,6 +220,8 @@ def communityauth(request, siteid):
 	# Get whatever site the user is trying to log in to.
 	site = get_object_or_404(CommunityAuthSite, pk=siteid)
 
+	# "suburl" - old style way of passing parameters
+	# deprecated - will be removed once all sites have migrated
 	if request.GET.has_key('su'):
 		su = request.GET['su']
 		if not su.startswith('/'):
@@ -226,18 +229,30 @@ def communityauth(request, siteid):
 	else:
 		su = None
 
+	# "data" - new style way of passing parameter, where we only
+	# care that it's characters are what's in base64.
+	if request.GET.has_key('d'):
+		d = request.GET['d']
+		if d != urllib.quote_plus(d, '=$'):
+			# Invalid character, so drop it
+			d = None
+	else:
+		d = None
+
 	# Verify if the user is authenticated, and if he/she is not, generate
 	# a login form that has information about which site is being logged
 	# in to, and basic information about how the community login system
 	# works.
 	if not request.user.is_authenticated():
-		if su:
-			suburl = "?su=%s" % su
+		if d:
+			urldata = "?d=%s" % d
+		elif su:
+			urldata = "?su=%s" % su
 		else:
-			suburl = ""
+			urldata = ""
 		return render_to_response('account/communityauth.html', {
 				'sitename': site.name,
-				'next': '/account/auth/%s/%s' % (siteid, suburl),
+				'next': '/account/auth/%s/%s' % (siteid, urldata),
 				}, NavContext(request, 'account'))
 
 
@@ -256,8 +271,10 @@ def communityauth(request, siteid):
 		'l': request.user.last_name.encode('utf-8'),
 		'e': request.user.email.encode('utf-8'),
 		}
-	if su:
-		info['su'] = request.GET['su'].encode('utf-8')
+	if d:
+		info['d'] = d.encode('utf-8')
+	elif su:
+		info['su'] = d.encode('utf-8')
 
 	# Turn this into an URL. Make sure the timestamp is always first, that makes
 	# the first block more random..

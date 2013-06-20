@@ -53,10 +53,14 @@ The flow of an authentication in the 2.0 system is fairly simple:
    The <id> number in this URL is unique for each site, and is the
    identifier that accesses all encryption keys and redirection
    information.
-   In this call, the client site can optionally include a parameter
-   *su*, which will be used in the final redirection step. This URL
-   must start with a / to be considered, to prevent cross site
-   redirection.
+   In this call, the client can optionally include a parameter
+   *d*, which will be passed through back on the login confirmation.
+   This should be a base64 encoded parameter (other than the base64
+   character, the *$* character is also allowed and can be used to
+   split fields).
+   The client should encrypt or sign this parameter as necessary, and
+   without encryption/signature it should *not* be trusted, since it
+   can be injected into the authentication process without verification.
 #. The main website will check if the user holds a valid, logged in,
    session on the main website. If it does not, the user will be
    sent through the standard login path on the main website, and once
@@ -72,8 +76,10 @@ The flow of an authentication in the 2.0 system is fairly simple:
      The last name of the user logged in
    e
      The email address of the user logged in
+   d
+     base64 encoded data block to be passed along in confirmation (optional)
    su
-     The suburl to redirect to (optional)
+     *DEPRECATED* The suburl to redirect to (optional)
    t
      The timestamp of the authentication, in seconds-since-epoch. This
      should be validated against the current time, and authentication
@@ -110,7 +116,10 @@ The flow of an authentication in the 2.0 system is fairly simple:
    this is the case.
 #. The community site logs the user in using whatever method it's framework
    uses.
-#. If the *su* key is present in the data structure handed over, the
+#. If the *d* key is present in the data structure handed over, the
+   community site implements a site-specific action based on this data,
+   such as redirecting the user to the original location.
+#. *DEPRECATED* If the *su* key is present in the data structure handed over, the
    community site redirects to this location. If it's not present, then
    the community site will redirect so some default location on the
    site.

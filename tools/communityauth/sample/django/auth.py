@@ -27,8 +27,10 @@ from django.conf import settings
 
 import base64
 import urlparse
-from urllib import quote_plus
+import urllib
 from Crypto.Cipher import AES
+from Crypto.Hash import SHA
+from Crypto import Random
 import time
 
 class AuthBackend(ModelBackend):
@@ -45,9 +47,20 @@ class AuthBackend(ModelBackend):
 # Handle login requests by sending them off to the main site
 def login(request):
 	if request.GET.has_key('next'):
-		return HttpResponseRedirect("%s?su=%s" % (
+		# Put together an url-encoded dict of parameters we're getting back,
+		# including a small nonce at the beginning to make sure it doesn't
+		# encrypt the same way every time.
+		s = "t=%s&%s" % (int(time.time()), urllib.urlencode({'r': request.GET['next']}))
+		# Now encrypt it
+		r = Random.new()
+		iv = r.read(16)
+		encryptor = AES.new(SHA.new(settings.SECRET_KEY).digest()[:16], AES.MODE_CBC, iv)
+		cipher = encryptor.encrypt(s + ' ' * (16-(len(s) % 16))) # pad to 16 bytes
+
+		return HttpResponseRedirect("%s?d=%s$%s" % (
 				settings.PGAUTH_REDIRECT,
-				quote_plus(request.GET['next']),
+			    base64.b64encode(iv, "-_"),
+			    base64.b64encode(cipher, "-_"),
 				))
 	else:
 		return HttpResponseRedirect(settings.PGAUTH_REDIRECT)
@@ -119,9 +132,21 @@ def auth_receive(request):
 	user.backend = "%s.%s" % (AuthBackend.__module__, AuthBackend.__name__)
 	django_login(request, user)
 
-	# Finally, redirect the user
-	if data.has_key('su'):
-		return HttpResponseRedirect(data['su'][0])
+	# Finally, check of we have a data package that tells us where to
+	# redirect the user.
+	if data.has_key('d'):
+		(ivs, datas) = data['d'][0].split('$')
+		decryptor = AES.new(SHA.new(settings.SECRET_KEY).digest()[:16],
+							AES.MODE_CBC,
+							base64.b64decode(ivs, "-_"))
+		s = decryptor.decrypt(base64.b64decode(datas, "-_")).rstrip(' ')
+		try:
+			rdata = urlparse.parse_qs(s, strict_parsing=True)
+		except ValueError, e:
+			raise Exception("Invalid encrypted data received.")
+		if rdata.has_key('r'):
+			# Redirect address
+			return HttpResponseRedirect(rdata['r'][0])
 	# No redirect specified, see if we have it in our settings
 	if hasattr(settings, 'PGAUTH_REDIRECT_SUCCESS'):
 		return HttpResponseRedirect(settings.PGAUTH_REDIRECT_SUCCESS)
