@@ -13,7 +13,7 @@ import settings
 setup_environ(settings)
 
 from core.models import ImportedRSSFeed, ImportedRSSItem
-from django.db import transaction
+from django.db import transaction, connection
 
 # Set timeout for loading RSS feeds
 socket.setdefaulttimeout(20)
@@ -49,3 +49,5 @@ for importfeed in ImportedRSSFeed.objects.all():
 		transaction.commit()
 	except Exception, e:
 		print "Failed to load %s: %s" % (importfeed, e)
+
+connection.close()
