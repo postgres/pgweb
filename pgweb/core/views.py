@@ -124,6 +124,9 @@ def robots(request):
 		return HttpResponse("""User-agent: *
 Disallow: /admin/
 Disallow: /account/
+Disallow: /list/
+Disallow: /message-id/raw/
+Disallow: /message-id/flat/
 
 Sitemap: http://www.postgresql.org/sitemap.xml
 """, mimetype='text/plain')
