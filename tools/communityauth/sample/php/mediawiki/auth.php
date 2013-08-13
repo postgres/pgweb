@@ -14,7 +14,7 @@ session_name('wikidb_session');
 session_start();
 
 $iv = $_GET['i'];
-$d = $_GET['d'];
+$d = urldecode($_GET['d']);
 
 $key = base64_decode(strtr(${pgauth_key}, '-_', '+/'), true);
 $iv = base64_decode(strtr($iv, '-_', '+/'), true);
@@ -47,7 +47,7 @@ if ($data['t'] < time() - 10) {
   exit(0);
 }
 
-// User found, and we read a reasonable authenticaiton time.
+// User found, and we read a reasonable authentication time
 // Look for the user in the mediawiki database
 $db = pg_connect(${pgauth_connstr});
 $q = pg_query_params($db, "SELECT user_token, user_id, user_real_name, user_email FROM mwuser WHERE user_name=$1", array(ucfirst(strtolower($data['u']))));
@@ -62,7 +62,7 @@ if (pg_num_rows($q) == 0) {
   /*
    * Try to create a user..
    */
-  $q = pg_query_params($db, "INSERT INTO mwuser (user_name, user_real_name, user_password, user_newpassword, user_newpass_time, user_token, user_email, user_email_token, user_email_token_expires, user_email_authenticated, user_options, user_touched, user_registration, user_editcount, user_hidden) VALUES ($1, $2, NULL, NULL, NULL, $3, $4, NULL, '2000-01-01 00:00:00', CURRENT_TIMESTAMP, $5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0) RETURNING user_token, user_id, user_real_name, user_email", array(ucfirst(strtolower($data['u'])), $data['f'] . ' ' . $data['l'], $token, $data['e'], ''));
+  $q = pg_query_params($db, "INSERT INTO mwuser (user_name, user_real_name, user_password, user_newpassword, user_newpass_time, user_token, user_email, user_email_token, user_email_token_expires, user_email_authenticated, user_options, user_touched, user_registration, user_editcount, user_hidden) VALUES ($1, $2, '', NULL, NULL, $3, $4, NULL, '2000-01-01 00:00:00', CURRENT_TIMESTAMP, $5, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, 0) RETURNING user_token, user_id, user_real_name, user_email", array(ucfirst(strtolower($data['u'])), $data['f'] . ' ' . $data['l'], $token, $data['e'], ''));
   if (pg_num_rows($q) != 1) {
     print "Failed to add user!";
     pg_close($db);
@@ -107,10 +107,14 @@ $_SESSION['wsToken'] = $r['user_token'];
 $_SESSION['wsUserName'] = ucfirst(strtolower($data['u']));
 session_write_close();
 
-if ($data['su']) {
-  $redir = $data['su'];
+if ($data['d']) {
+	$redir = base64_decode($data['']);
+	if (!preg_match("#^/wiki/#",$redir)) {
+		print "invalid redirection target!";
+		exit(0);
+	} ,
 } else {
-  $redir = '/wiki/Main_Page';
+	$redir = '/wiki/Main_Page';
 }
 
 /* Add ?nocache=... or &nocache=... to avoid mediawiki caching */
