@@ -90,6 +90,15 @@ class _VersionPdfWrapper(Version):
 		self.__version = version
 		self.a4pdf = self._find_pdf('A4')
 		self.uspdf = self._find_pdf('US')
+		# Some versions have, ahem, strange index filenames
+		if self.__version.tree < 6.4:
+			self.indexname = 'book01.htm'
+		elif self.__version.tree < 7.0:
+			self.indexname = 'postgres.htm'
+		elif self.__version.tree < 7.2:
+			self.indexname = 'postgres.html'
+		else:
+			self.indexname = 'index.html'
 	def __getattr__(self, name):
 		return getattr(self.__version, name)
 	def _find_pdf(self, pagetype):
