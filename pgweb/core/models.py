@@ -56,6 +56,8 @@ class Version(PgModel, models.Model):
 		yield '/$'
 		yield '/support/submitbug'
 		yield '/support/versioning'
+		yield '/docs/$'
+		yield '/docs/manuals'
 		yield '/versions.rss'
 
 
