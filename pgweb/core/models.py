@@ -6,7 +6,7 @@ from pgweb.util.misc import varnish_purge
 from datetime import datetime
 
 class Version(PgModel, models.Model):
-	tree = models.DecimalField(max_digits=3, decimal_places=1, null=False, blank=False)
+	tree = models.DecimalField(max_digits=3, decimal_places=1, null=False, blank=False, unique=True)
 	latestminor = models.IntegerField(null=False, blank=False, default=0, help_text="For beta versions, latestminor means latest beta number. For other releases, it's the latest minor release number in the tree.")
 	reldate = models.DateField(null=False, blank=False)
 	relnotes = models.CharField(max_length=32, null=False, blank=False)
