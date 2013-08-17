@@ -106,7 +106,7 @@ def manuals(request):
 	}, NavContext(request, 'docs'))
 
 def manualarchive(request):
-	versions = Version.objects.filter(beta=False,tree__gt=0).order_by('-tree')
+	versions = Version.objects.filter(beta=False,supported=False,tree__gt=0).order_by('-tree')
 	return render_to_response('docs/archive.html', {
 		'versions': [_VersionPdfWrapper(v) for v in versions],
 	}, NavContext(request, 'docs'))
