@@ -43,7 +43,10 @@ def docpage(request, version, typ, filename):
 
 	fullname = "%s.%s" % (filename, extension)
 	page = get_object_or_404(DocPage, version=ver, file=fullname)
-	versions = DocPage.objects.filter(file=fullname).extra(select={'supported':"COALESCE((SELECT supported FROM core_version v WHERE v.tree=version), 'f')"}).order_by('-supported', '-version').only('version', 'file')
+	versions = DocPage.objects.filter(file=fullname).extra(select={
+		'supported':"COALESCE((SELECT supported FROM core_version v WHERE v.tree=version), 'f')",
+		'beta':"CASE WHEN (SELECT beta FROM core_version v WHERE v.tree=version)='t' THEN true WHEN version=0 THEN true ELSE false END",
+	}).order_by('-supported', '-version').only('version', 'file')
 
 	if typ=="interactive":
 		comments = DocComment.objects.filter(version=ver, file=fullname, approved=True).order_by('posted_at')
@@ -53,7 +56,8 @@ def docpage(request, version, typ, filename):
 	return render_to_response('docs/docspage.html', {
 		'page': page,
 		'supported_versions': [v for v in versions if v.supported],
-		'unsupported_versions': [v for v in versions if not v.supported],
+		'devel_versions': [v for v in versions if not v.supported and v.beta],
+		'unsupported_versions': [v for v in versions if not v.supported and not v.beta],
 		'title': page.title,
 		'doc_type': typ,
 		'comments': comments,

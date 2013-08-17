@@ -40,8 +40,8 @@
 <a href="/" title="Home">Home</a> &rarr; <a href="/docs" title="Documentation">Documentation</a> &rarr; <a href="/docs/manuals" title="Manuals">Manuals</a> &rarr; <a href="/docs/{{page.display_version}}/{{doc_type}}/{{doc_index_filename}}">PostgreSQL {{page.display_version}}</a>{%if loaddate%} ({{loaddate|date:"Y-m-d H:i:s"}}){%endif%}
 </div>
 <div id="docVersions">
-{%if supported_versions%}
 This page in other versions:
+{%if supported_versions%}
 {%for ver in supported_versions %}
 	{%if not forloop.first %}/{%endif%}
 	{%if ver.version == page.version %}
@@ -51,8 +51,21 @@ This page in other versions:
 	{%endif%}
 {%endfor%}
 {%endif%}
+
+{%if devel_versions%}
+{%if supported_versions%}&nbsp;|&nbsp; {%endif%}Development versions:
+{%for ver in devel_versions %}
+	{%if not forloop.first %}/{%endif%}
+	{%if ver.version == page.version %}
+	<b>{{ver.display_version}}</b>
+	{% else %}
+	<a href="/docs/{{ver.display_version}}/{{doc_type}}/{{ver.file}}" title="This page in version {{ver.display_version}}" rel="nofollow">{{ver.display_version}}</a>
+	{%endif%}
+{%endfor%}
+{%endif%}
+
 {%if unsupported_versions%}
-&nbsp;|&nbsp; Unsupported versions:
+{%if supported_versions or devel_versions%}&nbsp;|&nbsp; {%endif%}Unsupported versions:
 {%for ver in unsupported_versions %}
 	{%if not forloop.first %}/{%endif%}
 	{%if ver.version == page.version %}
