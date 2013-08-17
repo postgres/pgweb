@@ -1,13 +1,20 @@
 from django import forms
+from django.db.models import Q
 
 from pgweb.core.models import Version
 
 class _version_choices():
 	def __iter__(self):
 		yield ('-1', '** Select version')
-		for v in Version.objects.filter(supported=True):
+		q = Q(supported=True) | Q(beta=True)
+		for v in Version.objects.filter(q):
 			for minor in range(v.latestminor,-1,-1):
-				s = "%s.%s" % (v.tree, minor)
+				if not v.beta:
+					s = "%s.%s" % (v.tree, minor)
+				else:
+					# For beta versions, there is no beta0
+					if minor==0: continue
+					s = "%s.beta%s" % (v.tree, minor)
 				yield (s,s)
 		yield ('Unsupported/Unknown', 'Unsupported/Unknown')
 

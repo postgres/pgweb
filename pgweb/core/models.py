@@ -7,11 +7,12 @@ from datetime import datetime
 
 class Version(PgModel, models.Model):
 	tree = models.DecimalField(max_digits=3, decimal_places=1, null=False, blank=False)
-	latestminor = models.IntegerField(null=False, blank=False, default=0)
+	latestminor = models.IntegerField(null=False, blank=False, default=0, help_text="For beta versions, latestminor means latest beta number. For other releases, it's the latest minor release number in the tree.")
 	reldate = models.DateField(null=False, blank=False)
 	relnotes = models.CharField(max_length=32, null=False, blank=False)
 	current = models.BooleanField(null=False, blank=False, default=False)
 	supported = models.BooleanField(null=False, blank=False, default=True)
+	beta = models.BooleanField(null=False, blank=False, default=False, help_text="For beta versions, latestminor means beta number")
 	docsloaded = models.DateTimeField(null=True, blank=True, help_text="The timestamp of the latest docs load. Used to control indexing and info on developer docs.")
 	firstreldate = models.DateField(null=False, blank=False, help_text="The date of the .0 release in this tree")
 	eoldate = models.DateField(null=False, blank=False, help_text="The planned EOL date for this tree")
@@ -21,7 +22,10 @@ class Version(PgModel, models.Model):
 
 	@property
 	def versionstring(self):
-		return "%s.%s" % (self.tree, self.latestminor)
+		if not self.beta:
+			return "%s.%s" % (self.tree, self.latestminor)
+		else:
+			return "%sbeta%s" % (self.tree, self.latestminor)
 
 	def save(self):
 		# Make sure only one version at a time can be the current one.
