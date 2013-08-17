@@ -27,6 +27,13 @@ class Version(PgModel, models.Model):
 		else:
 			return "%sbeta%s" % (self.tree, self.latestminor)
 
+	@property
+	def treestring(self):
+		if not self.beta:
+			return self.tree
+		else:
+			return "%s beta" % self.tree
+
 	def save(self):
 		# Make sure only one version at a time can be the current one.
 		# (there may be some small race conditions here, but the likelyhood

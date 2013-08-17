@@ -2,8 +2,11 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+from django.conf import settings
 
 from decimal import Decimal
+import os
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
@@ -71,6 +74,42 @@ def docsrootpage(request, version, typ):
 
 def redirect_root(request, version):
 	return HttpResponseRedirect("/docs/%s/static/" % version)
+
+def root(request):
+	versions = Version.objects.filter(Q(supported=True) | Q(beta=True,tree__gt=0)).order_by('-tree')
+	return render_to_response('pages/docs.html', {
+		'versions': versions,
+	}, NavContext(request, 'docs'))
+
+class _VersionPdfWrapper(Version):
+	"""
+	A wrapper around a version that knows to look for PDF files, and
+	return their sizes.
+	"""
+	def __init__(self, version):
+		self.__version = version
+		self.a4pdf = self._find_pdf('A4')
+		self.uspdf = self._find_pdf('US')
+	def __getattr__(self, name):
+		return getattr(self.__version, name)
+	def _find_pdf(self, pagetype):
+		try:
+			return os.stat('%s/documentation/pdf/%s/postgresql-%s-%s.pdf' % (settings.STATIC_CHECKOUT, self.__version.tree, self.__version.tree, pagetype)).st_size
+		except:
+			return 0
+
+def manuals(request):
+	# We don't include beta's here. Why?
+	versions = Version.objects.filter(supported=True).order_by('-tree')
+	return render_to_response('pages/docs/manuals.html', {
+		'versions': [_VersionPdfWrapper(v) for v in versions],
+	}, NavContext(request, 'docs'))
+
+def manualarchive(request):
+	versions = Version.objects.filter(beta=False,tree__gt=0).order_by('-tree')
+	return render_to_response('pages/docs/manuals/archive.html', {
+		'versions': [_VersionPdfWrapper(v) for v in versions],
+	}, NavContext(request, 'docs'))
 
 @ssl_required
 @login_required

@@ -143,6 +143,7 @@ SESSION_COOKIE_SECURE=True                             # Allow our session only 
 SESSION_COOKIE_DOMAIN="www.postgresql.org"             # Don't allow access by other postgresql.org sites
 SITE_ROOT="http://www.postgresql.org"                  # Root of working URLs
 FTP_PICKLE="/usr/local/pgweb/ftpsite.pickle"           # Location of file with current contents from ftp site
+STATIC_CHECKOUT="/usr/local/pgweb-static"              # Location of a checked out pgweb-static project
 NOTIFICATION_EMAIL="someone@example.com"               # Address to send notifications *to*
 NOTIFICATION_FROM="someone@example.com"                # Address to send notifications *from*
 LISTSERVER_EMAIL="someone@example.com"                 # Address to majordomo

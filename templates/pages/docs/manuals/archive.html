@@ -15,188 +15,23 @@ If you are still using any of these releases, you are strongly advised to upgrad
 	<th class="colLast">PDF Version</th>
 </tr>
 
-<tr>
-    <td class="colFirst">8.3</td>
+{%for v in versions%}
+<tr{%if forloop.last%} class="lastrow"{%endif%}>
+    <td class="colFirst">{{v.tree}}</td>
     <td class="colMid">
           <ul>
-              <li><a href="/docs/8.3/static/index.html">Without user comments</a></li>
+              <li><a href="/docs/{{v.tree}}/static/index.html">Without user comments</a></li>
           </ul>
       </td>
       <td class="colLast">
 	<ul>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/8.3/postgresql-8.3-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">(4.6 MB)</span></li>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/8.3/postgresql-8.3-US.pdf">US PDF</a> <span class="txtMediumGrey">(4.6 MB)</span></li> 
+	  {%if v.a4pdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.tree}}/postgresql-{{v.tree}}-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">({{v.a4pdf|filesizeformat}})</span></li>{%endif%}
+	  {%if v.uspdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.tree}}/postgresql-{{v.tree}}-US.pdf">US PDF</a> <span class="txtMediumGrey">({{v.uspdf|filesizeformat}})</span></li>{%endif%}
+	  {%if not v.a4pdf and not v4.uspdf%}<li>PDF version noot available</li>{%endif%}
 	</ul>
       </td>
 </tr>
-<tr>
-	<td class="colFirst">8.2</td>
-	<td class="colMid">
-	<ul>
-        <li><a href="/docs/8.2/static/index.html">Without user comments</a></li>
-    </ul>
-	</td>
-	<td class="colLast">
-	<ul>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/8.2/postgresql-8.2-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">(5.5 MB)</span></li>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/8.2/postgresql-8.2-US.pdf">US PDF</a> <span class="txtMediumGrey">(14 MB)</span></li>
-    </ul>
-	</td>
-</tr>
-
-<tr>
-	<td class="colFirst">8.1</td>
-	<td class="colMid">
-	<ul>
-        <li><a href="/docs/8.1/static/index.html">Without user comments</a></li>
-    </ul>
-	</td>
-	<td class="colLast">
-	<ul>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/8.1/postgresql-8.1-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">(12.1 MB)</span></li>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/8.1/postgresql-8.1-US.pdf">US PDF</a> <span class="txtMediumGrey">(12.1 MB)</span></li>
-    </ul>
-	</td>
-</tr>
-
-<tr>
-	<td class="colFirst">8.0</td>
-	<td class="colMid">
-	<ul>
-        <li><a href="/docs/8.0/static/index.html">Without user comments</a></li>
-    </ul>
-	</td>
-	<td class="colLast">
-	<ul>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/8.0/postgresql-8.0-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">(9.8 MB)</span></li>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/8.0/postgresql-8.0-US.pdf">US PDF</a> <span class="txtMediumGrey">(9.9 MB)</span></li>
-    </ul>
-	</td>
-</tr>
-
-<tr>
-	<td class="colFirst">7.4</td>
-	<td class="colMid">
-	<ul>
-        <li><a href="/docs/7.4/static/index.html">Without user comments</a></li>
-    </ul>
-	</td>
-	<td class="colLast">
-	<ul>
-	<li>Comprehensive Manual: <a href="/files/documentation/pdf/7.4/postgresql-7.4.2-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">(9.0 MB)</span></li>
-        <li>Comprehensive Manual: <a href="/files/documentation/pdf/7.4/postgresql-7.4.2-US.pdf">US PDF</a> <span class="txtMediumGrey">(9.1 MB)</span></li>
-    </ul>
-	</td>
-</tr>
-
-<tr>
-	<td class="colFirst">7.3</td>
-	<td class="colMid">
-	<ul>
-        <li><a href="/docs/7.3/static/index.html">Without user comments</a></li>
-    </ul>
-	</td>
-	<td class="colLast">
-	<ul>
-        <li>Administrators Guide: <a href="/files/documentation/pdf/7.3/admin-7.3.2-US.pdf">US PDF</a> | <a href="/files/documentation/pdf/7.3/admin-7.3.2-A4.pdf">A4 PDF</a></li>
-        <li>System Catalog Diagram: <a href="/files/documentation/pdf/7.3/catalogs-7.3.2-US.pdf">US PDF</a> | <a href="/files/documentation/pdf/7.3/catalogs-7.3.2-A4.pdf">A4 PDF</a></li>
-        <li>Connection Diagram: <a href="/files/documentation/pdf/7.3/connections-7.3.2-US.pdf">US PDF</a> | <a href="/files/documentation/pdf/7.3/connections-7.3.2-A4.pdf">A4 PDF</a></li>
-        <li>Developers Guide: <a href="/files/documentation/pdf/7.3/developer-7.3.2-US.pdf">US PDF</a> | <a href="/files/documentation/pdf/7.3/developer-7.3.2-A4.pdf">A4 PDF</a></li>
-        <li>Programmers Guide: <a href="/files/documentation/pdf/7.3/programmer-7.3.2-US.pdf">US PDF</a> | <a href="/files/documentation/pdf/7.3/programmer-7.3.2-A4.pdf">A4 PDF</a></li>
-        <li>Reference Guide: <a href="/files/documentation/pdf/7.3/reference-7.3.2-US.pdf">US PDF</a> | <a href="/files/documentation/pdf/7.3/reference-7.3.2-A4.pdf">A4 PDF</a></li>
-        <li>Tutorial: <a href="/files/documentation/pdf/7.3/tutorial-7.3.2-US.pdf">US PDF</a> | <a href="/files/documentation/pdf/7.3/tutorial-7.3.2-A4.pdf">A4 PDF</a></li>
-        <li>Users Guide: <a href="/files/documentation/pdf/7.3/user-7.3.2-US.pdf">US PDF</a> | <a href="/files/documentation/pdf/7.3/user-7.3.2-A4.pdf">A4 PDF</a></li>
-    </ul>
-	</td>
-</tr>
-<tr class="lastrow">
-	<td class="colFirst">7.2</td>
-	<td class="colMid">
-	<ul>
-        <li><a href="/docs/7.2/static/index.html">Without user comments</a></li>
-    </ul>
-	</td>
-	<td class="colLast">
-	<ul>
-        <li>Administrators Guide: <a href="/files/documentation/pdf/7.2/admin-7.2-US.pdf">US</a> <a href="/files/documentation/pdf/7.2/admin-7.2-A4.pdf">A4</a></li>
-        <li>Developers Guide: <a href="/files/documentation/pdf/7.2/developer-7.2-US.pdf">US</a> <a href="/files/documentation/pdf/7.2/developer-7.2-A4.pdf">A4</a></li>
-        <li>Programmers Guide: <a href="/files/documentation/pdf/7.2/programmer-7.2-US.pdf">US</a> <a href="/files/documentation/pdf/7.2/programmer-7.2-A4.pdf">A4</a></li>
-        <li>Reference Guide: <a href="/files/documentation/pdf/7.2/reference-7.2-US.pdf">US</a> <a href="/files/documentation/pdf/7.2/reference-7.2-A4.pdf">A4</a></li>
-        <li>Tutorial: <a href="/files/documentation/pdf/7.2/tutorial-7.2-US.pdf">US</a> <a href="/files/documentation/pdf/7.2/tutorial-7.2-A4.pdf">A4</a></li>
-        <li>Users Guide: <a href="/files/documentation/pdf/7.2/user-7.2-US.pdf">US</a> <a href="/files/documentation/pdf/7.2/user-7.2-A4.pdf">A4</a></li>
-    </ul>
-	</td>
-</tr>
-<tr>
-	<td class="colFirst">7.1</td>
-	<td class="colMid">
-	<ul>
-        <li><a href="/docs/7.1/static/postgres.html">Without user comments</a></li>
-    </ul>
-	</td>
-	<td class="colLast">
-	<ul>
-        <li><a href="/files/documentation/pdf/7.1/admin.pdf">Administrators Guide</a></li>
-        <li><a href="/files/documentation/pdf/7.1/developer.pdf">Developers Guide</a></li>
-        <li><a href="/files/documentation/pdf/7.1/programmer.pdf">Programmers Guide</a></li>
-        <li><a href="/files/documentation/pdf/7.1/reference.pdf">Reference Guide</a></li>
-        <li><a href="/files/documentation/pdf/7.1/tutorial.pdf">Tutorial</a></li>
-        <li><a href="/files/documentation/pdf/7.1/user.pdf">Users Guide</a></li>
-    </ul>
-	</td>
-</tr>
-<tr>
-	<td class="colFirst">7.0</td>
-	<td class="colMid">
-	<ul>
-        <li><a href="/docs/7.0/static/postgres.html">Without user comments</a></li>
-    </ul>
-	</td>
-	<td class="colLast">
-	<ul>
-		<li><span class="txtMediumGrey">PDF version not available</span></li>
-	</ul>
-	</td>
-</tr>
-<tr>
-	<td class="colFirst">6.5</td>
-	<td class="colMid">
-	<ul>
-        <li><a href="/docs/6.5/static/postgres.htm">Without user comments</a></li>
-    </ul>
-	</td>
-	<td class="colLast">
-	<ul>
-		<li><span class="txtMediumGrey">PDF version not available</span></li>
-	</ul>
-	</td>
-</tr>
-<tr>
-	<td class="colFirst">6.4</td>
-	<td class="colMid">
-	<ul>
-        <li><a href="/docs/6.4/static/postgres.htm">Without user comments</a></li>
-    </ul>
-	</td>
-	<td class="colLast">
-	<ul>
-		<li><span class="txtMediumGrey">PDF version not available</span></li>
-	</ul>
-	</td>
-</tr>
-<tr class="lastrow">
-	<td class="colFirst">6.3</td>
-	<td class="colMid">
-	<ul>
-        <li><a href="/docs/6.3/static/book01.htm">Without user comments</a></li>
-    </ul>
-	</td>
-	<td class="colLast">
-	<ul>
-		<li><span class="txtMediumGrey">PDF version not available</span></li>
-	</ul>
-	</td>
-</tr>
+{%endfor%}
 </table>
 </div>
 {%endblock%}

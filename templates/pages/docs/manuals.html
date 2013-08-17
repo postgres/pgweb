@@ -12,66 +12,23 @@
 	<th class="colMid">Online Version</th>
 	<th class="colLast">Downloadable Version</th>
 </tr>
-<tr>
-    <td class="colFirst">9.2</td>
+{%for v in versions%}
+<tr{%if forloop.last%} class="lastrow"{%endif%}>
+    <td class="colFirst">{{v.tree}}</td>
     <td class="colMid">
           <ul>
-              <li><a href="/docs/9.2/interactive/index.html">With user comments</a></li>
-	      <li><a href="/docs/9.2/static/index.html">Without user comments</a></li>
+              <li><a href="/docs/{{v.tree}}/interactive/index.html">With user comments</a></li>
+	      <li><a href="/docs/{{v.tree}}/static/index.html">Without user comments</a></li>
 	  </ul>
     </td>
     <td class="colLast">
 	<ul>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/9.2/postgresql-9.2-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">(6.1 MB)</span></li>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/9.2/postgresql-9.2-US.pdf">US PDF</a> <span class="txtMediumGrey">(6.2 MB)</span></li>
+	  {%if v.a4pdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.tree}}/postgresql-{{v.tree}}-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">({{v.a4pdf|filesizeformat}})</span></li>{%endif%}
+	  {%if v.uspdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.tree}}/postgresql-{{v.tree}}-US.pdf">US PDF</a> <span class="txtMediumGrey">({{v.uspdf|filesizeformat}})</span></li>{%endif%}
 	</ul>
     </td>
 </tr>
-<tr>
-    <td class="colFirst">9.1</td>
-    <td class="colMid">
-          <ul>
-              <li><a href="/docs/9.1/interactive/index.html">With user comments</a></li>
-	      <li><a href="/docs/9.1/static/index.html">Without user comments</a></li>
-	  </ul>
-    </td>
-    <td class="colLast">
-	<ul>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/9.1/postgresql-9.1-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">(5.9 MB)</span></li>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/9.1/postgresql-9.1-US.pdf">US PDF</a> <span class="txtMediumGrey">(5.9 MB)</span></li>
-	</ul>
-    </td>
-</tr>
-<tr>
-    <td class="colFirst">9.0</td>
-    <td class="colMid">
-          <ul>
-              <li><a href="/docs/9.0/interactive/index.html">With user comments</a></li>
-	      <li><a href="/docs/9.0/static/index.html">Without user comments</a></li>
-	  </ul>
-    </td>
-    <td class="colLast">
-	<ul>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/9.0/postgresql-9.0-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">(5.4 MB)</span></li>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/9.0/postgresql-9.0-US.pdf">US PDF</a> <span class="txtMediumGrey">(5.5 MB)</span></li>
-	</ul>
-    </td>
-</tr>
-<tr>
-    <td class="colFirst">8.4</td>
-    <td class="colMid">
-          <ul>
-              <li><a href="/docs/8.4/interactive/index.html">With user comments</a></li>
-              <li><a href="/docs/8.4/static/index.html">Without user comments</a></li>
-          </ul>
-      </td>
-      <td class="colLast">
-        <ul>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/8.4/postgresql-8.4-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">(5.0 MB)</span></li>
-            <li>Comprehensive Manual: <a href="/files/documentation/pdf/8.4/postgresql-8.4-US.pdf">US PDF</a> <span class="txtMediumGrey">(5.1 MB)</span></li>
-        </ul>
-      </td>
-</tr>
+{%endfor%}
 </table>
 </div>
 
