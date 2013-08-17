@@ -124,6 +124,7 @@ def robots(request):
 		return HttpResponse("""User-agent: *
 Disallow: /admin/
 Disallow: /account/
+Disallow: /docs/devel/
 Disallow: /list/
 Disallow: /message-id/raw/
 Disallow: /message-id/flat/

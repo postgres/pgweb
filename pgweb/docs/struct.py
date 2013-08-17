@@ -26,7 +26,8 @@ def get_struct():
 				docprio -= 0.1
 			lastversion = version
 
-		yield ('docs/%s/static/%s' % (version, filename),
+		yield ('docs/%s/static/%s' % (version==0 and 'devel' or version,
+									  filename),
 			   beta and 0.1 or docprio, # beta versions always get 0.1 in prio
 			   loaded)
 
