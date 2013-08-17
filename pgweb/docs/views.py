@@ -77,7 +77,7 @@ def redirect_root(request, version):
 
 def root(request):
 	versions = Version.objects.filter(Q(supported=True) | Q(beta=True,tree__gt=0)).order_by('-tree')
-	return render_to_response('pages/docs.html', {
+	return render_to_response('docs/index.html', {
 		'versions': versions,
 	}, NavContext(request, 'docs'))
 
@@ -101,13 +101,13 @@ class _VersionPdfWrapper(Version):
 def manuals(request):
 	# We don't include beta's here. Why?
 	versions = Version.objects.filter(supported=True).order_by('-tree')
-	return render_to_response('pages/docs/manuals.html', {
+	return render_to_response('docs/manuals.html', {
 		'versions': [_VersionPdfWrapper(v) for v in versions],
 	}, NavContext(request, 'docs'))
 
 def manualarchive(request):
 	versions = Version.objects.filter(beta=False,tree__gt=0).order_by('-tree')
-	return render_to_response('pages/docs/manuals/archive.html', {
+	return render_to_response('docs/archive.html', {
 		'versions': [_VersionPdfWrapper(v) for v in versions],
 	}, NavContext(request, 'docs'))
 
