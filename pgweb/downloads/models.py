@@ -129,6 +129,7 @@ class StackBuilderApp(models.Model):
 									   verbose_name='Dependencies',
 									   help_text='Comma separated list of text dependencies, no spaces!')
 	versionkey = models.CharField(max_length=500, null=False, blank=False)
+	manifesturl = models.URLField(max_length=500, null=False, blank=True)
 
 	def __unicode__(self):
 		return "%s %s %s" % (self.textid, self.version, self.platform)
