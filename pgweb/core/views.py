@@ -36,15 +36,15 @@ from django.template.context import RequestContext
 # Front page view
 @cache(minutes=10)
 def home(request):
-	news = NewsArticle.objects.filter(approved=True)[:5]
-	events = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gte=date.today).order_by('enddate', 'startdate')[:3]
+	news = NewsArticle.objects.filter(approved=True)[:7]
+	events = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gte=date.today).order_by('enddate', 'startdate')[:5]
 	try:
 		quote = Quote.objects.filter(approved=True).order_by('?')[0]
 	except:
 		# if there is no quote available, just ignore error
 		quote = None
 	versions = Version.objects.filter(supported=True)
-	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:5]
+	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:7]
 
 	traininginfo = Event.objects.filter(approved=True, training=True).extra(where=("startdate <= (CURRENT_DATE + '6 Months'::interval) AND enddate >= CURRENT_DATE",)).aggregate(Count('id'), Count('country', distinct=True))
 	# can't figure out how to make django do this
