@@ -22,7 +22,7 @@ written about PostgreSQL (some of which are available in their entirety online).
     <dt>Online Manuals</dt>
     <dd>
 {%for v in versions%}
-        <p><b>{{v.treestring}}</b> ({%if not v.beta%}<a href="/docs/{{v.tree}}/interactive/index.html">with</a>/{%endif%}<a href="/docs/{{v.tree}}/static/index.html">without</a> comments)</p>
+        <p><b>{{v.treestring}}</b> ({%if not v.testing%}<a href="/docs/{{v.tree}}/interactive/index.html">with</a>/{%endif%}<a href="/docs/{{v.tree}}/static/index.html">without</a> comments)</p>
 {%endfor%}
     </dd>
     <dt>Translated Manuals</dt>

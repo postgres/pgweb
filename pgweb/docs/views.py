@@ -48,7 +48,7 @@ def docpage(request, version, typ, filename):
 	page = get_object_or_404(DocPage, version=ver, file=fullname)
 	versions = DocPage.objects.filter(file=fullname).extra(select={
 		'supported':"COALESCE((SELECT supported FROM core_version v WHERE v.tree=version), 'f')",
-		'beta':"CASE WHEN (SELECT beta FROM core_version v WHERE v.tree=version)='t' THEN true WHEN version=0 THEN true ELSE false END",
+		'testing':"COALESCE((SELECT testing FROM core_version v WHERE v.tree=version),0)",
 	}).order_by('-supported', '-version').only('version', 'file')
 
 	if typ=="interactive":
@@ -59,8 +59,8 @@ def docpage(request, version, typ, filename):
 	return render_to_response('docs/docspage.html', {
 		'page': page,
 		'supported_versions': [v for v in versions if v.supported],
-		'devel_versions': [v for v in versions if not v.supported and v.beta],
-		'unsupported_versions': [v for v in versions if not v.supported and not v.beta],
+		'devel_versions': [v for v in versions if not v.supported and v.testing],
+		'unsupported_versions': [v for v in versions if not v.supported and not v.testing],
 		'title': page.title,
 		'doc_type': typ,
 		'comments': comments,
@@ -76,7 +76,7 @@ def redirect_root(request, version):
 	return HttpResponseRedirect("/docs/%s/static/" % version)
 
 def root(request):
-	versions = Version.objects.filter(Q(supported=True) | Q(beta=True,tree__gt=0)).order_by('-tree')
+	versions = Version.objects.filter(Q(supported=True) | Q(testing__gt=0,tree__gt=0)).order_by('-tree')
 	return render_to_response('docs/index.html', {
 		'versions': versions,
 	}, NavContext(request, 'docs'))
@@ -108,14 +108,14 @@ class _VersionPdfWrapper(Version):
 			return 0
 
 def manuals(request):
-	# We don't include beta's here. Why?
+	# We don't include beta/rc's here. Why?
 	versions = Version.objects.filter(supported=True).order_by('-tree')
 	return render_to_response('docs/manuals.html', {
 		'versions': [_VersionPdfWrapper(v) for v in versions],
 	}, NavContext(request, 'docs'))
 
 def manualarchive(request):
-	versions = Version.objects.filter(beta=False,supported=False,tree__gt=0).order_by('-tree')
+	versions = Version.objects.filter(testing=0,supported=False,tree__gt=0).order_by('-tree')
 	return render_to_response('docs/archive.html', {
 		'versions': [_VersionPdfWrapper(v) for v in versions],
 	}, NavContext(request, 'docs'))

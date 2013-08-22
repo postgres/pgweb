@@ -6,16 +6,13 @@ from pgweb.core.models import Version
 class _version_choices():
 	def __iter__(self):
 		yield ('-1', '** Select version')
-		q = Q(supported=True) | Q(beta=True)
+		q = Q(supported=True) | Q(testing__gt=0)
 		for v in Version.objects.filter(q):
 			for minor in range(v.latestminor,-1,-1):
-				if not v.beta:
-					s = "%s.%s" % (v.tree, minor)
-				else:
-					# For beta versions, there is no beta0
-					if minor==0: continue
-					s = "%s.beta%s" % (v.tree, minor)
-				yield (s,s)
+				if not v.testing or minor>0:
+					# For beta/rc versions, there is no beta0, so exclude it
+					s = v.buildversionstring(minor)
+					yield (s,s)
 		yield ('Unsupported/Unknown', 'Unsupported/Unknown')
 
 class SubmitBugForm(forms.Form):

@@ -5,14 +5,21 @@ from pgweb.util.misc import varnish_purge
 
 from datetime import datetime
 
+TESTING_CHOICES = (
+	(0, 'Release'),
+	(1, 'Release candidate'),
+	(2, 'Beta'),
+	)
+TESTING_SHORTSTRING = ('', 'rc', 'beta')
+
 class Version(PgModel, models.Model):
 	tree = models.DecimalField(max_digits=3, decimal_places=1, null=False, blank=False, unique=True)
-	latestminor = models.IntegerField(null=False, blank=False, default=0, help_text="For beta versions, latestminor means latest beta number. For other releases, it's the latest minor release number in the tree.")
+	latestminor = models.IntegerField(null=False, blank=False, default=0, help_text="For testing versions, latestminor means latest beta/rc number. For other releases, it's the latest minor release number in the tree.")
 	reldate = models.DateField(null=False, blank=False)
 	relnotes = models.CharField(max_length=32, null=False, blank=False)
 	current = models.BooleanField(null=False, blank=False, default=False)
 	supported = models.BooleanField(null=False, blank=False, default=True)
-	beta = models.BooleanField(null=False, blank=False, default=False, help_text="For beta versions, latestminor means beta number")
+	testing = models.IntegerField(null=False, blank=False, default=0, help_text="Testing level of this release. latestminor indicates beta/rc number", choices=TESTING_CHOICES)
 	docsloaded = models.DateTimeField(null=True, blank=True, help_text="The timestamp of the latest docs load. Used to control indexing and info on developer docs.")
 	firstreldate = models.DateField(null=False, blank=False, help_text="The date of the .0 release in this tree")
 	eoldate = models.DateField(null=False, blank=False, help_text="The planned EOL date for this tree")
@@ -22,17 +29,20 @@ class Version(PgModel, models.Model):
 
 	@property
 	def versionstring(self):
-		if not self.beta:
-			return "%s.%s" % (self.tree, self.latestminor)
+		return self.buildversionstring(self.latestminor)
+
+	def buildversionstring(self, minor):
+		if not self.testing:
+			return "%s.%s" % (self.tree, minor)
 		else:
-			return "%sbeta%s" % (self.tree, self.latestminor)
+			return "%s%s%s" % (self.tree, TESTING_SHORTSTRING[self.testing], minor)
 
 	@property
 	def treestring(self):
-		if not self.beta:
+		if not self.testing:
 			return self.tree
 		else:
-			return "%s beta" % self.tree
+			return "%s %s" % (self.tree, TESTING_SHORTSTRING[self.testing])
 
 	def save(self):
 		# Make sure only one version at a time can be the current one.

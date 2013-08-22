@@ -13,7 +13,7 @@ class VersionFeed(Feed):
 	title_template = 'core/version_rss_title.html'
 
 	def items(self):
-		return Version.objects.filter(tree__gt=0).filter(beta=False)
+		return Version.objects.filter(tree__gt=0).filter(testing=0)
 
 	def item_link(self, obj):
 		return "http://www.postgresql.org/docs/%s/static/%s" % (obj.tree, obj.relnotes)
