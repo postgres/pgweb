@@ -32,7 +32,7 @@ fi
 
 # Cause reload
 #echo Reloading website due to updates
-sudo pkill -f pgweb/manage.py
+sudo pkill -f ^python.*pgweb/manage.py
 
 # Update the file listing the latest update
 mv -f /tmp/pgweb.update lastupdate
