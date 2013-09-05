@@ -126,6 +126,7 @@ Disallow: /admin/
 Disallow: /account/
 Disallow: /docs/devel/
 Disallow: /list/
+Disallow: /search/
 Disallow: /message-id/raw/
 Disallow: /message-id/flat/
 
