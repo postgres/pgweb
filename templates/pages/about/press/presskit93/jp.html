@@ -1,0 +1,198 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.3 プレスキット{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.3 プレスキット</h1>
+
+<h2>目次</h2>
+
+<p>
+ &nbsp; <a href="#original_release">プレスリリース原文</a><br />
+ &nbsp; <a href="#features">機能詳細</a><br />
+ &nbsp; <a href="#download">ダウンロード</a><br />
+ &nbsp; <a href="#docs">文書</a><br />
+ &nbsp; <a href="#license">ライセンス</a><br />
+ &nbsp; <a href="#contact">問い合わせ先</a><br />
+ &nbsp; <a href="#quoted_companies">引用した企業情報と引用文</a><br />
+ &nbsp; <a href="#companies">企業による支援</a><br />
+</p>
+
+<a name="original_release"></a><h2>プレスリリース原文</h2>
+
+<p>
+2013年9月9日:PostgreSQL Global Development Groupは、オープンソースリレーションデータベースシステムのリーダーであるPostgreSQLの最新バージョンPostgreSQL 9.3のリリースをアナウンスします。
+このリリースではPostgreSQLの信頼性、可用性、他のデータベースとの統合機能を拡張しました。
+バージョン9.3を使用してこれまで実現できなかったアプリケーションを構築できることに早くもユーザは分かっています。
+</p><p>
+VenueBookのCTOであるJonathan S. Katzはこう述べています。
+「アプリケーション開発者としてすぐに使うことができる、より優れたJSON機能、正規表現インデックス処理、Postgres外部データラッパを用いたより簡単なデータベースのフェデレーションといった機能をPostgreSQL 9.3は提供します。9.3がなくてはプロジェクトを完了させることが考えられません。」
+</p><p>
+<b>書き込み可能外部データ</b>
+</p><p>
+バージョン9.3でPostgreSQL外部データラッパは書き込み可能になり、システム間で双方向のデータ交換ができるようになりました。
+今日の複雑なIT環境は複数のデータベースや半構造データソースから構成されています。
+PostgreSQLはこれらを論理的なスタックに統合するための手助けになります。
+本プロジェクトでは、高性能かつ読み書き可能なPostgreSQL同士のフェデレーションドライバであるpostgres_fdwもリリースしました。
+</p><p>
+CloudFlareの共同創設者かつリードエンジニアであるLee Hollowayはこう述べています。
+「書き込み可能な外部データラッパにより各種代替バックエンドの組み込み、そのシームレスな試験ができ、様々なニーズを素早く、プロトタイプを知的に扱うことができます。
+新しいデータストア(開発中のインハウスな実験的なデータストアを含む)を想像し生み出すこと、そして読み書き、相互作用することを理解することに興奮しています。」
+</p><p>
+<b>信頼性と可用性の向上</b>
+</p><p>
+Gandi.netの研究開発役員であるPascal Bouchareineはこう述べています。
+「よく知られている安定性、堅牢性、強度な整合性、安全性、ACID、SQL互換性といった理由でPostgresという選択を推奨します。
+特に9.3で導入される高速フェイルオーバーに関してもっと知りたいと思います。」
+</p><p>
+この新しいリリースには、PostgreSQLのよく知られた信頼性と可用性に関する機能に対し、さらなる改良と拡張が含まれています。
+</p><ul>
+<li>データページのチェックサム。管理者はディスク障害、データを破損するハードウェア障害を素早く検知できるようになります。</li>
+<li>高速フェイルオーバー。キャリア級の可用性をサポートする、マスタからレプリカへの1秒以下のスイッチオフが可能です。</li>
+<li>ストリーミングのみのリマスタ処理: フェイルオーバー後のカスケードレプリカの再構成がより簡単に、より高速になりました。</li>
+</ul><p>
+<b>開発者向けの機能</b>
+</p><p>
+これまでの毎年のリリースと同様、PostgreSQL 9.3には、アプリケーション開発者、管理者、アーキテクト向けに、PostgreSQLを用いた作業をより簡単に、より柔軟に、より楽しくする、多くの機能が含まれています。
+以下の機能が含まれます。
+</p><ul>
+<li>JSONコンストラクタおよび抽出メソッドの追加</li>
+<li>自動更新可能なビュー</li>
+<li>大規模データベースのバックアップを高速化する並行pg_dump</li>
+<li>LATERAL結合</li>
+</ul><p>
+さらに開発者はPostgreSQL 9.3のユーザ定義バックグラウンドワーカにより、PostgreSQLを負荷の調整機構とすることができる、タスクマネージャ、リクエストハンドラ、並行処理、キューイングツール、その他の補助アプリケーションを作成することができます。
+この例として既にリリースされているものが、MongoDBへの問い合わせを受け付け、それを解釈し、PostgreSQLに渡すバックグラウンドワーカであるMongresです。
+</p><p>
+<b>PostgreSQLについて</b>
+</p><p>
+PostgreSQLは、数千のユーザ、貢献者、数十の企業や団体からなるグローバルなコミュニティを持つ、先駆的なオープンソースデータベースシステムです。
+カリフォルニア大学バークレイ校から始まったPostgreSQLプロジェクトの開発は25年経過しており、今日では他と比較にならないペースでその開発が進んでいます。
+PostgreSQLの成熟した機能群は、業界トップの商用データベースシステムに匹敵するだけではなく、先端的なデータベース機能、拡張性、セキュリティ、安定性という点でそれらを超えるものになっています。
+PostgreSQLの詳細については<a href="http://www.postgresql.org">PostgreSQL.org</a>にある私たちのコミュニティを参照ください。またコミュニティへの協力をお待ちしています。
+</p>
+
+<a name="features"></a><h2>機能詳細</h2>
+
+<p>
+上記機能やその他に関する説明については、下記リソースを参照してください。
+</p>
+<ul>
+<li><a href="/docs/9.3/static/release-9-3.html">リリースノート</a></li>
+<li><a href="/docs/9.3/static/index.html">9.3 文書</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.3">PostgreSQL 9.3の新機能 (英語)</a></li>
+<li><a href="/about/featurematrix">機能マトリックス(英語)</a></li>
+<li><a href="https://github.com/umitanuki/mongres">Mongres: PostgreSQL用MongoDBエミュレータ</a></li>
+<li><a href="http://blog.cloudflare.com/kyoto_tycoon_with_postgresql">CloudFlareによるPostgreSQL用Kyoto Tycoon FDW</a></li>
+<li><a href="https://wiki.postgresql.org/wiki/Foreign_data_wrappers">その他の外部データラッパのリスト</a></li>
+</ul>
+
+<a name="download"></a><h2>ダウンロード</h2>
+<ul>
+<li><a href="/download">ダウンロードページ</a> Windows、Linux、OSX、BSD、Solaris向けのインストーラとツールへのリンクがあります。</li>
+<li><a href="/ftp/source/v9.3.0">ソースコード</a></li>
+<li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+<li><a href="/download/product-categories">関連ソフトウェアおよび商用ソフトウェア</a></li>
+</ul>
+
+<a name="docs"></a><h2>文書</h2>
+
+<p>
+HTML文書およびマニュアルページはPostgreSQLでインストールされますが、拡張可能かつ対話式の<a href="/docs/9.3/interactive">オンライン文書</a>で閲覧、検索、コメント記入を自由に行ってください。
+</p>
+
+<a name="license"></a><h2>ライセンス</h2>
+<p>
+PostgreSQLは、BSDに似た寛容的なライセンスである、<a href="/about/licence">PostgreSQLライセンス</a>を使用しています。
+この<a href="http://www.opensource.org/licenses/postgresql">OSI認証ライセンス</a>は、商用のプロプライエタリアプリケーションにおけるPostgreSQLの使用を制限しないため、柔軟かつビジネスに利用しやすいことにより広く評価されています。
+複数の企業によるサポートやソースコードが公的に所有されていることとあいまって、このライセンス条項によって、料金・ベンダロックイン・ライセンス条項の変更などの心配が不要な自社製品への組込用データベースを求めるベンダに、PostgreSQLは非常に人気があります。 
+</p>
+
+<a name="contact"></a><h2>問い合わせ先</h2>
+
+<p>Webページ</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQLホームページ</a></li>
+<li><a href="http://www.postgresql.jp/">日本PostgreSQLユーザ会</a></li>
+</ul>
+
+<p>問い合わせ先</p>
+<p>
+日本PostgreSQLユーザ会<br />
+<a href="mailto:jpug-staff@postgresql.jp">jpug-staff@postgresql.jp</a><br />
++81-3-5979-2729 </p>
+
+<p>日本以外の問い合わせ先については<a href="/about/press/contact">問い合わせ先一覧</a>を参照してください。 </p>
+
+<a name="quoted_companies"></a><h2>引用した企業情報と引用文</h2>
+
+<b>VenueBook</b>
+
+<blockquote>
+VenueBookのCTOであるJonathan S. Katzはこう述べています。
+「アプリケーション開発者としてすぐに使うことができる、より優れたJSON機能、正規表現インデックス処理、Postgres外部データラッパを用いたより簡単なデータベースのフェデレーションといった機能をPostgreSQL 9.3は提供します。
+これまでのPostgresのリリースと同様、9.3がなくてはプロジェクトを完了させることが考えられません。」
+</blockquote>
+
+<p><a href="http://venuebook.com/">VenueBook</a>は、一カ所でイベントサイクル全体を監理することができるクラウドベースのイベント監理ソリューションです。
+venueマネージャが契約の準備、承認、プロセス支払をすべてオンラインで可能になるソフトウェアを提供します。
+イベント監理を補助するだけの市場の他のシステムと異なり、企画者との相互活動や予約を合理化します。
+連絡先(英語のみ)：<a href="mailto:info@venuebook.com">info@venuebook.com</a>, +1 646-543-8368</p>
+
+<b>CloudFlare</b>
+
+<blockquote>
+CloudFlareの共同創設者かつリードエンジニアであるLee Hollowayはこう述べています。
+「CloudFlareでは何百万のwebサイトの高速化とセキュリティを提供するツール群の中にPostgreSQL 9.3が含まれています。
+PostgreSQL 9.3はデータ層における機敏性とスケール性のために私たちが必要とする拡張性とカスタマイズ性を提供します。
+特に書き込み可能な外部データラッパにより各種代替バックエンドの組み込み、そのシームレスな試験ができ、様々なニーズを素早く、プロトタイプを知的に扱うことができます。
+新しいデータストア(開発中のインハウスな実験的なデータストアを含む)を想像し生み出すこと、そして読み書き、相互作用することを理解することに興奮しています。」
+<br /><br />
+外部データラッパとマテリアルビュー、問い合わせのlateral結合という概念を組み合わせ、監視用の独自バックグラウンドワーカによりPostgreSQLは使用し共に成長する正に強力な装置となりました。
+CloudFlareはこの宝石が私たちのツール群の中にあることにわくわくしています。」
+</blockquote>
+
+<p>
+<a href="http://www.cloudflare.com">CloudFlare, Inc.</a>はサイトを２倍高速化し、攻撃から保護し、常にオンラインであることを確実にします。
+また、シングルクリックでwebアプリケーションを追加できるようにサイトを容易化します。
+CloudFlareは、ハードウェアの追加、ソフトウェアのインストール、コードの変更を行う必要なく、サイズやプラットフォームを考えることなく、webサイトを強化します。
+CloudFlareコミュニティは成長につれて強化されています。新しくサイトが加わる度にそのネットワークはスマートになっています。
+素晴らしい技術のおかげで、毎月何億人がより速い、より安全、より優れたインターネットを体感しています。
+CloudFlareは、Fast Companyによる2012年のWorld Economic ForumにおいてTechnology Pioneer、すなわちWall Street Journalによる2011年および2012年のMost Innovative Network and Internet Technology Companyとして認められました。
+また、Fast Companyによる2012年のworld's 50 most innovative companiesにランクインしました。
+CloudFlareはUSAカリフォルニア州サンフランシスコに本拠地があります。
+連絡先(英語のみ)：<a href="mailto:press@cloudflare.com">press@cloudflare.com</a>, +1 (650) 485-1399</p>
+
+<b>Gandi.net</b>
+
+<blockquote>
+Gandi.netの研究開発役員であるPascal Bouchareineはこう述べています。
+「私たちはレプリケーションに注目しており、この機能に対する最新の改良に非常に興味を持っています。
+特に9.3で導入される高速フェイルオーバーに関してもっと知りたいと思います。
+私たちはGandi IAAS/PAASプラットフォーム用にPostgreSQLを使用してきました。
+また最近は内部用に、毎日数百万の行を格納・計算・出力するライブシステムの１つを構築するために使用しています。非常に簡単でした。
+<br /><br />
+よく知られている安定性、堅牢性、強度な整合性、安全性、ACID、SQL互換性といった理由でPostgresという選択を推奨します。
+今や近代的になり、OSをより良く使用するようになりました。
+大量の性能改良とフェイルセーフの設定に関して監理がより簡単になったことを確認しています。
+利用することができる、もっとも優れたミッションクリティカルデータベースです。」
+
+</blockquote>
+
+<p><a href="http://www.gandi.net">GANDI.net</a>はフランスにおける.COM、.NET、.ORG、.BIZ、.INFO、.NAME、.BE、.FR、.EUドメイン向けのICANNで承認された最初のドメイン名レジストラの１つでした。
+現在では200以上のドメイン拡張子を提供し、規則的な方法でこのリストの拡大を続けています。
+Gandiは自らを多少グレーな慣習を持つ業界において倫理的なドメイン名レジストラであると考えています。
+顧客の権利とプライバシーを何よりも重視し、可能な限りそれらを保護することを追求しています。
+連絡先：<a href="thomas@gandi.net">Thomas Stocking</a>(英語)。 <a href="mailto:nicolas.lhuillery@gandi.net">Nicolas Lhuillery</a>. Phone: +1 410.429.7402.(フランス語)</p>
+
+<a name="companies"></a><h2>企業による支援</h2>
+
+<p>
+PostgreSQLの開発は多くの企業による支援を受けており、これらスポンサー企業は開発者の雇用や支援、ホスティングリソースの提供や金銭的なサポートを行っています。
+これらプロジェクトスポンサーの一部については<a href="/about/sponsors">スポンサーページ</a>を参照してください。
+</p>
+
+<p>また、個人コンサルタントから多国籍企業まで、<a href="/support/professional_support">PostgreSQLサポートを提供する企業</a>という大規模なコミュニティもあります。</p>
+
+<p><a href="/about/donate">寄付</a>も歓迎してます。</p>
+
+{% endblock %}

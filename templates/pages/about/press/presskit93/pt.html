@@ -1,0 +1,197 @@
+{%extends "base/page.html"%}
+{%block title%}Kit de Imprensa do PostgreSQL 9.3{%endblock%}
+{%block contents%}
+
+<h1>Kit de Imprensa do PostgreSQL 9.3</h1>
+
+<h2>Conteúdo</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Texto Original das Notas de Lançamento</a><br />
+ &nbsp; <a href="#features">Detalhes das Funcionalidades</a><br />
+ &nbsp; <a href="#download">Onde Baixar</a><br />
+ &nbsp; <a href="#docs">Documentação</a><br />
+ &nbsp; <a href="#license">Licença</a><br />
+ &nbsp; <a href="#contact">Contatos</a><br />
+ &nbsp; <a href="#quoted_companies">Empresas Citadas e Texto Completo das Citações</a><br />
+ &nbsp; <a href="#companies">Suporte Corporativo</a><br />
+</p>
+
+<a name="original_release"></a><h2>Texto Original das Notas de Lançamento</h2>
+
+<p>9 DE SETEMBRO DE 2013: O Grupo de Desenvolvimento Global do PostgreSQL
+anuncia o lançamento do PostgreSQL 9.3, a última versão do líder mundial em
+sistema de banco de dados relacionais de código aberto. Esta versão expande a
+confiabilidade, disponibilidade e habilidade em integrar com outros bancos de
+dados. Usuários já estão descobrindo que eles podem desenvolver aplicações
+utilizando a versão 9.3 que antes não teriam sido possíveis.
+</p><p>
+"PostgreSQL 9.3 fornece funcionalidades que como um desenvolvedor de aplicações
+eu posso utilizar imediatamente: melhor suporte a JSON, indexação de expressões
+regulares e facilidade em federalizar bancos de dados com adaptador de dados
+externos. Não tenho ideia de como conclui projetos sem a 9.3", disse Jonathan
+S. Katz, CTO da VenueBook.
+</p><p>
+<b>Gravação de Dados Externos</b>
+</p><p>
+A versão 9.3 torna os adaptadores de dados externos graváveis, permitindo a
+troca de dados bidirecional entre sistemas. Ambientes complexos de TI atuais
+envolvem múltiplos bancos de dados e fontes de dados semi-estruturados, e o
+PostgreSQL ajuda você a integrá-los em uma pilha coerente. O projeto também
+lançou o postgres_fdw, um conector de federação PostgreSQL-a-PostgreSQL
+escrita/leitura de alto desempenho.
+</p><p>
+"Adaptadores de dados externos graváveis nos permitem ligar e testar
+perfeitamente várias alternativas de fonte de dados, o que nos permite atender
+às diferentes necessidades rapidamente e desenvolver protótipos
+inteligentemente", explicou Lee Holloway, co-fundador e engenheiro líder na
+CloudFlare. "É emocionante conceber e lançar novos armazenamentos de dados
+(incluindo nossos internos experimentais escritos em Go) e, em seguida, vê-los
+ler, escrever e até mesmo transacionar mutuamente".
+</p><p>
+<b>Maior Confiabilidade e Disponibilidade</b>
+</p><p>
+"Postgres tem sido a minha escolha favorita pela sua conhecida estabilidade,
+robustez, coerência forte, segurança, ACID e conformidade com o SQL", disse
+Pascal Bouchareine, diretor de pesquisa e desenvolvimento na Gandi.net. "Estou
+especialmente animado para ouvir mais sobre a transferência rápida em caso de
+falha que vem na 9.3".
+</p><p>
+Esta nova versão inclui funcionalidades para melhorar e estender as conhecidas
+confiabilidade e disponibilidade do PostgreSQL:
+</p><ul>
+<li>Verificações de Páginas de Dados: ajuda administradores a detectar
+rapidamente discos com falhas e hardware ruim que corrompe dados</li>
+<li>Transferência Rápida em Caso de Falha: permite transferências abaixo de um
+segundo do principal para réplica, suportando disponibilidade "a nível de
+operadora"</li>
+<li>Remasterização de Réplicas: reconfiguração mais fácil e mais rápida de
+réplicas cascateadas após transferência em caso de falha</li>
+</ul><p>
+<b>Funcionalidades para Desenvolvedores</b>
+</p><p>
+Tal como acontece todo lançamento anual, o PostgreSQL 9.3 inclui muitas
+funcionalidades que tornam o trabalho com PostgreSQL mais fácil, mais flexível
+e mais divertido para desenvolvedores de aplicações, administradores e
+arquitetos. Essas funcionalidades incluem:
+</p><ul>
+<li>Métodos construtores e extratores adicionais para JSON</li>
+<li>Visões automaticamente atualizáveis</li>
+<li>pg_dump paralelo para acelerar cópias de seguranças em grandes bancos de dados</li>
+<li>Junções laterais</li>
+</ul><p>
+Além disso, processos de trabalho em segundo plano definidos pelo usuário no
+PostgreSQL 9.3 permitem que desenvolvedores escrevam gerenciadores de tarefas,
+manipuladores de requisições, processadores paralelos, ferramentas de
+enfileiramento e outros aplicativos auxiliares que possibilitam que o
+PostgreSQL seja um coordenador de carga de trabalho. Um exemplo disto já
+lançado é o Mongres, um processo de trabalhado em segundo plano que aceita
+consultas do MongoDB, as interpreta e passa para o PostgreSQL.
+</p><p>
+<b>Sobre PostgreSQL</b>
+</p><p>
+PostgreSQL é um sistema de banco de dados líder de código aberto, com uma
+comunidade global de milhares de usuários e colaboradores e dezenas de empresas
+e organizações. O Projeto PostgreSQL foi construído ao longo de 25 anos de
+engenharia, iniciando na Universidade da Califórnia, Berkeley, e tem um ritmo
+inigualável de desenvolvimento hoje. Conjunto de funcionalidades maduras do
+PostgreSQL não só se igualam aos principais sistemas de bancos de dados
+proprietários, mas os supera em funcionalidades avançadas, extensibilidade,
+segurança e estabilidade. Saiba mais sobre o PostgreSQL e participe da nossa
+comunidade em <a href="http://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+
+<a name="features"></a><h2>Detalhes das Funcionalidades</h2>
+
+<p>
+Para explicações sobre as funcionalidades acima e outras, visite as seguintes páginas:
+</p>
+<ul>
+<li><a href="/docs/9.3/static/release-9-3.html">Notas de Lançamento</a></li>
+<li><a href="/docs/9.3/static/index.html">Documentação 9.3</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.3">O Que Há de Novo no PostgreSQL 9.3 (Inglês)</a></li>
+<li><a href="/about/featurematrix">Matriz de Funcionalidades (Inglês)</a></li>
+<li><a href="https://github.com/umitanuki/mongres">Mongres: emulador MongoDB para PostgreSQL</a></li>
+<li><a href="http://blog.cloudflare.com/kyoto_tycoon_with_postgresql">Kyoto Tycoon FDW para PostgreSQL por CloudFlare</a></li>
+<li><a href="https://wiki.postgresql.org/wiki/Foreign_data_wrappers">Lista de outros Adaptadores de Dados Externos</a></li>
+</ul>
+
+<a name="download"></a><h2>Onde Baixar</h2>
+<ul>
+<li><a href="/download">Páginas de downloads</a> com links para instaladores e ferramentas para Windows, Linux, OSX, BSD e Solaris.</li>
+<li><a href="/ftp/source/v9.3.0">Código Fonte</a></li>
+<li><a href="http://pgxn.org">Rede de Extensões do PostgreSQL</a></li>
+<li><a href="/download/product-categories">Softwares Relacionados e Comerciais</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentação</h2>
+
+<p>
+Documentação HTML e man pages são instalados com o PostgreSQL, mas fique a vontade para navegar, pesquisar e comentar na nossa vasta <a href="/docs/9.3/interactive">documentação online</a> interativa.
+</p>
+
+<a name="license"></a><h2>Licença</h2>
+<p>
+PostgreSQL usa a <a href="/about/license">Licença PostgreSQL</a>, uma licença
+"tolerante" estilo BSD. Essa <a
+	href="http://www.opensource.org/licenses/postgresql">Licença certificada
+	pela OSI</a> é amplamente reconhecida como flexível e ideal para negócios,
+uma vez que ela não restringe o uso do PostgreSQL com aplicações comerciais e
+proprietárias. Juntamente com apoio de várias empresas e a propriedade pública
+do código, nossa licença torna o PostgreSQL muito popular entre empresas que
+desejam incorporar um banco de dados em seus produtos sem medo de taxas,
+aprisionamento tecnológico ou mudanças nos termos da licença.
+</p>
+
+<a name="contact"></a><h2>Contatos</h2>
+
+<p>Páginas na Web</p>
+<ul>
+<li><a href="http://www.postgresql.org">Página do PostgreSQL</a></li>
+<li><a href="http://www.postgresql.org.br">Comunidade Brasileira de PostgreSQL</a></li>
+</ul>
+
+<p>Informação à Imprensa</p>
+<p>Brasil<br />
+Euler Taveira de Oliveira<br />
+<a href="mailto:br@postgresql.org">br@postgresql.org</a><br />
++55 63 84594598</p>
+
+<p>Para contato em outras regiões, visite <a href="/about/press/contact">nossa lista de contatos internacionais.</a></p>
+
+<a name="quoted_companies"></a><h2>Empresas Citadas e Texto Completo das Citações</h2>
+
+<b>VenueBook</b>
+
+<blockquote>"PostgreSQL 9.3 fornece funcionalidades que como um desenvolvedor de aplicações eu posso utilizar imediatamente: melhor suporte a JSON, indexação de expressões regulares e facilidade em federalizar bancos de dados com adaptador de dados externos. Não tenho ideia de como conclui projetos sem a 9.3", disse Jonathan S. Katz, CTO da VenueBook</blockquote>
+
+<p><a href="http://venuebook.com/">VenueBook</a> é um solução de gerenciamento de eventos na nuvem que ajuda a gerenciar todo ciclo do evento em um só lugar. Nós fornecemos software que possibilita gerentes de locais a preparar e aprovar contratos, cardápios e processar todos pagamentos online. Diferentemente de outros sistemas no mercado que apenas o ajudam a gerenciar eventos, nós também simplificamos a interação e agendamento com o planejador. Contato (somente inglês): <a href="mailto:info@venuebook.com">info@venuebook.com</a>, +1 646-543-8368</p>
+
+<b>CloudFlare</b>
+
+<blockquote>
+"CloudFlare está orgulhosa em incluir o PostgreSQL 9.3 na sua caixa de ferramentas que proporcionam aceleração e segurança a milhões de sites. Ele fornece a extensibilidade e personalização que precisamos para ser ágil e escalável na camada de dados. Adaptadores de dados externos graváveis nos permitem ligar e testar perfeitamente várias alternativas de fonte de dados, o que nos permite atender às diferentes necessidades rapidamente e desenvolver protótipos inteligentemente. É emocionante conceber e lançar novos armazenamentos de dados (incluindo nossos internos experimentais escritos em Go) e, em seguida, vê-los ler, escrever e até mesmo transacionar mutuamente."
+<br /><br />
+"Acoplar adaptadores de dados externos com a noção de visões materializadas e junções laterais para consulta; e processos de trabalho em segundo plano para monitoramento, rende ao PostgreSQL uma armadura verdadeiramente poderosa que pretendemos usar e crescer com ele. CloudFlare está entusiasmada por ter esta joia em nossa caixa de ferramentas", disse Lee Holloway, co-fundador e engenheiro líder da CloudFlare.</blockquote>
+
+<p><a href="http://www.cloudflare.com">CloudFlare, Inc.</a> faz sites duas vezes mais rápidos, os protege de ataques, garante que eles estejam sempre online e os torna simples de adicionar aplicativos web com apenas um clique. CloudFlare turbina sites independente do tamanho ou plataforma sem a necessidade de adicionar hardware, instalar software ou alterar uma linha de código. A comunidade CloudFlare se torna mais sólida à medida que cresce; cada novo site torna a rede mais inteligente. Graças a nossa fantástica tecnologia, a cada mês centenas de milhões de pessoas experimentam uma Internet melhor, mais rápida e mais segura. CloudFlare foi reconhecida pelo Fórum Econômico Mundial como um pioneiro tecnológico, chamado de a Mais Inovadora Empresa de Tecnologia de Rede e Internet no ano de 2011 e 2012 pelo Jornal Wall Street e ranqueada entre as 50 mais inovadoras empresas do mundo em 2012 pela Fast Company. CloudFlare localiza-se em São Francisco, Califórnia, USA. Contato (somente em inglês): <a href="mailto:press@cloudflare.com">press@cloudflare.com</a>, +1 (650) 485-1399</p>
+
+<b>Gandi.net</b>
+
+<blockquote>
+"Nós estamos acompanhando replicação e estamos muito interessados nas melhorias recentes desta funcionalidade. Estou especialmente animado para ouvir mais sobre a transferência rápida em caso de falha que vem na 9.3. Estamos utilizando o postgresql para a plataforma IAAS/PAAS na Gandi e recentemente internamente desenvolvendo um dos nossos sistemas em produção que armazena/computa/envia milhões de registros diariamente com facilidade."
+<br /><br />
+"Postgres tem sido a minha escolha favorita pela sua conhecida estabilidade/robustez/coerência forte/segurança/ACID e conformidade com o SQL. Agora que está se modernizando, fazendo bom uso do sistema operacional, estamos observando grandes melhorias de desempenho e mais facilidade na administração de uma instalação à prova de falhas. É o melhor banco de dados relacional de missão crítica disponível no mercado", disse Pascal Bouchareine, diretor de pesquisa e desenvolvimento da Gandi.
+</blockquote>
+
+<p><a href="http://www.gandi.net">GANDI.net</a> foi uma das primeiras empresas de registro de domínio aprovada pelo ICANN para domínios .COM, .NET, .ORG, .BIZ, .INFO, .NAME, .BE, .FR e .EU na França. Agora ela oferece mais de 200 extensões de domínios e continua a aumentar essa lista regularmente. Gandi considera-se uma empresa de registro de domínios ética em uma indústria que tem algumas práticas 'desonestas'. Ela valoriza os direitos e a privacidade dos clientes acima de tudo e busca defender isso sempre que possível. Contato em inglês: <a href="thomas@gandi.net">Thomas Stocking</a> e em francês: <a href="mailto:nicolas.lhuillery@gandi.net">Nicolas Lhuillery</a>. Telefone: +1 410.429.7402.</p>
+
+<a name="companies"></a><h2>Suporte Corporativo</h2>
+
+<p>O PostgreSQL conta com o apoio de várias empresas, que patrocinam desenvolvedores, fornecem hospedagem e nos dão apoio financeiro. Veja nossa <a href="http://www.postgresql.org/about/sponsors/">página de patrocinadores</a> para ver alguns desses apoiadores do projeto.</p>
+
+<p>Existe também uma grande comunidade de <a href="/support/professional_support">empresas oferecendo suporte ao PostgreSQL</a>, de consultores individuais a empresas multinacionais.</p>
+
+<p><a href="/about/donate">Doações</a> são aceitas de bom grado.</p>
+
+{% endblock %}
