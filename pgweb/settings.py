@@ -156,6 +156,7 @@ FRONTEND_SERVERS=()                                    # A tuple containing the 
 FTP_MASTERS=()										   # A tuple containing the *IP addresses* of all machines
                                                        # trusted to upload ftp structure data
 VARNISH_PURGERS=()                                     # Extra servers that can do varnish purges through our queue
+VARNISH_QUEUE_ID=1									   # pgq queue id used for varnish purging
 ARCHIVES_SEARCH_SERVER="archives.postgresql.org"       # Where to post REST request for archives search
 
 # Load local settings overrides
