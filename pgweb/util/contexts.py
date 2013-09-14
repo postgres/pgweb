@@ -46,10 +46,7 @@ sitenav = {
 	'community': [
 		{'title': 'Community',          'link':'/community/'},
 		{'title': 'Contributors',       'link':'/community/contributors/'},
-		{'title': 'Mailing Lists',      'link':'/community/lists/', 'submenu': [
-			{'title': 'Subscribe',  'link':'/community/lists/subscribe/'},
-			{'title': 'Archives',   'link':'/list/'},
-		]},
+		{'title': 'Mailing Lists',      'link':'/list/'},
 		{'title': 'IRC',                'link':'/community/irc/'},
 		{'title': 'Local User Groups',  'link':'/community/user-groups/'},
 		{'title': 'Featured Users',     'link':'/about/users/'},

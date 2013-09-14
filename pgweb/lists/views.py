@@ -14,13 +14,6 @@ from pgweb.util.misc import sendmail
 from models import MailingList, MailingListGroup
 from forms import SubscribeForm
 
-def root(request):
-	lists = MailingList.objects.all().order_by('group__sortkey', 'listname')
-	
-	return render_to_response('lists/root.html', {
-		'lists': lists,
-	}, NavContext(request, 'community'))
-
 @csrf_exempt
 def subscribe(request):
 	if request.POST:
