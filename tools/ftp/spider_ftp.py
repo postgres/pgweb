@@ -13,6 +13,10 @@ import cPickle as pickle
 import codecs
 import urllib2
 
+# Directories, specified from the root of the ftp tree and down, that
+# will be recursively excluded from the pickle.
+exclude_roots = ['/repos', ]
+
 allnodes = {}
 
 def read_file(fn):
@@ -37,11 +41,13 @@ def parse_directory(dirname, rootlen):
 					'd': os.readlink(fn),
 					}
 			else:
-				# This is a subdirectory, recurse into it
-				parse_directory(fn, rootlen)
-				mynode[f] = {
-					't': 'd',
-				}
+				# This is a subdirectory, recurse into it, unless it happens
+				# to be on our exclude list.
+				if not fn[rootlen:] in exclude_roots:
+					parse_directory(fn, rootlen)
+					mynode[f] = {
+						't': 'd',
+					}
 		else:
 			# This a file
 			stat = os.stat(fn)
