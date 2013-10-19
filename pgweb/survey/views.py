@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.db import connection
+from django.db import connection, transaction
 from django.template.defaultfilters import slugify
 from django.views.decorators.csrf import csrf_exempt
 
@@ -58,6 +58,7 @@ def vote(request, surveyid):
 	# do it properly. Possibly because of the cute stuff we do with
 	# getattr/setattr above.
 	varnish_purge("/community/survey/%s/" % surveyid)
+	transaction.commit_unless_managed()
 
 	return HttpResponseRedirect("/community/survey/%s/" % surveyid)
 
