@@ -5,7 +5,7 @@ from django.template.defaultfilters import slugify
 from django.views.decorators.csrf import csrf_exempt
 
 from pgweb.util.contexts import NavContext
-from pgweb.util.misc import get_client_ip
+from pgweb.util.misc import get_client_ip, varnish_purge
 from pgweb.util.helpers import HttpServerError
 
 from models import Survey, SurveyAnswer, SurveyLock
@@ -53,6 +53,11 @@ def vote(request, surveyid):
 	answers = SurveyAnswer.objects.get_or_create(survey=surv)[0]
 	setattr(answers, attrname, getattr(answers, attrname)+1)
 	answers.save()
+
+	# Do explicit varnish purge, since it seems that the model doesn't
+	# do it properly. Possibly because of the cute stuff we do with
+	# getattr/setattr above.
+	varnish_purge("/community/survey/%s/" % surveyid)
 
 	return HttpResponseRedirect("/community/survey/%s/" % surveyid)
 
