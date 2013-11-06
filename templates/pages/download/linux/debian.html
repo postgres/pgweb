@@ -24,7 +24,7 @@ Debian includes PostgreSQL by default. To install PostgreSQL on
 Debian, use the <i>apt-get</i> (or other apt-driving) command:
 </p>
 <code>
-apt-get install postgresql-9.2
+apt-get install postgresql-9.3
 </code>
 <p>
 The repository contains many different packages including third party
@@ -32,11 +32,11 @@ addons. The most command and important packages are (substitute the
 version number as required):
 </p>
 <ul>
- <li>postgresql-client-9.2 - client libraries and client binaries</li>
- <li>postgresql-9.2 - core database server</li>
- <li>postgresql-contrib-9.2 - additional supplied modules</li>
+ <li>postgresql-client-9.3 - client libraries and client binaries</li>
+ <li>postgresql-9.3 - core database server</li>
+ <li>postgresql-contrib-9.3 - additional supplied modules</li>
  <li>libpq-dev - libraries and headers for C language frontend development</li>
- <li>postgresql-server-dev-9.2 - libraries and headers for C language backend development</li>
+ <li>postgresql-server-dev-9.3 - libraries and headers for C language backend development</li>
  <li>pgadmin3 - pgAdmin III graphical administration utility</li>
 </ul>
 
@@ -64,8 +64,8 @@ To use the apt repository, follow these steps:
  <li>
   <select id="field.series" name="field.series" onchange='updateSeries(this);'>
    <option selected="selected" value="YOUR_DEBIAN_VERSION_HERE">Choose your Debian version</option>
-   <option value="wheezy">Wheezy (7.0)</option>
-   <option value="squeeze">Squeeze (6.0)</option>
+   <option value="wheezy">Wheezy (7.x)</option>
+   <option value="squeeze">Squeeze (6.x)</option>
   </select>
  </li>
  <li>Create the file <i>/etc/apt/sources.list.d/pgdg.list</i>, and add a line
