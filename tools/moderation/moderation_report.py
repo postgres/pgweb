@@ -9,6 +9,8 @@ sys.path.append(os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), '../
 import settings
 setup_environ(settings)
 
+from django.db import connection
+
 from util.moderation import get_all_pending_moderations
 from util.misc import send_template_mail
 
@@ -22,3 +24,5 @@ if len(counts):
 					   {
 			'items': counts,
 			})
+
+connection.close()
