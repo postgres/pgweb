@@ -25,7 +25,7 @@ PostgreSQL from these repositories, use the <i>yum</i> command:
 </p>
 <p>
 <code>
-yum install postgresql
+yum install postgresql-server
 </code>
 </p>
 <p>
@@ -45,13 +45,13 @@ the distribution:
    <td class="colFirst">RHEL/CentOS/SL 6</td>
    <td class="colLast">8.4</td>
   </tr>
-  <tr>
-   <td class="colFirst">Fedora 16, 17</td>
-   <td class="colLast">9.1</td>
-  </tr>
   <tr class="lastrow">
    <td class="colFirst">Fedora 18</td>
    <td class="colLast">9.2</td>
+  </tr>
+  <tr>
+   <td class="colFirst">Fedora 19</td>
+   <td class="colLast">9.3</td>
   </tr>
  </table>
 </div>
@@ -63,10 +63,10 @@ addons. The most common and important packages are (substitute the
 version number as required):
 </p>
 <ul>
- <li>postgresql - client libraries and client binaries</li>
- <li>postgresql-server - core database server</li>
- <li>postgresql-contrib - additional supplied modules</li>
- <li>postgresql-devel - libraries and headers for C language development</li>
+ <li>postgresql-client   libraries and client binaries</li>
+ <li>postgresql-server   core database server</li>
+ <li>postgresql-contrib  additional supplied modules</li>
+ <li>postgresql-devel    libraries and headers for C language development</li>
  <li>pgadmin3 - pgAdmin III graphical administration utility</li>
 </ul>
 
@@ -103,7 +103,7 @@ and install it with commands like:
 </p>
 <p>
 <code>
-rpm -i http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-1.noarch.rpm
+yum install http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-1.noarch.rpm
 </code>
 </p>
 <p>
@@ -115,6 +115,13 @@ same way as the ones included in the distribution.
 yum install postgresql93-server postgresql93-contrib<br/>
 service postgresql-9.3 initdb<br/>
 chkconfig postgresql-9.3 on
+</code>
+or, on Fedora 19 and other later derived distributions:<br />
+<code>
+yum install postgresql93-server postgresql93-contrib<br/>
+/usr/pgsql-9.3/bin/postgresql93-setup initdb
+systemctl enable postgresql-9.3.service
+systemctl start postgresql-9.3.service
 </code>
 </p>
 <p>
