@@ -1,14 +1,17 @@
 {%extends "base/page.html"%}
-{%block title%}Linux downloads (RedHat/CentOS/Fedora/Scientific){%endblock%}
+{%block title%}Linux downloads (RedHat family){%endblock%}
 {%block contents%}
 
-<h1>Linux downloads (RedHat/CentOS/Fedora/Scientific)</h1>
+<h1>Linux downloads (RedHat family)</h1>
 <p>
+The RedHat family of distributions includes RedHat Enterprise Linux,
+CentOS, Fedora, Scientific Linux, Oracle Linux and others.
 PostgreSQL is available on these platforms by default. However,
 each version of the platform normally "snapshots" a specific version of
 PostgreSQL that is then supported throughout the lifetime of this platform.
 Since this can often mean a different version than preferred, the PostgreSQL
-project provides a repository of packages of all supported versions.
+project provides a <a href="#yum">repository</a> of packages of all
+supported versions for the most common distributions.
 </p>
 <p>
 Should packages not be available for your distribution, or there are
@@ -38,11 +41,11 @@ the distribution:
    <th class="colLast">Version</th>
   </tr>
   <tr>
-   <td class="colFirst">RHEL/CentOS/SL 5</td>
+   <td class="colFirst">RHEL/CentOS/SL/OL 5</td>
    <td class="colLast">8.1 (also supplies package postgresql84)</td>
   </tr>
   <tr>
-   <td class="colFirst">RHEL/CentOS/SL 6</td>
+   <td class="colFirst">RHEL/CentOS/SL/OL 6</td>
    <td class="colLast">8.4</td>
   </tr>
   <tr class="lastrow">
@@ -78,7 +81,7 @@ version number as required):
 
 <h3>Post-installation</h3>
 <p>
-Due to policies for RedHat style distributions, the PostgreSQL installation
+Due to policies for RedHat family distributions, the PostgreSQL installation
 will not be enabled for automatic start or have the database initialized
 automatically. To make your database installation complete, you need to
 perform these two steps:
@@ -93,13 +96,21 @@ systemctl enable postgresql.service
 </code>
 </p>
 
-<h2>PostgreSQL Yum Repository</h2>
+<a name="yum"></a><h2>PostgreSQL Yum Repository</h2>
 <p>
 If the version supplied by your operating system is not the one you want,
 you can use the PostgreSQL Yum Repository. This repository will integrate
 with your normal systems and patch management, and provide automatic
 updates for all supported versions of PostgreSQL throughout the support
 <a href="/support/versioning/">lifetime</a> of PostgreSQL.
+</p>
+<p>
+The PostgreSQL yum repository currently supports RedHat Enterprise Linux,
+CentOS and ScientificLinux versions 5.x and 6.x, as well as current versions
+of Fedora. Note that due to the short support cycle on Fedora, all versions
+are not available on this platform, and we recommend not using Fedora for
+server deployments. All distributions are supported on both x86_64 and
+i386 architectures.
 </p>
 <p>
 To use the yum repository, you must first install the <i>repository RPM</i>.
