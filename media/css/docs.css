@@ -1,9 +1,6 @@
 /* PostgreSQL.org Documentation Style */
 
-@import url("global.css");
-@import url("table.css");
-@import url("text.css");
-
+/* requires global.css, table.css and text.css to be loaded before this file! */
 body {
   font-size: 76%;
 }

@@ -18,6 +18,7 @@ from pwn.feeds import PwnFeed
 
 urlpatterns = patterns('',
     (r'^$', 'pgweb.core.views.home'),
+    (r'^dyncss/(?P<css>base|docs).css$', 'pgweb.core.views.dynamic_css'),
 
     (r'^about/newsarchive/$', 'news.views.archive'),
     (r'^about/news/(\d+)(-.*)?/$', 'news.views.item'),

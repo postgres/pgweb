@@ -1,14 +1,16 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.template import TemplateDoesNotExist, loader, Context
+from django.http import HttpResponseNotModified
+from django.template import TemplateDoesNotExist, loader
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Count
 from django.db import connection, transaction
+from django.utils.http import http_date, parse_http_date
 from django.conf import settings
 
 from datetime import date, datetime
-from os import uname
+import os
 import re
 import urllib
 
@@ -155,6 +157,60 @@ def sitemap(request):
 	x.endDocument()
 	return resp
 
+# dynamic CSS serving, meaning we merge a number of different CSS into a
+# single one, making sure it turns into a single http response. We do this
+# dynamically, since the output will be cached (for all non-SSL users, which
+# is the vast majority) anyway.
+_dynamic_cssmap = {
+	'base': ['../media/css/global.css',
+			 '../media/css/layout.css',
+			 '../media/css/text.css',
+			 '../media/css/navigation.css',
+			 '../media/css/table.css',
+			 '../media/css/iefixes.css'],
+	'docs': ['../media/css/global.css',
+			 '../media/css/table.css',
+			 '../media/css/text.css',
+		     '../media/css/docs.css'],
+	}
+@cache(hours=6)
+def dynamic_css(request, css):
+	if not _dynamic_cssmap.has_key(css):
+		raise Http404('CSS not found')
+	files = _dynamic_cssmap[css]
+	resp = HttpResponse(content_type='text/css')
+
+	# We honor if-modified-since headers by looking at the most recently
+	# touched CSS file.
+	latestmod = 0
+	for fn in files:
+		try:
+			stime = os.stat(fn).st_mtime
+			if latestmod < stime:
+				latestmod = stime
+		except OSError:
+			# If we somehow referred to a file that didn't exist, or
+			# one that we couldn't access.
+			raise Http404('CSS (sub) not found')
+	if request.META.has_key('HTTP_IF_MODIFIED_SINCE'):
+		# This code is mostly stolen from django :)
+		matches = re.match(r"^([^;]+)(; length=([0-9]+))?$",
+						   request.META.get('HTTP_IF_MODIFIED_SINCE'),
+						   re.IGNORECASE)
+		header_mtime = parse_http_date(matches.group(1))
+		# We don't do length checking, just the date
+		if int(latestmod) <= header_mtime:
+			return HttpResponseNotModified(mimetype='text/css')
+	resp['Last-Modified'] = http_date(latestmod)
+
+	for fn in files:
+		with open(fn) as f:
+			resp.write("/* %s */\n" % fn)
+			resp.write(f.read())
+			resp.write("\n")
+
+	return resp
+
 @nocache
 def csrf_failure(request, reason=''):
 	resp = render_to_response('errors/csrf_failure.html', {
@@ -167,7 +223,7 @@ def csrf_failure(request, reason=''):
 @cache(seconds=30)
 def system_information(request):
 	return render_to_response('core/system_information.html', {
-			'server': uname()[1],
+			'server': os.uname()[1],
 			'behind_cache': is_behind_cache(request),
 			'cache_server': is_behind_cache(request) and request.META['REMOTE_ADDR'] or None,
 			'client_ip': get_client_ip(request),
