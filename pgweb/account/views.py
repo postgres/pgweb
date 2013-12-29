@@ -7,6 +7,7 @@ from django.utils.http import int_to_base36
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import logout as django_logout
 from django.conf import settings
+from django.db import transaction
 
 import base64
 import urllib
@@ -71,6 +72,7 @@ objtypes = {
 
 @ssl_required
 @login_required
+@transaction.commit_on_success
 def profile(request):
 	# We always have the user, but not always the profile. And we need a bit
 	# of a hack around the normal forms code since we have two different
