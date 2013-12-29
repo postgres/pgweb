@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from pgweb.util.bases import PgModel
 
@@ -25,6 +26,7 @@ class Contributor(PgModel, models.Model):
 	companyurl = models.URLField(max_length=100, null=True, blank=True)
 	location = models.CharField(max_length=100, null=True, blank=True)
 	contribution = models.TextField(null=True, blank=True)
+	user = models.ForeignKey(User, null=True, blank=True)
 
 	purge_urls = ('/community/contributors/', )
 
