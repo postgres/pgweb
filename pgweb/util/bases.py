@@ -100,7 +100,14 @@ class PgModel(object):
 					return (None, None)
 				return ('%s id %s has been modified' % (self._meta.verbose_name, self.id),
 					"The following fields have been modified:\n\n%s" % diff)
-
+		else:
+			# If there is no approved field, but send_notifications was set
+			# to True, we notify on all changes.
+			diff = self.full_text_diff(oldobj)
+			if not diff:
+				return (None, None)
+			return ('%s id %s has been modified' % (self._meta.verbose_name, self.id),
+					"The following fields have been modified:\n\n%s" % diff)
 
 	def _get_all_notification_fields(self):
 		if self.notify_fields:
