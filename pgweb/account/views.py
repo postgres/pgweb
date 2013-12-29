@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 import django.contrib.auth.views as authviews
-from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.http import int_to_base36
@@ -10,7 +10,6 @@ from django.conf import settings
 
 import base64
 import urllib
-import re
 from Crypto.Cipher import AES
 from Crypto import Random
 import time
@@ -18,16 +17,17 @@ import time
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
 from pgweb.util.misc import send_template_mail
-from pgweb.util.helpers import HttpServerError, simple_form
+from pgweb.util.helpers import HttpServerError
 
 from pgweb.news.models import NewsArticle
 from pgweb.events.models import Event
 from pgweb.core.models import Organisation, UserProfile
+from pgweb.contributors.models import Contributor
 from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
 
 from models import CommunityAuthSite
-from forms import SignupForm, UserForm, UserProfileForm
+from forms import SignupForm, UserForm, UserProfileForm, ContributorForm
 
 @ssl_required
 @login_required
@@ -77,23 +77,39 @@ def profile(request):
 	# models on a single form.
 	(profile, created) = UserProfile.objects.get_or_create(pk=request.user.pk)
 
+	# We may have a contributor record - and we only show that part of the
+	# form if we have it for this user.
+	try:
+		contrib = Contributor.objects.get(user=request.user.pk)
+	except Contributor.DoesNotExist:
+		contrib = None
+
+	contribform = None
+
 	if request.method == 'POST':
 		# Process this form
 		userform = UserForm(data=request.POST, instance=request.user)
 		profileform = UserProfileForm(data=request.POST, instance=profile)
+		if contrib:
+			contribform = ContributorForm(data=request.POST, instance=contrib)
 
-		if userform.is_valid() and profileform.is_valid():
+		if userform.is_valid() and profileform.is_valid() and (not contrib or contribform.is_valid()):
 			userform.save()
 			profileform.save()
+			if contrib:
+				contribform.save()
 			return HttpResponseRedirect("/account/")
 	else:
 		# Generate form
 		userform = UserForm(instance=request.user)
 		profileform = UserProfileForm(instance=profile)
+		if contrib:
+			contribform = ContributorForm(instance=contrib)
 
 	return render_to_response('account/userprofileform.html', {
 			'userform': userform,
 			'profileform': profileform,
+			'contribform': contribform,
 			}, NavContext(request, "account"))
 
 @ssl_required

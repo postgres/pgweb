@@ -4,6 +4,7 @@ import re
 
 from django.contrib.auth.models import User
 from pgweb.core.models import UserProfile
+from pgweb.contributors.models import Contributor
 
 class SignupForm(forms.Form):
 	username = forms.CharField(max_length=30)
@@ -57,3 +58,8 @@ class UserForm(forms.ModelForm):
 	class Meta:
 		model = User
 		fields = ('first_name', 'last_name', )
+
+class ContributorForm(forms.ModelForm):
+	class Meta:
+		model = Contributor
+		exclude = ('ctype', 'lastname', 'firstname', 'email', 'user', )
