@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from util.admin import PgwebAdmin
-from models import *
+from models import NewsArticle
 
 class NewsArticleAdmin(PgwebAdmin):
 	list_display = ('title', 'org', 'date', 'approved', )

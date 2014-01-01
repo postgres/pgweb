@@ -4,7 +4,7 @@ from pgweb.util.contexts import NavContext
 
 from datetime import date
 
-from models import *
+from models import PwnPost
 
 def index(request):
 	posts = PwnPost.objects.all()

@@ -14,8 +14,8 @@ from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.misc import get_client_ip, varnish_purge
 
-from models import *
-from forms import *
+from models import Mirror, Category, Product, StackBuilderApp
+from forms import ProductForm
 
 #######
 # FTP browser

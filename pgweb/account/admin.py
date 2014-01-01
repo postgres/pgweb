@@ -3,7 +3,7 @@ from django import forms
 
 import base64
 
-from models import *
+from models import CommunityAuthSite
 
 class CommunityAuthSiteAdminForm(forms.ModelForm):
 	class Meta:

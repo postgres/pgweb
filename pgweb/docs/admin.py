@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import *
+from models import DocComment
 
 def approve_doccomment(modeladmin, request, queryset):
 	# We need to do this in a loop even though it's less efficient,

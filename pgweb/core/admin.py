@@ -1,6 +1,8 @@
 from django.contrib import admin
 
-from pgweb.core.models import *
+from pgweb.core.models import Version, OrganisationType, Organisation
+from pgweb.core.models import ImportedRSSFeed, ImportedRSSItem
+from pgweb.core.models import ModerationNotification
 
 class OrganisationAdmin(admin.ModelAdmin):
 	list_display = ('name', 'approved', 'lastconfirmed',)

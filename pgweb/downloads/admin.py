@@ -5,7 +5,7 @@ from django.forms import ValidationError
 import re
 
 from util.admin import PgwebAdmin
-from models import *
+from models import StackBuilderApp, Mirror, Category, Product, LicenceType
 
 class MirrorAdmin(admin.ModelAdmin):
 	list_display = ('__unicode__', 'country_name', 'country_code', 'mirror_index', 'mirror_last_rsync', 'host_sponsor', )

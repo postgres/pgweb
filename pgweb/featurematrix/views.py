@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 
 from pgweb.util.contexts import NavContext
 
-from models import *
+from models import Feature
 
 def root(request):
 	features = Feature.objects.all().select_related().order_by('group__groupsort', 'group__groupname', 'featurename')

@@ -12,7 +12,7 @@ from pgweb.util.misc import send_template_mail
 
 from pgweb.core.models import Version
 
-from forms import *
+from forms import SubmitBugForm
 
 @csrf_exempt
 def submitbug(request):

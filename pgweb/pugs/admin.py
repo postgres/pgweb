@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from util.admin import PgwebAdmin
-from models import *
+from models import PUG
 
 class PUGAdmin(PgwebAdmin):
 	list_display = ('title', 'approved', )
