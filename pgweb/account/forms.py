@@ -31,7 +31,7 @@ class SignupForm(forms.Form):
 		if not re.match('^[a-z0-9_@\.-]+$', username):
 			raise forms.ValidationError("Invalid character in user name. Only a-z, 0-9, _, @, . and - allowed.")
 		try:
-			u = User.objects.get(username=username)
+			User.objects.get(username=username)
 		except User.DoesNotExist:
 			return username
 		raise forms.ValidationError("This username is already in use")
@@ -40,7 +40,7 @@ class SignupForm(forms.Form):
 		email = self.cleaned_data['email']
 
 		try:
-			u = User.objects.get(email=email)
+			User.objects.get(email=email)
 		except User.DoesNotExist:
 			return email
 		raise forms.ValidationError("A user with this email address is already registered")

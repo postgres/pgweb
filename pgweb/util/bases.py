@@ -75,7 +75,7 @@ class PgModel(object):
 	def _get_changes_texts(self):
 		try:
 			oldobj = self.__class__.objects.get(pk=self.pk)
-		except self.DoesNotExist, e:
+		except self.DoesNotExist:
 			return ('A new %s has been added' % self._meta.verbose_name, self.full_text_representation())
 		if hasattr(self,'approved'):
 			# This object has the capability to do approving. Apply the following logic:

@@ -24,7 +24,7 @@ class OrganisationForm(forms.ModelForm):
 		if self.cleaned_data['add_manager']:
 			# Something was added as manager - let's make sure the user exists
 			try:
-				u = User.objects.get(email=self.cleaned_data['add_manager'])
+				User.objects.get(email=self.cleaned_data['add_manager'])
 			except User.DoesNotExist:
 				raise ValidationError("User with email %s not found" % self.cleaned_data['add_manager'])
 

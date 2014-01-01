@@ -95,10 +95,10 @@ def fallback(request, url):
 
 	try:
 		t = loader.get_template('pages/%s.html' % url)
-	except TemplateDoesNotExist, e:
+	except TemplateDoesNotExist:
 		try:
 			t = loader.get_template('pages/%s/en.html' % url)
-		except TemplateDoesNotExist, e:
+		except TemplateDoesNotExist:
 			raise Http404('Page not found.')
 		
 	# Guestimate the nav section by looking at the URL and taking the first

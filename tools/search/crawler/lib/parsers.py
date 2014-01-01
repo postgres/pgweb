@@ -109,7 +109,7 @@ class ArchivesParser(object):
 
 		try:
 			self.date = dateutil.parser.parse(d)
-		except ValueError, e:
+		except ValueError:
 			log("Failed to parse date '%s'" % d)
 			return False
 
@@ -147,7 +147,7 @@ class RobotsParser(object):
 						activeagent = False
 				if activeagent and l.lower().startswith("disallow: "):
 					self.disallows.append(l[10:])
-		except Exception, e:
+		except Exception:
 			self.disallows = []
 
 	def block_url(self, url):

@@ -112,7 +112,7 @@ def uploadftp(request):
 		return HttpServerError("Invalid client address")
 	# We have the data in request.raw_post_data. Attempt to load it as
 	# a pickle to make sure it's properly formatted
-	throwaway = pickle.loads(request.raw_post_data)
+	pickle.loads(request.raw_post_data)
 
 	# Next, check if it's the same as the current file
 	f = open(settings.FTP_PICKLE, "rb")

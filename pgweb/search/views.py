@@ -12,7 +12,7 @@ import psycopg2
 import simplejson as json
 import socket
 
-from lists.models import MailingList, MailingListGroup
+from lists.models import MailingList
 
 # Conditionally import memcached library. Everything will work without
 # it, so we allow development installs to run without it...
@@ -173,7 +173,7 @@ def search(request):
 			# behavior not supported on pylibmc in squeeze:: behaviors={'tcp_nodelay':True})
 			try:
 				hits = memc.get(urlstr)
-			except Exception, e:
+			except Exception:
 				# If we had an exception, don't try to store either
 				memc = None
 		if not hits:
