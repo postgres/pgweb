@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response, get_object_or_404
+from django.template.context import RequestContext
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -125,18 +126,18 @@ def search(request):
 					'listid': listid,
 					'dates': dateoptions,
 					'dateval': dateval,
-					})
+					}, RequestContext(request))
 		else:
 			return render_to_response('search/sitesearch.html', {
 					'search_error': "No search term specified.",
-					})
+					}, RequestContext(request))
 	query = request.REQUEST['q']
 
 	# Anti-stefan prevention
 	if len(query) > 1000:
 		return render_to_response('search/sitesearch.html', {
 			'search_error': "Search term too long.",
-			})
+			}, RequestContext(request))
 
 	# Is the request being paged?
 	if request.REQUEST.has_key('p'):
@@ -186,12 +187,12 @@ def search(request):
 			except socket.timeout:
 				return render_to_response('search/listsearch.html', {
 						'search_error': 'Timeout when talking to search server. Please try your search again later, or with a more restrictive search terms.',
-						})
+						}, RequestContext(request))
 			if r.status != 200:
 				memc = None
 				return render_to_response('search/listsearch.html', {
 						'search_error': 'Error talking to search server: %s' % r.reason,
-						})
+						}, RequestContext(request))
 			hits = json.loads(r.read())
 			if has_memcached and memc:
 				# Store them in memcached too! But only for 10 minutes...
@@ -236,7 +237,7 @@ def search(request):
 				'listid': listid,
 				'dates': dateoptions,
 				'dateval': dateval,
-				})
+				}, RequestContext(request))
 
 	else:
 		# Website search is still done by making a regular pgsql connection
@@ -247,7 +248,7 @@ def search(request):
 		except:
 			return render_to_response('search/sitesearch.html', {
 					'search_error': 'Could not connect to search database.'
-					})
+					}, RequestContext(request))
 
 		# perform the query for general web search
 		curs.execute("SELECT * FROM site_search(%(query)s, %(firsthit)s, %(hitsperpage)s, %(allsites)s, %(suburl)s)", {
@@ -283,4 +284,4 @@ def search(request):
 						'url': "%s%s" % (h[1], h[2]),
 						'abstract': h[4].replace("[[[[[[", "<b>").replace("]]]]]]","</b>"),
 						'rank': h[5]} for h in hits[:-1]],
-				})
+				}, RequestContext(request))

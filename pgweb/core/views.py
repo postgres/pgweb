@@ -63,7 +63,7 @@ def home(request):
 		'quote': quote,
 		'versions': versions,
 		'planet': planet,
-	})
+	}, RequestContext(request))
 
 # Community main page (contains surveys and potentially more)
 def community(request):
@@ -244,7 +244,7 @@ def sync_timestamp(request):
 def admin_pending(request):
 	return render_to_response('core/admin_pending.html', {
 			'app_list': get_all_pending_moderations(),
-			})
+			}, RequestContext(request))
 
 # Purge objects from varnish, for the admin pages
 @login_required

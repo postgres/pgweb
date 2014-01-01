@@ -1,4 +1,5 @@
 from django.template import RequestContext
+from django.utils.functional import SimpleLazyObject
 from django.conf import settings
 
 # This is the whole site navigation structure. Stick in a smarter file?
@@ -100,12 +101,24 @@ class NavContext(RequestContext):
 		self.update({'navmenu': navsection})
 
 
-# Template context processor to add information about the root link
-def RootLinkContextProcessor(request):
+def _get_gitrev():
+	# Return the current git revision, that is used for
+	# cache-busting URLs.
+	with open('../.git/refs/heads/master') as f:
+		return f.readline()[:8]
+
+# Template context processor to add information about the root link and
+# the current git revision. git revision is returned as a lazy object so
+# we don't spend effort trying to load it if we don't need it (though
+# all general pages will need it since it's used to render the css urls)
+def PGWebContextProcessor(request):
+	gitrev = SimpleLazyObject(_get_gitrev)
 	if request.is_secure():
 		return {
 			'link_root': settings.SITE_ROOT,
+			'gitrev': gitrev,
 		}
 	else:
-		return {}
-
+		return {
+			'gitrev': gitrev,
+		}

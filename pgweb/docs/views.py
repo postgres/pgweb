@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import TemplateDoesNotExist, loader, Context
+from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.conf import settings
@@ -67,7 +68,7 @@ def docpage(request, version, typ, filename):
 		'can_comment': (typ=="interactive" and ver==currver),
 		'doc_index_filename': indexname,
 		'loaddate': loaddate,
-	})
+	}, RequestContext(request))
 
 def docsrootpage(request, version, typ):
 	return docpage(request, version, typ, 'index')
