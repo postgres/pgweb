@@ -1,5 +1,4 @@
 import os
-from datetime import datetime
 
 def get_struct():
 	yield ('', None)

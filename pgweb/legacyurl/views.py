@@ -1,4 +1,4 @@
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 
 def presskit(request, version, language):
 	return HttpResponseRedirect("/about/press/presskit%s/%s/" % (

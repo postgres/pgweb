@@ -1,6 +1,5 @@
 from django.shortcuts import render_to_response
 
-from pgweb.util.decorators import cache
 from pgweb.util.contexts import NavContext
 
 from models import PUG

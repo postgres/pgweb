@@ -1,9 +1,3 @@
-import os
-import pickle
-from datetime import date
-
-from django.conf import settings
-
 from models import Category
 
 def get_struct():

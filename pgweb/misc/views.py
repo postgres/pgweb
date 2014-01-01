@@ -1,5 +1,5 @@
-from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.shortcuts import render_to_response
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db import connection
 from django.conf import settings

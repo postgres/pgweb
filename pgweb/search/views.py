@@ -1,12 +1,11 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render_to_response
 from django.template.context import RequestContext
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
 from pgweb.util.decorators import cache
 
-import datetime
 import httplib
 import urllib
 import psycopg2

@@ -25,7 +25,7 @@ from pgweb.util.sitestruct import get_all_pages_struct
 from news.models import NewsArticle
 from events.models import Event
 from quotes.models import Quote
-from models import Version, ImportedRSSFeed, ImportedRSSItem
+from models import Version, ImportedRSSItem
 
 # models needed for the pieces on the community page
 from survey.models import Survey

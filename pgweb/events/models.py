@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-from datetime import date
 from pgweb.util.bases import PgModel
 
 from core.models import Country, Language, Organisation

@@ -1,8 +1,6 @@
 import re
-import string
 import urllib
 from StringIO import StringIO
-import codecs
 import dateutil.parser
 from datetime import timedelta
 

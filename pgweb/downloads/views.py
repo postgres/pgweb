@@ -1,13 +1,11 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.template import TemplateDoesNotExist, loader, Context
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.db import connection, transaction
+from django.db import transaction
 from django.conf import settings
 
 import os
-from datetime import datetime
 import urlparse
 import cPickle as pickle
 

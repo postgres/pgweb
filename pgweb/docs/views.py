@@ -1,6 +1,5 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.template import TemplateDoesNotExist, loader, Context
+from django.http import HttpResponseRedirect
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q

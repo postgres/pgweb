@@ -1,9 +1,7 @@
-from datetime import date
 from django.db import connection
 from core.models import Version
 
 def get_struct():
-	now = date.today()
 	currentversion = Version.objects.get(current=True)
 
 	# Can't use a model here, because we don't (for some reason) have a

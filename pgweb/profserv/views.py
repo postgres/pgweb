@@ -1,8 +1,6 @@
-from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.template import TemplateDoesNotExist, loader, Context
+from django.shortcuts import render_to_response
+from django.http import Http404
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext

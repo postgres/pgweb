@@ -8,7 +8,6 @@
 import sys
 from Crypto import Random
 from Crypto.Cipher import AES
-from urllib import quote_plus
 import base64
 import time
 import urllib

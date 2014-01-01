@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.db import connection, transaction
 from django.template.defaultfilters import slugify
 from django.views.decorators.csrf import csrf_exempt

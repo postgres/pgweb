@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 
 from pgweb.core.models import Organisation
 from pgweb.util.bases import PgModel
