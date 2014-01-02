@@ -24,6 +24,11 @@ class PgMiddleware(object):
 		if hasattr(settings,'NO_HTTPS_REDIRECT') and settings.NO_HTTPS_REDIRECT:
 			return None
 
+		# Does this view allow both SSL and non-ssl?
+		if getattr(view_func, 'ssl_optional', False):
+			# SSL is optional, so perform no redirects
+			return None
+
 		# Always redirect the admin interface to https
 		if request.path.startswith('/admin'):
 			if not request.is_secure():

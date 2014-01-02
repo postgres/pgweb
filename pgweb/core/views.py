@@ -14,7 +14,7 @@ import os
 import re
 import urllib
 
-from pgweb.util.decorators import ssl_required, cache, nocache
+from pgweb.util.decorators import ssl_required, ssl_optional, cache, nocache
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.moderation import get_all_pending_moderations
@@ -174,6 +174,7 @@ _dynamic_cssmap = {
 		     '../media/css/docs.css'],
 	}
 @cache(hours=6)
+@ssl_optional
 def dynamic_css(request, css):
 	if not _dynamic_cssmap.has_key(css):
 		raise Http404('CSS not found')
