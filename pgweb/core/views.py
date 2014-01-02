@@ -173,8 +173,8 @@ _dynamic_cssmap = {
 			 '../media/css/text.css',
 		     '../media/css/docs.css'],
 	}
-@cache(hours=6)
 @ssl_optional
+@cache(hours=6)
 def dynamic_css(request, css):
 	if not _dynamic_cssmap.has_key(css):
 		raise Http404('CSS not found')
