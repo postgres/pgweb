@@ -158,6 +158,7 @@ FTP_MASTERS=()										   # A tuple containing the *IP addresses* of all machin
 VARNISH_PURGERS=()                                     # Extra servers that can do varnish purges through our queue
 VARNISH_QUEUE_ID=1									   # pgq queue id used for varnish purging
 ARCHIVES_SEARCH_SERVER="archives.postgresql.org"       # Where to post REST request for archives search
+FRONTEND_SMTP_RELAY="magus.postgresql.org"             # Where to relay user generated email
 
 # Load local settings overrides
 from settings_local import *

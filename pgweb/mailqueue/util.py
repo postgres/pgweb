@@ -6,7 +6,7 @@ from email import encoders
 
 from models import QueuedMail
 
-def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None):
+def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False):
 	# attachment format, each is a tuple of (name, mimetype,contents)
 	# content should be *binary* and not base64 encoded, since we need to
 	# use the base64 routines from the email library to get a properly
@@ -30,8 +30,8 @@ def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None):
 
 
 	# Just write it to the queue, so it will be transactionally rolled back
-	QueuedMail(sender=sender, receiver=receiver, fullmsg=msg.as_string()).save()
+	QueuedMail(sender=sender, receiver=receiver, fullmsg=msg.as_string(), usergenerated=usergenerated).save()
 
-def send_mail(sender, receiver, fullmsg):
+def send_mail(sender, receiver, fullmsg, usergenerated=False):
 	# Send an email, prepared as the full MIME encoded mail already
-	QueuedMail(sender=sender, receiver=receiver, fullmsg=fullmsg).save()
+	QueuedMail(sender=sender, receiver=receiver, fullmsg=fullmsg, usergenerated=False).save()

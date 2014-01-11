@@ -31,7 +31,8 @@ def submitbug(request):
 				{
 					'bugid': bugid,
 					'bug': form.cleaned_data,
-				}
+				},
+				usergenerated=True
 			)
 
 			return render_to_response('misc/bug_completed.html', {

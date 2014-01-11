@@ -4,9 +4,10 @@ from django.conf import settings
 from pgweb.mailqueue.util import send_simple_mail
 from pgweb.util.helpers import template_to_string
 
-def send_template_mail(sender, receiver, subject, templatename, templateattr={}):
+def send_template_mail(sender, receiver, subject, templatename, templateattr={}, usergenerated=False):
 	send_simple_mail(sender, receiver, subject,
-					 template_to_string(templatename, templateattr))
+					 template_to_string(templatename, templateattr),
+					 usergenerated=usergenerated)
 
 def is_behind_cache(request):
 	"""

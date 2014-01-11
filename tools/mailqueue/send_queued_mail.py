@@ -36,8 +36,20 @@ if __name__ == "__main__":
 		# Yes, we do a new connection for each run. Just because we can.
 		# If it fails we'll throw an exception and just come back on the
 		# next cron job. And local delivery should never fail...
-		smtp = smtplib.SMTP("localhost")
-		smtp.sendmail(m.sender, m.receiver, m.fullmsg.encode('utf-8'))
+		if m.usergenerated:
+			# User generated email gets relayed directly over a frontend
+			smtphost = settings.FRONTEND_SMTP_RELAY
+		else:
+			smtphost = 'localhost'
+		smtp = smtplib.SMTP(smtphost)
+		try:
+			smtp.sendmail(m.sender, m.receiver, m.fullmsg.encode('utf-8'))
+		except (smtplib.SMTPSenderRefused, smtplib.SMTPRecipientsRefused, smtplib.SMTPDataError):
+			# If this was user generated, this indicates the antispam
+			# kicking in, so we just ignore it. If it's anything else,
+			# we want to let the exception through.
+			if not m.usergenerated:
+				raise
 		smtp.close()
 		m.delete()
 		transaction.commit()
