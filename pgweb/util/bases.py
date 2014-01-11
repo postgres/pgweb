@@ -1,11 +1,10 @@
-from email.mime.text import MIMEText
-
 from django.db.models.signals import pre_save, post_save
 from django.db import models
 from django.conf import settings
 
 from util.middleware import get_current_user
-from util.misc import sendmail, varnish_purge
+from util.misc import varnish_purge
+from mailqueue.util import send_simple_mail
 
 class PgModel(object):
 	send_notification = False
@@ -43,15 +42,10 @@ class PgModel(object):
 
 
 		# Build the mail text
-		msg = MIMEText(cont, _charset='utf-8')
-		msg['Subject'] = "%s by %s" % (subj, get_current_user())
-		msg['To'] = settings.NOTIFICATION_EMAIL
-		msg['From'] = settings.NOTIFICATION_FROM
-
-		if hasattr(settings,'SUPPRESS_NOTIFICATIONS') and settings.SUPPRESS_NOTIFICATIONS:
-			print msg.as_string()
-		else:
-			sendmail(msg)
+		send_simple_mail(settings.NOTIFICATION_FROM,
+						 settings.NOTIFICATION_EMAIL,
+						 "%s by %s" % (subj, get_current_user()),
+						 cont)
 
 	def delete(self):
 		# We can't compare the object, but we should be able to construct something anyway
@@ -60,14 +54,11 @@ class PgModel(object):
 				self._meta.verbose_name,
 				self.id,
 				get_current_user())
-			msg = MIMEText(self.full_text_representation(), _charset='utf-8')
-			msg['Subject'] = subject
-			msg['To'] = settings.NOTIFICATION_EMAIL
-			msg['From'] = settings.NOTIFICATION_FROM
-			if hasattr(settings,'SUPPRESS_NOTIFICATIONS') and settings.SUPPRESS_NOTIFICATIONS:
-				print msg.as_string()
-			else:
-				sendmail(msg)
+
+			send_simple_mail(settings.NOTIFICATION_FROM,
+							 settings.NOTIFICATION_EMAIL,
+							 subject,
+							 self.full_text_representation())
 
 		# Now call our super to actually delete the object
 		super(PgModel, self).delete()

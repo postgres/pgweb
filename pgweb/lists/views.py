@@ -3,11 +3,10 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
-from email.mime.text import MIMEText
 import simplejson as json
 
 from pgweb.util.contexts import NavContext
-from pgweb.util.misc import sendmail
+from pgweb.mailqueue.util import send_simple_mail
 
 from models import MailingList, MailingListGroup
 from forms import SubscribeForm
@@ -26,11 +25,12 @@ def subscribe(request):
 					mailtxt += "set digest\n"
 			else:
 				mailtxt += "unsubscribe %s\n" % form.cleaned_data['lists']
-			msg = MIMEText(mailtxt, _charset='utf-8')
-			msg['Subject'] = ''
-			msg['To'] = settings.LISTSERVER_EMAIL
-			msg['From'] = form.cleaned_data['email']
-			sendmail(msg)
+
+			send_simple_mail(form.cleaned_data['email'],
+							 settings.LISTSERVER_EMAIL,
+							 '',
+							 mailtxt)
+
 			return render_to_response('lists/subscribed.html', {
 			}, NavContext(request, "community"))
 	else:

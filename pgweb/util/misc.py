@@ -1,24 +1,12 @@
-from subprocess import Popen, PIPE
-from email.mime.text import MIMEText
 from django.db import connection
 from django.conf import settings
 
+from pgweb.mailqueue.util import send_simple_mail
 from pgweb.util.helpers import template_to_string
 
-def sendmail(msg):
-	pipe = Popen("/usr/sbin/sendmail -t", shell=True, stdin=PIPE).stdin
-	pipe.write(msg.as_string())
-	pipe.close()
-
 def send_template_mail(sender, receiver, subject, templatename, templateattr={}):
-	msg = MIMEText(
-		template_to_string(templatename, templateattr),
-		_charset='utf-8')
-	msg['Subject'] = subject
-	msg['To'] = receiver
-	msg['From'] = sender
-	sendmail(msg)
-
+	send_simple_mail(sender, receiver, subject,
+					 template_to_string(templatename, templateattr))
 
 def is_behind_cache(request):
 	"""

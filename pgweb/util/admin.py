@@ -1,10 +1,8 @@
 from django.contrib import admin
 from django.conf import settings
 
-from email.mime.text import MIMEText
-
 from pgweb.core.models import ModerationNotification
-from util.misc import sendmail
+from mailqueue.util import send_simple_mail
 
 
 class PgwebAdmin(admin.ModelAdmin):
@@ -78,29 +76,20 @@ class PgwebAdmin(admin.ModelAdmin):
 												obj,
 												request.POST['new_notification'])
 
-				msg = MIMEText(msgstr, _charset='utf-8')
-				msg['Subject'] = "postgresql.org moderation notification"
-				msg['To'] = obj.org.email
-				msg['From'] = settings.NOTIFICATION_FROM
-				if hasattr(settings,'SUPPRESS_NOTIFICATIONS') and settings.SUPPRESS_NOTIFICATIONS:
-					print msg.as_string()
-				else:
-					sendmail(msg)
+				send_simple_mail(settings.NOTIFICATION_FROM,
+								 obj.org.email,
+								 "postgresql.org moderation notification",
+								 msgstr)
 
 				# Also generate a mail to the moderators
-				msg = MIMEText(_get_moderator_notification_text(request.POST.has_key('remove_after_notify'),
-																obj,
-																request.POST['new_notification'],
-																request.user.username
-																),
-							   _charset='utf-8')
-				msg['Subject'] = "Moderation comment on %s %s" % (obj.__class__._meta.verbose_name, obj.id)
-				msg['To'] = settings.NOTIFICATION_EMAIL
-				msg['From'] = settings.NOTIFICATION_FROM
-				if hasattr(settings,'SUPPRESS_NOTIFICATIONS') and settings.SUPPRESS_NOTIFICATIONS:
-					print msg.as_string()
-				else:
-					sendmail(msg)
+				send_simple_mail(settings.NOTIFICATION_FROM,
+								 settings.NOTIFICATION_EMAIL,
+								 "Moderation comment on %s %s" % (obj.__class__._meta.verbose_name, obj.id),
+								 _get_moderator_notification_text(request.POST.has_key('remove_after_notify'),
+																  obj,
+																  request.POST['new_notification'],
+																  request.user.username
+															  ))
 
 				if request.POST.has_key('remove_after_notify'):
 					# Object should not be saved, it should be deleted

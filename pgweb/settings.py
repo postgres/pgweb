@@ -99,6 +99,7 @@ INSTALLED_APPS = [
     'django.contrib.markup',
 	'django.contrib.staticfiles',
     'pgweb.core',
+    'pgweb.mailqueue',
     'pgweb.account',
     'pgweb.news',
     'pgweb.events',
@@ -148,7 +149,6 @@ NOTIFICATION_EMAIL="someone@example.com"               # Address to send notific
 NOTIFICATION_FROM="someone@example.com"                # Address to send notifications *from*
 LISTSERVER_EMAIL="someone@example.com"                 # Address to majordomo
 BUGREPORT_EMAIL="someone@example.com"                  # Address to pgsql-bugs list
-SUPPRESS_NOTIFICATIONS=False                           # Set to true to disable all notification mails
 NO_HTTPS_REDIRECT=False                                # Set to true to disable redirects to https when
                                                        # developing locally
 FRONTEND_SERVERS=()                                    # A tuple containing the *IP addresses* of all the

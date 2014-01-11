@@ -25,7 +25,6 @@ with. Here's a quick step-by-step on how to do that:
 
 	DEBUG=True
 	TEMPLATE_DEBUG=DEBUG
-	SUPPRESS_NOTIFICATIONS=True
 	SITE_ROOT="http://localhost:8000"
 	NO_HTTPS_REDIRECT=True
 	SESSION_COOKIE_SECURE=False
