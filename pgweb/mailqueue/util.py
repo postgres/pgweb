@@ -2,6 +2,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.nonmultipart import MIMENonMultipart
 from email.Utils import formatdate
+from email.Utils import make_msgid
 from email import encoders
 
 from models import QueuedMail
@@ -16,6 +17,7 @@ def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, userge
 	msg['To'] = receiver
 	msg['From'] = sender
 	msg['Date'] = formatdate(localtime=True)
+	msg['Message-ID'] = make_msgid()
 
 	msg.attach(MIMEText(msgtxt, _charset='utf-8'))
 
