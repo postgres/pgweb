@@ -136,7 +136,7 @@ class BaseSiteCrawler(object):
 		if relprio == 0.0:
 			relprio = 0.5
 		params = {
-			'title': self.page.title,
+			'title': self.page.title[:128],
 			'txt': self.page.gettext(),
 			'lastmod': lastmod,
 			'site': self.siteid,
