@@ -112,7 +112,7 @@ class PgModel(object):
 		if not fieldlist:
 			return "This object does not know how to express itself."
 
-		return "\n".join(['%s: %s' % (n, self._get_attr_value(n)) for n in fieldlist])
+		return "\n".join([u'%s: %s' % (n, self._get_attr_value(n)) for n in fieldlist])
 
 	def _get_attr_value(self, fieldname):
 		try:
