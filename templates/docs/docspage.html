@@ -3,8 +3,6 @@
 <head>
     <title>PostgreSQL: Documentation: {{page.display_version}}: {{page.title}}</title>
     <style type="text/css" media="screen" title="Normal Text">@import url("/dyncss/docs.css?{{gitrev}}");</style>
-    <link rel="alternate stylesheet" media="screen" href="/media/css/docs_large.css" type="text/css" title="Large Text" />
-    <script async type="text/javascript" src="/media/js/styleswitcher.js?{{gitrev}}"></script>
     <script type="text/javascript" src="/media/js/monospacefix.js?{{gitrev}}"></script>
     <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -34,7 +32,6 @@
 	<label for="q">Search Documentation:&nbsp;</label><input type="text" id="q" name="q" size="20" onfocus="if( this.value==this.defaultValue ) this.value='';" value="Search" /><input id="submit" type="submit" value="Search" />
 	</div>
 	</form>
-        <div id="docTextSize">Text Size: <a href="#" onclick="setActiveStyleSheet('Normal Text'); return false;" onkeypress="return false;" title="Normal Text Size">Normal</a> / <a href="#" onclick="setActiveStyleSheet('Large Text'); return false;" onkeypress="return false;" title="Large Text Size">Large</a></div>
 </div>
 <div id="docNav">
 <a href="/" title="Home">Home</a> &rarr; <a href="/docs" title="Documentation">Documentation</a> &rarr; <a href="/docs/manuals" title="Manuals">Manuals</a> &rarr; <a href="/docs/{{page.display_version}}/{{doc_type}}/{{doc_index_filename}}">PostgreSQL {{page.display_version}}</a>{%if loaddate%} ({{loaddate|date:"Y-m-d H:i:s"}}){%endif%}
