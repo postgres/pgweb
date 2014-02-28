@@ -3,6 +3,7 @@ from django.conf import settings
 
 from pgweb.mailqueue.util import send_simple_mail
 from pgweb.util.helpers import template_to_string
+import re
 
 def send_template_mail(sender, receiver, subject, templatename, templateattr={}, usergenerated=False):
 	send_simple_mail(sender, receiver, subject,
@@ -59,3 +60,17 @@ def varnish_purge(url):
 	"""
 	url = '^%s' % url
 	connection.cursor().execute("SELECT varnish_purge(%s)", (url, ))
+
+def version_sort(l):
+	"""
+	map a directory name to a format that will show up sensibly in an ascii sort
+	"""
+	print l['url']
+	mkey = l['url']
+	m = re.match('v([0-9]+)\.([0-9]+)\.([0-9]+)$',l['url'])
+	if m:
+        	mkey = m.group(1) + '%02d' % int(m.group(2)) + '%02d' % int(m.group(3));
+	m = re.match('v([0-9]+)\.([0-9]+)$',l['url'])
+	if m:
+        	mkey = m.group(1) + '%02d' % int(m.group(2));
+	return mkey

@@ -12,7 +12,7 @@ import cPickle as pickle
 from pgweb.util.decorators import ssl_required, nocache
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
-from pgweb.util.misc import get_client_ip, varnish_purge
+from pgweb.util.misc import get_client_ip, varnish_purge, version_sort
 
 from models import Mirror, Category, Product, StackBuilderApp
 from forms import ProductForm
@@ -50,7 +50,6 @@ def ftpbrowser(request, subpath):
 	directories = [{'link': k, 'url': k} for k,v in node.items() if v['t'] == 'd']
 	# Add all symlinks (only directoreis supported)
 	directories.extend([{'link': k, 'url': v['d']} for k,v in node.items() if v['t'] == 'l'])
-	directories.sort()
 
 	# Add a link to the parent directory
 	if subpath:
@@ -81,7 +80,7 @@ def ftpbrowser(request, subpath):
 
 	return render_to_response('downloads/ftpbrowser.html', {
 		'basepath': subpath.rstrip('/'),
-		'directories': directories,
+		'directories': sorted(directories, key = version_sort, reverse=True),
 		'files': sorted(files),
 		'breadcrumbs': breadcrumbs,
 		'readme': file_readme,
