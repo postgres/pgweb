@@ -19,16 +19,18 @@ def subscribe(request):
 			mailtxt = ""
 			if form.cleaned_data['action'] == 'subscribe':
 				mailtxt += "subscribe %s\n" % form.cleaned_data['lists']
+				mailsubject = "subscribe"
 				if not form.cleaned_data['receive']:
 					mailtxt += "set nomail\n"
 				if form.cleaned_data['digest']:
 					mailtxt += "set digest\n"
 			else:
 				mailtxt += "unsubscribe %s\n" % form.cleaned_data['lists']
+				mailsubject = "unsubscribe"
 
 			send_simple_mail(form.cleaned_data['email'],
 							 settings.LISTSERVER_EMAIL,
-							 '',
+							 mailsubject,
 							 mailtxt)
 
 			return render_to_response('lists/subscribed.html', {
