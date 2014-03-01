@@ -68,8 +68,8 @@ def version_sort(l):
 	mkey = l['url']
 	m = re.match('v([0-9]+)\.([0-9]+)\.([0-9]+)$',l['url'])
 	if m:
-        	mkey = m.group(1) + '%02d' % int(m.group(2)) + '%02d' % int(m.group(3));
+		mkey = m.group(1) + '%02d' % int(m.group(2)) + '%02d' % int(m.group(3));
 	m = re.match('v([0-9]+)\.([0-9]+)$',l['url'])
 	if m:
-        	mkey = m.group(1) + '%02d' % int(m.group(2));
+		mkey = m.group(1) + '%02d' % int(m.group(2));
 	return mkey
