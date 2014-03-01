@@ -65,7 +65,6 @@ def version_sort(l):
 	"""
 	map a directory name to a format that will show up sensibly in an ascii sort
 	"""
-	print l['url']
 	mkey = l['url']
 	m = re.match('v([0-9]+)\.([0-9]+)\.([0-9]+)$',l['url'])
 	if m:
