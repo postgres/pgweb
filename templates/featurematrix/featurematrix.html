@@ -1,7 +1,75 @@
 {%extends "base/page.html"%}
 {%block title%}Feature Matrix{%endblock%}
 {%block extrahead%}
+<script type="text/javascript" src="/media/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+  //<![CDATA[
+    $(document).ready(function(){
+      var eol_versions = ["7.4","8.0","8.1","8.2","8.3"];
+
+      // Create form to contain filter checkboxes
+      $('table').before('<form id="version_filter"><fieldset><legend>Filter by version</legend></fieldset></form><br/>');
+
+      // Generate a list of versions based on table column headers
+      $('table tr:first th').not('th:nth-child(1)').each(function(){
+        var version_class = $(this).text().replace('.', '');
+
+        // Only mark a box as checked if no in the EOL list
+        var checked = (eol_versions.indexOf($(this).text()) == -1 ? 'checked="checked"' : '');
+
+        $('form#version_filter fieldset').append('<label for="' + version_class + '">' + $(this).text()
+          + '</label><input class="version" ' + checked + ' type="checkbox" id="toggle_' + version_class + '"/ value="' +
+          $(this).text() + '"/>&nbsp;');
+      });
+
+      // Add a checkbox to hide rows where all values are the same between
+      // displayed versions.  Default: checked.
+      $('form#version_filter fieldset').append('<hr/> <label for="hide_unchanged">Hide unchanged features</label><input type="checkbox" checked="checked" id="hide_unchanged" />');
+
+      // Show/hide column based on whether supplied checkbox is checked.
+      function filter_version(checkbox)
+      {
+        var column=$("table tr:first th").index($("table tr:first th:contains('" + checkbox.val() + "')")) + 1;
+        $("table th:nth-child(" + column + "), table td:nth-child(" + column + ")").toggle(checkbox.is(":checked")).toggleClass('hidden');
+        hide_unchanged();
+      }
+
+      // Show/hide rows if all values are the same in displayed cells
+      function hide_unchanged()
+      {
+        var hide_unchanged=$('form#version_filter input#hide_unchanged').is(':checked');
+        $('table tr').has('td').each(function(){
+          var row_values=$(this).children('td').not('.colFirst, .hidden');
+          var yes_count=row_values.filter(":contains('Yes')").length;
+          var no_count=row_values.filter(":contains('No')").length;
+          var obsolete_count=row_values.filter(":contains('Obsolete')").length;
+          $(this).toggle(hide_unchanged == false || (yes_count != row_values.length && no_count != row_values.length && obsolete_count != row_values.length));
+        });
+      }
+
+      // Upon loading the page, apply the filter based on EOL versions that are
+      // unchecked.
+      $('form#version_filter input.version').not(':checked').each(function(){
+        filter_version($(this));
+      });
+
+      // Apply filter based on change in check status of clicked version filter.
+      $('form#version_filter input.version').on("change", function(){
+        filter_version($(this));
+      });
+
+      // Show/hide unchanged feature rows when checkbox clicked.
+      $('form#version_filter input#hide_unchanged').on("change", function(){
+        hide_unchanged();
+      });
+    });
+  //]]>
+</script>
 <style type="text/css">
+div.tblBasic { margin-top: 20px; }
+form#version_filter { text-align: center; }
+input.version { margin-right: 15px; }
+input.version:last-child { margin-right: 0; }
 td.fm_no { background-color: #ffdddd !important; }
 td.fm_yes {  background-color: #ddffdd !important; }
 td.fm_obs { background-color: #ddddff !important; }
@@ -21,8 +89,6 @@ the text.
  <li><a href="#{{group.group.groupname|slugify}}">{{group.group.groupname}}</a></li>
 {%endfor%}
 </ul>
-
-<p>&nbsp;</p>
 
 <div class="tblBasic">
 <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
