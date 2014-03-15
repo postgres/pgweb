@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response, get_object_or_404
 
 from pgweb.util.contexts import NavContext
 
+from pgweb.core.models import Version
 from models import Feature
 
 def root(request):
@@ -22,8 +23,10 @@ def root(request):
 	if currentgroup:
 		groups.append(currentgroup)
 
+	eol_versions = [v.tree for v in Version.objects.filter(supported=False, testing=False)]
 	return render_to_response('featurematrix/featurematrix.html', {
 		'groups': groups,
+		'eol_versions': eol_versions,
 	}, NavContext(request, 'about'))
 
 def detail(request, featureid):

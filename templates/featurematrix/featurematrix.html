@@ -5,7 +5,7 @@
 <script type="text/javascript">
   //<![CDATA[
     $(document).ready(function(){
-      var eol_versions = ["7.4","8.0","8.1","8.2","8.3"];
+      var eol_versions = ["{{eol_versions|join:'","'}}"];
 
       // Create form to contain filter checkboxes
       $('table').before('<form id="version_filter"><fieldset><legend>Filter by version</legend></fieldset></form><br/>');

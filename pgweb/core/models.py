@@ -68,6 +68,7 @@ class Version(PgModel, models.Model):
 		yield '/support/versioning'
 		yield '/docs/$'
 		yield '/docs/manuals'
+		yield '/about/featurematrix/$'
 		yield '/versions.rss'
 
 
