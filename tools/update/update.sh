@@ -20,6 +20,7 @@ git pull -q >/dev/null 2>&1
 
 
 # Now do a conditional update of the main repo
+cd $UPDDIR
 
 # Sleep 10 seconds to avoid interfering with the automirror scripts that
 # also run exactly on the minute.
