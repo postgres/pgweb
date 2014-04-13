@@ -286,6 +286,15 @@ def api_varnish_purge(request):
 	transaction.commit_unless_managed()
 	return HttpResponse("Purged %s entries\n" % n)
 
+@ssl_required
+@csrf_exempt
+def api_repo_updated(request):
+	if not request.META['REMOTE_ADDR'] in settings.SITE_UPDATE_HOSTS:
+		return HttpServerError("Invalid client address")
+	# Ignore methods and contents, just drop the trigger
+	open(settings.SITE_UPDATE_TRIGGER_FILE, 'a').close()
+	return HttpResponse("OK")
+
 # Merge two organisations
 @login_required
 @user_passes_test(lambda u: u.is_superuser)

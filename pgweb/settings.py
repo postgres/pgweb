@@ -159,6 +159,8 @@ VARNISH_PURGERS=()                                     # Extra servers that can 
 VARNISH_QUEUE_ID=1									   # pgq queue id used for varnish purging
 ARCHIVES_SEARCH_SERVER="archives.postgresql.org"       # Where to post REST request for archives search
 FRONTEND_SMTP_RELAY="magus.postgresql.org"             # Where to relay user generated email
+SITE_UPDATE_TRIGGER_FILE='/tmp/pgweb.update_trigger'   # Where to drop update trigger file
+SITE_UPDATE_HOSTS=('127.0.0.1', )                      # Hosts that can trigger a site update
 
 # Load local settings overrides
 from settings_local import *
