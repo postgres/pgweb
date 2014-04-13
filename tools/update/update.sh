@@ -12,9 +12,18 @@
 UPDDIR=$(dirname $0)
 cd $UPDDIR
 
-# Sleep 20 seconds to avoid interfering with the automirror scripts that
+# Unconditionally update the static content (we don't need to reload
+# lighttpd for this, so there is no need to actually check for last
+# updates or anything like that)
+cd $UPDDIR/../../../pgweb-static
+git pull -q >/dev/null 2>&1
+
+
+# Now do a conditional update of the main repo
+
+# Sleep 10 seconds to avoid interfering with the automirror scripts that
 # also run exactly on the minute.
-sleep 20
+sleep 10
 
 # Pull changes from the git repo
 git pull -q >/dev/null 2>&1
@@ -44,10 +53,3 @@ mv -f /tmp/pgweb.update lastupdate
 wget --header "Host: www.postgresql.org" http://localhost/web_sync_timestamp -O /dev/null -q
 sleep 1
 wget --header "Host: www.postgresql.org" http://localhost/web_sync_timestamp -O /dev/null -q
-
-
-# Unconditionally update the static content (we don't need to reload
-# lighttpd for this, so there is no need to actually check for last
-# updates or anything like that)
-cd $UPDDIR/../../../pgweb-static
-git pull -q >/dev/null 2>&1
