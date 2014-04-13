@@ -16,7 +16,7 @@ cd $UPDDIR
 # also run exactly on the minute.
 sleep 20
 
-# Pull changes from the it repo
+# Pull changes from the git repo
 git pull -q >/dev/null 2>&1
 
 # Figure out if something changed
@@ -47,7 +47,7 @@ wget --header "Host: www.postgresql.org" http://localhost/web_sync_timestamp -O 
 
 
 # Unconditionally update the static content (we don't need to reload
-# lighttpd for htis, so there is no need to actually check for last
+# lighttpd for this, so there is no need to actually check for last
 # updates or anything like that)
 cd $UPDDIR/../../../pgweb-static
 git pull -q >/dev/null 2>&1
