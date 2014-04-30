@@ -1,4 +1,11 @@
-from util.admin import register_pgwebadmin
+from django.contrib import admin
+
+from util.admin import PgwebAdmin
 from models import ProfessionalService
 
-register_pgwebadmin(ProfessionalService)
+class ProfessionalServiceAdmin(PgwebAdmin):
+	list_display = ('__unicode__', 'approved',)
+	list_filter = ('approved',)
+	search_fields = ('org__name',)
+
+admin.site.register(ProfessionalService, ProfessionalServiceAdmin)
