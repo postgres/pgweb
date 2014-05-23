@@ -83,7 +83,7 @@ def search(request):
 
 		if request.REQUEST.has_key('s'):
 			listsort = request.REQUEST['s']
-			if listsort != 'r' and listsort != 'd':
+			if not listsort in ('r', 'd', 'i'):
 				listsort = 'r'
 		else:
 			listsort = 'r'
@@ -94,6 +94,7 @@ def search(request):
 		sortoptions = (
 			{'val':'r', 'text': 'Rank', 'selected': not (request.REQUEST.has_key('s') and request.REQUEST['s'] == 'd')},
 			{'val':'d', 'text': 'Date', 'selected': request.REQUEST.has_key('s') and request.REQUEST['s'] == 'd'},
+			{'val':'i', 'text': 'Reverse date', 'selected': request.REQUEST.has_key('s') and request.REQUEST['s'] == 'i'},
 			)
 		dateoptions = (
 			{'val': -1, 'text': 'anytime'},
