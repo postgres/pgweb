@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -31,6 +31,8 @@ def docpage(request, version, typ, filename):
 		loaddate = Version.objects.get(tree=Decimal(0)).docsloaded
 	else:
 		ver = Decimal(version)
+		if ver == Decimal(0):
+			raise Http404("Version not found")
 
 	if ver < Decimal("7.1") and ver > Decimal(0):
 		extension = "htm"
