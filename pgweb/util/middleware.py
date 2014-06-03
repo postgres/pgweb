@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.conf import settings
 
 # Use thread local storage to pass the username down. 
@@ -78,3 +78,17 @@ class PgMiddleware(object):
 					return HttpResponseRedirect(redirect_to)
 				else:
 					return None
+
+
+
+# Protection middleware against badly encoded query strings.
+# We could probably block this in the webserver further out, but this
+# is a quick-fix. From django ticket #15152.
+class RequestCheckMiddleware(object):
+	def process_request(self, request):
+		try:
+			u'%s' % request.META.get('QUERY_STRING','')
+		except UnicodeDecodeError:
+			response = HttpResponse()
+			response.status_code = 400  #Bad Request
+			return response
