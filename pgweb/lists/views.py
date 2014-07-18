@@ -44,9 +44,13 @@ def subscribe(request):
 		'operation': 'Subscribe',
 		'jquery': True,
 		'form_intro': """
-Please do not subscribe to mailing lists using e-mail accounts protected by
-mail-back anti-spam systems. These are extremely annoying to the list maintainers
-and other members, and you may be automatically unsubscribed."""
+<b>Note 1:</b> Please ensure you read the <a 
+href="https://wiki.postgresql.org/wiki/Archives_Policy">Archive Policy</a>
+before posting to the lists.</p>
+
+<p><b>Note 2:</b> Please do not subscribe to mailing lists using e-mail 
+accounts protected by mail-back anti-spam systems. These are extremely annoying 
+to the list maintainers and other members, and you may be automatically unsubscribed."""
 	}, NavContext(request, "community"))
 
 def listinfo(request):
