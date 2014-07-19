@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     # Community authenticatoin
     (r'^auth/(\d+)/$', 'account.views.communityauth'),
     (r'^auth/(\d+)/logout/$', 'account.views.communityauth_logout'),
+    (r'^auth/(\d+)/search/$', 'account.views.communityauth_search'),
 
 	# Profile
 	(r'^profile/$', 'account.views.profile'),

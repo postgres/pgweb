@@ -6,7 +6,7 @@
 #
 # To integrate with django, you need the following:
 # * Make sure the view "login" from this module is used for login
-# * Map an url somwehere (typicall /auth_receive/) to the auth_receive
+# * Map an url somwehere (typically /auth_receive/) to the auth_receive
 #   view.
 # * In settings.py, set AUTHENTICATION_BACKENDS to point to the class
 #   AuthBackend in this module.
@@ -26,6 +26,8 @@ from django.contrib.auth import logout as django_logout
 from django.conf import settings
 
 import base64
+import simplejson
+import socket
 import urlparse
 import urllib
 from Crypto.Cipher import AES
@@ -168,3 +170,36 @@ We apologize for the inconvenience.
 	if hasattr(settings, 'PGAUTH_REDIRECT_SUCCESS'):
 		return HttpResponseRedirect(settings.PGAUTH_REDIRECT_SUCCESS)
 	raise Exception("Authentication successful, but don't know where to redirect!")
+
+
+# Perform a search in the central system. Note that the results are returned as an
+# array of dicts, and *not* as User objects. To be able to for example reference the
+# user through a ForeignKey, a User object must be materialized locally. We don't do
+# that here, as this search might potentially return a lot of unrelated users since
+# it's a wildcard match.
+# Unlike the authentication, searching does not involve the browser - we just make
+# a direct http call.
+def user_search(searchterm=None, userid=None):
+	# If upsteam isn't responding quickly, it's not going to respond at all, and
+	# 10 seconds is already quite long.
+	socket.setdefaulttimeout(10)
+	if userid:
+		q = {'u': userid}
+	else:
+		q = {'s': searchterm}
+
+	u = urllib.urlopen('%ssearch/?%s' % (
+		settings.PGAUTH_REDIRECT,
+		urllib.urlencode(q),
+		))
+	(ivs, datas) = u.read().split('&')
+	u.close()
+
+	# Decryption time
+	decryptor = AES.new(base64.b64decode(settings.PGAUTH_KEY),
+						AES.MODE_CBC,
+						base64.b64decode(ivs, "-_"))
+	s = decryptor.decrypt(base64.b64decode(datas, "-_")).rstrip(' ')
+	j = simplejson.loads(s)
+
+	return j

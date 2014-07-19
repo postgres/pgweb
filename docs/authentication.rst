@@ -143,3 +143,40 @@ The flow for a logout request is trivial:
 #. The main website redirects the user back to the community website,
    at the URL <redirection_url>?s=logout (where redirection_url is the
    same URL as when logging in)
+
+Searching
+---------
+The community authentication system also supports an API for searching for
+users. The idea here is to give the ability to add a user to downstream
+systems even if that user has not yet logged in (normally the user is added
+on first login).
+
+In order to not leak sensitive information about users, all search results
+are returned encrypted with the same key as the authentication scheme.
+
+The flow for search is:
+
+#. Make an API call to
+   https://www.postgresql.org/account/auth/<id>/search/?<params>
+   where the id is the same id as during login, and params can be one of
+   the following:
+
+   s
+    Case insensitive substring search of name and email
+   n
+    Case insensitive substring search of name
+   e
+    Case insensitive substring search of email
+   u
+    Exact search of username
+
+#. The returned data will be an array of JSON objects, with the following keys:
+
+   u
+    Username
+   e
+    Email
+   f
+    First name
+   l
+    Last name

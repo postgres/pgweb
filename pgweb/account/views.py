@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 import django.contrib.auth.views as authviews
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.http import int_to_base36
@@ -8,12 +8,14 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import logout as django_logout
 from django.conf import settings
 from django.db import transaction
+from django.db.models import Q
 
 import base64
 import urllib
 from Crypto.Cipher import AES
 from Crypto import Random
 import time
+import simplejson as json
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
@@ -322,3 +324,38 @@ def communityauth_logout(request, siteid):
 
 	# Redirect user back to the specified suburl
 	return HttpResponseRedirect("%s?s=logout" % site.redirecturl)
+
+@ssl_required
+def communityauth_search(request, siteid):
+	# Perform a search for users. The response will be encrypted with the site
+	# key to prevent abuse, therefor we need the site.
+	site = get_object_or_404(CommunityAuthSite, pk=siteid)
+
+	q = Q(is_active=True)
+	if request.GET.has_key('s') and request.GET['s']:
+		# General search term, match both name and email
+		q = q & (Q(email__icontains=request.GET['s']) | Q(first_name__icontains=request.GET['s']) | Q(last_name__icontains=request.GET['s']))
+	elif request.GET.has_key('e') and request.GET['e']:
+		q = q & Q(email__icontains=request.GET['e'])
+	elif request.GET.has_key('n') and request.GET['n']:
+		q = q & (Q(first_name__icontains=request.GET['n']) | Q(last_name__icontains=request.GET['n']))
+	elif request.GET.has_key('u') and request.GET['u']:
+		q = q & Q(username=request.GET['u'])
+	else:
+		raise Http404('No search term specified')
+
+	users = User.objects.filter(q)
+
+	j = json.dumps([{'u': u.username, 'e': u.email, 'f': u.first_name, 'l': u.last_name} for u in users])
+
+	# Encrypt it with the shared key (and IV!)
+	r = Random.new()
+	iv = r.read(16) # Always 16 bytes for AES
+	encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_CBC, iv)
+	cipher = encryptor.encrypt(j + ' ' * (16-(len(j) % 16))) #Pad to even 16 bytes
+
+	# Base64-encode the response, just to be consistent
+	return HttpResponse("%s&%s" % (
+		base64.b64encode(iv, '-_'),
+		base64.b64encode(cipher, '-_'),
+	))
