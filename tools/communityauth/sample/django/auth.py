@@ -18,7 +18,7 @@
 #   directory that's processed before the default django.contrib.admin)
 #
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth import login as django_login
@@ -118,6 +118,23 @@ def auth_receive(request):
 			user.save()
 	except User.DoesNotExist, e:
 		# User not found, create it!
+
+		# NOTE! We have some legacy users where there is a user in
+		# the database with a different userid. Instead of trying to
+		# somehow fix that live, give a proper error message and
+		# have somebody look at it manually.
+		if User.objects.filter(email=data['e'][0]).exists():
+			return HttpResponse("""A user with email %s already exists, but with
+a different username than %s.
+
+This is almost certainly caused by some legacy data in our database.
+Please send an email to webmaster@postgresql.eu, indicating the username
+and email address from above, and we'll manually marge the two accounts
+for you.
+
+We apologize for the inconvenience.
+""" % (data['e'][0], data['u'][0]), content_type='text/plain')
+
 		user = User(username=data['u'][0],
 					first_name=data['f'][0],
 					last_name=data['l'][0],
