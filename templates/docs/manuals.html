@@ -14,7 +14,7 @@
 </tr>
 {%for v in versions%}
 <tr{%if forloop.last%} class="lastrow"{%endif%}>
-    <td class="colFirst">{{v.tree}}</td>
+    <td class="colFirst">{{v.treestring}}</td>
     <td class="colMid">
           <ul>
               <li><a href="/docs/{{v.tree}}/interactive/index.html">With user comments</a></li>

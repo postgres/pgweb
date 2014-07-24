@@ -110,8 +110,7 @@ class _VersionPdfWrapper(Version):
 			return 0
 
 def manuals(request):
-	# We don't include beta/rc's here. Why?
-	versions = Version.objects.filter(supported=True).order_by('-tree')
+	versions = Version.objects.filter(Q(supported=True) | Q(testing__gt=0,tree__gt=0)).order_by('-tree')
 	return render_to_response('docs/manuals.html', {
 		'versions': [_VersionPdfWrapper(v) for v in versions],
 	}, NavContext(request, 'docs'))
