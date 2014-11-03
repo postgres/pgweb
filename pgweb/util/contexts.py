@@ -38,7 +38,7 @@ sitenav = {
 			{'title': 'Japanese',   'link':'http://www.postgresql.jp/document/'},
 		]},
 		{'title': 'Security',           'link':'/support/security/'},
-		{'title': 'What\'s New',        'link':'/docs/9.2/static/release-9-2-2.html'},
+		{'title': 'What\'s New',        'link':'/docs/current/static/release.html'},
 		{'title': 'FAQ',                'link':'https://wiki.postgresql.org/wiki/Category:FAQ'},
 		{'title': 'Books',              'link':'/docs/books/'},
 		{'title': 'Wiki',               'link':'https://wiki.postgresql.org'},
