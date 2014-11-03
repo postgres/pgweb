@@ -140,7 +140,7 @@ def mirrorselect(request, path):
 	# redirect this to ftp.mirrors.postgresql.org for now...
 	# Since requests hit our internal servers, we're also not going to
 	# bother logging them - logging will be handled by those servers
-	return HttpResponseRedirect("http://ftp.postgresql.org/pub/%s" % path)
+	return HttpResponseRedirect("https://ftp.postgresql.org/pub/%s" % path)
 
 # Accesses asking for a specific mirror will keep doing that for now.
 # At some time in the future we might consider hijacking them and sending
