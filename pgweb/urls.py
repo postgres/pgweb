@@ -111,10 +111,10 @@ urlpatterns = patterns('',
     ###
     (r'^developer/sourcecode/$', redirect_to, {'url': '/developer/coding/' }),
     (r'^developer/bios/$', redirect_to, {'url': '/community/contributors/' }),
-    (r'^docs/techdocs.*', redirect_to, {'url': 'http://wiki.postgresql.org/' }),
-    (r'^docs/faqs.FAQ.html$', redirect_to, {'url': 'http://wiki.postgresql.org/wiki/FAQ' }),
-    (r'^docs/faqs.FAQ_DEV.*', redirect_to, {'url': 'http://wiki.postgresql.org/wiki/Development_information' }),
-    (r'^docs/faqs.TODO.*', redirect_to, {'url': 'http://wiki.postgresql.org/wiki/Todo' }),
+    (r'^docs/techdocs.*', redirect_to, {'url': 'https://wiki.postgresql.org/' }),
+    (r'^docs/faqs.FAQ.html$', redirect_to, {'url': 'https://wiki.postgresql.org/wiki/FAQ' }),
+    (r'^docs/faqs.FAQ_DEV.*', redirect_to, {'url': 'https://wiki.postgresql.org/wiki/Development_information' }),
+    (r'^docs/faqs.TODO.*', redirect_to, {'url': 'https://wiki.postgresql.org/wiki/Todo' }),
     (r'^about/license/$', redirect_to, {'url': '/about/licence'}),
 
     ###
