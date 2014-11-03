@@ -40,9 +40,9 @@ sitenav = {
 		]},
 		{'title': 'Security',           'link':'/support/security/'},
 		{'title': 'What\'s New',        'link':'/docs/9.2/static/release-9-2-2.html'},
-		{'title': 'FAQ',                'link':'http://wiki.postgresql.org/wiki/Category:FAQ'},
+		{'title': 'FAQ',                'link':'https://wiki.postgresql.org/wiki/Category:FAQ'},
 		{'title': 'Books',              'link':'/docs/books/'},
-		{'title': 'Wiki',               'link':'http://wiki.postgresql.org'},
+		{'title': 'Wiki',               'link':'https://wiki.postgresql.org'},
 	],
 	'community': [
 		{'title': 'Community',          'link':'/community/'},
@@ -65,7 +65,7 @@ sitenav = {
 			{'title': 'Beta Information',  'link':'/developer/beta/'},
 		]},
 		{'title': 'Mailing Lists',      'link':'/community/lists/'},
-		{'title': 'Developer FAQ',      'link':'http://wiki.postgresql.org/wiki/Developer_FAQ'},
+		{'title': 'Developer FAQ',      'link':'https://wiki.postgresql.org/wiki/Developer_FAQ'},
 	],
 	'support': [
 		{'title': 'Support',            'link':'/support/'},
