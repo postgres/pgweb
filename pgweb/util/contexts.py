@@ -28,7 +28,6 @@ sitenav = {
 				{'title': 'Source',		'link':'/ftp/source/'}
 		]},
 		{'title': 'Software Catalogue', 'link':'/download/product-categories/'},
-		{'title': 'pgFoundry',          'link':'http://pgfoundry.org/'},
 		{'title': 'File Browser',       'link':'/ftp/'},
 	],
 	'docs': [
