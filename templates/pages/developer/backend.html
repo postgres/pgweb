@@ -6,7 +6,7 @@
 
 <center>
 <h3><i>Click on an item</i> to see more detail or look at the full
-<a href="http://wiki.postgresql.org/wiki/Backend_flowchart">index.</a></h3>
+<a href="https://wiki.postgresql.org/wiki/Backend_flowchart">index.</a></h3>
 
 <p><img src="../../../media/img/developer/backend/flow.gif" usemap="#flowmap" alt="flowchart" />
 
@@ -17,26 +17,26 @@ echo "0, 0," | awk -F, '{printf "%d, %d\n", $1 + 145, $2 + 45}'
  -->
 
 <map name="flowmap" id="flowmap">
-<area coords="50, 0, 195, 45" href="http://wiki.postgresql.org/wiki/Backend_flowchart#main" alt="main" />
-<area coords="50, 65,  195, 110" href="http://wiki.postgresql.org/wiki/Backend_flowchart#postmaster" alt="postmaster" />
-<area coords="50, 135, 195, 180" href="http://wiki.postgresql.org/wiki/Backend_flowchart#tcop" alt="tcop" />
-<area coords="50, 225, 195, 270" href="http://wiki.postgresql.org/wiki/Backend_flowchart#parser" alt="parser" />
-<area coords="50, 295, 195, 340" href="http://wiki.postgresql.org/wiki/Backend_flowchart#tcop" alt="tcop" />
-<area coords="50, 365, 195, 410" href="http://wiki.postgresql.org/wiki/Backend_flowchart#rewrite" alt="rewrite" />
-<area coords="50, 435, 195, 480" href="http://wiki.postgresql.org/wiki/Backend_flowchart#optimizer_path" alt="path" />
-<area coords="50, 505, 195, 550" href="http://wiki.postgresql.org/wiki/Backend_flowchart#optimizer_plan" alt="plan" />
-<area coords="50, 575, 195, 620" href="http://wiki.postgresql.org/wiki/Backend_flowchart#executor" alt="executor" />
+<area coords="50, 0, 195, 45" href="https://wiki.postgresql.org/wiki/Backend_flowchart#main" alt="main" />
+<area coords="50, 65,  195, 110" href="https://wiki.postgresql.org/wiki/Backend_flowchart#postmaster" alt="postmaster" />
+<area coords="50, 135, 195, 180" href="https://wiki.postgresql.org/wiki/Backend_flowchart#tcop" alt="tcop" />
+<area coords="50, 225, 195, 270" href="https://wiki.postgresql.org/wiki/Backend_flowchart#parser" alt="parser" />
+<area coords="50, 295, 195, 340" href="https://wiki.postgresql.org/wiki/Backend_flowchart#tcop" alt="tcop" />
+<area coords="50, 365, 195, 410" href="https://wiki.postgresql.org/wiki/Backend_flowchart#rewrite" alt="rewrite" />
+<area coords="50, 435, 195, 480" href="https://wiki.postgresql.org/wiki/Backend_flowchart#optimizer_path" alt="path" />
+<area coords="50, 505, 195, 550" href="https://wiki.postgresql.org/wiki/Backend_flowchart#optimizer_plan" alt="plan" />
+<area coords="50, 575, 195, 620" href="https://wiki.postgresql.org/wiki/Backend_flowchart#executor" alt="executor" />
 
-<area coords="280, 35, 425, 80" href="http://wiki.postgresql.org/wiki/Backend_flowchart#libpq" alt="libpq" />
-<area coords="280, 135, 425, 180" href="http://wiki.postgresql.org/wiki/Backend_flowchart#tcop" alt="tcop" />
-<area coords="280, 285, 425, 330" href="http://wiki.postgresql.org/wiki/Backend_flowchart#commands" alt="commands" />
+<area coords="280, 35, 425, 80" href="https://wiki.postgresql.org/wiki/Backend_flowchart#libpq" alt="libpq" />
+<area coords="280, 135, 425, 180" href="https://wiki.postgresql.org/wiki/Backend_flowchart#tcop" alt="tcop" />
+<area coords="280, 285, 425, 330" href="https://wiki.postgresql.org/wiki/Backend_flowchart#commands" alt="commands" />
 
-<area coords="0, 710, 145, 755" href="http://wiki.postgresql.org/wiki/Backend_flowchart#utils" alt="utils" />
-<area coords="190, 710, 335, 755" href="http://wiki.postgresql.org/wiki/Backend_flowchart#catalog" alt="catalog" />
-<area coords="365, 710, 510, 755" href="http://wiki.postgresql.org/wiki/Backend_flowchart#storage" alt="storage" />
+<area coords="0, 710, 145, 755" href="https://wiki.postgresql.org/wiki/Backend_flowchart#utils" alt="utils" />
+<area coords="190, 710, 335, 755" href="https://wiki.postgresql.org/wiki/Backend_flowchart#catalog" alt="catalog" />
+<area coords="365, 710, 510, 755" href="https://wiki.postgresql.org/wiki/Backend_flowchart#storage" alt="storage" />
 
-<area coords="85, 780, 230, 825" href="http://wiki.postgresql.org/wiki/Backend_flowchart#access" alt="access" />
-<area coords="280, 780, 425, 825" href="http://wiki.postgresql.org/wiki/Backend_flowchart#nodes" alt="nodes" />
+<area coords="85, 780, 230, 825" href="https://wiki.postgresql.org/wiki/Backend_flowchart#access" alt="access" />
+<area coords="280, 780, 425, 825" href="https://wiki.postgresql.org/wiki/Backend_flowchart#nodes" alt="nodes" />
 </map>
 </center>
 
@@ -44,7 +44,7 @@ echo "0, 0," | awk -F, '{printf "%d, %d\n", $1 + 145, $2 + 45}'
 
 <p>A query comes to the backend via data packets arriving through TCP/IP
 or Unix Domain sockets. It is loaded into a string, and passed to the <a
-href="http://wiki.postgresql.org/wiki/Backend_flowchart#parser">parser,</a>
+href="https://wiki.postgresql.org/wiki/Backend_flowchart#parser">parser,</a>
 where the lexical scanner, <a
 href="http://git.postgresql.org/gitweb/?p=postgresql.git;a=blob;f=src/backend/parser/scan.l">scan.l,</a>
 breaks the query up into tokens(words). The parser uses <a
@@ -58,7 +58,7 @@ href="http://git.postgresql.org/gitweb/?p=postgresql.git;a=blob;f=src/include/no
 <p>The statement is then identified as complex (<i>SELECT / INSERT /
 UPDATE / DELETE</i>) or a simple, e.g <i> CREATE USER, ANALYZE, </i>,
 etc.  Simple utility commands are processed by statement-specific
-functions in <a href="http://wiki.postgresql.org/wiki/Backend_flowchart#commands.</a>
+functions in <a href="https://wiki.postgresql.org/wiki/Backend_flowchart#commands.</a>
 Complex statements require more handling.</p>
 
 <p>The parser takes a complex query, and creates a <a
@@ -89,21 +89,21 @@ fields.</p>
 
 <p>The next step is for the Query to be modified by any
 <i>VIEWS</i> or <i>RULES</i> that may apply to the query. This is
-performed by the <a href="http://wiki.postgresql.org/wiki/Backend_flowchart#rewrite">rewrite</a>
+performed by the <a href="https://wiki.postgresql.org/wiki/Backend_flowchart#rewrite">rewrite</a>
 system.</p>
 
 <p>The <a
-href="http://wiki.postgresql.org/wiki/Backend_flowchart#optimizer_path">optimizer</a>
+href="https://wiki.postgresql.org/wiki/Backend_flowchart#optimizer_path">optimizer</a>
 uses the Query structure to determine the best table join order and join
 type of each table in the RangeTable, using Query.qual(<i>WHERE</i>
 clause) to consider optimal index usage.</p>  The <a
-href="http://wiki.postgresql.org/wiki/Backend_flowchart#optimizer_path">path</a>
+href="https://wiki.postgresql.org/wiki/Backend_flowchart#optimizer_path">path</a>
 module  then generates an optimal <a
-href="http://git.postgresql.org/gitweb/?p=postgresql.git;a=blob;f=src/include/nodes/plannodes.h">Plan,</a>
+href="https://git.postgresql.org/gitweb/?p=postgresql.git;a=blob;f=src/include/nodes/plannodes.h">Plan,</a>
 which contains the operations to be performed to execute the query.
 
 <p>The Plan is then passed to the <a
-href="http://wiki.postgresql.org/wiki/Backend_flowchart#executor">executor</a> for execution, and the
+href="https://wiki.postgresql.org/wiki/Backend_flowchart#executor">executor</a> for execution, and the
 result returned to the client. The Plan is actually as set of nodes,
 arranged in a tree structure with a top-level node, and various
 sub-nodes as children.</p>
