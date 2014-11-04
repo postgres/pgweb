@@ -72,13 +72,15 @@ To use the apt repository, follow these steps:
  <li>
   <select id="field.series" name="field.series" onchange='updateSeries(this);'>
    <option selected="selected" value="YOUR_UBUNTU_VERSION_HERE">Choose your Ubuntu version</option>
+   <option value="utopic">Utopic (14.10)</option>
+   <option value="trusty">Trusty (14.04)</option>
    <option value="precise">Precise (12.04)</option>
    <option value="lucid">Lucid (10.04)</option>
   </select>
  </li>
  <li>Create the file <i>/etc/apt/sources.list.d/pgdg.list</i>, and add a line
  for the repository
- <code>deb https://apt.postgresql.org/pub/repos/apt/ <span id="series-deb">YOUR_UBUNTU_VERSION_HERE</span>-pgdg main</code>
+ <code>deb http://apt.postgresql.org/pub/repos/apt/ <span id="series-deb">YOUR_UBUNTU_VERSION_HERE</span>-pgdg main</code>
  </li>
  <li>Import the repository signing key, and update the package lists
    <code>
