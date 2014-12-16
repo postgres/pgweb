@@ -1,0 +1,153 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.4 Pressemappe{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.4 Pressemappe</h1>
+
+<h2>Inhalte</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Originaler Text der Ver&ouml;ffentlichung</a><br />
+ &nbsp; <a href="#features">Mehr &uuml;ber die Features</a><br />
+ &nbsp; <a href="#download">Download</a><br />
+ &nbsp; <a href="#docs">Dokumentation</a><br />
+ &nbsp; <a href="#license">Lizenz</a><br />
+ &nbsp; <a href="#contact">Kontakt</a><br />
+ &nbsp; <a href="#graphics">Bilder und Logos</a><br />
+ &nbsp; <a href="#quoted_companies">Zitierte Unternehmen und kompletter Text der Zitate</a><br />
+ &nbsp; <a href="#companies">Professioneller Support</a><br />
+</p>
+
+<img src="http://media.postgresql.org/propaganda/postgres94_sm.jpg" />
+
+<a name="original_release"></a><h2>Originaler Text der Ver&ouml;ffentlichung</h2>
+
+<h2>PostgreSQL 9.4 erhöht Flexibilität, Skalierbarkeit und Performance</h2>
+<p>
+18 DEZEMBER 2014: Die PostgreSQL Global Development Group ist hocherfreut, die Veröffentlichung von PostgreSQL 9.4, der jüngsten Version des weltweit führenden Open Source Datenbank-Systems, zu verkünden. Diese Version bringt viele neue Features, die PostgreSQLs Flexibilität, Skalierbarkeit und Performance für die unterschiedlichsten Datenbank-Anwendungszwecke verbessern, unter anderem im Bereich der JSON-Unterstützung, Replikation und Index-Performance.
+</p><p>
+<b>Flexibilität</b>
+</p><p>
+Der neue Datentyp JSONB in PostgreSQL entbindet Benutzer ab sofort von der Wahl zwischen relationaler und non-relationaler Datenbank; mit JSONB bekommt man beides zur selben Zeit. JSONB bietet schnelle Suche mit einfacher Syntax, gestützt durch Generalized Inverted Indexe (GIN). Zahlreiche neue Funktionen ermöglichen es dem Benutzer, in JSON-Daten zu suchen und sie zu manipulieren, und das mit einer Geschwindigkeit, die auf Augenhöhe oder sogar über der populärer Dokument-Datenbanken liegt. Mit JSONB können strukturierte und unstrukturierte Daten einfach und vollintegriert miteinander kombiniert werden.
+</p><p>
+"Mit JSONB geht PostgreSQL einen großen Schritt auf die Community der JavaScript-Entwickler zu, denn JSON-Daten können nun nativ gespeichert und abgefragt werden. Node.js wie auch andere serverseitige JavaScript-Frameworks können jetzt von der Sicherheit und Stabilität von PostgreSQL profitieren, während die Daten weiterhin unstrukturiert vorliegen dürfen." meint Matt Soldo, Produktmanager Heroku Postgres.
+</p><p>
+<b>Skalierbarkeit</b>
+</p><p>
+Das 9.4-Release bringt mit Logical Decoding eine neue API mit, um den PostgreSQL-Replikationsstrom zu lesen, filtern und manipulieren. Diese Schnittstelle legt die Grundlage für aufregende neue Replikations-Werkzeuge wie bidirektionale Replikation, welche wiederum Multi-Master-Cluster ermöglicht. Weitere Verbesserungen im Replikationsmechanismus, wie Replikations-Slots und zeitverzögerte Replika-Server, bieten neue Möglichkeiten und verbessertes Management von replizierten Datenbanken.
+</p><p>
+"Der Hauptgrund für die sofortige Adaption von PostgreSQL 9.4 in unserer Produktivumgebung ist das neue Logical decoding", sagt Marco Favale, Cartographic Production Manager bei Navionics. "Die Möglichkeit, kundenspezifische und flexible Output-Plugins zu schreiben erlaubt uns, Änderungen an bestimmten Tabellen transparent zu sammeln und zu replizieren, wann und wo immer wir möchten. Die komplexe und schwierig zu wartende trigger-basierte Replikationslösung können wir dadurch ablösen."
+</p><p>
+"Zalando verlässt sich auf die Geschwindigkeit und Stabilität hunderter Datenbankserver, um kontinuierlich Millionen von Kunden überall in Europa zu bedienen." sagt Valentin Gogichashvili, Teamleiter Datenbankoperationen bei Zalando Technologies. "Wir freuen uns darauf, zeitverzögerte Standby Server, die sofort einsatzbereit sind, zu nutzen, und werden die neuen bidirektionalen Replikationsswerkzeuge evaluieren, sobald diese verfügbar sind"
+</p><p>
+<b>Performance</b>
+</p><p>
+Version 9.4 bringt auch verschiedene Performance-Verbesserungen, die noch mehr aus jedem PostgreSQL-Server herausholen, so zum Beispiel:
+</p>
+<ul>
+<li>Verbesserungen bei GIN indexes, mit bis zu 3X höherer Geschwindigkeit bei bis zu 50% weniger Platzbedarf.</li>
+<li>Materialized Views können jetzt im Hintergrund aktualisiert werden, ohne laufende Abfragen zu blockieren, was schnellere und aktuellere Reports ermöglicht.</li>
+<li>Schnelles Aufwärmen des Datenbank-Cache beim Neustart mit pg_prewarm.</li>
+<li>Schnelleres paralleles Schreiben in das PostgreSQL Transaktions-Log.</li>
+</ul>
+<p>
+"Wir werden definitiv von im Hintergrund aktualisierten Materialized Views, verzögerten Standby Servern (die unser Disaster Recovery noch robuster machen werden) ebenso wie von den üblichen Verbesserungen der Geschwindigkeit, die mit jeder neuen Version kommen, profitieren" fügt Marco Favale hinzu.
+</p>
+<a name="features"></a><h2>Mehr &uuml;ber die Features</h2>
+<p>
+F&uuml;r Erl&auml;uterungen zu den oben genannten, sowie weiteren Features, besuchen Sie bitte die folgenden Links:
+</p>
+<ul>
+<li><a href="/docs/9.4/static/release-9-4.html">Release Notes</a></li>
+<li><a href="/docs/9.4/static/index.html">9.4 Dokumentation</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.4">Was ist neu in PostgreSQL 9.4 (English)</a></li>
+<li><a href="https://www.youtube.com/watch?v=oQ1LSW31Y1A&list=PLWW0CjV-Tafa2jvcjihXwSvZZKsLAsb9Y#t=2492">9.4 On The Floor presentations</a></li>
+<li><a href="/about/featurematrix">Feature matrix (English only)</a></li>
+<li><a href="https://wiki.postgresql.org/wiki/BDR_User_Guide">Bi-Direktionale Replikation (BDR)</a></li>
+<li><a href="https://www.youtube.com/watch?v=MmzbnMqBMI0&index=28&list=PLWW0CjV-Tafa2jvcjihXwSvZZKsLAsb9Y">JSON in 9.4 Pr&auml;sentation</a></li>
+</ul>
+
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Downloads Seite</a> mit Links zu Windows, Linux, OSX, BSD und Solaris Installern, sowie Tools.</li>
+<li><a href="/ftp/source/v9.4.0">Source Code</a></li>
+<li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+<li><a href="/download/product-categories">Zugeh&ouml;rige und kommerzielle Software</a></li>
+</ul>
+
+<a name="docs"></a><h2>Dokumentation</h2>
+
+<p>
+HTML Dokumentation und Manpages werden mit PostgreSQL installiert, aber Sie k&ouml;nnen jederzeit die umfangreiche, interaktive <a href="/docs/9.4/interactive">Online Dokumentation</a> nutzen, durchsuchen und kommentieren.
+</p>
+
+<a name="license"></a><h2>Lizenz</h2>
+<p>
+PostgreSQL nutzt die <a href="/about/licence">PostgreSQL Lizenz</a>, eine BSD-artige "permissive" Lizenz. Diese
+<a href="http://www.opensource.org/licenses/postgresql">OSI-zertifizierte Lizenz</a> wird als sehr flexibel und Unternehmens-freundlich angesehen, da diese die Nutzung von PostgreSQL f&uuml;r kommerzielle und propriet&auml;re Anwendungen nicht einschr&auml;nkt. Zusammen mit Support von verschiedenen Firmen und dem Source Code in der Hand der Community, macht diese Lizenz PostgreSQL sehr popul&auml;r f&uuml;r Hersteller die eine Datenbank in ihr Produkt integrieren m&ouml;chten, ohne Angst um Geb&uuml;hren, Vendor Lock-in oder &Auml;nderungen in den Lizenzbestimmungen haben zu m&uuml;ssen.</p>
+
+<a name="contact"></a><h2>Kontakt</h2>
+
+<p>Webseiten</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL Webseite</a></li>
+<li><a href="http://www.pgug.de">Deutschsprachige PostgreSQL Anwendergruppe</a></li>
+</ul>
+
+<p>Presseanfragen</p>
+<p>Deutschland<br />
+Andreas Scherbaum<br />
+<a href="mailto:de@postgresql.org">de@postgresql.org</a><br />
++49 33056 406869</p>
+
+<p>Schweiz<br />
+<p>Markus Wanner<br />
+<a href="ch@postgresql.org">ch@postgresql.org</a><br />
++41 78 715 11 31</p>
+
+<p>F&uuml;r Kontaktinformationen aus anderen L&auml;ndern pflegen wir eine <a href="/about/press/contact">internationale Kontaktliste</a>.</p>
+
+<a name="graphics">Bilder und Logos</a>
+
+<img src="http://media.postgresql.org/propaganda/elephant2.png" >
+
+<ul>
+<li><a href="http://media.postgresql.org/propaganda/postgres94_large.jpg">PostgreSQL 9.4 Poster Grafik</a></li>
+<li><a href="http://media.postgresql.org/propaganda/pg94_acid_large.jpg">NoSQL On Acid Button</a></li>
+<li><a href="http://media.postgresql.org/propaganda/elephant.png">PostgreSQL Elefant Logo, PNG Format</a></li>
+<li><a href="http://media.postgresql.org/propaganda/elephant64.jpg">PostgreSQL Elefant Icon</a></li>
+<li><a href="http://media.postgresql.org/propaganda/slonik_with_black_text_and_tagline.gif">PostgreSQL Banner mit Logo, Elefant und Slogan</a></li>
+</ul>
+<p>
+Alle Logos sind für Bearbeitung und Weiterverbreitung under der PostgreSQL Lizenz verfügbar. Der PostgreSQL Name und das Logo sind Trademark der "The PostgreSQL Community Association of Canada".
+</p>
+
+<a name="quoted_companies"></a><h2>Zitierte Unternehmen und kompletter Text der Zitate</h2>
+<p>
+"Mit JSONB geht PostgreSQL einen großen Schritt auf die Community der JavaScript-Entwickler zu, denn JSON-Daten können nun nativ gespeichert und abgefragt werden. Node.js wie auch andere serverseitige JavaScript-Frameworks können jetzt von der Sicherheit und Stabilität von PostgreSQL profitieren, während die Daten weiterhin unstrukturiert vorliegen dürfen." meint Matt Soldo, Produktmanager Heroku Postgres.
+</p><p>
+<b>&Uuml;ber Heroku:</b> <a href="http://www.heroku.com">Heroku</a> ist die führende offene Platform as a Service (PaaS) und konzentriert sich auf Benutzerfreundlichkeit, Automatisierung und Zuverlässigkeit. Der Hauptsitz ist in San Francisco, CA. Heroku ist eine leidenschaftlicher und aktiver Unterstützer von Ruby-Technologien und Cloud-Architektur. Für weitere Informationen besuchen Sie bitte die <a href="http://www.heroku.com">Webseite</a> und das <a href="http://blog.heroku.com">Blog</a> oder folgen <a href="http://twitter.com/heroku">Heroku auf Twitter</a>. Heroku ist eine hundertprozentige Tochtergesellschaft von salesforce.com. Kontakt (nur Englisch): <a href="mailto:pr@heroku.com">Heroku PR</a>.
+</p><p>
+"Der Hauptgrund für die sofortige Adaption von PostgreSQL 9.4 in unserer Produktivumgebung ist das neue Logical decoding", sagt Marco Favale, Cartographic Production Manager bei Navionics. "Die Möglichkeit, kundenspezifische und flexible Output-Plugins zu schreiben erlaubt uns, Änderungen an bestimmten Tabellen transparent zu sammeln und zu replizieren, wann und wo immer wir möchten. Die komplexe und schwierig zu wartende trigger-basierte Replikationslösung können wir dadurch ablösen."
+</p><p>
+"Wir werden auf jeden Fall von gleichzeitiger Aktualisierung der materialisierten Views und der verzögerten Standby-Server (die unser Disaster Recovery noch robuster machen werden), sowie die üblichen Performance-Verbesserungen, die jede neue Version enthält, profitieren."
+</p><p>
+<b>&Uuml;ber Navionics</b>: Navionics (www.navionics.com) verfügt über die weltweit größte Datenbank von Karten über Meere und Seen, welche das Salzwasser des gesamten Planeten als auch Zehntausende Seen und Flüsse abdeckt. Viele dieser Pläne wurden durch Navionics proprietären Umfragen sowohl auf dem Feld und mit Fernerkundung durchgeführt, wie Satellitenbilder und Airborne Laserscanner. Navionics hat Firmensitze in Italien, USA, Indien und Estland, mit Vertrieb und Service in der ganzen Welt. Kontakt (Englisch oder Italienisch): <a href="mailto:mfavale@navionics.com">Marco Favale</a>
+</p><p>
+"Zalando verlässt sich auf die Geschwindigkeit und Stabilität hunderter Datenbankserver, um kontinuierlich Millionen von Kunden überall in Europa zu bedienen. Wir halten Schritt mit der neuesten Entwicklung von PostgreSQL seit 2010, als wir den PostgreSQL 9.0 Release Candidate 1 ausgerollt haben, und jedes neue Release bringt uns mehr Leistung und Usability-Verbesserungen, die wir nutzen, praktisch vom ersten Tag an. Wir freuen uns darauf, zeitverzögerte Standby Server, die sofort einsatzbereit sind, zu nutzen, und werden die neuen bidirektionalen Replikationsswerkzeuge evaluieren, die durch das logische Decoding verfügbar sind. Unser Team arbeitet bereits an Verbesserungen für unsere Open-Source-Monitoring-Tools, die die Vorteile von Echtzeit-Statistiken, bereitgestellt durch das pg_stat_statements Modul, nutzen werden, und welches viele Verbesserungen in 9.4 erfahren hat. Aggregate Verbesserungen, wie FILTER, machen das Schreiben von Abfragen mit Aggregatfunktionen wesentlich einfacher und bestärkt unsere Kollegen noch eleganteres SQL zu schreiben." sagt Valentin Gogichashvili, Teamleiter Datenbankoperationen bei Zalando Technologies.
+</p><p>
+<b>Zalando</b> ist eines der größten europäischen E-Commerce-Unternehmen, welches in 15 Ländern aktiv ist. Bei Zalando Technologie wurden wir die meisten der Plattformen im eigenen Haus entwickelt, einschließlich der Shops, interne Systeme und unsere Logistiksoftware. Wenn es um die Entwicklung und den Systembetrieb geht, verwenden wir hauptsächlich Open-Source Lösungen und arbeiten in kleinen, flexiblen Teams. Unsere Technologie-Teams erstellen Zalandos herausragende Online-Shopping Erfahrung, die Millionen von Kunden jeden Tag genießen. Besuchen Sie uns auf unserer <a href="http://www.zalando.de/">Webseite</b> oder unserem <a href="http://tech.zalando.com/">Blog</a>
+</p>
+
+<a name="companies"></a><h2>Professioneller Support</h2>
+
+<p>Postgresql erfreut sich der Unterstützung einer Reihe von Unternehmen, die Entwickler sponsern, Hosting Resourcen anbieten oder uns finanziell unterstützen. Auf unserer <a href="http://www.postgresql.org/about/sponsors/">Sponsorenseite</a> führen wir einige dieser Unternehmen auf.</p>
+
+<p>Die Arbeit an JSONB wurde von Engine Yard gesponsort, und unterstützt von Heroku, Andrew Dunstan und verschiedenen anderen Beitragenden. Die Arbeit an Logical Decoding wurde von 2ndQuadrand durchgeführt. Viele andere Unternemen haben zu diesem Release beigetragen.</p>
+
+<p>Eine große Anzahl an Unternehmen bietet <a href="/support/professional_support">professionellen Support</a> an - von Einzelfirmen bis zum internationalen Unternehmen.</p>
+
+<p><a href="/about/donate">Spenden</a> sind werden jederzeit gerne entgegengenommen.</p>
+<p>Sie können ebenfalls Merchandise von unserem <li><a href="http://www.zazzle.com/postgresql">Zazzle PostgreSQL Shop</a> beziehen.</li>
+
+{% endblock %}

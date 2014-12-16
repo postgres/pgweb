@@ -1,14 +1,14 @@
 {%extends "base/page.html"%}
-{%block title%}Frequently Asked Press Questions{%endblock%}
+{%block title%}PostgreSQL Press FAQ{%endblock%}
 {%block contents%}
 
 <h1>Frequently Asked Questions</h1>
 
 <p><b>Q: What is the current version of PostgreSQL?</b><br />
-A: 9.3, which was released September 9, 2013.</p>
+A: 9.4, which was released December 18, 2014.</p>
 
-<p><b>Q: 9.3?  Does that mean it's a minor release?</b><br />
-A: No, it's approximately our 24th major release in 27 years of development.  We release a new version of PostgreSQL every year, which is unique among SQL databases.  Because of the long history of our project the first two decimals are major releases.  Thus 9.1, 9.0 and 8.4 were all major releases.  Minor releases have numbers like 9.1.5. This is similar to how Linux, Apache, and MySQL number their versions.</p>
+<p><b>Q: 9.4?  Does that mean it's a minor release?</b><br />
+A: No, it's approximately our 25th major release in 28 years of development.  We release a new version of PostgreSQL every year, which is unique among SQL databases.  Because of the long history of our project the first two decimals are major releases.  Thus 9.4, 9.1 and 9.0 were all major releases.  Minor releases have numbers like 9.2.9. This is similar to how Linux, Apache, and MySQL number their versions.</p>
 
 <p><b>Q: How is PostgreSQL licensed? How much does it cost?</b><br />
 A: PostgreSQL is released under the OSI-approved PostgreSQL License.  There is no fee, even for use in commercial software products.  Please see <a href="http://www.postgresql.org/about/licence">http://www.postgresql.org/about/licence</a></p>
@@ -26,13 +26,13 @@ A: Please contact press@postgresql.org and our press volunteers will try to arra
 A: None.  We are an unincorporated association of volunteers and companies who share code under the PostgreSQL License.   The PostgreSQL project involves a couple dozen companies who either support PostgreSQL contributors or directly contribute corporate projects to our repository.  Some of our major corporate sponsors are on the <a href="/about/sponsors">sponsors page,</a> and there are many more companies who contribute to the project in other ways.</p>
 
 <p><b>Q: Where can people get support for PostgreSQL?</b><br />
-A: There are several companies which provide paid support for PostgreSQL.  Most of them are regional in nature.  People should contact the nearest regional contact volunteer to be connected with one or more companies, or check our <a href="/support/professional_support">professional services list</a>.</p>
+A: There are several companies which provide paid support for PostgreSQL.  Most of them are regional in nature.  People should contact the nearest regional contact volunteer to be connected with one or more companies, or check our <a href="/support/professional_services">professional services list</a>.</p>
 
 <p><b>Q: What's the relationship between the PostgreSQL Project, EnterpriseDB, 2ndQuadrant, CommandPrompt, SRA, Heroku, VMWare and others?</b><br />
 A: The PostgreSQL project enjoys the support of multiple companies who sell products or services built with PostgreSQL, and in turn contribute code, money and staff time to the project.  None of them "own" PostgreSQL, nor is any individual company responsible for PostgreSQL code development. This is the same as Linux, Apache and FreeBSD.</p>
 
 <p><b>Q: Does PostgreSQL run on the Cloud?</b><br />
-A: Yes.  Like other open source databases, PostgreSQL is easy to run in virtual containers and is highly portable.   Many companies have support for PostgreSQL in cloud hosting environments, including Heroku, VMware, Engine Yard, Scalr, EnterpriseDB, and Red Hat.</p>
+A: Yes.  Like other open source databases, PostgreSQL is easy to run in virtual containers and is highly portable.   Many companies have support for PostgreSQL in cloud hosting environments, including Heroku, Amazon, VMware, Engine Yard, Scalr, EnterpriseDB, and Red Hat.</p>
 
 <p><b>Q: How does PostgreSQL compare to MySQL?</b><br />
 A: This is a topic that can start several hours of discussion.  As a quick summary, MySQL is the "easy-to-use, web developer" database, and PostgreSQL is the "feature-rich, standards-compliant" database. PostgreSQL is liberally licensed and owned by its community; MySQL is GPL-licensed and owned by Oracle.  Beyond that, each database user should make his own evaluation; open source software makes doing comparisons very easy.</p>
@@ -47,20 +47,19 @@ A: The term &quot;NoSQL&quot; covers such a diverse array of non-relational data
 A: To date there is one: a <a href="http://www.spec.org/jAppServer2004/results/res2007q3/jAppServer2004-20070703-00073.html">SpecJAppserver2004 benchmark</a>, which at time of publication was within 10% of the leading commercial SQL RDBMS. We are not certain when another benchmark will be published, as verifiable benchmarks are expensive and time-consuming for a not-for-profit community to undertake.</p>
 
 <p><b>Q: When will PostgreSQL get database server clustering?</b><br />
-A: We already have it.  Since no one type of clustering satisfies all needs, we have several different clustering tools which take various clustering approaches.  The open source projects PostgresXC, Stado and pgPool2 are available, as well as proprietary tools such as StormDB, Greenplum Database, Aster Data, Hadapt and several others.  For more advanced clustering options, see Skype's Skytools or the experimental project Postgres-R, which is being commercialized as TransLattice.  Also, PostgreSQL is supported by filesystem-based clustering systems for failover, including ones from Red Hat, Microsoft, Veritas and Oracle.</p>
+A: We already have it.  Since no one type of clustering satisfies all needs, we have several different clustering tools which take various clustering approaches.  The open source projects PostgresXC, Postgres-XL, Stado and pgPool2 are available, as well as proprietary tools such as Translattice, Greenplum Database, Aster Data, CitusData and several others.  Also, PostgreSQL is supported by filesystem-based clustering systems for failover, including ones from Red Hat, Microsoft, Veritas and Oracle.</p>
 
 <p><b>Q: Has PostgreSQL won any awards?</b><br />
 A: Several.  Most recently, we won <a href="http://www.developer.com/design/article.php/10925_3721761_1">the 2008 Developer.com Award for best Database Tool</a>.  Other awards we've won over the years are
 listed on our <a href="http://www.postgresql.org/about/awards">awards page</a>.
 </p>
 
-<p><b>Q: When will 9.4 come out?</b><br />
-A: The PostgreSQL project begins work on the next version of PostgreSQL in July of each year, and it generally takes 12 to 15 months to work to a release. So expect 9.4 sometime in mid to late 2014.  We are the only major SQL database which releases every year.</p>
+<p><b>Q: When will 9.5 come out?</b><br />
+A: The PostgreSQL project begins work on the next version of PostgreSQL in July of each year, and it generally takes 12 to 15 months to work to a release. So expect 9.5 around September 2015.  We are the only major SQL database which releases every year.</p>
 
-<p><b>Q: What features will 9.3 have?</b><br />
-A: As always, we can't be certain what will go in and what won't; the project has strict quality standards that not all patches can make before deadline.   All we can tell you is what's being worked on, which includes: logical streaming replication, materialized views, JSON indexes, row-level security, and more.  By the time 9.4 is released, though, this feature list will have changed considerably.</p>
+<p><b>Q: What features will 9.5 have?</b><br />
+A: As always, we can't be certain what will go in and what won't; the project has strict quality standards that not all patches can make before deadline.   All we can tell you is what's being worked on, which includes: BRIN indexes for big data, new partitioning, OLAP CUBEs, UPSERT, and parallel VACUUM.  By the time 9.5 is released, though, this feature list will have changed considerably.</p>
 
 <p><b>Q: How do you pronounce PostgreSQL</b><br />
 A: post-GRES-que-ell, per this <a href="/files/postgresql.mp3">audio file</a>.  Many people, however, just say "post-GREZ".</p>
 
-{%endblock%}

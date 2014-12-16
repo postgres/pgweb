@@ -1,0 +1,204 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.4 Press Kit{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.4 プレスキット</h1>
+
+<h2>目次</h2>
+
+<p>
+ &nbsp; <a href="#original_release">プレスリリース原文</a><br />
+ &nbsp; <a href="#features">機能詳細</a><br />
+ &nbsp; <a href="#download">ダウンロード</a><br />
+ &nbsp; <a href="#docs">文書</a><br />
+ &nbsp; <a href="#license">ライセンス</a><br />
+ &nbsp; <a href="#contact">問い合せ先</a><br />
+ &nbsp; <a href="#graphics">画像とロゴ</a><br />
+ &nbsp; <a href="#quoted_companies">引用した企業情報と引用文</a><br />
+ &nbsp; <a href="#companies">企業による支援</a><br />
+</p>
+
+<img src="http://media.postgresql.org/propaganda/postgres94_sm.jpg" />
+
+<a name="original_release"></a><h2>プレスリリース原文</h2>
+
+<h2>PostgreSQL9.4は柔軟性、スケーラビリティ、およびパフォーマンスが向上</h2>
+<p>
+18 2014年12月:
+PostgreSQL Global Development GroupはPostgreSQL9.4(世界をリードするオープンソースデータベース・システムの最新版)リリースを発表します。
+このリリースでは、多種多様なデータベースユーザのために、PostgreSQLの柔軟性、スケーラビリティ、および性能を高める多くの新機能を加えました。
+これには、JSONサポートやレプリケーション、インデックス性能への改良が含まれています。
+</p><p>
+<b>柔軟性</b>
+</p><p>
+PostgreSQLの新しいJSONBデータ型を使うことで、ユーザはデータ・ストアにリレーショナルか非リレーショナルかを、もう選ぶ必要がありません。
+それらを同時に、両方持つことができます。
+JSONBは、Generalized Inverted Indexes(GIN)を使用することで、高速なルックアップと簡単な検索クエリーをサポートします。
+複数の新しい支援関数は、最もポピュラーな文書データベースに勝るとも劣らないパフォーマンスで、JSONデータの抽出や操作をを可能にします。
+JSONBを使う事でテーブルデータとドキュメントデータを簡単に統合でき、完全に一貫したデータベース環境として扱うことが可能です。
+</p><p>
+Heroku Postgres社のプロダクトマネージャ、Matt Soldo氏は、
+「JSONBを使うことでJSONデータをネイティブに格納、検索できるPostgreSQLは、JavaScript開発コミュニテイに朗報です。
+PostgreSQLを使えば、彼らが好むスキーマレスのデータフォーマットを使い続けたまま、Node.jsや他のサーバサイドJavaScriptフレームワークに安全性と堅牢性を与えることができます。」と言っています。
+</p><p>
+<b>スケーラビリティ</b>
+</p><p>
+9.4のロジカル・デコーディングはPostgreSQLのレプリケーション・ストリームを読んだり、フィルタリングしたり、操作したりするための新しいAPIです。
+このインターフェースは、マルチマスタPostgreSQLのクラスタ作成をサポートする、双方向レプリケーションのような新しいレプリケーションツールの基礎となるものです。
+その他のレプリケーション・システムの改良、例えばレプリケーション・スロットやタイム・ディレイド・レプリカは、レプリケーションサーバの管理をしやすくし、利便性を向上します。
+</p><p>
+「我々がPostgreSQL9.4を今直ぐ採用したい主な理由は、新しいロジカル・デコーディング機能にあります。」と、Navionics社の地図プロダクション・マネージャのMarco Favale氏は言っています。
+「重くて管理の複雑なトリガーベースのレプリケーション・ソリューションの代わりに、融通の利くカスタマイズされた出力プラグインを書くことで、特定のテーブルの変化やレプリカの変化を透過的に収集できるようになるのは良いですね。」
+</p><p>
+「Zalando社は安定性とパフォーマンスに優れた数百台のPostgreSQLデータベースによって、ヨーロッパ各地にいる何百万人もの顧客に継続したサービスを提供しています。」とZalando Technologies社のデータベース運用チームのリーダ、Valentin Gogichashvili氏は言っています。
+「今回のリリースで使えるようになったタイム・ディレイド・スタンバイサーバ、そして近くリリースされると思われる双方向レプリケーションツールを、我々は非常に楽しみにしています。」
+</p><p>
+<b>パフォーマンス</b>
+</p><p>
+バージョン9.4では、PostgreSQLサーバのパフォーマンスをより一層向上させることのできる機能を複数導入しました。
+以下の機能が含まれます。
+</p>
+<ul>
+<li>最高でサイズが50%小さくなり3倍高速になる、GINインデックスの改良</li>
+<li>並列更新可能なマテリアライズド・ビューにより、より高速かつ新しい検索データを提供</li>
+<li>DB再起動の際に、pg_prewarmを使ってデータベース・キャッシュを高速再ロード</li>
+<li>PostgreSQLトランザクション・ログへのより高速な並列書き込み</li>
+</ul>
+<p>
+「新版リリースで毎回続けている通常の性能改良に加え、マテリアライズド・ビューのコンカレント・リフレッシュや（我々の既存のディザスタリカバリをより堅牢にしてくれる）ディレイド・スタンバイ・サーバは、必ずや役に立つ
+と確信しています。」とMarco Favale氏はつけ加えています。
+</p>
+<a name="features"></a><h2>機能詳細</h2>
+<p>
+上記機能やその他に関する説明については、下記リソースを参照してください。 
+</p>
+<ul>
+<li><a href="/docs/9.4/static/release-9-4.html">リリースノート</a></li>
+<li><a href="/docs/9.4/static/index.html">9.4 文書</a></li>
+<li><a href="http://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.4">PostgreSQL 9.4の新機能 (英語)</a></li>
+<li><a href="https://www.youtube.com/watch?v=oQ1LSW31Y1A&list=PLWW0CjV-Tafa2jvcjihXwSvZZKsLAsb9Y#t=2492">9.4 On The Floor（スライド）</a></li>
+<li><a href="/about/featurematrix">機能マトリクス(英語)</a></li>
+<li><a href="https://wiki.postgresql.org/wiki/BDR_User_Guide">双方向レプリケーション (BDR)</a></li>
+<li><a href="https://www.youtube.com/watch?v=MmzbnMqBMI0&index=28&list=PLWW0CjV-Tafa2jvcjihXwSvZZKsLAsb9Y">PostgreSQL9.4 and JSON（スライド）</a></li>
+</ul>
+
+<a name="download"></a><h2>ダウンロード</h2>
+<ul>
+<li><a href="/download">ダウンロードページ</a>  Windows、Linux、OSX、BSD、Solaris向けのインストーラとツールへのリンクがあります。</li>
+<li><a href="/ftp/source/v9.4.0">ソースコード</a></li>
+<li><a href="http://pgxn.org">PostgreSQL Extension Network (PGXN)</a></li>
+<li><a href="/download/product-categories">関連ソフトウェアおよび商用ソフトウェア</a></li>
+</ul>
+
+<a name="docs"></a><h2>文書</h2>
+
+<p>
+HTML文書およびマニュアルページはPostgreSQLでインストールされますが、拡張可能かつ対話式の<a href="/docs/9.4/interactive">オンライン文書</a>で閲覧、検索、コメント記入を自由に行ってください。 
+</p>
+
+<a name="license"></a><h2>ライセンス</h2>
+<p>
+PostgreSQLは、BSDに似た寛容的なライセンスである、<a href="/about/licence">PostgreSQLライセンス</a>を使用しています。 
+この<a href="http://www.opensource.org/licenses/postgresql">OSI認証ライセンス</a>は、
+商用のプロプライエタリアプリケーションにおけるPostgreSQLの使用を制限しないため、柔軟かつビジネスに利用しやすいことにより広く評価されています。
+複数の企業によるサポートやソースコードが公的に所有されていることとあいまって、
+このライセンス条項によって、料金・ベンダロックイン・ライセンス条項の変更などの心配が不要な自社製品への組込用データベースを求めるベンダに、
+PostgreSQLは非常に人気があります。 
+</p>
+
+<a name="contact"></a><h2>問い合せ先</h2>
+
+<p>WEBサイト</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL home page</a></li>
+<li><a href="http://www.postgresql.jp/">日本PostgreSQLユーザ会</a></li>
+</ul>
+
+<p>プレス問い合わせ先</p>
+<p>Japan<br />
+日本PostgreSQLユーザ会<br />
+<a href="mailto:jpug-staff@postgresql.jp">jpug-staff@postgresql.jp</a><br />
++81-3-5951-1214</p>
+
+<p>日本以外の問い合わせ先については<a href="/about/press/contact">問い合わせ先一覧</a>を参照してください。</p>
+
+
+<a name="graphics"></a><h2>画像とロゴ</h2>
+
+<img src="http://media.postgresql.org/propaganda/elephant2.png" >
+
+<ul>
+<li><a href="http://media.postgresql.org/propaganda/postgres94_large.jpg">PostgreSQL 9.4 ポスター画像</a></li>
+<li><a href="http://media.postgresql.org/propaganda/pg94_acid_large.jpg">NoSQL On Acid ボタン</a></li>
+<li><a href="http://media.postgresql.org/propaganda/elephant.png">PostgreSQL Elephant ロゴ(PNG)</a></li>
+<li><a href="http://media.postgresql.org/propaganda/elephant64.jpg">PostgreSQL Elephant アイコン</a></li>
+<li><a href="http://media.postgresql.org/propaganda/slonik_with_black_text_and_tagline.gif">PostgreSQL ロゴ付バナー（象とスローガン）</a></li>
+</ul>
+<p>
+全てのロゴはPostgreSQLライセンスに基づき、自由に変更、再配布できます。
+PostgreSQLの名称とロゴはカナダのPostgreSQLコミュニティ協会の登録商標です。
+</p>
+
+<a name="quoted_companies"></a><h2>引用した企業情報と引用文</h2>
+<b>Heroku社</b> 
+
+Heroku Postgres社のプロダクトマネージャ、Matt Soldo氏は、「JSONBを使うことでJSONデータをネイティブに格納、検索できるPostgreSQLは、JavaScript開発コミュニテイに朗報です。
+PostgreSQLを使えば、彼らが好むスキーマレスのデータフォーマットを使い続けたまま、Node.jsや他のサーバサイドJavaScriptフレームワークに安全性と堅牢性を与えることができます。」と言っています。
+</blockquote>
+<p>
+<a href="http://www.heroku.com">Heroku社</a> は、(PaaS)サービスの使いやすさ、自動化、信頼性に焦点をあてた、優れたオープン・プラットフォームです。
+Heroku社はカリフォルニア州サンフランシスコに本社を置き、Ruby技術やクラウドのアーキテクチャに熱心で活発なサポートを行っています。
+詳細情報は私たちの<a href="http://www.heroku.com">Webサイト</a>や<a href="http://blog.heroku.com">ブログ</a>をご覧頂くか、Herokuの<a href="http://twitter.com/heroku">Twitter</a>をフォローしてください。
+Heroku社はsalesforce.comの全額出資子会社です。
+連絡先(英語): <a href="mailto:pr@heroku.com">Heroku PR</a>
+</p>
+
+<b>Navionics社</b>
+<blockquote>
+「我々がPostgreSQL9.4を今直ぐ採用したい主な理由は、新しいロジカル・デコーディング機能にあります。」と、Navionics社の地図プロダクション・マネージャのMarco Favale氏は言っています。
+「重くて管理の複雑なトリガーベースのレプリケーション・ソリューションの代わりに、融通の利くカスタマイズされた出力プラグインを書くことで、特定のテーブルの変化やレプリカの変化を透過的に収集できるようになるのは良いですね。」
+</br>
+「新版リリースで毎回続けている通常の性能改良に加え、マテリアライズド・ビューのコンカレント・リフレッシュや（我々の既存のディザスタリカバリをより堅牢にしてくれる）ディレイド・スタンバイ・サーバは、必ずや役に立つ
+と確信しています。」
+</blockquote>
+<p> <a href="http://www.navionics.com">Navionics社</a>は地球全体の海水域並びに数万本の湖や川をもカバーする、世界最大の海図と湖沼図のデータベースを持っています。 
+これらの地図の多くは、Navionics社独自のフィールドワークや衛星写真や空中レーザスキャナーを使った遠隔探査による測量で作られてきました。
+Navionics社はイタリア、米国、インドとエストニアに拠点を持ち、世界中で販売とサービスを行っています。
+連絡先 (英語またはイタリア語): <a href="mailto:mfavale@navionics.com">Marco Favale</a>
+</p>
+
+<b>Zalando社</b> 
+<blockquote>
+「Zalando社は安定性とパフォーマンスに優れた数百台のPostgreSQLデータベースによって、ヨーロッパ各地にいる何百万人もの顧客に継続したサービスを提供しています。
+私たちはPostgreSQL9.0 RC1がリリースされた2010年からPostgreSQLの最新版を維持しており、毎回パフォーマンスや利便性がより向上している最新版の恩恵に与っています。
+今回のリリースで使えるようになったタイム・ディレイド・スタンバイサーバ、そして近くリリースされると思われる双方向レプリケーションツールを、我々は非常に楽しみにしています。
+私たちのチームは既に、9.4で受理された、pg_stat_statementsモジュールやその他のモジュールから送られるリアルタイムステートメントの統計情報を利用した、オープンソースモニタリングツールの改良を始めています。
+FILTERのような集約関数の改良は、集約関数を使ったクエリーをずっと簡単でより強力にし、もう少しエレガントなSQLにしてくれます。」とZalando Technologies社のデータベース運用チームのリーダ、Valentin Gogichashvili氏は言っています。
+</blockquote>
+<p>
+Zalando社は15か国以上で操業しているヨーロッパ最大のeコマースカンパニーの一つです。
+Zalando Technologyではショップや社内システム、ロジスティックソフトウェアを含む組織内のプラットフォームの多くを開発してきました。
+開発部門やシステムオペレーション部門では、主にオープンソースソリューションを使っており、私たちは少人数で柔軟性のあるチームで働いています。
+私たちの技術チームは、数百万人もの顧客が毎日楽しんでいる、Zalandoの優れたオンラインショップを作りだしました。
+私たちの <a href="http://www.zalando.de/">Webサイト</a>や<a href="http://tech.zalando.com/">ブログ</a>をご覧ください。
+</p>
+
+<a name="companies"></a><h2>企業による支援</h2>
+
+<p>
+PostgreSQLの開発は多くの企業による支援を受けており、これらスポンサー企業は開発者の雇用や支援、ホスティングリソースの提供や金銭的なサポートを行っています。 
+これらプロジェクトスポンサーの一部については<a href="http://www.postgresql.org/about/sponsors/">スポンサーページ</a>を参照してください。 
+</p>
+
+<p>JSONBのプロジェクトはEngine Yardの出資と Heroku、Andrew Dunstan及び、その他の貢献者にサポート頂いています。
+  Logical Decodingプロジェクトは2ndQuadrantによって運営されています。
+  本リリースでは多くの企業から寄付を頂いています。
+</p>
+<p>
+また、個人コンサルタントから多国企業まで、<a href="/support/professional_support">PostgreSQLサポートを提供する企業</a>という大規模なコミュニティもあります。
+</p>
+
+<p><a href="/about/donate">寄付</a>も歓迎しています。</p>
+<p><li><a href="http://www.zazzle.com/postgresql">Zazzle PostgreSQL ストア</a>から素敵なグッズも購入頂けます。</li></p>
+
+{% endblock %}
