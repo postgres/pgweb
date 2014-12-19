@@ -24,7 +24,7 @@ Debian includes PostgreSQL by default. To install PostgreSQL on
 Debian, use the <i>apt-get</i> (or other apt-driving) command:
 </p>
 <code>
-apt-get install postgresql-9.3
+apt-get install postgresql-9.4
 </code>
 <p>
 The repository contains many different packages including third party
@@ -32,11 +32,11 @@ addons. The most command and important packages are (substitute the
 version number as required):
 </p>
 <ul>
- <li>postgresql-client-9.3 - client libraries and client binaries</li>
- <li>postgresql-9.3 - core database server</li>
- <li>postgresql-contrib-9.3 - additional supplied modules</li>
+ <li>postgresql-client-9.4 - client libraries and client binaries</li>
+ <li>postgresql-9.4 - core database server</li>
+ <li>postgresql-contrib-9.4 - additional supplied modules</li>
  <li>libpq-dev - libraries and headers for C language frontend development</li>
- <li>postgresql-server-dev-9.3 - libraries and headers for C language backend development</li>
+ <li>postgresql-server-dev-9.4 - libraries and headers for C language backend development</li>
  <li>pgadmin3 - pgAdmin III graphical administration utility</li>
 </ul>
 
@@ -59,7 +59,7 @@ updates for all supported versions of PostgreSQL throughout the support
 </p>
 <p>
 The PostgreSQL apt repository supports the currently supported stable
-versions of debian, squeeze (6.x) and wheezy (7.x), on amd64 and i386
+versions of debian, squeeze (6.x) and wheezy (7.x) as well as Jessie (8.x), on amd64 and i386
 architectures.
 </p>
 <p>
@@ -69,6 +69,7 @@ To use the apt repository, follow these steps:
  <li>
   <select id="field.series" name="field.series" onchange='updateSeries(this);'>
    <option selected="selected" value="YOUR_DEBIAN_VERSION_HERE">Choose your Debian version</option>
+   <option value="jessie">Jessie (8.x)</option>
    <option value="wheezy">Wheezy (7.x)</option>
    <option value="squeeze">Squeeze (6.x)</option>
   </select>
