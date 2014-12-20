@@ -1,0 +1,156 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.4 Press Kit{%endblock%}
+{%block contents%}
+
+<style type="text/css">
+	p, h1, h2, a, ul, li
+	{
+		font-family: 'Calibri', sans-serif;
+	}
+</style>
+
+<h1>PostgreSQL 9.4 Press Kit</h1>
+
+<h2>Daftar Isi</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Kata-kata pada Rilis Asli</a><br />
+ &nbsp; <a href="#features">Selebihnya Tentang Fitur</a><br />
+ &nbsp; <a href="#download">Dimana untuk Mengunduh</a><br />
+ &nbsp; <a href="#docs">Dokumentasi</a><br />
+ &nbsp; <a href="#license">Lisensi</a><br />
+ &nbsp; <a href="#contact">Kontak</a><br />
+ &nbsp; <a href="#graphics">Gambar dan Logo</a><br />
+ &nbsp; <a href="#quoted_companies">Perusahaan yang Dikutip dan Kata-kata Kutipan</a><br />
+ &nbsp; <a href="#companies">Dukungan Perusahaan</a><br />
+</p>
+
+<img src="/media/img/about/press/postgres94_sm.jpg" />
+
+<a name="original_release"></a><h2>Press Release Asli</h2>
+
+<h2>PostgreSQL 9.4 Meningkatkan Fleksibilitas, Skalabilitas, dan Performa</h2>
+<p>
+18 DESEMBER 2014: PostgreSQL Global Development Group mengumumkan rilis PostgreSQL 9.4, versi terbaru dari sistem database yang terbaik di dunia. Pada rilis ini ditambahkan banyak fitur baru yang meningkatkan fleksibilitas PostgreSQL, skalabilitas, dan performa untuk segala tipe pengguna database, termasuk peningkatan untuk dukungan JSON, replikasi, dan performa index.
+</p><p>
+<b>Fleksibilitas</b>
+</p><p>
+Dengan tipe data baru JSONB untuk PostgreSQL, pengguna tidak lagi perlu untuk memilih antara penyimpanan data relasional dan non-relasional: anda dapat memiliki keduanya secara bersamaan. JSONB mendukung pencarian secara cepat dan query perncarian dengan ekspresi sederhana menggunakan Generalized Inverted Indexes (GIN). Fungsi dukungan lainnya memungkinkan pengguna untuk mengekstrak dan memanipulasi data JSON, dengan performa yang sama bahkan melebihi database yang populer untuk dokumen. Dengan JSONB, data pada table akan dengan mudah diintegrasikan dengan data dokumen untuk kondisi database yang terintegrasi sepenuhnya. 
+</p><p>
+"JSONB membawa PostgreSQL kepada komunitas pengembang JavaScript dengan memperbolehkan data JSON untuk disimpan dan di-query secara native. Node.js dan framework JavaScript di sisi server lainnya mendapatkan keuntungan dari keamanan dan keketatan dari PostgreSQL, selama menyimpan data dalam format tanpa skema yang mereka pilih", ucap Matt Soldo, Product Manager, Heroku Postgres.
+</p><p>
+<b>Skalabilitas</b>
+</p><p>
+Pada versi 9.4, <i>Logical Decoding</i> memberikan API baru untuk membaca, menyaring, dan memanipulasi aliran replikasi PostgreSQL. Interface ini merupakan dasar dari perangkat replikasi yang baru, seperti Bi-Directional Replication (Replikasi Dua Arah), yang mendukung pembangunan kluster PostgreSQL multi-master. Peningkatan lain pada sistem replikasi, seperti slot replikasi dan replika dengan penunda waktu, meningkatkan pengelolaan dan penggunaan server replica.
+</p><p>
+"Alasan utama di balik pengadopsian segera dari PostgreSQL 9.4 pada lingkungan produksi adalah fitur <i>Logical Decoding</i> yang baru", ujar Marco Favale, Cartographoc Production Manager dari Navionics. "Kemampuan untuk menulis plugin yang beragam dan fleksibel memperbolehkan kita untuk mengumpulkan perubahan secara transparan pada table yang dipilih dan mereplikasi perubahan tersebut dimanapun kita inginkan, dengan menghapus solusi replikasi berbasiskan trigger yang berat - dan lebih rumit untuk dikelola -."
+</p><p>
+"Zalando bergantung kepada kestabilan dan kemampuan dari ratusan server database PostgreSQL untuk melayani jutaan pelanggan di seluruh Eropa secara berkelanjutan," ucap Valentine Gogichashvili, Team Lead Database Operations di Zalando Technologies. "Kami sangat tertarik untuk menjalankan server standby dengan penunda waktu yang bekerja di luar yang biasanya, dan akan mengevaluasi perangkat replikasi bi-directional sesaat setelah PostgreSQL dirilis."
+</p><p>
+<b>Performa</b>
+</p><p>
+Versi 9.4 juga memperkenalkan banyak peningkatkan performa yang akan memperbolehkan pengguna untuk mendapatkan lebih banyak lagi dari setiap server PostgreSQL. Hal ini termasuk:
+</p>
+<ul>
+<li>Peningkatan index GIN, membuat hal tersebut menjadi 50% lebih kecil dan lebih cepat sampai 3 kali lipat.
+</li><li>Materialized View yang dapat diperbaharui secara bersamaan untuk pelaporan yang lebih cepat dan lebih terkini.
+</li><li>Mengisi kembali cache database secara cepat pada saat menghidupkan kembali menggunakan pg_prewarm.
+</li><li>Penulisan paralel yang lebih cepat ke log transaksi PostgreSQL.
+</li></ul>
+<p>
+"Kami pasti akan mendapatkan keuntungan dari materialized views secara bersamaan, penundaan server standby (yang akan membuat pemulihan kembali dari kerusakan menjadi jauh lebih terjamin) bersamaan dengan peningkatan performa yang dilakukan setiap kali rilis baru diumumkan," tambah Marco Favale.
+</p>
+<a name="features"></a><h2>Selebihnya tentang Fitur</h2>
+<p>
+Untuk penjelasan mengenai fitur di atas dan yang lainnya, silakan lihat tautan berikut ini:
+</p>
+<ul>
+<li><a href="/docs/9.4/static/release-9-4.html">Release Notes</a></li>
+<li><a href="/docs/9.4/static/index.html">9.4 Documentation</a></li>
+<li><a href="https://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.4">What's New In PostgreSQL 9.4 (English)</a></li>
+<li><a href="https://www.youtube.com/watch?v=oQ1LSW31Y1A&list=PLWW0CjV-Tafa2jvcjihXwSvZZKsLAsb9Y#t=2492">9.4 On The Floor presentations</a></li>
+<li><a href="/about/featurematrix">Feature matrix (English only)</a></li>
+<li><a href="https://wiki.postgresql.org/wiki/BDR_User_Guide">Bi-Directional Replication (BDR)</a></li>
+<li><a href="https://www.youtube.com/watch?v=MmzbnMqBMI0&index=28&list=PLWW0CjV-Tafa2jvcjihXwSvZZKsLAsb9Y">JSON in 9.4 Presentation</a></li>
+</ul>
+
+<a name="download"></a><h2>Unduhan</h2>
+<ul>
+<li><a href="/download">Halaman unduhan</a> dengan tautan untuk installer Windows, Linux, OSX, BSD and Solaris dan perangkat tools.</li>
+<li><a href="/ftp/source/v9.4.0">Source Code</a></li>
+<li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+<li><a href="/download/product-categories">Perangkat Lunak yang Berhubungan dan Komersial</a></li>
+</ul>
+
+<a name="docs"></a><h2>Dokumentasi</h2>
+
+<p>
+Dokumentasi HTML dan manual diinstalasi bersamaan dengan PostgreSQL, namun silakan menelusuri secara bebas, mencari, dan berkomentar pada <a href="/docs/9.4/interactive">dokumentasi online</a> yang luas dan interaktif kami.
+</p>
+
+<a name="license"></a><h2>Lisensi</h2>
+<p>
+PostgreSQL menggunakan <a href="/about/licence">Lisensi PostgreSQL</a>, lisensi "permissive" semacam BSD. This
+<a href="http://www.opensource.org/licenses/postgresql">Lisensi bersetifikasi OSI</a> diterima secara luas sebagai hal yang fleksibel dan baik untuk bisnis, karena tidak membatasi penggunaan PostgreSQL dengan aplikasi komersial dan proprietary. Bersama-sama dengan dukungan banyak perusahaan dan kepemilikan secara publik atas kode, lisensi kami membuat PostgreSQL menjadi sangat populer dengan vendor yang ingin menggunakan database pada produk mereka tanpa khawatir akan biaya, penguncian vendor, atau perubahan pada lisensi.
+</p>
+
+<a name="contact"></a><h2>Kontak</h2>
+
+<p>Halaman Web</p>
+<ul>
+<li><a href="http://www.postgresql.org">PostgreSQL home page</a></li>
+<li><a href="http://www.postgresql.or.id">PostgreSQL Indonesia</a></li>
+</ul>
+
+<p>Inkuiri Press</p>
+<p>Indonesia<br />
+Julyanto Sutandang<br />
+<a href="mailto:id@postgresql.org">id@postgresql.org</a><br />
++62 851 00 88 1898</p>
+
+<p>Untuk kontak pada region lain, silakan lihat <a href="/about/press/contact">daftar kontak internasional kami.</a></p>
+
+<a name="graphics">Gambar dan Logo</a>
+
+<img src="/media/img/about/press/elephant64.png" >
+
+<ul>
+<li><a href="/media/img/about/press/postgres94_large.jpg">PostgreSQL 9.4 Poster Graphic</a></li>
+<li><a href="/media/img/about/press/pg94_acid_large.jpg">NoSQL On Acid button</a></li>
+<li><a href="/media/img/about/press/elephant.png">PostgreSQL Elephant Logo, PNG format</a></li>
+<li><a href="/media/img/about/press/elephant64.png">PostgreSQL Elephant Icon</a></li>
+<li><a href="/media/img/about/press/slonik_with_black_text_and_tagline.gif">PostgreSQL Banner with Logo, Elephant and Slogan</a></li>
+</ul>
+<p>
+Semua logo tersedia untuk modifikasi dan distribusi kembali di bawah Lisensi PostgreSQL. Nama PostgreSQL dan logo adalah merk dagang dari Asosiasi Komunitas PostgreSQL Kanada.
+</p>
+
+<a name="quoted_companies"></a><h2>Informasi Perusahaan yang Dikutip dan Kata-kata Kutipan</h2>
+<p>
+"JSONB membawa PostgreSQL kepada komunitas pengembang JavaScript dengan memperbolehkan data JSON untuk disimpan dan di-query secara native. Node.js dan framework JavaScript di sisi server lainnya mendapatkan keuntungan dari keamanan dan keketatan dari PostgreSQL, selama menyimpan data dalam format tanpa skema yang mereka pilih", ucap Matt Soldo, Product Manager, Heroku Postgres.
+</p><p>
+<b>Tentang Heroku:</b> <a href="http://www.heroku.com">Heroku</a> adalah platform terbuka yang terkemuka sebagai service (PaaS) yang berfokus kepada kemudahan penggunaan, otomasi, dan keandalan. Berpusat di San Francisco, CA, Heroku adalah pendukung teknologi Ruby dan arsitektur cloud yang bersemangat dan aktif. Untuk informasi lebih lanjut, silakan kunjungi <a href="http://www.heroku.com">halaman web kami</a> dan <a href="http://blog.heroku.com">blog kami</a> atau follow <a href="http://twitter.com/heroku">Heroku di Twitter</a>. Heroku adalah anak perusahaan yang sepenuhnya dimiliki oleh salesforce.com. Kontak (hanya English): <a href="mailto:pr@heroku.com">Heroku PR</a>
+</p><p>
+"Alasan utama di balik pengadopsian segera dari PostgreSQL 9.4 pada lingkungan produksi adalah fitur <i>Logical Decoding</i> yang baru", ujar Marco Favale, Cartographic Production Manager dari Navionics. "Kemampuan untuk menulis plugin yang beragam dan fleksibel memperbolehkan kita untuk mengumpulkan perubahan secara transparan pada table yang dipilih dan mereplikasi perubahan tersebut dimanapun kita inginkan, dengan menghapus solusi replikasi berbasiskan trigger yang berat - dan lebih rumit untuk dikelola -."
+</p><p>
+"Kami pasti akan mendapatkan keuntungan dari materialized views secara bersamaan, penundaan server standby (yang akan membuat pemulihan kembali dari kerusakan menjadi jauh lebih terjamin) bersamaan dengan peningkatan performa yang dilakukan setiap kali rilis baru diumumkan."
+</p><p>
+<b>Tentang Navionics</b>: Navionics (www.navionics.com) mempunyai database yang terbesar di dunia mengenai grafik kelautan dan danau, meliputi perairan asin di seluruh bumi beserta puluhan ribu danau dan sungai. Kebanyakan dari grafik ini dikembangkan dengan cara survey secara proprietary oleh Navionics yang dilakukan baik di lapangan dan penginderaan jarak jauh menggunakan pencitraan satelit dna pemindai laser udara. Navionics berlokasi di Italy, USA, India dan Estonia dengan penjualan dan layanan untuk seluruh dunia. Kontak (English atau Italian): <a href="mailto:mfavale@navionics.com">Marco Favale</a>
+</p><p>
+"Zalando bergantung kepada stabilitas dan performa dari ratusan server database PostgreSQL untuk melayani jutaan pelanggan di seluruh Eropa secara berkelanjutan. Kami selalu mengikuti perkembangan terakhir dari PostgreSQL sejak 2010, ketika kami menggunakan PostgreSQL 9.0 Release Candidate 1, dan setiap rilis baru memberikan kami peningkatan performa dan penggunaan yang lebih banyak sehingga kami memanfaatkan hal tersebut pada praktek dari awal. Kami sangat tertarik untuk menjalankan server standby dengan penunda waktu yang bekerja di luar yang biasanya, dan akan mengevaluasi replikasi Bi-Directional yang baru, yang dimungkinkan dengan pengenalan <i>logical decoding</i>. Saat ini tim kami sedang mengerjakan peningkatan perangkat monitoring open-source kami yang akan memanfaatkan statistik statement secara real-time yang disediakan oleh modul pg_stat_statements dan banyak peningkatan lain yang didapatkan pada 9.4. Peningkatan agregasi, seperti FILTER, membuat penulisan query dengan fungsi agregasi lebih mudah dan membuat tim kami menuliskan SQL yang lebih elegan dari sebelumnya," ujar Valentine Gogichashvili, Team Lead Database Operations di Zalando Technologies.
+</p><p>
+<b>Zalando</b> adalah salah satu perusahaan eCommerce terbesar di Eropa, yang saat ini beroperasi di 15 negara. Di Zalando Technology kami mengembangkan sebagian besar dari in-house platform termasuk toko, sistem internal, dan perangkat lunak logistik kami. Untuk pengembangan dan sistem operasi, kami biasanya menggunakan solusi open source dan bekerja dengan tim kecil dan fleksibel. Tim teknologi kami membuat pengalaman belanja online Zalando yang sangat baik, dimana jutaan pelanggan menikmatinya setiap hari. Kunjungi kami di <a href="http://www.zalando.de/">web site kami</a> atau <a href="http://tech.zalando.com/">blog kami</a>
+</p>
+
+<a name="companies"></a><h2>Dukungan Perusahaan</h2>
+
+<p>PostgreSQL menikmati dukungan dari berbagai perusahaan, yang mensponsori pengembang, menyediakan sumber hosting, dan memberikan dukungan finansial kepada kami. Silakan lihat <a href="/about/sponsors/">halaman sponsor</a> kami untuk beberapa pendukung projek ini.</p>
+
+<p>Pengembangan pada JSONB disponsori oleh Engine Yard, dan didukung oleh Heroku, Andrew Dunstan, dan beberapa kontributor lainnya. Pengembangan pada <i>Logical Decoding</i> dikepalai oleh 2ndQuadrant. Banyak perusahaan lain juga berkontribusi pada rilis ini.</p>
+
+<p>Terdapat juga sebuah komunitas yang besar dari <a href="/support/professional_support">perusahaan yang menawarkan support PostgreSQL</a>, mulai dari konsultan individual sampai perusahaan multinasional.</p>
+
+<p><a href="/about/donate">Donasi</a> dengan senang hati diterima.</p>
+<p>Atau anda dapat membeli beberapa merchandise menarik kami dari <li><a href="http://www.zazzle.com/postgresql">Zazzle PostgreSQL Store</a></li>
+
+{% endblock %}
