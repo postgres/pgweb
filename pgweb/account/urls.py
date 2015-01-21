@@ -11,6 +11,9 @@ urlpatterns = patterns('',
 
 	# Profile
 	(r'^profile/$', 'account.views.profile'),
+    (r'^profile/change_email/$', 'account.views.change_email'),
+    (r'^profile/change_email/([0-9a-f]+)/$', 'account.views.confirm_change_email'),
+
     # List of items to edit
     (r'^edit/(.*)/$', 'account.views.listobjects'),
 

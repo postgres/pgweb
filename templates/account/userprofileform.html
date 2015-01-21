@@ -10,6 +10,10 @@
   <td colspan="2">Please correct the errors below, and re-submit the form.</td>
  </tr>
 {%endif%}
+ <tr>
+  <th>Email</th>
+  <td>{{user.email}} (<i><a href="change_email/">change</a></i>)</td>
+ </tr>
 {%for field in userform%}
  {%if field.errors %}
  <tr class="error">

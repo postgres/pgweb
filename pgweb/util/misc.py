@@ -1,6 +1,9 @@
 from django.db import connection
 from django.conf import settings
 
+from Crypto.Hash import SHA256
+from Crypto import Random
+
 from pgweb.mailqueue.util import send_simple_mail
 from pgweb.util.helpers import template_to_string
 import re
@@ -73,3 +76,14 @@ def version_sort(l):
 	if m:
 		mkey = m.group(1) + '%02d' % int(m.group(2));
 	return mkey
+
+def generate_random_token():
+	"""
+	Generate a random token of 64 characters. This token will be
+	generated using a strong random number, and then hex encoded to make
+	sure all characters are safe to put in emails and URLs.
+	"""
+	s = SHA256.new()
+	r = Random.new()
+	s.update(r.read(250))
+	return s.hexdigest()

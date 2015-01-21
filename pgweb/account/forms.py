@@ -63,3 +63,34 @@ class ContributorForm(forms.ModelForm):
 	class Meta:
 		model = Contributor
 		exclude = ('ctype', 'lastname', 'firstname', 'email', 'user', )
+
+class ChangeEmailForm(forms.Form):
+	email = forms.EmailField()
+	email2 = forms.EmailField(label="Repeat email")
+
+	def __init__(self, user, *args, **kwargs):
+		super(ChangeEmailForm, self).__init__(*args, **kwargs)
+		self.user = user
+
+	def clean_email(self):
+		email = self.cleaned_data['email']
+
+		if email == self.user.email:
+			raise forms.ValidationError("This is your existing email address!")
+
+		if User.objects.filter(email=email).exists():
+			raise forms.ValidationError("A user with this email address is already registered")
+
+		return email
+
+	def clean_email2(self):
+		# If the primary email checker had an exception, the data will be gone
+		# from the cleaned_data structure
+		if not self.cleaned_data.has_key('email'):
+			return self.cleaned_data['email2']
+		email1 = self.cleaned_data['email']
+		email2 = self.cleaned_data['email2']
+
+		if email1 != email2:
+			raise forms.ValidationError("Email addresses don't match")
+		return email2

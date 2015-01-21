@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class CommunityAuthSite(models.Model):
 	name = models.CharField(max_length=100, null=False, blank=False,
@@ -10,3 +11,9 @@ class CommunityAuthSite(models.Model):
 
 	def __unicode__(self):
 		return self.name
+
+class EmailChangeToken(models.Model):
+	user = models.ForeignKey(User, null=False, blank=False, unique=True)
+	email = models.EmailField(max_length=75, null=False, blank=False)
+	token = models.CharField(max_length=100, null=False, blank=False)
+	sentat = models.DateTimeField(null=False, blank=False, auto_now=True)

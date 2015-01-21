@@ -19,7 +19,7 @@ import simplejson as json
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
-from pgweb.util.misc import send_template_mail
+from pgweb.util.misc import send_template_mail, generate_random_token
 from pgweb.util.helpers import HttpServerError
 
 from pgweb.news.models import NewsArticle
@@ -29,8 +29,9 @@ from pgweb.contributors.models import Contributor
 from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
 
-from models import CommunityAuthSite
+from models import CommunityAuthSite, EmailChangeToken
 from forms import SignupForm, UserForm, UserProfileForm, ContributorForm
+from forms import ChangeEmailForm
 
 @ssl_required
 @login_required
@@ -115,6 +116,59 @@ def profile(request):
 			'profileform': profileform,
 			'contribform': contribform,
 			}, NavContext(request, "account"))
+
+@ssl_required
+@login_required
+@transaction.commit_on_success
+def change_email(request):
+	tokens = EmailChangeToken.objects.filter(user=request.user)
+	token = len(tokens) and tokens[0] or None
+
+	if request.method == 'POST':
+		form = ChangeEmailForm(request.user, data=request.POST)
+		if form.is_valid():
+			# If there is an existing token, delete it
+			if token:
+				token.delete()
+
+			# Create a new token
+			token = EmailChangeToken(user=request.user,
+									 email=form.cleaned_data['email'],
+									 token=generate_random_token())
+			token.save()
+
+			send_template_mail(settings.NOTIFICATION_FROM,
+							   form.cleaned_data['email'],
+							   'Your postgresql.org community account',
+							   'account/email_change_email.txt',
+							   { 'token': token , 'user': request.user, }
+						   )
+			return HttpResponseRedirect('done/')
+	else:
+		form = ChangeEmailForm(request.user)
+
+	return render_to_response('account/emailchangeform.html', {
+		'form': form,
+		'token': token,
+		}, NavContext(request, "account"))
+
+@ssl_required
+@login_required
+@transaction.commit_on_success
+def confirm_change_email(request, tokenhash):
+	tokens = EmailChangeToken.objects.filter(user=request.user, token=tokenhash)
+	token = len(tokens) and tokens[0] or None
+
+	if token:
+		# Valid token find, so change the email address
+		request.user.email = token.email
+		request.user.save()
+		token.delete()
+
+	return render_to_response('account/emailchangecompleted.html', {
+		'token': tokenhash,
+		'success': token and True or False,
+		}, NavContext(request, "account"))
 
 @ssl_required
 @login_required
