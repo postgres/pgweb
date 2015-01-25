@@ -3,12 +3,12 @@
 # A pgq consumer that generates varnish purge requests to expire things from
 # the frontend caches.
 #
-# Reads the file varnish_pgq.ini, wihch is a normal pgq configuration file.
+# Reads the file varnish_pgq.ini, which is a normal pgq configuration file.
 # Will look for any section starting with varnish_purger_<name>, and start one
 # purger for each such section purging from the frontend <name>.
 #
 # Each purger will run in a process of it's own, because pgq doesn't support
-# running differet consumers in different threads.
+# running different consumers in different threads.
 #
 # Purging is done by sending a regular GET request to /varnish-purge-url, with
 # the regular expression to purge in the http header X-Purge-URL.
@@ -127,7 +127,7 @@ class PurgerProcess(object):
 
 	def terminate(self):
 		"""
-		Terminate the process runing this purger.
+		Terminate the process running this purger.
 		"""
 		print_t("Terminating process for '%s'" % self.frontend)
 		self.process.terminate()

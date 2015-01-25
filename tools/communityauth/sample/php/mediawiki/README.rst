@@ -3,7 +3,7 @@ Mediawiki login provider
 
 This provider implements a (fairly ugly) community auth v2 provider
 for mediawiki. Since the mediawiki API doesn't support external
-authentication (it reqiures there to be a username and password,
+authentication (it requires there to be a username and password,
 which isn't always true, and can only pass those on to external
 services), this has to be done by browser interception. Basically,
 we intercept the mediawiki login URL and redirect it. Upon receiving
