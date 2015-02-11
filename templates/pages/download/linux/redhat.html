@@ -13,13 +13,6 @@ Since this can often mean a different version than preferred, the PostgreSQL
 project provides a <a href="#yum">repository</a> of packages of all
 supported versions for the most common distributions.
 </p>
-<p>
-Should packages not be available for your distribution, or there are
-issues with your package manager, there are graphical installers available.
-</p>
-<p>
-Finally, most Linux systems make it easy to build from source.
-</p>
 
 <h2>Included in distribution</h2>
 <p>
@@ -49,16 +42,16 @@ the distribution:
    <td class="colLast">8.4</td>
   </tr>
   <tr class="lastrow">
-   <td class="colFirst">Fedora 18</td>
-   <td class="colLast">9.2</td>
-  </tr>
-  <tr>
-   <td class="colFirst">Fedora 19</td>
-   <td class="colLast">9.3</td>
-  </tr>
-  <tr>
    <td class="colFirst">Fedora 20</td>
    <td class="colLast">9.3</td>
+  </tr>
+  <tr>
+   <td class="colFirst">Fedora 21</td>
+   <td class="colLast">9.3</td>
+  </tr>
+  <tr>
+   <td class="colFirst">Fedora 22</td>
+   <td class="colLast">9.4</td>
   </tr>
  </table>
 </div>
@@ -120,7 +113,7 @@ and install it with commands like:
 </p>
 <p>
 <code>
-yum install http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-1.noarch.rpm
+yum install http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-redhat94-9.4-1.noarch.rpm
 </code>
 </p>
 <p>
@@ -129,16 +122,16 @@ same way as the ones included in the distribution.
 </p>
 <p>
 <code>
-yum install postgresql93-server postgresql93-contrib<br/>
-service postgresql-9.3 initdb<br/>
-chkconfig postgresql-9.3 on
+yum install postgresql94-server postgresql94-contrib<br/>
+service postgresql-9.4 initdb<br/>
+chkconfig postgresql-9.4 on
 </code>
 or, on Fedora 19 and other later derived distributions:<br />
 <code>
-yum install postgresql93-server postgresql93-contrib<br/>
-/usr/pgsql-9.3/bin/postgresql93-setup initdb<br/>
-systemctl enable postgresql-9.3.service<br/>
-systemctl start postgresql-9.3.service
+yum install postgresql94-server postgresql94-contrib<br/>
+/usr/pgsql-9.4/bin/postgresql94-setup initdb<br/>
+systemctl enable postgresql-9.4.service<br/>
+systemctl start postgresql-9.4.service
 </code>
 </p>
 <p>
@@ -147,10 +140,10 @@ PostgreSQL yum repository follows the same standard as the ones included
 in the main repositories, but include the version number, such as:
 </p>
 <ul>
- <li>postgresql93</li>
- <li>postgresql93-server</li>
- <li>postgresql93-contrib</li>
- <li>pgadmin3_93</li>
+ <li>postgresql94</li>
+ <li>postgresql94-server</li>
+ <li>postgresql94-contrib</li>
+ <li>pgadmin3_94</li>
 </ul>
 
 <h2>Direct RPM download</h2>
