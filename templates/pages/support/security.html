@@ -36,7 +36,7 @@ criteria.
 
 <p>
 The following table lists all known security issues.
-Please note that versions prior to 8.4 are no longer
+Please note that versions prior to 9.0 are no longer
 supported and vulnerabilities for these versions may not be included
 in this list. New vulnerabilities in these versions are no longer patched.
 </p>
@@ -59,14 +59,59 @@ to determine if the bug affects specific installations or not.
    <th class="colMid"><a href="#cls">Class</a></th>
    <th class="colLast">Description</th>
   </tr>
-
+    
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0241">CVE-2015-0241</a></td>
+   <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
+   <td class="colMid">9.4.1, 9.3.6, 9.2.10, 9.1.15, 9.0.19</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">C</td>
+   <td class="colLast">Buffer overruns in "to_char" functions.</td>
+  </tr>
+  
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0242">CVE-2015-0242</a></td>
+   <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
+   <td class="colMid">9.4.1, 9.3.6, 9.2.10, 9.1.15, 9.0.19</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">C</td>
+   <td class="colLast">Buffer overrun in replacement printf family of functions.</td>
+  </tr>
+  
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0243">CVE-2015-0243</a></td>
+   <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
+   <td class="colMid">9.4.1, 9.3.6, 9.2.10, 9.1.15, 9.0.19</td>
+   <td class="colMid">contrib module</td>
+   <td class="colMid">C</td>
+   <td class="colLast">Memory errors in functions in the pgcrypto extension.</td>
+  </tr>
+  
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0244">CVE-2015-0244</a></td>
+   <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
+   <td class="colMid">9.4.1, 9.3.6, 9.2.10, 9.1.15, 9.0.19</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">C</td>
+   <td class="colLast">An error in extended protocol message reading.</td>
+  </tr>
+  
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8161">CVE-2014-8161</a></td>
+   <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
+   <td class="colMid">9.4.1, 9.3.6, 9.2.10, 9.1.15, 9.0.19</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">C</td>
+   <td class="colLast">Constraint violation errors can cause display of values in columns which the user would not normally have rights to see.</td>
+  </tr>  
+  
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0067">CVE-2014-0067</a></td>
    <td class="colMid">9.3, 9.2, 9.1, 9.0, 8.4</td>
    <td class="colMid">9.3.5, 9.2.9, 9.1.14, 9.0.18, 8.4.22 on non-Windows platforms</td>
    <td class="colMid">other</td>
    <td class="colMid">N/A</td>
-   <td class="colLast">Unauthenticated users may gain access to the database server during "make check". <a href="https://wiki.postgresql.org/wiki/20140220securityrelease">Details</a>.  Currently not fixed on Windows.</td>
+   <td class="colLast">Unauthenticated users may gain access to the database server during "make check". <a href="https://wiki.postgresql.org/wiki/20140220securityrelease">Details</a>.</td>
   </tr>
 
   <tr valign="top">
