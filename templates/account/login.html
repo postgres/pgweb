@@ -7,6 +7,11 @@ you may <a href="/account/signup/">sign up</a> for one now. If you have one but 
 password, you can use the <a href="/account/reset/">password reset</a> form.
 </p>
 
+{%if form.non_field_errors%}
+{%for err in form.non_field_errors %}
+<div style="color:red;">{{err}}</div>
+{%endfor%}
+{%endif%}
 <form action="." method="post" id="login-form">{% csrf_token %}
   <div class="form-row">
     <label for="id_username">Username:</label> <input type="text" name="username" id="id_username" />
