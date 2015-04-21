@@ -82,9 +82,9 @@ def auth_receive(request):
 		return HttpResponseRedirect('/')
 
 	if not request.GET.has_key('i'):
-		raise Exception("Missing IV")
+		return HttpResponse("Missing IV in url!", status=400)
 	if not request.GET.has_key('d'):
-		raise Exception("Missing data!")
+		return HttpResponse("Missing data in url!", status=400)
 
 	# Set up an AES object and decrypt the data we received
 	decryptor = AES.new(base64.b64decode(settings.PGAUTH_KEY),
@@ -96,11 +96,11 @@ def auth_receive(request):
 	try:
 		data = urlparse.parse_qs(s, strict_parsing=True)
 	except ValueError:
-		raise Exception("Invalid encrypted data received.")
+		return HttpResponse("Invalid encrypted data received.", status=400)
 
 	# Check the timestamp in the authentication
 	if (int(data['t'][0]) < time.time() - 10):
-		raise Exception("Authentication token too old.")
+		return HttpResponse("Authentication token too old.", status=400)
 
 	# Update the user record (if any)
 	try:
@@ -162,14 +162,14 @@ We apologize for the inconvenience.
 		try:
 			rdata = urlparse.parse_qs(s, strict_parsing=True)
 		except ValueError:
-			raise Exception("Invalid encrypted data received.")
+			return HttpResponse("Invalid encrypted data received.", status=400)
 		if rdata.has_key('r'):
 			# Redirect address
 			return HttpResponseRedirect(rdata['r'][0])
 	# No redirect specified, see if we have it in our settings
 	if hasattr(settings, 'PGAUTH_REDIRECT_SUCCESS'):
 		return HttpResponseRedirect(settings.PGAUTH_REDIRECT_SUCCESS)
-	raise Exception("Authentication successful, but don't know where to redirect!")
+	return HttpResponse("Authentication successful, but don't know where to redirect!", status=500)
 
 
 # Perform a search in the central system. Note that the results are returned as an
