@@ -95,7 +95,7 @@ def auth_receive(request):
 	# Now un-urlencode it
 	try:
 		data = urlparse.parse_qs(s, strict_parsing=True)
-	except ValueError, e:
+	except ValueError:
 		raise Exception("Invalid encrypted data received.")
 
 	# Check the timestamp in the authentication
@@ -118,7 +118,7 @@ def auth_receive(request):
 			changed= True
 		if changed:
 			user.save()
-	except User.DoesNotExist, e:
+	except User.DoesNotExist:
 		# User not found, create it!
 
 		# NOTE! We have some legacy users where there is a user in
