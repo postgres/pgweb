@@ -8,7 +8,7 @@
 
 {%for t in contributortypes%}
 <h2>{{t.typename}}</h2>
-{%if t.extrainfo%}<p>{{t.extrainfo}}</p>{%endif%}
+{%if t.extrainfo%}<p>{{t.extrainfo|safe}}</p>{%endif%}
 <div class="tblBasic">
  <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
   {%if t.detailed%}

@@ -57,6 +57,7 @@ sitenav = {
 	],
 	'developer': [
 		{'title': 'Developers',         'link':'/developer/'},
+		{'title': 'Core Team',          'link':'/developer/core/'},
 		{'title': 'Roadmap',            'link':'/developer/roadmap/'},
 		{'title': 'Coding',             'link':'/developer/coding/'},
 		{'title': 'Testing',            'link':'/developer/testing/', 'submenu': [
