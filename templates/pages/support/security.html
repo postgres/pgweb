@@ -37,7 +37,7 @@ criteria.
 <p>
 The following table lists all known security issues.
 Please note that versions prior to 9.0 are no longer
-supported.  An archive of vulnerabilities found only in in unsupported 
+supported.  An archive of vulnerabilities found only in unsupported 
 versions is
 <a href="/support/security_archive">on our Security Archive page</a>,
 but vulnerability information on those versions is no longer updated,
@@ -61,6 +61,33 @@ to determine if the bug affects specific installations or not.
    <th class="colMid"><a href="#comp">Component</a></th>
    <th class="colMid"><a href="#cls">Class</a></th>
    <th class="colLast">Description</th>
+  </tr>
+    
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3165">CVE-2015-3165</a></td>
+   <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
+   <td class="colMid">9.4.2, 9.3.7, 9.2.11, 9.1.16, 9.0.20</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">B</td>
+   <td class="colLast">Double "free" after authentication timeout</td>
+  </tr>
+  
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3166">CVE-2015-3166</a></td>
+   <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
+   <td class="colMid">9.4.2, 9.3.7, 9.2.11, 9.1.16, 9.0.20</td>
+   <td class="colMid">core server, client</td>
+   <td class="colMid">D</td>
+   <td class="colLast">Unanticipated errors from the standard library.</td>
+  </tr>
+  
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3167">CVE-2015-3167</a></td>
+   <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
+   <td class="colMid">9.4.2, 9.3.7, 9.2.11, 9.1.16, 9.0.20</td>
+   <td class="colMid">contrib module</td>
+   <td class="colMid">C</td>
+   <td class="colLast">pgcrypto has multiple error messages for decryption with an incorrect key.</td>
   </tr>
     
   <tr valign="top">
