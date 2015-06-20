@@ -1,4 +1,4 @@
-<?
+<?php
 require 'pgauth_conf.php';
 /* Redirect authentication request */
 

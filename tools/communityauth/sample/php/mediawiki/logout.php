@@ -1,4 +1,4 @@
-<?
+<?php
 require 'pgauth_conf.php';
 /* Log the user out locally */
 
