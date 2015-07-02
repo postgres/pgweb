@@ -9,8 +9,9 @@ TESTING_CHOICES = (
 	(0, 'Release'),
 	(1, 'Release candidate'),
 	(2, 'Beta'),
+	(3, 'Alpha'),
 	)
-TESTING_SHORTSTRING = ('', 'rc', 'beta')
+TESTING_SHORTSTRING = ('', 'rc', 'beta', 'alpha')
 
 class Version(PgModel, models.Model):
 	tree = models.DecimalField(max_digits=3, decimal_places=1, null=False, blank=False, unique=True)
