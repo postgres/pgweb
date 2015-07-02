@@ -17,7 +17,7 @@
     <td class="colFirst">{{v.treestring}}</td>
     <td class="colMid">
           <ul>
-              <li><a href="/docs/{{v.tree}}/interactive/index.html">With user comments</a></li>
+              {%if not v.testing%}<li><a href="/docs/{{v.tree}}/interactive/index.html">With user comments</a></li>{% endif %}
 	      <li><a href="/docs/{{v.tree}}/static/index.html">Without user comments</a></li>
 	  </ul>
     </td>
