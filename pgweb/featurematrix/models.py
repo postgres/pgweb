@@ -45,6 +45,7 @@ class Feature(PgModel, models.Model):
 	v92 = FeatureMatrixField(verbose_name="9.2")
 	v93 = FeatureMatrixField(verbose_name="9.3")
 	v94 = FeatureMatrixField(verbose_name="9.4")
+	v95 = FeatureMatrixField(verbose_name="9.5")
 
 	purge_urls = ('/about/featurematrix/.*', )
 
