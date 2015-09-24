@@ -37,7 +37,7 @@ class SignupForm(forms.Form):
 		raise forms.ValidationError("This username is already in use")
 
 	def clean_email(self):
-		email = self.cleaned_data['email']
+		email = self.cleaned_data['email'].lower()
 
 		try:
 			User.objects.get(email=email)
