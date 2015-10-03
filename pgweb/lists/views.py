@@ -16,16 +16,24 @@ def subscribe(request):
 	if request.POST:
 		form = SubscribeForm(request.POST)
 		if form.is_valid():
-			mailtxt = ""
 			if form.cleaned_data['action'] == 'subscribe':
-				mailtxt += "subscribe %s\n" % form.cleaned_data['lists']
 				mailsubject = "subscribe"
-				if not form.cleaned_data['receive']:
-					mailtxt += "set nomail\n"
-				if form.cleaned_data['digest']:
-					mailtxt += "set digest\n"
+				# Default is get mail and not digest, in which case we send a regular
+				# subscribe request. In other cases, we send subscribe-set which also
+				# sets those flags.
+				if form.cleaned_data['receive'] and not form.cleaned_data['digest']:
+					mailtxt = "subscribe %s\n" % form.cleaned_data['lists']
+				else:
+					tags = []
+					if not form.cleaned_data['receive']:
+						tags.append('nomail')
+					if form.cleaned_data['digest']:
+						tags.append('digest')
+
+					mailtxt = "subscribe-set %s %s\n" % (form.cleaned_data['lists'],
+														",".join(tags))
 			else:
-				mailtxt += "unsubscribe %s\n" % form.cleaned_data['lists']
+				mailtxt = "unsubscribe %s\n" % form.cleaned_data['lists']
 				mailsubject = "unsubscribe"
 
 			send_simple_mail(form.cleaned_data['email'],
