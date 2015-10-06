@@ -56,5 +56,6 @@ TRUNCATE TABLE survey_surveylock;
 
 -- We still have a lot of migration data, so lose it.
 DROP TABLE IF EXISTS users_old;
+DROP TABLE IF EXISTS users_keys;
 
 \echo NOTE! Transaction has not been committed. Verify manually and then commit!
