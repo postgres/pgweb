@@ -146,18 +146,6 @@ def mirrorselect(request, path):
 # At some time in the future we might consider hijacking them and sending
 # them to our master mirrors again.
 def _mirror_redirect_internal(request, scheme, host, path):
-	# Log the access
-#	curs = connection.cursor()
-#	curs.execute("""INSERT INTO clickthrus (scheme, host, path, country)
-#VALUES (%(scheme)s, %(host)s, %(path)s, (
-#SELECT countrycode FROM iptocountry WHERE %(ip)s BETWEEN startip and endip LIMIT 1))""", {
-#		'scheme': scheme,
-#		'host': host,
-#		'path': path,
-#		'ip': _get_numeric_ip(request),
-#})
-#	transaction.commit_unless_managed()
-
 	# Redirect!
 	newurl = "%s://%s/%s" % (scheme, host, path)
 	return HttpResponseRedirect(newurl)
