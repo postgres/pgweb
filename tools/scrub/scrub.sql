@@ -36,7 +36,8 @@ UPDATE contributors_contributor SET email='E'||id||'@scrubbed.postgresql.org';
 
 DELETE FROM core_moderationnotification;
 
-UPDATE core_organisation SET email='E'||id||'@scrubbed.postgresql.org', phone='1-555-'||id;
+UPDATE core_organisation SET email='E'||id||'@scrubbed.postgresql.org', phone='1-555-'||id,
+       name='O'||id, address='scrubbedaddress', url='http://scrubbed.url';
 DELETE FROM core_organisation_managers;
 UPDATE core_userprofile SET sshkey='SSHKEYSCRUBBED';
 
