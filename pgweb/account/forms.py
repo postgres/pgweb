@@ -18,8 +18,8 @@ class SignupForm(forms.Form):
 		# from the cleaned_data structure
 		if not self.cleaned_data.has_key('email'):
 			return self.cleaned_data['email2']
-		email1 = self.cleaned_data['email']
-		email2 = self.cleaned_data['email2']
+		email1 = self.cleaned_data['email'].lower()
+		email2 = self.cleaned_data['email2'].lower()
 
 		if email1 != email2:
 			raise forms.ValidationError("Email addresses don't match")
@@ -88,8 +88,8 @@ class ChangeEmailForm(forms.Form):
 		# from the cleaned_data structure
 		if not self.cleaned_data.has_key('email'):
 			return self.cleaned_data['email2']
-		email1 = self.cleaned_data['email']
-		email2 = self.cleaned_data['email2']
+		email1 = self.cleaned_data['email'].lower()
+		email2 = self.cleaned_data['email2'].lower()
 
 		if email1 != email2:
 			raise forms.ValidationError("Email addresses don't match")
