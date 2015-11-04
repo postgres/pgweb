@@ -41,10 +41,19 @@ This page in other versions:
 {%if supported_versions%}
 {%for ver in supported_versions %}
 	{%if not forloop.first %}/{%endif%}
-	{%if ver.version == page.version %}
-	<b>{{ver.display_version}}</b>
+	{%if ver.version.current %}
+		{%if ver.version == page.version %}
+		current ({{ver.display_version}})
+		{%else%}
+		<a href="/docs/current/{{doc_type}}/{{ver.file}}" title="This page in version {{ver.display_version}}">current</a>
+		(<a href="/docs/{{ver.display_version}}/{{doc_type}}/{{ver.file}}" title="This page in current version">{{ver.display_version}}</a>)
+		{%endif%}
 	{%else%}
-	<a href="/docs/{{ver.display_version}}/{{doc_type}}/{{ver.file}}" title="This page in version {{ver.display_version}}">{{ver.display_version}}</a>
+		{%if ver.version == page.version %}
+		<b>{{ver.display_version}}</b>
+		{%else%}
+		<a href="/docs/{{ver.display_version}}/{{doc_type}}/{{ver.file}}" title="This page in version {{ver.display_version}}">{{ver.display_version}}</a>
+		{%endif%}
 	{%endif%}
 {%endfor%}
 {%endif%}
