@@ -9,7 +9,7 @@ from pgweb.util.decorators import cache
 import httplib
 import urllib
 import psycopg2
-import simplejson as json
+import json
 import socket
 
 from lists.models import MailingList

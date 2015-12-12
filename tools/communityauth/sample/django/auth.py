@@ -26,7 +26,7 @@ from django.contrib.auth import logout as django_logout
 from django.conf import settings
 
 import base64
-import simplejson
+import json
 import socket
 import urlparse
 import urllib
@@ -200,6 +200,6 @@ def user_search(searchterm=None, userid=None):
 						AES.MODE_CBC,
 						base64.b64decode(ivs, "-_"))
 	s = decryptor.decrypt(base64.b64decode(datas, "-_")).rstrip(' ')
-	j = simplejson.loads(s)
+	j = json.loads(s)
 
 	return j

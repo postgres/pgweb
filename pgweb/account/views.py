@@ -15,7 +15,7 @@ import urllib
 from Crypto.Cipher import AES
 from Crypto import Random
 import time
-import simplejson as json
+import json
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
