@@ -230,6 +230,15 @@ def system_information(request):
 			'client_ip': get_client_ip(request),
 	})
 
+@ssl_required
+def system_information_ssl(request):
+	return render_to_response('core/system_information.html', {
+			'server': os.uname()[1],
+			'behind_cache': False,
+			'cache_server': None,
+			'client_ip': get_client_ip(request),
+	})
+
 # Sync timestamp for automirror. Keep it around for 30 seconds
 # Basically just a check that we can access the backend still...
 @cache(seconds=30)
