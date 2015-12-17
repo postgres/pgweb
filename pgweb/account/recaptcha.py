@@ -11,10 +11,14 @@ import httplib
 import urllib
 import json
 
+import logging
+log = logging.getLogger(__name__)
+
 class ReCaptchaWidget(forms.widgets.Widget):
 	def render(self, name, value, attrs=None):
 		if settings.NOCAPTCHA:
 			return u'Captcha disabled on this system'
+		log.info("Generated captcha")
 		return mark_safe(u'<div class="g-recaptcha" data-sitekey="{0}"></div>'.format(settings.RECAPTCHA_SITE_KEY))
 
 	def value_from_datadict(self, data, files, name):
@@ -60,17 +64,22 @@ class ReCaptchaField(forms.CharField):
 		try:
 			r = c.getresponse()
 		except:
+			log.error('Failed in API call to google recaptcha')
 			raise ValidationError('Failed in API call to google recaptcha')
 		if r.status != 200:
+			log.error('Invalid response code from google recaptcha')
 			raise ValidationError('Invalid response code from google recaptcha')
 
 		try:
 			j = json.loads(r.read())
 		except:
+			log.error('Invalid response structure from google recaptcha')
 			raise ValidationError('Invalid response structure from google recaptcha')
 
 		if not j['success']:
+			log.warning('Incorrect recaptcha entered. Trying again.')
 			raise ValidationError('Invalid. Try again.')
 
 		# Recaptcha validated ok!
+		log.info("Successful recaptcha validation")
 		return True
