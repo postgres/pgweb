@@ -88,14 +88,6 @@ def ftpbrowser(request, subpath):
 		'maintainer': file_maintainer,
 	}, NavContext(request, 'download'))
 
-def _get_numeric_ip(request):
-	try:
-		ip = get_client_ip(request)
-		p = ip.split('.')
-		return int(p[0])*16777216 + int(p[1])*65536 + int(p[2])*256 + int(p[3])
-	except:
-		return None
-
 
 # Accept an upload of the ftpsite pickle. This is fairly resource consuming,
 # and not very optimized, but that's why we limit it so that only the ftp
