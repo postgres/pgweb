@@ -359,6 +359,8 @@ def communityauth(request, siteid):
 	# Check for cooloff period
 	if site.cooloff_hours > 0:
 		if (datetime.now() - request.user.date_joined) < timedelta(hours=site.cooloff_hours):
+			log.warning("User {0} tried to log in to {1} before cooloff period ended.".format(
+				request.user.username, site.name))
 			return render_to_response('account/communityauth_cooloff.html', {
 				'site': site,
 				}, NavContext(request, 'account'))
