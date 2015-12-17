@@ -20,7 +20,9 @@ class ReCaptchaWidget(forms.widgets.Widget):
 	def value_from_datadict(self, data, files, name):
 		if settings.NOCAPTCHA:
 			return None
-		return data['g-recaptcha-response']
+		if data.has_key('g-recaptcha-response'):
+			return data['g-recaptcha-response']
+		return None
 
 
 class ReCaptchaField(forms.CharField):
