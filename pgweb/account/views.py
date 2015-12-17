@@ -258,6 +258,10 @@ def signup(request):
 			user = User.objects.create_user(form.cleaned_data['username'].lower(), form.cleaned_data['email'].lower())
 			user.first_name = form.cleaned_data['first_name']
 			user.last_name = form.cleaned_data['last_name']
+
+			# generate a random value for password. It won't be possible to log in with it, but
+			# it creates more entropy for the token generator (I think).
+			user.password = generate_random_token()
 			user.save()
 
 			# Now generate a token
