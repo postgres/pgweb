@@ -33,6 +33,9 @@ from models import CommunityAuthSite, EmailChangeToken
 from forms import SignupForm, UserForm, UserProfileForm, ContributorForm
 from forms import ChangeEmailForm
 
+import logging
+log = logging.getLogger(__name__)
+
 @ssl_required
 @login_required
 def home(request):
@@ -203,26 +206,31 @@ def logout(request):
 
 @ssl_required
 def changepwd(request):
+	log.info("Initiating password change from {0}".format(get_client_ip(request)))
 	return authviews.password_change(request,
 									 template_name='account/password_change.html',
 									 post_change_redirect='/account/changepwd/done/')
 
 @ssl_required
 def resetpwd(request):
+	log.info("Initiating password set from {0}".format(get_client_ip(request)))
 	return authviews.password_reset(request, template_name='account/password_reset.html',
 									email_template_name='account/password_reset_email.txt',
 									post_reset_redirect='/account/reset/done/')
 
 @ssl_required
 def change_done(request):
+	log.info("Password change done from {0}".format(get_client_ip(request)))
 	return authviews.password_change_done(request, template_name='account/password_change_done.html')
 
 @ssl_required
 def reset_done(request):
+	log.info("Password reset done from {0}".format(get_client_ip(request)))
 	return authviews.password_reset_done(request, template_name='account/password_reset_done.html')
 
 @ssl_required
 def reset_confirm(request, uidb36, token):
+	log.info("Confirming password reset for uidb {0}, token {1} from {2}".format(uidb36, token, get_client_ip(request)))
 	return authviews.password_reset_confirm(request,
 											uidb36=uidb36,
 											token=token,
@@ -231,6 +239,7 @@ def reset_confirm(request, uidb36, token):
 
 @ssl_required
 def reset_complete(request):
+	log.info("Password reset completed for user from {0}".format(get_client_ip(request)))
 	return authviews.password_reset_complete(request, template_name='account/password_reset_complete.html')
 
 @ssl_required
@@ -244,6 +253,7 @@ def signup(request):
 		if form.is_valid():
 			# Attempt to create the user here
 			# XXX: Do we need to validate something else?
+			log.info("Creating user for {0} from {1}".format(form.cleaned_data['username'], get_client_ip(request)))
 
 			user = User.objects.create_user(form.cleaned_data['username'].lower(), form.cleaned_data['email'].lower())
 			user.first_name = form.cleaned_data['first_name']
@@ -252,6 +262,7 @@ def signup(request):
 
 			# Now generate a token
 			token = default_token_generator.make_token(user)
+			log.info("Generated token {0} for user {1} from {1}".format(token, form.cleaned_data['username'], get_client_ip(request)))
 
 			# Generate an outgoing email
 			send_template_mail(settings.NOTIFICATION_FROM,
