@@ -16,6 +16,10 @@ class SignupForm(forms.Form):
 	email2 = forms.EmailField(label="Repeat email")
 	captcha = ReCaptchaField()
 
+	def __init__(self, remoteip, *args, **kwargs):
+		super(SignupForm, self).__init__(*args, **kwargs)
+		self.fields['captcha'].set_ip(remoteip)
+
 	def clean_email2(self):
 		# If the primary email checker had an exception, the data will be gone
 		# from the cleaned_data structure

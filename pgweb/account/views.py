@@ -19,7 +19,7 @@ import json
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
-from pgweb.util.misc import send_template_mail, generate_random_token
+from pgweb.util.misc import send_template_mail, generate_random_token, get_client_ip
 from pgweb.util.helpers import HttpServerError
 
 from pgweb.news.models import NewsArticle
@@ -240,7 +240,7 @@ def signup(request):
 
 	if request.method == 'POST':
 		# Attempt to create user then, eh?
-		form = SignupForm(data=request.POST)
+		form = SignupForm(get_client_ip(request), data=request.POST)
 		if form.is_valid():
 			# Attempt to create the user here
 			# XXX: Do we need to validate something else?
@@ -263,7 +263,7 @@ def signup(request):
 
 			return HttpResponseRedirect('/account/signup/complete/')
 	else:
-		form = SignupForm()
+		form = SignupForm(get_client_ip(request))
 
 	return render_to_response('base/form.html', {
 			'form': form,

@@ -25,9 +25,13 @@ class ReCaptchaWidget(forms.widgets.Widget):
 
 class ReCaptchaField(forms.CharField):
 	def __init__(self, *args, **kwargs):
+		self.remoteip = None
 		self.widget = ReCaptchaWidget()
 		self.required = not settings.NOCAPTCHA
 		super(ReCaptchaField, self).__init__(*args, **kwargs)
+
+	def set_ip(self, ip):
+		self.remoteip = ip
 
 	def clean(self, value):
 		if settings.NOCAPTCHA:
@@ -37,12 +41,13 @@ class ReCaptchaField(forms.CharField):
 
 		# Validate the recaptcha
 		c = httplib.HTTPSConnection('www.google.com', strict=True, timeout=5)
-		param = urllib.urlencode({
+		param = {
 			'secret': settings.RECAPTCHA_SECRET_KEY,
 			'response': value,
-			# XXX: include remote ip!
-		})
-		c.request('POST', '/recaptcha/api/siteverify', param, {
+		}
+		if self.remoteip:
+			param['remoteip'] = self.remoteip
+		c.request('POST', '/recaptcha/api/siteverify', urllib.urlencode(param), {
 			'Content-type': 'application/x-www-form-urlencoded',
 		})
 		c.sock.settimeout(10)
