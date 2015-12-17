@@ -81,7 +81,11 @@ $(document).ready(function() {
 });
 {%endfor%}
 </script>
-{%endif%}
+{%endif%}{# toggle_fields #}
+{%endif%}{# markdownfields #}
+
+{%if recaptcha%}
+<script src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
 {%endif%}
 {%endblock%}
 

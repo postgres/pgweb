@@ -6,12 +6,15 @@ from django.contrib.auth.models import User
 from pgweb.core.models import UserProfile
 from pgweb.contributors.models import Contributor
 
+from recaptcha import ReCaptchaField
+
 class SignupForm(forms.Form):
 	username = forms.CharField(max_length=30)
 	first_name = forms.CharField(max_length=30)
 	last_name = forms.CharField(max_length=30)
 	email = forms.EmailField()
 	email2 = forms.EmailField(label="Repeat email")
+	captcha = ReCaptchaField()
 
 	def clean_email2(self):
 		# If the primary email checker had an exception, the data will be gone

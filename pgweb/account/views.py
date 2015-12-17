@@ -275,6 +275,7 @@ content is available for reading without an account.
 """,
 			'savebutton': 'Sign up',
 			'operation': 'New',
+			'recaptcha': True,
 	}, NavContext(request, 'account'))
 
 

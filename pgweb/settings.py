@@ -135,6 +135,11 @@ PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.CryptPasswordHasher',
 )
 
+# Configure recaptcha. Most details contain keys and are thus handled
+# in settings_local.py. Override NOCAPTCHA to actually use them.
+NOCAPTCHA=True
+RECAPTCHA_SITE_KEY=""
+RECAPTCHA_SECRET_KEY=""
 
 ###
 # Application specific settings, likely overridden in settings_local.py.
