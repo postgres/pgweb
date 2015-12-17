@@ -47,8 +47,12 @@ class ReCaptchaField(forms.CharField):
 			'secret': settings.RECAPTCHA_SECRET_KEY,
 			'response': value,
 		}
-		if self.remoteip:
-			param['remoteip'] = self.remoteip
+
+		# Temporarily don't include remoteip, because it only shows our ssl terminating
+		# frontends.
+#		if self.remoteip:
+#			param['remoteip'] = self.remoteip
+
 		c.request('POST', '/recaptcha/api/siteverify', urllib.urlencode(param), {
 			'Content-type': 'application/x-www-form-urlencoded',
 		})
