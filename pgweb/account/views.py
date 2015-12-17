@@ -266,7 +266,7 @@ def signup(request):
 
 			# Now generate a token
 			token = default_token_generator.make_token(user)
-			log.info("Generated token {0} for user {1} from {1}".format(token, form.cleaned_data['username'], get_client_ip(request)))
+			log.info("Generated token {0} for user {1} from {2}".format(token, form.cleaned_data['username'], get_client_ip(request)))
 
 			# Generate an outgoing email
 			send_template_mail(settings.NOTIFICATION_FROM,
