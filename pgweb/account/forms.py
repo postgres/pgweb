@@ -35,6 +35,8 @@ class SignupForm(forms.Form):
 	def clean_username(self):
 		username = self.cleaned_data['username'].lower()
 
+		raise forms.ValidationError("Signups are temporarily disabled")
+
 		if not re.match('^[a-z0-9_@\.-]+$', username):
 			raise forms.ValidationError("Invalid character in user name. Only a-z, 0-9, _, @, . and - allowed.")
 		try:
