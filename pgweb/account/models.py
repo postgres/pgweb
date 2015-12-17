@@ -8,6 +8,8 @@ class CommunityAuthSite(models.Model):
 	cryptkey = models.CharField(max_length=100, null=False, blank=False,
 								help_text="Use tools/communityauth/generate_cryptkey.py to create a key")
 	comment = models.TextField(null=False, blank=True)
+	cooloff_hours = models.IntegerField(null=False, blank=False, default=0,
+										help_text="Number of hours a user must have existed in the systems before allowed to log in to this site")
 
 	def __unicode__(self):
 		return self.name

@@ -16,6 +16,7 @@ from Crypto.Cipher import AES
 from Crypto import Random
 import time
 import json
+from datetime import datetime, timedelta
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
@@ -353,6 +354,13 @@ def communityauth(request, siteid):
 
 	if request.user.first_name=='' or request.user.last_name=='' or request.user.email=='':
 		return render_to_response('account/communityauth_noinfo.html', {
+				}, NavContext(request, 'account'))
+
+	# Check for cooloff period
+	if site.cooloff_hours > 0:
+		if (datetime.now() - request.user.date_joined) < timedelta(hours=site.cooloff_hours):
+			return render_to_response('account/communityauth_cooloff.html', {
+				'site': site,
 				}, NavContext(request, 'account'))
 
 	info = {
