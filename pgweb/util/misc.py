@@ -38,22 +38,17 @@ def is_behind_cache(request):
 def get_client_ip(request):
 	"""
 	Get the IP of the client. If the client is served through our Varnish caches,
-	make sure we get the *actual* client IP, and not the IP of the Varnish cache.
+	or behind one of our SSL proxies, make sure to get the *actual* client IP,
+	and not the IP of the cache/proxy.
 	"""
-	if is_behind_cache:
-		# When we are served behind a cache, our varnish is (should) always be configured
-		# to set the X-Forwarded-For header. It will also remove any previous such header,
-		# so we can always trust that header if it's there.
-		try:
+	if request.META.has_key('HTTP_X_FORWARDED_FOR'):
+		# There is a x-forwarded-for header, so trust it but only if the actual connection
+		# is coming in from one of our frontends.
+		if request.META['REMOTE_ADDR'] in settings.FRONTEND_SERVERS:
 			return request.META['HTTP_X_FORWARDED_FOR']
-		except:
-			# In case something failed, we'll return the remote address. This is most likely
-			# the varnish server itself, but it's better than aborting the request.
-			return request.META['REMOTE_ADDR']
-	else:
-		return request.META['REMOTE_ADDR']
 
-
+	# Else fall back and return the actual IP of the connection
+	return request.META['REMOTE_ADDR']
 
 
 def varnish_purge(url):
