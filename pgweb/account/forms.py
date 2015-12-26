@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 
 import re
 
@@ -7,6 +8,25 @@ from pgweb.core.models import UserProfile
 from pgweb.contributors.models import Contributor
 
 from recaptcha import ReCaptchaField
+
+import logging
+log = logging.getLogger(__name__)
+
+# Override some error handling only in the default authentication form
+class PgwebAuthenticationForm(AuthenticationForm):
+	def clean(self):
+		try:
+			return super(PgwebAuthenticationForm, self).clean()
+		except ValueError, e:
+			if e.message.startswith('Unknown password hashing algorithm'):
+				# This is *probably* a user trying to log in with an account that has not
+				# been set up properly yet. It could be an actually unsupported hashing
+				# algorithm, but we'll deal with that when we get there.
+				self._errors["__all__"] = self.error_class(["This account appears not to be properly initialized. Make sure you complete the signup process with the instructions in the email received before trying to use the account."])
+				log.warning("User {0} tried to log in with invalid hash, probably because signup was completed.".format(self.cleaned_data['username']))
+				return self.cleaned_data
+			raise e
+
 
 class SignupForm(forms.Form):
 	username = forms.CharField(max_length=30)

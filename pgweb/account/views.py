@@ -31,6 +31,7 @@ from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
 
 from models import CommunityAuthSite, EmailChangeToken
+from forms import PgwebAuthenticationForm
 from forms import SignupForm, UserForm, UserProfileForm, ContributorForm
 from forms import ChangeEmailForm
 
@@ -199,7 +200,8 @@ def orglist(request):
 
 @ssl_required
 def login(request):
-	return authviews.login(request, template_name='account/login.html')
+	return authviews.login(request, template_name='account/login.html',
+						   authentication_form=PgwebAuthenticationForm)
 
 @ssl_required
 def logout(request):
