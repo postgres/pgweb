@@ -1,0 +1,181 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.5 Press Kit{%endblock%}
+{%block contents%}
+
+<h1>PostgreSQL 9.5 Press Kit</h1>
+
+<h2>Contents</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Text of Original Release</a><br />
+ &nbsp; <a href="#features">More About The Features</a><br />
+ &nbsp; <a href="#download">Where to Download</a><br />
+ &nbsp; <a href="#docs">Documentation</a><br />
+ &nbsp; <a href="#license">License</a><br />
+ &nbsp; <a href="#contact">Contacts</a><br />
+ &nbsp; <a href="#graphics">Images and Logos</a><br />
+ &nbsp; <a href="#about">About PostgreSQL</a><br />
+ &nbsp; <a href="#quoted_companies">Quoted Companies and Full Text of Quotes</a><br />
+ &nbsp; <a href="#companies">Corporate Support</a><br />
+</p>
+
+<img src="http://www.postgresql.org/media/img/about/press/elephant64.png" />
+
+<a name="original_release"></a><h2>Original Press Release</h2>
+
+<h2>PostgreSQL 9.5: UPSERT, Row Level Security, and Big Data Features</h2>
+<p>
+7 JANUARY 2016: The PostgreSQL Global Development Group announces the release of PostgreSQL 9.5.  This release adds UPSERT capability, Row Level Security, and multiple Big Data features, which will broaden the user base for the world's most advanced database.  With these new capabilities, PostgreSQL will be the best choice for even more applications for startups, large corporations, and government agencies.
+</p><p>
+Annie Prévot, CIO of the CNAF, the French Child Benefits Office, said, "The CNAF is providing services for 11 million persons and distributing 73 billion Euros every year, through 26 types of social benefit schemes. This service is essential to the population and it relies on an information system that must be absolutely efficient and reliable. The CNAF's information system is satisfyingly based on the PostgreSQL database management system."
+</p><p>
+<b>UPSERT</b>
+</p><p>
+A most-requested feature by application developers for several years, "UPSERT" is shorthand for "INSERT, ON CONFLICT UPDATE", allowing new and updated rows to be treated the same.  UPSERT simplifies web and mobile application development by enabling the database to handle conflicts between concurrent data changes.  This feature also removes the last significant barrier to migrating legacy MySQL applications to PostgreSQL. 
+</p><p>
+Developed over the last two years by Heroku programmer Peter Geoghegan, PostgreSQL's implementation of UPSERT is significantly more flexible and powerful than those offered by other relational databases.  The new ON CONFLICT clause permits ignoring the new data, or updating different columns or relations in ways which will support complex ETL (Extract, Transform, Load) toolchains for bulk data loading. And, like all of PostgreSQL, it is designed to be absolutely concurrency-safe and to integrate with all other PostgreSQL features, including Logical Replication.
+</p><p>
+<b>Row Level Security</b>
+</p><p>
+PostgreSQL continues to expand database security capabilities with its new Row Level Security (RLS) feature.  RLS implements true per-row and per-column data access control which integrates with external label-based security stacks such as SE Linux.  PostgreSQL is already known as "the most secure by default." RLS cements its position as the best choice for applications with strong data security requirements, such as compliance with PCI, the European Data Protection Directive, and healthcare data protection standards.
+</p><p>
+RLS is the culmination of five years of security features added to PostgreSQL, including extensive work by KaiGai Kohei of NEC, Stephen Frost of Crunchy Data, and Dean Rasheed.  Through it, database administrators can set security "policies" which filter which rows particular users are allowed to update or view.  Data security implemented this way is resistant to SQL injection exploits and other application-level security holes.
+</p><p>
+<b>Big Data Features</b>
+</p><p>
+PostgreSQL 9.5 includes multiple new features for bigger databases, and for integrating with other Big Data systems.  These features ensure that PostgreSQL continues to have a strong role in the rapidly growing open source Big Data marketplace. Among them are:
+</p><p>
+<b>BRIN Indexing</b>: This new type of index supports creating tiny, but effective indexes for very large, "naturally ordered" tables.  For example, tables containing logging data with billions of rows could be indexed and searched in 5% of the time required by standard BTree indexes.
+</p><p>
+<b>Faster Sorts</b>: PostgreSQL now sorts text and NUMERIC data faster, using an algorithm called "abbreviated keys".  This makes some queries which need to sort large amounts of data 2X to 12X faster, and can speed up index creation by 20X.
+</p><p>
+<b>CUBE, ROLLUP and GROUPING SETS</b>: These new standard SQL clauses let users produce reports with multiple levels of summarization in one query instead of requiring several.  CUBE will also enable tightly integrating PostgreSQL with more Online Analytic Processing (OLAP) reporting tools such as Tableau.
+</p><p>
+<b>Foreign Data Wrappers (FDWs)</b>: These already allow using PostgreSQL as a query engine for other Big Data systems such as Hadoop and Cassandra.  Version 9.5 adds IMPORT FOREIGN SCHEMA and JOIN pushdown making query connections to external databases both easier to set up and more efficient.
+</p><p>
+<b>TABLESAMPLE</b>: This SQL clause allows grabbing a quick statistical sample of huge tables, without the need for expensive sorting.
+</p><p>
+"The new BRIN index in PostgreSQL 9.5 is a powerful new feature which enables PostgreSQL to manage and index volumes of data that were impractical or impossible in the past. It allows scalability of data and performance beyond what was considered previously attainable with traditional relational databases and makes PostgreSQL a perfect solution for Big Data analytics," said Boyan Botev, Lead Database Administrator, Premier, Inc.
+</p>
+<a name="features"></a><h2>More About the Features</h2>
+<p>
+For explanations of the above features and others, please see the following resources:
+</p>
+<ul>
+<li><a href="/docs/9.5/static/release-9.5.html">Release Notes</a></li>
+<li><a href="/docs/9.5/static/index.html">9.5 Documentation</a></li>
+<li><a href="https://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.5">What's New In PostgreSQL 9.5 (English)</a></li>
+<li><a href="/about/featurematrix">Feature matrix (English only)</a></li>
+<li><a href="https://momjian.us/main/writings/pgsql/features.pdf">Major Features slide deck</a></li>
+<li><a href="https://www.youtube.com/watch?v=ubR3AN6kaGA">What's New in 9.5 presentation</a></li>
+<li><a href="https://www.youtube.com/watch?v=xsVxexMp1PU">PostgreSQL 9.5 Performance presentation</a></li>
+</ul>
+
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+<li><a href="/download">Downloads page</a> with links to Windows, Linux, OSX, BSD and Solaris installers and tools.</li>
+<li><a href="/ftp/source/v9.5.0">Source Code</a></li>
+<li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+<li><a href="/download/product-categories">Related Interfaces, Extensions and Software</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentation</h2>
+
+<p>
+HTML documentation and man pages are installed with PostgreSQL, but feel free to browse, search and comment on our extensive, interactive <a href="/docs/9.5/interactive">online documentation</a>.
+</p>
+
+<a name="license"></a><h2>License</h2>
+<p>
+PostgreSQL uses the <a href="/about/licence">PostgreSQL License</a>, a BSD-like "permissive" license. This
+<a href="http://www.opensource.org/licenses/postgresql">OSI-certified license</a> is widely appreciated as flexible and business-friendly, since it does not restrict the use of PostgreSQL with commercial and proprietary applications. Together with multi-company support and public ownership of the code, our license makes PostgreSQL very popular with vendors wanting to embed a database in their own products without fear of fees, vendor lock-in, or changes in licensing terms.
+</p>
+
+<a name="contact"></a><h2>Contacts</h2>
+
+<p>Web Page</p>
+
+<a href="http://www.postgresql.org">PostgreSQL home page</a>
+
+<p>English-Language Press Inquiries</p>
+
+<p>USA, Canada and General Inquiries<br />
+PostgreSQL Press Team<br />
+<a href="mailto:press@postgresql.org">press@postgresql.org</a><br />
+Phone: +1 (347) 674-7759</p>
+
+<p>Ireland<br />
+Raymond O'Donnell<br />
+<a href="mailto:ie@postgresql.org">ie@postgresql.org</a><br />
++353 (0)87 2241365</p>
+
+<p>United Kingdom<br />
+Simon Riggs<br />
+<a href="mailto:uk@postgresql.org">uk@postgresql.org</a><br />
++44-7900-255520</p>
+
+<p>Finland<br />
+Jussi Mikkola
+<br /><a href="mailto:fi@postgresql.org">fi@postgresql.org</a>
+<br />Cell: +46-708-969691
+</p>
+
+<p>Sweden<br />
+Magnus Hagander
+<br /><a href="mailto:se@postgresql.org">se@postgresql.org</a>
+<br />Cell: +46-708-969691
+</p>
+
+<p>Malaysia<br />
+Chris Travers
+<br /><a href="mailto:my@postgresql.org">my@postgresql.org</a>
+</p>
+
+<p>Australia<br />
+Arul Shaji Arulappan and Richard Sayad
+<br /><a href="mailto:au@postgresql.org">au@postgresql.org</a>
+</p>
+
+<p>For contacts in other regions, see <a href="/about/press/contact">our international contact list.</a></p>
+
+<a name="graphics"><h2>Images and Logos</h2></a>
+
+<img src="http://www.postgresql.org/media/img/about/press/elephant64.png" >
+
+<ul>
+<li><a href="http://www.postgresql.org/media/img/about/press/elephant.png">PostgreSQL Elephant Logo, PNG format</a></li>
+<li><a href="http://www.postgresql.org/media/img/about/press/elephant64.jpg">PostgreSQL Elephant Icon</a></li>
+<li><a href="http://www.postgresql.org/media/img/about/press/slonik_with_black_text_and_tagline.gif">PostgreSQL Banner with Logo, Elephant and Slogan</a></li>
+</ul>
+<p>
+All logos are available for modification and redistribution under The PostgreSQL License.  The PostgreSQL name and logo are trademarks of The PostgreSQL Community Association of Canada.
+</p>
+
+<a name="about"></a><h2>About PostgreSQL</h2>
+<p>
+PostgreSQL is the world's most advanced database system, with a global community of thousands of users and contributors and dozens of companies and organizations.  The PostgreSQL Project builds on over 25 years of engineering, starting at the University of California, Berkeley, and has an unmatched pace of development today. PostgreSQL's mature feature set not only matches top proprietary database systems, but exceeds them in advanced database features, extensibility, security and stability.  Learn more about PostgreSQL and participate in our community at <a href="http://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+
+<a name="quoted_companies"></a><h2>Quoted Company Information and Full Text of Quotes</h2>
+<p>
+Annie Prévot,  DSI de la CNAF, déclare, "La CNAF sert 11 millions d'allocataires , elle verse 73 milliards d'euros par an , au travers de 26 types de prestations , ce service essentiel à la population s'appuie sur un système d'information qui se doit d'être absolument performant et fiable . Le système d'information de la CNAF s'appuie avec satisfaction sur le gestionnaire de Base de données PostgreSQL . En utilisation sur la moitié des systèmes , ce logiciel open source offre toutes les garanties de fonctionnement et de fiabilité et est en phase de déploiement sur l'ensemble des systèmes."
+</p>
+<p>(English version) Annie Prévot, CIO of the CNAF, the French Child Benefits Office, said, "The CNAF is providing services for 11 million persons and distributing 73 billion Euros every year, through 26 types of social benefit schemes. This service is essential to the population and it relies on an information system that must be absolutely efficient and reliable. The CNAF's information system is satisfyingly based on the PostgreSQL database management system.  In use on half of the systems, this open source software offers all the functionality required and a guarantee of reliability. A deployment of PostgreSQL on all systems is underway."
+</p>
+<p>
+"The new BRIN index in Postgresql 9.5 is a powerful new feature which enables Postgresql to manage and index volumes of data that were impractical or impossible in the past. It allows scalability of data and performance beyond what was considered previously attainable with traditional relational databases and makes Postgresql a perfect solution for Big Data analytics," said Boyan Botev, Lead Database Administrator, Premier, Inc.
+</p>
+<p>
+<a href="https://www.premierinc.com">Premier, Inc.</a> (Nasdaq: PINC) is a healthcare performance improvement alliance of approximately 3,600 U.S. hospitals and 120,000 other providers. Our mission is simple: To improve the health of communities. As an industry leader, the Premier alliance has created one of the most comprehensive databases of actionable data, best practices and cost reduction strategies.  Contact Premier, Inc. through <a href="https://www.premierinc.com/contact-premier/">its website</a>.
+</p>
+
+<a name="companies"></a><h2>Corporate Support</h2>
+
+<p>PostgreSQL enjoys the support of numerous companies, who sponsor developers, provide hosting resources, and give us financial support.  See our <a href="http://www.postgresql.org/about/sponsors/">sponsors page</a> for some of these project supporters.</p>
+
+<p>There is also a large community of <a href="/support/professional_support">companies offering PostgreSQL Support</a>, from individual consultants to multinational companies.</p>
+
+<p><a href="/about/donate">Donations</a> gladly accepted.</p>
+<p>Or you can buy some of this fine merchandise from our <li><a href="http://www.zazzle.com/postgresql">Zazzle PostgreSQL Store</a></li>
+
+{% endblock %}
