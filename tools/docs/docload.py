@@ -8,15 +8,9 @@ import tarfile
 import re
 import tidy
 from optparse import OptionParser
+from ConfigParser import ConfigParser
 
-
-# Set up for accessing django
-from django.core.management import setup_environ
-sys.path.append(os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), '../../pgweb'))
-import settings
-setup_environ(settings)
-
-from django.db import connection, transaction
+import psycopg2
 
 pagecount = 0
 quiet = False
@@ -68,11 +62,16 @@ quiet = options.quiet
 ver = sys.argv[1]
 tarfilename = sys.argv[2]
 
+config = ConfigParser()
+config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'docload.ini'))
+
 if not os.path.isfile(tarfilename):
 	print "File %s not found" % tarfilename
 	sys.exit(1)
 
 tf = tarfile.open(tarfilename)
+
+connection = psycopg2.connect(config.get('db', 'dsn'))
 
 curs = connection.cursor()
 # Verify that the version exists, and what we're loading
@@ -118,7 +117,7 @@ curs.execute("SELECT varnish_purge('^/docs/' || %(v)s || '/')", {'v': ver})
 if iscurrent:
 	curs.execute("SELECT varnish_purge('^/docs/current/')")
 
-transaction.commit_unless_managed()
+connection.commit()
 connection.close()
 
 if not quiet: print "Done (%i pages)." % pagecount
