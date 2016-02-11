@@ -36,7 +36,7 @@ criteria.
 
 <p>
 The following table lists all known security issues.
-Please note that versions prior to 9.0 are no longer
+Please note that versions prior to 9.1 are no longer
 supported.  An archive of vulnerabilities found only in unsupported 
 versions is
 <a href="/support/security_archive">on our Security Archive page</a>,
@@ -61,6 +61,24 @@ to determine if the bug affects specific installations or not.
    <th class="colMid"><a href="#comp">Component</a></th>
    <th class="colMid"><a href="#cls">Class</a></th>
    <th class="colLast">Description</th>
+  </tr>
+  
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0773">CVE-2016-0773</a></td>
+   <td class="colMid">9.5, 9.4, 9.3, 9.2, 9.1</td>
+   <td class="colMid">9.5.1, 9.4.6, 9.3.11, 9.2.15, 9.1.20</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">B</td>
+   <td class="colLast">Unchecked regex can crash the server</td>
+  </tr>
+  
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-0766">CVE-2016-0766</a></td>
+   <td class="colMid">9.5, 9.4, 9.3, 9.2, 9.1</td>
+   <td class="colMid">9.5.1, 9.4.6, 9.3.11, 9.2.15, 9.1.20</td>
+   <td class="colMid">contrib module</td>
+   <td class="colMid">C</td>
+   <td class="colLast">Privilege escalation by changing PL/Java config settings</td>
   </tr>
 
   <tr valign="top">
@@ -341,24 +359,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">C</td>
    <td class="colLast">Line breaks in object names can be exploited to execute arbitrary SQL when reloading a pg_dump file.</td>
   </tr>
-
-  <tr valign="top">
-   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4015">CVE-2010-4015</a></td>
-   <td class="colMid">9.0, 8.4, 8.3, 8.2</td>
-   <td class="colMid"> 9.0.3, 8.4.7, 8.3.14, 8.2.20</td>
-   <td class="colMid">contrib module</td>
-   <td class="colMid">C</td>
-   <td class="colLast">An authenticated database user can cause a buffer overrun by calling functions from the intarray optional module with certain parameters.</td>
-  </tr>
-
-  <tr valign="top">
-   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3433">CVE-2010-3433</a></td>
-   <td class="colMid">9.0, 8.4, 8.3, 8.2, 8.1, 8.0, 7.4</td>
-   <td class="colMid">9.0.1, 8.4.5, 8.3.12, 8.2.18, 8.1.22, 8.0.26, 7.4.30</td>
-   <td class="colMid">core server</td>
-   <td class="colMid">C</td>
-   <td class="colLast">An authenticated database user can manipulate modules and tied variables in some external procedural languages to execute code with enhanced privileges.<a href="https://wiki.postgresql.org/wiki/20101005securityrelease">Details</a></td>
-  </tr>
+  
  </table>
 </div>
 
