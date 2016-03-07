@@ -2,6 +2,8 @@ from django.db.models.signals import pre_save, post_save, pre_delete
 from django.db import models
 from django.conf import settings
 
+import difflib
+
 from util.middleware import get_current_user
 from util.misc import varnish_purge
 from mailqueue.util import send_simple_mail
@@ -26,11 +28,15 @@ def _get_full_text_diff(obj, oldobj):
 	if not fieldlist:
 		return "This object does not know how to express ifself."
 
-	s = "\n\n".join(["%s from: %s\n%s to:   %s" % (
-		n,
-		_get_attr_value(oldobj, n),
-		n,
-		_get_attr_value(obj, n),
+	s = "\n\n".join(["\n".join(filter(lambda x: not x.startswith('@@'),
+		difflib.unified_diff(
+			_get_attr_value(oldobj, n).splitlines(),
+			_get_attr_value(obj, n).splitlines(),
+			n=1,
+			lineterm='',
+			fromfile=n,
+			tofile=n,
+			))
 	) for n in fieldlist if _get_attr_value(oldobj, n) != _get_attr_value(obj, n)])
 	if not s: return None
 	return s
@@ -50,7 +56,7 @@ def _get_attr_value(obj, fieldname):
 		value = getattr(obj, fieldname)
 		if isinstance(obj._meta.get_field_by_name(fieldname)[0], models.ManyToManyField):
 			return ", ".join(map(lambda x: unicode(x), value.all()))
-		return value
+		return "%s" % value
 	except ValueError, v:
 		# NOTE! If the object is brand new, and it has a many-to-many relationship, we can't
 		# access this data yet. So just return that it's not available yet.
