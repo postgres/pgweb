@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from pgweb.util.bases import PgModel
-
-class ContributorType(PgModel, models.Model):
+class ContributorType(models.Model):
 	typename = models.CharField(max_length=32, null=False, blank=False)
 	sortorder = models.IntegerField(null=False, default=100)
 	extrainfo = models.TextField(null=True, blank=True)
@@ -17,7 +15,7 @@ class ContributorType(PgModel, models.Model):
 	class Meta:
 		ordering = ('sortorder',)
 
-class Contributor(PgModel, models.Model):
+class Contributor(models.Model):
 	ctype = models.ForeignKey(ContributorType)
 	lastname = models.CharField(max_length=100, null=False, blank=False)
 	firstname = models.CharField(max_length=100, null=False, blank=False)

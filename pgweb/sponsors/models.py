@@ -2,9 +2,7 @@ from django.db import models
 
 from core.models import Country
 
-from pgweb.util.bases import PgModel
-
-class SponsorType(PgModel, models.Model):
+class SponsorType(models.Model):
 	typename = models.CharField(max_length=32, null=False, blank=False)
 	description = models.TextField(null=False, blank=False)
 	sortkey = models.IntegerField(null=False, default=10)
@@ -18,7 +16,7 @@ class SponsorType(PgModel, models.Model):
 	class Meta:
 		ordering = ('sortkey', )
 		
-class Sponsor(PgModel, models.Model):
+class Sponsor(models.Model):
 	sponsortype = models.ForeignKey(SponsorType, null=False)
 	name = models.CharField(max_length=128, null=False, blank=False)
 	url = models.URLField(null=False, blank=False)
@@ -33,7 +31,7 @@ class Sponsor(PgModel, models.Model):
 	class Meta:
 		ordering = ('name', )
 
-class Server(PgModel, models.Model):
+class Server(models.Model):
 	name = models.CharField(max_length=32, null=False, blank=False)
 	sponsors = models.ManyToManyField(Sponsor)
 	dedicated = models.BooleanField(null=False, default=True)

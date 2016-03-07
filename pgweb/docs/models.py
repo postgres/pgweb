@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from pgweb.util.bases import PgModel
 from pgweb.core.models import Version
 
 from datetime import datetime
@@ -24,7 +23,7 @@ class DocPage(models.Model):
 		# Index file first, because we want to list versions by file
 		unique_together = [('file', 'version')]
 
-class DocComment(PgModel, models.Model):
+class DocComment(models.Model):
 	version = models.DecimalField(max_digits=3, decimal_places=1, null=False)
 	file = models.CharField(max_length=64, null=False, blank=False)
 	comment = models.TextField(null=False, blank=False)

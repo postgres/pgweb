@@ -1,9 +1,8 @@
 from django.db import models
 
 from pgweb.core.models import Organisation
-from pgweb.util.bases import PgModel
 
-class ProfessionalService(PgModel, models.Model):
+class ProfessionalService(models.Model):
 	approved = models.BooleanField(null=False, blank=False, default=False)
 
 	org = models.ForeignKey(Organisation, null=False, blank=False, unique=True,

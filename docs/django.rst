@@ -38,13 +38,11 @@ not accidentally committed to the main repository, or cause merge conflicts.
 
 Forms
 -----
-There are some special things to consider when dealing with forms. For
+here are some special things to consider when dealing with forms. For
 any objects that are going to be moderated, the Model that is used
-should inherit from the PgModel model, instead of just the regular
-django.db.models.Model. When this is done, the send_notification
-attribute should be set to True. This will cause the system to
-automatically send out notifications to the slaves list whenever a new
-object is created or an existing one is modified.
+should set the send_notification attribute to True. This will cause
+the system to automatically send out notifications to the slaves list
+whenever a new object is created or an existing one is modified.
 
 If the form contains any text fields that accept markdown, the
 attribute markdown_fields should be set to a tuple containing a list
@@ -74,12 +72,6 @@ auth.py
 +++++++
 This module implements the community login provider for logging into
 both the website itself and the admin interface.
-
-bases.py
-++++++++
-This module implements base classes to inherit from. Specifically, it
-implements the PgModel base class that is used to automatically
-generate notifications.
 
 contexts.py
 +++++++++++

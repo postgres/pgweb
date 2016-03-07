@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from pgweb.util.bases import PgModel
 from pgweb.util.misc import varnish_purge
 
 from datetime import datetime
@@ -13,7 +12,7 @@ TESTING_CHOICES = (
 	)
 TESTING_SHORTSTRING = ('', 'rc', 'beta', 'alpha')
 
-class Version(PgModel, models.Model):
+class Version(models.Model):
 	tree = models.DecimalField(max_digits=3, decimal_places=1, null=False, blank=False, unique=True)
 	latestminor = models.IntegerField(null=False, blank=False, default=0, help_text="For testing versions, latestminor means latest beta/rc number. For other releases, it's the latest minor release number in the tree.")
 	reldate = models.DateField(null=False, blank=False)
@@ -113,7 +112,7 @@ class OrganisationType(models.Model):
 	def __unicode__(self):
 		return self.typename
 
-class Organisation(PgModel, models.Model):
+class Organisation(models.Model):
 	name = models.CharField(max_length=100, null=False, blank=False, unique=True)
 	approved = models.BooleanField(null=False, default=False)
 	address = models.TextField(null=False, blank=True)

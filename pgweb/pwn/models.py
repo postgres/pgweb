@@ -1,10 +1,8 @@
 from django.db import models
 
-from pgweb.util.bases import PgModel
-
 from datetime import date
 
-class PwnPost(PgModel, models.Model):
+class PwnPost(models.Model):
 	date = models.DateField(null=False, blank=False, default=date.today, unique=True)
 	intro  = models.TextField(null=False, blank=False)
 	content = models.TextField(null=False, blank=False)

@@ -1,7 +1,5 @@
 from django.db import models
 
-from pgweb.util.bases import PgModel
-
 choices_map = {
  0: {'str': 'No',       'class': 'no', 'bgcolor': '#ffdddd'},
  1: {'str': 'Yes',      'class': 'yes', 'bgcolor': '#ddffdd'},
@@ -10,7 +8,7 @@ choices_map = {
 }
 choices = [(k, v['str']) for k,v in choices_map.items()]
 
-class FeatureGroup(PgModel, models.Model):
+class FeatureGroup(models.Model):
 	groupname = models.CharField(max_length=100, null=False, blank=False)
 	groupsort = models.IntegerField(null=False, blank=False)
 
@@ -29,7 +27,7 @@ class FeatureMatrixField(models.IntegerField):
 		super(FeatureMatrixField, self).__init__(null=False, blank=False, default=0, verbose_name=verbose_name, choices=choices)
 		self.visible_default = visible_default
 
-class Feature(PgModel, models.Model):
+class Feature(models.Model):
 	group = models.ForeignKey(FeatureGroup, null=False, blank=False)
 	featurename = models.CharField(max_length=100, null=False, blank=False)
 	featuredescription = models.TextField(null=False, blank=True)

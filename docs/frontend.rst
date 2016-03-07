@@ -45,7 +45,7 @@ done by using the @cache() decorator on the view method. Caching
 should be kept lower for pages that have frequently updating data,
 such as the front page or the survey results page.
 
-Any model inheriting from PgModel can define a tuple or a function
+Any model can define a tuple or a function
 called *purge_urls* (if it's a function, it will be called and
 should return a tuple or a generator). Each entry is a regular
 expression, and this data will be automatically removed from the

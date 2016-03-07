@@ -1,7 +1,5 @@
 from django.db import models
 
-from pgweb.util.bases import PgModel
-
 from datetime import datetime
 
 # internal text/value object
@@ -15,7 +13,7 @@ class SurveyAnswerValues(object):
 		self.votes = votes
 		self.votespercent = votespercent
 
-class Survey(PgModel, models.Model):
+class Survey(models.Model):
 	question = models.CharField(max_length=500, null=False, blank=False)
 	opt1 = models.CharField(max_length=500, null=False, blank=False)
 	opt2 = models.CharField(max_length=500, null=False, blank=False)
@@ -81,7 +79,7 @@ class Survey(PgModel, models.Model):
 		# free to save this one.
 		super(Survey, self).save()
 
-class SurveyAnswer(PgModel, models.Model):
+class SurveyAnswer(models.Model):
 	survey = models.ForeignKey(Survey, null=False, blank=False, primary_key=True)
 	tot1 = models.IntegerField(null=False, default=0)
 	tot2 = models.IntegerField(null=False, default=0)

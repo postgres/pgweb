@@ -1,7 +1,6 @@
 from django.db import models
-from pgweb.util.bases import PgModel
 
-class Quote(PgModel, models.Model):
+class Quote(models.Model):
 	approved = models.BooleanField(null=False, default=False)
 	quote = models.TextField(null=False, blank=False)
 	who = models.CharField(max_length=100, null=False, blank=False)

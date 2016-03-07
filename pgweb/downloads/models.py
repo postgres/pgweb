@@ -1,5 +1,4 @@
 from django.db import models
-from pgweb.util.bases import PgModel
 
 from pgweb.core.models import Organisation
 
@@ -74,7 +73,7 @@ class LicenceType(models.Model):
 	class Meta:
 		ordering = ('typename',)
 
-class Product(PgModel, models.Model):
+class Product(models.Model):
 	name = models.CharField(max_length=100, null=False, blank=False, unique=True)
 	approved = models.BooleanField(null=False, default=False)
 	org = models.ForeignKey(Organisation, db_column="publisher_id", null=False, verbose_name="Organisation")

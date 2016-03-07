@@ -2,7 +2,7 @@ from django.conf.urls.defaults import *
 from django.views.generic.simple import redirect_to
 
 # Register our save signal handlers
-from pgweb.util.bases import register_basic_signal_handlers
+from pgweb.util.signals import register_basic_signal_handlers
 register_basic_signal_handlers()
 
 # Uncomment the next two lines to enable the admin:

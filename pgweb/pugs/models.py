@@ -1,7 +1,6 @@
 from django.db import models
-from pgweb.util.bases import PgModel
 
-class PUG(PgModel, models.Model):
+class PUG(models.Model):
 	"""
 	contains information about a local PostgreSQL user group
 	"""
