@@ -103,7 +103,7 @@
            <div class="pgNewsEventsWrap">
              {% for n in news %}
              <p>
-              <span class="txtDate">{{n.date}}</span> <br/>
+              <span class="txtDate">{{n.displaydate}}</span> <br/>
               <a href="/about/news/{{n.id}}/">{{n.title}}</a>
              </p>
              {% endfor %}

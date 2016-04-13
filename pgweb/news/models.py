@@ -30,5 +30,9 @@ class NewsArticle(models.Model):
 			return True
 		return False
 
+	@property
+	def displaydate(self):
+		return self.date.strftime("%Y-%m-%d")
+
 	class Meta:
 		ordering = ('-date',)

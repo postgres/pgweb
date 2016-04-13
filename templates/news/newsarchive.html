@@ -5,7 +5,7 @@
 <h1>News archive</h1>
 {%for obj in news %}
 <h2><a href="/about/news/{{obj.id}}/">{{obj.title}}</a></h2>
-<div class="newsdate">Posted on <b>{{obj.date}}</b></div>
+<div class="newsdate">Posted on <b>{{obj.displaydate}}</b></div>
 {{obj.content|markdown|striptags|truncatewords:20}}
 {%endfor%}
 <p><a href="/account/news/new/">Submit news</a></p>
