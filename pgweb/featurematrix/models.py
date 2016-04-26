@@ -22,28 +22,24 @@ class FeatureGroup(models.Model):
 		# Return a list of all the columns for the matrix
 		return [b for a,b in versions]
 
-class FeatureMatrixField(models.IntegerField):
-	def __init__(self, verbose_name, visible_default=True):
-		super(FeatureMatrixField, self).__init__(null=False, blank=False, default=0, verbose_name=verbose_name, choices=choices)
-		self.visible_default = visible_default
-
 class Feature(models.Model):
 	group = models.ForeignKey(FeatureGroup, null=False, blank=False)
 	featurename = models.CharField(max_length=100, null=False, blank=False)
 	featuredescription = models.TextField(null=False, blank=True)
 	#WARNING! All fields that start with "v" will be considered versions!
-	v74 = FeatureMatrixField(verbose_name="7.4", visible_default=False)
-	v80 = FeatureMatrixField(verbose_name="8.0")
-	v81 = FeatureMatrixField(verbose_name="8.1")
-	v82 = FeatureMatrixField(verbose_name="8.2")
-	v83 = FeatureMatrixField(verbose_name="8.3")
-	v84 = FeatureMatrixField(verbose_name="8.4")
-	v90 = FeatureMatrixField(verbose_name="9.0")
-	v91 = FeatureMatrixField(verbose_name="9.1")
-	v92 = FeatureMatrixField(verbose_name="9.2")
-	v93 = FeatureMatrixField(verbose_name="9.3")
-	v94 = FeatureMatrixField(verbose_name="9.4")
-	v95 = FeatureMatrixField(verbose_name="9.5")
+	v74 = models.IntegerField(verbose_name="7.4", null=False, blank=False, default=0, choices=choices)
+	v74.visible_default = False
+	v80 = models.IntegerField(verbose_name="8.0", null=False, blank=False, default=0, choices=choices)
+	v81 = models.IntegerField(verbose_name="8.1", null=False, blank=False, default=0, choices=choices)
+	v82 = models.IntegerField(verbose_name="8.2", null=False, blank=False, default=0, choices=choices)
+	v83 = models.IntegerField(verbose_name="8.3", null=False, blank=False, default=0, choices=choices)
+	v84 = models.IntegerField(verbose_name="8.4", null=False, blank=False, default=0, choices=choices)
+	v90 = models.IntegerField(verbose_name="9.0", null=False, blank=False, default=0, choices=choices)
+	v91 = models.IntegerField(verbose_name="9.1", null=False, blank=False, default=0, choices=choices)
+	v92 = models.IntegerField(verbose_name="9.2", null=False, blank=False, default=0, choices=choices)
+	v93 = models.IntegerField(verbose_name="9.3", null=False, blank=False, default=0, choices=choices)
+	v94 = models.IntegerField(verbose_name="9.4", null=False, blank=False, default=0, choices=choices)
+	v95 = models.IntegerField(verbose_name="9.5", null=False, blank=False, default=0, choices=choices)
 
 	purge_urls = ('/about/featurematrix/.*', )
 
@@ -52,6 +48,7 @@ class Feature(models.Model):
 		return ''
 
 	def columns(self):
+		# Get a list of column based on all versions that are visible_default
 		return [choices_map[getattr(self, a)] for a,b in versions]
 
 	@property
@@ -61,5 +58,4 @@ class Feature(models.Model):
 		else:
 			return 'detail/%s/' % self.id
 
-versions = [(f.name,f.verbose_name) for f in Feature()._meta.fields if f.name.startswith('v') and f.visible_default]
-
+versions = [(f.name,f.verbose_name) for f in Feature()._meta.fields if f.name.startswith('v') and getattr(f, 'visible_default', True)]
