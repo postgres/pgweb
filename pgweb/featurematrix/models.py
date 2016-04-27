@@ -30,6 +30,7 @@ class Feature(models.Model):
 	v74 = models.IntegerField(verbose_name="7.4", null=False, blank=False, default=0, choices=choices)
 	v74.visible_default = False
 	v80 = models.IntegerField(verbose_name="8.0", null=False, blank=False, default=0, choices=choices)
+	v80.visible_default = False
 	v81 = models.IntegerField(verbose_name="8.1", null=False, blank=False, default=0, choices=choices)
 	v82 = models.IntegerField(verbose_name="8.2", null=False, blank=False, default=0, choices=choices)
 	v83 = models.IntegerField(verbose_name="8.3", null=False, blank=False, default=0, choices=choices)
