@@ -135,6 +135,9 @@ PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.CryptPasswordHasher',
 )
 
+# Default format for date/time (as it changes between machines)
+DATETIME_FORMAT="Y-m-d H:i:s"
+
 # Configure recaptcha. Most details contain keys and are thus handled
 # in settings_local.py. Override NOCAPTCHA to actually use them.
 NOCAPTCHA=True
@@ -162,7 +165,6 @@ FRONTEND_SERVERS=()                                    # A tuple containing the 
 FTP_MASTERS=()										   # A tuple containing the *IP addresses* of all machines
                                                        # trusted to upload ftp structure data
 VARNISH_PURGERS=()                                     # Extra servers that can do varnish purges through our queue
-VARNISH_QUEUE_ID=1									   # pgq queue id used for varnish purging
 ARCHIVES_SEARCH_SERVER="archives.postgresql.org"       # Where to post REST request for archives search
 FRONTEND_SMTP_RELAY="magus.postgresql.org"             # Where to relay user generated email
 SITE_UPDATE_TRIGGER_FILE='/tmp/pgweb.update_trigger'   # Where to drop update trigger file

@@ -3,6 +3,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.http import HttpResponseNotModified
 from django.template import TemplateDoesNotExist, loader
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Count
 from django.db import connection, transaction
@@ -266,17 +267,15 @@ def admin_purge(request):
 			return HttpResponseRedirect('.')
 		varnish_purge(url)
 		transaction.commit_unless_managed()
-		completed = '^%s' % url
-	else:
-		completed = None
+		messages.info(request, "Purge completed: '^%s'" % url)
+		return HttpResponseRedirect('.')
 
 	# Fetch list of latest purges
 	curs = connection.cursor()
-	curs.execute("SELECT ev_time, ev_type, ev_data FROM pgq.event_%s WHERE ev_type IN ('P', 'X') ORDER BY ev_time DESC LIMIT 20" % settings.VARNISH_QUEUE_ID)
-	latest = [{'t': r[0], 'ty': r[1], 'u': r[2]} for r in curs.fetchall()]
+	curs.execute("SELECT added, completed, consumer, mode, expr FROM varnishqueue.queue q LEFT JOIN varnishqueue.consumers c ON c.consumerid=q.consumerid ORDER BY added DESC")
+	latest = curs.fetchall()
 
 	return render_to_response('core/admin_purge.html', {
-			'purge_completed': completed,
 			'latest_purges': latest,
 			}, RequestContext(request))
 

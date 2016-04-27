@@ -11,12 +11,6 @@
 <h1>Purge URL from Varnish</h1>
 
 <div id="content-main">
-{%if purge_completed %}
-  <div class="module">
-    Purge completed: {{purge_completed}}
-  </div>
-{%endif%}
-
  <form method="POST" action=".">{% csrf_token %}
 URL (regex, ^ is auto-added): <input type="text" name="url">
   <input type="submit" value="Purge" />
@@ -26,11 +20,16 @@ URL (regex, ^ is auto-added): <input type="text" name="url">
   <div class="module">
     <table summary="Latest purges" width="100%">
       <caption><a class="section">Latest purges</a></caption>
+      <tr class="row2">
+	<th width="150">Queued</th>
+	<th width="150">Delivered</th>
+	<th width="150">Frontend</th>
+	<th width="30">Type</th>
+	<th>Expression</th>
+      </tr>
       {%for p in latest_purges%}
       <tr class="row{%cycle '1' '2'%}">
-	<td>{{p.t|date:"c"}}</td>
-	<td>{{p.ty}}</td>
-	<td>{{p.u}}</td>
+	{%for c in p%}<td>{{c|default:""}}</td>{%endfor%}
       </tr>
       {%endfor%}
     </table>
