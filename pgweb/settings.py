@@ -44,7 +44,7 @@ MEDIA_URL = ''
 STATIC_URL = '/media/'
 
 STATICFILES_DIRS = (
-	'../media/',
+	'media/',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -72,8 +72,8 @@ CSRF_FAILURE_VIEW='pgweb.core.views.csrf_failure'
 ROOT_URLCONF = 'pgweb.urls'
 
 TEMPLATE_DIRS = (
-    '../templates/',
-	'../../templates', # Sometimes called in subdirectories, should never hurt to have both
+    'templates/',
+	'../templates', # Sometimes called in subdirectories, should never hurt to have both
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

@@ -104,7 +104,7 @@ class NavContext(RequestContext):
 def _get_gitrev():
 	# Return the current git revision, that is used for
 	# cache-busting URLs.
-	with open('../.git/refs/heads/master') as f:
+	with open('.git/refs/heads/master') as f:
 		return f.readline()[:8]
 
 # Template context processor to add information about the root link and
