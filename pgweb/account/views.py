@@ -80,7 +80,7 @@ objtypes = {
 
 @ssl_required
 @login_required
-@transaction.commit_on_success
+@transaction.atomic
 def profile(request):
 	# We always have the user, but not always the profile. And we need a bit
 	# of a hack around the normal forms code since we have two different
@@ -124,7 +124,7 @@ def profile(request):
 
 @ssl_required
 @login_required
-@transaction.commit_on_success
+@transaction.atomic
 def change_email(request):
 	tokens = EmailChangeToken.objects.filter(user=request.user)
 	token = len(tokens) and tokens[0] or None
@@ -159,7 +159,7 @@ def change_email(request):
 
 @ssl_required
 @login_required
-@transaction.commit_on_success
+@transaction.atomic
 def confirm_change_email(request, tokenhash):
 	tokens = EmailChangeToken.objects.filter(user=request.user, token=tokenhash)
 	token = len(tokens) and tokens[0] or None

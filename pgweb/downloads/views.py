@@ -121,7 +121,6 @@ def uploadftp(request):
 
 	# Purge it out of varnish so we start responding right away
 	varnish_purge("/ftp")
-	transaction.commit_unless_managed()
 
 	# Finally, indicate to the client that we're happy
 	return HttpResponse("OK", content_type="text/plain")

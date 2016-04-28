@@ -266,7 +266,6 @@ def admin_purge(request):
 		if url == '':
 			return HttpResponseRedirect('.')
 		varnish_purge(url)
-		transaction.commit_unless_managed()
 		messages.info(request, "Purge completed: '^%s'" % url)
 		return HttpResponseRedirect('.')
 
@@ -291,7 +290,6 @@ def api_varnish_purge(request):
 	for i in range(0, n):
 		expr = request.POST['p%s' % i]
 		curs.execute("SELECT varnish_purge_expr(%s)", (expr, ))
-	transaction.commit_unless_managed()
 	return HttpResponse("Purged %s entries\n" % n)
 
 @nocache
@@ -306,7 +304,7 @@ def api_repo_updated(request):
 # Merge two organisations
 @login_required
 @user_passes_test(lambda u: u.is_superuser)
-@transaction.commit_on_success
+@transaction.atomic
 def admin_mergeorg(request):
 	if request.method == 'POST':
 		form = MergeOrgsForm(data=request.POST)
