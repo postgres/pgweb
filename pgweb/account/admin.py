@@ -11,6 +11,7 @@ from models import CommunityAuthSite
 class CommunityAuthSiteAdminForm(forms.ModelForm):
 	class Meta:
 		model = CommunityAuthSite
+		exclude = ()
 
 	def clean_cryptkey(self):
 		x = None

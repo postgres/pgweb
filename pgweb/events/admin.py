@@ -15,6 +15,7 @@ approve_event.short_description = 'Approve event'
 class EventAdminForm(forms.ModelForm):
 	class Meta:
 		model = Event
+		exclude = ()
 
 	def clean(self):
 		cleaned_data = super(EventAdminForm, self).clean()

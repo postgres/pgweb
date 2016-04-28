@@ -33,6 +33,7 @@ duplicate_stackbuilderapp.short_description = "Duplicate application"
 class StackBuilderAppAdminForm(forms.ModelForm):
 	class Meta:
 		model = StackBuilderApp
+		exclude = ()
 
 	def clean_textid(self):
 		if not re.match('^[a-z0-9_]*$', self.cleaned_data['textid']):
