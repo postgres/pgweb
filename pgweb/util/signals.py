@@ -4,23 +4,23 @@ from django.conf import settings
 
 import difflib
 
-from util.middleware import get_current_user
-from util.misc import varnish_purge
-from mailqueue.util import send_simple_mail
+from pgweb.util.middleware import get_current_user
+from pgweb.util.misc import varnish_purge
+from pgweb.mailqueue.util import send_simple_mail
 
 def _build_url(obj):
 	if obj.id:
 		return "%s/admin/%s/%s/%s/" % (
 			settings.SITE_ROOT,
 			obj._meta.app_label,
-			obj._meta.module_name,
+			obj._meta.model_name,
 			obj.id,
 		)
 	else:
 		return "%s/admin/%s/%s/" % (
 			settings.SITE_ROOT,
 			obj._meta.app_label,
-			obj._meta.module_name,
+			obj._meta.model_name,
 		)
 
 def _get_full_text_diff(obj, oldobj):

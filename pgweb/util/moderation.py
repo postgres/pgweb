@@ -12,7 +12,7 @@ def _get_unapproved_list(objecttype):
 	objects = objecttype.objects.filter(approved=False)
 	if not len(objects): return None
 	return { 'name': objects[0]._meta.verbose_name_plural, 'entries':
-			 [{'url': '/admin/%s/%s/%s/' % (x._meta.app_label, x._meta.module_name, x.pk), 'title': unicode(x)} for x in objects]
+			 [{'url': '/admin/%s/%s/%s/' % (x._meta.app_label, x._meta.model_name, x.pk), 'title': unicode(x)} for x in objects]
 			 }
 
 def get_all_pending_moderations():
