@@ -62,7 +62,7 @@ to the list maintainers and other members, and you may be automatically unsubscr
 	}, NavContext(request, "community"))
 
 def listinfo(request):
-	resp = HttpResponse(mimetype='application/json')
+	resp = HttpResponse(content_type='application/json')
 	groupdata = [ {
 			'id': g.id,
 			'name': g.groupname,

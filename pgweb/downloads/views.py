@@ -182,7 +182,7 @@ def mirrors_xml(request):
 	# Same as in mirrorselect
 	all_mirrors = Mirror.objects.filter(mirror_active=True, mirror_private=False, mirror_dns=True).extra(where=["mirror_last_rsync>(now() - '48 hours'::interval)"]).order_by('country_name', 'mirror_index')	
 
-	resp = HttpResponse(mimetype='text/xml')
+	resp = HttpResponse(content_type='text/xml')
 	x = PgXmlHelper(resp)
 	x.startDocument()
 	x.startElement('mirrors', {})
@@ -228,7 +228,7 @@ def productform(request, itemid):
 def applications_v2_xml(request):
 	all_apps = StackBuilderApp.objects.select_related().filter(active=True)
 
-	resp = HttpResponse(mimetype='text/xml')
+	resp = HttpResponse(content_type='text/xml')
 	x = PgXmlHelper(resp, skipempty=True)
 	x.startDocument()
 	x.startElement('applications', {})

@@ -121,7 +121,7 @@ def organisationform(request, itemid):
 def robots(request):
 	if not is_behind_cache(request):
 		# If we're not serving this through one of our Varnish caches, we allow *nothing* to be indexed
-		return HttpResponse("User-agent: *\nDisallow: /\n", mimetype='text/plain')
+		return HttpResponse("User-agent: *\nDisallow: /\n", content_type='text/plain')
 	else:
 		# Regular website
 		return HttpResponse("""User-agent: *
@@ -134,13 +134,13 @@ Disallow: /message-id/raw/
 Disallow: /message-id/flat/
 
 Sitemap: http://www.postgresql.org/sitemap.xml
-""", mimetype='text/plain')
+""", content_type='text/plain')
 
 
 # Sitemap (XML format)
 @cache(hours=6)
 def sitemap(request):
-	resp = HttpResponse(mimetype='text/xml')
+	resp = HttpResponse(content_type='text/xml')
 	x = PgXmlHelper(resp)
 	x.startDocument()
 	x.startElement('urlset', {'xmlns': 'http://www.sitemaps.org/schemas/sitemap/0.9'})
@@ -202,7 +202,7 @@ def dynamic_css(request, css):
 		header_mtime = parse_http_date(matches.group(1))
 		# We don't do length checking, just the date
 		if int(latestmod) <= header_mtime:
-			return HttpResponseNotModified(mimetype='text/css')
+			return HttpResponseNotModified(content_type='text/css')
 	resp['Last-Modified'] = http_date(latestmod)
 
 	for fn in files:
@@ -245,7 +245,7 @@ def system_information_ssl(request):
 @cache(seconds=30)
 def sync_timestamp(request):
 	s = datetime.now().strftime("%Y-%m-%d %H:%M:%S\n")
-	r = HttpResponse(s,	mimetype='text/plain')
+	r = HttpResponse(s,	content_type='text/plain')
 	r['Content-Length'] = len(s)
 	return r
 
