@@ -99,11 +99,6 @@ class Language(models.Model):
 	def __unicode__(self):
 		return self.name
 
-	# Get the english language to use for default in foreign keys
-	@staticmethod
-	def english():
-		return Language.objects.get(pk='eng')
-
 class OrganisationType(models.Model):
 	typename = models.CharField(max_length=32, null=False, blank=False)
 
