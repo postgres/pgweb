@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from pgweb.util.misc import varnish_purge
 
-from datetime import datetime
-
 TESTING_CHOICES = (
 	(0, 'Release'),
 	(1, 'Release candidate'),
@@ -121,7 +119,7 @@ class Organisation(models.Model):
 	phone = models.CharField(max_length=100, null=False, blank=True)
 	orgtype = models.ForeignKey(OrganisationType, null=False, blank=False, verbose_name="Organisation type")
 	managers = models.ManyToManyField(User, null=False, blank=False)
-	lastconfirmed = models.DateTimeField(null=False, blank=False, default=datetime.now())
+	lastconfirmed = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 
 	send_notification = True
 
@@ -161,7 +159,7 @@ class ImportedRSSItem(models.Model):
 
 # Extra attributes for users (if they have them)
 class UserProfile(models.Model):
-	user = models.ForeignKey(User, null=False, blank=False, unique=True, primary_key=True)
+	user = models.OneToOneField(User, null=False, blank=False, primary_key=True)
 	sshkey = models.TextField(null=False, blank=True, verbose_name="SSH key", help_text= "Paste one or more public keys in OpenSSH format, one per line.")
 	lastmodified = models.DateTimeField(null=False, blank=False, auto_now=True)
 

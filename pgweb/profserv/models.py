@@ -5,7 +5,7 @@ from pgweb.core.models import Organisation
 class ProfessionalService(models.Model):
 	approved = models.BooleanField(null=False, blank=False, default=False)
 
-	org = models.ForeignKey(Organisation, null=False, blank=False, unique=True,
+	org =  models.OneToOneField(Organisation, null=False, blank=False,
 							db_column="organisation_id",
 							verbose_name="organisation",
 							help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or webmaster@postgresql.org if none are listed.")

@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from pgweb.core.models import Version
 
-from datetime import datetime
-
 class DocPage(models.Model):
 	id = models.AutoField(null=False, primary_key=True)
 	file = models.CharField(max_length=64, null=False, blank=False)
@@ -27,7 +25,7 @@ class DocComment(models.Model):
 	version = models.DecimalField(max_digits=3, decimal_places=1, null=False)
 	file = models.CharField(max_length=64, null=False, blank=False)
 	comment = models.TextField(null=False, blank=False)
-	posted_at = models.DateTimeField(null=False, blank=False, default=datetime.now())
+	posted_at = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 	submitter = models.ForeignKey(User, null=False)
 	approved = models.BooleanField(blank=False, default=False)
 

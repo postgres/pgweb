@@ -7,10 +7,10 @@ from datetime import datetime
 class Mirror(models.Model):
 	country_name = models.CharField(max_length=50, null=False, blank=False)
 	country_code = models.CharField(max_length=2, null=False, blank=False)
-	mirror_created = models.DateTimeField(null=False, blank=False, default=datetime.now())
+	mirror_created = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 	mirror_last_rsync = models.DateTimeField(null=False, blank=False, default=datetime(1970,1,1))
 	mirror_index = models.IntegerField(null=False)
-	host_addr = models.IPAddressField(null=True, default='0.0.0.0')
+	host_addr = models.GenericIPAddressField(null=True, default='0.0.0.0')
 	host_path = models.CharField(max_length=100, null=True)
 	host_sponsor = models.CharField(max_length=100, null=True)
 	host_contact = models.CharField(max_length=100, null=True)
@@ -82,7 +82,7 @@ class Product(models.Model):
 	licencetype = models.ForeignKey(LicenceType, null=False, verbose_name="Licence type")
 	description = models.TextField(null=False, blank=False)
 	price = models.CharField(max_length=200, null=False, blank=True)
-	lastconfirmed = models.DateTimeField(null=False, blank=False, default=datetime.now())
+	lastconfirmed = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 
 	send_notification = True
 	markdown_fields = ('description', )

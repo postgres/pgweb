@@ -1,7 +1,5 @@
 from django.db import models
 
-from datetime import datetime
-
 # internal text/value object
 class SurveyQuestion(object):
 	def __init__(self, value, text):
@@ -23,7 +21,7 @@ class Survey(models.Model):
 	opt6 = models.CharField(max_length=500, null=False, blank=True)
 	opt7 = models.CharField(max_length=500, null=False, blank=True)
 	opt8 = models.CharField(max_length=500, null=False, blank=True)
-	posted = models.DateTimeField(null=False, default=datetime.now)
+	posted = models.DateTimeField(null=False, auto_now_add=True)
 	current = models.BooleanField(null=False, default=False)
 
 	purge_urls = ('/community/survey', )
@@ -80,7 +78,7 @@ class Survey(models.Model):
 		super(Survey, self).save()
 
 class SurveyAnswer(models.Model):
-	survey = models.ForeignKey(Survey, null=False, blank=False, primary_key=True)
+	survey = models.OneToOneField(Survey, null=False, blank=False, primary_key=True)
 	tot1 = models.IntegerField(null=False, default=0)
 	tot2 = models.IntegerField(null=False, default=0)
 	tot3 = models.IntegerField(null=False, default=0)
@@ -93,6 +91,6 @@ class SurveyAnswer(models.Model):
 	purge_urls = ('/community/survey', )
 
 class SurveyLock(models.Model):
-	ipaddr = models.IPAddressField(null=False, blank=False)
-	time = models.DateTimeField(null=False, default=datetime.now)
+	ipaddr = models.GenericIPAddressField(null=False, blank=False)
+	time = models.DateTimeField(null=False, auto_now_add=True)
 

@@ -15,7 +15,7 @@ class CommunityAuthSite(models.Model):
 		return self.name
 
 class EmailChangeToken(models.Model):
-	user = models.ForeignKey(User, null=False, blank=False, unique=True)
+	user = models.OneToOneField(User, null=False, blank=False)
 	email = models.EmailField(max_length=75, null=False, blank=False)
 	token = models.CharField(max_length=100, null=False, blank=False)
 	sentat = models.DateTimeField(null=False, blank=False, auto_now=True)
