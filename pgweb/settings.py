@@ -97,7 +97,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.admin',
-    'django.contrib.markup',
+    'django_markwhat',
 	'django.contrib.staticfiles',
     'pgweb.core',
     'pgweb.mailqueue',
