@@ -1,6 +1,6 @@
 from django.db import models
 
-from core.models import Country, Language, Organisation
+from pgweb.core.models import Country, Language, Organisation
 
 class Event(models.Model):
 	approved = models.BooleanField(null=False, blank=False, default=False)

@@ -1,5 +1,5 @@
 from django.db import connection
-from core.models import Version
+from pgweb.core.models import Version
 
 def get_struct():
 	currentversion = Version.objects.get(current=True)

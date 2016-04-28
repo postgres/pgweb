@@ -12,7 +12,7 @@ import psycopg2
 import json
 import socket
 
-from lists.models import MailingList
+from pgweb.lists.models import MailingList
 
 # Conditionally import memcached library. Everything will work without
 # it, so we allow development installs to run without it...

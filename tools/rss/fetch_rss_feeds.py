@@ -12,7 +12,7 @@ sys.path.append(os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), '../
 import settings
 setup_environ(settings)
 
-from core.models import ImportedRSSFeed, ImportedRSSItem
+from pgweb.core.models import ImportedRSSFeed, ImportedRSSItem
 from django.db import transaction, connection
 
 # Set timeout for loading RSS feeds

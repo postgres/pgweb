@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from util.admin import PgwebAdmin
+from pgweb.util.admin import PgwebAdmin
 from models import Event
 
 def approve_event(modeladmin, request, queryset):

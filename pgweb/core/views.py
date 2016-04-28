@@ -23,13 +23,13 @@ from pgweb.util.misc import get_client_ip, is_behind_cache, varnish_purge
 from pgweb.util.sitestruct import get_all_pages_struct
 
 # models needed for the pieces on the frontpage
-from news.models import NewsArticle
-from events.models import Event
-from quotes.models import Quote
+from pgweb.news.models import NewsArticle
+from pgweb.events.models import Event
+from pgweb.quotes.models import Quote
 from models import Version, ImportedRSSItem
 
 # models needed for the pieces on the community page
-from survey.models import Survey
+from pgweb.survey.models import Survey
 
 # models and forms needed for core objects
 from models import Organisation

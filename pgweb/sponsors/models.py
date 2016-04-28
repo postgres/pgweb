@@ -1,6 +1,6 @@
 from django.db import models
 
-from core.models import Country
+from pgweb.core.models import Country
 
 class SponsorType(models.Model):
 	typename = models.CharField(max_length=32, null=False, blank=False)

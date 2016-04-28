@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from util.admin import PgwebAdmin
+from pgweb.util.admin import PgwebAdmin
 from models import PUG
 
 class PUGAdmin(PgwebAdmin):

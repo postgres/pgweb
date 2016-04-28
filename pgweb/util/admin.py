@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.conf import settings
 
 from pgweb.core.models import ModerationNotification
-from mailqueue.util import send_simple_mail
+from pgweb.mailqueue.util import send_simple_mail
 
 
 class PgwebAdmin(admin.ModelAdmin):

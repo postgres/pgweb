@@ -4,7 +4,7 @@ from django.forms import ValidationError
 
 import re
 
-from util.admin import PgwebAdmin
+from pgweb.util.admin import PgwebAdmin
 from models import StackBuilderApp, Mirror, Category, Product, LicenceType
 
 class MirrorAdmin(admin.ModelAdmin):

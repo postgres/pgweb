@@ -1,11 +1,11 @@
 # models needed to generate unapproved list
-from news.models import NewsArticle
-from events.models import Event
-from core.models import Organisation
-from docs.models import DocComment
-from downloads.models import Product
-from profserv.models import ProfessionalService
-from quotes.models import Quote
+from pgweb.news.models import NewsArticle
+from pgweb.events.models import Event
+from pgweb.core.models import Organisation
+from pgweb.docs.models import DocComment
+from pgweb.downloads.models import Product
+from pgweb.profserv.models import ProfessionalService
+from pgweb.quotes.models import Quote
 
 # Pending moderation requests (including URLs for the admin interface))
 def _get_unapproved_list(objecttype):
