@@ -2,3 +2,4 @@ Django==1.4.5
 django-markdown==0.2.1
 psycopg2==2.5
 pycrypto==2.6
+PyYAML==3.11

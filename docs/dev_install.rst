@@ -38,12 +38,14 @@ with. Here's a quick step-by-step on how to do that:
 
 #. A few functions are required, or at least recommended in order to
    test all of the system. The SQL scripts in the directory sql/ needs
-   to be run in the database. Note that for a local dev install
-   without varnish frontends, you should use the *varnish_local.sql*
-   script, and not use the *varnish.sql* script.
+   to be run in the database. Run *compat_tables.sql* before
+   *community_login.sql* Note that for a local dev instal without varnish
+   frontends, you should use the *varnish_local.sql* script, and not use the
+   *varnish.sql* script.
 
 #. To load some initial data for some tables (far from all at this
-   point), in the pgweb directory, run the following command::
+   point), in the pgweb directory, run the following command after making sure
+   you have PyYAML installed::
 
    ./load_initial_data.sh
 #. At this point, you're ready to get started. Start your local server
