@@ -232,10 +232,10 @@ def reset_done(request):
 	return authviews.password_reset_done(request, template_name='account/password_reset_done.html')
 
 @ssl_required
-def reset_confirm(request, uidb36, token):
-	log.info("Confirming password reset for uidb {0}, token {1} from {2}".format(uidb36, token, get_client_ip(request)))
+def reset_confirm(request, uidb64, token):
+	log.info("Confirming password reset for uidb {0}, token {1} from {2}".format(uidb64, token, get_client_ip(request)))
 	return authviews.password_reset_confirm(request,
-											uidb36=uidb36,
+											uidb64=uidb64,
 											token=token,
 											template_name='account/password_reset_confirm.html',
 											post_reset_redirect='/account/reset/complete/')
