@@ -3,7 +3,7 @@ from django.db import models
 from datetime import date
 
 class PwnPost(models.Model):
-	date = models.DateField(null=False, blank=False, default=date.today, unique=True)
+	date = models.DateField(null=False, blank=False, default=date.today(), unique=True)
 	intro  = models.TextField(null=False, blank=False)
 	content = models.TextField(null=False, blank=False)
 

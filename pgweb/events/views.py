@@ -12,8 +12,8 @@ from models import Event
 from forms import EventForm
 
 def main(request):
-	events = Event.objects.select_related('country').filter(approved=True).filter(training=False, enddate__gt=date.today).order_by('enddate', 'startdate',)
-	training = Event.objects.select_related('country').filter(approved=True).filter(training=True, enddate__gt=date.today).order_by('enddate', 'startdate',)
+	events = Event.objects.select_related('country').filter(approved=True).filter(training=False, enddate__gt=date.today()).order_by('enddate', 'startdate',)
+	training = Event.objects.select_related('country').filter(approved=True).filter(training=True, enddate__gt=date.today()).order_by('enddate', 'startdate',)
 	return render_to_response('events/archive.html', {
 		'title': 'Upcoming events',
 		'eventblocks': (
@@ -24,7 +24,7 @@ def main(request):
 
 def _eventarchive(request, training, title):
 	# Hardcode to the latest 100 events. Do we need paging too?
-	events = Event.objects.select_related('country').filter(approved=True).filter(training=training, enddate__lte=date.today).order_by('-enddate', '-startdate',)[:100]
+	events = Event.objects.select_related('country').filter(approved=True).filter(training=training, enddate__lte=date.today()).order_by('-enddate', '-startdate',)[:100]
 	return render_to_response('events/archive.html', {
 			'title': '%s Archive' % title,
 			'archive': True,
