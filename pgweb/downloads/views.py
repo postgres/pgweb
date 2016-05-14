@@ -101,21 +101,21 @@ def uploadftp(request):
 		return HttpServerError("Invalid method")
 	if not request.META['REMOTE_ADDR'] in settings.FTP_MASTERS:
 		return HttpServerError("Invalid client address")
-	# We have the data in request.raw_post_data. Attempt to load it as
+	# We have the data in request.body. Attempt to load it as
 	# a pickle to make sure it's properly formatted
-	pickle.loads(request.raw_post_data)
+	pickle.loads(request.body)
 
 	# Next, check if it's the same as the current file
 	f = open(settings.FTP_PICKLE, "rb")
 	x = f.read()
 	f.close()
-	if x == request.raw_post_data:
+	if x == request.body:
 		# Don't rewrite the file or purge any data if nothing changed
 		return HttpResponse("NOT CHANGED", content_type="text/plain")
 
 	# File has changed - let's write it!
 	f = open("%s.new" % settings.FTP_PICKLE, "wb")
-	f.write(request.raw_post_data)
+	f.write(request.body)
 	f.close()
 	os.rename("%s.new" % settings.FTP_PICKLE, settings.FTP_PICKLE)
 
