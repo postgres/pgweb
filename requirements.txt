@@ -1,4 +1,6 @@
-Django==1.4.5
+Django==1.8.13
 django-markdown==0.2.1
 psycopg2==2.5
 pycrypto==2.6
+django_markwhat==1.4
+
