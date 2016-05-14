@@ -5,13 +5,7 @@ from django.forms import ValidationError
 import re
 
 from pgweb.util.admin import PgwebAdmin
-from models import StackBuilderApp, Mirror, Category, Product, LicenceType
-
-class MirrorAdmin(admin.ModelAdmin):
-	list_display = ('__unicode__', 'country_name', 'country_code', 'mirror_index', 'mirror_last_rsync', 'host_sponsor', )
-	list_filter = ('country_name', 'mirror_active', )
-	search_fields = ('country_name', 'host_sponsor', 'host_notes', )
-	ordering = ('country_code', )
+from models import StackBuilderApp, Category, Product, LicenceType
 
 class ProductAdmin(PgwebAdmin):
 	list_display = ('name', 'org', 'approved', 'lastconfirmed',)
@@ -58,7 +52,6 @@ class StackBuilderAppAdmin(admin.ModelAdmin):
 	actions = [duplicate_stackbuilderapp, ]
 	form = StackBuilderAppAdminForm
 
-admin.site.register(Mirror, MirrorAdmin)
 admin.site.register(Category)
 admin.site.register(LicenceType)
 admin.site.register(Product, ProductAdmin)

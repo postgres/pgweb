@@ -14,7 +14,7 @@ from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.misc import get_client_ip, varnish_purge, version_sort
 
-from models import Mirror, Category, Product, StackBuilderApp
+from models import Category, Product, StackBuilderApp
 from forms import ProductForm
 
 #######
@@ -127,76 +127,12 @@ def uploadftp(request):
 
 @nocache
 def mirrorselect(request, path):
-	# We have given up on the advanced mirror network things, and will just
-	# redirect this to ftp.mirrors.postgresql.org for now...
-	# Since requests hit our internal servers, we're also not going to
-	# bother logging them - logging will be handled by those servers
+	# Old access to mirrors will just redirect to the main ftp site.
+	# We don't really need it anymore, but the cost of keeping it is
+	# very low...
 	return HttpResponseRedirect("https://ftp.postgresql.org/pub/%s" % path)
 
-# Accesses asking for a specific mirror will keep doing that for now.
-# At some time in the future we might consider hijacking them and sending
-# them to our master mirrors again.
-def _mirror_redirect_internal(request, scheme, host, path):
-	# Redirect!
-	newurl = "%s://%s/%s" % (scheme, host, path)
-	return HttpResponseRedirect(newurl)
 
-@nocache
-def mirror_redirect(request, mirrorid, protocol, path):
-	try:
-		mirror = Mirror.objects.get(pk=mirrorid)
-	except Mirror.DoesNotExist:
-		raise Http404("Specified mirror not found")
-
-	return _mirror_redirect_internal(
-		request,
-		protocol=='h' and 'http' or 'ftp',
-		mirror.get_root_path(protocol),
-		path,
-	)
-
-@nocache
-def mirror_redirect_old(request):
-	# Version of redirect that takes parameters in the querystring. This is
-	# only used by the stackbuilder.
-	try:
-		if not request.GET['sb'] == "1":
-			raise Http404("Page not found, you should be using the new URL format!")
-	except:
-		raise Http404("Page not found, you should be using the new URL format!")
-
-	urlpieces = urlparse.urlparse(request.GET['url'])
-	if urlpieces.query:
-		path = "%s?%s" % (urlpieces.path, urlpieces.query)
-	else:
-		path = urlpieces.path
-
-	return _mirror_redirect_internal(
-		request,
-		urlpieces.scheme,
-		urlpieces.netloc,
-		path,
-	)
-
-def mirrors_xml(request):
-	# Same as in mirrorselect
-	all_mirrors = Mirror.objects.filter(mirror_active=True, mirror_private=False, mirror_dns=True).extra(where=["mirror_last_rsync>(now() - '48 hours'::interval)"]).order_by('country_name', 'mirror_index')	
-
-	resp = HttpResponse(content_type='text/xml')
-	x = PgXmlHelper(resp)
-	x.startDocument()
-	x.startElement('mirrors', {})
-	for m in all_mirrors:
-		for protocol in m.get_all_protocols():
-			x.startElement('mirror', {})
-			x.add_xml_element('country', m.country_name)
-			x.add_xml_element('path', m.host_path)
-			x.add_xml_element('protocol', protocol)
-			x.add_xml_element('hostname', m.get_host_name())
-			x.endElement('mirror')
-	x.endElement('mirrors')
-	x.endDocument()
-	return resp
 
 #######
 # Product catalogue
