@@ -18,7 +18,7 @@ if __name__ == "__main__":
 	curs = conn.cursor()
 
 	# Get the oldest entry that has not been completed, if any
-	curs.execute("SELECT max(now()-added) FROM varnishqueue.queue WHERE completed IS NULL")
+	curs.execute("SELECT COALESCE(max(now()-added), '0') FROM varnishqueue.queue WHERE completed IS NULL")
 	rows = curs.fetchall()
 	conn.close()
 
