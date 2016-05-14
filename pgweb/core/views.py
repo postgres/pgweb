@@ -40,7 +40,7 @@ from django.template.context import RequestContext
 @cache(minutes=10)
 def home(request):
 	news = NewsArticle.objects.filter(approved=True)[:7]
-	events = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gte=date.today).order_by('enddate', 'startdate')[:5]
+	events = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gte=date.today()).order_by('enddate', 'startdate')[:5]
 	try:
 		quote = Quote.objects.filter(approved=True).order_by('?')[0]
 	except:
