@@ -114,7 +114,6 @@ INSTALLED_APPS = [
     'pgweb.survey',
     'pgweb.misc',
     'pgweb.featurematrix',
-	'pgweb.pwn',
 	'pgweb.search',
     'pgweb.pugs',
 ]

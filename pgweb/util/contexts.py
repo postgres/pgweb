@@ -53,7 +53,6 @@ sitenav = {
 		{'title': 'International Sites','link':'/community/international/'},
 		{'title': 'Propaganda',         'link':'/community/propaganda/'},
 		{'title': 'Resources',          'link':'/community/resources/'},
-		{'title': 'Weekly News',        'link':'/community/weeklynews/'},
 	],
 	'developer': [
 		{'title': 'Developers',         'link':'/developer/'},

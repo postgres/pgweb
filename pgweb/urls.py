@@ -14,7 +14,6 @@ admin.autodiscover()
 from pgweb.core.feeds import VersionFeed
 from pgweb.news.feeds import NewsFeed
 from pgweb.events.feeds import EventFeed
-from pgweb.pwn.feeds import PwnFeed
 
 urlpatterns = patterns('',
 	(r'^$', 'pgweb.core.views.home'),
@@ -52,8 +51,6 @@ urlpatterns = patterns('',
 	(r'^community/survey/vote/(\d+)/$', 'pgweb.survey.views.vote'),
 	(r'^community/survey[/\.](\d+)(-.*)?/$', 'pgweb.survey.views.results'),
 	(r'^community/user-groups/$', 'pgweb.pugs.views.index'),
-	(r'^community/weeklynews/$', 'pgweb.pwn.views.index'),
-	(r'^community/weeklynews/pwn(\d{4})(\d{2})(\d{2})/$', 'pgweb.pwn.views.post'),
 
 	(r'^search/$', 'pgweb.search.views.search'),
 
@@ -73,7 +70,6 @@ urlpatterns = patterns('',
 	(r'^versions.rss$', VersionFeed()),
 	(r'^news.rss$', NewsFeed()),
 	(r'^events.rss$', EventFeed()),
-	(r'^weeklynews.rss$', PwnFeed()),
 
 	###
 	# Special sections
