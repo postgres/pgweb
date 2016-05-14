@@ -59,13 +59,13 @@ def search(request):
 	# constants that we might eventually want to make configurable
 	hitsperpage = 20
 
-	if request.REQUEST.has_key('m') and request.REQUEST['m'] == '1':
+	if request.GET.has_key('m') and request.GET['m'] == '1':
 		searchlists = True
 
-		if request.REQUEST.has_key('l'):
-			if request.REQUEST['l'] != '':
+		if request.GET.has_key('l'):
+			if request.GET['l'] != '':
 				try:
-					listid = int(request.REQUEST['l'])
+					listid = int(request.GET['l'])
 				except:
 					listid = None
 			else:
@@ -73,16 +73,16 @@ def search(request):
 		else:
 			listid = None
 
-		if request.REQUEST.has_key('d'):
+		if request.GET.has_key('d'):
 			try:
-				dateval = int(request.REQUEST['d'])
+				dateval = int(request.GET['d'])
 			except:
 				dateval = None
 		else:
 			dateval = None
 
-		if request.REQUEST.has_key('s'):
-			listsort = request.REQUEST['s']
+		if request.GET.has_key('s'):
+			listsort = request.GET['s']
 			if not listsort in ('r', 'd', 'i'):
 				listsort = 'r'
 		else:
@@ -92,9 +92,9 @@ def search(request):
 			dateval = 365
 
 		sortoptions = (
-			{'val':'r', 'text': 'Rank', 'selected': not (request.REQUEST.has_key('s') and request.REQUEST['s'] == 'd')},
-			{'val':'d', 'text': 'Date', 'selected': request.REQUEST.has_key('s') and request.REQUEST['s'] == 'd'},
-			{'val':'i', 'text': 'Reverse date', 'selected': request.REQUEST.has_key('s') and request.REQUEST['s'] == 'i'},
+			{'val':'r', 'text': 'Rank', 'selected': not (request.GET.has_key('s') and request.GET['s'] == 'd')},
+			{'val':'d', 'text': 'Date', 'selected': request.GET.has_key('s') and request.GET['s'] == 'd'},
+			{'val':'i', 'text': 'Reverse date', 'selected': request.GET.has_key('s') and request.GET['s'] == 'i'},
 			)
 		dateoptions = (
 			{'val': -1, 'text': 'anytime'},
@@ -106,18 +106,18 @@ def search(request):
 			)
 	else:
 		searchlists = False
-		if request.REQUEST.has_key('u'):
-			suburl = request.REQUEST['u']
+		if request.GET.has_key('u'):
+			suburl = request.GET['u']
 		else:
 			suburl = None
 
-		if request.REQUEST.has_key('a'):
-			allsites = (request.REQUEST['a'] == "1")
+		if request.GET.has_key('a'):
+			allsites = (request.GET['a'] == "1")
 		else:
 			allsites = False
 
 	# Check that we actually have something to search for
-	if not request.REQUEST.has_key('q') or request.REQUEST['q'] == '':
+	if not request.GET.has_key('q') or request.GET['q'] == '':
 		if searchlists:
 			return render_to_response('search/listsearch.html', {
 					'search_error': "No search term specified.",
@@ -131,7 +131,7 @@ def search(request):
 			return render_to_response('search/sitesearch.html', {
 					'search_error': "No search term specified.",
 					}, RequestContext(request))
-	query = request.REQUEST['q']
+	query = request.GET['q']
 
 	# Anti-stefan prevention
 	if len(query) > 1000:
@@ -140,9 +140,9 @@ def search(request):
 			}, RequestContext(request))
 
 	# Is the request being paged?
-	if request.REQUEST.has_key('p'):
+	if request.GET.has_key('p'):
 		try:
-			pagenum = int(request.REQUEST['p'])
+			pagenum = int(request.GET['p'])
 		except:
 			pagenum = 1
 	else:
@@ -219,7 +219,7 @@ def search(request):
 				'hitcount': totalhits,
 				'firsthit': firsthit,
 				'lasthit': min(totalhits, firsthit+hitsperpage-1),
-				'query': request.REQUEST['q'],
+				'query': request.GET['q'],
 				'pagelinks': "&nbsp;".join(
 					generate_pagelinks(pagenum,
 									   totalhits / hitsperpage + 1,
@@ -274,7 +274,7 @@ def search(request):
 				'hitcount': totalhits,
 				'firsthit': firsthit,
 				'lasthit': min(totalhits, firsthit+hitsperpage-1),
-				'query': request.REQUEST['q'],
+				'query': request.GET['q'],
 				'pagelinks': "&nbsp;".join(
 					generate_pagelinks(pagenum,
 									   totalhits / hitsperpage + 1,
