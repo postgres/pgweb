@@ -258,7 +258,7 @@ def signup(request):
 			# XXX: Do we need to validate something else?
 			log.info("Creating user for {0} from {1}".format(form.cleaned_data['username'], get_client_ip(request)))
 
-			user = User.objects.create_user(form.cleaned_data['username'].lower(), form.cleaned_data['email'].lower())
+			user = User.objects.create_user(form.cleaned_data['username'].lower(), form.cleaned_data['email'].lower(), last_login=datetime.now())
 			user.first_name = form.cleaned_data['first_name']
 			user.last_name = form.cleaned_data['last_name']
 
