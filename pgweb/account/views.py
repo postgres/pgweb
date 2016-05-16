@@ -3,7 +3,8 @@ import django.contrib.auth.views as authviews
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.utils.http import int_to_base36
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import logout as django_logout
 from django.conf import settings
@@ -276,7 +277,7 @@ def signup(request):
 							   form.cleaned_data['email'],
 							   'Your new postgresql.org community account',
 							   'account/new_account_email.txt',
-							   { 'uid': int_to_base36(user.id), 'token': token, 'user': user}
+							   { 'uid': urlsafe_base64_encode(force_bytes(user.id)), 'token': token, 'user': user}
 							   )
 
 			return HttpResponseRedirect('/account/signup/complete/')
