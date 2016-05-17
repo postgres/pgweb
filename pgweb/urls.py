@@ -56,7 +56,8 @@ urlpatterns = patterns('',
 
 	(r'^support/professional_(support|hosting)/$', 'pgweb.profserv.views.root'),
 	(r'^support/professional_(support|hosting)[/_](.*)/$', 'pgweb.profserv.views.region'),
-	(r'^support/submitbug/$', 'pgweb.misc.views.submitbug'),
+	(r'^account/submitbug/$', 'pgweb.misc.views.submitbug'),
+	(r'^support/submitbug/$', RedirectView.as_view(url='/account/submitbug/', permanent=True)),
 	(r'^support/versioning/$', 'pgweb.core.views.versions'),
 
 	(r'^about/sponsors/$', 'pgweb.sponsors.views.sponsors'),

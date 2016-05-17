@@ -72,7 +72,7 @@ sitenav = {
 		{'title': 'Security',           'link':'/support/security/'},
 		{'title': 'Professional Services','link':'/support/professional_support/'},
 		{'title': 'Hosting Solutions',  'link':'/support/professional_hosting/'},
-		{'title': 'Report a Bug',       'link':'/support/submitbug/'},
+		{'title': 'Report a Bug',       'link':'/account/submitbug/'},
 	],
 	'account': [
 		{'title': 'Your account',         'link':'/account'},

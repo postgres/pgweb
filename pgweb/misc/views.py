@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
 from django.db import connection
 from django.conf import settings
 
@@ -9,12 +9,14 @@ import os
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import template_to_string
 from pgweb.util.misc import send_template_mail
+from pgweb.util.decorators import ssl_required
 
 from pgweb.core.models import Version
 
 from forms import SubmitBugForm
 
-@csrf_exempt
+@ssl_required
+@login_required
 def submitbug(request):
 	if request.method == 'POST':
 		form = SubmitBugForm(request.POST)
@@ -39,7 +41,10 @@ def submitbug(request):
 				'bugid': bugid,
 			}, NavContext(request, 'support'))
 	else:
-		form = SubmitBugForm()
+		form = SubmitBugForm(initial={
+			'name': '%s %s' % (request.user.first_name, request.user.last_name),
+			'email': request.user.email,
+		})
 
 	versions = Version.objects.filter(supported=True)
 
@@ -47,7 +52,6 @@ def submitbug(request):
 		'form': form,
 		'formitemtype': 'bug report',
 		'operation': 'Submit',
-		'nocsrf': True,
 		'form_intro': template_to_string('misc/bug_header.html', {
 			'supportedversions': versions,
 		}),
