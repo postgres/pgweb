@@ -51,35 +51,6 @@ class PgMiddleware(object):
 # Thread local store for username, see comment at the top of this file
 		_thread_locals.user = getattr(request, 'user', None)
 
-# Per django ticket #3777, make filters in admin be sticky
-		path = request.path
-		if path.find('/admin/') != -1:
-			query_string = request.META['QUERY_STRING']
-			if not request.META.has_key('HTTP_REFERER'):
-				return None
-			session = request.session
-			if session.get('redirected', False):
-				del session['redirected']
-				return None
-			referrer = request.META['HTTP_REFERER'].split('?')[0]
-			referrer = referrer[referrer.find('/admin'):len(referrer)]
-			key = 'key'+path.replace('/','_')
-			if path == referrer:
-				if query_string == '':
-					if session.get(key,False):
-						del session[key]
-					return None
-				request.session[key] = query_string
-			else:
-				if session.get(key,False):
-					query_string=request.session.get(key)
-					redirect_to = path+'?'+query_string
-					request.session['redirected'] = True
-					return HttpResponseRedirect(redirect_to)
-				else:
-					return None
-
-
 
 # Protection middleware against badly encoded query strings.
 # We could probably block this in the webserver further out, but this
