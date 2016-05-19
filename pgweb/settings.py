@@ -58,7 +58,6 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = [
-	'pgweb.util.middleware.RequestCheckMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
 	'django.contrib.messages.middleware.MessageMiddleware',

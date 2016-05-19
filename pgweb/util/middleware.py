@@ -50,16 +50,3 @@ class PgMiddleware(object):
 	def process_request(self, request):
 # Thread local store for username, see comment at the top of this file
 		_thread_locals.user = getattr(request, 'user', None)
-
-
-# Protection middleware against badly encoded query strings.
-# We could probably block this in the webserver further out, but this
-# is a quick-fix. From django ticket #15152.
-class RequestCheckMiddleware(object):
-	def process_request(self, request):
-		try:
-			u'%s' % request.META.get('QUERY_STRING','')
-		except UnicodeDecodeError:
-			response = HttpResponse()
-			response.status_code = 400  #Bad Request
-			return response
