@@ -1,20 +1,6 @@
 import datetime
 from functools import wraps
 
-def ssl_required(fn):
-	def _require_ssl(request, *_args, **_kwargs):
-		return fn(request, *_args, **_kwargs)
-	_require_ssl.ssl_required = True
-	# wraps retains original function attributes such as __name__, csrf_exempt, etc
-	return wraps(_require_ssl)(fn)
-
-def ssl_optional(fn):
-	def _optional_ssl(request, *_args, **_kwargs):
-		return fn(request, *_args, **_kwargs)
-	_optional_ssl.ssl_optional = True
-	# wraps retains original function attributes such as __name__, csrf_exempt, etc
-	return wraps(_optional_ssl)(fn)
-
 def nocache(fn):
 	def _nocache(request, *_args, **_kwargs):
 		resp = fn(request, *_args, **_kwargs)
