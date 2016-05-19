@@ -9,13 +9,11 @@ import os
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import template_to_string
 from pgweb.util.misc import send_template_mail
-from pgweb.util.decorators import ssl_required
 
 from pgweb.core.models import Version
 
 from forms import SubmitBugForm
 
-@ssl_required
 @login_required
 def submitbug(request):
 	if request.method == 'POST':

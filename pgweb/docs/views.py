@@ -9,7 +9,6 @@ from django.conf import settings
 from decimal import Decimal
 import os
 
-from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import template_to_string
 from pgweb.util.misc import send_template_mail
@@ -119,7 +118,6 @@ def manualarchive(request):
 		'versions': [_VersionPdfWrapper(v) for v in versions],
 	}, NavContext(request, 'docs'))
 
-@ssl_required
 @login_required
 def commentform(request, itemid, version, filename):
 	if request.method == 'POST':

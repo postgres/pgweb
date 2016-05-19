@@ -2,7 +2,6 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 
-from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form
 
@@ -23,7 +22,6 @@ def item(request, itemid, throwaway=None):
 		'obj': news,
 	}, NavContext(request, 'about'))
 
-@ssl_required
 @login_required
 def form(request, itemid):
 	return simple_form(NewsArticle, itemid, request, NewsArticleForm,

@@ -9,7 +9,7 @@ import os
 import urlparse
 import cPickle as pickle
 
-from pgweb.util.decorators import ssl_required, nocache
+from pgweb.util.decorators import nocache
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.misc import get_client_ip, varnish_purge, version_sort
@@ -94,7 +94,6 @@ def ftpbrowser(request, subpath):
 # server(s) can post it.
 # There is no concurrency check - the ftp site better not send more than one
 # file in parallel.
-@ssl_required
 @csrf_exempt
 def uploadftp(request):
 	if request.method != 'PUT':
@@ -152,7 +151,6 @@ def productlist(request, catid, junk=None):
 		'productcount': len(products),
 	}, NavContext(request, 'download'))
 
-@ssl_required
 @login_required
 def productform(request, itemid):
 	return simple_form(Product, itemid, request, ProductForm,

@@ -157,8 +157,6 @@ NOTIFICATION_FROM="someone@example.com"                # Address to send notific
 LISTSERVER_EMAIL="someone@example.com"                 # Address to majordomo
 BUGREPORT_EMAIL="someone@example.com"                  # Address to pgsql-bugs list
 DOCSREPORT_EMAIL="someone@example.com"                 # Address to pgsql-docs list
-NO_HTTPS_REDIRECT=False                                # Set to true to disable redirects to https when
-                                                       # developing locally
 FRONTEND_SERVERS=()                                    # A tuple containing the *IP addresses* of all the
                                                        # varnish frontend servers in use.
 FTP_MASTERS=()										   # A tuple containing the *IP addresses* of all machines

@@ -19,7 +19,6 @@ import time
 import json
 from datetime import datetime, timedelta
 
-from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
 from pgweb.util.misc import send_template_mail, generate_random_token, get_client_ip
 from pgweb.util.helpers import HttpServerError
@@ -39,7 +38,6 @@ from forms import ChangeEmailForm
 import logging
 log = logging.getLogger(__name__)
 
-@ssl_required
 @login_required
 def home(request):
 	myarticles = NewsArticle.objects.filter(org__managers=request.user, approved=False)
@@ -79,7 +77,6 @@ objtypes = {
 	},
 }
 
-@ssl_required
 @login_required
 @transaction.atomic
 def profile(request):
@@ -123,7 +120,6 @@ def profile(request):
 			'contribform': contribform,
 			}, NavContext(request, "account"))
 
-@ssl_required
 @login_required
 @transaction.atomic
 def change_email(request):
@@ -158,7 +154,6 @@ def change_email(request):
 		'token': token,
 		}, NavContext(request, "account"))
 
-@ssl_required
 @login_required
 @transaction.atomic
 def confirm_change_email(request, tokenhash):
@@ -176,7 +171,6 @@ def confirm_change_email(request, tokenhash):
 		'success': token and True or False,
 		}, NavContext(request, "account"))
 
-@ssl_required
 @login_required
 def listobjects(request, objtype):
 	if not objtypes.has_key(objtype):
@@ -190,7 +184,6 @@ def listobjects(request, objtype):
 		'suburl': objtype,
 	}, NavContext(request, 'account'))
 
-@ssl_required
 @login_required
 def orglist(request):
 	orgs = Organisation.objects.filter(approved=True)
@@ -199,40 +192,33 @@ def orglist(request):
 			'orgs': orgs,
 	}, NavContext(request, 'account'))
 
-@ssl_required
 def login(request):
 	return authviews.login(request, template_name='account/login.html',
 						   authentication_form=PgwebAuthenticationForm)
 
-@ssl_required
 def logout(request):
 	return authviews.logout_then_login(request, login_url='/')
 
-@ssl_required
 def changepwd(request):
 	log.info("Initiating password change from {0}".format(get_client_ip(request)))
 	return authviews.password_change(request,
 									 template_name='account/password_change.html',
 									 post_change_redirect='/account/changepwd/done/')
 
-@ssl_required
 def resetpwd(request):
 	log.info("Initiating password set from {0}".format(get_client_ip(request)))
 	return authviews.password_reset(request, template_name='account/password_reset.html',
 									email_template_name='account/password_reset_email.txt',
 									post_reset_redirect='/account/reset/done/')
 
-@ssl_required
 def change_done(request):
 	log.info("Password change done from {0}".format(get_client_ip(request)))
 	return authviews.password_change_done(request, template_name='account/password_change_done.html')
 
-@ssl_required
 def reset_done(request):
 	log.info("Password reset done from {0}".format(get_client_ip(request)))
 	return authviews.password_reset_done(request, template_name='account/password_reset_done.html')
 
-@ssl_required
 def reset_confirm(request, uidb64, token):
 	log.info("Confirming password reset for uidb {0}, token {1} from {2}".format(uidb64, token, get_client_ip(request)))
 	return authviews.password_reset_confirm(request,
@@ -241,12 +227,10 @@ def reset_confirm(request, uidb64, token):
 											template_name='account/password_reset_confirm.html',
 											post_reset_redirect='/account/reset/complete/')
 
-@ssl_required
 def reset_complete(request):
 	log.info("Password reset completed for user from {0}".format(get_client_ip(request)))
 	return authviews.password_reset_complete(request, template_name='account/password_reset_complete.html')
 
-@ssl_required
 def signup(request):
 	if request.user.is_authenticated():
 		return HttpServerError("You must log out before you can sign up for a new account")
@@ -298,7 +282,6 @@ content is available for reading without an account.
 	}, NavContext(request, 'account'))
 
 
-@ssl_required
 def signup_complete(request):
 	return render_to_response('account/signup_complete.html', {
 	}, NavContext(request, 'account'))
@@ -309,7 +292,6 @@ def signup_complete(request):
 ## Community authentication endpoint
 ####
 
-@ssl_required
 def communityauth(request, siteid):
 	# Get whatever site the user is trying to log in to.
 	site = get_object_or_404(CommunityAuthSite, pk=siteid)
@@ -397,7 +379,6 @@ def communityauth(request, siteid):
 			))
 
 
-@ssl_required
 def communityauth_logout(request, siteid):
 	# Get whatever site the user is trying to log in to.
 	site = get_object_or_404(CommunityAuthSite, pk=siteid)
@@ -408,7 +389,6 @@ def communityauth_logout(request, siteid):
 	# Redirect user back to the specified suburl
 	return HttpResponseRedirect("%s?s=logout" % site.redirecturl)
 
-@ssl_required
 def communityauth_search(request, siteid):
 	# Perform a search for users. The response will be encrypted with the site
 	# key to prevent abuse, therefor we need the site.

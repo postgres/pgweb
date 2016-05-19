@@ -2,7 +2,6 @@ from django.shortcuts import render_to_response
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 
-from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form
 
@@ -56,7 +55,6 @@ def region(request, servtype, regionname):
 
 
 # Forms to edit
-@ssl_required
 @login_required
 def profservform(request, itemid):
 	return simple_form(ProfessionalService, itemid, request, ProfessionalServiceForm,

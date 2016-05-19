@@ -15,7 +15,7 @@ import os
 import re
 import urllib
 
-from pgweb.util.decorators import ssl_required, cache, nocache
+from pgweb.util.decorators import cache, nocache
 from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.moderation import get_all_pending_moderations
@@ -111,7 +111,6 @@ def fallback(request, url):
 	return HttpResponse(t.render(NavContext(request, navsect)))
 
 # Edit-forms for core objects
-@ssl_required
 @login_required
 def organisationform(request, itemid):
 	return simple_form(Organisation, itemid, request, OrganisationForm,
@@ -160,8 +159,7 @@ def sitemap(request):
 
 # dynamic CSS serving, meaning we merge a number of different CSS into a
 # single one, making sure it turns into a single http response. We do this
-# dynamically, since the output will be cached (for all non-SSL users, which
-# is the vast majority) anyway.
+# dynamically, since the output will be cached.
 _dynamic_cssmap = {
 	'base': ['media/css/global.css',
 			 'media/css/layout.css',
@@ -231,7 +229,6 @@ def system_information(request):
 			'client_ip': get_client_ip(request),
 	})
 
-@ssl_required
 def system_information_ssl(request):
 	return render_to_response('core/system_information.html', {
 			'server': os.uname()[1],
@@ -278,7 +275,6 @@ def admin_purge(request):
 			'latest_purges': latest,
 			}, RequestContext(request))
 
-@ssl_required
 @csrf_exempt
 def api_varnish_purge(request):
 	if not request.META['REMOTE_ADDR'] in settings.VARNISH_PURGERS:
