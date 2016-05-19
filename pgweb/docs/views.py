@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
+from django.http import Http404
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -10,11 +11,12 @@ import os
 
 from pgweb.util.decorators import ssl_required
 from pgweb.util.contexts import NavContext
-from pgweb.util.helpers import simple_form
+from pgweb.util.helpers import template_to_string
+from pgweb.util.misc import send_template_mail
 
 from pgweb.core.models import Version
 
-from models import DocPage, DocComment
+from models import DocPage
 from forms import DocCommentForm
 
 def docpage(request, version, typ, filename):
@@ -54,9 +56,8 @@ def docpage(request, version, typ, filename):
 	}).order_by('-supported', '-version').only('version', 'file')
 
 	if typ=="interactive":
-		comments = DocComment.objects.filter(version=ver, file=fullname, approved=True).order_by('posted_at')
-	else:
-		comments = None
+		# Interactive documents are disabled, so redirect to static page
+		return HttpResponsePermanentRedirect("/docs/{0}/static/{1}.html".format(version, filename))
 
 	return render_to_response('docs/docspage.html', {
 		'page': page,
@@ -64,9 +65,6 @@ def docpage(request, version, typ, filename):
 		'devel_versions': [v for v in versions if not v.supported and v.testing],
 		'unsupported_versions': [v for v in versions if not v.supported and not v.testing],
 		'title': page.title,
-		'doc_type': typ,
-		'comments': comments,
-		'can_comment': (typ=="interactive" and ver==currver),
 		'doc_index_filename': indexname,
 		'loaddate': loaddate,
 	}, RequestContext(request))
@@ -124,10 +122,33 @@ def manualarchive(request):
 @ssl_required
 @login_required
 def commentform(request, itemid, version, filename):
-	return simple_form(DocComment, itemid, request, DocCommentForm,
-		fixedfields={
-			'version': version,
-			'file': filename,
-		},
-		redirect='/docs/comment_submitted/'
-	)
+	if request.method == 'POST':
+		form = DocCommentForm(request.POST)
+		if form.is_valid():
+			send_template_mail(
+				form.cleaned_data['email'],
+				settings.DOCSREPORT_EMAIL,
+				'%s' % form.cleaned_data['shortdesc'],
+				'docs/docsbugmail.txt', {
+					'version': version,
+					'filename': filename,
+					'details': form.cleaned_data['details'],
+				},
+				usergenerated=True,
+			)
+			return render_to_response('docs/docsbug_completed.html', {
+			}, NavContext(request, 'docs'))
+	else:
+		form = DocCommentForm(initial={
+			'name': '%s %s' % (request.user.first_name, request.user.last_name),
+			'email': request.user.email,
+		})
+
+	return render_to_response('base/form.html', {
+		'form': form,
+		'formitemtype': 'documentation correction',
+		'operation': 'Submit',
+		'form_intro': template_to_string('docs/docsbug.html', {
+			'user': request.user,
+		}),
+	}, NavContext(request, 'docs'))

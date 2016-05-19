@@ -21,9 +21,11 @@ written about PostgreSQL (some of which are available in their entirety online).
   <dl>
     <dt>Online Manuals</dt>
     <dd>
+      <ul>
 {%for v in versions%}
-        <p><b>{{v.treestring}}</b> ({%if not v.testing%}<a href="/docs/{{v.tree}}/interactive/index.html">with</a>/{%endif%}<a href="/docs/{{v.tree}}/static/index.html">without</a> comments)</p>
+        <li><a href="/docs/{{v.tree}}/static/index.html">{{v.treestring}}</a></li>
 {%endfor%}
+      </ul>
     </dd>
     <dt>Translated Manuals</dt>
     <dd>

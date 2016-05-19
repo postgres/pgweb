@@ -1,9 +1,8 @@
 from django import forms
 
-from models import DocComment
-
-class DocCommentForm(forms.ModelForm):
-	class Meta:
-		model = DocComment
-		exclude = ('submitter', 'approved', 'version', 'file', 'posted_at', )
-
+class DocCommentForm(forms.Form):
+	name = forms.CharField(max_length=100, required=True)
+	email = forms.EmailField(max_length=100, required=True)
+	shortdesc = forms.CharField(max_length=100, required=True,
+								label="Short description")
+	details = forms.CharField(required=True, widget=forms.Textarea)
