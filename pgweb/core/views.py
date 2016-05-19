@@ -133,7 +133,7 @@ Disallow: /search/
 Disallow: /message-id/raw/
 Disallow: /message-id/flat/
 
-Sitemap: http://www.postgresql.org/sitemap.xml
+Sitemap: https://www.postgresql.org/sitemap.xml
 """, content_type='text/plain')
 
 
@@ -148,7 +148,7 @@ def sitemap(request):
 	for p in get_all_pages_struct():
 		pages+=1
 		x.startElement('url', {})
-		x.add_xml_element('loc', 'http://www.postgresql.org/%s' % urllib.quote(p[0]))
+		x.add_xml_element('loc', 'https://www.postgresql.org/%s' % urllib.quote(p[0]))
 		if len(p) > 1 and p[1]:
 			x.add_xml_element('priority', unicode(p[1]))
 		if len(p) > 2 and p[2]:

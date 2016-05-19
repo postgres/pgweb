@@ -63,7 +63,7 @@ class SitemapSiteCrawler(BaseSiteCrawler):
 	def init_crawl(self):
 		# Fetch the sitemap. We ignore robots.txt in this case, and
 		# assume it's always under /sitemap.xml
-		u = urllib.urlopen("http://%s/sitemap.xml" % self.hostname)
+		u = urllib.urlopen("https://%s/sitemap.xml" % self.hostname)
 		p = SitemapParser()
 		p.parse(u)
 		u.close()
