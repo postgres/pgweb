@@ -6,7 +6,7 @@ from datetime import datetime, time
 
 class VersionFeed(Feed):
 	title = "PostgreSQL latest versions"
-	link = "http://www.postgresql.org/"
+	link = "https://www.postgresql.org/"
 	description = "PostgreSQL latest versions"
 
 	description_template = 'core/version_rss_description.html'
@@ -16,7 +16,7 @@ class VersionFeed(Feed):
 		return Version.objects.filter(tree__gt=0).filter(testing=0)
 
 	def item_link(self, obj):
-		return "http://www.postgresql.org/docs/%s/static/%s" % (obj.tree, obj.relnotes)
+		return "https://www.postgresql.org/docs/%s/static/%s" % (obj.tree, obj.relnotes)
 
 	def item_pubdate(self, obj):
 		return datetime.combine(obj.reldate,time.min)
