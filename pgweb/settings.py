@@ -149,6 +149,11 @@ RECAPTCHA_SECRET_KEY=""
 ###
 SESSION_COOKIE_SECURE=True                             # Allow our session only over https
 SESSION_COOKIE_DOMAIN="www.postgresql.org"             # Don't allow access by other postgresql.org sites
+SESSION_COOKIE_HTTPONLY=True                           # Access over http only, no js
+CSRF_COOKIE_SECURE=SESSION_COOKIE_SECURE
+CSRF_COOKIE_DOMAIN=SESSION_COOKIE_DOMAIN
+CSRF_COOKIE_HTTPONLY=SESSION_COOKIE_HTTPONLY
+
 SITE_ROOT="http://www.postgresql.org"                  # Root of working URLs
 FTP_PICKLE="/usr/local/pgweb/ftpsite.pickle"           # Location of file with current contents from ftp site
 STATIC_CHECKOUT="/usr/local/pgweb-static"              # Location of a checked out pgweb-static project
