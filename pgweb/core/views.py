@@ -118,12 +118,7 @@ def organisationform(request, itemid):
 
 # robots.txt
 def robots(request):
-	if not is_behind_cache(request):
-		# If we're not serving this through one of our Varnish caches, we allow *nothing* to be indexed
-		return HttpResponse("User-agent: *\nDisallow: /\n", content_type='text/plain')
-	else:
-		# Regular website
-		return HttpResponse("""User-agent: *
+	return HttpResponse("""User-agent: *
 Disallow: /admin/
 Disallow: /account/
 Disallow: /docs/devel/
