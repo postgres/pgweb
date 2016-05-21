@@ -118,7 +118,6 @@ urlpatterns = patterns('',
 
 	# Some basic information about the connection (for debugging purposes)
 	(r'^system_information/$', 'pgweb.core.views.system_information'),
-	(r'^system_information_ssl/$', 'pgweb.core.views.system_information_ssl'),
 	# Sync timestamp, for automirror
 	(r'^web_sync_timestamp$', 'pgweb.core.views.sync_timestamp'),
 
