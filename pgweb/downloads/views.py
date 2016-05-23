@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
+from pgweb.util.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 from django.conf import settings

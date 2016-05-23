@@ -2,7 +2,8 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.http import HttpResponseNotModified
 from django.template import TemplateDoesNotExist, loader
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import user_passes_test
+from pgweb.util.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Count

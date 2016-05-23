@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 import django.contrib.auth.views as authviews
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from pgweb.util.decorators import login_required
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
