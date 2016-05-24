@@ -17,7 +17,7 @@ from setproctitle import setproctitle
 
 def do_purge(consumername, headers):
 	try:
-		conn = httplib.HTTPConnection('%s.postgresql.org' % consumername)
+		conn = httplib.HTTPSConnection('%s.postgresql.org' % consumername)
 		conn.request("GET", "/varnish-purge-url", '', headers)
 		resp = conn.getresponse()
 		conn.close()
