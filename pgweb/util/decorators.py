@@ -28,7 +28,7 @@ def login_required(f):
 	@wraps(f)
 	def wrapper(*args, **kwargs):
 		request = args[0]
-		if not request.path.startswith('/account/'):
+		if not (request.path.startswith('/account/') or reqeust.path.startswith('/admin/')):
 			raise Exception("Login required in bad path, aborting with exception.")
 		return django_login_required(f)(*args, **kwargs)
 	return wrapper
