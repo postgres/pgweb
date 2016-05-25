@@ -69,7 +69,8 @@ class SitemapSiteCrawler(BaseSiteCrawler):
 		u.close()
 
 		for url, prio, lastmod in p.urls:
-			url = url[len(self.hostname)+7:]
+			# Advance 8 characters - length of https://.
+			url = url[len(self.hostname)+8:]
 			if lastmod:
 				if self.scantimes.has_key(url):
 					if lastmod < self.scantimes[url]:
