@@ -3,6 +3,7 @@ import httplib
 import time
 from email.utils import formatdate, parsedate
 import urlparse
+import ssl
 
 from Queue import Queue
 import threading
