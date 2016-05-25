@@ -18,7 +18,7 @@ def doit():
 
 	# Start by indexing the main website
 	log("Starting indexing of main website")
-	SitemapSiteCrawler("www.postgresql.org", conn, 1, cp.get("search", "frontendip")).crawl()
+	SitemapSiteCrawler("www.postgresql.org", conn, 1, cp.get("search", "frontendip"), True).crawl()
 	conn.commit()
 
 	# Skip id=1, which is the main site..

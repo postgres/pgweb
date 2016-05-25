@@ -57,8 +57,8 @@ class SitemapParser(object):
 			self.currstr += data
 
 class SitemapSiteCrawler(BaseSiteCrawler):
-	def __init__(self, hostname, dbconn, siteid, serverip):
-		super(SitemapSiteCrawler, self).__init__(hostname, dbconn, siteid, serverip)
+	def __init__(self, hostname, dbconn, siteid, serverip, https=False):
+		super(SitemapSiteCrawler, self).__init__(hostname, dbconn, siteid, serverip, https)
 
 	def init_crawl(self):
 		# Fetch the sitemap. We ignore robots.txt in this case, and

@@ -11,11 +11,12 @@ from lib.log import log
 from lib.parsers import GenericHtmlParser, lossy_unicode
 
 class BaseSiteCrawler(object):
-	def __init__(self, hostname, dbconn, siteid, serverip=None):
+	def __init__(self, hostname, dbconn, siteid, serverip=None, https=False):
 		self.hostname = hostname
 		self.dbconn = dbconn
 		self.siteid = siteid
 		self.serverip = serverip
+		self.https = https
 		self.pages_crawled = {}
 		self.pages_new = 0
 		self.pages_updated = 0
@@ -162,14 +163,21 @@ class BaseSiteCrawler(object):
 
 	def fetch_page(self, url):
 		try:
+			if not self.https:
+				port = 80
+				connclass = httplib.HTTPConnection
+			else:
+				port = 443
+				connclass = httplib.HTTPSConnection
+
 			# Unfortunatley, persistent connections seem quite unreliable,
 			# so create a new one for each page.
 			if self.serverip:
-				h = httplib.HTTPConnection(host=self.serverip, port=80, strict=True, timeout=10)
+				h = connclass(host=self.serverip, port=port, strict=True, timeout=10)
 				h.putrequest("GET", url, skip_host=1)
 				h.putheader("Host", self.hostname)
 			else:
-				h = httplib.HTTPConnection(host=self.hostname, port=80, strict=True, timeout=10)
+				h = connclass(host=self.hostname, port=port, strict=True, timeout=10)
 				h.putrequest("GET", url)
 			h.putheader("User-agent","pgsearch/0.2")
 			h.putheader("Connection","close")
