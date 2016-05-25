@@ -163,21 +163,20 @@ class BaseSiteCrawler(object):
 
 	def fetch_page(self, url):
 		try:
-			if not self.https:
-				port = 80
-				connclass = httplib.HTTPConnection
-			else:
-				port = 443
-				connclass = httplib.HTTPSConnection
-
 			# Unfortunatley, persistent connections seem quite unreliable,
 			# so create a new one for each page.
 			if self.serverip:
-				h = connclass(host=self.serverip, port=port, strict=True, timeout=10)
+				if not self.https:
+					h = httplib.HTTPConnection(host=self.serverip, port=80, strict=True, timeout=10)
+				else:
+					h = httplib.HTTPSConnection(host=self.serverip, port=443, strict=True, timeout=10, context=ssl._create_unverified_context())
 				h.putrequest("GET", url, skip_host=1)
 				h.putheader("Host", self.hostname)
 			else:
-				h = connclass(host=self.hostname, port=port, strict=True, timeout=10)
+				if not self.https:
+					h = httplib.HTTPConnection(host=self.hostname, port=80, strict=True, timeout=10)
+				else:
+					h = httplib.HTTPSConnection(host=self.hostname, port=443, strict=True, timeout=10, context=ssl._createa_unverified_context())
 				h.putrequest("GET", url)
 			h.putheader("User-agent","pgsearch/0.2")
 			h.putheader("Connection","close")
