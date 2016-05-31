@@ -6,8 +6,11 @@ def get_struct():
 
 	# Can't use a model here, because we don't (for some reason) have a
 	# hard link to the versions table here
+	# Make sure we exclude the /devel/ docs because they are blocked by
+	# robots.txt, and thus will cause tohusands of warnings in search
+	# engines.
 	curs = connection.cursor()
-	curs.execute("SELECT d.version, d.file, v.docsloaded, v.testing FROM docs d INNER JOIN core_version v ON v.tree=d.version ORDER BY d.version DESC")
+	curs.execute("SELECT d.version, d.file, v.docsloaded, v.testing FROM docs d INNER JOIN core_version v ON v.tree=d.version WHERE version > 0 ORDER BY d.version DESC")
 
 	# Start priority is higher than average but lower than what we assign
 	# to the current version of the docs.
@@ -24,8 +27,7 @@ def get_struct():
 				docprio -= 0.1
 			lastversion = version
 
-		yield ('docs/%s/static/%s' % (version==0 and 'devel' or version,
-									  filename),
+		yield ('docs/%s/static/%s' % (version, filename),
 			   testing and 0.1 or docprio, # beta/rc versions always get 0.1 in prio
 			   loaded)
 
