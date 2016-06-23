@@ -135,6 +135,9 @@ urlpatterns = patterns('',
 	# Uncomment the next line to enable the admin:
 	(r'^admin/', include(admin.site.urls)),
 
+    # We use selectable...
+	(r'^selectable/', include('selectable.urls')),
+
 	# This should not happen in production - serve by the webserver natively!
 	url(r'^(favicon.ico)$', 'django.views.static.serve', {
 		'document_root': 'media',
