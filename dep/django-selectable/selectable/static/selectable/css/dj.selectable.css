@@ -1,0 +1,47 @@
+/*
+ * django-selectable UI widget CSS
+ * Source: https://github.com/mlavin/django-selectable
+ * Docs: http://django-selectable.readthedocs.org/
+ *
+ * Copyright 2010-2014, Mark Lavin
+ * BSD License
+ *
+*/
+ul.selectable-deck, ul.ui-autocomplete {
+    list-style: none outside none;
+}
+ul.selectable-deck li.selectable-deck-item,
+ul.ui-autocomplete li.ui-menu-item {
+    margin: 0;
+    list-style-type: none;
+}
+ul.selectable-deck li.selectable-deck-item .selectable-deck-remove {
+    float: right;
+}
+ul.selectable-deck-bottom-inline,
+ul.selectable-deck-top-inline {
+    padding: 0;
+}
+ul.selectable-deck-bottom-inline li.selectable-deck-item,
+ul.selectable-deck-top-inline li.selectable-deck-item {
+    display: inline;
+}
+ul.selectable-deck-bottom-inline li.selectable-deck-item .selectable-deck-remove,
+ul.selectable-deck-top-inline li.selectable-deck-item .selectable-deck-remove {
+    margin-left: 0.4em;
+    display: inline;
+    float: none;
+}
+ul.ui-autocomplete li.ui-menu-item span.highlight {
+    font-weight: bold;
+}
+input.ui-combo-input {
+    margin-right: 0;
+    line-height: 1.3;
+}
+a.ui-combo-button {
+    margin-left: -1px;
+}
+a.ui-combo-button .ui-button-text {
+    padding: 0;
+}
