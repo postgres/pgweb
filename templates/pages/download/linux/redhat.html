@@ -17,11 +17,17 @@ supported versions for the most common distributions.
 <h2>Included in distribution</h2>
 <p>
 These distributions all include PostgreSQL by default. To install
-PostgreSQL from these repositories, use the <i>yum</i> command:
+PostgreSQL from these repositories, use the <i>yum</i> command on RHEL 5,6 and 7,
+or <i>dnf</i> command on Fedora 22+:
 </p>
 <p>
 <code>
 yum install postgresql-server
+</code>
+</p>
+<p>
+<code>
+dnf install postgresql-server
 </code>
 </p>
 <p>
@@ -35,7 +41,7 @@ the distribution:
   </tr>
   <tr>
    <td class="colFirst">RHEL/CentOS/SL/OL 7</td>
-   <td class="colLast">9.2</td>
+   <td class="colLast">9.2(also supplies package rh-postgresql95 and rh-postgresql94 via SCL)</td>
   </tr>
   <tr>
    <td class="colFirst">RHEL/CentOS/SL/OL 6</td>
@@ -46,16 +52,12 @@ the distribution:
    <td class="colLast">8.1 (also supplies package postgresql84)</td>
   </tr>
   <tr>
-   <td class="colFirst">Fedora 22</td>
-   <td class="colLast">9.4</td>
-  </tr>
-  <tr>
-   <td class="colFirst">Fedora 21</td>
-   <td class="colLast">9.3</td>
+   <td class="colFirst">Fedora 24</td>
+   <td class="colLast">9.5</td>
   </tr>
   <tr class="lastrow">
-   <td class="colFirst">Fedora 20</td>
-   <td class="colLast">9.3</td>
+   <td class="colFirst">Fedora 23</td>
+   <td class="colLast">9.4</td>
   </tr>
  </table>
 </div>
@@ -86,10 +88,11 @@ perform these two steps:
 service postgresql initdb<br/>
 chkconfig postgresql on
 </code>
-or, on Fedora 19 and other later derived distributions:<br />
+or, on Fedora 23 and other later derived distributions:<br />
 <code>
 postgresql-setup initdb<br />
 systemctl enable postgresql.service
+systemctl start postgresql.service
 </code>
 </p>
 
@@ -116,8 +119,15 @@ To do this, download the correct RPM from the
 and install it with commands like:
 </p>
 <p>
+On RHEL and its derivatives:
 <code>
-yum install http://yum.postgresql.org/9.4/redhat/rhel-6-x86_64/pgdg-redhat94-9.4-1.noarch.rpm
+yum install http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-redhat95-9.5-2.noarch.rpm
+</code>
+</p>
+<p>
+On Fedora,
+<code>
+dnf install https://download.postgresql.org/pub/repos/yum/9.6/fedora/fedora-24-x86_64/pgdg-fedora96-9.6-1.noarch.rpm
 </code>
 </p>
 <p>
@@ -125,17 +135,21 @@ Once this is done, you can proceed to install and update packages the
 same way as the ones included in the distribution.
 </p>
 <p>
+For RHEL and its derivatives:
 <code>
-yum install postgresql94-server postgresql94-contrib<br/>
-service postgresql-9.4 initdb<br/>
-chkconfig postgresql-9.4 on
+yum install postgresql95-server postgresql95-contrib<br/>
+(or yum groupinstall "PostgreSQL Database Server 9.6 PGDG")<br/>
+service postgresql-9.5 initdb<br/>
+chkconfig postgresql-9.5 on
+service postgresql-9.5 start
 </code>
-or, on Fedora 19 and other later derived distributions:<br />
+or, on Fedora 23 and other later derived distributions:<br />
 <code>
-yum install postgresql94-server postgresql94-contrib<br/>
-/usr/pgsql-9.4/bin/postgresql94-setup initdb<br/>
-systemctl enable postgresql-9.4.service<br/>
-systemctl start postgresql-9.4.service
+dnf install postgresql95-server postgresql95-contrib<br/>
+(or dnf groupinstall "PostgreSQL Database Server 9.6 PGDG")<br/>
+/usr/pgsql-9.5/bin/postgresql95-setup initdb<br/>
+systemctl enable postgresql-9.5.service<br/>
+systemctl start postgresql-9.5.service
 </code>
 </p>
 <p>
@@ -144,10 +158,10 @@ PostgreSQL yum repository follows the same standard as the ones included
 in the main repositories, but include the version number, such as:
 </p>
 <ul>
- <li>postgresql94</li>
- <li>postgresql94-server</li>
- <li>postgresql94-contrib</li>
- <li>pgadmin3_94</li>
+ <li>postgresql95</li>
+ <li>postgresql95-server</li>
+ <li>postgresql95-contrib</li>
+ <li>pgadmin3_95</li>
 </ul>
 
 <h2>Direct RPM download</h2>
