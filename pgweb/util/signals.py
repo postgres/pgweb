@@ -50,22 +50,17 @@ def _get_all_notification_fields(obj):
 		return [n for n in obj._meta.get_all_field_names() if not n in ('approved', 'submitter', 'id', ) and obj._meta.get_field_by_name(n)[2]]
 
 def _get_attr_value(obj, fieldname):
-	try:
-		# see if this is a Many-to-many field. If yes, we want to print
-		# it out as a pretty list
-		value = getattr(obj, fieldname)
-		if isinstance(obj._meta.get_field_by_name(fieldname)[0], models.ManyToManyField):
-			return ", ".join(map(lambda x: unicode(x), value.all()))
-		return "%s" % value
-	except ValueError, v:
+	# see if this is a Many-to-many field. If yes, we want to print
+	# it out as a pretty list
+	if isinstance(obj._meta.get_field_by_name(fieldname)[0], models.ManyToManyField):
 		# NOTE! If the object is brand new, and it has a many-to-many relationship, we can't
 		# access this data yet. So just return that it's not available yet.
-		# XXX: This is an ugly way to find it out, and is dependent on
-		#      the version of django used. But I've found no better way...
-		if v.message.find('" needs to have a value for field "') and v.message.find('" before this many-to-many relationship can be used.') > -1:
+		if not obj.pk:
+			# No primary key indicates the object doesn't exist yet, so we can't
+			# access the primary key
 			return "<not available yet>"
-		else:
-			raise v
+		return u", ".join(map(lambda x: unicode(x), getattr(obj, fieldname).all()))
+	return getattr(obj, fieldname)
 
 def _get_full_text_representation(obj):
 	fieldlist = _get_all_notification_fields(obj)
