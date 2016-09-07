@@ -8,8 +8,8 @@ installation where a GUI is not available and consistency across
 multiple distributions is a requirement.
 </p>
 <p>
-<a href="http://www.openscg.com/se/postgresql/packages.jsp">Download</a>
-the packages from OpenSCG for all supported versions.
+<a href="https://www.bigsql.org/postgresql/installers.jsp">Download</a>
+the packages from BigSQL for all supported versions.
 </p>
 
 <p>
