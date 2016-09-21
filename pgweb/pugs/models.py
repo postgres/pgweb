@@ -13,6 +13,7 @@ class PUG(models.Model):
 	mailing_list_url = models.TextField(null=True, blank=True)
 
 	purge_urls = ('/community/user-groups/', )
+	send_notification = True
 
 	def __unicode__(self):
 		return self.title
