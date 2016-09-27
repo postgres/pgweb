@@ -45,8 +45,8 @@ This page in other versions:
 		{%if ver.version == page.version %}
 		current ({{ver.display_version}})
 		{%else%}
-		<a href="/docs/current/static/{{ver.file}}" title="This page in version {{ver.display_version}}">current</a>
-		(<a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="This page in current version">{{ver.display_version}}</a>)
+		<a href="/docs/current/static/{{ver.file}}" title="This page in current version">current</a>
+		(<a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="This page in version {{ver.display_version}}">{{ver.display_version}}</a>)
 		{%endif%}
 	{%else%}
 		{%if ver.version == page.version %}
