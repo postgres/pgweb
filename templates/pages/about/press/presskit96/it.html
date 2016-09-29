@@ -1,0 +1,140 @@
+{%extends "base/page.html"%}
+{%block title%}Press Kit di PostgreSQL 9.6{%endblock%}
+{%block contents%}
+
+<h1>Press Kit di PostgreSQL 9.6</h1>
+
+<h2>Sommario</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Comunicato stampa originale</a><br />
+ &nbsp; <a href="#features">Funzionalità in maggior dettaglio</a><br />
+ &nbsp; <a href="#download">Dove scaricare PostgreSQL</a><br />
+ &nbsp; <a href="#docs">Documentazione</a><br />
+ &nbsp; <a href="#license">Licenza</a><br />
+ &nbsp; <a href="#contact">Contattaci</a><br />
+ &nbsp; <a href="#graphics">Logo e immagini</a><br />
+ &nbsp; <a href="#about">Informazioni su PostgreSQL</a><br />
+ &nbsp; <a href="#quoted_companies">Testo completo delle citazioni e informazioni sulle relative aziende</a><br />
+ &nbsp; <a href="#companies">Supporto alle aziende</a><br />
+</p>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" />
+
+<a name="original_release"></a><h2>Comunicato stampa originale</h2>
+
+<p>29 SETTEMBRE 2016: PostgreSQL 9.6, l'ultima versione del più avanzato database SQL open source, è stato rilasciato oggi dal PostgreSQL Global Development Group. Questa release migliora la scalabilità verticale e orizzontale di database con alti requisiti di performance. Le nuove funzionalità comprendono query parallele, maggior controllo nella replica sincrona, ricerche di frasi, oltre ai consueti miglioramenti in ambito di prestazioni e di usabilità.
+</p><p>
+<strong>Scalabilità verticale tramite query parallele</strong>
+</p><p>
+PostgreSQL 9.6 introduce il supporto per la parallelizzazione delle query, consentendo di sfruttare più processori di uno stesso server e di velocizzarne l'esecuzione. Questa release include il supporto per <em>sequential scan</em> di una tabella, <em>aggregazioni</em> e <em>join</em>.
+A seconda del numero di processori a disposizione, la parallelizzazione può ridurre i tempi di esecuzione di query in ambito big data fino a 32 volte.
+</p><p>
+</p><p>
+<strong>Scalabilità orizzontale tramite replica sincrona e postgres_fdw</strong>
+</p><p>
+Sono state aggiunte due nuove opzioni alla replica sincrona di PostgreSQL che permettono di scalare le letture su più nodi di un cluster, assicurandone la consistenza fra loro. Finora non era possibile mantenere più repliche sincrone. Adesso, con l'introduzione della modalità 'remote_apply', è possibile mantenere una vista consistente su più nodi. Tramite la replica sincrona, si potranno avere diversi nodi "identici" ed effettuare *load balancing* in lettura.
+</p><p>
+In aggiunta, postgres_fdw, il driver per la federazione dei dati tra database PostgreSQL, permette adesso la propagazione (in gergo tecnico <em>"push down"</em>) di ordinamenti, <em>join</em> e aggiornamenti batch di dati sul server remoto. In questo modo, gli utenti potranno distribuire il carico su diversi nodi PostgreSQL. Presto queste operazioni saranno estese anche ad altri driver FDW.
+</p><p>
+"Grazie all'esecuzione remota di JOIN, UPDATE e DELETE, i <em>Foreign Data Wrapper</em> rappresentano adesso una soluzione completa per la distribuzione dei dati tra altri database e PostgreSQL. Per esempio, PostgreSQL può essere usato per gestire dati in ingresso verso due o più differenti tipi di database", ha detto Julyanto Sutandang, Direttore <em>Business Solution</em> di Equnix.
+</p><p>
+<strong>Miglior ricerca testuale con le frasi</strong>
+</p><p>
+Il <em>full text search</em> di PostgreSQL supporta adesso la ricerca a livello di "frase". Gli utenti saranno in grado di ricercare con <em>match</em> esatto intere frasi, oppure parole con una certa prossimità fra loro, usando la veloce indicizzazione GIN. Combinata con le nuove funzionalità di maggior controllo delle opzioni di ricerca testuale, PostgreSQL si conferma essere la prima scelta per "ricerche ibride" che includono l'approccio relazionale, NOSQL (col supporto JSON), e <em>full text</em>.
+</p><p>
+<strong>Più armonioso, veloce e semplice da usare</strong>
+</p><p>
+Grazie al feedback ricevuto dagli utenti che utilizzano in produzione database PostgreSQL su grandi volumi, questa nuova versione ha visto notevoli miglioramenti in termini di prestazioni e usabilità. Replica, aggregazioni, indicizzazioni, ordinamenti e procedure sono stati resi più efficienti. PostgreSQL adesso riesce a sfruttare meglio le risorse delle recenti versioni di kernel Linux. Anche l'impatto di amministrazione ordinaria di tabelle di grandi dimensioni e in presenza di carichi di lavoro complessi è stato ridotto,  soprattutto attraverso il potenziamento del 'VACUUM'.
+</p>
+<a name="features"></a><h2>Funzionalità in maggior dettaglio</h2>
+<p>
+Per spiegazioni sulle funzionalità elencate sopra e per ulteriori informazioni,
+si rimanda alle seguenti risorse:
+</p>
+<ul>
+  <li><a href="https://www.postgresql.org/docs/current/static/release-9-6.html">Note di rilascio</a></li>
+  <li><a href="https://wiki.postgresql.org/wiki/NewIn96">What's New in 9.6 (English)</a>, sezione del wiki di PostgreSQL dedicata alle novità della 9.6 (in inglese)</li>
+  <li><a href="/about/featurematrix" hreflang="en">Matrice delle funzionalità</a> (in inglese)</li>
+  <li><a href="https://momjian.us/main/writings/pgsql/features.pdf">Slide "Major Features"</a> (in inglese)</li>
+  <li><a href="https://www.youtube.com/watch?v=HjAeLE9aNhQ">Presentazione "A Look Inside The Elephant's Trunk: 9.6"</a> (in inglese)</li>
+  <li><a href="https://www.youtube.com/watch?v=RkkUbQP3G0A">Presentazione "PostgreSQL 9.6 Performance"</a> (in inglese)</li>
+</ul>
+
+<a name="download"></a><h2>Download</h2>
+<ul>
+  <li><a href="/download">Pagina di download</a> con link ad <em>installer</em> per Windows, Linux, OSX, BSD e Solaris e ad applicazioni varie.</li>
+  <li><a href="/ftp/source/v9.6.0">Codice sorgente</a></li>
+  <li><a href="https://hub.docker.com/_/postgres/">Immagine Docker con Postgres</a></li>
+  <li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentazione</h2>
+
+<p>
+La documentazione in formato HTML ed il manuale in formato <em>man</em> sono installati contestualmente a PostgreSQL. Tuttavia è estremamente consigliato navigare, ricercare e lasciare commenti sulla <a href="/docs/9.6/interactive">documentazione online</a> interattiva.
+</p>
+
+<a name="license"></a><h2>Licenza</h2>
+<p>
+PostgreSQL utilizza la <a href="/about/licence">Licenza PostgreSQL</a>, una licenza in stile BSD molto permissiva.
+Questa <a href="http://www.opensource.org/licenses/postgresql">licenza certificata da OSI</a> è unanimemente apprezzata per la sua natura flessibile e <em>business-friendly</em>, in quanto non limita l'impiego di PostgreSQL in applicazioni proprietarie e commerciali. Insieme al supporto multi-azienda ed alla proprietà diffusa e pubblica del codice, la nostra licenza rende PostgreSQL molto popolare con i <em>vendor</em> che intendono incorporare il database all'interno dei loro prodotti senza alcun timore di incappare in costi, forme di lock-in o cambi nei termini e nelle condizioni di licenza.
+</p>
+
+<a name="contact"></a><h2>Contattaci</h2>
+
+<p>Riferimenti sul web</p>
+<ul>
+<li><a href="https://www.postgresql.org/">Home page di PostgreSQL</a></li>
+<li><a href="http://www.itpug.org/">Associazione culturale Italian PostgreSQL Users Group</a> (ITPUG)</li>
+</ul>
+
+<p>Contatto per la stampa</p>
+<p>Gabriele Bartolini<br />
+<a href="mailto:it@postgresql.org">it@postgresql.org</a><br />
+Ufficio: +39 0574 159 3000<br />
+Mobile: +39 338 1566217</p>
+
+<p>Per contatti in altre aree e nazioni, consultare la <a href="/about/press/contact">lista di contatti internazionali.</a></p>
+
+<a name="graphics"><h2>Immagini e logo</h2></a>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" >
+
+<ul>
+<li><a href="http://www.postgresql.org/media/img/about/press/elephant.png">Logo elefante di PostgreSQL, formato PNG</a></li>
+<li><a href="http://www.postgresql.org/media/img/about/press/elephant64.png">Icona elefante di PostgreSQL</a></li>
+<li><a href="http://www.postgresql.org/media/img/about/press/slonik_with_black_text_and_tagline.gif">Banner di PostgreSQL con logo, elefante e slogan</a></li>
+</ul>
+<p>
+Tutti i logo sono disponibili per modifiche e redistribuzione secondo la "PostgreSQL License". Il nome ed il logo di PostgreSQL sono marchi registrati di "PostgreSQL Community Association of Canada".
+</p>
+
+<a name="about"></a><h2>Informazioni su PostgreSQL</h2>
+<p>
+PostgreSQL è il principale sistema di gestione di database open source, con una comunità internazionale costituita da migliaia di utenti e sviluppatori nonché decine di aziende ed enti provenienti da tutte le parti del mondo. Il progetto PostgreSQL si porta dietro oltre 25 anni di attività di ingegneria del software, a partire dal campus di Berkeley dell'Università di California, ed oggi può vantare un ritmo di sviluppo senza uguali. La gamma di funzionalità mature messe a disposizione da PostgreSQL non soltanto è in grado di competere con quelle offerte da sistemi di database proprietari, ma le migliora in termini  di funzionalità avanzate, estensibilità, sicurezza e stabilità. Scopri maggiori informazioni su PostgreSQL e partecipa attivamente alla nostra comunità sul sito <a href="https://www.postgresql.org">PostgreSQL.org</a> e, per l'Italia, <a href="http://www.itpug.org">ITPUG</a>.
+</p>
+
+<a name="quoted_companies"></a><h2>Testo completo delle citazioni e informazioni sulle relative aziende</h2>
+<p>
+"In qualità di <em>chief database architect</em> per Synthetic Genomics, sono rimasto oltremodo stupito dalla potenza, dalla flessibilità e dalla ricchezza di interfacce di programmazione per PostgreSQL 9.5. Abbiamo migrato la totalità dei genomi immagazzinati nella nostra piattaforma - complessivamente 25 miliardi di righe in MySQL - su di un singolo database PostgreSQL, sfruttando la possibilità di compressione dello spazio occupato dalle righe (grazie al tipo di dato 'JSONB' e alle eccellenti indicizzazioni 'GIN', 'BRIN' e 'B-tree') e l'incredibilmente esteso linguaggio di programmazione PL/pgSQL per le <em>stored procedure</em>. Adesso, con la versione 9.6, mi aspetto di sfruttare a pieno le query parallele ed aumentare così la scalabilità del nostro database, composto da tabelle piuttosto grandi. PostgreSQL 9.5 ha dimostrato di essere estremamente stabile, di avere prestazioni considerevoli, e di essere in questo momento, almeno secondo la mia opinione, il miglior motore sul mercato per la memorizzazione ibrida di dati relazionali e non strutturati", ha detto Mike Sofen, Chief Database Architect di Synthetic Genomics.
+</p>
+<p><a href="https://www.syntheticgenomics.com/">Synthetic Genomics, Inc.</a> (SGI) è leader mondiale nel campo della biologia sintetica.
+<!--
+is a global leader in the fields of synthetic biology and synthetic genomics utilizing foundational intellectual property in these rapidly evolving disciplines to design and build biological systems to solve global sustainability challenges. SGI provides solutions in genomics research, bioproduction, and applied products. The research segment is focused on genomics solutions for academic and commercial research and development organizations. The commercial products and services include instrumentation, reagents, DNA synthesis services, and bioinformatics services and software.
+-->
+Contatto in inglese: <a href="mailto:media@syntheticgenomics.com">media@syntheticgenomics.com</a>.
+</p>
+<p>"Grazie all'esecuzione remota di JOIN, UPDATE e DELETE, i <em>Foreign Data Wrapper</em> rappresentano adesso una soluzione completa per la distribuzione dei dati tra altri database e PostgreSQL. Per esempio, PostgreSQL può essere usato per gestire dati in ingresso verso due o più differenti tipi di database", ha detto Julyanto Sutandang, Direttore <em>Business Solution</em> di Equnix.</p>
+<p><a href="http://www.equnix.co.id/">Equnix</a> è un provider di soluzioni IT per aziende che si basa su ricerca, sviluppo e open source. Equnix è un'azienda che supporta PostgreSQL. Contatto in inglese: <a href="mailto:info@equnix.co.id">Info@equnix.co.id</a>.</p>
+
+<a name="companies"></a><h2>Supporto alle aziende</h2>
+
+<p>PostgreSQL gode del supporto di tante aziende pronte a sponsorizzare sviluppatori, a fornire servizi di hosting e a contribuire economicamente al progetto. Il sito comprende una <a href="https://www.postgresql.org/about/sponsors/">pagina di sponsor</a> principali del progetto PostgreSQL.</p>
+
+<p>Esiste anche un vasto gruppo di <a href="/support/professional_support">aziende che offrono supporto professionale a PostgreSQL</a>, da liberi professionisti e consulenti fino a aziende multinazionali.</p>
+
+<p><a href="/about/donate">Donazioni</a> sono bene accette e gradite.</p>
+<p>Oppure potete acquistare il nostro elegante merchandise dal nostro <a href="http://www.zazzle.com/postgresql">Zazzle PostgreSQL Store</a>.</p>
+
+{% endblock %}

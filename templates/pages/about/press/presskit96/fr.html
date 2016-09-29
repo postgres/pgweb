@@ -1,0 +1,140 @@
+{%extends "base/page.html"%}
+{%block title%}Dossier de presse PostgreSQL 9.6{%endblock%}
+{%block contents%}
+
+<h1>Dossier de presse PostgreSQL 9.6</h1>
+
+<h2>Contenu</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Texte original</a><br />
+ &nbsp; <a href="#features">Détail des fonctionnalités</a><br />
+ &nbsp; <a href="#download">Téléchargement</a><br />
+ &nbsp; <a href="#docs">Documentation</a><br />
+ &nbsp; <a href="#license">Licence</a><br />
+ &nbsp; <a href="#contact">Contacts</a><br />
+ &nbsp; <a href="#graphics">Images et Logos</a><br />
+ &nbsp; <a href="#about">À propos de PostgreSQL</a><br />
+ &nbsp; <a href="#quoted_companies">Informations concernant les sociétés citées et texte intégral des citations</a><br />
+ &nbsp; <a href="#companies">Support professionnel</a><br />
+</p>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" />
+
+<a name="original_release"></a><h2>Texte original</h2>
+
+<p>29 septembre 2016 : le PostgreSQL Global Development Group a publié aujourd'hui PostgreSQL 9.6, dernière version du système libre de gestion de bases de données SQL de référence.
+Cette version va permettre aux utilisateurs de réaliser à la fois une expansion interne (scale up) et externe (scale out, répartition de la charge) de leurs bases de données haute-performance. Les nouvelles fonctionnalités incluent notamment le parallélisme des requêtes, des améliorations sur la réplication synchrone, la recherche par phrase, ainsi que des améliorations sur la performance et la facilité d'utilisation.</p>
+
+<b>Expansion interne avec le parallélisme des requêtes</b>
+
+<p>La version 9.6 ajoute le support du parallélisme pour certaines opérations dans les requêtes.
+Ce parallélisme active l'utilisation de tout ou partie des cœurs de processeur d'un serveur pour retourner les résultats plus rapidement.
+Sur cette version, le parallélisme concerne le parcours séquentiel (des tables), les agrégats et les jointures.
+En fonction des caractéristiques et du nombre de cœurs, le parallélisme permet d'espérer des gains jusqu'à un facteur 32 sur des requêtes traitant des volumes importants de données.</p>
+
+<p>&quot;J'ai migré l'intégralité de notre plateforme génomique - soit un héritage de 25 milliards de lignes MySQL - vers une seule base de données Postgres, en utilisant les possibilités de compression du type JSONB, les excellentes méthodes d'indexation GIN, BRIN et B-tree. Aujourd'hui, avec la version 9.6, j'attends de pouvoir exploiter le parallélisme des requêtes pour améliorer encore plus les performances des requêtes sur les tables volumineuses&quot; indique Mike Sofen, Chief Database Architect chez Synthetic Genomics.</p>
+
+<b>Répartition de charge avec la réplication synchrone et postgres_fdw</b>
+
+<p>Deux nouvelles options ont été ajoutées à la réplication synchrone de PostgreSQL. Elles permettent de maintenir des lectures cohérentes de données sur les nœuds d'un cluster de bases de données. En premier lieu, il est désormais possible de configurer des groupes de réplication synchrone. En second lieu, le mode &quot;remote_apply&quot; (application distante) crée une vue plus cohérente des données sur les différents nœuds. Ces fonctionnalités utilisent la réplication interne pour maintenir un groupe de nœuds &quot;identiques&quot; afin d'équilibrer la charge de lecture (load-balancing).</p>
+
+<p>Le pilote de fédération de données entre bases PostgreSQL, postgres_fdw, dispose de nouvelles fonctionnalités d'exécution du travail sur le serveur distant. En &quott;externalisant&quot; les tris, les jointures et les mises à jour par lot, la charge peut être distribuée sur plusieurs serveurs PostgreSQL. Ces possibilités seront bientôt ajoutées aux autres pilotes FDW.</p>
+
+<p>&quot;Avec les possibilités d'externaliser les jointures, les mises à jour et les suppressions, les Foreign Data Wrappers offrent maintenant une solution complète de partage de données entre PostgreSQL et les autres bases de données. Par exemple, PostgreSQL peut être utilisé pour gérer en entrée des données qui vont vers des bases de données différentes&quot; indique Julyanto Sutandang, Director of Business Solutions chez Equnix.</p>
+
+<b>Meilleure recherche de texte avec des phrases</b>
+
+<p>La fonctionnalité de recherche plein texte de PostgreSQL supporte désormais les recherche par phrases. Cela permet une recherche de phrases exactes ou de mots proches les uns des autres, en utilisant l'indexation GIN. Additionné aux nouvelles fonctionnalités d'optimisation de la recherche textuelle, cet apport fait de PostgreSQL un outil de choix pour la &quot;recherche hybride&quot; mêlant relationnel, JSON et recherche plein texte.</p>
+
+<b>Plus agréable, plus rapide et plus facile à utiliser</b>
+
+<p>Grâce au retours d'expérience et aux tests effectués par les utilisateurs de PostgreSQL disposant de bases de données de production à fort volume, le projet a pu améliorer de nombreux aspects des performances et de la maniabilité dans cette version. La réplication, les agrégats, l'indexation, les tris et les procédures stockées sont plus efficaces, et PostgreSQL utilise désormais mieux les ressources lorsqu'il est installé sur des noyaux Linux récents. Le surcoût d’administration des tables volumineuses et des charges complexes a été réduit, notamment par des améliorations du VACUUM.</p>
+
+<a name="features"></a><h2>Détail des fonctionnalités</h2>
+<p>
+Plus d'informations sur les fonctionnalités ci-dessus et les autres dans les liens suivants :
+</p>
+<ul>
+  <li><a href="https://www.postgresql.org/docs/current/static/release-9-6.html">Notes de version (En anglais)</a></li>
+  <li><a href="https://wiki.postgresql.org/wiki/NewIn96">Nouveautés de PostgreSQL 9.6 (En anglais)</a></li>
+  <li><a href="/about/featurematrix">Matrice de fonctionnalités (En anglais)</a></li>
+  <li><a href="https://momjian.us/main/writings/pgsql/features.pdf">Les principales fonctionnalités (En anglais)</a></li>
+  <li><a href="https://www.youtube.com/watch?v=HjAeLE9aNhQ">A Look Inside The Elephant's Trunk: 9.6</a></li>
+  <li><a href="https://www.youtube.com/watch?v=RkkUbQP3G0A">Présentation des performances de PostgreSQL 9.6</a></li>
+</ul>
+
+<a name="download"></a><h2>Téléchargement</h2>
+<ul>
+  <li><a href="/download">Page de téléchargement</a> avec les liens pour les logiciels et outils d'installation pour Windows, Linux, OSX, BSD et Solaris.</li>
+  <li><a href="/ftp/source/v9.6.0">Code Source</a></li>
+  <li><a href="https://hub.docker.com/_/postgres/">Image Docker de Postgres</a></li>
+  <li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentation</h2>
+
+<p>
+La documentation au format HTML et les pages de manuel sont installées avec PostgreSQL. La <a href="/docs/9.6/static">documentation en ligne</a>, exhaustive et interactive, peut être parcourue, interrogée et commentée librement.
+</p>
+
+<a name="license"></a><h2>Licence</h2>
+<p>
+PostgreSQL utilise la <a href="/about/licence">licence PostgreSQL</a>, une licence permissive de type BSD. Cette <a href="http://www.opensource.org/licenses/postgresql">licence certifiée par l'OSI</a> est largement appréciée pour sa flexibilité et sa compatibilité avec le monde des affaires, puisqu'elle ne restreint pas l'utilisation de PostgreSQL dans les applications propriétaires ou commerciales. Associée à un support proposé par de multiples sociétés et une propriété publique du code, sa licence rend PostgreSQL très populaire parmi les revendeurs souhaitant embarquer une base de données dans leurs produits sans avoir à se soucier des prix de licence, des verrous commerciaux ou modifications des termes de licence.
+</p>
+
+<a name="contact"></a><h2>Contacts</h2>
+
+<p>Pages Web</p>
+<ul>
+<li><a href="https://www.postgresql.org">Page d'accueil PostgreSQL</a></li>
+</ul>
+
+<p>Contact presse</p>
+<p>France et pays francophones<br />
+Stéphane Schildknecht<br />
+<a href="mailto:fr@postgresql.org">fr at postgresql dot org</a><br />
++33 (0) 617 11 37 42</p>
+
+<p>Pour les contacts d'autres régions, consulter <a href="/about/press/contact">la liste des contacts internationaux.</a></p>
+
+<a name="graphics"><h2>Images et logos</h2></a>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" >
+
+<ul>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant.png">Logo de l'éléphant PostgreSQL, format PNG</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant64.png">Icône de l'éléphant PostgreSQL</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/slonik_with_black_text_and_tagline.gif">Banière PostgreSQL avec le logo, l'éléphant et le slogan</a></li>
+</ul>
+<p>
+Tous les logos sont modifiables et redistribuables selon les termes de la licence PostgreSQL. Le nom PostgreSQL et le logo sont des marques déposées de la PostgreSQL Community Association of Canada.
+</p>
+
+<a name="about">À propos de PostgreSQL</a><h2></h2>
+
+<p>
+PostgreSQL est le système de gestion de bases de données libre de référence. Sa communauté mondiale est composée de plusieurs milliers d'utilisateurs et contributeurs, et de plusieurs dizaines d'entreprises et institutions. Le projet PostgreSQL, démarré il y a 30 ans, à l'université de Californie, à Berkeley, a atteint aujourd’hui un rythme de développement sans pareil. L'ensemble des fonctionnalités proposées est mature et plus riche que ceux des systèmes commerciaux leaders sur les fonctionnalités avancées, les extensions, la sécurité et la stabilité, offertes à un niveau que seul PostgreSQL atteint. Pour en savoir plus à propos de PostgreSQL et participer à la communauté :  <a href="https://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+
+<a name="quoted_companies"></a><h2>Informations concernant les sociétés citées et texte intégral des citations</h2>
+<p>
+&quot;En tant qu'architecte en chef de bases de données chez Synthetic Genomics, j'ai été réellement impressionné par la puissance, la flexibilité et la richesse des interfaces de programmation de Postgres 9.5. J'ai migré l'intégralité de notre plateforme génomique &mdash; soit 25 milliards de lignes issues de MySQL &mdash; vers une seule base de données Postgres, en utilisant les possibilités de compression du type JSONB, les excellentes méthodes d'indexation GIN, BRIN et B-tree, ainsi que l'élégant langage de programmation de fonctions stockées PL/pgSQL. Aujourd'hui, avec la version 9.6, j'attends de pouvoir exploiter le parallélisme des requêtes pour améliorer encore plus les performances des requêtes sur les tables volumineuses.
+Postgres 9.5 a prouvé par lui-même qu'il est complètement stable, remarquablement performant, et selon moi, le meilleur moteur à ce jour de stockage de données hybride relationnel-document sur le marché.&quot; indique Mike Sofen, Chief Database Architect chez Synthetic Genomics.
+</p>
+<p><a href="https://www.syntheticgenomics.com/">Synthetic Genomics, Inc.</a> (SGI) est l'un des leaders mondiaux dans les domaines de la biologie de synthèse et la génomique de synthèse. SGI se fonde sur l'utilisation de la propriété intellectuelle dans cette discipline qui évolue rapidement, pour concevoir et réaliser des systèmes biologiques qui permettent de résoudre les défis de développement durable à l'échelle de la planète. SGI fournit des solutions dans les domaines de la recherche génomique, de la bio-production et des produits appliqués. La recherche est focalisée sur les solutions génomiques pour tout organisme de recherche et développement, académique ou commercial. Les produits et services commerciaux incluent l'instrumentation, les réactifs, les services de synthèse d'ADN et les logiciels et services en bio-informatique. Contact&nbsp;: Synthetic Genomics, <a href="mailto:media@syntheticgenomics.com">media@syntheticgenomics.com</a> (anglais)
+</p>
+<p>&quot;Avec les possibilités d'externaliser les jointures, les mises à jour et les suppressions, les Foreign Data Wrappers offrent maintenant une solution complète de partage de données entre PostgreSQL et les autres bases de données. Par exemple, PostgreSQL peut être utilisé pour gérer en entrée des données qui vont vers des bases de données différentes&quot; indique Julyanto Sutandang, Director of Business Solutions chez Equnix.</p>
+</p>
+<p><a href="http://www.equnix.co.id">Equnix</a> est fournisseur de solutions informatiques pour les entreprises. Cette société met en place des solutions alternatives complètes, basées sur la recherche, le développement et du code libre. Equnix fournit du service autour de PostgreSQL. Contact en anglais ou en indonésien&nbsp;:  <a href="mailto:info@equnix.co.id">Info@equnix.co.id</a> ou téléphoner à Johan D. au +6221-22866662.</p>
+
+<a name="companies"></a><h2>Support Professionnel</h2>
+
+<p>PostgreSQL bénéficie du support de nombreuses sociétés, qui financent des développeurs, fournissent l'hébergement ou un support financier. Les plus fervents supporters sont listés sur la <a href="https://www.postgresql.org/about/sponsors/">page des mécènes du développement</a>.</p>
+
+<p>Il existe également une très grande communauté de <a href="/support/professional_support">sociétés fournissant du support PostgreSQL</a>, des consultants indépendants aux sociétés multinationales.
+
+<p>Les <a href="/about/donate">dons</a> sont acceptés avec plaisir.</p>
+<p>Vous pouvez également acheter des produits dérivés de qualité sur la <a href="http://www.zazzle.com/postgresql">Boutique Zazzle PostgreSQL</a>.
+
+{% endblock %}
