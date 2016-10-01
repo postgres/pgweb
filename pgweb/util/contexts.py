@@ -61,7 +61,6 @@ sitenav = {
 		{'title': 'Roadmap',            'link':'/developer/roadmap/'},
 		{'title': 'Coding',             'link':'/developer/coding/'},
 		{'title': 'Testing',            'link':'/developer/testing/', 'submenu': [
-			{'title': 'Alpha Information', 'link':'/developer/alpha/'},
 			{'title': 'Beta Information',  'link':'/developer/beta/'},
 		]},
 		{'title': 'Mailing Lists',      'link':'/community/lists/'},
