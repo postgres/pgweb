@@ -1,0 +1,152 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 9.6 Press Kit{%endblock%}
+{%block contents%}
+
+<div><span>This page in: </span>
+<span lang="en"><a href="/about/press/presskit96/en">English</a></span>
+/ <span lang="fr"><a href="/about/press/presskit96/fr">Français</a></span>
+/ <span lang="de"><a href="/about/press/presskit96/de">Deutsch</a></span>
+/ <span lang="id"><a href="/about/press/presskit96/id">Bahasa Indonesia</a></span>
+/ <span lang="it"><a href="/about/press/presskit96/it">Italiano</a></span>
+/ <span lang="pt"><a href="/about/press/presskit96/pt">Português</a></span>
+/ <span lang="es"><a href="/about/press/presskit96/es">Español</a></span>
+/ <span lang="de"><a href="/about/press/presskit96/de">Deutsch</a></span>
+/ <span lang="ru"><a href="/about/press/presskit96/ru">Русский</a></span><br/><br/>
+</div>
+
+<h1>PostgreSQL 9.6 Press Kit</h1>
+
+<h2>Contents</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Teks Rilis Asli</a><br />
+ &nbsp; <a href="#features">Lebih Lanjut Tentang Fitur-fitur</a><br />
+ &nbsp; <a href="#download">Lokasi Unduhan</a><br />
+ &nbsp; <a href="#docs">Dokumentasi</a><br />
+ &nbsp; <a href="#license">Lisensi</a><br />
+ &nbsp; <a href="#contact">Kontak</a><br />
+ &nbsp; <a href="#graphics">Gambar dan Logo</a><br />
+ &nbsp; <a href="#about">Tentang PostgreSQL</a><br />
+ &nbsp; <a href="#quoted_companies">Kutipan Korporat dan Teks Lengkap Kutipan</a><br />
+ &nbsp; <a href="#companies">Dukungan Korporat</a><br />
+</p>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" />
+
+<a name="original_release"></a><h2>Rilis Pers Asli</h2>
+
+<p>29 SEPTEMBER 2016: PostgreSQL 9.6, versi terbaru sistem database relasional Open Source tercanggih dunia, dirilis hari ini oleh PostgreSQL Global Development Group. Rilis ini akan memungkinkan pengguna untuk melakukan baik scale up dan scale out beban kerja database yang berperforma tinggi. Fitur-fitur baru mencakup query secara parallel, peningkatan dalam replikasi synchronous, pencarian frase, dan peningkatan pada performa dan kegunaan.</p>
+
+<b>Scale Up dengan Query Parallel</b>
+
+<p>Versi 9.6 menambah dukungan untuk paralelisasi beberapa operasi query, memungkinkan penggunaan sebagian atau seluruh jumlah core dalam server untuk menampilkan hasil query lebih cepat. Rilis ini mencakup scan (table) paralel berurut, agregasi, dan join. Bergantung pada detil dan jumlah cores yang ada, paralelisme dapat mempercepat query-query data besar hingga 32 kali lebih cepat.</p>
+
+<p>&quot;Saya memigrasikan seluruh platform data genomics kami &mdash; seluruh 25 milyar baris MySQL legacy &mdash; ke satu database Postgres tunggal, mengedepankan kemampuan kompresi baris dari tipe data JSONB, dan mode index GIN, BRIN, dan B-tree yang hebat. Kini dengan versi 9.6, Saya berharap untuk menggunakan fungsionalitas query paralel untuk memungkinkan skalabilitas yang lebih besar lagi untuk query terhadap tabel-tabel kami yang berukuran besar,&quot; sebut Mike Sofen, Chief Database Architect, Synthetic Genomics.</p>
+
+<b>Scale Out dengan Replikasi Synchronous dan postgres_fdw</b>
+
+<p>Dua opsi baru telah ditambahkan ke fitur replikasi synchronous di PostgreSQL yang memungkinkannya untuk digunakan dalam menjaga bacaan data yang konsisten di sepanjang kluster database. Pertama, fitur ini kini memungkinkan konfigurasi kelompok-kelompok replika  synchronous. Kedua, mode &quot;remote_apply&quot; membuat tampilan data yang lebih konsisten di sepanjang node-node berbeda. Fitur-fitur ini mendukung penggunaan replikasi built-in untuk menjaga sekumpulan node &quot;identik&quot; untuk melakukan load balancing pada beban kerja bacaan.</p>
+
+<p>Driver untuk federasi data PostgreSQL-ke-PostgreSQL, postgres_fdw, punya kemampuan-kemampuan baru untuk melaksanakan tugas server-server secara remote. Dengan mem&quot;push down&quot; sort, join, dan update data secara batch, pengguna dapat mendistribusikan beban kerja di sepanjang beberapa server PostgreSQL. Fitur-fitur ini akan segera ditambahkan ke driver-driver FDW lainnya juga.</p>
+
+<p>&quot;Dengan kemampuan-kemampuan JOIN, UPDATE dan DELETE secara remote, Foreign Data Wrappers kini menjadi solusi lengkap untuk berbagi data antara database lain dengan PostgreSQL. Contohnya, PostgreSQL dapat digunakan untuk menangani input data menuju ke dua atau lebih jenis database berbeda,&quot; sebut Julyanto Sutandang, Director of Business Solutions at Equnix.</p>
+
+<b>Pencarian teks Lebih baik Dengan Frase</b>
+
+<p>Fitur pencarian teks penuh di PostgreSQL kini medukung &quot;phrase search.&quot; Ini memungkinkan pengguna mencari frase secara persis, atau kata-kata dalam kedekatan yang ditentukan di antaranya, menggunakan index GIN yang cepat. Dikombinasikan dengan fitur-fitur baru untuk fine-tuning opsi pencarian teks, PostgreSQL adalah pilihan superior untuk &quot;hybrid search&quot; yang menggabungkan relasional, JSON, danpencarian teks penuh.</p>
+
+<b>Penggunaan Lebih Halus, Cepat dan Mudah</b>
+
+<p>Dengan feedback dan pengujian oleh pengguna-pengguna PostgreSQL dengan database produksi bervolume tinggi, proyek database telah mampu meningkatkan banyak aspek performa dan kegunaan dalam rilis ini. Replikasi, agregasi, indexing, sorting, dan stored procedure telah dibuat lebih efisien, dan PostgreSQL kini mempergunakan sumber daya kernel Linux dengan lebih baik. Overhead administrasi untuk tabel-tabel besar dan beban kerja complex juga dikurangi, khususnya lewat pengikatan pada VACUUM.</p>
+
+<a name="features"></a><h2>Lebih Lanjut Tentang Fitur-fitur</h2>
+<p>
+Untuk penjelasan tentang fitur-fitur di atas dan lainnya, silakan lihat sumber daya berikut:
+</p>
+<ul>
+  <li><a href="https://www.postgresql.org/docs/current/static/release-9-6.html">Catatan Rilis</a></li>
+  <li><a href="https://wiki.postgresql.org/wiki/NewIn96">Yang Baru dalam 9.6</a></li>
+  <li><a href="/about/featurematrix">Matrix Fitur (Bahasa Inggris)</a></li>
+  <li><a href="https://momjian.us/main/writings/pgsql/features.pdf">Presentasi Fitur Utama</a></li>
+  <li><a href="https://www.youtube.com/watch?v=HjAeLE9aNhQ">A Look Inside The Elephant's Trunk: 9.6</a></li>
+  <li><a href="https://www.youtube.com/watch?v=RkkUbQP3G0A">Presentasi Performa PostgreSQL 9.6</a></li>
+</ul>
+
+<a name="download"></a><h2>Unduhan</h2>
+<ul>
+  <li><a href="/download">Laman Unduhan</a> dengan tautan installer dan tools untuk Windows, Linux, OSX, BSD dan Solaris.</li>
+  <li><a href="/ftp/source/v9.6.0">Source Code</a></li>
+  <li><a href="https://hub.docker.com/_/postgres/">Image Docker di Docker</a></li>
+  <li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+</ul>
+
+<a name="docs"></a><h2>Dokumentasi</h2>
+
+<p>
+Dokumentasi HTML dan man-pages ter-install dengan PostgreSQL, namun silakan menjelajah, mencari, dan berkomentar dalam <a href="/docs/9.6/interactive">dokumentasi online</a> kami yang ekstensif dan interaktif.
+</p>
+
+<a name="license"></a><h2>Lisensi</h2>
+<p>
+PostgreSQL menggunakan <a href="/about/licence">Lisensi PostgreSQL</a>, suatu lisensi BSD-like yang "permisif". Lisensi
+<a href="http://www.opensource.org/licenses/postgresql">OSI-certified</a> ini banyak diapresiasi karena bersifat fleksibel dan ramah terhadap bisnis, karena tidak melarang penggunaan PostgreSQL dengan aplikasi komersil dan berbayar. Bersama dukungan banyak perusahaan dan kepemilikan publik dari source code, lisensi kami membuat PostgreSQL sangat populer dengan vendor yang ingin menanamkan database dalam produk mereka tanpa takut biaya, vendor lock-in, atau perubahan dalam syarat-syarat lisensi.
+</p>
+
+<a name="contact"></a><h2>Kontak</h2>
+
+<p>Laman-laman Web</p>
+<ul>
+<li><a href="https://www.postgresql.org">Laman Muka PostgreSQL</a></li>
+</ul>
+
+<p>Keterangan Pers</p>
+<p>Indonesia<br />
+Julyanto Sutandang<br />
+<a href="mailto:id@POSTGRESQL.ORG">is@postgresql.org</a><br />
++62 816 4858 028</p>
+
+<p>Malaysia<br />
+Chris Travers
+<br /><a href="mailto:my@postgresql.org">my@postgresql.org</a>
+</p>
+
+<p>Untuk kontak dalam regional lainnya, kunjungi <a href="/about/press/contact">daftar kontak internasional.</a></p>
+
+<a name="graphics"><h2>Gambar dan Logo</h2></a>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" >
+
+<ul>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant.png">Logo Gajah PostgreSQL, format PNG</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant64.png">Ikon Gajah PostgreSQL</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/slonik_with_black_text_and_tagline.gif">Banner PostgreSQL dengan Logo, Gajah dan Slogan</a></li>
+</ul>
+<p>
+Semua logo tersedia untuk modifikasi dan distribusi ulang di bawah Lisensi PostgreSQL.  Nama dan logo PostgreSQL adalah merk dagang dari The PostgreSQL Community Association of Canada.
+</p>
+
+<a name="about"></a><h2>Tentang PostgreSQL</h2>
+<p>
+PostgreSQL adalah system database tercanggih dunia, dengan komunitas global ribuan pengguna dan kontributor dan lusinan perusahaan dan organisasi.  Proyek PostgreSQL membanguna di atas lebih dari 30 tahun pengembangan, yang dimulai dari University of California, Berkeley, dan memiliki kecepatan pengembangan yang tak tertandingi kini. Kumpulan fitur PostgreSQL hyang matang tidak hanya menyamai sistemm database berbayar populer, namun juga melebih mereka dalam fitur-fitur database tingkat lanjut, ekstensibilitas, keamanan dan stabilitas.  Pelajari lebih lanjut tentang PostgreSQL dan bergabunglah dalam komunitas kami di <a href="https://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+
+<a name="quoted_companies"></a><h2>Informasi Perusahaan yang Dikutip dan Teks Lengkap Kutipan</h2>
+<p>
+&quot;Sebagai chief database architect untuk Synthetic Genomics, saya sangat kagum dengan kekuatan, fleksibiltas dan kekayaan antarmuka pemrograman untuk Postgres 9.5x.  Saya memigrasikan seluruh platform data genomics kami &mdash; seluruh 25 milyar baris MySQL legacy &mdash; ke satu database Postgres tunggal, mengedepankan kemampuan kompresi baris dari tipe data JSONB, dan mode index GIN, BRIN, dan B-tree yang hebat, dan bahasa pemrograman PL/pgSQL yang diperluas dengan indah bagi fungsi-fungsi tersimpan. Kini dengan versi 9.6, Saya berharap untuk menggunakan fungsionalitas query paralel untuk memungkinkan skalabilitas yang lebih besar lagi untuk query terhadap tabel-tabel kami yang berukuran besar.  Postgres 9.5 telah terbukti sangat stabil, berperforma sangat baik, dan, menurut pendapat saya, menjadi engine penyimpanan data campuran antara relasional dan document store terbaik di pasaran saat ini,&quot; sebut Mike Sofen, Chief Database Architect, Synthetic Genomics
+</p>
+<p><a href="https://www.syntheticgenomics.com/">Synthetic Genomics, Inc.</a> (SGI) adalah pemimpin global dalam biologi dan genomic sintetis menggunakan dasar properti intelektual dalam disiplin ilmu yang berkembang cepat ini untuk merancang dan membangun sistem biologis untuk menjawab tantangan keberlanjutan global. SGI menyediakan solusi dalam riset genomic, bioproduction, dan produk terapannya. Segmen riset ini berfokus pada solusi genomics untuk riset akademis dan komersil dan organsasi pengembang. Produk dan jasa komersilnya mencakup include instrumentasi, reagen, jasa sintesa DNA, dan jasa dan software bioinformatika.  Hubungi Synthetic Genomics di <a href="mailto:media@syntheticgenomics.com">media@syntheticgenomics.com</a> (Bahasa Inggris)
+</p>
+<p>
+&quot;Dengan kemampuan JOIN, UPDATE dan DELETE secara remote, Foreign Data Wrappers kini menjadi solusi lengkap berbagi data antara database lain dengan PostgreSQL. Contohnya, PostgreSQL dapat digunakan untuk menangani input data menuju ke dua atau lebih jenis database berbeda,&quot; sebut Julyanto Sutandang, Director of Business Solutions di Equnix.</p>
+<p><a href="http://www.equnix.co.id/">Equnix</a> adalah penyedia Solusi IT untuk bisnis kelas enterprise yang memberi solusi alternatif yang menyeluruh, berdasarkan penelitian, pengembangan dan Open Source. Equnix adalah sebuah perusahaan PostgreSQL. Hubungi kami dalam Bahasa Inggris atau Bahasa Indonesia di: <a href="mailto:info@equnix.co.id">Info@equnix.co.id</a> atau hubungi Johan D. di  +6221-22866662.
+</p>
+
+<a name="companies"></a><h2>Dukungan Korporat</h2>
+
+<p>PostgreSQL memiliki dukungan berbagai perusahaan, yang mensponsori para pengembang, menyediakan sarana hosting, dan dukungan finansial.  Kunjungi <a href="https://www.postgresql.org/about/sponsors/">laman sponsor</a> kami untuk sebagian dari pendukung proyek ini.</p>
+
+<p>Juga ada komunitas besar <a href="/support/professional_support">perusahaan yang menawarkan dukungan profesional PostgreSQL</a>, dari konsultan individual hingga perusahaan multinasional.</p>
+
+<p><a href="/about/donate">Donasi</a> juga diterima.</p>
+<p>Atau Anda dapat membeli merchandise dari <li><a href="http://www.zazzle.com/postgresql">Toko PostgreSQL Zazzle </a></li>
+{% endblock %}
