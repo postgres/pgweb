@@ -5,7 +5,7 @@ So, you're ready to contribute to pgweb, and you want to set up a
 local working copy of the website code, so you have something to work
 with. Here's a quick step-by-step on how to do that:
 
-#. Make sure you have downloaded and installed django *version 1.4*
+#. Make sure you have downloaded and installed django *version 1.8*
    You will also need the dependencies *psycopg2*, *yaml*
    and *markdown* (these are python libraries, so prefix python- for Debian
    packages, for example). There is a `requirements.txt` file available
