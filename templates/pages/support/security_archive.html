@@ -34,6 +34,69 @@ the main <a href="/support/security">security page</a>.
   </tr>
 
   <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-3489">CVE-2012-3489</a></td>
+   <td class="colMid">9.1, 9.0, 8.4, 8.3</td>
+   <td class="colMid">9.1.5, 9.0.9, 8.4.13, 8.3.20</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">C</td>
+   <td class="colLast">xml_parse() DTD validation can be used to read arbitrary files</td>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-3488">CVE-2012-3488</a></td>
+   <td class="colMid">9.1, 9.0, 8.4, 8.3</td>
+   <td class="colMid">9.1.5, 9.0.9, 8.4.13, 8.3.20</td>
+   <td class="colMid">contrib module</td>
+   <td class="colMid">C</td>
+   <td class="colLast">contrib/xml2's xslt_process() can be used to read and write arbitrary files</td>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2143">CVE-2012-2143</a></td>
+   <td class="colMid">9.1, 9.0, 8.4, 8.3</td>
+   <td class="colMid">9.1.4, 9.0.8, 8.4.12, 8.3.19</td>
+   <td class="colMid">contrib module</td>
+   <td class="colMid">C</td>
+   <td class="colLast">Passwords containing the byte 0x80 passed to the crypt() function in pgcrypto are incorrectly truncated if DES encryption was used</td>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2655">CVE-2012-2655</a></td>
+   <td class="colMid">9.1, 9.0, 8.4, 8.3</td>
+   <td class="colMid">9.1.4, 9.0.8, 8.4.12, 8.3.19</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">D</td>
+   <td class="colLast">SECURITY DEFINER and SET attributes on procedural call handlers are not ignored and can be used to crash the server</td>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0866">CVE-2012-0866</a></td>
+   <td class="colMid">9.1, 9.0, 8.4, 8.3</td>
+   <td class="colMid">9.1.3, 9.0.7, 8.4.11, 8.3.18</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">C</td>
+   <td class="colLast">Permissions on a function called by a trigger are not properly checked.</td>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0867">CVE-2012-0867</a></td>
+   <td class="colMid">9.1, 9.0, 8.4</td>
+   <td class="colMid">9.1.3, 9.0.7, 8.4.11</td>
+   <td class="colMid">core server, limited deployments</td>
+   <td class="colMid">A</td>
+   <td class="colLast">SSL certificate name checks are truncated to 32 characters, allowing connection spoofing under some circumstances when using third party certificate authorities.</td>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-0868">CVE-2012-0868</a></td>
+   <td class="colMid">9.1, 9.0, 8.4, 8.3</td>
+   <td class="colMid">9.1.3, 9.0.7, 8.4.11, 8.3.18</td>
+   <td class="colMid">core server</td>
+   <td class="colMid">C</td>
+   <td class="colLast">Line breaks in object names can be exploited to execute arbitrary SQL when reloading a pg_dump file.</td>
+  </tr>
+  
+  <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4015">CVE-2010-4015</a></td>
    <td class="colMid">9.0, 8.4, 8.3, 8.2</td>
    <td class="colMid"> 9.0.3, 8.4.7, 8.3.14, 8.2.20</td>
