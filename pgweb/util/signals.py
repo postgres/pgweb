@@ -60,7 +60,8 @@ def _get_attr_value(obj, fieldname):
 			# access the primary key
 			return "<not available yet>"
 		return u", ".join(map(lambda x: unicode(x), getattr(obj, fieldname).all()))
-	return getattr(obj, fieldname)
+	# Return the value, or an empty tring if it's NULL (migrated records)
+	return getattr(obj, fieldname) or ''
 
 def _get_full_text_representation(obj):
 	fieldlist = _get_all_notification_fields(obj)
