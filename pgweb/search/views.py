@@ -259,7 +259,7 @@ def search(request):
 				'allsites': allsites,
 				'suburl': suburl
 				})
-		except ProgrammingError:
+		except psycopg2.ProgrammingError:
 			return render_to_response('search/sitesearch.html', {
 					'search_error': 'Error executing search query.'
 					}, RequestContext(request))
