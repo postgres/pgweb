@@ -251,13 +251,18 @@ def search(request):
 					}, RequestContext(request))
 
 		# perform the query for general web search
-		curs.execute("SELECT * FROM site_search(%(query)s, %(firsthit)s, %(hitsperpage)s, %(allsites)s, %(suburl)s)", {
+		try:
+			curs.execute("SELECT * FROM site_search(%(query)s, %(firsthit)s, %(hitsperpage)s, %(allsites)s, %(suburl)s)", {
 				'query': query,
 				'firsthit': firsthit - 1,
 				'hitsperpage': hitsperpage,
 				'allsites': allsites,
 				'suburl': suburl
 				})
+		except ProgrammingError:
+			return render_to_response('search/sitesearch.html', {
+					'search_error': 'Error executing search query.'
+					}, RequestContext(request))
 
 		hits = curs.fetchall()
 		conn.close()
