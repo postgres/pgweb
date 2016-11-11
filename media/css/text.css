@@ -9,15 +9,15 @@ h1 {
 }
 
 h2 {
-  color: #666; 
+  color: #666;
 }
 
-h3 { 
-  color: #666; 
+h3 {
+  color: #666;
 }
 
-h4 { 
-  color: #666; 
+h4 {
+  color: #666;
 }
 
 /* Text Styles */
@@ -36,31 +36,31 @@ h4 {
   font-weight: bold;
 }
 
-.txtDivider { 
-  font-size: 0.8em; 
-  color: #E1E1E1; 
-  padding-left: 4px; 
-  padding-right: 4px; 
+.txtDivider {
+  font-size: 0.8em;
+  color: #E1E1E1;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
-.txtNewsEvent { 
-  font-size: 0.9em; 
-  color: #0094C7; 
-}
-
-.txtDate { 
+.txtNewsEvent {
   font-size: 0.9em;
-  color: #666; 
+  color: #0094C7;
 }
 
-.txtMediumGrey { 
-  color: #666; 
+.txtDate {
+  font-size: 0.9em;
+  color: #666;
 }
 
-.txtFormLabel { 
-  color: #666; 
-  font-weight: bold; 
-  text-align: right; 
+.txtMediumGrey {
+  color: #666;
+}
+
+.txtFormLabel {
+  color: #666;
+  font-weight: bold;
+  text-align: right;
   vertical-align: top;
 }
 
@@ -89,42 +89,42 @@ h4 {
 }
 
 #txtFrontUserText {
-  font-size: 1.0em; 
-  color: #666; 
-  margin-top: 12px; 
+  font-size: 1.0em;
+  color: #666;
+  margin-top: 12px;
 }
 
-#txtFrontUserName { 
-  font-size: 0.9em; 
-  color: #666; 
-  margin-top: 9px; 
-  font-weight: bold; 
+#txtFrontUserName {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 9px;
+  font-weight: bold;
 }
 
-#txtFrontUserLink { 
-  font-size: 0.9em; 
-  color: #666; 
-  margin-top: 11px; 
-  margin-left: 1px; 
+#txtFrontUserLink {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 11px;
+  margin-left: 1px;
 }
 
 #txtFrontUserLink img {
   padding-right: 5px;
 }
 
-#txtFrontSupportUsText { 
+#txtFrontSupportUsText {
   font-size: 1.0em;
-  margin-top: 9px; 
+  margin-top: 9px;
 }
 
-#txtFrontSupportUsLink { 
+#txtFrontSupportUsLink {
   font-size: 0.9em;
-  margin-top: 6px; 
+  margin-top: 6px;
 }
 
 #txtFrontSupportUsLink img {
   padding-right: 7px;
-} 
+}
 
 /* Link Styles */
 
@@ -144,8 +144,8 @@ a:hover                         { color:#000000; text-decoration: underline; }
 #txtFrontUserName a:hover               { color:#000; text-decoration: underline; }
 
 #txtArchives a:visited	{ color:#00536E; text-decoration: underline; }
-#txtArchives pre 	{ word-wrap: break-word; font-size: 150%; }
-#txtArchives tt 	{ word-wrap: break-word; font-size: 150%; }
+#txtArchives pre        { word-wrap: break-word; font-size: 150%; }
+#txtArchives tt         { word-wrap: break-word; font-size: 150%; }
 
 #pgFrontUSSContainer h2, #pgFrontUSSContainer h3 {
   margin: 0;

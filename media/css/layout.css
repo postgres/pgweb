@@ -44,8 +44,8 @@
   float: left;
 }
 
-#pgHeaderLogoLeft img { 
-  border: 0px; 
+#pgHeaderLogoLeft img {
+  border: 0px;
 }
 
 #pgHeaderLogoRight {
@@ -79,13 +79,13 @@
   white-space: nowrap; /* for Opera */
 }
 
-#pgSearch form label { 
-  color: #666; 
-  font-size: 0.8em; 
+#pgSearch form label {
+  color: #666;
+  font-size: 0.8em;
 }
 
-#pgSearch form input { 
-  font-size: 0.8em; 
+#pgSearch form input {
+  font-size: 0.8em;
 }
 
 #pgSearch form #submit,
@@ -168,7 +168,7 @@
 #pgFrontFeature #pgFrontFeatureContent {
     /* This padding controls the size of the text in the front blurb, and needs to be
      * adjusted whenever the image is changed. */
-  padding: 6px 132px 16px 10px; 
+  padding: 6px 132px 16px 10px;
 }
 
 #pgFrontRightContainer {
@@ -430,7 +430,7 @@ img.pgArrowImage {
   border-bottom: 1px solid #EFEFEF;
   background: #F5F5F5 url(/media/img/layout/box_top.gif) no-repeat top left;
 }
-	
+
 #pgSurvey dd {
   margin: 0 0 0 10px;
   padding: 0 10px 0 0;
@@ -524,7 +524,7 @@ img.pgArrowImage {
   border-bottom: 1px solid #EFEFEF;
   background: #F5F5F5 url(/media/img/layout/box_top.gif) no-repeat top left;
 }
-	
+
 #pgQuickDocs dd {
   margin: 0 0 0 10px;
   padding: 0 10px 0 0;
@@ -557,7 +557,7 @@ img.pgArrowImage {
 }
 
 .pgCommunityDocsCurrentMenu {
-  font-weight: bold;    
+  font-weight: bold;
 }
 
 #pgDownloadsWrap {
@@ -597,7 +597,7 @@ img.pgArrowImage {
   border-bottom: 1px solid #EFEFEF;
   background: #F5F5F5 url(/media/img/layout/box_top.gif) no-repeat top left;
 }
-	
+
 #pgQuickDownloads dd {
   margin: 0 0 0 10px;
   padding: 0 10px 0 0;
@@ -620,7 +620,6 @@ img.pgArrowImage {
 
 #pgPressContacts dd {
   margin-bottom: 10px;
-  
 }
 
 #pgArchiveWrap {
@@ -629,9 +628,9 @@ img.pgArrowImage {
 
 /* Footer Container */
 #pgFooter {
-  font-size: 0.9em; 
-  color: #666; 
-  line-height: 1.3em; 
+  font-size: 0.9em;
+  color: #666;
+  line-height: 1.3em;
   padding-top: 5px;
   clear: both;
 }
@@ -645,27 +644,27 @@ TABLE.pgGenericFormTable TR TD INPUT,
 TABLE.pgGenericFormTable TR TD SELECT,
 TABLE.pgGenericFormTable TR TD TEXTAREA,
 TABLE.pgGenericFormTable TR TD DIV.markdownpreview {
-   width: 100%;
+  width: 100%;
 }
 
 TABLE.pgGenericFormTable TR.error {
-   background-color: red;
-   color: white;
+  background-color: red;
+  color: white;
 }
 
 TABLE.pgGenericFormTable TR.errorinfo {
-   background-color: #FFFFCC;
+  background-color: #FFFFCC;
 }
 
 TABLE.pgGenericFormTable TR.errorheader TD {
-   background-color: #FFFFCC;
-   border: 1px solid red;
-   padding: 2px;
+  background-color: #FFFFCC;
+  border: 1px solid red;
+  padding: 2px;
 }
 
 TABLE.pgGenericFormTable TR TH SPAN.formfieldhelp {
-   font-weight: normal;
-   font-style: italic;
+  font-weight: normal;
+  font-style: italic;
 }
 
 /* Misc Classes */
@@ -677,11 +676,11 @@ TABLE.pgGenericFormTable TR TH SPAN.formfieldhelp {
 }
 
 .pgBlockHide {
-	display: none;
-	height: 0;
-	width: 0;
-	overflow: hidden;
-	position: absolute;  /* IE5 Mac */
+  display: none;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  position: absolute;  /* IE5 Mac */
 }
 
 img {
