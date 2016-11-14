@@ -9,5 +9,5 @@ echo 'Are you sure you want this (answer "yes" to overwrite)'
 read R
 
 if [ "$R" == "yes" ]; then
-   find . -name data.yaml | xargs ./manage.py loaddata
+   find . -name data.yaml | xargs ../manage.py loaddata
 fi
