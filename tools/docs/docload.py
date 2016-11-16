@@ -29,7 +29,17 @@ def load_doc_file(filename, f):
 				indent='auto',
 			)
 
-	contents = unicode(f.read(),'latin1')
+	# Postgres 10 started using xml toolchain and now produces docmentation in utf8. So we need
+	# to figure out which version it is.
+	rawcontents = f.read()
+	if rawcontents.startswith('<?xml version="1.0" encoding="UTF-8"'):
+		# Version 10, use utf8
+		encoding = 'utf-8'
+	else:
+		encoding = 'latin1'
+
+	contents = unicode(rawcontents, encoding)
+
 	tm = re_titlematch.search(contents)
 	if tm:
 		title = tm.group(1)
