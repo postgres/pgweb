@@ -64,7 +64,7 @@
   "model": "core.importedrssfeed",
   "fields": {
    "internalname": "planet",
-   "url": "http://planet.postgresql.org/rss20_short.xml"
+   "url": "https://planet.postgresql.org/rss20_short.xml"
   }
  },
  {
