@@ -9,7 +9,11 @@
 <div>
 <table border="0" cellpadding="0" cellspacing="0" width="90%">
 {%for dir in directories%}
- <tr><td><a href="{{dir.url}}"><img src="/media/img/ftp/folder.png" alt="{{dir.link}}" /></a>&nbsp;<a href="{{dir.url}}">{{dir.link}}</a></td></tr>
+ {% if dir.type == 'd' or dir.link = '[Parent Directory]' %}
+  <tr><td><a href="{{dir.url}}/"><img src="/media/img/ftp/folder.png" alt="{{dir.link}}" /></a>&nbsp;<a href="{{dir.url}}/">{{dir.link}}</a></td></tr>
+ {%else%}
+  <tr><td><a href="{{dir.url}}/"><img src="/media/img/ftp/symlink.png" alt="{{dir.link}} -&gt; {{dir.url}}" /></a>&nbsp;<a href="{{dir.url}}/">{{dir.link}}</a> -&gt; {{dir.url}}</td></tr>
+ {%endif%}
 {%endfor%}
 </table>
 </div>

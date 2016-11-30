@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from pgweb.util.decorators import login_required
@@ -40,16 +41,45 @@ def ftpbrowser(request, subpath):
 	except Exception, e:
 		return HttpServerError("Failed to load ftp site information: %s" % e)
 
-	if not allnodes.has_key(subpath):
-		raise Http404
+	# An incoming subpath may either be canonical, or have one or more elements
+	# present that are actually symlinks. For each element of the path, test to
+	# see if it is present in the pickle. If not, look for a symlink entry with
+	# and if present, replace the original entry with the symlink target.
+	canonpath = ''
+	if subpath != '':
+		parent = ''
+		for d in subpath.split('/'):
+			# Check if allnodes contains a node matching the path
+			if allnodes[parent].has_key(d):
+				if allnodes[parent][d]['t'] == 'd':
+					canonpath = os.path.join(canonpath, d)
+				elif allnodes[parent][d]['t'] == 'l':
+					canonpath = os.path.join(canonpath, allnodes[parent][d]['d'])
+				else:
+					# There's a matching node, but it's not a link or a directory
+					raise Http404
+
+				parent = canonpath
+			else:
+				# There's no matching node
+				raise Http404
+
+	# If we wound up with a canonical path that doesn't match the original request,
+	# redirect the user
+	canonpath = canonpath.strip('/')
+	if subpath != canonpath:
+		return HttpResponseRedirect('/ftp/' + canonpath)
 
 	node = allnodes[subpath]
 	del allnodes
 
 	# Add all directories
-	directories = [{'link': k, 'url': k} for k,v in node.items() if v['t'] == 'd']
-	# Add all symlinks (only directoreis supported)
-	directories.extend([{'link': k, 'url': v['d']} for k,v in node.items() if v['t'] == 'l'])
+	directories = [{'link': k, 'url': k, 'type': 'd'} for k,v in node.items() if v['t'] == 'd']
+	# Add all symlinks (only directories supported)
+	directories.extend([{'link': k, 'url': v['d'], 'type': 'l'} for k,v in node.items() if v['t'] == 'l'])
+
+	# A ittle early sorting wouldn't go amiss, so .. ends up at the top
+	directories.sort(key = version_sort, reverse=True)
 
 	# Add a link to the parent directory
 	if subpath:
@@ -80,7 +110,7 @@ def ftpbrowser(request, subpath):
 
 	return render_to_response('downloads/ftpbrowser.html', {
 		'basepath': subpath.rstrip('/'),
-		'directories': sorted(directories, key = version_sort, reverse=True),
+		'directories': directories,
 		'files': sorted(files),
 		'breadcrumbs': breadcrumbs,
 		'readme': file_readme,
