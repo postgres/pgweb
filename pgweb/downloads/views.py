@@ -54,7 +54,7 @@ def ftpbrowser(request, subpath):
 				if allnodes[parent][d]['t'] == 'd':
 					canonpath = os.path.join(canonpath, d)
 				elif allnodes[parent][d]['t'] == 'l':
-					canonpath = os.path.join(canonpath, allnodes[parent][d]['d'])
+					canonpath = os.path.join(canonpath, allnodes[parent][d]['d']).strip('/')
 				else:
 					# There's a matching node, but it's not a link or a directory
 					raise Http404
