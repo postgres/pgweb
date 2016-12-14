@@ -24,7 +24,7 @@ class Survey(models.Model):
 	posted = models.DateTimeField(null=False, auto_now_add=True)
 	current = models.BooleanField(null=False, default=False)
 
-	purge_urls = ('/community/survey', )
+	purge_urls = ('/community/survey', '/community/$')
 
 	def __unicode__(self):
 		return self.question
