@@ -46,8 +46,8 @@ def _get_all_notification_fields(obj):
 		return obj.notify_fields
 	else:
 		# Include all field names except specified ones,
-		# that are "direct" (by get_field_by_name()[2])
-		return [n for n in obj._meta.get_all_field_names() if not n in ('approved', 'submitter', 'id', ) and obj._meta.get_field_by_name(n)[2]]
+		# that are local to this model (not auto created)
+		return [f.name for f in obj._meta.get_fields() if not f.name in ('approved', 'submitter', 'id', ) and not f.auto_created]
 
 def _get_attr_value(obj, fieldname):
 	# see if this is a Many-to-many field. If yes, we want to print
@@ -58,7 +58,7 @@ def _get_attr_value(obj, fieldname):
 		return ''
 
 	# Return the value, or an empty tring if it's NULL (migrated records)
-	return getattr(obj, fieldname) or ''
+	return unicode(getattr(obj, fieldname)) or ''
 
 def _get_full_text_representation(obj):
 	fieldlist = _get_all_notification_fields(obj)
