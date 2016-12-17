@@ -53,13 +53,10 @@ def _get_attr_value(obj, fieldname):
 	# see if this is a Many-to-many field. If yes, we want to print
 	# it out as a pretty list
 	if isinstance(obj._meta.get_field_by_name(fieldname)[0], models.ManyToManyField):
-		# NOTE! If the object is brand new, and it has a many-to-many relationship, we can't
-		# access this data yet. So just return that it's not available yet.
-		if not obj.pk:
-			# No primary key indicates the object doesn't exist yet, so we can't
-			# access the primary key
-			return "<not available yet>"
-		return u", ".join(map(lambda x: unicode(x), getattr(obj, fieldname).all()))
+		# XXX: Changes to ManyToMany fields can't be tracked here :(
+		#      For now, we have no good way to deal with it so, well, don't.
+		return ''
+
 	# Return the value, or an empty tring if it's NULL (migrated records)
 	return getattr(obj, fieldname) or ''
 
