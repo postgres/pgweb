@@ -16,9 +16,9 @@ whatsoever.</i>
 <div>Date: <b>{{event.displaydate|safe}}</b></div>
 <div>Location: <b>{{event.locationstring}}</b></div>
 {%if event.language%}<div>Language: <b>{{event.language}}</b></div>{%endif%}
-<p>
+<div>
 {{event.summary|markdown}}
-</p>
+</div>
 {%endfor%}
 {%if not archive%}
 <p><a href="/about/eventarchive/{{eventblock.link}}">Older {{eventblock.name}}</a></p>
