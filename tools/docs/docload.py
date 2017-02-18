@@ -35,6 +35,8 @@ def load_doc_file(filename, f):
 	if rawcontents.startswith('<?xml version="1.0" encoding="UTF-8"'):
 		# Version 10, use utf8
 		encoding = 'utf-8'
+		# XML builds also don't need clean=1, and that one adds some interesting CSS properties
+		del tidyopts['clean']
 	else:
 		encoding = 'latin1'
 
