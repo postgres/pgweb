@@ -55,7 +55,7 @@ class Feature(models.Model):
 
 	@property
 	def featurelink(self):
-		if self.featuredescription.startswith('http://'):
+		if self.featuredescription.startswith('https://') or self.featuredescription.startswith('http://'):
 			return self.featuredescription
 		else:
 			return 'detail/%s/' % self.id
