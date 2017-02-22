@@ -11,6 +11,7 @@ import urllib
 import psycopg2
 import json
 import socket
+import ssl
 
 from pgweb.lists.models import MailingList
 
@@ -184,7 +185,7 @@ def search(request):
 			c.sock.settimeout(20) # Set a 20 second timeout
 			try:
 				r = c.getresponse()
-			except socket.timeout:
+			except (socket.timeout, ssl.SSLError):
 				return render_to_response('search/listsearch.html', {
 						'search_error': 'Timeout when talking to search server. Please try your search again later, or with a more restrictive search terms.',
 						}, RequestContext(request))
