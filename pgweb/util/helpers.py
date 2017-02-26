@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from pgweb.util.contexts import NavContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.template import Context
 from django.template.loader import get_template
 import django.utils.xmlutils
@@ -10,6 +10,10 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 		instance = instancetype()
 	else:
 		# Regular form item, attempt to edit it
+		try:
+			i = int(itemid)
+		except ValueError:
+			raise Http404("Invalid URL")
 		if createifempty:
 			(instance, wascreated) = instancetype.objects.get_or_create(pk=itemid)
 		else:
