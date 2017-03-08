@@ -1,6 +1,7 @@
 {%extends "base/base.html" %}
 {%block layoutblock%}
 <div id="pgSideWrap">
+ {%if navmenu|length > 0%}
  <div id="pgSideNav">
   <ul>
    {%for m in navmenu%}
@@ -19,6 +20,7 @@
    {%endfor%}
   </ul>
  </div>
+ {%endif%}
 </div> <!-- pgSideWrap -->
 <div id="pgContentWrap">
 {%block contents%}{%endblock%}
