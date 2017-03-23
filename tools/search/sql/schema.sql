@@ -32,7 +32,7 @@ CREATE TABLE webpages (
    suburl varchar(512) NOT NULL,
    title varchar(128) NOT NULL,
    relprio float NOT NULL DEFAULT 0.5,
-   internal boolean NOT NULL DEFAULT 'f',
+   isinternal boolean NOT NULL DEFAULT 'f',
    lastscanned timestamptz NULL,
    txt text NOT NULL,
    fti tsvector NOT NULL
