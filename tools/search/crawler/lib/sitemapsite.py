@@ -7,6 +7,9 @@ from lib.basecrawler import BaseSiteCrawler
 
 class SitemapParser(object):
 	def __init__(self):
+		self.urls = []
+
+	def parse(self, f, internal=False):
 		self.parser = xml.parsers.expat.ParserCreate()
 		self.currenturl = ""
 		self.currentprio = 0
@@ -16,9 +19,6 @@ class SitemapParser(object):
 		self.getlastmod = False
 		self.currstr = ""
 		self.internal = False
-		self.urls = []
-
-	def parse(self, f, internal=False):
 		self.parser.StartElementHandler = lambda name,attrs: self.processelement(name,attrs)
 		self.parser.EndElementHandler = lambda name: self.processendelement(name)
 		self.parser.CharacterDataHandler = lambda data: self.processcharacterdata(data)
