@@ -254,7 +254,7 @@ def search(request):
 		# This is kind of a hack, but... Some URLs are flagged as internal
 		# and should as such only be included in searches that explicitly
 		# reference the suburl that they are in.
-		if suburl.startswith('/docs/devel'):
+		if suburl and suburl.startswith('/docs/devel'):
 			include_internal = True
 		else:
 			include_internal = False
