@@ -24,11 +24,11 @@ class GenericSiteCrawler(BaseSiteCrawler):
 		self.extra_excludes = [re.compile(x) for x, in curs.fetchall()]
 
 		# We *always* crawl the root page, of course
-		self.queue.put(("/", 0.5))
+		self.queue.put(("/", 0.5, False))
 
 		# Now do all the other pages
 		for x in allpages:
-			self.queue.put((x, 0.5))
+			self.queue.put((x, 0.5, False))
 
 	def exclude_url(self, url):
 		if self.robots and self.robots.block_url(url):
@@ -39,7 +39,7 @@ class GenericSiteCrawler(BaseSiteCrawler):
 		return False
 
 	def queue_url(self, url):
-		self.queue.put((url.strip(), 0.5))
+		self.queue.put((url.strip(), 0.5, False))
 
 	def post_process_page(self, url):
 		for l in self.resolve_links(self.page.links, url):

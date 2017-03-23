@@ -81,9 +81,9 @@ class BaseSiteCrawler(object):
 
 	def crawl_from_queue(self):
 		while not self.stopevent.is_set():
-			(url, relprio) = self.queue.get()
+			(url, relprio, internal) = self.queue.get()
 			try:
-				self.crawl_page(url, relprio)
+				self.crawl_page(url, relprio, internal)
 			except Exception, e:
 				log("Exception crawling '%s': %s" % (url, e))
 			self.queue.task_done()
@@ -91,7 +91,7 @@ class BaseSiteCrawler(object):
 	def exclude_url(self, url):
 		return False
 
-	def crawl_page(self, url, relprio):
+	def crawl_page(self, url, relprio, internal):
 		if self.pages_crawled.has_key(url) or self.pages_crawled.has_key(url+"/"):
 			return
 
@@ -131,10 +131,10 @@ class BaseSiteCrawler(object):
 			log(e)
 			return
 
-		self.save_page(url, lastmod, relprio)
+		self.save_page(url, lastmod, relprio, internal)
 		self.post_process_page(url)
 
-	def save_page(self, url, lastmod, relprio):
+	def save_page(self, url, lastmod, relprio, internal):
 		if relprio == 0.0:
 			relprio = 0.5
 		params = {
@@ -144,11 +144,12 @@ class BaseSiteCrawler(object):
 			'site': self.siteid,
 			'url': url,
 			'relprio': relprio,
+			'internal': internal,
 			}
 		curs = self.dbconn.cursor()
-		curs.execute("UPDATE webpages SET title=%(title)s, txt=%(txt)s, fti=to_tsvector(%(txt)s), lastscanned=%(lastmod)s, relprio=%(relprio)s WHERE site=%(site)s AND suburl=%(url)s", params)
+		curs.execute("UPDATE webpages SET title=%(title)s, txt=%(txt)s, fti=to_tsvector(%(txt)s), lastscanned=%(lastmod)s, relprio=%(relprio)s, isinternal=%(internal)s WHERE site=%(site)s AND suburl=%(url)s", params)
 		if curs.rowcount != 1:
-			curs.execute("INSERT INTO webpages (site, suburl, title, txt, fti, lastscanned, relprio) VALUES (%(site)s, %(url)s, %(title)s, %(txt)s, to_tsvector(%(txt)s), %(lastmod)s, %(relprio)s)", params)
+			curs.execute("INSERT INTO webpages (site, suburl, title, txt, fti, lastscanned, relprio, isinternal) VALUES (%(site)s, %(url)s, %(title)s, %(txt)s, to_tsvector(%(txt)s), %(lastmod)s, %(relprio)s, %(internal)s)", params)
 			with self.counterlock:
 				self.pages_new += 1
 		else:

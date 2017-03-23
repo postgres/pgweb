@@ -15,12 +15,14 @@ class SitemapParser(object):
 		self.getprio = False
 		self.getlastmod = False
 		self.currstr = ""
+		self.internal = False
 		self.urls = []
 
-	def parse(self, f):
+	def parse(self, f, internal=False):
 		self.parser.StartElementHandler = lambda name,attrs: self.processelement(name,attrs)
 		self.parser.EndElementHandler = lambda name: self.processendelement(name)
 		self.parser.CharacterDataHandler = lambda data: self.processcharacterdata(data)
+		self.internal = internal
 
 		self.parser.ParseFile(f)
 
@@ -50,7 +52,7 @@ class SitemapParser(object):
 			self.getlastmod = False
 			self.currentlastmod = dateutil.parser.parse(self.currstr)
 		elif name == "url":
-			self.urls.append((self.currenturl, self.currentprio, self.currentlastmod))
+			self.urls.append((self.currenturl, self.currentprio, self.currentlastmod, self.internal))
 
 	def processcharacterdata(self, data):
 		if self.geturl or self.getprio or self.getlastmod:
@@ -68,7 +70,16 @@ class SitemapSiteCrawler(BaseSiteCrawler):
 		p.parse(u)
 		u.close()
 
-		for url, prio, lastmod in p.urls:
+		# Attempt to fetch a sitempa_internal.xml. This is used to index
+		# pages on our internal search engine that we don't want on
+		# Google. They should also be excluded from default search
+		# results (unless searching with a specific suburl)
+		u = urllib.urlopen("https://%s/sitemap_internal.xml" % self.hostname)
+		if u.getcode() == 200:
+			p.parse(u, True)
+		u.close()
+
+		for url, prio, lastmod, internal in p.urls:
 			# Advance 8 characters - length of https://.
 			url = url[len(self.hostname)+8:]
 			if lastmod:
@@ -79,7 +90,7 @@ class SitemapSiteCrawler(BaseSiteCrawler):
 						# to make sure we don't remove it...
 						self.pages_crawled[url] = 1
 						continue
-			self.queue.put((url, prio))
+			self.queue.put((url, prio, internal))
 
 		log("About to crawl %s pages from sitemap" % self.queue.qsize())
 
