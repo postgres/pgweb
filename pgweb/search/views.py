@@ -251,14 +251,23 @@ def search(request):
 					'search_error': 'Could not connect to search database.'
 					}, RequestContext(request))
 
+		# This is kind of a hack, but... Some URLs are flagged as internal
+		# and should as such only be included in searches that explicitly
+		# reference the suburl that they are in.
+		if suburl.startswith('/docs/devel'):
+			include_internal = True
+		else:
+			include_internal = False
+
 		# perform the query for general web search
 		try:
-			curs.execute("SELECT * FROM site_search(%(query)s, %(firsthit)s, %(hitsperpage)s, %(allsites)s, %(suburl)s)", {
+			curs.execute("SELECT * FROM site_search(%(query)s, %(firsthit)s, %(hitsperpage)s, %(allsites)s, %(suburl)s, %(internal)s)", {
 				'query': query,
 				'firsthit': firsthit - 1,
 				'hitsperpage': hitsperpage,
 				'allsites': allsites,
-				'suburl': suburl
+				'suburl': suburl,
+				'internal': include_internal,
 				})
 		except psycopg2.ProgrammingError:
 			return render_to_response('search/sitesearch.html', {

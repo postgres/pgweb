@@ -60,7 +60,7 @@ LANGUAGE 'plpgsql';
 ALTER FUNCTION archives_search(text, int, timestamptz, timestamptz, int, int, char) SET default_text_search_config = 'public.pg';
 
 
-CREATE OR REPLACE FUNCTION site_search(query text, startofs int, hitsperpage int, allsites bool, _suburl text)
+CREATE OR REPLACE FUNCTION site_search(query text, startofs int, hitsperpage int, allsites bool, _suburl text, includeinternal boolean DEFAULT False)
 RETURNS TABLE (siteid int, baseurl text, suburl text, title text, headline text, rank float)
 AS $$
 DECLARE
@@ -82,13 +82,13 @@ BEGIN
 
     IF allsites THEN
         SELECT INTO pagecount sum(sites.pagecount) FROM sites;
-        OPEN curs FOR SELECT sites.id AS siteid, sites.baseurl, webpages.suburl, ts_rank_cd(fti,tsq) * relprio AS ts_rank_cd FROM webpages INNER JOIN sites ON webpages.site=sites.id WHERE fti @@ tsq ORDER BY ts_rank_cd(fti,tsq) * relprio DESC LIMIT 1000;
+        OPEN curs FOR SELECT sites.id AS siteid, sites.baseurl, webpages.suburl, ts_rank_cd(fti,tsq) * relprio AS ts_rank_cd FROM webpages INNER JOIN sites ON webpages.site=sites.id WHERE fti @@ tsq AND (includeinternal OR NOT isinternal) ORDER BY ts_rank_cd(fti,tsq) * relprio DESC LIMIT 1000;
     ELSE
         SELECT INTO pagecount sites.pagecount FROM sites WHERE id=1;
         IF _suburl IS NULL THEN
-            OPEN curs FOR SELECT sites.id AS siteid, sites.baseurl, webpages.suburl, ts_rank_cd(fti,tsq) * relprio AS ts_rank_cd FROM webpages INNER JOIN sites ON webpages.site=sites.id WHERE fti @@ tsq AND site=1 ORDER BY ts_rank_cd(fti,tsq) * relprio DESC LIMIT 1000;
+            OPEN curs FOR SELECT sites.id AS siteid, sites.baseurl, webpages.suburl, ts_rank_cd(fti,tsq) * relprio AS ts_rank_cd FROM webpages INNER JOIN sites ON webpages.site=sites.id WHERE fti @@ tsq AND site=1 AND (includeinternal OR NOT isinternal) ORDER BY ts_rank_cd(fti,tsq) * relprio DESC LIMIT 1000;
         ELSE
-            OPEN curs FOR SELECT sites.id AS siteid, sites.baseurl, webpages.suburl, ts_rank_cd(fti,tsq) * relprio AS ts_rank_cd FROM webpages INNER JOIN sites ON webpages.site=sites.id WHERE fti @@ tsq AND site=1 AND webpages.suburl LIKE _suburl||'%' ORDER BY ts_rank_cd(fti,tsq) * relprio DESC LIMIT 1000;
+            OPEN curs FOR SELECT sites.id AS siteid, sites.baseurl, webpages.suburl, ts_rank_cd(fti,tsq) * relprio AS ts_rank_cd FROM webpages INNER JOIN sites ON webpages.site=sites.id WHERE fti @@ tsq AND site=1 AND webpages.suburl LIKE _suburl||'%' AND (includeinternal OR NOT isinternal) ORDER BY ts_rank_cd(fti,tsq) * relprio DESC LIMIT 1000;
         END IF;
     END IF;
     LOOP
@@ -106,4 +106,4 @@ BEGIN
 END;
 $$
 LANGUAGE 'plpgsql';
-ALTER FUNCTION site_search(text, int, int, bool, text) SET default_text_search_config = 'public.pg';
+ALTER FUNCTION site_search(text, int, int, bool, text, boolean) SET default_text_search_config = 'public.pg';
