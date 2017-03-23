@@ -36,3 +36,15 @@ def get_struct():
 		if version == currentversion.tree:
 			yield ('docs/current/static/%s' % filename,
 				   1.0, loaded)
+
+# For our internal sitemap (used only by our own search engine),
+# include the devel version of the docs (and only those, since the
+# other versions are already included)
+def get_internal_struct():
+	curs = connection.cursor()
+	curs.execute("SELECT d.file, v.docsloaded FROM docs d INNER JOIN core_version v ON v.tree=d.version WHERE version = 0")
+
+	for filename, loaded in curs.fetchall():
+		yield ('docs/devel/static/%s' % (filename, ),
+			   0.1,
+			   loaded)

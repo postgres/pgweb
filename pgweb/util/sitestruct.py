@@ -1,6 +1,6 @@
 from django.conf import settings
 
-def get_all_pages_struct():
+def get_all_pages_struct(method='get_struct'):
 	"""
 	Return an iterator over all distinct pages on the site.
 	Each page is returned as a tuple consisting of:
@@ -13,9 +13,10 @@ def get_all_pages_struct():
 	for app in settings.INSTALLED_APPS:
 		if app.startswith('pgweb.'):
 			try:
-				m = __import__(app+".struct", {}, {}, 'get_struct')
+				m = __import__(app+".struct", {}, {}, method)
 			except:
 				# Failed to import - probably module didnd't exist
 				continue
 
-			for x in m.get_struct(): yield x
+			if hasattr(m, method):
+				for x in getattr(m, method)(): yield x

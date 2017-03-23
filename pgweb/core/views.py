@@ -132,15 +132,13 @@ Sitemap: https://www.postgresql.org/sitemap.xml
 """, content_type='text/plain')
 
 
-# Sitemap (XML format)
-@cache(hours=6)
-def sitemap(request):
+def _make_sitemap(pagelist):
 	resp = HttpResponse(content_type='text/xml')
 	x = PgXmlHelper(resp)
 	x.startDocument()
 	x.startElement('urlset', {'xmlns': 'http://www.sitemaps.org/schemas/sitemap/0.9'})
 	pages = 0
-	for p in get_all_pages_struct():
+	for p in pagelist:
 		pages+=1
 		x.startElement('url', {})
 		x.add_xml_element('loc', 'https://www.postgresql.org/%s' % urllib.quote(p[0]))
@@ -152,6 +150,18 @@ def sitemap(request):
 	x.endElement('urlset')
 	x.endDocument()
 	return resp
+
+# Sitemap (XML format)
+@cache(hours=6)
+def sitemap(request):
+	return _make_sitemap(get_all_pages_struct())
+
+# Internal sitemap (only for our own search engine)
+# Note! Still served up to anybody who wants it, so don't
+# put anything secret in it...
+@cache(hours=6)
+def sitemap_internal(request):
+	return _make_sitemap(get_all_pages_struct(method='get_internal_struct'))
 
 # dynamic CSS serving, meaning we merge a number of different CSS into a
 # single one, making sure it turns into a single http response. We do this

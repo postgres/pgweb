@@ -81,6 +81,7 @@ urlpatterns = patterns('',
 	# Sitemap (FIXME: support for >50k urls!)
 	###
 	(r'^sitemap.xml', 'pgweb.core.views.sitemap'),
+	(r'^sitemap_internal.xml', 'pgweb.core.views.sitemap_internal'),
 
 	###
 	# Workaround for broken links pushed in press release
