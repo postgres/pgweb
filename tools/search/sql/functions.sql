@@ -106,4 +106,7 @@ BEGIN
 END;
 $$
 LANGUAGE 'plpgsql';
-ALTER FUNCTION site_search(text, int, int, bool, text, boolean) SET default_text_search_config = 'public.pg';
+/* Seems broken, so stop doing this for now
+ * ALTER FUNCTION site_search(text, int, int, bool, text, boolean) SET default_text_search_config = 'public.pg';
+ */
+
