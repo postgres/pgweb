@@ -71,7 +71,7 @@ DECLARE
     curs refcursor;
     pagecount int;
 BEGIN
-    tsq := plainto_tsquery(query);
+    tsq := plainto_tsquery('public.pg', query);
     IF numnode(tsq) = 0 THEN
         siteid = 0;baseurl=NULL;suburl=NULL;title=NULL;headline=NULL;rank=0;
         RETURN NEXT;
@@ -106,7 +106,3 @@ BEGIN
 END;
 $$
 LANGUAGE 'plpgsql';
-/* Seems broken, so stop doing this for now
- * ALTER FUNCTION site_search(text, int, int, bool, text, boolean) SET default_text_search_config = 'public.pg';
- */
-
