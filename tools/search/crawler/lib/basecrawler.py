@@ -147,9 +147,9 @@ class BaseSiteCrawler(object):
 			'internal': internal,
 			}
 		curs = self.dbconn.cursor()
-		curs.execute("UPDATE webpages SET title=%(title)s, txt=%(txt)s, fti=to_tsvector('public.pg', %(txt)s), lastscanned=%(lastmod)s, relprio=%(relprio)s, isinternal=%(internal)s WHERE site=%(site)s AND suburl=%(url)s", params)
+		curs.execute("UPDATE webpages SET title=%(title)s, txt=%(txt)s, fti=setweight(to_tsvector('public.pg', %(title)s), 'A') || to_tsvector('public.pg', %(txt)s), lastscanned=%(lastmod)s, relprio=%(relprio)s, isinternal=%(internal)s WHERE site=%(site)s AND suburl=%(url)s", params)
 		if curs.rowcount != 1:
-			curs.execute("INSERT INTO webpages (site, suburl, title, txt, fti, lastscanned, relprio, isinternal) VALUES (%(site)s, %(url)s, %(title)s, %(txt)s, to_tsvector('public.pg', %(txt)s), %(lastmod)s, %(relprio)s, %(internal)s)", params)
+			curs.execute("INSERT INTO webpages (site, suburl, title, txt, fti, lastscanned, relprio, isinternal) VALUES (%(site)s, %(url)s, %(title)s, %(txt)s, setweight(to_tsvector('public.pg', %(title)s), 'A') || to_tsvector('public.pg', %(txt)s), %(lastmod)s, %(relprio)s, %(internal)s)", params)
 			with self.counterlock:
 				self.pages_new += 1
 		else:
