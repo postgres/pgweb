@@ -22,10 +22,10 @@ def doit():
 	conn.commit()
 
 	# Skip id=1, which is the main site..
-	curs.execute("SELECT id, hostname FROM sites WHERE id>1")
-	for siteid, hostname in curs.fetchall():
+	curs.execute("SELECT id, hostname, https FROM sites WHERE id>1")
+	for siteid, hostname, https in curs.fetchall():
 		log("Starting indexing of %s" % hostname)
-		GenericSiteCrawler(hostname, conn, siteid).crawl()
+		GenericSiteCrawler(hostname, conn, siteid, https).crawl()
 		conn.commit()
 
 	curs.execute("WITH t AS (SELECT site,count(*) AS c FROM webpages GROUP BY site) UPDATE sites SET pagecount=t.c FROM t WHERE id=t.site")

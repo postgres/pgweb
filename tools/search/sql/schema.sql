@@ -24,6 +24,7 @@ CREATE TABLE sites (
    id int NOT NULL PRIMARY KEY,
    hostname text NOT NULL UNIQUE,
    description text NOT NULL,
+   https boolean NOT NULL DEFAULT 'f',
    pagecount int NOT NULL
 );
 

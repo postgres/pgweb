@@ -232,7 +232,7 @@ class BaseSiteCrawler(object):
 	def resolve_links(self, links, pageurl):
 		for x in links:
 			p = urlparse.urlsplit(x)
-			if p.scheme == "http":
+			if p.scheme in ("http", "https"):
 				if p.netloc != self.hostname:
 					# Remote link
 					continue

@@ -4,8 +4,8 @@ from basecrawler import BaseSiteCrawler
 from parsers import RobotsParser
 
 class GenericSiteCrawler(BaseSiteCrawler):
-	def __init__(self, hostname, dbconn, siteid):
-		super(GenericSiteCrawler, self).__init__(hostname, dbconn, siteid)
+	def __init__(self, hostname, dbconn, siteid, https=False):
+		super(GenericSiteCrawler, self).__init__(hostname, dbconn, siteid, https=https)
 
 	def init_crawl(self):
 		# Load robots.txt
