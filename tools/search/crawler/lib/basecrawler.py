@@ -178,7 +178,7 @@ class BaseSiteCrawler(object):
 				if not self.https:
 					h = httplib.HTTPConnection(host=self.hostname, port=80, strict=True, timeout=10)
 				else:
-					h = httplib.HTTPSConnection(host=self.hostname, port=443, strict=True, timeout=10, context=ssl._createa_unverified_context())
+					h = httplib.HTTPSConnection(host=self.hostname, port=443, strict=True, timeout=10, context=ssl._create_unverified_context())
 				h.putrequest("GET", url)
 			h.putheader("User-agent","pgsearch/0.2")
 			h.putheader("Connection","close")
