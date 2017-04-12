@@ -185,6 +185,15 @@ h4 a:hover {
   text-decoration: none;
 }
 
+/*
+ * Change color of h2 chunk titles in XSL build.  (In DSSSL build,
+ * these will be h1, which is already handled elsewhere.)
+ */
+.titlepage h2.title,
+.refnamediv h2 {
+  color: #EC5800;
+}
+
 /* Text Styles */
 
 div.sect2,
