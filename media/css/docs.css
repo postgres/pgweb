@@ -255,7 +255,7 @@ pre.literallayout,
 .warning,
 .note,
 .tip,
-table.table,
+.table table,
 pre.LITERALLAYOUT,
 .SCREEN,
 .SYNOPSIS,
@@ -390,8 +390,8 @@ table {
   margin-left: 2ex;
 }
 
-table.table td,
-table.table th,
+.table table td,
+.table table th,
 table.CALSTABLE td,
 table.CALSTABLE th,
 table.CAUTION td,
@@ -401,7 +401,7 @@ table.WARNING th {
   border-style: solid;
 }
 
-table.table,
+.table table,
 table.CALSTABLE,
 table.CAUTION,
 table.WARNING {
@@ -409,7 +409,7 @@ table.WARNING {
   border-collapse: collapse;
 }
 
-table.table,
+.table table,
 table.CALSTABLE
 {
   margin: 2ex 0 2ex 2ex;
@@ -417,19 +417,19 @@ table.CALSTABLE
   border: 2px solid #A7C6DF;
 }
 
-table.table tr:hover td,
+.table table tr:hover td,
 table.CALSTABLE tr:hover td
 {
   background-color: #EFEFEF;
 }
 
-table.table td,
+.table table td,
 table.CALSTABLE td {
   background-color: #FFF;
 }
 
-table.table td,
-table.table th,
+.table table td,
+.table table th,
 table.CALSTABLE td,
 table.CALSTABLE th {
   border: 1px solid #A7C6DF;
