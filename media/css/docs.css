@@ -362,6 +362,18 @@ blockquote.TIP code {
   box-shadow: none;
 }
 
+.caution,
+.warning {
+  max-width: 600px;
+}
+
+.tip h3,
+.note h3,
+.caution h3,
+.warning h3 {
+  text-align: center;
+}
+
 .emphasis,
 .c2 {
   font-weight: bold;
@@ -432,11 +444,13 @@ table.WARNING {
   max-width: 600px;
 }
 
+.caution,
 table.CAUTION {
   background-color: #F5F5DC;
   border-color: #DEDFA7;
 }
 
+.warning,
 table.WARNING {
   background-color: #FFD7D7;
   border-color: #DF421E;
