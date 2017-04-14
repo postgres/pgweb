@@ -19,6 +19,9 @@ if (newMonoSize != 1)
 {
         document.write('<style type="text/css" media="screen">'
 					+ '#docContainer tt, #docContainer pre, #docContainer code'
-					+ '{font-size: ' + newMonoSize.toFixed(1) + 'em;}</style>\n');
+					+ '{font-size: ' + newMonoSize.toFixed(1) + 'em;}</style>\n'
+					/* prevent embedded code tags from changing font size */
+					+ '#docContainer code code'
+					+ '{font-size: 1em;}</style>\n');
 }
 
