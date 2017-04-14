@@ -55,8 +55,8 @@ class SignupForm(forms.Form):
 	def clean_username(self):
 		username = self.cleaned_data['username'].lower()
 
-		if not re.match('^[a-z0-9_@\.-]+$', username):
-			raise forms.ValidationError("Invalid character in user name. Only a-z, 0-9, _, @, . and - allowed.")
+		if not re.match('^[a-z0-9\.-]+$', username):
+			raise forms.ValidationError("Invalid character in user name. Only a-z, 0-9, . and - allowed for compatibility with third party software.")
 		try:
 			User.objects.get(username=username)
 		except User.DoesNotExist:
