@@ -88,5 +88,3 @@ else:
 	pickle.dump(allnodes, f)
 	f.close()
 	os.rename(sys.argv[2] + ".tmp", sys.argv[2])
-
-#pprint(allnodes)
