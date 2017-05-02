@@ -38,7 +38,7 @@ def parse_directory(dirname, rootlen):
 				# This is a symbolic link
 				mynode[f] = {
 					't': 'l',
-					'd': os.readlink(fn),
+					'd': os.readlink(fn).strip("/"),
 					}
 			else:
 				# This is a subdirectory, recurse into it, unless it happens
