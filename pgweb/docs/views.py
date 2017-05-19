@@ -47,6 +47,11 @@ def docpage(request, version, typ, filename):
 	else:
 		indexname = "index.html"
 
+	if ver >= 10 and version.find('.') > -1:
+		# Version 10 and up, but specified as 10.0 / 11.0 etc, so redirect back without the
+		# decimal.
+		return HttpResponseRedirect("/docs/{0}/static/{1}.html".format(int(ver), filename))
+
 	fullname = "%s.%s" % (filename, extension)
 	page = get_object_or_404(DocPage, version=ver, file=fullname)
 	versions = DocPage.objects.filter(file=fullname).extra(select={
