@@ -56,7 +56,7 @@
             <h2><img src="/media/img/hdr/hdr_latestreleases.png" width="120" height="10" alt="Latest Releases" /></h2>
             <div id="pgFrontLatestReleasesWrap">
              {%for v in versions %}
-             <b>{{v.tree}}.{{v.latestminor}}</b> &middot; {{v.reldate}} &middot; <a href="/docs/{{v.tree}}/static/{{v.relnotes}}">Notes</a>
+             <b>{{v.numtree}}.{{v.latestminor}}</b> &middot; {{v.reldate}} &middot; <a href="/docs/{{v.numtree}}/static/{{v.relnotes}}">Notes</a>
              <br />
              {%endfor%}
             </div>

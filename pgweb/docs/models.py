@@ -14,7 +14,7 @@ class DocPage(models.Model):
 		if self.version.tree == 0:
 			return 'devel'
 		else:
-			return str(self.version.tree)
+			return str(self.version.numtree)
 
 	class Meta:
 		db_table = 'docs'

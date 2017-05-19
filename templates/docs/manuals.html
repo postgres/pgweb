@@ -15,13 +15,13 @@
 <tr{%if forloop.last%} class="lastrow"{%endif%}>
     <td class="colMid">
           <ul>
-            <li><a href="/docs/{{v.tree}}/static/index.html">{{v.treestring}}</a></li>
+            <li><a href="/docs/{{v.numtree}}/static/index.html">{{v.treestring}}</a></li>
 	  </ul>
     </td>
     <td class="colLast">
 	<ul>
-	  {%if v.a4pdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.tree}}/postgresql-{{v.tree}}-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">({{v.a4pdf|filesizeformat}})</span></li>{%endif%}
-	  {%if v.uspdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.tree}}/postgresql-{{v.tree}}-US.pdf">US PDF</a> <span class="txtMediumGrey">({{v.uspdf|filesizeformat}})</span></li>{%endif%}
+	  {%if v.a4pdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">({{v.a4pdf|filesizeformat}})</span></li>{%endif%}
+	  {%if v.uspdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-US.pdf">US PDF</a> <span class="txtMediumGrey">({{v.uspdf|filesizeformat}})</span></li>{%endif%}
 	</ul>
     </td>
 </tr>

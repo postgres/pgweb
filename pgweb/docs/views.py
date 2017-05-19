@@ -102,7 +102,7 @@ class _VersionPdfWrapper(Version):
 		return getattr(self.__version, name)
 	def _find_pdf(self, pagetype):
 		try:
-			return os.stat('%s/documentation/pdf/%s/postgresql-%s-%s.pdf' % (settings.STATIC_CHECKOUT, self.__version.tree, self.__version.tree, pagetype)).st_size
+			return os.stat('%s/documentation/pdf/%s/postgresql-%s-%s.pdf' % (settings.STATIC_CHECKOUT, self.__version.numtree, self.__version.numtree, pagetype)).st_size
 		except:
 			return 0
 

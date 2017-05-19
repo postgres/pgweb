@@ -29,18 +29,27 @@ class Version(models.Model):
 	def versionstring(self):
 		return self.buildversionstring(self.latestminor)
 
+	@property
+	def numtree(self):
+		# Return the proper numeric tree version, taking into account that PostgreSQL 10
+		# changed from x.y to x for major version.
+		if self.tree >= 10:
+			return int(self.tree)
+		else:
+			return self.tree
+
 	def buildversionstring(self, minor):
 		if not self.testing:
-			return "%s.%s" % (self.tree, minor)
+			return "%s.%s" % (self.numtree, minor)
 		else:
-			return "%s%s%s" % (self.tree, TESTING_SHORTSTRING[self.testing], minor)
+			return "%s%s%s" % (self.numtree, TESTING_SHORTSTRING[self.testing], minor)
 
 	@property
 	def treestring(self):
 		if not self.testing:
-			return self.tree
+			return "%s" % self.numtree
 		else:
-			return "%s %s" % (self.tree, TESTING_SHORTSTRING[self.testing])
+			return "%s %s" % (self.numtree, TESTING_SHORTSTRING[self.testing])
 
 	def save(self):
 		# Make sure only one version at a time can be the current one.

@@ -65,8 +65,8 @@ version may be required.
 
 {%for v in versions%}
   <tr {%if forloop.last%}class="lastrow"{%endif%}>
-   <td class="colFirst">{{v.tree}}</td>
-   <td class="colMid">{{v.tree}}.{{v.latestminor}}</td>
+   <td class="colFirst">{{v.numtree}}</td>
+   <td class="colMid">{{v.numtree}}.{{v.latestminor}}</td>
    <td class="colMid">{{v.supported|yesno:"Yes,No"}}</td>
    <td class="colMid">{{v.firstreldate|date:"F Y"}}</td>
    <td class="colLast">{{v.eoldate|date:"F Y"}}</td>
