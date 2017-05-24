@@ -9,6 +9,7 @@ from django.conf import settings
 import os
 import urlparse
 import cPickle as pickle
+import json
 
 from pgweb.util.decorators import nocache
 from pgweb.util.contexts import NavContext
@@ -150,6 +151,35 @@ def uploadftp(request):
 
 	# Purge it out of varnish so we start responding right away
 	varnish_purge("/ftp")
+
+	# Finally, indicate to the client that we're happy
+	return HttpResponse("OK", content_type="text/plain")
+
+@csrf_exempt
+def uploadyum(request):
+	if request.method != 'PUT':
+		return HttpServerError("Invalid method")
+	if not request.META['REMOTE_ADDR'] in settings.FTP_MASTERS:
+		return HttpServerError("Invalid client address")
+	# We have the data in request.body. Attempt to load it as
+	# json to ensure correct format.
+	json.loads(request.body)
+
+	# Next, check if it's the same as the current file
+	if os.path.isfile(settings.YUM_JSON):
+		with open(settings.YUM_JSON, "r") as f:
+			if f.read() == request.body:
+				# Don't rewrite the file or purge any data if nothing changed
+				return HttpResponse("NOT CHANGED", content_type="text/plain")
+
+	# File has changed - let's write it!
+	with open("%s.new" % settings.YUM_JSON, "w") as f:
+		f.write(request.body)
+
+	os.rename("%s.new" % settings.YUM_JSON, settings.YUM_JSON)
+
+	# Purge it out of varnish so we start responding right away
+	varnish_purge("/download/js/yum.js")
 
 	# Finally, indicate to the client that we're happy
 	return HttpResponse("OK", content_type="text/plain")
