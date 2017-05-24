@@ -14,6 +14,74 @@ project provides a <a href="#yum">repository</a> of packages of all
 supported versions for the most common distributions.
 </p>
 
+<a name="yum"></a><h2>PostgreSQL Yum Repository</h2>
+<p>
+If the version supplied by your operating system is not the one you want,
+you can use the PostgreSQL Yum Repository. This repository will integrate
+with your normal systems and patch management, and provide automatic
+updates for all supported versions of PostgreSQL throughout the support
+<a href="/support/versioning/">lifetime</a> of PostgreSQL.
+</p>
+<p>
+The PostgreSQL yum repository currently supports Red Hat Enterprise Linux,
+CentOS, Oracle Enterprise Linux and Scientific Linux versions 5.x, 6.x, and 7.x,
+as well as current versions of Fedora. Note that due to the shorter support cycle
+on Fedora, all versions are not available on this platform, and we recommend not
+using Fedora for server deployments.
+</p>
+<p>
+To use the yum repository, you must first install the <i>repository RPM</i>.
+To do this, download the correct RPM from the
+<a href="https://yum.postgresql.org/repopackages.php">repository RPM listing</a>,
+and install it with commands like:
+</p>
+<p>
+On RHEL and its derivatives:
+<code>
+yum install https://yum.postgresql.org/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
+</code>
+</p>
+<p>
+On Fedora,
+<code>
+dnf install https://download.postgresql.org/pub/repos/yum/9.6/fedora/fedora-25-x86_64/pgdg-fedora96-9.6-3.noarch.rpm
+</code>
+</p>
+<p>
+Once this is done, you can proceed to install and update packages the
+same way as the ones included in the distribution.
+</p>
+<p>
+For RHEL and its derivatives:
+<code>
+yum install postgresql96-server postgresql96-contrib<br/>
+(or yum groupinstall "PostgreSQL Database Server 9.6 PGDG")<br/>
+service postgresql-9.6 initdb<br/>
+chkconfig postgresql-9.6 on
+service postgresql-9.6 start
+</code>
+or, on Fedora 24 and other later derived distributions:<br />
+<code>
+dnf install postgresql96-server postgresql96-contrib<br/>
+(or dnf groupinstall "PostgreSQL Database Server 9.6 PGDG")<br/>
+/usr/pgsql-9.6/bin/postgresql96-setup initdb<br/>
+systemctl enable postgresql-9.6.service<br/>
+systemctl start postgresql-9.6.service
+</code>
+</p>
+<p>
+Package names in the
+PostgreSQL yum repository follows the same standard as the ones included
+in the main repositories, but include the version number, such as:
+</p>
+<ul>
+ <li>postgresql96</li>
+ <li>postgresql96-server</li>
+ <li>postgresql96-contrib</li>
+ <li>pgadmin3_96</li>
+</ul>
+
+
 <h2>Included in distribution</h2>
 <p>
 These distributions all include PostgreSQL by default. To install
@@ -97,73 +165,6 @@ systemctl enable postgresql.service
 systemctl start postgresql.service
 </code>
 </p>
-
-<a name="yum"></a><h2>PostgreSQL Yum Repository</h2>
-<p>
-If the version supplied by your operating system is not the one you want,
-you can use the PostgreSQL Yum Repository. This repository will integrate
-with your normal systems and patch management, and provide automatic
-updates for all supported versions of PostgreSQL throughout the support
-<a href="/support/versioning/">lifetime</a> of PostgreSQL.
-</p>
-<p>
-The PostgreSQL yum repository currently supports Red Hat Enterprise Linux,
-CentOS, Oracle Enterprise Linux and Scientific Linux versions 5.x, 6.x, and 7.x,
-as well as current versions of Fedora. Note that due to the shorter support cycle
-on Fedora, all versions are not available on this platform, and we recommend not
-using Fedora for server deployments.
-</p>
-<p>
-To use the yum repository, you must first install the <i>repository RPM</i>.
-To do this, download the correct RPM from the
-<a href="https://yum.postgresql.org/repopackages.php">repository RPM listing</a>,
-and install it with commands like:
-</p>
-<p>
-On RHEL and its derivatives:
-<code>
-yum install https://yum.postgresql.org/9.6/redhat/rhel-7-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
-</code>
-</p>
-<p>
-On Fedora,
-<code>
-dnf install https://download.postgresql.org/pub/repos/yum/9.6/fedora/fedora-25-x86_64/pgdg-fedora96-9.6-3.noarch.rpm
-</code>
-</p>
-<p>
-Once this is done, you can proceed to install and update packages the
-same way as the ones included in the distribution.
-</p>
-<p>
-For RHEL and its derivatives:
-<code>
-yum install postgresql96-server postgresql96-contrib<br/>
-(or yum groupinstall "PostgreSQL Database Server 9.6 PGDG")<br/>
-service postgresql-9.6 initdb<br/>
-chkconfig postgresql-9.6 on
-service postgresql-9.6 start
-</code>
-or, on Fedora 24 and other later derived distributions:<br />
-<code>
-dnf install postgresql96-server postgresql96-contrib<br/>
-(or dnf groupinstall "PostgreSQL Database Server 9.6 PGDG")<br/>
-/usr/pgsql-9.6/bin/postgresql96-setup initdb<br/>
-systemctl enable postgresql-9.6.service<br/>
-systemctl start postgresql-9.6.service
-</code>
-</p>
-<p>
-Package names in the
-PostgreSQL yum repository follows the same standard as the ones included
-in the main repositories, but include the version number, such as:
-</p>
-<ul>
- <li>postgresql96</li>
- <li>postgresql96-server</li>
- <li>postgresql96-contrib</li>
- <li>pgadmin3_96</li>
-</ul>
 
 <h2>Direct RPM download</h2>
 <p>
