@@ -12,7 +12,7 @@ class ContributorType(models.Model):
 
 	def __unicode__(self):
 		return self.typename
-	
+
 	class Meta:
 		ordering = ('sortorder',)
 
@@ -32,6 +32,6 @@ class Contributor(models.Model):
 
 	def __unicode__(self):
 		return "%s %s" % (self.firstname, self.lastname)
-	
+
 	class Meta:
 		ordering = ('lastname', 'firstname',)
