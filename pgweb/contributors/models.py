@@ -6,6 +6,7 @@ class ContributorType(models.Model):
 	sortorder = models.IntegerField(null=False, default=100)
 	extrainfo = models.TextField(null=True, blank=True)
 	detailed = models.BooleanField(null=False, default=True)
+	showemail = models.BooleanField(null=False, default=True)
 
 	purge_urls = ('/community/contributors/', )
 
