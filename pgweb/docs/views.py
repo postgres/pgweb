@@ -54,9 +54,13 @@ def docpage(request, version, typ, filename):
 
 	fullname = "%s.%s" % (filename, extension)
 	page = get_object_or_404(DocPage, version=ver, file=fullname)
-	versions = DocPage.objects.filter(file=fullname).extra(select={
-		'supported':"COALESCE((SELECT supported FROM core_version v WHERE v.tree=version), 'f')",
-		'testing':"COALESCE((SELECT testing FROM core_version v WHERE v.tree=version),0)",
+	qq = Q(file=fullname) | Q(file='kalle.html')
+	versions = DocPage.objects.extra(
+		where=["file=%s OR file IN (SELECT file2 FROM docsalias WHERE file1=%s) OR file IN (SELECT file1 FROM docsalias WHERE file2=%s)"],
+		params=[fullname, fullname, fullname],
+		select={
+			'supported':"COALESCE((SELECT supported FROM core_version v WHERE v.tree=version), 'f')",
+			'testing':"COALESCE((SELECT testing FROM core_version v WHERE v.tree=version),0)",
 	}).order_by('-supported', '-version').only('version', 'file')
 
 	if typ=="interactive":
