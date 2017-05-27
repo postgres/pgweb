@@ -71,7 +71,7 @@ def _get_notification_text(obj):
 	try:
 		oldobj = obj.__class__.objects.get(pk=obj.pk)
 	except obj.DoesNotExist:
-		return ('A new {0} as been added'.format(obj._meta.verbose_name),
+		return ('A new {0} has been added'.format(obj._meta.verbose_name),
 				_get_full_text_representation(obj))
 
 	if hasattr(obj, 'approved'):
