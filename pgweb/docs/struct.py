@@ -27,6 +27,9 @@ def get_struct():
 				docprio -= 0.1
 			lastversion = version
 
+		if version >= 10:
+			version = int(version)
+
 		yield ('docs/%s/static/%s' % (version, filename),
 			   testing and 0.1 or docprio, # beta/rc versions always get 0.1 in prio
 			   loaded)
