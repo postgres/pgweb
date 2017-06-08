@@ -192,6 +192,13 @@ def mirrorselect(request, path):
 	return HttpResponseRedirect("https://ftp.postgresql.org/pub/%s" % path)
 
 
+# Render javascript for yum downloads
+def yum_js(request):
+	with open(settings.YUM_JSON) as f:
+		jsonstr = f.read()
+	return render_to_response('downloads/js/yum.js', {
+		'json': jsonstr,
+		}, content_type='application/json')
 
 #######
 # Product catalogue

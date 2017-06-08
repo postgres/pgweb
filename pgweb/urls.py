@@ -36,6 +36,7 @@ urlpatterns = patterns('',
 	(r'^applications-v2.xml$', 'pgweb.downloads.views.applications_v2_xml'),
 	(r'^download/uploadftp/', 'pgweb.downloads.views.uploadftp'),
 	(r'^download/uploadyum/', 'pgweb.downloads.views.uploadyum'),
+	(r'^download/js/yum.js', 'pgweb.downloads.views.yum_js'),
 
 	(r'^docs/$', 'pgweb.docs.views.root'),
 	(r'^docs/manuals/$', 'pgweb.docs.views.manuals'),
