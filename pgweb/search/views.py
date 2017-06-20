@@ -132,7 +132,7 @@ def search(request):
 			return render_to_response('search/sitesearch.html', {
 					'search_error': "No search term specified.",
 					}, RequestContext(request))
-	query = request.GET['q']
+	query = request.GET['q'].strip()
 
 	# Anti-stefan prevention
 	if len(query) > 1000:
