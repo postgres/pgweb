@@ -38,7 +38,7 @@ def subscribe(request):
 
 	return render_to_response('lists/subscribe_form.html', {
 		'form': form,
-		'operation': 'Subscribe',
+		'operation': 'Legacy subscription',
 		'jquery': True,
 		'form_intro': """
 <b>Note 1:</b> Please ensure you read the <a 
