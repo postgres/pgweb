@@ -50,7 +50,7 @@
 <link rel="stylesheet" type="text/css" href="/media/css/showdown_preview.css" />
 <script type="text/javascript" src="/media/showdown/showdown.js"></script>
 <script type="text/javascript" src="/media/js/showdown_preview.js"></script>
-<script language="javascript">
+<script type="text/javascript">
    window.onload = function() {
       {%for mdf in markdownfields %}
          attach_showdown_preview('id_{{mdf}}', 0);
@@ -58,7 +58,7 @@
    }
 </script>
 {%if toggle_fields %}
-<script language="javascript">
+<script type="text/javascript">
 {%for f in toggle_fields%}
 function toggle_{{f.name}}() {
    v = $('#id_{{f.name}}').prop('checked');
@@ -86,7 +86,7 @@ $(document).ready(function() {
 {%endif%}{# markdownfields #}
 
 {%if recaptcha%}
-<script src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
 {%endif%}
 {%endblock%}
 
