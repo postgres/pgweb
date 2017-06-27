@@ -285,15 +285,6 @@ def api_varnish_purge(request):
 		curs.execute("SELECT varnish_purge_expr(%s)", (expr, ))
 	return HttpResponse("Purged %s entries\n" % n)
 
-@nocache
-@csrf_exempt
-def api_repo_updated(request):
-	if not get_client_ip(request) in settings.SITE_UPDATE_HOSTS:
-		return HttpServerError("Invalid client address")
-	# Ignore methods and contents, just drop the trigger
-	open(settings.SITE_UPDATE_TRIGGER_FILE, 'a').close()
-	return HttpResponse("OK")
-
 # Merge two organisations
 @login_required
 @user_passes_test(lambda u: u.is_superuser)

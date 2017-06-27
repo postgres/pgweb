@@ -127,9 +127,6 @@ urlpatterns = patterns('',
 	# API endpoints
 	(r'^api/varnish/purge/$', 'pgweb.core.views.api_varnish_purge'),
 
-	# Pingback from git repo to update site
-	(r'^api/repo_updated/$', 'pgweb.core.views.api_repo_updated'),
-
 	# Override some URLs in admin, to provide our own pages
 	(r'^admin/pending/$', 'pgweb.core.views.admin_pending'),
 	(r'^admin/purge/$', 'pgweb.core.views.admin_purge'),
