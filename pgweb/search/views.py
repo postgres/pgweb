@@ -72,7 +72,17 @@ def search(request):
 			else:
 				listid = None
 		else:
-			listid = None
+			# Listid not specified. But do we have the name?
+			if request.GET.has_key('ln'):
+				try:
+					ll = MailingList.objects.get(listname=request.GET['ln'])
+					listid = ll.id
+				except MailingList.DoesNotExist:
+					# Invalid list name just resets the default of the form,
+					# no need to throw an error.
+					listid = None
+			else:
+				listid = None
 
 		if request.GET.has_key('d'):
 			try:
