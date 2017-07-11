@@ -19,10 +19,12 @@
 	  </ul>
     </td>
     <td class="colLast">
+	{%if v.a4pdf or v.uspdf%}
 	<ul>
 	  {%if v.a4pdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">({{v.a4pdf|filesizeformat}})</span></li>{%endif%}
 	  {%if v.uspdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-US.pdf">US PDF</a> <span class="txtMediumGrey">({{v.uspdf|filesizeformat}})</span></li>{%endif%}
 	</ul>
+	{%endif%}
     </td>
 </tr>
 {%endfor%}
