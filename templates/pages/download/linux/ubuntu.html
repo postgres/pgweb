@@ -29,9 +29,9 @@ updates for all supported versions of PostgreSQL throughout the support
 <a href="/support/versioning/">lifetime</a> of PostgreSQL.
 </p>
 <p>
-The PostgreSQL apt repository supports LTS versions of Ubuntu (12.04, 14.04 and 16.04)
-on amd64 and i386 architectures as well as select non-LTS versions(15.10).
-While not fully supported, the packages often work on other non-LTS versions as well, 
+The PostgreSQL apt repository supports LTS versions of Ubuntu (14.04 and 16.04)
+on amd64, i386 and ppc64el architectures as well as select non-LTS versions(17.04).
+While not fully supported, the packages often work on other non-LTS versions as well,
 by using the closest LTS version available.
 </p>
 <p>
@@ -41,9 +41,9 @@ To use the apt repository, follow these steps:
  <li>
   <select id="field.series" name="field.series" onchange='updateSeries(this);'>
    <option selected="selected" value="YOUR_UBUNTU_VERSION_HERE">Choose your Ubuntu version</option>
+   <option value="zesty">Zesty (17.04)</option>
    <option value="xenial">Xenial (16.04)</option>
    <option value="trusty">Trusty (14.04)</option>
-   <option value="precise">Precise (12.04)</option>
   </select>
  </li>
  <li>Create the file <i>/etc/apt/sources.list.d/pgdg.list</i>, and add a line
@@ -70,7 +70,7 @@ Ubuntu includes PostgreSQL by default. To install PostgreSQL on
 Ubuntu, use the <i>apt-get</i> (or other apt-driving) command:
 </p>
 <code>
-apt-get install postgresql-9.4
+apt-get install postgresql-9.6
 </code>
 <p>
 The repository contains many different packages including third party
@@ -78,11 +78,11 @@ addons. The most common and important packages are (substitute the
 version number as required):
 </p>
 <ul>
- <li>postgresql-client-9.4 - client libraries and client binaries</li>
- <li>postgresql-9.4 - core database server</li>
- <li>postgresql-contrib-9.4 - additional supplied modules</li>
+ <li>postgresql-client-9.6 - client libraries and client binaries</li>
+ <li>postgresql-9.6 - core database server</li>
+ <li>postgresql-contrib-9.6 - additional supplied modules</li>
  <li>libpq-dev - libraries and headers for C language frontend development</li>
- <li>postgresql-server-dev-9.4 - libraries and headers for C language backend development</li>
+ <li>postgresql-server-dev-9.6 - libraries and headers for C language backend development</li>
  <li>pgadmin3 - pgAdmin III graphical administration utility</li>
 </ul>
 
