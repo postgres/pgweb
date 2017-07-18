@@ -20,7 +20,7 @@
   {%for c in t.contributor_set.all %}
    {%if t.detailed%}
     <tr{%if forloop.last%} class="lastrow"{%endif%}>
-     <td class="colFirst">{{c.firstname}} {{c.lastname}} {%if t.showemail%}({{c.email|hidemail}}){%endif%}
+     <td class="colFirst">{{c.firstname}} {{c.lastname}} {%if t.showemail and c.email%}({{c.email|hidemail}}){%endif%}
       {%if c.company %}<br/><a href="{{c.companyurl}}">{{c.company}}</a>{%endif%}
       <br/>{{c.location}}</td>
      <td class="colLast">{{c.contribution}}</td>
