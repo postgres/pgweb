@@ -153,4 +153,3 @@ urlpatterns = patterns('',
 	# Fallback for static pages, must be at the bottom
 	(r'^(.*)/$', 'pgweb.core.views.fallback'),
 )
-

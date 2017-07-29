@@ -54,6 +54,7 @@ sitenav = {
 		{'title': 'International Sites','link':'/community/international/'},
 		{'title': 'Propaganda',         'link':'/community/propaganda/'},
 		{'title': 'Resources',          'link':'/community/resources/'},
+		{'title': 'Recognition Guidelines',       'link':'/community/recognition/'},
 	],
 	'developer': [
 		{'title': 'Developers',         'link':'/developer/'},

@@ -9,19 +9,24 @@
 
 {% for pug_group in pug_list %}
   <h2>{{ pug_group.country }}</h2>
-  <ul>
-  {% for pug in pug_group.pugs %}
-    <li>
-      <strong>{{ pug.locale }}</strong>:
-      {{ pug.title }}
-      {% if pug.website_url %}
-        (<a href="{{ pug.website_url }}">website</a>)
-      {% endif %}
-      {% if pug.mailing_list_url %}
-        (<a href="{{ pug.mailing_list_url }}">mailing list</a>)
-      {% endif %}
-    </li>
-  {% endfor %}
-  </ul>
+  <p>
+    <ul>
+    {% for pug in pug_group.pugs %}
+      <li>
+        <strong>{{ pug.locale }}</strong>:
+        {{ pug.title }}
+        {% if pug.website_url %}
+          (<a href="{{ pug.website_url }}">website</a>)
+        {% endif %}
+        {% if pug.mailing_list_url %}
+          (<a href="{{ pug.mailing_list_url }}">mailing list</a>)
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+  </p>
 {% endfor %}
+
+<h1>PostgreSQL Nonprofit Organisation (NPO) Recognition</h1>
+<p>For information about how <a href="/community/recognition/#npos">Recognised PostgreSQL Nonprofit Organizations (NPOs)</a> become recognised, please review the guidelines <a href="/community/recognition/#npos">here</a>.
 {%endblock%}
