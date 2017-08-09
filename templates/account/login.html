@@ -2,7 +2,19 @@
 {%block contents%}
 <h1>Log in</h1>
 <p>
-Please log in to your community account to reach this area. If you do not already have an account,
+{%if sitename%}
+The website you are trying to log in to ({{sitename}}) is using the
+postgresql.org community login system. In this system you create a
+central account that is used to log into most postgresql.org services.
+Once you are logged into this account, you will automatically be
+logged in to the associated postgresql.org services. Note that this
+single sign on is only used for official postgresql.org websites.
+{%else%}
+Please log in to your community account to reach this area.
+{%endif%}
+</p>
+<p>
+If you do not already have an account,
 you may <a href="/account/signup/">sign up</a> for one now. If you have one but have lost your
 password, you can use the <a href="/account/reset/">password reset</a> form.
 </p>

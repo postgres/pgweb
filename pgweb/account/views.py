@@ -326,11 +326,13 @@ def communityauth(request, siteid):
 			urldata = "?su=%s" % su
 		else:
 			urldata = ""
-		return render_to_response('account/communityauth.html', {
-				'sitename': site.name,
-				'next': '/account/auth/%s/%s' % (siteid, urldata),
-				}, NavContext(request, 'account'))
-
+		return authviews.login(request, template_name='account/login.html',
+							   authentication_form=PgwebAuthenticationForm,
+							   extra_context={
+								   'sitename': site.name,
+								   'next': '/account/auth/%s/%s' % (siteid, urldata),
+							   },
+						   )
 
 	# When we reach this point, the user *has* already been authenticated.
 	# The request variable "su" *may* contain a suburl and should in that
