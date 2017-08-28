@@ -16,14 +16,19 @@ class Command(BaseCommand):
 		try:
 			session = Session.objects.get(session_key=options['sessionid']).get_decoded()
 			uid = session.get('_auth_user_id')
-			user = User.objects.get(pk=uid)
 
 			print u"Session {0}".format(options['sessionid'])
-			print " -- Logged in user --"
-			print u"Userid:   {0}".format(uid)
-			print u"Username: {0}".format(user.username)
-			print u"Name:     {0}".format(user.get_full_name())
-			print u"Email:    {0}".format(user.email)
+
+			try:
+				user = User.objects.get(pk=uid)
+				print " -- Logged in user --"
+				print u"Userid:   {0}".format(uid)
+				print u"Username: {0}".format(user.username)
+				print u"Name:     {0}".format(user.get_full_name())
+				print u"Email:    {0}".format(user.email)
+			except User.DoesNotExist:
+				print "** Associated user not found. Maybe not logged in?"
+
 			# Remove known keys
 			for k in ('_auth_user_id', '_auth_user_hash', '_auth_user_backend'):
 				session.pop(k, None)
@@ -34,6 +39,4 @@ class Command(BaseCommand):
 
 		except Session.DoesNotExist:
 			raise CommandError('Session not found')
-		except User.DoesNotExist:
-			raise CommandError('Associated user not found')
 
