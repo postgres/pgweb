@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.contrib.auth import login as django_login
 import django.contrib.auth.views as authviews
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
@@ -18,6 +19,7 @@ from Crypto import Random
 import time
 import json
 from datetime import datetime, timedelta
+import itertools
 
 from pgweb.util.contexts import NavContext
 from pgweb.util.misc import send_template_mail, generate_random_token, get_client_ip
@@ -32,11 +34,16 @@ from pgweb.profserv.models import ProfessionalService
 
 from models import CommunityAuthSite, EmailChangeToken
 from forms import PgwebAuthenticationForm
-from forms import SignupForm, UserForm, UserProfileForm, ContributorForm
+from forms import SignupForm, SignupOauthForm
+from forms import UserForm, UserProfileForm, ContributorForm
 from forms import ChangeEmailForm
 
 import logging
 log = logging.getLogger(__name__)
+
+# The value we store in user.password for oauth logins. This is
+# a value that must not match any hashers.
+OAUTH_PASSWORD_STORE='oauth_signin_account_no_password'
 
 @login_required
 def home(request):
@@ -85,6 +92,11 @@ def profile(request):
 	# models on a single form.
 	(profile, created) = UserProfile.objects.get_or_create(pk=request.user.pk)
 
+	# Don't allow users whose accounts were created via oauth to change
+	# their email, since that would kill the connection between the
+	# accounts.
+	can_change_email = (request.user.password != OAUTH_PASSWORD_STORE)
+
 	# We may have a contributor record - and we only show that part of the
 	# form if we have it for this user.
 	try:
@@ -118,6 +130,7 @@ def profile(request):
 			'userform': userform,
 			'profileform': profileform,
 			'contribform': contribform,
+			'can_change_email': can_change_email,
 			}, NavContext(request, "account"))
 
 @login_required
@@ -125,6 +138,11 @@ def profile(request):
 def change_email(request):
 	tokens = EmailChangeToken.objects.filter(user=request.user)
 	token = len(tokens) and tokens[0] or None
+
+	if request.user.password == OAUTH_PASSWORD_STORE:
+		# Link shouldn't exist in this case, so just throw an unfriendly
+		# error message.
+		return HttpServerError("This account cannot change email address as it's connected to a third party login site.")
 
 	if request.method == 'POST':
 		form = ChangeEmailForm(request.user, data=request.POST)
@@ -160,6 +178,11 @@ def confirm_change_email(request, tokenhash):
 	tokens = EmailChangeToken.objects.filter(user=request.user, token=tokenhash)
 	token = len(tokens) and tokens[0] or None
 
+	if request.user.password == OAUTH_PASSWORD_STORE:
+		# Link shouldn't exist in this case, so just throw an unfriendly
+		# error message.
+		return HttpServerError("This account cannot change email address as it's connected to a third party login site.")
+
 	if token:
 		# Valid token find, so change the email address
 		request.user.email = token.email
@@ -194,18 +217,31 @@ def orglist(request):
 
 def login(request):
 	return authviews.login(request, template_name='account/login.html',
-						   authentication_form=PgwebAuthenticationForm)
+						   authentication_form=PgwebAuthenticationForm,
+						   extra_context={
+							   'oauth_providers': [(k,v) for k,v in sorted(settings.OAUTH.items())],
+						   })
 
 def logout(request):
 	return authviews.logout_then_login(request, login_url='/')
 
 def changepwd(request):
+	if request.user.password == OAUTH_PASSWORD_STORE:
+		return HttpServerError("This account cannot change password as it's connected to a third party login site.")
+
 	log.info("Initiating password change from {0}".format(get_client_ip(request)))
 	return authviews.password_change(request,
 									 template_name='account/password_change.html',
 									 post_change_redirect='/account/changepwd/done/')
 
 def resetpwd(request):
+	if request.method == "POST":
+		try:
+			u = User.objects.get(email__iexact=request.POST['email'])
+			if u.password == OAUTH_PASSWORD_STORE:
+				return HttpServerError("This account cannot change password as it's connected to a third party login site.")
+		except User.DoesNotExist:
+			pass
 	log.info("Initiating password set from {0}".format(get_client_ip(request)))
 	return authviews.password_reset(request, template_name='account/password_reset.html',
 									email_template_name='account/password_reset_email.txt',
@@ -287,6 +323,74 @@ def signup_complete(request):
 	}, NavContext(request, 'account'))
 
 
+@transaction.atomic
+def signup_oauth(request):
+	if not request.session.has_key('oauth_email') \
+	   or not request.session.has_key('oauth_firstname') \
+	   or not request.session.has_key('oauth_lastname'):
+		return HttpServerError('Invalid redirect received')
+
+	if request.method == 'POST':
+		# Second stage, so create the account. But verify that the
+		# nonce matches.
+		data = request.POST.copy()
+		data['email'] = request.session['oauth_email']
+		data['first_name'] = request.session['oauth_firstname']
+		data['last_name'] = request.session['oauth_lastname']
+		form = SignupOauthForm(data=data)
+		if form.is_valid():
+			log.info("Creating user for {0} from {1} from oauth signin of email {2}".format(form.cleaned_data['username'], get_client_ip(request), request.session['oauth_email']))
+
+			user = User.objects.create_user(form.cleaned_data['username'].lower(),
+											request.session['oauth_email'],
+											last_login=datetime.now())
+			user.first_name = request.session['oauth_firstname']
+			user.last_name = request.session['oauth_lastname']
+			user.password = OAUTH_PASSWORD_STORE
+			user.save()
+
+			# Clean up our session
+			del request.session['oauth_email']
+			del request.session['oauth_firstname']
+			del request.session['oauth_lastname']
+			request.session.modified = True
+
+			# We can immediately log the user in because their email
+			# is confirmed.
+			user.backend = settings.AUTHENTICATION_BACKENDS[0]
+			django_login(request, user)
+
+			# Redirect to the account page
+			return HttpResponseRedirect('/account/')
+	elif request.GET.has_key('do_abort'):
+		del request.session['oauth_email']
+		del request.session['oauth_firstname']
+		del request.session['oauth_lastname']
+		request.session.modified = True
+		return HttpResponseRedirect('/')
+	else:
+		# Generate possible new username
+		suggested_username = request.session['oauth_email'].replace('@', '.')[:30]
+		for u in itertools.chain([
+				"{0}{1}".format(request.session['oauth_firstname'].lower(), request.session['oauth_lastname'][0].lower()),
+				"{0}{1}".format(request.session['oauth_firstname'][0].lower(), request.session['oauth_lastname'].lower()),
+		], ("{0}{1}{2}".format(request.session['oauth_firstname'].lower(), request.session['oauth_lastname'][0].lower(), n) for n in xrange(100))):
+			if not User.objects.filter(username=u[:30]).exists():
+				suggested_username = u[:30]
+				break
+		form = SignupOauthForm(initial={
+			'username': suggested_username,
+			'email': request.session['oauth_email'],
+			'first_name': request.session['oauth_firstname'][:30],
+			'last_name': request.session['oauth_lastname'][:30],
+		})
+
+	return render_to_response('account/signup_oauth.html', {
+		'form': form,
+		'operation': 'New account',
+		'savebutton': 'Sign up for new account',
+		'recaptcha': True,
+		}, NavContext(request, 'account'))
 
 ####
 ## Community authentication endpoint
@@ -331,6 +435,7 @@ def communityauth(request, siteid):
 							   extra_context={
 								   'sitename': site.name,
 								   'next': '/account/auth/%s/%s' % (siteid, urldata),
+								   'oauth_providers': [(k,v) for k,v in sorted(settings.OAUTH.items())],
 							   },
 						   )
 

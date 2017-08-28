@@ -1,0 +1,23 @@
+{%extends "base/form.html"%}
+{%block pre_form_header%}
+<p>
+  We find no account associated with your email address {{email}}.
+</p>
+
+<p>
+  If your account is under a different name, please
+  <a href="?do_abort=1">cancel</a> this sign-in and sign in with the
+  appropriate account instead.
+</p>
+
+<p>
+  If you wish to sign up for a new account, please select a username
+  and verify the other details:
+</p>
+{% endblock %}
+
+{%block post_form%}
+<p>
+  <a href="?do_abort=1"><button>Cancel signup and log in with another account</button></a>
+</p>
+{%endblock%}

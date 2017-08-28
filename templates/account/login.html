@@ -1,6 +1,6 @@
 {%extends "base/page.html"%}
 {%block contents%}
-<h1>Log in</h1>
+<h1>Sign in</h1>
 <p>
 {%if sitename%}
 The website you are trying to log in to ({{sitename}}) is using the
@@ -15,7 +15,14 @@ Please log in to your community account to reach this area.
 </p>
 <p>
 If you do not already have an account,
-you may <a href="/account/signup/">sign up</a> for one now. If you have one but have lost your
+you can either <a href="/account/signup/">create</a>
+a dedicated account, or use one of the third party sign-in systems below.
+</p>
+
+<h2>Community account sign-in</h2>
+<p>
+If you have a postgresql.org community account with a password, please
+use the form below to sign in. If you have one but have lost your
 password, you can use the <a href="/account/reset/">password reset</a> form.
 </p>
 
@@ -34,9 +41,17 @@ password, you can use the <a href="/account/reset/">password reset</a> form.
     <input type="hidden" name="next" value="{{next}}" />
   </div>
   <div class="submit-row">
-    <label>&nbsp;</label><input type="submit" value="Log in" />
+    <label>&nbsp;</label><input type="submit" value="Sign in with community account password" />
   </div>
 </form>
+
+{%if oauth_providers%}
+<h2>Third party sign in</h2>
+{%for p,d in oauth_providers%}
+<p><a href="/account/login/{{p}}/?next={{next}}"><img src="/media/img/misc/btn_login_{{p}}.png" alt="Sign in with {{p|capfirst}}"></a></p>
+{%endfor%}
+{%endif%}
+
 
 <script type="text/javascript">
 document.getElementById('id_username').focus()

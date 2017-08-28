@@ -172,6 +172,7 @@ VARNISH_PURGERS=()                                     # Extra servers that can 
 LIST_ACTIVATORS=()								       # Servers that can activate lists
 ARCHIVES_SEARCH_SERVER="archives.postgresql.org"       # Where to post REST request for archives search
 FRONTEND_SMTP_RELAY="magus.postgresql.org"             # Where to relay user generated email
+OAUTH={}                                               # OAuth providers and keys
 
 # Load local settings overrides
 from settings_local import *

@@ -16,7 +16,12 @@
  </tr>
  <tr>
   <th>Email</th>
-  <td>{{user.email}} (<i><a href="change_email/">change</a></i>)</td>
+  <td>{{user.email}} {%if can_change_email%}(<i><a href="change_email/">change</a></i>){%else%}
+<br/><br/>
+The email address of this account cannot be changed, because the account does
+not have a local password, most likely because it's connected to a third
+party system (such as Google or Facebook).
+{%endif%}</td>
  </tr>
 {%for field in userform%}
  {%if field.errors %}

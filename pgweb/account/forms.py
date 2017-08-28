@@ -12,6 +12,17 @@ from recaptcha import ReCaptchaField
 import logging
 log = logging.getLogger(__name__)
 
+def _clean_username(username):
+	username = username.lower()
+
+	if not re.match('^[a-z0-9\.-]+$', username):
+		raise forms.ValidationError("Invalid character in user name. Only a-z, 0-9, . and - allowed for compatibility with third party software.")
+	try:
+		User.objects.get(username=username)
+	except User.DoesNotExist:
+		return username
+	raise forms.ValidationError("This username is already in use")
+
 # Override some error handling only in the default authentication form
 class PgwebAuthenticationForm(AuthenticationForm):
 	def clean(self):
@@ -53,15 +64,7 @@ class SignupForm(forms.Form):
 		return email2
 
 	def clean_username(self):
-		username = self.cleaned_data['username'].lower()
-
-		if not re.match('^[a-z0-9\.-]+$', username):
-			raise forms.ValidationError("Invalid character in user name. Only a-z, 0-9, . and - allowed for compatibility with third party software.")
-		try:
-			User.objects.get(username=username)
-		except User.DoesNotExist:
-			return username
-		raise forms.ValidationError("This username is already in use")
+		return _clean_username(self.cleaned_data['username'])
 
 	def clean_email(self):
 		email = self.cleaned_data['email'].lower()
@@ -71,6 +74,25 @@ class SignupForm(forms.Form):
 		except User.DoesNotExist:
 			return email
 		raise forms.ValidationError("A user with this email address is already registered")
+
+class SignupOauthForm(forms.Form):
+	username = forms.CharField(max_length=30)
+	first_name = forms.CharField(max_length=30)
+	last_name = forms.CharField(max_length=30)
+	email = forms.EmailField()
+	captcha = ReCaptchaField()
+
+	def __init__(self, *args, **kwargs):
+		super(SignupOauthForm, self).__init__(*args, **kwargs)
+		self.fields['first_name'].widget.attrs['readonly'] = True
+		self.fields['first_name'].widget.attrs['disabled'] = True
+		self.fields['last_name'].widget.attrs['readonly'] = True
+		self.fields['last_name'].widget.attrs['disabled'] = True
+		self.fields['email'].widget.attrs['readonly'] = True
+		self.fields['email'].widget.attrs['disabled'] = True
+
+	def clean_username(self):
+		return _clean_username(self.cleaned_data['username'])
 
 class UserProfileForm(forms.ModelForm):
 	class Meta:
