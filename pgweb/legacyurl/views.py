@@ -18,4 +18,4 @@ def html_extension(request, prior_to_html):
 	return HttpResponseRedirect("/%s" % prior_to_html)
 
 def mailpref(request, listname):
-	return HttpResponseRedirect("https://mail.postgresql.org/mj/mj_wwwusr/domain=postgresql.org?func=lists-long-full&extra=%s" % listname)
+	return HttpResponseRedirect("https://lists.postgresql.org/mj/mj_wwwusr/domain=postgresql.org?func=lists-long-full&extra=%s" % listname)
