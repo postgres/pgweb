@@ -226,7 +226,7 @@ def logout(request):
 	return authviews.logout_then_login(request, login_url='/')
 
 def changepwd(request):
-	if request.user.password == OAUTH_PASSWORD_STORE:
+	if hasattr(request.user, 'password') and request.user.password == OAUTH_PASSWORD_STORE:
 		return HttpServerError("This account cannot change password as it's connected to a third party login site.")
 
 	log.info("Initiating password change from {0}".format(get_client_ip(request)))
