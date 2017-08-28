@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import login as django_login
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 
 import sys
@@ -33,7 +33,11 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
 		token = oa.fetch_token(tokenurl,
 							   client_secret=client_secret,
 							   code=request.GET['code'])
-		(email, firstname, lastname) = authdatafunc(oa)
+		try:
+			(email, firstname, lastname) = authdatafunc(oa)
+		except KeyError, e:
+			log.warning("Oauth signing using {0} was missing data: {1}".format(provider, e))
+			return HttpResponse('OAuth login was missing critical data. To log in, you need to allow access to email, first name and last name!')
 
 		try:
 			user = User.objects.get(email=email)
