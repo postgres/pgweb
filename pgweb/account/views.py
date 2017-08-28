@@ -372,9 +372,9 @@ def signup_oauth(request):
 		# Generate possible new username
 		suggested_username = request.session['oauth_email'].replace('@', '.')[:30]
 		for u in itertools.chain([
-				"{0}{1}".format(request.session['oauth_firstname'].lower(), request.session['oauth_lastname'][0].lower()),
-				"{0}{1}".format(request.session['oauth_firstname'][0].lower(), request.session['oauth_lastname'].lower()),
-		], ("{0}{1}{2}".format(request.session['oauth_firstname'].lower(), request.session['oauth_lastname'][0].lower(), n) for n in xrange(100))):
+				u"{0}{1}".format(request.session['oauth_firstname'].lower(), request.session['oauth_lastname'][0].lower()),
+				u"{0}{1}".format(request.session['oauth_firstname'][0].lower(), request.session['oauth_lastname'].lower()),
+		], (u"{0}{1}{2}".format(request.session['oauth_firstname'].lower(), request.session['oauth_lastname'][0].lower(), n) for n in xrange(100))):
 			if not User.objects.filter(username=u[:30]).exists():
 				suggested_username = u[:30]
 				break
