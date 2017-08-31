@@ -10,6 +10,10 @@ from pgweb.util.misc import get_client_ip
 import logging
 log = logging.getLogger(__name__)
 
+
+class OAuthException(Exception):
+	pass
+
 #
 # Generic OAuth login for multiple providers
 #
@@ -28,7 +32,7 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
 		# and log the user in.
 		if request.GET.get('state', '') != request.session.pop('oauth_state'):
 			log.warning("Invalid state received in {0} oauth2 step from {1}".format(provider, get_client_ip(request)))
-			return HttpResponse("Invalid OAuth state received")
+			raise OAuthException("Invalid OAuth state received")
 
 		token = oa.fetch_token(tokenurl,
 							   client_secret=client_secret,
@@ -82,7 +86,7 @@ def oauth_login_google(request):
 	def _google_auth_data(oa):
 		r = oa.get('https://www.googleapis.com/oauth2/v1/userinfo').json()
 		if not r['verified_email']:
-			raise Exception("Verified email required")
+			raise OAuthException("The email in your google profile must be verified in order to log in")
 		return (r['email'],
 				r.get('given_name', ''),
 				r.get('family_name', ''))
@@ -124,7 +128,7 @@ def oauth_login_github(request):
 					n[0],
 					n[1],
 				)
-		raise Exception("Could not find email")
+		raise OAuthException("Your GitHub profile must include a verified email address in order to log in")
 
 	return _login_oauth(
 		request,
@@ -141,6 +145,9 @@ def oauth_login_github(request):
 def oauth_login_facebook(request):
 	def _facebook_auth_data(oa):
 		r = oa.get('https://graph.facebook.com/me?fields=email,first_name,last_name').json()
+		if not 'email' in r:
+			raise OAuthException("Your Facebook profile must provide an email address in order to log in")
+
 		return (r['email'],
 				r.get('first_name', ''),
 				r.get('last_name', ''))
@@ -161,6 +168,9 @@ def oauth_login_facebook(request):
 def oauth_login_microsoft(request):
 	def _microsoft_auth_data(oa):
 		r = oa.get("https://apis.live.net/v5.0/me").json()
+		if not 'emails' in r or not account in r['emails']:
+			raise OAuthException("Your Facebook profile must provide an email address in order to log in")
+
 		return (r['emails']['account'],
 				r.get('first_name', ''),
 				r.get('last_name', ''))
@@ -178,4 +188,10 @@ def login_oauth(request, provider):
 	fn = 'oauth_login_{0}'.format(provider)
 	m = sys.modules[__name__]
 	if hasattr(m, fn):
-		return getattr(m, fn)(request)
+		try:
+			return getattr(m, fn)(request)
+		except OAuthException, e:
+			return HttpResponse(e)
+		except Exception, e:
+			log.error('Excpetion during OAuth: %s' % e)
+			return HttpResponse('An unhandled exception occured during the authentication process')
