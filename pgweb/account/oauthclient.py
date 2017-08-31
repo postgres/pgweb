@@ -107,6 +107,10 @@ def oauth_login_github(request):
 		r = oa.get('https://api.github.com/user').json()
 		if 'name' in r:
 			n = r['name'].split(None, 1)
+			# Some accounts only have one name, extend with an empty
+			# lastname, so the user can fill it out manually.
+			while len(n) < 2:
+				n.append('')
 		else:
 			# Some github accounts have no name on them, so we can just
 			# let the user fill it out manually in that case.
