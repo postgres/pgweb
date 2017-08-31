@@ -26,9 +26,9 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
 
 		# Receiving a login request from the provider, so validate data
 		# and log the user in.
-		if request.GET['state'] != request.session.pop('oauth_state'):
+		if request.GET.get('state', '') != request.session.pop('oauth_state'):
 			log.warning("Invalid state received in {0} oauth2 step from {1}".format(provider, get_client_ip(request)))
-			raise Exception("Invalid OAuth state received")
+			return HttpResponse("Invalid OAuth state received")
 
 		token = oa.fetch_token(tokenurl,
 							   client_secret=client_secret,
