@@ -105,7 +105,12 @@ def oauth_login_github(request):
 		# Github just returns full name, so we're just going to have to
 		# split that.
 		r = oa.get('https://api.github.com/user').json()
-		n = r['name'].split(None, 1)
+		if 'name' in r:
+			n = r['name'].split(None, 1)
+		else:
+			# Some github accounts have no name on them, so we can just
+			# let the user fill it out manually in that case.
+			n = ['','']
 		# Email is at a separate endpoint
 		r = oa.get('https://api.github.com/user/emails').json()
 		for e in r:
