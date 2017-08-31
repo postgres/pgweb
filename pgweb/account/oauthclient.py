@@ -84,8 +84,8 @@ def oauth_login_google(request):
 		if not r['verified_email']:
 			raise Exception("Verified email required")
 		return (r['email'],
-				r['given_name'],
-				r['family_name'])
+				r.get('given_name', ''),
+				r.get('family_name', ''))
 
 	return _login_oauth(
 		request,
@@ -142,8 +142,8 @@ def oauth_login_facebook(request):
 	def _facebook_auth_data(oa):
 		r = oa.get('https://graph.facebook.com/me?fields=email,first_name,last_name').json()
 		return (r['email'],
-				r['first_name'],
-				r['last_name'])
+				r.get('first_name', ''),
+				r.get('last_name', ''))
 
 	return _login_oauth(
 		request,
@@ -162,8 +162,8 @@ def oauth_login_microsoft(request):
 	def _microsoft_auth_data(oa):
 		r = oa.get("https://apis.live.net/v5.0/me").json()
 		return (r['emails']['account'],
-				r['first_name'],
-				r['last_name'])
+				r.get('first_name', ''),
+				r.get('last_name', ''))
 
 	return _login_oauth(
 		request,
