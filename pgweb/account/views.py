@@ -360,14 +360,15 @@ def signup_oauth(request):
 			user.backend = settings.AUTHENTICATION_BACKENDS[0]
 			django_login(request, user)
 
-			# Redirect to the account page
-			return HttpResponseRedirect('/account/')
+			# Redirect to the sessions page, or to the account page
+			# if none was given.
+			return HttpResponseRedirect(request.session.pop('login_next', '/account/'))
 	elif request.GET.has_key('do_abort'):
 		del request.session['oauth_email']
 		del request.session['oauth_firstname']
 		del request.session['oauth_lastname']
 		request.session.modified = True
-		return HttpResponseRedirect('/')
+		return HttpResponseRedirect(request.session.pop('login_next', '/'))
 	else:
 		# Generate possible new username
 		suggested_username = request.session['oauth_email'].replace('@', '.')[:30]
