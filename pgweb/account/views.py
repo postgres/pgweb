@@ -436,11 +436,17 @@ def communityauth(request, siteid):
 			urldata = "?su=%s" % su
 		else:
 			urldata = ""
+		if request.method == "POST" and 'next' in request.POST and 'this_is_the_login_form' in request.POST:
+			# This is a postback of the login form. So pick the next filed
+			# from that one, so we keep it across invalid password entries.
+			nexturl = request.POST['next']
+		else:
+			nexturl = '/account/auth/%s/%s' % (siteid, urldata)
 		return authviews.login(request, template_name='account/login.html',
 							   authentication_form=PgwebAuthenticationForm,
 							   extra_context={
 								   'sitename': site.name,
-								   'next': '/account/auth/%s/%s' % (siteid, urldata),
+								   'next': nexturl,
 								   'oauth_providers': [(k,v) for k,v in sorted(settings.OAUTH.items())],
 							   },
 						   )
