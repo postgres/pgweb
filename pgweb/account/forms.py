@@ -77,8 +77,8 @@ class SignupForm(forms.Form):
 
 class SignupOauthForm(forms.Form):
 	username = forms.CharField(max_length=30)
-	first_name = forms.CharField(max_length=30)
-	last_name = forms.CharField(max_length=30)
+	first_name = forms.CharField(max_length=30, required=False)
+	last_name = forms.CharField(max_length=30, required=False)
 	email = forms.EmailField()
 	captcha = ReCaptchaField()
 
