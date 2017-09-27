@@ -161,6 +161,7 @@ YUM_JSON="/usr/local/pgweb/external/yum.json"
 STATIC_CHECKOUT="/usr/local/pgweb-static"              # Location of a checked out pgweb-static project
 NOTIFICATION_EMAIL="someone@example.com"               # Address to send notifications *to*
 NOTIFICATION_FROM="someone@example.com"                # Address to send notifications *from*
+NOREPLY_FROM="someone@example.com"                     # Address to send unverified messages from
 LISTSERVER_EMAIL="someone@example.com"                 # Address to majordomo
 BUGREPORT_EMAIL="someone@example.com"                  # Address to pgsql-bugs list
 DOCSREPORT_EMAIL="someone@example.com"                 # Address to pgsql-docs list

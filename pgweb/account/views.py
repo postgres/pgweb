@@ -157,7 +157,7 @@ def change_email(request):
 									 token=generate_random_token())
 			token.save()
 
-			send_template_mail(settings.NOTIFICATION_FROM,
+			send_template_mail(settings.NOREPLY_FROM,
 							   form.cleaned_data['email'],
 							   'Your postgresql.org community account',
 							   'account/email_change_email.txt',
@@ -293,7 +293,7 @@ def signup(request):
 			log.info("Generated token {0} for user {1} from {2}".format(token, form.cleaned_data['username'], get_client_ip(request)))
 
 			# Generate an outgoing email
-			send_template_mail(settings.NOTIFICATION_FROM,
+			send_template_mail(settings.NOREPLY_FROM,
 							   form.cleaned_data['email'],
 							   'Your new postgresql.org community account',
 							   'account/new_account_email.txt',
