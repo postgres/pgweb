@@ -1,0 +1,200 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 10 Press Kit{%endblock%}
+{%block contents%}
+
+<div><span>This page in: </span>
+    <span lang="my"><a href="/about/press/presskit10/my/">Burmese</a></span>
+    / <span lang="cn"><a href="/about/press/presskit10/cn/">Chinese</a></span>
+    / <span lang="en"><a href="/about/press/presskit10/">English</a></span>
+    / <span lang="fr"><a href="/about/press/presskit10/fr/">French</a></span>
+    / <span lang="de"><a href="/about/press/presskit10/de/">German</a></span>
+    / <span lang="il"><a href="/about/press/presskit10/il/">Hebrew</a></span>
+    / <span lang="hi"><a href="/about/press/presskit10/hi/">Hindi</a></span>
+    / <span lang="id"><a href="/about/press/presskit10/id/">Indonesian</a></span>
+    / <span lang="it"><a href="/about/press/presskit10/it/">Italian</a></span>
+    / <span lang="kr"><a href="/about/press/presskit10/kr/">Korean</a></span>
+    / <span lang="pt"><a href="/about/press/presskit10/pt/">Portuguese</a></span>
+    / <span lang="ru"><a href="/about/press/presskit10/ru/">Russian</a></span>
+    / <span lang="es"><a href="/about/press/presskit10/es/">Spanish</a></span>
+    / <span lang="th"><a href="/about/press/presskit10/th/">Thai</a></span>
+    / <span lang="vi"><a href="/about/press/presskit10/vi/">Vietnamese</a></span><br/><br/>
+</div>
+
+<h1>PostgreSQL 10 Press Kit</h1>
+
+<h2>Nội dung</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Thông cáo báo chí gốc</a><br />
+ &nbsp; <a href="#features">Các thông tin thêm về tính năng</a><br />
+ &nbsp; <a href="#download">Nơi tải xuống</a><br />
+ &nbsp; <a href="#docs">Tài liệu</a><br />
+ &nbsp; <a href="#license">Giấy phép</a><br />
+ &nbsp; <a href="#contact">Liên hệ</a><br />
+ &nbsp; <a href="#graphics">Hình ảnh và logo</a><br />
+ &nbsp; <a href="#about">Giới thiệu về PostgreSQL</a><br />
+ &nbsp; <a href="#quoted_companies">Thông tin công ty được trích dẫn và nguyên văn đầy đủ của lời trích dẫn</a>
+ <br />
+ &nbsp; <a href="#companies">Hỗ trợ Công ty</a><br />
+</p>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" />
+
+<a name="original_release"></a><h2>Thông cáo báo chí gốc</h2>
+
+<p>5 tháng 10 2017 - Tập đoàn Phát triển Toàn cầu PostgreSQL ngày hôm nay đã thông báo ra mắt PostgreSQL 10, phiên bản mới nhất của cơ sở dữ liệu nguồn mở tiên tiến nhất trên thế giới.</p>
+
+<p>Một tính năng quan trọng của khối lượng công việc hiện đại là khả năng phân phối dữ liệu qua nhiều nút để tiếp cận, quản lý, và phân tích nhanh hơn, đồng thời được biết đến là chiến lược &quot;chia để trị&quot; Ra mắt PostgreSQL 10 gồm có những cải tiến quan trọng để thiết lập một cách có hiệu quả chiến lược chia để trị, bao gồm sao lưu logic gốc, phân chia bảng khai báo, và xử lý song song câu hỏi được cải thiện.</p>
+
+<p>&quot;Cộng đồng nhà phát triển của chúng tôi tập trung xây dựng các tính năng sẽ tận dụng các cài đặt cơ sở hạ tầng hiện đại để phân phối khối lượng công việc,&quot;
+  Magnus Hagander nói, một <a href="/developer/core/">core team</a> thành viên của
+  <a href="/">PostgreSQL Global Development Group</a>. &quot;Các tính năng như sao lưu logic và xử lý song song câu hỏi được cải thiện là kết quả của nhiều năm làm việc và minh chứng cho sự cống hiến liên tục của cộng đồng để bảo đảm sự dẫn đầu của Postgres khi các nhu cầu về công nghệ phát triển.&quot;
+</p>
+
+<p>Sự ra mắt này cũng đánh dấu sự thay đổi của giản đồ phiên bản cho PostgreSQL sang định dạng &quot;x.y&quot;. Điều này có nghĩa sự ra mắt với những thay đổi nhỏ lần tiếp theo của PostgreSQL sẽ là 10.1 và ra mắt với những thay đổi lớn sẽ là 11.</p>
+
+<b>Sao lưu logic - Bộ khung phát hành/đăng ký để phân phối dữ liệu</b>
+
+<p>Sao lưu logic mở rộng các tính năng sao lưu hiện tại của PostgreSQL với khả năng gửi các hiệu chỉnh trên mỗi cơ sở dữ liệu và mỗi cấp độ trên bảng thành các cơ sở dữ liệu PostgreSQL khác nhau.  Người sử dụng hiện nay có thể tinh chỉnh dữ liệu sao lưu sang nhiều nhóm cơ sở dữ liệu khác nhau và sẽ có khả năng để thực hiện nâng cấp sang các phiên bản PostgreSQL với thay đổi lớn mà không có thời gian dừng.</p>
+
+<p>&quot;Chúng tôi đang sử dụng rất nhiều PostgreSQL kể từ phiên bản 9.3 và rất háo hức với phiên bản 10 bởi vì phiên bản này mang đến cơ sở cho sự phân chia đã chờ đợi từ lâu và sự sao lưu logic cài sẵn. Nó sẽ cho phép chúng ta sử dụng PostgreSQL trong nhiều các dịch vụ hơn nữa,&quot; Vladimir Borodin cho biết, Người đứng đầu nhóm DBA tại
+  <a href="https://www.yandex.com/" target="_blank">Yandex</a>.</p>
+
+<b>Phân chia bảng khai báo - Sự tiện lợi trong phân chia dữ liệu của quý vị</b>
+
+<p>Phân chia bảng đã tồn tại nhiều năm trong PostgreSQL nhưng yêu cầu người dùng phải duy trì một bộ các quy tắc không hề tầm thường và các bộ khởi động để phân chia làm việc. PostgreSQL 10 giới thiệu một cú pháp phân chia bảng cho phép người sử dụng có thể dễ dàng tạo và duy trì phạm vi và các bảng được phân chia theo danh sách. Bổ sung cú pháp phân chia là bước đầu tiên trong một chuỗi các tính năng được lập kế hoạch để cung cấp một bộ khung phân chia thiết thực trong PostgreSQL.</p>
+
+<b>Xử lý song song câu hỏi được cải thiện - Giải quyết nhanh chóng phân tích của quý vị</b>
+
+<p>PostgreSQL 10 cung cấp hỗ trợ tốt hơn cho các câu hỏi song song bằng cách cho phép quá trình xử lý các phần của câu hỏi được song song hóa.  Sự cải tiến bao gồm các loại quét dữ liệu bổ sung được song song hóa cũng như tối ưu hóa khi dữ liệu được kết hợp lại, như sự sắp xếp từ trước. Những nâng cấp này cho phép các kết quả có thể quay trở lại nhanh chóng hơn.</p>
+
+<b>Cam kết số tối thiểu cần thiết cho Sao lưu đồng bộ - Phân bổ dữ liệu có độ tin cậy</b>
+
+<p>PostgreSQL 10 giới thiệu cam kết số tối thiểu cần thiết cho Sao lưu đồng bộ, tạo sự linh hoạt trong cách thức một cơ sở dữ liệu sơ cấp nhận xác nhận các thay đổi đã thành công được viết cho các mô hình từ xa.  Người quản trị hiện nay có thể xác định nếu có bất cứ số lượng mô hình đã được xác nhận rằng có một sự thay đổi ở cơ sở dữ liệu đã được thực hiện, sau đó dữ liệu có thể được cân nhắc ghi một cách an toàn.
+</p>
+
+<p>&quot;Cam kết số tối thiểu cần thiết cho Sao lưu đồng bộ ở PostgreSQL 10 mang lại nhiều lựa chọn để mở rộng khả năng của chúng ta để thúc đẩy cơ sở hạ tầng dữ liệu có thời gian dừng gần bằng không từ phối cảnh ứng dụng. Điều này cho phép chúng ta triển khai và cập nhập cơ sở hạ tầng dữ liệu mà không phải chịu tình trạng cửa sổ bảo dưỡng kéo dài,&quot; Curt Micol nói, Kỹ sư Cơ sở dữ liệu nhân viên tại
+  <a href="https://www.simple.com/" target="_blank">Simple Finance</a>.</p>
+
+<b>SCRAM-SHA-256 Sự xác thực - Bảo đảm sự tiếp cận dữ liệu của quý vị</b>
+
+<p>Cơ chế xác thực phản ứng thách thức có kinh nghiệm (SCRAM) được định nghĩa trong
+  <a href="https://tools.ietf.org/html/rfc5802" target="_blank">RFC5802</a>
+  định nghĩa là một giao thức để cải thiện lưu trữ bảo đảm và truyền dẫn mật khẩu bằng cách cung cấp một bộ khung để thương lượng mật khẩu mạnh. PostgreSQL 10 giới thiệu phương pháp xác thực SCRAM-SHA-256, định nghĩa trong
+  <a href="https://tools.ietf.org/html/rfc7677" target="_blank">RFC7677</a>, để cung cấp bảo mật tốt hơn phương pháp xác thực mật khẩu dựa trên MD5 hiện tại.</p>
+
+<a name="features"></a><h2>Các thông tin thêm về các tính năng</h2>
+<p>
+Để xem diễn giải của các tính năng kể trên và các mục khác, vui lòng xem các nguồn sau đây:
+</p>
+<ul>
+  <li><a href="https://www.postgresql.org/docs/current/static/release-10.html">Release Notes</a></li>
+  <li><a href="https://wiki.postgresql.org/wiki/New_in_postgres_10">What's New in 10</a></li>
+  <li><a href="/about/featurematrix">Feature matrix (English only)</a></li>
+  <li><a href="https://momjian.us/main/writings/pgsql/features.pdf">Major Features slide deck</a></li>
+  <li><a href="https://www.hagander.net/talks/PostgreSQL_10.pdf">Major Features slide deck (2)</a></li>
+</ul>
+
+<a name="download"></a><h2>Tải xuống</h2>
+<ul>
+  <li><a href="/download/">Downloads page</a> với các liên kết với Windows, Linux, OSX, BSD và bộ cài đặt và các công cụ của Solaris.</li>
+  <li><a href="/ftp/source/v10.0">Source Code</a></li>
+  <li><a href="https://hub.docker.com/_/postgres/">Postgres Docker image</a></li>
+  <li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+</ul>
+
+<a name="docs"></a><h2>Tài liệu</h2>
+
+<p>
+Tài liệu HTML và các trang hướng dẫn được cài đặt bằng PostgreSQL, nhưng quý vị có thể duyệt xem qua tài liệu trực tuyến của chúng tôi tại <a href="/docs/10/static/">online
+  documentation</a>.
+</p>
+
+<a name="license"></a><h2>Giấy phép</h2>
+<p>
+PostgreSQL sử dụng <a href="/about/licence/">PostgreSQL License</a>, giấy phép
+&quot;cho phép&quot; như BSD. <a href="http://www.opensource.org/licenses/postgresql/">OSI-certified license
+</a> được đánh giá rộng rãi là linh hoạt và thân thiện với môi trường kinh doanh, bởi giấy phép này không giới hạn sử dụng PostgreSQL trong các ứng dụng độc quyền và thương mại. Cùng với sự hỗ trợ của nhiều công ty và sự sở hữu công của tiêu chuẩn, giấy phép của chúng tôi làm cho PostgreSQL trở nên phổ biến với nhà cung cấp muốn gắn cơ sở dữ liệu trong các sản phẩm của riêng họ mà không phải lo lắng về phí, chỉ theo một nhà cung cấp hoặc thay đổi các điều khoản giấy phép.
+</p>
+
+<a name="contact"></a><h2>Liên hệ</h2>
+
+<p>Trang web</p>
+<ul>
+<li><a href="https://www.postgresql.org/">PostgreSQL home page</a></li>
+</ul>
+
+<p>Các câu hỏi báo chí bằng tiếng Anh ie</p>
+
+<p>USA, Canada và các câu hỏi chung<br />
+Nhóm báo chí PostgreSQL <br />
+<a href="mailto:press@postgresql.org">press@postgresql.org</a><br />
+Điện thoại: +1 (347) 674-7759</p>
+
+<p>Vietnam<br />
+Bui Hung <br />
+<a href="mailto:vn@postgresql.org">vn@postgresql.org</a><br />
++84 945913585</p>
+
+<p>Liện hệ ở các khu vực khác, vui lòng xem	 <a href="/about/press/contact/">our
+  international contact list.</a></p>
+
+<a name="graphics"><h2>Hình ảnh và logo</h2></a>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" >
+
+<ul>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant.png">PostgreSQL Elephant Logo, PNG format</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant64.jpg">PostgreSQL Elephant Icon</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/slonik_with_black_text_and_tagline.gif">PostgreSQL Banner with Logo, Elephant and Slogan</a></li>
+</ul>
+<p>
+ất cả các logo có thể hiệu chỉnh và phân phối lại theo Giấy phép của PostgreSQL. Tên và logo của PostgreSQL là nhãn hiệu đăng ký của Hiệp hội cộng đồng PostgreSQL Canada.
+</p>
+
+<a name="about"></a><h2>Giới thiệu về PostgreSQL</h2>
+<p>
+PostgreSQL là một cơ sở dữ liệu nguồn mở tiên tiến nhất trên thế giới, với một cộng đồng toàn cầu gồm hàng nghìn người sử dụng, người đóng góp, các công ty và tổ chức.  Dự án PostgreSQL xây dựng trên 30 năm thiết kế, bắt đầu tại Trường Đại học California, Berkeley, và đã tiếp tục với một bước phát triển không gì có thể sánh kịp. Bộ tính năng hoàn thiện của PostgreSQL không chỉ phù hợp với các hệ thống cơ sở dữ liệu độc quyền, mà còn vượt xa về các tính năng cơ sở dữ liệu tiên tiến,  khả năng mở rộng, bảo mật và tính bền vững. Để biết thêm PostgreSQL và tham gia vào cộng đồng của chúng tôi hãy truy cập <a href="https://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+
+<a name="quoted_companies"></a><h2>Thông tin công ty được trích dẫn và nguyên văn đầy đủ của lời trích dẫn</h2>
+<p>&quot;Cộng đồng nhà phát triển của chúng tôi tập trung xây dựng các tính năng sẽ tận dụng các cài đặt cơ sở hạ tầng hiện đại để phân phối khối lượng công việc,&quot;
+  Magnus Hagander nói, một <a href="https://www.postgresql.org/developer/core/">
+  core team</a> thành viên của <a href="https://www.postgresql.org/">
+  PostgreSQL Global Development Group</a>. &quot;Các tính năng như sao lưu logic và xử lý song song câu hỏi được cải thiện là kết quả của nhiều năm làm việc và minh chứng cho sự cống hiến liên tục của cộng đồng để bảo đảm sự dẫn đầu của Postgres khi các nhu cầu về công nghệ phát triển.&quot;
+</p>
+<p>PostgreSQL là một cơ sở dữ liệu nguồn mở tiên tiến nhất trên thế giới, với một cộng đồng toàn cầu gồm hàng nghìn người sử dụng, người đóng góp, các công ty và tổ chức.  Dự án PostgreSQL xây dựng trên 30 năm thiết kế, bắt đầu tại Trường Đại học California, Berkeley, và đã tiếp tục với một bước phát triển không gì có thể sánh kịp. Bộ tính năng hoàn thiện của PostgreSQL không chỉ phù hợp với các hệ thống cơ sở dữ liệu độc quyền, mà còn vượt xa về các tính năng cơ sở dữ liệu tiên tiến,  khả năng mở rộng, bảo mật và tính bền vững. Để biết thêm PostgreSQL và tham gia vào cộng đồng của chúng tôi hãy truy cập <a href="https://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+<p>&quot;Chúng tôi đang sử dụng rất nhiều PostgreSQL kể từ phiên bản 9.3 và rất háo hức với phiên bản 10 bởi vì phiên bản này mang đến cơ sở cho sự phân chia đã chờ đợi từ lâu và sự sao lưu logic cài sẵn. Nó sẽ cho phép chúng ta sử dụng PostgreSQL trong nhiều các dịch vụ hơn nữa,&quot; Vladimir Borodin cho biết, Người đứng đầu nhóm DBA tại
+  <a href="https://www.yandex.com/" target="_blank">Yandex</a>.
+</p>
+<p>
+<a href="https://yandex.com/" target="_blank">Yandex</a> là một công ty công nghệ xây dựng các sản phẩm và dịch vụ thông minh vận hành thông qua khả năng học hỏi của máy móc. Mục tiêu của Yandex là giúp đỡ người tiêu dùng và kinh doanh điều hướng thế giới trực tuyến và ngoại tuyến tốt hơn. Kể từ năm 1997, Yandex đã cung cấp các dịch vụ tìm kiếm và thông tin địa phương và trên thế giới. Thêm vào đó, Yandex đã phát triển các dịch vụ giao thông, các sản phẩm điều hướng và các ứng dụng di động theo yêu cầu dẫn đầu thị trường cho hàng triệu khách hàng trên toàn cầu. Để liên hệ với Yandex, vui lòng truy cập
+<a href="https://yandex.com/company/contacts/" target="_blank">
+  https://yandex.com/company/contacts/
+</a>
+</p>
+<p>&quot;Cam kết số tối thiểu cần thiết cho Sao lưu đồng bộ ở PostgreSQL 10 mang lại nhiều lựa chọn để mở rộng khả năng của chúng ta để thúc đẩy cơ sở hạ tầng dữ liệu có thời gian dừng gần bằng không từ phối cảnh ứng dụng. Điều này cho phép chúng ta triển khai và cập nhập cơ sở hạ tầng dữ liệu mà không phải chịu tình trạng cửa sổ bảo dưỡng kéo dài,&quot; Curt Micol nói, Kỹ sư Cơ sở dữ liệu nhân viên tại
+  <a href="https://www.simple.com/" target="_blank">Simple Finance</a>.</p>
+<p>Được thành lập vào năm 2009, <a href="https://www.simple.com/" target="_blank">Simple</a>
+  là một công ty công nghệ đang làm thay đổi cách thức mọi người gửi tiền vào ngân hàng và cách nghĩ về tiền của họ. Sản phẩm của Simple pha trộn việc lập ngân sách và hoạt động ngân hàng thành một ứng dụng đẹp đẽ duy nhất, với các công cụ giúp đỡ mọi người lưu trữ những thứ họ cần và chi tiêu một cách có trách nhiệm cho những thứ họ muốn. Liên hệ
+  <a href="https://www.simple.com/" target="_blank">Simple</a> theo địa chỉ
+  <a href="mailto:press@simple.com">press@simple.com</a>
+</p>
+
+<a name="companies"></a><h2>Hỗ trợ Công ty</h2>
+
+<p>PostgreSQL hân hạnh hỗ trợ nhiều công ty, đã tài trợ cho các nhà phát triển, cung cấp các nguồn lực máy chủ, và hỗ trợ chúng tôi về tài chính. Vui lòng xem
+  <a href="/about/sponsors/">sponsors page</a> for
+  để biết thông tin về một số các nhà hỗ trợ của dự án.</p>
+
+<p>Đồng thời có một cộng đồng lớn
+  <a href="/support/professional_support/">companies offering PostgreSQL Support
+  </a>, từ các nhà tư vấn cá nhân đến các công ty đa quốc gia.</p>
+
+<p>Chúng tôi hân hạnh nhận <a href="/about/donate/">Donations</a></p>
+
+<p>Hoặc quý vị có thể mua một số hàng hóa gia công từ
+  <a href="http://www.zazzle.com/postgresql">Zazzle PostgreSQL Store</a> của chúng tôi.
+</p>
+{% endblock %}

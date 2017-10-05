@@ -1,0 +1,287 @@
+{%extends "base/page.html"%}
+{%block title%}ข่าวประชาสัมพันธ์ PostgreSQL 10{%endblock%}
+{%block contents%}
+
+<div><span>This page in: </span>
+    <span lang="my"><a href="/about/press/presskit10/my/">Burmese</a></span>
+    / <span lang="cn"><a href="/about/press/presskit10/cn/">Chinese</a></span>
+    / <span lang="en"><a href="/about/press/presskit10/">English</a></span>
+    / <span lang="fr"><a href="/about/press/presskit10/fr/">French</a></span>
+    / <span lang="de"><a href="/about/press/presskit10/de/">German</a></span>
+    / <span lang="il"><a href="/about/press/presskit10/il/">Hebrew</a></span>
+    / <span lang="hi"><a href="/about/press/presskit10/hi/">Hindi</a></span>
+    / <span lang="id"><a href="/about/press/presskit10/id/">Indonesian</a></span>
+    / <span lang="it"><a href="/about/press/presskit10/it/">Italian</a></span>
+    / <span lang="kr"><a href="/about/press/presskit10/kr/">Korean</a></span>
+    / <span lang="pt"><a href="/about/press/presskit10/pt/">Portuguese</a></span>
+    / <span lang="ru"><a href="/about/press/presskit10/ru/">Russian</a></span>
+    / <span lang="es"><a href="/about/press/presskit10/es/">Spanish</a></span>
+    / <span lang="th"><a href="/about/press/presskit10/th/">Thai</a></span>
+    / <span lang="vi"><a href="/about/press/presskit10/vi/">Vietnamese</a></span><br/><br/>
+</div>
+
+<h1>PostgreSQL 10</h1>
+
+<h2>เนื้อหา</h2>
+
+<p>
+ &nbsp; <a href="#original_release">เนื้อหาข่าวต้นฉบับ</a><br/>
+ &nbsp; <a href="#features">เพิ่มเติมเกี่ยวกับคุณสมบัติ</a><br />
+ &nbsp; <a href="#download">ที่สำหรับดาวน์โหลด</a><br />
+ &nbsp; <a href="#docs">เอกสาร</a><br />
+ &nbsp; <a href="#license">ใบอนุญาต</a><br />
+ &nbsp; <a href="#contact">การติดต่อ</a><br />
+ &nbsp; <a href="#graphics">ภาพและโลโก้</a><br />
+ &nbsp; <a href="#about">เกี่ยวกับ PostgreSQL</a><br />
+ &nbsp; <a href="#quoted_companies">บริษัทอ้างอิงและข้อความอ้างอิงแบบเต็ม</a>
+ <br />
+ &nbsp; <a href="#companies">ผู้ให้การสนับสนุน</a><br />
+</p>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" />
+
+<a name="original_release"></a><h2>ข่าวประชาสัมพันธ์ต้นฉบับ</h2>
+
+<p>5 ตุลาคม 2017 - วันนี้ PostgreSQL Global Development Group ได้แถลงข่าว
+  การวางจำหน่าย PostgreSQL 10 ซึ่งเป็นเวอร์ชั่นล่าสุด
+  ของฐานข้อมูลโอเพ่นซอร์สที่ก้าวหน้าที่สุดในโลก</p>
+
+<p>คุณสมบัติที่สำคัญของการจัดการกับข้อมูลจำนวนมาก คือ ความสามารถในการกระจายข้อมูลไปยังสถานีเชื่อมโยงจำนวนมาก
+  เพื่อการเข้าถึง การจัดการ และการวิเคราะห์ที่รวดเร็วขึ้น
+  ซึ่งรู้จักกันว่าคือ กลยุทธิ์ &quot;การแบ่งและพิชิต&quot; การเปิดตัว  PostgreSQL
+  10 ยังครอบคลุมถึงการพัฒนาให้สามารถใช้กลยุทธิ์การ
+  แบ่งและการพิชิตข้อมูล รวมถึงการจำลองตรรกะดั้งเดิม
+  การแบ่งตารางที่เปิดเผย และการสอดคล้องของการสืบค้นที่พัฒนาขึ้น</p>
+
+<p>&quot;ชุมชนนักพัฒนาของเรามุ่งเน้นที่การสร้างคุณสมบัติใหม่ที่สามารถ
+  ใช้ประโยชน์จากการติดตั้งโครงสร้างอันทันสมัยเพื่อกระจายปริมาณข้อมูล,&quot;
+  Magnus Hagander, <a href="https://www.postgresql.org/developer/core/">> 
+  สมาชิกของ</a> ทีมหลักของ <a href="https://www.postgresql.org/">กล่าว &quot;คุณสมบัติอย่างเช่น
+  การจำลองตรรกะ และการสอดคล้องของคำสืบค้นนั้น ใช้เวลาในการพัฒนาหลายปี
+  แสดงให้เห็นถึงการทุ่มเทอย่างต่อเนื่องของชุมชนเพื่อให้มั่นใจได้ว่า Postgres
+  ยังคงเป็นผู้นำในการตอบสนองต่อความต้องการทางด้านเทคโนโลยีอยู่เสมอ&quot;
+</p>
+
+<p>การเปิดตัวครั้งนี้ยังได้เน้นย้ำถึงการเปลี่ยนแปลงรูปแบบเวอร์ชั่นของ PostgreSQL
+  ไปเป็นฟอร์แมต &quot;x.y&quot; ซึ่งหมายความว่าการเปิดตัวครั้งหน้าแบบย่อมๆ ของ
+  PostgreSQL จะเป็น 10.1 และครั้งใหญ่ในคราวถัดไปก็คือ 11</p>
+
+<b>การจำลองตรรกะ – กรอบการเผยแพร่/ลงทะเบียนสำหรับการกระจายข้อมูล</b>
+
+<p>การจำลองตรระกะได้ขยายคุณสมบัติการจำลองในปัจจุบันของ PostgreSQL
+  ด้วยความสามารถในการส่งการแก้ไขปรับปรุงในระดับฐานข้อมูลและตาราง
+  ไปยังฐานข้อมูลต่างๆ ของ PostgreSQL ปัจจุบันผู้ใช้สามารถแก้ไขปรับปรุงข้อมูล
+  ที่จำลองไปยังคลัสเตอร์ฐานข้อมูลที่หลากหลาย
+  และจะสามารถอัพเกรดไปยังเวอร์ชั่นหลักๆ ในอนาคตของ PostgreSQL ได้อย่างต่อเนื่องไม่สะดุด</p>
+
+<p>&quot;เราได้ใช้ PostgreSQL เยอะมากตั้งแต่ 9.3 และรู้สึกตื่นเต้นมาก
+  กับเวอร์ชั่น 10 เพราะเป็นจุดเริ่มต้นของแบ่งข้อมูลที่รอกันมานาน
+  และการจำลองตรรกะที่ติดตั้งไว้ในตัว ยังทำให้เราสามารถใช้ PostgreSQL ในบริการอื่นๆ
+  ได้มากขึ้นด้วย,&quot;  Vladimir Borodin หัวหน้าทีม DBA ที่
+  <a href="https://www.yandex.com/" target="_blank">Yandex</a>กล่าว</p>
+
+<b>การแบ่งตารางที่เปิดเผย - ความสะดวกในการแบ่งข้อมูลของคุณ</b>
+
+<p>การแบ่งตารางมีอยู่ใน PostgreSQL มาหลายปีแล้ว แต่ผู้ใช้ยังต้อง
+  ใช้กฎสำคัญๆ และการกระตุ้นเพื่อให้การแบ่งทำงาน
+  PostgreSQL 10 ได้สร้างรูปแบบการเขียนภาษาในการแบ่งตารางที่ช่วยให้ผู้ใช้สามารถ
+  สร้าง รักษาความแตกต่างระหว่างจำนวนสูงสุดและต่ำสุดและลิสต์รายการตารางที่ถูกแบ่งได้อย่างง่าย  นอกจาก
+  รูปแบบการเขียนภาษาในการแบ่งข้อมูลแล้ว ยังถือเป็นก้าวแรกของชุดคุณลักษณะที่ได้วางแผนไว้เพื่อ
+  พัฒนากรอบการแบ่งข้อมูลที่แข็งแกร่งของ PostgreSQL </p>
+
+<b>การสอดคล้องของการสืบค้นที่พัฒนาขึ้น - การวิเคราะห์ที่รวดเร็ว</b>
+
+<p>PostgreSQL 10 มีการสนับสนุนการสืบค้นที่สอดคล้องด้วยการเปรียบเทียบ
+  กระบวนการสืบค้นหลายๆ ส่วนที่เพิ่มมากขึ้น การพัฒนา
+  ยังรวมถึงการสแกนประเภทข้อมูลที่มากขึ้น เช่นเดียวกับ
+  การหาค่าที่เหมาะสมที่สุดเมื่อข้อมูลอยู่รวมกัน เช่น  การเรียงลำดับข้อมูล
+  การพัฒนานี้ช่วยให้ผลการสืบค้นปรากฏเร็วขึ้น </p>
+
+<b>การใช้ Quorum เพื่อการจำลองซิงโครไนซ์ - แบ่งข้อมูลอย่างมั่นใจ</b>
+
+<p>PostgreSQL 10 ได้สร้างการจำลองที่ซิงโครไนซ์
+  ซึ่งทำให้มีความยืดหยุ่นให้การที่ฐานข้อมูลหลักสามารถรับข้อมูล
+  เกี่ยวกับการเปลี่ยนแปลงที่บันทึกยังสำเนาที่อยู่ห่างออกไป  ต่อไปนี้แอดมิน
+  สามารถกำหนดได้ว่าหากสำเนาใดก็ตามได้รับข้อมูลการเปลี่ยนแปลง
+  ฐานข้อมูลที่เกิดขึ้น ข้อมูลนั้นถือว่าถูกเขียนอย่างปลอดภัยแล้ว
+</p>
+
+<p>&quot;การใช้ Quorum เพื่อการจำลองซิงโครไนซ์ใน  PostgreSQL 10 ได้เพิ่ม
+  ทางเลือกในการขยายขีดความสามารถของโครงสร้างฐานข้อมูลให้เกือบ
+  เป็นไปได้อย่างต่อเนื่องแบบไม่มีสะดุด นี่ยังช่วยให้เราสามารถ
+  ใช้งานและอัพเดทโครงสร้างฐานข้อมูลของเราโดยไม่ต้องเปิดวินโดว์บำรุงรักษา
+  เป็นเวลานาน,&quot;  Curt Micol วิศวกรด้านโครงสร้างพนักงาน ที่
+  <a href="https://www.simple.com/" target="_blank">Simple Finance</a>กล่าว</p>
+
+<b>การพิสูจน์ตัวตน SCRAM-SHA-256 - รักษาความปลอดภัยในการเข้าถึงข้อมูลของคุณ</b>
+
+<p>The Salted Challenge Response Authentication Mechanism (SCRAM) ที่ระบุอยู่ใน
+  <a href="https://tools.ietf.org/html/rfc5802" target="_blank">RFC5802</a>
+  หมายถึงโปรโตคอลที่พัฒนา เพื่อการเก็บข้อมูลความปลอดภัยและการส่งผ่าน
+  รหัสผ่าน ด้วยการใช้กรอบการต่อรองรหัสผ่านที่เข้มแข็ง
+  PostgreSQL 10 ได้สร้างเครื่องมือพิสูจน์ตัวตน SCRAM-SHA-256 ที่ระบุใน
+  <a href="https://tools.ietf.org/html/rfc7677" target="_blank">RFC7677</a> เพื่อ
+  สร้างความปลอดภัยที่มากกว่าเครื่องมือพิสูจน์ตัวตนรหัสผ่าน MD5
+  ที่มีอยู่</p>
+
+<a name="features"></a><h2>เพิ่มเติมเกี่ยวกับคุณสมบัติ</h2>
+<p>
+สำหรับคำอธิบายเกี่ยวกับคุณสมบัติข้างต้นและอื่นๆ กรุณาศึกษาข้อมูลเพิ่มเติม
+ต่อไปนี้:
+</p>
+<ul>
+  <li><a href="https://www.postgresql.org/docs/current/static/release-10.html">บันทึกข่าว</a></li>
+  <li><a href="https://wiki.postgresql.org/wiki/New_in_postgres_10">มีอะไรใหม่ใน 10</a></li>
+  <li><a href="/about/featurematrix">Feature matrix (English only)</a></li>
+  <li><a href="https://momjian.us/main/writings/pgsql/features.pdf">คุณสมบัติหลัก</a></li>
+  <li><a href="https://www.hagander.net/talks/PostgreSQL_10.pdf">คุณสมบัติหลัก(2)</a></li>
+</ul>
+
+<a name="download"</a><h2>ดาวน์โหลด</h2>
+<ul>
+  <li><a href="/download/">หน้าดาวน์โหลด</a> ด้วยลิงค์สำหรับเครื่องมือและตัวติดตั้ง Windows, Linux, OSX,
+    BSD และ Solaris</li>
+  <li><a href="/ftp/source/v10.0">Source Code</a></li>
+  <li><a href="https://hub.docker.com/_/postgres/">ภาพของ Postgres Docker</a></li>
+  <li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+</ul>
+
+<a name="docs"></a><h2>เอกสาร</h2>
+
+<p>
+เอกสาร HTML และหน้าหลักได้รับการติดตั้งด้วย PostgreSQL อย่าเกรงใจที่จะ
+เปิดดูเอกสารออนไลน์ของเราที่ <a href="/docs/10/static/">เอกสาร
+  ออนไลน์</a>.
+</p>
+
+<a name="license"></a><h2>ใบอนุญาต</h2>
+<p>
+PostgreSQL ใช้<a href="/about/licence/">PostgreSQL License</a> ใบอนุญาตคล้าย BSD
+&quot;permissive&quot; 
+<a href="http://www.opensource.org/licenses/postgresql/">ใบอนุญาต OSI-certified
+</a> ได้รับการยอมรับว่ายืดหยุ่น และเป็นมิตรต่อธุรกิจ เนื่องจากไม่
+เข้มงวดเรื่องการใช้ PostgreSQL กับแอปพลิเคชั่นด้านการค้าหรือสิทธิบัตร
+นอกจากการสนับสนุนระหว่างบริษัทและธุรกิจเอกชนต่อโค้ดดังกล่าวแล้ว
+ใบอนุญาตของเรายังทำให้ PostgreSQL เป็นที่นิยมต่อนักลงทุนที่ต้องการเก็บฐานข้อมูล
+ในผลิตภัณฑ์ของตนเองโดยปราศจากความกลัว ไม่ต้องเข้าสู่ระบบ หรือเปลี่ยนแปลงตาม
+เงื่อนไขของการให้ใบอนุญาต
+</p>
+
+<a name ="contact"></a><h2>การติดต่อ</h2>
+
+<p>หน้าเว็บ</p>
+<ul>
+<li><a href="https://www.postgresql.org/">หน้าแรกของ PostgreSQL</a></li>
+</ul>
+
+<p>การสืบค้นสื่อภาษาอังกฤษ</p>
+
+<p>สหรัฐอเมริกา แคนาดา และการสืบค้นทั่วไป<br />
+ทีมสื่อของ PostgreSQL<br />
+<a href="mailto:press@postgresql.org">press@postgresql.org</a><br />
+โทร: +1 (347) 674-7759</p>
+
+<p>Thailand<br />
+Lilly Rangsikriangkrai <br />
+<a href="mailto:th@postgresql.org">th@postgresql.org</a><br />
++66 2-207-2602</p>
+
+<p>สำหรับการติดต่อในภูมิภาคอื่น ดูที่ <a href="/about/press/contact/">
+  รายการผู้ติดต่อรำหว่างประเทศของเรา</a></p>
+
+<a name="graphics"></a><h2>ภาพและโลโก้</h2></a>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" >
+
+<ul>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant.png">PostgreSQL Elephant Logo, PNG format</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant64.jpg">PostgreSQL Elephant Icon</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/slonik_with_black_text_and_tagline.gif">PostgreSQL Banner with Logo, Elephant and Slogan</a></li>
+</ul>
+<p>
+การดัดแปลง แจกจ่าย ทุกโลโก้ อยู่ภายใต้ใบอนุญาตของ PostgreSQL
+ชื่อและโลโก้ของ PostgreSQL เป็นเครื่องหมายการค้าของ PostgreSQL
+Community Association of Canada.
+</p>
+
+<a name="about"></a><h2>เกี่ยวกับ PostgreSQL</h2>
+<p>
+PostgreSQL คือฐานข้อมูลโอเพ่นซอร์สที่ก้าวหน้าที่สุดในโลก ประกอบด้วย
+ชุมชนผู้ใช้ ผู้จำหน่าย บริษัท และองค์กรทั่วโลกหลายพันชุมชน
+โครงการของ PostgreSQL  เกิดขึ้นโดยพื้นฐานทางวิศวกรรมกว่า 30 ปี เริ่มที่
+มหาวิทยาลัยแคลิฟอร์เนีย เบิร์คลีย์  จากนั้นก็พัฒนาก้าวไปเรื่อยๆ อย่างไม่มีใครตามทันได้
+จุดเด่นหลักของ PostgreSQL ไม่เพียงแต่มีระบบฐานข้อมูลที่สุดยอดที่สุดเท่านั้น
+แต่ยังมีการปฏิบัติการฐานข้อมูลที่ก้าวหน้า มีความสามารถในการขยายขีดความสามารถ
+การรักษาความปลอดภัย และการรักษาเสถียรภาพด้วย ศึกษาข้อมูลเพิ่มเติมเกี่ยวกับ PostgreSQL
+และมีส่วนร่วมกับชุมชนของเราได้ที่ <a href="https://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+
+<a name="quoted_companies"></a><h2>ข้อมูลบริษัทอ้างอิงและเนื้อหาอ้างอิงแบบเต็ม</h2>
+<p>&quot;ชุมชนนักพัฒนาของเรามุ่งเน้นที่การสร้างคุณสมบัติใหม่ที่สามารถ
+  ใช้ประโยชน์จากการติดตั้งโครงสร้างอันทันสมัยเพื่อกระจายปริมาณข้อมูล,&quot;
+   Magnus Hagander,  <a href="https://www.postgresql.org/developer/core/">
+  สมาชิกของ</a> ทีมหลักของ <a href="https://www.postgresql.org/">
+  PostgreSQL Global Development Group</a>กล่าว &quot;คุณสมบัติอย่างเช่น
+  การจำลองตรรกะและการสอดคล้องของคำสืบค้นนั้น ใช้เวลาในการพัฒนาหลายปี
+  แสดงให้เห็นถึงการทุ่มเทอย่างต่อเนื่องของชุมชนเพื่อให้มั่นใจได้ว่า Postgres
+  ยังคงเป็นผู้นำในการตอบสนองต่อความต้องการทางด้านเทคโนโลยีอยู่เสมอ&quot;
+</p>
+<p>PostgreSQL คือฐานข้อมูลโอเพ่นซอร์สที่ก้าวหน้าที่สุดในโลก ประกอบด้วยชุมชนผู้ใช้
+ชุมชนผู้ใช้ ผู้จำหน่าย บริษัท และองค์กรทั่วโลกหลายพันชุมชน
+โครงการของ PostgreSQL  เกิดขึ้นโดยพื้นฐานทางวิศวกรรมกว่า 30 ปี เริ่มที่
+มหาวิทยาลัยแคลิฟอร์เนีย เบิร์คลีย์  จากนั้นก็พัฒนาก้าวไปเรื่อยๆ อย่างไม่มีใครตามทันได้
+จุดเด่นหลักของ PostgreSQL ไม่เพียงแต่มีระบบฐานข้อมูลที่สุดยอดที่สุดเท่านั้น
+แต่ยังมีการปฏิบัติการฐานข้อมูลที่ก้าวหน้า มีความสามารถในการขยายขีดความสามารถ
+การรักษาความปลอดภัย และการรักษาเสถียรภาพด้วย ศึกษาข้อมูลเพิ่มเติมเกี่ยวกับ PostgreSQL 
+และมีส่วนร่วมกับชุมชนของเราได้ที่ <a href="https://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+<p>&quot;เราได้ใช้  PostgreSQL เยอะมากตั้งแต่ 9.3 และรู้สึกตื่นเต้นมาก
+  กับเวอร์ชั่น 10 เพราะเป็นจุดเริ่มต้นของแบ่งข้อมูลที่รอกันมานาน
+  และการจำลองตรรกะที่ติดตั้งไว้ในตัว ยังทำให้เราสามารถใช้ PostgreSQL  ในบริการอื่นๆ
+  ได้มากขึ้นด้วย,&quot;  Vladimir Borodin หัวหน้าทีม DBA Team Lead ที่
+  <a href="https://www.yandex.com/" target="_blank">Yandex</a>กล่าว
+</p>
+<p>
+<a href="https://yandex.com/" target="_blank">Yandex</a> คือบริษัทเทคโนโลยี
+ซึ่งสร้างผลิตภัณฑ์และบริการอัจฉริยะซึ่งเกิดจากการศึกษาเรียนรู้เครื่องจักรกล เป้าหมายของ Yandex
+คือการนำทางให้ผู้บริโภคและธุรกิจก้าวไปในโลกออนไลน์และออฟไลน์
+นับตั้งแต่ปี 1997 Yandex ได้เปิดตัวการให้บริการข้อมูลและสืบค้นแบบเฉพาะในระดับเวิลด์คลาส
+นอกจากนี้ Yandex ยังได้พัฒนาบริการด้านการขนส่งตามความต้องการของตลาด
+ผลิตภัณฑ์ด้านการนำทาง และแอปพลิเคชั่นมือถือสำหรับ
+ผู้บริโภคหลายล้านคนทั่วโลก  ติดต่อ Yandex โปรดไปที่
+<a href="https://yandex.com/company/contacts/" target="_blank">
+  https://yandex.com/company/contacts/
+</a>
+</p>
+<p>&quot;การใช้ Quorum เพื่อการจำลองซิงโครไนซ์ใน  PostgreSQL 10 ได้เพิ่ม
+  ทางเลือกในการขยายขีดความสามารถของโครงสร้างฐานข้อมูลให้เกือบ
+  เป็นไปได้อย่างต่อเนื่องแบบไม่มีสะดุด นี่ยังช่วยให้เราสามารถ
+  ใช้งานและอัพเดทโครงสร้างฐานข้อมูลของเราโดยไม่ต้องเปิดวินโดว์บำรุงรักษา
+  เป็นเวลานาน,&quot;  Curt Micol วิศวกรด้านโครงสร้างพนักงาน ที่
+  <a href="https://www.simple.com/" target="_blank">Simple Finance</a>กล่าว</p>
+<p>ก่อตั้งในปี 2009 <a href="https://www.simple.com/" target="_blank">Simple</a>
+  คือบริษัทเทคโนโลยีที่กำลังเปลี่ยนวิธีคิดเกี่ยวกับเงินและธนาคาร
+  ผลิตภัณฑ์ของ Simple หลอมรวมเรื่องของทุนและการธนาคารไว้ใน
+  แอปพลิเคชั่นอันสุดยอดเพียงหนึ่งเดียว ด้วยเครื่องมือที่ช่วยให้ผู้คนสามารถเก็บออมเพื่อสิ่งที่ต้องการ
+  และจ่ายเงินให้กับสิ่งที่ต้องการอย่างมีความรับผิดชอบ ติดต่อ
+  <a href="https://www.simple.com/" target="_blank">Simple</a> ที่
+  <a href="mailto:press@simple.com">press@simple.com</a>
+</p>
+
+<a name="companies"></a><h2>Corporate Support</h2>
+
+<p>PostgreSQL สนุกกับการสนับสนุนบริษัทจำนวนมาก ซึ่งให้สปอนเซอร์นักพัฒนา
+  จัดหาทรัพยากรสำหรับเครือข่าย และสนับสนุนด้านการเงิน ดู
+  <a href="/about/sponsors/">หน้าสปอนเซอร์</a> สำหรับ
+  ผู้สนับสนุนโครงการเหล่านี้</p>
+
+<p>ยังมีชุมชนขนาดใหญ่ของ
+  <a href="/support/professional_support/">บริษัทที่ให้การสนับสนุน PostgreSQL
+  </a> ตั้งแต่ที่ปรึกษาส่วนบุคคลไปจนถึงบรรษัทข้ามชาติ</p>
+
+<p><a href="/about/donate/">การบริจาค</a>ยินดีรับ</p>
+
+<p>หรือท่านอาจซื้อสินค้าเหล่านี้จาก
+  <a href="http://www.zazzle.com/postgresql">Zazzle PostgreSQL Store</a>
+</p>
+{% endblock %}

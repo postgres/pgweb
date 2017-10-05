@@ -1,0 +1,224 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 10 Press Kit{%endblock%}
+{%block contents%}
+
+<div><span>This page in: </span>
+    <span lang="my"><a href="/about/press/presskit10/my/">Burmese</a></span>
+    / <span lang="cn"><a href="/about/press/presskit10/cn/">Chinese</a></span>
+    / <span lang="en"><a href="/about/press/presskit10/">English</a></span>
+    / <span lang="fr"><a href="/about/press/presskit10/fr/">French</a></span>
+    / <span lang="de"><a href="/about/press/presskit10/de/">German</a></span>
+    / <span lang="il"><a href="/about/press/presskit10/il/">Hebrew</a></span>
+    / <span lang="hi"><a href="/about/press/presskit10/hi/">Hindi</a></span>
+    / <span lang="id"><a href="/about/press/presskit10/id/">Indonesian</a></span>
+    / <span lang="it"><a href="/about/press/presskit10/it/">Italian</a></span>
+    / <span lang="kr"><a href="/about/press/presskit10/kr/">Korean</a></span>
+    / <span lang="pt"><a href="/about/press/presskit10/pt/">Portuguese</a></span>
+    / <span lang="ru"><a href="/about/press/presskit10/ru/">Russian</a></span>
+    / <span lang="es"><a href="/about/press/presskit10/es/">Spanish</a></span>
+    / <span lang="th"><a href="/about/press/presskit10/th/">Thai</a></span>
+    / <span lang="vi"><a href="/about/press/presskit10/vi/">Vietnamese</a></span><br/><br/>
+</div>
+
+<h1>PostgreSQL 10 Press Kit</h1>
+
+<h2>Contents</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Text of Original Release</a><br />
+ &nbsp; <a href="#features">More About The Features</a><br />
+ &nbsp; <a href="#download">Where to Download</a><br />
+ &nbsp; <a href="#docs">Documentation</a><br />
+ &nbsp; <a href="#license">License</a><br />
+ &nbsp; <a href="#contact">Contacts</a><br />
+ &nbsp; <a href="#graphics">Images and Logos</a><br />
+ &nbsp; <a href="#about">About PostgreSQL</a><br />
+ &nbsp; <a href="#quoted_companies">Quoted Companies and Full Text of Quotes</a>
+ <br />
+ &nbsp; <a href="#companies">Corporate Support</a><br />
+</p>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" />
+
+<a name="original_release"></a><h2>PostgreSQL 10 출시</h2>
+
+<p>PostgreSQL 글로벌 개발 그룹에서는 오늘 2017년 10월 5일에 PostgreSQL 10의 출시를 공식 발표했습니다.</p>
+
+<p>최근 워크로드 처리의 중요한 기능중 하나는 "divide and conquer" (분할 정복)로 알려진 데이터를 여러 노드로 분산을 통한 빠른 엑세스, 관리, 분석할 수 있는 기능입니다. PostgreSQL 10은 로지컬 리플리케이션, 선언적 테이블 파티셔닝 및 병렬처리 기능 개선을 포함한 분할 정복을 위한 상당한 기능 개선이 이루어졌습니다.</p>
+
+<p><a href="https://www.postgresql.org/">PostgreSQL 글로벌 개발 그룹</a>의 <a href="https://www.postgresql.org/developer/core/">코어팀</a> 개발자인 Magnus Hagander는 "우리 개발 커뮤니티는 워크로드 분산처리를 위한 모던 인프라스트럭처 구성을 위한 기능 개발에 중점을 두었습니다. 로지컬 리플리케이션이나 쿼리 병렬 처리 기능 개선 등은 PostgreSQL 기능 개선을 위한 다년간의 끊임없는 커뮤니티의 노력의 결과입니다."
+</p>
+
+<p>이번 버전에서는 PostgreSQL의 버전 정보가 'x.y'로 변경되었습니다. 다음 마이너 릴리즈는 PostgreSQL 10.1이 될 것이고 다음 메이저 버전은 11이 됩니다.</p>
+
+<b>로지컬 리플리케이션 - 분산 데이터를 위한 publish/subscribe (발행/구독) 프레임웍</b>
+
+<p>로지컬 리플리케이션은 기존 PostgreSQL 리플리케이션 기능의 확장으로 다른 PostgreSQL 데이터베이스로 데이터베이스 단위 또는 테이블 단위의 변경 사항을 전송합니다. 사용자는 PostgreSQL 메이저 버전의 제로 다운타임 업그레이드를 실행할 수 있게 되었습니다.</p>
+
+<p>"우리는 PostgreSQL 9.3 버전부터 사용한 헤비 유저로 오랜 기간 기다려온 파티셔닝과 로지컬 리플리케이션이 가능한 10 버전에 매우 기대가 큽니다. 이는 PostgreSQL로 더 많은 서비스를 확대할 수 있음을 나타냅니다." - Vladimir Borodin, DBA Team Lead at <a href="https://www.yandex.com/">Yandex</a></p>
+
+<b>선언적 테이블 파티셔닝 - 편리한 데이터 분할 저장</b>
+
+<p>테이블 파티셔닝은 PostgreSQL에서 이미 오래전부터 지원되던 기능이었습니다. 하지만 구성, 관리를 위한 많은 부가 작업이 수반되었습니다. PostgreSQL 10에서는 레인지, 리스트 파티션을 구현할 수 있는 구문이 소개되었습니다. 테이블 파티셔닝 구문의 추가는 더욱 강력해질 파티셔닝 프레임웍의 개발 계획의 첫 단계입니다.</p>
+
+<b>병렬 처리 개선 - 신속한 데이터 분석</b>
+
+<p>PostgreSQL 10은 쿼리 실행 프로세스의 더 많은 부분을 병렬 처리할 수 있도록 함으로써 병렬화된 쿼리를 보다 잘 지원합니다. 사전 정렬과 같이 데이터가 재결합될 때 병렬화되는 추가 유형의 데이터 스캔과 최적화가 개선되었습니다. 이러한 향상된 기능을 통해 쿼리 성능을 개선할 수 있습니다.</p>
+
+<b>동기화 리플리케이션의 Quorum Commit - 높은 신뢰도의 데이터 분산</b>
+
+<p>PostgreSQL 10에서는 동기식 리플리케이션에서 quorum commit을 지원합니다. 이는 마스터 데이터베이스의 변경 사항이 원격 복제본에 성공적으로 기록되었음을 확인하는 방법에 유연성을 제공합니다. 관리자는 데이터베이스의 변경이 확인된 복제본이 여러개 있으면 데이터가 안전하게 작성되었다고 간주할 수 있음을 지정할 수 있습니다.
+</p>
+
+<p>PostgreSQL 10의 동기식 복제를 위한 quorum commit은 애플리케이션 관점에서 거의 제로 다운타임으로 데이터베이스 인프라를 향상시키는 능력을 확장할 수 있는 더 많은 옵션을 제공합니다. 이를 통해 우리는 긴 유지 관리 기간없이 데이터베이스 인프라를 지속적으로 배치 및 업데이트 할 수 있습니다. - Curt Micol, Staff Infrastructure Engineer at <a href="https://www.simple.com">Simple Finance</a></p>
+
+<b>SCRAM-SHA-256 인증 - 인증 강화</b>
+
+<p>SCRAM (Salted Challenge Response Authentication Mechanism)은 <a href="https://tools.ietf.org/html/rfc5802">RFC5802</a>에 강력한 암호 인증을 위한 프레임 워크를 제공하여 암호의 안전한 저장 및 전송을 향상시키는 프로토콜을 정의합니다. PostgreSQL 10은 기존의 MD5 기반 암호 인증 방법보다 향상된 보안을 제공하기 위해 <a href="https://tools.ietf.org/html/rfc7677">RFC7677</a>에 정의 된 SCRAM-SHA-256 인증 방법을 도입했습니다.</p>
+
+<a name="features"></a><h2>More About the Features</h2>
+<p>
+위 기능 및 다른 기능의 보다 자세한 설명은 다음 관련 자료를 참고하여 주세요:
+</p>
+<ul>
+  <li><a href="https://www.postgresql.org/docs/current/static/release-10.html">Release Notes</a></li>
+  <li><a href="https://wiki.postgresql.org/wiki/New_in_postgres_10">What's New in 10</a></li>
+  <li><a href="/about/featurematrix">Feature matrix (English only)</a></li>
+  <li><a href="https://momjian.us/main/writings/pgsql/features.pdf">Major Features slide deck</a></li>
+  <li><a href="https://www.hagander.net/talks/PostgreSQL_10.pdf">Major Features slide deck (2)</a></li>
+</ul>
+
+<a name="download"></a><h2>다운로드</h2>
+<ul>
+  <li><a href="/download/">Downloads page</a> with links to Windows, Linux, OSX,
+    BSD and Solaris installers and tools.</li>
+  <li><a href="/ftp/source/v10.0">Source Code</a></li>
+  <li><a href="https://hub.docker.com/_/postgres/">Postgres Docker image</a></li>
+  <li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+</ul>
+
+<a name="docs"></a><h2>문서</h2>
+
+<p>
+HTML documentation and man pages are installed with PostgreSQL, but feel free to
+browse our online documentation at <a href="/docs/10/static/">online
+  documentation</a>.
+</p>
+
+<a name="license"></a><h2>라이센스</h2>
+<p>
+PostgreSQL uses the <a href="/about/licence/">PostgreSQL License</a>, a BSD-like
+&quot;permissive&quot; license. This
+<a href="http://www.opensource.org/licenses/postgresql/">OSI-certified license
+</a> is widely appreciated as flexible and business-friendly, since it does not
+restrict the use of PostgreSQL with commercial and proprietary applications.
+Together with multi-company support and public ownership of the code, our
+license makes PostgreSQL very popular with vendors wanting to embed a database
+in their own products without fear of fees, vendor lock-in, or changes in
+licensing terms.
+</p>
+
+<a name="contact"></a><h2>연락처</h2>
+
+<p>Web Pages</p>
+<ul>
+<li><a href="https://www.postgresql.org/">PostgreSQL home page</a></li>
+</ul>
+
+<p>English-Language Press Inquiries</p>
+
+<p>USA, Canada and General Inquiries<br />
+PostgreSQL Press Team<br />
+<a href="mailto:press@postgresql.org">press@postgresql.org</a><br />
+Phone: +1 (347) 674-7759</p>
+
+<p>South Korea<br />
+Ioseph Kim<br />
+<a href="mailto:kr@postgresql.org">kr@postgresql.org</a><br />
++82-10-2521-2189</p>
+
+<p>For contacts in other regions, see <a href="/about/press/contact/">our
+  international contact list.</a></p>
+
+<a name="graphics"><h2>Images and Logos</h2></a>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" >
+
+<ul>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant.png">PostgreSQL Elephant Logo, PNG format</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant64.jpg">PostgreSQL Elephant Icon</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/slonik_with_black_text_and_tagline.gif">PostgreSQL Banner with Logo, Elephant and Slogan</a></li>
+</ul>
+<p>모든 로고의 수정과 배포는 PostgreSQL License 하에 가능합니다. PostgreSQL 이름과 로고는 The PostgreSQL Community Association of Canada의 트레이드 마크입니다.
+</p>
+
+<a name="about"></a><h2>PostgreSQL에 대하여</h2>
+<p>
+PostgreSQL은 수천명의 사용자, 공헌자, 회사 및 조직의 글로벌 커뮤니티가 있는 세계에서 가장 진보 된 오픈 소스 데이터베이스입니다. PostgreSQL 프로젝트는 캘리포니아 버클리 (Berkeley) 대학에서 시작하여 30 년이 넘는 엔지니어링을 기반으로하며 탁월한 개발 속도로 계속되었습니다. PostgreSQL의 성숙한 기능 세트는 상용 데이터베이스 시스템과 일치할 뿐만 아니라 고급 데이터베이스 기능, 확장성, 보안 및 안정성 면에서도 뛰어납니다. PostgreSQL에 대해 더 자세히 알아보고 <a href="https://www.postgresql.org">PostgreSQL.org</a>에서 커뮤니티에 참여하세요.
+</p>
+
+<a name="quoted_companies"></a><h2>인용된 회사 정보 및 원문</h2>
+<p>&quot;Our developer community focused on building features that would take
+  advantage of modern infrastructure setups for distributing workloads,&quot;
+  said Magnus Hagander, a <a href="https://www.postgresql.org/developer/core/">
+  core team</a> member of the the <a href="https://www.postgresql.org/">
+  PostgreSQL Global Development Group</a>. &quot;Features such as logical
+  replication and improved query parallelism represent years of work and
+  demonstrate the continued dedication of the community to ensuring Postgres
+  leadership as technology demands evolve.&quot;
+</p>
+<p>PostgreSQL is the world's most advanced open source database, with a global
+community of thousands of users, contributors, companies and organizations.
+The PostgreSQL Project builds on over 30 years of engineering, starting at the
+University of California, Berkeley, and has continued with an unmatched pace of
+development. PostgreSQL's mature feature set not only matches top proprietary
+database systems, but exceeds them in advanced database features, extensibility,
+security and stability.  Learn more about PostgreSQL and participate in our
+community at <a href="https://www.postgresql.org">PostgreSQL.org</a>.
+</p>
+<p>&quot;We have been heavily using PostgreSQL since 9.3 and are very excited
+  about version 10 since it brings basis for long-awaited partitioning and
+  built-in logical replication. It will allow us to use PostgreSQL in even more
+  services,&quot; said Vladimir Borodin, DBA Team Lead at
+  <a href="https://www.yandex.com/" target="_blank">Yandex</a>.
+</p>
+<p>
+<a href="https://yandex.com/" target="_blank">Yandex</a> is a technology company
+that builds intelligent products and services powered by machine learning. Yandex's
+goal is to help consumers and businesses better navigate the online and offline
+world. Since 1997, Yandex has delivered world-class, locally relevant search and
+information services. Additionally, Yandex has developed market-leading on-demand
+transportation services, navigation products, and other mobile applications for
+millions of consumers across the globe.  To contact Yandex, please visit
+<a href="https://yandex.com/company/contacts/" target="_blank">
+  https://yandex.com/company/contacts/
+</a>
+</p>
+<p>&quot;Quorum commit for synchronous replication in PostgreSQL 10 gives more
+  options to extend our ability to promote database infrastructure with nearly
+  zero downtime from the application perspective. This allows us to continuously
+  deploy and update our database infrastructure without incurring long
+  maintenance windows,&quot; said Curt Micol, Staff Infrastructure Engineer at
+  <a href="https://www.simple.com/" target="_blank">Simple Finance</a>.</p>
+<p>Founded in 2009, <a href="https://www.simple.com/" target="_blank">Simple</a>
+  is a technology company that’s changing the way people bank and think about
+  their money. Simple's product blends budgeting and banking into a single
+  beautiful app, with tools that help people save for the things they need and
+  spend responsibly on the things they want.  Contact
+  <a href="https://www.simple.com/" target="_blank">Simple</a> at
+  <a href="mailto:press@simple.com">press@simple.com</a>
+</p>
+
+<a name="companies"></a><h2>기술 지원</h2>
+
+<p>PostgreSQL은 개발자 스폰서, 호스팅 리소스 제공 및 재정적 지원을 제공하는 수많은 회사의 지원을 받고 있습니다. 프로젝트 후원자 중 일부는 <a href="/about/sponsors/">스폰서 페이지</a>를 참조하십시오.
+</p>
+
+<p>또한 개별 컨설턴트에서부터 다국적 기업에 이르기까지 <a href="/support/professional_support/">PostgreSQL Support를 제공하는 대규모 커뮤니티</a>가 있습니다.
+</p>
+
+<p><a href="/about/donate/">기부</a>도 환영합니다.</p>
+
+<p>또는 <a href="http://www.zazzle.com/postgresql">Zazzle PostgreSQL Store</a>를 통해 PostgreSQL 관련 상품을 구매하실 수 있습니다.
+</p>
+{% endblock %}

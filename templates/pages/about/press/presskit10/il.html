@@ -1,0 +1,170 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 10 ערכת עיתונות{%endblock%}
+{%block contents%}
+
+<div><span>This page in: </span>
+    <span lang="my"><a href="/about/press/presskit10/my/">Burmese</a></span>
+    / <span lang="cn"><a href="/about/press/presskit10/cn/">Chinese</a></span>
+    / <span lang="en"><a href="/about/press/presskit10/">English</a></span>
+    / <span lang="fr"><a href="/about/press/presskit10/fr/">French</a></span>
+    / <span lang="de"><a href="/about/press/presskit10/de/">German</a></span>
+    / <span lang="il"><a href="/about/press/presskit10/il/">Hebrew</a></span>
+    / <span lang="hi"><a href="/about/press/presskit10/hi/">Hindi</a></span>
+    / <span lang="id"><a href="/about/press/presskit10/id/">Indonesian</a></span>
+    / <span lang="it"><a href="/about/press/presskit10/it/">Italian</a></span>
+    / <span lang="kr"><a href="/about/press/presskit10/kr/">Korean</a></span>
+    / <span lang="pt"><a href="/about/press/presskit10/pt/">Portuguese</a></span>
+    / <span lang="ru"><a href="/about/press/presskit10/ru/">Russian</a></span>
+    / <span lang="es"><a href="/about/press/presskit10/es/">Spanish</a></span>
+    / <span lang="th"><a href="/about/press/presskit10/th/">Thai</a></span>
+    / <span lang="vi"><a href="/about/press/presskit10/vi/">Vietnamese</a></span><br/><br/>
+</div>
+
+<h1 dir="rtl">PostgreSQL 10 ערכת עיתונות</h1>
+
+<h2 dir="rtl">תוכן</h2>
+
+<p dir="rtl">
+&nbsp; <a href="#original_release">טקסט של גרסה מקורית</a><br />
+&nbsp; <a href="#features">על התכונות בהרחבה</a><br />
+&nbsp; <a href="#download">איפה ניתן להוריד</a><br />
+&nbsp; <a href="#docs">תיעוד</a><br />
+&nbsp; <a href="#license">רישיון</a><br />
+&nbsp; <a href="#contact">אנשי קשר</a><br />
+&nbsp; <a href="#graphics">תמונות וסמלים</a><br />
+&nbsp; <a href="#about">אודות PostgreSQL</a><br />
+&nbsp; <a href="#quoted_companies">חברות מצוטטות וטקסט מלא של ציטוטים</a>
+<br />
+&nbsp; <a href="#companies">תמיכה תאגידית</a><br />
+</p>
+<div dir="rtl">
+ <img src="https://www.postgresql.org/media/img/about/press/elephant64.png" />
+</div>
+
+<a dir="rtl" name="original_release"></a>
+<h2 dir="rtl">טקסט של גרסה מקורית</h2>
+
+<p dir="rtl">5 באוקטובר 2017 - קבוצת הפיתוח הגלובלית של PostgreSQL הודיעה היום על שחרורה של PostgreSQL 10, הגרסה העדכנית ביותר של מסד הנתונים המתקדם בעולם עם קוד פתוח.</p>
+
+<p dir="rtl">תכונה קריטית של עומסי העבודה המודרניים היא היכולת להפיץ נתונים על פני צמתים רבים עבור גישה מהירה יותר, ניהול וניתוח אשר ידועה גם בשם אסטרטגיה &quot;הפרד ומשול&quot;. שחרורה של 10 PostgreSQL כוללת שיפורים משמעותיים ליישם ביעילות את אסטרטגיה &quot;הפרד ומשול&quot;, כולל שכפול לוגי מובנה, חלוקה טבלאות הצהרתית, שאילתות מקבילות משופרות.</p>
+
+<p dir="rtl">&quot;קהילת המפתחים שלנו התמקדה בבניית תכונות שינצלו את תצורות של התשתית המודרניות להפצת עומסי עבודה&quot;, אמר מגנוס האגנדר, חבר <a href="/developer/core/">צוות ליבה</a> ב
+<a href="/">קבוצת הפיתוח הגלובלית של PostgreSQL</a> &quot;תכונות כגון שכפול לוגי והקבלת שאילתות משופרת מייצגות שנים של עבודה ומדגימות את המשך מסירות הקהילה להבטחת עליונותה של Postgres כאשר דרישות של טכנולוגיה מתפתחות&quot;.</p>
+
+<p dir="rtl">גירסה זו מסמנת גם את שינוי ערכת הגרסאות של PostgreSQL לפורמט &quot;x.y&quot;. משמעות הדבר היא כי גרסה מינורית הבאה של PostgreSQL תהיה 10.1 וגרסה מז'ורית תהיה 11.</p>
+
+<p dir="rtl"><b>שכפול לוגי - תשתית publish/subscribe להפצת נתונים</b></p>
+
+<p dir="rtl">שכפול לוגי מרחיב את תכונות השכפול הנוכחיות של PostgreSQL עם היכולת לשלוח שינויים ברמת מסד נתונים או ברמה של הטבלה למסדי נתונים שונים של PostgreSQL. משתמשים יכולים עכשיו לכוונן את הנתונים משוכפלים לאשכולות מסד נתונים שונות ויהיו יכולים לבצע שדרוגים עם אפס זמן השבתה לגרסאות PostgreSQL עתידיים גדולים.</p>
+
+<p dir="rtl">&quot;אנו משתמשים כבדים של PostgreSQL מאז 9.3 ומתלהבים מאוד מהגרסה 10 מכיוון שהיא מביאה את הבסיס להפרדת הטבלאות ולשכפול לוגי מובני. והיא תאפשר לנו להשתמש ב- PostgreSQL בשירותים אחרים גם", אמר וולדימיר&quot;בורודין, ראש צוות DBA  ב <a href="https://www.yandex.com/" target="_blank">Yandex</a>.</p>
+
+<p dir="rtl"><b>חלוקה טבלאות הצהרתית - נוחות חלוקת הנתונים שלך</b></p>
+
+<p dir="rtl">חלוקת טבלת קיימת במשך שנים ב- PostgreSQL, אך נדרש nהמשתמש לשמור סט לא טריוויאלי של כללים טריגרים על מנת לגרום לחלוקה לעבוד. PostgreSQL 10 מציגה תחביר חלוקת הטבלה המאפשר למשתמשים בקלות ליצור ולשמור טווח ולרשום טבלאות מחולקות. הוספת תחביר חלוקה היא הצעד הראשון בסדרה של תכונות מתוכננות כדי לספק תשתית חלוקה חזקה בתוך PostgreSQL.</p>
+
+<p dir="rtl"><b>שאילתות מקבילות משופרות - במהירות לכבוש את הניתוחים שלך</b></p>
+
+<p dir="rtl">PostgreSQL 10 מספקת תמיכה טובה יותר לשאילתות מקבילות בכך שהיא מאפשרת לחלקים נוספים של תהליך ביצוע השאילתה לרוץ במקביל. השיפורים כוללים סוגים נוספים של סריקות נתונים מקביליות, כמו גם אופטימיזציה כאשר הנתונים מסודרים מחדש, כגון מיון מראש. שיפורים אלה מאפשרים להחזיר תוצאות במהירות רבה יותר.</p>
+
+<p dir="rtl"><b>מניין להתחייבות ביצוע בשכפול נתונים סינכרוני - להפיץ נתונים בביטחון</b></p>
+
+<p dir="rtl">PostgreSQL 10 מציגה מניין להתחייבות ביצוע עבור שכפול סינכרוני, אשר מאפשר גמישות כיצד מסד נתונים ראשי מקבל הודאה כי השינויים נכתבו בהצלחה בעותקים משוכפלים מרוחקים. מנהל מערכת יכול כעת לציין כי אם מספר כלשהו של עותקים משוכפלים הודיעו כי נעשה שינוי למסד הנתונים, אז הנתונים יכולים להיחשב כנכתב בבטחה.</p>
+
+<p dir="rtl">&quot;מניין להתחייבות ביצוע בשכפול נתונים סינכרוני ב- PostgreSQL 10 מעניק יותר אפשרויות להרחיב את יכולתנו לקדם את תשתיות מסד הנתונים עם זמן השבתה כמעט אפסי מנקודת מבט של היישום. זה מאפשר לנו ברציפות לפרוס &quot;לעדכן את תשתית מסד הנתונים שלנו מבלי לגרום לחלונות תחזוקה ארוכים", אמר קורט מיקול , מהנדס צוות תשתיות ב- <a href="https://www.simple.com/" target="_blank">Simple Finance</a>.</p>
+
+<p dir="rtl"><b>אימות SCRAM-SHA-256 - אבטחת גישה לנתונים שלך</b></p>
+
+<p dir="rtl">The Salted Challenge Response Authentication Mechanism (ר"ת SCRAM) המוגדר ב <a href="https://tools.ietf.org/html/rfc5802" target="_blank">RFC5802</a> מגדיר פרוטוקול לשפר את האחסון המאובטח והעברת הסיסמאות על-ידי מתן תשתית למשא ומתן חזק עם סיסמאות . PostgreSQL 10 מציג אתה שיטת האימות SCRAM-SHA-256, המוגדרת ב <a href="https://tools.ietf.org/html/rfc7677" target="_blank">RFC7677</a> כדי לספק אבטחה טובה יותר מאשר שיטת אימות הסיסמאות הקיימת המבוססת על MD5.</p>
+
+<a name="features"></a><h2 dir="rtl">על התכונות בהרחבה</h2>
+<p dir="rtl">לקבלת הסברים על התכונות הנ"ל ואחרים, עיין במשאבים הבאים:</p>
+<ul dir="rtl">
+   <li><a href="https://www.postgresql.org/docs/current/static/release-10.html">הערות הגרסה</a></li>
+   <li><a href="https://wiki.postgresql.org/wiki/New_in_postgres_10">מה חדש ב -10</a></li>
+   <li><a href="/about/featurematrix">מטריצת תכונה (אנגלית בלבד)</a></li>
+   <li><a href="https://momjian.us/main/writings/pgsql/features.pdf">שקופית תכונות עיקריות</a></li>
+   <li><a href="https://www.hagander.net/talks/PostgreSQL_10.pdf">שקופית תכונות עיקריות (2)</a></li>
+</ul>
+
+<a name="download"></a><h2 dir="rtl">איפה ניתן להוריד</h2>
+<ul dir="rtl">
+   <li><a href="/download/">Downloads page</a> with links to Windows, Linux, OSX,
+     BSD and Solaris installers and tools.</li>
+   <li><a href="/ftp/source/v10.0">קוד מקור</a></li>
+   <li><a href="https://hub.docker.com/_/postgres/">Postgres דוקר אימג</a></li>
+   <li><a href="http://pgxn.org">PostgreSQL רשת רחבה של</a></li>
+</ul>
+
+<a name="docs"></a><h2  dir="rtl">תיעוד</h2>
+
+<p dir="rtl">תיעוד HTML ודפי man מותקנים עם PostgreSQL, אך אתם מוזמנים לעיין ב<a href="/docs/10/static/">תיעוד מקוון</a>.
+</p>
+
+<a name="license"></a><h2 dir="rtl">רישיון</h2>
+<p dir="rtl">PostgreSQL משתמשת ב<a href="/about/licence/">רישיון PostgreSQL</a>, רישיון &quot;מתירני&quot; דמוי BSD. רשיון זה אשר הוא <a href="http://www.opensource.org/licenses/postgresql/">מוסמך-OSI</a> מוערך באופן נרחב כי גמיש וידידותי לעסקים, שכן הוא אינו מגביל את השימוש PostgreSQL עם יישומים מסחריים קנייניים. יחד עם תמיכה מחברות מרובות ובעלות ציבורית על הקוד, הרישיון שלנו הופך את PostgreSQL לפופולרית מאוד בקרב ספקים המעוניינים להשתמש במסד נתונים במוצרים שלהם, ללא חשש מעמלות, תלות בספקים או שינויים בתנאי רישיון.</p>
+
+<a name="contact"></a><h2 dir="rtl">אנשי קשר</h2>
+
+<p dir="rtl">דפי אינטרנט</p>
+<ul dir="rtl">
+<li><a href="https://www.postgresql.org/">דף הבית של PostgreSQL</a></li>
+</ul>
+
+<p dir="rtl">פניות מהעיתונות בשפה אנגלית</p>
+
+<p dir="rtl">ארה"ב, קנדה ופניות כלליות<br />
+צוות העיתונות של PostgreSQL<br />
+<a href="mailto:press@postgresql.org">press@postgresql.org</a><br />
+Phone: +1 (347) 674-7759</p>
+
+<p dir="rtl">אירלנד<br />
+Michael Goldberg<br />
+<a href="mailto:il@postgresql.org">il@postgresql.org</a><br />
+ +972 54 305 7642 </p>
+
+<p dir="rtl">עבור אנשי קשר באזורים אחרים, ראה <a href="/about/press/contact/"> רשימת אנשי הקשר הבינלאומיים שלנו. </a></p>
+
+<a name="graphics"><h2 dir="rtl">תמונות וסמלים</h2></a>
+
+<div dir="rtl">
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" >
+</div>
+<ul dir="rtl">
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant.png">PostgreSQL סמל הפיל, בפורמט PNG</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant64.jpg">PostgreSQL פיל אייקון</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/slonik_with_black_text_and_tagline.gif">PostgreSQL באנר עם לוגו, פיל והסלוגן</a></li>
+</ul>
+<p dir="rtl">כל הסמלים זמינים לשינוי וחלוקה מחדש תחת רישיון PostgreSQL. שם PostgreSQL והלוגו הם סימנים מסחריים של The PostgreSQL Community Association of Canada.</p>
+
+<a name="about"></a><h2 dir="rtl">אודות PostgreSQL</h2>
+<p dir="rtl">הפרויקט PostgreSQL נבנה על מעל 30 שנות הנדסה, החל באוניברסיטת קליפורניה, ברקלי, והמשיך להתפתח עם קצב ללא תחרות. ערכת התכונות הבשלות של PostgreSQL לא רק תואמת מערכות נתונים קנייניות מובילות, אלא עולה עליהן במאפיינים של מסדי נתונים מתקדמים ,הרחבה, אבטחה ויציבות. למידע נוסף על PostgreSQL והשתתפות בקהילה שלנו ניתן ב <a href="https://www.postgresql.org">PostgreSQL.org</a>.</p>
+
+<a name="quoted_companies"></a><h2 dir="rtl">חברות מצוטטות וטקסט מלא של ציטוטים</h2>
+
+<p dir="rtl">&quot;קהילת המפתחים שלנו התמקדה בבניית תכונות שינצלו את תצורות של התשתית המודרניות להפצת עומסי עבודה&quot;, אמר מגנוס האגנדר, חבר <a href="/developer/core/">צוות ליבה</a> ב
+<a href="/">קבוצת הפיתוח הגלובלית של PostgreSQL</a> &quot;תכונות כגון שכפול לוגי והקבלת שאילתות משופרת מייצגות שנים של עבודה ומדגימות את המשך מסירות הקהילה להבטחת עליונותה של Postgres כאשר דרישות של טכנולוגיה מתפתחות&quot;.</p>
+
+<p dir="rtl">הפרויקט PostgreSQL נבנה על מעל 30 שנות הנדסה, החל באוניברסיטת קליפורניה, ברקלי, והמשיך להתפתח עם קצב ללא תחרות. ערכת התכונות הבשלות של PostgreSQL לא רק תואמת מערכות נתונים קנייניות מובילות, אלא עולה עליהן במאפיינים של מסדי נתונים מתקדמים ,הרחבה, אבטחה ויציבות. למידע נוסף על PostgreSQL והשתתפות בקהילה שלנו ניתן ב <a href="https://www.postgresql.org">PostgreSQL.org</a>.</p>
+
+<p dir="rtl">&quot;אנו משתמשים כבדים של PostgreSQL מאז 9.3 ומתלהבים מאוד מהגרסה 10 מכיוון שהיא מביאה את הבסיס להפרדת הטבלאות ולשכפול לוגי מובני. והיא תאפשר לנו להשתמש ב- PostgreSQL בשירותים אחרים גם", אמר וולדימיר&quot;בורודין, ראש צוות DBA  ב <a href="https://www.yandex.com/" target="_blank">Yandex</a>.</p>
+
+<p dir="rtl">
+<a href="https://yandex.com/" target="_blank"> Yandex </a> הנה חברת טכנולוגית שבונה מוצרים ושירותים נבונים המופעלים על ידי למידת מכונה. המטרה של Yandex היא לעזור לצרכנים ולעסקים לנווט טוב יותר בעולם המקוון והלא מקוון. מאז 1997, Yandex סיפקה שירותי חיפוש ומידע הרלוונטיים לאזור ברמה עולמית. בנוסף, Yandex פיתחה שירותי תחבורה המובילים בשוק על פי דרישה, מוצרי ניווט, ויישומים ניידים אחרים עבור מיליוני צרכנים ברחבי העולם. כדי ליצור קשר עם Yandex, בקר בכתובת <a href="https://yandex.com/company/contacts/" target="_blank"> https://yandex.com/company/contacts/ </a>
+</p>
+
+<p dir="rtl">&quot;מניין להתחייבות ביצוע בשכפול נתונים סינכרוני ב- PostgreSQL 10 מעניק יותר אפשרויות להרחיב את יכולתנו לקדם את תשתיות מסד הנתונים עם זמן השבתה כמעט אפסי מנקודת מבט של היישום. זה מאפשר לנו ברציפות לפרוס &quot;לעדכן את תשתית מסד הנתונים שלנו מבלי לגרום לחלונות תחזוקה ארוכים", אמר קורט מיקול , מהנדס צוות תשתיות ב- <a href="https://www.simple.com/" target="_blank">Simple Finance</a>.</p>
+
+<p dir="rtl">נוסדה בשנת 2009, <a href="https://www.simple.com/" target="_blank"> Simple</a> היא חברת טכנולוגיה אשר משנה את הדרך שבה אנשים חושבים על הבנק ועל הכסף שלהם. המוצר של Simple משלב תקציב ובנקאות בתוך באפליקציה אחת מהממת, עם כלים המסייעים לאנשים לחסוך עבור דברים שהם צריכים לשלם עם אחריות עבור דברים שהם רוצים. צור קשר עם <a href="https://www.simple.com/" target="_blank"> Simple</a> ב <a href="mailto:press@simple.com"> press@simple.com </ a></p>
+
+<a name="companies"></a><h2 dir="rtl">תמיכה תאגידית</h2>
+
+<p dir="rtl">PostgreSQL נהנית מתמיכתן של חברות רבות, המממנות מפתחים, מספקות משאבים לאירוח שרתים, ומספקות לנו תמיכה כספית. עיין בדף <a href="/about/sponsors/"> נותני החסות </a> שלנו עבור חלק מתומכי הפרויקטים האלה.</p>
+
+<p dir="rtl">יש גם קהילה גדולה של <a href="/support/professional_support/"> חברות המציעות תמיכה ב- PostgreSQL </a>, מיועצים בודדים לחברות בינלאומיות.</p>
+
+<p dir="rtl"><a href="/about/donate/"> תרומות </a> מתקבלות בשמחה.</p>
+
+<p dir="rtl">לחלופין, תוכל לרכוש חלק מהסחורה המשובחת מ <a href="http://www.zazzle.com/postgresql">חנות Zazzle PostgreSQL</a></p>
+
+{% endblock %}

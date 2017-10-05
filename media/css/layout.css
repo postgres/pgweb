@@ -125,8 +125,8 @@
 
 #pgFrontFeature {
   position: relative;
-  /* background: #F5F5F5 url(/media/img/feature/feature_elephant.png) right bottom no-repeat; */
-  background: #F5F5F5 url(/media/img/feature/feature_gears.png) right bottom no-repeat;
+  background: #F5F5F5 url(/media/img/feature/feature_elephant.png) right bottom no-repeat;
+  /* background: #F5F5F5 url(/media/img/feature/feature_gears.png) right bottom no-repeat; */
   /* Also see pgFrontFeatureContent for image size */
   padding: 15px;
   margin-bottom: 1em;

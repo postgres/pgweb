@@ -1,0 +1,225 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 10 0版本发布说明{%endblock%}
+{%block contents%}
+
+<div><span>This page in: </span>
+    <span lang="my"><a href="/about/press/presskit10/my/">Burmese</a></span>
+    / <span lang="cn"><a href="/about/press/presskit10/cn/">Chinese</a></span>
+    / <span lang="en"><a href="/about/press/presskit10/">English</a></span>
+    / <span lang="fr"><a href="/about/press/presskit10/fr/">French</a></span>
+    / <span lang="de"><a href="/about/press/presskit10/de/">German</a></span>
+    / <span lang="il"><a href="/about/press/presskit10/il/">Hebrew</a></span>
+    / <span lang="hi"><a href="/about/press/presskit10/hi/">Hindi</a></span>
+    / <span lang="id"><a href="/about/press/presskit10/id/">Indonesian</a></span>
+    / <span lang="it"><a href="/about/press/presskit10/it/">Italian</a></span>
+    / <span lang="kr"><a href="/about/press/presskit10/kr/">Korean</a></span>
+    / <span lang="pt"><a href="/about/press/presskit10/pt/">Portuguese</a></span>
+    / <span lang="ru"><a href="/about/press/presskit10/ru/">Russian</a></span>
+    / <span lang="es"><a href="/about/press/presskit10/es/">Spanish</a></span>
+    / <span lang="th"><a href="/about/press/presskit10/th/">Thai</a></span>
+    / <span lang="vi"><a href="/about/press/presskit10/vi/">Vietnamese</a></span><br/><br/>
+</div>
+
+<h1>PostgreSQL 10.0版本发布说明</h1>
+
+<h2>目录</h2>
+
+<p>
+ &nbsp; <a href="#original_release">新版本发布说明的原文</a><br />
+ &nbsp; <a href="#features">特性列表</a><br />
+ &nbsp; <a href="#download">下载地址</a><br />
+ &nbsp; <a href="#docs">文档</a><br />
+ &nbsp; <a href="#license">版权声明</a><br />
+ &nbsp; <a href="#contact">联系方式</a><br />
+ &nbsp; <a href="#graphics">相关图片和标识</a><br />
+ &nbsp; <a href="#about">关于PostgreSQL数据库</a><br />
+ &nbsp; <a href="#quoted_companies">相关商业公司信息和反馈</a><br />
+ &nbsp; <a href="#companies">企业支持</a><br />
+</p>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" />
+
+<a name="original_release"></a><h2>新版本发布说明</h2>
+
+<p>2017-10-05 -  Postgresql全球开发组今天宣布，PostgreSQL 10 正式发布，Postgresql作为世界上最先进的开源关系型数据库， 10 是迄今为止的最新版本。</p>
+
+<p>作为现代工作负载 (modern workloads)， 其关键特性之一便是具备横跨多节点处理数据，从而达到更快访问、管理与分析数据的能力，即数据可被"分而治之(divide and conquer)"。
+Postgresql 10.0版本所具备的重要改进，如逻辑复制、显示声明的表分区功能与改进后的并行查询功能等，高效地实现了"分而治之 (divide and conquer)"。</p>
+
+<p>"我们的开发社区着重构建那些可充分适用于现代基础网络架构(modern infrastructure setups)的核心特性，"
+  <a href="/">PostgreSQL全球开发组</a>的<a href="/developer/core/">核心组</a>成员之一Magnus Hagander先生说道。
+
+  "对逻辑复制和改进后的并行查询等功能的研发，代表着社区多年的努力成果，也表明随着技术需求的发展, 社区会继续努力以确保 Postgres 的领导地位。"
+</p>
+
+<p>PostgreSQL 10也标志着PostgreSQL的版本号更新实现了到"x.y"的转变。这意味着下一次小版本的 PostgreSQL 将是 10.1，而下个大版本将是11。</p>
+
+<b>逻辑复制-用于分发数据的发布/订阅(publish/subscribe)框架</b>
+
+<p>PostgreSQL 10 的逻辑复制对现有的Postgresql复制特性进行了扩展，新版本的逻辑复制可以将单个数据库级别或者表级别的改动(modifications)发送至不同的Postgresql 数据库。
+这意味着用户可以细粒度地将数据变化发送到不同的数据库集群(database clusters)，甚至在大版本升级期间，实现零停机(zero-downtime)。</p>
+
+<p>"自9.3版本发布后，Yandex 公司便广泛使用PostgreSQL数据库产品，现在我们惊讶于PostgreSQL10，因为10版本终于给我们带来了翘首以盼的分区功能和内置的逻辑复制。
+这将会使得PostgreSQL 应用到Yandex公司更多的服务上，"
+来自<a href="https://www.yandex.com/" target="_blank">Yandex公司</a>的DBA团队负责人 Vladimir Borodin表示。</p>
+
+<b>显示声明的表分区功能 - 更加方便地进行数据分区</b>
+
+<p>PostgreSQL中的表分区功能早已存在多年，不过表分区功能的正常使用却要求用户维护一套具有一定复杂度的分区规则和触发器，用以保证分区机制正常运行。
+PostgreSQL 10版本引入了新的表分区的语法，这允许用户更加方便地进行创建与维护范围类型的分区和列表类型的分区。
+增加表分区语法，只是PostgreSQL内部用以提供稳健的分区机制的一系列特性的第一步而已。</p>
+
+<b>改进后的并行查询 - 更快满足你的数据分析需求</b>
+
+<p>PostgreSQL 10 版本可以通过对查询过程中更多的步骤进行并行化执行，从而对并行查询提供了更好地支持。
+改进内容包括当数据重组时(recombined)，PostgreSQL10支持更多的数据扫描类型被并行执行和优化，例如预排序操作。
+这些增强的特性可以更快的返回结果值。
+
+</p>
+
+<b>同步复制的优选提交(Quorum Commit)  - 更加自信地分发数据</b>
+
+<p>PostgreSQL10 引入了优化提交机制(Quorum Commit)，这使得主数据库在接收到远程备库更新成功的确认信息时具备灵活性
+。数据库管理员现在可以指定当固定数量的备库已确认对更新进行写入后，数据才被认为是安全写入。
+
+</p>
+
+<p>"PostgreSQL 10.0版本中的同步复制的优选提交（Quorum Commit，即通过读写副本数的优化来平衡读写性能）功能，
+从应用程序的角度给了我们更多的选择，以几乎零停机的代价来扩展我们基础设施的能力。
+这允许我们可以连续发布或是更新数据库基础设施而不必忍受长时间停机维护的代价,"
+<a href="https://www.simple.com/" target="_blank">Simplem金融公司</a>的高级基础设施工程师Curt Micol先生说道。</p>
+
+<b>SCRAM-SHA-256 安全认证机制 - 让你的数据存取更安全</b>
+
+<p>SCRAM安全认证算法在<a href="https://tools.ietf.org/html/rfc5802" target="_blank">RFC5802]</a>进行了详细的定义，它是通过提供一个强加密的框架来改进密码的安全存储和传输的协议。
+PostgreSQL 10版本引入的SCRAM-SHA-256 安全认证方法，
+在<a href="https://tools.ietf.org/html/rfc7677" target="_blank">RFC7677</a>
+中有详细定义，它可以提供比现在基于MD5加密算法更好的安全性。</p>
+
+<a name="features"></a><h2>有关新特性的更多信息</h2>
+<p>
+有关上述提及的新特性以及其他特性介绍，可查询以下资源：
+</p>
+<ul>
+  <li><a href="https://www.postgresql.org/docs/current/static/release-10.html">详细发布声明</a></li>
+  <li><a href="https://wiki.postgresql.org/wiki/New_in_postgres_10">10.0版本中新增特性</a></li>
+  <li><a href="/about/featurematrix">特性矩阵(仅英文版)</a></li>
+  <li><a href="https://momjian.us/main/writings/pgsql/features.pdf">主要新特性演示文件</a></li>
+  <li><a href="https://www.hagander.net/talks/PostgreSQL_10.pdf">主要新特性演示文件（2）</a></li>
+</ul>
+
+<a name="download"></a><h2>下载</h2>
+<ul>
+  <li><a href="/download">下载页面</a>有含Windows、Linux、OSX、BSD 和 Solaris 平台下的安装包及其他工具</li>
+  <li><a href="/ftp/source/v10.0">源代码</a></li>
+  <li><a href="https://hub.docker.com/_/postgres/">Postgres Docker 虚拟环境安装包</a></li>
+  <li><a href="http://pgxn.org">PostgreSQL 扩展模块网站</a></li>
+</ul>
+
+<a name="docs"></a><h2>文档</h2>
+<p>
+HTML 格式文档和 man 格式的文档随PostgreSQL一起安装，用户也可以免费地在网站上
+对<a href="/docs/10/static">在线文档</a>进行浏览。
+</p>
+
+<a name="license"></a><h2>版权声明</h2>
+<p>
+PostgreSQL 使用<a href="/about/licence">PostgreSQL版权声明</a>，它是类似BSD的版权。
+由于这个经 <a href="http://www.opensource.org/licenses/postgresql">OSI认证的版权</a>不限制
+PostgreSQL在商业环境和有版权的应用程序中使用，因此被公认为是非常有灵活性和对商业应用是友好的。
+加上有多个公司的支持和源代码归属公共所有，我们的版权使得PostgreSQL在那些希望在自己的产品里嵌
+入数据库的厂商中很流行，因为他们不用担心费用、嵌入软件的版权锁以及版权条款的改变。
+</p>
+
+<a name="contact"></a><h2>联系方式</h2>
+
+<p>网站</p>
+<ul>
+<li><a href="https://www.postgresql.org/">PostgreSQL网站首页</a></li>
+</ul>
+
+<p>英文语系的新闻访谈</p>
+
+<p>美国、加拿大和总的新闻访谈<br />
+PostgreSQL 新闻组<br />
+<a href="mailto:press@postgresql.org">press@postgresql.org</a><br />
+电话: +1 (347) 674-7759</p>
+
+
+<p>中文社区的新闻访谈</p>
+<p>
+Daojing Zhou<br />
++86 135 1551 3326<br />
+<a href="mailto:cn@postgresql.org">cn@postgresql.org</a><br />
+</p>
+
+
+<p>要查询特定地区的联系人，可浏览 <a href="/about/press/contact/">我们的全球联系人员列表。</a></p>
+
+<a name="graphics"><h2>相关图片和标识文件</h2></a>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" >
+
+<ul>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant.png">PostgreSQL 大象标识图片，PNG格式</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant64.jpg">PostgreSQL 大象图标</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/slonik_with_black_text_and_tagline.gif">含PostgreSQL图标、大象图和宣传语的横幅图片</a></li>
+</ul>
+<p>
+在符合PostgreSQL的版权下，所有标识图片允许进行修改和二次发布。
+PostgreSQL的名称和标识现在是属于PostgreSQL加拿大联合社区的商标的一部分。
+
+</p>
+
+<a name="about"></a><h2>关于PostgreSQL数据库</h2>
+<p>
+PostgreSQL是最先进的开源关系型数据库，它的全球社区是一个由数千名用户、开发人员、公司或其他组织而组成。
+PostgreSQL项目有30年以上的历史，起源于加利福利亚的伯克利大学，经历了无数次开发升级。
+PostgreSQL的专业特性不仅包含顶级商业数据库系统的功能特性，更是在高级数据库功能、数据库扩展性、数据库安全性和稳定性方面超过了它们。
+若想获取到更多关于PostgreSQL的信息或者加入到PostgreSQL社区，请浏览<a href="https://www.postgresql.org">PostgreSQL.org</a>网站。
+</p>
+
+<a name="quoted_companies"></a><h2>相关商业公司信息和反馈</h2>
+<p>"PG开发者社区一直以来，着重构建那些可充分适用于现代基础网络架构(modern infrastructure setups)的新特性"
+<a href="https://www.postgresql.org/">PostgreSQL全球开发组</a>的
+<a href="https://www.postgresql.org/developer/core/">核心组</a>成员之一Magnus Hagander先生表示。
+
+"对逻辑复制和改进后的并行查询等功能的研发，代表着社区多年的努力成果，也表明随着技术需求的发展, 社区会继续努力以确保 Postgres 的领导地位。"
+</p>
+
+<p>"自9.3版本发布后，Yandex 公司便广泛使用PostgreSQL数据库产品，现在我们惊讶于PostgreSQL10，因为10版本终于给我们带来了翘首以盼的分区功能和内置的逻辑复制。这将会使得PostgreSQL 应用到Yandex公司更多的服务上，" 来自<a href="https://www.yandex.com/" target="_blank">Yandex公司</a>的
+DBA团队负责人 Vladimir Borodin说道。
+</p>
+<p>
+<a href="https://yandex.com/" target="_blank">Yandex公司</a> 是一家使用机器学习技术提供人工智能产品和服务的技术公司。
+Yandex公司的目标是帮助客户和商业伙们更好地探索在线和离线业务。
+从1997年起，Yandex公司已交付了世界级的、本地业务相关的搜索和信息服务。
+另外，Yandex公司也为全球上百万的用户开发了市场领先的按需乘车服务、导航产品以及其他移动应用。
+可以通过<a href="https://yandex.com/company/contacts/" target="_blank"> https://yandex.com/company/contacts/</a>网址来访问Yandex公司。
+
+</p>
+<p>"PostgreSQL 10.0版本中的同步复制的优选提交（Quorum Commit，即通过读写副本数的优化来平衡读写性能）功能，
+从应用程序的角度给了我们更多的选择，以几乎零停机的代价来扩展我们基础设施的能力。
+这允许我们可以连续发布或是更新数据库基础设施而不必忍受长时间停机维护的代价。"
+ 来自<a href="https://www.simple.com/" target="_blank">Simple财务</a>公司的高级基础设施工程师Curt Micol先生说道。
+</p>
+
+<p>成立于2009年，<a href="https://www.simple.com/" target="_blank">Simple财务</a>公司是一家正在改变人们
+对于储蓄业务和开销管理想法的科技公司。Simple公司的产品将人们的预算和储蓄操作集中于一个漂亮的移动应用中，
+并且帮助人们节约他们所需的物品的花费，以及帮助人们对想要物品的进行预算管理。可以通过这个
+  <a href="https://www.simple.com/" target="_blank">Simple财务</a>网站以及这个邮箱
+  <a href="mailto:press@simple.com">press@simple.com</a>与他们联系。
+</p>
+
+<a name="companies"></a><h2>企业支持</h2>
+
+<p>PostgreSQL获得了一大批公司的支持，他们资助开发人员，提供网上资源以及给予了资金上的支持。
+一些较大的且长期支持的公司名单列在我们的 <a href="/about/sponsors">开发支持页面</a>。</p>
+
+<p>还有<a href="/support/professional_support">大量的公司</a>提供从独立顾问到跨国公司的 PostgreSQL 支持。</p>
+
+<p>我们也很乐意接受各方<a href="/about/donate">捐助</a>。</p>
+
+<p>或者你也可以通过从<a href="http://www.zazzle.com/postgresql">Zazzle PostgreSQL商店</a>购买这些精美的商品来支持我们。
+</p>
+{% endblock %}

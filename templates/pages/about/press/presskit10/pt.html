@@ -1,0 +1,170 @@
+{%extends "base/page.html"%}
+{%block title%}Kit de Imprensa do PostgreSQL 10{%endblock%}
+{%block contents%}
+
+<div><span>This page in: </span>
+    <span lang="my"><a href="/about/press/presskit10/my/">Burmese</a></span>
+    / <span lang="cn"><a href="/about/press/presskit10/cn/">Chinese</a></span>
+    / <span lang="en"><a href="/about/press/presskit10/">English</a></span>
+    / <span lang="fr"><a href="/about/press/presskit10/fr/">French</a></span>
+    / <span lang="de"><a href="/about/press/presskit10/de/">German</a></span>
+    / <span lang="il"><a href="/about/press/presskit10/il/">Hebrew</a></span>
+    / <span lang="hi"><a href="/about/press/presskit10/hi/">Hindi</a></span>
+    / <span lang="id"><a href="/about/press/presskit10/id/">Indonesian</a></span>
+    / <span lang="it"><a href="/about/press/presskit10/it/">Italian</a></span>
+    / <span lang="kr"><a href="/about/press/presskit10/kr/">Korean</a></span>
+    / <span lang="pt"><a href="/about/press/presskit10/pt/">Portuguese</a></span>
+    / <span lang="ru"><a href="/about/press/presskit10/ru/">Russian</a></span>
+    / <span lang="es"><a href="/about/press/presskit10/es/">Spanish</a></span>
+    / <span lang="th"><a href="/about/press/presskit10/th/">Thai</a></span>
+    / <span lang="vi"><a href="/about/press/presskit10/vi/">Vietnamese</a></span><br/><br/>
+</div>
+
+<h1>Kit de Imprensa do PostgreSQL 10</h1>
+
+<h2>Conteúdo</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Texto do Lançamento Original</a><br />
+ &nbsp; <a href="#features">Mais Sobre as Funcionalidades</a><br />
+ &nbsp; <a href="#download">Onde Baixcar</a><br />
+ &nbsp; <a href="#docs">Documentação</a><br />
+ &nbsp; <a href="#license">Licença</a><br />
+ &nbsp; <a href="#contact">Contatos</a><br />
+ &nbsp; <a href="#graphics">Imagens e Logomarcas</a><br />
+ &nbsp; <a href="#about">Sobre o PostgreSQL</a><br />
+ &nbsp; <a href="#quoted_companies">Companhias Citadas e Citações Completas</a>
+ <br />
+ &nbsp; <a href="#companies">Apoio Corporativo</a><br />
+</p>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" />
+
+<a name="original_release"></a><h2>Release de Imprensa Original</h2>
+
+<p>5 OUTUBRO 2017 - O Grupo de Desenvolvimento Global do PostgreSQL anunciou hoje o lançamento do PostgreSQL 10, a versão mais recente do banco de dados de código aberto mais avançado do mundo.</p>
+
+<p>Uma característica crítica das cargas de trabalho modernas é a capacidade de distribuir dados em vários nós para acesso, gerenciamento e análise mais rápidos, que também é conhecida como estratégia de "divisão e conquista". O PostgreSQL 10 inclui melhorias significativas para implementar efetivamente a estratégia de divisão e conquista, incluindo replicação lógica nativa, partição declarativa de tabelas e melhorias na funcionalidade de paralelismo de consultas.</p>
+
+<p>&quot;A nossa comunidade de desenvolvedores concentrou-se na construção de recursos que aproveitariam as modernas configurações de infraestrutura para distribuição de carga de trabalho&quot;, disse Magnus Hagander, um <a href="https://www.postgresql.org/developer/core/">
+    membro</a> do <a href="https://www.postgresql.org/">Grupo de desenvolvimento global do PostgreSQL</a>. &quot;Características como a replicação lógica e melhorias no paralelismo de consultas representam anos de trabalho e demonstram a dedicação continuada da comunidade para garantir a liderança do Postgres à medida que as demandas de tecnologia evoluem.&quot;</p>
+
+<p>Esta versão também marca a alteração do esquema de versão para PostgreSQL para um formato &quot;x.y&quot;. Isso significa que a próxima versão menor do PostgreSQL será 10.1 e a próxima versão principal será 11.</p>
+
+<b>Replicação lógica - Uma estrutura de publicação / assinatura para distribuição de dados</b>
+
+<p>
+A replicação lógica expande os recursos de replicação atuais do PostgreSQL com a capacidade de enviar modificações em um banco por banco de dados e a nível de tabela para diferentes bancos de dados do PostgreSQL. Os usuários agora podem afinar os dados replicados em vários clusters de banco de dados e terão a capacidade de executar atualizações sem interrupação para as futuras principais versões do PostgreSQL.
+</p>
+
+<p>&quot;Temos usado fortemente o PostgreSQL desde 9.3 e estamos muito entusiasmados com a versão 10, pois traz bases para o esperado particionamento e replicação lógica integrada. Ele nos permitirá usar o PostgreSQL em mais serviços&quot;, disse Vladimir Borodin, DBA Chefe de Equipe na <a href="https://www.yandex.com/" target="_blank">Yandex</a>.</p>
+
+<b>Particionamento Declarativo de Tabelas - Conveniência na divisão de seus dados</b>
+
+<p>O particionamento de tabelas existe há anos no PostgreSQL, mas exigiu que um usuário mantenha um conjunto de regras e gatilhos não triviais para que o particionamento funcione. O PostgreSQL 10 apresenta uma sintaxe de partição de tabelas que permite aos usuários criar e manter facilmente o intervalo e listar tabelas particionadas. A adição da sintaxe de particionamento é o primeiro passo em uma série de recursos planejados para fornecer uma estrutura de particionamento robusta no PostgreSQL.</p>
+
+<b>Melhor paralelismo de consulta - Conquiste rapidamente sua análise</b>
+
+<p>O PostgreSQL 10 oferece um melhor suporte para consultas paralelizadas, permitindo que mais partes do processo de execução da consulta sejam paralelizadas. As melhorias incluem tipos adicionais de varredura de dados que são paralelizados, bem como otimizações quando os dados são recombinados, como pré-triagem. Esses aprimoramentos permitem que os resultados sejam retornados mais rapidamente.</p>
+
+<b>Commit por Quórum para Replicação Síncrona - Distribua dados com confiança</b>
+
+<p>O PostgreSQL 10 introduz o commit por quórum para a replicação síncrona, o que permite flexibilidade na forma como um banco de dados primário recebe confirmação de que as alterações foram gravadas com sucesso nas réplicas remotas. Um administrador agora pode especificar que, se um certo número de réplicas tiver reconhecido que uma alteração no banco de dados foi feita, os dados podem ser considerados como seguramente escritos.</p>
+
+<p>&quot;O commit por quórum para a replicação síncrona no PostgreSQL 10 oferece mais opções para expandir nossa capacidade de promover infra-estrutura de banco de dados com praticamente tempo de inatividade zero, da perspectiva do aplicativo. Isso nos permite implantar e atualizar continuamente nossa infraestrutura de banco de dados sem incorrer em longas janelas de manutenção&quot;, disse Curt Micol. , Engenheiro de infraestrutura pessoal na <a href="https://www.simple.com/" target="_blank">Simple Finance</a>.</p>
+
+<b>Autenticação SCRAM-SHA-256 - Proteja seu acesso a dados</b>
+
+<p>O &quot;Salted Challenge Response Authentication Mechanism&quot; (SCRAM) definido <a href="https://tools.ietf.org/html/rfc5802" target="_bla
+ transmissão de senhas, fornecendo uma estrutura para uma neg|nk">RFC5802</a> define um protocolo para melhorar o armazenamento seguro e a transmissão de senhas, fornecendo uma estrutura para uma negociação forte de senhas. O PostgreSQL 10 inclui o método de autenticação SCRAM-SHA-256, definido em <a href="https://tools.ietf.org/html/rfc7677" target="_blank">RFC7677</a>, para fornecer uma segurança melhor do que o atual método de autenticação de senha baseado em MD5.</p>
+
+<a name="features"></a><h2>Mais Sobre as Funcionalidades</h2>
+<p>
+Para explicações detalhadas destas e outras funcionalidades, favor ver as seguintes páginas:
+</p>
+<ul>
+  <li><a href="https://www.postgresql.org/docs/current/static/release-10.html">Notas de Lançamento</a></li>
+  <li><a href="https://wiki.postgresql.org/wiki/New_in_postgres_10">O Que Há de Novo no PG 10</a></li>
+  <li><a href="/about/featurematrix">Matriz de Funcionalidades (somente Inglês)</a></li>
+  <li><a href="https://momjian.us/main/writings/pgsql/features.pdf">Documento PDF com as Grandes Funcionalidades</a></li>
+  <li><a href="https://www.hagander.net/talks/PostgreSQL_10.pdf">Document PDF com as Grandes Funcionalidades (2)</a></li>
+</ul>
+
+<a name="download"></a><h2>Downloads</h2>
+<ul>
+  <li><a href="/download/">Downloads</a> com links e ferramentas para Windows, Linux, OSC, BSD e Solaris.</li>
+  <li><a href="/ftp/source/v10.0">Código Fonte</a></li>
+  <li><a href="https://hub.docker.com/_/postgres/">Imagem Docker do Postgres</a></li>
+  <li><a href="http://pgxn.org">Rede de Extensões do PostgreSQL</a></li>
+</ul>
+
+<a name="docs"></a><h2>Documentação</h2>
+
+<p>
+Documentação HTML e páginas mamn são instaladas com o PostgreSQL, e podem ser navegadas online em <a href="/docs/10/static/">documentação online</a>.
+</p>
+
+<a name="license"></a><h2>Licença</h2>
+<p>
+O PostgreSQL usa a <a href="/about/licence/">Licença do PostgreSQL</a>, uma licença &quot;liberal&quot; tipo-BSD. Essa
+<a href="http://www.opensource.org/licenses/postgresql/">Licença certificada pela OSI
+</a> é amplamente vista como flexível e amigável à empresas, já que ela não restringe o uso do PostgreSQL com aplicações comerciais ou proprietárias. Juntamente com suporte de múltiplas empresas e propriedade pública do código, nossa licença torna o PostgreSQL muito popular entre revendedores querendo embarcar um banco de dados nos seus produtos sem receio de taxas, prisão à revendedores, ou mudanças nos termos da licença.
+</p>
+
+<a name="contact"></a><h2>Contatos</h2>
+
+<p>Páginas Web</p>
+<ul>
+<li><a href="https://www.postgresql.org/">Página do PostgreSQL</a></li>
+</ul>
+
+<p>Contatos para Imprensa em língua Ingles</p>
+
+<p>USA, Canada e Perguntas Gerais<br />
+Equipe de Imprensa do PostgreSQL<br />
+<a href="mailto:press@postgresql.org">press@postgresql.org</a><br />
+Tel: +1 (347) 674-7759</p>
+
+<p>Brasil<br />
+Euler Taveira de Oliveira <br />
+<a href="mailto:br@postgresql.org">br@postgresql.org</a><br />
++55 63 84594598 </p>
+
+<p>Para contatos em outras regiões, veja <a href="/about/press/contact/">nossa lista de contatos internacionais.
+</a></p>
+
+<a name="graphics"><h2>Imagens and Logomarcas</h2></a>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" >
+
+<ul>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant.png">Logomarca do Elefante do PostgreSQL, formato PNG</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant64.jpg">Ícone do Elefante do PostgreSQL</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/slonik_with_black_text_and_tagline.gif">Banner do PostgreSQL com Logomarca, Elefante e Slogan</a></li>
+</ul>
+<p>
+Todas as logomarcas estão disponíveis para modificação sob a Licença do PostgreSQL. O nome e logomarcas PostgreSQL são marcas registradas da Associação Comunidade do PostgreSQL do Canadá.
+</p>
+
+<a name="about"></a><h2>Sobre o PostgreSQL</h2>
+<p>
+O PostgreSQL é o banco de dados de código aberto mais avançado do mundo, com uma comunidade global de milhares de usuários, contribuidores, empresas e organizações. O Projeto PostgreSQL baseia-se em mais de 30 anos de engenharia, a partir da Universidade da Califórnia, Berkley, e continuou com um ritmo de desenvolvimento sem igual. O conjunto maduro de funcionalidades do PostgreSQL não apenas iguala sistemas de bancos de dados proprietários, mas excede-os em funcionalidades avançadas, extensibilidade, segurança e estabilidade. Saiba mais sobre o PostgreSQL e participe na nossa comunidade em <a href="https://www.postgresql.org">PostgreSQL.org</a>.
+
+</p>
+
+<a name="quoted_companies"></a><h2>Informações e Textos Completos das Companhias Citadas</h2>
+
+<a name="companies"></a><h2>Suporte Corporativo</h2>
+
+<p>O PostgreSQL tem o suporte de muitas empresas, que financiam desenvolvedores, fornecem hospedagem, e nos dá apoio financeiro. Veja nossa <a href="https://www.postgresql.org/about/sponsors/">página de patrocinadores</a> para detalhes de alguns desses apoiadores do projeto.<p>
+
+<p>Também temos uma ampla comunidade de
+  <a href="/support/professional_support/">empresas oferecendo suporte ao PostgreSQL
+  </a>, desde consultores individuais até empresas multinacionais.</p>
+
+<p><a href="/about/donate/">Doações</a> são aceitas com prazer.</p>
+
+<p>Ou você pode comprar excelentes ítens da nossa
+  <a href="http://www.zazzle.com/postgresql">Loja do PostgreSQL no Zazzle</a>
+</p>
+{% endblock %}

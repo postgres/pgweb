@@ -1,0 +1,187 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 10 Press Kit{%endblock%}
+{%block contents%}
+
+<div><span>This page in: </span>
+    <span lang="my"><a href="/about/press/presskit10/my/">Burmese</a></span>
+    / <span lang="cn"><a href="/about/press/presskit10/cn/">Chinese</a></span>
+    / <span lang="en"><a href="/about/press/presskit10/">English</a></span>
+    / <span lang="fr"><a href="/about/press/presskit10/fr/">French</a></span>
+    / <span lang="de"><a href="/about/press/presskit10/de/">German</a></span>
+    / <span lang="il"><a href="/about/press/presskit10/il/">Hebrew</a></span>
+    / <span lang="hi"><a href="/about/press/presskit10/hi/">Hindi</a></span>
+    / <span lang="id"><a href="/about/press/presskit10/id/">Indonesian</a></span>
+    / <span lang="it"><a href="/about/press/presskit10/it/">Italian</a></span>
+    / <span lang="kr"><a href="/about/press/presskit10/kr/">Korean</a></span>
+    / <span lang="pt"><a href="/about/press/presskit10/pt/">Portuguese</a></span>
+    / <span lang="ru"><a href="/about/press/presskit10/ru/">Russian</a></span>
+    / <span lang="es"><a href="/about/press/presskit10/es/">Spanish</a></span>
+    / <span lang="th"><a href="/about/press/presskit10/th/">Thai</a></span>
+    / <span lang="vi"><a href="/about/press/presskit10/vi/">Vietnamese</a></span><br/><br/>
+</div>
+
+<h1>PostgreSQL 10 Press Kit</h1>
+
+<h2>Konten</h2>
+
+<p>
+ &nbsp; <a href="#original_release">Text Release Asli</a><br />
+ &nbsp; <a href="#features">Lebih Jauh Mengenai Fitur-Fitur</a><br />
+ &nbsp; <a href="#download">Dimana Mengunduh</a><br />
+ &nbsp; <a href="#docs">Dokumentasi</a><br />
+ &nbsp; <a href="#license">Izin</a><br />
+ &nbsp; <a href="#contact">Kontak</a><br />
+ &nbsp; <a href="#graphics">Gambar dan Logo</a><br />
+ &nbsp; <a href="#about">Tentang PostgreSQL</a><br />
+ &nbsp; <a href="#quoted_companies">Perusahaan yang dikutip dan Kutipan text keseluruhan</a>
+ <br />
+ &nbsp; <a href="#companies">Dukungan Korporasi</a><br />
+</p>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" />
+
+<a name="original_release"></a><h2>Press Release Asli</h2>
+
+<p>5 OCTOBER 2017 - PostgreSQL Global Development Group hari ini mengumumkan peluncuran PostgreSQL 10, versi terbaru dari database open source yang paling terdepan di dunia.</p>
+
+<p>Fitur kritikal dari sebuah <i>workloads</i> modern adalah kemampuan untuk mendistribusikan data ke banyak simpul untuk mempercepat akses data, manajemen dan analisis yang dikenal juga sebagai strategi "membagikan dan menaklukkan"(<i>divide and conquer</i>). Peluncuran PostgreSQL 10 mencakup peningkatan yang signifikan dalam penerapan strategi membagikan dan menaklukkan (<i>divide and conquer</i>) secara efektif, termasuk replikasi logika yang tertanam, partisi table <i>declarative</i> dan pararelisasi <i>query</i> yang dimutakhirkan.</p>
+
+<p>&quot;Komunitas pengembang kami berfokus pada pengembangan fitur yang akan memanfaatkan pengaturan infrastruktur modern untuk mendistribusikan <i>workloads</i>,&quot; ujar Magnus Hagander, seorang anggota <a href="/developer/core/">tim inti </a> dari <a href="/">PostgreSQL Global Development Group</a>&quot;. Fitur seperti replikasi logikal dan pararelisme <i>query</i> mutakhir menggambarkan pekerjaan selama bertahun-tahun dan menunjukkan dedikasi yang berkesinambungan dari komunitas untuk memastikan kepemimpinan PostgreSQL seiring tuntutan perkembangan teknologi.&quot;
+</p>
+
+<p>Rilis ini juga menandai perubahan skema pembuatan versi untuk PostgreSQL ke format &quot;x.y&quot;. Ini berarti rilis minor PostgreSQL berikutnya akan menjadi 10.1 dan rilis besar berikutnya adalah 11.</p>
+
+<b>Replikasi Logikal - Sebuah <i>framework</i> publikasi/subskripsi untuk pendistribusian data</b>
+
+<p>Replikasi logikal memperluas fitur replikasi dari PostgreSQL saat ini dengan kemampuan untuk mengirim perubahan pada tingkat per-database dan per-tabel ke database PostgreSQL yang berbeda. Pengguna sekarang dapat menyempurnakan data yang direplikasi ke berbagai cluster database dan akan memiliki kemampuan untuk melakukan upgrade dengan <i>zero-downtime</i> ke versi PostgreSQL utama di kemudian hari.</p>
+
+<p>&quot;Kami telah banyak PostgreSQL secara besar-besaran sejak versi 9.3 dan sangat membuncah dengan kehadiran versi 10 karena menyajikan dasar untuk partisi yang telah lama ditunggu dan replikasi logikal yang tertanam pada PostgreSQL. Ini akan memungkinkan kami untuk menggunakan PostgreSQL bahkan di dalam lebih banyak lagi layanan,&quot; ujar Vladimir Borodin, Kepala Tim DBA di
+<a href="https://www.yandex.com/" target="_blank">Yandex</a>.</p>
+
+<b>Deklarasi Tabel Partisi - Kenyamanan dalam membagi data Anda</b>
+
+<p>Tabel partisi telah ada selama bertahun-tahun di PostgreSQL namun mengharuskan pengguna untuk mempertahankan beberapa <i>rules</i> dan <i>triggers</i> agar partisi dapat berfungsi. PostgreSQL 10 memperkenalkan sintaks partisi tabel yang memungkinkan pengguna membuat dan megelola list dan range partisi dengan mudah. Penambahan sintaks partisi adalah langkah pertama dalam serangkaian fitur yang direncanakan untuk menyediakan kerangka partisi yang kuat di dalam PostgreSQL.</p>
+
+<b>Peningkatan Pararelisme <i>Query</i> - Menaklukkan analisis Anda dengan cepat</b>
+
+<p>PostgreSQL 10 memberikan dukungan yang lebih baik untuk paralelisasi <i>query</i> dengan memungkinkan lebih banyak bagian proses eksekusi <i>query</i> yang akan diparalelkan. Perbaikan mencakup tambahan jenis pemindaian data yang diparalelkan dan dioptimalkan saat data digabungkan, seperti pra-penyortiran. Penyempurnaan ini memungkinkan hasil <i>query</i> dapat dikembalikan lebih cepat.</p>
+
+<b><i>Quorum Commit</i> untuk Replikasi Sinkron - Mendistribusikan data dengan percaya diri</b>
+
+<p>PostgreSQL 10 memperkenalkan <i>Quorum Commit</i> untuk replikasi sinkron, yang memungkinkan fleksibilitas dalam bagaimana database utama menerima informasi bahwa perubahan berhasil ditulis ke replika jarak jauh. Administrator sekarang dapat menentukan bahwa jika sejumlah replika telah mengetahui bahwa perubahan pada database telah dilakukan, maka data dapat dianggap aman ditulis.</p>
+
+<p>&quot;<i>Quorum Commit</i> untuk melakukan replikasi sinkron di PostgreSQL 10 memberikan lebih banyak pilihan untuk memperluas kemampuan kita dalam mempromosikan infrastruktur database dengan hampir nol <i>downtime</i> dari perspektif aplikasi. Hal ini memungkinkan kita untuk terus menyebarkan dan memperbarui infrastruktur database kita tanpa menimbulkan waktu maintenance yang panjang,&quot; kata Curt Micol, Staff Infrastructure Engineer di <a href="https://www.simple.com/" target="_blank">Simple Finance</a>.</p>
+
+<b>Otentikasi SCRAM-SHA-256 - Amankan akses data Anda</b>
+
+<p>Salted Challenge Response Authentication Mechanism (SCRAM) yang didefinisikan dalam <a href="https://tools.ietf.org/html/rfc5802" target="_blank">RFC5802</a> mendefinisikan protokol untuk memperbaiki penyimpanan dan transmisi kata sandi yang aman dengan menyediakan kerangka kerja untuk negosiasi kata sandi yang kuat. PostgreSQL 10 memperkenalkan metode otentikasi SCRAM-SHA-256, yang didefinisikan dalam
+<a href="https://tools.ietf.org/html/rfc7677" target="_blank">RFC7677</a>, untuk memberikan keamanan yang lebih baik daripada metode otentikasi kata sandi MD5 yang ada.</p>
+
+<a name="features"></a><h2>Penjelasan tambahan tentang fitur-fitur</h2>
+<p>untuk penjelasan dari fitur-fitur diatas dan lainnya, mohon lihat tautan dibawah ini:
+</p>
+<ul>
+  <li><a href="https://www.postgresql.org/docs/current/static/release-10.html">Release Notes</a></li>
+  <li><a href="https://wiki.postgresql.org/wiki/New_in_postgres_10">What's New in 10</a></li>
+  <li><a href="/about/featurematrix">Feature matrix (English only)</a></li>
+  <li><a href="https://momjian.us/main/writings/pgsql/features.pdf">Major Features slide deck</a></li>
+  <li><a href="https://www.hagander.net/talks/PostgreSQL_10.pdf">Major Features slide deck (2)</a></li>
+</ul>
+
+<a name="download"></a><h2>Unduhan</h2>
+<ul>
+  <li><a href="/download/">Halaman Unduhan</a> dengan tautan ke Windows, Linux, OSX,
+	BSD and Solaris installers and tools.</li>
+  <li><a href="/ftp/source/v10.0">Source Code</a></li>
+  <li><a href="https://hub.docker.com/_/postgres/">Postgres Docker image</a></li>
+  <li><a href="http://pgxn.org">PostgreSQL Extension Network</a></li>
+</ul>
+
+<a name="docs"></a><h2>Dokumentasi</h2>
+
+<p>
+Dokumentasi HTML dan halaman petunjuk telah dipasang dengan PostgreSQL, silakan melihat dokumentasi online kami di <a href="/docs/10/static/">dokumentasi online</a>.
+</p>
+
+<a name="license"></a><h2>Lisensi</h2>
+<p>
+PostgreSQL menggunakan <a href="/about/licence/">Lisensi PostgreSQL</a>, sebuah lisensi
+&quot;permisif&quot; seperti BSD.<a href="http://www.opensource.org/licenses/postgresql/">Lisensi bersertifikasi OSI
+</a> ini secara luas dihargai sebagai fleksibel dan ramah bisnis, karena tidak membatasi penggunaan PostgreSQL dengan aplikasi komersial dan terpaten. Bersama dengan dukungan multi-perusahaan dan kepemilikan publik atas kode, lisensi kami membuat PostgreSQL sangat populer di kalangan vendor yang ingin menanamkan database dengan produk mereka sendiri tanpa rasa takut akan biaya, penguncian vendor, atau perubahan dalam
+persyaratan perizinan.</p>
+
+<a name="contact"></a><h2>Kontak</h2>
+
+<p>Web Pages</p>
+<ul>
+<li><a href="https://www.postgresql.org/">PostgreSQL Halaman Muka</a></li>
+</ul>
+
+<p>Pertanyaan Pers Berbahasa Inggris</p>
+
+<p>USA, Kanada, dan Pertanyaan Umum<br />
+PostgreSQL Press Team<br />
+<a href="mailto:press@postgresql.org">press@postgresql.org</a><br />
+Telepon: +1 (347) 674-7759</p>
+
+<p>Indonesia<br />
+  Julyanto Sutandang <br />
+<a href="mailto:id@postgresql.org">id@postgresql.org</a><br />
++628164858028</p>
+
+<p>Untuk kontak regional lain, silakan lihat <a href="/about/press/contact/">daftar kontak internasional kami.</a></p>
+
+<a name="graphics"><h2>Gambar dan Logo</h2></a>
+
+<img src="https://www.postgresql.org/media/img/about/press/elephant64.png" >
+
+<ul>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant.png">PostgreSQL Elephant Logo, PNG format</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/elephant64.jpg">PostgreSQL Elephant Icon</a></li>
+<li><a href="https://www.postgresql.org/media/img/about/press/slonik_with_black_text_and_tagline.gif">PostgreSQL Banner with Logo, Elephant and Slogan</a></li>
+</ul>
+<p>
+Semua logo tersedia untuk modifikasi dan redistribusi di bawah Lisensi PostgreSQL. Nama dan logo PostgreSQL adalah merek dagang dari Asosiasi Komunitas PostgreSQL Kanada.
+</p>
+
+<a name="about"></a><h2>Tentang PostgreSQL</h2>
+<p>
+PostgreSQL adalah database open source paling maju di dunia, dengan komunitas global dari ribuan pengguna, kontributor, perusahaan dan organisasi. Proyek PostgreSQL dibangun lebih dari 30 tahun rekayasa, dimulai dari University of California, Berkeley, dan terus berlanjut dengan tahap perkembangan yang tak tertandingi. Fitur PostgreSQL  yang telah matang tidak hanya sesuai dengan pemilik yang memiliki sistem database terbaik, namun melebihi mereka dari segi fitur database canggih, kelayakan, keamanan dan stabilitas. Pelajari lebih lanjut tentang PostgreSQL dan berpartisipasi dalam komunitas kami di <a href="https://www.postgresql.org">PostgreSQL.org</a>.</p>
+
+<a name="quoted_companies"></a><h2>Kutipan lengkap tentang PostgreSQL dari beberapa perusahan</h2>
+<p>&quot;Komunitas pengembang kami berfokus pada pengembangan fitur yang akan memanfaatkan penyiapan infrastruktur modern untuk mendistribusikan beban kerja,&quot;
+  kata Magnus Hagander, a <a href="https://www.postgresql.org/developer/core/">tim inti</a> member of the <a href="https://www.postgresql.org/">PostgreSQL Global Development Group</a>. &quot;Fitur seperti replikasi logis dan query paralelism  yang meningkat mewakili pekerjaan selama bertahun tahun dan menunjukkan dedikasi yang berkelangsungan dari komunitas untuk memastikan kepemimpinan Postgres seiring tuntutan perkembangan teknologi.&quot;
+</p>
+<p>PostgreSQL adalah database open source paling maju di dunia, dengan komunitas global dari ribuan pengguna, kontributor, perusahaan dan organisasi. Proyek PostgreSQL dibangun lebih dari 30 tahun rekayasa, dimulai dari University of California, Berkeley, dan terus berlanjut dengan tahap perkembangan yang tak tertandingi. Fitur PostgreSQL  yang telah matang tidak hanya sesuai dengan pemilik yang memiliki sistem database terbaik, namun melebihi mereka dari segi fitur database canggih, kelayakan, keamanan dan stabilitas. Pelajari lebih lanjut tentang PostgreSQL dan berpartisipasi dalam komunitas kami di <a href="https://www.postgresql.org">PostgreSQL.org</a>.</p>
+
+<p>&quot;Kami telah banyak menggunakan PostgreSQL sejak 9.3 dan sangat senang dengan versi 10 karena membawa basis untuk tabel partisi yang telah lama ditunggu dan replikasi logis yang terpasang secara alami pada PostgreSQL. Ini akan memungkinkan kami untuk menggunakan PostgreSQL di lebih banyak layanan,&quot; kata Vladimir Borodin, DBA tim Lead di
+  <a href="https://www.yandex.com/" target="_blank">Yandex</a>.
+</p>
+<p>
+<a href="https://yandex.com/" target="_blank">Yandex</a> adalah perusahaan teknologi yang membangun produk dan layanan cerdas yang didukung oleh pembelajaran mesin. Tujuan Yandex adalah untuk membantu konsumen dan bisnis lebih baik menavigasi dunia online dan offline. Sejak 1997, Yandex telah menyampaikan layanan pencarian dan informasi kelas dunia yang relevan secara lokal. Selain itu, Yandex telah mengembangkan layanan transportasi on-demand terkemuka di pasar, produk navigasi, dan aplikasi mobile lainnya untuk jutaan konsumen di seluruh dunia. Untuk menghubungi
+<a href="https://yandex.com/company/contacts/" target="_blank">
+  https://yandex.com/company/contacts/
+</a>
+</p>
+<p>&quot;Quorum Commit untuk melakukan replikasi sinkron di PostgreSQL 10 memberikan lebih banyak pilihan untuk memperluas kemampuan kita dalam mempromosikan infrastruktur database dengan hampir nol downtime dari perspektif aplikasi. Hal ini memungkinkan kita untuk terus menyebarkan dan memperbarui infrastruktur database kita tanpa menimbulkan waktu maintenance yang panjang&quot; kata Curt Micol, Staff Infrastructure Engineer at
+  <a href="https://www.simple.com/" target="_blank">Simple Finance</a>.</p>
+<p>didirkan pada tahun 2009, <a href="https://www.simple.com/" target="_blank">Simple</a>
+ adalah perusahaan teknologi yang mengubah cara orang bank dan memikirkan uang mereka. Produk sederhana memadukan penganggaran dan perbankan menjadi satu aplikasi indah, dengan alat yang membantu orang menabung untuk hal-hal yang mereka butuhkan dan membelanjakannya dengan bertanggung jawab atas hal-hal yang mereka inginkan. Hubungi
+  <a href="https://www.simple.com/" target="_blank">Simple</a> di
+  <a href="mailto:press@simple.com">press@simple.com</a>
+</p>
+
+<a name="companies"></a><h2>Dukungan Korporasi</h2>
+
+<p>PostgreSQL menikmati dukungan dari banyak perusahaan, yang mensponsori pengembang, menyediakan sumber daya hosting, dan memberi kami dukungan finansial. Lihat
+  <a href="/about/sponsors/">halaman sponsor</a>  kami untuk beberapa pendukung proyek ini.</p>
+
+<p>Terdapat juga komunitas besar dari
+  <a href="/support/professional_support/">perusahaan-perusahaan yang menawarkan Dukungan PostgreSQL</a> dari konsultan perorangan ke perusahaan multinasional.</p>
+
+<p>Kami dengan senang hati menerima <a href="/about/donate/">Donasi</a>.</p>
+
+<p>Atau Anda bisa membeli produk merchandise dari
+  <a href="http://www.zazzle.com/postgresql">Zazzle PostgreSQL Store</a> kami
+</p>
+{% endblock %}
