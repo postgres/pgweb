@@ -7,7 +7,7 @@ import json
 import urllib2
 from tempfile import NamedTemporaryFile
 
-versions = ["9.6", "9.5", "9.4", "9.3", "9.2"]
+versions = ["10", "9.6", "9.5", "9.4", "9.3", "9.2"]
 
 platform_names = {
 	'redhat': 'RedHat Enterprise Linux {0}',
