@@ -1,7 +1,11 @@
 var repodata = {{json|safe}};
 
+function sortNumeric(a,b) {
+   return a-b;
+}
+
 window.onload = function() {
-   versions = Object.keys(repodata['reporpms']).sort().reverse();
+   versions = Object.keys(repodata['reporpms']).sort(sortNumeric).reverse();
    for (var p in versions) {
       var opt = document.createElement('option');
       opt.text = versions[p];
