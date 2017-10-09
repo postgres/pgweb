@@ -16,6 +16,7 @@ from pgweb.util.contexts import NavContext
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.misc import get_client_ip, varnish_purge, version_sort
 
+from pgweb.core.models import Version
 from models import Category, Product, StackBuilderApp
 from forms import ProductForm
 
@@ -198,6 +199,7 @@ def yum_js(request):
 		jsonstr = f.read()
 	return render_to_response('downloads/js/yum.js', {
 		'json': jsonstr,
+		'supported_versions': ','.join([str(v.numtree) for v in Version.objects.filter(supported=True)]),
 		}, content_type='application/json')
 
 #######

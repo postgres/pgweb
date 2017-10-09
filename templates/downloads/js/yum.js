@@ -1,4 +1,5 @@
 var repodata = {{json|safe}};
+var supported_versions = [{{supported_versions}}];
 
 function sortNumeric(a,b) {
    return a-b;
@@ -7,6 +8,9 @@ function sortNumeric(a,b) {
 window.onload = function() {
    versions = Object.keys(repodata['reporpms']).sort(sortNumeric).reverse();
    for (var p in versions) {
+      if (supported_versions.indexOf(Number(versions[p])) < 0)
+	  continue;
+
       var opt = document.createElement('option');
       opt.text = versions[p];
       document.getElementById('version').add(opt);

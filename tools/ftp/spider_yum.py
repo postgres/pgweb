@@ -5,9 +5,8 @@ import os
 import re
 import json
 import urllib2
+from decimal import Decimal
 from tempfile import NamedTemporaryFile
-
-versions = ["10", "9.6", "9.5", "9.4", "9.3", "9.2"]
 
 platform_names = {
 	'redhat': 'RedHat Enterprise Linux {0}',
@@ -49,6 +48,8 @@ for v in range(24, 25+1):
 	platforms.update(dict(generate_platform('fedora', 'fedora', v, 'dnf', True)))
 
 re_reporpm = re.compile('^pgdg-([a-z0-9-]+)([0-9]{2})-[^-]+-(\d+)\.noarch\.rpm$')
+re_versiondirs = re.compile(r'^\d+(\.\d+)?$')
+
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description="Spider repo RPMs")
 	parser.add_argument('yumroot', type=str, help='YUM root path')
@@ -56,6 +57,7 @@ if __name__ == "__main__":
 
 	args = parser.parse_args()
 
+	versions = sorted([v for v in os.listdir(args.yumroot) if re_versiondirs.match(v)], key=Decimal, reverse=True)
 	reporpms = {}
 	for v in versions:
 		reporpms[v] = {}
