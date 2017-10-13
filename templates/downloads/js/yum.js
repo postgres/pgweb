@@ -95,7 +95,12 @@ function archChanged() {
    document.getElementById('clientpackage').innerHTML = pinfo['i'] + ' install postgresql' + shortver;
    document.getElementById('serverpackage').innerHTML = pinfo['i'] + ' install postgresql' + shortver + '-server';
    if (pinfo.d) {
-       document.getElementById('initdb').innerHTML = '/usr/pgsql-' + ver + '/bin/postgresql' + shortver + '-setup initdb<br/>systemctl enable postgresql-' + ver + '<br/>systemctl start postgresql-' + ver;
+       var setupcmd = 'postgresql-' + shortver + '-setup';
+       if (ver < 10) {
+	   setupcmd = 'postgresql' + shortver + '-setup';
+       }
+
+       document.getElementById('initdb').innerHTML = '/usr/pgsql-' + ver + '/bin/' + setupcmd + ' initdb<br/>systemctl enable postgresql-' + ver + '<br/>systemctl start postgresql-' + ver;
    }
    else {
        document.getElementById('initdb').innerHTML = 'service postgresql-' + ver + ' initdb<br/>chkconfig postgresql-' + ver + ' on<br/>service postgresql-' + ver + ' start';
