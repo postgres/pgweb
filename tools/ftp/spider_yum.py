@@ -44,7 +44,7 @@ def get_redhat_systemd(ver):
 platforms = {}
 for v in range(5, 7+1):
 	platforms.update(dict(generate_platform('redhat', 'rhel', v, 'yum', get_redhat_systemd(v))))
-for v in range(24, 25+1):
+for v in range(24, 30+1):
 	platforms.update(dict(generate_platform('fedora', 'fedora', v, 'dnf', True)))
 
 re_reporpm = re.compile('^pgdg-([a-z0-9-]+)([0-9]{2})-[^-]+-(\d+)\.noarch\.rpm$')
