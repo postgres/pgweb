@@ -24,7 +24,7 @@ class OrganisationForm(forms.ModelForm):
 		if self.cleaned_data['add_manager']:
 			# Something was added as manager - let's make sure the user exists
 			try:
-				User.objects.get(email=self.cleaned_data['add_manager'])
+				User.objects.get(email=self.cleaned_data['add_manager'].lower())
 			except User.DoesNotExist:
 				raise ValidationError("User with email %s not found" % self.cleaned_data['add_manager'])
 
@@ -44,7 +44,7 @@ class OrganisationForm(forms.ModelForm):
 	def save(self, commit=True):
 		model = super(OrganisationForm, self).save(commit=False)
 		if self.cleaned_data.has_key('add_manager') and self.cleaned_data['add_manager']:
-			model.managers.add(User.objects.get(email=self.cleaned_data['add_manager']))
+			model.managers.add(User.objects.get(email=self.cleaned_data['add_manager'].lower()))
 		if self.cleaned_data.has_key('remove_manager') and self.cleaned_data['remove_manager']:
 			for toremove in self.cleaned_data['remove_manager']:
 				model.managers.remove(toremove)

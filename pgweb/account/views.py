@@ -153,7 +153,7 @@ def change_email(request):
 
 			# Create a new token
 			token = EmailChangeToken(user=request.user,
-									 email=form.cleaned_data['email'],
+									 email=form.cleaned_data['email'].lower(),
 									 token=generate_random_token())
 			token.save()
 
@@ -185,7 +185,7 @@ def confirm_change_email(request, tokenhash):
 
 	if token:
 		# Valid token find, so change the email address
-		request.user.email = token.email
+		request.user.email = token.email.lower()
 		request.user.save()
 		token.delete()
 
@@ -334,7 +334,7 @@ def signup_oauth(request):
 		# Second stage, so create the account. But verify that the
 		# nonce matches.
 		data = request.POST.copy()
-		data['email'] = request.session['oauth_email']
+		data['email'] = request.session['oauth_email'].lower()
 		data['first_name'] = request.session['oauth_firstname']
 		data['last_name'] = request.session['oauth_lastname']
 		form = SignupOauthForm(data=data)
@@ -342,7 +342,7 @@ def signup_oauth(request):
 			log.info("Creating user for {0} from {1} from oauth signin of email {2}".format(form.cleaned_data['username'], get_client_ip(request), request.session['oauth_email']))
 
 			user = User.objects.create_user(form.cleaned_data['username'].lower(),
-											request.session['oauth_email'],
+											request.session['oauth_email'].lower(),
 											last_login=datetime.now())
 			user.first_name = request.session['oauth_firstname']
 			user.last_name = request.session['oauth_lastname']
@@ -387,7 +387,7 @@ def signup_oauth(request):
 
 		form = SignupOauthForm(initial={
 			'username': suggested_username,
-			'email': request.session['oauth_email'],
+			'email': request.session['oauth_email'].lower(),
 			'first_name': request.session['oauth_firstname'][:30],
 			'last_name': request.session['oauth_lastname'][:30],
 		})

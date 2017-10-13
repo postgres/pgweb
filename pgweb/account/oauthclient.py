@@ -39,6 +39,7 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
 							   code=request.GET['code'])
 		try:
 			(email, firstname, lastname) = authdatafunc(oa)
+			email = email.lower()
 		except KeyError, e:
 			log.warning("Oauth signing using {0} was missing data: {1}".format(provider, e))
 			return HttpResponse('OAuth login was missing critical data. To log in, you need to allow access to email, first name and last name!')

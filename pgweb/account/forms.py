@@ -94,6 +94,9 @@ class SignupOauthForm(forms.Form):
 	def clean_username(self):
 		return _clean_username(self.cleaned_data['username'])
 
+	def clean_email(self):
+		return self.cleaned_data['email'].lower()
+
 class UserProfileForm(forms.ModelForm):
 	class Meta:
 		model = UserProfile
@@ -122,7 +125,7 @@ class ChangeEmailForm(forms.Form):
 		self.user = user
 
 	def clean_email(self):
-		email = self.cleaned_data['email']
+		email = self.cleaned_data['email'].lower()
 
 		if email == self.user.email:
 			raise forms.ValidationError("This is your existing email address!")
@@ -136,7 +139,7 @@ class ChangeEmailForm(forms.Form):
 		# If the primary email checker had an exception, the data will be gone
 		# from the cleaned_data structure
 		if not self.cleaned_data.has_key('email'):
-			return self.cleaned_data['email2']
+			return self.cleaned_data['email2'].lower()
 		email1 = self.cleaned_data['email'].lower()
 		email2 = self.cleaned_data['email2'].lower()
 
