@@ -242,7 +242,7 @@ def resetpwd(request):
 				return HttpServerError("This account cannot change password as it's connected to a third party login site.")
 		except User.DoesNotExist:
 			log.info("Attempting to reset password of {0}, user not found".format(request.POST['email']))
-	log.info("Initiating password set from {0} for {1}".format(get_client_ip(request), request.POST['email']))
+	log.info("Initiating password set from {0}".format(get_client_ip(request)))
 	return authviews.password_reset(request, template_name='account/password_reset.html',
 									email_template_name='account/password_reset_email.txt',
 									post_reset_redirect='/account/reset/done/')
