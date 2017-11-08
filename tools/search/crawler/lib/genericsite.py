@@ -31,6 +31,8 @@ class GenericSiteCrawler(BaseSiteCrawler):
 			self.queue.put((x, 0.5, False))
 
 	def exclude_url(self, url):
+		if ".." in url:
+			return True
 		if self.robots and self.robots.block_url(url):
 			return True
 		for r in self.extra_excludes:
