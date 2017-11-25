@@ -27,17 +27,16 @@ class ProfessionalService(models.Model):
 	provides_support = models.BooleanField(null=False, default=False)
 	provides_hosting = models.BooleanField(null=False, default=False)
 	interfaces = models.CharField(max_length=512, null=True, blank=True, verbose_name="Interfaces (for hosting)")
-	
+
 	purge_urls = ('/support/professional_', )
-	
+
 	send_notification = True
-	
+
 	def verify_submitter(self, user):
 		return (len(self.org.managers.filter(pk=user.pk)) == 1)
 
 	def __unicode__(self):
 		return self.org.name
-	
+
 	class Meta:
 		ordering = ('org__name',)
-

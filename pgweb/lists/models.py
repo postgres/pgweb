@@ -12,7 +12,7 @@ class MailingListGroup(models.Model):
 
 	def __unicode__(self):
 		return self.groupname
-	
+
 	class Meta:
 		ordering = ('sortkey', )
 
@@ -34,6 +34,6 @@ class MailingList(models.Model):
 
 	def __unicode__(self):
 		return self.listname
-	
+
 	class Meta:
 		ordering = ('listname', )

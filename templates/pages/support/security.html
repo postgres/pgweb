@@ -6,7 +6,7 @@
 
 <p>
 If you wish to report a new security vulnerability in PostgreSQL, please
-send an email to 
+send an email to
 <a href="mailto:security@postgresql.org">security@postgresql.org</a>.
 For reporting non-security bugs, please see the <a href="/account/submitbug">Report a Bug</a> page.
 </p>
@@ -17,12 +17,12 @@ The PostgreSQL Global Development Group (PGDG) takes security seriously,
 allowing our users to place their trust in the web sites and applications
 built around PostgreSQL. Our approach covers fail-safe configuration options,
 a secure and robust database server as well as good integration with other
-security infrastructure software. 
+security infrastructure software.
 </p>
 
 <p>
 PostgreSQL security updates are primarily made available as <a href="/support/versioning">minor version</a>
-upgrades. You are always advised to use the latest minor version available, 
+upgrades. You are always advised to use the latest minor version available,
 as it will likely also contain other non-security related fixes. All known
 security issues are always fixed in the next major release, when it comes out.
 </p>
@@ -31,13 +31,13 @@ security issues are always fixed in the next major release, when it comes out.
 PGDG believes that accuracy, completeness and availability of security
 information is essential for our users. We choose to pool all information on
 this one page, allowing easy searching for vulnerabilities by a range of
-criteria. 
+criteria.
 </p>
 
 <p>
 The following table lists all known security issues.
 Please note that versions prior to 9.3 are no longer
-supported.  An archive of vulnerabilities found only in unsupported 
+supported.  An archive of vulnerabilities found only in unsupported
 versions is
 <a href="/support/security_archive">on our Security Archive page</a>,
 but vulnerability information on those versions is no longer updated,
@@ -152,7 +152,7 @@ to determine if the bug affects specific installations or not.
     <td class="colMid">A</td>
     <td class="colLast">Interactive installer downloads software over plain HTTP, then executes it</td>
   </tr>
-  
+
   <tr valign="top">
    <td class="colFirst"><a href="https://access.redhat.com/security/cve/CVE-2016-5423">CVE-2016-5423</a></td>
    <td class="colMid">9.5, 9.4, 9.3, 9.2, 9.1</td>
@@ -197,7 +197,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">C</td>
    <td class="colLast">Unchecked regex can crash the server</td>
   </tr>
-  
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5289">CVE-2015-5289</a></td>
    <td class="colMid">9.4, 9.3</td>
@@ -206,7 +206,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">B</td>
    <td class="colLast">Unchecked JSON input can crash the server</td>
   </tr>
-    
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5288">CVE-2015-5288</a></td>
    <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
@@ -215,7 +215,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">C</td>
    <td class="colLast">Memory leak in crypt() function.</td>
   </tr>
-    
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3165">CVE-2015-3165</a></td>
    <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
@@ -224,7 +224,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">B</td>
    <td class="colLast">Double "free" after authentication timeout</td>
   </tr>
-  
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3166">CVE-2015-3166</a></td>
    <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
@@ -233,7 +233,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">D</td>
    <td class="colLast">Unanticipated errors from the standard library.</td>
   </tr>
-  
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-3167">CVE-2015-3167</a></td>
    <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
@@ -242,7 +242,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">C</td>
    <td class="colLast">pgcrypto has multiple error messages for decryption with an incorrect key.</td>
   </tr>
-    
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0241">CVE-2015-0241</a></td>
    <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
@@ -251,7 +251,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">C</td>
    <td class="colLast">Buffer overruns in "to_char" functions.</td>
   </tr>
-  
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0242">CVE-2015-0242</a></td>
    <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
@@ -260,7 +260,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">C</td>
    <td class="colLast">Buffer overrun in replacement printf family of functions.</td>
   </tr>
-  
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0243">CVE-2015-0243</a></td>
    <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
@@ -269,7 +269,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">C</td>
    <td class="colLast">Memory errors in functions in the pgcrypto extension.</td>
   </tr>
-  
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-0244">CVE-2015-0244</a></td>
    <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
@@ -278,7 +278,7 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">C</td>
    <td class="colLast">An error in extended protocol message reading.</td>
   </tr>
-  
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-8161">CVE-2014-8161</a></td>
    <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
@@ -286,8 +286,8 @@ to determine if the bug affects specific installations or not.
    <td class="colMid">core server</td>
    <td class="colMid">C</td>
    <td class="colLast">Constraint violation errors can cause display of values in columns which the user would not normally have rights to see.</td>
-  </tr>  
-  
+  </tr>
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0067">CVE-2014-0067</a></td>
    <td class="colMid">9.4, 9.3, 9.2, 9.1, 9.0</td>
@@ -397,7 +397,7 @@ The following vulnerability class references are used in the above table:
    <td class="colFirst">D</td>
    <td class="colLast">A vulnerability that is exploitable for denial-of-service, but requiring a valid prior login.</td>
   </tr>
-  
+
  </table>
 
 </div>

@@ -13,8 +13,8 @@
   <li>v8.4.17</li>
 </ul>
 
-<p>While this FAQ covers the 2013-04-04 PostgreSQL Security Update in general, 
-most of its contents focus on the primary security vulnerability patched in the 
+<p>While this FAQ covers the 2013-04-04 PostgreSQL Security Update in general,
+most of its contents focus on the primary security vulnerability patched in the
 release, <a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1899">
 CVE-2013-1899</a>.</p>
 
@@ -22,136 +22,136 @@ CVE-2013-1899</a>.</p>
 <p>There were no known exploits at the time of release.</p>
 
 <h2>Who is particularly vulnerable because of this issue?</h2>
-<p>Any system that allows unrestricted access to the PostgreSQL network port, 
-such as users running PostgreSQL on a public cloud, is especially vulnerable. 
-Users whose servers are only accessible on protected internal networks, or who 
-have effective firewalling or other network access restrictions, are less 
+<p>Any system that allows unrestricted access to the PostgreSQL network port,
+such as users running PostgreSQL on a public cloud, is especially vulnerable.
+Users whose servers are only accessible on protected internal networks, or who
+have effective firewalling or other network access restrictions, are less
 vulnerable.</p>
-<p>This is a good general rule for database security: do not allow port access 
-to the database server from untrusted networks unless it is absolutely 
-necessary. This is as true, or more true, of other database systems as it is of 
+<p>This is a good general rule for database security: do not allow port access
+to the database server from untrusted networks unless it is absolutely
+necessary. This is as true, or more true, of other database systems as it is of
 PostgreSQL.</p>
 
 <h2>What is the nature of the vulnerability?</h2>
-<p>The vulnerability allows users to use a command-line switch for a PostgreSQL 
+<p>The vulnerability allows users to use a command-line switch for a PostgreSQL
 connection intended for single-user recovery mode while PostgreSQL is running in
 normal, multiuser mode. This can be used to harm the server.</p>
 
 <h2>What potential exploits are enabled by this vulnerability?</h2>
 <ol>
-<li>Persistent Denial of Service: an unauthenticated attacker may use this 
-    vulnerability to cause PostgreSQL error messages to be appended to targeted 
-    files in the PostgreSQL data directory on the server. Files corrupted in 
-    this way may cause the database server to crash, and to refuse to restart. 
-    The database server can be fixed either by editing the files and removing 
+<li>Persistent Denial of Service: an unauthenticated attacker may use this
+    vulnerability to cause PostgreSQL error messages to be appended to targeted
+    files in the PostgreSQL data directory on the server. Files corrupted in
+    this way may cause the database server to crash, and to refuse to restart.
+    The database server can be fixed either by editing the files and removing
     the garbage text, or restoring from backup.</li>
-<li>Configuration Setting Privilege Escalation: in the event that an attacker 
-    has a legitimate login on the database server, and the server is configured 
-    such that this user name and the database name are identical (e.g. user 
-    <i>web</i>, database <i>web</i>), then this vulnerability may be used to 
-    temporarily set one configuration variable with the privileges of the 
+<li>Configuration Setting Privilege Escalation: in the event that an attacker
+    has a legitimate login on the database server, and the server is configured
+    such that this user name and the database name are identical (e.g. user
+    <i>web</i>, database <i>web</i>), then this vulnerability may be used to
+    temporarily set one configuration variable with the privileges of the
     superuser.</li>
-<li>Arbitrary Code Execution: if the attacker meets all of the qualifications 
-    under 2 above, and has the ability to save files to the filesystem as well 
-    (even to the <i>tmp</i> directory), then they can use the vulnerability to 
-    load and execute arbitrary C code. SELinux will prevent this specific 
+<li>Arbitrary Code Execution: if the attacker meets all of the qualifications
+    under 2 above, and has the ability to save files to the filesystem as well
+    (even to the <i>tmp</i> directory), then they can use the vulnerability to
+    load and execute arbitrary C code. SELinux will prevent this specific
     type of exploit.</li>
 </ol>
 
 <h2>Which major versions of PostgreSQL are affected?</h2>
 <p>Versions 9.0, 9.1 and 9.2.</p>
-<p>Users of version 8.4 are not affected. Users of version 8.3 and earlier are 
-not affected by this issue, but are vulnerable to other unpatched security 
+<p>Users of version 8.4 are not affected. Users of version 8.3 and earlier are
+not affected by this issue, but are vulnerable to other unpatched security
 vulnerabilities, since those versions are EOL.</p>
 
 <h2>How can users protect themselves?</h2>
 <ul>
-<li>Download the update release and update all of your servers as soon as 
+<li>Download the update release and update all of your servers as soon as
     possible.</li>
 <li>Ensure that PostgreSQL is not open to connections from untrusted networks.
     </li>
-<li>Audit your database users to be certain that all logins require proper 
-    credentials, and that the only logins which exist are legitimate and in 
+<li>Audit your database users to be certain that all logins require proper
+    credentials, and that the only logins which exist are legitimate and in
     current use.</li>
 </ul>
-<p>Use of advanced security frameworks, such as SELinux with PostgreSQL's 
+<p>Use of advanced security frameworks, such as SELinux with PostgreSQL's
 SEPostgres extension, also lessen or eliminate the exposure and potential damage
 from PostgreSQL security vulnerabilities.</p>
 
 <h2>Who was given access to the information about the vulnerability?</h2>
 <p>Specifics about the vulnerability were first disclosed to our security team.
 </p>
-<p>The PostgreSQL Global Development Group (PGDG) has had, for several years, a 
-policy granting engineers who build PostgreSQL binary packages to be distributed 
-to the public (such as RPMs and Windows installers) early access to be able to 
-release information and code so that packages can be ready on the official 
-release date. This applied to both minor and major releases. Given the 
-increasing prevalence of PostgreSQL-as-a-Service (PGaaS) as a distribution 
-mechanism, we are revising this policy to accomodate the case of the cloud 
+<p>The PostgreSQL Global Development Group (PGDG) has had, for several years, a
+policy granting engineers who build PostgreSQL binary packages to be distributed
+to the public (such as RPMs and Windows installers) early access to be able to
+release information and code so that packages can be ready on the official
+release date. This applied to both minor and major releases. Given the
+increasing prevalence of PostgreSQL-as-a-Service (PGaaS) as a distribution
+mechanism, we are revising this policy to accomodate the case of the cloud
 providers. The new policy is still being edited and should be available soon.
 </p>
 
 <h2>When was the vulnerability discovered?</h2>
-<p>This vulnerability was first reported to the PostgreSQL Global Development 
+<p>This vulnerability was first reported to the PostgreSQL Global Development
 Group (PGDG) security team on March 12, 2013.</p>
-<p>We filed for the CVE, with the assistance of the Red Hat security team, on 
+<p>We filed for the CVE, with the assistance of the Red Hat security team, on
 March 27.</p>
 
 <h2>Who discovered the vulnerability?</h2>
-<p>Mitsumasa Kondo and Kyotaro Horiguchi of NTT Open Source Software Center 
+<p>Mitsumasa Kondo and Kyotaro Horiguchi of NTT Open Source Software Center
 while conducting a security audit. NTT is a longtime contributor to PostgreSQL.
 </p>
 
 <h2>How was the vulnerability reported?</h2>
 <p>Kondo-san and Horiguchi-san sent email to security@postgresql.org.</p>
 
-<h2>As reported by TechCrunch and Hacker News, some entities including cloud 
+<h2>As reported by TechCrunch and Hacker News, some entities including cloud
 platform provider Heroku were given early access. Why did this occur?</h2>
-<p>Heroku was given access to updated source code which patched the 
-vulnerability at the same time as other packagers. Because Heroku was especially 
-vulnerable, the PostgreSQL Core Team worked with them -- to secure their 
-infrastructure and to use their deployment as a test-bed for the security 
-patches. This helped to verify that the security update did not break any 
-application functionality. Heroku has a history both of working closely with 
-community developers, and of testing experimental features in their PostgreSQL 
+<p>Heroku was given access to updated source code which patched the
+vulnerability at the same time as other packagers. Because Heroku was especially
+vulnerable, the PostgreSQL Core Team worked with them -- to secure their
+infrastructure and to use their deployment as a test-bed for the security
+patches. This helped to verify that the security update did not break any
+application functionality. Heroku has a history both of working closely with
+community developers, and of testing experimental features in their PostgreSQL
 service.</p>
 
 <h2>Who was given access to the code before the official release?</h2>
-<p>We have two teams that communicate on private lists hosted on the PGDG 
+<p>We have two teams that communicate on private lists hosted on the PGDG
 infrastructure. Both teams had access to the source code prior to the release of
- any packages for analyzing the security patch and then creating packages for 
+ any packages for analyzing the security patch and then creating packages for
  distributing PostgreSQL binaries. These are our Security Team and our Packagers
-List. In both cases, these groups had early access in order to participate in 
+List. In both cases, these groups had early access in order to participate in
 patching the security hole.</p>
 
-<h2>How can end-users with large deployments or security-sensitive applications 
+<h2>How can end-users with large deployments or security-sensitive applications
 obtain early access security information?</h2>
-<p>At this time, the PostgreSQL project does not provide users who are not 
-directly involved in patching security vulnerabilities or packaging PostgreSQL 
-for other users early access to security information, patches, or code. It is 
-possible that at some time in the future we may be in a position to offer such 
+<p>At this time, the PostgreSQL project does not provide users who are not
+directly involved in patching security vulnerabilities or packaging PostgreSQL
+for other users early access to security information, patches, or code. It is
+possible that at some time in the future we may be in a position to offer such
 access, but we are not able to now.</p>
 
 <h2>Was taking the repository private while this security discussion was ongoing
  the proper thing to do?</h2>
 <p>Given the severity of the vulnerability, the PostgreSQL Core team deliberated
-and determined the security risk posed by having the source code for the fix 
-available before the packages were made available outweighed the public’s 
+and determined the security risk posed by having the source code for the fix
+available before the packages were made available outweighed the public’s
 interest in having immediate access.</p>
-<p>Normal procedure for sharing information about security releases is to send 
+<p>Normal procedure for sharing information about security releases is to send
 an announcement our developer mailing list, pgsql-hackers@postgresql.org, a week
-before a new release. Tom Lane did this. Then, due to the severity of the 
-security vulnerability, we also sent an announcement to 
-pgsql-announce@postgresql.org and to our RSS News feed on our website homepage. 
-We did this because we wanted to give DBAs sufficient time to plan for a 
+before a new release. Tom Lane did this. Then, due to the severity of the
+security vulnerability, we also sent an announcement to
+pgsql-announce@postgresql.org and to our RSS News feed on our website homepage.
+We did this because we wanted to give DBAs sufficient time to plan for a
 maintenance window to upgrade.</p>
 <p>The timing of the announcements and the release was based on the availability
 of volunteer packagers and release managers to conduct the release.</p>
 
 <h2>How is the PostgreSQL project organized?</h2>
-<p>PostgreSQL Global Development Group (PGDG) is a volunteer-run, global 
+<p>PostgreSQL Global Development Group (PGDG) is a volunteer-run, global
 organization. We have a six-person core team, a number of Major Contributors and
-several mailing lists that make up the centralized portion of our community. 
+several mailing lists that make up the centralized portion of our community.
 <a href="/community/contributors/">See here for details
 about contributors</a>.</p>
 
@@ -159,18 +159,18 @@ about contributors</a>.</p>
 <p>Membership in both groups is maintained by the Core Team.</p>
 
 <h2>How often does PostgreSQL find new security vulnerabilities?</h2>
-<p>We find zero to seven minor security issues a year. This is the first 
-security issue of this magnitude since 2006: the "backslash escape encoding 
+<p>We find zero to seven minor security issues a year. This is the first
+security issue of this magnitude since 2006: the "backslash escape encoding
 issue", which affected MySQL and a few other database systems as well.</p>
 
 <h2>How was the vulnerability introduced?</h2>
 <p>It was created as a side effect of a refactoring effort to make establishing
-new connections to a PostgreSQL server faster, and the associated code more 
+new connections to a PostgreSQL server faster, and the associated code more
 maintainable.</p>
 
 <h2>Who discovers vulnerabilities in PostgreSQL?</h2>
-<p>We are fortunate to have a large pool of security engineers who test 
-PostgreSQL regularly and responsibly report security issues so that they can be 
+<p>We are fortunate to have a large pool of security engineers who test
+PostgreSQL regularly and responsibly report security issues so that they can be
 fixed. This includes:</p>
 <ul>
 <li>QA staff at contributing companies like NTT Open Source, EnterpriseDB and
@@ -182,11 +182,10 @@ fixed. This includes:</p>
 </ul>
 
 <h2>What else is included in this release?</h2>
-<p>This release also updates four other, minor, security issues which are 
-detailed on the <a href="/support/security">security 
-page</a> and in the release announcement. It includes a number of bug fixes for 
-PostgreSQL as well, most notably fixes for two potential data corruption issues 
+<p>This release also updates four other, minor, security issues which are
+detailed on the <a href="/support/security">security
+page</a> and in the release announcement. It includes a number of bug fixes for
+PostgreSQL as well, most notably fixes for two potential data corruption issues
 with binary replication.</p>
 
 {%endblock%}
-

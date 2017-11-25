@@ -86,4 +86,3 @@ class StackBuilderApp(models.Model):
 	class Meta:
 		unique_together = ('textid', 'version', 'platform', )
 		ordering = ('textid', 'name', 'platform', )
-

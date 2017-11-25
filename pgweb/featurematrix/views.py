@@ -34,4 +34,3 @@ def detail(request, featureid):
 	return render_to_response('featurematrix/featuredetail.html', {
 		'feature': feature,
 	}, NavContext(request, 'about'))
-

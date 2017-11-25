@@ -54,4 +54,3 @@ class AuthBackend(ModelBackend):
 			return None
 
 		return None # Should never get here, but just in case...
-

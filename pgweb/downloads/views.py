@@ -26,7 +26,7 @@ from forms import ProductForm
 def ftpbrowser(request, subpath):
 	if subpath:
 		# An actual path has been selected. Fancy!
-		
+
 		if subpath.find('..') > -1:
 			# Just claim it doesn't exist if the user tries to do this
 			# type of bad thing
@@ -89,7 +89,7 @@ def ftpbrowser(request, subpath):
 
 	# Fetch files
 	files = [{'name': k, 'mtime': v['d'], 'size': v['s']} for k,v in node.items() if v['t'] == 'f']
-	
+
 	breadcrumbs = []
 	if subpath:
 		breadroot = ""
@@ -260,4 +260,3 @@ def applications_v2_xml(request):
 	x.endElement('applications')
 	x.endDocument()
 	return resp
-

@@ -177,4 +177,3 @@ OAUTH={}                                               # OAuth providers and key
 
 # Load local settings overrides
 from settings_local import *
-

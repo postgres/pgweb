@@ -12,10 +12,10 @@ class SponsorType(models.Model):
 
 	def __unicode__(self):
 		return self.typename
-	
+
 	class Meta:
 		ordering = ('sortkey', )
-		
+
 class Sponsor(models.Model):
 	sponsortype = models.ForeignKey(SponsorType, null=False)
 	name = models.CharField(max_length=128, null=False, blank=False)
@@ -27,7 +27,7 @@ class Sponsor(models.Model):
 
 	def __unicode__(self):
 		return self.name
-	
+
 	class Meta:
 		ordering = ('name', )
 
@@ -39,12 +39,11 @@ class Server(models.Model):
 	os = models.CharField(max_length=32, null=False, blank=False)
 	location = models.CharField(max_length=128, null=False, blank=False)
 	usage = models.TextField(null=False, blank=False)
-	
+
 	purge_urls = ('/about/servers/', )
 
 	def __unicode__(self):
 		return self.name
-	
+
 	class Meta:
 		ordering = ('name', )
-

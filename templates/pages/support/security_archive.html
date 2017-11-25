@@ -5,11 +5,11 @@
 <h1>Security Information Archive</h1>
 
 <p>
-This page contains a list of vulnerabilities which appear only in versions of PostgreSQL which are 
+This page contains a list of vulnerabilities which appear only in versions of PostgreSQL which are
 End Of Life and no longer updated, according to our <a href="/support/versioning">version support policy.</a>
-These versions may contain additional vulnerabilities which are listed on the main 
+These versions may contain additional vulnerabilities which are listed on the main
 <a href="/support/security">security page</a>, as well as vulnerabilities which were discovered
-later and have not been patched in those releases.  
+later and have not been patched in those releases.
 </p>
 <p>
 Users still running on unsupported PostgreSQL versions are strongly urged to upgrade
@@ -149,7 +149,7 @@ the main <a href="/support/security">security page</a>.
    <td class="colMid">C</td>
    <td class="colLast">Line breaks in object names can be exploited to execute arbitrary SQL when reloading a pg_dump file.</td>
   </tr>
-  
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-4015">CVE-2010-4015</a></td>
    <td class="colMid">9.0, 8.4, 8.3, 8.2</td>
@@ -167,7 +167,7 @@ the main <a href="/support/security">security page</a>.
    <td class="colMid">C</td>
    <td class="colLast">An authenticated database user can manipulate modules and tied variables in some external procedural languages to execute code with enhanced privileges.<a href="https://wiki.postgresql.org/wiki/20101005securityrelease">Details</a></td>
   </tr>
-  
+
   <tr valign="top">
    <td class="colFirst"><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-1975">CVE-2010-1975</a></td>
    <td class="colMid">8.4, 8.3, 8.2, 8.1, 8.0, 7.4</td>
@@ -185,7 +185,7 @@ bypassing settings that should be enforced.</td>
    <td class="colMid">8.4.4, 8.3.11, 8.2.17, 8.1.21, 8.0.25, 7.4.29</td>
    <td class="colMid">core server, limited deployments</td>
    <td class="colMid">C</td>
-   <td class="colLast">A vulnerability in Safe.pm and PL/Perl can allow an authenticated user to run arbitrary Perl code on the database 
+   <td class="colLast">A vulnerability in Safe.pm and PL/Perl can allow an authenticated user to run arbitrary Perl code on the database
                        server if PL/Perl is installed and enabled.</td>
 
   </tr>

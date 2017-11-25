@@ -13,4 +13,3 @@ If you have not done so, use <a href="/account/organisations/new/">this form</a>
 	class Meta:
 		model = ProfessionalService
 		exclude = ('submitter', 'approved', )
-

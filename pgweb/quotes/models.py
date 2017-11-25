@@ -6,7 +6,7 @@ class Quote(models.Model):
 	who = models.CharField(max_length=100, null=False, blank=False)
 	org = models.CharField(max_length=100, null=False, blank=False)
 	link = models.URLField(null=False, blank=False)
-	
+
 	send_notification = True
 
 	purge_urls = ('/about/quotesarchive/', '/$', )

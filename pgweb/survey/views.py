@@ -60,4 +60,3 @@ def vote(request, surveyid):
 	varnish_purge("/community/survey/%s/" % surveyid)
 
 	return HttpResponseRedirect("/community/survey/%s/" % surveyid)
-

@@ -50,4 +50,3 @@ def item(request, itemid, throwaway=None):
 def form(request, itemid):
 	return simple_form(Event, itemid, request, EventForm,
 					   redirect='/account/edit/events/')
-

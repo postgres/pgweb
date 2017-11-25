@@ -19,4 +19,3 @@ class NewsFeed(Feed):
 
 	def item_pubdate(self, obj):
 		return datetime.combine(obj.date,time.min)
-

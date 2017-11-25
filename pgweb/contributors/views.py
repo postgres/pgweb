@@ -9,4 +9,3 @@ def completelist(request):
 	return render_to_response('contributors/list.html', {
 		'contributortypes': contributortypes,
 	}, NavContext(request, 'community'))
-

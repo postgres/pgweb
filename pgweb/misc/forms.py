@@ -31,4 +31,3 @@ class SubmitBugForm(forms.Form):
 		if self.cleaned_data.get('pgversion') == '-1':
 			raise forms.ValidationError('You must select a version')
 		return self.cleaned_data.get('pgversion')
-

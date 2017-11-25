@@ -24,7 +24,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 		elif hasattr(instance, 'verify_submitter'):
 			if not instance.verify_submitter(request.user):
 				raise Exception("You are not the owner of this item!")
-	
+
 	if request.method == 'POST':
 		# Process this form
 		form = formclass(data=request.POST, instance=instance)
@@ -88,4 +88,3 @@ class PgXmlHelper(django.utils.xmlutils.SimplerXMLGenerator):
 		self.startElement(name, {})
 		self.characters(value)
 		self.endElement(name)
-

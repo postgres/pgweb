@@ -41,12 +41,12 @@ def subscribe(request):
 		'operation': 'Legacy subscription',
 		'jquery': True,
 		'form_intro': """
-<b>Note 1:</b> Please ensure you read the <a 
+<b>Note 1:</b> Please ensure you read the <a
 href="https://wiki.postgresql.org/wiki/Archives_Policy">Archive Policy</a>
 before posting to the lists.</p>
 
-<p><b>Note 2:</b> Please do not subscribe to mailing lists using e-mail 
-accounts protected by mail-back anti-spam systems. These are extremely annoying 
+<p><b>Note 2:</b> Please do not subscribe to mailing lists using e-mail
+accounts protected by mail-back anti-spam systems. These are extremely annoying
 to the list maintainers and other members, and you may be automatically unsubscribed."""
 	}, NavContext(request, "community"))
 

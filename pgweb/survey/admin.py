@@ -12,4 +12,3 @@ class SurveyAnswerAdmin(admin.ModelAdmin):
 admin.site.register(Survey, SurveyAdmin)
 admin.site.register(SurveyLock)
 admin.site.register(SurveyAnswer, SurveyAnswerAdmin)
-

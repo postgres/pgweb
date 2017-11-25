@@ -18,10 +18,10 @@ class NewsArticle(models.Model):
 		yield '/news.rss'
 		# FIXME: when to expire the front page?
 		yield '/$'
-	
+
 	def __unicode__(self):
 		return "%s: %s" % (self.date, self.title)
-	
+
 	def verify_submitter(self, user):
 		return (len(self.org.managers.filter(pk=user.pk)) == 1)
 

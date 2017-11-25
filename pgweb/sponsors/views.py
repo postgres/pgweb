@@ -17,4 +17,3 @@ def servers(request):
 	return render_to_response('sponsors/servers.html', {
 		'servers': servers,
 	}, NavContext(request, 'about'))
-

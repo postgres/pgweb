@@ -93,4 +93,3 @@ class SurveyAnswer(models.Model):
 class SurveyLock(models.Model):
 	ipaddr = models.GenericIPAddressField(null=False, blank=False)
 	time = models.DateTimeField(null=False, auto_now_add=True)
-
