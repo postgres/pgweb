@@ -11,12 +11,14 @@ from models import Event
 from forms import EventForm
 
 def main(request):
-	events = Event.objects.select_related('country').filter(approved=True).filter(training=False, enddate__gt=date.today()).order_by('enddate', 'startdate',)
+	community_events = Event.objects.select_related('country').filter(approved=True, badged=True).filter(training=False, enddate__gt=date.today()).order_by('enddate', 'startdate',)
+	other_events = Event.objects.select_related('country').filter(approved=True, badged=False).filter(training=False, enddate__gt=date.today()).order_by('enddate', 'startdate',)
 	training = Event.objects.select_related('country').filter(approved=True).filter(training=True, enddate__gt=date.today()).order_by('enddate', 'startdate',)
 	return render_to_response('events/archive.html', {
 		'title': 'Upcoming events',
 		'eventblocks': (
-			{ 'name': 'Events', 'events': events, 'link': '',},
+			{ 'name': 'Community Events', 'events': community_events, 'link': '',},
+			{ 'name': 'Other Events', 'events': other_events, 'link': '',},
 			{ 'name': 'Training', 'events': training, 'link': 'training/',},
 		),
 	}, NavContext(request, 'about'))

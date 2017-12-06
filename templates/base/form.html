@@ -69,9 +69,9 @@ function toggle_{{f.name}}() {
 {%else%}
    if (!v) {
 {%endif%}
-      $('#id_{{c}}').attr('disabled', true);
+      $('#id_{{c}}').attr('disabled', true).parents('tr').hide();
    } else {
-      $('#id_{{c}}').removeAttr('disabled');
+      $('#id_{{c}}').removeAttr('disabled').parents('tr').show();
    }
 {%endfor%}
 }

@@ -5,12 +5,18 @@ from pgweb.core.models import Organisation
 from models import Event
 
 class EventForm(forms.ModelForm):
-	toggle_fields = [{
+	toggle_fields = [
+		{
 			'name': 'isonline',
 			'invert': True,
 			'fields': ['city', 'state', 'country',]
-			},
-					 ]
+		},
+		{
+			'name': 'badged',
+			'invert': False,
+			'fields': ['description_for_badged',]
+		},
+	]
 	def __init__(self, *args, **kwargs):
 		super(EventForm, self).__init__(*args, **kwargs)
 	def filter_by_user(self, user):

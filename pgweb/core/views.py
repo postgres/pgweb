@@ -40,15 +40,19 @@ from django.template.context import RequestContext
 # Front page view
 @cache(minutes=10)
 def home(request):
-	news = NewsArticle.objects.filter(approved=True)[:7]
-	events = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gte=date.today()).order_by('enddate', 'startdate')[:5]
+	news = NewsArticle.objects.filter(approved=True)[:10]
+	# get the first seven events and divide each up into a list of community and other events
+	event_queryset = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gte=date.today()).order_by('enddate', 'startdate')
+	# display up to the first 4 community events.  Then choose the next 7 - |communty_events|
+	community_events = [event for event in event_queryset.filter(badged=True).all()[:4]]
+	other_events = [event for event in event_queryset.filter(badged=False).all()[:(7-len(community_events))]]
 	try:
 		quote = Quote.objects.filter(approved=True).order_by('?')[0]
 	except:
 		# if there is no quote available, just ignore error
 		quote = None
 	versions = Version.objects.filter(supported=True)
-	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:7]
+	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:10]
 
 	traininginfo = Event.objects.filter(approved=True, training=True).extra(where=("startdate <= (CURRENT_DATE + '6 Months'::interval) AND enddate >= CURRENT_DATE",)).aggregate(Count('id'), Count('country', distinct=True))
 	# can't figure out how to make django do this
@@ -59,7 +63,8 @@ def home(request):
 	return render_to_response('index.html', {
 		'title': 'The world\'s most advanced open source database',
 		'news': news,
-		'events': events,
+		'community_events': community_events,
+		'other_events': other_events,
 		'traininginfo': traininginfo,
 		'trainingcompanies': trainingcompanies,
 		'quote': quote,
@@ -102,7 +107,7 @@ def fallback(request, url):
 			t = loader.get_template('pages/%s/en.html' % url)
 		except TemplateDoesNotExist:
 			raise Http404('Page not found.')
-		
+
 	# Guestimate the nav section by looking at the URL and taking the first
 	# piece of it.
 	try:
@@ -311,7 +316,7 @@ def admin_mergeorg(request):
 				p.save()
 			# Now that everything is moved, we can delete the organisation
 			f.delete()
-			
+
 			return HttpResponseRedirect("/admin/core/organisation/")
 		# Else fall through to re-render form with errors
 	else:

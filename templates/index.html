@@ -148,16 +148,31 @@
            </div> <!-- pgFrontPlanetWrap -->
          </div> <!-- pgFrontPlanet -->
          <div id="pgFrontEvents" class="txtNewsEvent">
-           <a href="/about/events/">
-           <img src="/media/img/hdr/hdr_upcomingevents.png" width="123" height="10" alt="Upcoming Events" />
-           </a>
-           <div class="pgNewsEventsWrap">
-           {% for e in events %}
-            <p>
-             <span class="txtDate">{{e.displaydate|safe}}</span><br />
-             <a href="/about/event/{{e.id}}/">{{e.title}}</a><br/> ({{e.locationstring}})
-            </p>
-           {% endfor %}
+           {% if community_events %}
+             <h3 class="txtHomeHeader">
+               &gt;&nbsp;
+               <a href="/about/events/">Community Events</a>
+             </h3>
+             <div class="pgNewsEventsWrap">
+             {% for e in community_events %}
+              <p>
+               <span class="txtDate">{{e.displaydate|safe}}</span><br />
+               <a href="/about/event/{{e.id}}/">{{e.title}}</a><br/> ({{e.locationstring}})
+              </p>
+             {% endfor %}
+             </div>
+            {% endif %}
+            <h3 class="txtHomeHeader">
+              &gt;&nbsp;
+              <a href="/about/events/">{% if community_events %}Other {% endif %}Events</a>
+            </h3>
+            <div class="pgNewsEventsWrap">
+            {% for e in other_events %}
+             <p>
+              <span class="txtDate">{{e.displaydate|safe}}</span><br />
+              <a href="/about/event/{{e.id}}/">{{e.title}}</a><br/> ({{e.locationstring}})
+             </p>
+            {% endfor %}
            </div>
            <div style="margin-bottom: 10px;">
              <img class="pgArrowImage" src="/media/img/layout/blt_blu_arrow.png" width="6" height="5" alt="" />
