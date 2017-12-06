@@ -667,6 +667,10 @@ TABLE.pgGenericFormTable TR TH SPAN.formfieldhelp {
   font-style: italic;
 }
 
+TABLE.pgGenericFormTable TR TH.formfieldnamecontainer {
+  max-width: 300px;
+}
+
 /* Misc Classes */
 
 .pgClearBoth {

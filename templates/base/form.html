@@ -24,7 +24,7 @@
  </tr>
  {%endif%}
  <tr {%if field.errors%}class="errorinfo"{%endif%}>
-  <th>{{field.label_tag}}{%if field.help_text%}{%if field.field.widget|class_name == "Textarea"%}<br/>
+  <th class="formfieldnamecontainer">{{field.label_tag}}{%if field.help_text%}{%if field.field.widget|class_name == "Textarea"%}<br/>
    <span class="formfieldhelp">{{field.help_text|safe}}</span>{%endif%}{%endif%}
   </th>
   <td>{{field}}</td>
