@@ -43,6 +43,12 @@ h4 {
   padding-right: 4px;
 }
 
+.txtHomeHeader {
+  color: #0094C7;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
 .txtNewsEvent {
   font-size: 0.9em;
   color: #0094C7;
@@ -132,6 +138,18 @@ a:link                          { color:#0085B0; text-decoration: underline; }
 a:visited                       { color:#004E66; text-decoration: underline; }
 a:active                        { color:#0085B0; text-decoration: underline; }
 a:hover                         { color:#000000; text-decoration: underline; }
+
+.txtHomeHeader a:link, .txtHomeHeader a:visited {
+  color: #0094C7;
+  margin: 0 auto;
+  text-decoration: none;
+}
+
+.txtHomeHeader a:hover {
+  color: #0094C7;
+  margin: 0 auto;
+  text-decoration: underline;
+}
 
 #pgFooter a:link                { color:#666; text-decoration: underline; }
 #pgFooter a:visited             { color:#666; text-decoration: underline; }

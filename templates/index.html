@@ -34,7 +34,7 @@
               <div id="pgFrontUser">
                 <div id="pgFrontUserInner">
                   <div id="pgFrontUserWrap">
-                    <h2><img src="/media/img/hdr/hdr_featureduser.png" width="104" height="10" alt="Featured User" /></h2>
+                    <h3 class="txtHomeHeader">&gt;&nbsp; Featured User</h3>
                     <div id="pgFrontUserContent">
                       <div id="txtFrontUserText">{{quote.quote}}</div>
                       <div id="txtFrontUserName"><b>{{quote.who}}, <a href="{{quote.link}}">{{quote.org}}</a></b></div>
@@ -50,7 +50,7 @@
         </div> <!-- pgFrontContainer -->
         <div id="pgFrontRightContainer">
           <div id="pgFrontLatestReleases">
-            <h2><img src="/media/img/hdr/hdr_latestreleases.png" width="120" height="10" alt="Latest Releases" /></h2>
+            <h3 class="txtHomeHeader">&gt;&nbsp; Latest Releases</h3>
             <div id="pgFrontLatestReleasesWrap">
              {%for v in versions %}
              <b>{{v.numtree}}.{{v.latestminor}}</b> &middot; {{v.reldate}} &middot; <a href="/docs/{{v.numtree}}/static/{{v.relnotes}}">Notes</a>
@@ -60,7 +60,7 @@
 	    <div id="pgFrontLatestReleasesNote"><b><a href="/download">Download</a></b> | <a href="/versions.rss" title="Versions RSS Feed"><img class="pgRSSImage" src="/media/img/misc/ico_rss.png" width="28" height="13" alt="Versions RSS Feed" /></a><br /><a href="/support/versioning">Why should I upgrade?</a><br/><a href="/developer/roadmap/">Upcoming releases</a></div>
           </div> <!-- pgFrontLatestreleases -->
           <div id="pgFrontShortcuts">
-            <h2><img src="/media/img/hdr/hdr_shortcuts.png" width="85" height="10" alt="Shortcuts" /></h2>
+            <h3 class="txtHomeHeader">&gt;&nbsp; Shortcuts</h3>
             <div id="pgFrontShortcutsWrap">
               <ul id="pgFrontShortcutsList">
                 <li>
@@ -85,7 +85,7 @@
             </div>
           </div> <!-- pgFrontShortcuts -->
           <div id="pgFrontSupportUs">
-            <h2><img src="/media/img/hdr/hdr_supportus.png" width="81" height="10" alt="Support Us" /></h2>
+            <h3 class="txtHomeHeader">&gt;&nbsp; Support Us</h3>
             <div id="pgFrontSupportUsWrap">
               <div id="txtFrontSupportUsText">
                 PostgreSQL is free. Please support our work by making a <a href="/about/donate">donation</a>.
@@ -95,9 +95,10 @@
         </div> <!-- pgFrontRightContainer -->
         <div id="pgFrontBottomContainer">
          <div id="pgFrontNews" class="txtNewsEvent">
-           <a href="/about/newsarchive">
-           <img src="/media/img/hdr/hdr_latestnews.png" width="90" height="10" alt="Latest News" />
-           </a>
+           <h3 class="txtHomeHeader">
+             &gt;&nbsp;
+             <a href="/about/newsarchive">News</a>
+           </h3>
            <div class="pgNewsEventsWrap">
              {% for n in news %}
              <p>
@@ -122,9 +123,10 @@
            </div>
          </div> <!-- pgFrontNews -->
          <div id="pgFrontPlanet">
-           <a href="https://planet.postgresql.org">
-           <img src="/media/img/hdr/hdr_planetpg.png" width="140" height="10" alt="Planet PostgreSQL" />
-           </a>
+           <h3 class="txtHomeHeader">
+             &gt;&nbsp;
+             <a href="https://planet.postgresql.org">Planet PostgreSQL</a>
+           </h3>
            <div id="pgFrontPlanetWrap">
             {%for post in planet%}
             <p>
@@ -171,9 +173,10 @@
                </li>
              </ul>
            </div>
-           <a href="/about/events/">
-           <img src="/media/img/hdr/hdr_upcomingtraining.png" width="140" height="10" alt="Upcoming training" />
-           </a>
+           <h3 class="txtHomeHeader">
+             &gt;&nbsp;
+             <a href="/about/events/">TRAINING</a>
+           </h3>
            <div class="pgNewsEventsWrap">
              <div id="pgFrontTrainingSummary">
              {%if traininginfo.id__count %}
