@@ -17,4 +17,4 @@ class NewsArticleForm(forms.ModelForm):
 
 	class Meta:
 		model = NewsArticle
-		exclude = ('submitter', 'approved', )
+		exclude = ('submitter', 'approved', 'tweeted')

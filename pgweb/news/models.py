@@ -8,6 +8,7 @@ class NewsArticle(models.Model):
 	date = models.DateField(null=False, blank=False, default=date.today)
 	title = models.CharField(max_length=200, null=False, blank=False)
 	content = models.TextField(null=False, blank=False)
+	tweeted = models.BooleanField(null=False, blank=False, default=False)
 
 	send_notification = True
 	markdown_fields = ('content',)
