@@ -118,22 +118,6 @@ INSTALLED_APPS = [
     'pgweb.pugs',
 ]
 
-#
-# Disable the new authentication handling for now. The reason for this is
-# that we need the sha1 authentication so we can do old-style community
-# auth, which is still used by the commitfest app. Once that app is
-# migrated away, this can be reverted to the new django default which
-# is more secure.
-#
-PASSWORD_HASHERS = (
-    'django.contrib.auth.hashers.SHA1PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
-    'django.contrib.auth.hashers.BCryptPasswordHasher',
-    'django.contrib.auth.hashers.MD5PasswordHasher',
-    'django.contrib.auth.hashers.CryptPasswordHasher',
-)
-
 # Default format for date/time (as it changes between machines)
 DATETIME_FORMAT="Y-m-d H:i:s"
 
