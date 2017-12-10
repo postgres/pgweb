@@ -8,6 +8,7 @@ urlpatterns = patterns('',
 	(r'^auth/(\d+)/$', 'pgweb.account.views.communityauth'),
 	(r'^auth/(\d+)/logout/$', 'pgweb.account.views.communityauth_logout'),
 	(r'^auth/(\d+)/search/$', 'pgweb.account.views.communityauth_search'),
+	(r'^auth/(\d+)/getkeys/(\d+/)?$', 'pgweb.account.views.communityauth_getkeys'),
 
 	# Profile
 	(r'^profile/$', 'pgweb.account.views.profile'),
