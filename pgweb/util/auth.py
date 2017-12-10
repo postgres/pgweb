@@ -4,9 +4,8 @@ from django.db import connection
 
 from pgweb.core.models import UserProfile
 
-# Special version of the authentication backend, so we can deal with migration
-# of accounts from the old community login system. Once we consider all accounts
-# migrated, we can remove this one and use the default backend.
+# Special version of the authentication backend, so we can handle things like
+# forced lowercasing of usernames.
 class AuthBackend(ModelBackend):
 	def authenticate(self, username=None, password=None):
 		try:
@@ -20,37 +19,7 @@ class AuthBackend(ModelBackend):
 			# User found but password wrong --> tell django it is wrong
 			return None
 		except User.DoesNotExist:
-			# User does not exist. See if it exists in the old system,
-			# and if it does, migrate it to the new one.
-			curs = connection.cursor()
-			curs.execute('SELECT * FROM community_login_old(%s,%s)', (username.lower(), password))
-			rows = curs.fetchall()
-
-			if len(rows) != 1:
-				# No rows returned, something clearly went wrong
-				return None
-			if rows[0][1] == 1:
-				# Value 1 in field 1 means the login succeeded. In this case,
-				# create a user in the django system, and migrate all settings
-				# we can think of.
-				namepieces = rows[0][2].split(None, 2)
-				if len(namepieces) == 0: namepieces = ['', '']
-				if len(namepieces) == 1: namepieces.append('')
-				user = User(username=username.lower(), email=rows[0][3], first_name=namepieces[0], last_name=namepieces[1])
-				user.set_password(password)
-				user.save()
-
-				# Create a userprofile if we have to
-				if rows[0][8]:
-					profile = UserProfile(user=user)
-					profile.sshkey = rows[0][8]
-					profile.save()
-
-				# Now delete the user in the old system so nobody can use it
-				curs.execute('SELECT * FROM community_login_old_delete(%s)', (username.lower(), ))
-
-				return user
-			# Any other value in field 1 means login failed, so tell django we did
+			# User not found, so clearly they can't log in!
 			return None
 
 		return None # Should never get here, but just in case...

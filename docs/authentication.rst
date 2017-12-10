@@ -1,25 +1,3 @@
-Authentication
-==============
-The authentication system provides the base for the community login
-system, as well as the django system. The functions defined in
-sql/community_login.sql implement the community login system (existing
-API) on top of the django authentication, as well as a function to
-access all users defined in the old community login system.
-
-The custom authentication provider pgweb.util.auth.AuthBackend
-implements the community login system migration functionality. It will
-first attempt to log the user in with the standard django system. If
-this fails, it will attempt to log the user in with the *old*
-community login system, and if this succeeds the user will
-automatically be migrated to the django authentication system, and
-removed from the old system.
-
-In a local installation that does not have access to the existing set
-of users, this authentication backend can be disabled completely, and
-the system will function perfectly fine relying on just the django
-authentication system.
-
-
 Community authentication 2.0
 ============================
 While the old community authentication system was simply having the
@@ -38,11 +16,6 @@ Each community site is still registered in the central system, to hold
 encryption keys and similar details. This is now held in the main
 database, accessible through the django administration system, instead
 of being held in pg_hba.conf and managed through SQL.
-
-In some cases this may be complicated to implement on the client side,
-and thus version 1.0 community login is still left around. It may
-be removed at some point in the future, depending on implementation
-and policy details...
 
 The flow of an authentication in the 2.0 system is fairly simple:
 
