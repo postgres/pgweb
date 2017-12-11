@@ -44,7 +44,7 @@
 
 {% block extrahead %}
 {{ block.super }}
-{%if toggle_fields or jquery %}
+{%if toggle_fields or described_checkboxes or jquery %}
 <script type="text/javascript" src="/media/js/jquery.min.js"></script>
 {%endif%}
 {%if markdownfields%}
@@ -55,6 +55,18 @@
    window.onload = function() {
       {%for mdf in markdownfields %}
          attach_showdown_preview('id_{{mdf}}', 0);
+      {%endfor%}
+      {%for cbf, descs in described_checkboxes.items%}
+{%comment%}more than a little ugly, but django uses a sequence and not the id for the labels{%endcomment%}
+       var descs={
+{%for k,v in descs %}
+         '{{k}}': '{{v|escapejs}}',
+{%endfor%}
+       };
+       $('ul#id_{{cbf}} li').each(function (i,e) {
+          var id = $(e).find('input[type=checkbox]')[0].value;
+          e.title=descs[id];
+       });
       {%endfor%}
    }
 </script>

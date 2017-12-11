@@ -58,10 +58,16 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 	else:
 		markdownfields = None
 
+	if hasattr(form, 'described_checkboxes'):
+		described_checkboxes = form.described_checkboxes
+	else:
+		described_checkboxes = None
+
 	return render_to_response(formtemplate, {
 		'form': form,
 		'formitemtype': instance._meta.verbose_name,
 		'markdownfields': markdownfields,
+		'described_checkboxes': described_checkboxes,
 		'form_intro': hasattr(form, 'form_intro') and form.form_intro or None,
 		'toggle_fields': hasattr(form, 'toggle_fields') and form.toggle_fields or None,
 		'jquery': hasattr(form, 'jquery') and form.jquery or None,
