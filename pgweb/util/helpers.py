@@ -43,6 +43,8 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 				form.apply_submitter(r, request.user)
 				r.save()
 
+			form.save_m2m()
+
 			return HttpResponseRedirect(redirect)
 	else:
 		# Generate form

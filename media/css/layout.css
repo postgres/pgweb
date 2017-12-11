@@ -640,7 +640,7 @@ TABLE.pgGenericFormTable TR {
    vertical-align: top;
 }
 
-TABLE.pgGenericFormTable TR TD INPUT,
+TABLE.pgGenericFormTable TR TD INPUT:not([type='checkbox']),
 TABLE.pgGenericFormTable TR TD SELECT,
 TABLE.pgGenericFormTable TR TD TEXTAREA,
 TABLE.pgGenericFormTable TR TD DIV.markdownpreview {
@@ -669,6 +669,10 @@ TABLE.pgGenericFormTable TR TH SPAN.formfieldhelp {
 
 TABLE.pgGenericFormTable TR TH.formfieldnamecontainer {
   max-width: 300px;
+}
+
+TABLE.pgGenericFormTable TR TD UL {
+  list-style-type: none;
 }
 
 /* Misc Classes */
