@@ -189,6 +189,8 @@ span.newstag {
    -webkit-border-radius: 6px;
    -moz-border-radius: 6px;
    border-radius: 6px;
+   display: inline-block;
+   margin-bottom: 8px;
 }
 
 span.newstag a {
