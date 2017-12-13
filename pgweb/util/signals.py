@@ -1,4 +1,4 @@
-from django.db.models.signals import pre_save, post_save, pre_delete
+from django.db.models.signals import pre_save, post_save, pre_delete, m2m_changed
 from django.db import models
 from django.conf import settings
 
@@ -55,6 +55,7 @@ def _get_attr_value(obj, fieldname):
 	if isinstance(obj._meta.get_field_by_name(fieldname)[0], models.ManyToManyField):
 		# XXX: Changes to ManyToMany fields can't be tracked here :(
 		#      For now, we have no good way to deal with it so, well, don't.
+		#      (trying to get the value will return None for it)
 		return ''
 
 	# Return the value, or an empty tring if it's NULL (migrated records)
@@ -118,6 +119,29 @@ def my_pre_save_handler(sender, **kwargs):
 							 "%s by %s" % (subj, get_current_user()),
 							 cont)
 
+def my_m2m_changed_handler(sender, **kwargs):
+	instance = kwargs['instance']
+	if getattr(instance, 'send_m2m_notification', False):
+		(cl, f) = sender.__name__.split('_')
+		if not hasattr(instance, '_stored_m2m'):
+			instance._stored_m2m={}
+		if kwargs['action'] == 'pre_clear':
+			instance._stored_m2m[f] = set([unicode(t) for t in getattr(instance,f).all()])
+		elif kwargs['action'] == 'post_add':
+			newset = set([unicode(t) for t in getattr(instance,f).all()])
+			added = newset.difference(instance._stored_m2m[f])
+			removed = instance._stored_m2m[f].difference(newset)
+			subj = '{0} id {1} has been modified'.format(instance._meta.verbose_name, instance.id)
+			if added or removed:
+				send_simple_mail(settings.NOTIFICATION_FROM,
+						settings.NOTIFICATION_EMAIL,
+						"%s by %s" % (subj, get_current_user()),
+						"The following values for {0} were changed:\n\n{1}\n{2}\n\n".format(
+				instance._meta.get_field(f).verbose_name,
+				"\n".join([u"Added: %s" % a for a in added]),
+				"\n".join([u"Removed: %s" % r for r in removed]),
+				))
+
 def my_pre_delete_handler(sender, **kwargs):
 	instance = kwargs['instance']
 	if getattr(instance, 'send_notification', False):
@@ -142,3 +166,4 @@ def register_basic_signal_handlers():
 	pre_save.connect(my_pre_save_handler)
 	pre_delete.connect(my_pre_delete_handler)
 	post_save.connect(my_post_save_handler)
+	m2m_changed.connect(my_m2m_changed_handler)

@@ -125,6 +125,7 @@ class Organisation(models.Model):
 	lastconfirmed = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 
 	send_notification = True
+	send_m2m_notification = True
 
 	def __unicode__(self):
 		return self.name
