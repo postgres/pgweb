@@ -1,8 +1,13 @@
 {%extends "base/page.html"%}
 {%load markup%}
-{%block title%}News archive{%endblock%}
+{%block title%}News archive{%if tag%} - {{tag.name}}{%endif%}{%endblock%}
 {%block contents%}
-<h1>News archive</h1>
+<h1>News archive{%if tag%} - {{tag.name}}{%endif%}</h1>
+
+<p>
+{%for t in newstags%}<span class="newstag"><a href="/about/newsarchive/{{t.urlname}}/">{{t.name}}</a></span> {%endfor%}
+</p>
+
 {%for obj in news %}
 <h2><a href="/about/news/{{obj.id}}/">{{obj.title}}</a></h2>
 <div class="newsdate">Posted on <b>{{obj.displaydate}}</b></div>

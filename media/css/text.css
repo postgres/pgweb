@@ -178,3 +178,20 @@ a:hover                         { color:#000000; text-decoration: underline; }
 #pgFrontNewsEventsContainer h3 img {
   margin-bottom: 10px;
 }
+
+/*
+ * News items tag list
+ */
+span.newstag {
+   background-color: #336791;
+   color: white;
+   padding: 4px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   border-radius: 6px;
+}
+
+span.newstag a {
+   color: white;
+   text-decoration: none;
+}

@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ValidationError
 
 from pgweb.core.models import Organisation
-from models import NewsArticle
+from models import NewsArticle, NewsTag
 
 class NewsArticleForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
@@ -15,6 +15,15 @@ class NewsArticleForm(forms.ModelForm):
 				raise ValidationError("You cannot change the date on an article that has been approved")
 		return self.cleaned_data['date']
 
+	@property
+	def described_checkboxes(self):
+		return {
+			'tags': [(t.id, t.description) for t in NewsTag.objects.all()]
+		}
+
 	class Meta:
 		model = NewsArticle
 		exclude = ('submitter', 'approved', 'tweeted')
+		widgets = {
+			'tags': forms.CheckboxSelectMultiple,
+		}

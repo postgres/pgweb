@@ -19,7 +19,7 @@ urlpatterns = patterns('',
 	(r'^$', 'pgweb.core.views.home'),
 	(r'^dyncss/(?P<css>base|docs).css$', 'pgweb.core.views.dynamic_css'),
 
-	(r'^about/newsarchive/$', 'pgweb.news.views.archive'),
+	(r'^about/newsarchive/([^/]+/)?$', 'pgweb.news.views.archive'),
 	(r'^about/news/(\d+)(-.*)?/$', 'pgweb.news.views.item'),
 	(r'^about/events/$', 'pgweb.events.views.main'),
 	(r'^about/eventarchive/$', 'pgweb.events.views.archive'),
@@ -72,7 +72,7 @@ urlpatterns = patterns('',
 	# RSS feeds
 	###
 	(r'^versions.rss$', VersionFeed()),
-	(r'^news.rss$', NewsFeed()),
+	(r'^news(/(?P<tagurl>[^/]+))?.rss$', NewsFeed()),
 	(r'^events.rss$', EventFeed()),
 
 	###

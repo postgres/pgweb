@@ -24,7 +24,7 @@ from pgweb.util.misc import get_client_ip, varnish_purge
 from pgweb.util.sitestruct import get_all_pages_struct
 
 # models needed for the pieces on the frontpage
-from pgweb.news.models import NewsArticle
+from pgweb.news.models import NewsArticle, NewsTag
 from pgweb.events.models import Event
 from pgweb.quotes.models import Quote
 from models import Version, ImportedRSSItem
@@ -63,6 +63,7 @@ def home(request):
 	return render_to_response('index.html', {
 		'title': 'The world\'s most advanced open source database',
 		'news': news,
+		'newstags': NewsTag.objects.all(),
 		'community_events': community_events,
 		'other_events': other_events,
 		'traininginfo': traininginfo,

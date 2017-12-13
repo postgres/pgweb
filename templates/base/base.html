@@ -8,8 +8,14 @@
   <meta name="copyright" content="The PostgreSQL Global Development Group" />
   <style type="text/css" media="screen" title="Normal Text">@import url("/dyncss/base.css?{{gitrev}}");</style>
   <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="alternate" type="application/rss+xml" title="PostgreSQL News" href="{{link_root}}/news.rss" />
+{%if newstags %}
+{%comment%}Default RSS links are only shown on pages that have newstags set{%endcomment%}
+  <link rel="alternate" type="application/rss+xml" title="All PostgreSQL News" href="{{link_root}}/news.rss" />
+{%for t in newstags%}
+  <link rel="alternate" type="application/rss+xml" title="PostgreSQL News about {{t.name}}" href="{{link_root}}/news/{{t.urlname}}.rss" />
+{%endfor%}
   <link rel="alternate" type="application/rss+xml" title="PostgreSQL Events" href="{{link_root}}/events.rss" />
+{%endif%}
   <script type="text/javascript">
   var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-1345454-1']);

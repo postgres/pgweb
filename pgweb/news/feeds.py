@@ -11,8 +11,14 @@ class NewsFeed(Feed):
 	description_template = 'news/rss_description.html'
 	title_template = 'news/rss_title.html'
 
-	def items(self):
-		return NewsArticle.objects.filter(approved=True)[:10]
+	def get_object(self, request, tagurl=None):
+		return tagurl
+
+	def items(self, obj):
+		if obj:
+			return NewsArticle.objects.filter(approved=True, tags__urlname=obj)[:10]
+		else:
+			return NewsArticle.objects.filter(approved=True)[:10]
 
 	def item_link(self, obj):
 		return "https://www.postgresql.org/about/news/%s/" % obj.id
