@@ -10,6 +10,9 @@ class NewsTag(models.Model):
 	def __unicode__(self):
 		return self.name
 
+	class Meta:
+		ordering = ('urlname', )
+
 class NewsArticle(models.Model):
 	org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or webmaster@postgresql.org if none are listed.")
 	approved = models.BooleanField(null=False, blank=False, default=False)
