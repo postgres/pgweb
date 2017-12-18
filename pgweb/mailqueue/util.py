@@ -1,21 +1,27 @@
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.nonmultipart import MIMENonMultipart
-from email.Utils import formatdate
+from email.Utils import formatdate, formataddr
 from email.Utils import make_msgid
 from email import encoders
+from email.header import Header
 
 from models import QueuedMail
 
-def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False, cc=None, replyto=None):
+def _encoded_email_header(name, email):
+	if name:
+		return formataddr((str(Header(name, 'utf-8')), email))
+	return email
+
+def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False, cc=None, replyto=None, sendername=None, receivername=None):
 	# attachment format, each is a tuple of (name, mimetype,contents)
 	# content should be *binary* and not base64 encoded, since we need to
 	# use the base64 routines from the email library to get a properly
 	# formatted output message
 	msg = MIMEMultipart()
 	msg['Subject'] = subject
-	msg['To'] = receiver
-	msg['From'] = sender
+	msg['To'] = _encoded_email_header(receivername, receiver)
+	msg['From'] = _encoded_email_header(sendername, sender)
 	if cc:
 		msg['Cc'] = cc
 	if replyto:
