@@ -143,7 +143,7 @@ def commentform(request, itemid, version, filename):
 				},
 				usergenerated=True,
 				cc=form.cleaned_data['email'],
-				replyto='%s, %s' % (form.cleaned_data['email'], settings.DOCSREPORT_NOREPLY_EMAIL),
+				replyto='%s, %s' % (form.cleaned_data['email'], settings.DOCSREPORT_EMAIL),
 				sendername='PG Doc comments form'
 			)
 			return render_to_response('docs/docsbug_completed.html', {
