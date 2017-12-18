@@ -35,6 +35,7 @@ def submitbug(request):
 				usergenerated=True,
 				cc=form.cleaned_data['email'],
 				replyto='%s, %s' % (form.cleaned_data['email'], settings.BUGREPORT_EMAIL),
+				sendername="PG Bug reporting form",
 			)
 
 			return render_to_response('misc/bug_completed.html', {
