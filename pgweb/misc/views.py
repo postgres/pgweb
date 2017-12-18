@@ -24,7 +24,7 @@ def submitbug(request):
 			bugid = c.fetchall()[0][0]
 
 			send_template_mail(
-				form.cleaned_data['email'],
+				settings.BUGREPORT_NOREPLY_EMAIL,
 				settings.BUGREPORT_EMAIL,
 				'BUG #%s: %s' % (bugid, form.cleaned_data['shortdesc']),
 				'misc/bugmail.txt',
@@ -34,6 +34,7 @@ def submitbug(request):
 				},
 				usergenerated=True,
 				cc=form.cleaned_data['email'],
+				replyto='%s, %s' % (form.cleaned_data['email'], settings.BUGREPORT_EMAIL),
 			)
 
 			return render_to_response('misc/bug_completed.html', {

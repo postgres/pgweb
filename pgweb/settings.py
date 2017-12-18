@@ -148,7 +148,9 @@ NOTIFICATION_FROM="someone@example.com"                # Address to send notific
 NOREPLY_FROM="someone@example.com"                     # Address to send unverified messages from
 LISTSERVER_EMAIL="someone@example.com"                 # Address to majordomo
 BUGREPORT_EMAIL="someone@example.com"                  # Address to pgsql-bugs list
+BUGREPORT_NOREPLY_EMAIL="someone-noreply@example.com"  # Address to no-reply pgsql-bugs address
 DOCSREPORT_EMAIL="someone@example.com"                 # Address to pgsql-docs list
+DOCSREPORT_NOREPLY_EMAIL="someone-noreply@example.com" # Address to no-reply pgsql-docs address
 FRONTEND_SERVERS=()                                    # A tuple containing the *IP addresses* of all the
                                                        # varnish frontend servers in use.
 FTP_MASTERS=()										   # A tuple containing the *IP addresses* of all machines
