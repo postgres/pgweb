@@ -72,8 +72,7 @@ class PgwebAdmin(admin.ModelAdmin):
 				n.save()
 
 				# Now send an email too
-				msgstr = _get_notification_text(request.POST.has_key('remove_after_notify'),
-												obj,
+				msgstr = _get_notification_text(obj,
 												request.POST['new_notification'])
 
 				send_simple_mail(settings.NOTIFICATION_FROM,
@@ -85,16 +84,10 @@ class PgwebAdmin(admin.ModelAdmin):
 				send_simple_mail(settings.NOTIFICATION_FROM,
 								 settings.NOTIFICATION_EMAIL,
 								 "Moderation comment on %s %s" % (obj.__class__._meta.verbose_name, obj.id),
-								 _get_moderator_notification_text(request.POST.has_key('remove_after_notify'),
-																  obj,
+								 _get_moderator_notification_text(obj,
 																  request.POST['new_notification'],
 																  request.user.username
 															  ))
-
-				if request.POST.has_key('remove_after_notify'):
-					# Object should not be saved, it should be deleted
-					obj.delete()
-					return
 
 
 		# Either no notifications, or done with notifications
@@ -105,17 +98,9 @@ def register_pgwebadmin(model):
 	admin.site.register(model, PgwebAdmin)
 
 
-def _get_notification_text(remove, obj, txt):
+def _get_notification_text(obj, txt):
 	objtype = obj.__class__._meta.verbose_name
-	if remove:
-		return """You recently submitted a %s to postgresql.org.
-
-This submission has been rejected by a moderator, with the following comment:
-
-%s
-""" % (objtype, txt)
-	else:
-		return """You recently submitted a %s to postgresql.org.
+	return """You recently submitted a %s to postgresql.org.
 
 During moderation, this item has received comments that need to be
 addressed before it can be approved. The comment given by the moderator is:
@@ -128,15 +113,13 @@ request, and your submission will be re-moderated.
 
 
 
-def _get_moderator_notification_text(remove, obj, txt, moderator):
+def _get_moderator_notification_text(obj, txt, moderator):
 	return """Moderator %s made a comment to a pending object:
 Object type: %s
 Object id: %s
 Comment: %s
-Delete after comment: %s
 """ % (moderator,
 	   obj.__class__._meta.verbose_name,
 	   obj.id,
 	   txt,
-	   remove and "Yes" or "No",
 	   )

@@ -36,7 +36,8 @@ Note that the summary field can use
 <p>
 {%if original.org.email%}
 New notification: <input type="text" name="new_notification" style="width:400px;" /> (<b>Note!</b> This comment is emailed to the organization!)<br/>
-<input type="checkbox" name="remove_after_notify">Delete after notification</>
+To send a notification on rejection, first add the notification above and hit
+"Save and continue editing". Then as a separate step, delete the record.
 {%else%}
 Organisation has <b>no email</b>, so cannot send notifications to it!
 {%endif%}
