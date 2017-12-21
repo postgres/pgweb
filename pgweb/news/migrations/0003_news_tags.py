@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=32)),
                 ('description', models.CharField(max_length=200)),
             ],
+            options={'ordering': ('urlname',)},
         ),
         migrations.AlterField(
             model_name='newsarticle',
