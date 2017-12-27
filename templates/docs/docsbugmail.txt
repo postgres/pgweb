@@ -3,4 +3,4 @@ The following documentation comment has been logged on the website:
 Page: https://www.postgresql.org/docs/{{version}}/static/{{filename}}
 Description:
 
-{{details|wordwrap:76}}
+{{details|safe|wordwrap:76}}
