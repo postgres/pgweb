@@ -129,8 +129,8 @@ def my_m2m_changed_handler(sender, **kwargs):
 			instance._stored_m2m[f] = set([unicode(t) for t in getattr(instance,f).all()])
 		elif kwargs['action'] == 'post_add':
 			newset = set([unicode(t) for t in getattr(instance,f).all()])
-			added = newset.difference(instance._stored_m2m[f])
-			removed = instance._stored_m2m[f].difference(newset)
+			added = newset.difference(instance._stored_m2m.get(f, set()))
+			removed = instance._stored_m2m.get(f, set()).difference(newset)
 			subj = '{0} id {1} has been modified'.format(instance._meta.verbose_name, instance.id)
 			if added or removed:
 				send_simple_mail(settings.NOTIFICATION_FROM,
