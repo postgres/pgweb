@@ -132,6 +132,9 @@ def commentform(request, itemid, version, filename):
 	if request.method == 'POST':
 		form = DocCommentForm(request.POST)
 		if form.is_valid():
+			if version == '0.0':
+				version = 'devel'
+
 			send_template_mail(
 				settings.DOCSREPORT_NOREPLY_EMAIL,
 				settings.DOCSREPORT_EMAIL,
