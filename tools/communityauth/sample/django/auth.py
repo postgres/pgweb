@@ -142,6 +142,18 @@ for you.
 We apologize for the inconvenience.
 """ % (data['e'][0], data['u'][0]), content_type='text/plain')
 
+		if hasattr(settings, 'PGAUTH_CREATEUSER_CALLBACK'):
+			res = getattr(settings, 'PGAUTH_CREATEUSER_CALLBACK')(
+				data['u'][0],
+				data['e'][0],
+				['f'][0],
+				data['l'][0],
+			)
+			# If anything is returned, we'll return that as our result.
+			# If None is returned, it means go ahead and create the user.
+			if res:
+				return res
+
 		user = User(username=data['u'][0],
 					first_name=data['f'][0],
 					last_name=data['l'][0],
