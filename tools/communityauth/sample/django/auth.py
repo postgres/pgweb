@@ -48,6 +48,11 @@ class AuthBackend(ModelBackend):
 
 # Handle login requests by sending them off to the main site
 def login(request):
+	if not hasattr(settings, 'PGAUTH_REDIRECT'):
+		# No pgauth installed, so allow local installs.
+		from django.contrib.auth.views import login
+		return login(request, template_name='admin.html')
+
 	if request.GET.has_key('next'):
 		# Put together an url-encoded dict of parameters we're getting back,
 		# including a small nonce at the beginning to make sure it doesn't
