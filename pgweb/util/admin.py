@@ -26,7 +26,7 @@ class PgwebAdmin(admin.ModelAdmin):
 		return fld
 
 	def change_view(self, request, object_id, form_url='', extra_context=None):
-		if self.model.send_notification:
+		if hasattr(self.model, 'send_notification') and self.model.send_notification:
 			# Anything that sends notification supports manual notifications
 			if extra_context == None:
 				extra_context = dict()
@@ -54,7 +54,7 @@ class PgwebAdmin(admin.ModelAdmin):
 	actions=['custom_delete_selected']
 
 	def save_model(self, request, obj, form, change):
-		if change and self.model.send_notification:
+		if change and hasattr(self.model, 'send_notification') and self.model.send_notification:
 			# We only do processing if something changed, not when adding
 			# a new object.
 			if request.POST.has_key('new_notification') and request.POST['new_notification']:
