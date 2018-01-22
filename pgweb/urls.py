@@ -21,6 +21,7 @@ urlpatterns = patterns('',
 
 	(r'^about/newsarchive/([^/]+/)?$', 'pgweb.news.views.archive'),
 	(r'^about/news/(\d+)(-.*)?/$', 'pgweb.news.views.item'),
+	(r'^about/news/taglist.json/$', 'pgweb.news.views.taglist_json'),
 	(r'^about/events/$', 'pgweb.events.views.main'),
 	(r'^about/eventarchive/$', 'pgweb.events.views.archive'),
 	(r'^about/eventarchive/training/$', 'pgweb.events.views.trainingarchive'),

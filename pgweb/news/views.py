@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import Http404
+from django.http import HttpResponse, Http404
 from pgweb.util.decorators import login_required
 
 from pgweb.util.contexts import NavContext
@@ -7,6 +7,8 @@ from pgweb.util.helpers import simple_form
 
 from models import NewsArticle, NewsTag
 from forms import NewsArticleForm
+
+import json
 
 def archive(request, tag=None, paging=None):
 	if tag:
@@ -29,6 +31,12 @@ def item(request, itemid, throwaway=None):
 		'obj': news,
 		'newstags': NewsTag.objects.all(),
 	}, NavContext(request, 'about'))
+
+def taglist_json(request):
+	return HttpResponse(json.dumps({
+		'tags': [{'name': t.urlname, 'description': t.description} for t in NewsTag.objects.distinct('urlname')],
+	}), content_type='application/json')
+
 
 @login_required
 def form(request, itemid):
