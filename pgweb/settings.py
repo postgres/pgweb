@@ -146,7 +146,6 @@ STATIC_CHECKOUT="/usr/local/pgweb-static"              # Location of a checked o
 NOTIFICATION_EMAIL="someone@example.com"               # Address to send notifications *to*
 NOTIFICATION_FROM="someone@example.com"                # Address to send notifications *from*
 NOREPLY_FROM="someone@example.com"                     # Address to send unverified messages from
-LISTSERVER_EMAIL="someone@example.com"                 # Address to majordomo
 BUGREPORT_EMAIL="someone@example.com"                  # Address to pgsql-bugs list
 BUGREPORT_NOREPLY_EMAIL="someone-noreply@example.com"  # Address to no-reply pgsql-bugs address
 DOCSREPORT_EMAIL="someone@example.com"                 # Address to pgsql-docs list
