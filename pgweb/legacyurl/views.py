@@ -18,4 +18,5 @@ def html_extension(request, prior_to_html):
 	return HttpResponseRedirect("/%s" % prior_to_html)
 
 def mailpref(request, listname):
-	return HttpResponseRedirect("https://lists.postgresql.org/mj/mj_wwwusr/domain=postgresql.org?func=lists-long-full&extra=%s" % listname)
+	# Just redirect to the homepage of pglister, don't try specific lists
+	return HttpResponseRedirect("https://lists.postgresql.org/")
