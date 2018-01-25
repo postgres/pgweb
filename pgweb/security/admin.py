@@ -27,14 +27,12 @@ class SecurityPatchForm(forms.ModelForm):
 
 	def clean(self):
 		d = super(SecurityPatchForm, self).clean()
-		vecs = [v for k,v in d.items() if k.startswith('vector_') and k != 'vector_other']
+		vecs = [v for k,v in d.items() if k.startswith('vector_')]
 		empty = [v for v in vecs if v == '']
 		if len(empty) != len(vecs) and len(empty) != 0:
 			for k in d.keys():
-				if k.startswith('vector_') and k != 'vector_other':
+				if k.startswith('vector_'):
 					self.add_error(k, 'Either specify all vector values or none')
-		if d['vector_other'] and len(empty) > 0:
-			self.add_error('vector_other', 'Cannot specify other vectors without base vectors')
 		return d
 
 class SecurityPatchAdmin(admin.ModelAdmin):
