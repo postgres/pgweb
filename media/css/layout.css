@@ -694,3 +694,7 @@ TABLE.pgGenericFormTable TR TD UL {
 img {
   border: 0;
 }
+
+span.cvssvector {
+   font-size: smaller;
+}

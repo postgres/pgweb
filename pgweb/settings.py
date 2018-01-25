@@ -110,6 +110,7 @@ INSTALLED_APPS = [
     'pgweb.contributors',
     'pgweb.profserv',
     'pgweb.lists',
+    'pgweb.security',
     'pgweb.sponsors',
     'pgweb.survey',
     'pgweb.misc',
@@ -159,6 +160,7 @@ LIST_ACTIVATORS=()								       # Servers that can activate lists
 ARCHIVES_SEARCH_SERVER="archives.postgresql.org"       # Where to post REST request for archives search
 FRONTEND_SMTP_RELAY="magus.postgresql.org"             # Where to relay user generated email
 OAUTH={}                                               # OAuth providers and keys
+PGDG_ORG_ID=-1                                         # id of the PGDG organisation entry
 
 # Load local settings overrides
 from settings_local import *

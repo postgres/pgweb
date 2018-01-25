@@ -72,6 +72,7 @@ class Version(models.Model):
 	def purge_urls(self):
 		yield '/$'
 		yield '/support/versioning'
+		yield '/support/security'
 		yield '/docs/$'
 		yield '/docs/manuals'
 		yield '/about/featurematrix/$'

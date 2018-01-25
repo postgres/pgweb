@@ -1,0 +1,145 @@
+{%extends "base/page.html"%}
+{%block title%}Security Information{%endblock%}
+{%block contents%}
+
+<h1>Security Information</h1>
+
+<p>
+If you wish to report a new security vulnerability in PostgreSQL, please
+send an email to
+<a href="mailto:security@postgresql.org">security@postgresql.org</a>.
+For reporting non-security bugs, please see the <a href="/account/submitbug">Report a Bug</a> page.
+</p>
+
+{%if version and not version.supported%}
+<h1>UNSUPPORTED VERSION</h1>
+<p>
+You are currently viewing security issues for an unsupported version. If
+you are still using PostgreSQL version {{version}}, you should upgrade as
+soon as possible!
+</p>
+{%else%}
+<p>
+
+The PostgreSQL Global Development Group (PGDG) takes security seriously,
+allowing our users to place their trust in the web sites and applications
+built around PostgreSQL. Our approach covers fail-safe configuration options,
+a secure and robust database server as well as good integration with other
+security infrastructure software.
+</p>
+
+<p>
+PostgreSQL security updates are primarily made available as <a href="/support/versioning">minor version</a>
+upgrades. You are always advised to use the latest minor version available,
+as it will likely also contain other non-security related fixes. All known
+security issues are always fixed in the next major release, when it comes out.
+</p>
+
+<p>
+PGDG believes that accuracy, completeness and availability of security
+information is essential for our users. We choose to pool all information on
+this one page, allowing easy searching for vulnerabilities by a range of
+criteria.
+</p>
+
+<p>
+Vulnerabilities list which major releases they were present
+in, and which version they are fixed in for each. If the vulnerability
+was exploitable without a valid login, this is also stated. They also
+list a vulnerability class, but we urge all users to read the description
+to determine if the bug affects specific installations or not.
+</p>
+
+{%endif%}
+
+<h2>Known security issues in {%if version%}version {{version.numtree}}{%else%}all supported versions{%endif%}</h2>
+<p>
+You can filter the view of patches to show just the version:<br/>
+{%for v in supported%}
+<a href="/support/security/{{v.numtree}}/">{{v.numtree}}</a>{%if not forloop.last%} -{%endif%}
+{%endfor%}
+- <a href="/support/security/">all</a>
+</p>
+
+<div class="tblBasic">
+ <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+  <tr>
+   <th class="colFirst">Reference</th>
+   <th class="colMid">Affected<br/>versions</th>
+   <th class="colMid">Fixed in</th>
+   <th class="colMid" align="center"><a href="#comp">Component</a> and<br/>CVSS v3 Base Score</th>
+   <th class="colLast">Description</th>
+  </tr>
+{%for p in patches%}
+  <tr valign="top">
+    <td class="colFirst">
+{%if p.cve%}<nobr><a href="https://access.redhat.com/security/cve/CVE-{{p.cve}}">CVE-{{p.cve}}</a></nobr><br/>{%endif%}
+{%if p.newspost%}<a href="/about/news/{{p.newspost.id}}/">Announcement</a><br/>{%endif%}
+    </td>
+    <td class="colMid">{{p.affected|join:", "}}</td>
+    <td class="colMid">{{p.fixed|join:", "}}</td>
+    <td class="colMid" align="center">
+{{p.component}}<br/>
+{%if p.cvssscore >= 0%}<a href="https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector={{p.cvssvector}}">{{p.cvssscore}}</a><br/><span class="cvssvector">{{p.cvssvector}}</span>
+{%else%}Legacy: {{p.legacyscore}}{%endif%}</td>
+    <td class="colLast">{{p.description}}{%if p.detailslink%}<br/><br/><a href="{{p.detailslink}}">more details</a>{%endif%}</td>
+  </tr>
+{%endfor%}
+
+ </table>
+</div>
+
+<h3>Unsupported versions</h3>
+<p>
+  You can also view archived security patches for unsupported versions:<br/>
+{%for v in unsupported%}
+<a href="/support/security/{{v.numtree}}/">{{v.numtree}}</a>{%if not forloop.last%} -{%endif%}
+{%endfor%}
+</p>
+
+
+<a name="comp"></a>
+<h2>Components</h2>
+<p>
+The following component references are used in the above table:
+</p>
+
+<div class="tblBasic">
+ <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+  <tr>
+   <th class="colFirst">Component</th>
+
+   <th class="colLast">Description</th>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst">core server</td>
+   <td class="colLast">This vulnerability exists in the core server product.</td>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst">client</td>
+   <td class="colLast">This vulnerability exists in a client library or client application only.</td>
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst">contrib module</td>
+   <td class="colLast">This vulnerability exists in a contrib module. Contrib modules are not installed by default when PostgreSQL is installed from source. They may be installed by binary packages.</td>
+
+  </tr>
+
+  <tr valign="top">
+   <td class="colFirst">client contrib module</td>
+   <td class="colLast">This vulnerability exists in a contrib module used on the client only.</td>
+  </tr>
+
+  <tr valign="top" class="lastrow">
+   <td class="colFirst">packaging</td>
+   <td class="colLast">This vulnerability exists in PostgreSQL binary packaging, e.g. an installer or RPM.</td>
+  </tr>
+
+ </table>
+</div>
+
+
+{%endblock%}
