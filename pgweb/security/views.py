@@ -26,13 +26,3 @@ def version(request, numtree):
 	# It's safe to pass in the value since we get it from the module, not from
 	# the actual querystring.
 	return _list_patches(request, "EXISTS (SELECT 1 FROM security_securitypatchversion svv WHERE svv.version_id={0} AND svv.patch_id=p.id)".format(version.id))
-	return _list_patches(request, "v.id={0}".format(version.id))
-
-	patches = SecurityPatch.objects.filter(public=True, versions=version).distinct()
-
-	return render_to_response('security/security.html', {
-		'patches': patches,
-		'supported': Version.objects.filter(supported=True),
-		'unsupported': Version.objects.filter(supported=False, tree__gt=0),
-		'version': version,
-	}, NavContext(request, 'support'))
