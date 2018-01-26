@@ -59,6 +59,10 @@ urlpatterns = patterns('',
 
 	(r'^search/$', 'pgweb.search.views.search'),
 
+	(r'^support/security/$', 'pgweb.security.views.index'),
+	(r'^support/security/([\d\.]+)/$', 'pgweb.security.views.version'),
+	(r'^support/security_archive/$', RedirectView.as_view(url='/support/security/')),
+
 	(r'^support/professional_(support|hosting)/$', 'pgweb.profserv.views.root'),
 	(r'^support/professional_(support|hosting)[/_](.*)/$', 'pgweb.profserv.views.region'),
 	(r'^account/submitbug/$', 'pgweb.misc.views.submitbug'),
