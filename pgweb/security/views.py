@@ -14,7 +14,9 @@ def _list_patches(request, filt):
 	return render_to_response('security/security.html', {
 		'patches': patches,
 		'supported': Version.objects.filter(supported=True),
-		'unsupported': Version.objects.filter(supported=False, tree__gt=0),
+		'unsupported': Version.objects.filter(supported=False, tree__gt=0).extra(
+			where=["EXISTS (SELECT 1 FROM security_securitypatchversion pv WHERE pv.version_id=core_version.id)"],
+		),
 	}, NavContext(request, 'support'))
 
 def index(request):
