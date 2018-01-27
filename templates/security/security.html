@@ -91,7 +91,8 @@ You can filter the view of patches to show just patches for version:<br/>
 
 <h3>Unsupported versions</h3>
 <p>
-  You can also view archived security patches for unsupported versions:<br/>
+  You can also view archived security patches for unsupported versions. Note that no further
+  security patches are made available for these versions as they are end of life.<br/>
 {%for v in unsupported%}
 <a href="/support/security/{{v.numtree}}/">{{v.numtree}}</a>{%if not forloop.last%} -{%endif%}
 {%endfor%}
