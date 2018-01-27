@@ -54,7 +54,7 @@ to determine if the bug affects specific installations or not.
 
 <h2>Known security issues in {%if version%}version {{version.numtree}}{%else%}all supported versions{%endif%}</h2>
 <p>
-You can filter the view of patches to show just the version:<br/>
+You can filter the view of patches to show just patches for version:<br/>
 {%for v in supported%}
 <a href="/support/security/{{v.numtree}}/">{{v.numtree}}</a>{%if not forloop.last%} -{%endif%}
 {%endfor%}
