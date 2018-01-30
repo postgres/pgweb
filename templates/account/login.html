@@ -48,7 +48,7 @@ password, you can use the <a href="/account/reset/">password reset</a> form.
 {%if oauth_providers%}
 <h2>Third party sign in</h2>
 {%for p,d in oauth_providers%}
-<p><a href="/account/login/{{p}}/?next={{next}}"><img src="/media/img/misc/btn_login_{{p}}.png" alt="Sign in with {{p|capfirst}}"></a></p>
+<p><a href="/account/login/{{p}}/?next={{next}}"><img src="/media/img/misc/btn_login_{{p}}.png" alt="Sign in with {{p|capfirst}}" /></a></p>
 {%endfor%}
 {%endif%}
 
