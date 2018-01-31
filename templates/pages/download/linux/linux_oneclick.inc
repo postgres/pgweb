@@ -1,6 +1,6 @@
 <h2>Interactive installer by EnterpriseDB</h2>
 <p>
-<a href="http://www.enterprisedb.com/products/pgdownload.do#linux"> Download the installer</a>
+<a href="https://www.enterprisedb.com/downloads/postgres-postgresql-downloads"> Download the installer</a>
  certified by EnterpriseDB for all supported PostgreSQL versions.
 </p>
 
@@ -22,7 +22,7 @@ Debian GNU/Linux and derivatives, Ubuntu Linux and derivatives, SuSE and OpenSuS
 
 <p>
 <em>Advanced users</em> can also download a
-<a href="http://www.enterprisedb.com/products/pgbindownload.do">tar.gz archive</a>
+<a href="https://www.enterprisedb.com/download-postgresql-binaries">tar.gz archive</a>
 of the binaries, without the installer.
 This download is intended for users who wish to include PostgreSQL as part of another application installer.
 </p>
