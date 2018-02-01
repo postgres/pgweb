@@ -5,7 +5,7 @@
 
 <h1>{{title}}</h1>
 {%for eventblock in eventblocks%}
-{%if eventblocks|length > 1%}<h2><a name="{{eventblock.name}}">{{eventblock.name}}</a></h2>{%endif%}
+{%if eventblocks|length > 1%}<h2><a name="{{eventblock.anchor|slugify}}">{{eventblock.name}}</a></h2>{%endif%}
 <p>
 <i><b>Note:</b> The PostgreSQL Global Development Group does not endorse any
 events run by third parties. No guarantee of the quality of events is offered
