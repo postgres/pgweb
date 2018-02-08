@@ -191,6 +191,7 @@ span.newstag {
    border-radius: 6px;
    display: inline-block;
    margin-bottom: 8px;
+   margin-top: 8px;
 }
 
 span.newstag a {
