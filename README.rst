@@ -23,7 +23,7 @@ subdirectory. The content in here is simple HTML, and can be edited as such.
 Contributing
 ------------
 We appreciate all (most?) contributions to this project. If you wish to
-contribute, be sure to sign up to the `pgsql-www <http://www.postgresql.org/community/lists/>`_
+contribute, be sure to sign up to the `pgsql-www <https://www.postgresql.org/list/>`_
 mailinglist for any discussions, and post any suggested patches there. If you
 want to make any major changes, be sure to have discussed those on the list first.
 
