@@ -9,7 +9,7 @@ from decimal import Decimal
 from tempfile import NamedTemporaryFile
 
 platform_names = {
-	'redhat': 'RedHat Enterprise Linux {0}',
+	'redhat': 'Red Hat Enterprise Linux {0}',
 	'centos': 'CentOS {0}',
 	'sl': 'Scientific Linux {0}',
 	'fedora': 'Fedora {0}',
