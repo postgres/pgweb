@@ -80,6 +80,8 @@ class StackBuilderApp(models.Model):
 	versionkey = models.CharField(max_length=500, null=False, blank=False)
 	manifesturl = models.URLField(max_length=500, null=False, blank=True)
 
+	purge_urls = ('/applications-v2.xml', )
+
 	def __unicode__(self):
 		return "%s %s %s" % (self.textid, self.version, self.platform)
 
