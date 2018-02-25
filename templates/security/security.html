@@ -73,7 +73,7 @@ You can filter the view of patches to show just patches for version:<br/>
 {%for p in patches%}
   <tr valign="top">
     <td class="colFirst">
-{%if p.cve%}<nobr><a href="https://access.redhat.com/security/cve/CVE-{{p.cve}}">CVE-{{p.cve}}</a></nobr><br/>{%endif%}
+{%if p.cve%}<nobr>{%if p.cve_visible%}<a href="{{p.cvelink}}">CVE-{{p.cve}}</a>{%else%}CVE-{{p.cve}}{%endif%}</nobr><br/>{%endif%}
 {%if p.newspost%}<a href="/about/news/{{p.newspost.id}}/">Announcement</a><br/>{%endif%}
     </td>
     <td class="colMid">{{p.affected|join:", "}}</td>

@@ -49,6 +49,7 @@ class SecurityPatch(models.Model):
 	public = models.BooleanField(null=False, blank=False, default=False)
 	newspost = models.ForeignKey(NewsArticle, null=True, blank=True)
 	cve = models.CharField(max_length=32, null=False, blank=True, validators=[cve_validator,])
+	cve_visible = models.BooleanField(null=False, blank=False, default=False)
 	cvenumber = models.IntegerField(null=False, blank=False, db_index=True)
 	detailslink = models.URLField(null=False, blank=True)
 	description = models.TextField(null=False, blank=False)
@@ -99,6 +100,10 @@ class SecurityPatch(models.Model):
 			return c.base_score
 		except Exception, e:
 			return -1
+
+	@property
+	def cvelink(self):
+		return "https://access.redhat.com/security/cve/CVE-{0}".format(self.cve)
 
 	class Meta:
 		verbose_name_plural = 'Security patches'
