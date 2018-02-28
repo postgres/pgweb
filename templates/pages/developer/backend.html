@@ -56,9 +56,9 @@ or <a
 href="https://git.postgresql.org/gitweb/?p=postgresql.git;a=blob;f=src/include/nodes/parsenodes.h">SelectStmt.</a></p>
 
 <p>The statement is then identified as complex (<i>SELECT / INSERT /
-UPDATE / DELETE</i>) or a simple, e.g <i> CREATE USER, ANALYZE, </i>,
-etc.  Simple utility commands are processed by statement-specific
-functions in <a href="https://wiki.postgresql.org/wiki/Backend_flowchart#commands.</a>
+UPDATE / DELETE</i>) or simple, e.g <i>CREATE USER, ANALYZE,</i>
+etc.  Simple utility commands that do not require the executor are processed by statement-specific
+functions in the <a href="https://wiki.postgresql.org/wiki/Backend_flowchart#commands">commands</a> module.
 Complex statements require more handling.</p>
 
 <p>The parser takes a complex query, and creates a <a
