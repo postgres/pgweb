@@ -190,7 +190,10 @@ def search(request):
 				memc = None
 		if not hits:
 			# No hits found - so try to get them from the search server
-			c = httplib.HTTPSConnection(settings.ARCHIVES_SEARCH_SERVER, strict=True, timeout=5)
+			if settings.ARCHIVES_SEARCH_PLAINTEXT:
+				c = httplib.HTTPConnection(settings.ARCHIVES_SEARCH_SERVER, strict=True, timeout=5)
+			else:
+				c = httplib.HTTPSConnection(settings.ARCHIVES_SEARCH_SERVER, strict=True, timeout=5)
 			c.request('POST', '/archives-search/', urlstr, {'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'})
 			c.sock.settimeout(20) # Set a 20 second timeout
 			try:
