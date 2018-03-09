@@ -1,6 +1,9 @@
 from django.db import models
+from django.core.validators import ValidationError
 from django.contrib.auth.models import User
 from pgweb.util.misc import varnish_purge
+
+import base64
 
 TESTING_CHOICES = (
 	(0, 'Release'),
@@ -162,10 +165,30 @@ class ImportedRSSItem(models.Model):
 		return self.posttime.strftime("%Y-%m-%d")
 
 
+# From man sshd, except for ssh-dss
+_valid_keytypes = ['ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'ssh-rsa']
+# Options, keytype, key, comment. But we don't support options.
+def validate_sshkey(key):
+	lines = key.splitlines()
+	for k in lines:
+		pieces = k.split()
+		if len(pieces) == 0:
+			raise ValidationError("Empty keys are not allowed")
+		if len(pieces) > 3:
+			raise ValidationError('Paste each ssh key without options, e.g. "ssh-rsa AAAAbbbcc mykey@machine"')
+		if pieces[0] == 'ssh-dss':
+			raise ValidationError("For security reasons, ssh-dss keys are not supported")
+		if pieces[0] not in _valid_keytypes:
+			raise ValidationError("Only keys of types {0} are supported, not {1}.".format(", ".join(_valid_keytypes), pieces[0]))
+		try:
+			base64.b64decode(pieces[1])
+		except:
+			raise ValidationError("Incorrect base64 encoded key!")
+
 # Extra attributes for users (if they have them)
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, null=False, blank=False, primary_key=True)
-	sshkey = models.TextField(null=False, blank=True, verbose_name="SSH key", help_text= "Paste one or more public keys in OpenSSH format, one per line.")
+	sshkey = models.TextField(null=False, blank=True, verbose_name="SSH key", help_text= "Paste one or more public keys in OpenSSH format, one per line.", validators=[validate_sshkey, ])
 	lastmodified = models.DateTimeField(null=False, blank=False, auto_now=True)
 
 # Notifications sent for any moderated content.
