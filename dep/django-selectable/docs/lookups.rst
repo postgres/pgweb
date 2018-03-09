@@ -25,7 +25,7 @@ you must register in with django-selectable. All lookups must extend from
         class MyLookup(LookupBase):
             def get_query(self, request, term):
                 data = ['Foo', 'Bar']
-                return filter(lambda x: x.startswith(term), data)
+                return [x for x in data if x.startswith(term)]
 
         registry.register(MyLookup)
 
@@ -139,23 +139,13 @@ than jQuery UI. Most users will not need to override these methods.
     If :ref:`SELECTABLE_MAX_LIMIT` is defined or ``limit`` is passed in request.GET
     then ``paginate_results`` will return the current page using Django's
     built in pagination. See the Django docs on
-    `pagination <https://docs.djangoproject.com/en/1.3/topics/pagination/>`_
+    `pagination <https://docs.djangoproject.com/en/stable/topics/pagination/>`_
     for more info.
 
     :param results: The set of all matched results.
     :param options: Dictionary of ``cleaned_data`` from the lookup form class.
-    :return: The current `Page object <https://docs.djangoproject.com/en/1.3/topics/pagination/#page-objects>`_
+    :return: The current `Page object <https://docs.djangoproject.com/en/stable/topics/pagination/#page-objects>`_
         of results.
-
-.. _lookup-serialize-results:
-
-.. py:method:: LookupBase.serialize_results(self, results)
-
-    Returns serialized results for sending via http. You may choose to override
-    this if you are making use of 
-
-    :param results: a python structure to be serialized e.g. the one returned by :ref:`format_results<lookup-format-results>`
-    :returns: JSON string.
 
 
 .. _ModelLookup:
@@ -167,11 +157,24 @@ Perhaps the most common use case is to define a lookup based on a given Django m
 For this you can extend ``selectable.base.ModelLookup``. To extend ``ModelLookup`` you
 should set two class attributes: ``model`` and ``search_fields``.
 
-    .. literalinclude:: ../example/core/lookups.py
-        :pyobject: FruitLookup
+    .. code-block:: python
+
+        from __future__ import unicode_literals
+
+        from selectable.base import ModelLookup
+        from selectable.registry import registry
+
+        from .models import Fruit
+
+
+        class FruitLookup(ModelLookup):
+            model = Fruit
+            search_fields = ('name__icontains', )
+
+        registry.register(FruitLookup)
 
 The syntax for ``search_fields`` is the same as the Django
-`field lookup syntax <http://docs.djangoproject.com/en/1.3/ref/models/querysets/#field-lookups>`_.
+`field lookup syntax <http://docs.djangoproject.com/en/stable/ref/models/querysets/#field-lookups>`_.
 Each of these lookups are combined as OR so any one of them matching will return a
 result. You may optionally define a third class attribute ``filters`` which is a dictionary of
 filters to be applied to the model queryset. The keys should be a string defining a field lookup
@@ -183,7 +186,7 @@ User Lookup Example
 --------------------------------------
 
 Below is a larger model lookup example using multiple search fields, filters
-and display options for the `auth.User <https://docs.djangoproject.com/en/1.3/topics/auth/#users>`_
+and display options for the `auth.User <https://docs.djangoproject.com/en/stable/topics/auth/#users>`_
 model.
 
     .. code-block:: python
@@ -217,8 +220,6 @@ model.
 
 Lookup Decorators
 --------------------------------------
-
-.. versionadded:: 0.5
 
 Registering lookups with django-selectable creates a small API for searching the
 lookup data. While the amount of visible data is small there are times when you want

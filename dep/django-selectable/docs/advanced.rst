@@ -2,7 +2,7 @@ Advanced Usage
 ==========================
 
 We've gone through the most command and simple use cases for django-selectable. Now
-we'll take a lot at some of the more advanced features of this project. This assumes
+we'll take a look at some of the more advanced features of this project. This assumes
 that you are comfortable reading and writing a little bit of Javascript making
 use of jQuery.
 
@@ -16,7 +16,7 @@ The basic lookup is based on handling a search based on a single term string.
 If additional filtering is needed it can be inside the lookup ``get_query`` but
 you would need to define this when the lookup is defined. While this fits a fair
 number of use cases there are times when you need to define additional query
-parameters that won't be know until the either the form is bound or until selections
+parameters that won't be known until either the form is bound or until selections
 are made on the client side. This section will detail how to handle both of these
 cases.
 
@@ -24,8 +24,8 @@ cases.
 How Parameters are Passed
 _______________________________________
 
-As with the search term the additional parameters you define will be passed in
-``request.GET``. Since ``get_query`` gets the current request so you will have access to
+As with the search term, the additional parameters you define will be passed in
+``request.GET``. Since ``get_query`` gets the current request, you will have access to
 them. Since they can be manipulated on the client side, these parameters should be
 treated like all user input. It should be properly validated and sanitized.
 
@@ -63,7 +63,7 @@ most common way to use this would be in the form ``__init__``.
 
 You can also pass the query parameters into the widget using the ``query_params``
 keyword argument. It depends on your use case as to whether the parameters are
-know when the form is defined or when an instance of the form is created.
+known when the form is defined or when an instance of the form is created.
 
 
 .. _client-side-parameters:
@@ -109,28 +109,90 @@ to write a little javascript.
 
 Suppose we have city model
 
-    .. literalinclude:: ../example/core/models.py
-        :pyobject: City
+    .. code-block:: python
+
+        from __future__ import unicode_literals
+
+        from django.db import models
+        from django.utils.encoding import python_2_unicode_compatible
+
+        from localflavor.us.models import USStateField
+
+
+        @python_2_unicode_compatible
+        class City(models.Model):
+            name = models.CharField(max_length=200)
+            state = USStateField()
+
+            def __str__(self):
+                return self.name
+
+Then in our lookup we will grab the state value and filter our results on it:
+
+    .. code-block:: python
+
+        from __future__ import unicode_literals
+
+        from selectable.base import ModelLookup
+        from selectable.registry import registry
+
+        from .models import City
+
+
+        class CityLookup(ModelLookup):
+            model = City
+            search_fields = ('name__icontains', )
+
+            def get_query(self, request, term):
+                results = super(CityLookup, self).get_query(request, term)
+                state = request.GET.get('state', '')
+                if state:
+                    results = results.filter(state=state)
+                return results
+
+            def get_item_label(self, item):
+                return "%s, %s" % (item.name, item.state)
+
+
+        registry.register(CityLookup)
 
 and a simple form
 
-    .. literalinclude:: ../example/core/forms.py
-        :pyobject: ChainedForm
+    .. code-block:: python
+
+        from django import forms
+
+        from localflavor.us.forms import USStateField, USStateSelect
+
+        from selectable.forms import AutoCompleteSelectField, AutoComboboxSelectWidget
+
+        from .lookups import CityLookup
+
+
+        class ChainedForm(forms.Form):
+            city = AutoCompleteSelectField(
+                lookup_class=CityLookup,
+                label='City',
+                required=False,
+                widget=AutoComboboxSelectWidget
+            )
+            state = USStateField(widget=USStateSelect, required=False)
+
 
 We want our users to select a city and if they choose a state then we will only
 show them cities in that state. To do this we will pass back chosen state as
 addition parameter with the following javascript:
 
-    .. literalinclude:: ../example/core/templates/advanced.html
-        :language: html
-        :start-after: {% block extra-js %}
-        :end-before: {% endblock %}
+    .. code-block:: html
 
-
-Then in our lookup we will grab the state value and filter our results on it:
-
-    .. literalinclude:: ../example/core/lookups.py
-        :pyobject: CityLookup
+        <script type="text/javascript">
+            $(document).ready(function() {
+                function newParameters(query) {
+                    query.state = $('#id_state').val();
+                }
+                $('#id_city_0').djselectable('option', 'prepareQuery', newParameters);
+            });
+        </script>
 
 And that's it! We now have a working chained selection example. The full source
 is included in the example project.
@@ -152,12 +214,6 @@ expose the events defined by the plugin.
     - djselectableselect
     - djselectableclose
     - djselectablechange
-
-.. note::
-
-    Prior to v0.7 these event names were under the ``autocomplete`` namespace. If you
-    are upgrading from a previous version and had customizations using these events
-    you should be sure to update the names.
 
 For the most part these event names should be self-explanatory. If you need additional
 detail you should refer to the `jQuery UI docs on these events <http://jqueryui.com/demos/autocomplete/#events>`_.
@@ -230,7 +286,7 @@ then you can make django-selectable work by passing ``bindSelectables`` to the
         </script>
 
 Currently you must include the django-selectable javascript below this formset initialization
-code for this to work. See django-selectable `issue #31 <https://bitbucket.org/mlavin/django-selectable/issue/31/>`_
+code for this to work. See django-selectable `issue #31 <https://github.com/mlavin/django-selectable/issues/31>`_
 for some additional detail on this problem.
 
 
@@ -250,17 +306,8 @@ The item is a dictionary object matching what is returned by the lookup's
 :ref:`format_item <lookup-format-item>`. ``formatLabel`` should return the string
 which should be used for the label.
 
-.. note::
-
-    In v0.7 the scope of ``formatLabel`` was updated so that ``this`` refers to the
-    current ``djselectable`` plugin instance. Previously ``this`` refered to the
-    plugin ``options`` instance.
-
 Going back to the ``CityLookup`` we can adjust the label to wrap the city and state
 portions with their own classes for additional styling:
-
-    .. literalinclude:: ../example/core/lookups.py
-        :pyobject: CityLookup
 
     .. code-block:: html
 

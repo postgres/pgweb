@@ -1,10 +1,69 @@
 Release Notes
 ==================
 
-v0.7.1 (Released TBD)
+
+v1.1.0 (Released 2018-01-12)
+--------------------------------------
+
+- Updated admin docs.
+- Added support for Django 1.11
+
+Special thanks to Luke Plant for contributing the fixes to support Django 1.11.
+
+
+v1.0.0 (Released 2017-04-14)
+--------------------------------------
+
+This project has been stable for quite some time and finally declaring a 1.0 release. With
+that comes new policies on official supported versions for Django, Python, jQuery, and jQuery UI.
+
+- New translations for German and Czech.
+- Various bug and compatibility fixes.
+- Updated example project.
+
+Special thanks to Raphael Merx for helping track down issues related to this release
+and an updating the example project to work on Django 1.10.
+
+Backwards Incompatible Changes
+________________________________
+
+- Dropped support Python 2.6 and 3.2
+- Dropped support for Django < 1.7. Django 1.11 is not yet supported.
+- ``LookupBase.serialize_results`` had been removed. This is now handled by the built-in ``JsonResponse`` in Django.
+- jQuery and jQuery UI versions for the ``include_jquery_libs`` and ``include_ui_theme`` template tags have been increased to 1.12.4 and 1.11.4 respectively.
+- Dropped testing support for jQuery < 1.9 and jQuery UI < 1.10. Earlier versions may continue to work but it is recommended to upgrade.
+
+
+v0.9.0 (Released 2014-10-21)
+--------------------------------------
+
+This release primarily addresses incompatibility with Django 1.7. The app-loading refactor both
+broke the previous registration and at the same time provided better utilities in Django core to
+make it more robust.
+
+- Compatibility with Django 1.7. Thanks to Calvin Spealman for the fixes.
+- Fixes for Python 3 support.
+
+Backwards Incompatible Changes
+________________________________
+
+- Dropped support for jQuery < 1.7
+
+
+v0.8.0 (Released 2014-01-20)
 --------------------------------------
 
 - Widget media references now include a version string for cache-busting when upgrading django-selectable. Thanks to Ustun Ozgur.
+- Added compatibility code for \*SelectWidgets to handle POST data for the default SelectWidget. Thanks to leo-the-manic.
+- Development moved from Bitbucket to Github.
+- Update test suite compatibility with new test runner in Django 1.6. Thanks to Dan Poirier for the report and fix.
+- Tests now run on Travis CI.
+- Added French and Chinese translations.
+
+Backwards Incompatible Changes
+________________________________
+
+- Support for Django < 1.5 has been dropped. Most pieces should continue to work but there was an ugly JS hack to make django-selectable work nicely in the admin which too flakey to continue to maintain. If you aren't using the selectable widgets in inline-forms in the admin you can most likely continue to use Django 1.4 without issue.
 
 
 v0.7.0 (Released 2013-03-01)
@@ -210,7 +269,7 @@ _________________
 Bug Fixes
 _________________
 
-- Fixed issue with Enter key removing items from select multiple widgets `#24 <https://bitbucket.org/mlavin/django-selectable/issue/24/pressing-enter-when-autocomplete-input-box>`_
+- Fixed issue with Enter key removing items from select multiple widgets `#24 <https://github.com/mlavin/django-selectable/issues/24>`_
 
 
 Backwards Incompatible Changes
@@ -241,7 +300,7 @@ v0.1.2 (Released 2011-05-25)
 Bug Fixes
 _________________
 
-- Fixed issue `#17 <https://bitbucket.org/mlavin/django-selectable/issue/17/update-not-working>`_
+- Fixed issue `#17 <https://github.com/mlavin/django-selectable/issues/17>`_
 
 
 v0.1.1 (Release 2011-03-21)

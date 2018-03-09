@@ -23,8 +23,8 @@ class JqueryTagTestCase(BaseSelectableTestCase):
         template = Template("{% load selectable_tags %}{% include_jquery_libs %}")
         context = Context({})
         result = template.render(context)
-        self.assertJQueryVersion(result, '1.7.2')
-        self.assertUIVersion(result, '1.8.23')
+        self.assertJQueryVersion(result, '1.12.4')
+        self.assertUIVersion(result, '1.11.4')
 
     def test_render_jquery_version(self):
         "Render template tag with specified jQuery version."
@@ -82,7 +82,7 @@ class ThemeTagTestCase(BaseSelectableTestCase):
         template = Template("{% load selectable_tags %}{% include_ui_theme %}")
         context = Context({})
         result = template.render(context)
-        self.assertUICSS(result, 'base', '1.8.23')
+        self.assertUICSS(result, 'smoothness', '1.11.4')
 
     def test_render_version(self):
         "Render template tag with alternate version."
@@ -90,7 +90,7 @@ class ThemeTagTestCase(BaseSelectableTestCase):
         context = Context({})
         result = template.render(context)
         self.assertUICSS(result, 'base', '1.8.13')
-        
+
     def test_variable_version(self):
         "Render using version from content variable."
         version = '1.8.13'
@@ -104,12 +104,12 @@ class ThemeTagTestCase(BaseSelectableTestCase):
         template = Template("{% load selectable_tags %}{% include_ui_theme 'ui-lightness' %}")
         context = Context({})
         result = template.render(context)
-        self.assertUICSS(result, 'ui-lightness', '1.8.23')
-        
+        self.assertUICSS(result, 'ui-lightness', '1.11.4')
+
     def test_variable_theme(self):
         "Render using theme from content variable."
         theme = 'ui-lightness'
         template = Template("{% load selectable_tags %}{% include_ui_theme theme %}")
         context = Context({'theme': theme})
         result = template.render(context)
-        self.assertUICSS(result, theme, '1.8.23')
+        self.assertUICSS(result, theme, '1.11.4')
