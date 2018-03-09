@@ -50,13 +50,6 @@ STATICFILES_DIRS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'REALLYCHANGETHISINSETTINGS_LOCAL.PY'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-	'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.load_template_source',
-)
-
 MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -70,17 +63,19 @@ CSRF_FAILURE_VIEW='pgweb.core.views.csrf_failure'
 
 ROOT_URLCONF = 'pgweb.urls'
 
-TEMPLATE_DIRS = (
-    'templates/',
-	'../templates', # Sometimes called in subdirectories, should never hurt to have both
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-	'django.contrib.auth.context_processors.auth',
-	'django.contrib.messages.context_processors.messages',
-	'django.core.context_processors.media',
-	'pgweb.util.contexts.PGWebContextProcessor',
-)
+TEMPLATES = [{
+	'BACKEND': 'django.template.backends.django.DjangoTemplates',
+	'DIRS': ['templates', ],
+	'APP_DIRS': True,
+	'OPTIONS': {
+		'context_processors': [
+			'django.contrib.auth.context_processors.auth',
+			'django.contrib.messages.context_processors.messages',
+			'django.core.context_processors.media',
+			'pgweb.util.contexts.PGWebContextProcessor',
+		],
+	},
+}]
 
 LOGIN_URL='/account/login/'
 LOGIN_REDIRECT_URL='/account/'
