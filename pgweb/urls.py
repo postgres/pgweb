@@ -161,11 +161,6 @@ urlpatterns = [
 	# Uncomment the next line to enable the admin:
 	url(r'^admin/', include(admin.site.urls)),
 
-	# This should not happen in production - serve by the webserver natively!
-	url(r'^(favicon.ico)$', 'django.views.static.serve', {
-		'document_root': 'media',
-	}),
-
 	# Crash testing URL :-)
 	url(r'^crashtest/$', pgweb.misc.views.crashtest),
 
