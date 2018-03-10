@@ -78,7 +78,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 def template_to_string(templatename, attrs = {}):
 	return get_template(templatename).render(Context(attrs))
 
-def HttpServerError(msg):
+def HttpServerError(request, msg):
 	r = render(request, 'errors/500.html', {
 			'message': msg,
 			})

@@ -284,9 +284,9 @@ def admin_purge(request):
 @csrf_exempt
 def api_varnish_purge(request):
 	if not request.META['REMOTE_ADDR'] in settings.VARNISH_PURGERS:
-		return HttpServerError("Invalid client address")
+		return HttpServerError(request, "Invalid client address")
 	if request.method != 'POST':
-		return HttpServerError("Can't use this way")
+		return HttpServerError(request, "Can't use this way")
 	n = int(request.POST['n'])
 	curs = connection.cursor()
 	for i in range(0, n):

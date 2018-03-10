@@ -41,7 +41,7 @@ def ftpbrowser(request, subpath):
 		allnodes = pickle.load(f)
 		f.close()
 	except Exception, e:
-		return HttpServerError("Failed to load ftp site information: %s" % e)
+		return HttpServerError(request, "Failed to load ftp site information: %s" % e)
 
 	# An incoming subpath may either be canonical, or have one or more elements
 	# present that are actually symlinks. For each element of the path, test to
@@ -129,9 +129,9 @@ def ftpbrowser(request, subpath):
 @csrf_exempt
 def uploadftp(request):
 	if request.method != 'PUT':
-		return HttpServerError("Invalid method")
+		return HttpServerError(request, "Invalid method")
 	if not request.META['REMOTE_ADDR'] in settings.FTP_MASTERS:
-		return HttpServerError("Invalid client address")
+		return HttpServerError(request, "Invalid client address")
 	# We have the data in request.body. Attempt to load it as
 	# a pickle to make sure it's properly formatted
 	pickle.loads(request.body)
@@ -159,9 +159,9 @@ def uploadftp(request):
 @csrf_exempt
 def uploadyum(request):
 	if request.method != 'PUT':
-		return HttpServerError("Invalid method")
+		return HttpServerError(request, "Invalid method")
 	if not request.META['REMOTE_ADDR'] in settings.FTP_MASTERS:
-		return HttpServerError("Invalid client address")
+		return HttpServerError(request, "Invalid client address")
 	# We have the data in request.body. Attempt to load it as
 	# json to ensure correct format.
 	json.loads(request.body)

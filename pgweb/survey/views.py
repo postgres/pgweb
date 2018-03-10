@@ -28,7 +28,7 @@ def vote(request, surveyid):
 	try:
 		ansnum = int(request.POST['answer'])
 		if ansnum < 1 or ansnum > 8:
-			return HttpServerError("Invalid answer")
+			return HttpServerError(request, "Invalid answer")
 	except:
 		# When no answer is given, redirect to results instead
 		return HttpResponseRedirect("/community/survey/%s-%s" % (surv.id, slugify(surv.question)))
@@ -44,7 +44,7 @@ def vote(request, surveyid):
 	# Check if we are locked
 	lock = SurveyLock.objects.filter(ipaddr=addr)
 	if len(lock) > 0:
-		return HttpServerError("Too many requests from your IP in the past 15 minutes")
+		return HttpServerError(request, "Too many requests from your IP in the past 15 minutes")
 
 	# Generate a new lock item, and store it
 	lock = SurveyLock(ipaddr=addr)
