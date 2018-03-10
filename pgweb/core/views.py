@@ -10,6 +10,7 @@ from django.db.models import Count
 from django.db import connection, transaction
 from django.utils.http import http_date, parse_http_date
 from django.conf import settings
+import django
 
 from datetime import date, datetime
 import os
@@ -237,6 +238,7 @@ def system_information(request):
 			'server': os.uname()[1],
 			'cache_server': request.META['REMOTE_ADDR'] or None,
 			'client_ip': get_client_ip(request),
+			'django_version': django.get_version(),
 	})
 
 # Sync timestamp for automirror. Keep it around for 30 seconds
