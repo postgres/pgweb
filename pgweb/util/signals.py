@@ -52,7 +52,7 @@ def _get_all_notification_fields(obj):
 def _get_attr_value(obj, fieldname):
 	# see if this is a Many-to-many field. If yes, we want to print
 	# it out as a pretty list
-	if isinstance(obj._meta.get_field_by_name(fieldname)[0], models.ManyToManyField):
+	if isinstance(obj._meta.get_field(fieldname), models.ManyToManyField):
 		# XXX: Changes to ManyToMany fields can't be tracked here :(
 		#      For now, we have no good way to deal with it so, well, don't.
 		#      (trying to get the value will return None for it)
