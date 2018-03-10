@@ -1,5 +1,4 @@
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -130,25 +129,25 @@ def search(request):
 	# Check that we actually have something to search for
 	if not request.GET.has_key('q') or request.GET['q'] == '':
 		if searchlists:
-			return render_to_response('search/listsearch.html', {
+			return render(request, 'search/listsearch.html', {
 					'search_error': "No search term specified.",
 					'sortoptions': sortoptions,
 					'lists': MailingList.objects.all().order_by("group__sortkey"),
 					'listid': listid,
 					'dates': dateoptions,
 					'dateval': dateval,
-					}, RequestContext(request))
+					})
 		else:
-			return render_to_response('search/sitesearch.html', {
+			return render(request, 'search/sitesearch.html', {
 					'search_error': "No search term specified.",
-					}, RequestContext(request))
+					})
 	query = request.GET['q'].strip()
 
 	# Anti-stefan prevention
 	if len(query) > 1000:
-		return render_to_response('search/sitesearch.html', {
+		return render(request, 'search/sitesearch.html', {
 			'search_error': "Search term too long.",
-			}, RequestContext(request))
+			})
 
 	# Is the request being paged?
 	if request.GET.has_key('p'):
@@ -199,14 +198,14 @@ def search(request):
 			try:
 				r = c.getresponse()
 			except (socket.timeout, ssl.SSLError):
-				return render_to_response('search/listsearch.html', {
+				return render(request, 'search/listsearch.html', {
 						'search_error': 'Timeout when talking to search server. Please try your search again later, or with a more restrictive search terms.',
-						}, RequestContext(request))
+						})
 			if r.status != 200:
 				memc = None
-				return render_to_response('search/listsearch.html', {
+				return render(request, 'search/listsearch.html', {
 						'search_error': 'Error talking to search server: %s' % r.reason,
-						}, RequestContext(request))
+						})
 			hits = json.loads(r.read())
 			if has_memcached and memc:
 				# Store them in memcached too! But only for 10 minutes...
@@ -229,7 +228,7 @@ def search(request):
 			listsort
 			)
 
-		return render_to_response('search/listsearch.html', {
+		return render(request, 'search/listsearch.html', {
 				'hitcount': totalhits,
 				'firsthit': firsthit,
 				'lasthit': min(totalhits, firsthit+hitsperpage-1),
@@ -251,7 +250,7 @@ def search(request):
 				'listid': listid,
 				'dates': dateoptions,
 				'dateval': dateval,
-				}, RequestContext(request))
+				})
 
 	else:
 		# Website search is still done by making a regular pgsql connection
@@ -260,9 +259,9 @@ def search(request):
 			conn = psycopg2.connect(settings.SEARCH_DSN)
 			curs = conn.cursor()
 		except:
-			return render_to_response('search/sitesearch.html', {
+			return render(request, 'search/sitesearch.html', {
 					'search_error': 'Could not connect to search database.'
-					}, RequestContext(request))
+					})
 
 		# This is kind of a hack, but... Some URLs are flagged as internal
 		# and should as such only be included in searches that explicitly
@@ -283,9 +282,9 @@ def search(request):
 				'internal': include_internal,
 				})
 		except psycopg2.ProgrammingError:
-			return render_to_response('search/sitesearch.html', {
+			return render(request, 'search/sitesearch.html', {
 					'search_error': 'Error executing search query.'
-					}, RequestContext(request))
+					})
 
 		hits = curs.fetchall()
 		conn.close()
@@ -296,7 +295,7 @@ def search(request):
 			suburl and urllib.quote_plus(suburl) or '',
 			)
 
-		return render_to_response('search/sitesearch.html', {
+		return render(request, 'search/sitesearch.html', {
 				'suburl': suburl,
 				'allsites': allsites,
 				'hitcount': totalhits,
@@ -312,4 +311,4 @@ def search(request):
 						'url': "%s%s" % (h[1], h[2]),
 						'abstract': h[4].replace("[[[[[[", "<b>").replace("]]]]]]","</b>"),
 						'rank': h[5]} for h in hits[:-1]],
-				}, RequestContext(request))
+				})

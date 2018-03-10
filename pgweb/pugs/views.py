@@ -1,6 +1,4 @@
-from django.shortcuts import render_to_response
-
-from pgweb.util.contexts import NavContext
+from pgweb.util.contexts import render_pgweb
 
 from models import PUG
 
@@ -17,6 +15,6 @@ def index(request):
 				'country': pug.country.name,
 				'pugs': [pug]
 			})
-	return render_to_response('pugs/index.html', {
+	return render_pgweb(request, 'community', 'pugs/index.html', {
 		'pug_list': pug_list,
-	}, NavContext(request, 'community'))
+	})

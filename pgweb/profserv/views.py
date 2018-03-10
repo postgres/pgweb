@@ -1,8 +1,7 @@
-from django.shortcuts import render_to_response
 from django.http import Http404
 from pgweb.util.decorators import login_required
 
-from pgweb.util.contexts import NavContext
+from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import simple_form
 
 from models import ProfessionalService
@@ -21,12 +20,12 @@ def root(request, servtype):
 	title = servtype=='support' and 'Professional Services' or 'Hosting Providers'
 	what = servtype=='support' and 'support' or 'hosting'
 	support = servtype=='support'
-	return render_to_response('profserv/root.html', {
+	return render_pgweb(request, 'support', 'profserv/root.html', {
 		'title': title,
 		'support': support,
 		'regions': regions,
 		'what': what,
-	}, NavContext(request, 'support'))
+	})
 
 
 def region(request, servtype, regionname):
@@ -44,14 +43,14 @@ def region(request, servtype, regionname):
 	# Field names are cleaned up earlier, so it's safe against injections.
 	services = ProfessionalService.objects.select_related('org').filter(approved=True).extra(where=["region_%s AND provides_%s" % (regionname, what),])
 
-	return render_to_response('profserv/list.html', {
+	return render_pgweb(request, 'support', 'profserv/list.html', {
 		'title': title,
 		'support': support,
 		'what': what,
 		'whatname': whatname,
 		'regionname': regname,
 		'services': services,
-	}, NavContext(request, 'support'))
+	})
 
 
 # Forms to edit

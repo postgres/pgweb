@@ -1,6 +1,6 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import get_object_or_404
 
-from pgweb.util.contexts import NavContext
+from pgweb.util.contexts import render_pgweb
 
 from pgweb.core.models import Version
 from models import SecurityPatch
@@ -11,13 +11,13 @@ def GetPatchesList(filt):
 def _list_patches(request, filt):
 	patches = GetPatchesList(filt)
 
-	return render_to_response('security/security.html', {
+	return render_pgweb(request, 'support', 'security/security.html', {
 		'patches': patches,
 		'supported': Version.objects.filter(supported=True),
 		'unsupported': Version.objects.filter(supported=False, tree__gt=0).extra(
 			where=["EXISTS (SELECT 1 FROM security_securitypatchversion pv WHERE pv.version_id=core_version.id)"],
 		),
-	}, NavContext(request, 'support'))
+	})
 
 def index(request):
 	# Show all supported versions

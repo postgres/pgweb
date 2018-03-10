@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.http import HttpResponseNotModified
 from django.template import TemplateDoesNotExist, loader
@@ -17,7 +17,7 @@ import re
 import urllib
 
 from pgweb.util.decorators import cache, nocache
-from pgweb.util.contexts import NavContext
+from pgweb.util.contexts import render_pgweb, get_nav_menu
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.moderation import get_all_pending_moderations
 from pgweb.util.misc import get_client_ip, varnish_purge
@@ -35,7 +35,6 @@ from pgweb.survey.models import Survey
 # models and forms needed for core objects
 from models import Organisation
 from forms import OrganisationForm, MergeOrgsForm
-from django.template.context import RequestContext
 
 # Front page view
 @cache(minutes=10)
@@ -60,7 +59,7 @@ def home(request):
 	curs.execute("SELECT * FROM (SELECT DISTINCT(core_organisation.name) FROM events_event INNER JOIN core_organisation ON org_id=core_organisation.id WHERE startdate <= (CURRENT_DATE + '6 Months'::interval) AND enddate >= CURRENT_DATE AND events_event.approved AND training AND org_id IS NOT NULL) x ORDER BY random() LIMIT 3")
 	trainingcompanies = [r[0] for r in curs.fetchall()]
 
-	return render_to_response('index.html', {
+	return render(request, 'index.html', {
 		'title': 'The world\'s most advanced open source database',
 		'news': news,
 		'newstags': NewsTag.objects.all(),
@@ -71,7 +70,7 @@ def home(request):
 		'quote': quote,
 		'versions': versions,
 		'planet': planet,
-	}, RequestContext(request))
+	})
 
 # Community main page (contains surveys and potentially more)
 def community(request):
@@ -81,16 +80,16 @@ def community(request):
 	except:
 		s = None
 	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:7]
-	return render_to_response('core/community.html', {
+	return render_pgweb(request, 'community', 'core/community.html', {
 		'survey': s,
 		'planet': planet,
-	}, NavContext(request, 'community'))
+	})
 
 # List of supported versions
 def versions(request):
-	return render_to_response('support/versioning.html', {
+	return render_pgweb(request, 'support', 'support/versioning.html', {
 			'versions': Version.objects.filter(tree__gt=0).filter(testing=0),
-	}, NavContext(request, 'support'))
+	})
 
 re_staticfilenames = re.compile("^[0-9A-Z/_-]+$", re.IGNORECASE)
 # Generic fallback view for static pages
@@ -115,7 +114,7 @@ def fallback(request, url):
 		navsect = url.split('/',2)[0]
 	except:
 		navsect = ''
-	return HttpResponse(t.render(NavContext(request, navsect)))
+	return HttpResponse(t.render({'navmenu': get_nav_menu(navsect)}))
 
 # Edit-forms for core objects
 @login_required
@@ -225,7 +224,7 @@ def dynamic_css(request, css):
 
 @nocache
 def csrf_failure(request, reason=''):
-	resp = render_to_response('errors/csrf_failure.html', {
+	resp = render(request, 'errors/csrf_failure.html', {
 			'reason': reason,
 			})
 	resp.status_code = 403 # Forbidden
@@ -234,7 +233,7 @@ def csrf_failure(request, reason=''):
 # Basic information about the connection
 @cache(seconds=30)
 def system_information(request):
-	return render_to_response('core/system_information.html', {
+	return render(request,'core/system_information.html', {
 			'server': os.uname()[1],
 			'cache_server': request.META['REMOTE_ADDR'] or None,
 			'client_ip': get_client_ip(request),
@@ -254,9 +253,9 @@ def sync_timestamp(request):
 @user_passes_test(lambda u: u.is_staff)
 @user_passes_test(lambda u: u.groups.filter(name='web slaves').exists())
 def admin_pending(request):
-	return render_to_response('core/admin_pending.html', {
+	return render(request, 'core/admin_pending.html', {
 			'app_list': get_all_pending_moderations(),
-			}, RequestContext(request))
+			})
 
 # Purge objects from varnish, for the admin pages
 @login_required
@@ -276,9 +275,9 @@ def admin_purge(request):
 	curs.execute("SELECT added, completed, consumer, mode, expr FROM varnishqueue.queue q LEFT JOIN varnishqueue.consumers c ON c.consumerid=q.consumerid ORDER BY added DESC")
 	latest = curs.fetchall()
 
-	return render_to_response('core/admin_purge.html', {
+	return render(request, 'core/admin_purge.html', {
 			'latest_purges': latest,
-			}, RequestContext(request))
+			})
 
 @csrf_exempt
 def api_varnish_purge(request):
@@ -325,6 +324,6 @@ def admin_mergeorg(request):
 	else:
 		form = MergeOrgsForm()
 
-	return render_to_response('core/admin_mergeorg.html', {
+	return render(request, 'core/admin_mergeorg.html', {
 			'form': form,
-    }, RequestContext(request))
+    })

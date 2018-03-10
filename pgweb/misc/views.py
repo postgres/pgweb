@@ -1,4 +1,3 @@
-from django.shortcuts import render_to_response
 from pgweb.util.decorators import login_required
 from django.http import HttpResponse
 from django.db import connection
@@ -6,7 +5,7 @@ from django.conf import settings
 
 import os
 
-from pgweb.util.contexts import NavContext
+from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import template_to_string
 from pgweb.util.misc import send_template_mail
 
@@ -38,9 +37,9 @@ def submitbug(request):
 				sendername="PG Bug reporting form",
 			)
 
-			return render_to_response('misc/bug_completed.html', {
+			return render_pgweb(request, 'support', 'misc/bug_completed.html', {
 				'bugid': bugid,
-			}, NavContext(request, 'support'))
+			})
 	else:
 		form = SubmitBugForm(initial={
 			'name': '%s %s' % (request.user.first_name, request.user.last_name),
@@ -49,14 +48,14 @@ def submitbug(request):
 
 	versions = Version.objects.filter(supported=True)
 
-	return render_to_response('base/form.html', {
+	return render_pgweb(request, 'support', 'base/form.html', {
 		'form': form,
 		'formitemtype': 'bug report',
 		'operation': 'Submit',
 		'form_intro': template_to_string('misc/bug_header.html', {
 			'supportedversions': versions,
 		}),
-	}, NavContext(request, 'support'))
+	})
 
 
 # A crash testing URL. If the file /tmp/crashtest exists, raise a http 500

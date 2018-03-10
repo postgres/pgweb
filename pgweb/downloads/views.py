@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from pgweb.util.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -12,7 +12,7 @@ import cPickle as pickle
 import json
 
 from pgweb.util.decorators import nocache
-from pgweb.util.contexts import NavContext
+from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.misc import get_client_ip, varnish_purge, version_sort
 
@@ -110,7 +110,7 @@ def ftpbrowser(request, subpath):
 
 	del node
 
-	return render_to_response('downloads/ftpbrowser.html', {
+	return render_pgweb(request, 'download', 'downloads/ftpbrowser.html', {
 		'basepath': subpath.rstrip('/'),
 		'directories': directories,
 		'files': sorted(files),
@@ -118,7 +118,7 @@ def ftpbrowser(request, subpath):
 		'readme': file_readme,
 		'messagefile': file_message,
 		'maintainer': file_maintainer,
-	}, NavContext(request, 'download'))
+	})
 
 
 # Accept an upload of the ftpsite pickle. This is fairly resource consuming,
@@ -197,7 +197,7 @@ def mirrorselect(request, path):
 def yum_js(request):
 	with open(settings.YUM_JSON) as f:
 		jsonstr = f.read()
-	return render_to_response('downloads/js/yum.js', {
+	return render(request, 'downloads/js/yum.js', {
 		'json': jsonstr,
 		'supported_versions': ','.join([str(v.numtree) for v in Version.objects.filter(supported=True)]),
 		}, content_type='application/json')
@@ -207,18 +207,18 @@ def yum_js(request):
 #######
 def categorylist(request):
 	categories = Category.objects.all()
-	return render_to_response('downloads/categorylist.html', {
+	return render_pgweb(request, 'download', 'downloads/categorylist.html', {
 		'categories': categories,
-	}, NavContext(request, 'download'))
+	})
 
 def productlist(request, catid, junk=None):
 	category = get_object_or_404(Category, pk=catid)
 	products = Product.objects.select_related('org','licencetype').filter(category=category, approved=True)
-	return render_to_response('downloads/productlist.html', {
+	return render_pgweb(request, 'download', 'downloads/productlist.html', {
 		'category': category,
 		'products': products,
 		'productcount': len(products),
-	}, NavContext(request, 'download'))
+	})
 
 @login_required
 def productform(request, itemid):

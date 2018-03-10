@@ -1,10 +1,10 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.db import connection, transaction
 from django.template.defaultfilters import slugify
 from django.views.decorators.csrf import csrf_exempt
 
-from pgweb.util.contexts import NavContext
+from pgweb.util.contexts import render_pgweb
 from pgweb.util.misc import get_client_ip, varnish_purge
 from pgweb.util.helpers import HttpServerError
 
@@ -14,10 +14,10 @@ def results(request, surveyid, junk=None):
 	survey = get_object_or_404(Survey, pk=surveyid)
 	surveylist = Survey.objects.all().order_by('-posted')
 
-	return render_to_response('survey/results.html', {
+	return render_pgweb(request, 'community', 'survey/results.html', {
 		'survey': survey,
 		'surveylist': surveylist,
-	}, NavContext(request, 'community'))
+	})
 
 # Served over insecure HTTP, the Varnish proxy strips cookies
 @csrf_exempt

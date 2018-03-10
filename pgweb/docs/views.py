@@ -1,7 +1,6 @@
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.http import Http404
-from django.template.context import RequestContext
 from pgweb.util.decorators import login_required
 from django.db.models import Q
 from django.conf import settings
@@ -9,7 +8,7 @@ from django.conf import settings
 from decimal import Decimal
 import os
 
-from pgweb.util.contexts import NavContext
+from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import template_to_string
 from pgweb.util.misc import send_template_mail
 
@@ -67,7 +66,7 @@ def docpage(request, version, typ, filename):
 		# Interactive documents are disabled, so redirect to static page
 		return HttpResponsePermanentRedirect("/docs/{0}/static/{1}.html".format(version, filename))
 
-	return render_to_response('docs/docspage.html', {
+	return render(request, 'docs/docspage.html', {
 		'page': page,
 		'supported_versions': [v for v in versions if v.supported],
 		'devel_versions': [v for v in versions if not v.supported and v.testing],
@@ -75,7 +74,7 @@ def docpage(request, version, typ, filename):
 		'title': page.title,
 		'doc_index_filename': indexname,
 		'loaddate': loaddate,
-	}, RequestContext(request))
+	})
 
 def docsrootpage(request, version, typ):
 	return docpage(request, version, typ, 'index')
@@ -85,9 +84,9 @@ def redirect_root(request, version):
 
 def root(request):
 	versions = Version.objects.filter(Q(supported=True) | Q(testing__gt=0,tree__gt=0)).order_by('-tree')
-	return render_to_response('docs/index.html', {
+	return render_pgweb(request, 'docs', 'docs/index.html', {
 		'versions': versions,
-	}, NavContext(request, 'docs'))
+	})
 
 class _VersionPdfWrapper(Version):
 	"""
@@ -117,15 +116,15 @@ class _VersionPdfWrapper(Version):
 
 def manuals(request):
 	versions = Version.objects.filter(Q(supported=True) | Q(testing__gt=0,tree__gt=0)).order_by('-tree')
-	return render_to_response('docs/manuals.html', {
+	return render_pgweb(request, 'docs', 'docs/manuals.html', {
 		'versions': [_VersionPdfWrapper(v) for v in versions],
-	}, NavContext(request, 'docs'))
+	})
 
 def manualarchive(request):
 	versions = Version.objects.filter(testing=0,supported=False,tree__gt=0).order_by('-tree')
-	return render_to_response('docs/archive.html', {
+	return render_pgweb(request, 'docs', 'docs/archive.html', {
 		'versions': [_VersionPdfWrapper(v) for v in versions],
-	}, NavContext(request, 'docs'))
+	})
 
 @login_required
 def commentform(request, itemid, version, filename):
@@ -149,19 +148,18 @@ def commentform(request, itemid, version, filename):
 				replyto='%s, %s' % (form.cleaned_data['email'], settings.DOCSREPORT_EMAIL),
 				sendername='PG Doc comments form'
 			)
-			return render_to_response('docs/docsbug_completed.html', {
-			}, NavContext(request, 'docs'))
+			return render_pgweb(request, 'docs', 'docs/docsbug_completed.html', {})
 	else:
 		form = DocCommentForm(initial={
 			'name': '%s %s' % (request.user.first_name, request.user.last_name),
 			'email': request.user.email,
 		})
 
-	return render_to_response('base/form.html', {
+	return render_pgweb(request, 'docs', 'base/form.html', {
 		'form': form,
 		'formitemtype': 'documentation correction',
 		'operation': 'Submit',
 		'form_intro': template_to_string('docs/docsbug.html', {
 			'user': request.user,
 		}),
-	}, NavContext(request, 'docs'))
+	})

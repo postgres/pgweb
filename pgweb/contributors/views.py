@@ -1,11 +1,9 @@
-from django.shortcuts import render_to_response
-
-from pgweb.util.contexts import NavContext
+from pgweb.util.contexts import render_pgweb
 
 from models import ContributorType
 
 def completelist(request):
 	contributortypes = list(ContributorType.objects.all())
-	return render_to_response('contributors/list.html', {
+	return render_pgweb(request, 'community', 'contributors/list.html', {
 		'contributortypes': contributortypes,
-	}, NavContext(request, 'community'))
+	})

@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login as django_login
 import django.contrib.auth.views as authviews
 from django.http import HttpResponseRedirect, Http404, HttpResponse
-from django.shortcuts import render_to_response, get_object_or_404
+from django.shortcuts import get_object_or_404
 from pgweb.util.decorators import login_required
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
@@ -21,7 +21,7 @@ import json
 from datetime import datetime, timedelta
 import itertools
 
-from pgweb.util.contexts import NavContext
+from pgweb.util.contexts import render_pgweb
 from pgweb.util.misc import send_template_mail, generate_random_token, get_client_ip
 from pgweb.util.helpers import HttpServerError
 
@@ -52,13 +52,13 @@ def home(request):
 	myorgs = Organisation.objects.filter(managers=request.user, approved=False)
 	myproducts = Product.objects.filter(org__managers=request.user, approved=False)
 	myprofservs = ProfessionalService.objects.filter(org__managers=request.user, approved=False)
-	return render_to_response('account/index.html', {
+	return render_pgweb(request, 'account', 'account/index.html', {
 		'newsarticles': myarticles,
 		'events': myevents,
 		'organisations': myorgs,
 		'products': myproducts,
 		'profservs': myprofservs,
-	}, NavContext(request, 'account'))
+	})
 
 objtypes = {
 	'news': {
@@ -126,12 +126,12 @@ def profile(request):
 		if contrib:
 			contribform = ContributorForm(instance=contrib)
 
-	return render_to_response('account/userprofileform.html', {
+	return render_pgweb(request, 'account', 'account/userprofileform.html', {
 			'userform': userform,
 			'profileform': profileform,
 			'contribform': contribform,
 			'can_change_email': can_change_email,
-			}, NavContext(request, "account"))
+			})
 
 @login_required
 @transaction.atomic
@@ -167,10 +167,10 @@ def change_email(request):
 	else:
 		form = ChangeEmailForm(request.user)
 
-	return render_to_response('account/emailchangeform.html', {
+	return render_pgweb(request, 'account', 'account/emailchangeform.html', {
 		'form': form,
 		'token': token,
-		}, NavContext(request, "account"))
+		})
 
 @login_required
 @transaction.atomic
@@ -189,10 +189,10 @@ def confirm_change_email(request, tokenhash):
 		request.user.save()
 		token.delete()
 
-	return render_to_response('account/emailchangecompleted.html', {
+	return render_pgweb(request, 'account', 'account/emailchangecompleted.html', {
 		'token': tokenhash,
 		'success': token and True or False,
-		}, NavContext(request, "account"))
+		})
 
 @login_required
 def listobjects(request, objtype):
@@ -200,20 +200,20 @@ def listobjects(request, objtype):
 		raise Http404("Object type not found")
 	o = objtypes[objtype]
 
-	return render_to_response('account/objectlist.html', {
+	return render_pgweb(request, 'account', 'account/objectlist.html', {
 	    'objects': o['objects'](request.user),
 		'title': o['title'],
 		'submit_header': o.has_key('submit_header') and o['submit_header'] or None,
 		'suburl': objtype,
-	}, NavContext(request, 'account'))
+	})
 
 @login_required
 def orglist(request):
 	orgs = Organisation.objects.filter(approved=True)
 
-	return render_to_response('account/orglist.html', {
+	return render_pgweb(request, 'account', 'account/orglist.html', {
 			'orgs': orgs,
-	}, NavContext(request, 'account'))
+	})
 
 def login(request):
 	return authviews.login(request, template_name='account/login.html',
@@ -304,7 +304,7 @@ def signup(request):
 	else:
 		form = SignupForm(get_client_ip(request))
 
-	return render_to_response('base/form.html', {
+	return render_pgweb(request, 'account', 'base/form.html', {
 			'form': form,
 			'formitemtype': 'Account',
 			'form_intro': """
@@ -315,12 +315,12 @@ content is available for reading without an account.
 			'savebutton': 'Sign up',
 			'operation': 'New',
 			'recaptcha': True,
-	}, NavContext(request, 'account'))
+	})
 
 
 def signup_complete(request):
-	return render_to_response('account/signup_complete.html', {
-	}, NavContext(request, 'account'))
+	return render_pgweb(request, 'account', 'account/signup_complete.html', {
+	})
 
 
 @transaction.atomic
@@ -392,12 +392,12 @@ def signup_oauth(request):
 			'last_name': request.session['oauth_lastname'][:30],
 		})
 
-	return render_to_response('account/signup_oauth.html', {
+	return render_pgweb(request, 'account', 'account/signup_oauth.html', {
 		'form': form,
 		'operation': 'New account',
 		'savebutton': 'Sign up for new account',
 		'recaptcha': True,
-		}, NavContext(request, 'account'))
+		})
 
 ####
 ## Community authentication endpoint
@@ -458,17 +458,17 @@ def communityauth(request, siteid):
 	# course, we fill a structure with information about the user.
 
 	if request.user.first_name=='' or request.user.last_name=='' or request.user.email=='':
-		return render_to_response('account/communityauth_noinfo.html', {
-				}, NavContext(request, 'account'))
+		return render_pgweb(request, 'account', 'account/communityauth_noinfo.html', {
+				})
 
 	# Check for cooloff period
 	if site.cooloff_hours > 0:
 		if (datetime.now() - request.user.date_joined) < timedelta(hours=site.cooloff_hours):
 			log.warning("User {0} tried to log in to {1} before cooloff period ended.".format(
 				request.user.username, site.name))
-			return render_to_response('account/communityauth_cooloff.html', {
+			return render_pgweb(request, 'account', 'account/communityauth_cooloff.html', {
 				'site': site,
-				}, NavContext(request, 'account'))
+				})
 
 	info = {
 		'u': request.user.username.encode('utf-8'),

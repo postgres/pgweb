@@ -1,5 +1,5 @@
-from django.template import RequestContext
 from django.utils.functional import SimpleLazyObject
+from django.shortcuts import render
 from django.conf import settings
 
 # This is the whole site navigation structure. Stick in a smarter file?
@@ -91,15 +91,15 @@ sitenav = {
 }
 
 
-class NavContext(RequestContext):
-	def __init__(self, request, section):
-		RequestContext.__init__(self, request)
-		if sitenav.has_key(section):
-			navsection = sitenav[section]
-		else:
-			navsection = {}
-		self.update({'navmenu': navsection})
+def get_nav_menu(section):
+	if sitenav.has_key(section):
+		return sitenav[section]
+	else:
+		return {}
 
+def render_pgweb(request, section, template, context):
+	context['navmenu'] = get_nav_menu(section)
+	return render(request, template, context)
 
 def _get_gitrev():
 	# Return the current git revision, that is used for
