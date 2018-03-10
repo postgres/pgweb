@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from pgweb.util.contexts import render_pgweb
 from django.http import HttpResponseRedirect, Http404
-from django.template import Context
 from django.template.loader import get_template
 import django.utils.xmlutils
 
@@ -76,7 +75,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 	})
 
 def template_to_string(templatename, attrs = {}):
-	return get_template(templatename).render(Context(attrs))
+	return get_template(templatename).render(attrs)
 
 def HttpServerError(request, msg):
 	r = render(request, 'errors/500.html', {
