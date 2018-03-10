@@ -2,6 +2,7 @@ from django.conf.urls import url
 from django.conf import settings
 
 import pgweb.account.views
+import pgweb.account.oauthclient
 
 urlpatterns = [
 	url(r'^$', pgweb.account.views.home),
@@ -52,4 +53,4 @@ urlpatterns = [
 ]
 
 for provider in settings.OAUTH.keys():
-	urlpatterns.append(url(r'^login/({0})/$'.format(provider), 'pgweb.account.oauthclient.login_oauth'))
+	urlpatterns.append(url(r'^login/({0})/$'.format(provider), pgweb.account.oauthclient.login_oauth))
