@@ -37,12 +37,13 @@ class Command(BaseCommand):
 						l['name'], l['group'], l['active'], l['description'], l['shortdesc']))
 					print "Added list %s" % l['name']
 				else:
-					curs.execute("UPDATE lists_mailinglist SET group_id=(SELECT id FROM lists_mailinglistgroup WHERE groupname=%s), active=%s, description=%s, shortdesc=%s WHERE listname=%s AND NOT (group_id=(SELECT id FROM lists_mailinglistgroup WHERE groupname=%s) AND active=%s AND description=%s AND shortdesc=%s)", (
+					curs.execute("UPDATE lists_mailinglist SET group_id=(SELECT id FROM lists_mailinglistgroup WHERE groupname=%s), active=%s, description=%s, shortdesc=%s WHERE listname=%s AND NOT (group_id=(SELECT id FROM lists_mailinglistgroup WHERE groupname=%s) AND active=%s AND description=%s AND shortdesc=%s) RETURNING listname", (
 						l['group'], l['active'], l['description'], l['shortdesc'],
 						l['name'],
 						l['group'], l['active'], l['description'], l['shortdesc'],
 					))
-					print "Updated list %s" % l['name']
+					for n, in curs.fetchall():
+						print "Updated list %s" % n
 
 			# Delete any lists that shouldn't exist anymore (this is safe because we don't keep any data about them,
 			# so they are trivial to add back)
