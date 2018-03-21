@@ -171,9 +171,9 @@ def search(request):
 		if listid:
 			if listid < 0:
 				# This is a list group, we expand that on the web server
-				p['l'] = ','.join([str(x.id) for x in MailingList.objects.filter(group=-listid)])
+				p['ln'] = ','.join([x.listname for x in MailingList.objects.filter(group=-listid)])
 			else:
-				p['l'] = listid
+				p['ln'] = MailingList.objects.get(pk=listid).listname
 		if dateval:
 			p['d'] = dateval
 		urlstr = urllib.urlencode(p)
