@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 from django.conf import settings
 
+import pgweb.core.models
 
 class Migration(migrations.Migration):
 
@@ -100,7 +101,7 @@ class Migration(migrations.Migration):
             name='UserProfile',
             fields=[
                 ('user', models.OneToOneField(primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('sshkey', models.TextField(help_text=b'Paste one or more public keys in OpenSSH format, one per line.', verbose_name=b'SSH key', blank=True)),
+                ('sshkey', models.TextField(help_text=b'Paste one or more public keys in OpenSSH format, one per line.', verbose_name=b'SSH key', blank=True, validators=[pgweb.core.models.validate_sshkey])),
                 ('lastmodified', models.DateTimeField(auto_now=True)),
             ],
         ),
