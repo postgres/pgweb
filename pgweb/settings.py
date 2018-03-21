@@ -1,7 +1,6 @@
 # Django settings for pgweb project.
 
 DEBUG = False
-#TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
 	('PostgreSQL Webmaster', 'webmaster@postgresql.org'),
