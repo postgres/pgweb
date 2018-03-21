@@ -20,7 +20,6 @@ class MailingList(models.Model):
 	group = models.ForeignKey(MailingListGroup, null=False)
 	listname = models.CharField(max_length=64, null=False, blank=False, unique=True)
 	active = models.BooleanField(null=False, default=False)
-	externallink = models.URLField(max_length=200, null=True, blank=True)
 	description = models.TextField(null=False, blank=True)
 	shortdesc = models.TextField(null=False, blank=True)
 
