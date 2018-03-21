@@ -24,17 +24,3 @@ def listinfo(request):
 			} for l in MailingList.objects.all()]
 	json.dump({'groups': groupdata, 'lists': listdata}, resp)
 	return resp
-
-# Temporary API endpoint
-def activate(request):
-	if not request.META['REMOTE_ADDR'] in settings.LIST_ACTIVATORS:
-		return HttpResponseForbidden()
-	listname = request.GET['listname']
-	active = (request.GET['active'] == '1')
-
-	l = get_object_or_404(MailingList, listname=listname)
-	if l.active == active:
-		return HttpResponse("Not changed")
-	l.active = active
-	l.save()
-	return HttpResponse("Changed")
