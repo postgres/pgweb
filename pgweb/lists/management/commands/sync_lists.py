@@ -19,7 +19,6 @@ class Command(BaseCommand):
 		else:
 			proto="https"
 		r = requests.get('{0}://{1}/listinfo/'.format(proto, settings.ARCHIVES_SEARCH_SERVER))
-		print "2"
 		j = r.json()
 		allgroups = list(set([l['group'] for l in j]))
 		with transaction.atomic():
