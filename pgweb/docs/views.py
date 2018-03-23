@@ -88,7 +88,7 @@ def root(request):
 		'versions': versions,
 	})
 
-class _VersionPdfWrapper(Version):
+class _VersionPdfWrapper(object):
 	"""
 	A wrapper around a version that knows to look for PDF files, and
 	return their sizes.
