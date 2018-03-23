@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 
 import re
 
@@ -146,3 +146,6 @@ class ChangeEmailForm(forms.Form):
 		if email1 != email2:
 			raise forms.ValidationError("Email addresses don't match")
 		return email2
+
+class PgwebPasswordResetForm(forms.Form):
+	email = forms.EmailField()

@@ -36,7 +36,7 @@ from models import CommunityAuthSite, EmailChangeToken
 from forms import PgwebAuthenticationForm
 from forms import SignupForm, SignupOauthForm
 from forms import UserForm, UserProfileForm, ContributorForm
-from forms import ChangeEmailForm
+from forms import ChangeEmailForm, PgwebPasswordResetForm
 
 import logging
 log = logging.getLogger(__name__)
@@ -235,6 +235,9 @@ def changepwd(request):
 									 post_change_redirect='/account/changepwd/done/')
 
 def resetpwd(request):
+	# Basic django password reset feature is completely broken. For example, it does not support
+	# resetting passwords for users with "old hashes", which means they have no way to ever
+	# recover. So implement our own, since it's quite the trivial feature.
 	if request.method == "POST":
 		try:
 			u = User.objects.get(email__iexact=request.POST['email'])
@@ -242,10 +245,29 @@ def resetpwd(request):
 				return HttpServerError(request, "This account cannot change password as it's connected to a third party login site.")
 		except User.DoesNotExist:
 			log.info("Attempting to reset password of {0}, user not found".format(request.POST['email']))
-	log.info("Initiating password set from {0}".format(get_client_ip(request)))
-	return authviews.password_reset(request, template_name='account/password_reset.html',
-									email_template_name='account/password_reset_email.txt',
-									post_reset_redirect='/account/reset/done/')
+			return HttpResponseRedirect('/account/reset/done/')
+
+		form = PgwebPasswordResetForm(data=request.POST)
+		if form.is_valid():
+			log.info("Initiating password set from {0} for {1}".format(get_client_ip(request), form.cleaned_data['email']))
+			token = default_token_generator.make_token(u)
+			send_template_mail(settings.NOREPLY_FROM,
+							   form.cleaned_data['email'],
+							   'Password reset for your postgresql.org account',
+							   'account/password_reset_email.txt',
+							   {
+								   'user': u,
+								   'uid': urlsafe_base64_encode(force_bytes(u.pk)),
+								   'token': token,
+							   },
+			)
+			return HttpResponseRedirect('/account/reset/done/')
+	else:
+		form = PgwebPasswordResetForm()
+
+	return render_pgweb(request, 'account', 'account/password_reset.html', {
+			'form': form,
+	})
 
 def change_done(request):
 	log.info("Password change done from {0}".format(get_client_ip(request)))
