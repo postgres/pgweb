@@ -16,16 +16,16 @@
 <option value="">-- All lists</option>
 {%for l in lists %}
 {%ifchanged l.group%}
-<option value="{{l.group.negid}}"{%if l.group.negid = listid%} SELECTED{%endif%}>-- {{l.group}}</option>
+<option value="{{l.group.negid}}"{%if l.group.negid == listid%} SELECTED{%endif%}>-- {{l.group}}</option>
 {%endifchanged%}
-<option value="{{l.id}}"{%if l.id = listid%} SELECTED{%endif%}>{{l}}</option>
+<option value="{{l.id}}"{%if l.id == listid%} SELECTED{%endif%}>{{l}}</option>
 {%endfor%}
     </select></td>
    </tr>
    <tr>
     <td class="colFirstR">Post date:</td>
     <td class="colLast"><select name="d">{%for d in dates%}
-     <option value="{{d.val}}"{%if d.val = dateval %} SELECTED{%endif%}>{{d.text}}</option>{%endfor%}
+     <option value="{{d.val}}"{%if d.val == dateval %} SELECTED{%endif%}>{{d.text}}</option>{%endfor%}
     </select></td>
    </tr>
    <tr class="lastrow">
@@ -43,10 +43,10 @@
  <div>{{search_error}}</div>
  {%else%}
   <!-- docbot goes here -->
-  {%if hitcount = 0 %}
+  {%if hitcount == 0 %}
    <p>Your search for <b>{{query}}</b> returned no hits.</p>
   {%else%}
-   <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount = 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
+   <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount == 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
    {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
    {%for hit in hits %}
     {{forloop.counter0|add:firsthit}}. <a href="https://www.postgresql.org/message-id/{{hit.messageid}}">{{hit.subject}}</a> [{{hit.rank|floatformat:2}}]<br/>

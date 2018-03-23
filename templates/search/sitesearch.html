@@ -25,10 +25,10 @@
  <div>{{search_error}}</div>
  {%else%}
   <!-- docbot goes here -->
-  {%if hitcount = 0 %}
+  {%if hitcount == 0 %}
    <p>Your search for <b>{{query}}</b> returned no hits.</p>
   {%else%}
-   <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount = 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
+   <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount == 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
    {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
    {%for hit in hits %}
     {{forloop.counter0|add:firsthit}}. <a href="{{hit.url}}">{{hit.title}}</a> [{{hit.rank|floatformat:2}}]<br/>
