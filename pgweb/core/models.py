@@ -125,7 +125,7 @@ class Organisation(models.Model):
 	email = models.EmailField(null=False, blank=True)
 	phone = models.CharField(max_length=100, null=False, blank=True)
 	orgtype = models.ForeignKey(OrganisationType, null=False, blank=False, verbose_name="Organisation type")
-	managers = models.ManyToManyField(User, null=False, blank=False)
+	managers = models.ManyToManyField(User, blank=False)
 	lastconfirmed = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 
 	send_notification = True
