@@ -65,13 +65,16 @@ ROOT_URLCONF = 'pgweb.urls'
 TEMPLATES = [{
 	'BACKEND': 'django.template.backends.django.DjangoTemplates',
 	'DIRS': ['templates', ],
-	'APP_DIRS': True,
 	'OPTIONS': {
 		'context_processors': [
 			'django.contrib.auth.context_processors.auth',
 			'django.contrib.messages.context_processors.messages',
 			'django.template.context_processors.media',
 			'pgweb.util.contexts.PGWebContextProcessor',
+		],
+		'loaders': [
+			'django.template.loaders.filesystem.Loader',
+			'django.template.loaders.app_directories.Loader',
 		],
 	},
 }]
