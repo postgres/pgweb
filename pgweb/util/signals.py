@@ -110,7 +110,7 @@ def _get_notification_text(obj):
 
 def my_pre_save_handler(sender, **kwargs):
 	instance = kwargs['instance']
-	if getattr(instance, 'send_notification', False):
+	if getattr(instance, 'send_notification', False) and get_current_user():
 		(subj, cont) = _get_notification_text(instance)
 		if cont:
 			cont = _build_url(instance) + "\n\n" + cont
@@ -121,7 +121,7 @@ def my_pre_save_handler(sender, **kwargs):
 
 def my_m2m_changed_handler(sender, **kwargs):
 	instance = kwargs['instance']
-	if getattr(instance, 'send_m2m_notification', False):
+	if getattr(instance, 'send_m2m_notification', False) and get_current_user():
 		(cl, f) = sender.__name__.split('_')
 		if not hasattr(instance, '_stored_m2m'):
 			instance._stored_m2m={}
@@ -144,7 +144,7 @@ def my_m2m_changed_handler(sender, **kwargs):
 
 def my_pre_delete_handler(sender, **kwargs):
 	instance = kwargs['instance']
-	if getattr(instance, 'send_notification', False):
+	if getattr(instance, 'send_notification', False) and get_current_user():
 		send_simple_mail(settings.NOTIFICATION_FROM,
 						 settings.NOTIFICATION_EMAIL,
 						 "%s id %s has been deleted by %s" % (
