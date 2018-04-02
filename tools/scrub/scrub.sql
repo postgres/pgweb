@@ -28,24 +28,21 @@ DELETE FROM account_emailchangetoken;
 UPDATE auth_user SET username='id' || id,
        		     first_name='F' || id,
 		     last_name='L' || id,
-		     email='E' || id || '@scrubbed.postgresql.org',
+		     email='e' || id || '@scrubbed.postgresql.org',
 		     password='NOTAVALIDHASHSETBYSCRUBBINGSCRIPT',
 		     is_staff='f', is_superuser='f';
 
-UPDATE contributors_contributor SET email='E'||id||'@scrubbed.postgresql.org';
+UPDATE contributors_contributor SET email='e'||id||'@scrubbed.postgresql.org';
 
 DELETE FROM core_moderationnotification;
 
-UPDATE core_organisation SET email='E'||id||'@scrubbed.postgresql.org', phone='1-555-'||id,
+UPDATE core_organisation SET email='e'||id||'@scrubbed.postgresql.org', phone='1-555-'||id,
        name='O'||id, address='scrubbedaddress', url='http://scrubbed.url';
 DELETE FROM core_organisation_managers;
 UPDATE core_userprofile SET sshkey='SSHKEYSCRUBBED';
 
 TRUNCATE TABLE django_admin_log;
 TRUNCATE TABLE django_session;
-
--- We don't really care about the comments anymore, they're getting dropped...
-TRUNCATE TABLE docs_doccomment;
 
 -- Just in case we snapshotted with something in the queue
 DELETE FROM mailqueue_queuedmail;
@@ -55,7 +52,7 @@ UPDATE profserv_professionalservice SET contact='scrubbedcontact';
 TRUNCATE TABLE survey_surveylock;
 
 -- We still have a lot of migration data, so lose it.
-DROP VIEW IF EXISTS users_keys;
 DROP TABLE IF EXISTS users_old;
+DROP TABLE IF EXISTS docs_doccomment_saved;
 
 \echo NOTE! Transaction has not been committed. Verify manually and then commit!
