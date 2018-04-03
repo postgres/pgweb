@@ -40,6 +40,12 @@ def load_doc_file(filename, f):
 	else:
 		encoding = 'latin1'
 
+	# PostgreSQL prior to 11 used an older toolchain to build the docs, which does not support
+	# indented HTML. So turn it off on those, but keep it on the newer versions where it works,
+	# because it makes things a lot easier to debug.
+	if float(ver) < 11 and float(ver) > 0:
+		tidyopts['indent'] = 'no'
+
 	contents = unicode(rawcontents, encoding)
 
 	tm = re_titlematch.search(contents)
