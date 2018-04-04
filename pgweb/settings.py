@@ -153,7 +153,6 @@ FRONTEND_SERVERS=()                                    # A tuple containing the 
 FTP_MASTERS=()										   # A tuple containing the *IP addresses* of all machines
                                                        # trusted to upload ftp structure data
 VARNISH_PURGERS=()                                     # Extra servers that can do varnish purges through our queue
-LIST_ACTIVATORS=()								       # Servers that can activate lists
 ARCHIVES_SEARCH_SERVER="archives.postgresql.org"       # Where to post REST request for archives search
 ARCHIVES_SEARCH_PLAINTEXT=False                        # Contact ARCHIVES_SEARCH_SERVER with http instead of https
 FRONTEND_SMTP_RELAY="magus.postgresql.org"             # Where to relay user generated email
