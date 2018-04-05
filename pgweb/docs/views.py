@@ -162,4 +162,5 @@ def commentform(request, itemid, version, filename):
 		'form_intro': template_to_string('docs/docsbug.html', {
 			'user': request.user,
 		}),
+		'savebutton': 'Send email',
 	})
