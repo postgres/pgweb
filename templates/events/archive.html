@@ -7,15 +7,15 @@
 {%for eventblock in eventblocks%}
 {%if eventblocks|length > 1%}<h2><a name="{{eventblock.anchor|slugify}}">{{eventblock.name}}</a></h2>{%endif%}
 <p>
-<i><b>Note:</b> The PostgreSQL Global Development Group does not endorse any
+<em><strong>Note:</strong> The PostgreSQL Global Development Group does not endorse any
 events run by third parties. No guarantee of the quality of events is offered
-whatsoever.  For information on <a href="/community/recognition/#conferences">Community Conference Recognition</a>, please review the guidelines <a href="/community/recognition/#conferences">here</a>.</i>
+whatsoever.  For information on <a href="/community/recognition/#conferences">Community Conference Recognition</a>, please review the guidelines <a href="/community/recognition/#conferences">here</a>.</em>
 </p>
 {%for event in eventblock.events %}
 <div><a href="/about/event/{{event.id}}/">{{event.title}}</a></div>
-<div>Date: <b>{{event.displaydate|safe}}</b></div>
-<div>Location: <b>{{event.locationstring}}</b></div>
-{%if event.language%}<div>Language: <b>{{event.language}}</b></div>{%endif%}
+<div>Date: <strong>{{event.displaydate|safe}}</strong></div>
+<div>Location: <strong>{{event.locationstring}}</strong></div>
+{%if event.language%}<div>Language: <strong>{{event.language}}</strong></div>{%endif%}
 <div>
 {{event.summary|markdown}}
 </div>

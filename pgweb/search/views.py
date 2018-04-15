@@ -309,6 +309,6 @@ def search(request):
 				'hits': [{
 						'title': h[3],
 						'url': "%s%s" % (h[1], h[2]),
-						'abstract': h[4].replace("[[[[[[", "<b>").replace("]]]]]]","</b>"),
+						'abstract': h[4].replace("[[[[[[", "<strong>").replace("]]]]]]","</strong>"),
 						'rank': h[5]} for h in hits[:-1]],
 				})

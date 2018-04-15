@@ -13,11 +13,11 @@ div.mirrorselect {
 {%endblock%}
 {%block contents%}
 <h1>Choose a download mirror</h1>
-<p><b>Downloading: </b> {{path}}</p>
+<p><strong>Downloading:</strong> {{path}}</p>
 
 
 {%if near_mirrors%}
-<p><b>We think these mirrors are near you:</b></p>
+<p><strong>We think these mirrors are near you:</strong></p>
 <div id="nearmirrorwrap">
  {%for mirror in near_mirrors%}
   {%include "downloads/inc_mirror.html"%}
@@ -25,7 +25,7 @@ div.mirrorselect {
 </div>
 {%endif%}
 
-<p><b>Choose any other mirror in the world:</b></p>
+<p><strong>Choose any other mirror in the world:</strong></p>
 <div id="mainmirrorwrap">
  {%for mirror in all_mirrors%}
   {%include "downloads/inc_mirror.html"%}

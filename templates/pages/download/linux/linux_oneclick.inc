@@ -28,6 +28,6 @@ This download is intended for users who wish to include PostgreSQL as part of an
 </p>
 
 <p>
-<i>Note:</i> The installers do not integrate with
+<em>Note:</em> The installers do not integrate with
 platform-specific packaging systems.
 </p>

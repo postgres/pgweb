@@ -48,12 +48,12 @@ normal, multiuser mode. This can be used to harm the server.</p>
 <li>Configuration Setting Privilege Escalation: in the event that an attacker
     has a legitimate login on the database server, and the server is configured
     such that this user name and the database name are identical (e.g. user
-    <i>web</i>, database <i>web</i>), then this vulnerability may be used to
+    <em>web</em>, database <em>web</em>), then this vulnerability may be used to
     temporarily set one configuration variable with the privileges of the
     superuser.</li>
 <li>Arbitrary Code Execution: if the attacker meets all of the qualifications
     under 2 above, and has the ability to save files to the filesystem as well
-    (even to the <i>tmp</i> directory), then they can use the vulnerability to
+    (even to the <em>tmp</em> directory), then they can use the vulnerability to
     load and execute arbitrary C code. SELinux will prevent this specific
     type of exploit.</li>
 </ol>

@@ -13,6 +13,6 @@ the packages from BigSQL for all supported versions.
 </p>
 
 <p>
-<i>Note:</i> The cross distribution packages do not fully integrate with
+<em>Note:</em> The cross distribution packages do not fully integrate with
 the platform-specific packaging systems.
 </p>
