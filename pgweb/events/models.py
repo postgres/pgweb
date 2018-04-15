@@ -5,7 +5,7 @@ from pgweb.core.models import Country, Language, Organisation
 class Event(models.Model):
 	approved = models.BooleanField(null=False, blank=False, default=False)
 
-	org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or webmaster@postgresql.org if none are listed.")
+	org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.")
 	title = models.CharField(max_length=100, null=False, blank=False)
 	isonline = models.BooleanField(null=False, default=False, verbose_name="Online event")
 	city = models.CharField(max_length=50, null=False, blank=True)

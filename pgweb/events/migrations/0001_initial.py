@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('details', models.TextField(help_text=b'Complete event description')),
                 ('country', models.ForeignKey(blank=True, to='core.Country', null=True)),
                 ('language', models.ForeignKey(default=b'eng', blank=True, to='core.Language', help_text=b'Primary language for event. When multiple languages, specify this in the event description', null=True)),
-                ('org', models.ForeignKey(verbose_name=b'Organisation', to='core.Organisation', help_text=b'If no organisations are listed, please check the <a href="/account/orglist/">organisation list</a> and contact the organisation manager or webmaster@postgresql.org if none are listed.')),
+                ('org', models.ForeignKey(verbose_name=b'Organisation', to='core.Organisation', help_text=b'If no organisations are listed, please check the <a href="/account/orglist/">organisation list</a> and contact the organisation manager or <a href="mailto:webmaster@postgresql.org">webmaster@postgresql.org</a> if none are listed.')),
             ],
             options={
                 'ordering': ('-startdate', '-enddate'),

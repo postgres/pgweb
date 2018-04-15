@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('date', models.DateField(default=datetime.date.today)),
                 ('title', models.CharField(max_length=200)),
                 ('content', models.TextField()),
-                ('org', models.ForeignKey(verbose_name=b'Organisation', to='core.Organisation', help_text=b'If no organisations are listed, please check the <a href="/account/orglist/">organisation list</a> and contact the organisation manager or webmaster@postgresql.org if none are listed.')),
+                ('org', models.ForeignKey(verbose_name=b'Organisation', to='core.Organisation', help_text=b'If no organisations are listed, please check the <a href="/account/orglist/">organisation list</a> and contact the organisation manager or <a href="mailto:webmaster@postgresql.org">webmaster@postgresql.org</a> if none are listed.')),
             ],
             options={
                 'ordering': ('-date',),
