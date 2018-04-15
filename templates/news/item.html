@@ -3,7 +3,7 @@
 {%block title%}{{obj.title}}{%endblock%}
 {%block contents%}
 <h1>{{obj.title}}</h1>
-<div class="newsdate">Posted on <strong>{{obj.displaydate}}</strong></div>
+<div class="newsdate">Posted on <strong>{{obj.displaydate}}</strong> by {{ obj.org.name }}</div>
 {{obj.content|markdown}}
 {%if obj.is_migrated%}
 <p><em>This post has been migrated from a previous version of the PostgreSQL

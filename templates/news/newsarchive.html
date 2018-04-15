@@ -10,7 +10,7 @@
 
 {%for obj in news %}
 <h2><a href="/about/news/{{obj.id}}/">{{obj.title}}</a></h2>
-<div class="newsdate">Posted on <strong>{{obj.displaydate}}</strong></div>
+<div class="newsdate">Posted on <strong>{{obj.displaydate}}</strong> by {{ obj.org.name }}</div>
 {{obj.content|markdown|striptags|truncatewords:20}}
 {%endfor%}
 <p><a href="/account/news/new/">Submit news</a></p>
