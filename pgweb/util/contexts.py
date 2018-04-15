@@ -13,7 +13,7 @@ sitenav = {
 		{'title': 'Case Studies',       'link':'/about/casestudies/'},
 		{'title': 'Quotes',             'link':'/about/quotesarchive/'},
 		{'title': 'Featured Users',     'link':'/about/users/'},
-		{'title': 'History',            'link':'/about/history/'},
+		{'title': 'History',            'link':'/docs/current/static/history.html'},
 		{'title': 'Sponsors',           'link':'/about/sponsors/', 'submenu': [
 			{'title': 'Servers',    'link': '/about/servers/'},
 		]},
