@@ -157,10 +157,10 @@ def commentform(request, itemid, version, filename):
 
 	return render_pgweb(request, 'docs', 'base/form.html', {
 		'form': form,
-		'formitemtype': 'documentation correction',
+		'formitemtype': 'documentation comment',
 		'operation': 'Submit',
 		'form_intro': template_to_string('docs/docsbug.html', {
 			'user': request.user,
 		}),
-		'savebutton': 'Send email',
+		'savebutton': 'Send Email',
 	})
