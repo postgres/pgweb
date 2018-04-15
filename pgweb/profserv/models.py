@@ -8,7 +8,7 @@ class ProfessionalService(models.Model):
 	org =  models.OneToOneField(Organisation, null=False, blank=False,
 							db_column="organisation_id",
 							verbose_name="organisation",
-							help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or webmaster@postgresql.org if none are listed.")
+							help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.")
 	description = models.TextField(null=False,blank=False)
 	employees = models.CharField(max_length=32, null=True, blank=True)
 	locations = models.CharField(max_length=128, null=True, blank=True)
