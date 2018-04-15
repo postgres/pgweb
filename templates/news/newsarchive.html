@@ -12,6 +12,7 @@
 <h2><a href="/about/news/{{obj.id}}/">{{obj.title}}</a></h2>
 <div class="newsdate">Posted on <strong>{{obj.displaydate}}</strong> by {{ obj.org.name }}</div>
 {{obj.content|markdown|striptags|truncatewords:20}}
+<p><a href="/about/news/{{obj.id}}/">Read more...</a></p>
 {%endfor%}
 <p><a href="/account/news/new/">Submit news</a></p>
 {%endblock%}
