@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('website_url', models.TextField(null=True, blank=True)),
                 ('mailing_list_url', models.TextField(null=True, blank=True)),
                 ('country', models.ForeignKey(to='core.Country')),
-                ('org', models.ForeignKey(blank=True, to='core.Organisation', help_text=b'Organization that manages the PUG and its contents', null=True)),
+                ('org', models.ForeignKey(blank=True, to='core.Organisation', help_text=b'Organisation that manages the PUG and its contents', null=True)),
             ],
         ),
     ]
