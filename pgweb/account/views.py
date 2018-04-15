@@ -62,7 +62,7 @@ def home(request):
 
 objtypes = {
 	'news': {
-		'title': 'News article',
+		'title': 'News Article',
 		'objects': lambda u: NewsArticle.objects.filter(org__managers=u),
 	},
 	'events': {
@@ -74,7 +74,7 @@ objtypes = {
 		'objects': lambda u: Product.objects.filter(org__managers=u),
 	},
 	'services': {
-		'title': 'Professional service',
+		'title': 'Professional Service',
 		'objects': lambda u: ProfessionalService.objects.filter(org__managers=u),
 	},
 	'organisations': {
@@ -582,4 +582,3 @@ def communityauth_getkeys(request, siteid, since=None):
 	j = json.dumps([{'u': k.user.username, 's': k.sshkey} for k in keys])
 
 	return HttpResponse(_encrypt_site_response(site, j))
-
