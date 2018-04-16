@@ -1,31 +1,32 @@
 {%extends "base/page.html"%}
 {%block title%}Local PostgreSQL User Groups{%endblock%}
 {%block contents%}
+<h1>Local User Groups <i class="fa fa-users"></i></h1>
 
-<h1>Local User Groups</h1>
 <p>The PostgreSQL community is proud to have many local chapters that advocate and educate users about PostgreSQL.  Below is a list of PostgreSQL User Groups (PUGs) sorted by country and local area.  If you would like to start a PostgreSQL User Group, please send an email to <a href="mailto:usergroups@postgresql.org">usergroups@postgresql.org</a> and describe the PUG that you want to create.</p>
 <p>If a PUG already exists in your area, follow the URLs below to find out how to attend and participate.</p>
 
 {% for pug_group in pug_list %}
   <h2>{{ pug_group.country }}</h2>
-  <p>
-    <ul>
-    {% for pug in pug_group.pugs %}
-      <li>
-        <strong>{{ pug.locale }}</strong>:
-        {{ pug.title }}
-        {% if pug.website_url %}
-          (<a href="{{ pug.website_url }}">website</a>)
-        {% endif %}
-        {% if pug.mailing_list_url %}
-          (<a href="{{ pug.mailing_list_url }}">mailing list</a>)
-        {% endif %}
-      </li>
-    {% endfor %}
-    </ul>
-  </p>
+  <ul>
+  {% for pug in pug_group.pugs %}
+    <li>
+      <strong>{{ pug.locale }}</strong>:
+      {% if pug.website_url %}
+        <a href="{{ pug.website_url }}" target="_blank">
+      {% endif %}
+      {{ pug.title }}
+      {% if pug.website_url %}
+        </a>
+      {% endif %}
+      {% if pug.website_url %}
+        (<a href="{{ pug.website_url }}" target="_blank">website</a>)
+      {% endif %}
+      {% if pug.mailing_list_url %}
+        (<a href="{{ pug.mailing_list_url }}" target="_blank">mailing list</a>)
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
 {% endfor %}
-
-<h1>PostgreSQL Nonprofit Organisation (NPO) Recognition</h1>
-<p>For information about how <a href="/community/recognition/#npos">Recognised PostgreSQL Nonprofit Organizations (NPOs)</a> become recognised, please review the guidelines <a href="/community/recognition/#npos">here</a>.
 {%endblock%}

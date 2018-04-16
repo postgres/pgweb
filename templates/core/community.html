@@ -1,50 +1,71 @@
 {%extends "base/page.html"%}
 {%block title%}Community{%endblock%}
 {%block contents%}
-<div id="pgCommunityWrap">
-<div id="pgCommunity">
-<h1>Community</h1>
-
-<p>PostgreSQL is well supported by its active community. There are more than a dozen <a href="/community/lists/">mailing lists</a> available, categorized into topics like administration, announcements, jobs, performance, and SQL. We also have several PostgreSQL User Groups in the world, and there is also an active <a href="/community/irc/">IRC</a> community.</p>
-
-<p>In addition to the resources available on this site, there are also links to <a href="/community/international/">international sites</a> that contain PostgreSQL information in various languages. PostgreSQL community <a href="/community/resources/">resources</a> are also highlighted in this section of the website.</p>
-</div>
-</div>
-
-{%if survey%}
-<div id="pgSurveyWrap">
-<div id="pgSurvey">
-  <dl>
-    <dt>User Survey</dt>
-    <dd>{{survey.question}}</dd>
-    <dd>
-      <form method="post" action="/community/survey/vote/{{survey.id}}/"><!-- CSRF exempt -->
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Community <i class="fa fa-users"></i></h1>
       <p>
-      {%for q in survey.questions%}
-      <input type="radio" name="answer" value="{{q.value}}" id="surv_opt_{{q.value}}" /><label for="surv_opt_{{q.value}}">{{q.text}}</label><br />
-      {%endfor%}
+        PostgreSQL is well-supported by its active community. There are more than a dozen <a href="https://lists.postgresql.org/">mailing lists</a> available, categorized into topics like:
+        <ul>
+          <li><a href="/list/pgsql-announce/">Announcements</a></li>
+          <li><a href="/list/pgsql-hackers/">PostgreSQL development</a></li>
+          <li><a href="/list/pgsql-general/">General PostgreSQL Support</a></li>
+          <li><a href="/list/pgsql-jobs/">Jobs</a></li>
+        </ul>
+        and more. We also have many local <a href="/community/user-groups/">PostgreSQL User Groups</a> all over the world, and there is also an active <a href="/community/irc/">IRC</a> &amp; <a href="https://postgres-slack.herokuapp.com/" target="_blank">Slack</a> community.
       </p>
-      <p><input id="surveySubmit" type="submit" name="submit" value="Vote" /></p>
-      </form>
-    </dd>
-    <dd><a href="/community/survey/{{survey.id}}-{{survey|slugify}}/">Results</a></dd>
-  </dl>
-</div>
-</div>
-{%endif%}
-
-<div id="pgPlanetWrap">
-<div id="pgPlanet">
- <dl>
-  <dt>Planet PostgreSQL</dt>
-  <dd><ul>
-   {%for post in planet%}
-    <li><a href="{{post.url}}">{{post.title}}</a></li>
-   {%endfor%}
-  </ul></dd>
-  <dd><a href="https://planet.postgresql.org">More</a></dd>
- </dl>
-</div>
-</div>
-
+      <p>
+        There are also links to <a href="/community/international/">international sites</a> that contain PostgreSQL information in various languages.
+      </p>
+      <p>People in the PostgreSQL community also contribute to:</p>
+      <ul>
+        <li><a href="https://planet.postgresql.org/" target="_blank">Planet PostgreSQL</a>, an aggregator of blogs covering many topics around PostgreSQL</li>
+        <li><a href="https://wiki.postgresql.org" target="_blank">PostgreSQL Wiki</a>, our wiki, hosting user generated content as well as information for how to contribute code to PostgreSQL</li>
+      </ul>
+    </div>
+    <div class="col-md-4">
+      <h2>Planet PostgreSQL</h2>
+     <dl>
+      <dd><ul class="feature">
+       {% for post in planet %}
+        <li class="{% cycle '' 'pg-bg-gray' %}"><a href="{{ post.url }}">{{ post.title }}</a></li>
+       {%endfor%}
+      </ul></dd>
+     </dl>
+     <a href="https://planet.postgresql.org"><button type="button" class="btn btn-primary">More</button></a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <h2>External Resources</h2>
+      <ul>
+        <li><a href="http://www.pg-forum.de/" target="_blank">pg-forum.de</a>, a German PostgreSQL forum.</li>
+      </ul>
+      <p>
+        Please send appropriate links to <a href="mailto:webmaster@postgresql.org">webmaster@postgresql.org</a> for possible inclusion on this page.
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h2>Survey</h2>
+      {% if survey %}
+        <h3>{{survey.question}}</h3>
+        <form method="post" action="/community/survey/vote/{{survey.id}}/"><!-- CSRF exempt -->
+          <fieldset class="form-group">
+            {%for q in survey.questions%}
+              <div class="form-check">
+                <input id="surv_opt_{{q.value}}" class="form-check-input" type="radio" name="answer" value="{{ q.value }}" />
+                <label class="form-check-label" for="surv_opt_{{q.value}}">{{q.text}}</label>
+              </div>
+            {%endfor%}
+          </fieldset>
+          <div class="form-row">
+            <input class="btn btn-primary" type="submit" name="submit" value="Vote!" />
+          </div>
+          <div class="form-row">
+            <a href="/community/survey/{{survey.id}}-{{survey|slugify}}/"><button type="button" class="btn btn-primary">View Results</button></a>
+          </div>
+        </form>
+      {% endif %}
+    </div>
+  </div>
 {%endblock%}
