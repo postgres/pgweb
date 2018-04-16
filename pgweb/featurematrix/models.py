@@ -62,3 +62,4 @@ class Feature(models.Model):
 			return 'detail/%s/' % self.id
 
 versions = [(f.name,f.verbose_name) for f in Feature()._meta.fields if f.name.startswith('v') and getattr(f, 'visible_default', True)]
+versions = sorted(versions, key=lambda f: -float(f[1]))

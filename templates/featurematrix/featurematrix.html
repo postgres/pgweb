@@ -8,7 +8,7 @@
       var eol_versions = ["{{eol_versions|join:'","'}}"];
 
       // Create form to contain filter checkboxes
-      $('table').before('<form id="version_filter"><fieldset><legend>Filter by version</legend></fieldset></form><br/>');
+      $('#feature-matrix-filter').html('<form id="version_filter"><h5>Filter by version</h5></form>');
 
       // Generate a list of versions based on table column headers
       $('table tr:first th').not('th:nth-child(1)').each(function(){
@@ -17,21 +17,33 @@
         // Only mark a box as checked if no in the EOL list
         var checked = (eol_versions.indexOf($(this).text()) == -1 ? 'checked="checked"' : '');
 
-        $('form#version_filter fieldset').append('<label for="' + version_class + '">' + $(this).text()
+        $('form#version_filter').append('<label for="' + version_class + '">' + $(this).text()
           + '</label><input class="version" ' + checked + ' type="checkbox" id="toggle_' + version_class + '"/ value="' +
           $(this).text() + '"/>&nbsp;');
       });
 
       // Add a checkbox to hide rows where all values are the same between
       // displayed versions.  Default: checked.
-      $('form#version_filter fieldset').append('<hr/> <label for="hide_unchanged">Hide unchanged features</label><input type="checkbox" checked="checked" id="hide_unchanged" />');
+      $('form#version_filter').append('<hr style="margin: 0;" /> <label for="hide_unchanged">Hide unchanged features</label><input type="checkbox" id="hide_unchanged" />');
 
       // Show/hide column based on whether supplied checkbox is checked.
       function filter_version(checkbox)
       {
+        var total_checked = $('form#version_filter .version:checked').length;
         var column=$("table tr:first th").index($("table tr:first th:contains('" + checkbox.val() + "')")) + 1;
+        if (total_checked) {
+          $('.feature-version-col').css('width', (70 / total_checked) + '%');
+        }
         $("table th:nth-child(" + column + "), table td:nth-child(" + column + ")").toggle(checkbox.is(":checked")).toggleClass('hidden');
         hide_unchanged();
+        // Lastly, if at this point an entire row is obsolete, then hide
+        $('tbody tr').each(function(i, el) {
+          var $tr = $(el),
+              visible_count = $tr.find('td:not(.hidden)').length,
+              obsolete_count = $tr.find('td.fm_obs:not(.hidden)').length;
+          // if visible count matches obsolete count, then hide this row
+          $tr.toggle(visible_count !== obsolete_count);
+        });
       }
 
       // Show/hide rows if all values are the same in displayed cells
@@ -66,7 +78,6 @@
   //]]>
 </script>
 <style type="text/css">
-div.tblBasic { margin-top: 20px; }
 form#version_filter { text-align: center; }
 input.version { margin-right: 15px; }
 input.version:last-child { margin-right: 0; }
@@ -77,44 +88,54 @@ td.fm_unk { background-color: #ffffaa !important; }
 </style>
 {%endblock%}
 {%block contents%}
-<h1>Feature Matrix</h1>
+<h1>Feature Matrix <i class="fas fa-th-list"></i></h1>
 <p>
 This table outlines which features were added in which version. To get more
 information about a feature, click the link or hover the mouse pointer over
 the text.
 </p>
-<h2>Groups</h2>
+<h3>Groups</h3>
 <ul>
-{%for group in groups %}
- <li><a href="#{{group.group.groupname|slugify}}">{{group.group.groupname}}</a></li>
-{%endfor%}
+{% for group in groups %}
+  <li>
+    <a href="#{{group.group.groupname|slugify}}">{{group.group.groupname}}</a>
+  </li>
+{% endfor %}
 </ul>
 
-<div class="tblBasic">
-<table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
-{%for group in groups %}
- <tr>
-  <th class="colFirst"><a name="{{group.group.groupname|slugify}}">{{group.group.groupname}}</a></th>
-  {%for col in group.group.columns %}
-  <th class="{%if forloop.last%}colLast{%else%}colMid{%endif%}">{{col}}</th>
-  {%endfor%}
- </tr>
- {%for feature in group.features%}
-  <tr valign="top" {%if forloop.last%}class="lastrow"{%endif%}>
-  <td class="colFirst" {%if feature.featuredescription%}title="{{feature.featuredescription|truncatewords:15}}"{%endif%}>
-   {% if feature.featuredescription %}
-    <a href="{{feature.featurelink}}">{{feature.featurename}}</a>
-   {%else%}
-    {{feature.featurename}}
-   {%endif%}
-  </td>
-  {%for col in feature.columns%}
-  <td class="{%if forloop.last%}colLast{%else%}colMid{%endif%} fm_{{col.class}}">{{col.str}}</td>
-  {%endfor%}
-  </tr>
- {%endfor%}
-{%endfor%}
-</table>
+<div class="row">
+  <div id="feature-matrix-filter" class="col-8 offset-2 border"></div>
 </div>
 
+{% for group in groups %}
+  <h2>
+    <a name="{{group.group.groupname|slugify}}">{{ group.group.groupname }}</a>
+  </h2>
+  <table class="table table-striped table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" width="30%">&nbsp;</th>
+        {% for col in group.group.columns %}
+          <th scope="col" class="feature-version-col">{{col}}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {%for feature in group.features%}
+        <tr valign="top">
+          <th scope="row" {%if feature.featuredescription %}title="{{ feature.featuredescription|truncatewords:15 }}"{% endif %}>
+            {% if feature.featuredescription %}
+              <a href="{{feature.featurelink}}">{{feature.featurename}}</a>
+            {%else%}
+              {{feature.featurename}}
+            {%endif%}
+          </th>
+          {%for col in feature.columns%}
+            <td class="fm_{{col.class}}">{{col.str}}</td>
+          {%endfor%}
+        </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+{% endfor %}
 {%endblock%}
