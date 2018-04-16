@@ -1,30 +1,32 @@
 {%extends "base/page.html"%}
 {%block title%}Survey Results: {{survey}}{%endblock%}
 {%block contents%}
-<h1>Survey Results</h1>
+<h1>Survey Results <i class="fas fa-list-ul"></i></h1>
 <p>The current results of our <strong>{{survey}}</strong> survey are:</p>
 
-<div class="tblBasic">
-<table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+<table class="table table-striped">
+  <thead class="thead-light">
     <tr>
-        <th class="colFirst">Answer</th>
-        <th class="colMid">Responses</th>
-        <th class="colLast">Percentage</th>
+      <th>Answer</th>
+      <th>Responses</th>
+      <th>Percentage</th>
     </tr>
-{%for a in survey.completeanswers%}
-    <tr>
-        <td class="colFirst">{{a.option}}</td>
-        <td class="colMid">{{a.votes}}</td>
-        <td class="colLast">{{a.votespercent}}%</td>
-    </tr>
-{%endfor%}
-    <tr class="lastrow">
-        <td class="colFirst"><strong>Total</strong></td>
-        <td class="colMid">{{survey.totalvotes}}</td>
-        <td class="colLast"></td>
-    </tr>
+  </thead>
+  <tbody>
+    {%for a in survey.completeanswers%}
+        <tr>
+            <td>{{a.option}}</td>
+            <td>{{a.votes}}</td>
+            <td>{{a.votespercent}}%</td>
+        </tr>
+    {%endfor%}
+        <tr>
+            <td><b>Total</b></td>
+            <td>{{survey.totalvotes}}</td>
+            <td></td>
+        </tr>
+  </tbody>
 </table>
-</div>
 
 <p>This survey was posted {{survey.posted|date}}.</p>
 
