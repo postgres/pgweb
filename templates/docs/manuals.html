@@ -2,34 +2,31 @@
 {%block title%}Manuals{%endblock%}
 {%block contents%}
 
-<h1>Manuals</h1>
-<p></p>
+<h1>Manuals <i class="fas fa-book"></i></h1>
 
-<div class="tblBasic">
-<table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
-<tr>
-	<th class="colMid">Online Version</th>
-	<th class="colLast">PDF Version</th>
-</tr>
-{%for v in versions%}
-<tr{%if forloop.last%} class="lastrow"{%endif%}>
-    <td class="colMid">
-          <ul>
-            <li><a href="/docs/{{v.numtree}}/static/index.html">{{v.treestring}}</a></li>
-	  </ul>
-    </td>
-    <td class="colLast">
-	{%if v.a4pdf or v.uspdf%}
-	<ul>
-	  {%if v.a4pdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">({{v.a4pdf|filesizeformat}})</span></li>{%endif%}
-	  {%if v.uspdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-US.pdf">US PDF</a> <span class="txtMediumGrey">({{v.uspdf|filesizeformat}})</span></li>{%endif%}
-	</ul>
-	{%endif%}
-    </td>
-</tr>
-{%endfor%}
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Online Version</th>
+      <th>PDF Version</th>
+    </tr>
+  </thead>
+  <tbody>
+		{%for v in versions%}
+		<tr{%if forloop.last%}{%endif%}>
+		    <td>
+	        <a href="/docs/{{v.numtree}}/static/index.html">{{v.treestring}}</a>
+		    </td>
+		    <td>
+			{%if v.a4pdf or v.uspdf%}
+			  {%if v.a4pdf%}Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">({{v.a4pdf|filesizeformat}})</span>{%endif%}
+			  {%if v.uspdf%}Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-US.pdf">US PDF</a> <span class="txtMediumGrey">({{v.uspdf|filesizeformat}})</span>{%endif%}
+        {%if not v.a4pdf and not v4.uspdf%}PDF version not available{%endif%}
+      {%endif%}
+		</tr>
+		{%endfor%}
+  </tbody>
 </table>
-</div>
 
 <p>Please see the <a href="/docs/manuals/archive/">manual archive</a> for documentation for older releases.
 The DocBook SGML source for the manuals is available as part of the PostgreSQL source download available in

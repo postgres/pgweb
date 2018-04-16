@@ -51,11 +51,12 @@ def submitbug(request):
 	return render_pgweb(request, 'support', 'base/form.html', {
 		'form': form,
 		'formitemtype': 'bug report',
+		'formtitle': 'Submit Bug Report <i class="fas fa-bug"></i>',
 		'operation': 'Submit',
 		'form_intro': template_to_string('misc/bug_header.html', {
 			'supportedversions': versions,
 		}),
-		'savebutton': 'Create report and send email',
+		'savebutton': 'Submit Report and Send Email',
 	})
 
 

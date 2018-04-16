@@ -2,34 +2,31 @@
 {%block title%}Manual Archive{%endblock%}
 {%block contents%}
 
-<h1>Manual Archive</h1>
+<h1>Manual Archive <i class="fas fa-book"></i></h1>
 
 <p>Following are links to manuals (both online and printable versions) for PostgreSQL releases that are no longer supported.
 If you are still using any of these releases, you are strongly advised to upgrade.</p>
 
-<div class="tblBasic">
-<table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
-<tr>
-	<th class="colMid">Online Version</th>
-	<th class="colLast">PDF Version</th>
-</tr>
-
-{%for v in versions%}
-<tr{%if forloop.last%} class="lastrow"{%endif%}>
-    <td class="colMid">
-          <ul>
-            <li><a href="/docs/{{v.numtree}}/static/{{v.indexname}}">{{v.treestring}}</a></li>
-          </ul>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Online Version</th>
+      <th>PDF Version</th>
+    </tr>
+  </thead>
+  <tbody>
+		{%for v in versions%}
+		<tr{%if forloop.last%}{%endif%}>
+	    <td>
+          <a href="/docs/{{v.numtree}}/static/{{v.indexname}}">{{v.treestring}}</a>
       </td>
-      <td class="colLast">
-	<ul>
-	  {%if v.a4pdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">({{v.a4pdf|filesizeformat}})</span></li>{%endif%}
-	  {%if v.uspdf%}<li>Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-US.pdf">US PDF</a> <span class="txtMediumGrey">({{v.uspdf|filesizeformat}})</span></li>{%endif%}
-	  {%if not v.a4pdf and not v4.uspdf%}<li>PDF version not available</li>{%endif%}
-	</ul>
+      <td>
+				  {%if v.a4pdf%}Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">({{v.a4pdf|filesizeformat}})</span>{%endif%}
+				  {%if v.uspdf%}Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-US.pdf">US PDF</a> <span class="txtMediumGrey">({{v.uspdf|filesizeformat}})</span>{%endif%}
+				  {%if not v.a4pdf and not v4.uspdf%}PDF version not available{%endif%}
       </td>
-</tr>
-{%endfor%}
+		</tr>
+		{%endfor%}
+  </tbody>
 </table>
-</div>
 {%endblock%}
