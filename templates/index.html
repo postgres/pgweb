@@ -1,216 +1,213 @@
 {%extends "base/base.html" %}
+{% load pgfilters %}
 {%block title%}The world's most advanced open source database{%endblock%}
 {%block meta%}
   <meta name="description" content="The official site for PostgreSQL, the world's most advanced open source database" />
 {%endblock%}
 {%block layoutblock%}
-        <div id="pgFrontContainer">
-          <div id="pgFrontMain">
-            <div id="pgFrontFeature">
-              <div id="pgFrontFeatureContent">
+<div class="jumbotron jumbotron-fluid pg-jumbotron">
+  <div class="container">
+    <h1 class="text-white pg-jumbotron-header">PostgreSQL: The World's Most Advanced open source relational database</h1>
+    <div class="row">
+      <div class="col text-center">
+        <a class="btn btn-light btn-rounded" role="button" href="/download/">Download <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        <a class="btn btn-light btn-rounded" role="button" href="/about/">New to PostgreSQL?</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Jumbotron -->
+<div class="container margin">
+  <!-- Start First Feature Row -->
 
-                <p><strong>1<sup>st</sup> March 2018</strong></p>
+  <div class="row">
+    <!-- Feature -->
+    <div class="col-lg-6 feature">
+      <img src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+      <h2>New to PostgreSQL?</h2>
+      <div class="text">
+        <p>
+          PostgreSQL is a powerful, open source object-relational database system with over 30 years of active development
+          that has earned it a strong reputation for reliability, feature robustness, and performance.
+        </p>
+        <p>
+          There is a wealth of information to be found describing how to <a href="{{link_root}}/download/">install</a> and <a href="{{link_root}}/docs/">use</a> PostgreSQL through the <a href="{{link_root}}/docs/">official documentation</a>.
+          The PostgreSQL community provides many helpful places to become familiar with the technology, discover how it works, and find
+          career opportunities. Reach out to the community <a href="{{link_root}}/community/">here</a>.
+        </p>
+      </div>
+      <a href="{{link_root}}/about/" title="Read More"><button type="button" class="btn btn-center btn-primary">Read More</button></a>
+    </div>
+    <!-- END Feature -->
 
-                <h1 id="txtFrontFeatureHeading">
-                  PostgreSQL 10.3 Released!
-                </h1>
-                <p>
-                  The PostgreSQL Global Development Group has released an update to all supported versions of our database system, including 10.3, 9.6.8, 9.5.12, 9.4.17, and 9.3.22.
-                </p>
-                <p>
-                  This release centers around added documentation that describes <a href="https://wiki.postgresql.org/wiki/A_Guide_to_CVE-2018-1058:_Protect_Your_Search_Path">CVE-2018-1058</a> and how to take steps to mitigate the impact on PostgreSQL databases. There are also several bug fixes included in the release.  All users using the affected versions of PostgreSQL should update as soon as possible.
-                </p>
+    <!-- Feature -->
+    <div class="col-lg-6 feature">
+      <i class="fas fa-download"></i>
+      <h2>Latest Releases</h2>
+      <div class="text">
+        <p>
+          <strong>2018-03-01 - PostgreSQL 10.3 Released!</strong>
+          The PostgreSQL Global Development Group has released an update to all supported versions of our database system, including 10.3, 9.6.8, 9.5.12, 9.4.17, and 9.3.22.
+        </p>
+        <ul>
+          {% for v in versions %}
+            <li class="{% cycle '' 'pg-bg-gray' %}"><b>{{ v.numtree }}.{{ v.latestminor }}</b> &middot; {{ v.reldate|date:"Y-m-d" }} &middot; <a href="/docs/{{ v.numtree }}/static/{{ v.relnotes }}">Notes</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <a href="{{link_root}}/download/" title="Download"><button type="button" class="btn btn-center btn-primary">Download</button></a>
+    </div>
+    <!-- END Feature -->
 
-                <div id="txtFrontFeatureLink">
-                  <br/>
-                  <img src="/media/img/layout/blt_blu_arrow.png" width="6" height="6" alt="" /><a href="/about/news/1834/" title="Release Announcement">Release Announcement</a><br />
-                  <img src="/media/img/layout/blt_blu_arrow.png" width="6" height="6" alt="" /><a href="/docs/current/static/release-10-3.html" title="Release Notes">Release Notes</a><br />
-                  <img src="/media/img/layout/blt_blu_arrow.png" width="6" height="6" alt="" /><a href="https://wiki.postgresql.org/wiki/A_Guide_to_CVE-2018-1058:_Protect_Your_Search_Path">A Guide to CVE-2018-1058</a><br />
-                  <img src="/media/img/layout/blt_blu_arrow.png" width="6" height="6" alt="" /><a href="/download/" title="Download">Download</a>
-                </div>
+  </div>
+  <!-- END First Feature Row -->
+  <!-- Start Second Feature Row -->
+  <div class="row">
+    <!-- Feature -->
+    <div class="col-lg-6 feature">
+      <i class="fas fa-calendar-alt"></i>
+      <h2>Upcoming Community Events</h2>
+      <div class="text">
+        <ul>
+          {% for event in events %}
+            <li class="{% cycle '' 'pg-bg-gray' %} {% if not event.badged%}non-badged{% endif %}">
+              {% if event.badged %}
+                <img src="/media/img/PostgreSQL_Badge1.svg" class="community" alt="PostgreSQL Community Event">
+              {% endif %}
+              {{ event.displaydate|safe }} &middot; <a href="/about/event/{{ event.id }}/">{{ event.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+        <p>
+          <img src="/media/img/PostgreSQL_Badge1.svg" class="community" alt="PostgreSQL Community Event">
+          indicates that an event is recognised under the <a href="/community/recognition/#conferences">community event guidelines</a> and is directly helping the PostgreSQL community.
+        </p>
+      </div>
+      <a href="/about/events/" title="Check Schedule"><button type="button" class="btn btn-center btn-primary">Check Schedule</button></a>
+    </div>
+    <!-- END Feature -->
+    <!-- Feature -->
+    <div class="col-lg-6 feature">
+      <i class="fas fa-envelope"></i>
+      <h2>Mailing Lists</h2>
+      <div class="text">
+        <p>
+          The PostgreSQL <a href="https://lists.postgresql.org" target="_blank">mailing lists</a> enable you to interact with active community participants on subjects related to the development of PostgreSQL, discovering how to use PostgreSQL, or learning about upcoming events and product releases.
+        </p>
+        <p>
+          In order to manage your mailing list subscription, you need a <a href="{{link_root}}/account/">PostgreSQL community account</a>. <a href="{{link_root}}/account/">Signing up</a> is easy and gives you direct access to the <a href="{{link_root}}/community/">global PostgreSQL community</a>.
+        </p>
+      </div>
+      <a href="https://lists.postgresql.org" title="Subscribe"><button type="button" class="btn btn-center btn-primary">Subscribe</button></a>
+    </div>
+    <!-- END Feature -->
+  </div>
+  <!-- END Second Feature Row -->
+</div>
+<!-- CTA -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6 cta cta-3"></div>
+    <div class="col-lg-6 cta-text">
+      <h2>Learning Opportunities Ahead</h2>
+      <p class="text-left">
+        Want to learn more about PostgreSQL and help build the community? Come to one of the many events, local user groups, &amp; training sessions where you can meet experienced PostgreSQL users and enhance your database skills.
+      </p>
+      <a href="{{link_root}}/about/events/" title="Browse Events"><button type="button" class="btn btn-light btn-rounded">Browse Events</button></a>
+      <a href="{{link_root}}/community/user-groups/" title="Browse User Groups"><button type="button" class="btn btn-light btn-rounded">Browse User Groups</button></a>
+    </div>
+  </div>
+</div>
+<!-- END CTA -->
+<!-- News -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-7">
+      <h2 class="centered-lines">Latest News</h2>
+      <!-- Featured Post -->
+        <header>
+          <h3><a href="#">PostgreSQL 10.3 Released!</a></h3>
+          <ul class="meta">
+            <li><i class="far fa-clock"></i>&nbsp;2018-03-01</li>
+            <!--<li><i class="far fa-comments"></i> 0</li>-->
+          </ul>
+        </header>
+        <p>
+          The PostgreSQL Global Development Group has released an update to all supported versions of our database system, including 10.3, 9.6.8, 9.5.12, 9.4.17, and 9.3.22.
+        </p>
+        <p>
+          This release centers around added documentation that describes <a href="https://wiki.postgresql.org/wiki/A_Guide_to_CVE-2018-1058:_Protect_Your_Search_Path" target="_blank">CVE-2018-1058</a> and how to take steps to mitigate the impact on PostgreSQL databases. There are also
+          several bug fixes included in the release. All users using the affected versions of PostgreSQL should update as soon as possible.
+        </p>
+        <ul class="bold">
+          <li><a href="/about/news/1834/">Release Announcement</a></li>
+          <li><a href="https://www.postgresql.org/docs/current/static/release-10-3.html">Release Notes</a></li>
+          <li><a href="https://wiki.postgresql.org/wiki/A_Guide_to_CVE-2018-1058:_Protect_Your_Search_Path">A Guide to CVE-2018-1058</a></li>
+          <li><a href="https://www.postgresql.org/download/">Download</a></li>
+        </ul>
+        <a href="{{link_root}}/" title="Archives"><button type="button" class="btn btn-primary">Browse Archives</button></a>
+    </div>
+    <div class="col-lg-5">
+      <div class="sidebar">
 
-              </div>
-            </div> <!-- pgFrontFeature -->
-            <div id="pgFrontUSSContainer">
-              <div id="pgFrontUser">
-                <div id="pgFrontUserInner">
-                  <div id="pgFrontUserWrap">
-                    <h3 class="txtHomeHeader">&gt;&nbsp; Featured User</h3>
-                    <div id="pgFrontUserContent">
-                      <div id="txtFrontUserText">{{quote.quote}}</div>
-                      <div id="txtFrontUserName"><strong>{{quote.who}}, <a href="{{quote.link}}">{{quote.org}}</a></strong></div>
-                      <div id="txtFrontUserLink">
-                          <img src="/media/img/layout/blt_blu_arrow.png" width="6" height="5" alt="" /><a href="/about/casestudies/">Case Studies</a><span class="txtDivider">|</span><a href="/about/quotesarchive/" title="See more quotes">More Quotes</a><span class="txtDivider">|</span><a href="/about/users/" title="See featured users">Featured Users</a>
-                      </div>
-                    </div>
-                  </div> <!-- pgFrontUserWrap -->
-                </div>
-              </div>
-            </div> <!-- pgFrontUSSContainer -->
-          </div> <!-- pgFrontMain -->
-        </div> <!-- pgFrontContainer -->
-        <div id="pgFrontRightContainer">
-          <div id="pgFrontLatestReleases">
-            <h3 class="txtHomeHeader">&gt;&nbsp; Latest Releases</h3>
-            <div id="pgFrontLatestReleasesWrap">
-             {%for v in versions %}
-             <strong>{{v.numtree}}.{{v.latestminor}}</strong> &middot; {{v.reldate}} &middot; <a href="/docs/{{v.numtree}}/static/{{v.relnotes}}">Notes</a>
-             <br />
-             {%endfor%}
-            </div>
-	    <div id="pgFrontLatestReleasesNote"><strong><a href="/download/">Download</a></strong> | <a href="/versions.rss" title="Versions RSS Feed"><img class="pgRSSImage" src="/media/img/misc/ico_rss.png" width="28" height="13" alt="Versions RSS Feed" /></a><br /><a href="/support/versioning/">Why should I upgrade?</a><br/><a href="/developer/roadmap/">Upcoming releases</a></div>
-          </div> <!-- pgFrontLatestreleases -->
-          <div id="pgFrontShortcuts">
-            <h3 class="txtHomeHeader">&gt;&nbsp; Shortcuts</h3>
-            <div id="pgFrontShortcutsWrap">
-              <ul id="pgFrontShortcutsList">
-                <li>
-                  <a href="/support/security/">Security</a>
-                </li>
-                <li>
-                  <a href="/community/international/">International Sites</a>
-                </li>
-                <li>
-                  <a href="/community/lists/">Mailing Lists</a>
-                </li>
-                <li>
-                  <a href="https://wiki.postgresql.org/">Wiki</a>
-                </li>
-                <li>
-                  <a href="/account/submitbug/">Report a Bug</a>
-                </li>
-                <li>
-                  <a href="/docs/faq/">FAQs</a>
-                </li>
+        <!-- Archives -->
+        <ul class="divided">
+          {% for n in news %}
+            <li>
+              <h3><a href="/about/news/{{ n.id }}/">{{ n.title }}</a></h3>
+              <ul class="meta">
+                <li><i class="far fa-clock"></i>&nbsp;{{ n.displaydate }} by {{ n.org.name }}</li>
               </ul>
-            </div>
-          </div> <!-- pgFrontShortcuts -->
-          <div id="pgFrontSupportUs">
-            <h3 class="txtHomeHeader">&gt;&nbsp; Support Us</h3>
-            <div id="pgFrontSupportUsWrap">
-              <div id="txtFrontSupportUsText">
-                PostgreSQL is free. Please support our work by making a <a href="/about/donate/">donation</a>.
-              </div>
-            </div>
-          </div> <!-- pgFrontSupportUs -->
-        </div> <!-- pgFrontRightContainer -->
-        <div id="pgFrontBottomContainer">
-         <div id="pgFrontNews" class="txtNewsEvent">
-           <h3 class="txtHomeHeader">
-             &gt;&nbsp;
-             <a href="/about/newsarchive/">News</a>
-           </h3>
-           <div class="pgNewsEventsWrap">
-             {% for n in news %}
-             <p>
-              <span class="txtDate">{{n.displaydate}}</span> <br/>
-              <a href="/about/news/{{n.id}}/">{{n.title}}</a>
-             </p>
-             {% endfor %}
-             <div>
-               <img class="pgArrowImage" src="/media/img/layout/blt_blu_arrow.png" width="6" height="5" alt="" />
-               <ul class="pgRSSBottomList">
-                 <li>
-                   <a href="/about/newsarchive/" title="More News">More</a>
-                 </li>
-                 <li>
-                  <a href="/account/news/new/">Submit News</a>
-                 </li>
-                 <li class="last-child">
-                   <a href="/news.rss" title="News RSS Feed"><img class="pgRSSImage" src="/media/img/misc/ico_rss.png" width="28" height="13" alt="News RSS Feed" /></a>
-                 </li>
-               </ul>
-             </div>
-           </div>
-         </div> <!-- pgFrontNews -->
-         <div id="pgFrontPlanet">
-           <h3 class="txtHomeHeader">
-             &gt;&nbsp;
-             <a href="https://planet.postgresql.org">Planet PostgreSQL</a>
-           </h3>
-           <div id="pgFrontPlanetWrap">
-            {%for post in planet%}
-            <p>
-              <span class="txtDate">{{post.date}}</span><br />
-              <a href="{{post.url}}">{{post.title}}</a>
-            </p>
-            {%endfor%}
-            <div>
-             <img class="pgArrowImage" src="/media/img/layout/blt_blu_arrow.png" width="6" height="5" alt="" />
-             <ul class="pgRSSBottomList">
-              <li>
-               <a href="https://planet.postgresql.org" title="More Blog Posts">More</a>
-              </li>
-              <li class="last-child">
-               <a href="https://planet.postgresql.org/rss20.xml" title="PlanetPostgreSQL RSS Feed"><img class="pgRSSImage" src="/media/img/misc/ico_rss.png" width="28" height="13" alt="PlanetPostgreSQL RSS Feed" /></a>
-              </li>
-             </ul>
-            </div>
-           </div> <!-- pgFrontPlanetWrap -->
-         </div> <!-- pgFrontPlanet -->
-         <div id="pgFrontEvents" class="txtNewsEvent">
-           {% if community_events %}
-             <h3 class="txtHomeHeader">
-               &gt;&nbsp;
-               <a href="/about/events/">Community Events</a>
-             </h3>
-             <div class="pgNewsEventsWrap">
-             {% for e in community_events %}
-              <p>
-               <span class="txtDate">{{e.displaydate|safe}}</span><br />
-               <a href="/about/event/{{e.id}}/">{{e.title}}</a><br/> ({{e.locationstring}})
-              </p>
-             {% endfor %}
-             </div>
-            {% endif %}
-            <h3 class="txtHomeHeader">
-              &gt;&nbsp;
-              <a href="/about/events/">{% if community_events %}Other {% endif %}Events</a>
-            </h3>
-            <div class="pgNewsEventsWrap">
-            {% for e in other_events %}
-             <p>
-              <span class="txtDate">{{e.displaydate|safe}}</span><br />
-              <a href="/about/event/{{e.id}}/">{{e.title}}</a><br/> ({{e.locationstring}})
-             </p>
-            {% endfor %}
-           </div>
-           <div style="margin-bottom: 10px;">
-             <img class="pgArrowImage" src="/media/img/layout/blt_blu_arrow.png" width="6" height="5" alt="" />
-             <ul class="pgRSSBottomList">
-               <li>
-                 <a href="/about/events/" title="More Events">More</a>
-               </li>
-               <li>
-                <a href="/account/events/new/">Submit Event</a>
-               </li>
-               <li class="last-child">
-                <a href="/events.rss" title="Events RSS Feed"><img class="pgRSSImage" src="/media/img/misc/ico_rss.png" width="28" height="13" alt="Events RSS Feed" /></a>
-               </li>
-             </ul>
-           </div>
-           <h3 class="txtHomeHeader">
-             &gt;&nbsp;
-             <a href="/about/events/">TRAINING</a>
-           </h3>
-           <div class="pgNewsEventsWrap">
-             <div id="pgFrontTrainingSummary">
-             {%if traininginfo.id__count %}
-              There are {{traininginfo.id__count}} training events in {{traininginfo.country__count}} countries
-              scheduled over the next six months from
-              {%if trainingcompanies|length_is:"1"%}{{trainingcompanies|first}}.
-              {%else%}
-               {%if trainingcompanies|length_is:"2"%}{{trainingcompanies|join:" and "}}.
-               {%else%}
-               {{trainingcompanies|slice:":2"|join:", "}} and others.
-               {%endif%}
-              {%endif%}
-              <p>Take a look at our <a href="/about/events/#Training">schedule</a> to find the training that you want.</p>
-             {%else%}
-              There are no training events currently scheduled.
-             {%endif%}
-            </div>
-           </div> <!-- pgNewsEventsWrap -->
-         </div> <!-- pgFrontEvent -->
-        </div> <!-- pgFrontBottomContainer -->
+            </li>
+          {% endfor %}
+        </ul>
+        <!-- END Archives -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Blog -->
+ <div class="container margin">
+   <div class="row">
+     <div class="col-md-12">
+       <h2 class="centered-lines"><span>PLANET POSTGRESQL</span></h2>
+       <div class="feature"><i class="fas fa-globe"></i></div>
+    </div>
+   </div>
+   <!-- First Row Planet PostgreSQL -->
+   <div class="row">
+     <!-- First Column First Row Planet PostgreSQL -->
+      {%for post in planet %}
+        <div class="col-md-4">
+          <div class="text-center">
+            <h3><a href="{{ post.url }}">{{ post|planet_title }}</a></h3>
+            <ul class="meta">
+              <li><i class="far fa-comments"></i>&nbsp;{{ post|planet_author }}</li>
+              <li><i class="far fa-clock"></i>&nbsp;{{ post.date }}</li>
+            </ul>
+          </div>
+        </div>
+      {% endfor %}
+   </div>
+   <!-- END First Row Planet PostgreSQL -->
+   <div class="row">
+     <div class="col-sm-12">
+       <a href="https://planet.postgresql.org" title="Browse Archives" target="_blank"><button type="button" class="btn btn-center btn-primary">Browse Archives</button></a>
+     </div>
+   </div>
+ </div>
+ <!-- SUBMIT A BUG -->
+ <div class="container-fluid">
+   <div class="row">
+     <div class="col-lg-6 cta-text">
+       <h2>Seeing unexpected behavior?</h2>
+       <p>
+         The PostgreSQL community takes pride in releasing software that will reliably store your data. If you believe you've discovered a bug, please click the button below and follow the instructions on how to submit a bug.
+       </p>
+       <a href="/account/submitbug/" title="Submit a Bug"><button type="button" class="btn btn-light btn-rounded">Submit a Bug</button></a>
+     </div>
+     <div class="col-lg-6 cta cta-2"></div>
+   </div>
+ </div>
+ <!-- END SUBMIT A BUG -->
 {%endblock%}

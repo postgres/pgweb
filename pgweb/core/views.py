@@ -40,19 +40,16 @@ from forms import OrganisationForm, MergeOrgsForm
 # Front page view
 @cache(minutes=10)
 def home(request):
-	news = NewsArticle.objects.filter(approved=True)[:10]
-	# get the first seven events and divide each up into a list of community and other events
-	event_queryset = Event.objects.select_related('country').filter(approved=True, training=False, enddate__gte=date.today()).order_by('enddate', 'startdate')
-	# display up to the first 4 community events.  Then choose the next 7 - |communty_events|
-	community_events = [event for event in event_queryset.filter(badged=True).all()[:4]]
-	other_events = [event for event in event_queryset.filter(badged=False).all()[:(7-len(community_events))]]
-	try:
-		quote = Quote.objects.filter(approved=True).order_by('?')[0]
-	except:
-		# if there is no quote available, just ignore error
-		quote = None
+	news = NewsArticle.objects.filter(approved=True)[:5]
+	# get the first five community events
+	events = Event.objects.select_related('country').filter(
+		approved=True,
+		training=False,
+		enddate__gte=date.today(),
+		badged=True,
+	).order_by('enddate', 'startdate')[:5]
 	versions = Version.objects.filter(supported=True)
-	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:10]
+	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:9]
 
 	traininginfo = Event.objects.filter(approved=True, training=True).extra(where=("startdate <= (CURRENT_DATE + '6 Months'::interval) AND enddate >= CURRENT_DATE",)).aggregate(Count('id'), Count('country', distinct=True))
 	# can't figure out how to make django do this
@@ -64,11 +61,9 @@ def home(request):
 		'title': 'The world\'s most advanced open source database',
 		'news': news,
 		'newstags': NewsTag.objects.all(),
-		'community_events': community_events,
-		'other_events': other_events,
+		'events': events,
 		'traininginfo': traininginfo,
 		'trainingcompanies': trainingcompanies,
-		'quote': quote,
 		'versions': versions,
 		'planet': planet,
 	})
