@@ -3,60 +3,76 @@
 {%block contents%}
 
 <form method="get" action="/search/">
- <input type="hidden" name="m" value="1">
- <div class="tblBasic">
-  <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey" width="590">
-   <tr>
-    <td class="colFirst">Search for</td>
-    <th class="colLast"><input type="text" name="q" value="{{query}}" /> <input type="submit" value="Search" /></th>
-   </tr>
-   <tr>
-    <td class="colFirstR">List:</td>
-    <td class="colLast"><select name="l">
-<option value="">-- All lists</option>
-{%for l in lists %}
-{%ifchanged l.group%}
-<option value="{{l.group.negid}}"{%if l.group.negid == listid%} SELECTED{%endif%}>-- {{l.group}}</option>
-{%endifchanged%}
-<option value="{{l.id}}"{%if l.id == listid%} SELECTED{%endif%}>{{l}}</option>
-{%endfor%}
-    </select></td>
-   </tr>
-   <tr>
-    <td class="colFirstR">Post date:</td>
-    <td class="colLast"><select name="d">{%for d in dates%}
-     <option value="{{d.val}}"{%if d.val == dateval %} SELECTED{%endif%}>{{d.text}}</option>{%endfor%}
-    </select></td>
-   </tr>
-   <tr class="lastrow">
-    <td class="colFirst" align="right">Sort by:</td>
-    <td class="colLast"><select name="s">{%for s in sortoptions%}
-      <option value="{{s.val}}"{%if s.selected%} SELECTED{%endif%}>{{s.text}}</option>{%endfor%}
-     </select></td>
-   </tr>
-  </table>
- </div>
+  <input type="hidden" name="m" value="1">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="input-group">
+        <input type="text" name="q" value="{{query}}" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </span>
+      </div><!-- /input-group -->
+      <div class="form-group">
+        <label for="allsites">List:</label>
+        <select name="l">
+          <option value="">-- All lists</option>
+          {%for l in lists %}
+            {%ifchanged l.group%}
+              <option value="{{l.group.negid}}"{%if l.group.negid == listid%} SELECTED{%endif%}>-- {{l.group}}</option>
+            {%endifchanged%}
+            <option value="{{l.id}}"{%if l.id == listid%} SELECTED{%endif%}>{{l}}</option>
+          {%endfor%}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="search-lists">List:</label>
+        <select id="search-lists" class="custom-select" name="l">
+          <option value="">-- All lists</option>
+          {%for l in lists %}
+            {%ifchanged l.group%}
+              <option value="{{l.group.negid}}"{%if l.group.negid == listid%} SELECTED{%endif%}>-- {{l.group}}</option>
+            {%endifchanged%}
+            <option value="{{l.id}}"{%if l.id == listid%} SELECTED{%endif%}>{{l}}</option>
+          {%endfor%}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="search-postdate">Date:</label>
+        <select id="search-postdate" class="custom-select" name="d">{%for d in dates%}
+         <option value="{{d.val}}"{%if d.val == dateval %} SELECTED{%endif%}>{{d.text}}</option>{%endfor%}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="search-sortby">Sort By:</label>
+        <select id="search-sortby" class="custom-select" name="s">{%for s in sortoptions%}
+          <option value="{{s.val}}"{%if s.selected%} SELECTED{%endif%}>{{s.text}}</option>{%endfor%}
+         </select>
+      </div>
+    </div><!-- /.col-lg-6 -->
+  </div><!-- /.row -->
 </form>
 
-<div id="pgSearchContent">
- {%if search_error %}
- <div>{{search_error}}</div>
- {%else%}
-  <!-- docbot goes here -->
-  {%if hitcount == 0 %}
-   <p>Your search for <strong>{{query}}</strong> returned no hits.</p>
+<div class="row">
+  {%if search_error %}
+    <div>{{search_error}}</div>
   {%else%}
-   <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount == 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
-   {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
-   {%for hit in hits %}
-    {{forloop.counter0|add:firsthit}}. <a href="https://www.postgresql.org/message-id/{{hit.messageid}}">{{hit.subject}}</a> [{{hit.rank|floatformat:2}}]<br/>
-    From {{hit.author}} on {{hit.date}}.<br/>
-{{hit.abstract|safe}}<br/>
-<a href="https://www.postgresql.org/message-id/{{hit.messageid}}">https://www.postgresql.org/message-id/{{hit.messageid}}</a><br/>
-    <br/>
-   {%endfor%}
-   {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
+    <!-- docbot goes here -->
+    {%if hitcount == 0 %}
+      <p>Your search for <b>{{query}}</b> returned no hits.</p>
+    {%else%}
+      <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount == 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
+      {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
+      {%for hit in hits %}
+        {{forloop.counter0|add:firsthit}}. <a href="https://www.postgresql.org/message-id/{{hit.messageid}}">{{hit.subject}}</a> [{{hit.rank|floatformat:2}}]<br/>
+        From {{hit.author}} on {{hit.date}}.<br/>
+        {{hit.abstract|safe}}<br/>
+        <a href="https://www.postgresql.org/message-id/{{hit.messageid}}">https://www.postgresql.org/message-id/{{hit.messageid}}</a><br/>
+        <br/>
+      {%endfor%}
+      {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
+    {%endif%}
   {%endif%}
- {%endif%}
 </div>
 {%endblock%}

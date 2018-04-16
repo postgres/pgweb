@@ -2,42 +2,47 @@
 {%block title%}Search results{%endblock%}
 {%block contents%}
 
+<h1>Site Search <i class="fas fa-link"></i></h1>
 <form method="get" action="/search/">
-{%if suburl%}
- <input type="hidden" name="u" value="{{suburl}}">
-{%endif%}
- <div class="tblBasic">
-  <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey" width="590">
-   <tr>
-    <td class="colFirst">Search for</td>
-    <th class="colLast"><input type="text" name="q" value="{{query}}" /> <input type="submit" value="Search" /></th>
-   </tr>
-   <tr class="lastrow">
-    <td class="colFirst"></td>
-    <td class="colLast"><input type="checkbox" name="a" value="1" {%if allsites%}checked="checked"{%endif%}/>Include community sites</td>
-   </tr>
-  </table>
- </div>
+  {%if suburl%}
+   <input type="hidden" name="u" value="{{suburl}}">
+  {%endif%}
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="input-group">
+        <input type="text" name="q" value="{{query}}" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </span>
+      </div><!-- /input-group -->
+      <div class="form-check search">
+        <input class="form-check-input" type="checkbox" value=""  name="a" value="1" {%if allsites%}checked="checked"{%endif%} id="allsites">
+        <label class="form-check-label" for="allsites">
+          Include community sites
+        </label>
+      </div>
+    </div><!-- /.col-lg-6 -->
+  </div><!-- /.row -->
 </form>
 
-<div id="pgSearchContent">
- {%if search_error %}
- <div>{{search_error}}</div>
- {%else%}
-  <!-- docbot goes here -->
-  {%if hitcount == 0 %}
-   <p>Your search for <strong>{{query}}</strong> returned no hits.</p>
-  {%else%}
-   <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount == 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
-   {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
-   {%for hit in hits %}
-    {{forloop.counter0|add:firsthit}}. <a href="{{hit.url}}">{{hit.title}}</a> [{{hit.rank|floatformat:2}}]<br/>
-    <div>...{{hit.abstract|safe}}...</div>
-    <a href="{{hit.url}}">{{hit.url}}</a><br/>
-    <br/>
-   {%endfor%}
-   {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
-  {%endif%}
- {%endif%}
-</div>
+{%if search_error %}
+<div>{{search_error}}</div>
+{%else%}
+<!-- docbot goes here -->
+{%if hitcount == 0 %}
+ <p>Your search for <b>{{query}}</b> returned no hits.</p>
+{%else%}
+ <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount == 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
+ {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
+ {%for hit in hits %}
+  {{forloop.counter0|add:firsthit}}. <a href="{{hit.url}}">{{hit.title}}</a> [{{hit.rank|floatformat:2}}]<br/>
+  <div>...{{hit.abstract|safe}}...</div>
+  <a href="{{hit.url}}">{{hit.url}}</a><br/>
+  <br/>
+ {%endfor%}
+ {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
+{%endif%}
+{%endif%}
 {%endblock%}
