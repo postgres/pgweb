@@ -1,9 +1,8 @@
 {%extends "base/page.html"%}
 {%block title%}Downloads{%endblock%}
 {%block contents%}
-<div id="pgDownloadsWrap">
 
-<h1>Downloads</h1>
+<h1>Downloads <i class="fa fa-download"></i></h1>
 
 <h2>PostgreSQL Core Distribution</h2>
 
@@ -27,11 +26,13 @@ systems:
  </li>
  <li>Linux
   <ul>
- <li><a href="/download/linux/redhat/">Red Hat</a> family Linux (including CentOS/Fedora/Scientific/Oracle variants)</li>
- <li><a href="/download/linux/debian/">Debian</a> GNU/Linux and derivatives</li>
- <li><a href="/download/linux/ubuntu/">Ubuntu</a> Linux and derivatives</li>
- <li><a href="/download/linux/suse/">SuSE</a> and OpenSuSE</li>
-   <li><a href="/download/linux/">Other</a> Linux</li>
+    <li>
+      <a href="/download/linux/redhat/">Red Hat</a> family Linux (including <a href="/download/linux/redhat/">CentOS</a>/<a href="/download/linux/redhat/">Fedora</a>/<a href="/download/linux/redhat/">Scientific/Oracle</a> variants)
+    </li>
+    <li><a href="/download/linux/debian/">Debian</a> GNU/Linux and derivatives</li>
+    <li><a href="/download/linux/ubuntu/">Ubuntu</a> Linux and derivatives</li>
+    <li><a href="/download/linux/suse/">SuSE</a> and <a href="/download/linux/suse/">OpenSuSE</a></li>
+    <li><a href="/download/linux/">Other</a> Linux</li>
   </ul>
  </li>
  <li><a href="/download/macosx/">macOS</a></li>
@@ -44,7 +45,7 @@ systems:
 <p>
 The source code can be found in the main <a href="/ftp/source/">file browser</a>
 or you can access the source control repository directly
-at <a href="https://git.postgresql.org/gitweb/?p=postgresql.git;a=summary">git.postgresql.org</a>.
+at <a href="https://git.postgresql.org/gitweb/?p=postgresql.git;a=summary" target="_blank">git.postgresql.org</a>.
 Instructions for building from source can be found in the
 <a href="/docs/current/static/installation.html">documentation</a>.
 </p>
@@ -118,5 +119,4 @@ that you may find useful.</p>
 <h2>File Browser</h2>
 <p>You can download most of the software we publish from a mirror site using our <a href="/ftp/">File Browser</a>.</p>
 
-</div>
 {%endblock%}

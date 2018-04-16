@@ -5,10 +5,21 @@
 {%endblock%}
 {%block contents%}
 
-<h1>Linux downloads (Red Hat family)</h1>
+<h1>Linux downloads (Red Hat family) <img class="logo" src="/media/img/redhat.svg" alt="Red Hat Logo" /></h1>
 <p>
-The Red Hat family of distributions includes Red Hat Enterprise Linux,
-CentOS, Fedora, Scientific Linux, Oracle Linux and others.
+The Red Hat family of distributions includes:
+</p>
+<p>
+  <ul>
+    <li>Red Hat Enterprise Linux</li>
+    <li>CentOS</li>
+    <li>Fedora</li>
+    <li>Scientific Linux</li>
+    <li>Oracle Linux</li>
+  </ul>
+</p>
+<p>and others.</p>
+<p>
 PostgreSQL is available on these platforms by default. However,
 each version of the platform normally "snapshots" a specific version of
 PostgreSQL that is then supported throughout the lifetime of this platform.
@@ -17,51 +28,64 @@ project provides a <a href="#yum">repository</a> of packages of all
 supported versions for the most common distributions.
 </p>
 
-<a name="yum"></a><h2>PostgreSQL Yum Repository</h2>
+<a name="yum"></a>
+<h2>PostgreSQL Yum Repository</h2>
 <p>
-This repository will integrate
+The <a href="https://yum.postgresql.org" target="_blank">PostgreSQL Yum Repository</a> will integrate
 with your normal systems and patch management, and provide automatic
 updates for all supported versions of PostgreSQL throughout the support
 <a href="/support/versioning/">lifetime</a> of PostgreSQL.
 </p>
 <p>
-The PostgreSQL yum repository currently supports Red Hat Enterprise Linux,
-CentOS, Oracle Enterprise Linux and Scientific Linux,
-as well as current versions of Fedora. Note that due to the shorter support cycle
-on Fedora, all versions are not available on this platform, and we recommend not
+The PostgreSQL Yum Repository currently supports:
+</p>
+<p>
+  <ul>
+    <li>Red Hat Enterprise Linux</li>
+    <li>CentOS</li>
+    <li>Scientific Linux</li>
+    <li>Oracle Linux</li>
+    <li>Fedora<sup>*</sup></li>
+  </ul>
+</p>
+<p><strong><sup>*</sup>Note</strong>: due to the shorter support cycle
+on Fedora, all supported versions of PostgreSQL are not available on this platform. We do not recommend
 using Fedora for server deployments.
 </p>
 <p>
-To use the yum repository, follow these steps:
+To use the PostgreSQL Yum Repository, follow these steps:
 </p>
-<ul>
-  <li>Select version: <select id="version" onChange="verChanged()"></select><br/></li>
-  <li>Select platform: <select id="platform" onChange="platChanged()"></select></li>
-  <li>Select architecture: <select id="arch" onChange="archChanged()"></select></li>
+<ol>
+  <li>Select version: <select id="version" class="custom-select" onChange="verChanged()"></select><br/></li>
+  <li>Select platform: <select id="platform" class="custom-select" onChange="platChanged()"></select></li>
+  <li>Select architecture: <select id="arch" class="custom-select" onChange="archChanged()"></select></li>
   <li>Install the repository RPM:
-    <code id="reporpm"></code>
+    <pre id="reporpm" class="code"></pre>
   </li>
   <li>Install the client packages:
-    <code id="clientpackage"></code>
+    <pre id="clientpackage" class="code"></pre>
   </li>
   <li>Optionally install the server packages:
-    <code id="serverpackage"></code>
+    <pre id="serverpackage" class="code"></pre>
   </li>
   <li>Optionally initialize the database and enable automatic start:
-    <code id="initdb"></code>
+      <pre id="initdb" class="code"></pre>
   </li>
-</ul>
+</ol>
 
 <h2>Included in distribution</h2>
 <p>
 These distributions all include PostgreSQL by default. To install
-PostgreSQL from these repositories, use the <em>yum</em> command on RHEL 5,6 and 7,
-or <em>dnf</em> command on Fedora 24+:
+PostgreSQL from these repositories, use the <var>yum</var> command on RHEL 5,6 and 7,
+or <var>dnf</var> command on Fedora 24+:
 </p>
 <p>
 <code>
 yum install postgresql-server
 </code>
+</p>
+<p>
+or <var>dnf</var> command on Fedora 24+:
 </p>
 <p>
 <code>
@@ -72,34 +96,36 @@ dnf install postgresql-server
 Which version of PostgreSQL you get will depend on the version of
 the distribution:
 </p>
-<div class="tblBasic">
- <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
-  <tr>
-   <th class="colFirst">Distribution</th>
-   <th class="colLast">Version</th>
-  </tr>
-  <tr>
-   <td class="colFirst">RHEL/CentOS/SL/OL 7</td>
-   <td class="colLast">9.2(also supplies package rh-postgresql95 and rh-postgresql94 via SCL)</td>
-  </tr>
-  <tr>
-   <td class="colFirst">RHEL/CentOS/SL/OL 6</td>
-   <td class="colLast">8.4(also supplies package postgresql92)</td>
-  </tr>
-  <tr>
-   <td class="colFirst">RHEL/CentOS/SL/OL 5</td>
-   <td class="colLast">8.1 (also supplies package postgresql84)</td>
-  </tr>
-  <tr>
-   <td class="colFirst">Fedora 25</td>
-   <td class="colLast">9.6</td>
-  </tr>
-  <tr class="lastrow">
-   <td class="colFirst">Fedora 24</td>
-   <td class="colLast">9.4</td>
-  </tr>
- </table>
-</div>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Distribution</th>
+      <th>Version</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+     <th scope="row">RHEL/CentOS/SL/OL 7</th>
+     <td>9.2 (also supplies package rh-postgresql95 and rh-postgresql94 via SCL)</td>
+    </tr>
+    <tr>
+     <th scope="row">RHEL/CentOS/SL/OL 6</th>
+     <td>8.4 (also supplies package postgresql92)</td>
+    </tr>
+    <tr>
+     <th scope="row">RHEL/CentOS/SL/OL 5</th>
+     <td>8.1 (also supplies package postgresql84)</td>
+    </tr>
+    <tr>
+     <th scope="row">Fedora 25</th>
+     <td>9.6</td>
+    </tr>
+    <tr>
+     <th scope="row">Fedora 24</th>
+     <td>9.4</td>
+    </tr>
+  </tbody>
+</table>
 <p>
 Other Red Hat family distributions may ship a different version of
 PostgreSQL by default, check with your distribution vendor to be sure.
@@ -110,30 +136,48 @@ The repository contains many different packages including third party
 addons. The most common and important packages are (substitute the
 version number as required):
 </p>
-<ul>
- <li>postgresql-client   libraries and client binaries</li>
- <li>postgresql-server   core database server</li>
- <li>postgresql-contrib  additional supplied modules</li>
- <li>postgresql-devel    libraries and headers for C language development</li>
- <li>pgadmin3 - pgAdmin III graphical administration utility</li>
-</ul>
+<table class="table table-striped">
+  <tbody>
+    <tr>
+     <th scope="row">postgresql-client</th>
+     <td>libraries and client binaries</td>
+    </tr>
+    <tr>
+     <th scope="row">postgresql-server</th>
+     <td>core database server</td>
+    </tr>
+    <tr>
+     <th scope="row">postgresql-contrib</th>
+     <td>additional supplied modules</td>
+    </tr>
+    <tr>
+     <th scope="row">postgresql-devel</th>
+     <td>libraries and headers for C language development</td>
+    </tr>
+    <tr>
+     <th scope="row">pgadmin4</th>
+     <td>pgAdmin 4 graphical administration utility</td>
+    </tr>
+  </tbody>
+</table>
 
-<h3>Post-installation</h3>
+<h2>Post-installation</h2>
 <p>
 Due to policies for Red Hat family distributions, the PostgreSQL installation
 will not be enabled for automatic start or have the database initialized
 automatically. To make your database installation complete, you need to
-perform these two steps:
-<code>
-service postgresql initdb<br/>
-chkconfig postgresql on
-</code>
-or, on Fedora 24 and other later derived distributions:<br />
-<code>
-postgresql-setup initdb<br />
-systemctl enable postgresql.service
-systemctl start postgresql.service
-</code>
+perform the following steps, based on your distribution:
+<h3>For RHEL / CentOS / SL / OL 5,6</h3>
+<pre class="code">
+  service postgresql initdb
+  chkconfig postgresql on
+</pre>
+<h3>For RHEL / CentOS / SL / OL 7 or Fedora 24 and later derived distributions:</h3>
+<pre class="code">
+  postgresql-setup initdb
+  systemctl enable postgresql.service
+  systemctl start postgresql.service
+</pre>
 </p>
 
 <h2>Direct RPM download</h2>
@@ -153,45 +197,47 @@ and manual installation as well.
 <p>The installers are tested by EnterpriseDB on the following platforms.
     They may also work on other variations or versions:</p>
 
-<div class="tblBasic">
-  <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+<table class="table table-striped">
+  <thead class="thead-light">
     <tr>
       <th>PostgreSQL Version</th>
       <th>64 Bit Platforms</th>
       <th>32 Bit Platforms</th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
-      <td>10</td>
+      <th scope="row">10</th>
       <td>RHEL / CentOS / OEL 7.x &amp; 6.x</td>
       <td>RHEL / CentOS / OEL 6.x</td>
     </tr>
     <tr>
-      <td>9.6</td>
+      <th scope="row">9.6</th>
       <td>RHEL / CentOS / OEL 7.x &amp; 6.x</td>
       <td>RHEL / CentOS / OEL 6.x</td>
     </tr>
     <tr>
-      <td>9.5</td>
+      <th scope="row">9.5</th>
       <td>RHEL / CentOS / OEL 7.x &amp; 6.x</td>
       <td>RHEL / CentOS / OEL 6.x</td>
     </tr>
     <tr>
-      <td>9.4</td>
+      <th scope="row">9.4</th>
       <td>RHEL / CentOS / OEL 7.x &amp; 6.x</td>
       <td>RHEL / CentOS / OEL 6.x</td>
     </tr>
     <tr>
-      <td>9.3</td>
+      <th scope="row">9.3</th>
       <td>RHEL / CentOS / OEL 6.x</td>
       <td>RHEL / CentOS / OEL 6.x</td>
     </tr>
     <tr>
-      <td>9.2</td>
+      <th scope="row">9.2</th>
       <td>RHEL / CentOS / OEL 6.x, 5.x</td>
       <td>RHEL / CentOS / OEL 6.x, 5.x</td>
     </tr>
-  </table>
-</div>
+  </tbody>
+</table>
 
 {%include "pages/download/linux/linux_source.inc" %}
 {%endblock%}

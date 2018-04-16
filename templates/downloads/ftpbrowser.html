@@ -1,7 +1,7 @@
 {%extends "base/page.html"%}
 {%block title%}File Browser{%endblock%}
 {%block contents%}
-<h1>File Browser</h1>
+<h1>File Browser <i class="fa fa-folder-open"></i></h1>
 <h3><a href="/ftp/">Top</a>{%for b in breadcrumbs%} &rarr; <a href="/ftp/{{b.path}}/">{{b.name}}</a>{%endfor%}</h3>
 
 {%if directories%}

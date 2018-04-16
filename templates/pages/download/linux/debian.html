@@ -2,12 +2,12 @@
 {%block title%}Linux downloads (Debian){%endblock%}
 {%block contents%}
 
-<h1>Linux downloads (Debian)</h1>
+<h1>Linux downloads (Debian) <img class="logo" src="/media/img/debian.svg" alt="Debian Logo" /></h1>
 <p>
 PostgreSQL is available in all Debian versions by default. However, the
 stable versions of Debians "snapshot" a specific version of PostgreSQL
 that is then supported throughout the lifetime of that Debian version.
-The PostgreSQL project also maintains an apt repository with all supported
+The PostgreSQL project also maintains an <a href="#apt">apt repository</a> with all supported
 of PostgreSQL available.
 </p>
 
@@ -20,70 +20,102 @@ of PostgreSQL available.
  -->
 </script>
 
+<a name="apt"></a>
 <h2>PostgreSQL Apt Repository</h2>
 <p>
 If the version included in your version of Debian is not the one you want,
-you can use the PostgreSQL Apt Repository. This repository will integrate
+you can use the <a href="https://apt.postgresql.org" target="_blank">PostgreSQL Apt Repository</a>. This repository will integrate
 with your normal systems and patch management, and provide automatic
 updates for all supported versions of PostgreSQL throughout the support
 <a href="/support/versioning/">lifetime</a> of PostgreSQL.
 </p>
 <p>
 The PostgreSQL apt repository supports the currently supported stable
-versions of debian, wheezy (7.x) and Jessie (8.x) as well as Stretch (9.x), on amd64, i386
-and ppc64el architectures.
+versions of Debian:
 </p>
+<ul>
+  <li>Stretch (9.x)</li>
+  <li>Jessie (8.x)</li>
+  <li>Wheezy (7.x)</li>
+</ul>
+<p>on the following architectures:</p>
+<ul>
+  <li>amd64</li>
+  <li>i386</li>
+  <li>ppc64el</li>
+</ul>
 <p>
 To use the apt repository, follow these steps:
 </p>
-<ul>
+<ol>
  <li>
-  <select id="field.series" name="field.series" onchange='updateSeries(this);'>
+  <select id="field.series" name="field.series" class="custom-select" onchange='updateSeries(this);'>
    <option selected="selected" value="YOUR_DEBIAN_VERSION_HERE">Choose your Debian version</option>
    <option value="stretch">Stretch (9.x)</option>
    <option value="jessie">Jessie (8.x)</option>
    <option value="wheezy">Wheezy (7.x)</option>
   </select>
  </li>
- <li>Create the file <em>/etc/apt/sources.list.d/pgdg.list</em>, and add a line
- for the repository
- <code>deb http://apt.postgresql.org/pub/repos/apt/ <span id="series-deb">YOUR_DEBIAN_VERSION_HERE</span>-pgdg main</code>
+ <li>
+   Create the file <var>/etc/apt/sources.list.d/pgdg.list</var>, and add a line
+ for the repository:
+   <pre class="code">
+     deb http://apt.postgresql.org/pub/repos/apt/ <span id="series-deb">YOUR_DEBIAN_VERSION_HERE</span>-pgdg main</pre>
  </li>
- <li>Import the repository signing key, and update the package lists
-   <code>
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \<br/>
-&nbsp;&nbsp;sudo apt-key add -<br/>
-sudo apt-get update
-   </code>
+ <li>
+   Import the repository signing key, and update the package lists:
+   <pre class="code">
+     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+     sudo apt-get update</pre>
  </li>
-</ul>
+</ol>
 <p>
 For more information about the apt repository, including answers to frequent
 questions, please see the apt page on
-<a href="https://wiki.postgresql.org/wiki/Apt">the wiki</a>.
+<a href="https://wiki.postgresql.org/wiki/Apt" target="_blank">the wiki</a>.
 </p>
 
 <h2>Included in distribution</h2>
 <p>
 Debian includes PostgreSQL by default. To install PostgreSQL on
-Debian, use the <em>apt-get</em> (or other apt-driving) command:
+Debian, use the <code>apt-get</code> (or other apt-driving) command:
 </p>
-<code>
-apt-get install postgresql-9.6
-</code>
+<pre class="code">
+  apt-get install postgresql-9.6
+</pre>
 <p>
 The repository contains many different packages including third party
 addons. The most common and important packages are (substitute the
 version number as required):
 </p>
-<ul>
- <li>postgresql-client-9.6 - client libraries and client binaries</li>
- <li>postgresql-9.6 - core database server</li>
- <li>postgresql-contrib-9.6 - additional supplied modules</li>
- <li>libpq-dev - libraries and headers for C language frontend development</li>
- <li>postgresql-server-dev-9.6 - libraries and headers for C language backend development</li>
- <li>pgadmin3 - pgAdmin III graphical administration utility</li>
-</ul>
+<table class="table table-striped">
+  <tbody>
+    <tr>
+     <th scope="row">postgresql-client-9.6</th>
+     <td>client libraries and client binaries</td>
+    </tr>
+    <tr>
+     <th scope="row">postgresql-9.6</th>
+     <td>core database server</td>
+    </tr>
+    <tr>
+     <th scope="row">postgresql-contrib-9.6</th>
+     <td>additional supplied modules</td>
+    </tr>
+    <tr>
+     <th scope="row">libpq-dev</th>
+     <td>libraries and headers for C language frontend development</td>
+    </tr>
+    <tr>
+     <th scope="row">postgresql-server-dev-9.6</th>
+     <td>libraries and headers for C language backend development</td>
+    </tr>
+    <tr>
+     <th scope="row">pgadmin4</th>
+     <td>pgAdmin 4 graphical administration utility</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2>Debian backports</h2>
 <p>
@@ -105,40 +137,42 @@ the builtin repositories.
 <p>The installers are tested by EnterpriseDB on the following platforms.
     They may also work on other variations or versions:</p>
 
-<div class="tblBasic">
-  <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
+<table class="table table-striped">
+  <thead>
     <tr>
       <th>PostgreSQL Version</th>
       <th>64 Bit Platforms</th>
       <th>32 Bit Platforms</th>
     </tr>
+  </thead>
+  <tbody>
     <tr>
-      <td>10</td>
+      <th scope="row">10</th>
       <td>Debian 8.x &amp; 7.x</td>
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td>9.6</td>
+      <th scope="row">9.6</th>
       <td>Debian 8.x &amp; 7.x</td>
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td>9.5</td>
+      <th scope="row">9.5</th>
       <td>Debian 7.x</td>
       <td>Debian 7.x</td>
     </tr>
     <tr>
-      <td>9.4</td>
+      <th scope="row">9.4</th>
       <td>Debian 7.x</td>
       <td>Debian 7.x</td>
     </tr>
     <tr>
-      <td>9.3</td>
+      <th scope="row">9.3</th>
       <td>Debian 7.x</td>
       <td>Debian 7.x</td>
     </tr>
-  </table>
-</div>
+  </tbody>
+</table>
 
 {%include "pages/download/linux/linux_source.inc" %}
 {%endblock%}
