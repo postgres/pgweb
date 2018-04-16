@@ -2,7 +2,7 @@
 {%block title%}Security Information{%endblock%}
 {%block contents%}
 
-<h1>Security Information</h1>
+<h1>Security Information <i class="fas fa-lock"></i></h1>
 
 <p>
 If you wish to report a new security vulnerability in PostgreSQL, please
@@ -61,33 +61,33 @@ You can filter the view of patches to show just patches for version:<br/>
 - <a href="/support/security/">all</a>
 </p>
 
-<div class="tblBasic">
- <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
-  <tr>
-   <th class="colFirst">Reference</th>
-   <th class="colMid">Affected<br/>versions</th>
-   <th class="colMid">Fixed in</th>
-   <th class="colMid" align="center"><a href="#comp">Component</a> and<br/>CVSS v3 Base Score</th>
-   <th class="colLast">Description</th>
-  </tr>
-{%for p in patches%}
-  <tr valign="top">
-    <td class="colFirst">
-{%if p.cve%}<nobr>{%if p.cve_visible%}<a href="{{p.cvelink}}">CVE-{{p.cve}}</a>{%else%}CVE-{{p.cve}}{%endif%}</nobr><br/>{%endif%}
-{%if p.newspost%}<a href="/about/news/{{p.newspost.id}}/">Announcement</a><br/>{%endif%}
-    </td>
-    <td class="colMid">{{p.affected|join:", "}}</td>
-    <td class="colMid">{{p.fixed|join:", "}}</td>
-    <td class="colMid" align="center">
-{{p.component}}<br/>
-{%if p.cvssscore >= 0%}<a href="https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector={{p.cvssvector}}">{{p.cvssscore}}</a><br/><span class="cvssvector">{{p.cvssvector}}</span>
-{%else%}Legacy: {{p.legacyscore}}{%endif%}</td>
-    <td class="colLast">{{p.description}}{%if p.detailslink%}<br/><br/><a href="{{p.detailslink}}">more details</a>{%endif%}</td>
-  </tr>
-{%endfor%}
-
- </table>
-</div>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Reference</th>
+      <th>Affected</th>
+      <th>Fixed</th>
+      <th><a href="#comp">Component</a> & CVSS v3 Base Score</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for p in patches%}
+      <tr>
+        <td>
+          {%if p.cve%}<nobr>{%if p.cve_visible%}<a href="{{p.cvelink}}">CVE-{{p.cve}}</a>{%else%}CVE-{{p.cve}}{%endif%}</nobr><br/>{%endif%}
+          {%if p.newspost%}<a href="/about/news/{{p.newspost.id}}/">Announcement</a><br/>{%endif%}
+        </td>
+        <td>{{p.affected|join:", "}}</td>
+        <td>{{p.fixed|join:", "}}</td>
+        <td>{{p.component}}<br/>
+          {%if p.cvssscore >= 0%}<a href="https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector={{p.cvssvector}}">{{p.cvssscore}}</a><br/><span class="cvssvector">{{p.cvssvector}}</span>
+    {%else%}Legacy: {{p.legacyscore}}{%endif%}</td>
+        <td>{{p.description}}{%if p.detailslink%}<br/><br/><a href="{{p.detailslink}}">more details</a>{%endif%}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 <h3>Unsupported versions</h3>
 <p>
@@ -105,42 +105,40 @@ You can filter the view of patches to show just patches for version:<br/>
 The following component references are used in the above table:
 </p>
 
-<div class="tblBasic">
- <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
-  <tr>
-   <th class="colFirst">Component</th>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Component</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+       <td>core server</td>
+       <td>This vulnerability exists in the core server product.</td>
+      </tr>
 
-   <th class="colLast">Description</th>
-  </tr>
+      <tr>
+       <td>client</td>
+       <td>This vulnerability exists in a client library or client application only.</td>
+      </tr>
 
-  <tr valign="top">
-   <td class="colFirst">core server</td>
-   <td class="colLast">This vulnerability exists in the core server product.</td>
-  </tr>
+      <tr>
+       <td>contrib module</td>
+       <td>This vulnerability exists in a contrib module. Contrib modules are not installed by default when PostgreSQL is installed from source. They may be installed by binary packages.</td>
+      </tr>
 
-  <tr valign="top">
-   <td class="colFirst">client</td>
-   <td class="colLast">This vulnerability exists in a client library or client application only.</td>
-  </tr>
+      <tr>
+       <td>client contrib module</td>
+       <td>This vulnerability exists in a contrib module used on the client only.</td>
+      </tr>
 
-  <tr valign="top">
-   <td class="colFirst">contrib module</td>
-   <td class="colLast">This vulnerability exists in a contrib module. Contrib modules are not installed by default when PostgreSQL is installed from source. They may be installed by binary packages.</td>
-
-  </tr>
-
-  <tr valign="top">
-   <td class="colFirst">client contrib module</td>
-   <td class="colLast">This vulnerability exists in a contrib module used on the client only.</td>
-  </tr>
-
-  <tr valign="top" class="lastrow">
-   <td class="colFirst">packaging</td>
-   <td class="colLast">This vulnerability exists in PostgreSQL binary packaging, e.g. an installer or RPM.</td>
-  </tr>
-
- </table>
-</div>
+      <tr>
+       <td>packaging</td>
+       <td>This vulnerability exists in PostgreSQL binary packaging, e.g. an installer or RPM.</td>
+      </tr>
+  </tbody>
+</table>
 
 
 {%endblock%}

@@ -2,7 +2,7 @@
 {%block title%}Versioning policy{%endblock%}
 {%block contents%}
 
-<h1>Versioning policy</h1>
+<h1>Versioning policy <i class="fas fa-code-branch"></i></h1>
 
 <p>
 <em>We always recommend that all users run the latest available minor release for whatever major version is in use.</em>
@@ -53,25 +53,27 @@ version may be required.
 </p>
 
 <h2>End Of Life (EOL) dates</h2>
-<div class="tblBasic">
- <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
-  <tr>
-   <th class="colFirst">Version</th>
-   <th class="colMid">Current minor</th>
-   <th class="colMid">Supported</th>
-   <th class="colMid">First release date</th>
-   <th class="colLast">EOL date</th>
-  </tr>
 
-{%for v in versions%}
-  <tr {%if forloop.last%}class="lastrow"{%endif%}>
-   <td class="colFirst">{{v.numtree}}</td>
-   <td class="colMid">{{v.numtree}}.{{v.latestminor}}</td>
-   <td class="colMid">{{v.supported|yesno:"Yes,No"}}</td>
-   <td class="colMid">{{v.firstreldate|date:"F Y"}}</td>
-   <td class="colLast">{{v.eoldate|date:"F Y"}}</td>
-  </tr>
-{%endfor%}
- </table>
-</div>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Version</th>
+      <th>Current minor</th>
+      <th>Supported</th>
+      <th>First release date</th>
+      <th>EOL date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for v in versions%}
+      <tr>
+       <td>{{v.numtree}}</td>
+       <td>{{v.numtree}}.{{v.latestminor}}</td>
+       <td>{{v.supported|yesno:"Yes,No"}}</td>
+       <td>{{v.firstreldate|date:"F Y"}}</td>
+       <td>{{v.eoldate|date:"F Y"}}</td>
+      </tr>
+    {%endfor%}
+  </tbody>
+</table>
 {%endblock%}

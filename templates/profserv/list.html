@@ -1,80 +1,76 @@
 {%extends "base/page.html"%}
 {%block title%}{{title}}{%endblock%}
 {%block contents%}
-<h1>{{title}}</h1>
+<h1>{{title}} <i class="fa fa-question-circle"></i></h1>
 <p>The following {{whatname}} are registered in {{regionname}}.</p>
 
-{%for s in services%}
-  <div class="tblBasic">
-  <table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
-   <tr>
-    <td class="colFirst">Name</td>
-    <td class="colMid"><strong>{{s.org.name}}</strong>{%if s.url%} (<a href="{{s.url}}">{{s.url}}</a>){%endif%}</td>
-    <th class="colLast" />
-   </tr>
-   {%if s.provides_hosting and s.provides_support %}
-   <tr>
-    <td class="colFisrtT">Provides</td>
-    <td class="colMidT">Provides both support and hosting.</td>
-    <td class="colLastT" />
-   </tr>
-   {%endif%}
-   <tr>
-    <td class="colFirstT">Description</td>
-    <td class="colMidT">{{s.description}}</td>
-    <td class="colLastT" />
-   </tr>
-   {%if s.employees %}
-   <tr>
-    <td class="colFirstT">Number of employees</td>
-    <td class="colMidT">{{s.employees}}</td>
-    <td class="colLastT" />
-   </tr>
-   {%endif%}
-   {%if s.locations%}
-   <tr>
-    <td class="colFirstT">Office locations</td>
-    <td class="colMidT">{{s.locations}}</td>
-    <td class="colLastT" />
-   </tr>
-   {%endif%}
-   {%if s.hours %}
-   <tr>
-    <td class="colFirstT">Hours</td>
-    <td class="colMidT">{{s.hours}}</td>
-    <td class="colLastT" />
-   </tr>
-   {%endif%}
-   {%if s.languages%}
-   <tr>
-    <td class="colFirstT">Languages</td>
-    <td class="colMidT">{{s.languages}}</td>
-    <td class="colLastT" />
-   </tr>
-   {%endif%}
-   {%if s.customerexample%}
-   <tr>
-    <td class="colFirstT">Customer example</td>
-    <td class="colMidT">{{s.customerexample}}</td>
-    <td class="colLastT" />
-   </tr>
-   {%endif%}
-   {%if s.experience %}
-   <tr>
-    <td class="colFirstT">Experience</td>
-    <td class="colMidT">{{s.experience}}</td>
-    <td class="colLastT" />
-   </tr>
-   {%endif%}
-   {%if s.contact%}
-   <tr class="lastrow">
-    <td class="colFirstT">Contact information</td>
-    <td class="colMidT">{{s.contact}}</td>
-    <td class="colLastT" />
-   </tr>
-   {%endif%}
+{% for s in services %}
+  <h2 class="news">
+    <a href="{{s.url}}" target="_blank">{{ s.org.name }}</a>
+  </h2>
+  <table class="table table-striped">
+    <tbody>
+      {% if s.url %}
+         <tr>
+          <th scope="row">Website</th>
+          <td><a href="{{s.url}}" target="_blank">{{s.url}}</a></td>
+         </tr>
+      {% endif %}
+      <tr>
+        <th scope="row" style="width: 20%">Description</th>
+        <td>{{s.description}}</td>
+      </tr>
+      {% if s.provides_hosting and s.provides_support %}
+        <tr>
+          <th scope="row">Provides</th>
+          <td>Provides both support and hosting.</td>
+        </tr>
+      {% endif %}
+      {%if s.employees %}
+        <tr>
+          <th scope="row">Employees</th>
+          <td>{{s.employees}}</td>
+        </tr>
+      {% endif %}
+      {%if s.locations%}
+        <tr>
+          <th scope="row">Office locations</th>
+          <td>{{s.locations}}</td>
+        </tr>
+      {% endif %}
+      {% if s.hours %}
+        <tr>
+          <th scope="row">Hours</th>
+          <td>{{s.hours}}</td>
+        </tr>
+      {% endif %}
+      {% if s.languages %}
+        <tr>
+          <th scope="row">Languages</th>
+          <td>{{s.languages}}</td>
+        </tr>
+      {% endif %}
+      {% if s.customerexample %}
+        <tr>
+          <th scope="row">Customer example</th>
+          <td>{{s.customerexample}}</td>
+        </tr>
+      {% endif %}
+      {% if s.experience %}
+        <tr>
+          <th scope="row">Experience</th>
+          <td>{{s.experience}}</td>
+        </tr>
+      {% endif %}
+      {%if s.contact%}
+        <tr>
+          <th scope="row">Contact information</th>
+          <td>{{s.contact}}</td>
+        </tr>
+      {% endif %}
+    </tbody>
   </table>
-  </div>
+  <hr />
 {%endfor%}
 
 {%endblock%}
