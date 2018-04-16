@@ -3,16 +3,27 @@
 {%block title%}{{title}}{%endblock%}
 {%block contents%}
 
-<h1>{{title}}</h1>
+<h1>{{title}} <i class="fas fa-calendar-alt"></i></h1>
 {%for eventblock in eventblocks%}
 {%if eventblocks|length > 1%}<h2><a name="{{eventblock.anchor|slugify}}">{{eventblock.name}}</a></h2>{%endif%}
 <p>
 <em><strong>Note:</strong> The PostgreSQL Global Development Group does not endorse any
 events run by third parties. No guarantee of the quality of events is offered
-whatsoever.  For information on <a href="/community/recognition/#conferences">Community Conference Recognition</a>, please review the guidelines <a href="/community/recognition/#conferences">here</a>.</em>
+whatsoever.</em>
 </p>
+{% if eventblock.name == 'Community Events' %}
+<p>
+  <img src="/media/img/PostgreSQL_Badge1.svg" class="community" alt="PostgreSQL Community Event">
+  indicates that an event is recognised under the <a href="/community/recognition/#conferences">community event guidelines</a> and is directly helping the PostgreSQL community.
+</p>
+{% endif %}
 {%for event in eventblock.events %}
-<div><a href="/about/event/{{event.id}}/">{{event.title}}</a></div>
+<div>
+  {% if event.badged %}
+    <img src="/media/img/PostgreSQL_Badge1.svg" class="community" alt="PostgreSQL Community Event">
+  {% endif %}
+  <a href="/about/event/{{event.id}}/">{{event.title}}</a>
+</div>
 <div>Date: <strong>{{event.displaydate|safe}}</strong></div>
 <div>Location: <strong>{{event.locationstring}}</strong></div>
 {%if event.language%}<div>Language: <strong>{{event.language}}</strong></div>{%endif%}

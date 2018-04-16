@@ -10,6 +10,6 @@
 website. We apologise for any formatting issues caused by the migration.</em></p>
 {%endif%}
 {%for t in obj.tags.all%}
-<span class="newstag"><a href="/about/newsarchive/{{t.urlname}}/">{{t.name}}</a></span>
+<span class="newstag"><a class="btn btn-primary" href="/about/newsarchive/{{t.urlname}}/">{{t.name}}</a></span>
 {%endfor%}
 {%endblock%}
