@@ -21,7 +21,6 @@ import pgweb.misc.views
 import pgweb.news.views
 import pgweb.profserv.views
 import pgweb.pugs.views
-import pgweb.quotes.views
 import pgweb.search.views
 import pgweb.security.views
 import pgweb.sponsors.views
@@ -45,7 +44,6 @@ urlpatterns = [
 	url(r'^about/event/(\d+)(-.*)?/$', pgweb.events.views.item),
 	url(r'^about/featurematrix/$', pgweb.featurematrix.views.root),
 	url(r'^about/featurematrix/detail/(\d+)/$', pgweb.featurematrix.views.detail),
-	url(r'^about/quotesarchive/$', pgweb.quotes.views.allquotes),
 
 	url(r'^ftp/(.*/)?$', pgweb.downloads.views.ftpbrowser),
 	url(r'^download/mirrors-ftp/+(.*)$', pgweb.downloads.views.mirrorselect),

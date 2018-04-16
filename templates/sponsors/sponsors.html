@@ -2,49 +2,39 @@
 {%block title%}Sponsors{%endblock%}
 {%block contents%}
 
-<h1>Sponsors</h1>
+<h1>Sponsors <i class="fa fa-users"></i></h1>
 
-<p><span class="txtMediumGrey">The following is a categorized list of significant sponsors to PostgreSQL.
+<p>The following is a categorized list of significant sponsors to PostgreSQL.
 Sponsors are listed in no particular order within each section, with just the location of the head office
-for each company shown.
-</span></p>
+for each company shown.</p>
 
-{% for s in sponsors %}
-{%ifchanged s.sponsortype %}
-{%if not forloop.first %}
- </table>
-</div>
+{% for sponsor in sponsors %}
+  {% ifchanged sponsor.sponsortype %}
+    {% if not forloop.first %}
+          </tbody>
+        </table>
+    {% endif %}
+    <h2>{{ sponsor.sponsortype.typename }}</h2>
+    <table class="table table-striped">
+      <tbody>
+        {% endifchanged%}
+          <tr>
+            <th scope="row" style="width: 20%">
+              <a href="{{ sponsor.url }}" target="_blank">
+                <img width="150" src="/media/img/about/sponsors/{{ sponsor.logoname }}" alt="{{ sponsor.name }}" />
+              </a>
+            </th>
+            <td style="width: 50%">
+              <a href="{{ sponsor.url }}" target="_blank">{{ sponsor.name }}</a>
+            </td>
+            <td style="width: 30%">{{ sponsor.country }}</td>
+          </tr>
+        {% endfor %}
+    </tbody>
+  </table>
 
-{%endif%}
-<div class="tblBasic">
-<table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
-<tr>
-	<td><h1>{{s.sponsortype.typename}}</h1></td>
-	<td class="colFirst" colspan="2">&nbsp;</td>
-</tr>
-
-{%endifchanged%}
-<tr>
-	<td class="colFirst" width="125"><img width="150" src="/media/img/about/sponsors/{{s.logoname}}" alt="{{s.name}} logo" /></td>
-	<td class="colMid"><a href="{{s.url}}">{{s.name}}</a></td>
-	<td class="colLast" width="150">{{s.country}}</td>
-</tr>
-{%endfor%}
- </table>
-</div>
-
-<div class="tblBasic">
-<table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
-<tr class="lastrow">
-<th colspan="3">Sponsorship recognition is wholly determined by the
-	<a href="https://wiki.postgresql.org/wiki/Sponsoring">Sponsorship Committee</a>.
-</th>
-
-</tr>
-
-</table>
-
-</div>
-
+<h2>Sponsorship Recognition</h2>
+<p>
+  Sponsorship recognition is wholly determined by the <a href="https://wiki.postgresql.org/wiki/Sponsoring" target="_blank">Sponsorship Committee</a>.
+</p>
 {%endblock%}
-

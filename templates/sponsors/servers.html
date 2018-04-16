@@ -2,42 +2,42 @@
 {%block title%}Servers{%endblock%}
 {%block contents%}
 
-<h1>Servers</h1>
+<h1>Servers <i class="fas fa-server"></i></h1>
 
 <p>
 The servers that power the services of <a href="/">www.postgresql.org</a> are provided by
-different companies and organisations around the world. 
+different companies and organisations around the world.
 </p>
 
-<div class="tblBasic">
-<table border="0" cellpadding="0" cellspacing="0" class="tblBasicGrey">
-<tr>
-	<th class="colFirst">Name</th>
-	<th class="colMid">Provider</th>
-	<th class="colMid">Dedicated</th>
-	<th class="colMid">Specs</th>
-	<th class="colMid">OS</th>
-	<th class="colMid">Location</th>
-	<th class="colLast">Usage</th>	
-</tr>
-
-{% for s in servers %}
-<tr>
-	<td class="colFirst">{{s.name}}</td>
-	<td class="colMid">
-	{%for p in s.sponsors.all %}
-		<a href="{{p.url}}">{{p.name}}</a>{%if not forloop.last%}, {%endif%}
-	{%endfor%}
-	</td>
-	<td class="colMid">{{s.dedicated}}</td>
-	<td class="colMid">{{s.performance}}</td>
-	<td class="colMid">{{s.os}}</td>
-	<td class="colMid">{{s.location}}</td>
-	<td class="colLast">{{s.usage}}</td>
-</tr>
-{% endfor %}
- </table>
-</div>
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+      <th>Name</th>
+    	<th>Provider</th>
+    	<th>Dedicated</th>
+    	<th>Specs</th>
+    	<th>OS</th>
+    	<th>Location</th>
+    	<th>Usage</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for server in servers %}
+      <tr>
+        <th scope="row">{{ server.name }}</th>
+        <td>
+          {% for sponsor in server.sponsors.all %}
+            <a href="{{ sponsor.url }}" target="_blank">{{ sponsor.name }}</a>{%if not forloop.last%}, {%endif%}
+          {% endfor %}
+        </td>
+        <td>{{ server.dedicated|yesno:"Yes,No" }}</td>
+        <td>{{ server.performance }}</td>
+        <td>{{ server.os }}</td>
+        <td>{{ server.location }}</td>
+        <td>{{ server.usage }}</td>
+      </tr>
+    {%endfor%}
+  </tbody>
+</table>
 
 {%endblock%}
-
