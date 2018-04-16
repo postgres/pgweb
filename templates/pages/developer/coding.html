@@ -2,7 +2,7 @@
 {%block title%}Coding{%endblock%}
 {%block contents%}
 
-<h1>Coding</h1>
+<h1>Coding <i class="fa fa-code"></i></h1>
 
 <p>The following links are useful when exploring the PostgreSQL source code.</p>
 
@@ -14,16 +14,23 @@
     <li><a href="/developer/backend/">Backend Flowchart</a></li>
     <li><a href="https://babel.postgresql.org/">Translating</a></li>
     <li><a href="https://wiki.postgresql.org/wiki/Developer_and_Contributor_Resources">Developer Section on wiki.postgresql.org</a></li>
-    <li>
-     <form action="https://git.postgresql.org/gitweb" method="get">
-      <input type="hidden" name="p" value="postgresql.git" />
-      <input type="hidden" name="a" value="commitdiff" />
-      View git commit hash: <input type="text" name="h" size="40" />
-      <input type="submit" value="Go" />
-     </form>
-    </li>
 </ul>
 
+<h2>Search Code By Git Commit Hash</h2>
+<div class="row">
+  <div class="col-6">
+  <form action="https://git.postgresql.org/gitweb" method="get">
+    <input type="hidden" name="p" value="postgresql.git" />
+    <input type="hidden" name="a" value="commitdiff" />
+    <div class="input-group">
+      <input class="form-control" type="text" name="h" type="text" size="40" placeholder="e.g. &quot;861861edcc04a6e3ebdfe363311f122e2b226196&quot;">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+      </span>
+    </div><!-- /input-group -->
+  </form>
+</div>
+</div>
 <h2>Documentation</h2>
 <ul>
     <li><a href="https://wiki.postgresql.org/wiki/Developer_FAQ">Frequently Asked Questions for Developers</a></li>
