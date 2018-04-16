@@ -1,77 +1,96 @@
 {%extends "base/page.html"%}
+{% load pgfilters %}
 {%block title%}Edit user profile{%endblock%}
 {%block contents%}
-<h1>Edit user profile</h1>
-<form method="post" action=".">{% csrf_token %}
+<h1>Edit User Profile <i class="far fa-address-card"></i></h1>
 
-<table class="pgGenericFormTable">
-{%if userform.errors or profileform.errors or contribform.errors %}
- <tr class="errorheader">
-  <td colspan="2">Please correct the errors below, and re-submit the form.</td>
- </tr>
-{%endif%}
- <tr>
-  <th>Username</th>
-  <td>{{user.username}}</td>
- </tr>
- <tr>
-  <th>Email</th>
-  <td>{{user.email}} {%if can_change_email%}(<em><a href="change_email/">change</a></em>){%else%}
-<br/><br/>
-The email address of this account cannot be changed, because the account does
-not have a local password, most likely because it's connected to a third
-party system (such as Google or Facebook).
-{%endif%}</td>
- </tr>
-{%for field in userform%}
- {%if field.errors %}
- <tr class="error">
-  <td colspan="2">{{field.errors.as_ul}}</td>
- </tr>
- {%endif%}
- <tr {%if field.errors%}class="errorinfo"{%endif%}>
-  <th>{{field.label_tag}}{%if field.help_text %}<br/>
-   <span class="formfieldhelp">{{field.help_text}}</span>{%endif%}</th>
-  <td>{{field}}</td>
- </tr>
-{%endfor%}
-{%for field in profileform%}
- {%if field.errors %}
- <tr class="error">
-  <td colspan="2">{{field.errors.as_ul}}</td>
- </tr>
- {%endif%}
- <tr {%if field.errors%}class="errorinfo"{%endif%}>
-  <th>{{field.label_tag}}{%if field.help_text %}<br/>
-   <span class="formfieldhelp">{{field.help_text}}</span>{%endif%}</th>
-  <td>{{field}}</td>
- </tr>
-{%endfor%}
-</table>
-
-{%if contribform%}
-<h2>Edit contributor information</h2>
-<p>
-You can edit the information that's shown on the
-<a href="/community/contributors/">contributors</a> page. Please be
-careful as your changes will take effect immediately.
-</p>
-<table class="pgGenericFormTable">
-{%for field in contribform%}
- {%if field.errors %}
- <tr class="error">
-  <td colspan="2">{{field.errors.as_ul}}</td>
- </tr>
- {%endif%}
- <tr {%if field.errors%}class="errorinfo"{%endif%}>
-  <th>{{field.label_tag}}{%if field.help_text %}<br/>
-   <span class="formfieldhelp">{{field.help_text}}</span>{%endif%}</th>
-  <td>{{field}}</td>
- </tr>
-{%endfor%}
-</table>
-{%endif%}
-
-<input type="submit" value="Save" />
+<form method="post" action=".">
+  {% csrf_token %}
+  {% if userform.errors or profileform.errors or contribform.errors %}
+    <div class="alert alert-danger" role="alert">
+      Please correct the errors below, and re-submit the form.
+    </div>
+  {% endif %}
+  <div class="form-group row">
+    <label class="col-form-label col-sm-3">Username:</label>
+    <div class="col-sm-9">
+      {{ user.username }}
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-form-label col-sm-3">Email:</label>
+    <div class="col-sm-9">
+      {{ user.email }}
+      {% if can_change_email %}
+        (<em><a href="change_email/">change</a></em>)
+      {% else %}
+        <p><em>The email address of this account cannot be changed, because the account does
+        not have a local password, most likely because it's connected to a third
+        party system (such as Google or Facebook).</em></p>
+      {% endif %}
+    </div>
+  </div>
+  {% for field in userform %}
+    <div class="form-group row">
+      {% if field.errors %}
+        {% for e in field.errors %}
+          <div class="col-lg-12 alert alert-danger">{{e}}</div>
+        {% endfor %}
+      {% endif %}
+      <label class="col-form-label col-sm-3" for="{{ field.id }}">
+        {{ field.label|title }}
+        {% if field.help_text %}
+          <p><small>{{ field.help_text }}</small></p>
+        {% endif %}
+      </label>
+      <div class="col-sm-9">
+        {{ field|field_class:"form-control" }}
+      </div>
+    </div>
+  {% endfor %}
+  {% for field in profileform %}
+    <div class="form-group row">
+      {% if field.errors %}
+        {% for e in field.errors %}
+          <div class="col-lg-12 alert alert-danger">{{e}}</div>
+        {% endfor %}
+      {% endif %}
+      <label class="col-form-label col-sm-3" for="{{ field.id }}">
+        {{ field.label }}
+        {% if field.help_text %}
+          <p><small>{{ field.help_text }}</small></p>
+        {% endif %}
+      </label>
+      <div class="col-sm-9">
+        {{ field|field_class:"form-control" }}
+      </div>
+    </div>
+  {% endfor %}
+  {% if contribform %}
+    <h2>Edit contributor information</h2>
+    <p>You can edit the information that's shown on the <a href="/community/contributors/" target="_blank">contributors</a> page. Please be careful as your changes will take effect immediately!
+    </p>
+    {% for field in contribform %}
+      <div class="form-group row">
+        {% if field.errors %}
+          {% for e in field.errors %}
+            <div class="col-lg-12 alert alert-danger">{{e}}</div>
+          {% endfor %}
+        {% endif %}
+        <label class="col-form-label col-sm-3" for="{{ field.id }}">
+          {{ field.label }}
+          {% if field.help_text %}
+            <p><small>{{ field.help_text }}</small></p>
+          {% endif %}
+        </label>
+        <div class="col-sm-9">
+          {{ field|field_class:"form-control" }}
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+  <div class="submit-row">
+    <input class="btn btn-primary" type="submit" value="Save" />
+  </div>
 </form>
 {%endblock%}

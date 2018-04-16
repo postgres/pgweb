@@ -1,7 +1,7 @@
 {%extends "base/page.html"%}
 {%block title%}Organisations{%endblock%}
 {%block contents%}
-<h1>Organisations</h1>
+<h1>Organisations <i class="fa fa-users"></i></h1>
 <p>
 The following organisations are registered in our database. Note that any
 organisations listed as <em>Migrated Connections</em> are organisations that
@@ -12,16 +12,20 @@ organisations, please send an email to
 letting us know this, and including the name of your community account.
 We will then link your account to this organisation.
 </p>
-<table>
- <tr>
-  <th>Organisation</th>
-  <th>Manager</th>
- </tr>
-{%for o in orgs%}
- <tr>
-  <td>{{o.name}}</td>
-  <td>{%for m in o.managers.all%}{{m.first_name}} {{m.last_name}}{%if not forloop.last%}<br/>{%endif%}{%endfor%}</td>
- </tr>
-{%endfor%}
+<table class="table table-striped">
+  <thead class="thead-light">
+    <tr>
+     <th>Organisation</th>
+     <th>Manager</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for o in orgs%}
+     <tr>
+      <th scope="row">{{o.name}}</th>
+      <td>{%for m in o.managers.all%}{{m.first_name}} {{m.last_name}}{%if not forloop.last%}<br/>{%endif%}{%endfor%}</td>
+     </tr>
+    {%endfor%}
+  </tbody>
 </table>
 {%endblock%}

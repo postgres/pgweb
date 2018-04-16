@@ -1,7 +1,8 @@
 {%extends "base/page.html"%}
+{% load pgfilters %}
 {%block title%}Change email{%endblock%}
 {%block contents%}
-<h1>Change email</h1>
+<h1>Change email <i class="fas fa-envelope"></i></h1>
 {%if token%}
 <h2>Awaiting confirmation</h2>
 <p>
@@ -29,27 +30,31 @@ and once you click the link in that email, your email will be changed.
 {%endif%}
 
 <form method="post" action=".">{% csrf_token %}
-
-<table class="pgGenericFormTable">
-{%if form.errors %}
- <tr class="errorheader">
-  <td colspan="2">Please correct the errors below, and re-submit the form.</td>
- </tr>
-{%endif%}
-{%for field in form%}
- {%if field.errors %}
- <tr class="error">
-  <td colspan="2">{{field.errors.as_ul}}</td>
- </tr>
- {%endif%}
- <tr {%if field.errors%}class="errorinfo"{%endif%}>
-  <th>{{field.label_tag}}{%if field.help_text %}<br/>
-   <span class="formfieldhelp">{{field.help_text}}</span>{%endif%}</th>
-  <td>{{field}}</td>
- </tr>
-{%endfor%}
-</table>
-
-<input type="submit" value="Change email" />
+  {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+      Please correct the errors below, and re-submit the form.
+    </div>
+  {% endif %}
+  {% for field in form %}
+    <div class="form-group row">
+      {% if field.errors %}
+        {% for e in field.errors %}
+          <div class="col-lg-12 alert alert-danger">{{e}}</div>
+        {% endfor %}
+      {% endif %}
+      <label class="col-form-label col-sm-3" for="{{ field.id }}">
+        {{ field.label|title }}
+        {% if field.help_text %}
+          <p><small>{{ field.help_text }}</small></p>
+        {% endif %}
+      </label>
+      <div class="col-sm-9">
+        {{ field|field_class:"form-control" }}
+      </div>
+    </div>
+  {% endfor %}
+  <div class="submit-row">
+    <input class="btn btn-primary" type="submit" value="Change Email" />
+  </div>
 </form>
 {%endblock%}

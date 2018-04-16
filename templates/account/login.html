@@ -1,6 +1,6 @@
 {%extends "base/page.html"%}
 {%block contents%}
-<h1>Sign in</h1>
+<h1>Sign in <i class="fas fa-sign-in-alt"></i></h1>
 <p>
 {%if sitename%}
 The website you are trying to log in to ({{sitename}}) is using the
@@ -32,16 +32,16 @@ password, you can use the <a href="/account/reset/">password reset</a> form.
 {%endfor%}
 {%endif%}
 <form action="." method="post" id="login-form">{% csrf_token %}
-  <div class="form-row">
-    <label for="id_username">Username:</label> <input type="text" name="username" id="id_username" />
+  <div class="form-group">
+    <input type="text" class="form-control" name="username" id="id_username" placeholder="Username" />
   </div>
-  <div class="form-row">
-    <label for="id_password">Password:</label> <input type="password" name="password" id="id_password" />
+  <div class="form-group">
+    <input type="password" class="form-control" name="password" id="id_password" placeholder="Password"/>
     <input type="hidden" name="this_is_the_login_form" value="1" />
     <input type="hidden" name="next" value="{{next}}" />
   </div>
   <div class="submit-row">
-    <label>&nbsp;</label><input type="submit" value="Sign in with community account password" />
+    <input class="btn btn-primary" type="submit" value="Community Sign-In">
   </div>
 </form>
 

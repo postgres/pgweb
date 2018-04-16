@@ -3,7 +3,7 @@
 {%block contents%}
 
 {%if success%}
-<h1>Email changed</h1>
+<h1>Email changed <i class="fas fa-envelope"></i></h1>
 <p>
 Your email has successfully been changed to {{user.email}}.
 </p>
@@ -13,7 +13,7 @@ community site than <em>www.postgresql.org</em>, you may need to log
 out and back in again for the email to be updated on that site.
 </p>
 {%else%}
-<h1>Change email</h1>
+<h1>Change email <i class="fas fa-envelope"></i></h1>
 <p>
 The token <code>{{token}}</code> was not found.
 </p>
