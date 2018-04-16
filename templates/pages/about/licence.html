@@ -1,41 +1,60 @@
 {%extends "base/page.html"%}
 {%block title%}License{%endblock%}
 {%block contents%}
-<h1>License</h1>
-<p>PostgreSQL is released under the <a href="https://www.opensource.org/licenses/postgresql">PostgreSQL License</a>,
+<h1>License <i class="far fa-file-alt"></i></h1>
+<p>PostgreSQL is released under the <a href="http://www.opensource.org/licenses/postgresql">PostgreSQL License</a>,
 a liberal Open Source license, similar to the BSD or MIT licenses.</p>
 
-<p>PostgreSQL Database Management System<br />
-(formerly known as Postgres, then as Postgres95)<br /><br />
-
-Portions Copyright (c) 1996-{% now "Y" %}, The PostgreSQL Global Development Group<br /><br />
-
-Portions Copyright (c) 1994, The Regents of the University of California<br /><br />
-
-Permission to use, copy, modify, and distribute this software and its
-documentation for any purpose, without fee, and without a written agreement
-is hereby granted, provided that the above copyright notice and this
-paragraph and the following two paragraphs appear in all copies.<br /><br />
-
-IN NO EVENT SHALL THE UNIVERSITY OF CALIFORNIA BE LIABLE TO ANY PARTY FOR
-DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING
-LOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS
-DOCUMENTATION, EVEN IF THE UNIVERSITY OF CALIFORNIA HAS BEEN ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGE.<br /><br />
-
-THE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY WARRANTIES,
-INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
-ON AN "AS IS" BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATIONS TO
-PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.<br />
+<p>
+  PostgreSQL Database Management System<br />
+  (formerly known as Postgres, then as Postgres95)
+</p>
+<p>
+  Portions Copyright &copy; 1996-{% now "Y" %}, The PostgreSQL Global Development Group
+</p>
+<p>
+  Portions Copyright &copy; 1994, The Regents of the University of California
+</p>
+<p>
+  Permission to use, copy, modify, and distribute this software and its
+  documentation for any purpose, without fee, and without a written agreement
+  is hereby granted, provided that the above copyright notice and this
+  paragraph and the following two paragraphs appear in all copies.
+</p>
+<p>
+  IN NO EVENT SHALL THE UNIVERSITY OF CALIFORNIA BE LIABLE TO ANY PARTY FOR
+  DIRECT, INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, INCLUDING
+  LOST PROFITS, ARISING OUT OF THE USE OF THIS SOFTWARE AND ITS
+  DOCUMENTATION, EVEN IF THE UNIVERSITY OF CALIFORNIA HAS BEEN ADVISED OF THE
+  POSSIBILITY OF SUCH DAMAGE.
+</p>
+<p>
+  THE UNIVERSITY OF CALIFORNIA SPECIFICALLY DISCLAIMS ANY WARRANTIES,
+  INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+  AND FITNESS FOR A PARTICULAR PURPOSE.  THE SOFTWARE PROVIDED HEREUNDER IS
+  ON AN "AS IS" BASIS, AND THE UNIVERSITY OF CALIFORNIA HAS NO OBLIGATIONS TO
+  PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 </p>
 
 <h2>Why not the GNU General Public License?</h2>
-<p>People often ask why PostgreSQL is not released under the GNU General
-Public License. The simple answer is because we like our license and do not
-want to change it. If you are keen to read more about this topic, then please
-take a look in the <a href="/list/">Archives</a> at
-any of the many threads on this subject, but please don't start yet another
-debate on the subject!
+
+<p>
+  People often ask why PostgreSQL is not released under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GNU General
+Public License</a>. The simple answer is: we like our license and do not
+want to change it!
 </p>
+<p>
+  If you would like to read more about this topic, then please
+take a look at the <a href="/list/">mailing list archives</a> at
+one of the many discussions on this subject.
+</p>
+
+<h2>Will PostgreSQL ever be released under a different license?</h2>
+<p>
+  The PostgreSQL Global Development Group remains committed to making
+  PostgreSQL available as free and open source software in perpetuity. There are
+  no plans to change the PostgreSQL License or release PostgreSQL under a
+  different license.
+</p>
+
 {%endblock%}
