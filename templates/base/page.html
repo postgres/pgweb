@@ -1,28 +1,39 @@
 {%extends "base/base.html" %}
 {%block layoutblock%}
-<div id="pgSideWrap">
- {%if navmenu|length > 0%}
- <div id="pgSideNav">
-  <ul>
-   {%for m in navmenu%}
-   {%if not forloop.first %}</li>{%endif%}
-   <li{%if forloop.last%} class="last-child"{%endif%}><a href="{{m.link}}">{{m.title}}</a>
-    {%if m.submenu %}
-     <ul>
-     {%for sm in m.submenu %}
-      <li{%if forloop.last%} class="last-child"{%endif%}><a href="{{sm.link}}">{{sm.title}}</a></li>
-     {%endfor%}
-     </ul>
-    {%endif%}
-    {%if forloop.last%}
-   </li>
-    {%endif%}
-   {%endfor%}
-  </ul>
- </div>
- {%endif%}
-</div> <!-- pgSideWrap -->
-<div id="pgContentWrap">
-{%block contents%}{%endblock%}
-</div> <!-- pgContentWrap -->
+<div class="container-fluid margin">
+  <div class="row">
+    <div class="col-lg-2">
+      <div id="pgSideWrap">
+       {%if navmenu|length > 0%}
+       <div id="pgSideNav">
+         <h2>Quick Links</h2>
+
+         <ul>
+           {%for m in navmenu%}
+           {%if not forloop.first %}</li>{%endif%}
+           <li{%if forloop.last%} class="last-child"{%endif%}><a href="{{m.link}}">{{m.title}}</a>
+            {%if m.submenu %}
+             <ul>
+             {%for sm in m.submenu %}
+              <li{%if forloop.last%} class="last-child"{%endif%}><a href="{{sm.link}}">{{sm.title}}</a></li>
+             {%endfor%}
+             </ul>
+            {%endif%}
+            {%if forloop.last%}
+           </li>
+            {%endif%}
+           {%endfor%}
+        </ul>
+
+       </div>
+       {%endif%}
+      </div> <!-- pgSideWrap -->
+    </div>
+    <div class="col-lg-10">
+      <div id="pgContentWrap">
+        {%block contents%}{%endblock%}
+      </div> <!-- pgContentWrap -->
+    </div>
+  </div>
+</div>
 {%endblock%}

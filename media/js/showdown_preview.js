@@ -15,7 +15,7 @@ function attach_showdown_preview(objid, admin) {
 	}
 
 	newdiv = document.createElement('div');
-	newdiv.className = 'markdownpreview';
+	newdiv.className = 'markdownpreview col-lg-12';
 
 	if (admin) {
 		obj.style.cssFloat = 'left';
@@ -29,7 +29,7 @@ function attach_showdown_preview(objid, admin) {
 
 	obj.parentNode.insertBefore(newdiv, obj.nextSibling);
 
-	obj.infospan_html_base = admin ? '' : 'This field supports <a href="http://daringfireball.net/projects/markdown/basics">markdown</a>. See below for a preview.';
+	obj.infospan_html_base = admin ? '' : 'This field supports <a href="http://daringfireball.net/projects/markdown/basics" target="_blank">markdown</a>. See below for a preview.';
 
 	obj.infospan = document.createElement('span');
 	obj.infospan.innerHTML = obj.infospan_html_base;

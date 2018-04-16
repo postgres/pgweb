@@ -32,3 +32,15 @@ def isrequired_error(obj):
 @register.filter(is_safe=True)
 def label_class(value, arg):
 	return value.label_tag(attrs={'class': arg})
+
+@register.filter()
+def planet_author(obj):
+	# takes a ImportedRSSItem object from a Planet feed and extracts the author
+	# information from the title
+	return obj.title.split(':')[0]
+
+@register.filter()
+def planet_title(obj):
+	# takes a ImportedRSSItem object from a Planet feed and extracts the info
+	# specific to the title of the Planet entry
+	return ":".join(obj.title.split(':')[1:])
