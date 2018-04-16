@@ -35,6 +35,7 @@ urlpatterns = [
 	url(r'^$', pgweb.core.views.home),
 	url(r'^dyncss/(?P<css>base|docs).css$', pgweb.core.views.dynamic_css),
 
+	url(r'^about/$', pgweb.core.views.about),
 	url(r'^about/newsarchive/([^/]+/)?$', pgweb.news.views.archive),
 	url(r'^about/news/(\d+)(-.*)?/$', pgweb.news.views.item),
 	url(r'^about/news/taglist.json/$', pgweb.news.views.taglist_json),
