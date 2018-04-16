@@ -6,13 +6,8 @@ from django.conf import settings
 sitenav = {
 	'about': [
 		{'title': 'About',              'link':'/about/'},
-		{'title': 'Advantages',         'link':'/about/advantages/'},
 		{'title': 'Feature Matrix',     'link':'/about/featurematrix/'},
-		{'title': 'Awards',             'link':'/about/awards/'},
 		{'title': 'Donate',             'link':'/about/donate/'},
-		{'title': 'Case Studies',       'link':'/about/casestudies/'},
-		{'title': 'Quotes',             'link':'/about/quotesarchive/'},
-		{'title': 'Featured Users',     'link':'/about/users/'},
 		{'title': 'History',            'link':'/docs/current/static/history.html'},
 		{'title': 'Sponsors',           'link':'/about/sponsors/', 'submenu': [
 			{'title': 'Servers',    'link': '/about/servers/'},
@@ -38,10 +33,8 @@ sitenav = {
 			{'title': 'Japanese',   'link':'http://www.postgresql.jp/document/'},
 			{'title': 'Russian',    'link':'https://postgrespro.ru/docs/postgresql'},
 		]},
-		{'title': 'Security',           'link':'/support/security/'},
-		{'title': 'What\'s New',        'link':'/docs/current/static/release.html'},
-		{'title': 'FAQ',                'link':'https://wiki.postgresql.org/wiki/Category:FAQ'},
 		{'title': 'Books',              'link':'/docs/books/'},
+		{'title': 'Online Resources',   'link':'/docs/online-resources/'},
 		{'title': 'Wiki',               'link':'https://wiki.postgresql.org'},
 	],
 	'community': [
@@ -49,12 +42,10 @@ sitenav = {
 		{'title': 'Contributors',       'link':'/community/contributors/'},
 		{'title': 'Mailing Lists',      'link':'/list/'},
 		{'title': 'IRC',                'link':'/community/irc/'},
+        {'title': 'Slack',              'link':'https://postgres-slack.herokuapp.com/'},
 		{'title': 'Local User Groups',  'link':'/community/user-groups/'},
-		{'title': 'Featured Users',     'link':'/about/users/'},
+        {'title': 'Events',             'link':'/about/events/'},
 		{'title': 'International Sites','link':'/community/international/'},
-		{'title': 'Propaganda',         'link':'/community/propaganda/'},
-		{'title': 'Resources',          'link':'/community/resources/'},
-		{'title': 'Recognition Guidelines',       'link':'/community/recognition/'},
 	],
 	'developer': [
 		{'title': 'Developers',         'link':'/developer/'},
@@ -64,7 +55,7 @@ sitenav = {
 		{'title': 'Testing',            'link':'/developer/testing/', 'submenu': [
 			{'title': 'Beta Information',  'link':'/developer/beta/'},
 		]},
-		{'title': 'Mailing Lists',      'link':'/community/lists/'},
+		{'title': 'Mailing Lists',      'link':'/list/'},
 		{'title': 'Developer FAQ',      'link':'https://wiki.postgresql.org/wiki/Developer_FAQ'},
 	],
 	'support': [
