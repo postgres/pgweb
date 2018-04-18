@@ -15,18 +15,6 @@
         </span>
       </div><!-- /input-group -->
       <div class="form-group">
-        <label for="allsites">List:</label>
-        <select name="l">
-          <option value="">-- All lists</option>
-          {%for l in lists %}
-            {%ifchanged l.group%}
-              <option value="{{l.group.negid}}"{%if l.group.negid == listid%} SELECTED{%endif%}>-- {{l.group}}</option>
-            {%endifchanged%}
-            <option value="{{l.id}}"{%if l.id == listid%} SELECTED{%endif%}>{{l}}</option>
-          {%endfor%}
-        </select>
-      </div>
-      <div class="form-group">
         <label for="search-lists">List:</label>
         <select id="search-lists" class="custom-select" name="l">
           <option value="">-- All lists</option>
