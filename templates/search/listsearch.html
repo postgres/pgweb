@@ -54,26 +54,23 @@
   </div><!-- /.row -->
 </form>
 
-<div class="row">
-  {%if search_error %}
-    <div>{{search_error}}</div>
+{%if search_error %}
+  <div>{{search_error}}</div>
+{%else%}
+  <!-- docbot goes here -->
+  {%if hitcount == 0 %}
+    <p>Your search for <b>{{query}}</b> returned no hits.</p>
   {%else%}
-    <!-- docbot goes here -->
-    {%if hitcount == 0 %}
-      <p>Your search for <b>{{query}}</b> returned no hits.</p>
-    {%else%}
-      <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount == 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
-      {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
-      {%for hit in hits %}
-        <p>
-        {{forloop.counter0|add:firsthit}}. <a href="https://www.postgresql.org/message-id/{{hit.messageid}}">{{hit.subject}}</a> [{{hit.rank|floatformat:2}}]<br/>
-        From {{hit.author}} on {{hit.date}}.<br/>
-        {{hit.abstract|safe}}<br/>
-        <a href="https://www.postgresql.org/message-id/{{hit.messageid}}">https://www.postgresql.org/message-id/{{hit.messageid}}</a>
-        </p>
-      {%endfor%}
-      {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
-    {%endif%}
+    <h2>Results {{firsthit}}-{{lasthit}} of {%if hitcount == 1000%}more than 1000{%else%}{{hitcount}}{%endif%}.</h2>
+    {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
+    {%for hit in hits %}
+      {{forloop.counter0|add:firsthit}}. <a href="https://www.postgresql.org/message-id/{{hit.messageid}}">{{hit.subject}}</a> [{{hit.rank|floatformat:2}}]<br/>
+      From {{hit.author}} on {{hit.date}}.<br/>
+      {{hit.abstract|safe}}<br/>
+      <a href="https://www.postgresql.org/message-id/{{hit.messageid}}">https://www.postgresql.org/message-id/{{hit.messageid}}</a><br/>
+      <br/>
+    {%endfor%}
+    {%if pagelinks %}Result pages: {{pagelinks|safe}}<br/><br/>{%endif%}
   {%endif%}
-</div>
+{%endif%}
 {%endblock%}
