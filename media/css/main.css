@@ -724,6 +724,46 @@ th.formfieldnamecontainer {
     height: 3.5em;
 }
 
+/** This code is for pgarchives */
+/** Thread Lists */
+.thread-list {
+    font-size: 0.8em;
+}
+
+/** Messages */
+
+h3.messages {
+    text-transform: none;
+    font-size 1.2em;
+}
+
+.message-header {
+    font-size: 0.7em;
+    line-height: 1.2em;
+}
+
+.message-header select {
+    height: auto;
+    padding: 0;
+}
+
+.message-content {
+    font-size: 0.8em;
+    line-height: 1.2em;
+    margin: 0 auto;
+}
+
+.message-responses {
+    font-size: 1.2em;
+    font-size: 0.7em;
+}
+
+/* Message Subjects */
+h1.subject {
+    text-transform: none;
+    font-size: 1.2em;
+}
+
 /** ALL RESPONSIVE QUERIES HERE */
 /* Small devices (landscape phones, 576px and up)*/
 @media (min-width: 576px) {
