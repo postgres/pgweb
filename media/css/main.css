@@ -740,7 +740,12 @@ h3.messages {
 .message-header {
     font-size: 0.7em;
     line-height: 1.2em;
+    padding-bottom: 0.3em;
 }
+
+.message-header th, .message-header td {
+    padding: 0;
+ }
 
 .message-header select {
     height: auto;
@@ -754,8 +759,13 @@ h3.messages {
 }
 
 .message-responses {
-    font-size: 1.2em;
     font-size: 0.7em;
+    line-height: 1.5em;
+}
+
+.message-attachments, .message-nav {
+    font-size: 0.7em;
+    line-height: 1.2em;
 }
 
 /* Message Subjects */
