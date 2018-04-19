@@ -56,7 +56,7 @@ def submitbug(request):
 		'form_intro': template_to_string('misc/bug_header.html', {
 			'supportedversions': versions,
 		}),
-		'savebutton': 'Submit Report and Send Email',
+		'savebutton': 'Submit and Send Email',
 	})
 
 
