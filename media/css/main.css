@@ -343,7 +343,7 @@ blockquote {
 .feature button.btn.btn-center.btn-primary {
     position: relative;
     bottom: 0;
-    margin: 0 auto;
+    margin: 0.25rem auto;
 }
 
 .text {
