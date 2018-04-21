@@ -753,6 +753,8 @@ h3.messages {
 }
 
 .message-content {
+    display: inline-block;
+    font-family: monospace, monospace;
     font-size: 0.8em;
     line-height: 1.2em;
     margin: 0 auto;
