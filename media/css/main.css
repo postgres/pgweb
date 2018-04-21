@@ -730,6 +730,10 @@ th.formfieldnamecontainer {
     font-size: 0.8em;
 }
 
+.thread-list th, .thread-list td {
+    padding: 0;
+}
+
 /** Messages */
 
 h3.messages {
