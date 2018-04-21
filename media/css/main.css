@@ -111,8 +111,8 @@ a, .news a {
     transition: color .2s ease-in-out;
 }
 
-a:hover, a:active {
-    color: #515151;
+a:hover, a:active, #pgContentWrap a:visited, .feature a:visited {
+    color: #193145;
 	  text-decoration: none;
 }
 
