@@ -25,13 +25,15 @@
     </div>
     <div class="col-md-4">
       <h2>Planet PostgreSQL</h2>
-     <dl>
-      <dd><ul class="feature">
-       {% for post in planet %}
-        <li class="{% cycle '' 'pg-bg-gray' %}"><a href="{{ post.url }}">{{ post.title }}</a></li>
-       {%endfor%}
-      </ul></dd>
-     </dl>
+      <table class="table table-striped">
+        <tbody>
+          {% for post in planet %}
+          <tr>
+            <td scope="row"><a href="{{ post.url }}">{{ post.title }}</a></td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
      <a href="https://planet.postgresql.org"><button type="button" class="btn btn-primary">More</button></a>
     </div>
   </div>
