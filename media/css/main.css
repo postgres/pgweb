@@ -24,8 +24,7 @@ body {
     font-weight: 400;
     color: #515151;
     font-size: 11.5pt;
-    line-height: 1.8rem;
-    padding-top: 60px; /** this is to account for the fixed navbar blocking content */
+    padding-top: 54px; /** this is to account for the fixed navbar blocking content */
 }
 
 p {
@@ -463,6 +462,7 @@ ul.bold {
 .pg-shout-box {
     background-color: #336791;
     font-weight: 600;
+    padding-bottom: 0.2rem;
 }
 
 .pg-shout-box a {
