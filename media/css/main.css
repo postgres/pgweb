@@ -24,7 +24,6 @@ body {
     font-weight: 400;
     color: #515151;
     font-size: 11.5pt;
-    padding-top: 54px; /** this is to account for the fixed navbar blocking content */
 }
 
 p {
@@ -571,6 +570,7 @@ ul.actions {
 
 .navbar {
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s;
 }
 
 /* #SIDEBAR UL STYLING */
@@ -782,32 +782,39 @@ h1.subject {
 
 /** ALL RESPONSIVE QUERIES HERE */
 /* Small devices (landscape phones, 576px and up)*/
-@media (min-width: 576px) {
-    /** NAVBAR */
-    .nav-item > a {
-        font-size: 0.95rem;
-        font-weight: 600;
-    }
-}
-@media (max-width: 575px) {
-    /** HOMEPAGE JUMBOTRON */
-    .pg-jumbotron-header {
-        font-size: 1.5rem;
+
+@media (max-width: 1280px) {
+    input#q {
+      display: none;
     }
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 992px) {
+    .navbar.compressed {
+      padding: 0 10px;
+    }
+
+    .pg-shout-box {
+      padding-top: 3.7rem;
+    }
 }
 
 @media (max-width: 992px) {
+    .navbar {
+      padding: 5px 10px;
+    }
 
+    .navbar-toggler-icon {
+      width: 1rem;
+      height: 1.5rem;
+    }
+
+    .pg-shout-box {
+      padding-top: 2.8rem;
+    }
 }
 
 @media (max-width: 768px) {
-
-  body {
-    padding-top: 55px;
-  }
 
   .jumbotron.jumbotron-fluid.pg-jumbotron {
     padding: 4em;
@@ -863,4 +870,18 @@ h1.subject {
     padding-left: 1em;
   }
 
+}
+
+@media (min-width: 576px) {
+    /** NAVBAR */
+    .nav-item > a {
+        font-size: 0.95rem;
+        font-weight: 600;
+    }
+}
+@media (max-width: 575px) {
+    /** HOMEPAGE JUMBOTRON */
+    .pg-jumbotron-header {
+        font-size: 1.5rem;
+    }
 }
