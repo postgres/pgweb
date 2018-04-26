@@ -73,6 +73,7 @@ TEMPLATES = [{
 			'pgweb.util.contexts.PGWebContextProcessor',
 		],
 		'loaders': [
+			'pgweb.util.templateloader.TrackingTemplateLoader',
 			'django.template.loaders.filesystem.Loader',
 			'django.template.loaders.app_directories.Loader',
 		],
