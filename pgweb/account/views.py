@@ -157,7 +157,7 @@ def change_email(request):
 									 token=generate_random_token())
 			token.save()
 
-			send_template_mail(settings.NOREPLY_FROM,
+			send_template_mail(settings.ACCOUNTS_NOREPLY_FROM,
 							   form.cleaned_data['email'],
 							   'Your postgresql.org community account',
 							   'account/email_change_email.txt',
@@ -251,7 +251,7 @@ def resetpwd(request):
 		if form.is_valid():
 			log.info("Initiating password set from {0} for {1}".format(get_client_ip(request), form.cleaned_data['email']))
 			token = default_token_generator.make_token(u)
-			send_template_mail(settings.NOREPLY_FROM,
+			send_template_mail(settings.ACCOUNTS_NOREPLY_FROM,
 							   form.cleaned_data['email'],
 							   'Password reset for your postgresql.org account',
 							   'account/password_reset_email.txt',
@@ -315,7 +315,7 @@ def signup(request):
 			log.info("Generated token {0} for user {1} from {2}".format(token, form.cleaned_data['username'], get_client_ip(request)))
 
 			# Generate an outgoing email
-			send_template_mail(settings.NOREPLY_FROM,
+			send_template_mail(settings.ACCOUNTS_NOREPLY_FROM,
 							   form.cleaned_data['email'],
 							   'Your new postgresql.org community account',
 							   'account/new_account_email.txt',
