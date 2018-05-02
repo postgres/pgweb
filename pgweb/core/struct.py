@@ -3,7 +3,7 @@ import os
 def get_struct():
 	yield ('', None)
 	yield ('community/', None)
-	yield ('support/versioning', None)
+	yield ('support/versioning/', None)
 
 	# Enumerate all the templates that will generate pages
 	pages_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../templates/pages/'))
