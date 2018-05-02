@@ -725,6 +725,15 @@ th.formfieldnamecontainer {
 }
 
 /** This code is for pgarchives */
+
+/**
+ * general navigation padding just for the archives; removable after the
+ * universal notifier is available
+ */
+ .archive {
+     margin-top: 4rem;
+ }
+
 /** Thread Lists */
 .thread-list {
     font-size: 0.8em;
@@ -800,6 +809,10 @@ h1.subject {
 }
 
 @media (max-width: 992px) {
+    .archive {
+        margin-top: 2rem;
+    }
+
     .navbar {
       padding: 5px 10px;
     }
