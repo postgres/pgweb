@@ -128,6 +128,11 @@ def manualarchive(request):
 
 @login_required
 def commentform(request, itemid, version, filename):
+	v = get_object_or_404(Version, tree=version)
+	if not v.supported:
+		# No docs comments on unsupported versions
+		return HttpResponseRedirect("/docs/{0}/static/{1}".format(version, filename))
+
 	if request.method == 'POST':
 		form = DocCommentForm(request.POST)
 		if form.is_valid():

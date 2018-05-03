@@ -88,6 +88,7 @@ This page in other versions:
 {{page.content|safe}}
 </div>
 
+{%if page.version.supported%}
 <div id="docComments">
 
 <h2>Submit correction</h2>
@@ -99,6 +100,7 @@ please use
 to report a documentation issue.
 </p>
 </div>
+{%endif%}
 
 <div id="docFooter">
     <a href="{{link_root}}/about/privacypolicy">Privacy Policy</a> |
