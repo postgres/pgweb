@@ -31,6 +31,7 @@ updates for all supported versions of PostgreSQL throughout the support
 <p>
 The PostgreSQL Apt Repositorysupports the current LTS versions of Ubuntu:
 <ul>
+  <li>18.04</li>
   <li>16.04</li>
   <li>14.04</li>
 </ul>
@@ -41,10 +42,6 @@ on the following architectures:
   <li>ppc64el</li>
 </ul>
 
-The PostgreSQL Apt Repository also supports select non-LTS versions:
-<ul>
-  <li>17.04</li>
-</ul>
 While not fully supported, the packages often work on other non-LTS versions as well,
 by using the closest LTS version available.
 </p>
@@ -55,7 +52,7 @@ To use the apt repository, follow these steps:
   <li>
     <select id="field.series" name="field.series" class="custom-select" onchange='updateSeries(this);'>
       <option selected="selected" value="YOUR_UBUNTU_VERSION_HERE">Choose your Ubuntu version</option>
-      <option value="zesty">Zesty (17.04)</option>
+      <option value="bionic">Bionic (18.04)</option>
       <option value="xenial">Xenial (16.04)</option>
       <option value="trusty">Trusty (14.04)</option>
     </select>
@@ -82,7 +79,7 @@ Ubuntu includes PostgreSQL by default. To install PostgreSQL on
 Ubuntu, use the <em>apt-get</em> (or other apt-driving) command:
 </p>
 <code>
-apt-get install postgresql-9.6
+apt-get install postgresql-10
 </code>
 <p>
 The repository contains many different packages including third party
@@ -92,23 +89,23 @@ version number as required):
 <table class="table table-striped">
   <tbody>
     <tr>
-     <th scope="row">postgresql-client-9.6</th>
+     <th scope="row">postgresql-client-10</th>
      <td>client libraries and client binaries</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-9.6</th>
+     <th scope="row">postgresql-10</th>
      <td>core database server</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-contrib-9.6</th>
-     <td>additional supplied modules</td>
+     <th scope="row">postgresql-contrib-9.x</th>
+     <td>additional supplied modules (part of the postgresql-xx package in version 10 and later)</td>
     </tr>
     <tr>
      <th scope="row">libpq-dev</th>
      <td>libraries and headers for C language frontend development</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-server-dev-9.6</th>
+     <th scope="row">postgresql-server-dev-10</th>
      <td>libraries and headers for C language backend development</td>
     </tr>
     <tr>
