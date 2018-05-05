@@ -81,7 +81,7 @@ Debian includes PostgreSQL by default. To install PostgreSQL on
 Debian, use the <code>apt-get</code> (or other apt-driving) command:
 </p>
 <pre class="code">
-  apt-get install postgresql-9.6
+  apt-get install postgresql-10
 </pre>
 <p>
 The repository contains many different packages including third party
@@ -91,23 +91,23 @@ version number as required):
 <table class="table table-striped">
   <tbody>
     <tr>
-     <th scope="row">postgresql-client-9.6</th>
+     <th scope="row">postgresql-client-10</th>
      <td>client libraries and client binaries</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-9.6</th>
+     <th scope="row">postgresql-10</th>
      <td>core database server</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-contrib-9.6</th>
-     <td>additional supplied modules</td>
+     <th scope="row">postgresql-contrib-9.x</th>
+     <td>additional supplied modules (part of the postgresql-xx package in version 10 and later)</td>
     </tr>
     <tr>
      <th scope="row">libpq-dev</th>
      <td>libraries and headers for C language frontend development</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-server-dev-9.6</th>
+     <th scope="row">postgresql-server-dev-10</th>
      <td>libraries and headers for C language backend development</td>
     </tr>
     <tr>
