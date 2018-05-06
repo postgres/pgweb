@@ -77,7 +77,7 @@ To use the PostgreSQL Yum Repository, follow these steps:
 <p>
 These distributions all include PostgreSQL by default. To install
 PostgreSQL from these repositories, use the <var>yum</var> command on RHEL 5,6 and 7,
-or <var>dnf</var> command on Fedora 24+:
+or <var>dnf</var> command on Fedora 27+:
 </p>
 <p>
 <code>
@@ -85,7 +85,7 @@ yum install postgresql-server
 </code>
 </p>
 <p>
-or <var>dnf</var> command on Fedora 24+:
+or <var>dnf</var> command on Fedora 27+:
 </p>
 <p>
 <code>
@@ -172,7 +172,7 @@ perform the following steps, based on your distribution:
   service postgresql initdb
   chkconfig postgresql on
 </pre>
-<h3>For RHEL / CentOS / SL / OL 7 or Fedora 24 and later derived distributions:</h3>
+<h3>For RHEL / CentOS / SL / OL 7 or Fedora 27 and later derived distributions:</h3>
 <pre class="code">
   postgresql-setup initdb
   systemctl enable postgresql.service
