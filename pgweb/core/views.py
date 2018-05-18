@@ -12,7 +12,7 @@ from django.utils.http import http_date, parse_http_date
 from django.conf import settings
 import django
 
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import os
 import re
 import urllib
@@ -47,8 +47,11 @@ def home(request):
 		training=False,
 		enddate__gte=date.today(),
 	)
-	# first, see if there are up to do non-badged events
-	other_events = event_base_queryset.filter(badged=False).order_by('enddate', 'startdate')[:2]
+	# first, see if there are up to two non-badged events within 90 days
+	other_events = event_base_queryset.filter(
+		badged=False,
+		startdate__lte=date.today() + timedelta(days=90),
+	).order_by('enddate', 'startdate')[:2]
 	# based on that, get 7 - |other_events| community events to display
 	community_event_queryset = event_base_queryset.filter(badged=True).order_by('enddate', 'startdate')[:(7 - other_events.count())]
 	# now, return all the events in one unioned array!
