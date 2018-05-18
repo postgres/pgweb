@@ -48,9 +48,9 @@ def home(request):
 		enddate__gte=date.today(),
 	)
 	# first, see if there are up to do non-badged events
-	other_events = event_base_queryset.filter(badged=False)[:2]
+	other_events = event_base_queryset.filter(badged=False).order_by('enddate', 'startdate')[:2]
 	# based on that, get 7 - |other_events| community events to display
-	community_event_queryset = event_base_queryset.filter(badged=True)[:(7 - other_events.count())]
+	community_event_queryset = event_base_queryset.filter(badged=True).order_by('enddate', 'startdate')[:(7 - other_events.count())]
 	# now, return all the events in one unioned array!
 	events = community_event_queryset.union(other_events).order_by('enddate', 'startdate').all()
 	versions = Version.objects.filter(supported=True)
