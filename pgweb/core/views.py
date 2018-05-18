@@ -41,16 +41,17 @@ from forms import OrganisationForm, MergeOrgsForm
 @cache(minutes=10)
 def home(request):
 	news = NewsArticle.objects.filter(approved=True)[:5]
+	today = date.today()
 	# get up to seven events to display on the homepage
 	event_base_queryset = Event.objects.select_related('country').filter(
 		approved=True,
 		training=False,
-		enddate__gte=date.today(),
+		enddate__gte=today,
 	)
 	# first, see if there are up to two non-badged events within 90 days
 	other_events = event_base_queryset.filter(
 		badged=False,
-		startdate__lte=date.today() + timedelta(days=90),
+		startdate__lte=today + timedelta(days=90),
 	).order_by('enddate', 'startdate')[:2]
 	# based on that, get 7 - |other_events| community events to display
 	community_event_queryset = event_base_queryset.filter(badged=True).order_by('enddate', 'startdate')[:(7 - other_events.count())]
