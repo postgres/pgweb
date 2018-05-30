@@ -38,6 +38,15 @@ class PgwebAuthenticationForm(AuthenticationForm):
 				return self.cleaned_data
 			raise e
 
+class CommunityAuthConsentForm(forms.Form):
+	consent = forms.BooleanField(help_text='Consent to sharing this data')
+	next = forms.CharField(widget=forms.widgets.HiddenInput())
+
+	def __init__(self, orgname, *args, **kwargs):
+		self.orgname = orgname
+		super(CommunityAuthConsentForm, self).__init__(*args, **kwargs)
+
+		self.fields['consent'].label = 'Consent to sharing data with {0}'.format(self.orgname)
 
 class SignupForm(forms.Form):
 	username = forms.CharField(max_length=30)

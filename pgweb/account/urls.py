@@ -10,6 +10,7 @@ urlpatterns = [
 	# Community authenticatoin
 	url(r'^auth/(\d+)/$', pgweb.account.views.communityauth),
 	url(r'^auth/(\d+)/logout/$', pgweb.account.views.communityauth_logout),
+	url(r'^auth/(\d+)/consent/$', pgweb.account.views.communityauth_consent),
 	url(r'^auth/(\d+)/search/$', pgweb.account.views.communityauth_search),
 	url(r'^auth/(\d+)/getkeys/(\d+/)?$', pgweb.account.views.communityauth_getkeys),
 

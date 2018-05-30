@@ -32,8 +32,9 @@ from pgweb.contributors.models import Contributor
 from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
 
-from models import CommunityAuthSite, EmailChangeToken
+from models import CommunityAuthSite, CommunityAuthConsent, EmailChangeToken
 from forms import PgwebAuthenticationForm
+from forms import CommunityAuthConsentForm
 from forms import SignupForm, SignupOauthForm
 from forms import UserForm, UserProfileForm, ContributorForm
 from forms import ChangeEmailForm, PgwebPasswordResetForm
@@ -448,17 +449,18 @@ def communityauth(request, siteid):
 	else:
 		d = None
 
+	if d:
+		urldata = "?d=%s" % d
+	elif su:
+		urldata = "?su=%s" % su
+	else:
+		urldata = ""
+
 	# Verify if the user is authenticated, and if he/she is not, generate
 	# a login form that has information about which site is being logged
 	# in to, and basic information about how the community login system
 	# works.
 	if not request.user.is_authenticated():
-		if d:
-			urldata = "?d=%s" % d
-		elif su:
-			urldata = "?su=%s" % su
-		else:
-			urldata = ""
 		if request.method == "POST" and 'next' in request.POST and 'this_is_the_login_form' in request.POST:
 			# This is a postback of the login form. So pick the next filed
 			# from that one, so we keep it across invalid password entries.
@@ -491,6 +493,11 @@ def communityauth(request, siteid):
 			return render_pgweb(request, 'account', 'account/communityauth_cooloff.html', {
 				'site': site,
 				})
+
+	if site.org.require_consent:
+		if not CommunityAuthConsent.objects.filter(org=site.org, user=request.user).exists():
+			return HttpResponseRedirect('/account/auth/{0}/consent/?{1}'.format(siteid,
+																				urllib.urlencode({'next': '/account/auth/{0}/{1}'.format(siteid, urldata)})))
 
 	info = {
 		'u': request.user.username.encode('utf-8'),
@@ -530,6 +537,24 @@ def communityauth_logout(request, siteid):
 
 	# Redirect user back to the specified suburl
 	return HttpResponseRedirect("%s?s=logout" % site.redirecturl)
+
+def communityauth_consent(request, siteid):
+	org = get_object_or_404(CommunityAuthSite, id=siteid).org
+	if request.method == 'POST':
+		form = CommunityAuthConsentForm(org.orgname, data=request.POST)
+		if form.is_valid():
+			CommunityAuthConsent(user=request.user, org=org, consentgiven=datetime.now()).save()
+			return HttpResponseRedirect(form.cleaned_data['next'])
+	else:
+		form = CommunityAuthConsentForm(org.orgname, initial={'next': request.GET['next']})
+
+	return render_pgweb(request, 'account', 'base/form.html', {
+		'form': form,
+		'operation': 'Authentication',
+		'form_intro': 'The site you are about to log into is run by {0}. If you choose to proceed with this authentication, your name and email address will be shared with <em>{1}</em>.</p><p>Please confirm that you consent to this sharing.'.format(org.orgname, org.orgname),
+		'savebutton': 'Proceed with login',
+	})
+
 
 def _encrypt_site_response(site, s):
 	# Encrypt it with the shared key (and IV!)

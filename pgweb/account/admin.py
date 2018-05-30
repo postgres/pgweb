@@ -6,7 +6,7 @@ from django import forms
 
 import base64
 
-from models import CommunityAuthSite
+from models import CommunityAuthSite, CommunityAuthOrg
 
 class CommunityAuthSiteAdminForm(forms.ModelForm):
 	class Meta:
@@ -49,5 +49,6 @@ class PGUserAdmin(UserAdmin):
 		return self.readonly_fields
 
 admin.site.register(CommunityAuthSite, CommunityAuthSiteAdmin)
+admin.site.register(CommunityAuthOrg)
 admin.site.unregister(User) # have to unregister default User Admin...
 admin.site.register(User, PGUserAdmin) # ...in order to add overrides
