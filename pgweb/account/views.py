@@ -543,7 +543,9 @@ def communityauth_consent(request, siteid):
 	if request.method == 'POST':
 		form = CommunityAuthConsentForm(org.orgname, data=request.POST)
 		if form.is_valid():
-			CommunityAuthConsent(user=request.user, org=org, consentgiven=datetime.now()).save()
+			CommunityAuthConsent.objects.get_or_create(user=request.user, org=org,
+													   defaults={'consentgiven':datetime.now()},
+													   )
 			return HttpResponseRedirect(form.cleaned_data['next'])
 	else:
 		form = CommunityAuthConsentForm(org.orgname, initial={'next': request.GET['next']})
