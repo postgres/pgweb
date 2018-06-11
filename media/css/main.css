@@ -769,13 +769,13 @@ h3.messages {
     display: inline-block;
     font-family: monospace, monospace;
     font-size: 0.7em;
-    line-height: 1em;
+    line-height: 1.2em;
     margin: 0 auto;
     white-space: pre-wrap;
 }
 
 .message-content p {
-    margin-bottom: -0.7em;
+    margin-bottom: -1.2em;
 }
 
 .message-responses {
