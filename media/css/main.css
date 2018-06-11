@@ -775,7 +775,7 @@ h3.messages {
 }
 
 .message-content p {
-    margin-bottom: 0;
+    margin-bottom: -0.7em;
 }
 
 .message-responses {
