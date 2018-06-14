@@ -18,6 +18,7 @@ whatsoever.</em>
 </p>
 {% endif %}
 {%for event in eventblock.events %}
+<hr class="eventseparator">
 <div>
   {% if event.badged %}
     <img src="/media/img/PostgreSQL_Badge1.svg" class="community" alt="PostgreSQL Community Event">
@@ -27,7 +28,7 @@ whatsoever.</em>
 <div>Date: <strong>{{event.displaydate|safe}}</strong></div>
 <div>Location: <strong>{{event.locationstring}}</strong></div>
 {%if event.language%}<div>Language: <strong>{{event.language}}</strong></div>{%endif%}
-<div>
+<div class="newseventwrap">
 {{event.summary|markdown}}
 </div>
 {%endfor%}

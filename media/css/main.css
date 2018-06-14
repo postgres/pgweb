@@ -612,6 +612,23 @@ pre.code {
     border-radius: .25rem;
 }
 
+/* News and events getting markdown from end users */
+#pgContentWrap .newseventwrap h1 {
+    font-size: 1.2em;
+}
+#pgContentWrap .newseventwrap h2 {
+    display: block;
+    font-size: 1.1em;
+}
+#pgContentWrap .newseventwrap h3 {
+    font-size: 1.0em;
+}
+hr.eventseparator {
+    width: 80%;
+    margin-bottom: 1em;
+}
+
+
 /* #STYLEDSELECT */
 
 /**
