@@ -9,8 +9,12 @@ from pgweb.util.helpers import template_to_string
 import re
 
 def send_template_mail(sender, receiver, subject, templatename, templateattr={}, usergenerated=False, cc=None, replyto=None, receivername=None, sendername=None):
+	d = {
+		'link_root': settings.SITE_ROOT,
+	}
+	d.update(templateattr)
 	send_simple_mail(sender, receiver, subject,
-					 template_to_string(templatename, templateattr),
+					 template_to_string(templatename, d),
 					 usergenerated=usergenerated, cc=cc, replyto=replyto,
 					 receivername=receivername, sendername=sendername)
 
