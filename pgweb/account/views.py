@@ -538,6 +538,7 @@ def communityauth_logout(request, siteid):
 	# Redirect user back to the specified suburl
 	return HttpResponseRedirect("%s?s=logout" % site.redirecturl)
 
+@login_required
 def communityauth_consent(request, siteid):
 	org = get_object_or_404(CommunityAuthSite, id=siteid).org
 	if request.method == 'POST':
