@@ -23,7 +23,7 @@ class Command(BaseCommand):
 		curs = connection.cursor()
 		curs.execute("SELECT pg_try_advisory_lock(72181372)")
 		if not curs.fetchall()[0][0]:
-			raise CommandException("Failed to get advisory lock, existing send_queued_mail process stuck?")
+			raise CommandError("Failed to get advisory lock, existing send_queued_mail process stuck?")
 
 		for m in QueuedMail.objects.all():
 			# Yes, we do a new connection for each run. Just because we can.
