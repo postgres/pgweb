@@ -40,7 +40,7 @@ def other_vectors_validator(val):
 					k,v,
 					", ".join(cvss.constants3.METRICS_VALUES[k].keys()),
 				))
-	except ValidationError, ve:
+	except ValidationError:
 		raise
 	except Exception, e:
 		raise ValidationError("Failed to parse vectors: %s" % e)
@@ -98,7 +98,7 @@ class SecurityPatch(models.Model):
 		try:
 			c = cvss.CVSS3("CVSS:3.0/" + self.cvssvector)
 			return c.base_score
-		except Exception, e:
+		except Exception:
 			return -1
 
 	@property

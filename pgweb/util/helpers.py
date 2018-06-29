@@ -10,7 +10,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 	else:
 		# Regular form item, attempt to edit it
 		try:
-			i = int(itemid)
+			int(itemid)
 		except ValueError:
 			raise Http404("Invalid URL")
 		if createifempty:
