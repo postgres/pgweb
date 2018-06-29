@@ -121,9 +121,11 @@ def PGWebContextProcessor(request):
 	if request.is_secure():
 		return {
 			'link_root': settings.SITE_ROOT,
+			'do_esi': settings.DO_ESI,
 			'gitrev': gitrev,
 		}
 	else:
 		return {
 			'gitrev': gitrev,
+			'do_esi': settings.DO_ESI,
 		}

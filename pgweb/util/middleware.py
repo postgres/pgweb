@@ -26,5 +26,10 @@ class PgMiddleware(object):
 		initialize_template_collection()
 
 	def process_response(self, request, response):
-		response['xkey'] = ' '.join(["pgwt_{0}".format(hashlib.md5(t).hexdigest()) for t in get_all_templates()])
+		tlist = get_all_templates()
+		if 'base/esi.html' in tlist:
+			response['x-do-esi'] = "1"
+			tlist.remove('base/esi.html')
+		if tlist:
+			response['xkey'] = ' '.join(["pgwt_{0}".format(hashlib.md5(t).hexdigest()) for t in tlist])
 		return response

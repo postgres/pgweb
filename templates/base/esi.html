@@ -1,0 +1,3 @@
+{%if do_esi %}<esi:include src="{{includepage}}/xx"/>{%else%}
+{%include "pages"|add:includepage|add:".html"%}
+{%endif%}
