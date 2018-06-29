@@ -169,7 +169,7 @@ def oauth_login_facebook(request):
 def oauth_login_microsoft(request):
 	def _microsoft_auth_data(oa):
 		r = oa.get("https://apis.live.net/v5.0/me").json()
-		if not 'emails' in r or not account in r['emails']:
+		if not 'emails' in r or not 'account' in r['emails']:
 			raise OAuthException("Your Facebook profile must provide an email address in order to log in")
 
 		return (r['emails']['account'],
