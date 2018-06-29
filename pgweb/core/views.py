@@ -18,7 +18,7 @@ import re
 import urllib
 
 from pgweb.util.decorators import cache, nocache
-from pgweb.util.contexts import render_pgweb, get_nav_menu
+from pgweb.util.contexts import render_pgweb, get_nav_menu, PGWebContextProcessor
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.moderation import get_all_pending_moderations
 from pgweb.util.misc import get_client_ip, varnish_purge
@@ -128,7 +128,9 @@ def fallback(request, url):
 		navsect = url.split('/',2)[0]
 	except:
 		navsect = ''
-	return HttpResponse(t.render({'navmenu': get_nav_menu(navsect)}))
+	c = PGWebContextProcessor(request)
+	c.update({'navmenu': get_nav_menu(navsect)})
+	return HttpResponse(t.render(c))
 
 # Edit-forms for core objects
 @login_required
