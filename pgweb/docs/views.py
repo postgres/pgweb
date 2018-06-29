@@ -53,7 +53,6 @@ def docpage(request, version, typ, filename):
 
 	fullname = "%s.%s" % (filename, extension)
 	page = get_object_or_404(DocPage, version=ver, file=fullname)
-	qq = Q(file=fullname) | Q(file='kalle.html')
 	versions = DocPage.objects.extra(
 		where=["file=%s OR file IN (SELECT file2 FROM docsalias WHERE file1=%s) OR file IN (SELECT file1 FROM docsalias WHERE file2=%s)"],
 		params=[fullname, fullname, fullname],
