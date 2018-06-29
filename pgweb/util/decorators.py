@@ -20,8 +20,6 @@ def cache(days=0, hours=0, minutes=0, seconds=0):
 		return __cache
 	return _cache
 
-from django.utils.decorators import available_attrs
-
 # A wrapped version of login_required that throws an exception if it's
 # used on a path that's not under /account/.
 def login_required(f):

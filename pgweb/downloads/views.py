@@ -1,20 +1,17 @@
-from django.core.urlresolvers import reverse
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from pgweb.util.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.db import transaction
 from django.conf import settings
 
 import os
-import urlparse
 import cPickle as pickle
 import json
 
 from pgweb.util.decorators import nocache
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
-from pgweb.util.misc import get_client_ip, varnish_purge, version_sort
+from pgweb.util.misc import varnish_purge, version_sort
 
 from pgweb.core.models import Version
 from models import Category, Product, StackBuilderApp

@@ -5,7 +5,7 @@
 #
 
 from django.core.management.base import BaseCommand
-from django.db import connection, transaction
+from django.db import transaction
 from django.conf import settings
 
 from datetime import datetime

@@ -1,7 +1,4 @@
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponse, HttpResponseForbidden
-from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
+from django.http import HttpResponse
 
 import json
 

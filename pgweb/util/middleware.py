@@ -1,10 +1,7 @@
-from django.http import HttpResponseRedirect, HttpResponse
-from django.conf import settings
-
 # Use thread local storage to pass the username down.
 # http://code.djangoproject.com/wiki/CookBookThreadlocalsAndUser
 try:
-    from threading import local, currentThread
+    from threading import local
 except ImportError:
     from django.utils._threading_local import local
 

@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 from pgweb.core.models import Version
 
 class DocPage(models.Model):

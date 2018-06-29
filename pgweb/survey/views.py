@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
-from django.db import connection, transaction
+from django.db import connection
 from django.template.defaultfilters import slugify
 from django.views.decorators.csrf import csrf_exempt
 

@@ -1,8 +1,5 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.backends import ModelBackend
-from django.db import connection
-
-from pgweb.core.models import UserProfile
 
 # Special version of the authentication backend, so we can handle things like
 # forced lowercasing of usernames.

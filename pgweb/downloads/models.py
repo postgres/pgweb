@@ -2,8 +2,6 @@ from django.db import models
 
 from pgweb.core.models import Organisation
 
-from datetime import datetime
-
 
 class Category(models.Model):
 	catname = models.CharField(max_length=100, null=False, blank=False)
