@@ -53,8 +53,8 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
 			# handled elsewhere, so store the details we got from
 			# the oauth login in the session, and pass the user on.
 			request.session['oauth_email'] = email
-			request.session['oauth_firstname'] = firstname
-			request.session['oauth_lastname'] = lastname
+			request.session['oauth_firstname'] = firstname or ''
+			request.session['oauth_lastname'] = lastname or ''
 			return HttpResponseRedirect('/account/signup/oauth/')
 
 		log.info("Oauth signin of {0} using {1} from {2}.".format(email, provider, get_client_ip(request)))
