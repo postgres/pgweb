@@ -396,7 +396,7 @@ def signup_oauth(request):
 		# Generate possible new username
 		suggested_username = request.session['oauth_email'].replace('@', '.')[:30]
 
-		# Auto generation requires firstnamea and lastname to be specified
+		# Auto generation requires firstname and lastname to be specified
 		f = request.session['oauth_firstname'].lower()
 		l = request.session['oauth_lastname'].lower()
 		if f and l:
