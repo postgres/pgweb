@@ -12,7 +12,20 @@
 
 <div id="content-main">
  <form method="POST" action=".">{% csrf_token %}
-URL (regex, ^ is auto-added): <input type="text" name="url">
+   <table border="0" cellspacing="0">
+     <tr>
+       <td>URL (regex, ^ is auto-added):</td>
+       <td><input type="text" name="url"></td>
+     </tr>
+     <tr>
+       <td>Full expression:</td>
+       <td><input type="text" name="expr"></td>
+     </tr>
+     <tr>
+       <td>XKey:</td>
+       <td><input type="text" name="xkey"></td>
+     </tr>
+   </table>
   <input type="submit" value="Purge" />
  </form>
 

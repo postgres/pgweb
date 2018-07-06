@@ -299,7 +299,7 @@ def admin_purge(request):
 
 	# Fetch list of latest purges
 	curs = connection.cursor()
-	curs.execute("SELECT added, completed, consumer, mode, expr FROM varnishqueue.queue q LEFT JOIN varnishqueue.consumers c ON c.consumerid=q.consumerid ORDER BY added DESC")
+	curs.execute("SELECT added, completed, consumer, CASE WHEN mode = 'K' THEN 'XKey' WHEN mode='P' THEN 'URL' ELSE 'Expression' END, expr FROM varnishqueue.queue q LEFT JOIN varnishqueue.consumers c ON c.consumerid=q.consumerid ORDER BY added DESC")
 	latest = curs.fetchall()
 
 	return render(request, 'core/admin_purge.html', {
