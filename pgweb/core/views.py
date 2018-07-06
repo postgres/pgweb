@@ -21,7 +21,7 @@ from pgweb.util.decorators import cache, nocache
 from pgweb.util.contexts import render_pgweb, get_nav_menu, PGWebContextProcessor
 from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.moderation import get_all_pending_moderations
-from pgweb.util.misc import get_client_ip, varnish_purge
+from pgweb.util.misc import get_client_ip, varnish_purge, varnish_purge_expr, varnish_purge_xkey
 from pgweb.util.sitestruct import get_all_pages_struct
 
 # models needed for the pieces on the frontpage
@@ -277,10 +277,24 @@ def admin_pending(request):
 def admin_purge(request):
 	if request.method == 'POST':
 		url = request.POST['url']
-		if url == '':
+		expr = request.POST['expr']
+		xkey = request.POST['xkey']
+		l = len(filter(None, [url, expr, xkey]))
+		if l == 0:
+			# Nothing specified
 			return HttpResponseRedirect('.')
-		varnish_purge(url)
-		messages.info(request, "Purge completed: '^%s'" % url)
+		elif l > 1:
+			messages.error(request, "Can only specify one of url, expression and xkey!")
+			return HttpResponseRedirect('.')
+
+		if url:
+			varnish_purge(url)
+		elif expr:
+			varnish_purge_expr(expr)
+		else:
+			varnish_purge_xkey(xkey)
+
+		messages.info(request, "Purge added.")
 		return HttpResponseRedirect('.')
 
 	# Fetch list of latest purges

@@ -26,4 +26,12 @@ AS $$
   INSERT INTO varnishqueue.queue (mode, consumerid, expr) SELECT 'X', consumerid, $1 FROM varnishqueue.consumers;
   NOTIFY varnishqueue;
 $$ LANGUAGE 'sql';
+
+DROP FUNCTION IF EXISTS varnish_purge_xkey(key text);
+CREATE OR REPLACE FUNCTION varnish_purge_xkey(key text)
+RETURNS void
+AS $$
+  INSERT INTO varnishqueue.queue (mode, consumerid, expr) SELECT 'K', consumerid, $1 FROM varnishqueue.consumers;
+  NOTIFY varnishqueue;
+$$ LANGUAGE 'sql';
 COMMIT;

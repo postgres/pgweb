@@ -34,6 +34,12 @@ def get_client_ip(request):
 	return request.META['REMOTE_ADDR']
 
 
+def varnish_purge_xkey(xkey):
+	"""
+	Purge the specified xkey from Varnish.
+	"""
+	connection.cursor().execute("SELECT varnish_purge_xkey(%s)", (xkey, ))
+
 def varnish_purge(url):
 	"""
 	Purge the specified URL from Varnish. Will add initial anchor to the URL,
@@ -41,6 +47,13 @@ def varnish_purge(url):
 	"""
 	url = '^%s' % url
 	connection.cursor().execute("SELECT varnish_purge(%s)", (url, ))
+
+def varnish_purge_expr(expr):
+	"""
+	Purge the specified expression from Varnish. Does not modify the expression
+	at all, so be very careful!
+	"""
+	connection.cursor().execute("SELECT varnish_purge_expr(%s)", (expr, ))
 
 def version_sort(l):
 	"""

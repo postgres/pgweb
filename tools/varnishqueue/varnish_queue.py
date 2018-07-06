@@ -63,6 +63,11 @@ def worker(consumerid, consumername, dsn):
 					if not do_purge(consumername, {'X-Purge-Expr': r[2]}):
 						failed = True
 						continue
+				elif r[1] == 'K':
+					logging.info("Purging xkey %s on %s" % (r[2], consumername))
+					if not do_purge(consumername, {'X-Purge-Xkey': r[2]}):
+						failed = True
+						continue
 				else:
 					logging.warning("Unknown purge type %s on %s, ignoring." % (r[1], consumername))
 

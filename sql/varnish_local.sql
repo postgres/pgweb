@@ -16,4 +16,9 @@ RETURNS void
 AS $$
 $$ LANGUAGE 'sql';
 
+CREATE OR REPLACE FUNCTION varnish_purge_xkey(key text)
+RETURNS void
+AS $$
+$$ LANGUAGE 'sql';
+
 COMMIT;
