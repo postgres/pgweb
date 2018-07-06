@@ -7,15 +7,13 @@ BEGIN;
 --
 
 CREATE OR REPLACE FUNCTION varnish_purge(url text)
-RETURNS bigint
+RETURNS void
 AS $$
-   SELECT 1::bigint;
 $$ LANGUAGE 'sql';
 
-CREATE OR REPLACE FUNCTION varnish_purge_expr(url text)
-RETURNS bigint
+CREATE OR REPLACE FUNCTION varnish_purge_expr(expr text)
+RETURNS void
 AS $$
-   SELECT 1::bigint;
 $$ LANGUAGE 'sql';
 
 COMMIT;
