@@ -24,10 +24,17 @@ if __name__ == "__main__":
 	curs = conn.cursor()
 
 	for l in sys.stdin:
-		tmpl = l[len('templates/'):].strip()
-		if not tmpl in BANNED_TEMPLATES:
-			curs.execute("SELECT varnish_purge_xkey(%(key)s)", {
-				'key': 'pgwt_{0}'.format(hashlib.md5(tmpl).hexdigest()),
+		if l.startswith('templates/'):
+			tmpl = l[len('templates/'):].strip()
+			if not tmpl in BANNED_TEMPLATES:
+				curs.execute("SELECT varnish_purge_xkey(%(key)s)", {
+					'key': 'pgwt_{0}'.format(hashlib.md5(tmpl).hexdigest()),
+				})
+		elif l.startswith('media/'):
+			# For media we can't xkey, but the URL is exact so we can
+			# use a classic single-url purge.
+			curs.execute("SELECT varnish_purge('^/' || %(u)s || '$')", {
+				'u': l.strip(),
 			})
 	conn.commit()
 	conn.close()
