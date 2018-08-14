@@ -549,7 +549,7 @@ def communityauth_consent(request, siteid):
 													   )
 			return HttpResponseRedirect(form.cleaned_data['next'])
 	else:
-		form = CommunityAuthConsentForm(org.orgname, initial={'next': request.GET['next']})
+		form = CommunityAuthConsentForm(org.orgname, initial={'next': request.GET.get('next', '')})
 
 	return render_pgweb(request, 'account', 'base/form.html', {
 		'form': form,
