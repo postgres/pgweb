@@ -12,6 +12,7 @@ class FeatureGroupAdmin(admin.ModelAdmin):
 
 class FeatureAdmin(admin.ModelAdmin):
 	list_display = ('featurename', 'group')
+	search_fields = ('featurename',)
 
 admin.site.register(FeatureGroup, FeatureGroupAdmin)
 admin.site.register(Feature, FeatureAdmin)
