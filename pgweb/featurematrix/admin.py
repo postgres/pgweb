@@ -7,6 +7,8 @@ class FeatureInline(admin.TabularInline):
 
 class FeatureGroupAdmin(admin.ModelAdmin):
 	inlines = [FeatureInline, ]
+	list_display = ('groupname', 'groupsort')
+	ordering = ['groupsort']
 
 class FeatureAdmin(admin.ModelAdmin):
 	list_display = ('featurename', 'group')
