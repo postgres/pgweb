@@ -74,7 +74,7 @@ urlpatterns = [
 	url(r'^search/$', pgweb.search.views.search),
 
 	url(r'^support/security/$', pgweb.security.views.index),
-	url(r'^support/security/([\d\.]+)/$', pgweb.security.views.version),
+	url(r'^support/security/(\d\.\d|\d{2})/$', pgweb.security.views.version),
 	url(r'^support/security_archive/$', RedirectView.as_view(url='/support/security/', permanent=True)),
 
 	url(r'^support/professional_(support|hosting)/$', pgweb.profserv.views.root),
