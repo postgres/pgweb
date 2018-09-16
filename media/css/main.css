@@ -539,7 +539,7 @@ ul.bold {
 }
 
 #footer a {
-		color: inherit;
+    color: #840032;
 }
 
 /* #LIST DESKTOP */
@@ -582,12 +582,20 @@ ul.actions {
     padding: 1em;
 }
 
+#pgSideNav a {
+    color: #840032;
+}
+
 #pgSideNav ul {
     list-style-type: circle;
     padding-left: 1.3em;
 }
 
 /* #PGCONTENTWRAP */
+
+#pgContentWrap a {
+    color: #840032;
+}
 
 #pgContentWrap {
   padding: 1em 2em;
