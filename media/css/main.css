@@ -615,11 +615,16 @@ i.fas.fa-search {
 }
 
 /* #CODE */
+
+pre {
+    padding: 0.8rem;
+    border: 1px solid #ced4da;
+    margin: 1rem 0 !important;
+}
+
 pre.code {
     padding: .2rem .4rem;
     font-size: 90%;
-    color: #bd4147;
-    background-color: #f8f9fa;
     border-radius: .25rem;
 }
 
