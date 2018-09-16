@@ -16,7 +16,6 @@
 
 /** CUSTOM FONTS */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css?family=Maven+Pro');
 
 /** GLOBAL CONFIGURATION */
 body {
@@ -39,10 +38,9 @@ dl, ol, ul {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Maven Pro', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 700;
-    text-transform: uppercase;
-    color: #515151;
+    color: #336791;
     /*margin: 0 0 0.5em 0;*/
 }
 
@@ -54,6 +52,11 @@ h2 {
 h3 {
     font-size: 1.4em;
     font-weight: initial;
+}
+
+.h4, h4 {
+    font-size: 1.1rem;
+    text-transform: capitalize !important;
 }
 
 #pgContentWrap h2:after, #pgSideNav h2:after {
@@ -114,9 +117,9 @@ a:hover, a:active {
 	  text-decoration: none;
 }
 
-b, strong {
+b, strong, th {
 	  font-weight: 700;
-  	color: #383838;
+    color: #474747 !important;
 }
 
 i, em {
