@@ -23,7 +23,7 @@ class Version(models.Model):
 	testing = models.IntegerField(null=False, blank=False, default=0, help_text="Testing level of this release. latestminor indicates beta/rc number", choices=TESTING_CHOICES)
 	docsloaded = models.DateTimeField(null=True, blank=True, help_text="The timestamp of the latest docs load. Used to control indexing and info on developer docs.")
 	firstreldate = models.DateField(null=False, blank=False, help_text="The date of the .0 release in this tree")
-	eoldate = models.DateField(null=False, blank=False, help_text="The planned EOL date for this tree")
+	eoldate = models.DateField(null=False, blank=False, help_text="The final release date for this tree")
 
 	def __unicode__(self):
 		return self.versionstring

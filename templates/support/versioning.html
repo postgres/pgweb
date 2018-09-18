@@ -5,54 +5,78 @@
 <h1>Versioning policy <i class="fas fa-code-branch"></i></h1>
 
 <p>
-<em>We always recommend that all users run the latest available minor release for whatever major version is in use.</em>
+The PostgreSQL Global Development Group releases a new major version containing
+new features about once a year. Each major version receives bug fixes and, if
+need be, <a href="/support/security/">security</a> fixes that are released at
+least once every three months in what we call a "minor release." For more
+information on the minor release schedule, you can view the
+<a href="/developer/roadmap/">minor release roadmap</a>.
+<p>
+
+<p>
+If the release team determines that a critical bug or security fix is too
+important to wait until the regularly scheduled minor release, it may make
+a release available outside of the minor release roadmap.
 </p>
 
 <p>
-PostgreSQL major releases include new features and occur roughly once every year. Beginning with version 10, a major release is indicated by increasing the first part of the version, e.g. 10 to 11.  Before version 10, a major release was indicated by increasing either the first or second part of the version number, e.g. 9.5 to 9.6.
+The PostgreSQL Global Development Group supports a major version for 5 years
+after its initial release. After its five year anniversary, a major version will
+have one last minor release containing any fixes and will be considered
+end-of-life (EOL) and no longer supported.
+</p>
+
+<h2>Version Numbering</h2>
+
+<p>
+Starting with PostgreSQL 10, a major version is indicated by increasing the
+first part of the version, e.g. 10 to 11.  Before PostgreSQL 10, a major version
+was indicated by increasing either the first or second part of the version
+number, e.g. 9.5 to 9.6.
 </p>
 
 <p>
-Major releases usually change the internal format of system tables and data files.  These changes are often complex, so we do not maintain backward compatibility of all stored data.  A dump/reload of the database or use of the <a href="/docs/current/static/pgupgrade.html">pg_upgrade</a> module is required for major upgrades.
+Minor releases are numbered by increasing the last part of the version number.
+Beginning with PostgreSQL 10, this is the second part of the version number,
+e.g. 10.0 to 10.1; for older versions this is the third part of the version
+number, e.g. 9.5.3 to 9.5.4.
+</p>
+
+<h2>Upgrading</h2>
+
+<p>
+  <strong>
+    We always recommend that all users run the latest available minor
+    release for whatever major version is in use.
+  </strong>
 </p>
 
 <p>
-Minor releases are numbered by increasing the last part of the version number.  Beginning with version 10, this is the second part of the version number, e.g. 10.0 to 10.1; for older versions this is the third part of the version number, e.g. 9.5.3 to 9.5.4. The PostgreSQL team only adds bug fixes to minor releases. All users should upgrade to the most recent minor release as soon as possible. While upgrades always have some risk, PostgreSQL minor releases fix only frequently-encountered, <a href="/support/security/">security</a>, and data corruption bugs to reduce the risk associated with upgrading. <em>The community considers not upgrading to be riskier than upgrading</em>.
+Major versions usually change the internal format of system tables and data
+files.  These changes are often complex, so we do not maintain backward
+compatibility of all stored data.  A dump/reload of the database or use of the
+<a href="/docs/current/static/pgupgrade.html">pg_upgrade</a> module is required
+for major upgrades. We also recommend reading the
+<a href="/docs/current/static/upgrading.html">upgrading</a> section of the major
+version you are planning to upgrade to.
 </p>
 
 <p>
-A tentative schedule for upcoming minor releases can be found in the
-<a href="/developer/roadmap/">roadmap</a>.
+Upgrading to a minor release does not normally require a dump and restore;  you
+can stop the database server, install the updated binaries, and restart the
+server.  For some releases, manual changes may be required to complete the
+upgrade, so always read the release notes before upgrading.
 </p>
 
 <p>
-Upgrading to a minor release does not require a dump and restore; merely stop the database server, install the updated binaries, and restart the server.  For some releases, manual changes may be required to complete the upgrade, so always read the release notes before upgrading.
+While upgrading will always contain some level of risk, PostgreSQL minor releases
+fix only frequently-encountered bugs, <a href="/support/security/">security</a>
+issues, and data corruption problems to reduce the risk associated with
+upgrading. For minor releases, <em>the community considers not upgrading to be
+riskier than upgrading.</em>
 </p>
 
-<h2>PostgreSQL release support policy</h2>
-<p>
-The PostgreSQL Global Development Group aims to support a major release for
-<strong>five years</strong>. After its end-of-life (EOL) month ends, a major version receives one final <a href="/developer/roadmap/">minor release</a>. After that final minor release, bug fixing ceases for that major version.
-</p>
-
-<p>
-After a release falls out of full support, we may (at our committers'
-discretion) continue to apply further critical fixes to the source code,
-on a best-effort basis. No formal releases or binary packages will be
-produced by the project, but the updated source code will be available
-from our source code control system.
-</p>
-
-<p>
-This policy will be followed on a best-effort basis. In extreme cases it
-may not be possible to support a release for the planned lifetime; for
-example if a serious bug is found that cannot be resolved in a given major
-version without significant risk to the stability of the code or loss of
-application compatibility. In such cases, early retirement of a major
-version may be required.
-</p>
-
-<h2>Release History &amp; EOL Months</h2>
+<h2>Release History</h2>
 
 <table class="table table-striped">
   <thead class="thead-light">
@@ -60,8 +84,8 @@ version may be required.
       <th>Version</th>
       <th>Current minor</th>
       <th>Supported</th>
-      <th>First release month</th>
-      <th>EOL month</th>
+      <th>First Release</th>
+      <th>Expected Final Release</th>
     </tr>
   </thead>
   <tbody>
@@ -70,8 +94,8 @@ version may be required.
        <td>{{v.numtree}}</td>
        <td>{{v.numtree}}.{{v.latestminor}}</td>
        <td>{{v.supported|yesno:"Yes,No"}}</td>
-       <td>{{v.firstreldate|date:"F Y"}}</td>
-       <td>{{v.eoldate|date:"F Y"}}</td>
+       <td>{{v.firstreldate|date:"F j, Y"}}</td>
+       <td>{{v.eoldate|date:"F j, Y"}}</td>
       </tr>
     {%endfor%}
   </tbody>
