@@ -6,6 +6,9 @@ from django.conf import settings
 sitenav = {
 	'about': [
 		{'title': 'About',              'link':'/about/'},
+		{'title': 'Code of Conduct',    'link':'/about/policies/coc/', 'submenu': [
+			{'title': 'Committee',      'link':'/about/policies/coc_committee/'}
+		]},
 		{'title': 'Feature Matrix',     'link':'/about/featurematrix/'},
 		{'title': 'Donate',             'link':'/about/donate/'},
 		{'title': 'History',            'link':'/docs/current/static/history.html'},
