@@ -31,8 +31,8 @@ are defined in settings.FTP_MASTERS.
 moderation/moderation_report.py
 -------------------------------
 This script enumerates all unmoderated objects in the database and
-generates an email to the slaves list if there are any pending, to
-prod the moderators to do their job.
+generates an email to the NOTIFICATION_EMAIL address if there are any
+pending, to prod the moderators to do their job.
 
 rss/fetch_rss_feeds.py
 ----------------------

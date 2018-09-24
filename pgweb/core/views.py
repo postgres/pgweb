@@ -264,7 +264,7 @@ def sync_timestamp(request):
 # List of all unapproved objects, for the special admin page
 @login_required
 @user_passes_test(lambda u: u.is_staff)
-@user_passes_test(lambda u: u.groups.filter(name='web slaves').exists())
+@user_passes_test(lambda u: u.groups.filter(name='pgweb moderators').exists())
 def admin_pending(request):
 	return render(request, 'core/admin_pending.html', {
 			'app_list': get_all_pending_moderations(),

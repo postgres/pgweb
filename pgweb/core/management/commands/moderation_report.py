@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #
-# Script to send daily moderation report to web slaves
+# Script to send daily moderation report to the NOTIFICATION_EMAIL address
+# (the moderators list)
 #
 #
 
