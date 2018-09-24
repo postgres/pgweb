@@ -13,7 +13,7 @@ def _encoded_email_header(name, email):
 		return formataddr((str(Header(name, 'utf-8')), email))
 	return email
 
-def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False, cc=None, replyto=None, sendername=None, receivername=None):
+def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False, cc=None, replyto=None, sendername=None, receivername=None, messageid=None):
 	# attachment format, each is a tuple of (name, mimetype,contents)
 	# content should be *binary* and not base64 encoded, since we need to
 	# use the base64 routines from the email library to get a properly
@@ -27,7 +27,10 @@ def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, userge
 	if replyto:
 		msg['Reply-To'] = replyto
 	msg['Date'] = formatdate(localtime=True)
-	msg['Message-ID'] = make_msgid()
+	if messageid:
+		msg['Message-ID'] = messageid
+	else:
+		msg['Message-ID'] = make_msgid()
 
 	msg.attach(MIMEText(msgtxt, _charset='utf-8'))
 

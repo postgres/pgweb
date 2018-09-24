@@ -4,6 +4,8 @@ from django.db import connection
 from django.conf import settings
 
 import os
+import time
+import hashlib
 
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import template_to_string
@@ -12,6 +14,12 @@ from pgweb.util.misc import send_template_mail
 from pgweb.core.models import Version
 
 from forms import SubmitBugForm
+
+def _make_bugs_messageid(bugid):
+	return "{0}-{1}@postgresql.org".format(
+		bugid,
+		hashlib.md5("{0}-{1}".format(os.getpid(), time.time())).hexdigest()[:16],
+	)
 
 @login_required
 def submitbug(request):
@@ -35,6 +43,7 @@ def submitbug(request):
 				cc=form.cleaned_data['email'],
 				replyto='%s, %s' % (form.cleaned_data['email'], settings.BUGREPORT_EMAIL),
 				sendername="PG Bug reporting form",
+				messageid=_make_bugs_messageid(bugid),
 			)
 
 			return render_pgweb(request, 'support', 'misc/bug_completed.html', {

@@ -8,7 +8,7 @@ from pgweb.mailqueue.util import send_simple_mail
 from pgweb.util.helpers import template_to_string
 import re
 
-def send_template_mail(sender, receiver, subject, templatename, templateattr={}, usergenerated=False, cc=None, replyto=None, receivername=None, sendername=None):
+def send_template_mail(sender, receiver, subject, templatename, templateattr={}, usergenerated=False, cc=None, replyto=None, receivername=None, sendername=None, messageid=None):
 	d = {
 		'link_root': settings.SITE_ROOT,
 	}
@@ -16,7 +16,8 @@ def send_template_mail(sender, receiver, subject, templatename, templateattr={},
 	send_simple_mail(sender, receiver, subject,
 					 template_to_string(templatename, d),
 					 usergenerated=usergenerated, cc=cc, replyto=replyto,
-					 receivername=receivername, sendername=sendername)
+					 receivername=receivername, sendername=sendername,
+					 messageid=messageid)
 
 def get_client_ip(request):
 	"""
