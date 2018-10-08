@@ -1,0 +1,66 @@
+{% extends "pages/about/press/presskit11/base.html" %}
+{% block title %}PostgreSQL 11 Press Kit - Chinese{% endblock title %}
+{% block presskit_language %}- Chinese{% endblock presskit_language %}
+
+{% block presskit_content %}
+<p>2018-10-18，全球开发组今天宣布，PostgreSQL 11正式发布，Postgresql作为世界上最先进的开源关系型数据库， 11.0是迄今为止的最新版本。</p>
+
+<p>PostgreSQL 11 重点对系统性能进行提升，特别是在对大数据集和高计算负载的情况下进行了增强。尤其是PostgreSQL 11 对表分区的功能进行了重大的改变和提升，增加了内置事务管理的存储过程，，提升了并行查询能力和并行数据定义能力，也引入了JIT编译来加速查询中的表达式的计算执行。</p>
+
+<p>“对PostgreSQL 11，我们的开发社区聚焦于提升PostgreSQL管理大数据集的新特性的开发”，
+<a href="https://www.postgresql.org">PostgreSQL全球开发组</a> 的 <a href="https://www.postgresql.org/developer/core/">核心开发成员</a>  Bruce
+Momjian说道，“在已被证明PostgreSQL擅长于事务类负载的基础上，PostgreSQL 11 又增加了让开发人员扩展大数据应用更加容易的功能”。</p>
+
+<p>得益于超过20年以上的开源产品开发，PostgreSQL已成长为开发者喜爱的开源关系数据库产品。系统持续得到行业的认可，2017年度被DB-Engines评选为 "<a href="https://db-engines.com/en/blog_post/76">2017年度优秀数据库</a>" ,2018年度又被<a href="https://sdtimes.com/sdtimes-100/2018/best-in-show/database-and-database-management-2018/">SD Times 2018 100</a>（软件开发周刊）评选为2018年度表现最佳之100种产品中“数据库及数据库管理类”的产品。</p>
+
+<p>PostgreSQL 11 是自2017-10-5发布PostgreSQL 10以来首个主版本的发布。下次针对PostgreSQL 11的补丁修正版本将会是PostgreSQL 11.1版本，而下一个包含大量新特性的主版本将是PostgreSQL 12.</p>
+
+<h3 id="">增强的健壮性和分区表性能的提升</h3>
+
+<p>PostgreSQL 11 在目前版本已有了按值列表或是按范围作为分区键值的分区表功能外，又增加了按哈希键值分区的功能，也称之为“Hash分区”。 PostgreSQL 11 还通过在分区功能中使用外部数据封装器<a href="https://www.postgresql.org/docs/current/static/postgres-fdw.html">postgres_fdw</a>的功能，也进一步提升了数据聚合能力。</p>
+
+<p>为了帮助管理分区，PostgreSQL 11 引入了将不含有分区键值的记录自动转入缺省分区的功能，并增加了在（主表）执行创建主键、外键、索引和触发器时，会将这些操作全部自动复制给所有分区表的功能。另外PostgreSQL 11现在也支持当记录中的分区键值字段被更新后，会自动将该记录移至新的正确的分区表中的功能。</p>
+
+<p>PostgreSQL 11 版本通过使用新的分区消除策略来提升查询分区表的性能。另外，PostgreSQL 11现在在分区表上也支持流行的“UPSERT”功能，这可以帮助用户在处理应用数据时，简化应用程序的开发，减少网络负载。 </p>
+
+<h3 id="-1">支持内置事务的存储过程</h3>
+
+<p>开发人员在PostgreSQL可以创建用户自定义的函数超过20年了，但在PostgreSQL 11版本前，这些函数是不能控制它们自己的事务的。PostgreSQL 11版本增加了SQL 标准存储过程的特性，并且支持在过程中执行完整的事务管理功能。这个新特性允许开发人员创建更多更高级的服务端应用，比如涉及大量数据的增量导入功能。 </p>
+
+<p>SQL 过程是使用 <code>CREATE PROCEDURE</code> 指令创建，执行时使用 <code>CALL</code> 指令，现在服务端的过程语言有 PL/pgSQL、 PL/Perl、 PL/Python 和 PL/Tcl。</p>
+
+<h3 id="-2">并行查询的增强</h3>
+
+<p>PostgreSQL 11提升了并行查询的性能，通过更加有效的分区数据扫描，在并行顺序扫描和哈希聚合方面性能有了更大的改进。即使是组成UNION的查询子句不能并行处理时，PostgreSQL现在也可以对使用 <code>UNION</code> 的SELECT查询并行处理。</p>
+
+<p>PostgreSQL 11 也对几种数据集的定义指令增加了并行处理功能，最显著的就是通过 <code>CREATE INDEX</code>  指令创建的B-Tree索引。其他几种支持并行化操作的还有 <code>CREATE TABLE .. AS</code> 、 <code>SELECT INTO</code> 、 <code>CREATE MATERIALIZED VIEW</code> 等创建表和物化视图的操作。</p>
+
+<h3 id="jit">表达式的 (JIT) 编译</h3>
+
+<p>PostgreSQL 11 版本引入了JIT编译来加速查询中的表达式的计算和执行。JIT表达式的编译使用LLVM项目编译器的架构来提升在WHERE条件、指定列表、聚合、投影以及一些内部操作的表达式的编译执行。</p>
+
+<p>要使用JIT 编译，用户需要安装LLVM相关的依赖包，并在系统 中启用JIT编译，可通过在PostgreSQL的配置文件中设置 <code>jit = on</code> ，或是在 PostgreSQL 当前会话中执行 <code>SET jit = on</code> 指令均可启用JIT。</p>
+
+<h3 id="-3">一般性的用户体验提升</h3>
+
+<p>对PostgreSQL关系数据库的改进，没有一个活跃的用户社区和PostgreSQL开发人员的长期努力工作，是不可能实现的。下面所列的都是PostgreSQL 11版本众多特性中的一些提升用户友好性的亮点：</p>
+
+<ul>
+<li>改变 <code>ALTER TABLE .. ADD COLUMN .. DEFAULT ..</code> 指令在带有非 <code>NULL</code> 缺省值时需要重写整个表的操作，新的变化对这样的指令带来了极大的性能量级提升；</li>
+
+<li>“覆盖索引”操作， 允许用户在创建一个索引通过使用 <code>INCLUDE</code> 选项来增加额外字段，这样会对无B-tree索引列的查询来使用Index-Only 的扫描有很大好处；</li>
+
+<li>更多的窗口函数功能，包括允许 <code>RANGE</code> 来使用 <code>PRECEDING</code> / <code>FOLLOWING</code> 和 <code>GROUPS</code>，窗口的非包含功能等；</li>
+
+<li>给PostgreSQL的命令行程序psql增加了关键字<code>quit</code> 和 <code>exit</code> ，以让用户（按各种习惯）更加容易退出这个程序。</li>
+</ul>
+
+<p>新版本中的完整的新特性列表，请参阅这里的：
+<a href="https://www.postgresql.org/docs/11/static/release-11.html">发布声明</a> ，网址是：<a href="https://www.postgresql.org/docs/11/static/release-11.html">https://www.postgresql.org/docs/11/static/release-11.html</a></p>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2 id="postgresql">关于PostgreSQL</h2>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a>是最先进的开源关系型数据库，它的全球社区是一个由数千名用户、开发人员、公司或其他组织而组成。 PostgreSQL项目有30年以上的历史，起源于加利福利亚的伯克利大学，经历了无数次开发升级。 PostgreSQL的专业特性不仅包含顶级商业数据库系统的功能特性，更是在高级数据库功能、数据库扩展性、数据库安全性和稳定性方面超过了它们。 若想获取到更多关于PostgreSQL的信息或者加入到PostgreSQL社区，请浏览 <a href="https://www.postgresql.org">PostgreSQL.org</a> 网站。</p>
+{% endblock presskit_about %}

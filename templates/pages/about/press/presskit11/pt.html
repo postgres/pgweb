@@ -1,0 +1,151 @@
+{% extends "pages/about/press/presskit11/base.html" %}
+{% block title %}PostgreSQL 11 Press Kit - Portuguese{% endblock title %}
+{% block presskit_language %}- Portuguese{% endblock presskit_language %}
+
+{% block presskit_content %}
+<p>18 DE OUTUBRO DE 2017 - O Grupo de Desenvolvimento Global do PostgreSQL
+anunciou hoje o lançamento do PostgreSQL 11, a versão mais recente do banco de
+dados de código aberto mais avançado do mundo.</p>
+
+<p>O PostgreSQL 11 oferece aos usuários melhorias no desempenho geral do sistema
+de banco de dados, com aprimoramentos específicos associados a banco de dados
+muito grandes e altas cargas de trabalho computacionais. Além disso, o
+PostgreSQL 11 fez melhorias significativas no sistema de particionamento de
+tabelas, adicionou suporte para procedimentos armazenados capazes de gerenciar
+transações, melhorou o paralelismo de consultas e adicionou recursos para
+definição de dados paralelizado e introduziu compilação just-in-time (JIT) para
+acelerar a execução de expressões em consultas.</p>
+
+<p>"Para o PostgreSQL 11, nossa comunidade de desenvolvimento concentrou-se em
+adicionar recursos que melhoram a capacidade do PostgreSQL em gerenciar bancos
+de dados muito grandes", disse Bruce Momjian, um
+<a href="https://www.postgresql.org/developer/core/">membro</a> do <a href="https://www.postgresql.org">Grupo de
+Desenvolvimento Global do PostgreSQL</a>. "Além do
+desempenho comprovado do PostgreSQL para cargas de trabalho transacionais, o
+PostgreSQL 11 torna ainda mais fácil para os desenvolvedores executarem
+aplicações de big data em escala."</p>
+
+<p>O PostgreSQL se beneficia de mais de 20 anos de desenvolvimento de código
+aberto e se tornou o banco de dados relacional de código aberto preferido pelos
+desenvolvedores. O projeto continua a receber reconhecimento em toda a
+indústria e foi apresentado como o "<a href="https://db-engines.com/en/blog_post/76">SGBD do Ano de
+2017</a>" da DB-Engines e no <a href="https://sdtimes.com/sdtimes-100/2018/best-in-show/database-and-database-management-2018/">SD Times
+2018
+100</a>.</p>
+
+<p>O PostgreSQL 11 é a primeira versão desde que o PostgreSQL 10 foi lançado em 5
+de outubro de 2017. A próxima versão corretiva do PostgreSQL 11 contendo
+correção de bugs será o PostgreSQL 11.1 e a próxima versão com novos recursos
+será o PostgreSQL 12.</p>
+
+<h3 id="maiorrobustezedesempenhoparaparticionamento">Maior Robustez e Desempenho para Particionamento</h3>
+
+<p>PostgreSQL 11 adicionou a capacidade de particionar dados por uma chave hash,
+também conhecida como particionamento por hash, adicionando a capacidade atual
+de particionar dados no PostgreSQL por uma lista de valores ou por um
+intervalo. O PostgreSQL 11 melhorou ainda mais sua capacidade de federação de
+dados com melhorias de funcionalidade para partições que usam adaptadores de
+dados externos do PostgreSQL,
+<a href="https://www.postgresql.org/docs/current/static/postgres-fdw.html">postgres_fdw</a>.</p>
+
+<p>Para ajudar com gerenciamento de partições, o PostgreSQL 11 introduziu uma
+partição padrão para todos os dados que não correspondem a uma chave de
+partição, e a capacidade de criar chaves primárias, chaves estrangeiras,
+índices e gatilhos em tabelas particionadas que são passadas para todas as
+partições. O PostgreSQL 11 também suporta a movimentação automática de
+registros para a partição correta, se a chave de partição para esse registro
+for atualizada.</p>
+
+<p>O PostgreSQL 11 melhorou o desempenho das consultas ao ler partições usando uma
+nova estratégia de eliminação de partições. Além disso, o PostgreSQL 11 agora
+suporta a popular funcionalidade "upsert" em tabelas particionadas, que ajuda
+os usuários a simplificarem o código da aplicação e reduzirem a sobrecarga da
+rede ao interagir com seus dados.</p>
+
+<h3 id="transaessuportadasemprocedimentosarmazenados">Transações Suportadas em Procedimentos Armazenados</h3>
+
+<p>Os desenvolvedores criam funções definidas pelo usuário no PostgreSQL por mais
+de 20 anos, mas antes do PostgreSQL 11, essas funções não conseguiam gerenciar
+suas próprias transações. O PostgreSQL 11 adicionou procedimentos SQL que podem
+executar o gerenciamento completo de transações dentro do corpo de uma função,
+permitindo que os desenvolvedores criem aplicações mais avançadas do lado do
+servidor, como aquelas envolvendo o carregamento incremental de dados em massa.</p>
+
+<p>Os procedimentos SQL podem ser criados usando o comando <code>CREATE PROCEDURE</code>,
+executados usando o comando <code>CALL</code>, e são suportados pelas linguagens
+procedurais PL/pgSQL, PL/Perl, PL/Python e PL/Tcl.</p>
+
+<h3 id="recursosaprimoradosparaparalelismodeconsultas">Recursos Aprimorados para Paralelismo de Consultas</h3>
+
+<p>O PostgreSQL 11 melhorou o desempenho de consultas paralelas, com ganhos de
+desempenho em buscas sequenciais em paralelo e junções hash juntamente com
+buscas mais eficientes de dados particionados. O PostgreSQL agora pode executar
+consultas SELECT que usam <code>UNION</code> em paralelo se as consultas subjacentes não
+puderem ser paralelizadas.</p>
+
+<p>O PostgreSQL 11 adicionou paralelismo a vários comandos de definição de dados,
+notavelmente para a criação de índices B-tree que são gerados pela execução do
+comando <code>CREATE INDEX</code>. Vários comandos de definição de dados que criam tabelas
+ou visões materializadas a partir de consultas agora também são capazes de
+utilizar paralelismo, incluindo as opções <code>CREATE TABLE .. AS</code>, <code>SELECT INTO</code> e
+<code>CREATE MATERIALIZED VIEW</code>.</p>
+
+<h3 id="compilaojustintimejitparaexpresses">Compilação Just-in-Time (JIT) para Expressões</h3>
+
+<p>O PostgreSQL 11 introduziu suporte para compilação Just-In-Time (JIT) para
+acelerar a execução de certas expressões durante a execução da consulta. A
+compilação da expressão JIT para o PostgreSQL usa o projeto LLVM para acelerar
+a execução de expressões em cláusulas WHERE, listas de destino, agregações,
+projeções e algumas operações internas.</p>
+
+<p>Para aproveitar a compilação JIT, você precisará instalar as dependências do
+LLVM e habilitar a compilação JIT: definindo <code>jit = on</code> no arquivo de
+configuração do PostgreSQL ou executando <code>SET jit = on</code> a partir da sua sessão.</p>
+
+<h3 id="melhoriasgeraisparaexperinciadousurio">Melhorias Gerais para Experiência do Usuário</h3>
+
+<p>Os aprimoramentos no banco de dados relacional do PostgreSQL não são possíveis
+sem o feedback de uma comunidade ativa de usuários e o trabalho árduo das
+pessoas que trabalham no PostgreSQL. Abaixo destacamos alguns dos muitos
+recursos incluídos no PostgreSQL 11 projetados para melhorar a experiência
+geral do usuário:</p>
+
+<ul>
+<li>Remover a necessidade de reescrever toda tabela ao executar <code>ALTER TABLE ..
+ADD COLUMN .. DEFAULT ..</code> com valor padrão não <code>NULL</code>, o que fornece um aumento
+significativo no desempenho desse comando.</li>
+
+<li>"Índices de cobertura" permitem que um usuário inclua colunas
+adicionais a um índice usando a cláusula <code>INCLUDE</code> e são úteis para realizar
+buscas somente com índice, especialmente em tipos de dados que não são
+indexáveis por índices de B-tree.</li>
+
+<li>Funcionalidade adicional para trabalhar com funções deslizantes, incluindo
+permitir que <code>RANGE</code> use <code>PRECEDING</code>/<code>FOLLOWING</code>, <code>GROUPS</code> e exclusão de
+quadros.</li>
+
+<li>A inclusão das palavras-chave "quit" e "exit" na interface de linha de
+comando do PostgreSQL para facilitar a saída da ferramenta.</li>
+</ul>
+
+<p>Para obter uma lista completa dos recursos incluídos nesta versão, leia as
+<a href="https://www.postgresql.org/docs/11/static/release-11.html">notas de
+lançamento</a>, que
+podem ser encontradas em:</p>
+
+<p><a href="https://www.postgresql.org/docs/11/static/release-11.html">https://www.postgresql.org/docs/11/static/release-11.html</a></p>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2 id="sobreopostgresql">Sobre o PostgreSQL</h2>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a> é o banco de dados mais avançado do
+mundo, com uma comunidade global de milhares de usuários, colaboradores,
+empresas e organizações. O Projeto PostgreSQL baseia-se em mais de 30 anos de
+engenharia, iniciando na Universidade da Califórnia, Berkeley, e continua em um
+ritmo inigualável de desenvolvimento. Conjunto de funcionalidades maduras do
+PostgreSQL não só se igualam aos principais sistemas de bancos de dados
+proprietários, mas os supera em funcionalidades avançadas, extensibilidade,
+segurança e estabilidade. Saiba mais sobre o PostgreSQL e participe da nossa
+comunidade em <a href="https://www.postgresql.org">PostgreSQL.org</a>.</p>
+{% endblock presskit_about %}

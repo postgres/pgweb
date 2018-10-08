@@ -1,0 +1,128 @@
+{% extends "pages/about/press/presskit11/base.html" %}
+{% block title %}PostgreSQL 11 Press Kit - Indonesian{% endblock title %}
+{% block presskit_language %}- Indonesian{% endblock presskit_language %}
+
+{% block presskit_content %}
+<p>18 OCT 2018 - Grup Pengembangan Global PostgreSQL hari ini mengumumkan
+rilis PostgreSQL 11, versi terbaru dari Open Source paling mumpuni di dunia</p>
+
+<p>PostgreSQL 11 menyediakan peningkatan kinerja keseluruhan RDBMS kepada pengguna,
+dengan peningkatan fitur tambahan khusus yang terkait dengan basis data yang sangat besar
+dan beban kerja komputasi tinggi. Selanjutnya, PostgreSQL 11 membuat perbaikan yang signifikan
+pada sistem partisi tabel, menambahkan dukungan untuk /Stored Procedure/
+dengan kemampuan manajemen transaksional, meningkatkan query paralel dan
+menambahkan kemampuan definisi data yang paralel, dan memperkenalkan just-in-time
+(JIT) kompilasi untuk mempercepat eksekusi ekspresi dalam query.</p>
+
+<p>"Untuk PostgreSQL 11, komunitas pengembangan kami fokus pada penambahan fitur itu
+meningkatkan kemampuan PostgreSQL untuk mengelola basis data yang sangat besar, "kata Bruce
+Momjian, seorang <a href="https://www.postgresql.org/developer/core/">anggota tim inti</a> dari
+<a href="https://www.postgresql.org">PostgreSQL Global Development Group</a>. "Diatas dari
+Kinerja yang terbukti PostgreSQL untuk beban kerja transaksional, PostgreSQL 11 membuat
+bahkan lebih mudah bagi pengembang untuk menjalankan aplikasi data besar dalam skala besar. "</p>
+
+<p>PostgreSQL dikembangkan lebih dari dua puluh tahun dalam Open Source dan
+menjadi database relasional Open Source yang lebih disukai untuk pengembang aplikasi.
+Komunitas PostgreSQL Open Source terus mendapat pengakuan di seluruh industri, dan telah ditampilkan sebagai
+"DBMS of the Year 2017" oleh DB-Engines dan dalam "SD Times 2018 100".</p>
+
+<p>PostgreSQL 11 adalah rilis besar pertama sejak PostgreSQL 10 dirilis pada
+5 Oktober 2017. Pembaruan pembaruan berikutnya untuk PostgreSQL 11 berisi perbaikan bug
+akan menjadi PostgreSQL 11.1, dan rilis besar berikutnya dengan fitur baru akan
+PostgreSQL 12.</p>
+
+<h3 id="peningkatanketajamandankinerjauntukmempartisi">Peningkatan Ketajaman dan Kinerja untuk Mempartisi</h3>
+
+<p>PostgreSQL 11 menambahkan kemampuan untuk mempartisi data dengan kunci hash, juga dikenal sebagai
+hash partitioning, menambah kemampuan saat ini untuk mempartisi data di PostgreSQL
+oleh daftar nilai atau rentang. PostgreSQL 11 meningkatkan lebih lanjut datanya
+kemampuan federasi dengan peningkatan fungsi untuk partisi yang digunakan fitur "Foreign Data Wrapper/FDW"
+<a href="https://www.postgresql.org/docs/current/static/postgres-fdw.html">postgres_fdw</a>.</p>
+
+<p>Untuk membantu mengelola partisi, PostgreSQL 11 memperkenalkan partisi "Catch-All"
+untuk menampung data yang tidak sesuai dengan kunci partisi, dan kemampuan untuk
+membuat Primary Key, Foreign Key, Indeks dan memicu partisi yang diturunkan ke semua tabel. PostgreSQL 11 juga mendukung baris yang bergerak secara otomatis
+ke partisi yang benar jika kunci partisi untuk baris itu diperbarui.</p>
+
+<p>PostgreSQL 11 meningkatkan kinerja kueri saat membaca dari partisi dengan menggunakan strategi penghapusan
+partisi baru. Selain itu, PostgreSQL 11 sekarang mendukung fitur "UPSERT" yang populer pada tabel yang dipartisi,
+yang membantu pengguna untuk menyederhanakan kode aplikasi dan mengurangi overhead jaringan saat berinteraksi dengan
+data mereka.</p>
+
+<h3 id="transaksiyangdidukungdalamstoredprocedures">Transaksi yang Didukung dalam Stored Procedures</h3>
+
+<p>Pengembang telah mampu membuat fungsi yang ditentukan pengguna di PostgreSQL untuk
+lebih dari 20 tahun, tetapi sebelum PostgreSQL 11, fungsi-fungsi ini tidak dapat dikelola
+transaksi mereka sendiri. PostgreSQL 11 menambahkan prosedur SQL yang dapat bekerja penuh
+manajemen transaksi dalam tubuh fungsi, memungkinkan pengembang untuk
+membuat aplikasi sisi server yang lebih canggih, seperti yang melibatkan
+pemuatan data massal inkremental.</p>
+
+<p>Prosedur SQL dapat dibuat menggunakan perintah <code>CREATE PROCEDURE</code>, dieksekusi
+menggunakan perintah <code>CALL</code>, dan didukung oleh prosedural sisi server
+bahasa PL / pgSQL, PL / Perl, PL / Python, dan PL / Tcl.</p>
+
+<h3 id="peningkatankemampuanuntukqueryparallelism">Peningkatan Kemampuan untuk Query Parallelism</h3>
+
+<p>PostgreSQL 11 meningkatkan kinerja query paralel, dengan peningkatan kinerja dalam
+scan sekuensial paralel dan hash bergabung bersama dengan pemindaian yang lebih efisien
+data yang dipartisi. PostgreSQL sekarang dapat mengeksekusi query SELECT yang menggunakan <code>UNION</code> di
+sejajar jika query yang mendasarinya tidak dapat diparalelkan.</p>
+
+<p>PostgreSQL 11 menambahkan paralelisme ke beberapa perintah definisi data, terutama untuk
+pembuatan indeks B-tree yang dihasilkan dengan melaksanakan perintah standar <code>CREATE INDEX</code>.
+Beberapa perintah definisi data yang baik buat tabel atau tampilan terwujud dari query juga paralel sekarang,
+termasuk <code>CREATE TABLE .. AS</code>,<code>SELECT INTO</code>, dan <code>CREATE MATERIALIZED VIEW</code>.</p>
+
+<h3 id="justintimejitkompilasiuntukekspresi">Just-in-Time (JIT) Kompilasi untuk Ekspresi</h3>
+
+<p>PostgreSQL 11 memperkenalkan dukungan untuk kompilasi Just-In-Time (JIT)
+mempercepat eksekusi ekspresi tertentu selama eksekusi query. JIT
+Kompilasi ekspresi untuk PostgreSQL menggunakan proyek LLVM untuk mempercepat
+eksekusi ekspresi dalam klausa WHERE, daftar target, agregat,
+proyeksi, dan beberapa operasi internal.</p>
+
+<p>Untuk memanfaatkan kompilasi JIT, Anda harus menginstal LLVM
+dependensi untuk mengaktifkan kompilasi JIT di file pengaturan PostgreSQL Anda
+dengan menetapkan <code>jit = on</code> atau dari sesi PostgreSQL Anda dengan mengeksekusi
+<code>SET jit = on</code>.</p>
+
+<h3 id="peningkatanpengalamanpenggunaumum">Peningkatan Pengalaman Pengguna Umum</h3>
+
+<p>Peningkatan ke database relasional PostgreSQL tidak mungkin tanpa
+umpan balik dari komunitas pengguna aktif dan kerja keras oleh orang-orang yang
+bekerja di PostgreSQL. Di bawah ini menyoroti beberapa dari banyak fitur yang termasuk dalam
+PostgreSQL 11 dirancang untuk meningkatkan pengalaman pengguna secara keseluruhan:</p>
+
+<ul>
+<li>Menghapus kebutuhan untuk <code>ALTER TABLE .. ADD COLUMN .. DEFAULT ..</code> dengan tidak
+<code>NULL</code>, default untuk menulis ulang seluruh tabel pada eksekusi. Hal ini meningkatan kinerja
+yang signifikan saat menjalankan perintah ini.</li>
+
+<li>"Meliputi indeks," yang memungkinkan pengguna menambahkan kolom tambahan ke indeks
+menggunakan <code>termasuk</code> klausul dan sangat membantu untuk melakukan scan indeks saja,
+terutama pada tipe data yang tidak dapat diindeks oleh indeks B-tree.</li>
+
+<li>Fungsionalitas tambahan untuk bekerja dengan fungsi-fungsi window, termasuk mengizinkan
+<code>RANGE</code> untuk menggunakan<code>PRECEDING</code> / <code>FOLLOWING</code>,<code>GROUPS</code>, dan pengecualian frame</li>
+
+<li>Dimasukkannya kata kunci "berhenti" dan "keluar" di baris perintah PostgreSQL
+antarmuka untuk membantu membuatnya lebih mudah meninggalkan alat baris perintah</li>
+</ul>
+
+<p>Untuk daftar lengkap fitur yang termasuk dalam rilis ini, silakan baca
+<a href="https://www.postgresql.org/docs/11/static/release-11.html">catatan rilis</a>,
+yang dapat ditemukan di:</p>
+
+<p><a href="https://www.postgresql.org/docs/11/static/release-11.html">https://www.postgresql.org/docs/11/static/release-11.html</a></p>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2 id="tentangpostgresql">Tentang PostgreSQL</h2>
+
+<p>PostgreSQL adalah aplikasi Basis Data berbasiskan Open Source paling mumpuni di dunia, dengan ribuan komunitas pengguna, kontributor, perusahaan, dan organisasi tersebar diseluruh dunia. Open Source PostgreSQL dibangun dan direkayasa lebih dari 30 tahun,
+mulai dari riset akademis di University of California, Berkeley, dan terus dengan kecepatan pengembangan yang tak tertandingi.
+Fitur matang PostgreSQL tidak hanya cocok dengan sistem basis data proprietary teratas,
+tetapi melebihi mereka dalam fitur yang lebih lanjut, ekstensibilitas, keamanan dan stabilitas.
+Pelajari lebih lanjut tentang PostgreSQL dan berpartisipasi dalam komunitas kita di <a href="https://www.postgresql.org">PostgreSQL.org</a>.</p>
+{% endblock presskit_about %}

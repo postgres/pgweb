@@ -1,0 +1,67 @@
+{% extends "pages/about/press/presskit11/base.html" %}
+{% block title %}PostgreSQL 11 Press Kit - Italian{% endblock title %}
+{% block presskit_language %}- Italian{% endblock presskit_language %}
+
+{% block presskit_content %}
+<p>18 OTTOBRE 2018 - Il PostgreSQL Global Development Group ha annunciato oggi il rilascio di PostgreSQL 11, l'ultima versione del database open source più avanzato del mondo.</p>
+
+<p>PostgreSQL 11 migliora le performance complessive del sistema, in particolar modo per database di grandi dimensioni (VLDB) e con carichi computazionali elevati. Inoltre, PostgreSQL 11 contribuisce sensibilmente al sistema di partizionamento delle tabelle, aggiunge il supporto a stored procedure in grado di gestire transazioni, migliora il parallelismo delle query e introduce la compilazione just-in-time (JIT) per accelerare l'esecuzione di espressioni all'interno di query.</p>
+
+<p>"Con PostgreSQL 11, la nostra comunità di sviluppatori si è concentrata nell'aggiungere funzionalità che migliorano l'abilità di gestire database di grandi dimensioni", afferma Bruce Momjian, <a href="https://www.postgresql.org/developer/core/">membro del core team</a> del <a href="https://www.postgresql.org">PostgreSQL Global Development Group</a>. "PostgreSQL 11 rende ancora più facile per gli sviluppatori eseguire applicazioni di big data su larga scala, in aggiunta alle prestazioni già note per i carichi di lavoro transazionali.</p>
+
+<p>Dopo oltre 20 anni di sviluppo, PostgreSQL è divenuto il database relazionale open source preferito dagli sviluppatori. Il progetto continua a ricevere riconoscimenti da parte dell'industria, ed è stato insignito del titolo di "<a href="https://db-engines.com/en/blog_post/76">DBMS dell'anno 2017</a>" da DB-Engines e selezionato in
+"<a href="https://sdtimes.com/sdtimes-100/2018/best-in-show/database-and-database-management-2018/">SD Times 2018 100</a>".</p>
+
+<p>PostgreSQL 11 è la prima major release dopo il rilascio di PostgreSQL 10, avvenuto il 5 ottobre 2017. La prima release di manutenzione di PostgreSQL 11 sarà PostgreSQL 11.1, mentre la prossima major release con nuova funzionalità sarà PostgreSQL 12.</p>
+
+<h3 id="miglioriprestazioniemaggiorerobustezzaperilpartizionamento">Migliori prestazioni e maggiore robustezza per il partizionamento</h3>
+
+<p>PostgreSQL 11 introduce <em>hash partitioning</em>, ovvero la capacità di partizionare dati sulla base di una chiave hash. Questa funzionalità va ad aggiungersi ai metodi di partizionamento per lista di valori e per range attualmente disponibili in PostgreSQL.
+PostgreSQL 11 inoltre arricchisce le capacità di federazione dati con nuove funzionalità per le partizioni che utilizzano <a href="https://www.postgresql.org/docs/current/static/postgres-fdw.html">postgres_fdw</a>, il Foreign Data Wrapper di PostgreSQL.</p>
+
+<p>Per aiutare con la gestione delle partizioni, PostgreSQL 11 introduce le partizioni di default per i dati che non rientrano in nessuna chiave di partizionamento, nonché la possibilità di aggiungere chiavi primarie, chiavi esterne, indici e trigger sulle tabelle partizionate che vengono direttamente passati alle partizioni sottostanti. PostgreSQL 11 inoltre supporta automaticamente lo spostamento di righe nella partizione corretta in caso di aggiornamento della chiave di partizionamento.</p>
+
+<p>PostgreSQL 11 migliora anche le prestazioni delle query in fase di lettura dalle partizioni utilizzando una nuova strategia di eliminazione delle partizioni. Inoltre, con PostgreSQL 11 le tabelle partizionate supportano anche la funzionalità di "upsert", molto popolare tra gli sviluppatori, che permette di semplificare il codice applicativo e di ridurre il traffico di rete nella gestione dei dati.</p>
+
+<h3 id="gestionedelletransazioniallinternodistoredprocedure">Gestione delle transazioni all'interno di stored procedure</h3>
+
+<p>Per oltre 20 anni PostgreSQL ha consentito agli sviluppatori di creare funzioni definite dall'utente, ma prima di PostgreSQL 11 queste funzioni non erano in grado di gestire le proprie transazioni in autonomia. PostgreSQL 11 introduce la possibilità di definire procedure SQL capaci di gestire le transazioni all'interno del corpo di una funzione, permettendo agli sviluppatori di creare applicazioni lato server più avanzate, come ad esempio il caricamento massivo di dati in modalità incrementale.</p>
+
+<p>Le procedure SQL possono essere create utilizzando il comando <code>CREATE PROCEDURE</code> ed eseguite con il comando <code>CALL</code>. Sono supportate dai linguaggi procedurali lato server PL/pgSQL, PL/Perl, PL/Python e PL/Tcl.</p>
+
+<h3 id="queryparallelipipotenti">Query paralleli più potenti</h3>
+
+<p>PostgreSQL 11 migliora le prestazioni delle query parallele, con incrementi di performance nelle scansioni sequenziali e negli hash join, insieme ad un più efficiente algoritmo di scansionamento dei dati partizionati. PostgreSQL è ora in grado di eseguire query SELECT che utilizzano <code>UNION</code> in parallelo qualora le query sottostanti non possano essere effettuate in parallelo.</p>
+
+<p>PostgreSQL 11 aggiunge il parallelismo a diversi comandi di definizione dati, in particolare alla creazione di indici B-Tree tramite il comando standard <code>CREATE INDEX</code>. Altri comandi di definizione dati che creano tabelle o viste materializzate a partire da altre query possono adesso essere eseguiti in parallelo, come <code>CREATE TABLE .. AS</code>, <code>SELECT INTO</code>, e <code>CREATE MATERIALIZED VIEW</code>.</p>
+
+<h3 id="compilazionejustintimejitperleespressioni">Compilazione Just-in-Time (JIT) per le espressioni</h3>
+
+<p>PostgreSQL 11 introduce il supporto alla compilazione Just-In-Time (JIT) per accelerare l'esecuzione di alcune espressioni durante l'esecuzione delle query. La compilazione JIT delle espressioni per PostgreSQL utilizza il progetto LLVM per velocizzarne l'esecuzione in clausole WHERE, target list, aggregati, proiezioni e alcune operazioni interne.</p>
+
+<p>Per sfruttare la compilazione JIT, è necessario installare le dipendenze LLVM e abilitare l'impostazione a livello globale <code>jit = on</code> nel file di configurazione oppure a livello di sessione di PostgreSQL eseguendo <code>SET jit = on</code>.</p>
+
+<h3 id="unamiglioreesperienzapergliutenti">Una migliore esperienza per gli utenti</h3>
+
+<p>Migliorare un database relazionale come PostgreSQL non è possibile senza il feedback di una comunità di utenti attiva e senza la dedizione e gli sforzi delle persone che ci lavorano. Di seguito una piccola lista di funzionalità facenti parte di PostgreSQL 11 che sono progettate per migliorare l'esperienza globale degli utenti:</p>
+
+<ul>
+<li>rimozione del requisito di riscrivere l'intera tabella all'esecuzione del comando <code>ALTER TABLE .. ADD COLUMN .. DEFAULT ..</code> con un valore di default non <code>NULL</code>,  con un significativo miglioramento delle performance</li>
+
+<li>"Covering index" che permettono all'utente di aggiungere colonne addizionali ad un indice tramite la clausola <code>INCLUDE</code> e di effettuare scan di tipo "index-only", in particolar modo su tipi di dato che non sono indicizzabili da indici B-tree</li>
+
+<li>funzionalità aggiuntive da utilizzare con window function, compreso l'impiego con <code>RANGE</code> di <code>PRECEDING</code>/<code>FOLLOWING</code>, <code>GROUPS</code> e esclusione dai frame</li>
+
+<li>inclusione delle parole chiave "quit" e "exit" nell'interfaccia da linea di comando di PostgreSQL per renderne più semplice l'uscita</li>
+</ul>
+
+<p>Per una lista completa di funzionalità incluse in questa release si faccia riferimento alle <a href="https://www.postgresql.org/docs/11/static/release-11.html">note di rilascio</a> disponibili in lingua inglese all'indirizzo:</p>
+
+<p><a href="https://www.postgresql.org/docs/11/static/release-11.html">https://www.postgresql.org/docs/11/static/release-11.html</a></p>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2 id="supostgresql">Su PostgreSQL</h2>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a> è il più avanzato sistema di gestione di database open source, con una comunità globale costituita di utenti, sviluppatori, aziende ed organizzazioni. Il progetto PostgreSQL si porta dietro oltre 30 anni di attività di ingegneria del software, a partire dal campus di Berkeley dell'Università di California, ed oggi può vantare un ritmo di sviluppo senza uguali. La gamma di funzionalità mature messe a disposizione da PostgreSQL non soltanto è in grado di competere con quelle offerte da sistemi di database proprietari, ma le migliora in termini di funzionalità avanzate, estensibilità, sicurezza e stabilità. Scopri maggiori informazioni su PostgreSQL e partecipa attivamente alla nostra comunità su <a href="https://www.postgresql.org">PostgreSQL.org</a> e, per l'Italia, <a href="http://www.itpug.org">ITPUG</a>.</p>
+{% endblock presskit_about %}

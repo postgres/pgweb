@@ -1,0 +1,149 @@
+{% extends "pages/about/press/presskit11/base.html" %}
+{% block title %}PostgreSQL 11 Press Kit - Burmese{% endblock title %}
+{% block presskit_language %}- Burmese{% endblock presskit_language %}
+
+{% block presskit_content %}
+<p>၂၀၁၈ခ ွစ 18 ရက - ေန က ေပ ကမ
+ေခတအမဆ Open Source ေဒတ ေဘစ ျဖစ PostgreSQL
+11 က
+PostgreSQL ကမ လ ဆင တ တကေရး အ ဖ အစညးမ ယန ထတျပန
+ေျကည လက သည။
+PostgreSQL 11 သည ေဒတ ေဘစ စနစ၏အလ စတ တက မာ ျဖစည့ တကတ တ ျမင့မ မာ
+န ဆကပေနတ အ လနျက မ ေသ ေဒတ ေဘစာ ွင့ အတ ျမင့မ ေသ ကနျပတ အလပမ ဏမာ က
+အသ ျပသမာ အ ေထ ကေပးပ သည။ ထ အ ပင PostgreSQL 11 သည သသ ထင တ
+တ တက မာ ျဖစည့ table partitioning စနစ၊ေ ငပးေ ငယစမခန ခ ုိ ငမး လပ လပညးမာ
+သမးဆညးထ မ ကလညး ထပ ျဖည့ သငးလကျခငး၊query parallelism
+လညးတ တကေက ငး မ ျခငး အ ပင parallelized ေဒတ အဓပ ါယ ဖင့ဆ ုိင က
+ထပျဖည့ စကျခငး ွင့ ေမးျမနးခကာ တင အသ အ
+နးမာ ၏ အက ငအထညေဖ
+အရနျမင့တငျခငး
+အ တက just in time (JIT) စစညးထ မ ကလညး မတက ကည။</p>
+
+<p>"PostgreSQL 11 အကြောင်းမူကား, ရဲ့စွမ်းရည်ကိုတိုးတက်စေကြောင်းfeatures
+ငါတို့ဖှံ့ဖွိုးတိုးတအသိုင်းအဝိုင်းသည်အလွန်ကြီးမားdatabases ကိုစီမံခန့်ခွဲရန် PostgreSQL တွေထည့်သွင်းအာရုံစိုက်,"ဘရုစ်ကပြောပါတယ်
+Momjian တစ်ဦး <a href="https://www.postgresql.org/developer/core/">core ကိုအဖွဲ့သည်အဖွဲ့ဝင်</a> ၏ အဆိုပါ
+<a href="https://www.postgresql.org">PostgreSQL ကို Global ဖွံ့ဖြိုးရေးကောင်စီ Group မှ</a> ။ ရဲ့သက်သေစွမ်းဆောင်ရည်၏ထိပ်တွင်,
+"အရောင်းအဝယ်ပမာဏများအတွက်PostgreSQL  PostgreSQL 11ဖို့စေသည်။
+ကပင်ပိုမိုလွယ်ကူ developer များစကေးမှာကြီးမားတဲ့ data တွေကို applications များ run  "</p>
+
+<p>PostgreSQL သည စ၂၀ေကာ္ျက open source တ တက မ ထမ အကိးေက ဇ ရရသည့အ ပင
+ေဆ ငက (developers) မာ ပမျကက ွစက သည့ open source ွင့ဆကပ ရသည့ေဒတ ေဘစ
+ျဖစ သည။ အဆပ စမကနးသည
+နယယအ တငး တင အသအမတျပမ ဆကကရျပ
+DB-Engines မ “DBMS of the Year 2017” ွင့ SD Times တင 2018 100 အ ဖစေဖ ္ျပ ခငးခရသည။
+PostgreSQL 11 သည ေအ က ဘ ၅ ရက ၂၀၁၇ တင PostgreSQL 10 ထကျပ ေန က
+ပထမဆ အဓက ထကျခငးျဖစည။ PostgreSQL 11 ေန က အသ စကမ သည အမ ျပငင မာ ပ ဝငည့
+PostgreSQL 11.1 ျဖစ မည ျဖစျပ ေန ကပအဓက ထကလ မ
+လက ဏ ရပအသစာ ွင့
+PostgreSQL 12 ပငျဖစည။</p>
+
+<h3 id="increasedrobustnessandperformanceforpartitioning">Increased Robustness and Performance for Partitioning</h3>
+
+<p>PostgreSQL 11 သည hash partitioning လ ေခ တ hash key ကအသ ျပျပ ေဒတ မာ ပငးျခာ
+ကန သတ ုိ ငမးက ျဖည့ စကည၊ PostgreSQL တင ေဒတ ပငးျခာ ကန သတျခငး လက စမးရ
+အပငးအ ခာ အလက သို မဟတ
+တ စ ရငးအလက ထပျဖည့ သငးသည။ PostgreSQL foreign data wrapper သ ေသ
+ေဒတ ေဘစ အ ခမာ က အဆင့ျမင့တငျပ PostgreSQL 11 သည ေဒတ စစညး ုိင စမးရည က
+တ တကေအ ငျပလပ သည။
+<a href="http://www.postgreSQL.org/docs/current/static/postgres-fdw.html">postgres_fdw​</a>.</p>
+
+<p>စီမံခန့်ခွဲမှုနှင့်အတူကူညီနိုင်ရန်အတွက် partitions ကို, PostgreSQL 11 ဒေတာအတွက်ဖမ်း-အားလုံး default အ
+partition ကိုတစ်ဦး partition ကိုသော့နှင့်အဓိကသော့ချက်, နိုင်ငံခြားသော့အညွှန်းကိန်းဖန်တီးနိုင်စွမ်းမကိုက်ညီမိတ်ဆက်
+လူအပေါင်းတို့သည်စားပွဲဆင်းအောင်မြင်ပြီးဖြစ်ကြောင်း
+partition ကိုအပေါ်အစပျိုးလိုက်ခြင်းဖြစ်သည်။ ကြောင်းအတန်းများအတွက်
+partition ကို key ကို updated လျှင် PostgreSQL 11 ကိုလည်းမှန်ကန်သော partition ကိုမှတန်းစီရွေ့လျားကိုအလိုအလျောက်ကိုထောကျပံ့</p>
+
+<h4 id="holdforquoteaboutpartitioning">HOLD FOR QUOTE ABOUT PARTITIONING</h4>
+
+<p>PostgreSQL 11 သည ပငးျခာ ကန သတျခငး ဖယ ေရးနညးဗဟ အသစ အသ ျပျပ
+ပငးျခာ ကန သတကာ က
+ဖတည့ စစမးမ စမးေဆ င ျမင့တင ကည။ ဒ အ ပင PostgreSQL 11 သည
+အသ ျပသမာ အ တက အခကအလကာ တံ ျပ
+လပ တင network overhead ကေလာခေပးျပ
+လပနးသ ပ ိဂရမ ကဒ ရငးလငးေအ ငျပလပေပးသည့ ပငးျခာ ကန သတျခငး tables မာ ရ
+န မညျက
+“upsert” feature ကေထ ကေပးသည။</p>
+
+<h3 id="transactionssupportedinstoredprocedures">Transactions Supported in Stored Procedures</h3>
+
+<p>ေဆ ငက မာ (developers) သည PostgreSQL တင user-defined အလပ ွစေပ ငး ၂၀
+ေကာ္ျက ဖ ခသည၊
+သ ေသ ္ PostgreSQL 11 မတငက ယငးအလပာ (functions)သည သတ ၏
+လပနးကစ မာ (transactions) က
+ကယ ငမ ုိ ငမးမလပ ုိငေသးေပ။ PostgreSQL 11 သည အလပ(function)၏ကယညအ တငးရ
+လပနးကစ မာ က အ ပည့အဝစမခန ခ ေဆ ငက ုိင SQL လပနးစဥ ထည့ သငးခသည၊
+ထအရ သည ေဆ ငက မာ (developers) က incremental bulk data loading ပ ဝငည့ ပမအဆငျမင့သည့
+server-side လပနးသ ပ ိဂရမာ က ဖ
+ုိငေအ င လပေဆ ငေပးသည။
+SQL လပ လပညးမာ က <code>CREATE PROCEDURE</code> ည နျက မ ျဖင့ ဖ
+ိုငည၊
+<code>CALL</code> ည နျက မ ကအသ ျပျပ လက ေဆ ငကျပ server-side လပညးစနစ ဘ သ စက ျဖစည့
+PL/pgSQL, PL/Perl, PL/Python, and PL/Tcl တ က ေထ ကေပးသည။
+HOLD FOR QUOTE ABOUT SQL STORED PROCEDURES</p>
+
+<h3 id="enhancedcapabilitiesforqueryparallelism">Enhanced Capabilities for Query Parallelism</h3>
+
+<p>PostgreSQL 11 သည hash joins ျဖင့ ပငးျခာ ကန သတျခငး ေဒတ မာ က ပမထေရ က scan
+လပ ုိုငျခငး ွင့ parallel sequential scans ျခငး တင ပေဆ င တ တကည့ parallel query
+လပေဆ င က တ တကေအ ငျပလပ သည။ PostgreSQL သည ယခအခ parallel တင အကယ၍
+ညမ်ေအ ငလပ ိုငည့ အျခခ စစမးမ မာ ရလွင
+<code>UNION</code> ကအသ ျပထ သည့ SELECT စစမးမ မာ က အက ငအထညေဖ
+သည။
+PostgreSQL 11 သည parallelism က မာ စ ေသ ေဒတ အဓပ ါ ယင့ဆ ည နျက မ မာ တင
+ျဖည့ စကသည၊ အထ သ ဖင့ ​CREATE INDEX​ ည
+နျက ျခငးအဆင့ကေဆ ငကျခငးျဖင့
+​
+ျဖစေပ လ ေသ B-tree အည နးကနး အ တကျဖစည။ မာ စ ေသ ေဒတ အဓပ ါ ယင့ဆ
+ည နျက မ မာ သည tables သ မဟတ စစမးမ မာ မ
+အ မငာ ေပ ေပ က ျပ
+ိငးယဥ္ ုိ ငမးရျပျဖစ၍
+<code>CREATE TABLE .. AS​</code>, <code>​SELECT INTO​</code>, and <code>​CREATE MATERIALIZED VIEW​</code>ပ ဝငည။</p>
+
+<p>Just-in-Time (JIT) Compilation for Expressions
+PostgreSQL 11 သည Query execution အ တက လပနးစဥ္ေ တပမျမ
+ရနအ တက
+JIT compilation ၏ အထ ေထ ကံေသ အရ မာ ကစတငတက က သည။</p>
+
+<p>ဒ JIT compilation သည WHERE clauses, target စ ရငး, data အစ အဝး, internal
+လပေဆ ငကခိ
+ွင့ projections တ ကျမ ေစရန LLVM project
+ကအသု ျပထ သည။</p>
+
+<p>JIT compilation က အက ငးဆု အသု ျပ ိုင LLVM dependencies က တပငျခငး
+ျပလပမ ျဖစ တယ။ ဒလလပ အ တက PostgreSQL settings file အ တငး <code>jit = on</code> လပ၍၎
+PostgreSQL session မ <code>SET jit=on</code> လပ၍ JIT compilation
+ကအသု ျပလ ရပ သည။</p>
+
+<h3 id="generaluserexperienceimprovements">General User Experience Improvements</h3>
+
+<p>PostgreSQL ေဒတ ေဘစ အဆင့ျမင့မ လ ျခငးသည အသု ျပအသငးဝငး ွင့ PostgreSQL
+တ တကေအ ငေဆ ငကသမာ ၏ ကးစ မ ေ က င့သ ျဖစ သည။
+PostgreSQL 11 မ ပ ဝင ေသ တ တကေျပာငးလမအ တက လက ဏ အနညးငယ
+ေအ က အပ ဒငးေရးသ ေဖ ္ျပထ ပ သည။
+<ul>
+  <li><code>ALTER TABLE … ADD COLUMN … DEFAULT …</code> function က not <code>NULL</code> default ျဖင့ဖယ ၍ table ေ တ ျပ တဲအခ ျမ နေအ ငျပလပ က သည။</li>
+  <li>'Covering indexes' ဆတဲ function အသစည <code>INCLUDE</code> clause ကအသု ျပ၍
+အသု ျပသမာ အ column အသစာ တ ထည့ ို ငမး ေပးျခငးျဖင့ အထ က ျပပ သည။
+ယငး function သည index-only scans ွင့ B-tree index မ index လပ မ ရသ data
+အမ်းအစ မာ အ တကအသု ဝင သည။</li>
+  <li>အ ခာ တ တကေျပာငးလမမာ မ windows function အ တက <code>RANGE</code> feature သည <code>PRECEDING</code>/<code>FOLLOWING</code>, <code>GROUPS</code> ွင့ frame exclusion
+တ ကအသု ျပ ိုငည့အခက ျဖစ တယ။</li>
+  <li>PostgreSQL command line မ Keywords အသစာ ျဖစဲ 'quit' ွင့ 'exit' တ သည command line tool မ ထက မ လယ ေအ င ပေဆ ငေပးပ သည။ ဒ PostgreSQL 11 ထကမ </li>
+</ul>
+ွင့ပတကည့ ေျပာငးလမမာ စ ရငး အ ပည့စု က, မ ဝငေရ ကတ ေလ
+လ ိုင သည။
+<a href="https://www.postgresql.org/docs/11/static/release-11.html">https://www.postgresql.org/docs/11/static/release-11.html</a></p>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2 id="aboutpostgresql">About PostgreSQL</h2>
+
+<p>PostgreSQL သည္ ကမာၻ ့ေခတ္အမွီဆုံး open source database ျဖစ္ျပီး
+ကမာၻတစ္ဝွမ္းမွ ေထာင္ေက်ာ္ေသာ အသုံးျပဳသူမ်ား၊အျကံျပဳ ပါဝင္သူမ်ား၊ ကုမၸဏီမ်ားႏွင့္ အဖြဲ ႔အစည္းအမ်ားအျပားသုံးစြဲေသာ database ျဖစ္ပါသည္။
+PostgreSQL စီမံခ်က္စတင္ တည္ေဆာက္ခဲ့သည္မွာ ႏွစ္ေပါင္း ၃၀ေက်ာ္ရွိလာခဲ့ျပီး
+Berkeley ရွိ University of California မွာ စတင္ခဲ့ျခင္းျဖစ္သည္။ ဤစီမံခ်က္၏ ဖြံျဖိဳးတိုးတက္လာမႈႏႈန္းမ်ားသည္
+မယွဥ္ႏုိင္ေလာက္ေအာင္ပဲရွိခဲ့ပါသည္။ PostgreSQL ၏ ျပီးျပည့္စုံေသာ အခ်က္သည္ထိပ္တန္း ေဒတာေဘ့စ္စနစ္ေတြနွင့္ယွဥ္ႏုိင္ရုံတင္သာမက
+ပိုမိုအဆင့္ျမင့္ေသာ database အခ်က္အလက္မ်ားရွိမႈ ၊က်ယ္ျပန္႔စြာအသုံးျပဳႏုိင္မႈ၊အာမခံခ်က္ရွိမႈ၊တည္ျငိမ္မႈတို႕တြင္ ပိုမိုေကာင္းမြန္ေျကာင္းေတြ႕ရသည္။
+PostgreSQL အေျကာင္းပိုမိုသိရွိလိုျပီး၊ PostgreSQL ၏အသိုင္းအဝိုင္းတြင္ ပါဝင္ခ်င္သည္ဆိုပါက ေအာက္ေဖာ္ျပပါ website သို႕ဝင္ေရာက္ျကည့္ရႈႏုိင္ပါသည္။
+<a href="https://www.postgresql.org">PostgreSQL.org</a></p>
+{% endblock presskit_about %}

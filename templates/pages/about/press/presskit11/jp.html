@@ -1,0 +1,66 @@
+{% extends "pages/about/press/presskit11/base.html" %}
+{% block title %}PostgreSQL 11 Press Kit - Japanese{% endblock title %}
+{% block presskit_language %}- Japanese{% endblock presskit_language %}
+
+{% block presskit_content %}
+<p>2018年10月18日
+PostgreSQLグローバル開発グループは本日、世界で最も先進的なオープンソースデータベースの最新バージョンであるPostgreSQL 11のリリースを発表しました。
+PostgreSQL 11では、データベースシステムの全体的な性能向上、特に非常に大きなデータベースや高い計算負荷を扱う機能拡張をユーザーに提供します。
+  さらに、PostgreSQL 11では、テーブルパーティショニングの大幅な改善、トランザクション管理が可能なストアドプロシージャのサポートの追加、クエリの並列性の向上、並列化されたデータ定義機能の追加、クエリ実行を高速化するJIT（Just-In-Time）コンパイルを導入しました。</p>
+
+<p>「PostgreSQL 11 にむけて、私たち開発コミュニティは PostgreSQL が巨大データベースを扱える機能を追加することに注力しました。」ブルース・モムジャン（<a href="https://www.postgresql.org">PostgreSQLグローバル開発グループ</a> の <a href="https://www.postgresql.org/developer/core/">コアチームメンバー</a>）は言います。
+「トランザクション負荷についてPostgreSQLの明らかなパフォーマンスに加えて、PostgreSQL 11 は開発者が大規模なビッグデータアプリケーションをさらに容易に処理できるようにします。」</p>
+
+<p>PostgreSQLは20年以上オープンソースで開発されてきたお陰で、開発者にとって好ましいオープンソースのリレーショナルデータベースであり続けています。 このプロジェクトは業界全体で認知を得ており、 DB-Enginesの"DBMS of the Year 2017"で特集されており(https://db-engines.com/en/blog_post/76)、SD Timesの"'Best in Show' in Software Development"でも特集されています(https://sdtimes.com/sdtimes-100/2018/best-in-show/database-and-database-management-2018/)。
+PostgreSQL 11は、PostgreSQL 10が2017年10月5日にリリースされて以来、最初のメジャーリリースとなります。
+PostgreSQL 11のバグ修正を含む次のアップデートリリースはPostgreSQL 11.1となり、新機能を備えた次のメジャーリリースはPostgreSQL 12となる予定です。</p>
+
+<h3 id="-1">堅牢性とパフォーマンスが強化されたパーティショニング</h3>
+
+<p>PostgreSQL 11には、現行のリストパーティションやレンジパーティション機能に加え、ハッシュ・パーティショニングとしても知られるハッシュ・キーによるデータ分割機能が追加されています。
+PostgreSQL 11は、PostgreSQLの外部データラッパー<a href="https://www.postgresql.org/docs/current/static/postgres-fdw.html">postgres_fdw</a>に対するパーティションの機能強化により、データ・フェデレーション機能をさらに向上させました。
+パーティション管理の助けとして、PostgreSQL 11では、パーティションキーと一致しないデータの格納するデフォルトパーティションや、すべてのパーティションに渡されるパーティションテーブルのプライマリキー、外部キー、インデックス、トリガを作成する機能が導入されています。更に、パーティションキーのデータが更新された場合、行を自動的に正しいパーティションに移動する機能もサポートされています。</p>
+
+<p>PostgreSQL 11では、新しいパーティション消去ストラテジーにより、パーティション読取時のクエリのパフォーマンスが改善しています。
+ さらに、PostgreSQL 11は、ポピュラーな "upsert"機能を分割テーブルでサポートしています。これにより、ユーザのアプリケーションコード簡素化を助け、データ送受信のネットワークオーバーヘッドを削減します。</p>
+
+<h3 id="-2">ストアドプロシジャのトランザクションサポート</h3>
+
+<p>開発者はPostgreSQLで、20年以上前からユーザー定義関数を作成することができましたが、PostgreSQL 11までは関数内で独自のトランザクションを管理する事ができませんでした。
+PostgreSQL 11では、関数の本体内で完全なトランザクション管理を実行できるSQLプロシージャが追加され、開発者は一括データの増分値読込みのような、より高度なサーバサイドアプリケーションを作成できます。
+SQLプロシージャは、 <code>CREATE PROCEDURE</code>コマンドで作成、<code>CALL</code>コマンドで実行する事ができ、サーバ側の手続き言語としてはPL/pgSQL、PL/Perl、PL/Python、およびPL/Tclがサポートされています。</p>
+
+<h3 id="-3">並列クエリ処理の強化された機能</h3>
+
+<p>並列シーケンシャルスキャンとハッシュジョインに加え、より効率的になった分割データのスキャンによるパフォーマンス向上に伴い、PostgreSQL 11の並列クエリ処理のパフォーマンスが向上しました。
+要素となる個々のクエリが並列化できない場合でも、PostgreSQLは <code>UNION</code>を使用したSELECTクエリを並列実行できるようになりました。
+PostgreSQL 11では、いくつかのデータ定義コマンドに並列処理機能が追加されています。特に、標準の <code>CREATE INDEX</code>コマンド実行で生成されるBツリーインデックスが並列処理で作成されるのは注目に値します。クエリからテーブルやマテリアライズドビューを作成するいくつかのデータ定義コマンドも並列実行可能で、これには<code>CREATE TABLE .. AS</code>、<code>SELECT INTO</code>、 <code>CREATE MATERIALIZED VIEW</code>クエリが含まれます。</p>
+
+<h3 id="jit">問い合わせ式のジャストインタイム（JIT）コンパイル</h3>
+
+<p>PostgreSQL 11では、クエリ実行中に特定の問い合わせ式の実行を高速化するジャストインタイム（JIT）コンパイルのサポートが導入されています。LLVMプロジェクトを利用したPostgreSQLのJITコンパイルは、WHERE句、ターゲットリスト、集約、投影、および一部の内部操作で問い合わせ式の実行を高速化します。</p>
+
+<p>JITコンパイルを利用するには、LLVM依存関係をインストールする必要があり、さらにPostgreSQL設定ファイルで <code>jit = on</code>を設定するか、PostgreSQLセッションで<code>SET jit = on</code>を実行する必要があります。</p>
+
+<h3 id="-4">一般的なユーザーエクスペリエンスの向上</h3>
+
+<p>リレーショナルデータベースであるPostgreSQLの機能強化は、アクティブなユーザコミュニティからのフィードバックとPostgreSQLに取り組む人たちの努力なしにはできません。以下は、PostgreSQL 11に含まれている多くの機能のうち、ユーザエクスペリエンスを向上させるために設計されたものです。</p>
+
+<ul>
+<li>デフォルト値が<code>NULL</code>でない<code>ALTER TABLE .. ADD COLUMN .. DEFAULT ..</code>コマンドがテーブルを全体を書き換えずに実行できるようにしたことで、このコマンドのパフォーマンスが大幅に向上しました。</li>
+
+<li>INCLUDE句を使った列の追加でインデックスが利用可能になったり、Bツリーインデックスでインデックス化できないタイプのデータにもインデックス-オンリースキャンが実行可能になるなど、インデックスの利用範囲が広がりました。
+-Window関数の追加機能として、<code>RANGE</code>が<code>PRECEDING</code>/<code>FOLLOWING</code>、 <code>GROUPS</code>モードやフレーム除外オプションで使えるようになりました。
+-PostgreSQLのコマンドラインインタフェースにキーワード "quit"と "exit"を含めることで、コマンドラインツールから簡単に抜けられるようになりました。</li>
+</ul>
+
+<p>このリリースに含まれる機能の全リストは <a href="https://www.postgresql.org/docs/11/static/release-11.html">リリースノート</a>にありますのでご覧ください。
+こちらからもご覧いただけます
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2 id="postgresql">PostgreSQLについて</h2>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a>は世界で最も先進的なオープンソースデータベースであり、何千人ものユーザ、貢献者、企業、組織からなるグローバルコミュニティがあります。PostgreSQLプロジェクトは、カリフォルニア大学バークレー校を皮切りに、30年以上ソフトウェア工学に基づいた開発により先進的な進歩を続けています。PostgreSQLの成熟した機能セットは、独自のデータベースシステムにマッチするだけでなく、高度なデータベース機能、拡張性、セキュリティ、および安定性にも優れています。
+PostgreSQLについてもっと知って頂き、私たちのコミュニティにご参加下さい<a href="https://www.postgresql.org">PostgreSQL.org</a></p>
+{% endblock presskit_about %}

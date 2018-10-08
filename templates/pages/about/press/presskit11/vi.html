@@ -1,0 +1,88 @@
+{% extends "pages/about/press/presskit11/base.html" %}
+{% block title %}PostgreSQL 11 Press Kit - Vietnamese{% endblock title %}
+{% block presskit_language %}- Vietnamese{% endblock presskit_language %}
+
+{% block presskit_content %}
+<p>NGÀY THÁNG 2018 - hôm nay Nhóm Phát triển Toàn cầu PostgreSQL công bốra mắt PostgreSQL 11, phiên bản mới nhất của cơ sở dữ liệu tân tiến nhấttrên thế giới.</p>
+
+<p>PostgreSQL 11 cung cấp cho người dùng khả năng vận hành chung được cải tiến hơn tronghệ thống CSDL, với các cải tiến cụ thể được kết hợp với các CSDL rất lớn
+và khối lượng công việc tính toán cao. Hơn nữa, PostgreSQL 11 mang đến những cải tiến
+đáng kể cho hệ thống phân vùng bảng, thêm khả năng hỗ trợ các giao thức lưu trữ có khả năng quản lý giao dịch, cải thiện tính song song của truy vấn và thêm khả năng định nghĩa dữ liệu song song,  mang đến trình biên dịch just-in-time (JIT)  để tăng tốc việc thực thi các biểu thức trong các truy vấn.</p>
+
+<p>"Đối với PostgresQL 11, cộng đồng phát triển của chúng tôi tập trung vào việc thêm các tính năng cải thiện khả năng của PostgreSQL để quản lý cơ sở dữ liệu rất lớn", Bruce nói.
+Momjian, một thành viên trong nhóm cốt lõi của
+Nhóm phát triển toàn cầu PostgreSQL.
+"Trên đỉnh Hiệu suất đã được chứng minh của PostgreSQL cho khối lượng công việc giao dịch, PostgreSQL 11 làm cho các nhà phát triển thậm chí còn dễ dàng hơn để chạy các ứng dụng dữ liệu lớn trên quy mô lớn”.</p>
+
+<p>PHÁT HÀNH PostgreSQL có kinh nghiệm từ hơn hai mươi năm phát triển nguồn mở và đã trở thành cơ sở dữ liệu quan hệ nguồn mở được ưa thích cho các nhà phát triển. Dự án tiếp tục nhận được sự công nhận trên toàn ngành và đã được đánh dấu là
+"DBMS của Năm 2017" bởi DB-Engines và tại SD Times 2018 100.</p>
+
+<p>PostgreSQL 11 là bản phát hành chính đầu tiên kể từ khi PostgreSQL 10 được phát hành vào 5/10/2017. Bản phát hành cập nhật tiếp theo cho PostgreSQL 11 có chứa các bản sửa lỗi sẽ là PostgreSQL 11.1, và bản phát hành chính tiếp theo với các tính năng mới sẽ là PostgreSQL 12.</p>
+
+<h3 id="tngcngscmnhvhiusutchovicphnvng"> Tăng Cường Sức Mạnh Và Hiệu Suất Cho Việc Phân Vùng</h3>
+
+<p>PostgreSQL 11 bổ sung khả năng phân vùng dữ liệu bằng khóa băm, còn được gọi là
+phân vùng băm, nâng cao khả năng phân vùng dữ liệu hiện tại trong PostgreSQL
+theo danh sách các giá trị hoặc theo một phạm vi. PostgreSQL 11 tiếp tục cải thiện khả năng
+liên kết dữ liệu của nó với các cải tiến chức năng cho các phân vùng sử dụng
+trình đóng gói dữ liệu ngoại vi PostgreSQL,
+postgres_fdw.
+Để giúp quản lý các phân vùng, PostgreSQL 11 giới thiệu một phân vùng mặc định cho tất cả các dữ liệu không khớp với khóa và dung lượng phân vùng.
+Tạo chính, bên ngoài, chỉ mục và trình kích hoạt trên tất cả các phân vùng được chuyển tới tất cả các bảng.
+PostgreSQL 11 cũng hỗ trợ tự động chuyển hàng vào phân vùng chính xác nếu khóa phân vùng cho hàng đó được cập nhật.</p>
+
+<p>PostgreSQL 11 cải thiện hiệu suất truy vấn khi đọc từ phân vùng bằng cách sử dụng chiến lược loại bỏ phân vùng mới. Ngoài ra, PostgreSQL 11 hiện nay hỗ trợ tính năng "upsert" phổ biến trên các bảng được phân vùng, giúp người dùng đơn giản hóa mã ứng dụng và giảm chi phí mạng khi tương tác với dữ liệu của mình</p>
+
+<h3 id="giaodchchtrtrongccgiaothclutr"> Giao Dịch Được Hỗ Trợ Trong Các Giao Thức Lưu Trữ</h3>
+
+<p>Các nhà phát triển đã có thể tạo ra các hàm do người dùng định nghĩa trong PostgreSQL trong 53 hơn 20 năm, nhưng trước PostgreSQL 11, các chức năng này không thể quản lý
+các giao dịch của riêng họ. PostgreSQL 11 bổ sung các giao thức SQL có thể thực hiện quản lý
+giao dịch đầy đủ trong cấu trúc của một hàm, cho phép các nhà phát triển tạo ra các ứng dụng phía máy chủ nâng cao hơn, chẳng hạn như các ứng dụng liên quan đến tải dữ liệu hàng loạt thành từng phần.</p>
+
+<p>Các giao thức SQL có thể được thiết lập bằng lệnh <code>CREATE PROCEDURE</code>, thực hiện bằng lệnh <code>CALL</code>, và được hỗ trợ bởi các ngôn ngữ từ phía máy chủ bao gồm PL/pgSQL, PL/Perl, PL/Python, và PL/Tcl.</p>
+
+<h3 id="tngcngkhnngtruyvnsongsong"> Tăng Cường Khả Năng Truy Vấn Song Song</h3>
+
+<p>PostgreSQL 11 cải thiện hiệu suất truy vấn song song, với hiệu suất đạt được trong việc quét tuần tự song song và tham gia băm cùng với việc quét hiệu quả hơn các dữ liệu được phân vùng. PostgreSQL hiện nay có thể thực hiện các truy vấn SELECT sử dụng
+song song với <code>UNION</code> nếu các truy vấn bên dưới không thể song song được.</p>
+
+<p>PostgreSQL 11 thêm tính song song vào một số lệnh định nghĩa dữ liệu, đặc biệt là để tạo ra các chỉ mục B-tree được tạo ra bằng cách thực hiện lệnh<code>CREATE INDEX</code> chuẩn. Một số lệnh định nghĩa dữ liệu mà tạo ra các bảng hoặc các khung xem từ các truy vấn cũng có khả năng song song hiện nay, bao gồm
+<code>CREATE TABLE .. AS</code>,<code>SELECT INTO</code>, và ` CREATE MATERIALIZED VIEW'.</p>
+
+<h3 id="bindchjustintimejitchoccbiuthc"> Biên Dịch Just-In-Time (JIT) Cho Các Biểu Thức</h3>
+
+<p>PostgreSQL 11 hỗ trợ việc biên dịch Just-In-Time (JIT) để
+đẩy nhanh việc thực hiện các biểu thức nhất định trong khi thực hiện truy vấn. Việc biên dịch biểu thức JIT cho PostgreSQL sử dụng dự án LLVM để tăng tốc độ thực thi
+các biểu thức trong mệnh đề WHERE, các danh sách đích, tập hợp,
+các phép chiếu và một số hoạt động nội bộ.</p>
+
+<p>Để tận dụng tính năng biên dịch JIT, bạn sẽ cần phải cài đặt các phụ thuộc LLVM để cho phép biên dịch JIT trong tệp cài đặt PostgreSQL của bạn bằng thiết lập <code>jit = on</code> hoặc thi hành lệnh <code>SET jit = on</code> từ phiên PostgreSQL của bạn.</p>
+
+<h3 id="cithintringhimngidngchung"> Cải Thiện Trải Nghiệm Người Dùng Chung</h3>
+
+<p>Các cải tiến đối với cơ sở dữ liệu quan hệ PostgreSQL sẽ không khả thi nếu không có phản hồi từ cộng đồng người dùng đang hoạt động và sự làm việc chăm chỉ của những người
+phát triển PostgreSQL. Dưới đây nêu bật một vài trong số rất nhiều tính năng có trong
+PostgreSQL 11 được thiết kế để cải thiện trải nghiệm người dùng tổng thể:</p>
+
+<ul>
+  <li>Loại bỏ nhu cầu dùng lệnh <code>ALTER TABLE .. ADD COLUMN .. DEFAULT ..</code> với giá trị mặc định không phải là<code>NULL</code> để viết lại toàn bộ bảng khi thực thi, cung cấp một
+hiệu suất đáng kể khi chạy lệnh này.
+  </li>
+  <li>"Các chỉ mục hỗ trợ", cho phép người dùng thêm các cột bổ sung vào chỉ mục
+sử dụng mệnh đề <code>INCLUDE</code> và sẽ hữu ích khi thực hiện quét chỉ mục, đặc biệt là trên các loại dữ liệu không được lập chỉ mục B-index.</li>
+  <li>Chức năng bổ sung để làm việc với các chức năng cửa sổ, bao gồm việc cho phép <code>RANGE</code> sử dụng<code>PRECEDING</code> / <code>FOLLOWING</code>,<code>GROUPS</code> và loại trừ khung.</li>
+<li>Việc bao gồm các từ khóa "thoát" và "thoát" trong giao diện dòng lệnh PostgreSQL để giúp làm cho công cụ dòng lệnh dễ dàng hơn
+</li>
+</ul>
+<p>
+Để biết danh sách đầy đủ các tính năng có trong bản phát hành này, vui lòng đọc <a href="https://www.postgresql.org/docs/11/static/release-11.html">release notes</a>,
+có thể được tìm thấy tại:
+<a href="https://www.postgresql.org/docs/11/static/release-11.html">https://www.postgresql.org/docs/11/static/release-11.html</a></p>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2 id="thngtinvpostgresql">Thông Tin Về PostgreSQL</h2>
+
+<p>PostgreSQL là cơ sở dữ liệu nguồn mở tiên tiến nhất thế giới, với cộng đồng toàn cầu gồm hàng ngàn người dùng, cộng tác viên, công ty và tổ chức toàn cầu. Dự án PostgreSQL xây dựng trên hơn 30 năm kỹ thuật, bắt đầu từ Đại học California, Berkeley và tiếp tục với một tốc độ phát triển chưa từng có. Tính năng trưởng thành của PostgreSQL không chỉ phù hợp với các hệ thống cơ sở dữ liệu
+độc quyền hàng đầu, mà còn vượt quá chúng trong các tính năng cơ sở dữ liệu nâng cao,khả năng mở rộng, bảo mật và ổn định. Tìm hiểu thêm về PostgreSQL và tham gia cộng đồng của chúng tôi tại <a href="https://www.postgresql.org">PostgreSQL.org</a>.</p>
+{% endblock presskit_about %}
