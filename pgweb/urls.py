@@ -115,6 +115,7 @@ urlpatterns = [
 	# Legacy URLs from the old website, that are likely to be used from other
 	# sites or press releases or such
 	###
+	url(r'^about/press/contact/$', RedirectView.as_view(url='/about/press/', permanent=True)),
 	url(r'^about/press/presskit(\d+)\.html\.(\w+)$', pgweb.legacyurl.views.presskit),
 	url(r'^about/news\.(\d+)$', pgweb.legacyurl.views.news),
 	url(r'^about/event\.(\d+)$', pgweb.legacyurl.views.event),
