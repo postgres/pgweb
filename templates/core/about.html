@@ -13,7 +13,7 @@
 <p>
   PostgreSQL comes with <a href="/about/featurematrix/">many features</a> aimed to help developers build applications, administrators to protect data integrity and build fault-tolerant environments, and help you manage your data no matter how big or small the dataset.  In addition to being <a href="/about/license/">free and open source</a>, PostgreSQL is highly extensible. For example, you can define your own data types, build out custom functions, even write code from <a href="/docs/current/static/xplang.html">different programming languages</a> without recompiling your database!
 </p>
-<p>PostgreSQL tries to conform with the <a href="/docs/current/static/features.html">SQL standard</a> where such conformance does not contradict traditional features or could lead to poor architectural decisions. Many of the features required by the SQL standard are supported, though sometimes with slightly differing syntax or function. Further moves towards conformance can be expected over time. As of the version 10 release in October 2017, PostgreSQL conforms to at least 160 of the 179 mandatory features for SQL:2011 Core conformance, where as of this writing, no relational database meets full conformance with this standard.
+<p>PostgreSQL tries to conform with the <a href="/docs/current/static/features.html">SQL standard</a> where such conformance does not contradict traditional features or could lead to poor architectural decisions. Many of the features required by the SQL standard are supported, though sometimes with slightly differing syntax or function. Further moves towards conformance can be expected over time. As of the version 11 release in October 2018, PostgreSQL conforms to at least 160 of the 179 mandatory features for SQL:2011 Core conformance, where as of this writing, no relational database meets full conformance with this standard.
 </p>
 <p>Below is an inexhaustive of various features found in PostgreSQL, with more being added in every <a href="/developer/roadmap/">major release</a>:
 </p>
@@ -42,13 +42,14 @@
     <strong>Concurrency, Performance</strong>
     <ul>
       <li>Indexing: B-tree, Multicolumn, Expressions, Partial</li>
-      <li>Advanced Indexing: GiST, SP-Gist, KNN Gist, GIN, BRIN, Bloom filters</li>
+      <li>Advanced Indexing: GiST, SP-Gist, KNN Gist, GIN, BRIN, Covering indexes, Bloom filters</li>
       <li>Sophisticated query planner / optimizer, index-only scans, multicolumn statistics</li>
       <li>Transactions, Nested Transactions (via savepoints)</li>
       <li>Multi-Version concurrency Control (MVCC)</li>
-      <li>Parallelization of read queries</li>
+      <li>Parallelization of read queries and building B-tree indexes</li>
       <li>Table partitioning</li>
       <li>All transaction isolation levels defined in the SQL standard, including Serializable</li>
+      <li>Just-in-time (JIT) compilation of expressions</li>
     </ul>
   </li>
   <li>
@@ -71,7 +72,7 @@
   <li>
     <strong>Extensibility</strong>
     <ul>
-      <li>Stored procedures</li>
+      <li>Stored functions and procedures</li>
       <li>Procedural Languages: PL/PGSQL, Perl, Python (and many more)</li>
       <li>Foreign data wrappers: connect to other databases or streams with a standard SQL interface</li>
       <li>Many extensions that provide additional functionality, including PostGIS</li>
