@@ -591,17 +591,392 @@ ul.actions {
     padding-left: 1.3em;
 }
 
+/* DOCUMENTATION */
+/*
+ * The documentation classes are divided up by newer/older version of the docs
+ * Newer version of the docs are "lowercase" classed
+ * Older version of the docs are "UPPERCASE" classed
+ * Also, newer styles will be in classes vs. older ones that have i
+ */
+
+.docs-version-selected {
+  font-weight: 900;
+  text-decoration: underline;
+}
+
+/**
+ * docContent represents the main "box" where the documentation is rendered.
+ * We namespace everything to ensure these styles do not interfere across the
+ * rest of the site
+ */
+
+/**
+ * General styles
+ */
+#docContent {
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+#docContent p {
+    margin-bottom: 1rem !important;
+}
+
+#docContent hr {
+    margin: 0 0 0.5em 0;
+}
+
+/* #docContent hr.c1 {
+    margin: 0 0 3em 0;
+} */
+
+/* For code, order matters here.
+ * For instance, we don't want to have any any padding on code blocks that
+ * are within the "screen" element
+ * This is also higher up as some inherited rules affected the display of the
+ * code in certain areas
+ */
+
+#docContent br.table-break {
+    display: none;
+}
+
+#docContent pre {
+    padding: 0.8rem !important;
+}
+
+pre,
+code,
+#docContent kbd,
+#docContent tt.LITERAL,
+#docContent tt.REPLACEABLE {
+    padding: .2rem .4rem;
+    font-size: 0.9rem !important;
+    color: inherit !important;
+    background-color: #f8f9fa !important;
+    border-radius: .25rem;
+    margin: .6rem 0;
+    font-weight: 300;
+}
+
+#docContent .note pre,
+#docContent .note code,
+#docContent .note kbd,
+#docContent .note tt.LITERAL,
+#docContent .note tt.REPLACEABLE,
+#docContent .warning pre,
+#docContent .warning code,
+#docContent .warning kbd,
+#docContent .warning tt.LITERAL,
+#docContent .warning tt.REPLACEABLE,
+#docContent .tip pre,
+#docContent .tip code,
+#docContent .tip kbd,
+#docContent .tip tt.LITERAL,
+#docContent .tip tt.REPLACEABLE,
+#docContent .caution pre,
+#docContent .caution code,
+#docContent .caution kbd,
+#docContent .caution tt.LITERAL,
+#docContent .caution tt.REPLACEABLE {
+    background-color: transparent !important;
+    border: none;
+    padding: 0 !important;
+}
+
+#docContent .SCREEN code,
+#docContent .screen code {
+  padding: 0;
+}
+
+#docContent .USERINPUT > code,
+#docContent .userinput > code {
+    font-weight: bolder;
+}
+
+#docContent .REPLACEABLE,
+#docContent tt.REPLACEABLE,
+#docContent .replaceable {
+    font-weight: 900;
+    font-style: italic;
+}
+
+#docContent .REPLACEABLE > code,
+#docContent .replaceable > code {
+    font-weight: 900;
+}
+
+/**
+ * Documentation Tables
+ */
+ #docContent table.table,
+ #docContent table.informaltable,
+ #docContent table.CALSTABLE {
+     background-color: #e0ecef;
+     border: 2px solid #dee2e6;
+     border-spacing: 0;
+     border-collapse: collapse;
+     width: initial;
+     margin: 2ex 0;
+ }
+
+#docContent table.table th,
+#docContent table.informaltable th,
+#docContent table.CALSTABLE th {
+    background-color: #e9ecef;
+    padding: 0.5ex 0.5ex;
+}
+
+#docContent table.table td,
+#docContent table.informaltable td,
+#docContent table.CALSTABLE td {
+    background-color: #FFF;
+    padding: 0.5ex 0.5ex;
+}
+
+/** We use some overrides for code in tables, which makes it more readable */
+#docContent table.table tt,
+#docContent table.informaltable tt,
+#docContent table.CALSTABLE tt,
+#docContent table.table code,
+#docContent table.informaltable code,
+#docContent table.CALSTABLE code {
+    background-color: inherit !important;
+    color: inherit !important;
+    font-size: inherit !important;
+    margin: 0;
+    padding: 0;
+    word-break: unset;
+}
+
+/**
+ * Titles, Navigation
+ */
+#docContent .title {
+    display: block;
+}
+
+#docContent .title:after {
+    display: none;
+}
+
+#docContent h2.SECT2 tt,
+#docContent .title code {
+    background-color: inherit !important;
+    color: inherit !important;
+    font-size: inherit !important;
+}
+
+#docContent .NAVHEADER table th,
+#docContent .navheader table th {
+    text-align: center;
+}
+
+/**
+ * Table of contents
+ */
+#docContent .TOC,
+#docContent .toc {
+    margin-bottom: 1rem;
+}
+
+#docContent div.TOC > dl > dd,
+#docContent div.toc > dl > dd {
+    margin-left: 2rem;
+}
+
+#docContent div.TOC > dl > dt.c2,
+#docContent div.toc > dl > dt.c2 {
+    margin-bottom: 1rem;
+}
+
+#docContent .TOC tt, #docContent .TOC dt a,
+#docContent .toc tt, #docContent .toc dt a {
+    font-weight: 300!important;
+}
+
+#docContent .TOC dd, #docContent .TOC dl,
+#docContent .toc dd, #docContent .toc dl {
+    margin: 0;
+}
+
+#docContent .TOC span.refpurpose,
+#docContent .toc span.refpurpose {
+    font-weight: normal;
+}
+
+/** Do not show any highlighting on code literals in TOC */
+#docContent .TOC tt,
+#docContent .toc code {
+  background-color: inherit !important;
+  color: inherit !important;
+}
+
+/**
+  * Various callout boxes for docs, including warning, caution, note, tip
+  */
+#docContent table.CAUTION, table.WARNING,
+#docContent blockquote.CAUTION, #docContent blockquote.NOTE, #docContent blockquote.TIP, #docContent blockquote.WARNING,
+#docContent .caution, #docContent .note, #docContent .tip, #docContent .warning
+{
+    border-width: 1px;
+    border-style: solid;
+    font-style: initial;
+    margin: 4ex auto;
+    max-width: 40rem;
+    padding: 1rem;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+    border-radius: 8px;
+}
+
+#docContent table.WARNING {
+    border-color: #ced4da;
+}
+
+#docContent table.CAUTION, table.WARNING {
+    display: block;
+    overflow: auto;
+    padding: 0;
+}
+
+#docContent table.CAUTION td, #docContent table.CAUTION th,
+#docContent table.WARNING td, #docContent table.WARNING th {
+  border-width: 0;
+  padding-left: 2ex;
+  padding-right: 2ex;
+}
+
+#docContent table.CAUTION td, #docContent table.CAUTION th {
+  background-color: #fff3cd;
+  border-color: #F3E4D5
+}
+
+#docContent table.WARNING td, #docContent table.WARNING th {
+  background-color: #fff3cd;
+  border-color: #FFD7D7;
+}
+
+#docContent table.CAUTION, table.WARNING,
+#docContent blockquote.CAUTION p, #docContent blockquote.NOTE p, #docContent blockquote.TIP p, #docContent blockquote.WARNING p,
+#docContent .caution p, #docContent .note p, #docContent .tip p, #docContent .warning p
+{
+  margin-bottom: 0 !important;
+}
+
+#docContent blockquote.CAUTION,
+#docContent table.CAUTION,
+#docContent .caution {
+    border-color: #e2b21f;
+    background-color: #fff3cd;
+}
+
+#docContent blockquote.NOTE,
+#docContent .note {
+    border-color: #ced4da;
+    background-color: #d1ecf1;
+}
+
+#docContent blockquote.TIP,
+#docContent .tip {
+    border-color: #84c578;
+    background-color: #e8f7e6;
+}
+
+#docContent blockquote.WARNING,
+#docContent .warning {
+    background-color: #fbeded;
+    border-color: #df421e;
+}
+
+#docContent blockquote.TIP h3, #docContent blockquote.NOTE h3, #docContent blockquote.CAUTION h3, #docContent blockquote.WARNING h3,
+#docContent .tip h3, #docContent .note h3, #docContent .caution h3, #docContent .warning h3 {
+    text-align: center;
+    margin: 0.25rem 0 0.5rem 0;
+    color: initial;
+}
+
+#docContent blockquote.WARNING td.c2, #docContent blockquote.WARNING td,
+#docContent .warning td.c2, #docContent .warning td {
+    border: 1px solid #d58181;
+}
+
+#docContent blockquote.WARNING td.c2,
+#docContent .warning td.c2 {
+    color: #495057;
+    background-color: #fbeded;
+}
+
+#docContent blockquote.WARNING td.c2, #docContent blockquote.WARNING td,
+#docContent .warning td.c2, #docContent .warning td {
+    border: 1px solid #bd4147;
+}
+
+#docContent .warning td.c2 {
+    background-color: #fbeded;
+}
+
+/**
+ * Background color of code should be transparent
+ */
+
+#docContent table.WARNING code,
+#docContent blockquote.NOTE code {
+   background-color: transparent !important;
+}
+
+/**
+ * Listing out variables
+ */
+#docContent .VARIABLELIST dt,
+#docContent .variablelist dt {
+    font-family: monospace;
+    font-weight: 300;
+}
+
+#docContent ul.itemizedlist {
+    margin-left: 2.5rem;
+}
+
+#docContent ul.itemizedlist > li > p {
+    margin-left: 0 !important;
+}
+
+#docContent .VARIABLELIST p,
+#docContent .variablelist p,
+#docContent .VARIABLELIST pre,
+#docContent .variablelist pre {
+    margin: 1rem 0 1rem 2rem !important;;
+}
+/**
+ * Footnotes
+ */
+#docContent .FOOTNOTES hr,
+#docContent .footnotes hr {
+    margin-bottom: 1.25rem;
+}
+
 /* #PGCONTENTWRAP */
 
-#pgContentWrap a {
+#pgContentWrap a:not([href]):not([tabindex]),
+#docContent a:not([href]):not([tabindex]) {
+    color: inherit;
+    text-decoration: none;
+    color: #336791 !important;
+}
+
+#pgContentWrap a, #docContent a {
     color: #840032;
 }
 
 #pgContentWrap {
-  padding: 1em 2em;
+    padding: 1em 2em;
+    margin: 0 auto;
+    width: 100%;
 }
 
-#pgContentWrap h3 {
+#pgContentWrap h3, #pgContentWrap h4 {
   margin: 1em 0;
 }
 
@@ -834,6 +1209,10 @@ h1.subject {
     input#q {
       display: none;
     }
+
+    #docSearchForm input#q {
+      display: block;
+    }
 }
 
 @media (min-width: 992px) {
@@ -863,6 +1242,10 @@ h1.subject {
     .pg-shout-box {
       padding-top: 2.8rem;
       margin-bottom: 1rem;
+    }
+
+    #docContent table.table {
+        font-size: 70%;
     }
 }
 
@@ -920,6 +1303,10 @@ h1.subject {
 
   #pgContentWrap ul {
     padding-left: 1em;
+  }
+
+  #docContent table.table {
+      font-size: 50%;
   }
 
 }

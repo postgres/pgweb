@@ -59,7 +59,7 @@ def docpage(request, version, typ, filename):
 		select={
 			'supported':"COALESCE((SELECT supported FROM core_version v WHERE v.tree=version), 'f')",
 			'testing':"COALESCE((SELECT testing FROM core_version v WHERE v.tree=version),0)",
-	}).order_by('-supported', '-version').only('version', 'file')
+	}).order_by('-supported', 'version').only('version', 'file')
 
 	if typ=="interactive":
 		# Interactive documents are disabled, so redirect to static page

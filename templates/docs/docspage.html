@@ -1,113 +1,184 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr">
-<head>
-    <title>PostgreSQL: Documentation: {{page.display_version}}: {{page.title}}</title>
-    <style type="text/css" media="screen" title="Normal Text">@import url("/dyncss/docs.css?{{gitrev}}");</style>
-    <script type="text/javascript" src="/media/js/monospacefix.js?{{gitrev}}"></script>
+<!doctype html>
+<html lang="en">
+ <head>
+  <title>PostgreSQL: Documentation: {{page.display_version}}: {{page.title}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  {%block meta%}{%endblock%} {# used for custom meta tags such as description which we don't want for every page #}
+  <meta name="theme-color" content="#336791"/>
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <link href="/media/css/fontawesome.css?{{gitrev}}" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/bootstrap.min.css?{{gitrev}}">
+  <link rel="shortcut icon" href="/favicon.ico" />
+  {%if newstags %}
+    {%comment%}Default RSS links are only shown on pages that have newstags set{%endcomment%}
+    <link rel="alternate" type="application/rss+xml" title="All PostgreSQL News" href="/news.rss" />
+    {%for t in newstags%}
+      <link rel="alternate" type="application/rss+xml" title="PostgreSQL News about {{t.name}}" href="/news/{{t.urlname}}.rss" />
+    {%endfor%}
+    <link rel="alternate" type="application/rss+xml" title="PostgreSQL Events" href="/events.rss" />
+  {%endif%}
+  <style type="text/css" media="screen" title="Normal Text">@import url("/dyncss/base.css?{{gitrev}}");</style>
+  {%block extrahead%}{%endblock%}
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row justify-content-md-center">
+        <div class="col">
+          <!-- Header -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <a class="navbar-brand p-0" href="/">
+              <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="pgNavbar">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
+                <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
+                <li class="nav-item p-2"><a href="/download/" title="Download">Download</a></li>
+                <li class="nav-item p-2"><a href="/docs/" title="Documentation">Documentation</a></li>
+                <li class="nav-item p-2"><a href="/community/" title="Community">Community</a></li>
+                <li class="nav-item p-2"><a href="/developer/" title="Developers">Developers</a></li>
+                <li class="nav-item p-2"><a href="/support/" title="Support">Support</a></li>
+                <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
+                <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
+              </ul>
+             <form role="search" method="get" action="/search/">
+               <div class="input-group">
+                 <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                 <span class="input-group-btn">
+                   <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                 </span>
+               </div><!-- /input-group -->
+             </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="row justify-content-center pg-shout-box">
+        <div class="col text-white text-center">{%include "base/esi.html" with includepage="/include/topbar" %}</div>
+      </div>
+    </div>
+    <div class="container-fluid margin">
+      <div class="row">
+        <div id="pgContentWrap" class="col-11">
+          <div class="row">
+            <div class="col-md-6 mb-2">
+              <div class="row">
+                <div class="col">
+                  <div>
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/{{page.display_version}}/static/{{doc_index_filename}}">PostgreSQL {{page.display_version}}</a>{%if loaddate%} ({{loaddate|date:"Y-m-d H:i:s"}}){%endif%}
+                  </div>
+                </div>
+              </div>
+              {% if supported_versions %}
+                <div class="row">
+                  <div class="col">
+                    Supported Versions:
+                      {% for ver in supported_versions %}
+                        {% if not forloop.first %} / {% endif %}
+                        {% if ver.version.current %}
+                          <a href="/docs/current/static/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>Current</a>
+                          (<a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>{{ver.display_version}}</a>)
+                        {% else %}
+                          <a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>{{ver.display_version}}</a>
+                        {% endif %}
+                      {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+              {% if devel_versions %}
+                <div class="row">
+                  <div class="col">
+                    Development Versions:
+                    {% for ver in devel_versions %}
+                      {% if not forloop.first %} / {% endif %}
+                      <a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %} rel="nofollow">{{ver.display_version}}</a>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+              {% if unsupported_versions %}
+                <div class="row">
+                  <div class="col-12">
+                    Unsupported versions:
+                    {% for ver in unsupported_versions %}
+                      {% if not forloop.first %} / {% endif %}
+                      <a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %} rel="nofollow">{{ver.display_version}}</a>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+            <div class="col-md-6 col-lg-5 offset-lg-1">
+              <form id="docSearchForm" role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input type="text" id="q" name="q" onfocus="if( this.value==this.defaultValue ) this.value='';" class="form-control" placeholder="Search the documentation for..."/>
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+            </div>
+          </div>
+          <div id="docContent">
+            {{page.content|safe}}
+          </div>
+          {% if page.version.supported %}
+            <div id="docComments">
+              <h2>Submit correction</h2>
+              <p>
+              If you see anything in the documentation that is not correct, does not match
+              your experience with the particular feature or requires further clarification,
+              please use
+              <a href="/account/comments/new/{{page.version.numtree|default:"devel"}}/{{page.file}}/" rel="nofollow">this form</a>
+              to report a documentation issue.
+              </p>
+            </div>
+          {% endif %}
+        </div> <!-- pgContentWrap -->
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <ul>
+              <li><a href="https://twitter.com/postgresql"><img src="/media/img/atpostgresql.png" alt="@postgresql"></a></li>
+              <li><a href="https://git.postgresql.org/gitweb/?p=postgresql.git"><img src="/media/img/git.png" alt="Git"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Copyright -->
+      <div class="container">
+        <a href="/about/privacypolicy">Privacy Policy</a> |
+        <a href="/about/">About PostgreSQL</a> |
+        <a href="/about/contact/">Contact</a><br/>
+        <p>Copyright &copy; 1996-{% now "Y" %} The PostgreSQL Global Development Group</p>
+      </div>
+    </footer>
+    <script src="/media/js/jquery-3.2.1.slim.min.js?{{gitrev}}"></script>
+    <script src="/media/js/popper.min.js?{{gitrev}}"></script>
+    <script src="/media/js/bootstrap.min.js?{{gitrev}}"></script>
+    <script src="/media/js/main.js?{{gitrev}}"></script>
     <script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-1345454-1']);
-  _gaq.push(['_trackPageview']);
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-</head>
-<body>
-<div id="docHeader">
-	<div id="docHeaderLogo">
-		<a href="/" title="PostgreSQL"><img src="/media/img/docs/hdr_logo.png" width="206" height="80" alt="PostgreSQL" /></a>
-	</div>
-</div>
-
-<div id="docContainerWrap">
-<div id="docContainer">
-<div id="docNavSearchContainer">
-<div id="docSearch">
-	<form action="/search/" method="get">
-	<div>
-	<input type="hidden" name="u" value="/docs/{{page.display_version}}/" />
-	<label for="q">Search Documentation:&nbsp;</label><input type="text" id="q" name="q" size="20" onfocus="if( this.value==this.defaultValue ) this.value='';" value="Search" /><input id="submit" type="submit" value="Search" />
-	</div>
-	</form>
-</div>
-<div id="docNav">
-<a href="/" title="Home">Home</a> &rarr; <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/manuals/" title="Manuals">Manuals</a> &rarr; <a href="/docs/{{page.display_version}}/static/{{doc_index_filename}}">PostgreSQL {{page.display_version}}</a>{%if loaddate%} ({{loaddate|date:"Y-m-d H:i:s"}}){%endif%}
-</div>
-<div id="docVersions">
-This page in other versions:
-{%if supported_versions%}
-{%for ver in supported_versions %}
-	{%if not forloop.first %}/{%endif%}
-	{%if ver.version.current %}
-		{%if ver.version == page.version %}
-		<strong>current ({{ver.display_version}})</strong>
-		{%else%}
-		<a href="/docs/current/static/{{ver.file}}" title="This page in current version">current</a>
-		(<a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="This page in version {{ver.display_version}}">{{ver.display_version}}</a>)
-		{%endif%}
-	{%else%}
-		{%if ver.version == page.version %}
-		<strong>{{ver.display_version}}</strong>
-		{%else%}
-		<a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="This page in version {{ver.display_version}}">{{ver.display_version}}</a>
-		{%endif%}
-	{%endif%}
-{%endfor%}
-{%endif%}
-
-{%if devel_versions%}
-{%if supported_versions%}&nbsp;|&nbsp; {%endif%}Development versions:
-{%for ver in devel_versions %}
-	{%if not forloop.first %}/{%endif%}
-	{%if ver.version == page.version %}
-	<strong>{{ver.display_version}}</strong>
-	{% else %}
-	<a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="This page in version {{ver.display_version}}" rel="nofollow">{{ver.display_version}}</a>
-	{%endif%}
-{%endfor%}
-{%endif%}
-
-{%if unsupported_versions%}
-{%if supported_versions or devel_versions%}&nbsp;|&nbsp; {%endif%}Unsupported versions:
-{%for ver in unsupported_versions %}
-	{%if not forloop.first %}/{%endif%}
-	{%if ver.version == page.version %}
-	<strong>{{ver.display_version}}</strong>
-	{% else %}
-	<a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="This page in version {{ver.display_version}}" rel="nofollow">{{ver.display_version}}</a>
-	{%endif%}
-{%endfor%}
-{%endif%}
-</div>
-</div>
-
-<div id="docContent">
-{{page.content|safe}}
-</div>
-
-{%if page.version.supported%}
-<div id="docComments">
-
-<h2>Submit correction</h2>
-<p>
-If you see anything in the documentation that is not correct, does not match
-your experience with the particular feature or requires further clarification,
-please use
-<a href="/account/comments/new/{{page.version.numtree|default:"devel"}}/{{page.file}}/" rel="nofollow">this form</a>
-to report a documentation issue.
-</p>
-</div>
-{%endif%}
-
-<div id="docFooter">
-    <a href="{{link_root}}/about/privacypolicy">Privacy Policy</a> |
-    <a href="{{link_root}}/about/">About PostgreSQL</a><br/>
-Copyright &copy; 1996-{% now "Y" %} The PostgreSQL Global Development Group
-</div>
-</div>
-</div>
-</body>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-1345454-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    <script type="text/javascript">
+      var shiftWindow = function() { scrollBy(0, -80) };
+      if (location.hash) shiftWindow();
+      window.addEventListener("hashchange", shiftWindow);
+    </script>
+  </body>
 </html>
