@@ -112,28 +112,18 @@ urlpatterns = [
 	url(r'^downloads/$', RedirectView.as_view(url='/download/', permanent=True)),
 
 	###
-	# Legacy URLs from the old website, that are likely to be used from other
-	# sites or press releases or such
+	# Legacy URLs from old structurs, but used in places like press releases
+	# so needs to live a bit longer.
 	###
 	url(r'^about/press/contact/$', RedirectView.as_view(url='/about/press/', permanent=True)),
-	url(r'^about/press/presskit(\d+)\.html\.(\w+)$', pgweb.legacyurl.views.presskit),
-	url(r'^about/news\.(\d+)$', pgweb.legacyurl.views.news),
-	url(r'^about/event\.(\d+)$', pgweb.legacyurl.views.event),
-	url(r'^community/signup', pgweb.legacyurl.views.signup),
 
 	###
 	# Images that are used from other community sites
 	###
 	url(r'^layout/images/(?P<f>[a-z0-9_\.]+)$', RedirectView.as_view(url='/media/img/layout/%(f)s', permanent=True)),
 	###
-	# These URLs were legacy even on the old site...
+	# Handle redirect on incorrect spelling of licence
 	###
-	url(r'^developer/sourcecode/$', RedirectView.as_view(url='/developer/coding/', permanent=True)),
-	url(r'^developer/bios/$', RedirectView.as_view(url='/community/contributors/', permanent=True)),
-	url(r'^docs/techdocs.*', RedirectView.as_view(url='https://wiki.postgresql.org/', permanent=True)),
-	url(r'^docs/faqs.FAQ.html$', RedirectView.as_view(url='https://wiki.postgresql.org/wiki/FAQ', permanent=True)),
-	url(r'^docs/faqs.FAQ_DEV.*', RedirectView.as_view(url='https://wiki.postgresql.org/wiki/Development_information', permanent=True)),
-	url(r'^docs/faqs.TODO.*', RedirectView.as_view(url='https://wiki.postgresql.org/wiki/Todo', permanent=True)),
 	url(r'^about/license/$', RedirectView.as_view(url='/about/licence', permanent=True)),
 
 	###
@@ -162,9 +152,6 @@ urlpatterns = [
 
 	# Crash testing URL :-)
 	url(r'^crashtest/$', pgweb.misc.views.crashtest),
-
-	# If we're getting an attempt for something ending in HTML, just get rid of it
-	url(r'^(.*)\.html$', pgweb.legacyurl.views.html_extension),
 
 	# Fallback for static pages, must be at the bottom
 	url(r'^(.*)/$', pgweb.core.views.fallback),
