@@ -1054,7 +1054,7 @@ hr.eventseparator {
 .btn-primary {
   background-color: #336791;
   border-color: #336791;
-  color: #fff;
+  color: #fff !important;
 }
 
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary.active, .btn:active:focus, .btn.active:focus {
