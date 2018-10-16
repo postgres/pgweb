@@ -15,7 +15,7 @@ def main(request):
 	other_events = Event.objects.select_related('country').filter(approved=True, badged=False).filter(training=False, enddate__gt=date.today()).order_by('enddate', 'startdate',)
 	training = Event.objects.select_related('country').filter(approved=True).filter(training=True, enddate__gt=date.today()).order_by('enddate', 'startdate',)
 	return render_pgweb(request, 'about', 'events/archive.html', {
-		'title': 'Upcoming events',
+		'title': 'Upcoming Events',
 		'eventblocks': (
 			{ 'name': 'Community Events', 'events': community_events, 'link': '',},
 			{ 'name': 'Other Events', 'events': other_events, 'link': '',},

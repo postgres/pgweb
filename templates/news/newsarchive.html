@@ -1,8 +1,8 @@
 {%extends "base/page.html"%}
 {%load markup%}
-{%block title%}News archive{%if tag%} - {{tag.name}}{%endif%}{%endblock%}
+{%block title%}News Archive{%if tag%} - {{tag.name}}{%endif%}{%endblock%}
 {%block contents%}
-<h1>News archive{%if tag%} - {{tag.name}}{%endif%} <i class="far fa-newspaper"></i></h1>
+<h1>News Archive{%if tag%} - {{tag.name}}{%endif%} <i class="far fa-newspaper"></i></h1>
 
 <p>
 {%for t in newstags%}<span class="newstag"><a class="btn btn-primary" href="/about/newsarchive/{{t.urlname}}/">{{t.name}}</a></span> {%endfor%}
