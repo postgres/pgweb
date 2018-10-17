@@ -710,7 +710,8 @@ code,
  * Documentation Tables
  */
 #docContent .table .title > strong,
-#docContent .TABLE {
+#docContent .TABLE,
+#docContent .TABLE b {
     color: #336791 !important;
     font-weight: 900;
 }
