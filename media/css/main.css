@@ -709,6 +709,12 @@ code,
 /**
  * Documentation Tables
  */
+#docContent .table .title > strong,
+#docContent .TABLE {
+    color: #336791 !important;
+    font-weight: 900;
+}
+
  #docContent table.table,
  #docContent table.informaltable,
  #docContent table.CALSTABLE {
