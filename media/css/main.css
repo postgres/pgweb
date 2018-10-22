@@ -650,7 +650,6 @@ code,
 #docContent kbd,
 #docContent tt.LITERAL,
 #docContent tt.REPLACEABLE {
-    padding: .2rem .4rem;
     font-size: 0.9rem !important;
     color: inherit !important;
     background-color: #f8f9fa !important;
