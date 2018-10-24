@@ -114,6 +114,7 @@
             </div>
             <div class="col-md-6 col-lg-5 offset-lg-1">
               <form id="docSearchForm" role="search" method="get" action="/search/">
+                <input type="hidden" name="u" value="/docs/{{page.display_version}}/" />
                 <div class="input-group">
                   <input type="text" id="q" name="q" onfocus="if( this.value==this.defaultValue ) this.value='';" class="form-control" placeholder="Search the documentation for..."/>
                   <span class="input-group-btn">
