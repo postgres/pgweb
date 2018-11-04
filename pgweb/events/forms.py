@@ -11,11 +11,6 @@ class EventForm(forms.ModelForm):
 			'invert': True,
 			'fields': ['city', 'state', 'country',]
 		},
-		{
-			'name': 'badged',
-			'invert': False,
-			'fields': ['description_for_badged',]
-		},
 	]
 	def __init__(self, *args, **kwargs):
 		super(EventForm, self).__init__(*args, **kwargs)
@@ -51,4 +46,4 @@ class EventForm(forms.ModelForm):
 
 	class Meta:
 		model = Event
-		exclude = ('submitter', 'approved', )
+		exclude = ('submitter', 'approved', 'description_for_badged')

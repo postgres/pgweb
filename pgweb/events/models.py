@@ -15,7 +15,7 @@ class Event(models.Model):
 
 	training = models.BooleanField(null=False, blank=False, default=False)
 	badged = models.BooleanField(null=False, blank=False, default=False, verbose_name='Community event', help_text='Choose "Community event" if this is a community recognized event following the <a href="/community/recognition/#conferences" target="_blank">community event guidelines</a>.')
-	description_for_badged = models.TextField(blank=True, null=True, verbose_name='Description for community event', help_text='Please describe how this is a community recognized event following the <a href="/community/recognition/#conferences" target="_blank">community event guidelines</a>. Please be as detailed as possible.')
+	description_for_badged = models.TextField(blank=True, null=True, verbose_name='Description for community event', help_text='DEPRECRATED: This was used in the beginning of community events to collect additional information.')
 	startdate = models.DateField(null=False, blank=False, verbose_name="Start date")
 	enddate = models.DateField(null=False, blank=False, verbose_name="End date")
 
