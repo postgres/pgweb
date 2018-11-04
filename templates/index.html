@@ -53,15 +53,15 @@
           source database, is generally available for <a href="/download/">download</a>.
         </p>
         <p>
-          PostgreSQL 11 makes <a href="/docs/11/static/release-11.html">significant improvements</a> to the <a href="/docs/11/static/ddl-partitioning.html">table partitioning</a>
-          system, adds support for <a href="/docs/11/static/sql-createprocedure.html">stored procedures</a> capable of transaction
-          management, improves <a href="/docs/11/static/parallel-query.html">query parallelism</a> and adds parallelized data
-          definition capabilities, and introduces <a href="/docs/11/static/jit.html">just-in-time (JIT) compilation</a>
+          PostgreSQL 11 makes <a href="/docs/11/release-11.html">significant improvements</a> to the <a href="/docs/11/ddl-partitioning.html">table partitioning</a>
+          system, adds support for <a href="/docs/11/sql-createprocedure.html">stored procedures</a> capable of transaction
+          management, improves <a href="/docs/11/parallel-query.html">query parallelism</a> and adds parallelized data
+          definition capabilities, and introduces <a href="/docs/11/jit.html">just-in-time (JIT) compilation</a>
           for accelerating the execution of expressions in queries.
         </p>
         <ul>
           {% for v in versions %}
-            <li class="{% cycle '' 'pg-bg-gray' %}"><b>{{ v.numtree }}.{{ v.latestminor }}</b> &middot; {{ v.reldate|date:"Y-m-d" }} &middot; <a href="/docs/{{ v.numtree }}/static/{{ v.relnotes }}">Notes</a></li>
+            <li class="{% cycle '' 'pg-bg-gray' %}"><b>{{ v.numtree }}.{{ v.latestminor }}</b> &middot; {{ v.reldate|date:"Y-m-d" }} &middot; <a href="/docs/{{ v.numtree }}/{{ v.relnotes }}">Notes</a></li>
           {% endfor %}
         </ul>
       </div>
@@ -153,16 +153,16 @@
         <p>
           PostgreSQL 11 provides users with improvements to overall performance of the
           database system, with specific enhancements associated with very large databases
-          and high computational workloads. Further, PostgreSQL 11 makes <a href="/docs/11/static/release-11.html">significant improvements</a>
-          to the <a href="/docs/11/static/ddl-partitioning.html">table partitioning</a>
-          system, adds support for <a href="/docs/11/static/sql-createprocedure.html">stored procedures</a> capable of transaction
-          management, improves <a href="/docs/11/static/parallel-query.html">query parallelism</a> and adds parallelized data
-          definition capabilities, and introduces <a href="/docs/11/static/jit.html">just-in-time (JIT) compilation</a>
+          and high computational workloads. Further, PostgreSQL 11 makes <a href="/docs/11/release-11.html">significant improvements</a>
+          to the <a href="/docs/11/ddl-partitioning.html">table partitioning</a>
+          system, adds support for <a href="/docs/11/sql-createprocedure.html">stored procedures</a> capable of transaction
+          management, improves <a href="/docs/11/parallel-query.html">query parallelism</a> and adds parallelized data
+          definition capabilities, and introduces <a href="/docs/11/jit.html">just-in-time (JIT) compilation</a>
           for accelerating the execution of expressions in queries.
         </p>
         <ul class="bold">
           <li><a href="/about/news/1894/">Release Announcement</a></li>
-          <li><a href="/docs/11/static/release-11.html">PostgreSQL 11 Release Notes</a></li>
+          <li><a href="/docs/11/release-11.html">PostgreSQL 11 Release Notes</a></li>
           <li><a href="/about/press/presskit11/">PostgreSQL 11 Press Kit &amp; Translations</a></li>
           <li><a href="/download/">Download</a></li>
         </ul>

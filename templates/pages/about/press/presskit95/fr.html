@@ -32,13 +32,13 @@ Annie Prévot,  DSI de la CNAF, déclare, «&nbsp;La CNAF sert 11 millions d'all
 </p><p>
 <b>UPSERT</b>
 </p><p>
-UPSERT, raccourci de « INSERT, ON CONFLICT UPDATE », est une fonctionnalité réclamée depuis longtemps par les développeurs d'applications. 
+UPSERT, raccourci de « INSERT, ON CONFLICT UPDATE », est une fonctionnalité réclamée depuis longtemps par les développeurs d'applications.
 Elle permet de traiter de la même façon l'ajout ou l'actualisation de lignes.
 UPSERT simplifie le développement des applications web et mobile en permettant de laisser la base gérer les conflits entre modifications concurrentes des données.
-Cette fonctionnalité supprime également la dernière barrière à la migration d'applications MySQL historiques vers PostgreSQL. 
+Cette fonctionnalité supprime également la dernière barrière à la migration d'applications MySQL historiques vers PostgreSQL.
 </p><p>
-Développée sur les deux dernières années par Peter Geoghegan, programmeur au sein de la société Heroku, l'implantation de UPSERT au sein de PostgreSQL est nettement plus souple et puissante que celle de la plupart des autres SGBDR. 
-La nouvelle clause ON CONFLICT permet d'ignorer la nouvelle donnée, ou d'actualiser différentes colonnes ou relations, de façon à supporter les chaînes d'ETL (Extract, Transform, LOAD) les plus complexes. 
+Développée sur les deux dernières années par Peter Geoghegan, programmeur au sein de la société Heroku, l'implantation de UPSERT au sein de PostgreSQL est nettement plus souple et puissante que celle de la plupart des autres SGBDR.
+La nouvelle clause ON CONFLICT permet d'ignorer la nouvelle donnée, ou d'actualiser différentes colonnes ou relations, de façon à supporter les chaînes d'ETL (Extract, Transform, LOAD) les plus complexes.
 Et, à l'instar de PostgreSQL, cette fonctionnalité a été conçue pour être totalement concurrentielle, et s'intégrer avec les autres fonctionnalités de PostgreSQL, dont la réplication logique.
 </p><p>
 <b>Row Level Security</b>
@@ -47,7 +47,7 @@ PostgreSQL continue d'étendre les possibilités de sécurisation des accès, av
 RLS propose un vrai contrôle d'accès par ligne et par colonne, qui s'intègre avec les outils externe de sécurisation, tel SELinux.
 PostgreSQL est déjà connu comme « la base la plus sécurisée par défaut ». RLS conforte cette position de meilleur choix par défaut pour les applications à fort besoin de sécurisation, telles que la conformité PCI, la dIrective Européenne de protection des données, et les standards de protection des données des systèmes de santé.
 </p><p>
-RLS est l'aboutissement de 5 ans d'ajout de fonctionnalités de sécurité à PostgreSQL, ce qui inclut les travaux de  KaiGai Kohei de NEC, Stephen Frost de Crunchy Data, et ceux de Dean Rasheed. À travers cette fonctionnalité, les administrateurs de base de données peuvent définir des politiques de sécurité, qui filtrent les lignes visibles en fonction des utilisateurs. 
+RLS est l'aboutissement de 5 ans d'ajout de fonctionnalités de sécurité à PostgreSQL, ce qui inclut les travaux de  KaiGai Kohei de NEC, Stephen Frost de Crunchy Data, et ceux de Dean Rasheed. À travers cette fonctionnalité, les administrateurs de base de données peuvent définir des politiques de sécurité, qui filtrent les lignes visibles en fonction des utilisateurs.
 La sécurisation mises en place par ce biais est résistante aux injections SQL et autres trous de sécurité de niveau applicatif.
 </p><p>
 <b>
@@ -61,7 +61,7 @@ Citons :
 <b>Les index BRIN</b>&nbsp;: Ce nouveau type d'index permet la création d'index beaucoup plus petits, mais très efficaces, pour les tables volumineuses. Il est nécessaire que les données soient ordonnées.
 Par exemple, des tables contenant des millions de lignes de traces peuvent être indexées et interrogées en 5% du temps nécessaire lors de l'utilisation d'index de type BTree.
 </p><p>
-<b>Tris plus rapides</b>&nbsp;: PostgreSQL trie désormais les données textuelles et numériques plus rapidement, à l'aide d'un algorithme appelé "clés abrégées" ou "abbreviated keys". 
+<b>Tris plus rapides</b>&nbsp;: PostgreSQL trie désormais les données textuelles et numériques plus rapidement, à l'aide d'un algorithme appelé "clés abrégées" ou "abbreviated keys".
 Cela accélère certaines requêtes qui nécessitent de trier des volumes considérables de données d'un facteur 2 à 12, et peut également accélérer la création d'index d'un facteur 20.
 </p><p>
 <b>CUBE, ROLLUP et GROUPING SETS</b>&nbsp;: Ces nouvelles clauses du standard permettent de produire des rapports avec plusieurs niveaux de synthèse en une seule requête.
@@ -78,8 +78,8 @@ CUBE permet également une meilleure intégration de PostgreSQL avec un nombre p
 Plus d'informations sur les fonctionnalités ci-dessus et les autres dans les liens suivants :
 </p>
 <ul>
-<li><a href="/docs/9.5/static/release-9-5.html">Notes de version</a></li>
-<li><a href="/docs/9.5/static/index.html">Documentation 9.5</a></li>
+<li><a href="/docs/9.5/release-9-5.html">Notes de version</a></li>
+<li><a href="/docs/9.5/index.html">Documentation 9.5</a></li>
 <li><a href="https://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.5">Nouveautés de PostgreSQL 9.5 (En anglais)</a></li>
 <li><a href="/about/featurematrix">Matrice de fonctionnalités (En anglais)</a></li>
 <li><a href="https://momjian.us/main/writings/pgsql/features.pdf">Les principales fonctionnalités (Video en anglais)</a></li>
@@ -97,7 +97,7 @@ Plus d'informations sur les fonctionnalités ci-dessus et les autres dans les li
 
 <a name="docs"></a><h2>Documentation</h2>
 <p>
-La documentation au format HTML et les pages de manuel sont installées avec PostgreSQL. La <a href="/docs/9.5/static">documentation en ligne</a>, exhaustive et interactive, peut être parcourue, interrogée et commentée librement.
+La documentation au format HTML et les pages de manuel sont installées avec PostgreSQL. La <a href="/docs/9.5/">documentation en ligne</a>, exhaustive et interactive, peut être parcourue, interrogée et commentée librement.
 </p>
 
 <a name="license"></a><h2>Licence</h2>
@@ -137,7 +137,7 @@ Tous les logos sont modifiables et redistribuables selon les termes de la licenc
 <p>
 PostgreSQL est le système de gestion de bases de données libre de référence. Sa communauté mondiale est composée de plusieurs milliers d'utilisateurs et contributeurs, et de plusieurs dizaines d'entreprises et institutions.
 Le projet PostgreSQL, démarré il y a 25 ans, à l'université de Californie, à Berkeley, a atteint aujourd’hui un rythme de développement sans pareil.
-L'ensemble des fonctionnalités proposées est mature et plus riche que ceux des systèmes commerciaux leaders sur les fonctionnalités avancées, les extensions, la sécurité et la stabilité, offertes à un niveau que seul PostgreSQL atteint. 
+L'ensemble des fonctionnalités proposées est mature et plus riche que ceux des systèmes commerciaux leaders sur les fonctionnalités avancées, les extensions, la sécurité et la stabilité, offertes à un niveau que seul PostgreSQL atteint.
 Pour en savoir plus à propos de PostgreSQL et participer à la communauté&nbsp;:  <a href="https://www.postgresql.org">PostgreSQL.org</a>.
 </p>
 

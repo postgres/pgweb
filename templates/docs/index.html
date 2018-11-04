@@ -8,7 +8,7 @@
         <h1>Documentation <i class="far fa-file-alt"></i></h1>
       </section>
       <p>This section contains <a href="/docs/manuals/">current</a>
-      and <a href="/docs/manuals/archive/">archived</a> manuals for PostgreSQL users. You can read the <a href="/docs/current/static/release.html">release notes</a>, and view a listing of <a href="/docs/books/">books</a>
+      and <a href="/docs/manuals/archive/">archived</a> manuals for PostgreSQL users. You can read the <a href="/docs/current/release.html">release notes</a>, and view a listing of <a href="/docs/books/">books</a>
       written about PostgreSQL.</p>
     </div>
     <div class="col-md-3">
@@ -20,7 +20,7 @@
           <ul>
             {% for version in versions %}
               <li>
-                <a href="/docs/{{ version.numtree }}/static/index.html">{{ version.treestring }}</a>
+                <a href="/docs/{{ version.numtree }}/index.html">{{ version.treestring }}</a>
               </li>
             {%endfor%}
           </ul>

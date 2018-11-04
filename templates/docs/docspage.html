@@ -69,7 +69,7 @@
               <div class="row">
                 <div class="col">
                   <div>
-                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/{{page.display_version}}/static/{{doc_index_filename}}">PostgreSQL {{page.display_version}}</a>{%if loaddate%} ({{loaddate|date:"Y-m-d H:i:s"}}){%endif%}
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/{{page.display_version}}/{{doc_index_filename}}">PostgreSQL {{page.display_version}}</a>{%if loaddate%} ({{loaddate|date:"Y-m-d H:i:s"}}){%endif%}
                   </div>
                 </div>
               </div>
@@ -80,10 +80,10 @@
                       {% for ver in supported_versions %}
                         {% if not forloop.first %} / {% endif %}
                         {% if ver.version.current %}
-                          <a href="/docs/current/static/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>Current</a>
-                          (<a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>{{ver.display_version}}</a>)
+                          <a href="/docs/current/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>Current</a>
+                          (<a href="/docs/{{ver.display_version}}/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>{{ver.display_version}}</a>)
                         {% else %}
-                          <a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>{{ver.display_version}}</a>
+                          <a href="/docs/{{ver.display_version}}/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>{{ver.display_version}}</a>
                         {% endif %}
                       {% endfor %}
                   </div>
@@ -95,7 +95,7 @@
                     Development Versions:
                     {% for ver in devel_versions %}
                       {% if not forloop.first %} / {% endif %}
-                      <a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %} rel="nofollow">{{ver.display_version}}</a>
+                      <a href="/docs/{{ver.display_version}}/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %} rel="nofollow">{{ver.display_version}}</a>
                     {% endfor %}
                   </div>
                 </div>
@@ -106,7 +106,7 @@
                     Unsupported versions:
                     {% for ver in unsupported_versions %}
                       {% if not forloop.first %} / {% endif %}
-                      <a href="/docs/{{ver.display_version}}/static/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %} rel="nofollow">{{ver.display_version}}</a>
+                      <a href="/docs/{{ver.display_version}}/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %} rel="nofollow">{{ver.display_version}}</a>
                     {% endfor %}
                   </div>
                 </div>

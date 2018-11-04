@@ -11,7 +11,7 @@ sitenav = {
 		]},
 		{'title': 'Feature Matrix',     'link':'/about/featurematrix/'},
 		{'title': 'Donate',             'link':'/about/donate/'},
-		{'title': 'History',            'link':'/docs/current/static/history.html'},
+		{'title': 'History',            'link':'/docs/current/history.html'},
 		{'title': 'Sponsors',           'link':'/about/sponsors/', 'submenu': [
 			{'title': 'Servers',    'link': '/about/servers/'},
 		]},

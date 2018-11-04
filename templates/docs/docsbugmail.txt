@@ -1,6 +1,6 @@
 The following documentation comment has been logged on the website:
 
-Page: https://www.postgresql.org/docs/{{version}}/static/{{filename}}
+Page: https://www.postgresql.org/docs/{{version}}/{{filename}}
 Description:
 
 {{details|safe|wordwrap:76}}

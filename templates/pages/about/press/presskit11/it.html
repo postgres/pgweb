@@ -17,7 +17,7 @@
 <h3 id="miglioriprestazioniemaggiorerobustezzaperilpartizionamento">Migliori prestazioni e maggiore robustezza per il partizionamento</h3>
 
 <p>PostgreSQL 11 introduce <em>hash partitioning</em>, ovvero la capacità di partizionare dati sulla base di una chiave hash. Questa funzionalità va ad aggiungersi ai metodi di partizionamento per lista di valori e per range attualmente disponibili in PostgreSQL.
-PostgreSQL 11 inoltre arricchisce le capacità di federazione dati con nuove funzionalità per le partizioni che utilizzano <a href="https://www.postgresql.org/docs/current/static/postgres-fdw.html">postgres_fdw</a>, il Foreign Data Wrapper di PostgreSQL.</p>
+PostgreSQL 11 inoltre arricchisce le capacità di federazione dati con nuove funzionalità per le partizioni che utilizzano <a href="https://www.postgresql.org/docs/current/postgres-fdw.html">postgres_fdw</a>, il Foreign Data Wrapper di PostgreSQL.</p>
 
 <p>Per aiutare con la gestione delle partizioni, PostgreSQL 11 introduce le partizioni di default per i dati che non rientrano in nessuna chiave di partizionamento, nonché la possibilità di aggiungere chiavi primarie, chiavi esterne, indici e trigger sulle tabelle partizionate che vengono direttamente passati alle partizioni sottostanti. PostgreSQL 11 inoltre supporta automaticamente lo spostamento di righe nella partizione corretta in caso di aggiornamento della chiave di partizionamento.</p>
 
@@ -55,9 +55,9 @@ PostgreSQL 11 inoltre arricchisce le capacità di federazione dati con nuove fun
 <li>inclusione delle parole chiave "quit" e "exit" nell'interfaccia da linea di comando di PostgreSQL per renderne più semplice l'uscita</li>
 </ul>
 
-<p>Per una lista completa di funzionalità incluse in questa release si faccia riferimento alle <a href="https://www.postgresql.org/docs/11/static/release-11.html">note di rilascio</a> disponibili in lingua inglese all'indirizzo:</p>
+<p>Per una lista completa di funzionalità incluse in questa release si faccia riferimento alle <a href="https://www.postgresql.org/docs/11/release-11.html">note di rilascio</a> disponibili in lingua inglese all'indirizzo:</p>
 
-<p><a href="https://www.postgresql.org/docs/11/static/release-11.html">https://www.postgresql.org/docs/11/static/release-11.html</a></p>
+<p><a href="https://www.postgresql.org/docs/11/release-11.html">https://www.postgresql.org/docs/11/release-11.html</a></p>
 {% endblock presskit_content %}
 
 {% block presskit_about %}

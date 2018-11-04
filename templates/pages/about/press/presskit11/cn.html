@@ -17,7 +17,7 @@ Momjian说道，“在已被证明PostgreSQL擅长于事务类负载的基础上
 
 <h3 id="">增强的健壮性和分区表性能的提升</h3>
 
-<p>PostgreSQL 11 在目前版本已有了按值列表或是按范围作为分区键值的分区表功能外，又增加了按哈希键值分区的功能，也称之为“Hash分区”。 PostgreSQL 11 还通过在分区功能中使用外部数据封装器<a href="https://www.postgresql.org/docs/current/static/postgres-fdw.html">postgres_fdw</a>的功能，也进一步提升了数据聚合能力。</p>
+<p>PostgreSQL 11 在目前版本已有了按值列表或是按范围作为分区键值的分区表功能外，又增加了按哈希键值分区的功能，也称之为“Hash分区”。 PostgreSQL 11 还通过在分区功能中使用外部数据封装器<a href="https://www.postgresql.org/docs/current/postgres-fdw.html">postgres_fdw</a>的功能，也进一步提升了数据聚合能力。</p>
 
 <p>为了帮助管理分区，PostgreSQL 11 引入了将不含有分区键值的记录自动转入缺省分区的功能，并增加了在（主表）执行创建主键、外键、索引和触发器时，会将这些操作全部自动复制给所有分区表的功能。另外PostgreSQL 11现在也支持当记录中的分区键值字段被更新后，会自动将该记录移至新的正确的分区表中的功能。</p>
 
@@ -56,7 +56,7 @@ Momjian说道，“在已被证明PostgreSQL擅长于事务类负载的基础上
 </ul>
 
 <p>新版本中的完整的新特性列表，请参阅这里的：
-<a href="https://www.postgresql.org/docs/11/static/release-11.html">发布声明</a> ，网址是：<a href="https://www.postgresql.org/docs/11/static/release-11.html">https://www.postgresql.org/docs/11/static/release-11.html</a></p>
+<a href="https://www.postgresql.org/docs/11/release-11.html">发布声明</a> ，网址是：<a href="https://www.postgresql.org/docs/11/release-11.html">https://www.postgresql.org/docs/11/release-11.html</a></p>
 {% endblock presskit_content %}
 
 {% block presskit_about %}

@@ -30,14 +30,14 @@ def get_struct():
 		if version >= 10:
 			version = int(version)
 
-		yield ('docs/%s/static/%s' % (version, filename),
+		yield ('docs/%s/%s' % (version, filename),
 			   testing and 0.1 or docprio, # beta/rc versions always get 0.1 in prio
 			   loaded)
 
 		# Also yield the current version urls, with the highest
 		# possible priority
 		if version == currentversion.tree:
-			yield ('docs/current/static/%s' % filename,
+			yield ('docs/current/%s' % filename,
 				   1.0, loaded)
 
 # For our internal sitemap (used only by our own search engine),
@@ -48,6 +48,6 @@ def get_internal_struct():
 	curs.execute("SELECT d.file, v.docsloaded FROM docs d INNER JOIN core_version v ON v.tree=d.version WHERE version = 0")
 
 	for filename, loaded in curs.fetchall():
-		yield ('docs/devel/static/%s' % (filename, ),
+		yield ('docs/devel/%s' % (filename, ),
 			   0.1,
 			   loaded)

@@ -18,7 +18,7 @@ PostgreSQL 11のバグ修正を含む次のアップデートリリースはPost
 <h3 id="-1">堅牢性とパフォーマンスが強化されたパーティショニング</h3>
 
 <p>PostgreSQL 11には、現行のリストパーティションやレンジパーティション機能に加え、ハッシュ・パーティショニングとしても知られるハッシュ・キーによるデータ分割機能が追加されています。
-PostgreSQL 11は、PostgreSQLの外部データラッパー<a href="https://www.postgresql.org/docs/current/static/postgres-fdw.html">postgres_fdw</a>に対するパーティションの機能強化により、データ・フェデレーション機能をさらに向上させました。
+PostgreSQL 11は、PostgreSQLの外部データラッパー<a href="https://www.postgresql.org/docs/current/postgres-fdw.html">postgres_fdw</a>に対するパーティションの機能強化により、データ・フェデレーション機能をさらに向上させました。
 パーティション管理の助けとして、PostgreSQL 11では、パーティションキーと一致しないデータの格納するデフォルトパーティションや、すべてのパーティションに渡されるパーティションテーブルのプライマリキー、外部キー、インデックス、トリガを作成する機能が導入されています。更に、パーティションキーのデータが更新された場合、行を自動的に正しいパーティションに移動する機能もサポートされています。</p>
 
 <p>PostgreSQL 11では、新しいパーティション消去ストラテジーにより、パーティション読取時のクエリのパフォーマンスが改善しています。
@@ -54,7 +54,7 @@ PostgreSQL 11では、いくつかのデータ定義コマンドに並列処理�
 -PostgreSQLのコマンドラインインタフェースにキーワード "quit"と "exit"を含めることで、コマンドラインツールから簡単に抜けられるようになりました。</li>
 </ul>
 
-<p>このリリースに含まれる機能の全リストは <a href="https://www.postgresql.org/docs/11/static/release-11.html">リリースノート</a>にありますのでご覧ください。
+<p>このリリースに含まれる機能の全リストは <a href="https://www.postgresql.org/docs/11/release-11.html">リリースノート</a>にありますのでご覧ください。
 こちらからもご覧いただけます
 {% endblock presskit_content %}
 

@@ -18,7 +18,7 @@ If you are still using any of these releases, you are strongly advised to upgrad
 		{%for v in versions%}
 		<tr{%if forloop.last%}{%endif%}>
 	    <td>
-          <a href="/docs/{{v.numtree}}/static/{{v.indexname}}">{{v.treestring}}</a>
+          <a href="/docs/{{v.numtree}}/{{v.indexname}}">{{v.treestring}}</a>
       </td>
       <td>
 				  {%if v.a4pdf%}Comprehensive Manual: <a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">({{v.a4pdf|filesizeformat}})</span>{%endif%}

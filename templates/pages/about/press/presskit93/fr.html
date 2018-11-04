@@ -19,7 +19,7 @@
 
 <a name="original_release"></a><h2>Texte original</h2>
 
-<p>9 SEPTEMBRE 2013&nbsp;: Le PostgreSQL Global Development Group annonce la publication de PostgreSQL 9.3, la dernière version du système de gestion de bases de données relationnelles OpenSource le plus évolué. 
+<p>9 SEPTEMBRE 2013&nbsp;: Le PostgreSQL Global Development Group annonce la publication de PostgreSQL 9.3, la dernière version du système de gestion de bases de données relationnelles OpenSource le plus évolué.
 Cette version étend la fiabilité, la disponibilité et la capacité de PostgreSQL à s'interfacer avec d'autres bases de données.
 
 Les utilisateurs rapportent déjà des développements rendus possibles par cette version.
@@ -29,12 +29,12 @@ de PostgreSQL. Je me demande réellement comment je pouvais mener à bien mes pr
 </p><p>
 <b>Accès en écriture aux données externes</b>
 </p><p>
-La version 9.3 de PostgreSQL permet l'écriture au travers des gestionnaires de 
+La version 9.3 de PostgreSQL permet l'écriture au travers des gestionnaires de
 données externes («&nbsp;Foreign Data Wrappers&nbsp;», en anglais). Cela permet les échanges
-bi-directionnels entre plusieurs systèmes. Les environnements informatiques 
-d'aujourd'hui intègrent plusieurs bases de données et des sources de données 
+bi-directionnels entre plusieurs systèmes. Les environnements informatiques
+d'aujourd'hui intègrent plusieurs bases de données et des sources de données
 semi-structurées. PostgreSQL permet de les intégrer dans un ensemble cohérent.
-L'équipe a également développé postgres_fdw, pilote hautement performant de 
+L'équipe a également développé postgres_fdw, pilote hautement performant de
 fédération PostgreSQL-PostgreSQL en lecture/écriture.
 </p><p>
 &laquo;&nbsp;Les gestionnaires de données externes modifiables nous permettent de connecter
@@ -54,19 +54,19 @@ Recherche et Développement chez Gandi.net. &laquo;&nbsp;Je suis particulièreme
 impatient d'en apprendre plus sur le mécanisme de bascule rapide annoncé en
 9.3.&nbsp;&raquo;
 </p><p>
-Cette nouvelle version inclut de nouvelles fonctionnalités qui étendent et 
+Cette nouvelle version inclut de nouvelles fonctionnalités qui étendent et
 améliorent encore la fiabilité et la disponibilité de PostgreSQL&nbsp;:
 </p><ul>
-<li>Sommes de contrôle sur les pages de données&nbsp;: aide les administrateurs à détecter 
+<li>Sommes de contrôle sur les pages de données&nbsp;: aide les administrateurs à détecter
 rapidement tout disque ou composant matériel défectueux qui corrompt les données&nbsp;;</li>
-<li>Bascule rapide&nbsp;: bascule en moins d'une seconde entre le 
+<li>Bascule rapide&nbsp;: bascule en moins d'une seconde entre le
 maître et le réplicat, offrant une disponibilité dite &laquo;&nbsp;carrier-grade&nbsp;&raquo;&nbsp;;</li>
 <li>Resynchronisation par streaming simple&nbsp;: reconfiguration plus simple, plus rapide
   des réplicats en cascade après bascule.</li>
 </ul><p>
 <b>Fonctionnalités orientées développeurs</b>
 </p><p>
-Comme toute nouvelle version, PostgreSQL 9.3 propose de nombreuses fonctionnalités 
+Comme toute nouvelle version, PostgreSQL 9.3 propose de nombreuses fonctionnalités
 facilitant le travail avec PostgreSQL. Cela le rend plus flexible et plus agréable
 pour les développeurs, les administrateurs et les architectes.
 Parmi ces fonctionnalités, citons&nbsp;:
@@ -78,38 +78,38 @@ volumineuses&nbsp;;</li>
 <li>les LATERAL JOINs</li>
 </ul><p>
 De plus, avec PostgreSQL 9.3, la possibilité de définir ses propres processus
-autonomes intégrés («&nbsp;Background Workers&nbsp;», en anglais) permet aux développeurs 
-d'écrire des gestionnaires de tâches, des gestionnaires de requêtes, des 
+autonomes intégrés («&nbsp;Background Workers&nbsp;», en anglais) permet aux développeurs
+d'écrire des gestionnaires de tâches, des gestionnaires de requêtes, des
 traitements parallèles, des outils de &laquo;&nbsp;queueing&nbsp;&raquo; ou toute autre application
 permettant d'utiliser PostgreSQL comme séquenceur de tâches.
-Un exemple concret est Mongres, un processus autonome intégré qui accepte les 
+Un exemple concret est Mongres, un processus autonome intégré qui accepte les
 requêtes MongoDB, les interprète et les transmet à PostgreSQL.
 </p><p>
 <b>À propos de PostgreSQL</b>
 </p><p>
-PostgreSQL est le système de gestion de bases de données libre de référence. Sa 
-communauté mondiale est composée de milliers d'utilisateurs et contributeurs, 
+PostgreSQL est le système de gestion de bases de données libre de référence. Sa
+communauté mondiale est composée de milliers d'utilisateurs et contributeurs,
 et de plusieurs dizaines d'entreprises et institutions.
 
 Le projet PostgreSQL, démarré il y a 25 ans, à l'université de Californie, à
 Berkeley, a atteint aujourd’hui un rythme de développement sans pareil.
 L'ensemble des fonctionnalités proposées est mature et plus riche que ceux
 des systèmes commerciaux leaders sur les fonctionnalités avancées, les
-extensions, la sécurité et la stabilité, offertes à un niveau que seul PostgreSQL 
+extensions, la sécurité et la stabilité, offertes à un niveau que seul PostgreSQL
 atteint.
-Pour en savoir plus, et prendre part à la communauté, rendez-vous sur 
+Pour en savoir plus, et prendre part à la communauté, rendez-vous sur
 <a href="https://www.postgresql.org/">le site du projet</a>.
 </p>
 
 <a name="features"></a><h2>Détail des fonctionnalités</h2>
 
 <p>
-Pour des explications concernant les fonctionnalités décrites plus haut, 
+Pour des explications concernant les fonctionnalités décrites plus haut,
 et les autres, se référer aux ressources suivantes&nbsp;:
 </p>
 <ul>
-<li><a href="/docs/9.3/static/release-9-3.html">Notes de version</a></li>
-<li><a href="/docs/9.3/static/index.html">Documentation 9.3 en anglais</a></li>
+<li><a href="/docs/9.3/release-9-3.html">Notes de version</a></li>
+<li><a href="/docs/9.3/index.html">Documentation 9.3 en anglais</a></li>
 <li><a href="http://docs.postgresql.fr/9.3">Documentation 9.3 en français</a></li>
 <li><a href="https://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.3">What's New In PostgreSQL 9.3 (En anglais)</a></li>
 <li><a href="/about/featurematrix">Matrice des fonctionnalités (en anglais)</a></li>
@@ -129,7 +129,7 @@ et les autres, se référer aux ressources suivantes&nbsp;:
 
 <a name="docs"></a><h2>Documentation</h2>
 
-<p>La documentation au format HTML et les pages de manuel sont installées avec PostgreSQL. La <a href="/docs/9.3/static">documentation en ligne</a>, exhaustive et interactive, peut être parcourue, interrogée et commentée.</p>
+<p>La documentation au format HTML et les pages de manuel sont installées avec PostgreSQL. La <a href="/docs/9.3/">documentation en ligne</a>, exhaustive et interactive, peut être parcourue, interrogée et commentée.</p>
 
 <a name="license"></a><h2>Licence</h2>
 <p>

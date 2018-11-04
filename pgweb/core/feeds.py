@@ -16,8 +16,7 @@ class VersionFeed(Feed):
 		return Version.objects.filter(tree__gt=0).filter(testing=0)
 
 	def item_link(self, obj):
-		return "https://www.postgresql.org/docs/%s/static/%s" % (obj.numtree, obj.relnotes)
+		return "https://www.postgresql.org/docs/%s/%s" % (obj.numtree, obj.relnotes)
 
 	def item_pubdate(self, obj):
 		return datetime.combine(obj.reldate,time.min)
-
