@@ -17,7 +17,7 @@ from pgweb.core.models import Version
 from models import DocPage
 from forms import DocCommentForm
 
-def docpage(request, version, typ, filename):
+def docpage(request, version, filename):
 	loaddate = None
 	# Get the current version both to map the /current/ url, and to later
 	# determine if we allow comments on this page.
@@ -25,8 +25,6 @@ def docpage(request, version, typ, filename):
 	if version == 'current':
 		ver = currver
 	elif version == 'devel':
-		if not typ == 'static':
-			return HttpResponseRedirect("/docs/devel/static/%s.html" % filename)
 		ver = Decimal(0)
 		loaddate = Version.objects.get(tree=Decimal(0)).docsloaded
 	else:
@@ -49,7 +47,7 @@ def docpage(request, version, typ, filename):
 	if ver >= 10 and version.find('.') > -1:
 		# Version 10 and up, but specified as 10.0 / 11.0 etc, so redirect back without the
 		# decimal.
-		return HttpResponseRedirect("/docs/{0}/static/{1}.html".format(int(ver), filename))
+		return HttpResponsePermanentRedirect("/docs/{0}/{1}.html".format(int(ver), filename))
 
 	fullname = "%s.%s" % (filename, extension)
 	page = get_object_or_404(DocPage, version=ver, file=fullname)
@@ -61,10 +59,6 @@ def docpage(request, version, typ, filename):
 			'testing':"COALESCE((SELECT testing FROM core_version v WHERE v.tree=version),0)",
 	}).order_by('-supported', 'version').only('version', 'file')
 
-	if typ=="interactive":
-		# Interactive documents are disabled, so redirect to static page
-		return HttpResponsePermanentRedirect("/docs/{0}/static/{1}.html".format(version, filename))
-
 	return render(request, 'docs/docspage.html', {
 		'page': page,
 		'supported_versions': [v for v in versions if v.supported],
@@ -75,11 +69,20 @@ def docpage(request, version, typ, filename):
 		'loaddate': loaddate,
 	})
 
-def docsrootpage(request, version, typ):
-	return docpage(request, version, typ, 'index')
+def docspermanentredirect(request, version, typ, page, *args):
+	"""Provides a permanent redirect from the old static/interactive pages to
+	the modern pages that do not have said keywords.
+	"""
+	url = "/docs/{}/".format(version)
+	if page:
+		url += page
+	return HttpResponsePermanentRedirect(url)
+
+def docsrootpage(request, version):
+	return docpage(request, version, 'index')
 
 def redirect_root(request, version):
-	return HttpResponseRedirect("/docs/%s/static/" % version)
+	return HttpResponsePermanentRedirect("/docs/%s/" % version)
 
 def root(request):
 	versions = Version.objects.filter(Q(supported=True) | Q(testing__gt=0,tree__gt=0)).order_by('-tree')
@@ -130,7 +133,7 @@ def commentform(request, itemid, version, filename):
 	v = get_object_or_404(Version, tree=version)
 	if not v.supported:
 		# No docs comments on unsupported versions
-		return HttpResponseRedirect("/docs/{0}/static/{1}".format(version, filename))
+		return HttpResponseRedirect("/docs/{0}/{1}".format(version, filename))
 
 	if request.method == 'POST':
 		form = DocCommentForm(request.POST)
