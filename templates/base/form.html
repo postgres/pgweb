@@ -44,6 +44,9 @@
                 <label for="{{ field.id_for_label }}" class="form-check-label">
                   {{ field.label }}
                 </label>
+                {%if field.help_text%}
+                  <small class="form-text text-muted">{{field.help_text|safe}}</small>
+                {%endif%}
               </div>
             {% else %}
               {{ field.label_tag }} {{field.help_text|safe}}
