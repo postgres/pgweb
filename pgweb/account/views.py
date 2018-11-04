@@ -202,7 +202,10 @@ def listobjects(request, objtype):
 	o = objtypes[objtype]
 
 	return render_pgweb(request, 'account', 'account/objectlist.html', {
-	    'objects': o['objects'](request.user),
+		'objects': {
+			'approved': o['objects'](request.user).filter(approved=True),
+			'unapproved': o['objects'](request.user).filter(approved=False),
+		},
 		'title': o['title'],
 		'submit_header': o.has_key('submit_header') and o['submit_header'] or None,
 		'suburl': objtype,

@@ -3,15 +3,28 @@
 {%block contents%}
 <h1>{{title}}s <i class="fas fa-th-list"></i></h1>
 <p>
-Objects in <span style="color:red; font-weight: bolder;">bright red</span> are awaiting moderator approval. Note that modifying a previously
-approved object <em>may</em> result in it being un-approved if the changes are
-extensive.
+Objects that are awaiting moderator approval are listed in their own category.
+Note that modifying anything that was previously approved might result in
+additional moderation based upon what has changed in the content.
 </p>
+
+{% if objects.unapproved %}
+<h3>Awaiting Moderation</h3>
 <ul>
-{%for o in objects%}
-<li><a {%if not o.approved%} style="color:red;" {%endif%}href="/account/{{suburl}}/{{o.id}}/">{{o}}</a></li>
-{%endfor%}
+  {%for o in objects.unapproved %}
+    <li><a href="/account/{{suburl}}/{{o.id}}/">{{o}}</a></li>
+  {%endfor%}
 </ul>
+{% endif %}
+
+{% if objects.approved %}
+<h3>Approved</h3>
+<ul>
+  {%for o in objects.approved %}
+    <li><a href="/account/{{suburl}}/{{o.id}}/">{{o}}</a></li>
+  {%endfor%}
+</ul>
+{% endif %}
 
 {%if submit_header%}
 <p>{{submit_header|safe}}</p>
