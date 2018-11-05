@@ -73,7 +73,7 @@ def docspermanentredirect(request, version, typ, page, *args):
 	"""Provides a permanent redirect from the old static/interactive pages to
 	the modern pages that do not have said keywords.
 	"""
-	url = "/docs/{}/".format(version)
+	url = "/docs/%s/" % version
 	if page:
 		url += page
 	return HttpResponsePermanentRedirect(url)
