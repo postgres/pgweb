@@ -118,7 +118,7 @@ class Migration(migrations.Migration):
                 ('testing', models.IntegerField(default=0, help_text=b'Testing level of this release. latestminor indicates beta/rc number', choices=[(0, b'Release'), (1, b'Release candidate'), (2, b'Beta'), (3, b'Alpha')])),
                 ('docsloaded', models.DateTimeField(help_text=b'The timestamp of the latest docs load. Used to control indexing and info on developer docs.', null=True, blank=True)),
                 ('firstreldate', models.DateField(help_text=b'The date of the .0 release in this tree')),
-                ('eoldate', models.DateField(help_text=b'The planned EOL date for this tree')),
+                ('eoldate', models.DateField(help_text=b'The final release date for this tree')),
             ],
             options={
                 'ordering': ('-tree',),
