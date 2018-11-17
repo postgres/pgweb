@@ -22,7 +22,7 @@
     </thead>
     <tbody>
       <tr>
-      	<td>{{product.description|markdown}}</td>
+      	<td>{{product.description|markdown:"safe"}}</td>
         <td>{{product.licencetype}}</td>
         <td>{{product.price}}</td>
         <td><a href="{{product.org.url}}" target="_blank">{{product.org.name}}</a></td>
