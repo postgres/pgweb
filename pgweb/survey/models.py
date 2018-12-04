@@ -64,7 +64,7 @@ class Survey(models.Model):
 
 	def save(self):
 		# Make sure only one survey at a time can be the current one
-		# (there may be some small race conditions here, but the likelyhood
+		# (there may be some small race conditions here, but the likelihood
 		# that two admins are editing the surveys at the same time...)
 		if self.current:
 			previous = Survey.objects.filter(current=True)
