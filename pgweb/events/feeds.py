@@ -12,7 +12,7 @@ class EventFeed(Feed):
 	title_template = 'events/rss_title.html'
 
 	def items(self):
-		return Event.objects.filter(approved=True).filter(training=False)[:10]
+		return Event.objects.filter(approved=True)[:10]
 
 	def item_link(self, obj):
 		return "https://www.postgresql.org/about/event/%s/" % obj.id

@@ -45,7 +45,6 @@ def home(request):
 	# get up to seven events to display on the homepage
 	event_base_queryset = Event.objects.select_related('country').filter(
 		approved=True,
-		training=False,
 		enddate__gte=today,
 	)
 	# first, see if there are up to two non-badged events within 90 days
@@ -60,19 +59,11 @@ def home(request):
 	versions = Version.objects.filter(supported=True)
 	planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:9]
 
-	traininginfo = Event.objects.filter(approved=True, training=True).extra(where=("startdate <= (CURRENT_DATE + '6 Months'::interval) AND enddate >= CURRENT_DATE",)).aggregate(Count('id'), Count('country', distinct=True))
-	# can't figure out how to make django do this
-	curs = connection.cursor()
-	curs.execute("SELECT * FROM (SELECT DISTINCT(core_organisation.name) FROM events_event INNER JOIN core_organisation ON org_id=core_organisation.id WHERE startdate <= (CURRENT_DATE + '6 Months'::interval) AND enddate >= CURRENT_DATE AND events_event.approved AND training AND org_id IS NOT NULL) x ORDER BY random() LIMIT 3")
-	trainingcompanies = [r[0] for r in curs.fetchall()]
-
 	return render(request, 'index.html', {
 		'title': 'The world\'s most advanced open source database',
 		'news': news,
 		'newstags': NewsTag.objects.all(),
 		'events': events,
-		'traininginfo': traininginfo,
-		'trainingcompanies': trainingcompanies,
 		'versions': versions,
 		'planet': planet,
 	})

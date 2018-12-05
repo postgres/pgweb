@@ -40,7 +40,6 @@ urlpatterns = [
 	url(r'^about/news/taglist.json/$', pgweb.news.views.taglist_json),
 	url(r'^about/events/$', pgweb.events.views.main),
 	url(r'^about/eventarchive/$', pgweb.events.views.archive),
-	url(r'^about/eventarchive/training/$', pgweb.events.views.trainingarchive),
 	url(r'^about/event/(\d+)(-.*)?/$', pgweb.events.views.item),
 	url(r'^about/featurematrix/$', pgweb.featurematrix.views.root),
 	url(r'^about/featurematrix/detail/(\d+)/$', pgweb.featurematrix.views.detail),

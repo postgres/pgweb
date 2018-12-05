@@ -13,7 +13,6 @@ class Event(models.Model):
 	country = models.ForeignKey(Country, null=True, blank=True)
 	language = models.ForeignKey(Language, null=True, blank=True, default='eng', help_text="Primary language for event. When multiple languages, specify this in the event description")
 
-	training = models.BooleanField(null=False, blank=False, default=False)
 	badged = models.BooleanField(null=False, blank=False, default=False, verbose_name='Community event', help_text='Choose "Community event" if this is a community recognized event following the <a href="/community/recognition/#conferences" target="_blank">community event guidelines</a>.')
 	description_for_badged = models.TextField(blank=True, null=True, verbose_name='Description for community event', help_text='DEPRECRATED: This was used in the beginning of community events to collect additional information.')
 	startdate = models.DateField(null=False, blank=False, verbose_name="Start date")

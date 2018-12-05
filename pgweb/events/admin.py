@@ -29,8 +29,8 @@ class EventAdminForm(forms.ModelForm):
 		return cleaned_data
 
 class EventAdmin(PgwebAdmin):
-	list_display = ('title', 'org', 'startdate', 'enddate', 'training', 'approved',)
-	list_filter = ('approved','training',)
+	list_display = ('title', 'org', 'startdate', 'enddate', 'approved',)
+	list_filter = ('approved',)
 	search_fields = ('summary', 'details', 'title', )
 	actions = [approve_event, ]
 	form = EventAdminForm
