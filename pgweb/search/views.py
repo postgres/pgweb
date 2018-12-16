@@ -289,10 +289,17 @@ def search(request):
 		hits = curs.fetchall()
 		conn.close()
 		totalhits = int(hits[-1][5])
+		try:
+			if quoted_suburl:
+				quoted_suburl = urllib.quote_plus(suburl)
+			else:
+				quoted_suburl = ''
+		except:
+			quoted_suburl = ''
 		querystr = "?q=%s&a=%s&u=%s" % (
 			urllib.quote_plus(query.encode('utf-8')),
 			allsites and "1" or "0",
-			suburl and urllib.quote_plus(suburl) or '',
+			quoted_suburl,
 			)
 
 		return render(request, 'search/sitesearch.html', {
