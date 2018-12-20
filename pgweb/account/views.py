@@ -3,7 +3,7 @@ from django.contrib.auth import login as django_login
 import django.contrib.auth.views as authviews
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import get_object_or_404
-from pgweb.util.decorators import login_required
+from pgweb.util.decorators import login_required, script_sources
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
@@ -293,6 +293,8 @@ def reset_complete(request):
 	log.info("Password reset completed for user from {0}".format(get_client_ip(request)))
 	return authviews.password_reset_complete(request, template_name='account/password_reset_complete.html')
 
+@script_sources('https://www.google.com/recaptcha/')
+@script_sources('https://www.gstatic.com/recaptcha/')
 def signup(request):
 	if request.user.is_authenticated():
 		return HttpServerError(request, "You must log out before you can sign up for a new account")

@@ -1,5 +1,8 @@
+from django.conf import settings
+
 from pgweb.util.templateloader import initialize_template_collection, get_all_templates
 
+from collections import OrderedDict
 import hashlib
 
 # Use thread local storage to pass the username down.
@@ -26,10 +29,42 @@ class PgMiddleware(object):
 		initialize_template_collection()
 
 	def process_response(self, request, response):
+		# Set xkey representing the templates that are in use so we can do efficient
+		# varnish purging on commits.
 		tlist = get_all_templates()
 		if 'base/esi.html' in tlist:
 			response['x-do-esi'] = "1"
 			tlist.remove('base/esi.html')
 		if tlist:
 			response['xkey'] = ' '.join(["pgwt_{0}".format(hashlib.md5(t).hexdigest()) for t in tlist])
+
+		# Set security headers
+		sources = OrderedDict([
+			('default', ["'self'", ]),
+			('img', ['*', ]),
+			('script', ["'self'", "www.google-analytics.com"]),
+			('media', ["'self'", ]),
+			('style', ["'self'", "fonts.googleapis.com"]),
+			('font', ["'self'", "fonts.gstatic.com"]),
+		])
+		if hasattr(response, 'x_allow_extra_sources'):
+			for k,v in response.x_allow_extra_sources.items():
+				sources[k].extend(v)
+
+		security_policies = ["{0}-src {1}".format(k," ".join(v)) for k,v in sources.items()]
+
+		if not getattr(response, 'x_allow_frames', False):
+			response['X-Frame-Options'] = 'DENY'
+			security_policies.append("frame-ancestors 'none'")
+
+		if hasattr(settings, 'SECURITY_POLICY_REPORT_URI'):
+			security_policies.append("report-uri " + settings.SECURITY_POLICY_REPORT_URI)
+
+		if security_policies:
+			if getattr(settings, 'SECURITY_POLICY_REPORT_ONLY', False):
+				response['Content-Security-Policy-Report-Only'] = " ; ".join(security_policies)
+			else:
+				response['Content-Security-Policy'] = " ; ".join(security_policies)
+
+		response['X-XSS-Protection'] = "1; mode=block"
 		return response
