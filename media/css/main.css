@@ -1208,6 +1208,30 @@ h1.subject {
     font-size: 1.2em;
 }
 
+/* Feature matrix */
+form#featurematrix_version_filter {
+    text-align: center;
+}
+input.featurematrix_version {
+    margin-right: 15px;
+}
+input.featurematrix_version:last-child {
+    margin-right: 0;
+}
+td.fm_no {
+    background-color: #ffdddd !important;
+}
+td.fm_yes {
+    background-color: #ddffdd !important;
+}
+td.fm_obs {
+    background-color: #ddddff !important;
+}
+td.fm_unk {
+    background-color: #ffffaa !important;
+}
+
+
 /** ALL RESPONSIVE QUERIES HERE */
 /* Small devices (landscape phones, 576px and up)*/
 
