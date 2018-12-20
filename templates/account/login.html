@@ -27,7 +27,7 @@ password, you can use the <a href="/account/reset/">password reset</a> form.
 
 {%if form.non_field_errors%}
 {%for err in form.non_field_errors %}
-<div style="color:red;">{{err}}</div>
+<div class="alert alert-danger">{{err}}</div>
 {%endfor%}
 {%endif%}
 <form action="." method="post" id="login-form">{% csrf_token %}

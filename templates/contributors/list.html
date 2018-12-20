@@ -9,12 +9,12 @@
 <h2>{{t.typename}}</h2>
 {%if t.extrainfo%}<p>{{t.extrainfo|safe}}</p>{%endif%}
 
-<table class="table table-striped">
+<table class="table table-striped contributor-table">
   <thead class="thead-light">
     {%if t.detailed%}
     <tr>
-     <th scope="col" style="width: 50%">Contributor</th>
-     <th scope="col" style="width: 50%">Contribution</th>
+     <th scope="col">Contributor</th>
+     <th scope="col">Contribution</th>
     </tr>
     {%endif%}
   </thead>

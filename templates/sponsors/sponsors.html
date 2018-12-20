@@ -15,19 +15,19 @@ for each company shown.</p>
         </table>
     {% endif %}
     <h2>{{ sponsor.sponsortype.typename }}</h2>
-    <table class="table table-striped">
+    <table class="table table-striped sponsor-table">
       <tbody>
         {% endifchanged%}
           <tr>
-            <th scope="row" style="width: 20%">
+            <th scope="row">
               <a href="{{ sponsor.url }}" target="_blank">
                 <img width="150" src="/media/img/about/sponsors/{{ sponsor.logoname }}" alt="{{ sponsor.name }}" />
               </a>
             </th>
-            <td style="width: 50%">
+            <td>
               <a href="{{ sponsor.url }}" target="_blank">{{ sponsor.name }}</a>
             </td>
-            <td style="width: 30%">{{ sponsor.country }}</td>
+            <td>{{ sponsor.country }}</td>
           </tr>
         {% endfor %}
     </tbody>

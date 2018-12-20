@@ -1069,6 +1069,10 @@ hr.eventseparator {
   cursor: pointer;
 }
 
+.btn-inline-block {
+    display: inline-block;
+}
+
 .form-row .btn-primary {
   margin: 0.5em 0;
 }
@@ -1229,6 +1233,41 @@ td.fm_obs {
 }
 td.fm_unk {
     background-color: #ffffaa !important;
+}
+
+/* Contributors */
+table.contributor-table thead tr th {
+    width: 50%;
+}
+
+/* Downloads/products */
+table.product-table thead tr th:nth-child(1) {
+    width: 60%;
+}
+table.product-table thead tr th:nth-child(2) {
+    width: 10%;
+}
+table.product-table thead tr th:nth-child(3) {
+    width: 10%;
+}
+table.product-table thead tr th:nth-child(4) {
+    width: 20%;
+}
+
+/* Professional servies */
+table.profserv-table tbody tr th {
+    width: 20%;
+}
+
+/* Sponsors */
+table.sponsor-table tbody tr th {
+    width: 20%;
+}
+table.sponsor-table tbody tr td:nth-child(2) {
+    width: 50%;
+}
+table.sponsor-table tbody tr td:nth-child(3) {
+    width: 30%;
 }
 
 
