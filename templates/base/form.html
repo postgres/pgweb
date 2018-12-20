@@ -36,7 +36,7 @@
           </div>
         </div>
       {% else %}{# field|ischeckbox #}
-        <div class="form-group">
+        <div class="form-group"{%if field|ismultiplecheckboxes%} data-cbtitles="{{described_checkboxes|dictlookup:field.name|json}}"{%endif%}>
           <div class="col-lg-12 {%if field|isrequired_error%} alert alert-danger{%endif%}">
             {% if not field|ismultiplecheckboxes %}
               <div class="form-check">
@@ -74,60 +74,13 @@
 
 {% block extrahead %}
 {{ block.super }}
-{%if toggle_fields or described_checkboxes or jquery %}
-<script type="text/javascript" src="/media/js/jquery.min.js"></script>
-{%endif%}
-{%if markdownfields%}
 <link rel="stylesheet" type="text/css" href="/media/css/showdown_preview.css" />
+{%endblock%}
+
+{%block extrascript%}
 <script type="text/javascript" src="/media/showdown/showdown.js"></script>
 <script type="text/javascript" src="/media/js/showdown_preview.js"></script>
-<script type="text/javascript">
-   window.onload = function() {
-      {%for mdf in markdownfields %}
-         attach_showdown_preview('id_{{mdf}}', 0);
-      {%endfor%}
-      {%for cbf, descs in described_checkboxes.items%}
-{%comment%}more than a little ugly, but django uses a sequence and not the id for the labels{%endcomment%}
-       var descs={
-{%for k,v in descs %}
-         '{{k}}': '{{v|escapejs}}',
-{%endfor%}
-       };
-       $('ul#id_{{cbf}} li').each(function (i,e) {
-          var id = $(e).find('input[type=checkbox]')[0].value;
-          e.title=descs[id];
-       });
-      {%endfor%}
-   }
-</script>
-{%if toggle_fields %}
-<script type="text/javascript">
-{%for f in toggle_fields%}
-function toggle_{{f.name}}() {
-   v = $('#id_{{f.name}}').prop('checked');
-{%for c in f.fields%}
-{%if f.invert%}
-   if (v) {
-{%else%}
-   if (!v) {
-{%endif%}
-      $('#id_{{c}}').attr('disabled', true).parents('.form-group').hide();
-   } else {
-      $('#id_{{c}}').removeAttr('disabled').parents('.form-group').show();
-   }
-{%endfor%}
-}
-$(document).ready(function() {
-   $('#id_{{f.name}}').change(function() {
-      toggle_{{f.name}}();
-   });
-   toggle_{{f.name}}();
-});
-{%endfor%}
-</script>
-{%endif%}{# toggle_fields #}
-{%endif%}{# markdownfields #}
-
+<script type="text/javascript" src="/media/js/forms.js"></script>
 {%if recaptcha%}
 <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>
 {%endif%}

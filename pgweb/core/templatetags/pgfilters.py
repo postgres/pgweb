@@ -1,5 +1,8 @@
 from django.template.defaultfilters import stringfilter
 from django import template
+import json
+
+
 register = template.Library()
 
 @register.filter(name='class_name')
@@ -8,7 +11,11 @@ def class_name(ob):
 
 @register.filter(is_safe=True)
 def field_class(value, arg):
-	return value.as_widget(attrs={"class": arg})
+	if 'class' in value.field.widget.attrs:
+		c = arg + ' ' + value.field.widget.attrs['class']
+	else:
+		c = arg
+	return value.as_widget(attrs={"class": c})
 
 @register.filter(name='hidemail')
 @stringfilter
@@ -44,3 +51,11 @@ def planet_title(obj):
 	# takes a ImportedRSSItem object from a Planet feed and extracts the info
 	# specific to the title of the Planet entry
 	return ":".join(obj.title.split(':')[1:])
+
+@register.filter(name='dictlookup')
+def dictlookup(value, key):
+    return value.get(key, None)
+
+@register.filter(name='json')
+def tojson(value):
+	return json.dumps(value)

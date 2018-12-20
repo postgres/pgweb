@@ -18,7 +18,7 @@ class NewsArticleForm(forms.ModelForm):
 	@property
 	def described_checkboxes(self):
 		return {
-			'tags': [(t.id, t.description) for t in NewsTag.objects.all()]
+			'tags': {t.id: t.description for t in NewsTag.objects.all()}
 		}
 
 	class Meta:

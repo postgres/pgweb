@@ -52,24 +52,22 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
 	if hasattr(form, 'filter_by_user'):
 		form.filter_by_user(request.user)
 
-	if hasattr(instancetype, 'markdown_fields'):
-		markdownfields = instancetype.markdown_fields
-	else:
-		markdownfields = None
+	for fn in form.fields:
+		if fn in getattr(instancetype, 'markdown_fields', []):
+			form.fields[fn].widget.attrs.update({'class': 'markdown-content'})
 
-	if hasattr(form, 'described_checkboxes'):
-		described_checkboxes = form.described_checkboxes
-	else:
-		described_checkboxes = None
+	for togg in getattr(form, 'toggle_fields', []):
+		form.fields[togg['name']].widget.attrs.update({
+			'data-toggles': ','.join(togg['fields']),
+			'data-toggle-invert': togg['invert'] and 'true' or 'false',
+			'class': 'toggle-checkbox',
+		})
 
 	return render_pgweb(request, navsection, formtemplate, {
 		'form': form,
 		'formitemtype': instance._meta.verbose_name,
-		'markdownfields': markdownfields,
-		'described_checkboxes': described_checkboxes,
 		'form_intro': hasattr(form, 'form_intro') and form.form_intro or None,
-		'toggle_fields': hasattr(form, 'toggle_fields') and form.toggle_fields or None,
-		'jquery': hasattr(form, 'jquery') and form.jquery or None,
+		'described_checkboxes': getattr(form, 'described_checkboxes', {}),
 		'savebutton': (itemid == "new") and "Submit New" or "Save",
 		'operation': (itemid == "new") and "New" or "Edit",
 	})
