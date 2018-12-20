@@ -11,15 +11,6 @@ The PostgreSQL project also maintains an <a href="#apt">apt repository</a> with 
 of PostgreSQL available.
 </p>
 
-<script type="text/javascript">
- <!--
- function updateSeries(select) {
-  var deb = document.getElementById('series-deb');
-  deb.innerHTML = select.value;
- }
- -->
-</script>
-
 <a name="apt"></a>
 <h2>PostgreSQL Apt Repository</h2>
 <p>
@@ -49,7 +40,7 @@ To use the apt repository, follow these steps:
 </p>
 <ol>
  <li>
-  <select id="field.series" name="field.series" class="custom-select" onchange='updateSeries(this);'>
+  <select id="field.series" name="field.series" class="custom-select" onchange='updateDebianSeries(this);'>
    <option selected="selected" value="YOUR_DEBIAN_VERSION_HERE">Choose your Debian version</option>
    <option value="stretch">Stretch (9.x)</option>
    <option value="jessie">Jessie (8.x)</option>

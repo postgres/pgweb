@@ -11,15 +11,6 @@ versions of PostgreSQL are available through the PostgreSQL apt
 repository.
 </p>
 
-<script type="text/javascript">
- <!--
- function updateSeries(select) {
-  var deb = document.getElementById('series-deb');
-  deb.innerHTML = select.value;
- }
- -->
-</script>
-
 <h2>PostgreSQL Apt Repository</h2>
 <p>
 If the version included in your version of Ubuntu is not the one you want,
@@ -50,7 +41,7 @@ To use the apt repository, follow these steps:
 </p>
 <ul>
   <li>
-    <select id="field.series" name="field.series" class="custom-select" onchange='updateSeries(this);'>
+    <select id="field.series" name="field.series" class="custom-select" onchange='updateDebianSeries(this);'>
       <option selected="selected" value="YOUR_UBUNTU_VERSION_HERE">Choose your Ubuntu version</option>
       <option value="bionic">Bionic (18.04)</option>
       <option value="xenial">Xenial (16.04)</option>
