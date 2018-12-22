@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.http import Http404
-from pgweb.util.decorators import login_required, allow_frames
+from pgweb.util.decorators import login_required, allow_frames, content_sources
 from django.db.models import Q
 from django.conf import settings
 
@@ -18,6 +18,7 @@ from models import DocPage
 from forms import DocCommentForm
 
 @allow_frames
+@content_sources('style', "'unsafe-inline'")
 def docpage(request, version, filename):
 	loaddate = None
 	# Get the current version both to map the /current/ url, and to later
