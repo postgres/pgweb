@@ -1222,6 +1222,9 @@ input.featurematrix_version {
 input.featurematrix_version:last-child {
     margin-right: 0;
 }
+hr#featurematrix_version_divider {
+    margin: 0;
+}
 td.fm_no {
     background-color: #ffdddd !important;
 }

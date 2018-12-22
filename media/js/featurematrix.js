@@ -2,27 +2,6 @@
  * Filter feature matrix
  */
 $(document).ready(function(){
-    var eol_versions = $('#feature-matrix-filter').data('eol').split(',');
-
-    // Create form to contain filter checkboxes
-    $('#feature-matrix-filter').html('<form id="featurematrix_version_filter"><h5>Filter by version</h5></form>');
-
-    // Generate a list of versions based on table column headers
-    $('table tr:first th').not('th:nth-child(1)').each(function(){
-        var version_class = $(this).text().replace('.', '');
-
-        // Only mark a box as checked if no in the EOL list
-        var checked = (eol_versions.indexOf($(this).text()) == -1 ? 'checked="checked"' : '');
-
-        $('form#featurematrix_version_filter').append('<label for="' + version_class + '">' + $(this).text()
-					+ '</label><input class="featurematrix_version" ' + checked + ' type="checkbox" id="toggle_' + version_class + '"/ value="' +
-          $(this).text() + '"/>&nbsp;');
-    });
-
-    // Add a checkbox to hide rows where all values are the same between
-    // displayed versions.  Default: checked.
-    $('form#featurematrix_version_filter').append('<hr style="margin: 0;" /> <label for="hide_unchanged">Hide unchanged features</label><input type="checkbox" id="hide_unchanged" />');
-
     // Show/hide column based on whether supplied checkbox is checked.
     function filter_version(checkbox)
     {

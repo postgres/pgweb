@@ -23,10 +23,10 @@ def root(request):
 	if currentgroup:
 		groups.append(currentgroup)
 
-	eol_versions = [v.tree for v in Version.objects.filter(supported=False, testing=False)]
+	versions = Version.objects.filter(tree__gte='8.1').order_by('-tree')
 	return render_pgweb(request, 'about', 'featurematrix/featurematrix.html', {
 		'groups': groups,
-		'eol_versions': eol_versions,
+		'versions': versions,
 	})
 
 def detail(request, featureid):
