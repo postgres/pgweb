@@ -126,7 +126,8 @@ def fallback(request, url):
 # Edit-forms for core objects
 @login_required
 def organisationform(request, itemid):
-	get_object_or_404(Organisation, pk=itemid, managers=request.user)
+	if itemid != 'new':
+		get_object_or_404(Organisation, pk=itemid, managers=request.user)
 
 	return simple_form(Organisation, itemid, request, OrganisationForm,
 					   redirect='/account/edit/organisations/')
