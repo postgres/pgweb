@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.http import HttpResponseNotModified
 from django.template import TemplateDoesNotExist, loader
@@ -126,6 +126,8 @@ def fallback(request, url):
 # Edit-forms for core objects
 @login_required
 def organisationform(request, itemid):
+	get_object_or_404(Organisation, pk=itemid, managers=request.user)
+
 	return simple_form(Organisation, itemid, request, OrganisationForm,
 					   redirect='/account/edit/organisations/')
 
