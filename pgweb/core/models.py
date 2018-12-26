@@ -179,7 +179,7 @@ def validate_sshkey(key):
 		if pieces[0] == 'ssh-dss':
 			raise ValidationError("For security reasons, ssh-dss keys are not supported")
 		if pieces[0] not in _valid_keytypes:
-			raise ValidationError("Only keys of types {0} are supported, not {1}.".format(", ".join(_valid_keytypes), pieces[0]))
+			raise ValidationError(u"Only keys of types {0} are supported, not {1}.".format(", ".join(_valid_keytypes), pieces[0]))
 		try:
 			base64.b64decode(pieces[1])
 		except:
