@@ -41,12 +41,12 @@ class PgMiddleware(object):
 		# Set security headers
 		sources = OrderedDict([
 			('default', ["'self'", ]),
-			('img', ['*', ]),
+			('img', ['*', 'data:', ]),
 			('script', ["'self'", "www.google-analytics.com", "ssl.google-analytics.com"]),
 			('connect', ["'self'", "www.google-analytics.com", "ssl.google-analytics.com"]),
 			('media', ["'self'", ]),
 			('style', ["'self'", "fonts.googleapis.com"]),
-			('font', ["'self'", "fonts.gstatic.com"]),
+			('font', ["'self'", "fonts.gstatic.com", "data:" ]),
 		])
 		if hasattr(response, 'x_allow_extra_sources'):
 			for k,v in response.x_allow_extra_sources.items():
