@@ -43,6 +43,7 @@ class PgMiddleware(object):
 			('default', ["'self'", ]),
 			('img', ['*', ]),
 			('script', ["'self'", "www.google-analytics.com", "ssl.google-analytics.com"]),
+			('connect', ["'self'", "www.google-analytics.com", "ssl.google-analytics.com"]),
 			('media', ["'self'", ]),
 			('style', ["'self'", "fonts.googleapis.com"]),
 			('font', ["'self'", "fonts.gstatic.com"]),
