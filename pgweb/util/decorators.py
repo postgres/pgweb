@@ -42,6 +42,9 @@ def content_sources(what, source):
 def script_sources(source):
 	return content_sources('script', source)
 
+def frame_sources(source):
+	return content_sources('frame', source)
+
 # A wrapped version of login_required that throws an exception if it's
 # used on a path that's not under /account/.
 def login_required(f):

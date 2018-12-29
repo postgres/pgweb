@@ -50,7 +50,10 @@ class PgMiddleware(object):
 		])
 		if hasattr(response, 'x_allow_extra_sources'):
 			for k,v in response.x_allow_extra_sources.items():
-				sources[k].extend(v)
+				if k in sources:
+					sources[k].extend(v)
+				else:
+					sources[k] = v
 
 		security_policies = ["{0}-src {1}".format(k," ".join(v)) for k,v in sources.items()]
 
