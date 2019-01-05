@@ -27,7 +27,9 @@ window.addEventListener("hashchange", shiftWindow);
 /*
  * Debian/Ubuntu download dropdowns
  */
-function updateDebianSeries(select) {
-    var deb = document.getElementById('series-deb');
-    deb.innerHTML = select.value;
-}
+$(function() {
+    $('select#debseries').change(function() {
+	var deb = document.getElementById('series-deb');
+	deb.innerHTML = $(this).val();
+    });
+});
