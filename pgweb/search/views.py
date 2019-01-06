@@ -290,7 +290,7 @@ def search(request):
 		conn.close()
 		totalhits = int(hits[-1][5])
 		try:
-			if quoted_suburl:
+			if suburl:
 				quoted_suburl = urllib.quote_plus(suburl)
 			else:
 				quoted_suburl = ''
