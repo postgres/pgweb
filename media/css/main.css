@@ -941,6 +941,21 @@ code,
     font-weight: 300;
 }
 
+#docContent .VARIABLELIST dt,
+#docContent .variablelist dt {
+    font-family: monospace;
+    font-weight: 300;
+}
+
+#docContent .variablelist dd {
+    margin-top: 1rem;
+}
+
+#docContent .VARIABLELIST dd,
+#docContent .variablelist dd {
+    margin-inline-start: 2rem;
+}
+
 #docContent ul.itemizedlist {
     margin-left: 2.5rem;
 }
