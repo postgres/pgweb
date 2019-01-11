@@ -59,6 +59,10 @@ h3 {
     text-transform: capitalize !important;
 }
 
+.h5, h5 {
+    font-size: 0.98rem;
+}
+
 #pgContentWrap h2:after, #pgSideNav h2:after {
     background-color: #e7eae8;
     content: '\a0';
