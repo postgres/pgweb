@@ -118,7 +118,7 @@ def search(request):
         allsites = request.GET.get('a', None) == "1"
 
     # Check that we actually have something to search for
-    if request.GET.get('q', '') != '':
+    if request.GET.get('q', '') == '':
         if searchlists:
             return render(request, 'search/listsearch.html', {
                 'search_error': "No search term specified.",
