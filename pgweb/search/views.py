@@ -142,7 +142,7 @@ def search(request):
 
     # Is the request being paged?
     try:
-        pageum = int(request.GET.get('p', 1))
+        pagenum = int(request.GET.get('p', 1))
     except:
         pagenum = 1
 
