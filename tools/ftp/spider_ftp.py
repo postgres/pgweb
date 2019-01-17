@@ -30,8 +30,10 @@ def read_file(fn):
 def parse_directory(dirname, rootlen):
     mynode = {}
     for f in os.listdir(dirname):
-        if f.startswith(".") and not f == ".message": continue
-        if f == "sync_timestamp": continue
+        if f.startswith(".") and not f == ".message":
+            continue
+        if f == "sync_timestamp":
+            continue
 
         fn = os.path.join(dirname, f)
         if os.path.isdir(fn):
@@ -72,7 +74,8 @@ def Usage():
     sys.exit(1)
 
 
-if len(sys.argv) != 3: Usage()
+if len(sys.argv) != 3:
+    Usage()
 
 parse_directory(sys.argv[1], len(sys.argv[1]))
 

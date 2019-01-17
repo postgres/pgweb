@@ -20,4 +20,5 @@ def get_all_pages_struct(method='get_struct'):
                 continue
 
             if hasattr(m, method):
-                for x in getattr(m, method)(): yield x
+                for x in getattr(m, method)():
+                    yield x

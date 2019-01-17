@@ -43,7 +43,8 @@ def _get_full_text_diff(obj, oldobj):
             )
         )
     ) for n in fieldlist if _get_attr_value(oldobj, n) != _get_attr_value(obj, n)])
-    if not s: return None
+    if not s:
+        return None
     return s
 
 

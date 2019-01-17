@@ -92,7 +92,8 @@ class PgXmlHelper(django.utils.xmlutils.SimplerXMLGenerator):
         self.skipempty = skipempty
 
     def add_xml_element(self, name, value):
-        if self.skipempty and value == '': return
+        if self.skipempty and value == '':
+            return
         self.startElement(name, {})
         self.characters(value)
         self.endElement(name)

@@ -55,7 +55,8 @@ def load_doc_file(filename, f):
         title = tm.group(1)
     else:
         title = ""
-    if not quiet: print "--- file: %s (%s) ---" % (filename, title)
+    if not quiet:
+        print "--- file: %s (%s) ---" % (filename, title)
 
     s = tidy.parseString(contents.encode('utf-8'), **tidyopts)
     curs.execute("INSERT INTO docs (file, version, title, content) VALUES (%(f)s, %(v)s, %(t)s, %(c)s)", {
@@ -119,7 +120,8 @@ for member in tf:
         for inner_member in inner_tar:
             # Some old versions have index.html as a symlink - so let's
             # just ignore all symlinks to be on the safe side.
-            if inner_member.issym(): continue
+            if inner_member.issym():
+                continue
 
             if inner_member.name.endswith('.html') or inner_member.name.endswith('.htm'):
                 load_doc_file(inner_member.name, inner_tar.extractfile(inner_member))
@@ -140,4 +142,5 @@ if iscurrent:
 connection.commit()
 connection.close()
 
-if not quiet: print "Done (%i pages)." % pagecount
+if not quiet:
+    print "Done (%i pages)." % pagecount

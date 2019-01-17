@@ -37,7 +37,8 @@ class Survey(models.Model):
     def questions(self):
         for i in range(1, 9):
             v = getattr(self, "opt%s" % i)
-            if not v: break
+            if not v:
+                break
             yield SurveyQuestion(i, v)
 
     @property
@@ -62,7 +63,8 @@ class Survey(models.Model):
     def _get_complete_answers(self):
         for i in range(1, 9):
             q = getattr(self, "opt%s" % i)
-            if not q: break
+            if not q:
+                break
             n = getattr(self.answers, "tot%s" % i)
             yield (q, n)
 
