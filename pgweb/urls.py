@@ -83,6 +83,7 @@ urlpatterns = [
 	url(r'^account/submitbug/$', pgweb.misc.views.submitbug),
 	url(r'^support/submitbug/$', RedirectView.as_view(url='/account/submitbug/', permanent=True)),
 	url(r'^support/versioning/$', pgweb.core.views.versions),
+	url(r'^bugs_redir/(\d+)/$', pgweb.misc.views.bugs_redir),
 
 	url(r'^about/sponsors/$', pgweb.sponsors.views.sponsors),
 	url(r'^about/servers/$', pgweb.sponsors.views.servers),

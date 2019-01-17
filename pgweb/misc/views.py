@@ -1,6 +1,7 @@
 from pgweb.util.decorators import login_required
-from django.http import HttpResponse
-from django.db import connection
+from django.http import HttpResponse, HttpResponseRedirect
+from django.db import connection, transaction
+from django.shortcuts import get_object_or_404
 from django.conf import settings
 
 import os
@@ -12,6 +13,7 @@ from pgweb.util.helpers import template_to_string
 from pgweb.util.misc import send_template_mail
 
 from pgweb.core.models import Version
+from pgweb.misc.models import BugIdMap
 
 from forms import SubmitBugForm
 
@@ -26,29 +28,34 @@ def submitbug(request):
 	if request.method == 'POST':
 		form = SubmitBugForm(request.POST)
 		if form.is_valid():
-			c = connection.cursor()
-			c.execute("SELECT nextval('bug_id_seq')")
-			bugid = c.fetchall()[0][0]
+			with transaction.atomic():
+				c = connection.cursor()
+				c.execute("SELECT nextval('bug_id_seq')")
+				bugid = c.fetchall()[0][0]
 
-			send_template_mail(
-				settings.BUGREPORT_NOREPLY_EMAIL,
-				settings.BUGREPORT_EMAIL,
-				'BUG #%s: %s' % (bugid, form.cleaned_data['shortdesc']),
-				'misc/bugmail.txt',
-				{
+				messageid = _make_bugs_messageid(bugid)
+
+				BugIdMap(id=bugid, messageid=messageid.strip('<>')).save()
+
+				send_template_mail(
+					settings.BUGREPORT_NOREPLY_EMAIL,
+					settings.BUGREPORT_EMAIL,
+					'BUG #%s: %s' % (bugid, form.cleaned_data['shortdesc']),
+					'misc/bugmail.txt',
+					{
+						'bugid': bugid,
+						'bug': form.cleaned_data,
+					},
+					usergenerated=True,
+					cc=form.cleaned_data['email'],
+					replyto='%s, %s' % (form.cleaned_data['email'], settings.BUGREPORT_EMAIL),
+					sendername="PG Bug reporting form",
+					messageid=messageid,
+				)
+
+				return render_pgweb(request, 'support', 'misc/bug_completed.html', {
 					'bugid': bugid,
-					'bug': form.cleaned_data,
-				},
-				usergenerated=True,
-				cc=form.cleaned_data['email'],
-				replyto='%s, %s' % (form.cleaned_data['email'], settings.BUGREPORT_EMAIL),
-				sendername="PG Bug reporting form",
-				messageid=_make_bugs_messageid(bugid),
-			)
-
-			return render_pgweb(request, 'support', 'misc/bug_completed.html', {
-				'bugid': bugid,
-			})
+				})
 	else:
 		form = SubmitBugForm(initial={
 			'name': '%s %s' % (request.user.first_name, request.user.last_name),
@@ -68,6 +75,11 @@ def submitbug(request):
 		'savebutton': 'Submit and Send Email',
 	})
 
+
+def bugs_redir(request, bugid):
+	r = get_object_or_404(BugIdMap, id=bugid)
+
+	return HttpResponseRedirect("{0}/message-id/{1}".format(settings.SITE_ROOT, r.messageid))
 
 # A crash testing URL. If the file /tmp/crashtest exists, raise a http 500
 # error. Otherwise, just return a fixed text response
