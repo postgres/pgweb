@@ -53,9 +53,7 @@ def submitbug(request):
 					messageid=messageid,
 				)
 
-				return render_pgweb(request, 'support', 'misc/bug_completed.html', {
-					'bugid': bugid,
-				})
+				return HttpResponseRedirect("/account/submitbug/{0}/".format(bugid))
 	else:
 		form = SubmitBugForm(initial={
 			'name': '%s %s' % (request.user.first_name, request.user.last_name),
@@ -75,6 +73,11 @@ def submitbug(request):
 		'savebutton': 'Submit and Send Email',
 	})
 
+@login_required
+def submitbug_done(request, bugid):
+	return render_pgweb(request, 'support', 'misc/bug_completed.html', {
+		'bugid': bugid,
+	})
 
 def bugs_redir(request, bugid):
 	r = get_object_or_404(BugIdMap, id=bugid)
