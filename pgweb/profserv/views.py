@@ -17,44 +17,44 @@ regions = (
 )
 
 def root(request, servtype):
-	title = servtype=='support' and 'Professional Services' or 'Hosting Providers'
-	what = servtype=='support' and 'support' or 'hosting'
-	support = servtype=='support'
-	return render_pgweb(request, 'support', 'profserv/root.html', {
-		'title': title,
-		'support': support,
-		'regions': regions,
-		'what': what,
-	})
+    title = servtype=='support' and 'Professional Services' or 'Hosting Providers'
+    what = servtype=='support' and 'support' or 'hosting'
+    support = servtype=='support'
+    return render_pgweb(request, 'support', 'profserv/root.html', {
+        'title': title,
+        'support': support,
+        'regions': regions,
+        'what': what,
+    })
 
 
 def region(request, servtype, regionname):
-	regname = [n for r,n in regions if r==regionname]
-	if not regname:
-		raise Http404
-	regname = regname[0]
+    regname = [n for r,n in regions if r==regionname]
+    if not regname:
+        raise Http404
+    regname = regname[0]
 
-	what = servtype=='support' and 'support' or 'hosting'
-	whatname = servtype=='support' and 'Professional Services' or 'Hosting Providers'
-	title = "%s - %s" % (whatname, regname)
-	support = servtype=='support'
+    what = servtype=='support' and 'support' or 'hosting'
+    whatname = servtype=='support' and 'Professional Services' or 'Hosting Providers'
+    title = "%s - %s" % (whatname, regname)
+    support = servtype=='support'
 
-	# DB model is a bit funky here, so use the extra-where functionality to filter properly.
-	# Field names are cleaned up earlier, so it's safe against injections.
-	services = ProfessionalService.objects.select_related('org').filter(approved=True).extra(where=["region_%s AND provides_%s" % (regionname, what),])
+    # DB model is a bit funky here, so use the extra-where functionality to filter properly.
+    # Field names are cleaned up earlier, so it's safe against injections.
+    services = ProfessionalService.objects.select_related('org').filter(approved=True).extra(where=["region_%s AND provides_%s" % (regionname, what),])
 
-	return render_pgweb(request, 'support', 'profserv/list.html', {
-		'title': title,
-		'support': support,
-		'what': what,
-		'whatname': whatname,
-		'regionname': regname,
-		'services': services,
-	})
+    return render_pgweb(request, 'support', 'profserv/list.html', {
+        'title': title,
+        'support': support,
+        'what': what,
+        'whatname': whatname,
+        'regionname': regname,
+        'services': services,
+    })
 
 
 # Forms to edit
 @login_required
 def profservform(request, itemid):
-	return simple_form(ProfessionalService, itemid, request, ProfessionalServiceForm,
-					   redirect='/account/edit/services/')
+    return simple_form(ProfessionalService, itemid, request, ProfessionalServiceForm,
+                       redirect='/account/edit/services/')

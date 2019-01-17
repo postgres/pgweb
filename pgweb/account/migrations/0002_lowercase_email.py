@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-		migrations.RunSQL("UPDATE auth_user SET email=lower(email) WHERE email!=lower(email)"),
-		migrations.RunSQL("ALTER TABLE auth_user ADD CONSTRAINT email_must_be_lowercase CHECK (email=lower(email))"),
-		migrations.RunSQL("CREATE UNIQUE INDEX auth_user_email_lower_key ON auth_user USING btree(lower(email))"),
+        migrations.RunSQL("UPDATE auth_user SET email=lower(email) WHERE email!=lower(email)"),
+        migrations.RunSQL("ALTER TABLE auth_user ADD CONSTRAINT email_must_be_lowercase CHECK (email=lower(email))"),
+        migrations.RunSQL("CREATE UNIQUE INDEX auth_user_email_lower_key ON auth_user USING btree(lower(email))"),
     ]

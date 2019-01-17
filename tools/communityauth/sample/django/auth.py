@@ -36,10 +36,10 @@ from Crypto import Random
 import time
 
 class AuthBackend(ModelBackend):
-	# We declare a fake backend that always fails direct authentication -
-	# since we should never be using direct authentication in the first place!
-	def authenticate(self, username=None, password=None):
-		raise Exception("Direct authentication not supported")
+    # We declare a fake backend that always fails direct authentication -
+    # since we should never be using direct authentication in the first place!
+    def authenticate(self, username=None, password=None):
+        raise Exception("Direct authentication not supported")
 
 
 ####
@@ -48,90 +48,90 @@ class AuthBackend(ModelBackend):
 
 # Handle login requests by sending them off to the main site
 def login(request):
-	if not hasattr(settings, 'PGAUTH_REDIRECT'):
-		# No pgauth installed, so allow local installs.
-		from django.contrib.auth.views import login
-		return login(request, template_name='admin.html')
+    if not hasattr(settings, 'PGAUTH_REDIRECT'):
+        # No pgauth installed, so allow local installs.
+        from django.contrib.auth.views import login
+        return login(request, template_name='admin.html')
 
-	if request.GET.has_key('next'):
-		# Put together an url-encoded dict of parameters we're getting back,
-		# including a small nonce at the beginning to make sure it doesn't
-		# encrypt the same way every time.
-		s = "t=%s&%s" % (int(time.time()), urllib.urlencode({'r': request.GET['next']}))
-		# Now encrypt it
-		r = Random.new()
-		iv = r.read(16)
-		encryptor = AES.new(SHA.new(settings.SECRET_KEY).digest()[:16], AES.MODE_CBC, iv)
-		cipher = encryptor.encrypt(s + ' ' * (16-(len(s) % 16))) # pad to 16 bytes
+    if request.GET.has_key('next'):
+        # Put together an url-encoded dict of parameters we're getting back,
+        # including a small nonce at the beginning to make sure it doesn't
+        # encrypt the same way every time.
+        s = "t=%s&%s" % (int(time.time()), urllib.urlencode({'r': request.GET['next']}))
+        # Now encrypt it
+        r = Random.new()
+        iv = r.read(16)
+        encryptor = AES.new(SHA.new(settings.SECRET_KEY).digest()[:16], AES.MODE_CBC, iv)
+        cipher = encryptor.encrypt(s + ' ' * (16-(len(s) % 16))) # pad to 16 bytes
 
-		return HttpResponseRedirect("%s?d=%s$%s" % (
-				settings.PGAUTH_REDIRECT,
-			    base64.b64encode(iv, "-_"),
-			    base64.b64encode(cipher, "-_"),
-				))
-	else:
-		return HttpResponseRedirect(settings.PGAUTH_REDIRECT)
+        return HttpResponseRedirect("%s?d=%s$%s" % (
+                settings.PGAUTH_REDIRECT,
+                base64.b64encode(iv, "-_"),
+                base64.b64encode(cipher, "-_"),
+                ))
+    else:
+        return HttpResponseRedirect(settings.PGAUTH_REDIRECT)
 
 # Handle logout requests by logging out of this site and then
 # redirecting to log out from the main site as well.
 def logout(request):
-	if request.user.is_authenticated():
-		django_logout(request)
-	return HttpResponseRedirect("%slogout/" % settings.PGAUTH_REDIRECT)
+    if request.user.is_authenticated():
+        django_logout(request)
+    return HttpResponseRedirect("%slogout/" % settings.PGAUTH_REDIRECT)
 
 # Receive an authentication response from the main website and try
 # to log the user in.
 def auth_receive(request):
-	if request.GET.has_key('s') and request.GET['s'] == "logout":
-		# This was a logout request
-		return HttpResponseRedirect('/')
+    if request.GET.has_key('s') and request.GET['s'] == "logout":
+        # This was a logout request
+        return HttpResponseRedirect('/')
 
-	if not request.GET.has_key('i'):
-		return HttpResponse("Missing IV in url!", status=400)
-	if not request.GET.has_key('d'):
-		return HttpResponse("Missing data in url!", status=400)
+    if not request.GET.has_key('i'):
+        return HttpResponse("Missing IV in url!", status=400)
+    if not request.GET.has_key('d'):
+        return HttpResponse("Missing data in url!", status=400)
 
-	# Set up an AES object and decrypt the data we received
-	decryptor = AES.new(base64.b64decode(settings.PGAUTH_KEY),
-						AES.MODE_CBC,
-						base64.b64decode(str(request.GET['i']), "-_"))
-	s = decryptor.decrypt(base64.b64decode(str(request.GET['d']), "-_")).rstrip(' ')
+    # Set up an AES object and decrypt the data we received
+    decryptor = AES.new(base64.b64decode(settings.PGAUTH_KEY),
+                        AES.MODE_CBC,
+                        base64.b64decode(str(request.GET['i']), "-_"))
+    s = decryptor.decrypt(base64.b64decode(str(request.GET['d']), "-_")).rstrip(' ')
 
-	# Now un-urlencode it
-	try:
-		data = urlparse.parse_qs(s, strict_parsing=True)
-	except ValueError:
-		return HttpResponse("Invalid encrypted data received.", status=400)
+    # Now un-urlencode it
+    try:
+        data = urlparse.parse_qs(s, strict_parsing=True)
+    except ValueError:
+        return HttpResponse("Invalid encrypted data received.", status=400)
 
-	# Check the timestamp in the authentication
-	if (int(data['t'][0]) < time.time() - 10):
-		return HttpResponse("Authentication token too old.", status=400)
+    # Check the timestamp in the authentication
+    if (int(data['t'][0]) < time.time() - 10):
+        return HttpResponse("Authentication token too old.", status=400)
 
-	# Update the user record (if any)
-	try:
-		user = User.objects.get(username=data['u'][0])
-		# User found, let's see if any important fields have changed
-		changed = False
-		if user.first_name != data['f'][0]:
-			user.first_name = data['f'][0]
-			changed = True
-		if user.last_name != data['l'][0]:
-			user.last_name = data['l'][0]
-			changed = True
-		if user.email != data['e'][0]:
-			user.email = data['e'][0]
-			changed= True
-		if changed:
-			user.save()
-	except User.DoesNotExist:
-		# User not found, create it!
+    # Update the user record (if any)
+    try:
+        user = User.objects.get(username=data['u'][0])
+        # User found, let's see if any important fields have changed
+        changed = False
+        if user.first_name != data['f'][0]:
+            user.first_name = data['f'][0]
+            changed = True
+        if user.last_name != data['l'][0]:
+            user.last_name = data['l'][0]
+            changed = True
+        if user.email != data['e'][0]:
+            user.email = data['e'][0]
+            changed= True
+        if changed:
+            user.save()
+    except User.DoesNotExist:
+        # User not found, create it!
 
-		# NOTE! We have some legacy users where there is a user in
-		# the database with a different userid. Instead of trying to
-		# somehow fix that live, give a proper error message and
-		# have somebody look at it manually.
-		if User.objects.filter(email=data['e'][0]).exists():
-			return HttpResponse("""A user with email %s already exists, but with
+        # NOTE! We have some legacy users where there is a user in
+        # the database with a different userid. Instead of trying to
+        # somehow fix that live, give a proper error message and
+        # have somebody look at it manually.
+        if User.objects.filter(email=data['e'][0]).exists():
+            return HttpResponse("""A user with email %s already exists, but with
 a different username than %s.
 
 This is almost certainly caused by some legacy data in our database.
@@ -142,51 +142,51 @@ for you.
 We apologize for the inconvenience.
 """ % (data['e'][0], data['u'][0]), content_type='text/plain')
 
-		if hasattr(settings, 'PGAUTH_CREATEUSER_CALLBACK'):
-			res = getattr(settings, 'PGAUTH_CREATEUSER_CALLBACK')(
-				data['u'][0],
-				data['e'][0],
-				['f'][0],
-				data['l'][0],
-			)
-			# If anything is returned, we'll return that as our result.
-			# If None is returned, it means go ahead and create the user.
-			if res:
-				return res
+        if hasattr(settings, 'PGAUTH_CREATEUSER_CALLBACK'):
+            res = getattr(settings, 'PGAUTH_CREATEUSER_CALLBACK')(
+                data['u'][0],
+                data['e'][0],
+                ['f'][0],
+                data['l'][0],
+            )
+            # If anything is returned, we'll return that as our result.
+            # If None is returned, it means go ahead and create the user.
+            if res:
+                return res
 
-		user = User(username=data['u'][0],
-					first_name=data['f'][0],
-					last_name=data['l'][0],
-					email=data['e'][0],
-					password='setbypluginnotasha1',
-					)
-		user.save()
+        user = User(username=data['u'][0],
+                    first_name=data['f'][0],
+                    last_name=data['l'][0],
+                    email=data['e'][0],
+                    password='setbypluginnotasha1',
+                    )
+        user.save()
 
-	# Ok, we have a proper user record. Now tell django that
-	# we're authenticated so it persists it in the session. Before
-	# we do that, we have to annotate it with the backend information.
-	user.backend = "%s.%s" % (AuthBackend.__module__, AuthBackend.__name__)
-	django_login(request, user)
+    # Ok, we have a proper user record. Now tell django that
+    # we're authenticated so it persists it in the session. Before
+    # we do that, we have to annotate it with the backend information.
+    user.backend = "%s.%s" % (AuthBackend.__module__, AuthBackend.__name__)
+    django_login(request, user)
 
-	# Finally, check of we have a data package that tells us where to
-	# redirect the user.
-	if data.has_key('d'):
-		(ivs, datas) = data['d'][0].split('$')
-		decryptor = AES.new(SHA.new(settings.SECRET_KEY).digest()[:16],
-							AES.MODE_CBC,
-							base64.b64decode(ivs, "-_"))
-		s = decryptor.decrypt(base64.b64decode(datas, "-_")).rstrip(' ')
-		try:
-			rdata = urlparse.parse_qs(s, strict_parsing=True)
-		except ValueError:
-			return HttpResponse("Invalid encrypted data received.", status=400)
-		if rdata.has_key('r'):
-			# Redirect address
-			return HttpResponseRedirect(rdata['r'][0])
-	# No redirect specified, see if we have it in our settings
-	if hasattr(settings, 'PGAUTH_REDIRECT_SUCCESS'):
-		return HttpResponseRedirect(settings.PGAUTH_REDIRECT_SUCCESS)
-	return HttpResponse("Authentication successful, but don't know where to redirect!", status=500)
+    # Finally, check of we have a data package that tells us where to
+    # redirect the user.
+    if data.has_key('d'):
+        (ivs, datas) = data['d'][0].split('$')
+        decryptor = AES.new(SHA.new(settings.SECRET_KEY).digest()[:16],
+                            AES.MODE_CBC,
+                            base64.b64decode(ivs, "-_"))
+        s = decryptor.decrypt(base64.b64decode(datas, "-_")).rstrip(' ')
+        try:
+            rdata = urlparse.parse_qs(s, strict_parsing=True)
+        except ValueError:
+            return HttpResponse("Invalid encrypted data received.", status=400)
+        if rdata.has_key('r'):
+            # Redirect address
+            return HttpResponseRedirect(rdata['r'][0])
+    # No redirect specified, see if we have it in our settings
+    if hasattr(settings, 'PGAUTH_REDIRECT_SUCCESS'):
+        return HttpResponseRedirect(settings.PGAUTH_REDIRECT_SUCCESS)
+    return HttpResponse("Authentication successful, but don't know where to redirect!", status=500)
 
 
 # Perform a search in the central system. Note that the results are returned as an
@@ -197,29 +197,29 @@ We apologize for the inconvenience.
 # Unlike the authentication, searching does not involve the browser - we just make
 # a direct http call.
 def user_search(searchterm=None, userid=None):
-	# If upstream isn't responding quickly, it's not going to respond at all, and
-	# 10 seconds is already quite long.
-	socket.setdefaulttimeout(10)
-	if userid:
-		q = {'u': userid}
-	else:
-		q = {'s': searchterm}
+    # If upstream isn't responding quickly, it's not going to respond at all, and
+    # 10 seconds is already quite long.
+    socket.setdefaulttimeout(10)
+    if userid:
+        q = {'u': userid}
+    else:
+        q = {'s': searchterm}
 
-	u = urllib.urlopen('%ssearch/?%s' % (
-		settings.PGAUTH_REDIRECT,
-		urllib.urlencode(q),
-		))
-	(ivs, datas) = u.read().split('&')
-	u.close()
+    u = urllib.urlopen('%ssearch/?%s' % (
+        settings.PGAUTH_REDIRECT,
+        urllib.urlencode(q),
+        ))
+    (ivs, datas) = u.read().split('&')
+    u.close()
 
-	# Decryption time
-	decryptor = AES.new(base64.b64decode(settings.PGAUTH_KEY),
-						AES.MODE_CBC,
-						base64.b64decode(ivs, "-_"))
-	s = decryptor.decrypt(base64.b64decode(datas, "-_")).rstrip(' ')
-	j = json.loads(s)
+    # Decryption time
+    decryptor = AES.new(base64.b64decode(settings.PGAUTH_KEY),
+                        AES.MODE_CBC,
+                        base64.b64decode(ivs, "-_"))
+    s = decryptor.decrypt(base64.b64decode(datas, "-_")).rstrip(' ')
+    j = json.loads(s)
 
-	return j
+    return j
 
 # Import a user into the local authentication system. Will initially
 # make a search for it, and if anything other than one entry is returned
@@ -230,18 +230,18 @@ def user_search(searchterm=None, userid=None):
 # The call to this function should normally be wrapped in a transaction,
 # and this function itself will make no attempt to do anything about that.
 def user_import(uid):
-	u = user_search(userid=uid)
-	if len(u) != 1:
-		raise Exception("Internal error, duplicate or no user found")
+    u = user_search(userid=uid)
+    if len(u) != 1:
+        raise Exception("Internal error, duplicate or no user found")
 
-	u = u[0]
+    u = u[0]
 
-	if User.objects.filter(username=u['u']).exists():
-		raise Exception("User already exists")
+    if User.objects.filter(username=u['u']).exists():
+        raise Exception("User already exists")
 
-	User(username=u['u'],
-		 first_name=u['f'],
-		 last_name=u['l'],
-		 email=u['e'],
-		 password='setbypluginnotsha1',
-		 ).save()
+    User(username=u['u'],
+         first_name=u['f'],
+         last_name=u['l'],
+         email=u['e'],
+         password='setbypluginnotsha1',
+         ).save()

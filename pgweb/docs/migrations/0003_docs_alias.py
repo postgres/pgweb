@@ -23,5 +23,5 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'Doc page aliases',
             },
         ),
-		migrations.RunSQL("CREATE UNIQUE INDEX docsalias_unique ON docsalias (LEAST(file1, file2), GREATEST(file1, file2))"),
+        migrations.RunSQL("CREATE UNIQUE INDEX docsalias_unique ON docsalias (LEAST(file1, file2), GREATEST(file1, file2))"),
     ]

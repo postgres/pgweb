@@ -16,5 +16,5 @@ class Migration(migrations.Migration):
             name='v10',
             field=models.IntegerField(default=0, verbose_name=b'10', choices=[(0, b'No'), (1, b'Yes'), (2, b'Obsolete'), (3, b'?')]),
         ),
-		migrations.RunSQL("UPDATE featurematrix_feature SET v10=v96 WHERE NOT v10=v96"),
+        migrations.RunSQL("UPDATE featurematrix_feature SET v10=v96 WHERE NOT v10=v96"),
     ]

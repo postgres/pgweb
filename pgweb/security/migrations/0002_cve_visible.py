@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='cve_visible',
             field=models.BooleanField(default=True),
         ),
-		migrations.AlterField(
+        migrations.AlterField(
             model_name='securitypatch',
             name='cve_visible',
             field=models.BooleanField(default=False),

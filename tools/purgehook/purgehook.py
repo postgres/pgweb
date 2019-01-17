@@ -14,27 +14,27 @@ import psycopg2
 
 # Templates that we don't want to ban automatically
 BANNED_TEMPLATES=(
-	'base/base.html',
+    'base/base.html',
 )
 
 if __name__ == "__main__":
-	config = ConfigParser()
-	config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'purgehook.ini'))
-	conn = psycopg2.connect(config.get('db', 'dsn'))
-	curs = conn.cursor()
+    config = ConfigParser()
+    config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'purgehook.ini'))
+    conn = psycopg2.connect(config.get('db', 'dsn'))
+    curs = conn.cursor()
 
-	for l in sys.stdin:
-		if l.startswith('templates/'):
-			tmpl = l[len('templates/'):].strip()
-			if not tmpl in BANNED_TEMPLATES:
-				curs.execute("SELECT varnish_purge_xkey(%(key)s)", {
-					'key': 'pgwt_{0}'.format(hashlib.md5(tmpl).hexdigest()),
-				})
-		elif l.startswith('media/'):
-			# For media we can't xkey, but the URL is exact so we can
-			# use a classic single-url purge.
-			curs.execute("SELECT varnish_purge('^/' || %(u)s || '$')", {
-				'u': l.strip(),
-			})
-	conn.commit()
-	conn.close()
+    for l in sys.stdin:
+        if l.startswith('templates/'):
+            tmpl = l[len('templates/'):].strip()
+            if not tmpl in BANNED_TEMPLATES:
+                curs.execute("SELECT varnish_purge_xkey(%(key)s)", {
+                    'key': 'pgwt_{0}'.format(hashlib.md5(tmpl).hexdigest()),
+                })
+        elif l.startswith('media/'):
+            # For media we can't xkey, but the URL is exact so we can
+            # use a classic single-url purge.
+            curs.execute("SELECT varnish_purge('^/' || %(u)s || '$')", {
+                'u': l.strip(),
+            })
+    conn.commit()
+    conn.close()

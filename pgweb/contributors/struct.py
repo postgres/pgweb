@@ -1,2 +1,2 @@
 def get_struct():
-	yield ('community/contributors/', None)
+    yield ('community/contributors/', None)

@@ -7,16 +7,16 @@ from multiprocessing import Process
 # NOTE! Database connections and similar objects must be instantiated
 # in the subprocess, and not in the master, to be fully safe!
 def threadwrapper(func, *args):
-	p = Process(target=func, args=args)
-	p.start()
+    p = Process(target=func, args=args)
+    p.start()
 
-	# Wait for the child to exit, or if an interrupt signal is delivered,
-	# forcibly terminate the child.
-	try:
-		p.join()
-	except KeyboardInterrupt, e:
-		print "Keyboard interrupt, terminating child process!"
-		p.terminate()
-	except Exception, e:
-		print "Exception %s, terminating child process!" % e
-		p.terminate()
+    # Wait for the child to exit, or if an interrupt signal is delivered,
+    # forcibly terminate the child.
+    try:
+        p.join()
+    except KeyboardInterrupt, e:
+        print "Keyboard interrupt, terminating child process!"
+        p.terminate()
+    except Exception, e:
+        print "Exception %s, terminating child process!" % e
+        p.terminate()

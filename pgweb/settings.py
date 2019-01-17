@@ -3,17 +3,17 @@
 DEBUG = False
 
 ADMINS = (
-	('PostgreSQL Webmaster', 'webmaster@postgresql.org'),
+    ('PostgreSQL Webmaster', 'webmaster@postgresql.org'),
 )
 
 MANAGERS = ADMINS
 
 DATABASES={
-	'default': {
-		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME': 'pgweb',
-		}
-	}
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'pgweb',
+        }
+    }
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -43,7 +43,7 @@ MEDIA_URL = ''
 STATIC_URL = '/media/'
 
 STATICFILES_DIRS = (
-	'media/',
+    'media/',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -52,7 +52,7 @@ SECRET_KEY = 'REALLYCHANGETHISINSETTINGS_LOCAL.PY'
 MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-	'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'pgweb.util.middleware.PgMiddleware',
@@ -63,21 +63,21 @@ CSRF_FAILURE_VIEW='pgweb.core.views.csrf_failure'
 ROOT_URLCONF = 'pgweb.urls'
 
 TEMPLATES = [{
-	'BACKEND': 'django.template.backends.django.DjangoTemplates',
-	'DIRS': ['templates', ],
-	'OPTIONS': {
-		'context_processors': [
-			'django.contrib.auth.context_processors.auth',
-			'django.contrib.messages.context_processors.messages',
-			'django.template.context_processors.media',
-			'pgweb.util.contexts.PGWebContextProcessor',
-		],
-		'loaders': [
-			'pgweb.util.templateloader.TrackingTemplateLoader',
-			'django.template.loaders.filesystem.Loader',
-			'django.template.loaders.app_directories.Loader',
-		],
-	},
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': ['templates', ],
+    'OPTIONS': {
+        'context_processors': [
+            'django.contrib.auth.context_processors.auth',
+            'django.contrib.messages.context_processors.messages',
+            'django.template.context_processors.media',
+            'pgweb.util.contexts.PGWebContextProcessor',
+        ],
+        'loaders': [
+            'pgweb.util.templateloader.TrackingTemplateLoader',
+            'django.template.loaders.filesystem.Loader',
+            'django.template.loaders.app_directories.Loader',
+        ],
+    },
 }]
 
 LOGIN_URL='/account/login/'
@@ -95,7 +95,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.admin',
     'django_markwhat',
-	'django.contrib.staticfiles',
+    'django.contrib.staticfiles',
     'pgweb.selectable',
     'pgweb.core',
     'pgweb.mailqueue',
@@ -113,7 +113,7 @@ INSTALLED_APPS = [
     'pgweb.survey',
     'pgweb.misc',
     'pgweb.featurematrix',
-	'pgweb.search',
+    'pgweb.search',
     'pgweb.pugs',
 ]
 
@@ -151,7 +151,7 @@ DOCSREPORT_EMAIL="someone@example.com"                 # Address to pgsql-docs l
 DOCSREPORT_NOREPLY_EMAIL="someone-noreply@example.com" # Address to no-reply pgsql-docs address
 FRONTEND_SERVERS=()                                    # A tuple containing the *IP addresses* of all the
                                                        # varnish frontend servers in use.
-FTP_MASTERS=()										   # A tuple containing the *IP addresses* of all machines
+FTP_MASTERS=()                                           # A tuple containing the *IP addresses* of all machines
                                                        # trusted to upload ftp structure data
 VARNISH_PURGERS=()                                     # Extra servers that can do varnish purges through our queue
 DO_ESI=False                                           # Generate ESI tags
