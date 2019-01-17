@@ -26,7 +26,7 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
     redir = '{0}/account/login/{1}/'.format(settings.SITE_ROOT, provider)
 
     oa = OAuth2Session(client_id, scope=scope, redirect_uri=redir)
-    if request.GET.has_key('code'):
+    if 'code' in request.GET:
         log.info("Completing {0} oauth2 step from {1}".format(provider, get_client_ip(request)))
 
         # Receiving a login request from the provider, so validate data
@@ -151,7 +151,7 @@ def oauth_login_github(request):
 def oauth_login_facebook(request):
     def _facebook_auth_data(oa):
         r = oa.get('https://graph.facebook.com/me?fields=email,first_name,last_name').json()
-        if not 'email' in r:
+        if 'email' not in r:
             raise OAuthException("Your Facebook profile must provide an email address in order to log in")
 
         return (r['email'],
@@ -174,7 +174,7 @@ def oauth_login_facebook(request):
 def oauth_login_microsoft(request):
     def _microsoft_auth_data(oa):
         r = oa.get("https://apis.live.net/v5.0/me").json()
-        if not 'emails' in r or not 'account' in r['emails']:
+        if 'emails' not in r or 'account' not in r['emails']:
             raise OAuthException("Your Facebook profile must provide an email address in order to log in")
 
         return (r['emails']['account'],

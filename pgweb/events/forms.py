@@ -43,7 +43,7 @@ class EventForm(forms.ModelForm):
         if self.instance.pk and self.instance.approved:
             if self.cleaned_data['enddate'] != self.instance.enddate:
                 raise ValidationError("You cannot change the dates on events that have been approved")
-        if self.cleaned_data.has_key('startdate') and self.cleaned_data['enddate'] < self.cleaned_data['startdate']:
+        if 'startdate' in self.cleaned_data and self.cleaned_data['enddate'] < self.cleaned_data['startdate']:
             raise ValidationError("End date cannot be before start date!")
         return self.cleaned_data['enddate']
 

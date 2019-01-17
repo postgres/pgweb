@@ -78,7 +78,7 @@ if __name__ == "__main__":
                     found = False
                     for p, pinfo in platforms.items():
                         if pinfo['p'] == familypath and pinfo['f'] == shortdist:
-                            if not reporpms[v].has_key(p):
+                            if p not in reporpms[v]:
                                 reporpms[v][p] = {}
                             reporpms[v][p][arch] = max(ver, reporpms[v][p].get(arch, 0))
                             platforms[p]['found'] = True

@@ -67,7 +67,7 @@ class SignupForm(forms.Form):
     def clean_email2(self):
         # If the primary email checker had an exception, the data will be gone
         # from the cleaned_data structure
-        if not self.cleaned_data.has_key('email'):
+        if 'email' not in self.cleaned_data:
             return self.cleaned_data['email2']
         email1 = self.cleaned_data['email'].lower()
         email2 = self.cleaned_data['email2'].lower()
@@ -157,7 +157,7 @@ class ChangeEmailForm(forms.Form):
     def clean_email2(self):
         # If the primary email checker had an exception, the data will be gone
         # from the cleaned_data structure
-        if not self.cleaned_data.has_key('email'):
+        if 'email' not in self.cleaned_data:
             return self.cleaned_data['email2'].lower()
         email1 = self.cleaned_data['email'].lower()
         email2 = self.cleaned_data['email2'].lower()

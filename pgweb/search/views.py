@@ -60,20 +60,17 @@ def search(request):
     # constants that we might eventually want to make configurable
     hitsperpage = 20
 
-    if request.GET.has_key('m') and request.GET['m'] == '1':
+    if request.GET.get('m', '') == '1':
         searchlists = True
 
-        if request.GET.has_key('l'):
-            if request.GET['l'] != '':
-                try:
-                    listid = int(request.GET['l'])
-                except:
-                    listid = None
-            else:
+        if request.GET.get('l', '') != '':
+            try:
+                listid = int(request.GET['l'])
+            except:
                 listid = None
         else:
             # Listid not specified. But do we have the name?
-            if request.GET.has_key('ln'):
+            if 'ln' in request.GET:
                 try:
                     ll = MailingList.objects.get(listname=request.GET['ln'])
                     listid = ll.id
@@ -84,7 +81,7 @@ def search(request):
             else:
                 listid = None
 
-        if request.GET.has_key('d'):
+        if 'd' in request.GET:
             try:
                 dateval = int(request.GET['d'])
             except:
@@ -92,9 +89,9 @@ def search(request):
         else:
             dateval = None
 
-        if request.GET.has_key('s'):
+        if 's' in request.GET:
             listsort = request.GET['s']
-            if not listsort in ('r', 'd', 'i'):
+            if listsort not in ('r', 'd', 'i'):
                 listsort = 'r'
         else:
             listsort = 'r'
@@ -103,9 +100,9 @@ def search(request):
             dateval = 365
 
         sortoptions = (
-            {'val': 'r', 'text': 'Rank', 'selected': not (request.GET.has_key('s') and request.GET['s'] == 'd')},
-            {'val': 'd', 'text': 'Date', 'selected': request.GET.has_key('s') and request.GET['s'] == 'd'},
-            {'val': 'i', 'text': 'Reverse date', 'selected': request.GET.has_key('s') and request.GET['s'] == 'i'},
+            {'val': 'r', 'text': 'Rank', 'selected': request.GET.get('s', '') not in ('d', 'i')},
+            {'val': 'd', 'text': 'Date', 'selected': request.GET.get('s', '') == 'd'},
+            {'val': 'i', 'text': 'Reverse date', 'selected': request.GET.get('s', '') == 'i'},
         )
         dateoptions = (
             {'val': -1, 'text': 'anytime'},
@@ -117,18 +114,11 @@ def search(request):
         )
     else:
         searchlists = False
-        if request.GET.has_key('u'):
-            suburl = request.GET['u']
-        else:
-            suburl = None
-
-        if request.GET.has_key('a'):
-            allsites = (request.GET['a'] == "1")
-        else:
-            allsites = False
+        suburl = request.GET.get('u', None)
+        allsites = request.GET.get('a', None) == "1"
 
     # Check that we actually have something to search for
-    if not request.GET.has_key('q') or request.GET['q'] == '':
+    if request.GET.get('q', '') != '':
         if searchlists:
             return render(request, 'search/listsearch.html', {
                 'search_error': "No search term specified.",
@@ -151,12 +141,9 @@ def search(request):
         })
 
     # Is the request being paged?
-    if request.GET.has_key('p'):
-        try:
-            pagenum = int(request.GET['p'])
-        except:
-            pagenum = 1
-    else:
+    try:
+        pageum = int(request.GET.get('p', 1))
+    except:
         pagenum = 1
 
     firsthit = (pagenum - 1) * hitsperpage + 1

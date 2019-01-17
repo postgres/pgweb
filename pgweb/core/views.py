@@ -205,7 +205,7 @@ _dynamic_cssmap = {
 
 @cache(hours=6)
 def dynamic_css(request, css):
-    if not _dynamic_cssmap.has_key(css):
+    if css not in _dynamic_cssmap:
         raise Http404('CSS not found')
     files = _dynamic_cssmap[css]
     resp = HttpResponse(content_type='text/css')
@@ -222,7 +222,7 @@ def dynamic_css(request, css):
             # If we somehow referred to a file that didn't exist, or
             # one that we couldn't access.
             raise Http404('CSS (sub) not found')
-    if request.META.has_key('HTTP_IF_MODIFIED_SINCE'):
+    if 'HTTP_IF_MODIFIED_SINCE' in request.META:
         # This code is mostly stolen from django :)
         matches = re.match(r"^([^;]+)(; length=([0-9]+))?$",
                            request.META.get('HTTP_IF_MODIFIED_SINCE'),

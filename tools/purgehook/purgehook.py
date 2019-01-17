@@ -26,7 +26,7 @@ if __name__ == "__main__":
     for l in sys.stdin:
         if l.startswith('templates/'):
             tmpl = l[len('templates/'):].strip()
-            if not tmpl in BANNED_TEMPLATES:
+            if tmpl not in BANNED_TEMPLATES:
                 curs.execute("SELECT varnish_purge_xkey(%(key)s)", {
                     'key': 'pgwt_{0}'.format(hashlib.md5(tmpl).hexdigest()),
                 })

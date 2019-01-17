@@ -93,7 +93,7 @@ class BaseSiteCrawler(object):
         return False
 
     def crawl_page(self, url, relprio, internal):
-        if self.pages_crawled.has_key(url) or self.pages_crawled.has_key(url + "/"):
+        if url in self.pages_crawled or url + "/" in self.pages_crawled:
             return
 
         if self.exclude_url(url):
@@ -103,7 +103,7 @@ class BaseSiteCrawler(object):
         (result, pagedata, lastmod) = self.fetch_page(url)
 
         if result == 0:
-            if pagedata == None:
+            if pagedata is None:
                 # Result ok but no data, means that the page was not modified.
                 # Thus we can happily consider ourselves done here.
                 return
@@ -184,7 +184,7 @@ class BaseSiteCrawler(object):
                 h.putrequest("GET", url)
             h.putheader("User-agent", "pgsearch/0.2")
             h.putheader("Connection", "close")
-            if self.scantimes.has_key(url):
+            if url in self.scantimes:
                 h.putheader("If-Modified-Since", formatdate(time.mktime(self.scantimes[url].timetuple())))
             h.endheaders()
             resp = h.getresponse()
@@ -224,7 +224,7 @@ class BaseSiteCrawler(object):
         return datetime.datetime.now()
 
     def parse_html(self, page):
-        if page == None:
+        if page is None:
             return None
 
         p = GenericHtmlParser()

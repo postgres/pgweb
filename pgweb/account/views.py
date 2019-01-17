@@ -204,7 +204,7 @@ def confirm_change_email(request, tokenhash):
 
 @login_required
 def listobjects(request, objtype):
-    if not objtypes.has_key(objtype):
+    if objtype not in objtypes:
         raise Http404("Object type not found")
     o = objtypes[objtype]
 
@@ -214,7 +214,7 @@ def listobjects(request, objtype):
             'unapproved': o['objects'](request.user).filter(approved=False),
         },
         'title': o['title'],
-        'submit_header': o.has_key('submit_header') and o['submit_header'] or None,
+        'submit_header': o.get('submit_header', None),
         'suburl': objtype,
     })
 
@@ -375,9 +375,9 @@ def signup_complete(request):
 @frame_sources('https://www.google.com/')
 @transaction.atomic
 def signup_oauth(request):
-    if not request.session.has_key('oauth_email') \
-       or not request.session.has_key('oauth_firstname') \
-       or not request.session.has_key('oauth_lastname'):
+    if 'oauth_email' not in request.session \
+       or 'oauth_firstname' not in request.session \
+       or 'oauth_lastname' not in request.session:
         return HttpServerError(request, 'Invalid redirect received')
 
     if request.method == 'POST':
@@ -413,7 +413,7 @@ def signup_oauth(request):
             # Redirect to the sessions page, or to the account page
             # if none was given.
             return HttpResponseRedirect(request.session.pop('login_next', '/account/'))
-    elif request.GET.has_key('do_abort'):
+    elif 'do_abort' in request.GET:
         del request.session['oauth_email']
         del request.session['oauth_firstname']
         del request.session['oauth_lastname']
@@ -459,7 +459,7 @@ def communityauth(request, siteid):
 
     # "suburl" - old style way of passing parameters
     # deprecated - will be removed once all sites have migrated
-    if request.GET.has_key('su'):
+    if 'su' in request.GET:
         su = request.GET['su']
         if not su.startswith('/'):
             su = None
@@ -468,7 +468,7 @@ def communityauth(request, siteid):
 
     # "data" - new style way of passing parameter, where we only
     # care that it's characters are what's in base64.
-    if request.GET.has_key('d'):
+    if 'd' in request.GET:
         d = request.GET['d']
         if d != urllib.quote_plus(d, '=$'):
             # Invalid character, so drop it
@@ -608,14 +608,14 @@ def communityauth_search(request, siteid):
     site = get_object_or_404(CommunityAuthSite, pk=siteid)
 
     q = Q(is_active=True)
-    if request.GET.has_key('s') and request.GET['s']:
+    if 's' in request.GET and request.GET['s']:
         # General search term, match both name and email
         q = q & (Q(email__icontains=request.GET['s']) | Q(first_name__icontains=request.GET['s']) | Q(last_name__icontains=request.GET['s']))
-    elif request.GET.has_key('e') and request.GET['e']:
+    elif 'e' in request.GET and request.GET['e']:
         q = q & Q(email__icontains=request.GET['e'])
-    elif request.GET.has_key('n') and request.GET['n']:
+    elif 'n' in request.GET and request.GET['n']:
         q = q & (Q(first_name__icontains=request.GET['n']) | Q(last_name__icontains=request.GET['n']))
-    elif request.GET.has_key('u') and request.GET['u']:
+    elif 'u' in request.GET and request.GET['u']:
         q = q & Q(username=request.GET['u'])
     else:
         raise Http404('No search term specified')

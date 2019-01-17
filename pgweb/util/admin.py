@@ -28,7 +28,7 @@ class PgwebAdmin(admin.ModelAdmin):
     def change_view(self, request, object_id, form_url='', extra_context=None):
         if hasattr(self.model, 'send_notification') and self.model.send_notification:
             # Anything that sends notification supports manual notifications
-            if extra_context == None:
+            if extra_context is None:
                 extra_context = dict()
             extra_context['notifications'] = ModerationNotification.objects.filter(objecttype=self.model.__name__, objectid=object_id).order_by('date')
 
@@ -57,7 +57,7 @@ class PgwebAdmin(admin.ModelAdmin):
         if change and hasattr(self.model, 'send_notification') and self.model.send_notification:
             # We only do processing if something changed, not when adding
             # a new object.
-            if request.POST.has_key('new_notification') and request.POST['new_notification']:
+            if 'new_notification' in request.POST and request.POST['new_notification']:
                 # Need to send off a new notification. We'll also store
                 # it in the database for future reference, of course.
                 if not obj.org.email:

@@ -46,7 +46,7 @@ class GenericSiteCrawler(BaseSiteCrawler):
 
     def post_process_page(self, url):
         for l in self.resolve_links(self.page.links, url):
-            if self.pages_crawled.has_key(l) or self.pages_crawled.has_key(l + "/"):
+            if l in self.pages_crawled or l + "/" in self.pages_crawled:
                 continue
             if self.exclude_url(l):
                 continue

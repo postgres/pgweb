@@ -54,7 +54,7 @@ def _get_all_notification_fields(obj):
     else:
         # Include all field names except specified ones,
         # that are local to this model (not auto created)
-        return [f.name for f in obj._meta.get_fields() if not f.name in ('approved', 'submitter', 'id', ) and not f.auto_created]
+        return [f.name for f in obj._meta.get_fields() if f.name not in ('approved', 'submitter', 'id', ) and not f.auto_created]
 
 
 def _get_attr_value(obj, fieldname):

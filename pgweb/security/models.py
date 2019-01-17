@@ -35,11 +35,11 @@ def other_vectors_validator(val):
     try:
         for vector in val.split('/'):
             k, v = vector.split(':')
-            if not cvss.constants3.METRICS_VALUES.has_key(k):
+            if k not in cvss.constants3.METRICS_VALUES:
                 raise ValidationError("Metric {0} is unknown".format(k))
             if k in ('AV', 'AC', 'PR', 'UI', 'S', 'C', 'I', 'A'):
                 raise ValidationError("Metric {0} must be specified in the dropdowns".format(k))
-            if not cvss.constants3.METRICS_VALUES[k].has_key(v):
+            if v not in cvss.constants3.METRICS_VALUES[k]:
                 raise ValidationError("Metric {0} has unknown value {1}. Valind ones are: {2}".format(
                     k, v,
                     ", ".join(cvss.constants3.METRICS_VALUES[k].keys()),

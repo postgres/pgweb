@@ -50,7 +50,7 @@ def ftpbrowser(request, subpath):
         parent = ''
         for d in subpath.split('/'):
             # Check if allnodes contains a node matching the path
-            if allnodes[parent].has_key(d):
+            if d in allnodes[parent]:
                 if allnodes[parent][d]['t'] == 'd':
                     canonpath = os.path.join(canonpath, d)
                 elif allnodes[parent][d]['t'] == 'l':
@@ -102,9 +102,9 @@ def ftpbrowser(request, subpath):
             breadcrumbs.append({'name': pathpiece, 'path': breadroot})
 
     # Check if there are any "content files" we should render directly on the webpage
-    file_readme = (node.has_key('README') and node['README']['t'] == 'f') and node['README']['c'] or None
-    file_message = (node.has_key('.message') and node['.message']['t'] == 'f') and node['.message']['c'] or None
-    file_maintainer = (node.has_key('CURRENT_MAINTAINER') and node['CURRENT_MAINTAINER']['t'] == 'f') and node['CURRENT_MAINTAINER']['c'] or None
+    file_readme = ('README' in node and node['README']['t'] == 'f') and node['README']['c'] or None
+    file_message = ('.message' in node and node['.message']['t'] == 'f') and node['.message']['c'] or None
+    file_maintainer = ('CURRENT_MAINTAINER' in node and node['CURRENT_MAINTAINER']['t'] == 'f') and node['CURRENT_MAINTAINER']['c'] or None
 
     del node
 

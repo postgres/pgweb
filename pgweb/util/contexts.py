@@ -87,7 +87,7 @@ sitenav = {
 
 
 def get_nav_menu(section):
-    if sitenav.has_key(section):
+    if section in sitenav:
         return sitenav[section]
     else:
         return {}

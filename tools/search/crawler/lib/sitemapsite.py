@@ -85,7 +85,7 @@ class SitemapSiteCrawler(BaseSiteCrawler):
             # Advance 8 characters - length of https://.
             url = url[len(self.hostname) + 8:]
             if lastmod:
-                if self.scantimes.has_key(url):
+                if url in self.scantimes:
                     if lastmod < self.scantimes[url]:
                         # Not modified since last scan, so don't reload
                         # Stick it in the list of pages we've scanned though,
