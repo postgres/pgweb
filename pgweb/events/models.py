@@ -2,6 +2,7 @@ from django.db import models
 
 from pgweb.core.models import Country, Language, Organisation
 
+
 class Event(models.Model):
     approved = models.BooleanField(null=False, blank=False, default=False)
 
@@ -42,13 +43,13 @@ class Event(models.Model):
         mgrs = self.org.managers.all()
         if len(mgrs) == 1:
             if mgrs[0].pk == 0:
-                return False # Migration organisation
+                return False  # Migration organisation
             else:
-                return True # Has an actual organisation
+                return True  # Has an actual organisation
         elif len(mgrs) > 1:
             # More than one manager means it must be new
             return True
-        return False # Has no organisastion at all
+        return False  # Has no organisastion at all
 
     @property
     def displaydate(self):
@@ -67,4 +68,4 @@ class Event(models.Model):
             return "%s, %s" % (self.city, self.country)
 
     class Meta:
-        ordering = ('-startdate','-enddate',)
+        ordering = ('-startdate', '-enddate', )

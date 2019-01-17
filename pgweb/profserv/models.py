@@ -2,14 +2,15 @@ from django.db import models
 
 from pgweb.core.models import Organisation
 
+
 class ProfessionalService(models.Model):
     approved = models.BooleanField(null=False, blank=False, default=False)
 
-    org =  models.OneToOneField(Organisation, null=False, blank=False,
-                            db_column="organisation_id",
-                            verbose_name="organisation",
-                            help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.")
-    description = models.TextField(null=False,blank=False)
+    org = models.OneToOneField(Organisation, null=False, blank=False,
+                               db_column="organisation_id",
+                               verbose_name="organisation",
+                               help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.")
+    description = models.TextField(null=False, blank=False)
     employees = models.CharField(max_length=32, null=True, blank=True)
     locations = models.CharField(max_length=128, null=True, blank=True)
     region_africa = models.BooleanField(null=False, default=False, verbose_name="Africa")

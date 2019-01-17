@@ -7,6 +7,7 @@ from pgweb.core.lookups import UserLookup
 
 from models import Contributor, ContributorType
 
+
 class ContributorAdminForm(forms.ModelForm):
     class Meta:
         model = Contributor
@@ -20,8 +21,10 @@ class ContributorAdminForm(forms.ModelForm):
         self.fields['user'].widget.can_add_related = False
         self.fields['user'].widget.can_change_related = False
 
+
 class ContributorAdmin(admin.ModelAdmin):
     form = ContributorAdminForm
+
 
 admin.site.register(ContributorType)
 admin.site.register(Contributor, ContributorAdmin)

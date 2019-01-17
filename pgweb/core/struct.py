@@ -1,5 +1,6 @@
 import os
 
+
 def get_struct():
     yield ('', None)
     yield ('community/', None)

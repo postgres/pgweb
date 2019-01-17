@@ -9,6 +9,7 @@ from pgweb.core.models import ModerationNotification
 
 from pgweb.core.lookups import UserLookup
 
+
 class OrganisationAdminForm(forms.ModelForm):
     class Meta:
         model = Organisation
@@ -23,6 +24,7 @@ class OrganisationAdminForm(forms.ModelForm):
         self.fields['managers'].widget.can_change_related = False
         self.fields['managers'].widget.can_delete_related = False
 
+
 class OrganisationAdmin(admin.ModelAdmin):
     form = OrganisationAdminForm
     list_display = ('name', 'approved', 'lastconfirmed',)
@@ -30,8 +32,10 @@ class OrganisationAdmin(admin.ModelAdmin):
     ordering = ('name', )
     search_fields = ('name', )
 
+
 class VersionAdmin(admin.ModelAdmin):
     list_display = ('versionstring', 'reldate', 'supported', 'current', )
+
 
 admin.site.register(Version, VersionAdmin)
 admin.site.register(OrganisationType)
@@ -39,4 +43,3 @@ admin.site.register(Organisation, OrganisationAdmin)
 admin.site.register(ImportedRSSFeed)
 admin.site.register(ImportedRSSItem)
 admin.site.register(ModerationNotification)
-

@@ -17,6 +17,7 @@ from pgweb.core.models import Version
 from models import Category, Product, StackBuilderApp
 from forms import ProductForm
 
+
 #######
 # FTP browser
 #######
@@ -30,7 +31,7 @@ def ftpbrowser(request, subpath):
             raise Http404
         subpath = subpath.strip('/')
     else:
-        subpath=""
+        subpath = ""
 
     # Pickle up the list of things we need
     try:
@@ -73,19 +74,19 @@ def ftpbrowser(request, subpath):
     del allnodes
 
     # Add all directories
-    directories = [{'link': k, 'url': k, 'type': 'd'} for k,v in node.items() if v['t'] == 'd']
+    directories = [{'link': k, 'url': k, 'type': 'd'} for k, v in node.items() if v['t'] == 'd']
     # Add all symlinks (only directories supported)
-    directories.extend([{'link': k, 'url': v['d'], 'type': 'l'} for k,v in node.items() if v['t'] == 'l'])
+    directories.extend([{'link': k, 'url': v['d'], 'type': 'l'} for k, v in node.items() if v['t'] == 'l'])
 
     # A ittle early sorting wouldn't go amiss, so .. ends up at the top
-    directories.sort(key = version_sort, reverse=True)
+    directories.sort(key=version_sort, reverse=True)
 
     # Add a link to the parent directory
     if subpath:
-        directories.insert(0, {'link':'[Parent Directory]', 'url':'..'})
+        directories.insert(0, {'link': '[Parent Directory]', 'url': '..'})
 
     # Fetch files
-    files = [{'name': k, 'mtime': v['d'], 'size': v['s']} for k,v in node.items() if v['t'] == 'f']
+    files = [{'name': k, 'mtime': v['d'], 'size': v['s']} for k, v in node.items() if v['t'] == 'f']
 
     breadcrumbs = []
     if subpath:
@@ -98,12 +99,12 @@ def ftpbrowser(request, subpath):
                 breadroot = "%s/%s" % (breadroot, pathpiece)
             else:
                 breadroot = pathpiece
-            breadcrumbs.append({'name': pathpiece, 'path': breadroot});
+            breadcrumbs.append({'name': pathpiece, 'path': breadroot})
 
     # Check if there are any "content files" we should render directly on the webpage
-    file_readme = (node.has_key('README') and node['README']['t']=='f') and node['README']['c'] or None;
-    file_message = (node.has_key('.message') and node['.message']['t']=='f') and node['.message']['c'] or None;
-    file_maintainer = (node.has_key('CURRENT_MAINTAINER') and node['CURRENT_MAINTAINER']['t'] == 'f') and node['CURRENT_MAINTAINER']['c'] or None;
+    file_readme = (node.has_key('README') and node['README']['t'] == 'f') and node['README']['c'] or None
+    file_message = (node.has_key('.message') and node['.message']['t'] == 'f') and node['.message']['c'] or None
+    file_maintainer = (node.has_key('CURRENT_MAINTAINER') and node['CURRENT_MAINTAINER']['t'] == 'f') and node['CURRENT_MAINTAINER']['c'] or None
 
     del node
 
@@ -153,6 +154,7 @@ def uploadftp(request):
     # Finally, indicate to the client that we're happy
     return HttpResponse("OK", content_type="text/plain")
 
+
 @csrf_exempt
 def uploadyum(request):
     if request.method != 'PUT':
@@ -182,6 +184,7 @@ def uploadyum(request):
     # Finally, indicate to the client that we're happy
     return HttpResponse("OK", content_type="text/plain")
 
+
 @nocache
 def mirrorselect(request, path):
     # Old access to mirrors will just redirect to the main ftp site.
@@ -197,7 +200,8 @@ def yum_js(request):
     return render(request, 'downloads/js/yum.js', {
         'json': jsonstr,
         'supported_versions': ','.join([str(v.numtree) for v in Version.objects.filter(supported=True)]),
-        }, content_type='application/json')
+    }, content_type='application/json')
+
 
 #######
 # Product catalogue
@@ -208,19 +212,22 @@ def categorylist(request):
         'categories': categories,
     })
 
+
 def productlist(request, catid, junk=None):
     category = get_object_or_404(Category, pk=catid)
-    products = Product.objects.select_related('org','licencetype').filter(category=category, approved=True)
+    products = Product.objects.select_related('org', 'licencetype').filter(category=category, approved=True)
     return render_pgweb(request, 'download', 'downloads/productlist.html', {
         'category': category,
         'products': products,
         'productcount': len(products),
     })
 
+
 @login_required
 def productform(request, itemid):
     return simple_form(Product, itemid, request, ProductForm,
                        redirect='/account/edit/products/')
+
 
 #######
 # Stackbuilder

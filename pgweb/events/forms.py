@@ -4,16 +4,19 @@ from django.forms import ValidationError
 from pgweb.core.models import Organisation
 from models import Event
 
+
 class EventForm(forms.ModelForm):
     toggle_fields = [
         {
             'name': 'isonline',
             'invert': True,
-            'fields': ['city', 'state', 'country',]
+            'fields': ['city', 'state', 'country', ]
         },
     ]
+
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)
+
     def filter_by_user(self, user):
         self.fields['org'].queryset = Organisation.objects.filter(managers=user, approved=True)
 

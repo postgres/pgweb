@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class CommunityAuthOrg(models.Model):
     orgname = models.CharField(max_length=100, null=False, blank=False,
                                help_text="Name of the organisation")
@@ -8,6 +9,7 @@ class CommunityAuthOrg(models.Model):
 
     def __unicode__(self):
         return self.orgname
+
 
 class CommunityAuthSite(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False,
@@ -23,6 +25,7 @@ class CommunityAuthSite(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class CommunityAuthConsent(models.Model):
     user = models.ForeignKey(User, null=False, blank=False)
     org = models.ForeignKey(CommunityAuthOrg, null=False, blank=False)
@@ -30,6 +33,7 @@ class CommunityAuthConsent(models.Model):
 
     class Meta:
         unique_together = (('user', 'org'), )
+
 
 class EmailChangeToken(models.Model):
     user = models.OneToOneField(User, null=False, blank=False)

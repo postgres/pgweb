@@ -9,6 +9,7 @@ from django.conf import settings
 
 import requests_oauthlib
 
+
 class Command(BaseCommand):
     help = 'Register with twitter oauth'
 

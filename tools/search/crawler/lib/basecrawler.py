@@ -11,6 +11,7 @@ import threading
 from lib.log import log
 from lib.parsers import GenericHtmlParser, lossy_unicode
 
+
 class BaseSiteCrawler(object):
     def __init__(self, hostname, dbconn, siteid, serverip=None, https=False):
         self.hostname = hostname
@@ -37,11 +38,11 @@ class BaseSiteCrawler(object):
         # Fire off worker threads
         for x in range(5):
             t = threading.Thread(name="Indexer %s" % x,
-                       target = lambda: self.crawl_from_queue())
+                                 target=lambda: self.crawl_from_queue())
             t.daemon = True
             t.start()
 
-        t = threading.Thread(name="statusthread", target = lambda: self.status_thread())
+        t = threading.Thread(name="statusthread", target=lambda: self.status_thread())
         t.daemon = True
         t.start()
 
@@ -53,9 +54,9 @@ class BaseSiteCrawler(object):
         # Remove all pages that we didn't crawl
         curs = self.dbconn.cursor()
         curs.execute("DELETE FROM webpages WHERE site=%(site)s AND NOT suburl=ANY(%(urls)s)", {
-                'site': self.siteid,
-                'urls': self.pages_crawled.keys(),
-                })
+            'site': self.siteid,
+            'urls': self.pages_crawled.keys(),
+        })
         if curs.rowcount:
             log("Deleted %s pages no longer accessible" % curs.rowcount)
         self.pages_deleted += curs.rowcount
@@ -77,7 +78,7 @@ class BaseSiteCrawler(object):
                     threading.active_count() - 2,
                     self.queue.qsize(),
                     len(self.pages_crawled) / (nowtime - starttime),
-                    ))
+                ))
 
     def crawl_from_queue(self):
         while not self.stopevent.is_set():
@@ -92,7 +93,7 @@ class BaseSiteCrawler(object):
         return False
 
     def crawl_page(self, url, relprio, internal):
-        if self.pages_crawled.has_key(url) or self.pages_crawled.has_key(url+"/"):
+        if self.pages_crawled.has_key(url) or self.pages_crawled.has_key(url + "/"):
             return
 
         if self.exclude_url(url):
@@ -110,9 +111,9 @@ class BaseSiteCrawler(object):
             # Page failed to load or was a redirect, so remove from database
             curs = self.dbconn.cursor()
             curs.execute("DELETE FROM webpages WHERE site=%(id)s AND suburl=%(url)s", {
-                    'id': self.siteid,
-                    'url': url,
-                    })
+                'id': self.siteid,
+                'url': url,
+            })
             with self.counterlock:
                 self.pages_deleted += curs.rowcount
 
@@ -145,7 +146,7 @@ class BaseSiteCrawler(object):
             'url': url,
             'relprio': relprio,
             'internal': internal,
-            }
+        }
         curs = self.dbconn.cursor()
         curs.execute("UPDATE webpages SET title=%(title)s, txt=%(txt)s, fti=setweight(to_tsvector('public.pg', %(title)s), 'A') || to_tsvector('public.pg', %(txt)s), lastscanned=%(lastmod)s, relprio=%(relprio)s, isinternal=%(internal)s WHERE site=%(site)s AND suburl=%(url)s", params)
         if curs.rowcount != 1:
@@ -157,10 +158,11 @@ class BaseSiteCrawler(object):
                 self.pages_updated += 1
 
     ACCEPTED_CONTENTTYPES = ("text/html", "text/plain", )
+
     def accept_contenttype(self, contenttype):
         # Split apart if there is a "; charset=" in it
         if contenttype.find(";"):
-            contenttype = contenttype.split(';',2)[0]
+            contenttype = contenttype.split(';', 2)[0]
         return contenttype in self.ACCEPTED_CONTENTTYPES
 
     def fetch_page(self, url):
@@ -180,8 +182,8 @@ class BaseSiteCrawler(object):
                 else:
                     h = httplib.HTTPSConnection(host=self.hostname, port=443, strict=True, timeout=10, context=ssl._create_unverified_context())
                 h.putrequest("GET", url)
-            h.putheader("User-agent","pgsearch/0.2")
-            h.putheader("Connection","close")
+            h.putheader("User-agent", "pgsearch/0.2")
+            h.putheader("Connection", "close")
             if self.scantimes.has_key(url):
                 h.putheader("If-Modified-Since", formatdate(time.mktime(self.scantimes[url].timetuple())))
             h.endheaders()
@@ -209,7 +211,7 @@ class BaseSiteCrawler(object):
                 # No redirect at all found, becaue it was invalid?
                 return (2, None, None)
             else:
-                #print "Url %s returned status %s" % (url, resp.status)
+                # print "Url %s returned status %s" % (url, resp.status)
                 pass
         except Exception, e:
             log("Exception when loading url %s: %s" % (url, e))

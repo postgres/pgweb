@@ -7,6 +7,7 @@ from django.db import connection, transaction
 from django.conf import settings
 import requests
 
+
 class Command(BaseCommand):
     help = 'Synchronize mailinglists'
 
@@ -15,9 +16,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         if settings.ARCHIVES_SEARCH_PLAINTEXT:
-            proto="http"
+            proto = "http"
         else:
-            proto="https"
+            proto = "https"
         r = requests.get('{0}://{1}/listinfo/'.format(proto, settings.ARCHIVES_SEARCH_SERVER))
         j = r.json()
         allgroups = list(set([l['group'] for l in j]))

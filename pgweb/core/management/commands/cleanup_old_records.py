@@ -17,6 +17,7 @@ from datetime import datetime, timedelta
 
 from pgweb.account.models import EmailChangeToken
 
+
 class Command(BaseCommand):
     help = 'Cleanup old records'
 
@@ -32,4 +33,4 @@ class Command(BaseCommand):
 
         # Clean up old email change tokens
         with transaction.atomic():
-                EmailChangeToken.objects.filter(sentat__lt=datetime.now()-timedelta(hours=24)).delete()
+                EmailChangeToken.objects.filter(sentat__lt=datetime.now() - timedelta(hours=24)).delete()

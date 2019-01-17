@@ -4,6 +4,7 @@ from models import NewsArticle
 
 from datetime import datetime, time
 
+
 class NewsFeed(Feed):
     title = description = "PostgreSQL news"
     link = "https://www.postgresql.org/"
@@ -24,4 +25,4 @@ class NewsFeed(Feed):
         return "https://www.postgresql.org/about/news/%s/" % obj.id
 
     def item_pubdate(self, obj):
-        return datetime.combine(obj.date,time.min)
+        return datetime.combine(obj.date, time.min)

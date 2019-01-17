@@ -1,6 +1,7 @@
 from django.db import connection
 from pgweb.core.models import Version
 
+
 def get_struct():
     currentversion = Version.objects.get(current=True)
 
@@ -31,7 +32,7 @@ def get_struct():
             version = int(version)
 
         yield ('docs/%s/%s' % (version, filename),
-               testing and 0.1 or docprio, # beta/rc versions always get 0.1 in prio
+               testing and 0.1 or docprio,  # beta/rc versions always get 0.1 in prio
                loaded)
 
         # Also yield the current version urls, with the highest
@@ -39,6 +40,7 @@ def get_struct():
         if version == currentversion.tree:
             yield ('docs/current/%s' % filename,
                    1.0, loaded)
+
 
 # For our internal sitemap (used only by our own search engine),
 # include the devel version of the docs (and only those, since the

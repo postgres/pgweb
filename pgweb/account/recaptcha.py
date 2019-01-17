@@ -14,6 +14,7 @@ import json
 import logging
 log = logging.getLogger(__name__)
 
+
 class ReCaptchaWidget(forms.widgets.Widget):
     def render(self, name, value, attrs=None):
         if settings.NOCAPTCHA:

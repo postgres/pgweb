@@ -3,6 +3,7 @@ from django.contrib import admin
 from pgweb.util.admin import PgwebAdmin
 from models import NewsArticle, NewsTag
 
+
 class NewsArticleAdmin(PgwebAdmin):
     list_display = ('title', 'org', 'date', 'approved', )
     list_filter = ('approved', )
@@ -17,8 +18,10 @@ class NewsArticleAdmin(PgwebAdmin):
         }
         return super(NewsArticleAdmin, self).change_view(request, object_id, extra_context=my_context)
 
+
 class NewsTagAdmin(PgwebAdmin):
     list_display = ('urlname', 'name', 'description')
+
 
 admin.site.register(NewsArticle, NewsArticleAdmin)
 admin.site.register(NewsTag, NewsTagAdmin)

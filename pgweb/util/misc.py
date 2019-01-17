@@ -8,6 +8,7 @@ from pgweb.mailqueue.util import send_simple_mail
 from pgweb.util.helpers import template_to_string
 import re
 
+
 def send_template_mail(sender, receiver, subject, templatename, templateattr={}, usergenerated=False, cc=None, replyto=None, receivername=None, sendername=None, messageid=None):
     d = {
         'link_root': settings.SITE_ROOT,
@@ -18,6 +19,7 @@ def send_template_mail(sender, receiver, subject, templatename, templateattr={},
                      usergenerated=usergenerated, cc=cc, replyto=replyto,
                      receivername=receivername, sendername=sendername,
                      messageid=messageid)
+
 
 def get_client_ip(request):
     """
@@ -41,6 +43,7 @@ def varnish_purge_xkey(xkey):
     """
     connection.cursor().execute("SELECT varnish_purge_xkey(%s)", (xkey, ))
 
+
 def varnish_purge(url):
     """
     Purge the specified URL from Varnish. Will add initial anchor to the URL,
@@ -49,12 +52,14 @@ def varnish_purge(url):
     url = '^%s' % url
     connection.cursor().execute("SELECT varnish_purge(%s)", (url, ))
 
+
 def varnish_purge_expr(expr):
     """
     Purge the specified expression from Varnish. Does not modify the expression
     at all, so be very careful!
     """
     connection.cursor().execute("SELECT varnish_purge_expr(%s)", (expr, ))
+
 
 def version_sort(l):
     """
@@ -64,12 +69,12 @@ def version_sort(l):
     generally don't have that.
     """
     mkey = l['link']
-    m = re.match('v?([0-9]+)\.([0-9]+)\.([0-9]+)$',l['url'])
+    m = re.match('v?([0-9]+)\.([0-9]+)\.([0-9]+)$', l['url'])
     if m:
-        mkey = m.group(1) + '%02d' % int(m.group(2)) + '%02d' % int(m.group(3));
-    m = re.match('v?([0-9]+)\.([0-9]+)$',l['url'])
+        mkey = m.group(1) + '%02d' % int(m.group(2)) + '%02d' % int(m.group(3))
+    m = re.match('v?([0-9]+)\.([0-9]+)$', l['url'])
     if m:
-        mkey = m.group(1) + '%02d' % int(m.group(2));
+        mkey = m.group(1) + '%02d' % int(m.group(2))
         # SOOO ugly. But if it's v10 and up, just prefix it to get it higher
         if int(m.group(1)) >= 10:
             mkey = 'a' + mkey
@@ -79,6 +84,7 @@ def version_sort(l):
         mkey = 'a' + m.group(1) + '0'
 
     return mkey
+
 
 def generate_random_token():
     """

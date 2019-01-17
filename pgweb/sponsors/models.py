@@ -2,6 +2,7 @@ from django.db import models
 
 from pgweb.core.models import Country
 
+
 class SponsorType(models.Model):
     typename = models.CharField(max_length=32, null=False, blank=False)
     description = models.TextField(null=False, blank=False)
@@ -15,6 +16,7 @@ class SponsorType(models.Model):
 
     class Meta:
         ordering = ('sortkey', )
+
 
 class Sponsor(models.Model):
     sponsortype = models.ForeignKey(SponsorType, null=False)
@@ -30,6 +32,7 @@ class Sponsor(models.Model):
 
     class Meta:
         ordering = ('name', )
+
 
 class Server(models.Model):
     name = models.CharField(max_length=32, null=False, blank=False)

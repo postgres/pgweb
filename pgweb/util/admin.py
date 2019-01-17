@@ -51,7 +51,7 @@ class PgwebAdmin(admin.ModelAdmin):
         for x in queryset:
             x.delete()
     custom_delete_selected.short_description = "Delete selected items"
-    actions=['custom_delete_selected']
+    actions = ['custom_delete_selected']
 
     def save_model(self, request, obj, form, change):
         if change and hasattr(self.model, 'send_notification') and self.model.send_notification:
@@ -81,14 +81,16 @@ class PgwebAdmin(admin.ModelAdmin):
                                  msgstr)
 
                 # Also generate a mail to the moderators
-                send_simple_mail(settings.NOTIFICATION_FROM,
-                                 settings.NOTIFICATION_EMAIL,
-                                 "Moderation comment on %s %s" % (obj.__class__._meta.verbose_name, obj.id),
-                                 _get_moderator_notification_text(obj,
-                                                                  request.POST['new_notification'],
-                                                                  request.user.username
-                                                              ))
-
+                send_simple_mail(
+                    settings.NOTIFICATION_FROM,
+                    settings.NOTIFICATION_EMAIL,
+                    "Moderation comment on %s %s" % (obj.__class__._meta.verbose_name, obj.id),
+                    _get_moderator_notification_text(
+                        obj,
+                        request.POST['new_notification'],
+                        request.user.username
+                    )
+                )
 
         # Either no notifications, or done with notifications
         super(PgwebAdmin, self).save_model(request, obj, form, change)
@@ -110,7 +112,6 @@ addressed before it can be approved. The comment given by the moderator is:
 Please go to https://www.postgresql.org/account/ and make any changes
 request, and your submission will be re-moderated.
 """ % (objtype, txt)
-
 
 
 def _get_moderator_notification_text(obj, txt, moderator):

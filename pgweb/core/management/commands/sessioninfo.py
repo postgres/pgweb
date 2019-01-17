@@ -6,6 +6,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 
+
 class Command(BaseCommand):
     help = 'Dump interesting information about a session'
 
@@ -34,9 +35,8 @@ class Command(BaseCommand):
                 session.pop(k, None)
             if session:
                 print " -- Other session values --"
-                for k,v in session.items():
-                    print u"{0:20} {1}".format(k,v)
+                for k, v in session.items():
+                    print u"{0:20} {1}".format(k, v)
 
         except Session.DoesNotExist:
             raise CommandError('Session not found')
-

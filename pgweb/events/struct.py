@@ -1,6 +1,7 @@
 from datetime import date
 from models import Event
 
+
 def get_struct():
     now = date.today()
 
@@ -14,4 +15,4 @@ def get_struct():
         if yearsold > 4:
             yearsold = 4
         yield ('about/event/%s/' % n.id,
-               0.5-(yearsold/10.0))
+               0.5 - (yearsold / 10.0))

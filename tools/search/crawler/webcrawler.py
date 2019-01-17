@@ -10,9 +10,10 @@ from ConfigParser import ConfigParser
 import psycopg2
 import time
 
+
 def doit():
     psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
-    conn = psycopg2.connect(cp.get("search","db"))
+    conn = psycopg2.connect(cp.get("search", "db"))
 
     curs = conn.cursor()
 
@@ -34,7 +35,7 @@ def doit():
     time.sleep(1)
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     cp = ConfigParser()
     cp.read("search.ini")
 

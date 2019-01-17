@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.template.loader import get_template
 import django.utils.xmlutils
 
+
 def simple_form(instancetype, itemid, request, formclass, formtemplate='base/form.html', redirect='/account/', navsection='account', fixedfields=None, createifempty=False):
     if itemid == 'new':
         instance = instancetype()
@@ -33,7 +34,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
             # Set fixed fields. Note that this will not work if the fixed fields are ManyToMany,
             # but we'll fix that sometime in the future
             if fixedfields:
-                for k,v in fixedfields.items():
+                for k, v in fixedfields.items():
                     setattr(r, k, v)
             r.save()
 
@@ -72,13 +73,15 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
         'operation': (itemid == "new") and "New" or "Edit",
     })
 
-def template_to_string(templatename, attrs = {}):
+
+def template_to_string(templatename, attrs={}):
     return get_template(templatename).render(attrs)
+
 
 def HttpServerError(request, msg):
     r = render(request, 'errors/500.html', {
-            'message': msg,
-            })
+        'message': msg,
+    })
     r.status_code = 500
     return r
 
@@ -89,7 +92,7 @@ class PgXmlHelper(django.utils.xmlutils.SimplerXMLGenerator):
         self.skipempty = skipempty
 
     def add_xml_element(self, name, value):
-        if self.skipempty and value=='': return
+        if self.skipempty and value == '': return
         self.startElement(name, {})
         self.characters(value)
         self.endElement(name)

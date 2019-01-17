@@ -8,7 +8,7 @@ from pgweb.news.models import NewsArticle
 
 import cvss
 
-vector_choices = {k:list(v.items()) for k,v in cvss.constants3.METRICS_VALUE_NAMES.items()}
+vector_choices = {k: list(v.items()) for k, v in cvss.constants3.METRICS_VALUE_NAMES.items()}
 
 component_choices = (
     ('core server', 'Core server product'),
@@ -19,10 +19,14 @@ component_choices = (
     ('other', 'Other'),
 )
 
+
 re_cve = re.compile('^(\d{4})-(\d{4,5})$')
+
+
 def cve_validator(val):
     if not re_cve.match(val):
         raise ValidationError("Enter CVE in format 0000-0000 without the CVE text")
+
 
 def other_vectors_validator(val):
     if val != val.upper():
@@ -30,14 +34,14 @@ def other_vectors_validator(val):
 
     try:
         for vector in val.split('/'):
-            k,v = vector.split(':')
+            k, v = vector.split(':')
             if not cvss.constants3.METRICS_VALUES.has_key(k):
                 raise ValidationError("Metric {0} is unknown".format(k))
             if k in ('AV', 'AC', 'PR', 'UI', 'S', 'C', 'I', 'A'):
                 raise ValidationError("Metric {0} must be specified in the dropdowns".format(k))
             if not cvss.constants3.METRICS_VALUES[k].has_key(v):
                 raise ValidationError("Metric {0} has unknown value {1}. Valind ones are: {2}".format(
-                    k,v,
+                    k, v,
                     ", ".join(cvss.constants3.METRICS_VALUES[k].keys()),
                 ))
     except ValidationError:
@@ -45,10 +49,11 @@ def other_vectors_validator(val):
     except Exception, e:
         raise ValidationError("Failed to parse vectors: %s" % e)
 
+
 class SecurityPatch(models.Model):
     public = models.BooleanField(null=False, blank=False, default=False)
     newspost = models.ForeignKey(NewsArticle, null=True, blank=True)
-    cve = models.CharField(max_length=32, null=False, blank=True, validators=[cve_validator,])
+    cve = models.CharField(max_length=32, null=False, blank=True, validators=[cve_validator, ])
     cve_visible = models.BooleanField(null=False, blank=False, default=False)
     cvenumber = models.IntegerField(null=False, blank=False, db_index=True)
     detailslink = models.URLField(null=False, blank=True)
@@ -65,7 +70,7 @@ class SecurityPatch(models.Model):
     vector_c = models.CharField(max_length=1, null=False, blank=True, verbose_name="Confidentiality Impact", choices=vector_choices['C'])
     vector_i = models.CharField(max_length=1, null=False, blank=True, verbose_name="Integrity Impact", choices=vector_choices['I'])
     vector_a = models.CharField(max_length=1, null=False, blank=True, verbose_name="Availability Impact", choices=vector_choices['A'])
-    legacyscore = models.CharField(max_length=1, null=False, blank=True, verbose_name='Legacy score', choices=(('A', 'A'),('B','B'),('C','C'),('D','D')))
+    legacyscore = models.CharField(max_length=1, null=False, blank=True, verbose_name='Legacy score', choices=(('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')))
 
     purge_urls = ('/support/security/', )
 
@@ -109,8 +114,8 @@ class SecurityPatch(models.Model):
         verbose_name_plural = 'Security patches'
         ordering = ('-cvenumber',)
 
+
 class SecurityPatchVersion(models.Model):
     patch = models.ForeignKey(SecurityPatch, null=False, blank=False)
     version = models.ForeignKey(Version, null=False, blank=False)
     fixed_minor = models.IntegerField(null=False, blank=False)
-

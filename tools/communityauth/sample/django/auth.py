@@ -35,6 +35,7 @@ from Crypto.Hash import SHA
 from Crypto import Random
 import time
 
+
 class AuthBackend(ModelBackend):
     # We declare a fake backend that always fails direct authentication -
     # since we should never be using direct authentication in the first place!
@@ -62,15 +63,16 @@ def login(request):
         r = Random.new()
         iv = r.read(16)
         encryptor = AES.new(SHA.new(settings.SECRET_KEY).digest()[:16], AES.MODE_CBC, iv)
-        cipher = encryptor.encrypt(s + ' ' * (16-(len(s) % 16))) # pad to 16 bytes
+        cipher = encryptor.encrypt(s + ' ' * (16 - (len(s) % 16)))  # pad to 16 bytes
 
         return HttpResponseRedirect("%s?d=%s$%s" % (
-                settings.PGAUTH_REDIRECT,
-                base64.b64encode(iv, "-_"),
-                base64.b64encode(cipher, "-_"),
-                ))
+            settings.PGAUTH_REDIRECT,
+            base64.b64encode(iv, "-_"),
+            base64.b64encode(cipher, "-_"),
+        ))
     else:
         return HttpResponseRedirect(settings.PGAUTH_REDIRECT)
+
 
 # Handle logout requests by logging out of this site and then
 # redirecting to log out from the main site as well.
@@ -78,6 +80,7 @@ def logout(request):
     if request.user.is_authenticated():
         django_logout(request)
     return HttpResponseRedirect("%slogout/" % settings.PGAUTH_REDIRECT)
+
 
 # Receive an authentication response from the main website and try
 # to log the user in.
@@ -120,7 +123,7 @@ def auth_receive(request):
             changed = True
         if user.email != data['e'][0]:
             user.email = data['e'][0]
-            changed= True
+            changed = True
         if changed:
             user.save()
     except User.DoesNotExist:
@@ -208,7 +211,7 @@ def user_search(searchterm=None, userid=None):
     u = urllib.urlopen('%ssearch/?%s' % (
         settings.PGAUTH_REDIRECT,
         urllib.urlencode(q),
-        ))
+    ))
     (ivs, datas) = u.read().split('&')
     u.close()
 
@@ -220,6 +223,7 @@ def user_search(searchterm=None, userid=None):
     j = json.loads(s)
 
     return j
+
 
 # Import a user into the local authentication system. Will initially
 # make a search for it, and if anything other than one entry is returned

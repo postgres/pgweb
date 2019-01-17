@@ -6,6 +6,7 @@ from django.conf import settings
 
 import pgweb.core.models
 
+
 class Migration(migrations.Migration):
 
     dependencies = [

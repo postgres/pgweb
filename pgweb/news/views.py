@@ -10,9 +10,10 @@ from forms import NewsArticleForm
 
 import json
 
+
 def archive(request, tag=None, paging=None):
     if tag:
-        tag = get_object_or_404(NewsTag,urlname=tag.strip('/'))
+        tag = get_object_or_404(NewsTag, urlname=tag.strip('/'))
         news = NewsArticle.objects.filter(approved=True, tags=tag)
     else:
         tag = None
@@ -23,6 +24,7 @@ def archive(request, tag=None, paging=None):
         'newstags': NewsTag.objects.all(),
     })
 
+
 def item(request, itemid, throwaway=None):
     news = get_object_or_404(NewsArticle, pk=itemid)
     if not news.approved:
@@ -31,6 +33,7 @@ def item(request, itemid, throwaway=None):
         'obj': news,
         'newstags': NewsTag.objects.all(),
     })
+
 
 def taglist_json(request):
     return HttpResponse(json.dumps({

@@ -15,6 +15,7 @@ from pgweb.news.models import NewsArticle
 
 import requests_oauthlib
 
+
 class Command(BaseCommand):
     help = 'Post to twitter'
 
@@ -24,7 +25,7 @@ class Command(BaseCommand):
         if not curs.fetchall()[0][0]:
             raise CommandError("Failed to get advisory lock, existing twitter_post process stuck?")
 
-        articles = list(NewsArticle.objects.filter(tweeted=False, approved=True, date__gt=datetime.now()-timedelta(days=7)).order_by('date'))
+        articles = list(NewsArticle.objects.filter(tweeted=False, approved=True, date__gt=datetime.now() - timedelta(days=7)).order_by('date'))
         if not len(articles):
             return
 
@@ -35,7 +36,7 @@ class Command(BaseCommand):
 
         for a in articles:
             # We hardcode 30 chars for the URL shortener. And then 10 to cover the intro and spacing.
-            statusstr = u"News: {0} {1}/about/news/{2}/".format(a.title[:140-40], settings.SITE_ROOT, a.id)
+            statusstr = u"News: {0} {1}/about/news/{2}/".format(a.title[:140 - 40], settings.SITE_ROOT, a.id)
             r = tw.post('https://api.twitter.com/1.1/statuses/update.json', data={
                 'status': statusstr,
             })

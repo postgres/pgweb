@@ -10,6 +10,7 @@ from pgweb.util.helpers import HttpServerError
 
 from models import Survey, SurveyAnswer, SurveyLock
 
+
 def results(request, surveyid, junk=None):
     survey = get_object_or_404(Survey, pk=surveyid)
     surveylist = Survey.objects.all().order_by('-posted')
@@ -18,6 +19,7 @@ def results(request, surveyid, junk=None):
         'survey': survey,
         'surveylist': surveylist,
     })
+
 
 # Served over insecure HTTP, the Varnish proxy strips cookies
 @csrf_exempt
@@ -51,7 +53,7 @@ def vote(request, surveyid):
     lock.save()
 
     answers = SurveyAnswer.objects.get_or_create(survey=surv)[0]
-    setattr(answers, attrname, getattr(answers, attrname)+1)
+    setattr(answers, attrname, getattr(answers, attrname) + 1)
     answers.save()
 
     # Do explicit varnish purge, since it seems that the model doesn't

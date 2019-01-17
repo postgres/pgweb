@@ -26,6 +26,7 @@ platform_sort = {
 }
 archs = ['x86_64', 'i386', 'i686', 'ppc64le']
 
+
 def generate_platform(dirname, familyprefix, ver, installer, systemd):
     for f in platform_names.keys():
         yield ('%s-%s' % (f, ver), {
@@ -34,17 +35,19 @@ def generate_platform(dirname, familyprefix, ver, installer, systemd):
             'f': f,
             'i': installer,
             'd': systemd,
-            's': platform_sort[f]*1000-ver,
+            's': platform_sort[f] * 1000 - ver,
             'found': False,
-            })
+        })
+
 
 def get_redhat_systemd(ver):
     return (ver >= 7)
 
+
 platforms = {}
-for v in range(5, 7+1):
+for v in range(5, 7 + 1):
     platforms.update(dict(generate_platform('redhat', 'rhel', v, 'yum', get_redhat_systemd(v))))
-for v in range(24, 30+1):
+for v in range(24, 30 + 1):
     platforms.update(dict(generate_platform('fedora', 'fedora', v, 'dnf', True)))
 
 re_reporpm = re.compile('^pgdg-([a-z0-9-]+)([0-9]{2})-[^-]+-(\d+)\.noarch\.rpm$')
@@ -82,12 +85,12 @@ if __name__ == "__main__":
                             break
                     else:
                         # DEBUG
-#                        print "%s (%s) not found in platform list" % (familypath, shortdist)
+                        # print "%s (%s) not found in platform list" % (familypath, shortdist)
                         pass
 
     # Filter all platforms that are not used
-    platforms = {k:v for k,v in platforms.iteritems() if v['found']}
-    for k,v in platforms.iteritems():
+    platforms = {k: v for k, v in platforms.iteritems() if v['found']}
+    for k, v in platforms.iteritems():
         del v['found']
 
     j = json.dumps({'platforms': platforms, 'reporpms': reporpms})

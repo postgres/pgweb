@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class MailingListGroup(models.Model):
     groupname = models.CharField(max_length=64, null=False, blank=False)
     sortkey = models.IntegerField(null=False, default=10)
@@ -15,6 +16,7 @@ class MailingListGroup(models.Model):
 
     class Meta:
         ordering = ('sortkey', )
+
 
 class MailingList(models.Model):
     group = models.ForeignKey(MailingListGroup, null=False)

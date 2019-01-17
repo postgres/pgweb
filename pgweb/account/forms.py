@@ -12,6 +12,7 @@ from recaptcha import ReCaptchaField
 import logging
 log = logging.getLogger(__name__)
 
+
 def _clean_username(username):
     username = username.lower()
 
@@ -22,6 +23,7 @@ def _clean_username(username):
     except User.DoesNotExist:
         return username
     raise forms.ValidationError("This username is already in use")
+
 
 # Override some error handling only in the default authentication form
 class PgwebAuthenticationForm(AuthenticationForm):
@@ -38,6 +40,7 @@ class PgwebAuthenticationForm(AuthenticationForm):
                 return self.cleaned_data
             raise e
 
+
 class CommunityAuthConsentForm(forms.Form):
     consent = forms.BooleanField(help_text='Consent to sharing this data')
     next = forms.CharField(widget=forms.widgets.HiddenInput())
@@ -47,6 +50,7 @@ class CommunityAuthConsentForm(forms.Form):
         super(CommunityAuthConsentForm, self).__init__(*args, **kwargs)
 
         self.fields['consent'].label = 'Consent to sharing data with {0}'.format(self.orgname)
+
 
 class SignupForm(forms.Form):
     username = forms.CharField(max_length=30)
@@ -84,6 +88,7 @@ class SignupForm(forms.Form):
             return email
         raise forms.ValidationError("A user with this email address is already registered")
 
+
 class SignupOauthForm(forms.Form):
     username = forms.CharField(max_length=30)
     first_name = forms.CharField(max_length=30, required=False)
@@ -106,24 +111,29 @@ class SignupOauthForm(forms.Form):
     def clean_email(self):
         return self.cleaned_data['email'].lower()
 
+
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         exclude = ('user',)
+
 
 class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name', )
+
 
 class ContributorForm(forms.ModelForm):
     class Meta:
         model = Contributor
         exclude = ('ctype', 'lastname', 'firstname', 'user', )
+
 
 class ChangeEmailForm(forms.Form):
     email = forms.EmailField()
@@ -155,6 +165,7 @@ class ChangeEmailForm(forms.Form):
         if email1 != email2:
             raise forms.ValidationError("Email addresses don't match")
         return email2
+
 
 class PgwebPasswordResetForm(forms.Form):
     email = forms.EmailField()

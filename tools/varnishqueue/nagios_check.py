@@ -5,9 +5,9 @@ import psycopg2
 from datetime import timedelta
 
 # Up to 5 minutes delay is ok
-WARNING_THRESHOLD=timedelta(minutes=5)
+WARNING_THRESHOLD = timedelta(minutes=5)
 # More than 15 minutes something is definitely wrong
-CRITICAL_THRESHOLD=timedelta(minutes=15)
+CRITICAL_THRESHOLD = timedelta(minutes=15)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

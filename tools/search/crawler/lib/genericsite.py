@@ -3,6 +3,7 @@ import re
 from basecrawler import BaseSiteCrawler
 from parsers import RobotsParser
 
+
 class GenericSiteCrawler(BaseSiteCrawler):
     def __init__(self, hostname, dbconn, siteid, https=False):
         super(GenericSiteCrawler, self).__init__(hostname, dbconn, siteid, https=https)
@@ -19,8 +20,8 @@ class GenericSiteCrawler(BaseSiteCrawler):
         # robots.txt ones)
         curs = self.dbconn.cursor()
         curs.execute("SELECT suburlre FROM site_excludes WHERE site=%(site)s", {
-                'site': self.siteid,
-                })
+            'site': self.siteid,
+        })
         self.extra_excludes = [re.compile(x) for x, in curs.fetchall()]
 
         # We *always* crawl the root page, of course
@@ -45,7 +46,7 @@ class GenericSiteCrawler(BaseSiteCrawler):
 
     def post_process_page(self, url):
         for l in self.resolve_links(self.page.links, url):
-            if self.pages_crawled.has_key(l) or self.pages_crawled.has_key(l+"/"):
+            if self.pages_crawled.has_key(l) or self.pages_crawled.has_key(l + "/"):
                 continue
             if self.exclude_url(l):
                 continue

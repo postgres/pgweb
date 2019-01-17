@@ -8,6 +8,7 @@ from HTMLParser import HTMLParser
 
 from lib.log import log
 
+
 class GenericHtmlParser(HTMLParser):
     def __init__(self):
         HTMLParser.__init__(self)
@@ -22,7 +23,7 @@ class GenericHtmlParser(HTMLParser):
         if tag == "body":
             self.inbody = True
         if tag == "a":
-            for a,v in attrs:
+            for a, v in attrs:
                 if a == "href":
                     self.links.append(v)
 
@@ -31,6 +32,7 @@ class GenericHtmlParser(HTMLParser):
             self.inbody = False
 
     DATA_IGNORE_TAGS = ("script",)
+
     def handle_data(self, data):
         d = data.strip()
         if len(d) < 2:
@@ -59,6 +61,7 @@ class GenericHtmlParser(HTMLParser):
 class ArchivesParser(object):
     rematcher = re.compile("<!--X-Subject: ([^\n]*) -->.*<!--X-From-R13: ([^\n]*) -->.*<!--X-Date: ([^\n]*) -->.*<!--X-Body-of-Message-->(.*)<!--X-Body-of-Message-End-->", re.DOTALL)
     hp = HTMLParser()
+
     def __init__(self):
         self.subject = None
         self.author = None
@@ -79,6 +82,7 @@ class ArchivesParser(object):
 
     _date_multi_re = re.compile(' \((\w+\s\w+|)\)$')
     _date_trailing_envelope = re.compile('\s+\(envelope.*\)$')
+
     def parse_date(self, d):
         # For some reason, we have dates that look like this:
         # http://archives.postgresql.org/pgsql-bugs/1999-05/msg00018.php
@@ -126,10 +130,12 @@ class ArchivesParser(object):
     # So we copy the brokenness here.
     # This code is from MHonArc/ewhutil.pl, mrot13()
     _arot13_trans = dict(zip(map(ord,
-        u'@ABCDEFGHIJKLMNOPQRSTUVWXYZ[abcdefghijklmnopqrstuvwxyz'),
-        u'NOPQRSTUVWXYZ[@ABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'))
+                                 u'@ABCDEFGHIJKLMNOPQRSTUVWXYZ[abcdefghijklmnopqrstuvwxyz'),
+                             u'NOPQRSTUVWXYZ[@ABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'))
+
     def almost_rot13(self, s):
         return unicode(s).translate(self._arot13_trans)
+
 
 class RobotsParser(object):
     def __init__(self, url):

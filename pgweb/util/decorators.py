@@ -3,6 +3,7 @@ from functools import wraps
 from collections import defaultdict
 from django.contrib.auth.decorators import login_required as django_login_required
 
+
 def nocache(fn):
     def _nocache(request, *_args, **_kwargs):
         resp = fn(request, *_args, **_kwargs)
@@ -10,16 +11,18 @@ def nocache(fn):
         return resp
     return _nocache
 
+
 def cache(days=0, hours=0, minutes=0, seconds=0):
     "Set the server to cache object a specified time. td must be a timedelta object"
     def _cache(fn):
         def __cache(request, *_args, **_kwargs):
             resp = fn(request, *_args, **_kwargs)
             td = datetime.timedelta(hours=hours, minutes=minutes, seconds=seconds)
-            resp['Cache-Control'] = 's-maxage=%s' % (td.days*3600*24 + td.seconds)
+            resp['Cache-Control'] = 's-maxage=%s' % (td.days * 3600 * 24 + td.seconds)
             return resp
         return __cache
     return _cache
+
 
 def allow_frames(fn):
     def _allow_frames(request, *_args, **_kwargs):
@@ -27,6 +30,7 @@ def allow_frames(fn):
         resp.x_allow_frames = True
         return resp
     return _allow_frames
+
 
 def content_sources(what, source):
     def _script_sources(fn):
@@ -39,11 +43,14 @@ def content_sources(what, source):
         return __script_sources
     return _script_sources
 
+
 def script_sources(source):
     return content_sources('script', source)
 
+
 def frame_sources(source):
     return content_sources('frame', source)
+
 
 # A wrapped version of login_required that throws an exception if it's
 # used on a path that's not under /account/.

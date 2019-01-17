@@ -19,11 +19,13 @@ exclude_roots = ['/repos', ]
 
 allnodes = {}
 
+
 def read_file(fn):
     f = codecs.open(fn, 'r', encoding='utf-8', errors='replace')
     t = f.read()
     f.close()
     return t
+
 
 def parse_directory(dirname, rootlen):
     mynode = {}
@@ -39,7 +41,7 @@ def parse_directory(dirname, rootlen):
                 mynode[f] = {
                     't': 'l',
                     'd': os.readlink(fn).strip("/"),
-                    }
+                }
             else:
                 # This is a subdirectory, recurse into it, unless it happens
                 # to be on our exclude list.
@@ -61,12 +63,14 @@ def parse_directory(dirname, rootlen):
 
     allnodes[dirname[rootlen:].strip("/")] = mynode
 
+
 def Usage():
     print "Usage: spider_ftp.py <ftp_root> <pickle_file>"
     print ""
     print "If <pickle_file> starts with http[s]://, the file will be uploaded"
     print "to that URL instead of written to the filesystem."
     sys.exit(1)
+
 
 if len(sys.argv) != 3: Usage()
 

@@ -10,23 +10,24 @@ import psycopg2
 import sys
 import time
 
+
 def doit(opt):
     cp = ConfigParser()
     cp.read("search.ini")
     psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
-    conn = psycopg2.connect(cp.get("search","db"))
+    conn = psycopg2.connect(cp.get("search", "db"))
 
     curs = conn.cursor()
 
     if opt.list:
         # Multiple lists can be specified with a comma separator (no spaces)
         curs.execute("SELECT id,name FROM lists WHERE name=ANY(%(names)s)", {
-                'names': opt.list.split(','),
-                })
+            'names': opt.list.split(','),
+        })
     else:
         curs.execute("SELECT id,name FROM lists WHERE active ORDER BY id")
 
-    listinfo = [(id,name) for id,name in curs.fetchall()]
+    listinfo = [(id, name) for id, name in curs.fetchall()]
     c = MultiListCrawler(listinfo, conn, opt.status_interval, opt.commit_interval)
     n = c.crawl(opt.full, opt.month)
 
@@ -39,7 +40,8 @@ def doit(opt):
     log("Indexed %s messages" % n)
     time.sleep(1)
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     parser = OptionParser()
     parser.add_option("-l", "--list", dest='list', help="Crawl only this list")
     parser.add_option("-m", "--month", dest='month', help="Crawl only this month")

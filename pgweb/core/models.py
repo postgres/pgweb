@@ -10,8 +10,9 @@ TESTING_CHOICES = (
     (1, 'Release candidate'),
     (2, 'Beta'),
     (3, 'Alpha'),
-    )
+)
 TESTING_SHORTSTRING = ('', 'rc', 'beta', 'alpha')
+
 
 class Version(models.Model):
     tree = models.DecimalField(max_digits=3, decimal_places=1, null=False, blank=False, unique=True)
@@ -63,7 +64,7 @@ class Version(models.Model):
             for p in previous:
                 if not p == self:
                     p.current = False
-                    p.save() # primary key check avoids recursion
+                    p.save()  # primary key check avoids recursion
 
         # Now that we've made any previously current ones non-current, we are
         # free to save this one.
@@ -95,6 +96,7 @@ class Country(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Language(models.Model):
     # Import data from http://www.loc.gov/standards/iso639-2/ISO-639-2_utf-8.txt
     # (yes, there is a UTF16 BOM in the UTF8 file)
@@ -111,11 +113,13 @@ class Language(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class OrganisationType(models.Model):
     typename = models.CharField(max_length=32, null=False, blank=False)
 
     def __unicode__(self):
         return self.typename
+
 
 class Organisation(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False, unique=True)
@@ -151,6 +155,7 @@ class ImportedRSSFeed(models.Model):
     def __unicode__(self):
         return self.internalname
 
+
 class ImportedRSSItem(models.Model):
     feed = models.ForeignKey(ImportedRSSFeed)
     title = models.CharField(max_length=100, null=False, blank=False)
@@ -167,6 +172,8 @@ class ImportedRSSItem(models.Model):
 
 # From man sshd, except for ssh-dss
 _valid_keytypes = ['ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'ssh-rsa']
+
+
 # Options, keytype, key, comment. But we don't support options.
 def validate_sshkey(key):
     lines = key.splitlines()
@@ -185,11 +192,13 @@ def validate_sshkey(key):
         except:
             raise ValidationError("Incorrect base64 encoded key!")
 
+
 # Extra attributes for users (if they have them)
 class UserProfile(models.Model):
     user = models.OneToOneField(User, null=False, blank=False, primary_key=True)
-    sshkey = models.TextField(null=False, blank=True, verbose_name="SSH key", help_text= "Paste one or more public keys in OpenSSH format, one per line.", validators=[validate_sshkey, ])
+    sshkey = models.TextField(null=False, blank=True, verbose_name="SSH key", help_text="Paste one or more public keys in OpenSSH format, one per line.", validators=[validate_sshkey, ])
     lastmodified = models.DateTimeField(null=False, blank=False, auto_now=True)
+
 
 # Notifications sent for any moderated content.
 # Yes, we uglify it by storing the type of object as a string, so we don't
@@ -198,7 +207,7 @@ class ModerationNotification(models.Model):
     objectid = models.IntegerField(null=False, blank=False, db_index=True)
     objecttype = models.CharField(null=False, blank=False, max_length=100)
     text = models.TextField(null=False, blank=False)
-    author = models.CharField(null=False,  blank=False, max_length=100)
+    author = models.CharField(null=False, blank=False, max_length=100)
     date = models.DateTimeField(null=False, blank=False, auto_now=True)
 
     def __unicode__(self):

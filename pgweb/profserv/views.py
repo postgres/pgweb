@@ -8,18 +8,19 @@ from models import ProfessionalService
 from forms import ProfessionalServiceForm
 
 regions = (
-   ('africa','Africa'),
-   ('asia','Asia'),
-   ('europe','Europe'),
-   ('northamerica','North America'),
-   ('oceania','Oceania'),
-   ('southamerica','South America'),
+    ('africa', 'Africa'),
+    ('asia', 'Asia'),
+    ('europe', 'Europe'),
+    ('northamerica', 'North America'),
+    ('oceania', 'Oceania'),
+    ('southamerica', 'South America'),
 )
 
+
 def root(request, servtype):
-    title = servtype=='support' and 'Professional Services' or 'Hosting Providers'
-    what = servtype=='support' and 'support' or 'hosting'
-    support = servtype=='support'
+    title = servtype == 'support' and 'Professional Services' or 'Hosting Providers'
+    what = servtype == 'support' and 'support' or 'hosting'
+    support = servtype == 'support'
     return render_pgweb(request, 'support', 'profserv/root.html', {
         'title': title,
         'support': support,
@@ -29,19 +30,19 @@ def root(request, servtype):
 
 
 def region(request, servtype, regionname):
-    regname = [n for r,n in regions if r==regionname]
+    regname = [n for r, n in regions if r == regionname]
     if not regname:
         raise Http404
     regname = regname[0]
 
-    what = servtype=='support' and 'support' or 'hosting'
-    whatname = servtype=='support' and 'Professional Services' or 'Hosting Providers'
+    what = servtype == 'support' and 'support' or 'hosting'
+    whatname = servtype == 'support' and 'Professional Services' or 'Hosting Providers'
     title = "%s - %s" % (whatname, regname)
-    support = servtype=='support'
+    support = servtype == 'support'
 
     # DB model is a bit funky here, so use the extra-where functionality to filter properly.
     # Field names are cleaned up earlier, so it's safe against injections.
-    services = ProfessionalService.objects.select_related('org').filter(approved=True).extra(where=["region_%s AND provides_%s" % (regionname, what),])
+    services = ProfessionalService.objects.select_related('org').filter(approved=True).extra(where=["region_%s AND provides_%s" % (regionname, what), ])
 
     return render_pgweb(request, 'support', 'profserv/list.html', {
         'title': title,

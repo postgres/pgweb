@@ -15,6 +15,7 @@ import logging
 import psycopg2
 from setproctitle import setproctitle
 
+
 def do_purge(consumername, headers):
     try:
         conn = httplib.HTTPSConnection('%s.postgresql.org' % consumername)
@@ -29,6 +30,7 @@ def do_purge(consumername, headers):
         logging.error("Exception purging on %s: %s" % (consumername, ex))
         return False
     return True
+
 
 def worker(consumerid, consumername, dsn):
     logging.info("Starting worker for %s" % consumername)
@@ -85,7 +87,7 @@ def worker(consumerid, consumername, dsn):
             # Nothing, so roll back the transaction and wait
             conn.rollback()
 
-            select.select([conn],[],[],5*60)
+            select.select([conn], [], [], 5 * 60)
             conn.poll()
             while conn.notifies:
                 conn.notifies.pop()
@@ -104,7 +106,7 @@ def housekeeper(dsn):
             conn.commit()
         else:
             conn.rollback()
-        time.sleep(5*60)
+        time.sleep(5 * 60)
 
 
 if __name__ == "__main__":

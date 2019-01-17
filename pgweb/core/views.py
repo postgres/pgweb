@@ -37,6 +37,7 @@ from pgweb.survey.models import Survey
 from models import Organisation
 from forms import OrganisationForm, MergeOrgsForm
 
+
 # Front page view
 @cache(minutes=10)
 def home(request):
@@ -68,6 +69,7 @@ def home(request):
         'planet': planet,
     })
 
+
 # About page view (contains information about PostgreSQL + random quotes)
 @cache(minutes=10)
 def about(request):
@@ -76,6 +78,7 @@ def about(request):
     return render_pgweb(request, 'about', 'core/about.html', {
         'quotes': quotes,
     })
+
 
 # Community main page (contains surveys and potentially more)
 def community(request):
@@ -90,13 +93,17 @@ def community(request):
         'planet': planet,
     })
 
+
 # List of supported versions
 def versions(request):
     return render_pgweb(request, 'support', 'support/versioning.html', {
-            'versions': Version.objects.filter(tree__gt=0).filter(testing=0),
+        'versions': Version.objects.filter(tree__gt=0).filter(testing=0),
     })
 
+
 re_staticfilenames = re.compile("^[0-9A-Z/_-]+$", re.IGNORECASE)
+
+
 # Generic fallback view for static pages
 def fallback(request, url):
     if url.find('..') > -1:
@@ -116,12 +123,13 @@ def fallback(request, url):
     # Guestimate the nav section by looking at the URL and taking the first
     # piece of it.
     try:
-        navsect = url.split('/',2)[0]
+        navsect = url.split('/', 2)[0]
     except:
         navsect = ''
     c = PGWebContextProcessor(request)
     c.update({'navmenu': get_nav_menu(navsect)})
     return HttpResponse(t.render(c))
+
 
 # Edit-forms for core objects
 @login_required
@@ -131,6 +139,7 @@ def organisationform(request, itemid):
 
     return simple_form(Organisation, itemid, request, OrganisationForm,
                        redirect='/account/edit/organisations/')
+
 
 # robots.txt
 def robots(request):
@@ -154,7 +163,7 @@ def _make_sitemap(pagelist):
     x.startElement('urlset', {'xmlns': 'http://www.sitemaps.org/schemas/sitemap/0.9'})
     pages = 0
     for p in pagelist:
-        pages+=1
+        pages += 1
         x.startElement('url', {})
         x.add_xml_element('loc', 'https://www.postgresql.org/%s' % urllib.quote(p[0]))
         if len(p) > 1 and p[1]:
@@ -166,10 +175,12 @@ def _make_sitemap(pagelist):
     x.endDocument()
     return resp
 
+
 # Sitemap (XML format)
 @cache(hours=6)
 def sitemap(request):
     return _make_sitemap(get_all_pages_struct())
+
 
 # Internal sitemap (only for our own search engine)
 # Note! Still served up to anybody who wants it, so don't
@@ -178,17 +189,19 @@ def sitemap(request):
 def sitemap_internal(request):
     return _make_sitemap(get_all_pages_struct(method='get_internal_struct'))
 
+
 # dynamic CSS serving, meaning we merge a number of different CSS into a
 # single one, making sure it turns into a single http response. We do this
 # dynamically, since the output will be cached.
 _dynamic_cssmap = {
     'base': ['media/css/main.css',
-             'media/css/normalize.css',],
+             'media/css/normalize.css', ],
     'docs': ['media/css/global.css',
              'media/css/table.css',
              'media/css/text.css',
              'media/css/docs.css'],
-    }
+}
+
 
 @cache(hours=6)
 def dynamic_css(request, css):
@@ -228,32 +241,36 @@ def dynamic_css(request, css):
 
     return resp
 
+
 @nocache
 def csrf_failure(request, reason=''):
     resp = render(request, 'errors/csrf_failure.html', {
-            'reason': reason,
-            })
-    resp.status_code = 403 # Forbidden
+        'reason': reason,
+    })
+    resp.status_code = 403  # Forbidden
     return resp
+
 
 # Basic information about the connection
 @cache(seconds=30)
 def system_information(request):
-    return render(request,'core/system_information.html', {
-            'server': os.uname()[1],
-            'cache_server': request.META['REMOTE_ADDR'] or None,
-            'client_ip': get_client_ip(request),
-            'django_version': django.get_version(),
+    return render(request, 'core/system_information.html', {
+        'server': os.uname()[1],
+        'cache_server': request.META['REMOTE_ADDR'] or None,
+        'client_ip': get_client_ip(request),
+        'django_version': django.get_version(),
     })
+
 
 # Sync timestamp for automirror. Keep it around for 30 seconds
 # Basically just a check that we can access the backend still...
 @cache(seconds=30)
 def sync_timestamp(request):
     s = datetime.now().strftime("%Y-%m-%d %H:%M:%S\n")
-    r = HttpResponse(s,    content_type='text/plain')
+    r = HttpResponse(s, content_type='text/plain')
     r['Content-Length'] = len(s)
     return r
+
 
 # List of all unapproved objects, for the special admin page
 @login_required
@@ -261,8 +278,9 @@ def sync_timestamp(request):
 @user_passes_test(lambda u: u.groups.filter(name='pgweb moderators').exists())
 def admin_pending(request):
     return render(request, 'core/admin_pending.html', {
-            'app_list': get_all_pending_moderations(),
-            })
+        'app_list': get_all_pending_moderations(),
+    })
+
 
 # Purge objects from varnish, for the admin pages
 @login_required
@@ -297,8 +315,9 @@ def admin_purge(request):
     latest = curs.fetchall()
 
     return render(request, 'core/admin_purge.html', {
-            'latest_purges': latest,
-            })
+        'latest_purges': latest,
+    })
+
 
 @csrf_exempt
 def api_varnish_purge(request):
@@ -312,6 +331,7 @@ def api_varnish_purge(request):
         expr = request.POST['p%s' % i]
         curs.execute("SELECT varnish_purge_expr(%s)", (expr, ))
     return HttpResponse("Purged %s entries\n" % n)
+
 
 # Merge two organisations
 @login_required
@@ -346,5 +366,5 @@ def admin_mergeorg(request):
         form = MergeOrgsForm()
 
     return render(request, 'core/admin_mergeorg.html', {
-            'form': form,
+        'form': form,
     })

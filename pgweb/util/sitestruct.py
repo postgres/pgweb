@@ -1,5 +1,6 @@
 from django.conf import settings
 
+
 def get_all_pages_struct(method='get_struct'):
     """
     Return an iterator over all distinct pages on the site.
@@ -13,7 +14,7 @@ def get_all_pages_struct(method='get_struct'):
     for app in settings.INSTALLED_APPS:
         if app.startswith('pgweb.'):
             try:
-                m = __import__(app+".struct", {}, {}, method)
+                m = __import__(app + ".struct", {}, {}, method)
             except:
                 # Failed to import - probably module didnd't exist
                 continue

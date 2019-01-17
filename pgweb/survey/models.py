@@ -1,15 +1,19 @@
 from django.db import models
 
+
 # internal text/value object
 class SurveyQuestion(object):
     def __init__(self, value, text):
         self.value = value
         self.text = text
+
+
 class SurveyAnswerValues(object):
     def __init__(self, option, votes, votespercent):
         self.option = option
         self.votes = votes
         self.votespercent = votespercent
+
 
 class Survey(models.Model):
     question = models.CharField(max_length=500, null=False, blank=False)
@@ -31,7 +35,7 @@ class Survey(models.Model):
 
     @property
     def questions(self):
-        for i in range (1,9):
+        for i in range(1, 9):
             v = getattr(self, "opt%s" % i)
             if not v: break
             yield SurveyQuestion(i, v)
@@ -45,22 +49,22 @@ class Survey(models.Model):
     @property
     def completeanswers(self):
         for a in self._get_complete_answers():
-            yield SurveyAnswerValues(a[0], a[1], self.totalvotes>0 and (100*a[1]/self.totalvotes) or 0)
+            yield SurveyAnswerValues(a[0], a[1], self.totalvotes > 0 and (100 * a[1] / self.totalvotes) or 0)
 
     @property
     def totalvotes(self):
-        if not hasattr(self,"_totalvotes"):
+        if not hasattr(self, "_totalvotes"):
             self._totalvotes = 0
             for a in self._get_complete_answers():
                 self._totalvotes = self._totalvotes + a[1]
         return self._totalvotes
 
     def _get_complete_answers(self):
-        for i in range(1,9):
+        for i in range(1, 9):
             q = getattr(self, "opt%s" % i)
             if not q: break
             n = getattr(self.answers, "tot%s" % i)
-            yield (q,n)
+            yield (q, n)
 
     def save(self):
         # Make sure only one survey at a time can be the current one
@@ -71,11 +75,12 @@ class Survey(models.Model):
             for p in previous:
                 if not p == self:
                     p.current = False
-                    p.save() # primary key check avoids recursion
+                    p.save()  # primary key check avoids recursion
 
         # Now that we've made any previously current ones non-current, we are
         # free to save this one.
         super(Survey, self).save()
+
 
 class SurveyAnswer(models.Model):
     survey = models.OneToOneField(Survey, null=False, blank=False, primary_key=True)
@@ -89,6 +94,7 @@ class SurveyAnswer(models.Model):
     tot8 = models.IntegerField(null=False, default=0)
 
     purge_urls = ('/community/survey', )
+
 
 class SurveyLock(models.Model):
     ipaddr = models.GenericIPAddressField(null=False, blank=False)

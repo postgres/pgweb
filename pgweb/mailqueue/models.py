@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class QueuedMail(models.Model):
     sender = models.EmailField(max_length=100, null=False, blank=False)
     receiver = models.EmailField(max_length=100, null=False, blank=False)

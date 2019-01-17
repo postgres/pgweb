@@ -8,6 +8,7 @@ from pgweb.util.middleware import get_current_user
 from pgweb.util.misc import varnish_purge
 from pgweb.mailqueue.util import send_simple_mail
 
+
 def _build_url(obj):
     if obj.id:
         return "%s/admin/%s/%s/%s/" % (
@@ -23,23 +24,28 @@ def _build_url(obj):
             obj._meta.model_name,
         )
 
+
 def _get_full_text_diff(obj, oldobj):
     fieldlist = _get_all_notification_fields(obj)
     if not fieldlist:
         return "This object does not know how to express ifself."
 
-    s = "\n\n".join(["\n".join(filter(lambda x: not x.startswith('@@'),
-        difflib.unified_diff(
-            _get_attr_value(oldobj, n).splitlines(),
-            _get_attr_value(obj, n).splitlines(),
-            n=1,
-            lineterm='',
-            fromfile=n,
-            tofile=n,
-            ))
+    s = "\n\n".join(["\n".join(
+        filter(
+            lambda x: not x.startswith('@@'),
+            difflib.unified_diff(
+                _get_attr_value(oldobj, n).splitlines(),
+                _get_attr_value(obj, n).splitlines(),
+                n=1,
+                lineterm='',
+                fromfile=n,
+                tofile=n,
+            )
+        )
     ) for n in fieldlist if _get_attr_value(oldobj, n) != _get_attr_value(obj, n)])
     if not s: return None
     return s
+
 
 def _get_all_notification_fields(obj):
     if hasattr(obj, 'notify_fields'):
@@ -48,6 +54,7 @@ def _get_all_notification_fields(obj):
         # Include all field names except specified ones,
         # that are local to this model (not auto created)
         return [f.name for f in obj._meta.get_fields() if not f.name in ('approved', 'submitter', 'id', ) and not f.auto_created]
+
 
 def _get_attr_value(obj, fieldname):
     # see if this is a Many-to-many field. If yes, we want to print
@@ -61,12 +68,14 @@ def _get_attr_value(obj, fieldname):
     # Return the value, or an empty tring if it's NULL (migrated records)
     return unicode(getattr(obj, fieldname)) or ''
 
+
 def _get_full_text_representation(obj):
     fieldlist = _get_all_notification_fields(obj)
     if not fieldlist:
         return "This object does not know how to express itself."
 
     return "\n".join([u'%s: %s' % (n, _get_attr_value(obj, n)) for n in fieldlist])
+
 
 def _get_notification_text(obj):
     try:
@@ -108,6 +117,7 @@ def _get_notification_text(obj):
         return ('{0} id {1} has been modified'.format(obj._meta.verbose_name, obj.id),
                 'The following fields have been modified:\n\n%s' % diff)
 
+
 def my_pre_save_handler(sender, **kwargs):
     instance = kwargs['instance']
     if getattr(instance, 'send_notification', False) and get_current_user():
@@ -119,28 +129,30 @@ def my_pre_save_handler(sender, **kwargs):
                              "%s by %s" % (subj, get_current_user()),
                              cont)
 
+
 def my_m2m_changed_handler(sender, **kwargs):
     instance = kwargs['instance']
     if getattr(instance, 'send_m2m_notification', False) and get_current_user():
         (cl, f) = sender.__name__.split('_')
         if not hasattr(instance, '_stored_m2m'):
-            instance._stored_m2m={}
+            instance._stored_m2m = {}
         if kwargs['action'] == 'pre_clear':
-            instance._stored_m2m[f] = set([unicode(t) for t in getattr(instance,f).all()])
+            instance._stored_m2m[f] = set([unicode(t) for t in getattr(instance, f).all()])
         elif kwargs['action'] == 'post_add':
-            newset = set([unicode(t) for t in getattr(instance,f).all()])
+            newset = set([unicode(t) for t in getattr(instance, f).all()])
             added = newset.difference(instance._stored_m2m.get(f, set()))
             removed = instance._stored_m2m.get(f, set()).difference(newset)
             subj = '{0} id {1} has been modified'.format(instance._meta.verbose_name, instance.id)
             if added or removed:
                 send_simple_mail(settings.NOTIFICATION_FROM,
-                        settings.NOTIFICATION_EMAIL,
-                        "%s by %s" % (subj, get_current_user()),
-                        "The following values for {0} were changed:\n\n{1}\n{2}\n\n".format(
-                instance._meta.get_field(f).verbose_name,
-                "\n".join([u"Added: %s" % a for a in added]),
-                "\n".join([u"Removed: %s" % r for r in removed]),
-                ))
+                                 settings.NOTIFICATION_EMAIL,
+                                 "%s by %s" % (subj, get_current_user()),
+                                 "The following values for {0} were changed:\n\n{1}\n{2}\n\n".format(
+                                     instance._meta.get_field(f).verbose_name,
+                                     "\n".join([u"Added: %s" % a for a in added]),
+                                     "\n".join([u"Removed: %s" % r for r in removed]),
+                                 ))
+
 
 def my_pre_delete_handler(sender, **kwargs):
     instance = kwargs['instance']
@@ -151,7 +163,8 @@ def my_pre_delete_handler(sender, **kwargs):
                              instance._meta.verbose_name,
                              instance.id,
                              get_current_user()),
-                        _get_full_text_representation(instance))
+                         _get_full_text_representation(instance))
+
 
 def my_post_save_handler(sender, **kwargs):
     instance = kwargs['instance']
@@ -161,6 +174,7 @@ def my_post_save_handler(sender, **kwargs):
         else:
             purgelist = instance.purge_urls
         map(varnish_purge, purgelist)
+
 
 def register_basic_signal_handlers():
     pre_save.connect(my_pre_save_handler)

@@ -17,11 +17,13 @@ from pgweb.misc.models import BugIdMap
 
 from forms import SubmitBugForm
 
+
 def _make_bugs_messageid(bugid):
     return "<{0}-{1}@postgresql.org>".format(
         bugid,
         hashlib.md5("{0}-{1}".format(os.getpid(), time.time())).hexdigest()[:16],
     )
+
 
 @login_required
 def submitbug(request):
@@ -73,16 +75,19 @@ def submitbug(request):
         'savebutton': 'Submit and Send Email',
     })
 
+
 @login_required
 def submitbug_done(request, bugid):
     return render_pgweb(request, 'support', 'misc/bug_completed.html', {
         'bugid': bugid,
     })
 
+
 def bugs_redir(request, bugid):
     r = get_object_or_404(BugIdMap, id=bugid)
 
     return HttpResponseRedirect("{0}/message-id/{1}".format(settings.SITE_ROOT, r.messageid))
+
 
 # A crash testing URL. If the file /tmp/crashtest exists, raise a http 500
 # error. Otherwise, just return a fixed text response

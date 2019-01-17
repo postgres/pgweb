@@ -8,12 +8,12 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES={
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pgweb',
-        }
     }
+}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -58,7 +58,7 @@ MIDDLEWARE_CLASSES = [
     'pgweb.util.middleware.PgMiddleware',
 ]
 
-CSRF_FAILURE_VIEW='pgweb.core.views.csrf_failure'
+CSRF_FAILURE_VIEW = 'pgweb.core.views.csrf_failure'
 
 ROOT_URLCONF = 'pgweb.urls'
 
@@ -80,9 +80,9 @@ TEMPLATES = [{
     },
 }]
 
-LOGIN_URL='/account/login/'
-LOGIN_REDIRECT_URL='/account/'
-LOGOUT_URL='/account/logout/'
+LOGIN_URL = '/account/login/'
+LOGIN_REDIRECT_URL = '/account/'
+LOGOUT_URL = '/account/logout/'
 
 AUTHENTICATION_BACKENDS = (
     'pgweb.util.auth.AuthBackend',
@@ -118,48 +118,48 @@ INSTALLED_APPS = [
 ]
 
 # Default format for date/time (as it changes between machines)
-DATETIME_FORMAT="Y-m-d H:i:s"
+DATETIME_FORMAT = "Y-m-d H:i:s"
 
 # Configure recaptcha. Most details contain keys and are thus handled
 # in settings_local.py. Override NOCAPTCHA to actually use them.
-NOCAPTCHA=True
-RECAPTCHA_SITE_KEY=""
-RECAPTCHA_SECRET_KEY=""
+NOCAPTCHA = True
+RECAPTCHA_SITE_KEY = ""
+RECAPTCHA_SECRET_KEY = ""
 
 ###
 # Application specific settings, likely overridden in settings_local.py.
 #
 # In particular, adjust the email addresses
 ###
-SESSION_COOKIE_SECURE=True                             # Allow our session only over https
-SESSION_COOKIE_DOMAIN="www.postgresql.org"             # Don't allow access by other postgresql.org sites
-SESSION_COOKIE_HTTPONLY=True                           # Access over http only, no js
-CSRF_COOKIE_SECURE=SESSION_COOKIE_SECURE
-CSRF_COOKIE_DOMAIN=SESSION_COOKIE_DOMAIN
-CSRF_COOKIE_HTTPONLY=SESSION_COOKIE_HTTPONLY
+SESSION_COOKIE_SECURE = True                                # Allow our session only over https
+SESSION_COOKIE_DOMAIN = "www.postgresql.org"                # Don't allow access by other postgresql.org sites
+SESSION_COOKIE_HTTPONLY = True                              # Access over http only, no js
+CSRF_COOKIE_SECURE = SESSION_COOKIE_SECURE
+CSRF_COOKIE_DOMAIN = SESSION_COOKIE_DOMAIN
+CSRF_COOKIE_HTTPONLY = SESSION_COOKIE_HTTPONLY
 
-SITE_ROOT="http://www.postgresql.org"                  # Root of working URLs
-FTP_PICKLE="/usr/local/pgweb/ftpsite.pickle"           # Location of file with current contents from ftp site
-YUM_JSON="/usr/local/pgweb/external/yum.json"
-STATIC_CHECKOUT="/usr/local/pgweb-static"              # Location of a checked out pgweb-static project
-NOTIFICATION_EMAIL="someone@example.com"               # Address to send notifications *to*
-NOTIFICATION_FROM="someone@example.com"                # Address to send notifications *from*
-ACCOUNTS_NOREPLY_FROM="someone@example.com"            # Address to send account messages from
-BUGREPORT_EMAIL="someone@example.com"                  # Address to pgsql-bugs list
-BUGREPORT_NOREPLY_EMAIL="someone-noreply@example.com"  # Address to no-reply pgsql-bugs address
-DOCSREPORT_EMAIL="someone@example.com"                 # Address to pgsql-docs list
-DOCSREPORT_NOREPLY_EMAIL="someone-noreply@example.com" # Address to no-reply pgsql-docs address
-FRONTEND_SERVERS=()                                    # A tuple containing the *IP addresses* of all the
-                                                       # varnish frontend servers in use.
-FTP_MASTERS=()                                           # A tuple containing the *IP addresses* of all machines
-                                                       # trusted to upload ftp structure data
-VARNISH_PURGERS=()                                     # Extra servers that can do varnish purges through our queue
-DO_ESI=False                                           # Generate ESI tags
-ARCHIVES_SEARCH_SERVER="archives.postgresql.org"       # Where to post REST request for archives search
-ARCHIVES_SEARCH_PLAINTEXT=False                        # Contact ARCHIVES_SEARCH_SERVER with http instead of https
-FRONTEND_SMTP_RELAY="magus.postgresql.org"             # Where to relay user generated email
-OAUTH={}                                               # OAuth providers and keys
-PGDG_ORG_ID=-1                                         # id of the PGDG organisation entry
+SITE_ROOT = "http://www.postgresql.org"                     # Root of working URLs
+FTP_PICKLE = "/usr/local/pgweb/ftpsite.pickle"              # Location of file with current contents from ftp site
+YUM_JSON = "/usr/local/pgweb/external/yum.json"
+STATIC_CHECKOUT = "/usr/local/pgweb-static"                 # Location of a checked out pgweb-static project
+NOTIFICATION_EMAIL = "someone@example.com"                  # Address to send notifications *to*
+NOTIFICATION_FROM = "someone@example.com"                   # Address to send notifications *from*
+ACCOUNTS_NOREPLY_FROM = "someone@example.com"               # Address to send account messages from
+BUGREPORT_EMAIL = "someone@example.com"                     # Address to pgsql-bugs list
+BUGREPORT_NOREPLY_EMAIL = "someone-noreply@example.com"     # Address to no-reply pgsql-bugs address
+DOCSREPORT_EMAIL = "someone@example.com"                    # Address to pgsql-docs list
+DOCSREPORT_NOREPLY_EMAIL = "someone-noreply@example.com"    # Address to no-reply pgsql-docs address
+FRONTEND_SERVERS = ()                                       # A tuple containing the *IP addresses* of all the
+                                                            # varnish frontend servers in use.
+FTP_MASTERS = ()                                            # A tuple containing the *IP addresses* of all machines
+                                                            # trusted to upload ftp structure data
+VARNISH_PURGERS = ()                                        # Extra servers that can do varnish purges through our queue
+DO_ESI = False                                              # Generate ESI tags
+ARCHIVES_SEARCH_SERVER = "archives.postgresql.org"          # Where to post REST request for archives search
+ARCHIVES_SEARCH_PLAINTEXT = False                           # Contact ARCHIVES_SEARCH_SERVER with http instead of https
+FRONTEND_SMTP_RELAY = "magus.postgresql.org"                # Where to relay user generated email
+OAUTH = {}                                                  # OAuth providers and keys
+PGDG_ORG_ID = -1                                            # id of the PGDG organisation entry
 
 # Load local settings overrides
 from settings_local import *

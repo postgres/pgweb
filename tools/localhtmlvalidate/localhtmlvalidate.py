@@ -19,7 +19,8 @@ import httplib
 import re
 import HTMLParser
 
-BOUNDARY="-=--=foobar-=--="
+BOUNDARY = "-=--=foobar-=--="
+
 
 def encode_multipart_formdata(fields, files):
     L = []
@@ -39,7 +40,8 @@ def encode_multipart_formdata(fields, files):
     body = "\r\n".join(L)
     return body
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     if len(sys.argv) != 2:
         print "Usage: localhtmlvalidate.py <local url>"
         sys.exit(1)
@@ -53,13 +55,15 @@ if __name__=="__main__":
         firstline = 0
 
     # Generate a form body
-    body = encode_multipart_formdata([
+    body = encode_multipart_formdata(
+        [
             ('charset', 'utf-8'),
             ('doctype', 'inline'),
             ('group', '0'),
             ('verbose', '1'),
-            ],
-                                     [('uploaded_file', 'test.html', contents)])
+        ],
+        [('uploaded_file', 'test.html', contents)]
+    )
 
     # Now submit it to the w3c validator
     h = httplib.HTTP("validator.w3.org")
@@ -92,5 +96,3 @@ if __name__=="__main__":
         print "Unknown status: %s" % headers['x-w3c-validator-status']
         print headers
         sys.exit(1)
-    
-    

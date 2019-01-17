@@ -2,6 +2,7 @@ from django.db import models
 from datetime import date
 from pgweb.core.models import Organisation
 
+
 class NewsTag(models.Model):
     urlname = models.CharField(max_length=20, null=False, blank=False, unique=True)
     name = models.CharField(max_length=32, null=False, blank=False)
@@ -12,6 +13,7 @@ class NewsTag(models.Model):
 
     class Meta:
         ordering = ('urlname', )
+
 
 class NewsArticle(models.Model):
     org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.")

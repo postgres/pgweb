@@ -4,6 +4,7 @@ from email.parser import Parser
 
 from models import QueuedMail
 
+
 class QueuedMailAdmin(admin.ModelAdmin):
     model = QueuedMail
     readonly_fields = ('parsed_content', )
@@ -26,5 +27,6 @@ class QueuedMailAdmin(admin.ModelAdmin):
             return "Failed to get body: %s" % e
 
     parsed_content.short_description = 'Parsed mail'
+
 
 admin.site.register(QueuedMail, QueuedMailAdmin)

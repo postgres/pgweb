@@ -17,6 +17,7 @@ from pgweb.core.models import Version
 from models import DocPage
 from forms import DocCommentForm
 
+
 @allow_frames
 @content_sources('style', "'unsafe-inline'")
 def docpage(request, version, filename):
@@ -57,9 +58,9 @@ def docpage(request, version, filename):
         where=["file=%s OR file IN (SELECT file2 FROM docsalias WHERE file1=%s) OR file IN (SELECT file1 FROM docsalias WHERE file2=%s)"],
         params=[fullname, fullname, fullname],
         select={
-            'supported':"COALESCE((SELECT supported FROM core_version v WHERE v.tree=version), 'f')",
-            'testing':"COALESCE((SELECT testing FROM core_version v WHERE v.tree=version),0)",
-    }).order_by('-supported', 'version').only('version', 'file')
+            'supported': "COALESCE((SELECT supported FROM core_version v WHERE v.tree=version), 'f')",
+            'testing': "COALESCE((SELECT testing FROM core_version v WHERE v.tree=version),0)",
+        }).order_by('-supported', 'version').only('version', 'file')
 
     return render(request, 'docs/docspage.html', {
         'page': page,
@@ -71,6 +72,7 @@ def docpage(request, version, filename):
         'loaddate': loaddate,
     })
 
+
 def docspermanentredirect(request, version, typ, page, *args):
     """Provides a permanent redirect from the old static/interactive pages to
     the modern pages that do not have said keywords.
@@ -80,17 +82,21 @@ def docspermanentredirect(request, version, typ, page, *args):
         url += page
     return HttpResponsePermanentRedirect(url)
 
+
 def docsrootpage(request, version):
     return docpage(request, version, 'index')
+
 
 def redirect_root(request, version):
     return HttpResponsePermanentRedirect("/docs/%s/" % version)
 
+
 def root(request):
-    versions = Version.objects.filter(Q(supported=True) | Q(testing__gt=0,tree__gt=0)).order_by('-tree')
+    versions = Version.objects.filter(Q(supported=True) | Q(testing__gt=0, tree__gt=0)).order_by('-tree')
     return render_pgweb(request, 'docs', 'docs/index.html', {
         'versions': versions,
     })
+
 
 class _VersionPdfWrapper(object):
     """
@@ -110,25 +116,30 @@ class _VersionPdfWrapper(object):
             self.indexname = 'postgres.html'
         else:
             self.indexname = 'index.html'
+
     def __getattr__(self, name):
         return getattr(self.__version, name)
+
     def _find_pdf(self, pagetype):
         try:
             return os.stat('%s/documentation/pdf/%s/postgresql-%s-%s.pdf' % (settings.STATIC_CHECKOUT, self.__version.numtree, self.__version.numtree, pagetype)).st_size
         except:
             return 0
 
+
 def manuals(request):
-    versions = Version.objects.filter(Q(supported=True) | Q(testing__gt=0,tree__gt=0)).order_by('-tree')
+    versions = Version.objects.filter(Q(supported=True) | Q(testing__gt=0, tree__gt=0)).order_by('-tree')
     return render_pgweb(request, 'docs', 'docs/manuals.html', {
         'versions': [_VersionPdfWrapper(v) for v in versions],
     })
 
+
 def manualarchive(request):
-    versions = Version.objects.filter(testing=0,supported=False,tree__gt=0).order_by('-tree')
+    versions = Version.objects.filter(testing=0, supported=False, tree__gt=0).order_by('-tree')
     return render_pgweb(request, 'docs', 'docs/archive.html', {
         'versions': [_VersionPdfWrapper(v) for v in versions],
     })
+
 
 @login_required
 def commentform(request, itemid, version, filename):

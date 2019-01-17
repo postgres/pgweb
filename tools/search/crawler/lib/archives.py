@@ -8,6 +8,7 @@ import time
 from lib.log import log
 from lib.parsers import ArchivesParser
 
+
 class MultiListCrawler(object):
     def __init__(self, lists, conn, status_interval=30, commit_interval=500):
         self.lists = lists
@@ -27,8 +28,8 @@ class MultiListCrawler(object):
         for listid, listname in self.lists:
             if full:
                 # Generate a sequence of everything to index
-                for year in range(1997, datetime.datetime.now().year+1):
-                    for month in range(1,13):
+                for year in range(1997, datetime.datetime.now().year + 1):
+                    for month in range(1, 13):
                         self.queue.put((listid, listname, year, month, -1))
             elif month:
                 # Do one specific month
@@ -48,18 +49,18 @@ class MultiListCrawler(object):
                 curs = self.conn.cursor()
                 curr = datetime.date.today()
                 if curr.month == 1:
-                    prev = datetime.date(curr.year-1, 12, 1)
+                    prev = datetime.date(curr.year - 1, 12, 1)
                 else:
-                    prev = datetime.date(curr.year, curr.month-1, 1)
+                    prev = datetime.date(curr.year, curr.month - 1, 1)
 
                 for d in curr, prev:
                     # Figure out what the highest indexed page in this
                     # month is.
                     curs.execute("SELECT max(msgnum) FROM messages WHERE list=%(list)s AND year=%(year)s AND month=%(month)s", {
-                            'list': listid,
-                            'year': d.year,
-                            'month': d.month,
-                            })
+                        'list': listid,
+                        'year': d.year,
+                        'month': d.month,
+                    })
                     x = curs.fetchall()
                     if x[0][0] != None:
                         maxmsg = x[0][0]
@@ -69,11 +70,11 @@ class MultiListCrawler(object):
 
         for x in range(5):
             t = threading.Thread(name="Indexer %s" % x,
-                                 target = lambda: self.crawl_from_queue())
-            t.daemon= True
+                                 target=lambda: self.crawl_from_queue())
+            t.daemon = True
             t.start()
 
-        t = threading.Thread(name="statusthread", target = lambda: self.status_thread())
+        t = threading.Thread(name="statusthread", target=lambda: self.status_thread())
         t.daemon = True
         t.start()
 
@@ -93,10 +94,10 @@ class MultiListCrawler(object):
             with self.counterlock:
                 log("Indexed %s messages so far (%s active threads, %s months still queued, %.1f msg/sec)" % (
                     self.counter,
-                    threading.active_count() - 2 , # main thread + status thread
+                    threading.active_count() - 2,  # main thread + status thread
                     self.queue.qsize(),
                     self.counter / (nowtime - starttime),
-                    ))
+                ))
                 # Commit every 500 messages
                 if self.counter - lastcommit > self.commit_interval:
                     lastcommit = self.counter
@@ -152,15 +153,15 @@ class MultiListCrawler(object):
             # We return true to move on to the next message anyway!
             return True
         curs.execute("INSERT INTO messages (list, year, month, msgnum, date, subject, author, txt, fti) VALUES (%(listid)s, %(year)s, %(month)s, %(msgnum)s, %(date)s, %(subject)s, %(author)s, %(txt)s, setweight(to_tsvector('pg', %(subject)s), 'A') || to_tsvector('pg', %(txt)s))", {
-                'listid': listid,
-                'year': year,
-                'month': month,
-                'msgnum': msgnum,
-                'date': p.date,
-                'subject': p.subject[:127],
-                'author': p.author[:127],
-                'txt': p.body,
-                })
+            'listid': listid,
+            'year': year,
+            'month': month,
+            'msgnum': msgnum,
+            'date': p.date,
+            'subject': p.subject[:127],
+            'author': p.author[:127],
+            'txt': p.body,
+        })
         with self.counterlock:
             self.counter += 1
 

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class ContributorType(models.Model):
     typename = models.CharField(max_length=32, null=False, blank=False)
     sortorder = models.IntegerField(null=False, default=100)
@@ -16,6 +17,7 @@ class ContributorType(models.Model):
     class Meta:
         ordering = ('sortorder',)
 
+
 class Contributor(models.Model):
     ctype = models.ForeignKey(ContributorType)
     lastname = models.CharField(max_length=100, null=False, blank=False)
@@ -27,7 +29,7 @@ class Contributor(models.Model):
     contribution = models.TextField(null=True, blank=True)
     user = models.ForeignKey(User, null=True, blank=True)
 
-    send_notification=True
+    send_notification = True
     purge_urls = ('/community/contributors/', )
 
     def __unicode__(self):

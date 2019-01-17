@@ -4,6 +4,7 @@ from django.forms import ValidationError
 from models import Organisation
 from django.contrib.auth.models import User
 
+
 class OrganisationForm(forms.ModelForm):
     remove_manager = forms.ModelMultipleChoiceField(required=False, queryset=None, label="Current manager(s)", help_text="Select one or more managers to remove")
     add_manager = forms.EmailField(required=False)
@@ -53,6 +54,7 @@ class OrganisationForm(forms.ModelForm):
 
     def apply_submitter(self, model, User):
         model.managers.add(User)
+
 
 class MergeOrgsForm(forms.Form):
     merge_into = forms.ModelChoiceField(queryset=Organisation.objects.all())

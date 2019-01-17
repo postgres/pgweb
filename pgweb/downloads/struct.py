@@ -1,5 +1,6 @@
 from models import Category
 
+
 def get_struct():
     # Products
     for c in Category.objects.all():

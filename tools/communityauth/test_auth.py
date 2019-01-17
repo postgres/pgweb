@@ -46,7 +46,7 @@ if __name__ == "__main__":
         'f': options.first,
         'l': options.last,
         'e': options.email,
-        }
+    }
     if options.suburl:
         info['su'] = options.suburl
 
@@ -54,15 +54,15 @@ if __name__ == "__main__":
     # the first block more random..
     # Since this is a fake authentication, put it 5 minutes into the future to
     # give more time to copy/paste it.
-    s = "t=%s&%s" % (int(time.time()+300), urllib.urlencode(info))
+    s = "t=%s&%s" % (int(time.time() + 300), urllib.urlencode(info))
 
     r = Random.new()
     iv = r.read(16)
     encryptor = AES.new(base64.b64decode(options.key), AES.MODE_CBC, iv)
-    cipher = encryptor.encrypt(s + ' ' * (16-(len(s) % 16)))
+    cipher = encryptor.encrypt(s + ' ' * (16 - (len(s) % 16)))
 
     print "Paste the following after the receiving url:"
     print "?i=%s&d=%s" % (
         base64.b64encode(iv, "-_"),
         base64.b64encode(cipher, "-_"),
-        )
+    )

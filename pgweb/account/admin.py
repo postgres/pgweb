@@ -8,6 +8,7 @@ import base64
 
 from models import CommunityAuthSite, CommunityAuthOrg
 
+
 class CommunityAuthSiteAdminForm(forms.ModelForm):
     class Meta:
         model = CommunityAuthSite
@@ -24,8 +25,10 @@ class CommunityAuthSiteAdminForm(forms.ModelForm):
             raise forms.ValidationError("Crypto key must be 16, 24 or 32 bytes before being base64-encoded")
         return self.cleaned_data['cryptkey']
 
+
 class CommunityAuthSiteAdmin(admin.ModelAdmin):
     form = CommunityAuthSiteAdminForm
+
 
 class PGUserChangeForm(UserChangeForm):
     """just like UserChangeForm, butremoves "username" requirement"""
@@ -38,6 +41,7 @@ class PGUserChangeForm(UserChangeForm):
         if self.fields.get('username'):
             del self.fields['username']
 
+
 class PGUserAdmin(UserAdmin):
     """overrides default Django user admin"""
     form = PGUserChangeForm
@@ -48,7 +52,8 @@ class PGUserAdmin(UserAdmin):
             return self.readonly_fields + ('username',)
         return self.readonly_fields
 
+
 admin.site.register(CommunityAuthSite, CommunityAuthSiteAdmin)
 admin.site.register(CommunityAuthOrg)
-admin.site.unregister(User) # have to unregister default User Admin...
-admin.site.register(User, PGUserAdmin) # ...in order to add overrides
+admin.site.unregister(User)  # have to unregister default User Admin...
+admin.site.register(User, PGUserAdmin)  # ...in order to add overrides

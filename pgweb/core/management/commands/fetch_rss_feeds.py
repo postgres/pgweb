@@ -13,6 +13,7 @@ from datetime import datetime
 
 from pgweb.core.models import ImportedRSSFeed, ImportedRSSItem
 
+
 class Command(BaseCommand):
     help = 'Fetch RSS feeds'
 
@@ -27,7 +28,7 @@ class Command(BaseCommand):
                     if not hasattr(feed, 'status'):
                         # bozo_excpetion can seemingly be set when there is no error as well,
                         # so make sure we only check if we didn't get a status.
-                        if hasattr(feed,'bozo_exception'):
+                        if hasattr(feed, 'bozo_exception'):
                             raise Exception('Feed load error %s' % feed.bozo_exception)
                         raise Exception('Feed load error with no exception!')
                     if feed.status != 200:
@@ -38,10 +39,11 @@ class Command(BaseCommand):
                         try:
                             item = ImportedRSSItem.objects.get(feed=importfeed, url=entry.link)
                         except ImportedRSSItem.DoesNotExist:
-                            item = ImportedRSSItem(feed=importfeed,
-                                                   title=entry.title[:100],
-                                                   url=entry.link,
-                                                   posttime=datetime(*(entry.published_parsed[0:6])),
+                            item = ImportedRSSItem(
+                                feed=importfeed,
+                                title=entry.title[:100],
+                                url=entry.link,
+                                posttime=datetime(*(entry.published_parsed[0:6])),
                             )
                             item.save()
                             fetchedsomething = True

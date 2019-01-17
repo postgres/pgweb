@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Quote(models.Model):
     approved = models.BooleanField(null=False, default=False)
     quote = models.TextField(null=False, blank=False)

@@ -7,11 +7,11 @@ import psycopg2
 import urllib
 import simplejson as json
 
-if __name__=="__main__":
+if __name__ == "__main__":
     cp = ConfigParser()
     cp.read("search.ini")
     psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
-    conn = psycopg2.connect(cp.get("search","db"))
+    conn = psycopg2.connect(cp.get("search", "db"))
     curs = conn.cursor()
 
     u = urllib.urlopen("http://%s/community/lists/listinfo/" % cp.get("search", "web"))

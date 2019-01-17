@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class PUG(models.Model):
     """
     contains information about a local PostgreSQL user group

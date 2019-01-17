@@ -5,6 +5,7 @@ import dateutil.parser
 from lib.log import log
 from lib.basecrawler import BaseSiteCrawler
 
+
 class SitemapParser(object):
     def __init__(self):
         self.urls = []
@@ -19,7 +20,7 @@ class SitemapParser(object):
         self.getlastmod = False
         self.currstr = ""
         self.internal = False
-        self.parser.StartElementHandler = lambda name,attrs: self.processelement(name,attrs)
+        self.parser.StartElementHandler = lambda name, attrs: self.processelement(name, attrs)
         self.parser.EndElementHandler = lambda name: self.processendelement(name)
         self.parser.CharacterDataHandler = lambda data: self.processcharacterdata(data)
         self.internal = internal
@@ -58,6 +59,7 @@ class SitemapParser(object):
         if self.geturl or self.getprio or self.getlastmod:
             self.currstr += data
 
+
 class SitemapSiteCrawler(BaseSiteCrawler):
     def __init__(self, hostname, dbconn, siteid, serverip, https=False):
         super(SitemapSiteCrawler, self).__init__(hostname, dbconn, siteid, serverip, https)
@@ -81,7 +83,7 @@ class SitemapSiteCrawler(BaseSiteCrawler):
 
         for url, prio, lastmod, internal in p.urls:
             # Advance 8 characters - length of https://.
-            url = url[len(self.hostname)+8:]
+            url = url[len(self.hostname) + 8:]
             if lastmod:
                 if self.scantimes.has_key(url):
                     if lastmod < self.scantimes[url]:

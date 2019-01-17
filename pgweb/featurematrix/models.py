@@ -1,12 +1,13 @@
 from django.db import models
 
 choices_map = {
- 0: {'str': 'No',       'class': 'no', 'bgcolor': '#ffdddd'},
- 1: {'str': 'Yes',      'class': 'yes', 'bgcolor': '#ddffdd'},
- 2: {'str': 'Obsolete', 'class': 'obs', 'bgcolor': '#ddddff'},
- 3: {'str': '?',        'class': 'unk', 'bgcolor': '#ffffaa'},
+    0: {'str': 'No', 'class': 'no', 'bgcolor': '#ffdddd'},
+    1: {'str': 'Yes', 'class': 'yes', 'bgcolor': '#ddffdd'},
+    2: {'str': 'Obsolete', 'class': 'obs', 'bgcolor': '#ddddff'},
+    3: {'str': '?', 'class': 'unk', 'bgcolor': '#ffffaa'},
 }
-choices = [(k, v['str']) for k,v in choices_map.items()]
+choices = [(k, v['str']) for k, v in choices_map.items()]
+
 
 class FeatureGroup(models.Model):
     groupname = models.CharField(max_length=100, null=False, blank=False)
@@ -20,13 +21,14 @@ class FeatureGroup(models.Model):
     @property
     def columns(self):
         # Return a list of all the columns for the matrix
-        return [b for a,b in versions]
+        return [b for a, b in versions]
+
 
 class Feature(models.Model):
     group = models.ForeignKey(FeatureGroup, null=False, blank=False)
     featurename = models.CharField(max_length=100, null=False, blank=False)
     featuredescription = models.TextField(null=False, blank=True)
-    #WARNING! All fields that start with "v" will be considered versions!
+    # WARNING! All fields that start with "v" will be considered versions!
     v74 = models.IntegerField(verbose_name="7.4", null=False, blank=False, default=0, choices=choices)
     v74.visible_default = False
     v80 = models.IntegerField(verbose_name="8.0", null=False, blank=False, default=0, choices=choices)
@@ -53,7 +55,7 @@ class Feature(models.Model):
 
     def columns(self):
         # Get a list of column based on all versions that are visible_default
-        return [choices_map[getattr(self, a)] for a,b in versions]
+        return [choices_map[getattr(self, a)] for a, b in versions]
 
     @property
     def featurelink(self):
@@ -62,5 +64,6 @@ class Feature(models.Model):
         else:
             return 'detail/%s/' % self.id
 
-versions = [(f.name,f.verbose_name) for f in Feature()._meta.fields if f.name.startswith('v') and getattr(f, 'visible_default', True)]
+
+versions = [(f.name, f.verbose_name) for f in Feature()._meta.fields if f.name.startswith('v') and getattr(f, 'visible_default', True)]
 versions = sorted(versions, key=lambda f: -float(f[1]))

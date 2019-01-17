@@ -9,11 +9,14 @@ except ImportError:
 
 _thread_locals = local()
 
+
 def initialize_template_collection():
     _thread_locals.templates = []
 
+
 def get_all_templates():
     return getattr(_thread_locals, 'templates', [])
+
 
 class TrackingTemplateLoader(django.template.loaders.base.Loader):
     def get_template_sources(self, template_name):

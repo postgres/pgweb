@@ -13,6 +13,7 @@ import smtplib
 
 from pgweb.mailqueue.models import QueuedMail
 
+
 class Command(BaseCommand):
     help = 'Send queued mail'
 

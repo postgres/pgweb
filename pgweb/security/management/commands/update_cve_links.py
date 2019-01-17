@@ -13,6 +13,7 @@ from pgweb.util.misc import varnish_purge
 
 import requests
 
+
 class Command(BaseCommand):
     help = 'Update CVE links'
 

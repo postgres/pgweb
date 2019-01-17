@@ -13,6 +13,8 @@ except ImportError:
     from django.utils._threading_local import local
 
 _thread_locals = local()
+
+
 def get_current_user():
     return getattr(_thread_locals, 'user', None)
 
@@ -24,7 +26,7 @@ class PgMiddleware(object):
         return None
 
     def process_request(self, request):
-# Thread local store for username, see comment at the top of this file
+        # Thread local store for username, see comment at the top of this file
         _thread_locals.user = getattr(request, 'user', None)
         initialize_template_collection()
 
@@ -46,16 +48,16 @@ class PgMiddleware(object):
             ('connect', ["'self'", "www.google-analytics.com", "ssl.google-analytics.com"]),
             ('media', ["'self'", ]),
             ('style', ["'self'", "fonts.googleapis.com"]),
-            ('font', ["'self'", "fonts.gstatic.com", "data:" ]),
+            ('font', ["'self'", "fonts.gstatic.com", "data:", ]),
         ])
         if hasattr(response, 'x_allow_extra_sources'):
-            for k,v in response.x_allow_extra_sources.items():
+            for k, v in response.x_allow_extra_sources.items():
                 if k in sources:
                     sources[k].extend(v)
                 else:
                     sources[k] = v
 
-        security_policies = ["{0}-src {1}".format(k," ".join(v)) for k,v in sources.items()]
+        security_policies = ["{0}-src {1}".format(k, " ".join(v)) for k, v in sources.items()]
 
         if not getattr(response, 'x_allow_frames', False):
             response['X-Frame-Options'] = 'DENY'

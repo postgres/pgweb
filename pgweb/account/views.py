@@ -44,7 +44,8 @@ log = logging.getLogger(__name__)
 
 # The value we store in user.password for oauth logins. This is
 # a value that must not match any hashers.
-OAUTH_PASSWORD_STORE='oauth_signin_account_no_password'
+OAUTH_PASSWORD_STORE = 'oauth_signin_account_no_password'
+
 
 @login_required
 def home(request):
@@ -60,6 +61,7 @@ def home(request):
         'products': myproducts,
         'profservs': myprofservs,
     })
+
 
 objtypes = {
     'news': {
@@ -84,6 +86,7 @@ objtypes = {
         'submit_header': 'Before submitting a new Organisation, please verify on the list of <a href="/account/orglist/">current organisations</a> if the organisation already exists. If it does, please contact the manager of the organisation to gain permissions.',
     },
 }
+
 
 @login_required
 @transaction.atomic
@@ -128,11 +131,12 @@ def profile(request):
             contribform = ContributorForm(instance=contrib)
 
     return render_pgweb(request, 'account', 'account/userprofileform.html', {
-            'userform': userform,
-            'profileform': profileform,
-            'contribform': contribform,
-            'can_change_email': can_change_email,
-            })
+        'userform': userform,
+        'profileform': profileform,
+        'contribform': contribform,
+        'can_change_email': can_change_email,
+    })
+
 
 @login_required
 @transaction.atomic
@@ -158,12 +162,13 @@ def change_email(request):
                                      token=generate_random_token())
             token.save()
 
-            send_template_mail(settings.ACCOUNTS_NOREPLY_FROM,
-                               form.cleaned_data['email'],
-                               'Your postgresql.org community account',
-                               'account/email_change_email.txt',
-                               { 'token': token , 'user': request.user, }
-                           )
+            send_template_mail(
+                settings.ACCOUNTS_NOREPLY_FROM,
+                form.cleaned_data['email'],
+                'Your postgresql.org community account',
+                'account/email_change_email.txt',
+                {'token': token, 'user': request.user, }
+            )
             return HttpResponseRedirect('done/')
     else:
         form = ChangeEmailForm(request.user)
@@ -171,7 +176,8 @@ def change_email(request):
     return render_pgweb(request, 'account', 'account/emailchangeform.html', {
         'form': form,
         'token': token,
-        })
+    })
+
 
 @login_required
 @transaction.atomic
@@ -193,7 +199,8 @@ def confirm_change_email(request, tokenhash):
     return render_pgweb(request, 'account', 'account/emailchangecompleted.html', {
         'token': tokenhash,
         'success': token and True or False,
-        })
+    })
+
 
 @login_required
 def listobjects(request, objtype):
@@ -211,23 +218,27 @@ def listobjects(request, objtype):
         'suburl': objtype,
     })
 
+
 @login_required
 def orglist(request):
     orgs = Organisation.objects.filter(approved=True)
 
     return render_pgweb(request, 'account', 'account/orglist.html', {
-            'orgs': orgs,
+        'orgs': orgs,
     })
+
 
 def login(request):
     return authviews.login(request, template_name='account/login.html',
                            authentication_form=PgwebAuthenticationForm,
                            extra_context={
-                               'oauth_providers': [(k,v) for k,v in sorted(settings.OAUTH.items())],
+                               'oauth_providers': [(k, v) for k, v in sorted(settings.OAUTH.items())],
                            })
+
 
 def logout(request):
     return authviews.logout_then_login(request, login_url='/')
+
 
 def changepwd(request):
     if hasattr(request.user, 'password') and request.user.password == OAUTH_PASSWORD_STORE:
@@ -237,6 +248,7 @@ def changepwd(request):
     return authviews.password_change(request,
                                      template_name='account/password_change.html',
                                      post_change_redirect='/account/changepwd/done/')
+
 
 def resetpwd(request):
     # Basic django password reset feature is completely broken. For example, it does not support
@@ -255,31 +267,35 @@ def resetpwd(request):
         if form.is_valid():
             log.info("Initiating password set from {0} for {1}".format(get_client_ip(request), form.cleaned_data['email']))
             token = default_token_generator.make_token(u)
-            send_template_mail(settings.ACCOUNTS_NOREPLY_FROM,
-                               form.cleaned_data['email'],
-                               'Password reset for your postgresql.org account',
-                               'account/password_reset_email.txt',
-                               {
-                                   'user': u,
-                                   'uid': urlsafe_base64_encode(force_bytes(u.pk)),
-                                   'token': token,
-                               },
+            send_template_mail(
+                settings.ACCOUNTS_NOREPLY_FROM,
+                form.cleaned_data['email'],
+                'Password reset for your postgresql.org account',
+                'account/password_reset_email.txt',
+                {
+                    'user': u,
+                    'uid': urlsafe_base64_encode(force_bytes(u.pk)),
+                    'token': token,
+                },
             )
             return HttpResponseRedirect('/account/reset/done/')
     else:
         form = PgwebPasswordResetForm()
 
     return render_pgweb(request, 'account', 'account/password_reset.html', {
-            'form': form,
+        'form': form,
     })
+
 
 def change_done(request):
     log.info("Password change done from {0}".format(get_client_ip(request)))
     return authviews.password_change_done(request, template_name='account/password_change_done.html')
 
+
 def reset_done(request):
     log.info("Password reset done from {0}".format(get_client_ip(request)))
     return authviews.password_reset_done(request, template_name='account/password_reset_done.html')
+
 
 def reset_confirm(request, uidb64, token):
     log.info("Confirming password reset for uidb {0}, token {1} from {2}".format(uidb64, token, get_client_ip(request)))
@@ -289,9 +305,11 @@ def reset_confirm(request, uidb64, token):
                                             template_name='account/password_reset_confirm.html',
                                             post_reset_redirect='/account/reset/complete/')
 
+
 def reset_complete(request):
     log.info("Password reset completed for user from {0}".format(get_client_ip(request)))
     return authviews.password_reset_complete(request, template_name='account/password_reset_complete.html')
+
 
 @script_sources('https://www.google.com/recaptcha/')
 @script_sources('https://www.gstatic.com/recaptcha/')
@@ -326,7 +344,7 @@ def signup(request):
                                form.cleaned_data['email'],
                                'Your new postgresql.org community account',
                                'account/new_account_email.txt',
-                               { 'uid': urlsafe_base64_encode(force_bytes(user.id)), 'token': token, 'user': user}
+                               {'uid': urlsafe_base64_encode(force_bytes(user.id)), 'token': token, 'user': user}
                                )
 
             return HttpResponseRedirect('/account/signup/complete/')
@@ -334,16 +352,16 @@ def signup(request):
         form = SignupForm(get_client_ip(request))
 
     return render_pgweb(request, 'account', 'base/form.html', {
-            'form': form,
-            'formitemtype': 'Account',
-            'form_intro': """
+        'form': form,
+        'formitemtype': 'Account',
+        'form_intro': """
 To sign up for a free community account, enter your preferred userid and email address.
 Note that a community account is only needed if you want to submit information - all
 content is available for reading without an account.
 """,
-            'savebutton': 'Sign up',
-            'operation': 'New',
-            'recaptcha': True,
+        'savebutton': 'Sign up',
+        'operation': 'New',
+        'recaptcha': True,
     })
 
 
@@ -429,12 +447,12 @@ def signup_oauth(request):
         'operation': 'New account',
         'savebutton': 'Sign up for new account',
         'recaptcha': True,
-        })
+    })
+
 
 ####
-## Community authentication endpoint
+# Community authentication endpoint
 ####
-
 def communityauth(request, siteid):
     # Get whatever site the user is trying to log in to.
     site = get_object_or_404(CommunityAuthSite, pk=siteid)
@@ -476,23 +494,24 @@ def communityauth(request, siteid):
             nexturl = request.POST['next']
         else:
             nexturl = '/account/auth/%s/%s' % (siteid, urldata)
-        return authviews.login(request, template_name='account/login.html',
-                               authentication_form=PgwebAuthenticationForm,
-                               extra_context={
-                                   'sitename': site.name,
-                                   'next': nexturl,
-                                   'oauth_providers': [(k,v) for k,v in sorted(settings.OAUTH.items())],
-                               },
-                           )
+        return authviews.login(
+            request, template_name='account/login.html',
+            authentication_form=PgwebAuthenticationForm,
+            extra_context={
+                'sitename': site.name,
+                'next': nexturl,
+                'oauth_providers': [(k, v) for k, v in sorted(settings.OAUTH.items())],
+            },
+        )
 
     # When we reach this point, the user *has* already been authenticated.
     # The request variable "su" *may* contain a suburl and should in that
     # case be passed along to the site we're authenticating for. And of
     # course, we fill a structure with information about the user.
 
-    if request.user.first_name=='' or request.user.last_name=='' or request.user.email=='':
+    if request.user.first_name == '' or request.user.last_name == '' or request.user.email == '':
         return render_pgweb(request, 'account', 'account/communityauth_noinfo.html', {
-                })
+        })
 
     # Check for cooloff period
     if site.cooloff_hours > 0:
@@ -501,7 +520,7 @@ def communityauth(request, siteid):
                 request.user.username, site.name))
             return render_pgweb(request, 'account', 'account/communityauth_cooloff.html', {
                 'site': site,
-                })
+            })
 
     if site.org.require_consent:
         if not CommunityAuthConsent.objects.filter(org=site.org, user=request.user).exists():
@@ -513,7 +532,7 @@ def communityauth(request, siteid):
         'f': request.user.first_name.encode('utf-8'),
         'l': request.user.last_name.encode('utf-8'),
         'e': request.user.email.encode('utf-8'),
-        }
+    }
     if d:
         info['d'] = d.encode('utf-8')
     elif su:
@@ -525,16 +544,16 @@ def communityauth(request, siteid):
 
     # Encrypt it with the shared key (and IV!)
     r = Random.new()
-    iv = r.read(16) # Always 16 bytes for AES
+    iv = r.read(16)  # Always 16 bytes for AES
     encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_CBC, iv)
-    cipher = encryptor.encrypt(s + ' ' * (16-(len(s) % 16))) #Pad to even 16 bytes
+    cipher = encryptor.encrypt(s + ' ' * (16 - (len(s) % 16)))  # Pad to even 16 bytes
 
     # Generate redirect
     return HttpResponseRedirect("%s?i=%s&d=%s" % (
-            site.redirecturl,
-            base64.b64encode(iv, "-_"),
-            base64.b64encode(cipher, "-_"),
-            ))
+        site.redirecturl,
+        base64.b64encode(iv, "-_"),
+        base64.b64encode(cipher, "-_"),
+    ))
 
 
 def communityauth_logout(request, siteid):
@@ -547,6 +566,7 @@ def communityauth_logout(request, siteid):
     # Redirect user back to the specified suburl
     return HttpResponseRedirect("%s?s=logout" % site.redirecturl)
 
+
 @login_required
 def communityauth_consent(request, siteid):
     org = get_object_or_404(CommunityAuthSite, id=siteid).org
@@ -554,7 +574,7 @@ def communityauth_consent(request, siteid):
         form = CommunityAuthConsentForm(org.orgname, data=request.POST)
         if form.is_valid():
             CommunityAuthConsent.objects.get_or_create(user=request.user, org=org,
-                                                       defaults={'consentgiven':datetime.now()},
+                                                       defaults={'consentgiven': datetime.now()},
                                                        )
             return HttpResponseRedirect(form.cleaned_data['next'])
     else:
@@ -571,15 +591,16 @@ def communityauth_consent(request, siteid):
 def _encrypt_site_response(site, s):
     # Encrypt it with the shared key (and IV!)
     r = Random.new()
-    iv = r.read(16) # Always 16 bytes for AES
+    iv = r.read(16)  # Always 16 bytes for AES
     encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_CBC, iv)
-    cipher = encryptor.encrypt(s + ' ' * (16-(len(s) % 16))) #Pad to even 16 bytes
+    cipher = encryptor.encrypt(s + ' ' * (16 - (len(s) % 16)))  # Pad to even 16 bytes
 
     # Base64-encode the response, just to be consistent
     return "%s&%s" % (
         base64.b64encode(iv, '-_'),
         base64.b64encode(cipher, '-_'),
     )
+
 
 def communityauth_search(request, siteid):
     # Perform a search for users. The response will be encrypted with the site
@@ -604,6 +625,7 @@ def communityauth_search(request, siteid):
     j = json.dumps([{'u': u.username, 'e': u.email, 'f': u.first_name, 'l': u.last_name} for u in users])
 
     return HttpResponse(_encrypt_site_response(site, j))
+
 
 def communityauth_getkeys(request, siteid, since=None):
     # Get any updated ssh keys for community accounts.

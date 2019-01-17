@@ -4,6 +4,7 @@ from models import Version
 
 from datetime import datetime, time
 
+
 class VersionFeed(Feed):
     title = "PostgreSQL latest versions"
     link = "https://www.postgresql.org/"
@@ -19,4 +20,4 @@ class VersionFeed(Feed):
         return "https://www.postgresql.org/docs/%s/%s" % (obj.numtree, obj.relnotes)
 
     def item_pubdate(self, obj):
-        return datetime.combine(obj.reldate,time.min)
+        return datetime.combine(obj.reldate, time.min)

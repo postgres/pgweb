@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.auth.backends import ModelBackend
 
+
 # Special version of the authentication backend, so we can handle things like
 # forced lowercasing of usernames.
 class AuthBackend(ModelBackend):
@@ -19,4 +20,4 @@ class AuthBackend(ModelBackend):
             # User not found, so clearly they can't log in!
             return None
 
-        return None # Should never get here, but just in case...
+        return None  # Should never get here, but just in case...

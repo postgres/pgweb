@@ -5,6 +5,7 @@ from pgweb.util.contexts import render_pgweb
 from pgweb.core.models import Version
 from models import Feature
 
+
 def root(request):
     features = Feature.objects.all().select_related().order_by('group__groupsort', 'group__groupname', 'featurename')
     groups = []
@@ -28,6 +29,7 @@ def root(request):
         'groups': groups,
         'versions': versions,
     })
+
 
 def detail(request, featureid):
     feature = get_object_or_404(Feature, pk=featureid)

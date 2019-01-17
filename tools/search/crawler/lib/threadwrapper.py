@@ -1,5 +1,6 @@
 from multiprocessing import Process
 
+
 # Wrap a method call in a different process, so that we can process
 # keyboard interrupts and actually terminate it if we have to.
 # python threading makes it often impossible to Ctlr-C it otherwise..

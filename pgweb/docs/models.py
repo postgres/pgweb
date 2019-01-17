@@ -1,6 +1,7 @@
 from django.db import models
 from pgweb.core.models import Version
 
+
 class DocPage(models.Model):
     id = models.AutoField(null=False, primary_key=True)
     file = models.CharField(max_length=64, null=False, blank=False)
@@ -20,6 +21,7 @@ class DocPage(models.Model):
         # Index file first, because we want to list versions by file
         unique_together = [('file', 'version')]
 
+
 class DocPageAlias(models.Model):
     file1 = models.CharField(max_length=64, null=False, blank=False, unique=True)
     file2 = models.CharField(max_length=64, null=False, blank=False, unique=True)
@@ -30,4 +32,4 @@ class DocPageAlias(models.Model):
     # XXX: needs a unique functional index as well, see the migration!
     class Meta:
         db_table = 'docsalias'
-        verbose_name_plural='Doc page aliases'
+        verbose_name_plural = 'Doc page aliases'

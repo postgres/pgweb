@@ -14,6 +14,7 @@ log = logging.getLogger(__name__)
 class OAuthException(Exception):
     pass
 
+
 #
 # Generic OAuth login for multiple providers
 #
@@ -97,9 +98,12 @@ def oauth_login_google(request):
         'google',
         'https://accounts.google.com/o/oauth2/v2/auth',
         'https://accounts.google.com/o/oauth2/token',
-        ['https://www.googleapis.com/auth/userinfo.email',
-             'https://www.googleapis.com/auth/userinfo.profile'],
+        [
+            'https://www.googleapis.com/auth/userinfo.email',
+            'https://www.googleapis.com/auth/userinfo.profile'
+        ],
         _google_auth_data)
+
 
 #
 # Github login
@@ -119,7 +123,7 @@ def oauth_login_github(request):
         else:
             # Some github accounts have no name on them, so we can just
             # let the user fill it out manually in that case.
-            n = ['','']
+            n = ['', '']
         # Email is at a separate endpoint
         r = oa.get('https://api.github.com/user/emails').json()
         for e in r:
@@ -138,6 +142,7 @@ def oauth_login_github(request):
         'https://github.com/login/oauth/access_token',
         ['user:email', ],
         _github_auth_data)
+
 
 #
 # Facebook login
@@ -181,7 +186,7 @@ def oauth_login_microsoft(request):
         'microsoft',
         'https://login.live.com/oauth20_authorize.srf',
         'https://login.live.com/oauth20_token.srf',
-        ['wl.basic', 'wl.emails' ],
+        ['wl.basic', 'wl.emails', ],
         _microsoft_auth_data)
 
 

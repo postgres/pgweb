@@ -17,17 +17,19 @@ quiet = False
 
 re_titlematch = re.compile('<title\s*>([^<]+)</title\s*>', re.IGNORECASE)
 
-## Load a single page
+
+# Load a single page
 def load_doc_file(filename, f):
-    tidyopts = dict(drop_proprietary_attributes=1,
-                alt_text='',
-                hide_comments=1,
-                output_xhtml=1,
-                show_body_only=1,
-                clean=1,
-                char_encoding='utf8',
-                indent='auto',
-            )
+    tidyopts = dict(
+        drop_proprietary_attributes=1,
+        alt_text='',
+        hide_comments=1,
+        output_xhtml=1,
+        show_body_only=1,
+        clean=1,
+        char_encoding='utf8',
+        indent='auto',
+    )
 
     # Postgres 10 started using xml toolchain and now produces docmentation in utf8. So we need
     # to figure out which version it is.
@@ -56,7 +58,7 @@ def load_doc_file(filename, f):
     if not quiet: print "--- file: %s (%s) ---" % (filename, title)
 
     s = tidy.parseString(contents.encode('utf-8'), **tidyopts)
-    curs.execute("INSERT INTO docs (file, version, title, content) VALUES (%(f)s, %(v)s, %(t)s, %(c)s)",{
+    curs.execute("INSERT INTO docs (file, version, title, content) VALUES (%(f)s, %(v)s, %(t)s, %(c)s)", {
         'f': filename,
         'v': ver,
         't': title,
@@ -65,8 +67,8 @@ def load_doc_file(filename, f):
     global pagecount
     pagecount += 1
 
-## Main execution
 
+# Main execution
 parser = OptionParser(usage="usage: %prog [options] <version> <tarfile>")
 parser.add_option("-q", "--quiet", action="store_true", dest="quiet",
                   help="Run quietly")
@@ -139,4 +141,3 @@ connection.commit()
 connection.close()
 
 if not quiet: print "Done (%i pages)." % pagecount
-

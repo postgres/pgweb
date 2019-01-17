@@ -14,6 +14,7 @@ from datetime import datetime
 from pgweb.util.moderation import get_all_pending_moderations
 from pgweb.util.misc import send_template_mail
 
+
 class Command(BaseCommand):
     help = 'Send moderation report'
 
@@ -28,4 +29,4 @@ class Command(BaseCommand):
                                    "core/moderation_report.txt",
                                    {
                                        'items': counts,
-                })
+                                   })

@@ -4,13 +4,17 @@ from django import forms
 from pgweb.util.admin import PgwebAdmin
 from models import Event
 
+
 def approve_event(modeladmin, request, queryset):
     # We need to do this in a loop even though it's less efficient,
     # since using queryset.update() will not send the moderation messages.
     for e in queryset:
         e.approved = True
         e.save()
+
+
 approve_event.short_description = 'Approve event'
+
 
 class EventAdminForm(forms.ModelForm):
     class Meta:
@@ -27,6 +31,7 @@ class EventAdminForm(forms.ModelForm):
                 self._errors['country'] = self.error_class(['Country must be specified for non-online events'])
                 del cleaned_data['country']
         return cleaned_data
+
 
 class EventAdmin(PgwebAdmin):
     list_display = ('title', 'org', 'startdate', 'enddate', 'approved',)
