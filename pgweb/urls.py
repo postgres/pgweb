@@ -1,13 +1,7 @@
 from django.conf.urls import include, url
 from django.views.generic import RedirectView
 
-# Register our save signal handlers
 from pgweb.util.signals import register_basic_signal_handlers
-register_basic_signal_handlers()
-
-# Uncomment the next two lines to enable the admin:
-from django.contrib import admin
-admin.autodiscover()
 
 import pgweb.contributors.views
 import pgweb.core.views
@@ -29,6 +23,13 @@ import pgweb.survey.views
 from pgweb.core.feeds import VersionFeed
 from pgweb.news.feeds import NewsFeed
 from pgweb.events.feeds import EventFeed
+
+# Uncomment the next two lines to enable the admin:
+from django.contrib import admin
+admin.autodiscover()
+
+# Register our save signal handlers
+register_basic_signal_handlers()
 
 urlpatterns = [
     url(r'^$', pgweb.core.views.home),
