@@ -42,7 +42,7 @@ class PgMiddleware(object):
 		sources = OrderedDict([
 			('default', ["'self'", ]),
 			('img', ['*', 'data:', ]),
-			('script', ["'self'", "www.google-analytics.com", "ssl.google-analytics.com"]),
+			('script', ["'self'", "www.google-analytics.com", "ssl.google-analytics.com", "data:"]),
 			('connect', ["'self'", "www.google-analytics.com", "ssl.google-analytics.com"]),
 			('media', ["'self'", ]),
 			('style', ["'self'", "fonts.googleapis.com"]),
