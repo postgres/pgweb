@@ -28,7 +28,7 @@ if __name__ == "__main__":
             tmpl = l[len('templates/'):].strip()
             if tmpl not in BANNED_TEMPLATES:
                 curs.execute("SELECT varnish_purge_xkey(%(key)s)", {
-                    'key': 'pgwt_{0}'.format(hashlib.md5(tmpl).hexdigest()),
+                    'key': 'pgwt_{0}'.format(hashlib.md5(tmpl.encode('ascii')).hexdigest()),
                 })
         elif l.startswith('media/'):
             # For media we can't xkey, but the URL is exact so we can

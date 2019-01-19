@@ -21,7 +21,7 @@ from .forms import SubmitBugForm
 def _make_bugs_messageid(bugid):
     return "<{0}-{1}@postgresql.org>".format(
         bugid,
-        hashlib.md5("{0}-{1}".format(os.getpid(), time.time())).hexdigest()[:16],
+        hashlib.md5("{0}-{1}".format(os.getpid(), time.time()).encode('ascii')).hexdigest()[:16],
     )
 
 
