@@ -6,7 +6,7 @@ from email.Utils import make_msgid
 from email import encoders
 from email.header import Header
 
-from models import QueuedMail
+from .models import QueuedMail
 
 
 def _encoded_email_header(name, email):

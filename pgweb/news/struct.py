@@ -1,5 +1,5 @@
 from datetime import date, timedelta
-from models import NewsArticle
+from .models import NewsArticle
 
 
 def get_struct():

@@ -8,7 +8,7 @@ from pgweb.util.contexts import render_pgweb
 from pgweb.util.misc import get_client_ip, varnish_purge
 from pgweb.util.helpers import HttpServerError
 
-from models import Survey, SurveyAnswer, SurveyLock
+from .models import Survey, SurveyAnswer, SurveyLock
 
 
 def results(request, surveyid, junk=None):

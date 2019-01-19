@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from pgweb.util.admin import PgwebAdmin
-from models import NewsArticle, NewsTag
+from .models import NewsArticle, NewsTag
 
 
 class NewsArticleAdmin(PgwebAdmin):

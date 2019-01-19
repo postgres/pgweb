@@ -5,7 +5,7 @@ from selectable.forms.widgets import AutoCompleteSelectWidget
 
 from pgweb.core.lookups import UserLookup
 
-from models import Contributor, ContributorType
+from .models import Contributor, ContributorType
 
 
 class ContributorAdminForm(forms.ModelForm):

@@ -15,7 +15,7 @@ from pgweb.util.misc import send_template_mail
 from pgweb.core.models import Version
 from pgweb.misc.models import BugIdMap
 
-from forms import SubmitBugForm
+from .forms import SubmitBugForm
 
 
 def _make_bugs_messageid(bugid):

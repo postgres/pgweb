@@ -4,8 +4,8 @@ from pgweb.util.decorators import login_required
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import simple_form
 
-from models import ProfessionalService
-from forms import ProfessionalServiceForm
+from .models import ProfessionalService
+from .forms import ProfessionalServiceForm
 
 regions = (
     ('africa', 'Africa'),

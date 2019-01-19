@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ValidationError
 
 from pgweb.core.models import Organisation
-from models import NewsArticle, NewsTag
+from .models import NewsArticle, NewsTag
 
 
 class NewsArticleForm(forms.ModelForm):

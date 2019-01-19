@@ -1,7 +1,7 @@
 from django import forms
 
 from pgweb.core.models import Organisation
-from models import Product
+from .models import Product
 
 
 class ProductForm(forms.ModelForm):

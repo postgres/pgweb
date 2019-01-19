@@ -6,7 +6,7 @@ from django import forms
 
 import base64
 
-from models import CommunityAuthSite, CommunityAuthOrg
+from .models import CommunityAuthSite, CommunityAuthOrg
 
 
 class CommunityAuthSiteAdminForm(forms.ModelForm):

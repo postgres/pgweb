@@ -4,7 +4,7 @@ from django.conf import settings
 
 from pgweb.core.models import Version
 from pgweb.news.models import NewsArticle
-from models import SecurityPatch, SecurityPatchVersion
+from .models import SecurityPatch, SecurityPatchVersion
 
 
 class VersionChoiceField(forms.ModelChoiceField):

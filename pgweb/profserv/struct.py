@@ -1,4 +1,4 @@
-from views import regions
+from .views import regions
 
 
 def get_struct():

@@ -1,6 +1,6 @@
 from pgweb.util.contexts import render_pgweb
 
-from models import ContributorType
+from .models import ContributorType
 
 
 def completelist(request):

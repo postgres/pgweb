@@ -5,8 +5,8 @@ from pgweb.util.decorators import login_required
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import simple_form
 
-from models import NewsArticle, NewsTag
-from forms import NewsArticleForm
+from .models import NewsArticle, NewsTag
+from .forms import NewsArticleForm
 
 import json
 

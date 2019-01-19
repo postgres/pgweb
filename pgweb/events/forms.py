@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ValidationError
 
 from pgweb.core.models import Organisation
-from models import Event
+from .models import Event
 
 
 class EventForm(forms.ModelForm):

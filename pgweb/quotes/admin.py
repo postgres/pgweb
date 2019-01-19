@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Quote
+from .models import Quote
 
 
 class QuoteAdmin(admin.ModelAdmin):

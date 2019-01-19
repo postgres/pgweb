@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Survey, SurveyLock, SurveyAnswer
+from .models import Survey, SurveyLock, SurveyAnswer
 
 
 class SurveyAdmin(admin.ModelAdmin):

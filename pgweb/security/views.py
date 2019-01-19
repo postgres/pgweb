@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from pgweb.util.contexts import render_pgweb
 
 from pgweb.core.models import Version
-from models import SecurityPatch
+from .models import SecurityPatch
 
 
 def GetPatchesList(filt):

@@ -1,5 +1,5 @@
 from datetime import date
-from models import Event
+from .models import Event
 
 
 def get_struct():

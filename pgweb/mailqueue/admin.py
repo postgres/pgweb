@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from email.parser import Parser
 
-from models import QueuedMail
+from .models import QueuedMail
 
 
 class QueuedMailAdmin(admin.ModelAdmin):

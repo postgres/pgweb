@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from pgweb.core.models import UserProfile
 from pgweb.contributors.models import Contributor
 
-from recaptcha import ReCaptchaField
+from .recaptcha import ReCaptchaField
 
 import logging
 log = logging.getLogger(__name__)

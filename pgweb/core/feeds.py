@@ -1,6 +1,6 @@
 from django.contrib.syndication.views import Feed
 
-from models import Version
+from .models import Version
 
 from datetime import datetime, time
 

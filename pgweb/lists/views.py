@@ -2,7 +2,7 @@ from django.http import HttpResponse
 
 import json
 
-from models import MailingList, MailingListGroup
+from .models import MailingList, MailingListGroup
 
 
 def listinfo(request):

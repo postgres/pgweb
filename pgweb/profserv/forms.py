@@ -1,7 +1,7 @@
 from django import forms
 
 from pgweb.core.models import Organisation
-from models import ProfessionalService
+from .models import ProfessionalService
 
 
 class ProfessionalServiceForm(forms.ModelForm):

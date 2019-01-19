@@ -14,8 +14,8 @@ from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
 from pgweb.util.misc import varnish_purge, version_sort
 
 from pgweb.core.models import Version
-from models import Category, Product, StackBuilderApp
-from forms import ProductForm
+from .models import Category, Product, StackBuilderApp
+from .forms import ProductForm
 
 
 #######

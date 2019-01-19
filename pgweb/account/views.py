@@ -32,12 +32,12 @@ from pgweb.contributors.models import Contributor
 from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
 
-from models import CommunityAuthSite, CommunityAuthConsent, EmailChangeToken
-from forms import PgwebAuthenticationForm
-from forms import CommunityAuthConsentForm
-from forms import SignupForm, SignupOauthForm
-from forms import UserForm, UserProfileForm, ContributorForm
-from forms import ChangeEmailForm, PgwebPasswordResetForm
+from .models import CommunityAuthSite, CommunityAuthConsent, EmailChangeToken
+from .forms import PgwebAuthenticationForm
+from .forms import CommunityAuthConsentForm
+from .forms import SignupForm, SignupOauthForm
+from .forms import UserForm, UserProfileForm, ContributorForm
+from .forms import ChangeEmailForm, PgwebPasswordResetForm
 
 import logging
 log = logging.getLogger(__name__)

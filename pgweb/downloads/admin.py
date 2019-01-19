@@ -5,7 +5,7 @@ from django.forms import ValidationError
 import re
 
 from pgweb.util.admin import PgwebAdmin
-from models import StackBuilderApp, Category, Product, LicenceType
+from .models import StackBuilderApp, Category, Product, LicenceType
 
 
 class ProductAdmin(PgwebAdmin):

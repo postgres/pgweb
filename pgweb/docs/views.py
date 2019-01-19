@@ -14,8 +14,8 @@ from pgweb.util.misc import send_template_mail
 
 from pgweb.core.models import Version
 
-from models import DocPage
-from forms import DocCommentForm
+from .models import DocPage
+from .forms import DocCommentForm
 
 
 @allow_frames

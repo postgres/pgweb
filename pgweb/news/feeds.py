@@ -1,6 +1,6 @@
 from django.contrib.syndication.views import Feed
 
-from models import NewsArticle
+from .models import NewsArticle
 
 from datetime import datetime, time
 

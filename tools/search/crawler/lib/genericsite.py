@@ -1,7 +1,7 @@
 import re
 
-from basecrawler import BaseSiteCrawler
-from parsers import RobotsParser
+from .basecrawler import BaseSiteCrawler
+from .parsers import RobotsParser
 
 
 class GenericSiteCrawler(BaseSiteCrawler):

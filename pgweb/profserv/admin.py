@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from pgweb.util.admin import PgwebAdmin
-from models import ProfessionalService
+from .models import ProfessionalService
 
 
 class ProfessionalServiceAdmin(PgwebAdmin):

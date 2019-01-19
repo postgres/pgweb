@@ -162,4 +162,4 @@ OAUTH = {}                                                  # OAuth providers an
 PGDG_ORG_ID = -1                                            # id of the PGDG organisation entry
 
 # Load local settings overrides
-from settings_local import *
+from .settings_local import *

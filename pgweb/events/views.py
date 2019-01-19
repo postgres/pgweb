@@ -7,8 +7,8 @@ from datetime import date
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import simple_form
 
-from models import Event
-from forms import EventForm
+from .models import Event
+from .forms import EventForm
 
 
 def main(request):

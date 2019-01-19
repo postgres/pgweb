@@ -28,14 +28,14 @@ from pgweb.util.sitestruct import get_all_pages_struct
 from pgweb.news.models import NewsArticle, NewsTag
 from pgweb.events.models import Event
 from pgweb.quotes.models import Quote
-from models import Version, ImportedRSSItem
+from .models import Version, ImportedRSSItem
 
 # models needed for the pieces on the community page
 from pgweb.survey.models import Survey
 
 # models and forms needed for core objects
-from models import Organisation
-from forms import OrganisationForm, MergeOrgsForm
+from .models import Organisation
+from .forms import OrganisationForm, MergeOrgsForm
 
 
 # Front page view

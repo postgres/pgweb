@@ -1,7 +1,7 @@
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.decorators import cache
 
-from models import Sponsor, Server
+from .models import Sponsor, Server
 
 
 @cache(minutes=30)

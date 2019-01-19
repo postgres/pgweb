@@ -1,6 +1,6 @@
 from pgweb.util.contexts import render_pgweb
 
-from models import PUG
+from .models import PUG
 
 
 def index(request):

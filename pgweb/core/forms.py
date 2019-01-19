@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ValidationError
 
-from models import Organisation
+from .models import Organisation
 from django.contrib.auth.models import User
 
 
