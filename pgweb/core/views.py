@@ -167,7 +167,7 @@ def _make_sitemap(pagelist):
         x.startElement('url', {})
         x.add_xml_element('loc', 'https://www.postgresql.org/%s' % urllib.quote(p[0]))
         if len(p) > 1 and p[1]:
-            x.add_xml_element('priority', unicode(p[1]))
+            x.add_xml_element('priority', str(p[1]))
         if len(p) > 2 and p[2]:
             x.add_xml_element('lastmod', p[2].isoformat() + "Z")
         x.endElement('url')

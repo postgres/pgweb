@@ -30,7 +30,7 @@ class Survey(models.Model):
 
     purge_urls = ('/community/survey', '/community/$')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.question
 
     @property

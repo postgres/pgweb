@@ -5,7 +5,7 @@ from .models import ProfessionalService
 
 
 class ProfessionalServiceAdmin(PgwebAdmin):
-    list_display = ('__unicode__', 'approved',)
+    list_display = ('__str__', 'approved',)
     list_filter = ('approved',)
     search_fields = ('org__name',)
 

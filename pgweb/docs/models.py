@@ -26,8 +26,8 @@ class DocPageAlias(models.Model):
     file1 = models.CharField(max_length=64, null=False, blank=False, unique=True)
     file2 = models.CharField(max_length=64, null=False, blank=False, unique=True)
 
-    def __unicode__(self):
-        return u"%s <-> %s" % (self.file1, self.file2)
+    def __str__(self):
+        return "%s <-> %s" % (self.file1, self.file2)
 
     # XXX: needs a unique functional index as well, see the migration!
     class Meta:

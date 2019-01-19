@@ -16,11 +16,11 @@ class UserLookup(ModelLookup):
 
     def get_item_value(self, item):
         # Display for currently selected item
-        return u"%s (%s)" % (item.username, item.get_full_name())
+        return "%s (%s)" % (item.username, item.get_full_name())
 
     def get_item_label(self, item):
         # Display for choice listings
-        return u"%s (%s)" % (item.username, item.get_full_name())
+        return "%s (%s)" % (item.username, item.get_full_name())
 
 
 registry.register(UserLookup)

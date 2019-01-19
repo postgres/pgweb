@@ -428,9 +428,9 @@ def signup_oauth(request):
         l = request.session['oauth_lastname'].lower()
         if f and l:
             for u in itertools.chain([
-                    u"{0}{1}".format(f, l[0]),
-                    u"{0}{1}".format(f[0], l),
-            ], (u"{0}{1}{2}".format(f, l[0], n) for n in xrange(100))):
+                    "{0}{1}".format(f, l[0]),
+                    "{0}{1}".format(f[0], l),
+            ], ("{0}{1}{2}".format(f, l[0], n) for n in range(100))):
                 if not User.objects.filter(username=u[:30]).exists():
                     suggested_username = u[:30]
                     break

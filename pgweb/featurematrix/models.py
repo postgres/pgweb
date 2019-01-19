@@ -15,7 +15,7 @@ class FeatureGroup(models.Model):
 
     purge_urls = ('/about/featurematrix/', )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.groupname
 
     @property
@@ -49,7 +49,7 @@ class Feature(models.Model):
 
     purge_urls = ('/about/featurematrix/.*', )
 
-    def __unicode__(self):
+    def __str__(self):
         # To make it look good in the admin interface, just don't render it
         return ''
 

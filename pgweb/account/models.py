@@ -7,7 +7,7 @@ class CommunityAuthOrg(models.Model):
                                help_text="Name of the organisation")
     require_consent = models.BooleanField(null=False, blank=False, default=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.orgname
 
 
@@ -22,7 +22,7 @@ class CommunityAuthSite(models.Model):
     cooloff_hours = models.IntegerField(null=False, blank=False, default=0,
                                         help_text="Number of hours a user must have existed in the systems before allowed to log in to this site")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 

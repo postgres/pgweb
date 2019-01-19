@@ -20,7 +20,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         with transaction.atomic():
-            counts = [{'name': unicode(x['name']), 'count': len(x['entries'])} for x in get_all_pending_moderations()]
+            counts = [{'name': str(x['name']), 'count': len(x['entries'])} for x in get_all_pending_moderations()]
             if len(counts):
                 # Generate an email and send it off
                 send_template_mail(settings.NOTIFICATION_FROM,

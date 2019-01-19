@@ -11,7 +11,7 @@ class SponsorType(models.Model):
 
     purge_urls = ('/about/servers/', '/about/sponsors/', )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.typename
 
     class Meta:
@@ -27,7 +27,7 @@ class Sponsor(models.Model):
 
     purge_urls = ('/about/sponsors/', '/about/servers/', )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -45,7 +45,7 @@ class Server(models.Model):
 
     purge_urls = ('/about/servers/', )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:

@@ -67,7 +67,7 @@ def _get_attr_value(obj, fieldname):
         return ''
 
     # Return the value, or an empty tring if it's NULL (migrated records)
-    return unicode(getattr(obj, fieldname)) or ''
+    return str(getattr(obj, fieldname)) or ''
 
 
 def _get_full_text_representation(obj):
@@ -75,7 +75,7 @@ def _get_full_text_representation(obj):
     if not fieldlist:
         return "This object does not know how to express itself."
 
-    return "\n".join([u'%s: %s' % (n, _get_attr_value(obj, n)) for n in fieldlist])
+    return "\n".join(['%s: %s' % (n, _get_attr_value(obj, n)) for n in fieldlist])
 
 
 def _get_notification_text(obj):
@@ -138,9 +138,9 @@ def my_m2m_changed_handler(sender, **kwargs):
         if not hasattr(instance, '_stored_m2m'):
             instance._stored_m2m = {}
         if kwargs['action'] == 'pre_clear':
-            instance._stored_m2m[f] = set([unicode(t) for t in getattr(instance, f).all()])
+            instance._stored_m2m[f] = set([str(t) for t in getattr(instance, f).all()])
         elif kwargs['action'] == 'post_add':
-            newset = set([unicode(t) for t in getattr(instance, f).all()])
+            newset = set([str(t) for t in getattr(instance, f).all()])
             added = newset.difference(instance._stored_m2m.get(f, set()))
             removed = instance._stored_m2m.get(f, set()).difference(newset)
             subj = '{0} id {1} has been modified'.format(instance._meta.verbose_name, instance.id)
@@ -150,8 +150,8 @@ def my_m2m_changed_handler(sender, **kwargs):
                                  "%s by %s" % (subj, get_current_user()),
                                  "The following values for {0} were changed:\n\n{1}\n{2}\n\n".format(
                                      instance._meta.get_field(f).verbose_name,
-                                     "\n".join([u"Added: %s" % a for a in added]),
-                                     "\n".join([u"Removed: %s" % r for r in removed]),
+                                     "\n".join(["Added: %s" % a for a in added]),
+                                     "\n".join(["Removed: %s" % r for r in removed]),
                                  ))
 
 

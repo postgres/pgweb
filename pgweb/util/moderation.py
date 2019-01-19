@@ -14,7 +14,7 @@ def _get_unapproved_list(objecttype):
         return None
     return {
         'name': objects[0]._meta.verbose_name_plural,
-        'entries': [{'url': '/admin/%s/%s/%s/' % (x._meta.app_label, x._meta.model_name, x.pk), 'title': unicode(x)} for x in objects]
+        'entries': [{'url': '/admin/%s/%s/%s/' % (x._meta.app_label, x._meta.model_name, x.pk), 'title': str(x)} for x in objects]
     }
 
 

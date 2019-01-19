@@ -18,9 +18,9 @@ log = logging.getLogger(__name__)
 class ReCaptchaWidget(forms.widgets.Widget):
     def render(self, name, value, attrs=None):
         if settings.NOCAPTCHA:
-            return u'Captcha disabled on this system'
+            return 'Captcha disabled on this system'
         log.info("Generated captcha")
-        return mark_safe(u'<div class="g-recaptcha" data-sitekey="{0}"></div>'.format(settings.RECAPTCHA_SITE_KEY))
+        return mark_safe('<div class="g-recaptcha" data-sitekey="{0}"></div>'.format(settings.RECAPTCHA_SITE_KEY))
 
     def value_from_datadict(self, data, files, name):
         if settings.NOCAPTCHA:

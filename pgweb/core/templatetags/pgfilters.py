@@ -38,7 +38,7 @@ def ismultiplecheckboxes(obj):
 
 @register.filter(is_safe=True)
 def isrequired_error(obj):
-    if obj.errors and obj.errors[0] == u"This field is required.":
+    if obj.errors and obj.errors[0] == "This field is required.":
         return True
     return False
 

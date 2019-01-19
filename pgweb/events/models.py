@@ -32,7 +32,7 @@ class Event(models.Model):
         # FIXME: when to expire the front page?
         yield '/$'
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s: %s" % (self.startdate, self.title)
 
     def verify_submitter(self, user):

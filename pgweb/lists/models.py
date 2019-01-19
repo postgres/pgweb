@@ -11,7 +11,7 @@ class MailingListGroup(models.Model):
     def negid(self):
         return -self.id
 
-    def __unicode__(self):
+    def __str__(self):
         return self.groupname
 
     class Meta:
@@ -33,7 +33,7 @@ class MailingList(models.Model):
             return self.shortdesc
         return self.listname
 
-    def __unicode__(self):
+    def __str__(self):
         return self.listname
 
     class Meta:

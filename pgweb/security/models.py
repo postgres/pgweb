@@ -86,7 +86,7 @@ class SecurityPatch(models.Model):
             self.cvenumber = 100000 * int(m.groups(0)[0]) + int(m.groups(0)[1])
         super(SecurityPatch, self).save(force_insert, force_update)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.cve
 
     @property

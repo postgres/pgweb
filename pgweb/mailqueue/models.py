@@ -11,5 +11,5 @@ class QueuedMail(models.Model):
     # separately from an antispam and delivery perspective.
     usergenerated = models.BooleanField(null=False, blank=False, default=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s: %s -> %s" % (self.pk, self.sender, self.receiver)

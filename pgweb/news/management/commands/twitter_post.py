@@ -36,7 +36,7 @@ class Command(BaseCommand):
 
         for a in articles:
             # We hardcode 30 chars for the URL shortener. And then 10 to cover the intro and spacing.
-            statusstr = u"News: {0} {1}/about/news/{2}/".format(a.title[:140 - 40], settings.SITE_ROOT, a.id)
+            statusstr = "News: {0} {1}/about/news/{2}/".format(a.title[:140 - 40], settings.SITE_ROOT, a.id)
             r = tw.post('https://api.twitter.com/1.1/statuses/update.json', data={
                 'status': statusstr,
             })

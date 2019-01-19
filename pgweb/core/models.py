@@ -26,7 +26,7 @@ class Version(models.Model):
     firstreldate = models.DateField(null=False, blank=False, help_text="The date of the .0 release in this tree")
     eoldate = models.DateField(null=False, blank=False, help_text="The final release date for this tree")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.versionstring
 
     @property
@@ -93,7 +93,7 @@ class Country(models.Model):
         verbose_name = 'Country'
         verbose_name_plural = 'Countries'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
@@ -110,14 +110,14 @@ class Language(models.Model):
     class Meta:
         ordering = ('name', )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
 class OrganisationType(models.Model):
     typename = models.CharField(max_length=32, null=False, blank=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.typename
 
 
@@ -135,7 +135,7 @@ class Organisation(models.Model):
     send_notification = True
     send_m2m_notification = True
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -152,7 +152,7 @@ class ImportedRSSFeed(models.Model):
         if self.purgepattern:
             varnish_purge(self.purgepattern)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.internalname
 
 
@@ -162,7 +162,7 @@ class ImportedRSSItem(models.Model):
     url = models.URLField(null=False, blank=False)
     posttime = models.DateTimeField(null=False, blank=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     @property
@@ -186,7 +186,7 @@ def validate_sshkey(key):
         if pieces[0] == 'ssh-dss':
             raise ValidationError("For security reasons, ssh-dss keys are not supported")
         if pieces[0] not in _valid_keytypes:
-            raise ValidationError(u"Only keys of types {0} are supported, not {1}.".format(", ".join(_valid_keytypes), pieces[0]))
+            raise ValidationError("Only keys of types {0} are supported, not {1}.".format(", ".join(_valid_keytypes), pieces[0]))
         try:
             base64.b64decode(pieces[1])
         except:
@@ -210,7 +210,7 @@ class ModerationNotification(models.Model):
     author = models.CharField(null=False, blank=False, max_length=100)
     date = models.DateTimeField(null=False, blank=False, auto_now=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s id %s (%s): %s" % (self.objecttype, self.objectid, self.date, self.text[:50])
 
     class Meta:

@@ -11,7 +11,7 @@ class ContributorType(models.Model):
 
     purge_urls = ('/community/contributors/', )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.typename
 
     class Meta:
@@ -32,7 +32,7 @@ class Contributor(models.Model):
     send_notification = True
     purge_urls = ('/community/contributors/', )
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s" % (self.firstname, self.lastname)
 
     class Meta:

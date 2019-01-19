@@ -36,7 +36,7 @@ class ProfessionalService(models.Model):
     def verify_submitter(self, user):
         return (len(self.org.managers.filter(pk=user.pk)) == 1)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.org.name
 
     class Meta:

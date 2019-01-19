@@ -8,7 +8,7 @@ class NewsTag(models.Model):
     name = models.CharField(max_length=32, null=False, blank=False)
     description = models.CharField(max_length=200, null=False, blank=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -36,7 +36,7 @@ class NewsArticle(models.Model):
         # FIXME: when to expire the front page?
         yield '/$'
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s: %s" % (self.date, self.title)
 
     def verify_submitter(self, user):

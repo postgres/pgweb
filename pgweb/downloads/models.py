@@ -7,7 +7,7 @@ class Category(models.Model):
     catname = models.CharField(max_length=100, null=False, blank=False)
     blurb = models.TextField(null=False, blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.catname
 
     class Meta:
@@ -17,7 +17,7 @@ class Category(models.Model):
 class LicenceType(models.Model):
     typename = models.CharField(max_length=100, null=False, blank=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.typename
 
     class Meta:
@@ -38,7 +38,7 @@ class Product(models.Model):
     send_notification = True
     markdown_fields = ('description', )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def verify_submitter(self, user):
@@ -96,7 +96,7 @@ class StackBuilderApp(models.Model):
 
     purge_urls = ('/applications-v2.xml', )
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s %s %s" % (self.textid, self.version, self.platform)
 
     class Meta:

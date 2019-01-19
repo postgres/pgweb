@@ -12,7 +12,7 @@ class Quote(models.Model):
 
     purge_urls = ('/about/quotesarchive/', '/$', )
 
-    def __unicode__(self):
+    def __str__(self):
         if len(self.quote) > 75:
             return "%s..." % self.quote[:75]
         else:

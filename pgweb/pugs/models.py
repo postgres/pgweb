@@ -16,5 +16,5 @@ class PUG(models.Model):
     purge_urls = ('/community/user-groups/', )
     send_notification = True
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title

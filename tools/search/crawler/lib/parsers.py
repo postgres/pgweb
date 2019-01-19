@@ -129,12 +129,12 @@ class ArchivesParser(object):
     # Semi-hacked rot13, because the one used by mhonarc is broken.
     # So we copy the brokenness here.
     # This code is from MHonArc/ewhutil.pl, mrot13()
-    _arot13_trans = dict(zip(map(ord,
-                                 u'@ABCDEFGHIJKLMNOPQRSTUVWXYZ[abcdefghijklmnopqrstuvwxyz'),
-                             u'NOPQRSTUVWXYZ[@ABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'))
+    _arot13_trans = dict(list(zip(list(map(ord,
+                                           '@ABCDEFGHIJKLMNOPQRSTUVWXYZ[abcdefghijklmnopqrstuvwxyz')),
+                                  'NOPQRSTUVWXYZ[@ABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm')))
 
     def almost_rot13(self, s):
-        return unicode(s).translate(self._arot13_trans)
+        return str(s).translate(self._arot13_trans)
 
 
 class RobotsParser(object):
@@ -168,9 +168,9 @@ class RobotsParser(object):
 # up and do a best-effort utf8.
 def lossy_unicode(s):
     try:
-        return unicode(s, 'utf8')
+        return str(s, 'utf8')
     except UnicodeDecodeError:
         try:
-            return unicode(s, 'latin1')
+            return str(s, 'latin1')
         except UnicodeDecodeError:
-            return unicode(s, 'utf8', 'replace')
+            return str(s, 'utf8', 'replace')

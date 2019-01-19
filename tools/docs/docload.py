@@ -48,7 +48,7 @@ def load_doc_file(filename, f):
     if float(ver) < 11 and float(ver) > 0:
         tidyopts['indent'] = 'no'
 
-    contents = unicode(rawcontents, encoding)
+    contents = str(rawcontents, encoding)
 
     tm = re_titlematch.search(contents)
     if tm:
