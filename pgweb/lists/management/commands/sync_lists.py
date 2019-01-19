@@ -28,7 +28,7 @@ class Command(BaseCommand):
             # Add any groups necessary
             curs.execute("INSERT INTO lists_mailinglistgroup (groupname, sortkey) SELECT n,50 FROM UNNEST(%s) n(n) WHERE NOT EXISTS (SELECT 1 FROM lists_mailinglistgroup WHERE groupname=n) RETURNING groupname", (allgroups,))
             for n, in curs.fetchall():
-                print "Added group %s" % n
+                print("Added group %s" % n)
 
             # Add and update lists
             for l in j:
@@ -36,7 +36,7 @@ class Command(BaseCommand):
                 if curs.rowcount == 0:
                     curs.execute("INSERT INTO lists_mailinglist (listname, group_id, active, description, shortdesc) VALUES (%s, (SELECT id FROM lists_mailinglistgroup WHERE groupname=%s), %s, %s, %s)", (
                         l['name'], l['group'], l['active'], l['description'], l['shortdesc']))
-                    print "Added list %s" % l['name']
+                    print("Added list %s" % l['name'])
                 else:
                     curs.execute("UPDATE lists_mailinglist SET group_id=(SELECT id FROM lists_mailinglistgroup WHERE groupname=%s), active=%s, description=%s, shortdesc=%s WHERE listname=%s AND NOT (group_id=(SELECT id FROM lists_mailinglistgroup WHERE groupname=%s) AND active=%s AND description=%s AND shortdesc=%s) RETURNING listname", (
                         l['group'], l['active'], l['description'], l['shortdesc'],
@@ -44,17 +44,17 @@ class Command(BaseCommand):
                         l['group'], l['active'], l['description'], l['shortdesc'],
                     ))
                     for n, in curs.fetchall():
-                        print "Updated list %s" % n
+                        print("Updated list %s" % n)
 
             # Delete any lists that shouldn't exist anymore (this is safe because we don't keep any data about them,
             # so they are trivial to add back)
             curs.execute("DELETE FROM lists_mailinglist WHERE NOT listname=ANY(%s) RETURNING listname", ([l['name'] for l in j],))
             for n, in curs.fetchall():
-                print "Deleted list %s" % n
+                print("Deleted list %s" % n)
             # Delete listgroups
             curs.execute("DELETE FROM lists_mailinglistgroup WHERE NOT groupname=ANY(%s) RETURNING groupname", (allgroups,))
             for n, in curs.fetchall():
-                print "Deleted group %s" % n
+                print("Deleted group %s" % n)
 
             if options['dryrun']:
                 raise CommandError("Dry run, rolling back")

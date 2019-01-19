@@ -43,7 +43,7 @@ def encode_multipart_formdata(fields, files):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print "Usage: localhtmlvalidate.py <local url>"
+        print("Usage: localhtmlvalidate.py <local url>")
         sys.exit(1)
 
     contents = urllib.urlopen(sys.argv[1]).read()
@@ -76,23 +76,23 @@ if __name__ == "__main__":
     errcode, errmsg, headers = h.getreply()
     rbody = h.getfile().read()
     if headers['x-w3c-validator-status'] == 'Valid':
-        print "Page validates!"
+        print("Page validates!")
         sys.exit(0)
     elif headers['x-w3c-validator-status'] == 'Invalid':
-        print "Invalid!"
-        print "Errors: %s" % headers['x-w3c-validator-errors']
-        print "Warnings: %s" % headers['x-w3c-validator-warnings']
+        print("Invalid!")
+        print("Errors: %s" % headers['x-w3c-validator-errors'])
+        print("Warnings: %s" % headers['x-w3c-validator-warnings'])
         hp = HTMLParser.HTMLParser()
         for m in re.findall('<li class="msg_err">.*?</li>', rbody, re.DOTALL):
             r = re.search('<em>Line (\d+).*<span class="msg">(.*?)</span>', m, re.DOTALL)
-            print "Line %s (should be around %s): %s" % (r.group(1), int(r.group(1)) - firstline, hp.unescape(r.group(2)))
+            print("Line %s (should be around %s): %s" % (r.group(1), int(r.group(1)) - firstline, hp.unescape(r.group(2))))
 
             r2 = re.search('<code class="input">(.*?)<strong title=".*?">(.*?)</strong>(.*?)</code>', unicode(m, 'utf8'), re.DOTALL)
             if r2:
-                s = u"%s%s%s" % r2.groups()
-                print "Source: %s" % hp.unescape(s).encode('utf-8')
-            print ""
+                s = "%s%s%s" % r2.groups()
+                print("Source: %s" % hp.unescape(s).encode('utf-8'))
+            print("")
     else:
-        print "Unknown status: %s" % headers['x-w3c-validator-status']
-        print headers
+        print("Unknown status: %s" % headers['x-w3c-validator-status'])
+        print(headers)
         sys.exit(1)

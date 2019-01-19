@@ -67,10 +67,10 @@ def parse_directory(dirname, rootlen):
 
 
 def Usage():
-    print "Usage: spider_ftp.py <ftp_root> <pickle_file>"
-    print ""
-    print "If <pickle_file> starts with http[s]://, the file will be uploaded"
-    print "to that URL instead of written to the filesystem."
+    print("Usage: spider_ftp.py <ftp_root> <pickle_file>")
+    print("")
+    print("If <pickle_file> starts with http[s]://, the file will be uploaded")
+    print("to that URL instead of written to the filesystem.")
     sys.exit(1)
 
 
@@ -88,7 +88,7 @@ if sys.argv[2].startswith("http://") or sys.argv[2].startswith("https://"):
     u = o.open(r)
     x = u.read()
     if x != "NOT CHANGED" and x != "OK":
-        print "Failed to upload: %s" % x
+        print("Failed to upload: %s" % x)
         sys.exit(1)
 else:
     f = open(sys.argv[2] + ".tmp", "wb")

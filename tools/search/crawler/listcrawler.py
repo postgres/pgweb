@@ -52,7 +52,7 @@ if __name__ == "__main__":
     (opt, args) = parser.parse_args()
 
     if opt.full and opt.month:
-        print "Can't use both full and specific month!"
+        print("Can't use both full and specific month!")
         sys.exit(1)
 
     # assign default values

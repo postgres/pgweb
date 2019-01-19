@@ -35,12 +35,12 @@ class MultiListCrawler(object):
                 # Do one specific month
                 pieces = month.split("-")
                 if len(pieces) != 2:
-                    print "Month format is <y>-<m>, cannot parse '%s'" % month
+                    print("Month format is <y>-<m>, cannot parse '%s'" % month)
                     sys.exit(1)
                 try:
                     pieces = [int(x) for x in pieces]
                 except:
-                    print "Month format is <y>-<m>, cannot convert '%s' to integers" % month
+                    print("Month format is <y>-<m>, cannot convert '%s' to integers" % month)
                     sys.exit(1)
                 self.queue.put((listid, listname, pieces[0], pieces[1], -1))
             else:

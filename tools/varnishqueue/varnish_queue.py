@@ -111,7 +111,7 @@ def housekeeper(dsn):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print "Usage: varnish_queue.py <dsn>"
+        print("Usage: varnish_queue.py <dsn>")
         sys.exit(1)
 
     logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.INFO)

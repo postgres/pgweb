@@ -28,9 +28,9 @@ class Command(BaseCommand):
         fetch_response = oauth.fetch_request_token('https://api.twitter.com/oauth/request_token')
 
         authorization_url = oauth.authorization_url('https://api.twitter.com/oauth/authorize')
-        print 'Please go here and authorize: %s' % authorization_url
+        print('Please go here and authorize: %s' % authorization_url)
 
-        pin = raw_input('Paste the PIN here: ')
+        pin = input('Paste the PIN here: ')
 
         oauth = requests_oauthlib.OAuth1Session(settings.TWITTER_CLIENT,
                                                 settings.TWITTER_CLIENTSECRET,

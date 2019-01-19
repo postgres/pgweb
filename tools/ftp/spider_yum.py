@@ -96,15 +96,15 @@ if __name__ == "__main__":
     j = json.dumps({'platforms': platforms, 'reporpms': reporpms})
 
     if args.target.startswith('http://') or args.target.startswith('https://'):
-        o = urllib2.build_opener(urllib2.HTTPHandler)
-        r = urllib2.Request(sys.argv[2], data=j)
+        o = urllib.request.build_opener(urllib.request.HTTPHandler)
+        r = urllib.request.Request(sys.argv[2], data=j)
         r.add_header('Content-type', 'application/json')
         r.add_header('Host', 'www.postgresql.org')
         r.get_method = lambda: 'PUT'
         u = o.open(r)
         x = u.read()
         if x != "NOT CHANGED" and x != "OK":
-            print "Failed to upload: %s" % x
+            print("Failed to upload: %s" % x)
             sys.exit(1)
     else:
         with NamedTemporaryFile(dir=os.path.dirname(os.path.abspath(args.target))) as f:

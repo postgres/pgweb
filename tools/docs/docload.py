@@ -56,7 +56,7 @@ def load_doc_file(filename, f):
     else:
         title = ""
     if not quiet:
-        print "--- file: %s (%s) ---" % (filename, title)
+        print("--- file: %s (%s) ---" % (filename, title))
 
     s = tidy.parseString(contents.encode('utf-8'), **tidyopts)
     curs.execute("INSERT INTO docs (file, version, title, content) VALUES (%(f)s, %(v)s, %(t)s, %(c)s)", {
@@ -87,7 +87,7 @@ config = ConfigParser()
 config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'docload.ini'))
 
 if not os.path.isfile(tarfilename):
-    print "File %s not found" % tarfilename
+    print("File %s not found" % tarfilename)
     sys.exit(1)
 
 tf = tarfile.open(tarfilename)
@@ -99,7 +99,7 @@ curs = connection.cursor()
 curs.execute("SELECT current FROM core_version WHERE tree=%(v)s", {'v': ver})
 r = curs.fetchall()
 if len(r) != 1:
-    print "Version %s not found in the system, cannot load!" % ver
+    print("Version %s not found in the system, cannot load!" % ver)
     sys.exit(1)
 
 iscurrent = r[0][0]
@@ -143,4 +143,4 @@ connection.commit()
 connection.close()
 
 if not quiet:
-    print "Done (%i pages)." % pagecount
+    print("Done (%i pages)." % pagecount)

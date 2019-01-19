@@ -11,7 +11,7 @@ CRITICAL_THRESHOLD = timedelta(minutes=15)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print "Usage: nagios_check.py <dsn>"
+        print("Usage: nagios_check.py <dsn>")
         sys.exit(1)
 
     conn = psycopg2.connect(sys.argv[1])
@@ -23,17 +23,17 @@ if __name__ == "__main__":
     conn.close()
 
     if len(rows) == 0:
-        print "OK, queue is empty"
+        print("OK, queue is empty")
         sys.exit(0)
 
     age = rows[0][0]
 
     if age < WARNING_THRESHOLD:
-        print "OK, queue age is %s" % age
+        print("OK, queue age is %s" % age)
         sys.exit(0)
     elif age < CRITICAL_THRESHOLD:
-        print "WARNING, queue age is %s" % age
+        print("WARNING, queue age is %s" % age)
         sys.exit(1)
     else:
-        print "CRITICAL, queue age is %s" % age
+        print("CRITICAL, queue age is %s" % age)
         sys.exit(2)

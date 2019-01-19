@@ -30,9 +30,9 @@ if __name__ == "__main__":
         sys.exit(1)
 
     if not options.key:
-        options.key = raw_input("Enter key (BASE64 encoded): ")
+        options.key = input("Enter key (BASE64 encoded): ")
     if not options.user:
-        options.user = raw_input("Enter username: ")
+        options.user = input("Enter username: ")
     if not options.first:
         options.first = "FirstName"
     if not options.last:

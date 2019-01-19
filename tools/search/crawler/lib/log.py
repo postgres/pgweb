@@ -4,4 +4,4 @@ import datetime
 
 
 def log(msg):
-    print "%s: %s" % (datetime.datetime.now(), msg)
+    print("%s: %s" % (datetime.datetime.now(), msg))
