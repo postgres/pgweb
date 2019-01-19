@@ -61,7 +61,7 @@ class ReCaptchaField(forms.CharField):
                 'Content-type': 'application/x-www-form-urlencoded',
             })
             c.sock.settimeout(10)
-        except Exception, e:
+        except Exception as e:
             # Error to connect at TCP level
             log.error('Failed to connect to google recaptcha API: %s' % e)
             raise ValidationError('Failed in API call to google recaptcha')

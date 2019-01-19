@@ -25,7 +25,7 @@ class QueuedMailAdmin(admin.ModelAdmin):
                 if b:
                     return b
             return "Could not find body"
-        except Exception, e:
+        except Exception as e:
             return "Failed to get body: %s" % e
 
     parsed_content.short_description = 'Parsed mail'

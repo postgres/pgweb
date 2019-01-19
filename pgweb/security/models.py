@@ -46,7 +46,7 @@ def other_vectors_validator(val):
                 ))
     except ValidationError:
         raise
-    except Exception, e:
+    except Exception as e:
         raise ValidationError("Failed to parse vectors: %s" % e)
 
 

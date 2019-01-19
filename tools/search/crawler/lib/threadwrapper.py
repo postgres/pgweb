@@ -15,9 +15,9 @@ def threadwrapper(func, *args):
     # forcibly terminate the child.
     try:
         p.join()
-    except KeyboardInterrupt, e:
+    except KeyboardInterrupt as e:
         print "Keyboard interrupt, terminating child process!"
         p.terminate()
-    except Exception, e:
+    except Exception as e:
         print "Exception %s, terminating child process!" % e
         p.terminate()

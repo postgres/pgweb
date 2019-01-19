@@ -116,7 +116,7 @@ class MultiListCrawler(object):
             try:
                 if not self.crawl_single_message(listid, listname, year, month, currentmsg):
                     break
-            except Exception, e:
+            except Exception as e:
                 log("Exception when crawling %s/%s/%s/%s - %s" % (
                     listname, year, month, currentmsg, e))
                 # Continue on to try the next message

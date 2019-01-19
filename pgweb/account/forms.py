@@ -30,7 +30,7 @@ class PgwebAuthenticationForm(AuthenticationForm):
     def clean(self):
         try:
             return super(PgwebAuthenticationForm, self).clean()
-        except ValueError, e:
+        except ValueError as e:
             if e.message.startswith('Unknown password hashing algorithm'):
                 # This is *probably* a user trying to log in with an account that has not
                 # been set up properly yet. It could be an actually unsupported hashing

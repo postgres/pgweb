@@ -26,7 +26,7 @@ def do_purge(consumername, headers):
             return True
         logging.warning("Varnish purge on %s returned status %s (%s)" % (consumername, resp.status, resp.reason))
         return False
-    except Exception, ex:
+    except Exception as ex:
         logging.error("Exception purging on %s: %s" % (consumername, ex))
         return False
     return True

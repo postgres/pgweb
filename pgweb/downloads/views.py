@@ -38,7 +38,7 @@ def ftpbrowser(request, subpath):
         f = open(settings.FTP_PICKLE, "rb")
         allnodes = pickle.load(f)
         f.close()
-    except Exception, e:
+    except Exception as e:
         return HttpServerError(request, "Failed to load ftp site information: %s" % e)
 
     # An incoming subpath may either be canonical, or have one or more elements

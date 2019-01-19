@@ -41,7 +41,7 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
         try:
             (email, firstname, lastname) = authdatafunc(oa)
             email = email.lower()
-        except KeyError, e:
+        except KeyError as e:
             log.warning("Oauth signing using {0} was missing data: {1}".format(provider, e))
             return HttpResponse('OAuth login was missing critical data. To log in, you need to allow access to email, first name and last name!')
 
@@ -196,8 +196,8 @@ def login_oauth(request, provider):
     if hasattr(m, fn):
         try:
             return getattr(m, fn)(request)
-        except OAuthException, e:
+        except OAuthException as e:
             return HttpResponse(e)
-        except Exception, e:
+        except Exception as e:
             log.error('Excpetion during OAuth: %s' % e)
             return HttpResponse('An unhandled exception occurred during the authentication process')

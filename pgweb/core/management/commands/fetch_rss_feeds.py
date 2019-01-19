@@ -50,5 +50,5 @@ class Command(BaseCommand):
 
                     if fetchedsomething:
                             importfeed.purge_related()
-                except Exception, e:
-                    print "Failed to load %s: %s" % (importfeed, e)
+                except Exception as e:
+                    print("Failed to load %s: %s" % (importfeed, e))

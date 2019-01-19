@@ -85,7 +85,7 @@ class BaseSiteCrawler(object):
             (url, relprio, internal) = self.queue.get()
             try:
                 self.crawl_page(url, relprio, internal)
-            except Exception, e:
+            except Exception as e:
                 log("Exception crawling '%s': %s" % (url, e))
             self.queue.task_done()
 
@@ -127,7 +127,7 @@ class BaseSiteCrawler(object):
         pagedata = lossy_unicode(pagedata)
         try:
             self.page = self.parse_html(pagedata)
-        except Exception, e:
+        except Exception as e:
             log("Failed to parse HTML for %s" % url)
             log(e)
             return
@@ -213,7 +213,7 @@ class BaseSiteCrawler(object):
             else:
                 # print "Url %s returned status %s" % (url, resp.status)
                 pass
-        except Exception, e:
+        except Exception as e:
             log("Exception when loading url %s: %s" % (url, e))
         return (2, None, None)
 
