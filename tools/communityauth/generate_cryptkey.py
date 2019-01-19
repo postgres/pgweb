@@ -16,4 +16,4 @@ if __name__ == "__main__":
 
     r = Random.new()
     key = r.read(32)
-    print base64.b64encode(key)
+    print(base64.b64encode(key))

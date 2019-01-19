@@ -551,8 +551,8 @@ def communityauth(request, siteid):
     # Generate redirect
     return HttpResponseRedirect("%s?i=%s&d=%s" % (
         site.redirecturl,
-        base64.b64encode(iv, "-_"),
-        base64.b64encode(cipher, "-_"),
+        base64.b64encode(iv, b"-_").decode('ascii'),
+        base64.b64encode(cipher, b"-_").decode('ascii'),
     ))
 
 
@@ -597,8 +597,8 @@ def _encrypt_site_response(site, s):
 
     # Base64-encode the response, just to be consistent
     return "%s&%s" % (
-        base64.b64encode(iv, '-_'),
-        base64.b64encode(cipher, '-_'),
+        base64.b64encode(iv, b'-_').decode('ascii'),
+        base64.b64encode(cipher, b'-_').decode('ascii'),
     )
 
 
