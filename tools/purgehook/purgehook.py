@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # This hook script is run by gitdeployer when the code is
 # deployed to a server. figure out which templates have been

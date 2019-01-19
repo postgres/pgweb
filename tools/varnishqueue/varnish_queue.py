@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # varnish_queue.py - handle varnish purging queues
 #

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 #
 # spider_ftp.py - spider the ftp site and generate an output file with all

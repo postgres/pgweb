@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Script to send daily moderation report to the NOTIFICATION_EMAIL address
 # (the moderators list)

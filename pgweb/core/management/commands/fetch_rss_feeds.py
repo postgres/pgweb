@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Script to fetch content from RSS feeds into the db for publishing.
 #
