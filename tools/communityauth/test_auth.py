@@ -10,7 +10,7 @@ from Crypto import Random
 from Crypto.Cipher import AES
 import base64
 import time
-import urllib
+import urllib.parse
 from optparse import OptionParser
 
 

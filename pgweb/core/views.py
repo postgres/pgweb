@@ -15,7 +15,7 @@ import django
 from datetime import date, datetime, timedelta
 import os
 import re
-import urllib
+import urllib.parse
 
 from pgweb.util.decorators import cache, nocache
 from pgweb.util.contexts import render_pgweb, get_nav_menu, PGWebContextProcessor
@@ -165,7 +165,7 @@ def _make_sitemap(pagelist):
     for p in pagelist:
         pages += 1
         x.startElement('url', {})
-        x.add_xml_element('loc', 'https://www.postgresql.org/%s' % urllib.quote(p[0]))
+        x.add_xml_element('loc', 'https://www.postgresql.org/%s' % urllib.parse.quote(p[0]))
         if len(p) > 1 and p[1]:
             x.add_xml_element('priority', str(p[1]))
         if len(p) > 2 and p[2]:

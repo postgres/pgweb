@@ -161,7 +161,7 @@ def search(request):
                 p['ln'] = MailingList.objects.get(pk=listid).listname
         if dateval:
             p['d'] = dateval
-        urlstr = urllib.urlencode(p)
+        urlstr = urllib.parse.urlencode(p)
         # If memcached is available, let's try it
         hits = None
         if has_memcached:
@@ -212,7 +212,7 @@ def search(request):
 
         totalhits = len(hits)
         querystr = "?m=1&q=%s&l=%s&d=%s&s=%s" % (
-            urllib.quote_plus(query.encode('utf-8')),
+            urllib.parse.quote_plus(query.encode('utf-8')),
             listid or '',
             dateval,
             listsort
@@ -281,13 +281,13 @@ def search(request):
         totalhits = int(hits[-1][5])
         try:
             if suburl:
-                quoted_suburl = urllib.quote_plus(suburl)
+                quoted_suburl = urllib.parse.quote_plus(suburl)
             else:
                 quoted_suburl = ''
         except:
             quoted_suburl = ''
         querystr = "?q=%s&a=%s&u=%s" % (
-            urllib.quote_plus(query.encode('utf-8')),
+            urllib.parse.quote_plus(query.encode('utf-8')),
             allsites and "1" or "0",
             quoted_suburl,
         )

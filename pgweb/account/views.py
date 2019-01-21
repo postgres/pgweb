@@ -13,7 +13,7 @@ from django.db import transaction
 from django.db.models import Q
 
 import base64
-import urllib
+import urllib.parse
 from Crypto.Cipher import AES
 from Crypto import Random
 import time
@@ -470,7 +470,7 @@ def communityauth(request, siteid):
     # care that it's characters are what's in base64.
     if 'd' in request.GET:
         d = request.GET['d']
-        if d != urllib.quote_plus(d, '=$'):
+        if d != urllib.parse.quote_plus(d, '=$'):
             # Invalid character, so drop it
             d = None
     else:
@@ -525,7 +525,7 @@ def communityauth(request, siteid):
     if site.org.require_consent:
         if not CommunityAuthConsent.objects.filter(org=site.org, user=request.user).exists():
             return HttpResponseRedirect('/account/auth/{0}/consent/?{1}'.format(siteid,
-                                                                                urllib.urlencode({'next': '/account/auth/{0}/{1}'.format(siteid, urldata)})))
+                                                                                urllib.parse.urlencode({'next': '/account/auth/{0}/{1}'.format(siteid, urldata)})))
 
     info = {
         'u': request.user.username.encode('utf-8'),
@@ -540,7 +540,7 @@ def communityauth(request, siteid):
 
     # Turn this into an URL. Make sure the timestamp is always first, that makes
     # the first block more random..
-    s = "t=%s&%s" % (int(time.time()), urllib.urlencode(info))
+    s = "t=%s&%s" % (int(time.time()), urllib.parse.urlencode(info))
 
     # Encrypt it with the shared key (and IV!)
     r = Random.new()
