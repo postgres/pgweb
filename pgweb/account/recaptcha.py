@@ -7,9 +7,7 @@ from django.forms import ValidationError
 from django.utils.safestring import mark_safe
 from django.conf import settings
 
-import httplib
-import urllib
-import json
+import requests
 
 import logging
 log = logging.getLogger(__name__)
@@ -45,38 +43,28 @@ class ReCaptchaField(forms.CharField):
         super(ReCaptchaField, self).clean(value)
 
         # Validate the recaptcha
-        c = httplib.HTTPSConnection('www.google.com', strict=True, timeout=5)
         param = {
             'secret': settings.RECAPTCHA_SECRET_KEY,
             'response': value,
         }
-
-        # Temporarily don't include remoteip, because it only shows our ssl terminating
-        # frontends.
-#        if self.remoteip:
-#            param['remoteip'] = self.remoteip
-
         try:
-            c.request('POST', '/recaptcha/api/siteverify', urllib.urlencode(param), {
-                'Content-type': 'application/x-www-form-urlencoded',
-            })
-            c.sock.settimeout(10)
-        except Exception as e:
-            # Error to connect at TCP level
+            r = requests.post(
+                "https://www.google.com/recaptcha/api/siteverify", param,
+                headers={
+                    'Content-type': 'application/x-www-form-urlencoded',
+                },
+                timeout=5,
+            )
+        except requests.exceptions.Timeout:
             log.error('Failed to connect to google recaptcha API: %s' % e)
             raise ValidationError('Failed in API call to google recaptcha')
 
-        try:
-            r = c.getresponse()
-        except:
-            log.error('Failed in API call to google recaptcha')
-            raise ValidationError('Failed in API call to google recaptcha')
-        if r.status != 200:
+        if r.status_code != 200:
             log.error('Invalid response code from google recaptcha')
             raise ValidationError('Invalid response code from google recaptcha')
 
         try:
-            j = json.loads(r.read())
+            j = r.json()
         except:
             log.error('Invalid response structure from google recaptcha')
             raise ValidationError('Invalid response structure from google recaptcha')

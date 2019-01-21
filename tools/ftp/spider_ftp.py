@@ -11,7 +11,7 @@ import os
 from datetime import datetime
 import pickle as pickle
 import codecs
-import urllib2
+import requests
 
 # Directories, specified from the root of the ftp tree and down, that
 # will be recursively excluded from the pickle.
@@ -80,14 +80,17 @@ if len(sys.argv) != 3:
 parse_directory(sys.argv[1], len(sys.argv[1]))
 
 if sys.argv[2].startswith("http://") or sys.argv[2].startswith("https://"):
-    o = urllib2.build_opener(urllib2.HTTPHandler)
-    r = urllib2.Request(sys.argv[2], data=pickle.dumps(allnodes))
-    r.add_header('Content-type', 'application/octet-stream')
-    r.add_header('Host', 'www.postgresql.org')
-    r.get_method = lambda: 'PUT'
-    u = o.open(r)
-    x = u.read()
-    if x != "NOT CHANGED" and x != "OK":
+    r = requests.put(
+        sys.argv[2],
+        data=pickle.dumps(allnodes),
+        headers={
+            'Content-type': 'application/octet-stream',
+        },
+    )
+    if r.status_code != 200:
+        print("Failed to upload, code: %s" % r.status_code)
+        sys.exit(1)
+    elif r.text != "NOT CHANGED" and r.text != "OK":
         print("Failed to upload: %s" % x)
         sys.exit(1)
 else:

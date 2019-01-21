@@ -9,7 +9,7 @@
 import time
 import sys
 import select
-import httplib
+import requests
 import multiprocessing
 import logging
 import psycopg2
@@ -18,13 +18,12 @@ from setproctitle import setproctitle
 
 def do_purge(consumername, headers):
     try:
-        conn = httplib.HTTPSConnection('%s.postgresql.org' % consumername)
-        conn.request("GET", "/varnish-purge-url", '', headers)
-        resp = conn.getresponse()
-        conn.close()
-        if resp.status == 200:
+        r = requests.get("https://{}.postgresql.org/varnish-purge-url".format(consumername),
+                         headers=headers,
+                         timeout=10)
+        if r.status_code == 200:
             return True
-        logging.warning("Varnish purge on %s returned status %s (%s)" % (consumername, resp.status, resp.reason))
+        logging.warning("Varnish purge on %s returned status %s (%s)" % (consumername, r.status_code, r.reason))
         return False
     except Exception as ex:
         logging.error("Exception purging on %s: %s" % (consumername, ex))

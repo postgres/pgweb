@@ -4,7 +4,7 @@ import sys
 import os
 import re
 import json
-import urllib2
+import requests
 from decimal import Decimal
 from tempfile import NamedTemporaryFile
 
@@ -96,14 +96,18 @@ if __name__ == "__main__":
     j = json.dumps({'platforms': platforms, 'reporpms': reporpms})
 
     if args.target.startswith('http://') or args.target.startswith('https://'):
-        o = urllib.request.build_opener(urllib.request.HTTPHandler)
-        r = urllib.request.Request(sys.argv[2], data=j)
-        r.add_header('Content-type', 'application/json')
-        r.add_header('Host', 'www.postgresql.org')
-        r.get_method = lambda: 'PUT'
-        u = o.open(r)
-        x = u.read()
-        if x != "NOT CHANGED" and x != "OK":
+        r = requests.put(
+            args.target,
+            data=j,
+            headers={
+                'Content-type': 'application/json',
+            },
+        )
+        if r.status_code != 200:
+            print("Failed to upload, code: %s" % r.status_code)
+            sys.exit(1)
+
+        if r.text != "NOT CHANGED" and r.text != "OK":
             print("Failed to upload: %s" % x)
             sys.exit(1)
     else:

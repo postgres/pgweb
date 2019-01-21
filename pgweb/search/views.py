@@ -5,12 +5,9 @@ from django.conf import settings
 
 from pgweb.util.decorators import cache
 
-import httplib
-import urllib
+import urllib.parse
+import requests
 import psycopg2
-import json
-import socket
-import ssl
 
 from pgweb.lists.models import MailingList
 
@@ -177,24 +174,29 @@ def search(request):
                 memc = None
         if not hits:
             # No hits found - so try to get them from the search server
-            if settings.ARCHIVES_SEARCH_PLAINTEXT:
-                c = httplib.HTTPConnection(settings.ARCHIVES_SEARCH_SERVER, strict=True, timeout=5)
-            else:
-                c = httplib.HTTPSConnection(settings.ARCHIVES_SEARCH_SERVER, strict=True, timeout=5)
-            c.request('POST', '/archives-search/', urlstr, {'Content-type': 'application/x-www-form-urlencoded; charset=utf-8'})
-            c.sock.settimeout(20)  # Set a 20 second timeout
             try:
-                r = c.getresponse()
-            except (socket.timeout, ssl.SSLError):
+                r = requests.post(
+                    "{}://{}/archives-search/".format(settings.ARCHIVES_SEARCH_PLAINTEXT and 'http' or 'https', settings.ARCHIVES_SEARCH_SERVER),
+                    urlstr,
+                    headers={
+                        'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
+                    },
+                    timeout=5,
+                )
+            except requests.exceptions.Timeout:
                 return render(request, 'search/listsearch.html', {
                     'search_error': 'Timeout when talking to search server. Please try your search again later, or with a more restrictive search terms.',
                 })
-            if r.status != 200:
+            except:
+                return render(request, 'search/listsearch.html', {
+                    'search_error': 'General error when talking to search server.',
+                })
+            if r.status_code != 200:
                 memc = None
                 return render(request, 'search/listsearch.html', {
                     'search_error': 'Error talking to search server: %s' % r.reason,
                 })
-            hits = json.loads(r.read())
+            hits = r.json()
             if has_memcached and memc:
                 # Store them in memcached too! But only for 10 minutes...
                 # And always compress it, just because we can
