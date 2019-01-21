@@ -6,7 +6,7 @@ choices_map = {
     2: {'str': 'Obsolete', 'class': 'obs', 'bgcolor': '#ddddff'},
     3: {'str': '?', 'class': 'unk', 'bgcolor': '#ffffaa'},
 }
-choices = [(k, v['str']) for k, v in choices_map.items()]
+choices = [(k, v['str']) for k, v in list(choices_map.items())]
 
 
 class FeatureGroup(models.Model):

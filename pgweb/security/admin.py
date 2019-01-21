@@ -29,10 +29,10 @@ class SecurityPatchForm(forms.ModelForm):
 
     def clean(self):
         d = super(SecurityPatchForm, self).clean()
-        vecs = [v for k, v in d.items() if k.startswith('vector_')]
+        vecs = [v for k, v in list(d.items()) if k.startswith('vector_')]
         empty = [v for v in vecs if v == '']
         if len(empty) != len(vecs) and len(empty) != 0:
-            for k in d.keys():
+            for k in list(d.keys()):
                 if k.startswith('vector_'):
                     self.add_error(k, 'Either specify all vector values or none')
         return d

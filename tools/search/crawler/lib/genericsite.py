@@ -14,7 +14,7 @@ class GenericSiteCrawler(BaseSiteCrawler):
 
         # We need to seed the crawler with every URL we've already seen, since
         # we don't recrawl the contents if they haven't changed.
-        allpages = self.scantimes.keys()
+        allpages = list(self.scantimes.keys())
 
         # Figure out if there are any excludes to deal with (beyond the
         # robots.txt ones)

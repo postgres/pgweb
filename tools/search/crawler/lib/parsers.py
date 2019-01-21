@@ -1,10 +1,10 @@
 import re
 import urllib
-from StringIO import StringIO
+from io import StringIO
 import dateutil.parser
 from datetime import timedelta
 
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 
 from lib.log import log
 

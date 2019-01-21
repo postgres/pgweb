@@ -34,7 +34,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
             # Set fixed fields. Note that this will not work if the fixed fields are ManyToMany,
             # but we'll fix that sometime in the future
             if fixedfields:
-                for k, v in fixedfields.items():
+                for k, v in list(fixedfields.items()):
                     setattr(r, k, v)
             r.save()
 

@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
 import os
-import cPickle as pickle
+import pickle as pickle
 import json
 
 from pgweb.util.decorators import nocache
@@ -74,9 +74,9 @@ def ftpbrowser(request, subpath):
     del allnodes
 
     # Add all directories
-    directories = [{'link': k, 'url': k, 'type': 'd'} for k, v in node.items() if v['t'] == 'd']
+    directories = [{'link': k, 'url': k, 'type': 'd'} for k, v in list(node.items()) if v['t'] == 'd']
     # Add all symlinks (only directories supported)
-    directories.extend([{'link': k, 'url': v['d'], 'type': 'l'} for k, v in node.items() if v['t'] == 'l'])
+    directories.extend([{'link': k, 'url': v['d'], 'type': 'l'} for k, v in list(node.items()) if v['t'] == 'l'])
 
     # A ittle early sorting wouldn't go amiss, so .. ends up at the top
     directories.sort(key=version_sort, reverse=True)
@@ -86,7 +86,7 @@ def ftpbrowser(request, subpath):
         directories.insert(0, {'link': '[Parent Directory]', 'url': '..'})
 
     # Fetch files
-    files = [{'name': k, 'mtime': v['d'], 'size': v['s']} for k, v in node.items() if v['t'] == 'f']
+    files = [{'name': k, 'mtime': v['d'], 'size': v['s']} for k, v in list(node.items()) if v['t'] == 'f']
 
     breadcrumbs = []
     if subpath:

@@ -53,5 +53,5 @@ urlpatterns = [
     url(r'^signup/oauth/$', pgweb.account.views.signup_oauth),
 ]
 
-for provider in settings.OAUTH.keys():
+for provider in list(settings.OAUTH.keys()):
     urlpatterns.append(url(r'^login/({0})/$'.format(provider), pgweb.account.oauthclient.login_oauth))

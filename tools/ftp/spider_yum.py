@@ -28,7 +28,7 @@ archs = ['x86_64', 'i386', 'i686', 'ppc64le']
 
 
 def generate_platform(dirname, familyprefix, ver, installer, systemd):
-    for f in platform_names.keys():
+    for f in list(platform_names.keys()):
         yield ('%s-%s' % (f, ver), {
             't': platform_names[f].format(ver),
             'p': os.path.join(dirname, '{0}-{1}'.format(familyprefix, ver)),
@@ -66,7 +66,7 @@ if __name__ == "__main__":
         reporpms[v] = {}
         vroot = os.path.join(args.yumroot, v)
         for dirpath, dirnames, filenames in os.walk(vroot):
-            rmatches = filter(None, (re_reporpm.match(f) for f in sorted(filenames, reverse=True)))
+            rmatches = [_f for _f in (re_reporpm.match(f) for f in sorted(filenames, reverse=True)) if _f]
 
             if rmatches:
                 familypath = os.path.join(*dirpath.split('/')[-2:])
@@ -76,7 +76,7 @@ if __name__ == "__main__":
                     shortdist, shortver, ver = r.groups(1)
 
                     found = False
-                    for p, pinfo in platforms.items():
+                    for p, pinfo in list(platforms.items()):
                         if pinfo['p'] == familypath and pinfo['f'] == shortdist:
                             if p not in reporpms[v]:
                                 reporpms[v][p] = {}
@@ -89,8 +89,8 @@ if __name__ == "__main__":
                         pass
 
     # Filter all platforms that are not used
-    platforms = {k: v for k, v in platforms.iteritems() if v['found']}
-    for k, v in platforms.iteritems():
+    platforms = {k: v for k, v in platforms.items() if v['found']}
+    for k, v in platforms.items():
         del v['found']
 
     j = json.dumps({'platforms': platforms, 'reporpms': reporpms})

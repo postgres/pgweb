@@ -51,13 +51,13 @@ class PgMiddleware(object):
             ('font', ["'self'", "fonts.gstatic.com", "data:", ]),
         ])
         if hasattr(response, 'x_allow_extra_sources'):
-            for k, v in response.x_allow_extra_sources.items():
+            for k, v in list(response.x_allow_extra_sources.items()):
                 if k in sources:
                     sources[k].extend(v)
                 else:
                     sources[k] = v
 
-        security_policies = ["{0}-src {1}".format(k, " ".join(v)) for k, v in sources.items()]
+        security_policies = ["{0}-src {1}".format(k, " ".join(v)) for k, v in list(sources.items())]
 
         if not getattr(response, 'x_allow_frames', False):
             response['X-Frame-Options'] = 'DENY'

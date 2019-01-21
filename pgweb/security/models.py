@@ -8,7 +8,7 @@ from pgweb.news.models import NewsArticle
 
 import cvss
 
-vector_choices = {k: list(v.items()) for k, v in cvss.constants3.METRICS_VALUE_NAMES.items()}
+vector_choices = {k: list(v.items()) for k, v in list(cvss.constants3.METRICS_VALUE_NAMES.items())}
 
 component_choices = (
     ('core server', 'Core server product'),
@@ -42,7 +42,7 @@ def other_vectors_validator(val):
             if v not in cvss.constants3.METRICS_VALUES[k]:
                 raise ValidationError("Metric {0} has unknown value {1}. Valind ones are: {2}".format(
                     k, v,
-                    ", ".join(cvss.constants3.METRICS_VALUES[k].keys()),
+                    ", ".join(list(cvss.constants3.METRICS_VALUES[k].keys())),
                 ))
     except ValidationError:
         raise

@@ -9,7 +9,7 @@
 import sys
 import os
 import hashlib
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 import psycopg2
 
 # Templates that we don't want to ban automatically

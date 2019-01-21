@@ -31,17 +31,14 @@ def _get_full_text_diff(obj, oldobj):
         return "This object does not know how to express ifself."
 
     s = "\n\n".join(["\n".join(
-        filter(
-            lambda x: not x.startswith('@@'),
-            difflib.unified_diff(
-                _get_attr_value(oldobj, n).splitlines(),
-                _get_attr_value(obj, n).splitlines(),
-                n=1,
-                lineterm='',
-                fromfile=n,
-                tofile=n,
-            )
-        )
+        [x for x in difflib.unified_diff(
+            _get_attr_value(oldobj, n).splitlines(),
+            _get_attr_value(obj, n).splitlines(),
+            n=1,
+            lineterm='',
+            fromfile=n,
+            tofile=n,
+        ) if not x.startswith('@@')]
     ) for n in fieldlist if _get_attr_value(oldobj, n) != _get_attr_value(obj, n)])
     if not s:
         return None
@@ -174,7 +171,7 @@ def my_post_save_handler(sender, **kwargs):
             purgelist = instance.purge_urls()
         else:
             purgelist = instance.purge_urls
-        map(varnish_purge, purgelist)
+        list(map(varnish_purge, purgelist))
 
 
 def register_basic_signal_handlers():

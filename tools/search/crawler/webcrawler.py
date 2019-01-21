@@ -6,7 +6,7 @@ from lib.genericsite import GenericSiteCrawler
 from lib.sitemapsite import SitemapSiteCrawler
 from lib.threadwrapper import threadwrapper
 
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 import psycopg2
 import time
 

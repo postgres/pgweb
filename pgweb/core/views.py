@@ -291,7 +291,7 @@ def admin_purge(request):
         url = request.POST['url']
         expr = request.POST['expr']
         xkey = request.POST['xkey']
-        l = len(filter(None, [url, expr, xkey]))
+        l = len([_f for _f in [url, expr, xkey] if _f])
         if l == 0:
             # Nothing specified
             return HttpResponseRedirect('.')

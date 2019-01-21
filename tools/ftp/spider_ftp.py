@@ -9,7 +9,7 @@
 import sys
 import os
 from datetime import datetime
-import cPickle as pickle
+import pickle as pickle
 import codecs
 import urllib2
 

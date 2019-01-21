@@ -8,7 +8,7 @@ import tarfile
 import re
 import tidy
 from optparse import OptionParser
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 
 import psycopg2
 

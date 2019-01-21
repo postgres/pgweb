@@ -55,7 +55,7 @@ class BaseSiteCrawler(object):
         curs = self.dbconn.cursor()
         curs.execute("DELETE FROM webpages WHERE site=%(site)s AND NOT suburl=ANY(%(urls)s)", {
             'site': self.siteid,
-            'urls': self.pages_crawled.keys(),
+            'urls': list(self.pages_crawled.keys()),
         })
         if curs.rowcount:
             log("Deleted %s pages no longer accessible" % curs.rowcount)
