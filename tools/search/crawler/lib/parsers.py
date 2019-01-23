@@ -1,5 +1,5 @@
 import re
-import urllib
+import requests
 from io import StringIO
 import dateutil.parser
 from datetime import timedelta
@@ -61,12 +61,10 @@ class GenericHtmlParser(HTMLParser):
 class RobotsParser(object):
     def __init__(self, url):
         try:
-            u = urllib.urlopen(url)
-            txt = u.read()
-            u.close()
+            r = requests.get(url)
             self.disallows = []
             activeagent = False
-            for l in txt.splitlines():
+            for l in r.text.splitlines():
                 if l.lower().startswith("user-agent: ") and len(l) > 12:
                     if l[12] == "*" or l[12:20] == "pgsearch":
                         activeagent = True
@@ -83,15 +81,3 @@ class RobotsParser(object):
             if url.startswith(d):
                 return True
         return False
-
-
-# Convert a string to unicode, try utf8 first, then latin1, then give
-# up and do a best-effort utf8.
-def lossy_unicode(s):
-    try:
-        return str(s, 'utf8')
-    except UnicodeDecodeError:
-        try:
-            return str(s, 'latin1')
-        except UnicodeDecodeError:
-            return str(s, 'utf8', 'replace')

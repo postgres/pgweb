@@ -1,6 +1,6 @@
-import urllib
 import xml.parsers.expat
 import dateutil.parser
+import requests
 
 from lib.log import log
 from lib.basecrawler import BaseSiteCrawler
@@ -10,7 +10,7 @@ class SitemapParser(object):
     def __init__(self):
         self.urls = []
 
-    def parse(self, f, internal=False):
+    def parse(self, data, internal=False):
         self.parser = xml.parsers.expat.ParserCreate()
         self.currenturl = ""
         self.currentprio = 0
@@ -25,7 +25,7 @@ class SitemapParser(object):
         self.parser.CharacterDataHandler = lambda data: self.processcharacterdata(data)
         self.internal = internal
 
-        self.parser.ParseFile(f)
+        self.parser.Parse(data)
 
     def processelement(self, name, attrs):
         if name == "url":
@@ -67,19 +67,20 @@ class SitemapSiteCrawler(BaseSiteCrawler):
     def init_crawl(self):
         # Fetch the sitemap. We ignore robots.txt in this case, and
         # assume it's always under /sitemap.xml
-        u = urllib.urlopen("https://%s/sitemap.xml" % self.hostname)
+        r = requests.get("https://%s/sitemap.xml" % self.hostname)
+        if r.status_code != 200:
+            raise Exception("Could not load sitemap: %s" % r.status_code)
+
         p = SitemapParser()
-        p.parse(u)
-        u.close()
+        p.parse(r.text)
 
         # Attempt to fetch a sitempa_internal.xml. This is used to index
         # pages on our internal search engine that we don't want on
         # Google. They should also be excluded from default search
         # results (unless searching with a specific suburl)
-        u = urllib.urlopen("https://%s/sitemap_internal.xml" % self.hostname)
-        if u.getcode() == 200:
-            p.parse(u, True)
-        u.close()
+        r = requests.get("https://%s/sitemap_internal.xml" % self.hostname)
+        if r.status_code == 200:
+            p.parse(r.text, True)
 
         for url, prio, lastmod, internal in p.urls:
             # Advance 8 characters - length of https://.

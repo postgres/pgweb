@@ -1,15 +1,28 @@
 import datetime
-import httplib
 import time
 from email.utils import formatdate, parsedate
-import urlparse
-import ssl
+import urllib.parse
+import requests
+import urllib3
 
-from Queue import Queue
+from queue import Queue
 import threading
 
 from lib.log import log
-from lib.parsers import GenericHtmlParser, lossy_unicode
+from lib.parsers import GenericHtmlParser
+
+
+_orig_create_connection = urllib3.util.connection.create_connection
+
+
+def override_create_connection(hostname, ipaddr):
+    def _override(address, *args, **kwargs):
+        host, port = address
+        if host == hostname:
+            return _orig_create_connection((ipaddr, port), *args, **kwargs)
+        else:
+            return _orig_create_connection(address, *args, **kwargs)
+    urllib3.util.connection.create_connection = _override
 
 
 class BaseSiteCrawler(object):
@@ -24,6 +37,9 @@ class BaseSiteCrawler(object):
         self.pages_updated = 0
         self.pages_deleted = 0
         self.status_interval = 5
+
+        if serverip:
+            override_create_connection(hostname, serverip)
 
         curs = dbconn.cursor()
         curs.execute("SELECT suburl, lastscanned FROM webpages WHERE site=%(id)s AND lastscanned IS NOT NULL", {'id': siteid})
@@ -124,7 +140,6 @@ class BaseSiteCrawler(object):
             return
 
         # Try to convert pagedata to a unicode string
-        pagedata = lossy_unicode(pagedata)
         try:
             self.page = self.parse_html(pagedata)
         except Exception as e:
@@ -167,46 +182,42 @@ class BaseSiteCrawler(object):
 
     def fetch_page(self, url):
         try:
-            # Unfortunatley, persistent connections seem quite unreliable,
-            # so create a new one for each page.
-            if self.serverip:
-                if not self.https:
-                    h = httplib.HTTPConnection(host=self.serverip, port=80, strict=True, timeout=10)
-                else:
-                    h = httplib.HTTPSConnection(host=self.serverip, port=443, strict=True, timeout=10, context=ssl._create_unverified_context())
-                h.putrequest("GET", url, skip_host=1)
-                h.putheader("Host", self.hostname)
-            else:
-                if not self.https:
-                    h = httplib.HTTPConnection(host=self.hostname, port=80, strict=True, timeout=10)
-                else:
-                    h = httplib.HTTPSConnection(host=self.hostname, port=443, strict=True, timeout=10, context=ssl._create_unverified_context())
-                h.putrequest("GET", url)
-            h.putheader("User-agent", "pgsearch/0.2")
-            h.putheader("Connection", "close")
+            headers = {
+                'User-agent': 'pgsearch/0.2',
+            }
             if url in self.scantimes:
-                h.putheader("If-Modified-Since", formatdate(time.mktime(self.scantimes[url].timetuple())))
-            h.endheaders()
-            resp = h.getresponse()
+                headers["If-Modified-Since"] = formatdate(time.mktime(self.scantimes[url].timetuple()))
 
-            if resp.status == 200:
-                if not self.accept_contenttype(resp.getheader("content-type")):
+            if self.serverip and False:
+                connectto = self.serverip
+                headers['Host'] = self.hostname
+            else:
+                connectto = self.hostname
+
+            resp = requests.get(
+                '{}://{}{}'.format(self.https and 'https' or 'http', connectto, url),
+                headers=headers,
+                timeout=10,
+            )
+
+            if resp.status_code == 200:
+                if not self.accept_contenttype(resp.headers["content-type"]):
                     # Content-type we're not interested in
                     return (2, None, None)
-                return (0, resp.read(), self.get_date(resp.getheader("last-modified")))
-            elif resp.status == 304:
+                return (0, resp.text, self.get_date(resp.headers.get("last-modified", None)))
+            elif resp.status_code == 304:
                 # Not modified, so no need to reprocess, but also don't
                 # give an error message for it...
                 return (0, None, None)
-            elif resp.status == 301:
+            elif resp.status_code == 301:
                 # A redirect... So try again with the redirected-to URL
                 # We send this through our link resolver to deal with both
                 # absolute and relative URLs
-                if resp.getheader('location', '') == '':
+                if resp.headers.get('location', '') == '':
                     log("Url %s returned empty redirect" % url)
                     return (2, None, None)
 
-                for tgt in self.resolve_links([resp.getheader('location', '')], url):
+                for tgt in self.resolve_links([resp.header['location'], ], url):
                     return (1, tgt, None)
                 # No redirect at all found, becaue it was invalid?
                 return (2, None, None)
@@ -233,7 +244,7 @@ class BaseSiteCrawler(object):
 
     def resolve_links(self, links, pageurl):
         for x in links:
-            p = urlparse.urlsplit(x)
+            p = urllib.parse.urlsplit(x)
             if p.scheme in ("http", "https"):
                 if p.netloc != self.hostname:
                     # Remote link
@@ -252,10 +263,10 @@ class BaseSiteCrawler(object):
 
                 if p[2][0] == "/":
                     # Absolute link on this host, so just return it
-                    yield urlparse.urlunsplit(p)
+                    yield urllib.parse.urlunsplit(p)
                 else:
                     # Relative link
-                    yield urlparse.urljoin(pageurl, urlparse.urlunsplit(p))
+                    yield urllib.parse.urljoin(pageurl, urllib.parse.urlunsplit(p))
             else:
                 # Ignore unknown url schemes like mailto
                 pass
