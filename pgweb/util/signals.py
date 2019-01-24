@@ -128,30 +128,6 @@ def my_pre_save_handler(sender, **kwargs):
                              cont)
 
 
-def my_m2m_changed_handler(sender, **kwargs):
-    instance = kwargs['instance']
-    if getattr(instance, 'send_m2m_notification', False) and get_current_user():
-        (cl, f) = sender.__name__.split('_')
-        if not hasattr(instance, '_stored_m2m'):
-            instance._stored_m2m = {}
-        if kwargs['action'] == 'pre_clear':
-            instance._stored_m2m[f] = set([str(t) for t in getattr(instance, f).all()])
-        elif kwargs['action'] == 'post_add':
-            newset = set([str(t) for t in getattr(instance, f).all()])
-            added = newset.difference(instance._stored_m2m.get(f, set()))
-            removed = instance._stored_m2m.get(f, set()).difference(newset)
-            subj = '{0} id {1} has been modified'.format(instance._meta.verbose_name, instance.id)
-            if added or removed:
-                send_simple_mail(settings.NOTIFICATION_FROM,
-                                 settings.NOTIFICATION_EMAIL,
-                                 "%s by %s" % (subj, get_current_user()),
-                                 "The following values for {0} were changed:\n\n{1}\n{2}\n\n".format(
-                                     instance._meta.get_field(f).verbose_name,
-                                     "\n".join(["Added: %s" % a for a in added]),
-                                     "\n".join(["Removed: %s" % r for r in removed]),
-                                 ))
-
-
 def my_pre_delete_handler(sender, **kwargs):
     instance = kwargs['instance']
     if getattr(instance, 'send_notification', False) and get_current_user():
@@ -178,4 +154,3 @@ def register_basic_signal_handlers():
     pre_save.connect(my_pre_save_handler)
     pre_delete.connect(my_pre_delete_handler)
     post_save.connect(my_post_save_handler)
-    m2m_changed.connect(my_m2m_changed_handler)

@@ -1,8 +1,12 @@
 from django import forms
 from django.forms import ValidationError
+from django.conf import settings
 
 from .models import Organisation
 from django.contrib.auth.models import User
+
+from pgweb.util.middleware import get_current_user
+from pgweb.mailqueue.util import send_simple_mail
 
 
 class OrganisationForm(forms.ModelForm):
@@ -44,12 +48,23 @@ class OrganisationForm(forms.ModelForm):
 
     def save(self, commit=True):
         model = super(OrganisationForm, self).save(commit=False)
+        ops = []
         if 'add_manager' in self.cleaned_data and self.cleaned_data['add_manager']:
-            model.managers.add(User.objects.get(email=self.cleaned_data['add_manager'].lower()))
+            u = User.objects.get(email=self.cleaned_data['add_manager'].lower())
+            model.managers.add(u)
+            ops.append('Added manager {}'.format(u.username))
         if 'remove_manager' in self.cleaned_data and self.cleaned_data['remove_manager']:
             for toremove in self.cleaned_data['remove_manager']:
                 model.managers.remove(toremove)
+                ops.append('Removed manager {}'.format(toremove.username))
 
+        if ops:
+            send_simple_mail(
+                settings.NOTIFICATION_FROM,
+                settings.NOTIFICATION_EMAIL,
+                "{0} modified managers of {1}".format(get_current_user().username, model),
+                "The following changes were made to managers:\n\n{0}".format("\n".join(ops))
+            )
         return model
 
     def apply_submitter(self, model, User):
