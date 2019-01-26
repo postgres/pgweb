@@ -6,7 +6,7 @@ import sys
 import os
 import tarfile
 import re
-import tidy
+import tidylib
 from optparse import OptionParser
 from configparser import ConfigParser
 
@@ -34,7 +34,8 @@ def load_doc_file(filename, f):
     # Postgres 10 started using xml toolchain and now produces docmentation in utf8. So we need
     # to figure out which version it is.
     rawcontents = f.read()
-    if rawcontents.startswith('<?xml version="1.0" encoding="UTF-8"'):
+    rawfirst = rawcontents[:50].decode('utf8', errors='ignore')
+    if rawfirst.startswith('<?xml version="1.0" encoding="UTF-8"'):
         # Version 10, use utf8
         encoding = 'utf-8'
         # XML builds also don't need clean=1, and that one adds some interesting CSS properties
@@ -58,12 +59,13 @@ def load_doc_file(filename, f):
     if not quiet:
         print("--- file: %s (%s) ---" % (filename, title))
 
-    s = tidy.parseString(contents.encode('utf-8'), **tidyopts)
+    (html, errors) = tidylib.tidy_document(contents, options=tidyopts)
+
     curs.execute("INSERT INTO docs (file, version, title, content) VALUES (%(f)s, %(v)s, %(t)s, %(c)s)", {
         'f': filename,
         'v': ver,
         't': title,
-        'c': str(s),
+        'c': html,
     })
     global pagecount
     pagecount += 1
