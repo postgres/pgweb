@@ -80,7 +80,7 @@ if __name__ == "__main__":
                         if pinfo['p'] == familypath and pinfo['f'] == shortdist:
                             if p not in reporpms[v]:
                                 reporpms[v][p] = {}
-                            reporpms[v][p][arch] = max(ver, reporpms[v][p].get(arch, 0))
+                            reporpms[v][p][arch] = max(int(ver), int(reporpms[v][p].get(arch, 0)))
                             platforms[p]['found'] = True
                             break
                     else:

@@ -163,7 +163,7 @@ def uploadyum(request):
         return HttpServerError(request, "Invalid client address")
     # We have the data in request.body. Attempt to load it as
     # json to ensure correct format.
-    json.loads(request.body)
+    json.loads(request.body.decode('utf8'))
 
     # Next, check if it's the same as the current file
     if os.path.isfile(settings.YUM_JSON):
