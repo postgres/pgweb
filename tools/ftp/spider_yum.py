@@ -101,6 +101,7 @@ if __name__ == "__main__":
             data=j,
             headers={
                 'Content-type': 'application/json',
+                'Host': 'www.postgresql.org',
             },
         )
         if r.status_code != 200:

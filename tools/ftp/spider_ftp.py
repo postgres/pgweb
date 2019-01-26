@@ -85,6 +85,7 @@ if sys.argv[2].startswith("http://") or sys.argv[2].startswith("https://"):
         data=pickle.dumps(allnodes),
         headers={
             'Content-type': 'application/octet-stream',
+            'Host': 'www.postgresql.org',
         },
     )
     if r.status_code != 200:
