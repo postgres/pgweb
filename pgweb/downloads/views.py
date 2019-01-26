@@ -174,7 +174,7 @@ def uploadyum(request):
 
     # File has changed - let's write it!
     with open("%s.new" % settings.YUM_JSON, "w") as f:
-        f.write(request.body)
+        f.write(request.body.decode('utf8'))
 
     os.rename("%s.new" % settings.YUM_JSON, settings.YUM_JSON)
 
