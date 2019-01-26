@@ -1,7 +1,8 @@
-Django==1.8.13
+Django==1.11.18
 django-markdown==0.2.1
-psycopg2==2.5
+psycopg2==2.7.6
 pycrypto==2.6
 django_markwhat==1.4
 requests-oauthlib==0.4.0
-
+cvss==1.9
+pytidylib==0.3.2
