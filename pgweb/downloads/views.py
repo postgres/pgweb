@@ -111,7 +111,7 @@ def ftpbrowser(request, subpath):
     return render_pgweb(request, 'download', 'downloads/ftpbrowser.html', {
         'basepath': subpath.rstrip('/'),
         'directories': directories,
-        'files': sorted(files),
+        'files': sorted(files, key=lambda f: f['name']),
         'breadcrumbs': breadcrumbs,
         'readme': file_readme,
         'messagefile': file_message,
