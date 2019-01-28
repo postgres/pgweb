@@ -143,7 +143,10 @@ def manualarchive(request):
 
 @login_required
 def commentform(request, itemid, version, filename):
-    v = get_object_or_404(Version, tree=version)
+    if version == 'current':
+        v = Version.objects.get(current=True)
+    else:
+        v = get_object_or_404(Version, tree=version)
     if not v.supported:
         # No docs comments on unsupported versions
         return HttpResponseRedirect("/docs/{0}/{1}".format(version, filename))
