@@ -37,7 +37,8 @@ urlpatterns = [
     url(r'^services/(.*)/$', pgweb.profserv.views.profservform),
 
     # Docs comments
-    url(r'^comments/(new)/(.*)/(.*)/$', pgweb.docs.views.commentform),
+    url(r'^comments/(new)/([^/]+)/([^/]+)/$', pgweb.docs.views.commentform),
+    url(r'^comments/(new)/([^/]+)/([^/]+)/done/$', pgweb.docs.views.commentform_done),
 
     # Log in, logout, change password etc
     url(r'^login/$', pgweb.account.views.login),

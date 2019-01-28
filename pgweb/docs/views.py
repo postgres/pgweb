@@ -171,7 +171,7 @@ def commentform(request, itemid, version, filename):
                 replyto='%s, %s' % (form.cleaned_data['email'], settings.DOCSREPORT_EMAIL),
                 sendername='PG Doc comments form'
             )
-            return render_pgweb(request, 'docs', 'docs/docsbug_completed.html', {})
+            return HttpResponseRedirect("done/")
     else:
         form = DocCommentForm(initial={
             'name': '%s %s' % (request.user.first_name, request.user.last_name),
@@ -187,3 +187,8 @@ def commentform(request, itemid, version, filename):
         }),
         'savebutton': 'Send Email',
     })
+
+
+@login_required
+def commentform_done(request, itemid, version, filename):
+    return render_pgweb(request, 'docs', 'docs/docsbug_completed.html', {})
