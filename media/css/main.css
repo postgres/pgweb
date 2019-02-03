@@ -469,6 +469,7 @@ ul.bold {
     background-color: #336791;
     font-weight: 600;
     padding-bottom: 0.2rem;
+    padding-top: 0.2rem;
 }
 
 .pg-shout-box a {
@@ -1306,16 +1307,6 @@ table.sponsor-table tbody tr td:nth-child(3) {
     }
 }
 
-@media (min-width: 992px) {
-    .navbar.compressed {
-      padding: 0 10px;
-    }
-
-    .pg-shout-box {
-      padding-top: 3.7rem;
-    }
-}
-
 @media (max-width: 992px) {
     .archive {
         margin-top: 2rem;
@@ -1328,11 +1319,6 @@ table.sponsor-table tbody tr td:nth-child(3) {
     .navbar-toggler-icon {
       width: 1rem;
       height: 1.5rem;
-    }
-
-    .pg-shout-box {
-      padding-top: 2.8rem;
-      margin-bottom: 1rem;
     }
 
     #docContent table.table {
