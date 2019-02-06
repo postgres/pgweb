@@ -5,6 +5,12 @@
 <h1>Contributor Profiles <i class="fa fa-users"></i></h1>
 <p>These are the fine people that make PostgreSQL what it is today!</p>
 
+<p>To suggest additions to the list, please email
+    <a href="mailto:contributors@postgresql.org">contributors@postgresql.org</a>.
+    Existing contributors can update their information in their
+    <a href="/account/profile/">user profile</a>.
+</p>
+
 {%for t in contributortypes%}
 <h2>{{t.typename}}</h2>
 {%if t.extrainfo%}<p>{{t.extrainfo|safe}}</p>{%endif%}
