@@ -198,6 +198,9 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, null=False, blank=False, primary_key=True)
     sshkey = models.TextField(null=False, blank=True, verbose_name="SSH key", help_text="Paste one or more public keys in OpenSSH format, one per line.", validators=[validate_sshkey, ])
     lastmodified = models.DateTimeField(null=False, blank=False, auto_now=True)
+    block_oauth = models.BooleanField(null=False, blank=False, default=False,
+                                      verbose_name="Block OAuth login",
+                                      help_text="Disallow login to this account using OAuth providers like Google or Microsoft.")
 
 
 # Notifications sent for any moderated content.

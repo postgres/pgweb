@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 import sys
 
 from pgweb.util.misc import get_client_ip
+from pgweb.core.models import UserProfile
 
 import logging
 log = logging.getLogger(__name__)
@@ -59,6 +60,10 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
             return HttpResponseRedirect('/account/signup/oauth/')
 
         log.info("Oauth signin of {0} using {1} from {2}.".format(email, provider, get_client_ip(request)))
+        if UserProfile.objects.filter(user=user).exists():
+            if UserProfile.objects.get(user=user).block_oauth:
+                log.warning("Account {0} ({1}) is blocked from OAuth login".format(user.username, email))
+                return HttpResponse("OAuth login not allowed to this account.")
 
         user.backend = settings.AUTHENTICATION_BACKENDS[0]
         django_login(request, user)
