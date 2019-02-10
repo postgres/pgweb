@@ -29,6 +29,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='newsarticle',
             name='tags',
-            field=models.ManyToManyField(help_text=b'Hover mouse over tags to view full description', to='news.NewsTag'),
+            field=models.ManyToManyField(help_text='Hover mouse over tags to view full description', to='news.NewsTag'),
         ),
     ]

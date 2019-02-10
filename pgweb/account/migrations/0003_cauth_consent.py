@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
             name='CommunityAuthOrg',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('orgname', models.CharField(help_text=b'Name of the organisation', max_length=100)),
+                ('orgname', models.CharField(help_text='Name of the organisation', max_length=100)),
                 ('require_consent', models.BooleanField(default=True)),
             ],
         ),

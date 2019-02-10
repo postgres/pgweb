@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('firstname', models.CharField(max_length=100)),
                 ('email', models.EmailField(max_length=254)),
                 ('company', models.CharField(max_length=100, null=True, blank=True)),
-                ('companyurl', models.URLField(max_length=100, null=True, verbose_name=b'Company URL', blank=True)),
+                ('companyurl', models.URLField(max_length=100, null=True, verbose_name='Company URL', blank=True)),
                 ('location', models.CharField(max_length=100, null=True, blank=True)),
                 ('contribution', models.TextField(null=True, blank=True)),
             ],

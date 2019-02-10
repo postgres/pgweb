@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('file', models.CharField(max_length=64)),
                 ('title', models.CharField(max_length=256, null=True, blank=True)),
                 ('content', models.TextField(null=True, blank=True)),
-                ('version', models.ForeignKey(to='core.Version', db_column=b'version', to_field=b'tree')),
+                ('version', models.ForeignKey(to='core.Version', db_column='version', to_field='tree')),
             ],
             options={
                 'db_table': 'docs',

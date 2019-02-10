@@ -14,11 +14,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='badged',
-            field=models.BooleanField(default=False, help_text=b'Choose "Community event" if this is a community recognized event following the <a href="/community/recognition/#conferences" target="_blank">community event guidelines</a>.', verbose_name=b'Community event'),
+            field=models.BooleanField(default=False, help_text='Choose "Community event" if this is a community recognized event following the <a href="/community/recognition/#conferences" target="_blank">community event guidelines</a>.', verbose_name='Community event'),
         ),
         migrations.AddField(
             model_name='event',
             name='description_for_badged',
-            field=models.TextField(help_text=b'DEPRECRATED: This was used in the beginning of community events to collect additional information.', null=True, blank=True, verbose_name=b'Description for community event'),
+            field=models.TextField(help_text='DEPRECRATED: This was used in the beginning of community events to collect additional information.', null=True, blank=True, verbose_name='Description for community event'),
         ),
     ]

@@ -16,11 +16,11 @@ class Migration(migrations.Migration):
             name='CommunityAuthSite',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(help_text=b"Note that the value in this field is shown on the login page, so make sure it's user-friendly!", max_length=100)),
+                ('name', models.CharField(help_text="Note that the value in this field is shown on the login page, so make sure it's user-friendly!", max_length=100)),
                 ('redirecturl', models.URLField()),
-                ('cryptkey', models.CharField(help_text=b'Use tools/communityauth/generate_cryptkey.py to create a key', max_length=100)),
+                ('cryptkey', models.CharField(help_text='Use tools/communityauth/generate_cryptkey.py to create a key', max_length=100)),
                 ('comment', models.TextField(blank=True)),
-                ('cooloff_hours', models.IntegerField(default=0, help_text=b'Number of hours a user must have existed in the systems before allowed to log in to this site')),
+                ('cooloff_hours', models.IntegerField(default=0, help_text='Number of hours a user must have existed in the systems before allowed to log in to this site')),
             ],
         ),
         migrations.CreateModel(

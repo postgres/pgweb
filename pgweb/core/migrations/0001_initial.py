@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('internalname', models.CharField(unique=True, max_length=32)),
                 ('url', models.URLField()),
-                ('purgepattern', models.CharField(help_text=b"NOTE! Pattern will be automatically anchored with ^ at the beginning, but you must lead with a slash in most cases - and don't forget to include the trailing $ in most cases", max_length=512, blank=True)),
+                ('purgepattern', models.CharField(help_text="NOTE! Pattern will be automatically anchored with ^ at the beginning, but you must lead with a slash in most cases - and don't forget to include the trailing $ in most cases", max_length=512, blank=True)),
             ],
         ),
         migrations.CreateModel(
@@ -102,7 +102,7 @@ class Migration(migrations.Migration):
             name='UserProfile',
             fields=[
                 ('user', models.OneToOneField(primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('sshkey', models.TextField(help_text=b'Paste one or more public keys in OpenSSH format, one per line.', verbose_name=b'SSH key', blank=True, validators=[pgweb.core.models.validate_sshkey])),
+                ('sshkey', models.TextField(help_text='Paste one or more public keys in OpenSSH format, one per line.', verbose_name='SSH key', blank=True, validators=[pgweb.core.models.validate_sshkey])),
                 ('lastmodified', models.DateTimeField(auto_now=True)),
             ],
         ),
@@ -111,15 +111,15 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('tree', models.DecimalField(unique=True, max_digits=3, decimal_places=1)),
-                ('latestminor', models.IntegerField(default=0, help_text=b"For testing versions, latestminor means latest beta/rc number. For other releases, it's the latest minor release number in the tree.")),
+                ('latestminor', models.IntegerField(default=0, help_text="For testing versions, latestminor means latest beta/rc number. For other releases, it's the latest minor release number in the tree.")),
                 ('reldate', models.DateField()),
                 ('relnotes', models.CharField(max_length=32)),
                 ('current', models.BooleanField(default=False)),
                 ('supported', models.BooleanField(default=True)),
-                ('testing', models.IntegerField(default=0, help_text=b'Testing level of this release. latestminor indicates beta/rc number', choices=[(0, b'Release'), (1, b'Release candidate'), (2, b'Beta'), (3, b'Alpha')])),
-                ('docsloaded', models.DateTimeField(help_text=b'The timestamp of the latest docs load. Used to control indexing and info on developer docs.', null=True, blank=True)),
-                ('firstreldate', models.DateField(help_text=b'The date of the .0 release in this tree')),
-                ('eoldate', models.DateField(help_text=b'The final release date for this tree')),
+                ('testing', models.IntegerField(default=0, help_text='Testing level of this release. latestminor indicates beta/rc number', choices=[(0, 'Release'), (1, 'Release candidate'), (2, 'Beta'), (3, 'Alpha')])),
+                ('docsloaded', models.DateTimeField(help_text='The timestamp of the latest docs load. Used to control indexing and info on developer docs.', null=True, blank=True)),
+                ('firstreldate', models.DateField(help_text='The date of the .0 release in this tree')),
+                ('eoldate', models.DateField(help_text='The final release date for this tree')),
             ],
             options={
                 'ordering': ('-tree',),
@@ -133,6 +133,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='organisation',
             name='orgtype',
-            field=models.ForeignKey(verbose_name=b'Organisation type', to='core.OrganisationType'),
+            field=models.ForeignKey(verbose_name='Organisation type', to='core.OrganisationType'),
         ),
     ]
