@@ -70,3 +70,12 @@ def dictlookup(value, key):
 @register.filter(name='json')
 def tojson(value):
     return json.dumps(value)
+
+@register.filter()
+def release_notes_pg_minor_version(minor_version, major_version):
+    """Formats the minor version number to the appropriate PostgreSQL version.
+    This is particularly for very old version of PostgreSQL.
+    """
+    if str(major_version) in ['0', '1']:
+        return str(minor_version)[2:4]
+    return minor_version

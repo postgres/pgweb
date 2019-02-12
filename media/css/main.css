@@ -1294,6 +1294,35 @@ table.sponsor-table tbody tr td:nth-child(3) {
     width: 30%;
 }
 
+/** Release Notes */
+#release-notes .navheader,
+#release-notes .navfooter,
+#release-notes .NAVHEADER,
+#release-notes .NAVFOOTER,
+#release-notes .titlepage,
+#release-notes h1.SECT1,
+#release-notes .toc {
+    display: none;
+}
+
+#release-notes .version-list h2:after {
+    content: none;
+}
+
+.release-notes-list {
+    list-style-type: none;
+}
+
+.release-notes-list :not(.collapsed) > .right,
+.release-notes-list .collapsed > .down {
+    display: none;
+}
+
+.release-notes-list .collapsed > .right,
+.release-notes-list :not(.collapsed) > .down {
+    display: block;
+}
+
 
 /** ALL RESPONSIVE QUERIES HERE */
 /* Small devices (landscape phones, 576px and up)*/

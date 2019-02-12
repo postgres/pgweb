@@ -58,6 +58,8 @@ urlpatterns = [
     url(r'^docs/$', pgweb.docs.views.root),
     url(r'^docs/manuals/$', pgweb.docs.views.manuals),
     url(r'^docs/manuals/archive/$', pgweb.docs.views.manualarchive),
+    url(r'^docs/release/$', pgweb.docs.views.release_notes),
+    url(r'^docs/release/((?P<major_version>(\d+\.\d+)|\d+)\.(?P<minor_version>\d+))/$', pgweb.docs.views.release_notes),
     # Legacy URLs for accessing the docs page; provides a permanent redirect
     url(r'^docs/(current|devel|\d+(?:\.\d)?)/(static|interactive)/((.*).html?)?$', pgweb.docs.views.docspermanentredirect),
     url(r'^docs/(current|devel|\d+(?:\.\d)?)/(.*).html?$', pgweb.docs.views.docpage),

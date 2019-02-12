@@ -13,6 +13,7 @@ from pgweb.util.helpers import template_to_string
 from pgweb.util.misc import send_template_mail
 
 from pgweb.core.models import Version
+from pgweb.util.db import exec_to_dict
 
 from .models import DocPage
 from .forms import DocCommentForm
@@ -140,6 +141,103 @@ def manualarchive(request):
         'versions': [_VersionPdfWrapper(v) for v in versions],
     })
 
+def release_notes(request, major_version=None, minor_version=None):
+    """Contains the main archive of release notes."""
+    # this query gets a list of a unique set of release notes for each version of
+    # PostgreSQL. From PostgreSQL 9.4+, release notes are only present for their
+    # specific version of PostgreSQL, so all legacy release notes are present in
+    # 9.3 and older
+    # First the query identifies all of the release note files that have been loaded
+    # into the docs. We will limit our lookup to release notes from 9.3 on up,
+    # given 9.3 has all the release notes for PostgreSQL 9.3 and older
+    # From there, it parses the version the release notes are for
+    # from the file name, and breaks it up into "major" and "minor" version from
+    # our understanding of how PostgreSQL version numbering is handled, which is
+    # in 3 camps: 1 and older, 6.0 - 9.6, 10 - current
+    # It is then put into a unique set
+    # Lastly, we determine the next/previous versions (lead/lag) so we are able
+    # to easily page between the different versions in the unique release note view
+    # We only include the content if we are doing an actual lookup on an exact
+    # major/minor release pair, to limit how much data we load into memory
+    sql = """
+    SELECT
+        {content}
+        file, major, minor,
+        lag(minor) OVER (PARTITION BY major ORDER BY minor) AS previous,
+        lead(minor) OVER (PARTITION BY major ORDER BY minor) AS next
+    FROM (
+        SELECT DISTINCT ON (file, major, minor)
+            {content}
+            file,
+            CASE
+                WHEN v[1]::int >= 10 THEN v[1]::numeric
+                WHEN v[1]::int <= 1 THEN v[1]::int
+                ELSE array_to_string(v[1:2], '.')::numeric END AS major,
+            COALESCE(
+                CASE
+                    WHEN v[1]::int >= 10 THEN v[2]
+                    WHEN v[1]::int <= 1 THEN '.' || v[2]
+                    ELSE v[3]
+                END::numeric, 0
+            ) AS minor
+        FROM (
+            SELECT
+                {content}
+                file,
+                string_to_array(regexp_replace(file, 'release-(.*)\.htm.*', '\\1'), '-') AS v
+            FROM docs
+            WHERE file ~ '^release-\d+' AND version >= 9.3
+        ) r
+    ) rr
+    """
+    params = []
+    # if the major + minor version are provided, then we want to narrow down
+    # the results to all the release notes for the minor version, as we need the
+    # list of the entire set in order to generate the nice side bar in the release
+    # notes
+    # otherwise ensure the release notes are returned in order
+    if major_version is not None and minor_version is not None:
+        # at this point, include the content
+        sql = sql.format(content="content,")
+        # restrict to the major version, order from latest to earliest minor
+        sql = """{}
+        WHERE rr.major = %s
+        ORDER BY rr.minor DESC""".format(sql)
+        params += [major_version]
+    else:
+        sql = sql.format(content="")
+        sql += """
+        ORDER BY rr.major DESC, rr.minor DESC;
+        """
+    # run the query, loading a list of dict that contain all of the release
+    # notes that are filtered out by the query
+    release_notes = exec_to_dict(sql, params)
+    # determine which set of data to pass to the template:
+    # if both major/minor versions are present, we will load the release notes
+    # if neither are present, we load the list of all of the release notes to list out
+    if major_version is not None and minor_version is not None:
+        # first, see if any release notes were returned; if not, raise a 404
+        if not release_notes:
+            raise Http404()
+        # next, see if we can find the specific release notes we are looking for
+        # format what the "minor" version should look like
+        try:
+            minor = Decimal('0.{}'.format(minor_version) if major_version in ['0', '1'] else minor_version)
+        except TypeError:
+            raise Http404()
+        release_note = [r for r in release_notes if r['minor'] == minor][0]
+        # of course, if nothing is found, return a 404
+        if not release_note:
+            raise Http404()
+        context = {
+            'major_version': major_version,
+            'minor_version': minor_version,
+            'release_note': release_note,
+            'release_notes': release_notes
+        }
+    else:
+        context = { 'release_notes': release_notes }
+    return render_pgweb(request, 'docs', 'docs/release_notes.html', context)
 
 @login_required
 def commentform(request, itemid, version, filename):
