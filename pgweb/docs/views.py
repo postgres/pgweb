@@ -5,8 +5,9 @@ from pgweb.util.decorators import login_required, allow_frames, content_sources
 from django.db.models import Q
 from django.conf import settings
 
-from decimal import Decimal
+from decimal import Decimal, ROUND_DOWN
 import os
+import re
 
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import template_to_string
@@ -54,6 +55,34 @@ def docpage(request, version, filename):
         return HttpResponsePermanentRedirect("/docs/{0}/{1}.html".format(int(ver), filename))
 
     fullname = "%s.%s" % (filename, extension)
+
+    # Before looking up the documentation, we need to make a check for release
+    # notes. Based on a change, from PostgreSQL 9.4 and up, release notes are
+    # only available for the current version (e.g. 11 only has 11.0, 11.1, 11.2)
+    # This checks to see if there is a mismatch (e.g. ver = 9.4, fullname = release-9-3-2.html)
+    # and perform a redirect to the older version
+    if fullname.startswith('release-') and ver >= Decimal("9.4"):
+        # figure out which version to redirect to. Note that the oldest version
+        # of the docs loaded is 7.2
+        release_version = re.sub(r'release-((\d+)(-\d+)?)(-\d+)?.html',
+            r'\1', fullname).replace('-', '.')
+        # convert to Decimal for ease of manipulation
+        release_version = Decimal(release_version)
+        # if the version is greater than 10, truncate the number
+        if release_version >= Decimal('10'):
+            release_version = release_version.quantize(Decimal('1'), rounding=ROUND_DOWN)
+        # only proceed if the release version of the documents does not match
+        # the calculated release version
+        if release_version != ver:
+            url = "/docs/"
+            if release_version >= Decimal('10'):
+                url += "{}/{}".format(int(release_version), fullname)
+            elif release_version < Decimal('7.2'):
+                url += "7.2/{}".format(fullname)
+            else:
+                url += "{}/{}".format(release_version, fullname)
+            return HttpResponsePermanentRedirect(url)
+
     page = get_object_or_404(DocPage, version=ver, file=fullname)
     versions = DocPage.objects.extra(
         where=["file=%s OR file IN (SELECT file2 FROM docsalias WHERE file1=%s) OR file IN (SELECT file1 FROM docsalias WHERE file2=%s)"],
