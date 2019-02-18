@@ -6,9 +6,7 @@ from django.conf import settings
 sitenav = {
     'about': [
         {'title': 'About', 'link': '/about/'},
-        {'title': 'Code of Conduct', 'link': '/about/policies/coc/', 'submenu': [
-            {'title': 'Committee', 'link': '/about/policies/coc_committee/'}
-        ]},
+        {'title': 'Policies', 'link': '/about/policies/'},
         {'title': 'Feature Matrix', 'link': '/about/featurematrix/'},
         {'title': 'Donate', 'link': '/about/donate/'},
         {'title': 'History', 'link': '/docs/current/history.html'},
@@ -49,7 +47,6 @@ sitenav = {
         {'title': 'Local User Groups', 'link': '/community/user-groups/'},
         {'title': 'Events', 'link': '/about/events/'},
         {'title': 'International Sites', 'link': '/community/international/'},
-        {'title': 'Recognition Guidelines', 'link': '/community/recognition/'},
     ],
     'developer': [
         {'title': 'Developers', 'link': '/developer/'},

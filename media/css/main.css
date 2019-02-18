@@ -201,7 +201,8 @@ p, ul, ol, dl, table {
 
 blockquote {
 	  border-left: solid 5px #E7EAE8;
-	  padding: 1em 4em 3em .5em;
+	  padding: 0em 4em 0em .5em;
+    margin: 1em 0em 1em 0em;
 	  font-style: italic;
 }
 

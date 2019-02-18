@@ -44,6 +44,7 @@ urlpatterns = [
     url(r'^about/event/(\d+)(-.*)?/$', pgweb.events.views.item),
     url(r'^about/featurematrix/$', pgweb.featurematrix.views.root),
     url(r'^about/featurematrix/detail/(\d+)/$', pgweb.featurematrix.views.detail),
+    url(r'^about/privacypolicy/$', RedirectView.as_view(url='/about/policies/privacy/', permanent=True)),
 
     url(r'^ftp/(.*/)?$', pgweb.downloads.views.ftpbrowser),
     url(r'^download/mirrors-ftp/+(.*)$', pgweb.downloads.views.mirrorselect),

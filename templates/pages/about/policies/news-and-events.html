@@ -1,0 +1,244 @@
+{%extends "base/page.html"%}
+{%block title%}News and Events Approval Policy{%endblock%}
+{%block contents%}
+
+<h1>News and Events Approval Policy <i class="fas fa-gavel"></i></h1>
+
+<p><em>Last updated: March 29, 2018</em></p>
+
+<h2>Policies for Approving News &amp; Events &amp; pgsql-announce</h2>
+
+<h3>General Rules</h3>
+
+<p>The www.postgresql.org home page contains News and Events listings which are
+    maintained entirely for the benefit of the PostgreSQL community. As this
+    space would be quite valuable (up to $400 per listing) if commercially
+    available, our admins have unlimited authority to be restrictive about what
+    they allow on the home page.</p>
+
+<p>All News and Events (including Training Events) to be approved must include
+    the following information:</p>
+
+<ul>
+    <li>Accurate contact information</li>
+    <li>A descriptive title which distinguishes the item from similar items</li>
+    <li>A 10 to 25 word summary of the item which provides enough information
+        to clearly let RSS readers know if they want more information.
+    </li>
+    <li>A description of the news or event which clearly explains what it is
+        and how it relates to PostgreSQL.
+    </li>
+</ul>
+
+<p>Other General Rules include:</p>
+
+<ul>
+    <li>All items must relate to PostgreSQL in some direct and obvious way.</li>
+    <li>Link-only events or news will never be acceptable.</li>
+    <li>The WWW admin group of the PostgreSQL project may permanently ban any
+        organization which is the cause of substantiated complaints about
+        accuracy, ethics or legality from members of our community.
+    </li>
+    <li>The WWW team makes no promises about timely approval of announcements.
+        If publication on a specific day is critical to you, you will need to
+        contact the pgsql-www mailing list or a core team member prior to the
+        submission.
+    </li>
+    <li>Companies listed on the sponsors page may be granted an exception to
+        any of the limitations on news and events, such as allowed posting
+        frequency, at the discretion of the web team.
+    </li>
+    <li>The WWW team reserves the right to partially or entirely rewrite News
+        or Events postings to improve clarity.
+    </li>
+    <li>Starting at midnight UTC on the day of a PostgreSQL release, including
+        any beta or release candidate (RC), no new announcement request will be
+        approved until after midnight UTC 72 hours later. For example, if a new
+        version of PostgreSQL is released on 2018-02-08, then no other
+        announcements will be approved between 2018-02-08 0:00 UTC and
+        2018-02-11 0:00 UTC. Any announcements submitted *during* this time
+        should have their timestamp updated once they are approved, so they
+        don't end up looking like old once they do post.
+    </li>
+</ul>
+
+<p>In general, the postgresql.org home page is run exclusively for the benefit
+    of the not-for-profit member-owned PostgreSQL community. It is not an
+    advertising venue, and site admins are entitled to reject any notice which
+    they feel is inconsistent with the community's needs for any reason, or for
+    no reason.</p>
+
+<h2>Approving News and Announcements</h2>
+
+<p>All News policy below is considered to apply equally to the home page and
+    pgsql-announce, except that pgsql-announce also carries PWN.</p>
+
+<h3>PostgreSQL Core News</h3>
+
+<p>All items will be approved unless inaccurate. The following types of news are
+    generally appropriate for the home page:</p>
+
+<ul>
+    <li>All releases, major, minor and beta</li>
+    <li>Development schedule milestones</li>
+    <li>New certifications, awards & benchmarks</li>
+    <li>Core team and committer changes</li>
+    <li>Security issues</li>
+    <li>Calls for assistance/participation</li>
+    <li>Major changes to infrastructure, web, or legal structure of PostgreSQL
+    </li>
+    <li>Major new advocacy efforts</li>
+</ul>
+
+<h3>PostgreSQL "Family" News</h3>
+
+<p>This includes news about PostgreSQL add-on projects & drivers, open source
+    projects which are primarily based on PostgreSQL, and news about PostgreSQL
+    regional and user groups.</p>
+
+<p>Any of the following items will be approved, regardless of frequency:</p>
+
+<ul>
+    <li>Any release or initial beta of a major release</li>
+    <li>Creation of any new user group, regional group, or web site</li>
+    <li>Critical security patch announcements</li>
+    <li>Substantial new articles or documentation</li>
+    <li>Infrequent calls for assistance/participation</li>
+</ul>
+
+<p>Other types of news, such as changes in leadership, will not be approved.</p>
+
+<h3>Proprietary & External OSS Project News</h3>
+<p>This includes all news from companies whose products contain, support or are
+    based on PostgreSQL, and OSS projects which support PostgreSQL as one of
+    several database options.</p>
+
+<p>The following types of news will be approved:</p>
+
+<ul>
+    <li>Brand new products/projects/services which support or center around
+        PostgreSQL
+    </li>
+    <li>Newly released books about PostgreSQL or with substantial (20% or more)
+        PostgreSQL content.
+    </li>
+    <li>First support of PostgreSQL in existing products</li>
+    <li>Major version releases (not more than once per quarter)</li>
+    <li>Critical security updates, if thought to affect many PostgreSQL
+        community members
+    </li>
+</ul>
+
+<p>Other types of announcements, including minor releases, pricing changes,
+    leadership changes, 3rd-party news coverage, partnerships, and mergers &
+    acquisitions will be rejected.</p>
+
+<p>In addition, commercial entities who are not financial, in-kind or code
+    contributors to the PostgreSQL project will be restricted to one news item
+    of any kind per six-month period.</p>
+
+<h3>Procedure for Approving pgsql-announce</h3>
+
+<p>Since pgsql-announce goes to over 30,000 addresses, we are cautious in what
+    we approve to that list. In some cases, this may result in a delay of up to
+    several days in approving announcements.</p>
+
+<ol><li>Check if it's spam and reject spam.</li>
+    <li>Check if there is anything else in the 'To' or 'CC' list besides
+        -announce; if so, reject and ask for re-submission.
+    </li>
+    <li>Read the announcement</li>
+    <li>Consider if the announcement meets this policy and is appropriate for
+        announcement
+        <ul>
+            <li>if necessary, check on pgsql-www list</li>
+        </ul>
+    </li>
+    <li>Approve or Reject</li>
+</ol>
+<p>In any case where an approver has doubts about whether to approve an
+    announcement or not, they should err on the side of caution.</p>
+
+<p>Please note that PostgreSQL major/minor release posts should be handled by
+    the release team, not by the pgsql-announce moderators.</p>
+
+<h2>Approving Events and Event-Related News (excluding training)</h2>
+
+<p>Events must have significant PostgreSQL-related content in order to be
+    listed.</p>
+
+<h3>PostgreSQL Conferences & Events</h3>
+<p>Any semi-annual or less frequent non-training event which is primarily about
+    PostgreSQL or for PostgreSQL users will be entitled to be listed.
+    Additionally, conferences which are primarily or entirely about PostgreSQL
+    will be entitled to post news items at the following milestones, if they are
+    each a week or more apart:</p>
+
+<ul>
+    <li>Call for Papers</li>
+    <li>Schedule Posting,</li>
+    <li>Registration Opening,</li>
+    <li>Registration Closing,</li>
+    <li>Wrap-up.</li>
+</ul>
+
+<p>Routine monthly PostgreSQL User Group meetings will not be listed. First
+    meetings of a new PUG can be listed, as well as infrequent major special
+    events likely to be of interest outside of the PUG's normal area.</p>
+
+<h3>Open Source & Database Conferences & Events</h3>
+
+<p>Open source conferences, and database conferences, which are not primarily
+    about PostgreSQL but have significant PostgreSQL content, such as several
+    sessions and a booth, may be listed in the Events. Additionally, the Call
+    For Papers for these events may be accepted as News.</p>
+
+<p>More routine events, such as monthly local meetings or mini-conferences, will
+    not be listed. Conferences must have significant PostgreSQL content to be
+    worth listing, with decisions on relative significance to be made by the WWW
+    team.</p>
+
+<h2>Training Events</h2>
+
+<p>PostgreSQL Training may be listed from any company, under the following
+    conditions:</p>
+
+<ul>
+    <li>Each listing must include:
+        <ul>
+            <li>Specific locations and dates for that specific training</li>
+            <li>Link to online training registration</li>
+            <li>One or more sentence description of the contents of that
+                specific training
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<p>All descriptive text should be purely informative and not include strong
+    marketing copy or special offers unrelated to the training. The vendors
+    website should list PostgreSQL training information, including an online
+    schedule of upcoming trainings.</p>
+
+<p>In the event that any training company submits more than 4 training events to
+    be held in any given quarter, site admins may (at their discretion) deny
+    posting events to that company.</p>
+
+<h2>Rejection Notices</h2>
+
+<p>In cases where the submitter appears to have gone to some effort to submit a
+    relevant news item or event, but doesn't understand our policies, we should
+    send them a rejection e-mail linking to this page and explaining what was
+    wrong with their submission. This certainly goes for any of the major
+    project sponsors.</p>
+
+<p>If the submission looks like a 30-second cut-and-paste job, or something else
+    sloppy and quick, or is a submission by someone who has had multiple
+    submissions rejected in the past for the same reason, don't bother sending a
+    response. We get too much spam for that.</p>
+
+<p>Any company which has had submissions repeatedly rejected for the same
+    reasons, and does not correct their errors when notified, risks having their
+    community account suspended and their ability to submit news and events
+    blocked.</p>
+{%endblock%}

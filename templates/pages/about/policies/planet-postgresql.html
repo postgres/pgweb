@@ -1,0 +1,144 @@
+{%extends "base/page.html"%}
+{%block title%}Planet PostgreSQL{%endblock%}
+{%block contents%}
+
+<h1>Planet PostgreSQL <i class="fas fa-gavel"></i></h1>
+
+<p><em>Last updated: October 12, 2016</em></p>
+
+<p><a href="https://planet.postgresql.org/">Planet PostgreSQL</a> is a blog
+    aggregation service run by the PostgreSQL community. In addition to the main
+    Planet site, entries are published ("syndicated") to the <a
+            href="https://www.postgresql.org/">www.postgresql.org</a> site as
+    well.</p>
+
+<h2>Planet PostgreSQL Policy</h2>
+
+<p>The following simple rules cover the blogs being listed on Planet
+    PostgreSQL:</p>
+
+<ul>
+    <li>Blogs should be submitted by a community account in the name of the blog
+        author.
+    </li>
+    <li>All blogs should be about PostgreSQL or closely related technologies. If
+        you want to blog about other things as well, please put your PostgreSQL
+        specific posts in a separate category/tag/label, and use the feed for
+        this category only for Planet PostgreSQL.
+    </li>
+    <li>All topics related to PostgreSQL are of course appreciated - both
+        technical and non-technical.
+    </li>
+    <li>All posts should be in English. If you want to blog in other languages,
+        please put your PostgreSQL specific posts in a separate
+        category/tag/label, and use the feed for this category only for Planet
+        PostgreSQL.
+    </li>
+    <li>All blogs should be identified by the posters name. A nickname is
+        allowed to be used in combination with this, but blogs without names are
+        not allowed.
+    </li>
+    <li>Avoid inflammatory comments in syndicated posts. Personal attacks are
+        not permitted.
+    </li>
+    <li>Publishing of advertising in the syndicated part of your blog is not
+        permitted.
+    </li>
+</ul>
+
+<p>Violating these rules will cause your blog to be removed from Planet
+    PostgreSQL.</p>
+
+<h3>Approval of Blogs</h3>
+
+<p>Planet PostgreSQL volunteer moderators approve your blog once you submit the
+    syndication request. Note the following points:</p>
+
+<ul>
+    <li>The blog must have at least one article before approval, so that the
+        moderators can make a decision based on the initial contents. Empty
+        blogs are not approved.
+    </li>
+    <li>Moderators are not allowed to approve blogs owned by other employees of
+        their own employer.
+    </li>
+</ul>
+
+<h2>Planet PostgreSQL FAQ</h2>
+
+<h3>How can I remove a bad entry from the feed?</h3>
+<p>It's possible to login to the administration interface and hide an individual
+    entry. If you realize you've made a mistake and done something like
+    accidentally posting incorrectly tagged content, removing it on your own is
+    recommended.</p>
+
+<h3>What are the right URLs to use for a labeled feed from <a
+        href="http://www.blogger.com/">blogger.com</a>?</h3>
+<p>Assuming your blog is named "blogname" and you've tagged a subset of your
+    posts with the "postgresql" label, the correct URLs to input to the Planet
+    code are:</p>
+
+<ul>
+    <li>Feedurl: <a href="http://blogname.blogspot.com/search/label/postgresql">http://blogname.blogspot.com/search/label/postgresql</a>
+    </li>
+    <li>Blogurl: <a
+            href="http://blogname.blogspot.com/feeds/posts/default/-/postgresql">http://blogname.blogspot.com/feeds/posts/default/-/postgresql</a>
+    </li>
+</ul>
+
+<p>You can confirm those URLs display a suitable copy of your feed via a web
+    browser before submitting them.</p>
+
+<h3>Are commercial posts allowed?</h3>
+<p>Informative entries that mention proprietary products are normally
+    permissible, as long as the main entry is relevant to the PostgreSQL
+    community. But the policy specifically prohibits publication of advertising
+    in the portion of a blog that is syndicated to the Planet feed. It's
+    recommended that blogs that may contain ads tag them appropriately, to
+    provide a feed to the Planet without those entries included.</p>
+
+<h3>What constitutes an advertisement?</h3>
+<p>The primary test here is whether the information provided would be of some
+    use even to people who have no interest in the commercial product mentioned.
+    Consider what your entry would look like if all references to the product
+    were removed. If there's no useful PostgreSQL content left after doing that,
+    that post is an ad.</p>
+
+<p>You can find a blog entry giving a more detailed opinion from one of the
+    moderators about this subject at <a
+            href="https://blog.2ndquadrant.com/planetary_alignment/">Planetary
+        alignment</a>. That commentary is not part of the official policy.</p>
+
+<h3>Can I offer free or discounted products to people?</h3>
+<p>Not as your only post content. An article that otherwise meets the standards
+    here, by providing useful information to readers with no interest in the
+    commercial product mentioned, might also include some commercial offer like
+    a free product in them. But promotions like product giveaways or providing a
+    discount to blog readers are not acceptable on their own. You might consider
+    the offer itself informative, but the moderators of the Planet feed will
+    usually judge it to be advertisement. Blog entries offering to give away
+    something for free or at a reduced cost are very likely to be flagged as a
+    violation of policy.</p>
+
+<h3>What happens to blogs that violate the site policies?</h3>
+<p>A first violation of the advertising policy will result in the blog entry
+    with the ad being removed, and a warning e-mail sent to the listed owner of
+    the blog.</p>
+
+<p>A second violation will resulting in the blog being removed from the Planet
+    PostgreSQL feed. After a two month suspension period, the blog owner can
+    submit their blog address--or a new feed URL better tagged to filter out
+    advertisements--for reconsideration.</p>
+
+<p>A third violation in any year will result in a full 12 month suspension of
+    the blog from Planet PostgreSQL.</p>
+
+<h3>Who makes the moderation decisions about the Planet content allowed?</h3>
+<p>Site maintenance and moderation duty is done by a small team of volunteer
+    moderators, primarily made up of <a
+            href="https://www.postgresql.org/community/contributors/">PostgreSQL
+        contributors</a> from various companies who are familiar with the
+    policies of the PostgreSQL community.</p>
+
+
+{%endblock%}
