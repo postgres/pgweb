@@ -5,6 +5,8 @@
 import sys
 import os
 import tarfile
+import csv
+import io
 import re
 import tidylib
 from optparse import OptionParser
@@ -19,7 +21,7 @@ re_titlematch = re.compile('<title\s*>([^<]+)</title\s*>', re.IGNORECASE)
 
 
 # Load a single page
-def load_doc_file(filename, f):
+def load_doc_file(filename, f, c):
     tidyopts = dict(
         drop_proprietary_attributes=1,
         alt_text='',
@@ -61,12 +63,7 @@ def load_doc_file(filename, f):
 
     (html, errors) = tidylib.tidy_document(contents, options=tidyopts)
 
-    curs.execute("INSERT INTO docs (file, version, title, content) VALUES (%(f)s, %(v)s, %(t)s, %(c)s)", {
-        'f': filename,
-        'v': ver,
-        't': title,
-        'c': html,
-    })
+    c.writerow([filename, ver, title, html])
     global pagecount
     pagecount += 1
 
@@ -106,16 +103,14 @@ if len(r) != 1:
 
 iscurrent = r[0][0]
 
-# Remove any old docs for this version (still protected by a transaction while
-# we perform the load)
-curs.execute("DELETE FROM docs WHERE version=%(v)s", {'v': ver})
-
+s = io.StringIO()
+c = csv.writer(s, delimiter=';', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
 
 re_htmlfile = re.compile('[^/]*/doc/src/sgml/html/.*')
 re_tarfile = re.compile('[^/]*/doc/postgres.tar.gz$')
 for member in tf:
     if re_htmlfile.match(member.name):
-        load_doc_file(os.path.basename(member.name), tf.extractfile(member))
+        load_doc_file(os.path.basename(member.name), tf.extractfile(member), c)
     if re_tarfile.match(member.name):
         f = tf.extractfile(member)
         inner_tar = tarfile.open(fileobj=f)
@@ -126,8 +121,37 @@ for member in tf:
                 continue
 
             if inner_member.name.endswith('.html') or inner_member.name.endswith('.htm'):
-                load_doc_file(inner_member.name, inner_tar.extractfile(inner_member))
+                load_doc_file(inner_member.name, inner_tar.extractfile(inner_member), c)
 tf.close()
+
+if not quiet:
+    print("Total parsed doc size: {:.1f} MB".format(s.tell() / (1024 * 1024)))
+
+s.seek(0)
+
+curs.execute("CREATE TEMP TABLE docsload (file varchar(64) NOT NULL, version numeric(3,1) NOT NULL, title varchar(256) NOT NULL, content text)")
+curs.copy_expert("COPY docsload FROM STDIN WITH CSV DELIMITER AS ';'", s)
+if curs.rowcount != pagecount:
+    print("Loaded invalid number of rows! {} rows for {} pages!".format(curs.rowcount, pagecount))
+    sys.exit(1)
+
+curs.execute("DELETE FROM docs WHERE version=%(version)s AND NOT EXISTS (SELECT 1 FROM docsload WHERE docsload.file=docs.file)", {
+    'version': ver,
+})
+if not quiet:
+    print("Deleted {} orphaned doc pages".format(curs.rowcount))
+
+curs.execute("INSERT INTO docs (file, version, title, content) SELECT file, version, title, content FROM docsload WHERE NOT EXISTS (SELECT 1 FROM docs WHERE docs.file=docsload.file AND docs.version=%(version)s)", {
+    'version': ver,
+})
+if not quiet:
+    print("Inserted {} new doc pages.".format(curs.rowcount))
+
+curs.execute("UPDATE docs SET title=l.title, content=l.content FROM docsload l WHERE docs.version=%(version)s AND docs.file=l.file AND (docs.title != l.title OR docs.content != l.content)", {
+    'version': ver,
+})
+if not quiet:
+    print("Updated {} changed doc pages.".format(curs.rowcount))
 
 # Update the docs loaded timestamp
 curs.execute("UPDATE core_version SET docsloaded=CURRENT_TIMESTAMP WHERE tree=%(v)s", {'v': ver})
