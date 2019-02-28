@@ -6,32 +6,20 @@
 
 <p>PostgreSQL donations are managed by the <a href="https://wiki.PostgreSQL.org/wiki/SponsorShip">funds group</a>. The money donated goes to many vital services that the PostgreSQL community needs including advocacy materials, conference expenses, legal expenses, and travel costs.</p>
 
-<h2>Donate by Credit Card</h2>
-<p>Credit card transactions are currently unavailable.</p>
-{% comment %}
-<p>PostgreSQL donations are processed via Paysimple (third party) and deposited
-  into the PostgreSQL account at Software in the Public Interest (SPI).</p>
-
-<form method="post" action="https://www.usaepay.com/interface/epayform/">
-  <input name="UMdescription" value="PostgreSQL General Contribution" type="hidden" />
-  <input name="UMkey" value="faI13GX2IiFk4j415yTWXIGo7i3Hb6M5" type="hidden" />
-  <input name="UMcommand" value="sale" type="hidden" />
-  <div class="form-group">
-    <select id="donate_amount" class="form-control" name="UMamount" size="7">
-       <option value="10.00">10.00 USD</option>
-       <option value="25.00">25.00 USD</option>
-       <option value="50.00">50.00 USD</option>
-       <option value="100.00">100.00 USD</option>
-       <option value="250.00">250.00 USD</option>
-       <option value="500.00">500.00 USD</option>
-       <option value="1000.00">1000.00 USD</option>
-    </select>
-  </div>
-  <div class="submit-row">
-    <input class="btn btn-primary cp_button_609397530555" type="submit" value="Donate via SPI" />
-  </div>
+<h2>Donate by Credit Card / PayPal</h2>
+<p>
+  PostgreSQL donations are processed via Paysimple (third party) and deposited
+  into the <a href="http://spi-inc.org/projects/postgresql/" target="_blank">PostgreSQL account at Software in the Public Interest (SPI)</a>.
+  You can click the button below, which will redirect you to PayPal where your
+  donation will be processed:
+</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <fieldset>
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="J2S96PW9NMCDS">
+    <input class="btn btn-primary" type="submit" name="submit" value="Donate by Credit Card" />
+  </fieldset>
 </form>
-{% endcomment %}
 
 <h2>For other amounts or to donate via American, Canadian Check or Money Order:</h2>
 <p>Donations can also be made by mailing a check or sending a money order to Software in the Public Interest, Inc.</p>
