@@ -61,7 +61,7 @@ def docpage(request, version, filename):
     # only available for the current version (e.g. 11 only has 11.0, 11.1, 11.2)
     # This checks to see if there is a mismatch (e.g. ver = 9.4, fullname = release-9-3-2.html)
     # and perform a redirect to the older version
-    if fullname.startswith('release-') and ver >= Decimal("9.4"):
+    if fullname.startswith('release-') and ver >= Decimal("9.4") and not fullname.startswith('release-prior'):
         # figure out which version to redirect to. Note that the oldest version
         # of the docs loaded is 7.2
         release_version = re.sub(r'release-((\d+)(-\d+)?)(-\d+)?.html',
