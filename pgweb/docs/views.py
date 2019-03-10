@@ -65,7 +65,7 @@ def docpage(request, version, filename):
         # figure out which version to redirect to. Note that the oldest version
         # of the docs loaded is 7.2
         release_version = re.sub(r'release-((\d+)(-\d+)?)(-\d+)?.html',
-            r'\1', fullname).replace('-', '.')
+                                 r'\1', fullname).replace('-', '.')
         # convert to Decimal for ease of manipulation
         try:
             release_version = Decimal(release_version)
@@ -176,6 +176,7 @@ def manualarchive(request):
         'versions': [_VersionPdfWrapper(v) for v in versions],
     })
 
+
 def release_notes(request, major_version=None, minor_version=None):
     """Contains the main archive of release notes."""
     # this query gets a list of a unique set of release notes for each version of
@@ -271,8 +272,9 @@ def release_notes(request, major_version=None, minor_version=None):
             'release_notes': release_notes
         }
     else:
-        context = { 'release_notes': release_notes }
+        context = {'release_notes': release_notes}
     return render_pgweb(request, 'docs', 'docs/release_notes.html', context)
+
 
 @login_required
 def commentform(request, itemid, version, filename):

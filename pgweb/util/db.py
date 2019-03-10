@@ -1,5 +1,6 @@
 from django.db import connection
 
+
 def exec_to_dict(query, params=None):
     curs = connection.cursor()
     curs.execute(query, params)
