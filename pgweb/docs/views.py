@@ -67,7 +67,13 @@ def docpage(request, version, filename):
         release_version = re.sub(r'release-((\d+)(-\d+)?)(-\d+)?.html',
             r'\1', fullname).replace('-', '.')
         # convert to Decimal for ease of manipulation
-        release_version = Decimal(release_version)
+        try:
+            release_version = Decimal(release_version)
+        except:
+            # If it's not a proper decimal, just return 404. This can happen from many
+            # broken links around the web.
+            raise Http404("Invalid version format")
+
         # if the version is greater than 10, truncate the number
         if release_version >= Decimal('10'):
             release_version = release_version.quantize(Decimal('1'), rounding=ROUND_DOWN)
