@@ -22,7 +22,7 @@ if [ "$FILES" != "" ]; then
 	    continue
 	fi
 
-	R=$(git show ":$F" | pep8 -)
+	R=$(git show ":$F" | pycodestyle -)
 	if [ "$?" != "0" ]; then
 	    echo "Errors in $F"
 	    echo "$R"
