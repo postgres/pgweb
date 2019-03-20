@@ -60,8 +60,9 @@ def docpage(request, version, filename):
     # notes. Based on a change, from PostgreSQL 9.4 and up, release notes are
     # only available for the current version (e.g. 11 only has 11.0, 11.1, 11.2)
     # This checks to see if there is a mismatch (e.g. ver = 9.4, fullname = release-9-3-2.html)
-    # and perform a redirect to the older version
-    if fullname.startswith('release-') and ver >= Decimal("9.4") and not fullname.startswith('release-prior'):
+    # or if these are the development docs that are pointing to a released version
+    # and performs a redirect to the older version
+    if fullname.startswith('release-') and (ver >= Decimal("9.4") or version == "devel") and not fullname.startswith('release-prior'):
         # figure out which version to redirect to. Note that the oldest version
         # of the docs loaded is 7.2
         release_version = re.sub(r'release-((\d+)(-\d+)?)(-\d+)?.html',
@@ -77,9 +78,15 @@ def docpage(request, version, filename):
         # if the version is greater than 10, truncate the number
         if release_version >= Decimal('10'):
             release_version = release_version.quantize(Decimal('1'), rounding=ROUND_DOWN)
-        # only proceed if the release version of the documents does not match
-        # the calculated release version
-        if release_version != ver:
+        # if these are developer docs (i.e. from the nightly build), we need to
+        # determine if these are release notes for a released version or not, i.e. if we are:
+        # a) viewing the docs for a version that does not exist yet (e.g. active
+        #    development before an initial beta) OR
+        # b) viewing the docs for a beta version
+        is_released = Version.objects.filter(tree=release_version, testing=0).exists() if version == "devel" else True
+        # If we are viewing a released version of the release notesand the
+        # release versions do not match, then we redirect
+        if is_released and release_version != ver:
             url = "/docs/"
             if release_version >= Decimal('10'):
                 url += "{}/{}".format(int(release_version), fullname)
