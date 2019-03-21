@@ -268,7 +268,10 @@ def release_notes(request, major_version=None, minor_version=None):
             minor = Decimal('0.{}'.format(minor_version) if major_version in ['0', '1'] else minor_version)
         except TypeError:
             raise Http404()
-        release_note = [r for r in release_notes if r['minor'] == minor][0]
+        try:
+            release_note = [r for r in release_notes if r['minor'] == minor][0]
+        except IndexError:
+            raise Http404()
         # of course, if nothing is found, return a 404
         if not release_note:
             raise Http404()
