@@ -1132,6 +1132,12 @@ input {
 input[type=checkbox] {
     vertical-align: middle;
     margin-left: 5px;
+    width: auto;
+}
+
+input[type=checkbox]:focus {
+    outline: none;
+    box-shadow: none;
 }
 
 .custom-select {
