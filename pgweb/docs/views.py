@@ -24,11 +24,8 @@ from .forms import DocCommentForm
 @content_sources('style', "'unsafe-inline'")
 def docpage(request, version, filename):
     loaddate = None
-    # Get the current version both to map the /current/ url, and to later
-    # determine if we allow comments on this page.
-    currver = Version.objects.filter(current=True)[0].tree
     if version == 'current':
-        ver = currver
+        ver = Version.objects.filter(current=True)[0].tree
     elif version == 'devel':
         ver = Decimal(0)
         loaddate = Version.objects.get(tree=Decimal(0)).docsloaded
