@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
-from django.http import Http404
+from django.http import HttpResponse, Http404
 from pgweb.util.decorators import login_required, allow_frames, content_sources
 from django.db.models import Q
 from django.conf import settings
@@ -111,6 +111,25 @@ def docpage(request, version, filename):
         'doc_index_filename': indexname,
         'loaddate': loaddate,
     })
+
+
+@allow_frames
+def docsvg(request, version, filename):
+    if version == 'current':
+        ver = Version.objects.filter(current=True)[0].tree
+    elif version == 'devel':
+        ver = Decimal(0)
+    else:
+        ver = Decimal(version)
+        if ver == Decimal(0):
+            raise Http404("Version not found")
+
+    if ver < Decimal(12) and ver > Decimal(0):
+        raise Http404("SVG images don't exist in this version")
+
+    page = get_object_or_404(DocPage, version=ver, file="{0}.svg".format(filename))
+
+    return HttpResponse(page.content, content_type="image/svg+xml")
 
 
 def docspermanentredirect(request, version, typ, page, *args):
