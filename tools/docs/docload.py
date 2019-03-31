@@ -14,14 +14,19 @@ from configparser import ConfigParser
 
 import psycopg2
 
+# a counter that keeps track of the total number of pages (HTML, SVG) that are loaded
+# into the database
 pagecount = 0
+# if set to "True" -- mutes any output from the script. Controlled by an option
 quiet = False
-
+# regular expression used to search and extract the title on a given piece of
+# documentation, for further use in the application
 re_titlematch = re.compile('<title\s*>([^<]+)</title\s*>', re.IGNORECASE)
 
 
 # Load a single page
 def load_doc_file(filename, f, c):
+    """Prepares and loads a HTML file for import into the documentation database"""
     tidyopts = dict(
         drop_proprietary_attributes=1,
         alt_text='',
@@ -51,18 +56,26 @@ def load_doc_file(filename, f, c):
     if float(ver) < 11 and float(ver) > 0:
         tidyopts['indent'] = 'no'
 
+    # convert the raw contents to the appropriate encoding for the content that will
+    # be stored in the database
     contents = str(rawcontents, encoding)
 
+    # extract the title of the page, which is rendered in a few places in the documentation
     tm = re_titlematch.search(contents)
     if tm:
         title = tm.group(1)
     else:
         title = ""
+
+    # if not in quiet mode, output the (filename, title) pair of the docpage that is being processed
     if not quiet:
         print("--- file: %s (%s) ---" % (filename, title))
 
+    # run libtidy on the content
     (html, errors) = tidylib.tidy_document(contents, options=tidyopts)
 
+    # add all of the information to the CSV that will be used to load the updated
+    # documentation pages into the database
     c.writerow([filename, ver, title, html])
 
 
@@ -88,13 +101,16 @@ quiet = options.quiet
 ver = sys.argv[1]
 tarfilename = sys.argv[2]
 
+# load the configuration that is used to connect to the database
 config = ConfigParser()
 config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'docload.ini'))
 
+# determine if the referenced tarball exists; if not, exit
 if not os.path.isfile(tarfilename):
     print("File %s not found" % tarfilename)
     sys.exit(1)
 
+# open up the tarball as well as a connection to the database
 tf = tarfile.open(tarfilename)
 
 connection = psycopg2.connect(config.get('db', 'dsn'))
@@ -109,11 +125,18 @@ if len(r) != 1:
 
 iscurrent = r[0][0]
 
+# begin creating a CSV that will be used to import the documentation into the database
 s = io.StringIO()
 c = csv.writer(s, delimiter=';', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
 
+# this regular expression is for "newer" versions of PostgreSQL that keep all of
+# the HTML documentation built out
 re_htmlfile = re.compile('[^/]*/doc/src/sgml/html/.*')
+# this regular expression is for "older" versions of PostgreSQL that keep the
+# HTML documentation in a tarball within the tarball
 re_tarfile = re.compile('[^/]*/doc/postgres.tar.gz$')
+# go through each file of the tarball to determine if the file is documentation
+# that should be imported
 for member in tf:
     # newer versions of PostgreSQL will go down this path to find docfiles
     if re_htmlfile.match(member.name):
@@ -151,12 +174,18 @@ if not quiet:
 
 s.seek(0)
 
+# Start loading the documentation into the database
+# First, load the newly discovered documentation into a temporary table, where we
+# can validate that we loaded exactly the number of docs that we thought we would,
+# based on the page counter
 curs.execute("CREATE TEMP TABLE docsload (file varchar(64) NOT NULL, version numeric(3,1) NOT NULL, title varchar(256) NOT NULL, content text)")
 curs.copy_expert("COPY docsload FROM STDIN WITH CSV DELIMITER AS ';'", s)
 if curs.rowcount != pagecount:
     print("Loaded invalid number of rows! {} rows for {} pages!".format(curs.rowcount, pagecount))
     sys.exit(1)
 
+# If the previous step succeeded, delete all the documentation for the specified version
+# and insert into / updatethe doc table the content that was loaded into the temporary table
 curs.execute("DELETE FROM docs WHERE version=%(version)s AND NOT EXISTS (SELECT 1 FROM docsload WHERE docsload.file=docs.file)", {
     'version': ver,
 })
@@ -187,6 +216,7 @@ curs.execute("SELECT varnish_purge('^/docs/' || %(v)s || '/')", {'v': ver})
 if iscurrent:
     curs.execute("SELECT varnish_purge('^/docs/current/')")
 
+# ensure the changes are committed, and close the connection
 connection.commit()
 connection.close()
 
