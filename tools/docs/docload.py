@@ -66,6 +66,14 @@ def load_doc_file(filename, f, c):
     c.writerow([filename, ver, title, html])
 
 
+def load_svg_file(filename, f, c):
+    """Prepares and loads a SVG file for import into the documentation database"""
+    # this is fairly straightforward: we just need to load the contents, and
+    # set the "title" as NULL as there is no title tag
+    svg = f.read()
+    c.writerow([filename, ver, None, svg.decode('utf-8')])
+
+
 # Main execution
 parser = OptionParser(usage="usage: %prog [options] <version> <tarfile>")
 parser.add_option("-q", "--quiet", action="store_true", dest="quiet",
@@ -107,10 +115,22 @@ c = csv.writer(s, delimiter=';', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
 re_htmlfile = re.compile('[^/]*/doc/src/sgml/html/.*')
 re_tarfile = re.compile('[^/]*/doc/postgres.tar.gz$')
 for member in tf:
+    # newer versions of PostgreSQL will go down this path to find docfiles
     if re_htmlfile.match(member.name):
-        load_doc_file(os.path.basename(member.name), tf.extractfile(member), c)
+        # get the filename and a reference to the contents of the file
+        filename = os.path.basename(member.name)
+        f = tf.extractfile(member)
+        # determine if the file being loaded is an SVG or a regular doc file
+        if filename.endswith('.svg'):
+            load_svg_file(filename, f, c)
+        else:
+            load_doc_file(filename, f, c)
         # after successfully preparing the file for load, increase the page count
         pagecount += 1
+    # older versions of PostgreSQL kept a tarball of the documentation within the source
+    # tarball, and as such will go down this path
+    # SVG support was added for PostgreSQL 12, so the explicitly SVG check is not
+    # present in this path
     if re_tarfile.match(member.name):
         f = tf.extractfile(member)
         inner_tar = tarfile.open(fileobj=f)
