@@ -64,8 +64,6 @@ def load_doc_file(filename, f, c):
     (html, errors) = tidylib.tidy_document(contents, options=tidyopts)
 
     c.writerow([filename, ver, title, html])
-    global pagecount
-    pagecount += 1
 
 
 # Main execution
@@ -111,6 +109,8 @@ re_tarfile = re.compile('[^/]*/doc/postgres.tar.gz$')
 for member in tf:
     if re_htmlfile.match(member.name):
         load_doc_file(os.path.basename(member.name), tf.extractfile(member), c)
+        # after successfully preparing the file for load, increase the page count
+        pagecount += 1
     if re_tarfile.match(member.name):
         f = tf.extractfile(member)
         inner_tar = tarfile.open(fileobj=f)
@@ -122,6 +122,8 @@ for member in tf:
 
             if inner_member.name.endswith('.html') or inner_member.name.endswith('.htm'):
                 load_doc_file(inner_member.name, inner_tar.extractfile(inner_member), c)
+                # after successfully preparing the file for load, increase the page count
+                pagecount += 1
 tf.close()
 
 if not quiet:
