@@ -14,6 +14,8 @@ from configparser import ConfigParser
 
 import psycopg2
 
+# the Bootstrap grid classes that are added onto any images that are rendered in the docs
+BOOTSTRAP_FIGURE_CLASS = r'<div\1class="figure col-xl-8 col-lg-10 col-md-12"'
 # a counter that keeps track of the total number of pages (HTML, SVG) that are loaded
 # into the database
 pagecount = 0
@@ -22,6 +24,9 @@ quiet = False
 # regular expression used to search and extract the title on a given piece of
 # documentation, for further use in the application
 re_titlematch = re.compile('<title\s*>([^<]+)</title\s*>', re.IGNORECASE)
+# regular expression used to find any images that are in the HTML and apply
+# additional bootstrap classes
+re_figure_match = re.compile('<div([^<>]+)class="figure"', re.IGNORECASE)
 
 
 # Load a single page
@@ -66,6 +71,10 @@ def load_doc_file(filename, f, c):
         title = tm.group(1)
     else:
         title = ""
+
+    # find any images that are embedded in the HTML and add in the Bootstrap grid classes
+    # in order to ensure they are able to display responsively
+    contents = re_figure_match.sub(BOOTSTRAP_FIGURE_CLASS, contents)
 
     # if not in quiet mode, output the (filename, title) pair of the docpage that is being processed
     if not quiet:
