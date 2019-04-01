@@ -357,7 +357,8 @@ def signup(request):
         'form_intro': """
 To sign up for a free community account, enter your preferred userid and email address.
 Note that a community account is only needed if you want to submit information - all
-content is available for reading without an account.
+content is available for reading without an account. A confirmation email will be sent
+to the specified address, and once confirmed a password for the new account can be specified.
 """,
         'savebutton': 'Sign up',
         'operation': 'New',
