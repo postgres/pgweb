@@ -138,27 +138,35 @@
       <h2 class="centered-lines">Latest News</h2>
       <!-- Featured Post -->
         <header>
-          <h3><a href="/about/news/1920/">PostgreSQL 11.2, 10.7, 9.6.12, 9.5.16, and 9.4.21 Released!</a></h3>
+          <h3><a href="/about/news/1935/">CVE-2019-9193: Not a Security Vulnerability</a></h3>
           <ul class="meta">
-            <li><i class="far fa-clock"></i>&nbsp;2019-02-14</li>
+            <li><i class="far fa-clock"></i>&nbsp;2019-04-04</li>
             <!--<li><i class="far fa-comments"></i> 0</li>-->
           </ul>
         </header>
         <p>
-          The PostgreSQL Global Development Group has released an update to all
-          supported versions of our database system, <a href="/about/news/1920/">
-          including 11.2, 10.7, 9.6.12, 9.5.16, and 9.4.21</a>. This release
-          changes the behavior in how PostgreSQL interfaces with <code>fsync()</code>
-          and includes fixes for partitioning and over 70 other bugs that were
-          reported over the past three months
+          There is widespread mention in the media of a security vulnerability
+          in PostgreSQL, registered as <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-9193" target="_blank">CVE-2019-9193</a>.
+          The PostgreSQL Security Team would like to emphasize that this is <strong>not
+          a security vulnerability</strong>.
         </p>
         <p>
-          Users should plan to apply this update at the next scheduled downtime.
+          The <a href="/docs/current/sql-copy.html">COPY .. PROGRAM</a> feature
+          explicitly states that it can only be executed by database users that
+          have been granted superuser privileges or the default role <code>pg_execute_server_program</code>.
+          By design, this feature allows one who is granted superuser or <code>pg_execute_server_program</code>
+          to perform actions as the operating system user the PostgreSQL server
+          runs under (normally "postgres"). The default roles <code>pg_read_server_files</code>
+          and <code>pg_write_server_files</code> that are mentioned in the CVE
+          do not grant permission for a database user to use COPY .. PROGRAM.
+        </p>
+        <p>
+          For more information, please read our full statement <a href="/about/news/1935/">here</a>.
         </p>
         <ul class="bold">
-          <li><a href="/about/news/1920/">Release Announcement</a></li>
-          <li><a href="/docs/11/release-11-2.html">Release Notes</a></li>
-          <li><a href="/download/">Download</a></li>
+          <li><a href="/about/news/1935/">Read the Full Statement</a></li>
+          <!-- <li><a href="/docs/11/release-11-2.html">Release Notes</a></li>
+          <li><a href="/download/">Download</a></li> -->
         </ul>
         <a href="/about/newsarchive/" title="Archives"><button type="button" class="btn btn-primary btn-center btn-inline-block">Browse Archives</button></a>
         <a href="/account/news/new/" title="Submit News"><button type="button" class="btn btn-primary btn-center btn-inline-block">Submit News</button></a>
