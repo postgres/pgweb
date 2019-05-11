@@ -80,7 +80,7 @@
                       {% for ver in supported_versions %}
                         {% if not forloop.first %} / {% endif %}
                         {% if ver.version.current %}
-                          <a href="/docs/current/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>Current</a>
+                          <a rel="canonical" href="/docs/current/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>Current</a>
                           (<a href="/docs/{{ver.display_version}}/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>{{ver.display_version}}</a>)
                         {% else %}
                           <a href="/docs/{{ver.display_version}}/{{ver.file}}" title="PostgreSQL {{ver.display_version}} - {{page.title}}" {% if ver.version == page.version %}class="docs-version-selected"{% endif %}>{{ver.display_version}}</a>
