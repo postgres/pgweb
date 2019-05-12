@@ -4,7 +4,7 @@
  certified by EnterpriseDB for PostgreSQL 10.x and earlier.
 </p>
 
-<p><b>Note:</b> Installers for Linux are no longer being product for PostgreSQL 11 and later.
+<p><strong>Note:</strong> Installers for Linux are no longer being product for PostgreSQL 11 and later.
 Users are advised to use platform native packages instead.</p>
 
 <p>This installer includes the PostgreSQL server, pgAdmin; a graphical tool for managing and developing

@@ -67,7 +67,7 @@
         </p>
         <ul>
           {% for v in versions %}
-            <li class="{% cycle '' 'pg-bg-gray' %}"><b>{{ v.numtree }}.{{ v.latestminor }}</b> &middot; {{ v.reldate|date:"Y-m-d" }} &middot; <a href="/docs/{{ v.numtree }}/{{ v.relnotes }}">Notes</a></li>
+            <li class="{% cycle '' 'pg-bg-gray' %}"><strong>{{ v.numtree }}.{{ v.latestminor }}</strong> &middot; {{ v.reldate|date:"Y-m-d" }} &middot; <a href="/docs/{{ v.numtree }}/{{ v.relnotes }}">Notes</a></li>
           {% endfor %}
         </ul>
       </div>
