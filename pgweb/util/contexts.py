@@ -71,6 +71,7 @@ sitenav = {
     'account': [
         {'title': 'Your account', 'link': '/account'},
         {'title': 'Profile', 'link': '/account/profile'},
+        {'title': 'Mailing List Subscriptions', 'link': 'https://lists.postgresql.org/manage/'},
         {'title': 'Submitted data', 'link': '/account', 'submenu': [
             {'title': 'News Articles', 'link': '/account/edit/news/'},
             {'title': 'Events', 'link': '/account/edit/events/'},
