@@ -5,22 +5,64 @@ function sortNumeric(a,b) {
    return a-b;
 }
 
-window.onload = function() {
-   versions = Object.keys(repodata['reporpms']).sort(sortNumeric).reverse();
-   for (var p in versions) {
-      if (supported_versions.indexOf(Number(versions[p])) < 0)
-	  continue;
+function get_platform_name(plat) {
+    if (plat == 'EL')
+	return "RedHat Enterprise, CentOS, Scientific or Oracle";
+    else if (plat == 'F')
+	return "Fedora";
+    return "Undefined distribution";
+}
 
+function get_rpm_prefix(plat) {
+   if (plat.startsWith('EL-'))
+       return 'redhat';
+    else if (plat.startsWith('F-'))
+	return 'fedora';
+    return 'unknown';
+}
+
+function get_installer(plat) {
+    if (plat.startsWith('F-'))
+	return 'dnf';
+    else if (plat.startsWith('EL-')) {
+	var a = plat.split('-');
+	if (a[1] >= 8)
+	    return 'dnf';
+    }
+    return 'yum';
+}
+
+function uses_systemd(plat) {
+    if (plat.startsWith('EL-')) {
+	var a = plat.split('-');
+	if (a[1] < 7)
+	    return false;
+    }
+    return true;
+}
+
+function get_platform_text(p) {
+    var a = p.split('-');
+    return get_platform_name(a[0]) + ' version ' + a[1];
+}
+
+window.onload = function() {
+   for (var p in supported_versions) {
       var opt = document.createElement('option');
-      opt.text = versions[p];
+      opt.text = supported_versions[p];
       document.getElementById('version').add(opt);
    }
 
-   verChanged();
+   loadPlatforms();
+   archChanged();
 }
 
 function verChanged() {
-   var newver = document.getElementById('version').value;
+    /* Just update like the architecture changed */
+    archChanged();
+}
+
+function loadPlatforms() {
    var platbox = document.getElementById('platform');
 
    while (platbox.options.length > 0) {
@@ -31,15 +73,11 @@ function verChanged() {
    opt.value = -1;
    platbox.add(opt);
 
-   plats = Object.keys(repodata['reporpms'][newver]).sort(
-       function(a,b) {
-	   return repodata['platforms'][a].s - repodata['platforms'][b].s;
-       }
-   );
-   for (p in plats) {
+   platkeys = Object.keys(repodata['platforms']).sort();
+   for (var pp in platkeys) {
       var opt = document.createElement('option');
-      opt.text = repodata['platforms'][plats[p]].t;
-      opt.value = plats[p];
+      opt.text = get_platform_text(platkeys[pp]);
+      opt.value = platkeys[pp];
       platbox.add(opt);
    }
 
@@ -47,7 +85,6 @@ function verChanged() {
 }
 
 function platChanged() {
-   var ver = document.getElementById('version').value;
    var plat = document.getElementById('platform').value;
    var archbox = document.getElementById('arch');
 
@@ -60,13 +97,9 @@ function platChanged() {
       return;
    }
 
-   var platname = repodata['platforms'][plat].t;
-
-   archs = Object.keys(repodata['reporpms'][ver][plat]).sort().reverse();
-   for (a in archs) {
+   for (a in repodata['platforms'][plat].sort().reverse()) {
       var opt = document.createElement('option');
-      opt.text = archs[a];
-      opt.value = archs[a];
+      opt.text = opt.value = repodata['platforms'][plat][a];
       archbox.add(opt);
    }
 
@@ -78,7 +111,7 @@ function archChanged() {
    var plat = document.getElementById('platform').value;
    var arch = document.getElementById('arch').value;
 
-   if (plat == -1) {
+   if (!plat || plat == -1) {
       document.getElementById('reporpm').innerHTML = 'Select version and platform above';
       document.getElementById('clientpackage').innerHTML = 'Select version and platform above';
       document.getElementById('serverpackage').innerHTML = 'Select version and platform above';
@@ -89,12 +122,14 @@ function archChanged() {
    var pinfo = repodata['platforms'][plat];
    var shortver = ver.replace('.', '');
 
-   var url = 'https://download.postgresql.org/pub/repos/yum/' + ver + '/' + pinfo['p'] + '-' + arch + '/pgdg-' + pinfo['f'] + shortver + '-' + ver + '-' + repodata['reporpms'][ver][plat][arch] + '.noarch.rpm';
+   var url = 'https://download.postgresql.org/pub/repos/yum/reporpms/' + plat + '-' + arch + '/pgdg-' + get_rpm_prefix(plat) +'-repo-latest.noarch.rpm';
 
-   document.getElementById('reporpm').innerHTML = pinfo['i'] + ' install ' + url;
-   document.getElementById('clientpackage').innerHTML = pinfo['i'] + ' install postgresql' + shortver;
-   document.getElementById('serverpackage').innerHTML = pinfo['i'] + ' install postgresql' + shortver + '-server';
-   if (pinfo.d) {
+   var installer = get_installer(plat);
+   document.getElementById('reporpm').innerHTML = installer + ' install ' + url;
+   document.getElementById('clientpackage').innerHTML = installer + ' install postgresql' + shortver;
+   document.getElementById('serverpackage').innerHTML = installer + ' install postgresql' + shortver + '-server';
+
+   if (uses_systemd(plat)) {
        var setupcmd = 'postgresql-' + shortver + '-setup';
        if (ver < 10) {
 	   setupcmd = 'postgresql' + shortver + '-setup';
