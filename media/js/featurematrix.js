@@ -15,8 +15,8 @@ $(document).ready(function(){
         // Lastly, if at this point an entire row is obsolete, then hide
         $('tbody tr').each(function(i, el) {
             var $tr = $(el),
-		visible_count = $tr.find('td:not(.hidden)').length,
-		obsolete_count = $tr.find('td.fm_obs:not(.hidden)').length;
+            visible_count = $tr.find('td:not(.hidden)').length,
+            obsolete_count = $tr.find('td.fm_obs:not(.hidden)').length;
             // if visible count matches obsolete count, then hide this row
             $tr.toggle(visible_count !== obsolete_count);
         });
