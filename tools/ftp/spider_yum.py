@@ -112,7 +112,7 @@ if __name__ == "__main__":
             print("Failed to upload: %s" % x)
             sys.exit(1)
     else:
-        with NamedTemporaryFile(dir=os.path.dirname(os.path.abspath(args.target))) as f:
+        with NamedTemporaryFile(mode='w', dir=os.path.dirname(os.path.abspath(args.target))) as f:
             f.write(j)
             f.flush()
             if os.path.isfile(args.target):
