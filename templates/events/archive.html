@@ -4,20 +4,16 @@
 {%block contents%}
 
 <h1>{{title}} <i class="fas fa-calendar-alt"></i></h1>
-{%for eventblock in eventblocks%}
-{%if eventblocks|length > 1%}<h2><a name="{{eventblock.anchor|slugify}}">{{eventblock.name}}</a></h2>{%endif%}
 <p>
 <em><strong>Note:</strong> The PostgreSQL Global Development Group does not endorse any
 events run by third parties. No guarantee of the quality of events is offered
 whatsoever.</em>
 </p>
-{% if eventblock.name == 'Community Events' %}
 <p>
   <img src="/media/img/PostgreSQL_Badge1.svg" class="community" alt="PostgreSQL Community Event">
   indicates that an event is recognised under the <a href="/community/recognition/#conferences">community event guidelines</a> and is directly helping the PostgreSQL community.
 </p>
-{% endif %}
-{%for event in eventblock.events %}
+{%for event in events %}
 <hr class="eventseparator">
 <div>
   {% if event.badged %}
@@ -35,7 +31,6 @@ whatsoever.</em>
 {%if not archive%}
 <p><a href="/about/eventarchive/{{eventblock.link}}">Older {{eventblock.name}}</a></p>
 {%endif%}
-{%endfor%}
 
 {%if not archive%}
 <p><a href="/account/events/new/">Submit event</a></p>

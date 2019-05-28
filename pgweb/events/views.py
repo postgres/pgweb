@@ -12,14 +12,9 @@ from .forms import EventForm
 
 
 def main(request):
-    community_events = Event.objects.select_related('country').filter(approved=True, badged=True).filter(enddate__gt=date.today()).order_by('enddate', 'startdate',)
-    other_events = Event.objects.select_related('country').filter(approved=True, badged=False).filter(enddate__gt=date.today()).order_by('enddate', 'startdate',)
     return render_pgweb(request, 'about', 'events/archive.html', {
         'title': 'Upcoming Events',
-        'eventblocks': (
-            {'name': 'Community Events', 'events': community_events, 'link': '', },
-            {'name': 'Other Events', 'events': other_events, 'link': '', },
-        ),
+        'events': Event.objects.select_related('country').filter(approved=True, enddate__gt=date.today()).order_by('enddate', 'startdate'),
     })
 
 
@@ -29,9 +24,7 @@ def _eventarchive(request, title):
     return render_pgweb(request, 'about', 'events/archive.html', {
         'title': '%s Archive' % title,
         'archive': True,
-        'eventblocks': (
-            {'name': title, 'events': events, },
-        ),
+        'events': events,
     })
 
 
