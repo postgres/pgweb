@@ -56,8 +56,8 @@ class ReCaptchaField(forms.CharField):
                 timeout=5,
             )
         except requests.exceptions.Timeout:
-            log.error('Failed to connect to google recaptcha API: %s' % e)
-            raise ValidationError('Failed in API call to google recaptcha')
+            log.error('Timeout when trying to connect to google recaptcha API')
+            raise ValidationError('Timeout in API call to google recaptcha')
 
         if r.status_code != 200:
             log.error('Invalid response code from google recaptcha')
