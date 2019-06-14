@@ -21,13 +21,17 @@ class SubmitBugForm(forms.Form):
     name = forms.CharField(max_length=100, required=True)
     email = forms.EmailField(max_length=100, required=True)
     pgversion = forms.CharField(max_length=20, required=True,
-                                label="PostgreSQL version",
-                                widget=forms.Select(choices=_version_choices()))
+                                label="PostgreSQL version")
     os = forms.CharField(max_length=50, required=True,
                          label="Operating system")
     shortdesc = forms.CharField(max_length=100, required=True,
                                 label="Short description")
     details = forms.CharField(required=True, widget=forms.Textarea)
+
+    def __init__(self, *args, **kwargs):
+        super(SubmitBugForm, self).__init__(*args, **kwargs)
+
+        self.fields['pgversion'].widget = forms.Select(choices=_version_choices())
 
     def clean_pgversion(self):
         if self.cleaned_data.get('pgversion') == '-1':
