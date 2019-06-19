@@ -328,8 +328,11 @@ def api_varnish_purge(request):
     n = int(request.POST['n'])
     curs = connection.cursor()
     for i in range(0, n):
-        expr = request.POST['p%s' % i]
-        curs.execute("SELECT varnish_purge_expr(%s)", (expr, ))
+        if 'p{0}'.format(i) in request.POST:
+            curs.execute("SELECT varnish_purge_expr(%s)", (request.POST['p{0}'.format(i)], ))
+        if 'x{0}'.format(i) in request.POST:
+            curs.execute("SELECT varnish_purge_xkey(%s)", (request.POST['x{0}'.format(i)], ))
+
     return HttpResponse("Purged %s entries\n" % n)
 
 
