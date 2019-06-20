@@ -4,6 +4,8 @@ from django.conf import settings
 import pgweb.account.views
 import pgweb.account.oauthclient
 
+pgweb.account.oauthclient.configure()
+
 urlpatterns = [
     url(r'^$', pgweb.account.views.home),
 

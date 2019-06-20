@@ -3,6 +3,7 @@ from django.contrib.auth import login as django_login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 
+import os
 import sys
 
 from pgweb.util.misc import get_client_ip
@@ -14,6 +15,14 @@ log = logging.getLogger(__name__)
 
 class OAuthException(Exception):
     pass
+
+
+#
+# Disable scope validation in oauthlib, as it throws an exception we cannot
+# recover from. Manual check that turns it into a warning below.
+#
+def configure():
+    os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
 
 
 #
@@ -39,6 +48,9 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
         token = oa.fetch_token(tokenurl,
                                client_secret=client_secret,
                                code=request.GET['code'])
+        if token.scope_changed:
+            log.warning("Oauth scope changed for {0} login from '{1}' to '{2}'".format(provider, token.old_scope, token.scope))
+
         try:
             (email, firstname, lastname) = authdatafunc(oa)
             email = email.lower()
