@@ -204,5 +204,5 @@ def login_oauth(request, provider):
         except OAuthException as e:
             return HttpResponse(e)
         except Exception as e:
-            log.error('Excpetion during OAuth: %s' % e)
+            log.error('Exception during OAuth: %s' % e)
             return HttpResponse('An unhandled exception occurred during the authentication process')
