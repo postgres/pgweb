@@ -130,6 +130,10 @@ def search(request):
                 'search_error': "No search term specified.",
             })
     query = request.GET['q'].strip()
+    if '\0' in query:
+        return render(request, 'search/sitesearch.html', {
+            'search_error': "Invalid character in search.",
+        })
 
     # Anti-stefan prevention
     if len(query) > 1000:
