@@ -24,16 +24,14 @@ with. Here's a quick step-by-step on how to do that:
    override the following::
 
 	DEBUG=True
-	TEMPLATE_DEBUG=DEBUG
 	SITE_ROOT="http://localhost:8000"
 	SESSION_COOKIE_SECURE=False
 	SESSION_COOKIE_DOMAIN=None
-        DATABASE_NAME="pgweb"
 #. In the pgweb directory run the following command to create all
    tables and indexes, as well as create a superuser for your local
    installation::
 
-   ./manage.py syncdb
+   ./manage.py migrate
 
 #. A few functions are required, or at least recommended in order to
    test all of the system. The SQL scripts in the directory sql/ needs
