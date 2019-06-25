@@ -1,0 +1,1 @@
+Oauth buttons from https://lipis.github.io/bootstrap-social/, MIT licensed
