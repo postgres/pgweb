@@ -256,6 +256,33 @@ def oauth_login_microsoft(request):
         _microsoft_auth_data)
 
 
+#
+# Twitter login
+#  Registration: https://developer.twitter.com/en/apps
+#
+def oauth_login_twitter(request):
+    def _twitter_auth_data(oa):
+        r = oa.get('https://api.twitter.com/1.1/account/verify_credentials.json?include_email=true').json()
+        n = r['name'].split(None, 1)
+        while len(n) < 2:
+            # Handle single name names
+            n.append('')
+
+        return (
+            r['email'],
+            n[0],
+            n[1]
+        )
+
+    return _login_oauth1(
+        request,
+        'twitter',
+        'https://api.twitter.com/oauth/request_token',
+        'https://api.twitter.com/oauth/access_token',
+        'https://api.twitter.com/oauth/authorize',
+        _twitter_auth_data)
+
+
 def login_oauth(request, provider):
     fn = 'oauth_login_{0}'.format(provider)
     m = sys.modules[__name__]
