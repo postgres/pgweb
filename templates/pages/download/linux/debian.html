@@ -25,9 +25,9 @@ The PostgreSQL apt repository supports the currently supported stable
 versions of Debian:
 </p>
 <ul>
+  <li>Buster (10.x)</li>
   <li>Stretch (9.x)</li>
   <li>Jessie (8.x)</li>
-  <li>Wheezy (7.x)</li>
 </ul>
 <p>on the following architectures:</p>
 <ul>
@@ -42,9 +42,9 @@ To use the apt repository, follow these steps:
  <li>
   <select id="debseries" name="field.series" class="custom-select">
    <option selected="selected" value="YOUR_DEBIAN_VERSION_HERE">Choose your Debian version</option>
+   <option value="buster">Buster (10.x)</option>
    <option value="stretch">Stretch (9.x)</option>
    <option value="jessie">Jessie (8.x)</option>
-   <option value="wheezy">Wheezy (7.x)</option>
   </select>
  </li>
  <li>
@@ -72,7 +72,7 @@ Debian includes PostgreSQL by default. To install PostgreSQL on
 Debian, use the <code>apt-get</code> (or other apt-driving) command:
 </p>
 <pre class="code">
-  apt-get install postgresql-10
+  apt-get install postgresql-11
 </pre>
 <p>
 The repository contains many different packages including third party
@@ -82,11 +82,11 @@ version number as required):
 <table class="table table-striped">
   <tbody>
     <tr>
-     <th scope="row">postgresql-client-10</th>
+     <th scope="row">postgresql-client-11</th>
      <td>client libraries and client binaries</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-10</th>
+     <th scope="row">postgresql-11</th>
      <td>core database server</td>
     </tr>
     <tr>
@@ -98,7 +98,7 @@ version number as required):
      <td>libraries and headers for C language frontend development</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-server-dev-10</th>
+     <th scope="row">postgresql-server-dev-11</th>
      <td>libraries and headers for C language backend development</td>
     </tr>
     <tr>
