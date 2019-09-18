@@ -639,6 +639,6 @@ def communityauth_getkeys(request, siteid, since=None):
     else:
         keys = UserProfile.objects.select_related('user').all().exclude(sshkey='')
 
-    j = json.dumps([{'u': k.user.username, 's': k.sshkey} for k in keys])
+    j = json.dumps([{'u': k.user.username, 's': k.sshkey.replace("\r", "\n")} for k in keys])
 
     return HttpResponse(_encrypt_site_response(site, j))
