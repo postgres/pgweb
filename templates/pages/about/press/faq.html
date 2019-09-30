@@ -5,13 +5,13 @@
 <h1>Frequently Asked Questions</h1>
 
 <p><strong>Q: What is the current version of PostgreSQL?</strong><br />
-A: 11, which was released October 18, 2018. This is our 29th major release in 30 years of development. We release a new version of PostgreSQL every year, which is unique among SQL databases.</p>
+A: 12, which was released October 3, 2019. This is our 30th major release in over 30 years of development. We release a new version of PostgreSQL every year, which is unique among SQL databases.</p>
 
 <p><strong>Q: Does the PostgreSQL Project have a Code of Conduct?</strong><br />
 A: The PostgreSQL Project prides itself on the quality of our code and our work, and the technical and professional accomplishments of our community. We expect everyone who participates to conduct themselves in a professional manner, acting with common courtesy and in the common interest, with respect for all users and developers. To that end, we established a <a href="https://www.postgresql.org/about/policies/coc/">Code of Conduct</a> for community interaction and participation in the project’s work and the community at large.
 
 <p><strong>Q: What will the version number of the next major release be?  What will the version number of the next patch release be?</strong><br />
-A: The next major release of PostgreSQL will be version 12, and follows a two-part version numbering scheme.  So the first patch release for 11 will be 11.1. The version of PostgreSQL released in 2019 will be version 12.</p>
+A: The next major release of PostgreSQL will be version 13, and follows a two-part version numbering scheme.  So the first patch release for 12 will be 12.1. The version of PostgreSQL released in 2020 will be version 13.</p>
 
 <p><strong>Q: Why are older versions that are labeled 9.6.6 or 9.5.9?</strong><br />
 A: Because of the long history of our project the first two decimals are major releases.  Thus 9.6, 9.5 etc. were all major releases.  Minor releases have numbers like 9.6.6. Since version 10, the project has adopted a two-part version numbering scheme.</p>
@@ -20,10 +20,10 @@ A: Because of the long history of our project the first two decimals are major r
 A: PostgreSQL is released under the OSI-approved PostgreSQL Licence.  There is no fee, even for use in commercial software products.  Please see <a href="/about/licence/">the PostgreSQL Licence</a>.</p>
 
 <p><strong>Q: How many developers work on PostgreSQL?</strong><br />
-A: Over 400.  As with other open source projects, of course, we depend on hundreds of community members for documentation, translations, advocacy, conferences, website development, infrastructure, and peer-to-peer support.</p>
+A: Over 500.  As with other open source projects, of course, we depend on hundreds of community members for documentation, translations, advocacy, conferences, website development, infrastructure, and peer-to-peer support.</p>
 
 <p><strong>Q: How many PostgreSQL users are there, worldwide?</strong><br />
-A: Our wide distribution through the open source world and liberal licensing make that a difficult question to answer with any accuracy.  451Research estimates that around 30% of tech companies use PostgreSQL for core applications as of 2012, and around 11% of Debian users worldwide install PostgreSQL. Most users get PostgreSQL with a Linux distribution, or with some of the many other products, OSS software, and hardware devices that include PostgreSQL. Many indexes, such as the <a href="https://db-engines.com/en/ranking" target="_blank">DB-Engines Ranking</a>, demonstrate that PostgreSQL adoption continues to grow at a rapid pace, including DB-Engines recognition of PostgreSQL as the <a href="https://db-engines.com/en/blog_post/76">DBMS of the Year in 2017</a>.</p>
+A: Our wide distribution through the open source world and liberal licensing make that a difficult question to answer with any accuracy.  451Research estimates that around 30% of tech companies use PostgreSQL for core applications as of 2012, and around 11% of Debian users worldwide install PostgreSQL. Most users get PostgreSQL with a Linux distribution, or with some of the many other products, OSS software, and hardware devices that include PostgreSQL. Many indexes, such as the <a href="https://db-engines.com/en/ranking" target="_blank">DB-Engines Ranking</a>, demonstrate that PostgreSQL adoption continues to grow at a rapid pace, including DB-Engines recognition of PostgreSQL as the <a href="https://db-engines.com/en/blog_post/76">DBMS of the Year in 2017</a> and <a href="https://db-engines.com/en/blog_post/79" target="_blank">2018</a>.</p>
 
 <p><strong>Q: Can we talk to some of your users?</strong><br />
 A: Please contact <a href="mailto:press@postgresql.org">press@postgresql.org</a> and our press volunteers will try to arrange a contact.</p>
@@ -55,13 +55,12 @@ A: To date there is one: a <a href="http://www.spec.org/jAppServer2004/results/r
 <p><strong>Q: When will PostgreSQL get database server clustering?</strong><br />
 A: We already have it.  Since no one type of clustering satisfies all needs, we have several different clustering tools which take various clustering approaches.  The open source projects PostgresXC and Postgres-XL are available, as well as open source forks and proprietary tools such as Greenplum Database, Citus Data and several others.  Also, PostgreSQL is supported by filesystem-based clustering systems for failover, including ones from Red Hat, Microsoft, Veritas and Oracle.</p>
 
-<p><strong>Q: When will PostgreSQL 12 come out?</strong><br />
-A: The PostgreSQL project begins work on the next version of PostgreSQL in July of each year, and it generally takes 12 to 15 months to work to a release. So expect version 12 around September 2019.</p>
+<p><strong>Q: When will PostgreSQL 13 come out?</strong><br />
+A: The PostgreSQL project begins work on the next version of PostgreSQL in July of each year, and it generally takes 12 to 15 months to work to a release. So expect version 13 around September 2020.</p>
 
-<p><strong>Q: What features will 12 have?</strong><br />
-A: As always, we can't be certain what will go in and what won't; the project has strict quality standards that not all patches can make before deadline. All we can tell you is what's currently being worked on, which includes numerous improvements to the executor, work on pluggable storage, continued improvements to parallelism and partitioning, more improvements to JIT expression compilation as well as stored procedures, and many more. By the time 12 is released, though, this feature may have changed considerably.</p>
+<p><strong>Q: What features will 13 have?</strong><br />
+A: As always, we can't be certain what will go in and what won't; the project has strict quality standards that not all patches can make before deadline. All we can tell you is what's currently being worked on, which continued work on the pluggable storage interface (including plugins such as zheap or zedstore), native transparent data encryption support, continued improvements to parallelism and partitioning, and many more features. By the time 13 is released, though, this feature may have changed considerably.</p>
 
 <p><strong>Q: How do you pronounce PostgreSQL</strong><br />
 A: post-GRES-que-ell, per this <a href="/files/postgresql.mp3">audio file</a>.  Many people, however, just say "post-GRES" or "post-GREZ".</p>
-
 {%endblock%}
