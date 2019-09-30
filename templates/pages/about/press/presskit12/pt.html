@@ -1,0 +1,193 @@
+{% extends "pages/about/press/presskit12/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgresSQL 12 foi lançado!</h1>
+
+<p>
+  O Grupo de Desenvolvimento Global do PostgreSQL anunciou hoje o lançamento do
+  PostgreSQL 12, a versão mais recente do banco de dados de código aberto mais
+  avançado do mundo.
+</p>
+
+<p>
+  Aprimoramento do PostgreSQL 12 inclui melhorias notáveis no desempenho de
+  consultas, particularmente em conjuntos de dados maiores, e na utilização de
+  espaço no geral. Essa versão fornece aos desenvolvedores de aplicações novos
+  recursos, como o suporte a expressões de caminho SQL/JSON, otimizações de como
+  consultas de expressões de tabela comum (<code>WITH</code>) são executadas e
+  colunas geradas. A comunidade de PostgreSQL continua a suportar a
+  extensibilidade e robustez do PostgreSQL, com acréscimos à
+  internacionalização, autenticação e fornecendo possibilidades mais fáceis de
+  administrar o PostgreSQL. Essa versão também introduz uma interface de
+  armazenamento plugável, que permite que os desenvolvedores criem seus próprios
+  métodos para armazenar os dados.
+</p>
+
+<p>
+  "A comunidade de desenvolvimento por trás do PostgreSQL contribuiu com
+  recursos do PostgreSQL 12 que oferecem ganhos de performance e gerenciamento
+  de espaço que os nossos usuários podem obter com esforço mínimo, além de
+  melhorias na autenticação, funcionalidades administrativas e suporte a
+  SQL/JSON" disse Dave Page, um membro do Grupo de Desenvolvimento Global do
+  PostgreSQL. "Essa versão continua a tendência de facilitar o gerenciamento de
+  cargas de trabalho de bancos de dados grandes e pequenos enquanto se baseia na
+  reputação de flexibilidade, confiabilidade e estabilidade em ambientes de
+  produção".
+</p>
+
+<p>
+  O PostgreSQL se beneficia de mais de 20 anos de desenvolvimento de código
+  aberto e se tornou o banco de dados relacional de código aberto preferido por
+  organizações de todos os tamanhos. O projeto continua recebendo
+  reconhecimento em todo setor, inclusive sendo apresentado pelo segundo ano
+  consecutivo como o "SGBD do ano" em 2018 pela DB-Engines e recebendo o prêmio
+  de código aberto "Lifetime Achievement" na OSCON 2019.
+</p>
+
+<h3>Melhorias Gerais de Desempenho</h3>
+
+<p>
+  O PostgreSQL 12 fornece aprimoramentos significativos de desempenho e
+  manutenção no sistema de indexação e no particionamento.
+</p>
+
+<p>
+  Índices B-Tree, o tipo padrão de indexação no PostgreSQL, foram otimizados no
+  PostgreSQL 12 para lidar melhor com as cargas de trabalho onde os índices são
+  frequentemente modificados. Usando uma implementação justa do benchmark TPC-C,
+  o PostgreSQL 12 demonstrou, em média, uma redução de 40% na utilização do
+  espaço e um ganho geral no desempenho de consultas.
+</p>
+
+<p>
+  Consultas em tabelas particionadas também obtiveram melhorias demonstráveis,
+  principalmente para tabelas com milhares de partições que só precisam obter
+  dados de um subconjunto limitado. O PostgreSQL 12 também melhora o desempenho
+  da adição de dados as tabelas particionadas com <code>INSERT</code> e
+  <code>COPY</code>, e inclui a capacidade de anexar uma nova partição a uma
+  tabela sem bloquear consultas.
+</p>
+
+<p>
+  Existem melhorias adicionais na indexação no PostgreSQL 12 que afetam o
+  desempenho geral, incluindo menor sobrecarga na geração de log de transação
+  para os tipos de índice GiST, GIN e SP-GiST, a capacidade de criar índices de
+  cobertura (a cláusula <code>INCLUDE</code>) em índices GiST, a capacidade de
+  executar consultas de K-vizinhos mais próximos com o operador de distância
+  (<code>&lt;-&gt;</code>) utilizando índices SP-GiST e
+  <code>CREATE STATISTICS</code> agora suportando estatísticas do valor mais
+  comum (MCV) para ajudar a gerar planos de consultas melhores ao utilizar
+  colunas que são distribuídas de maneira não uniforme.
+</p>
+
+<p>
+  A compilação Just-in-time (JIT) utilizando LLVM, introduzida no PostgreSQL 11,
+  agora está ativada por padrão. A compilação JIT pode fornecer benefícios de
+  desempenho para a execução de expressões nas cláusulas WHERE, listas de
+  destinos, agregações e algumas operações internas, e estará disponível se a
+  instalação do PostgreSQL for compilada ou empacotada com LLVM.
+</p>
+
+<h3>Melhorias na Conformidade e Funcionalidade do SQL</h3>
+
+<p>
+  O PostgreSQL é conhecido por sua conformidade com o padrão SQL - uma razão
+  pela qual foi renomeado de "POSTGRES" para "PostgreSQL" - e o PostgreSQL 12
+  adicionou vários recursos para continuar sua implementação do padrão SQL com
+  funcionalidade aprimorada.
+</p>
+
+<p>
+  PostgreSQL 12 introduz a capacidade de executar consultas em documentos JSON
+  utilizando expressões de caminho JSON definidas no padrão SQL/JSON. Essas
+  consultas podem utilizar os mecanismos de indexação existentes para documentos
+  armazenados no formato <code>JSONB</code> para recuperar dados com eficiência.
+</p>
+
+<p>
+  Expressões de tabela comum, também conhecidas como consultas
+  <code>WITH</code>, agora podem ser automaticamente incorporadas pelo
+  PostgreSQL 12, o que, por sua vez, pode ajudar a aumentar o desempenho de
+  muitas consultas existentes. Nesta versão, uma consulta WITH pode ser
+  incorporada se ela não for recursiva, não tiver efeitos colaterais e for
+  referenciada apenas uma vez na parte posterior de uma consulta.
+</p>
+
+<p>
+  PostgreSQL 12 introduz "colunas geradas". Definido no padrão SQL, esse tipo de
+  coluna calcula seu valor a partir do conteúdo de outras colunas na mesma
+  tabela. Nesta versão, PostgreSQL suporta "colunas geradas armazenadas", onde o
+  valor calculado é armazenado no disco.
+</p>
+
+<h3>Internacionalização</h3>
+
+<p>
+  PostgreSQL 12 estende o suporte a ordenações ICU, permitindo que os usuários
+  possam definir "ordenações não determinísticos" que podem, por exemplo,
+  permitir comparações que não diferem maiúsculas de minúsculas ou não levam em
+  consideração acentos.
+</p>
+
+<h3>Autenticação</h3>
+
+<p>
+  PostgreSQL expande seu robusto suporte a métodos de autenticação com várias
+  melhorias que fornecem segurança e funcionalidades adicionais. Esta versão
+  introduz a criptografia do cliente e do servidor para autenticação nas
+  interfaces GSSAPI, bem como a capacidade do PostgreSQL em descobrir servidores
+  LDAP se o PostgreSQL for compilado com OpenLDAP.
+</p>
+
+<p>
+  Além disso, o PostgreSQL 12 agora suporta uma forma de autenticação multi
+  fator. Um servidor PostgreSQL pode exigir que um cliente forneça um
+  certificado SSL válido com seu nome de usuário utilizando a opção
+  <code>clientcert=verify-full</code> e combinar isso com o requisito de um
+  método de autenticação separado (por exemplo, <code>scram-sha-256</code>).
+</p>
+
+<h3>Administração</h3>
+
+<p>
+  O PostgreSQL 12 introduz a capacidade de reconstruir índices sem bloquear
+  gravações em um índice por meio do comando <code>REINDEX CONCURRENTLY</code>,
+  permitindo que os usuários evitem cenários de indisponibilidade para longas
+  reconstruções de índices.
+</p>
+
+<p>
+  Além disso, PostgreSQL 12 agora pode ativar ou desativar somas de verificação
+  de páginas em um agrupamento de banco de dados desligado utilizando o comando
+  <code>pg_checksums</code>. Anteriormente, somas de verificação, uma
+  funcionalidade para ajudar a verificar a integridade dos dados armazenados em
+  disco, só podiam ser ativadas no momento em que o agrupamento de banco de
+  dados fosse inicializado com <code>initdb</code>.
+</p>
+
+<p>
+  Para obter uma lista completa dos recursos incluídos nesta versão, leia as
+  notas de lançamento, que podem ser encontradas em:
+  <a href="/docs/12/release-12.html">https://www.postgresql.org/docs/12/release-12.html</a>
+</p>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2>Sobre PostgreSQL</h2>
+
+<p>
+  <a href="/">PostgreSQL</a> é o banco de dados mais avançado do mundo, com uma
+  comunidade global de milhares de usuários, colaboradores, empresas e
+  organizações. O Projeto PostgreSQL baseia-se em mais de 30 anos de engenharia,
+  iniciando na Universidade da Califórnia, Berkeley, e continua em um ritmo
+  inigualável de desenvolvimento. Conjunto de funcionalidades maduras do
+  PostgreSQL não só se igualam aos principais sistemas de bancos de dados
+  proprietários, mas os supera em funcionalidades avançadas, extensibilidade,
+  segurança e estabilidade.
+</p>
+
+<p>
+  Saiba mais sobre o PostgreSQL e participe da nossa comunidade em
+  <a href="/">PostgreSQL.org</a>.
+</p>
+{% endblock presskit_about %}

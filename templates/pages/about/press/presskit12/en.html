@@ -1,0 +1,170 @@
+{% extends "pages/about/press/presskit12/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 12 Released!</h1>
+
+<p>
+  <strong>OCTOBER 3, 2019</strong> - The PostgreSQL Global Development Group
+  today announced the release of <a href="/about/news/1976/">PostgreSQL 12</a>,
+  the latest version of the world's <a href="/">most advanced open source database</a>.
+</p>
+
+<p>
+  PostgreSQL 12 enhancements include notable improvements to query performance,
+  particularly over larger data sets, and overall space utilization. This
+  release provides application developers with new capabilities such as SQL/JSON
+  path expression support, optimizations for how common table expression
+  (<code>WITH</code>) queries are executed, and generated columns. The
+  PostgreSQL community continues to support the extensibility and robustness of
+  PostgreSQL, with further additions to internationalization, authentication,
+  and providing easier ways to administrate PostgreSQL. This release also
+  introduces the pluggable table storage interface, which allows developers to
+  create their own methods for storing data.
+</p>
+
+<p>
+  "The development community behind PostgreSQL contributed features for
+  PostgreSQL 12 that offer performance and space management gains that our users
+  can achieve with minimal effort, as well as improvements in enterprise
+  authentication, administration functionality, and SQL/JSON support." said Dave
+  Page, a <a href="/developer/core/">core team member</a> of the PostgreSQL
+  Global Development Group. "This release continues the trend of making it
+  easier to manage database workloads large and small while building on
+  PostgreSQL's reputation of flexibility, reliability and stability in
+  production environments."
+</p>
+
+<p>
+  PostgreSQL benefits from over 20 years of open source development and has
+  become the preferred open source relational database for organizations of all
+  sizes. The project continues to receive recognition across the industry,
+  including being featured for the second year in a row as the
+  <a href="https://db-engines.com/en/blog_post/79" target="_blank">"DBMS of the Year" in 2018</a>
+  by DB-Engines and receiving the
+  <a href="https://www.oreilly.com/radar/oreilly-open-source-and-frank-willison-awards-19/" target="_blank">"Lifetime Achievement" open source award</a>
+  at OSCON 2019.
+</p>
+
+<h3>Overall Performance Improvements</h3>
+
+<p>
+  PostgreSQL 12 provides significant performance and maintenance enhancements to
+  its indexing system and to partitioning.
+</p>
+
+<p>
+  B-tree Indexes, the standard type of indexing in PostgreSQL, have been
+  optimized in PostgreSQL 12 to better handle workloads where the indexes are
+  frequently modified. Using a fair use implementation of the TPC-C benchmark,
+  PostgreSQL 12 demonstrated on average a 40% reduction in space utilization and
+  an overall gain in query performance.
+</p>
+
+<p>
+  Queries on partitioned tables have also seen demonstrable improvements,
+  particularly for tables with thousands of partitions that only need to
+  retrieve data from a limited subset. PostgreSQL 12 also improves the
+  performance of adding data to partitioned tables with <a href="/docs/12/sql-insert.html"><code>INSERT</code></a>
+  and <a href="/docs/12/sql-copy.html"><code>COPY</code></a>, and includes the
+  ability to attach a new partition to a table without blocking queries.
+</p>
+
+<p>
+  There are additional enhancements to indexing in PostgreSQL 12 that affect
+  overall performance, including lower overhead in write-ahead log generation
+  for the GiST, GIN, and SP-GiST index types, the ability to create covering
+  indexes (the <a href="/docs/12/indexes-index-only-scans.html"><code>INCLUDE</code></a> clause) on GiST indexes, the ability to perform
+  K-nearest neighbor queries with the distance operator (<code>&lt;-&gt;</code>) using
+  SP-GiST indexes, and <a href="/docs/12/sql-createstatistics.html"><code>CREATE STATISTICS</code></a>
+  now supporting most-common value (MCV) statistics to help generate better
+  query plans when using columns that are nonuniformly distributed.
+</p>
+
+<p>
+  <a href="/docs/12/jit.html">Just-in-time (JIT) compilation</a> using LLVM, introduced in PostgreSQL 11, is now
+  enabled by default. JIT compilation can provide performance benefits to the
+  execution of expressions in <code>WHERE</code> clauses, target lists, aggregates, and some
+  internal operations, and is available if your PostgreSQL installation is
+  compiled or packaged with LLVM.
+</p>
+
+<h3>Enhancements to SQL Conformance & Functionality</h3>
+
+<p>
+  PostgreSQL is known for its conformance to the SQL standard - one reason why
+  it was renamed from "POSTGRES" to "PostgreSQL" - and PostgreSQL 12 adds
+  several features to continue its implementation of the SQL standard with
+  enhanced functionality.
+</p>
+
+<p>
+  PostgreSQL 12 introduces the ability to run queries over JSON documents using
+  <a href="/docs/12/functions-json.html#FUNCTIONS-SQLJSON-PATH">JSON path expressions</a>
+  defined in the SQL/JSON standard. Such queries may utilize the existing
+  indexing mechanisms for documents stored in the <a href="/docs/12/datatype-json.html"><code>JSONB</code></a>
+  format to efficiently retrieve data.
+</p>
+
+<p>
+  Common table expressions, also known as <code>WITH</code> queries, can now be
+  automatically inlined by PostgreSQL 12, which in turn can help increase the
+  performance of many existing queries. In this release, a <code>WITH</code>
+  query can be inlined if it is not recursive, does not have any side-effects,
+  and is only referenced once in a later part of a query.
+</p>
+
+<p>
+  PostgreSQL 12 introduces "<a href="/docs/12/ddl-generated-columns.html">generated columns</a>." Defined in the SQL standard,
+  this type of column computes its value from the contents of other columns in
+  the same table. In this version, PostgreSQL supports
+  "stored generated columns," where the computed value is stored on the disk.
+</p>
+
+<h3>Internationalization</h3>
+
+<p>
+  PostgreSQL 12 extends its support of ICU collations by allowing users to
+  define "<a href="/docs/12/collation.html#COLLATION-NONDETERMINISTIC">nondeterministic collations</a>"
+  that can, for example, allow case-insensitive or accent-insensitive comparisons.
+</p>
+
+<h3>Authentication</h3>
+
+<p>
+  PostgreSQL expands on its robust authentication method support with several
+  enhancements that provide additional security and functionality. This release
+  introduces both client and server-side encryption for authentication over
+  GSSAPI interfaces, as well as the ability for PostgreSQL to discover LDAP
+  servers if PostgreSQL is compiled with OpenLDAP.
+</p>
+
+<p>
+  Additionally, PostgreSQL 12 now supports a form of multifactor authentication.
+  A PostgreSQL server can now require an authenticating client to provide a
+  valid SSL certificate with their username using the <code>clientcert=verify-full</code>
+  option and combine this with the requirement of a separate authentication
+  method (e.g. <code>scram-sha-256</code>).
+</p>
+
+<h3>Administration</h3>
+
+<p>
+  PostgreSQL 12 introduces the ability to rebuild indexes without blocking
+  writes to an index via the
+  <a href="/docs/12/sql-reindex.html#SQL-REINDEX-CONCURRENTLY"><code>REINDEX CONCURRENTLY</code></a>
+  command, allowing users to avoid downtime scenarios for lengthy index rebuilds.
+</p>
+
+<p>
+  Additionally, PostgreSQL 12 can now enable or disable page checksums in an
+  offline cluster using the <a href="/docs/12/app-pgchecksums.html"><code>pg_checksums</code></a> command. Previously page
+  checksums, a feature to help verify the integrity of data stored to disk, could only be
+  enabled at the time a PostgreSQL cluster was initialized with <code>initdb</code>.
+</p>
+
+<p>
+  For a full list of features included in this release, please read the
+  <a href="/docs/12/release-12.html">release notes</a>, which can be found at:
+  <a href="/docs/12/release-12.html">https://www.postgresql.org/docs/12/release-12.html</a>
+</p>
+{% endblock presskit_content %}
