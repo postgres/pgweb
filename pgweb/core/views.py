@@ -112,6 +112,11 @@ def fallback(request, url):
     if not re_staticfilenames.match(url):
         raise Http404('Page not found.')
 
+    if len(url) > 250:
+        # Maximum length is really per-directory, but we shouldn't have any pages/fallback
+        # urls with anywhere *near* that, so let's just limit it on the whole
+        raise Http404('Page not found.')
+
     try:
         t = loader.get_template('pages/%s.html' % url)
     except TemplateDoesNotExist:
