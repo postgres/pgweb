@@ -1265,6 +1265,11 @@ td.fm_unk {
   background-color: #ffffaa !important;
 }
 
+/* Code of Conduct Committee */
+table.cocc-table tbody tr td:nth-child(1) {
+  width: 20%;
+}
+
 /* Contributors */
 table.contributor-table thead tr th {
   width: 50%;
