@@ -37,6 +37,7 @@ sitenav = {
         {'title': 'Release Notes', 'link': '/docs/release/'},
         {'title': 'Books', 'link': '/docs/books/'},
         {'title': 'Online Resources', 'link': '/docs/online-resources/'},
+        {'title': 'FAQ', 'link': '/docs/faq/'},
         {'title': 'Wiki', 'link': 'https://wiki.postgresql.org'},
     ],
     'community': [
