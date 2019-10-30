@@ -76,14 +76,15 @@ def docpage(request, version, filename):
         if release_version >= Decimal('10'):
             release_version = release_version.quantize(Decimal('1'), rounding=ROUND_DOWN)
         # if these are developer docs (i.e. from the nightly build), we need to
-        # determine if these are release notes for a released version or not, i.e. if we are:
+        # determine if these are release notes for a branched version or not,
+        # i.e. if we are:
         # a) viewing the docs for a version that does not exist yet (e.g. active
         #    development before an initial beta) OR
-        # b) viewing the docs for a beta version
-        is_released = Version.objects.filter(tree=release_version, testing=0).exists() if version == "devel" else True
+        # b) viewing the docs for a beta, RC, or fully released version
+        is_branched = Version.objects.filter(tree=release_version).exists() if version == "devel" else True
         # If we are viewing a released version of the release notesand the
         # release versions do not match, then we redirect
-        if is_released and release_version != ver:
+        if is_branched and release_version != ver:
             url = "/docs/"
             if release_version >= Decimal('10'):
                 url += "{}/{}".format(int(release_version), fullname)
