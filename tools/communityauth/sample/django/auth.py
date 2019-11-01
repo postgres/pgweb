@@ -30,9 +30,9 @@ import json
 import socket
 from urllib.parse import urlparse, urlencode, parse_qs
 import requests
-from Crypto.Cipher import AES
-from Crypto.Hash import SHA
-from Crypto import Random
+from Cryptodome.Cipher import AES
+from Cryptodome.Hash import SHA
+from Cryptodome import Random
 import time
 
 
@@ -58,7 +58,7 @@ def login(request):
         r = Random.new()
         iv = r.read(16)
         encryptor = AES.new(SHA.new(settings.SECRET_KEY.encode('ascii')).digest()[:16], AES.MODE_CBC, iv)
-        cipher = encryptor.encrypt(s + ' ' * (16 - (len(s) % 16)))  # pad to 16 bytes
+        cipher = encryptor.encrypt(s.encode('ascii') + b' ' * (16 - (len(s) % 16)))  # pad to 16 bytes
 
         return HttpResponseRedirect("%s?d=%s$%s" % (
             settings.PGAUTH_REDIRECT,

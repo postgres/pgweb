@@ -5,7 +5,7 @@
 # community authentication integration.
 #
 
-from Crypto import Random
+from Cryptodome import Random
 import base64
 
 if __name__ == "__main__":

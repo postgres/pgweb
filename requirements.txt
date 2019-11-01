@@ -1,7 +1,7 @@
 Django>=1.11,<1.12
 django-markdown==0.2.1
 psycopg2==2.7.6
-pycrypto==2.6
+pycryptodomex>=3.4.7,<3.5
 django_markwhat==1.4
 requests-oauthlib==0.4.0
 cvss==1.9

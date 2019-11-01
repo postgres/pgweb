@@ -1,8 +1,8 @@
 from django.db import connection
 from django.conf import settings
 
-from Crypto.Hash import SHA256
-from Crypto import Random
+from Cryptodome.Hash import SHA256
+from Cryptodome import Random
 
 from pgweb.mailqueue.util import send_simple_mail
 from pgweb.util.helpers import template_to_string

@@ -14,8 +14,8 @@ from django.db.models import Q
 
 import base64
 import urllib.parse
-from Crypto.Cipher import AES
-from Crypto import Random
+from Cryptodome.Cipher import AES
+from Cryptodome import Random
 import time
 import json
 from datetime import datetime, timedelta
@@ -547,7 +547,7 @@ def communityauth(request, siteid):
     r = Random.new()
     iv = r.read(16)  # Always 16 bytes for AES
     encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_CBC, iv)
-    cipher = encryptor.encrypt(s + ' ' * (16 - (len(s) % 16)))  # Pad to even 16 bytes
+    cipher = encryptor.encrypt(s.encode('ascii') + b' ' * (16 - (len(s) % 16)))  # Pad to even 16 bytes
 
     # Generate redirect
     return HttpResponseRedirect("%s?i=%s&d=%s" % (
@@ -594,7 +594,7 @@ def _encrypt_site_response(site, s):
     r = Random.new()
     iv = r.read(16)  # Always 16 bytes for AES
     encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_CBC, iv)
-    cipher = encryptor.encrypt(s + ' ' * (16 - (len(s) % 16)))  # Pad to even 16 bytes
+    cipher = encryptor.encrypt(s.encode('ascii') + b' ' * (16 - (len(s) % 16)))  # Pad to even 16 bytes
 
     # Base64-encode the response, just to be consistent
     return "%s&%s" % (

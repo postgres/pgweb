@@ -6,8 +6,8 @@
 #
 
 import sys
-from Crypto import Random
-from Crypto.Cipher import AES
+from Cryptodome import Random
+from Cryptodome.Cipher import AES
 import base64
 import time
 import urllib.parse
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     r = Random.new()
     iv = r.read(16)
     encryptor = AES.new(base64.b64decode(options.key), AES.MODE_CBC, iv)
-    cipher = encryptor.encrypt(s + ' ' * (16 - (len(s) % 16)))
+    cipher = encryptor.encrypt(s.encode('ascii') + b' ' * (16 - (len(s) % 16)))
 
     print("Paste the following after the receiving url:")
     print("?i=%s&d=%s" % (
