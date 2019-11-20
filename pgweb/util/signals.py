@@ -63,7 +63,7 @@ def _get_attr_value(obj, fieldname):
         #      (trying to get the value will return None for it)
         return ''
 
-    # Return the value, or an empty tring if it's NULL (migrated records)
+    # Return the value, or an empty string if it's NULL (migrated records)
     return str(getattr(obj, fieldname)) or ''
 
 
