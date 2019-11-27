@@ -16,6 +16,8 @@ class EventForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)
+        self.fields['startdate'].help_text = 'Use format YYYY-MM-DD'
+        self.fields['enddate'].help_text = 'Use format YYYY-MM-DD'
 
     def filter_by_user(self, user):
         self.fields['org'].queryset = Organisation.objects.filter(managers=user, approved=True)

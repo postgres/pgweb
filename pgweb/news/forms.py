@@ -8,6 +8,7 @@ from .models import NewsArticle, NewsTag
 class NewsArticleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(NewsArticleForm, self).__init__(*args, **kwargs)
+        self.fields['date'].help_text = 'Use format YYYY-MM-DD'
 
     def filter_by_user(self, user):
         self.fields['org'].queryset = Organisation.objects.filter(managers=user, approved=True)
