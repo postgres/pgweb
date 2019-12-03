@@ -32,7 +32,7 @@ password, you can use the <a href="/account/reset/">password reset</a> form.
 {%endif%}
 <form action="." method="post" id="login-form">{% csrf_token %}
   <div class="form-group">
-    <input type="text" class="form-control" name="username" id="id_username" placeholder="Username" autofocus />
+    <input type="text" class="form-control" name="username" id="id_username" placeholder="Username or email address" autofocus />
   </div>
   <div class="form-group">
     <input type="password" class="form-control" name="password" id="id_password" placeholder="Password"/>

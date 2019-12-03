@@ -7,7 +7,13 @@ from django.contrib.auth.backends import ModelBackend
 class AuthBackend(ModelBackend):
     def authenticate(self, username=None, password=None):
         try:
-            user = User.objects.get(username=username.lower())
+            # We don't allow @ signs in usernames (see accounts/forms.py), so if there is one
+            # specified then the user is clearly trying to log in with an email address,
+            # so look up by that.
+            if '@' in username:
+                user = User.objects.get(email=username.lower())
+            else:
+                user = User.objects.get(username=username.lower())
 
             # If user is found, check the password using the django
             # methods alone.
