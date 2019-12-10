@@ -1289,6 +1289,11 @@ table.product-table thead tr th:nth-child(4) {
   width: 20%;
 }
 
+/* Downloads // yum */
+li#dnfmodule {
+  display: none;
+}
+
 /* Professional servies */
 table.profserv-table tbody tr th {
   width: 20%;

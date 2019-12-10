@@ -62,6 +62,9 @@ To use the PostgreSQL Yum Repository, follow these steps:
   <li>Install the repository RPM:
     <pre id="reporpm" class="code"></pre>
   </li>
+  <li id="dnfmodule">Disable the built-in PostgreSQL module
+    <pre class="code">dnf -qy module disable postgresql</pre>
+  </li>
   <li>Install the client packages:
     <pre id="clientpackage" class="code"></pre>
   </li>

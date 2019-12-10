@@ -32,6 +32,15 @@ function get_installer(plat) {
     return 'yum';
 }
 
+function disable_module_on(plat) {
+    if (plat.startsWith('EL-')) {
+	var a = plat.split('-');
+	if (a[1] >= 8)
+	    return true;
+    }
+    return false;
+}
+
 function uses_systemd(plat) {
     if (plat.startsWith('EL-')) {
 	var a = plat.split('-');
@@ -116,6 +125,7 @@ function archChanged() {
       document.getElementById('clientpackage').innerHTML = 'Select version and platform above';
       document.getElementById('serverpackage').innerHTML = 'Select version and platform above';
       document.getElementById('initdb').innerHTML = 'Select version and platform above';
+      document.getElementById('dnfmodule').style.display = 'none';
       return;
    }
 
@@ -128,6 +138,8 @@ function archChanged() {
    document.getElementById('reporpm').innerHTML = installer + ' install ' + url;
    document.getElementById('clientpackage').innerHTML = installer + ' install postgresql' + shortver;
    document.getElementById('serverpackage').innerHTML = installer + ' install postgresql' + shortver + '-server';
+
+   document.getElementById('dnfmodule').style.display = disable_module_on(plat) ? 'list-item' : 'none';
 
    if (uses_systemd(plat)) {
        var setupcmd = 'postgresql-' + shortver + '-setup';
