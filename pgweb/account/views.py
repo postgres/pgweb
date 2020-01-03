@@ -269,7 +269,7 @@ def resetpwd(request):
             token = default_token_generator.make_token(u)
             send_template_mail(
                 settings.ACCOUNTS_NOREPLY_FROM,
-                form.cleaned_data['email'],
+                u.email,
                 'Password reset for your postgresql.org account',
                 'account/password_reset_email.txt',
                 {
