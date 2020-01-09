@@ -8,7 +8,7 @@ import requests
 from collections import defaultdict
 from tempfile import NamedTemporaryFile
 
-re_platformdir = re.compile('^(\w+)-(\d+)-([^-]+)$')
+re_platformdir = re.compile(r'^(\w+)-(\d+)-([^-]+)$')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Spider repo RPMs")

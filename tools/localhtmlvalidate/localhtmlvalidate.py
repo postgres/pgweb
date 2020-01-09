@@ -61,7 +61,7 @@ if __name__ == "__main__":
         print("Warnings: %s" % resp.headers['x-w3c-validator-warnings'])
         hp = html.parser.HTMLParser()
         for m in re.findall('<li class="msg_err">.*?</li>', resp.text, re.DOTALL):
-            r = re.search('<em>Line <a href="[^"]+">(\d+)</a>.*<span class="msg">(.*?)</span>', m, re.DOTALL)
+            r = re.search(r'<em>Line <a href="[^"]+">(\d+)</a>.*<span class="msg">(.*?)</span>', m, re.DOTALL)
             if r:
                 print("Line %s (should be around %s): %s" % (r.group(1), int(r.group(1)) - firstline, hp.unescape(r.group(2))))
             r2 = re.search('<code class="input">(.*?)<strong title=".*?">(.*?)</strong>(.*?)</code>', m, re.DOTALL)

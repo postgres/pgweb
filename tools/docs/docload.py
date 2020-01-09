@@ -23,7 +23,7 @@ pagecount = 0
 quiet = False
 # regular expression used to search and extract the title on a given piece of
 # documentation, for further use in the application
-re_titlematch = re.compile('<title\s*>([^<]+)</title\s*>', re.IGNORECASE)
+re_titlematch = re.compile(r'<title\s*>([^<]+)</title\s*>', re.IGNORECASE)
 # regular expression used to find any images that are in the HTML and apply
 # additional bootstrap classes
 re_figure_match = re.compile('<div([^<>]+)class="figure"', re.IGNORECASE)

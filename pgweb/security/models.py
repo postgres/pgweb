@@ -20,7 +20,7 @@ component_choices = (
 )
 
 
-re_cve = re.compile('^(\d{4})-(\d{4,5})$')
+re_cve = re.compile(r'^(\d{4})-(\d{4,5})$')
 
 
 def cve_validator(val):

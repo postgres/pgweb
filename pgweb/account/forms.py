@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
 def _clean_username(username):
     username = username.lower()
 
-    if not re.match('^[a-z0-9\.-]+$', username):
+    if not re.match(r'^[a-z0-9\.-]+$', username):
         # XXX: Note! Should we ever allow @ signs in usernames again, we need to also
         #      update util/auth.py and the code for identifying email addresses.
         raise forms.ValidationError("Invalid character in user name. Only a-z, 0-9, . and - allowed for compatibility with third party software.")

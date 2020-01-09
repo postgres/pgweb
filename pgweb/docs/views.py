@@ -244,9 +244,9 @@ def release_notes(request, major_version=None, minor_version=None):
             SELECT
                 {content}
                 file,
-                string_to_array(regexp_replace(file, 'release-(.*)\.htm.*', '\\1'), '-') AS v
+                string_to_array(regexp_replace(file, 'release-(.*)\\.htm.*', '\\1'), '-') AS v
             FROM docs
-            WHERE file ~ '^release-\d+' AND version >= 9.3
+            WHERE file ~ '^release-\\d+' AND version >= 9.3
         ) r
     ) rr
     """

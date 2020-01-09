@@ -69,10 +69,10 @@ def version_sort(l):
     generally don't have that.
     """
     mkey = l['link']
-    m = re.match('v?([0-9]+)\.([0-9]+)\.([0-9]+)$', l['url'])
+    m = re.match(r'v?([0-9]+)\.([0-9]+)\.([0-9]+)$', l['url'])
     if m:
         mkey = m.group(1) + '%02d' % int(m.group(2)) + '%02d' % int(m.group(3))
-    m = re.match('v?([0-9]+)\.([0-9]+)$', l['url'])
+    m = re.match(r'v?([0-9]+)\.([0-9]+)$', l['url'])
     if m:
         mkey = m.group(1) + '%02d' % int(m.group(2))
         # SOOO ugly. But if it's v10 and up, just prefix it to get it higher
