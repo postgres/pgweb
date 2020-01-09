@@ -6,4 +6,4 @@ django_markwhat==1.4
 requests-oauthlib==0.4.0
 cvss==1.9
 pytidylib==0.3.2
-pycodestyle==2.2.0
+pycodestyle==2.4.0
