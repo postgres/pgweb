@@ -85,7 +85,7 @@ def community(request):
     s = Survey.objects.filter(current=True)
     try:
         s = s[0]
-    except:
+    except Exception as e:
         s = None
     planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:7]
     return render_pgweb(request, 'community', 'core/community.html', {
@@ -129,7 +129,7 @@ def fallback(request, url):
     # piece of it.
     try:
         navsect = url.split('/', 2)[0]
-    except:
+    except Exception as e:
         navsect = ''
     c = PGWebContextProcessor(request)
     c.update({'navmenu': get_nav_menu(navsect)})

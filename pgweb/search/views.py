@@ -16,7 +16,7 @@ from pgweb.lists.models import MailingList
 try:
     import pylibmc
     has_memcached = True
-except:
+except Exception as e:
     has_memcached = False
 
 
@@ -63,7 +63,7 @@ def search(request):
         if request.GET.get('l', '') != '':
             try:
                 listid = int(request.GET['l'])
-            except:
+            except Exception as e:
                 listid = None
         else:
             # Listid not specified. But do we have the name?
@@ -81,7 +81,7 @@ def search(request):
         if 'd' in request.GET:
             try:
                 dateval = int(request.GET['d'])
-            except:
+            except Exception as e:
                 dateval = None
         else:
             dateval = None
@@ -144,7 +144,7 @@ def search(request):
     # Is the request being paged?
     try:
         pagenum = int(request.GET.get('p', 1))
-    except:
+    except Exception as e:
         pagenum = 1
 
     firsthit = (pagenum - 1) * hitsperpage + 1
@@ -191,7 +191,7 @@ def search(request):
                 return render(request, 'search/listsearch.html', {
                     'search_error': 'Timeout when talking to search server. Please try your search again later, or with a more restrictive search terms.',
                 })
-            except:
+            except Exception as e:
                 return render(request, 'search/listsearch.html', {
                     'search_error': 'General error when talking to search server.',
                 })
@@ -252,7 +252,7 @@ def search(request):
         try:
             conn = psycopg2.connect(settings.SEARCH_DSN)
             curs = conn.cursor()
-        except:
+        except Exception as e:
             return render(request, 'search/sitesearch.html', {
                 'search_error': 'Could not connect to search database.'
             })
@@ -288,7 +288,7 @@ def search(request):
                 quoted_suburl = urllib.parse.quote_plus(suburl)
             else:
                 quoted_suburl = ''
-        except:
+        except Exception as e:
             quoted_suburl = ''
         querystr = "?q=%s&a=%s&u=%s" % (
             urllib.parse.quote_plus(query.encode('utf-8')),

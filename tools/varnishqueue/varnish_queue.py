@@ -144,7 +144,7 @@ if __name__ == "__main__":
                 for p2 in processes:
                     try:
                         p2.terminate()
-                    except:
+                    except Exception as e:
                         pass
                 logging.error("Children killed, existing")
                 sys.exit(1)

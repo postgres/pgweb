@@ -31,7 +31,7 @@ def vote(request, surveyid):
         ansnum = int(request.POST['answer'])
         if ansnum < 1 or ansnum > 8:
             return HttpServerError(request, "Invalid answer")
-    except:
+    except Exception as e:
         # When no answer is given, redirect to results instead
         return HttpResponseRedirect("/community/survey/%s-%s" % (surv.id, slugify(surv.question)))
     attrname = "tot%s" % ansnum

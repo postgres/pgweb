@@ -65,7 +65,7 @@ class ReCaptchaField(forms.CharField):
 
         try:
             j = r.json()
-        except:
+        except Exception as e:
             log.error('Invalid response structure from google recaptcha')
             raise ValidationError('Invalid response structure from google recaptcha')
 

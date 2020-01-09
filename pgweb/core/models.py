@@ -189,7 +189,7 @@ def validate_sshkey(key):
             raise ValidationError("Only keys of types {0} are supported, not {1}.".format(", ".join(_valid_keytypes), pieces[0]))
         try:
             base64.b64decode(pieces[1])
-        except:
+        except Exception as e:
             raise ValidationError("Incorrect base64 encoded key!")
 
 

@@ -15,7 +15,7 @@ def get_all_pages_struct(method='get_struct'):
         if app.startswith('pgweb.'):
             try:
                 m = __import__(app + ".struct", {}, {}, method)
-            except:
+            except Exception as e:
                 # Failed to import - probably module didnd't exist
                 continue
 

@@ -67,7 +67,7 @@ def docpage(request, version, filename):
         # convert to Decimal for ease of manipulation
         try:
             release_version = Decimal(release_version)
-        except:
+        except Exception as e:
             # If it's not a proper decimal, just return 404. This can happen from many
             # broken links around the web.
             raise Http404("Invalid version format")
@@ -183,7 +183,7 @@ class _VersionPdfWrapper(object):
     def _find_pdf(self, pagetype):
         try:
             return os.stat('%s/documentation/pdf/%s/postgresql-%s-%s.pdf' % (settings.STATIC_CHECKOUT, self.__version.numtree, self.__version.numtree, pagetype)).st_size
-        except:
+        except Exception as e:
             return 0
 
 
