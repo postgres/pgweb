@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from pgweb.util.contexts import render_pgweb
 from django.http import HttpResponseRedirect, Http404
 from django.template.loader import get_template
 from django.db import models
 import django.utils.xmlutils
 from django.conf import settings
+
+from pgweb.util.contexts import render_pgweb
 
 import io
 import difflib
