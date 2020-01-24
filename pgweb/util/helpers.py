@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect, Http404
 from django.template.loader import get_template
 from django.db import models
@@ -30,10 +31,10 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
             instance = get_object_or_404(instancetype, pk=itemid)
         if hasattr(instance, 'submitter'):
             if not instance.submitter == request.user:
-                raise Exception("You are not the owner of this item!")
+                raise PermissionDenied("You are not the owner of this item!")
         elif hasattr(instance, 'verify_submitter'):
             if not instance.verify_submitter(request.user):
-                raise Exception("You are not the owner of this item!")
+                raise PermissionDenied("You are not the owner of this item!")
 
     if request.method == 'POST':
         # Process this form
