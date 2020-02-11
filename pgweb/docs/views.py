@@ -16,7 +16,7 @@ from pgweb.util.misc import send_template_mail
 from pgweb.core.models import Version
 from pgweb.util.db import exec_to_dict
 
-from .models import DocPage
+from .models import DocPage, DocPageRedirect
 from .forms import DocCommentForm
 
 
@@ -94,7 +94,18 @@ def docpage(request, version, filename):
                 url += "{}/{}".format(release_version, fullname)
             return HttpResponsePermanentRedirect(url)
 
-    page = get_object_or_404(DocPage, version=ver, file=fullname)
+    # try to get the page outright. If it's not found, check to see if it's a
+    # doc alias with a redirect, and if so, redirect to that page
+    try:
+        page = DocPage.objects.get(version=ver, file=fullname)
+    except DocPage.DoesNotExist:
+        # if the page does not exist but there is a special pgae redirect, check
+        # for the existence of that. if that does not exist, then we're really
+        # done and can 404
+        page_redirect = get_object_or_404(DocPageRedirect, redirect_from=fullname)
+        url = "/docs/{}/{}".format(version, page_redirect.redirect_to)
+        return HttpResponsePermanentRedirect(url)
+
     versions = DocPage.objects.extra(
         where=["file=%s OR file IN (SELECT file2 FROM docsalias WHERE file1=%s) OR file IN (SELECT file1 FROM docsalias WHERE file2=%s)"],
         params=[fullname, fullname, fullname],
