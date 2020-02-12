@@ -201,10 +201,11 @@ def sitemap_internal(request):
 _dynamic_cssmap = {
     'base': ['media/css/main.css',
              'media/css/normalize.css', ],
-    'docs': ['media/css/global.css',
-             'media/css/table.css',
-             'media/css/text.css',
-             'media/css/docs.css'],
+    'docs': ['media/css/fontawesome.css',
+             'media/css/bootstrap.min.css',
+             'media/css/bootstrap.min.css.map',
+             'media/css/main.css',
+             'media/css/normalize.css',],
 }
 
 
