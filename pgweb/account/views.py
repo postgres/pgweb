@@ -9,7 +9,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import logout as django_logout
 from django.conf import settings
-from django.db import transaction
+from django.db import transaction, connection
 from django.db.models import Q
 
 import base64
@@ -527,6 +527,14 @@ def communityauth(request, siteid):
         if not CommunityAuthConsent.objects.filter(org=site.org, user=request.user).exists():
             return HttpResponseRedirect('/account/auth/{0}/consent/?{1}'.format(siteid,
                                                                                 urllib.parse.urlencode({'next': '/account/auth/{0}/{1}'.format(siteid, urldata)})))
+
+    # Record the login as the last login to this site. Django doesn't support tables with
+    # multi-column PK, so we have to do this in a raw query.
+    with connection.cursor() as curs:
+        curs.execute("INSERT INTO account_communityauthlastlogin (user_id, site_id, lastlogin, logincount) VALUES (%(userid)s, %(siteid)s, CURRENT_TIMESTAMP, 1) ON CONFLICT (user_id, site_id) DO UPDATE SET lastlogin=CURRENT_TIMESTAMP, logincount=EXCLUDED.logincount+1", {
+            'userid': request.user.id,
+            'siteid': site.id,
+        })
 
     info = {
         'u': request.user.username.encode('utf-8'),
