@@ -133,12 +133,24 @@ def auth_receive(request):
 a different username than %s.
 
 This is almost certainly caused by some legacy data in our database.
-Please send an email to webmaster@postgresql.eu, indicating the username
+Please send an email to webmaster@postgresql.org, indicating the username
 and email address from above, and we'll manually merge the two accounts
 for you.
 
 We apologize for the inconvenience.
 """ % (data['e'][0], data['u'][0]), content_type='text/plain')
+
+        if getattr(settings, 'PGAUTH_CREATEUSER_CALLBACK', None):
+            res = getattr(settings, 'PGAUTH_CREATEUSER_CALLBACK')(
+                data['u'][0],
+                data['e'][0],
+                ['f'][0],
+                data['l'][0],
+            )
+            # If anything is returned, we'll return that as our result.
+            # If None is returned, it means go ahead and create the user.
+            if res:
+                return res
 
         user = User(username=data['u'][0],
                     first_name=data['f'][0],
