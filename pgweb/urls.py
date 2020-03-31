@@ -152,9 +152,6 @@ urlpatterns = [
     url(r'^admin/purge/$', pgweb.core.views.admin_purge),
     url(r'^admin/mergeorg/$', pgweb.core.views.admin_mergeorg),
 
-    # We use selectable only for /admin/ for now, so put it there to avoid caching issues
-    url(r'^admin/selectable/', include('selectable.urls')),
-
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 
