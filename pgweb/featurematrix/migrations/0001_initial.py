@@ -41,6 +41,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='feature',
             name='group',
-            field=models.ForeignKey(to='featurematrix.FeatureGroup'),
+            field=models.ForeignKey(to='featurematrix.FeatureGroup', on_delete=models.CASCADE),
         ),
     ]

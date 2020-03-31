@@ -19,11 +19,11 @@ class SponsorType(models.Model):
 
 
 class Sponsor(models.Model):
-    sponsortype = models.ForeignKey(SponsorType, null=False)
+    sponsortype = models.ForeignKey(SponsorType, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=128, null=False, blank=False)
     url = models.URLField(null=False, blank=False)
     logoname = models.CharField(max_length=64, null=False, blank=False)
-    country = models.ForeignKey(Country, null=False)
+    country = models.ForeignKey(Country, null=False, on_delete=models.CASCADE)
 
     purge_urls = ('/about/sponsors/', '/about/servers/', )
 

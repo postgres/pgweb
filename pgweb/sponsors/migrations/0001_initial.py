@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=128)),
                 ('url', models.URLField()),
                 ('logoname', models.CharField(max_length=64)),
-                ('country', models.ForeignKey(to='core.Country')),
+                ('country', models.ForeignKey(to='core.Country', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('name',),
@@ -54,7 +54,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='sponsor',
             name='sponsortype',
-            field=models.ForeignKey(to='sponsors.SponsorType'),
+            field=models.ForeignKey(to='sponsors.SponsorType', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='server',

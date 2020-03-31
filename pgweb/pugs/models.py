@@ -5,8 +5,8 @@ class PUG(models.Model):
     """
     contains information about a local PostgreSQL user group
     """
-    country = models.ForeignKey('core.Country')
-    org = models.ForeignKey('core.Organisation', null=True, blank=True, help_text='Organisation that manages the PUG and its contents')
+    country = models.ForeignKey('core.Country', on_delete=models.CASCADE)
+    org = models.ForeignKey('core.Organisation', null=True, blank=True, help_text='Organisation that manages the PUG and its contents', on_delete=models.CASCADE)
     approved = models.BooleanField(null=False, blank=False, default=False)
     locale = models.CharField(max_length=255, help_text="Locale where the PUG meets, e.g. 'New York City'")
     title = models.CharField(max_length=255, help_text="Title/Name of the PUG, e.g. 'NYC PostgreSQL User Group'")

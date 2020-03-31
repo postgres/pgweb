@@ -74,9 +74,9 @@ class Migration(migrations.Migration):
                 ('description', models.TextField()),
                 ('price', models.CharField(max_length=200, blank=True)),
                 ('lastconfirmed', models.DateTimeField(auto_now_add=True)),
-                ('category', models.ForeignKey(to='downloads.Category')),
-                ('licencetype', models.ForeignKey(verbose_name='Licence type', to='downloads.LicenceType')),
-                ('org', models.ForeignKey(db_column='publisher_id', verbose_name='Organisation', to='core.Organisation')),
+                ('category', models.ForeignKey(to='downloads.Category', on_delete=models.CASCADE)),
+                ('licencetype', models.ForeignKey(verbose_name='Licence type', to='downloads.LicenceType', on_delete=models.CASCADE)),
+                ('org', models.ForeignKey(db_column='publisher_id', verbose_name='Organisation', to='core.Organisation', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('name',),

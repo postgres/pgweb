@@ -85,7 +85,7 @@ class Survey(models.Model):
 
 
 class SurveyAnswer(models.Model):
-    survey = models.OneToOneField(Survey, null=False, blank=False, primary_key=True)
+    survey = models.OneToOneField(Survey, null=False, blank=False, primary_key=True, on_delete=models.CASCADE)
     tot1 = models.IntegerField(null=False, default=0)
     tot2 = models.IntegerField(null=False, default=0)
     tot3 = models.IntegerField(null=False, default=0)

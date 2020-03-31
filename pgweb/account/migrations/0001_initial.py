@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=75)),
                 ('token', models.CharField(max_length=100)),
                 ('sentat', models.DateTimeField(auto_now=True)),
-                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
         ),
     ]

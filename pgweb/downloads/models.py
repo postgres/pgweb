@@ -27,10 +27,10 @@ class LicenceType(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False, unique=True)
     approved = models.BooleanField(null=False, default=False)
-    org = models.ForeignKey(Organisation, db_column="publisher_id", null=False, verbose_name="Organisation")
+    org = models.ForeignKey(Organisation, db_column="publisher_id", null=False, verbose_name="Organisation", on_delete=models.CASCADE)
     url = models.URLField(null=False, blank=False)
-    category = models.ForeignKey(Category, null=False)
-    licencetype = models.ForeignKey(LicenceType, null=False, verbose_name="Licence type")
+    category = models.ForeignKey(Category, null=False, on_delete=models.CASCADE)
+    licencetype = models.ForeignKey(LicenceType, null=False, verbose_name="Licence type", on_delete=models.CASCADE)
     description = models.TextField(null=False, blank=False)
     price = models.CharField(max_length=200, null=False, blank=True)
     lastconfirmed = models.DateTimeField(null=False, blank=False, auto_now_add=True)

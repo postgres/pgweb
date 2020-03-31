@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('provides_support', models.BooleanField(default=False)),
                 ('provides_hosting', models.BooleanField(default=False)),
                 ('interfaces', models.CharField(max_length=512, null=True, verbose_name='Interfaces (for hosting)', blank=True)),
-                ('org', models.OneToOneField(db_column='organisation_id', to='core.Organisation', help_text='If no organisations are listed, please check the <a href="/account/orglist/">organisation list</a> and contact the organisation manager or <a href="mailto:webmaster@postgresql.org">webmaster@postgresql.org</a> if none are listed.', verbose_name='organisation')),
+                ('org', models.OneToOneField(db_column='organisation_id', to='core.Organisation', help_text='If no organisations are listed, please check the <a href="/account/orglist/">organisation list</a> and contact the organisation manager or <a href="mailto:webmaster@postgresql.org">webmaster@postgresql.org</a> if none are listed.', verbose_name='organisation', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('org__name',),

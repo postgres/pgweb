@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('vector_i', models.CharField(blank=True, max_length=1, verbose_name='Integrity Impact', choices=[('H', 'High'), ('L', 'Low'), ('N', 'None')])),
                 ('vector_a', models.CharField(blank=True, max_length=1, verbose_name='Availability Impact', choices=[('H', 'High'), ('L', 'Low'), ('N', 'None')])),
                 ('legacyscore', models.CharField(blank=True, max_length=1, verbose_name='Legacy score', choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')])),
-                ('newspost', models.ForeignKey(blank=True, to='news.NewsArticle', null=True)),
+                ('newspost', models.ForeignKey(blank=True, to='news.NewsArticle', null=True, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('-cvenumber',),
@@ -44,8 +44,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('fixed_minor', models.IntegerField()),
-                ('patch', models.ForeignKey(to='security.SecurityPatch')),
-                ('version', models.ForeignKey(to='core.Version')),
+                ('patch', models.ForeignKey(to='security.SecurityPatch', on_delete=models.CASCADE)),
+                ('version', models.ForeignKey(to='core.Version', on_delete=models.CASCADE)),
             ],
         ),
         migrations.AddField(

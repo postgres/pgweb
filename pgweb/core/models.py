@@ -128,7 +128,7 @@ class Organisation(models.Model):
     url = models.URLField(null=False, blank=False)
     email = models.EmailField(null=False, blank=True)
     phone = models.CharField(max_length=100, null=False, blank=True)
-    orgtype = models.ForeignKey(OrganisationType, null=False, blank=False, verbose_name="Organisation type")
+    orgtype = models.ForeignKey(OrganisationType, null=False, blank=False, verbose_name="Organisation type", on_delete=models.CASCADE)
     managers = models.ManyToManyField(User, blank=False)
     lastconfirmed = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 
@@ -157,7 +157,7 @@ class ImportedRSSFeed(models.Model):
 
 
 class ImportedRSSItem(models.Model):
-    feed = models.ForeignKey(ImportedRSSFeed)
+    feed = models.ForeignKey(ImportedRSSFeed, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, null=False, blank=False)
     url = models.URLField(null=False, blank=False)
     posttime = models.DateTimeField(null=False, blank=False)
@@ -195,7 +195,7 @@ def validate_sshkey(key):
 
 # Extra attributes for users (if they have them)
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, null=False, blank=False, primary_key=True)
+    user = models.OneToOneField(User, null=False, blank=False, primary_key=True, on_delete=models.CASCADE)
     sshkey = models.TextField(null=False, blank=True, verbose_name="SSH key", help_text="Paste one or more public keys in OpenSSH format, one per line.", validators=[validate_sshkey, ])
     lastmodified = models.DateTimeField(null=False, blank=False, auto_now=True)
     block_oauth = models.BooleanField(null=False, blank=False, default=False,

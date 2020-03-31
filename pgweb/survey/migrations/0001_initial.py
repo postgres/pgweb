@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SurveyAnswer',
             fields=[
-                ('survey', models.OneToOneField(primary_key=True, serialize=False, to='survey.Survey')),
+                ('survey', models.OneToOneField(primary_key=True, serialize=False, to='survey.Survey', on_delete=models.CASCADE)),
                 ('tot1', models.IntegerField(default=0)),
                 ('tot2', models.IntegerField(default=0)),
                 ('tot3', models.IntegerField(default=0)),

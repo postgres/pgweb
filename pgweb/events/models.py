@@ -6,13 +6,13 @@ from pgweb.core.models import Country, Language, Organisation
 class Event(models.Model):
     approved = models.BooleanField(null=False, blank=False, default=False)
 
-    org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.")
+    org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.", on_delete=models.CASCADE)
     title = models.CharField(max_length=100, null=False, blank=False)
     isonline = models.BooleanField(null=False, default=False, verbose_name="Online event")
     city = models.CharField(max_length=50, null=False, blank=True)
     state = models.CharField(max_length=50, null=False, blank=True)
-    country = models.ForeignKey(Country, null=True, blank=True)
-    language = models.ForeignKey(Language, null=True, blank=True, default='eng', help_text="Primary language for event. When multiple languages, specify this in the event description")
+    country = models.ForeignKey(Country, null=True, blank=True, on_delete=models.CASCADE)
+    language = models.ForeignKey(Language, null=True, blank=True, default='eng', help_text="Primary language for event. When multiple languages, specify this in the event description", on_delete=models.CASCADE)
 
     badged = models.BooleanField(null=False, blank=False, default=False, verbose_name='Community event', help_text='Choose "Community event" if this is a community recognized event following the <a href="/community/recognition/#conferences" target="_blank">community event guidelines</a>.')
     description_for_badged = models.TextField(blank=True, null=True, verbose_name='Description for community event', help_text='DEPRECRATED: This was used in the beginning of community events to collect additional information.')

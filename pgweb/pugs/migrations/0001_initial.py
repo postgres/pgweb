@@ -20,8 +20,8 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(help_text="Title/Name of the PUG, e.g. 'NYC PostgreSQL User Group'", max_length=255)),
                 ('website_url', models.TextField(null=True, blank=True)),
                 ('mailing_list_url', models.TextField(null=True, blank=True)),
-                ('country', models.ForeignKey(to='core.Country')),
-                ('org', models.ForeignKey(blank=True, to='core.Organisation', help_text='Organisation that manages the PUG and its contents', null=True)),
+                ('country', models.ForeignKey(to='core.Country', on_delete=models.CASCADE)),
+                ('org', models.ForeignKey(blank=True, to='core.Organisation', help_text='Organisation that manages the PUG and its contents', null=True, on_delete=models.CASCADE)),
             ],
         ),
     ]

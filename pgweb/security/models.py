@@ -52,7 +52,7 @@ def other_vectors_validator(val):
 
 class SecurityPatch(models.Model):
     public = models.BooleanField(null=False, blank=False, default=False)
-    newspost = models.ForeignKey(NewsArticle, null=True, blank=True)
+    newspost = models.ForeignKey(NewsArticle, null=True, blank=True, on_delete=models.CASCADE)
     cve = models.CharField(max_length=32, null=False, blank=True, validators=[cve_validator, ])
     cve_visible = models.BooleanField(null=False, blank=False, default=False)
     cvenumber = models.IntegerField(null=False, blank=False, db_index=True)
@@ -116,6 +116,6 @@ class SecurityPatch(models.Model):
 
 
 class SecurityPatchVersion(models.Model):
-    patch = models.ForeignKey(SecurityPatch, null=False, blank=False)
-    version = models.ForeignKey(Version, null=False, blank=False)
+    patch = models.ForeignKey(SecurityPatch, null=False, blank=False, on_delete=models.CASCADE)
+    version = models.ForeignKey(Version, null=False, blank=False, on_delete=models.CASCADE)
     fixed_minor = models.IntegerField(null=False, blank=False)

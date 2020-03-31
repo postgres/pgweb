@@ -38,6 +38,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='mailinglist',
             name='group',
-            field=models.ForeignKey(to='lists.MailingListGroup'),
+            field=models.ForeignKey(to='lists.MailingListGroup', on_delete=models.CASCADE),
         ),
     ]

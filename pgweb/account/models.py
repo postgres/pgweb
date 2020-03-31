@@ -18,7 +18,7 @@ class CommunityAuthSite(models.Model):
     cryptkey = models.CharField(max_length=100, null=False, blank=False,
                                 help_text="Use tools/communityauth/generate_cryptkey.py to create a key")
     comment = models.TextField(null=False, blank=True)
-    org = models.ForeignKey(CommunityAuthOrg, null=False, blank=False)
+    org = models.ForeignKey(CommunityAuthOrg, null=False, blank=False, on_delete=models.CASCADE)
     cooloff_hours = models.IntegerField(null=False, blank=False, default=0,
                                         help_text="Number of hours a user must have existed in the systems before allowed to log in to this site")
 
@@ -27,8 +27,8 @@ class CommunityAuthSite(models.Model):
 
 
 class CommunityAuthConsent(models.Model):
-    user = models.ForeignKey(User, null=False, blank=False)
-    org = models.ForeignKey(CommunityAuthOrg, null=False, blank=False)
+    user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    org = models.ForeignKey(CommunityAuthOrg, null=False, blank=False, on_delete=models.CASCADE)
     consentgiven = models.DateTimeField(null=False, blank=False)
 
     class Meta:
@@ -36,7 +36,7 @@ class CommunityAuthConsent(models.Model):
 
 
 class EmailChangeToken(models.Model):
-    user = models.OneToOneField(User, null=False, blank=False)
+    user = models.OneToOneField(User, null=False, blank=False, on_delete=models.CASCADE)
     email = models.EmailField(max_length=75, null=False, blank=False)
     token = models.CharField(max_length=100, null=False, blank=False)
     sentat = models.DateTimeField(null=False, blank=False, auto_now=True)

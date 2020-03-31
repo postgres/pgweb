@@ -5,7 +5,7 @@ from pgweb.core.models import Version
 class DocPage(models.Model):
     id = models.AutoField(null=False, primary_key=True)
     file = models.CharField(max_length=64, null=False, blank=False)
-    version = models.ForeignKey(Version, null=False, blank=False, db_column='version', to_field='tree')
+    version = models.ForeignKey(Version, null=False, blank=False, db_column='version', to_field='tree', on_delete=models.CASCADE)
     title = models.CharField(max_length=256, null=True, blank=True)
     content = models.TextField(null=True, blank=True)
 

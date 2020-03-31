@@ -25,9 +25,9 @@ class Migration(migrations.Migration):
                 ('enddate', models.DateField(verbose_name='End date')),
                 ('summary', models.TextField(help_text='A short introduction (shown on the events listing page)')),
                 ('details', models.TextField(help_text='Complete event description')),
-                ('country', models.ForeignKey(blank=True, to='core.Country', null=True)),
-                ('language', models.ForeignKey(default='eng', blank=True, to='core.Language', help_text='Primary language for event. When multiple languages, specify this in the event description', null=True)),
-                ('org', models.ForeignKey(verbose_name='Organisation', to='core.Organisation', help_text='If no organisations are listed, please check the <a href="/account/orglist/">organisation list</a> and contact the organisation manager or <a href="mailto:webmaster@postgresql.org">webmaster@postgresql.org</a> if none are listed.')),
+                ('country', models.ForeignKey(blank=True, to='core.Country', null=True, on_delete=models.CASCADE)),
+                ('language', models.ForeignKey(default='eng', blank=True, to='core.Language', help_text='Primary language for event. When multiple languages, specify this in the event description', null=True, on_delete=models.CASCADE)),
+                ('org', models.ForeignKey(verbose_name='Organisation', to='core.Organisation', help_text='If no organisations are listed, please check the <a href="/account/orglist/">organisation list</a> and contact the organisation manager or <a href="mailto:webmaster@postgresql.org">webmaster@postgresql.org</a> if none are listed.', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('-startdate', '-enddate'),

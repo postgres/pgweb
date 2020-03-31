@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('comment', models.TextField()),
                 ('posted_at', models.DateTimeField(auto_now_add=True)),
                 ('approved', models.BooleanField(default=False)),
-                ('submitter', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('submitter', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('-posted_at',),
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('file', models.CharField(max_length=64)),
                 ('title', models.CharField(max_length=256, null=True, blank=True)),
                 ('content', models.TextField(null=True, blank=True)),
-                ('version', models.ForeignKey(to='core.Version', db_column='version', to_field='tree')),
+                ('version', models.ForeignKey(to='core.Version', db_column='version', to_field='tree', on_delete=models.CASCADE)),
             ],
             options={
                 'db_table': 'docs',

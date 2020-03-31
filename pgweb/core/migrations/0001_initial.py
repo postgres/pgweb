@@ -45,7 +45,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=100)),
                 ('url', models.URLField()),
                 ('posttime', models.DateTimeField()),
-                ('feed', models.ForeignKey(to='core.ImportedRSSFeed')),
+                ('feed', models.ForeignKey(to='core.ImportedRSSFeed', on_delete=models.CASCADE)),
             ],
         ),
         migrations.CreateModel(
@@ -101,7 +101,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UserProfile',
             fields=[
-                ('user', models.OneToOneField(primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
+                ('user', models.OneToOneField(primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
                 ('sshkey', models.TextField(help_text='Paste one or more public keys in OpenSSH format, one per line.', verbose_name='SSH key', blank=True, validators=[pgweb.core.models.validate_sshkey])),
                 ('lastmodified', models.DateTimeField(auto_now=True)),
             ],
@@ -133,6 +133,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='organisation',
             name='orgtype',
-            field=models.ForeignKey(verbose_name='Organisation type', to='core.OrganisationType'),
+            field=models.ForeignKey(verbose_name='Organisation type', to='core.OrganisationType', on_delete=models.CASCADE),
         ),
     ]

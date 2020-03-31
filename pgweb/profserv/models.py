@@ -7,7 +7,7 @@ class ProfessionalService(models.Model):
     approved = models.BooleanField(null=False, blank=False, default=False)
 
     org = models.OneToOneField(Organisation, null=False, blank=False,
-                               db_column="organisation_id",
+                               db_column="organisation_id", on_delete=models.CASCADE,
                                verbose_name="organisation",
                                help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.")
     description = models.TextField(null=False, blank=False)

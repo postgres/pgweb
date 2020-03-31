@@ -19,7 +19,7 @@ class MailingListGroup(models.Model):
 
 
 class MailingList(models.Model):
-    group = models.ForeignKey(MailingListGroup, null=False)
+    group = models.ForeignKey(MailingListGroup, null=False, on_delete=models.CASCADE)
     listname = models.CharField(max_length=64, null=False, blank=False, unique=True)
     active = models.BooleanField(null=False, default=False)
     description = models.TextField(null=False, blank=True)

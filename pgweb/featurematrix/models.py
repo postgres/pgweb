@@ -25,7 +25,7 @@ class FeatureGroup(models.Model):
 
 
 class Feature(models.Model):
-    group = models.ForeignKey(FeatureGroup, null=False, blank=False)
+    group = models.ForeignKey(FeatureGroup, null=False, blank=False, on_delete=models.CASCADE)
     featurename = models.CharField(max_length=100, null=False, blank=False)
     featuredescription = models.TextField(null=False, blank=True)
     # WARNING! All fields that start with "v" will be considered versions!
