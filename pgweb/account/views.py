@@ -229,11 +229,11 @@ def orglist(request):
 
 
 def login(request):
-    return authviews.login(request, template_name='account/login.html',
-                           authentication_form=PgwebAuthenticationForm,
-                           extra_context={
-                               'oauth_providers': [(k, v) for k, v in sorted(settings.OAUTH.items())],
-                           })
+    return authviews.LoginView.as_view(template_name='account/login.html',
+                                       authentication_form=PgwebAuthenticationForm,
+                                       extra_context={
+                                           'oauth_providers': [(k, v) for k, v in sorted(settings.OAUTH.items())],
+                                       })(request)
 
 
 def logout(request):
@@ -245,9 +245,8 @@ def changepwd(request):
         return HttpServerError(request, "This account cannot change password as it's connected to a third party login site.")
 
     log.info("Initiating password change from {0}".format(get_client_ip(request)))
-    return authviews.password_change(request,
-                                     template_name='account/password_change.html',
-                                     post_change_redirect='/account/changepwd/done/')
+    return authviews.PasswordChangeView.as_view(template_name='account/password_change.html',
+                                                success_url='/account/changepwd/done/')(request)
 
 
 def resetpwd(request):
@@ -289,26 +288,25 @@ def resetpwd(request):
 
 def change_done(request):
     log.info("Password change done from {0}".format(get_client_ip(request)))
-    return authviews.password_change_done(request, template_name='account/password_change_done.html')
+    return authviews.PasswordChangeDoneView.as_view(template_name='account/password_change_done.html')(request)
 
 
 def reset_done(request):
     log.info("Password reset done from {0}".format(get_client_ip(request)))
-    return authviews.password_reset_done(request, template_name='account/password_reset_done.html')
+    return authviews.PasswordResetDoneView.as_view(template_name='account/password_reset_done.html')(request)
 
 
 def reset_confirm(request, uidb64, token):
     log.info("Confirming password reset for uidb {0}, token {1} from {2}".format(uidb64, token, get_client_ip(request)))
-    return authviews.password_reset_confirm(request,
-                                            uidb64=uidb64,
-                                            token=token,
-                                            template_name='account/password_reset_confirm.html',
-                                            post_reset_redirect='/account/reset/complete/')
+    return authviews.PasswordResetConfirmView.as_view(uidb64=uidb64,
+                                                      token=token,
+                                                      template_name='account/password_reset_confirm.html',
+                                                      post_reset_redirect='/account/reset/complete/')(request)
 
 
 def reset_complete(request):
     log.info("Password reset completed for user from {0}".format(get_client_ip(request)))
-    return authviews.password_reset_complete(request, template_name='account/password_reset_complete.html')
+    return authviews.PasswordResetCompleteView.as_view(template_name='account/password_reset_complete.html')(request)
 
 
 @script_sources('https://www.google.com/recaptcha/')
