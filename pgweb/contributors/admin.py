@@ -15,6 +15,7 @@ class ContributorAdminForm(forms.ModelForm):
 
 class ContributorAdmin(admin.ModelAdmin):
     form = ContributorAdminForm
+    autocomplete_fields = ['user', ]
 
 
 admin.site.register(ContributorType)

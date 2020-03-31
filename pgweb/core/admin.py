@@ -21,6 +21,7 @@ class OrganisationAdmin(admin.ModelAdmin):
     list_filter = ('approved',)
     ordering = ('name', )
     search_fields = ('name', )
+    autocomplete_fields = ['managers', ]
 
 
 class VersionAdmin(admin.ModelAdmin):
