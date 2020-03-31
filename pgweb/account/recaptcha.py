@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 
 
 class ReCaptchaWidget(forms.widgets.Widget):
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         if settings.NOCAPTCHA:
             return 'Captcha disabled on this system'
         log.info("Generated captcha")
