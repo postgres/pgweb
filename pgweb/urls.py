@@ -153,7 +153,7 @@ urlpatterns = [
     url(r'^admin/mergeorg/$', pgweb.core.views.admin_mergeorg),
 
     # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
 
     # Crash testing URL :-)
     url(r'^crashtest/$', pgweb.misc.views.crashtest),

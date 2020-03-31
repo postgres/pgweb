@@ -22,15 +22,17 @@ def get_current_user():
 # General middleware for all middleware functionality specific to the pgweb
 # project.
 class PgMiddleware(object):
-    def process_view(self, request, view_func, view_args, view_kwargs):
-        return None
+    def __init__(self, get_response):
+        self.get_response = get_response
 
-    def process_request(self, request):
+    def __call__(self, request):
         # Thread local store for username, see comment at the top of this file
         _thread_locals.user = getattr(request, 'user', None)
         initialize_template_collection()
 
-    def process_response(self, request, response):
+        # Call the view
+        response = self.get_response(request)
+
         # Set xkey representing the templates that are in use so we can do efficient
         # varnish purging on commits.
         tlist = get_all_templates()
