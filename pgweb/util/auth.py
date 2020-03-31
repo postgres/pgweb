@@ -5,7 +5,7 @@ from django.contrib.auth.backends import ModelBackend
 # Special version of the authentication backend, so we can handle things like
 # forced lowercasing of usernames.
 class AuthBackend(ModelBackend):
-    def authenticate(self, username=None, password=None):
+    def authenticate(self, request, username=None, password=None):
         try:
             # We don't allow @ signs in usernames (see accounts/forms.py), so if there is one
             # specified then the user is clearly trying to log in with an email address,
