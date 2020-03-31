@@ -298,10 +298,9 @@ def reset_done(request):
 
 def reset_confirm(request, uidb64, token):
     log.info("Confirming password reset for uidb {0}, token {1} from {2}".format(uidb64, token, get_client_ip(request)))
-    return authviews.PasswordResetConfirmView.as_view(uidb64=uidb64,
-                                                      token=token,
-                                                      template_name='account/password_reset_confirm.html',
-                                                      post_reset_redirect='/account/reset/complete/')(request)
+    return authviews.PasswordResetConfirmView.as_view(template_name='account/password_reset_confirm.html',
+                                                      success_url='/account/reset/complete/')(
+                                                          request, uidb64=uidb64, token=token)
 
 
 def reset_complete(request):
@@ -313,7 +312,7 @@ def reset_complete(request):
 @script_sources('https://www.gstatic.com/recaptcha/')
 @frame_sources('https://www.google.com/')
 def signup(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return HttpServerError(request, "You must log out before you can sign up for a new account")
 
     if request.method == 'POST':
@@ -486,7 +485,7 @@ def communityauth(request, siteid):
     # a login form that has information about which site is being logged
     # in to, and basic information about how the community login system
     # works.
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         if request.method == "POST" and 'next' in request.POST and 'this_is_the_login_form' in request.POST:
             # This is a postback of the login form. So pick the next filed
             # from that one, so we keep it across invalid password entries.
@@ -567,7 +566,7 @@ def communityauth_logout(request, siteid):
     # Get whatever site the user is trying to log in to.
     site = get_object_or_404(CommunityAuthSite, pk=siteid)
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         django_logout(request)
 
     # Redirect user back to the specified suburl

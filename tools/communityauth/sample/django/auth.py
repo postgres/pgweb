@@ -72,7 +72,7 @@ def login(request):
 # Handle logout requests by logging out of this site and then
 # redirecting to log out from the main site as well.
 def logout(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         django_logout(request)
     return HttpResponseRedirect("%slogout/" % settings.PGAUTH_REDIRECT)
 
