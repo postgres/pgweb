@@ -229,11 +229,11 @@ def orglist(request):
 
 
 def login(request):
-    return authviews.login(request, template_name='account/login.html',
-                           authentication_form=PgwebAuthenticationForm,
-                           extra_context={
-                               'oauth_providers': [(k, v) for k, v in sorted(settings.OAUTH.items())],
-                           })
+    return authviews.LoginView.as_view(template_name='account/login.html',
+                                       authentication_form=PgwebAuthenticationForm,
+                                       extra_context={
+                                           'oauth_providers': [(k, v) for k, v in sorted(settings.OAUTH.items())],
+                                       })(request)
 
 
 def logout(request):
@@ -245,9 +245,8 @@ def changepwd(request):
         return HttpServerError(request, "This account cannot change password as it's connected to a third party login site.")
 
     log.info("Initiating password change from {0}".format(get_client_ip(request)))
-    return authviews.password_change(request,
-                                     template_name='account/password_change.html',
-                                     post_change_redirect='/account/changepwd/done/')
+    return authviews.PasswordChangeView.as_view(template_name='account/password_change.html',
+                                                success_url='/account/changepwd/done/')(request)
 
 
 def resetpwd(request):
@@ -289,33 +288,31 @@ def resetpwd(request):
 
 def change_done(request):
     log.info("Password change done from {0}".format(get_client_ip(request)))
-    return authviews.password_change_done(request, template_name='account/password_change_done.html')
+    return authviews.PasswordChangeDoneView.as_view(template_name='account/password_change_done.html')(request)
 
 
 def reset_done(request):
     log.info("Password reset done from {0}".format(get_client_ip(request)))
-    return authviews.password_reset_done(request, template_name='account/password_reset_done.html')
+    return authviews.PasswordResetDoneView.as_view(template_name='account/password_reset_done.html')(request)
 
 
 def reset_confirm(request, uidb64, token):
     log.info("Confirming password reset for uidb {0}, token {1} from {2}".format(uidb64, token, get_client_ip(request)))
-    return authviews.password_reset_confirm(request,
-                                            uidb64=uidb64,
-                                            token=token,
-                                            template_name='account/password_reset_confirm.html',
-                                            post_reset_redirect='/account/reset/complete/')
+    return authviews.PasswordResetConfirmView.as_view(template_name='account/password_reset_confirm.html',
+                                                      success_url='/account/reset/complete/')(
+                                                          request, uidb64=uidb64, token=token)
 
 
 def reset_complete(request):
     log.info("Password reset completed for user from {0}".format(get_client_ip(request)))
-    return authviews.password_reset_complete(request, template_name='account/password_reset_complete.html')
+    return authviews.PasswordResetCompleteView.as_view(template_name='account/password_reset_complete.html')(request)
 
 
 @script_sources('https://www.google.com/recaptcha/')
 @script_sources('https://www.gstatic.com/recaptcha/')
 @frame_sources('https://www.google.com/')
 def signup(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return HttpServerError(request, "You must log out before you can sign up for a new account")
 
     if request.method == 'POST':
@@ -488,22 +485,22 @@ def communityauth(request, siteid):
     # a login form that has information about which site is being logged
     # in to, and basic information about how the community login system
     # works.
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         if request.method == "POST" and 'next' in request.POST and 'this_is_the_login_form' in request.POST:
             # This is a postback of the login form. So pick the next filed
             # from that one, so we keep it across invalid password entries.
             nexturl = request.POST['next']
         else:
             nexturl = '/account/auth/%s/%s' % (siteid, urldata)
-        return authviews.login(
-            request, template_name='account/login.html',
+        return authviews.LoginView.as_view(
+            template_name='account/login.html',
             authentication_form=PgwebAuthenticationForm,
             extra_context={
                 'sitename': site.name,
                 'next': nexturl,
                 'oauth_providers': [(k, v) for k, v in sorted(settings.OAUTH.items())],
             },
-        )
+        )(request)
 
     # When we reach this point, the user *has* already been authenticated.
     # The request variable "su" *may* contain a suburl and should in that
@@ -569,7 +566,7 @@ def communityauth_logout(request, siteid):
     # Get whatever site the user is trying to log in to.
     site = get_object_or_404(CommunityAuthSite, pk=siteid)
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         django_logout(request)
 
     # Redirect user back to the specified suburl
