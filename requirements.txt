@@ -1,8 +1,8 @@
-Django>=1.11,<1.12
-django-markdown==0.2.1
+Django>=2.2,<2.3
+django-markdown==0.8.4
 psycopg2==2.7.6
 pycryptodomex>=3.4.7,<3.5
-django_markwhat==1.4
+django_markwhat==1.6.2
 requests-oauthlib==0.4.0
 cvss==1.9
 pytidylib==0.3.2
