@@ -492,15 +492,15 @@ def communityauth(request, siteid):
             nexturl = request.POST['next']
         else:
             nexturl = '/account/auth/%s/%s' % (siteid, urldata)
-        return authviews.login(
-            request, template_name='account/login.html',
+        return authviews.LoginView.as_view(
+            template_name='account/login.html',
             authentication_form=PgwebAuthenticationForm,
             extra_context={
                 'sitename': site.name,
                 'next': nexturl,
                 'oauth_providers': [(k, v) for k, v in sorted(settings.OAUTH.items())],
             },
-        )
+        )(request)
 
     # When we reach this point, the user *has* already been authenticated.
     # The request variable "su" *may* contain a suburl and should in that
