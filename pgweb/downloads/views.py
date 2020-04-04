@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.core.exceptions import PermissionDenied
 from pgweb.util.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
@@ -127,9 +128,9 @@ def ftpbrowser(request, subpath):
 @csrf_exempt
 def uploadftp(request):
     if request.method != 'PUT':
-        return HttpServerError(request, "Invalid method")
+        raise PermissionDenied("Invalid method")
     if not request.META['REMOTE_ADDR'] in settings.FTP_MASTERS:
-        return HttpServerError(request, "Invalid client address")
+        raise PermissionDenied("Invalid client address")
     # We have the data in request.body. Attempt to load it as
     # a pickle to make sure it's properly formatted
     pickle.loads(request.body)
@@ -158,9 +159,9 @@ def uploadftp(request):
 @csrf_exempt
 def uploadyum(request):
     if request.method != 'PUT':
-        return HttpServerError(request, "Invalid method")
+        raise PermissionDenied("Invalid method")
     if not request.META['REMOTE_ADDR'] in settings.FTP_MASTERS:
-        return HttpServerError(request, "Invalid client address")
+        raise PermissionDenied("Invalid client address")
     # We have the data in request.body. Attempt to load it as
     # json to ensure correct format.
     json.loads(request.body.decode('utf8'))

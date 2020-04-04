@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.misc import get_client_ip, varnish_purge
-from pgweb.util.helpers import HttpServerError
+from pgweb.util.helpers import HttpSimpleResponse
 
 from .models import Survey, SurveyAnswer, SurveyLock
 
@@ -30,7 +30,7 @@ def vote(request, surveyid):
     try:
         ansnum = int(request.POST['answer'])
         if ansnum < 1 or ansnum > 8:
-            return HttpServerError(request, "Invalid answer")
+            return HttpSimpleResponse(request, "Response error", "Invalid answer")
     except Exception as e:
         # When no answer is given, redirect to results instead
         return HttpResponseRedirect("/community/survey/%s-%s" % (surv.id, slugify(surv.question)))
@@ -46,7 +46,7 @@ def vote(request, surveyid):
     # Check if we are locked
     lock = SurveyLock.objects.filter(ipaddr=addr)
     if len(lock) > 0:
-        return HttpServerError(request, "Too many requests from your IP in the past 15 minutes")
+        return HttpSimpleResponse(request, "Rate limited", "Too many requests from your IP in the past 15 minutes")
 
     # Generate a new lock item, and store it
     lock = SurveyLock(ipaddr=addr)

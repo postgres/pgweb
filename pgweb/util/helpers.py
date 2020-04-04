@@ -175,6 +175,13 @@ def HttpServerError(request, msg):
     return r
 
 
+def HttpSimpleResponse(request, title, msg):
+    return render(request, 'simple.html', {
+        'title': title,
+        'message': msg,
+    })
+
+
 class PgXmlHelper(django.utils.xmlutils.SimplerXMLGenerator):
     def __init__(self, outstream, skipempty=False):
         django.utils.xmlutils.SimplerXMLGenerator.__init__(self, outstream, 'utf-8')

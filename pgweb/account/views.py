@@ -23,7 +23,7 @@ import itertools
 
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.misc import send_template_mail, generate_random_token, get_client_ip
-from pgweb.util.helpers import HttpServerError
+from pgweb.util.helpers import HttpSimpleResponse
 
 from pgweb.news.models import NewsArticle
 from pgweb.events.models import Event
@@ -147,7 +147,7 @@ def change_email(request):
     if request.user.password == OAUTH_PASSWORD_STORE:
         # Link shouldn't exist in this case, so just throw an unfriendly
         # error message.
-        return HttpServerError(request, "This account cannot change email address as it's connected to a third party login site.")
+        return HttpSimpleResponse(request, "Account error", "This account cannot change email address as it's connected to a third party login site.")
 
     if request.method == 'POST':
         form = ChangeEmailForm(request.user, data=request.POST)
@@ -188,7 +188,7 @@ def confirm_change_email(request, tokenhash):
     if request.user.password == OAUTH_PASSWORD_STORE:
         # Link shouldn't exist in this case, so just throw an unfriendly
         # error message.
-        return HttpServerError(request, "This account cannot change email address as it's connected to a third party login site.")
+        return HttpSimpleResponse(request, "Account error", "This account cannot change email address as it's connected to a third party login site.")
 
     if token:
         # Valid token find, so change the email address
@@ -242,7 +242,7 @@ def logout(request):
 
 def changepwd(request):
     if hasattr(request.user, 'password') and request.user.password == OAUTH_PASSWORD_STORE:
-        return HttpServerError(request, "This account cannot change password as it's connected to a third party login site.")
+        return HttpSimpleResponse(request, "Account error", "This account cannot change password as it's connected to a third party login site.")
 
     log.info("Initiating password change from {0}".format(get_client_ip(request)))
     return authviews.PasswordChangeView.as_view(template_name='account/password_change.html',
@@ -257,7 +257,7 @@ def resetpwd(request):
         try:
             u = User.objects.get(email__iexact=request.POST['email'])
             if u.password == OAUTH_PASSWORD_STORE:
-                return HttpServerError(request, "This account cannot change password as it's connected to a third party login site.")
+                return HttpSimpleResponse(request, "Account error", "This account cannot change password as it's connected to a third party login site.")
         except User.DoesNotExist:
             log.info("Attempting to reset password of {0}, user not found".format(request.POST['email']))
             return HttpResponseRedirect('/account/reset/done/')
@@ -313,7 +313,7 @@ def reset_complete(request):
 @frame_sources('https://www.google.com/')
 def signup(request):
     if request.user.is_authenticated:
-        return HttpServerError(request, "You must log out before you can sign up for a new account")
+        return HttpSimpleResponse(request, "Account error", "You must log out before you can sign up for a new account")
 
     if request.method == 'POST':
         # Attempt to create user then, eh?
@@ -376,7 +376,7 @@ def signup_oauth(request):
     if 'oauth_email' not in request.session \
        or 'oauth_firstname' not in request.session \
        or 'oauth_lastname' not in request.session:
-        return HttpServerError(request, 'Invalid redirect received')
+        return HttpSimpleResponse(request, "OAuth error", 'Invalid redirect received')
 
     if request.method == 'POST':
         # Second stage, so create the account. But verify that the

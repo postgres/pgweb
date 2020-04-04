@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.http import HttpResponseNotModified
+from django.core.exceptions import PermissionDenied
 from django.template import TemplateDoesNotExist, loader
 from django.contrib.auth.decorators import user_passes_test
 from pgweb.util.decorators import login_required
@@ -19,7 +20,7 @@ import urllib.parse
 
 from pgweb.util.decorators import cache, nocache
 from pgweb.util.contexts import render_pgweb, get_nav_menu, PGWebContextProcessor
-from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
+from pgweb.util.helpers import simple_form, PgXmlHelper
 from pgweb.util.moderation import get_all_pending_moderations
 from pgweb.util.misc import get_client_ip, varnish_purge, varnish_purge_expr, varnish_purge_xkey
 from pgweb.util.sitestruct import get_all_pages_struct
@@ -328,9 +329,9 @@ def admin_purge(request):
 @csrf_exempt
 def api_varnish_purge(request):
     if not request.META['REMOTE_ADDR'] in settings.VARNISH_PURGERS:
-        return HttpServerError(request, "Invalid client address")
+        raise PermissionDenied("Invalid client address")
     if request.method != 'POST':
-        return HttpServerError(request, "Can't use this way")
+        raise PermissionDenied("Can't use this way")
     n = int(request.POST['n'])
     curs = connection.cursor()
     for i in range(0, n):
