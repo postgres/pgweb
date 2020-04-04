@@ -205,7 +205,7 @@ _dynamic_cssmap = {
              'media/css/bootstrap.min.css',
              'media/css/bootstrap.min.css.map',
              'media/css/main.css',
-             'media/css/normalize.css',],
+             'media/css/normalize.css', ],
 }
 
 
