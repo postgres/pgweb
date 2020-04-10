@@ -1,0 +1,218 @@
+{%extends "base/page.html"%}
+{% block title %}Related Projects{% endblock %}
+{% block contents %}
+
+<div class="row">
+  <div class="col-md-10">
+    <h1>Related Projects</h1>
+    <p>
+      There are a vareity of projects that help provide infrastructure and resources
+      across the community. These projects range from providing event management
+      software that is used by many of the <a href="/about/events/">PostgreSQL community events</a>,
+      to package management, to even the <a href="/">PostgreSQL.org</a> website
+      itself!
+    </p>
+    <p>
+      Much like the core PostgreSQL software, these projects rely on the support of
+      contributors for new features and ongoing maintenance. There are written in a
+      variety of programming langauges (or in some cases, natural languages!) and
+      are all ways for people to provide meaningful contributions to the PostgreSQL
+      community. In addition to what each project provides, there are instructions
+      for how you can start contributing to the project.
+    </p>
+    <p>
+      If you believe a project belongs on this list, please send an email to
+      <a href="mailto:pgsql-www@lists.postgresql.org">pgsql-www@lists.postgresql.org</a>.
+    </p>
+
+    <h2>Website Infrastructure</h2>
+
+    <h3>pgweb</h3>
+    <p>
+      "pgweb" is the base code for the <a href="/">postgresql.org</a> website
+      and serves as both a content management system and an authentication
+      provider for many other PostgreSQL family websites.
+    </p>
+    <p>
+      The PostgreSQL website is split into a dynamic and static part:
+    </p>
+    <ul>
+      <li><a href="https://git.postgresql.org/gitweb/?p=pgweb.git;a=summary">Dynamic content repository</a></li>
+      <li><a href="https://git.postgresql.org/gitweb/?p=pgweb-static.git;a=summary">Static files repository</a></li>
+    </ul>
+    <p>
+      The site itself runs on the  <a href="https://www.djangoproject.com/">Django</a>
+      web framework. You can get involved in this project by communicating on
+      the <a href="mailto:pgsql-www@lists.postgresql.org">pgsql-www</a> mailing
+      list.
+    </p>
+
+    <h3>Planet PostgreSQL</h3>
+    <p>
+      <a href="https://planet.postgresql.org">Planet PostgreSQL</a> is a blog
+      aggregator for individual blogs where people publish content about
+      PostgreSQL, the PostgreSQL community, and PostgreSQL-related projects. It
+      includes aggregation and distribution software, as well as tools to help
+      with moderation.
+    </p>
+    <ul>
+      <li><a href="https://git.postgresql.org/gitweb/?p=hamn.git;a=summary">Planet PostgreSQL repository</a></li>
+      <li><a href="https://planet.postgresql.org">Planet PostgreSQL</a></li>
+    </ul>
+    <p>
+      You can get involved in this project by communicating on the
+      <a href="mailto:pgsql-www@lists.postgresql.org">pgsql-www</a> mailing
+      list.
+    </p>
+
+    <h2>Mailing List Infrastructure</h2>
+
+    <h3>pglister</h3>
+    <p>
+      The PostgreSQL mailinglist system is powered by "pglister":
+    </p>
+    <ul>
+      <li><a href="https://git.postgresql.org/gitweb/?p=pglister.git;a=summary">pglister main repository</a></li>
+      <li><a href="https://lists.postgresql.org/">Mailing lists</a></li>
+    </ul>
+
+    <h3>pgarchives</h3>
+    <p>
+      The "pgarchives" codebase powers the display for the PostgreSQL mailing
+      list archives, which are an essential part of the development workflow for
+      the PostgreSQL project.
+    </p>
+    <ul>
+      <li><a href="https://git.postgresql.org/gitweb/?p=pgweb.git;a=summary">Dynamic content repository</a></li>
+    </ul>
+    <p>
+      You can get involved in this project by communicating on
+      the <a href="mailto:pgsql-www@lists.postgresql.org">pgsql-www</a> mailing
+      list.
+    </p>
+
+    <h2>Development Tools</h2>
+
+    <h3>PostgreSQL Build Farm</h3>
+    <p>
+      The PostgreSQL Build Farm tests the current PostgreSQL code, and all supported versions, on a great number of devices provided by the community:
+      <ul>
+        <li><a href="https://buildfarm.postgresql.org/">Build Farm website</a></li>
+        <li><a href="https://github.com/PGBuildFarm/server-code">Build Farm server code repository</a></li>
+        <li><a href="https://github.com/PGBuildFarm/client-code">Build Farm client code repository</a></li>
+        <li><a href="http://wiki.postgresql.org/wiki/PostgreSQL_Buildfarm_Howto">How to run your own buildfarm member</a></li>
+      </ul>
+      For Buildfarm related discussions, use the <a href="mailto:buildfarm-members@lists.postgresql.org">buildfarm-members</a> mailing list.
+    </p>
+
+    <h3>Commitfest</h3>
+    <p>
+      PostgreSQL uses a unique system for managing "Commitfests", which is a
+      single development cycle. People who use the Commitfest app discuss their
+      patches on the  <a href="mailto:pgsql-hackers@lists.postgresql.org">pgsql-hackers</a>
+      mailing list.
+    </p>
+    <ul>
+      <li><a href="https://commitfest.postgresql.org/">Commitfest website</a></li>
+      <li><a href="https://git.postgresql.org/gitweb/?p=pgcommitfest2.git;a=summary">pgcommitfest main repository</a></li>
+    </ul>
+    <p>
+      You can get involved in this project by communicating on
+      the <a href="mailto:pgsql-www@lists.postgresql.org">pgsql-www</a> mailing
+      list.
+    </p>
+
+
+    <h3>PostgreSQL Performance Farm</h3>
+    <p>
+      The PostgreSQL Performance Farm gathers performance data:
+    </p>
+    <ul>
+      <li><a href="https://github.com/PGPerfFarm/pgperffarm">Performance Farm code repository</a></li>
+    </ul>
+    <p>
+      You can get involved in this project by communicating on
+      the <a href="mailto:pgsql-www@lists.postgresql.org">pgsql-www</a> mailing
+      list.
+    </p>
+
+    <h2>Package Management</h2>
+
+    <h3><a href="https://apt.postgresql.org">apt.postgresql.org</a></h3>
+    <p>
+      The APT repository provides PostgreSQL packages for Debian/Ubuntu based
+      systems:
+    </p>
+    <ul>
+      <li><a href="https://wiki.postgresql.org/wiki/Apt">Wiki page with details</a></li>
+    </ul>
+    <p>
+      You can get involved in this project by communicating on
+      the <a href="mailto:pgsql-pkg-debian@postgresql.org">pgsql-pkg-debian</a>
+      mailing list.
+    </p>
+
+    <h3><a href="yum.postgresql.org">yum.postgresql.org</a></h3>
+    <p>
+      The YUM repository provides PostgreSQL packages for Red Hat/CentOS/Fedora
+      based systems (and derivatives):
+    </p>
+    <ul>
+      <li><a href="https://yum.postgresql.org/">Website with details</a></li>
+      <li><a href="https://redmine.postgresql.org/projects/pgrpms/">Issue tracker</a></li>
+    </ul>
+    <p>
+      You can get involved in this project by communicating on
+      the <a href="mailto:pgsql-pkg-yum@postgresql.org">pgsql-pkg-yum</a>
+      mailing list.
+    </p>
+
+    <h2>Event Management</h2>
+
+    <h3>pgeu conference system</h3>
+    <p>
+      The "pgeu-system" powers a number of PostgreSQL conferences, including:
+    </p>
+    <ul>
+      <li><a href="https://www.postgresql.eu/events/">PostgreSQL Europe events</a></li>
+      <li><a href="https://postgresql.us/events/">United States PostgreSQL Association events</a></li>
+    </ul>
+    <p>
+      The conference system runs on the  <a href="https://www.djangoproject.com/">django web framework</a>, and is Open Source with a <a href="https://git.postgresql.org/gitweb/?p=pgeu-system.git;a=blob_plain;f=LICENSE;hb=HEAD">MIT License</a>.
+    </p>
+    <p>
+      The code is hosted on git.postgresql.org, and mirrorred to GitHub:
+    </p>
+    <ul>
+      <li><a href="https://git.postgresql.org/gitweb/?p=pgeu-system.git;a=summary">pgeu-system main repository</a></li>
+      <li><a href="https://github.com/pgeu/pgeu-system">GitHub mirror</a></li>
+    </ul>
+    <p>
+      The GitHub mirror can be used to submit Issues and Pull Requests. You can
+      get involved in this project by communicating on the
+      <a href="mailto:pgeu-system@lists.postgresql.eu">pgeu-system@lists.postgresql.eu</a>
+      mailing list.
+    </p>
+
+
+    <h2>Advocacy</h2>
+
+    <h3>Press Releases</h3>
+    <p>
+      The press release repository contains archives of major PostgreSQL
+      releases, their press kits, and translations, as well as the periodic
+      minor updates.
+    </p>
+    <ul>
+      <li><a href="https://git.postgresql.org/gitweb/?p=press.git;a=summary">Press Kit repository</a></li>
+    </ul>
+    <p>
+      If you are interested in becoming a press release translator, you can get
+      involved in this project by sending an email to
+      <a href="mailto:press@postgresql.org">press@postgresql.org</a>.
+    </p>
+
+  </div>
+</div>
+
+{%endblock%}

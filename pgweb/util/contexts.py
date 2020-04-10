@@ -61,6 +61,7 @@ sitenav = {
         ]},
         {'title': 'Mailing Lists', 'link': '/list/'},
         {'title': 'Developer FAQ', 'link': 'https://wiki.postgresql.org/wiki/Developer_FAQ'},
+        {'title': 'Related Projects', 'link': '/developer/related-projects/'},
     ],
     'support': [
         {'title': 'Support', 'link': '/support/'},
