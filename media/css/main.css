@@ -737,7 +737,36 @@ code,
 #docContent table.CALSTABLE th {
   background-color: #e9ecef;
   padding: 0.5ex 0.5ex;
-  vertical-align: inherit;
+}
+
+#docContent table.table th[align="left"],
+#docContent table.table td[align="left"] {
+  text-align: left;
+}
+
+#docContent table.table th[align="center"],
+#docContent table.table td[align="center"] {
+  text-align: center;
+}
+
+#docContent table.table th[align="right"],
+#docContent table.table td[align="right"] {
+  text-align: right;
+}
+
+#docContent table.table th[valign="top"],
+#docContent table.table td[valign="top"] {
+  vertical-align: top;
+}
+
+#docContent table.table th[valign="middle"],
+#docContent table.table td[valign="middle"] {
+  vertical-align: middle;
+}
+
+#docContent table.table th[valign="bottom"],
+#docContent table.table td[valign="bottom"] {
+  vertical-align: top;
 }
 
 #docContent table.table td,
