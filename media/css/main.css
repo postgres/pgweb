@@ -737,6 +737,7 @@ code,
 #docContent table.CALSTABLE th {
   background-color: #e9ecef;
   padding: 0.5ex 0.5ex;
+  vertical-align: inherit;
 }
 
 #docContent table.table td,
