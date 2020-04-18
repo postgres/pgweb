@@ -791,6 +791,14 @@ code,
   word-break: unset;
 }
 
+/** Formatting for entries in tables of functions: indent all but first line **/
+#docContent table.table th.functableentry,
+#docContent table.table td.functableentry {
+	padding-left: 4em;
+	text-indent: -3.5em;
+	text-align: left;
+}
+
 /**
  * Titles, Navigation
  */
