@@ -63,7 +63,7 @@ class PgwebAdmin(admin.ModelAdmin):
                 if not obj.org.email:
                     # Should not happen because we remove the form field. Thus
                     # a hard exception is ok.
-                    raise Exception("Organisation does not have an email, canot send notification!")
+                    raise Exception("Organisation does not have an email, cannot send notification!")
                 n = ModerationNotification()
                 n.objecttype = obj.__class__.__name__
                 n.objectid = obj.id
