@@ -9,16 +9,20 @@ from pgweb.util.helpers import template_to_string
 import re
 
 
-def send_template_mail(sender, receiver, subject, templatename, templateattr={}, usergenerated=False, cc=None, replyto=None, receivername=None, sendername=None, messageid=None):
+def send_template_mail(sender, receiver, subject, templatename, templateattr={}, usergenerated=False, cc=None, replyto=None, receivername=None, sendername=None, messageid=None, suppress_auto_replies=True, is_auto_reply=False):
     d = {
         'link_root': settings.SITE_ROOT,
     }
     d.update(templateattr)
-    send_simple_mail(sender, receiver, subject,
-                     template_to_string(templatename, d),
-                     usergenerated=usergenerated, cc=cc, replyto=replyto,
-                     receivername=receivername, sendername=sendername,
-                     messageid=messageid)
+    send_simple_mail(
+        sender, receiver, subject,
+        template_to_string(templatename, d),
+        usergenerated=usergenerated, cc=cc, replyto=replyto,
+        receivername=receivername, sendername=sendername,
+        messageid=messageid,
+        suppress_auto_replies=suppress_auto_replies,
+        is_auto_reply=is_auto_reply,
+    )
 
 
 def get_client_ip(request):

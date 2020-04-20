@@ -78,7 +78,8 @@ class PgwebAdmin(admin.ModelAdmin):
                 send_simple_mail(settings.NOTIFICATION_FROM,
                                  obj.org.email,
                                  "postgresql.org moderation notification",
-                                 msgstr)
+                                 msgstr,
+                                 suppress_auto_replies=False)
 
                 # Also generate a mail to the moderators
                 send_simple_mail(

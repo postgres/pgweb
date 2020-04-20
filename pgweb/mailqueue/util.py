@@ -15,7 +15,7 @@ def _encoded_email_header(name, email):
     return email
 
 
-def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False, cc=None, replyto=None, sendername=None, receivername=None, messageid=None):
+def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False, cc=None, replyto=None, sendername=None, receivername=None, messageid=None, suppress_auto_replies=True, is_auto_reply=False):
     # attachment format, each is a tuple of (name, mimetype,contents)
     # content should be *binary* and not base64 encoded, since we need to
     # use the base64 routines from the email library to get a properly
@@ -33,6 +33,16 @@ def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, userge
         msg['Message-ID'] = messageid
     else:
         msg['Message-ID'] = make_msgid()
+    if suppress_auto_replies:
+        # Do our best to set some headers to indicate that auto-replies like out of office
+        # messages should not be sent to this email.
+        msg['X-Auto-Response-Suppress'] = 'All'
+
+    # Is this email auto-generated or auto-replied?
+    if is_auto_reply:
+        msg['Auto-Submitted'] = 'auto-replied'
+    elif not usergenerated:
+        msg['Auto-Submitted'] = 'auto-generated'
 
     msg.attach(MIMEText(msgtxt, _charset='utf-8'))
 
