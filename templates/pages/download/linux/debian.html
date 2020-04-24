@@ -28,11 +28,14 @@ versions of Debian:
   <li>Buster (10.x)</li>
   <li>Stretch (9.x)</li>
   <li>Jessie (8.x)</li>
+  <li>Bullseye (11.x, testing)</li>
+  <li>Sid (unstable)</li>
 </ul>
 <p>on the following architectures:</p>
 <ul>
   <li>amd64</li>
-  <li>i386</li>
+  <li>arm64 (Buster and newer)</li>
+  <li>i386 (Buster and older)</li>
   <li>ppc64el</li>
 </ul>
 <p>
@@ -45,6 +48,8 @@ To use the apt repository, follow these steps:
    <option value="buster">Buster (10.x)</option>
    <option value="stretch">Stretch (9.x)</option>
    <option value="jessie">Jessie (8.x)</option>
+   <option value="bullseye">Bullseye (11.x, testing)</option>
+   <option value="sid">Sid (unstable)</option>
   </select>
  </li>
  <li>
@@ -72,7 +77,7 @@ Debian includes PostgreSQL by default. To install PostgreSQL on
 Debian, use the <code>apt-get</code> (or other apt-driving) command:
 </p>
 <pre class="code">
-  apt-get install postgresql-11
+  apt-get install postgresql-12
 </pre>
 <p>
 The repository contains many different packages including third party
@@ -82,11 +87,11 @@ version number as required):
 <table class="table table-striped">
   <tbody>
     <tr>
-     <th scope="row">postgresql-client-11</th>
+     <th scope="row">postgresql-client-12</th>
      <td>client libraries and client binaries</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-11</th>
+     <th scope="row">postgresql-12</th>
      <td>core database server</td>
     </tr>
     <tr>
@@ -98,7 +103,7 @@ version number as required):
      <td>libraries and headers for C language frontend development</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-server-dev-11</th>
+     <th scope="row">postgresql-server-dev-12</th>
      <td>libraries and headers for C language backend development</td>
     </tr>
     <tr>

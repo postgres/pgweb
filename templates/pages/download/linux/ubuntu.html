@@ -22,13 +22,15 @@ updates for all supported versions of PostgreSQL throughout the support
 <p>
 The PostgreSQL Apt Repository supports the current LTS versions of Ubuntu:
 <ul>
+  <li>20.04</li>
   <li>18.04</li>
   <li>16.04</li>
 </ul>
 on the following architectures:
 <ul>
   <li>amd64</li>
-  <li>i386</li>
+  <li>arm64 (18.04 and newer)</li>
+  <li>i386 (18.04 and older)</li>
   <li>ppc64el</li>
 </ul>
 
@@ -42,6 +44,7 @@ To use the apt repository, follow these steps:
   <li>
     <select id="debseries" name="field.series" class="custom-select">
       <option selected="selected" value="YOUR_UBUNTU_VERSION_HERE">Choose your Ubuntu version</option>
+      <option value="focal">Focal (20.04)</option>
       <option value="bionic">Bionic (18.04)</option>
       <option value="xenial">Xenial (16.04)</option>
     </select>
@@ -68,7 +71,7 @@ Ubuntu includes PostgreSQL by default. To install PostgreSQL on
 Ubuntu, use the <em>apt-get</em> (or other apt-driving) command:
 </p>
 <code>
-apt-get install postgresql-11
+apt-get install postgresql-12
 </code>
 <p>
 The repository contains many different packages including third party
@@ -78,11 +81,11 @@ version number as required):
 <table class="table table-striped">
   <tbody>
     <tr>
-     <th scope="row">postgresql-client-11</th>
+     <th scope="row">postgresql-client-12</th>
      <td>client libraries and client binaries</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-11</th>
+     <th scope="row">postgresql-12</th>
      <td>core database server</td>
     </tr>
     <tr>
@@ -94,7 +97,7 @@ version number as required):
      <td>libraries and headers for C language frontend development</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-server-dev-11</th>
+     <th scope="row">postgresql-server-dev-12</th>
      <td>libraries and headers for C language backend development</td>
     </tr>
     <tr>
