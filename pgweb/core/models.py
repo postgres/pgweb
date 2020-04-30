@@ -57,7 +57,7 @@ class Version(models.Model):
 
     def save(self):
         # Make sure only one version at a time can be the current one.
-        # (there may be some small race conditions here, but the likelyhood
+        # (there may be some small race conditions here, but the likelihood
         # that two admins are editing the version list at the same time...)
         if self.current:
             previous = Version.objects.filter(current=True)
