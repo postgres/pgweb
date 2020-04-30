@@ -625,7 +625,7 @@ ul.actions {
 }
 
 #docContent p {
-  margin-bottom: 1rem !important;
+  margin-bottom: 1rem;
 }
 
 #docContent hr {
@@ -648,7 +648,7 @@ ul.actions {
 }
 
 #docContent pre {
-  padding: 0.8rem !important;
+  padding: 0.8rem;
 }
 
 pre,
@@ -658,7 +658,7 @@ code,
 #docContent tt.REPLACEABLE {
   font-size: 0.9rem !important;
   color: inherit !important;
-  background-color: #f8f9fa !important;
+  background-color: #f8f9fa;
   border-radius: .25rem;
   margin: .6rem 0;
   font-weight: 300;
@@ -797,6 +797,27 @@ code,
 	padding-left: 4em;
 	text-indent: -3.5em;
 	text-align: left;
+}
+
+#docContent table.table th.func_table_entry p,
+#docContent table.table td.func_table_entry p {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  padding-left: 4em;
+  text-align: left;
+}
+
+#docContent table.table p.func_signature {
+  text-indent: -3.5em;
+}
+
+#docContent table.table td.func_table_entry pre.programlisting {
+  background-color: inherit;
+  border: 0;
+  margin-bottom: 0.1em;
+  margin-top: 0.1em;
+  padding: 0;
+  padding-left: 4em;
 }
 
 /**
@@ -1059,7 +1080,7 @@ i.fas.fa-search {
 pre {
   padding: 0.8rem;
   border: 1px solid #ced4da;
-  margin: 1rem 0 !important;
+  margin: 1rem 0;
 }
 
 pre.code {
