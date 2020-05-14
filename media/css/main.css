@@ -791,20 +791,44 @@ code,
   word-break: unset;
 }
 
-/** Formatting for entries in tables of functions: indent all but first line **/
-#docContent table.table th.functableentry,
-#docContent table.table td.functableentry {
-	padding-left: 4em;
-	text-indent: -3.5em;
-	text-align: left;
-}
-
 #docContent table.table th.func_table_entry p,
 #docContent table.table td.func_table_entry p {
   margin-top: 0.1em;
   margin-bottom: 0.1em;
   padding-left: 4em;
   text-align: left;
+}
+
+/** Formatting for entries in tables of catalog/view columns **/
+#docContent table.table th.catalog_table_entry p,
+#docContent table.table td.catalog_table_entry p {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  padding-left: 4em;
+  text-align: left;
+}
+
+#docContent table.table th.catalog_table_entry p.column_definition {
+  text-indent: -3.5em;
+  word-spacing: 0.25em;
+}
+
+#docContent table.table td.catalog_table_entry p.column_definition {
+  text-indent: -3.5em;
+}
+
+#docContent table.table p.column_definition code.type {
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+}
+
+#docContent table.table td.catalog_table_entry pre.programlisting {
+  background-color: inherit;
+  border: 0;
+  margin-bottom: 0.1em;
+  margin-top: 0.1em;
+  padding: 0;
+  padding-left: 4em;
 }
 
 #docContent table.table p.func_signature {
