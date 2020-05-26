@@ -7,7 +7,7 @@ function sortNumeric(a,b) {
 
 function get_platform_name(plat) {
     if (plat == 'EL')
-	return "RedHat Enterprise, CentOS, Scientific or Oracle";
+	return "Red Hat Enterprise, CentOS, Scientific or Oracle";
     else if (plat == 'F')
 	return "Fedora";
     return "Undefined distribution";
