@@ -1,7 +1,7 @@
-<h2>Interactive installer by EnterpriseDB</h2>
+<h2>Interactive installer by EDB</h2>
 <p>
 <a href="https://www.enterprisedb.com/downloads/postgres-postgresql-downloads"> Download the installer</a>
- certified by EnterpriseDB for PostgreSQL 10.x and earlier.
+ certified by EDB for PostgreSQL 10.x and earlier.
 </p>
 
 <p><strong>Note:</strong> Installers for Linux are no longer being product for PostgreSQL 11 and later.
