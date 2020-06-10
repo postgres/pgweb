@@ -1526,3 +1526,14 @@ table.sponsor-table tbody tr td:nth-child(3) {
     font-size: 1.5rem;
   }
 }
+
+/* Script copy buttons */
+.pg-script-container {
+  position: relative;
+}
+
+.pg-script-copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}

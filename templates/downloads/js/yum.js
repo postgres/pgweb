@@ -119,13 +119,11 @@ function archChanged() {
    var ver = document.getElementById('version').value;
    var plat = document.getElementById('platform').value;
    var arch = document.getElementById('arch').value;
+   var scriptBox = document.getElementById('script-box')
 
    if (!plat || plat == -1) {
-      document.getElementById('reporpm').innerHTML = 'Select version and platform above';
-      document.getElementById('clientpackage').innerHTML = 'Select version and platform above';
-      document.getElementById('serverpackage').innerHTML = 'Select version and platform above';
-      document.getElementById('initdb').innerHTML = 'Select version and platform above';
-      document.getElementById('dnfmodule').style.display = 'none';
+      document.getElementById('copy-btn').style.display = 'none';
+      scriptBox.innerHTML = 'Select version and platform above';
       return;
    }
 
@@ -135,21 +133,28 @@ function archChanged() {
    var url = 'https://download.postgresql.org/pub/repos/yum/reporpms/' + plat + '-' + arch + '/pgdg-' + get_rpm_prefix(plat) +'-repo-latest.noarch.rpm';
 
    var installer = get_installer(plat);
-   document.getElementById('reporpm').innerHTML = installer + ' install ' + url;
-   document.getElementById('clientpackage').innerHTML = installer + ' install postgresql' + shortver;
-   document.getElementById('serverpackage').innerHTML = installer + ' install postgresql' + shortver + '-server';
+   scriptBox.innerHTML = '# Install the repository RPM:\n';
+   scriptBox.innerHTML += installer + ' install ' + url + '\n\n';
 
-   document.getElementById('dnfmodule').style.display = disable_module_on(plat) ? 'list-item' : 'none';
+   scriptBox.innerHTML += '# Install PostgreSQL:\n';
+   scriptBox.innerHTML += installer + ' install postgresql' + shortver + '-server\n\n';
 
+   if (disable_module_on(plat)) {
+      scriptBox.innerHTML += '# Disable the built-in PostgreSQL module:\n';
+      scriptBox.innerHTML += 'dnf -qy module disable postgresql\n\n';
+   }
+
+   scriptBox.innerHTML += '# Optionally initialize the database and enable automatic start:\n';
    if (uses_systemd(plat)) {
        var setupcmd = 'postgresql-' + shortver + '-setup';
        if (ver < 10) {
-	   setupcmd = 'postgresql' + shortver + '-setup';
+	       setupcmd = 'postgresql' + shortver + '-setup';
        }
-
-       document.getElementById('initdb').innerHTML = '/usr/pgsql-' + ver + '/bin/' + setupcmd + ' initdb<br/>systemctl enable postgresql-' + ver + '<br/>systemctl start postgresql-' + ver;
+       scriptBox.innerHTML += '/usr/pgsql-' + ver + '/bin/' + setupcmd + ' initdb\nsystemctl enable postgresql-' + ver + '\nsystemctl start postgresql-' + ver;
    }
    else {
-       document.getElementById('initdb').innerHTML = 'service postgresql-' + ver + ' initdb<br/>chkconfig postgresql-' + ver + ' on<br/>service postgresql-' + ver + ' start';
+       scriptBox.innerHTML += 'service postgresql-' + ver + ' initdb\nchkconfig postgresql-' + ver + ' on\nservice postgresql-' + ver + ' start';
    }
+
+   document.getElementById('copy-btn').style.display = 'block';
 }

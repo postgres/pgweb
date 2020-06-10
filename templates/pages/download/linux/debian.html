@@ -41,30 +41,23 @@ versions of Debian:
 <p>
 To use the apt repository, follow these steps:
 </p>
-<ol>
- <li>
-  <select id="debseries" name="field.series" class="custom-select">
-   <option selected="selected" value="YOUR_DEBIAN_VERSION_HERE">Choose your Debian version</option>
-   <option value="buster">Buster (10.x)</option>
-   <option value="stretch">Stretch (9.x)</option>
-   <option value="jessie">Jessie (8.x)</option>
-   <option value="bullseye">Bullseye (11.x, testing)</option>
-   <option value="sid">Sid (unstable)</option>
-  </select>
- </li>
- <li>
-   Create the file <var>/etc/apt/sources.list.d/pgdg.list</var>, and add a line
- for the repository:
-   <pre class="code">
-     deb http://apt.postgresql.org/pub/repos/apt/ <span id="series-deb">YOUR_DEBIAN_VERSION_HERE</span>-pgdg main</pre>
- </li>
- <li>
-   Import the repository signing key, and update the package lists:
-   <pre class="code">
-     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-     sudo apt-get update</pre>
- </li>
-</ol>
+
+<div class="pg-script-container">
+    <pre id="script-box" class="code"># Create the file repository configuration:
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+
+# Import the repository signing key:
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+# Update the package lists:
+sudo apt-get update
+
+# Install the latest version of PostgreSQL.
+# If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
+sudo apt-get install postgresql</pre>
+    <button class="pg-script-copy-btn" onclick="copyScript(this, 'script-box')">Copy Script</button>
+</div>
+
 <p>
 For more information about the apt repository, including answers to frequent
 questions, please see the apt page on

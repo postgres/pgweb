@@ -40,25 +40,23 @@ by using the closest LTS version available.
 <p>
 To use the apt repository, follow these steps:
 </p>
-<ul>
-  <li>
-    <select id="debseries" name="field.series" class="custom-select">
-      <option selected="selected" value="YOUR_UBUNTU_VERSION_HERE">Choose your Ubuntu version</option>
-      <option value="focal">Focal (20.04)</option>
-      <option value="bionic">Bionic (18.04)</option>
-      <option value="xenial">Xenial (16.04)</option>
-    </select>
- </li>
-  <li>Create the file <code>/etc/apt/sources.list.d/pgdg.list</code> and add a line
-    for the repository
-    <pre class="code">deb http://apt.postgresql.org/pub/repos/apt/ <span id="series-deb">YOUR_UBUNTU_VERSION_HERE</span>-pgdg main</pre>
- </li>
-  <li>
-    Import the repository signing key, and update the package lists
-    <pre class="code">wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-sudo apt-get update</pre>
-  </li>
-</ul>
+
+<div class="pg-script-container">
+    <pre id="script-box" class="code"># Create the file repository configuration:
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+
+# Import the repository signing key:
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+# Update the package lists:
+sudo apt-get update
+
+# Install the latest version of PostgreSQL.
+# If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
+sudo apt-get install postgresql</pre>
+    <button class="pg-script-copy-btn" onclick="copyScript(this, 'script-box')">Copy Script</button>
+</div>
+
 <p>
 For more information about the apt repository, including answers to frequent
 questions, please see the <a href="https://wiki.postgresql.org/wiki/Apt" target="_blank">PostgreSQL Apt Repository</a> page on

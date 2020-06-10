@@ -59,20 +59,11 @@ To use the PostgreSQL Yum Repository, follow these steps:
   <li>Select version: <select id="version" class="custom-select" onChange="verChanged()"></select><br/></li>
   <li>Select platform: <select id="platform" class="custom-select" onChange="platChanged()"></select></li>
   <li>Select architecture: <select id="arch" class="custom-select" onChange="archChanged()"></select></li>
-  <li>Install the repository RPM:
-    <pre id="reporpm" class="code"></pre>
-  </li>
-  <li id="dnfmodule">Disable the built-in PostgreSQL module
-    <pre class="code">dnf -qy module disable postgresql</pre>
-  </li>
-  <li>Install the client packages:
-    <pre id="clientpackage" class="code"></pre>
-  </li>
-  <li>Optionally install the server packages:
-    <pre id="serverpackage" class="code"></pre>
-  </li>
-  <li>Optionally initialize the database and enable automatic start:
-      <pre id="initdb" class="code"></pre>
+  <li>Copy, paste and run the relevant parts of the setup script:
+    <div class="pg-script-container">
+        <pre id="script-box" class="code"></pre>
+        <button id="copy-btn" class="pg-script-copy-btn" onclick="copyScript(this, 'script-box')">Copy Script</button>
+    </div>
   </li>
 </ol>
 
