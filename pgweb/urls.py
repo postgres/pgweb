@@ -1,8 +1,6 @@
 from django.conf.urls import include, url
 from django.views.generic import RedirectView
 
-from pgweb.util.signals import register_basic_signal_handlers
-
 import pgweb.contributors.views
 import pgweb.core.views
 import pgweb.docs.views
@@ -27,9 +25,6 @@ from pgweb.events.feeds import EventFeed
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
-
-# Register our save signal handlers
-register_basic_signal_handlers()
 
 urlpatterns = [
     url(r'^$', pgweb.core.views.home),

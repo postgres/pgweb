@@ -39,4 +39,3 @@ and have been made visible on the website.
 
 {0}
 """.format("\n".join(newly_visible)))
-                list(map(varnish_purge, SecurityPatch.purge_urls))
