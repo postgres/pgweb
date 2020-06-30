@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.exceptions import PermissionDenied
+from django.core.validators import ValidationError
 from django.http import HttpResponseRedirect, Http404
 from django.template.loader import get_template
 import django.utils.xmlutils
@@ -8,9 +9,29 @@ from django.conf import settings
 from pgweb.util.contexts import render_pgweb
 
 import io
+import re
 import difflib
+import markdown
 
 from pgweb.mailqueue.util import send_simple_mail
+
+
+_re_img = re.compile('<img ', re.I)
+_re_html_open = re.compile(r'<([^\s/][^>]*)>')
+
+
+def MarkdownValidator(val):
+    if _re_html_open.search(val):
+        raise ValidationError('Embedding HTML in markdown is not allowed')
+
+    out = markdown.markdown(val)
+
+    # We find images with a regexp, because it works... For now, nothing more advanced
+    # is needed.
+    if _re_img.search(out):
+        raise ValidationError('Image references are not allowed in this field')
+
+    return val
 
 
 def simple_form(instancetype, itemid, request, formclass, formtemplate='base/form.html', redirect='/account/', navsection='account', fixedfields=None, createifempty=False):
@@ -38,6 +59,9 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
     if request.method == 'POST':
         # Process this form
         form = formclass(data=request.POST, instance=instance)
+        for fn in form.fields:
+            if fn in getattr(instancetype, 'markdown_fields', []):
+                form.fields[fn].validators.append(MarkdownValidator)
 
         # Save away the old value from the instance before it's saved
         if not is_new:
