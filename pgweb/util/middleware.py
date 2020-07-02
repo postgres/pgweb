@@ -46,10 +46,10 @@ class PgMiddleware(object):
         sources = OrderedDict([
             ('default', ["'self'", ]),
             ('img', ['*', 'data:', ]),
-            ('script', ["'self'", "www.google-analytics.com", "ssl.google-analytics.com", "data:"]),
+            ('script', ["'unsafe-eval'", "'self'", "www.google-analytics.com", "ssl.google-analytics.com", "www.googletagmanager.com", "tagmanager.google.com", "data:"]),
             ('connect', ["'self'", "www.google-analytics.com", "ssl.google-analytics.com"]),
             ('media', ["'self'", ]),
-            ('style', ["'self'", "fonts.googleapis.com"]),
+            ('style', ["'self'", "fonts.googleapis.com", "tagmanager.google.com"]),
             ('font', ["'self'", "fonts.gstatic.com", "data:", ]),
         ])
         if hasattr(response, 'x_allow_extra_sources'):
