@@ -40,7 +40,7 @@ class DocPageRedirect(models.Model):
     completely removed from the PostgreSQL documentation
     """
     redirect_from = models.CharField(max_length=64, null=False, blank=False, unique=True, help_text='Page to redirect from, e.g. "old_page.html"')
-    redirect_to = models.CharField(max_length=64, null=False, blank=False, unique=True, help_text='Page to redirect from, e.g. "new_page.html"')
+    redirect_to = models.CharField(max_length=64, null=False, blank=False, unique=True, help_text='Page to redirect to, e.g. "new_page.html"')
 
     class Meta:
         verbose_name_plural = "Doc page redirects"
