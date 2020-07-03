@@ -114,10 +114,12 @@ INSTALLED_APPS = [
     'pgweb.featurematrix',
     'pgweb.search',
     'pgweb.pugs',
+    'pgweb.util',
 ]
 
 # Default format for date/time (as it changes between machines)
 DATETIME_FORMAT = "Y-m-d H:i:s"
+DATE_FORMAT = "Y-m-d"
 
 # Configure recaptcha. Most details contain keys and are thus handled
 # in settings_local.py. Override NOCAPTCHA to actually use them.
