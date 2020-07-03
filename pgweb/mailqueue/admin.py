@@ -17,13 +17,13 @@ class QueuedMailAdmin(admin.ModelAdmin):
             msg = parser.parsestr(obj.fullmsg)
             b = msg.get_payload(decode=True)
             if b:
-                return b
+                return b.decode('utf8')
 
             pl = msg.get_payload()
             for p in pl:
                 b = p.get_payload(decode=True)
                 if b:
-                    return b
+                    return b.decode('utf8')
             return "Could not find body"
         except Exception as e:
             return "Failed to get body: %s" % e
