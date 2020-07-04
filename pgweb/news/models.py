@@ -22,7 +22,7 @@ class NewsArticle(models.Model):
     title = models.CharField(max_length=200, null=False, blank=False)
     content = models.TextField(null=False, blank=False)
     tweeted = models.BooleanField(null=False, blank=False, default=False)
-    tags = models.ManyToManyField(NewsTag, blank=False, help_text="Hover mouse over tags to view full description")
+    tags = models.ManyToManyField(NewsTag, blank=False, help_text="Select the tags appropriate for this post")
 
     send_notification = True
     send_m2m_notification = True

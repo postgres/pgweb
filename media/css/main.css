@@ -1235,6 +1235,11 @@ th.formfieldnamecontainer {
   margin: 0.5em 0;
 }
 
+.form-check div.describedcheckbox {
+  margin-left: 3rem;
+  font-style: italic;
+}
+
 .form-check-input[type=radio] {
   margin-top: .4rem;
 }

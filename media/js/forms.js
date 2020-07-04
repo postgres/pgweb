@@ -10,12 +10,6 @@ $(document).ready(function(){
 	update_form_toggles($(e));
     });
 
-    $('div.form-group[data-cbtitles]').each(function(idx, e) {
-	var d = $(e).data('cbtitles');
-	$.each(d, function(k,v) {
-	    $(e).find('input[type=checkbox][value=' + k + ']').parent('div').prop('title', v);
-	});
-    });
 });
 
 function update_form_toggles(e) {
