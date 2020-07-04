@@ -3,7 +3,7 @@ import django.template.loaders.base
 
 # Store in TLS, since a template loader can't access the request
 try:
-    from threading import local, currentThread
+    from threading import local
 except ImportError:
     from django.utils._threading_local import local
 

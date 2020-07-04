@@ -9,7 +9,6 @@ from django.conf import settings
 
 from pgweb.security.models import SecurityPatch
 from pgweb.mailqueue.util import send_simple_mail
-from pgweb.util.misc import varnish_purge
 
 import requests
 
