@@ -37,7 +37,12 @@ def item(request, itemid, throwaway=None):
 
 def taglist_json(request):
     return HttpResponse(json.dumps({
-        'tags': [{'name': t.urlname, 'description': t.description} for t in NewsTag.objects.distinct('urlname')],
+        'tags': [{
+            'urlname': t.urlname,
+            'name': t.name,
+            'description': t.description,
+            'sortkey': t.sortkey,
+        } for t in NewsTag.objects.order_by('urlname').distinct('urlname')],
     }), content_type='application/json')
 
 

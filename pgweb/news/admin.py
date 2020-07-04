@@ -21,6 +21,7 @@ class NewsArticleAdmin(PgwebAdmin):
 
 class NewsTagAdmin(PgwebAdmin):
     list_display = ('urlname', 'name', 'description')
+    filter_horizontal = ('allowed_orgs', )
 
 
 admin.site.register(NewsArticle, NewsArticleAdmin)

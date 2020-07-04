@@ -25,6 +25,24 @@ class NewsArticleForm(forms.ModelForm):
             'tags': {t.id: t.description for t in NewsTag.objects.all()}
         }
 
+    def clean(self):
+        data = super().clean()
+
+        if 'tags' not in data:
+            self.add_error('tags', 'Select one or more tags')
+        else:
+            for t in data['tags']:
+                # Check each tag for permissions. This is not very db-efficient, but people
+                # don't save news articles that often...
+                if t.allowed_orgs.exists() and not t.allowed_orgs.filter(pk=data['org'].pk).exists():
+                    self.add_error('tags',
+                                   'The organisation {} is not allowed to use the tag {}.'.format(
+                                       data['org'],
+                                       t,
+                                   ))
+
+        return data
+
     class Meta:
         model = NewsArticle
         exclude = ('submitter', 'approved', 'tweeted')

@@ -7,12 +7,15 @@ class NewsTag(models.Model):
     urlname = models.CharField(max_length=20, null=False, blank=False, unique=True)
     name = models.CharField(max_length=32, null=False, blank=False)
     description = models.CharField(max_length=200, null=False, blank=False)
+    allowed_orgs = models.ManyToManyField(Organisation, blank=True,
+                                          help_text="Organisations allowed to use this tag")
+    sortkey = models.IntegerField(null=False, blank=False, default=100)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        ordering = ('urlname', )
+        ordering = ('sortkey', 'urlname', )
 
 
 class NewsArticle(models.Model):
