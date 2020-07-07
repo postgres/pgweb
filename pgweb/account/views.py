@@ -528,7 +528,7 @@ def communityauth(request, siteid):
     # Record the login as the last login to this site. Django doesn't support tables with
     # multi-column PK, so we have to do this in a raw query.
     with connection.cursor() as curs:
-        curs.execute("INSERT INTO account_communityauthlastlogin (user_id, site_id, lastlogin, logincount) VALUES (%(userid)s, %(siteid)s, CURRENT_TIMESTAMP, 1) ON CONFLICT (user_id, site_id) DO UPDATE SET lastlogin=CURRENT_TIMESTAMP, logincount=EXCLUDED.logincount+1", {
+        curs.execute("INSERT INTO account_communityauthlastlogin (user_id, site_id, lastlogin, logincount) VALUES (%(userid)s, %(siteid)s, CURRENT_TIMESTAMP, 1) ON CONFLICT (user_id, site_id) DO UPDATE SET lastlogin=CURRENT_TIMESTAMP, logincount=account_communityauthlastlogin.logincount+1", {
             'userid': request.user.id,
             'siteid': site.id,
         })
