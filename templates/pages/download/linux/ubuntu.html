@@ -1,5 +1,8 @@
 {%extends "base/page.html"%}
 {%block title%}Linux downloads (Ubuntu){%endblock%}
+{%block extrahead%}
+<script type="text/javascript" src="/media/js/apt.js?{{gitrev}}"></script>
+{%endblock%}
 {%block contents%}
 
 <h1>Linux downloads (Ubuntu) <img class="logo" src="/media/img/ubuntu.svg" alt="Ubuntu Logo" /></h1>
@@ -54,7 +57,7 @@ sudo apt-get update
 # Install the latest version of PostgreSQL.
 # If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
 sudo apt-get install postgresql</pre>
-    <button class="pg-script-copy-btn" onclick="copyScript(this, 'script-box')">Copy Script</button>
+    <button id="copy-btn" class="pg-script-copy-btn">Copy Script</button>
 </div>
 
 <p>

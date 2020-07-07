@@ -1,44 +1,76 @@
 {%extends "base/page.html"%}
 {%block title%}Downloads{%endblock%}
+{%block extrahead%}
+<script type="text/javascript" src="/media/js/download.js?{{gitrev}}"></script>
+{%endblock%}
 {%block contents%}
 
 <h1>Downloads <i class="fa fa-download"></i></h1>
 
-<h2>PostgreSQL Core Distribution</h2>
+<h2>PostgreSQL Downloads</h2>
 
 <p>
-The core of the PostgreSQL object-relational database management system
-is available in several source and binary formats.
+PostgreSQL is available for download as ready-to-use packages or installers for
+various platforms, as well as a source code archive if you want to build it
+yourself.
 </p>
 
-<h3>Binary packages</h3>
+<h3>Packages and Installers</h3>
 
-<p>
-Pre-built binary packages are available for a number of different operating
-systems:
-</p>
-<ul>
- <li>BSD
-  <ul>
-   <li><a href="/download/freebsd/">FreeBSD</a></li>
-   <li><a href="/download/openbsd/">OpenBSD</a></li>
-  </ul>
- </li>
- <li>Linux
-  <ul>
-    <li>
-      <a href="/download/linux/redhat/">Red Hat</a> family Linux (including <a href="/download/linux/redhat/">CentOS</a>/<a href="/download/linux/redhat/">Fedora</a>/<a href="/download/linux/redhat/">Scientific/Oracle</a> variants)
-    </li>
-    <li><a href="/download/linux/debian/">Debian</a> GNU/Linux and derivatives</li>
-    <li><a href="/download/linux/ubuntu/">Ubuntu</a> Linux and derivatives</li>
-    <li><a href="/download/linux/suse/">SUSE</a> and <a href="/download/linux/suse/">openSUSE</a></li>
-    <li><a href="/download/linux/">Other</a> Linux</li>
-  </ul>
- </li>
- <li><a href="/download/macosx/">macOS</a></li>
- <li><a href="/download/solaris/">Solaris</a></li>
- <li><a href="/download/windows/">Windows</a></li>
-</ul>
+<p>Select your operating system family:</p>
+
+<a role="button" id="btn-download-linux" class="btn btn-outline-dark btn-download" href="/download/linux/">
+  Linux<br/>
+  <img class="logo" src="/media/img/linux.svg" alt="Linux Logo" />
+</a>
+<a role="button" class="btn btn-outline-dark btn-download" href="/download/macosx/">
+  macOS<br/>
+  <img class="logo" src="/media/img/apple.png" alt="Apple Logo" />
+</a>
+<a role="button" class="btn btn-outline-dark btn-download" href="/download/windows/">
+  Windows<br/>
+  <img class="logo" src="/media/img/windows.svg" alt="Windows Logo" />
+</a>
+<a role="button" class="btn btn-outline-dark btn-download" href="/download/solaris/">
+  Solaris<br/>
+  <img class="logo" src="/media/img/solaris.png" alt="Solaris Logo" />
+</a>
+<a role="button" id="btn-download-bsd" class="btn btn-outline-dark btn-download" href="/download/bsd/">
+  BSD<br/>
+  <img class="logo" src="/media/img/bsd.png" alt="BSD Logo" />
+</a>
+
+<!-- sub-navigation for Linux distributions -->
+<div id="download-subnav-linux" class="download-subnav">
+  <p>Select your Linux distribution:</p>
+  <a role="button" class="btn btn-outline-dark btn-download" href="/download/linux/debian/">
+    Debian<br/>
+    <img class="logo" src="/media/img/debian.svg" alt="Debian Logo" />
+  </a>
+  <a role="button" class="btn btn-outline-dark btn-download" href="/download/linux/redhat">
+    Red Hat/CentOS<br/>
+    <img class="logo" src="/media/img/redhat.svg" alt="Red Hat Logo" />
+  </a>
+  <a role="button" class="btn btn-outline-dark btn-download" href="/download/linux/suse">
+    SUSE<br/>
+    <img class="logo" src="/media/img/suse.png" alt="SUSE Logo" />
+  </a>
+  <a role="button" class="btn btn-outline-dark btn-download" href="/download/linux/ubuntu">
+    Ubuntu<br/>
+    <img class="logo" src="/media/img/ubuntu.svg" alt="Ubuntu Logo" />
+  </a>
+  <a role="button" class="btn btn-outline-dark btn-download" href="/download/linux/#generic">
+    Other Linux<br/>
+    <img class="logo" src="/media/img/linux.svg" alt="Linux Logo" />
+  </a>
+</div>
+
+<!-- sub-navigation for BSD distributions -->
+<div id="download-subnav-bsd" class="download-subnav">
+  <p>Select your BSD distribution:</p>
+  <a role="button" class="btn btn-outline-dark btn-download" href="/download/openbsd/">OpenBSD<br/><img class="logo" src="/media/img/openbsd.gif" alt="OpenBSD Logo" /></a>
+  <a role="button" class="btn btn-outline-dark btn-download" href="/download/freebsd/">FreeBSD<br/><img class="logo" src="/media/img/freebsd.svg" alt="FreeBSD Logo" /></a>
+</div>
 
 <h3>Source code</h3>
 

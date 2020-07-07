@@ -158,3 +158,15 @@ function archChanged() {
 
    document.getElementById('copy-btn').style.display = 'block';
 }
+
+/* Event handlers */
+function setupHandlers() {
+    document.getElementById('copy-btn').addEventListener('click', function () {
+        copyScript(this, 'script-box');
+    });
+    document.getElementById('version').addEventListener('change', verChanged);
+    document.getElementById('platform').addEventListener('change', platChanged);
+    document.getElementById('arch').addEventListener('change', archChanged);
+}
+
+document.addEventListener("DOMContentLoaded", setupHandlers);

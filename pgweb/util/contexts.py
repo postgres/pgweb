@@ -20,7 +20,7 @@ sitenav = {
     ],
     'download': [
         {'title': 'Downloads', 'link': '/download/', 'submenu': [
-            {'title': 'Binary', 'link': '/download/'},
+            {'title': 'Packages', 'link': '/download/'},
             {'title': 'Source', 'link': '/ftp/source/'}
         ]},
         {'title': 'Software Catalogue', 'link': '/download/product-categories/'},

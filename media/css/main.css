@@ -1364,6 +1364,21 @@ table.contributor-table thead tr th {
 }
 
 /* Downloads/products */
+
+.btn-download {
+  border-color: #336791;
+  border-width: 2px;
+  color: #336791 !important;
+}
+
+.btn-download:hover {
+  background-color: #e7eae8;
+}
+
+.download-subnav {
+  display: none;
+}
+
 table.product-table thead tr th:nth-child(1) {
   width: 60%;
 }

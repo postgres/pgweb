@@ -73,3 +73,19 @@ function copyScript(trigger, elem) {
         trigger.innerHTML = label;
     }, 3000);
 }
+
+/*
+ * showDistros shows / hides the individual distributions of particular OS
+ * families on the Download page
+ */
+function showDistros(btn, osDiv) {
+  // Disable everything
+  document.getElementById('btn-download-bsd').style.background = '#ffffff';
+  document.getElementById('download-subnav-bsd').style.display = 'none';
+  document.getElementById('btn-download-linux').style.background = '#ffffff';
+  document.getElementById('download-subnav-linux').style.display = 'none';
+
+  // Enable the one we want
+  btn.style.background='#e7eae8';
+  document.getElementById(osDiv).style.display = 'block';
+}
