@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Service</th>
+    <th>Last login</th>
+    <th>Login count</th>
+  </tr>
+{%for l in logins%}
+  <tr>
+    <td>{{l.service}}</td>
+    <td>{{l.lastlogin}}</td>
+    <td>{{l.logincount}}</td>
+  </tr>
+{%endfor%}
+</table>

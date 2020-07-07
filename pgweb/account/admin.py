@@ -6,6 +6,9 @@ from django import forms
 
 import base64
 
+from pgweb.util.widgets import TemplateRenderWidget
+from pgweb.util.db import exec_to_dict
+
 from .models import CommunityAuthSite, CommunityAuthOrg
 
 
@@ -31,7 +34,8 @@ class CommunityAuthSiteAdmin(admin.ModelAdmin):
 
 
 class PGUserChangeForm(UserChangeForm):
-    """just like UserChangeForm, butremoves "username" requirement"""
+    logininfo = forms.CharField(label="Community login history")
+
     def __init__(self, *args, **kwargs):
         super(PGUserChangeForm, self).__init__(*args, **kwargs)
         # because the auth.User model is set to "blank=False" and the Django
@@ -40,6 +44,14 @@ class PGUserChangeForm(UserChangeForm):
         # avoid the validation is to remove the "username" field, if it exists
         if self.fields.get('username'):
             del self.fields['username']
+
+        self.fields['logininfo'].widget = TemplateRenderWidget(
+            template='forms/widgets/community_auth_usage_widget.html',
+            context={
+                'logins': exec_to_dict("SELECT s.name AS service, lastlogin, logincount FROM account_communityauthsite s INNER JOIN account_communityauthlastlogin l ON s.id=l.site_id WHERE user_id=%(userid)s ORDER BY lastlogin DESC", {
+                    'userid': self.instance.pk,
+                }),
+            })
 
 
 class PGUserAdmin(UserAdmin):
@@ -51,6 +63,14 @@ class PGUserAdmin(UserAdmin):
         if obj:
             return self.readonly_fields + ('username',)
         return self.readonly_fields
+
+    @property
+    def fieldsets(self):
+        fs = list(super().fieldsets)
+        fs.append(
+            ('Community authentication', {'fields': ('logininfo', )}),
+        )
+        return fs
 
 
 admin.site.register(CommunityAuthSite, CommunityAuthSiteAdmin)
