@@ -165,9 +165,9 @@ perform the following steps, based on your distribution:
   service postgresql initdb
   chkconfig postgresql on
 </pre>
-<h4>For RHEL / CentOS / SL / OL 7, 8 or Fedora 29 and later derived distributions:</h4>
+<h4>For RHEL / CentOS / SL / OL 7, 8 or Fedora 31 and later derived distributions:</h4>
 <pre class="code">
-  postgresql-setup initdb
+  postgresql-setup --initdb
   systemctl enable postgresql.service
   systemctl start postgresql.service
 </pre>
