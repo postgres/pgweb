@@ -3,7 +3,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.nonmultipart import MIMENonMultipart
 from email.utils import formatdate, formataddr
 from email.utils import make_msgid
-from email import encoders
+from email import encoders, charset
 from email.header import Header
 
 from .models import QueuedMail
@@ -15,7 +15,14 @@ def _encoded_email_header(name, email):
     return email
 
 
-def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False, cc=None, replyto=None, sendername=None, receivername=None, messageid=None, suppress_auto_replies=True, is_auto_reply=False):
+# Default for utf-8 in python is to encode subject with "shortest" and body with "base64". For our texts,
+# make it always quoted printable, for easier reading and testing.
+_utf8_charset = charset.Charset('utf-8')
+_utf8_charset.header_encoding = charset.QP
+_utf8_charset.body_encoding = charset.QP
+
+
+def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False, cc=None, replyto=None, sendername=None, receivername=None, messageid=None, suppress_auto_replies=True, is_auto_reply=False, htmlbody=None, headers={}):
     # attachment format, each is a tuple of (name, mimetype,contents)
     # content should be *binary* and not base64 encoded, since we need to
     # use the base64 routines from the email library to get a properly
@@ -44,14 +51,27 @@ def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, userge
     elif not usergenerated:
         msg['Auto-Submitted'] = 'auto-generated'
 
-    msg.attach(MIMEText(msgtxt, _charset='utf-8'))
+    for h in headers.keys():
+        msg[h] = headers[h]
+
+    if htmlbody:
+        mpart = MIMEMultipart("alternative")
+        mpart.attach(MIMEText(msgtxt, _charset=_utf8_charset))
+        mpart.attach(MIMEText(htmlbody, 'html', _charset=_utf8_charset))
+        msg.attach(mpart)
+    else:
+        # Just a plaintext body, so append it directly
+        msg.attach(MIMEText(msgtxt, _charset='utf-8'))
 
     if attachments:
-        for filename, contenttype, content in attachments:
-            main, sub = contenttype.split('/')
+        for a in attachments:
+            main, sub = a['contenttype'].split('/')
             part = MIMENonMultipart(main, sub)
-            part.set_payload(content)
-            part.add_header('Content-Disposition', 'attachment; filename="%s"' % filename)
+            part.set_payload(a['content'])
+            part.add_header('Content-Disposition', a.get('disposition', 'attachment; filename="%s"' % a['filename']))
+            if 'id' in a:
+                part.add_header('Content-ID', a['id'])
+
             encoders.encode_base64(part)
             msg.attach(part)
 
