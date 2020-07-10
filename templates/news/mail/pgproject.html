@@ -1,0 +1,16 @@
+{%extends "news/mail/base.html"%}
+{%load markup%}
+{%block title%}{{news.title}}{%endblock%}
+
+{%block content%}
+<div>
+  <img style="float: left" height="50" width="50" src="cid:slonik.png" alt="PostgreSQL logo">
+  <img style="float: right" height="50" width="50" src="cid:slonik.png" alt="PostgreSQL logo">
+  <h1>{{news.title}}</h1>
+</div>
+{{news.content|markdown}}
+{%endblock%}
+
+{%block footer%}
+This email was sent to you from the PostgreSQL project.
+{%endblock%}

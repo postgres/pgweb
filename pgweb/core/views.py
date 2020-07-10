@@ -392,6 +392,8 @@ def admin_moderate(request, objtype, objid):
                                          "The {} with title {}\nhas been approved and is now published.".format(obj._meta.verbose_name, obj.title),
                                          modnote,
                                          "approved")
+                if hasattr(obj, 'on_approval'):
+                    obj.on_approval(request)
             elif modstate == ModerationState.REJECTED:
                 _send_moderation_message(request,
                                          obj,

@@ -153,6 +153,10 @@ BUGREPORT_EMAIL = "someone@example.com"                     # Address to pgsql-b
 BUGREPORT_NOREPLY_EMAIL = "someone-noreply@example.com"     # Address to no-reply pgsql-bugs address
 DOCSREPORT_EMAIL = "someone@example.com"                    # Address to pgsql-docs list
 DOCSREPORT_NOREPLY_EMAIL = "someone-noreply@example.com"    # Address to no-reply pgsql-docs address
+NEWS_MAIL_SENDER = "someone-noreply@example.com"            # Address news is sent from
+NEWS_MAIL_RECEIVER = "some-announce@example.com"            # Address news is sent to
+NEWS_MAIL_RECEIVER_NAME = "Some Announcement List"          # Name field for sending news
+NEWS_MAIL_TAGKEY = ""                                       # Key used to sign tags for pglister delivery
 FRONTEND_SERVERS = ()                                       # A tuple containing the *IP addresses* of all the
                                                             # varnish frontend servers in use.
 FTP_MASTERS = ()                                            # A tuple containing the *IP addresses* of all machines

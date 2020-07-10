@@ -3,6 +3,8 @@ from datetime import date
 from pgweb.core.models import Organisation
 from pgweb.util.moderation import TristateModerateModel, ModerationState
 
+from .util import send_news_email
+
 
 class NewsTag(models.Model):
     urlname = models.CharField(max_length=20, null=False, blank=False, unique=True)
@@ -72,3 +74,6 @@ class NewsArticle(TristateModerateModel):
     def block_edit(self):
         # Don't allow editing of news articles that have been published
         return self.modstate in (ModerationState.PENDING, ModerationState.APPROVED)
+
+    def on_approval(self, request):
+        send_news_email(self)

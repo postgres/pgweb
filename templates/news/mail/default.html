@@ -1,0 +1,16 @@
+{%extends "news/mail/base.html"%}
+{%load markup%}
+{%block title%}{{news.title}}{%endblock%}
+
+{%block content%}
+<div>
+  <h1>{{news.title}}</h1>
+</div>
+{{news.content|markdown}}
+{%endblock%}
+
+{%block footer%}
+This email was sent to you from {{news.org}}. It was delivered on their behalf by
+the PostgreSQL project. Any questions about the content of the message should be
+sent to {{news.org}}.
+{%endblock%}

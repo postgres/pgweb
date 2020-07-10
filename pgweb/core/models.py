@@ -123,6 +123,12 @@ class OrganisationType(models.Model):
         return self.typename
 
 
+_mail_template_choices = (
+    ('default', 'Default template'),
+    ('pgproject', 'PostgreSQL project news'),
+)
+
+
 class Organisation(TwostateModerateModel):
     name = models.CharField(max_length=100, null=False, blank=False, unique=True)
     address = models.TextField(null=False, blank=True)
@@ -131,6 +137,7 @@ class Organisation(TwostateModerateModel):
     phone = models.CharField(max_length=100, null=False, blank=True)
     orgtype = models.ForeignKey(OrganisationType, null=False, blank=False, verbose_name="Organisation type", on_delete=models.CASCADE)
     managers = models.ManyToManyField(User, blank=False)
+    mailtemplate = models.CharField(max_length=50, null=False, blank=False, default='default', choices=_mail_template_choices)
     lastconfirmed = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 
     account_edit_suburl = 'organisations'

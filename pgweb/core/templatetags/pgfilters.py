@@ -1,7 +1,9 @@
 from django.template.defaultfilters import stringfilter
 from django import template
-import json
+from django.template.loader import get_template
 
+import json
+import pynliner
 
 register = template.Library()
 
@@ -93,3 +95,38 @@ def joinandor(value, andor):
         value = list(value)
 
     return ", ".join([str(x) for x in value[:-1]]) + ' ' + andor + ' ' + str(value[-1])
+
+
+# CSS inlining (used for HTML email)
+@register.tag
+class InlineCss(template.Node):
+    def __init__(self, nodes, arg):
+        self.nodes = nodes
+        self.arg = arg
+
+    def render(self, context):
+        contents = self.nodes.render(context)
+        path = self.arg.resolve(context, True)
+        if path is not None:
+            css = get_template(path).render()
+        else:
+            css = ''
+
+        p = pynliner.Pynliner().from_string(contents)
+        p.with_cssString(css)
+        return p.run()
+
+
+@register.tag
+def inlinecss(parser, token):
+    nodes = parser.parse(('endinlinecss',))
+
+    parser.delete_first_token()
+
+    # First part of token is the tagname itself
+    css = token.split_contents()[1]
+
+    return InlineCss(
+        nodes,
+        parser.compile_filter(css),
+    )
