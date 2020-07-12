@@ -1,10 +1,4 @@
 {% extends "admin/change_form.html" %}
-{% block form_top %}
-<p>
-Note that the summary field can use
-<a href="http://en.wikipedia.org/wiki/Markdown">markdown</a> markup.
-</p>
-{%endblock%}
 
 {% block extrahead %}
 {{ block.super }}
@@ -14,25 +8,25 @@ Note that the summary field can use
 <script type="text/javascript" src="/media/js/admin_pgweb.js"></script>
 {%endblock%}
 
-{%if notifications%}
-{%block after_field_sets%}
-<h4>Notifications sent for this item</h4>
-<ul>
- {%for n in notifications%}
- <li>{{n.text}} by {{n.author}} sent at {{n.date}}</li>
- {%empty%}
- <li>No notifications sent for this item</li>
- {%endfor%}
-</ul>
+{%block form_top%}
+{%if original.is_approved%}
+<div class="module aligned">
+  <h2 class="moderror">This {{opts.verbose_name}} has already been approved! Be very careful with editing!</h2>
+</div>
+{%endif%}
 <p>
-{%if original.org.email%}
-New notification: <input type="text" name="new_notification" id="new_notification" /> (<strong>Note!</strong> This comment is emailed to the organisation!)<br/>
-To send a notification on rejection, first add the notification above and hit
-"Save and continue editing". Then as a separate step, delete the record.
-{%else%}
-Organisation has <strong>no email</strong>, so cannot send notifications to it!
-{%endif%}
+  <a href="/admin/_moderate/{{opts.model_name}}/{{original.pk}}/" class="button">Moderate this {{opts.verbose_name}}</a>
 </p>
-<hr/>
 {%endblock%}
+
+{% block after_field_sets %}
+<p>
+  <a href="/admin/_moderate/{{opts.model_name}}/{{original.pk}}/" class="button">Moderate this {{opts.verbose_name}}</a>
+</p>
+{%if original.is_approved%}
+
+<div class="module aligned">
+  <h2 class="moderror">This {{opts.verbose_name}} has already been approved! Be very careful with editing!</h2>
+</div>
 {%endif%}
+{% endblock %}

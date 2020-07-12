@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ValidationError
 
+from pgweb.util.moderation import ModerationState
 from pgweb.core.models import Organisation
 from .models import NewsArticle, NewsTag
 
@@ -14,9 +15,9 @@ class NewsArticleForm(forms.ModelForm):
         self.fields['org'].queryset = Organisation.objects.filter(managers=user, approved=True)
 
     def clean_date(self):
-        if self.instance.pk and self.instance.approved:
+        if self.instance.pk and self.instance.modstate != ModerationState.CREATED:
             if self.cleaned_data['date'] != self.instance.date:
-                raise ValidationError("You cannot change the date on an article that has been approved")
+                raise ValidationError("You cannot change the date on an article that has been submitted or approved")
         return self.cleaned_data['date']
 
     @property
@@ -27,7 +28,7 @@ class NewsArticleForm(forms.ModelForm):
 
     class Meta:
         model = NewsArticle
-        exclude = ('submitter', 'approved', 'tweeted')
+        exclude = ('submitter', 'modstate', 'tweeted')
         widgets = {
             'tags': forms.CheckboxSelectMultiple,
         }

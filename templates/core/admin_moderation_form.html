@@ -1,0 +1,113 @@
+{%extends "admin/base_site.html"%}
+{%load pgfilters%}
+
+{%block breadcrumbs%}
+<div class="breadcrumbs"><a href="/admin/">Home</a> &rsaquo; <a href="/admin/pending">Pending moderation</a></div>
+{%endblock%}
+
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="/media/admin/css/forms.css" />
+<script type="text/javascript" src="/media/js/admin_pgweb.js"></script>
+{% endblock %}
+
+{% block coltype %}colM{% endblock %}
+
+
+{%block content%}
+<h1>Pending moderation</h1>
+
+<div id="content-main">
+  <form method="post" action=".">{%csrf_token%}
+    <div>
+{% if errors %}
+    <p class="errornote">
+    {% if errors|length == 1 %}Please correct the error below.{% else %}Please correct the errors below{% endif %}
+    </p>
+    {{ form.non_field_errors }}
+{% endif %}
+    </div>
+
+{%if obj.is_approved%}
+    <div class="module aligned">
+      <h2 class="moderror">This {{itemtype}} has already been approved!</h2>
+    </div>
+{%endif%}
+    <div class="module aligned">
+      <h2>{{itemtype|capfirst}}</h2>
+{%for fld, title, contents, mdcontents, note in object_fields %}
+      <div class="form-row moderation-form-row">
+        <div style="width: 200px;">{{title}}</div>
+{%if mdcontents%}
+          <div class="txtpreview">{{contents}}</div>
+	  <iframe class="mdpreview" src="about:blank" sandbox="allow-same-origin"></iframe>
+          <div class="mdpreview-data">{{mdcontents|safe}}</div>
+{%else%}
+          <div class="simplepreview">{{contents}}
+{%if note%}<div class="modhelp">{{note}}</div>{%endif%}
+          </div>
+{%endif%}
+
+      </div>
+{%endfor%}
+{%if user.is_staff %}
+      <a class="button admbutton" href="/admin/{{app}}/{{model}}/{{obj.id}}/">Edit {{itemtype}} in admin view</a>
+{%endif%}
+    </div>
+
+{%if previous %}
+    <div class="module aligned">
+        <h2>Previous {{itemtypeplural}}</h2>
+        <p>These are the latest {{itemtypeplural}} from this organisation:</p>
+        <table>
+            {%for p in previous %}
+                <tr>
+                    <td>{{p.date}}</td>
+                    <td>{{p.modstate_string}}</td>
+                    <td>{{p.title}}</td>
+                </tr>
+            {%endfor%}
+        </table>
+    </div>
+{%endif%}
+
+{%if notices%}
+    <div class="module aligned">
+        <h2>Moderation notices</h2>
+        <p>These moderation notices have previously been sent for this item:</p>
+        <table>
+            {%for n in notices %}
+                <tr>
+                    <td>{{n.date}}</td>
+                    <td>{{n.author}}</td>
+                    <td class="ws-pre">{{n.text}}</td>
+                </tr>
+            {%endfor%}
+        </table>
+    </div>
+{%endif%}
+
+    <div class="module aligned">
+      <h2>Moderation</h2>
+{%if obj.is_approved%}
+<h3 class="moderror">This {{itemtype}} has already been approved!</h3>
+<p>
+Be careful if you unapprove it!
+</p>
+{%endif%}
+{% for field in form %}
+      <div class="form-row{% if field.errors %} errors{% endif %}">
+        <div class="modadmfield">
+          {{ field.label_tag }}
+          {{ field }}
+          {%if field.field.help_text %}
+          <div class="help">{{ field.help_text|safe }}</div>
+          {%endif%}
+        </div>
+      </div>
+{% endfor %}
+    </div>
+      <input type="submit" value="Moderate this {{itemtype}}">
+  </form>
+</div>
+{%endblock%}

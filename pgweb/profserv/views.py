@@ -1,11 +1,8 @@
 from django.http import Http404
-from pgweb.util.decorators import login_required
 
 from pgweb.util.contexts import render_pgweb
-from pgweb.util.helpers import simple_form
 
 from .models import ProfessionalService
-from .forms import ProfessionalServiceForm
 
 regions = (
     ('africa', 'Africa'),
@@ -52,10 +49,3 @@ def region(request, servtype, regionname):
         'regionname': regname,
         'services': services,
     })
-
-
-# Forms to edit
-@login_required
-def profservform(request, itemid):
-    return simple_form(ProfessionalService, itemid, request, ProfessionalServiceForm,
-                       redirect='/account/edit/services/')

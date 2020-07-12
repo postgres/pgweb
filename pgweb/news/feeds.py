@@ -1,5 +1,6 @@
 from django.contrib.syndication.views import Feed
 
+from pgweb.util.moderation import ModerationState
 from .models import NewsArticle
 
 from datetime import datetime, time
@@ -17,9 +18,9 @@ class NewsFeed(Feed):
 
     def items(self, obj):
         if obj:
-            return NewsArticle.objects.filter(approved=True, tags__urlname=obj)[:10]
+            return NewsArticle.objects.filter(modstate=ModerationState.APPROVED, tags__urlname=obj)[:10]
         else:
-            return NewsArticle.objects.filter(approved=True)[:10]
+            return NewsArticle.objects.filter(modstate=ModerationState.APPROVED)[:10]
 
     def item_link(self, obj):
         return "https://www.postgresql.org/about/news/%s/" % obj.id

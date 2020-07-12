@@ -6,6 +6,7 @@ from .models import Organisation
 from django.contrib.auth.models import User
 
 from pgweb.util.middleware import get_current_user
+from pgweb.util.moderation import ModerationState
 from pgweb.mailqueue.util import send_simple_mail
 
 
@@ -79,3 +80,18 @@ class MergeOrgsForm(forms.Form):
         if self.cleaned_data['merge_into'] == self.cleaned_data['merge_from']:
             raise ValidationError("The two organisations selected must be different!")
         return self.cleaned_data
+
+
+class ModerationForm(forms.Form):
+    modnote = forms.CharField(label='Moderation notice', widget=forms.Textarea, required=False,
+                              help_text="This note will be sent to the creator of the object regardless of if the moderation state has changed.")
+    oldmodstate = forms.CharField(label='Current moderation state', disabled=True)
+    modstate = forms.ChoiceField(label='New moderation status', choices=ModerationState.CHOICES + (
+        (ModerationState.REJECTED, 'Reject and delete'),
+    ))
+
+    def __init__(self, *args, **kwargs):
+        self.twostate = kwargs.pop('twostate')
+        super().__init__(*args, **kwargs)
+        if self.twostate:
+            self.fields['modstate'].choices = [(k, v) for k, v in self.fields['modstate'].choices if int(k) != 1]

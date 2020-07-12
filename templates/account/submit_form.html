@@ -1,0 +1,22 @@
+{%extends "base/form.html"%}
+{%block post_form%}
+{%if notices%}
+<h2>Moderation notices</h2>
+<p>
+  This {{formitemtype}} has previously received the following moderation notices:
+</p>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Note</th>
+  </tr>
+{%for n in notices%}
+  <tr valign="top">
+    <td>{{n.date}}</td>
+    <td class="ws-pre">{{n.text}}</td>
+  </tr>
+{%endfor%}
+</table>
+{%endif%}
+
+{%endblock%}

@@ -20,28 +20,29 @@ import urllib.parse
 from pgweb.util.decorators import cache, nocache
 from pgweb.util.contexts import render_pgweb, get_nav_menu, PGWebContextProcessor
 from pgweb.util.helpers import simple_form, PgXmlHelper
-from pgweb.util.moderation import get_all_pending_moderations
+from pgweb.util.moderation import get_all_pending_moderations, get_moderation_model, ModerationState
 from pgweb.util.misc import get_client_ip, varnish_purge, varnish_purge_expr, varnish_purge_xkey
 from pgweb.util.sitestruct import get_all_pages_struct
+from pgweb.mailqueue.util import send_simple_mail
 
 # models needed for the pieces on the frontpage
 from pgweb.news.models import NewsArticle, NewsTag
 from pgweb.events.models import Event
 from pgweb.quotes.models import Quote
-from .models import Version, ImportedRSSItem
+from .models import Version, ImportedRSSItem, ModerationNotification
 
 # models needed for the pieces on the community page
 from pgweb.survey.models import Survey
 
 # models and forms needed for core objects
 from .models import Organisation
-from .forms import OrganisationForm, MergeOrgsForm
+from .forms import OrganisationForm, MergeOrgsForm, ModerationForm
 
 
 # Front page view
 @cache(minutes=10)
 def home(request):
-    news = NewsArticle.objects.filter(approved=True)[:5]
+    news = NewsArticle.objects.filter(modstate=ModerationState.APPROVED)[:5]
     today = date.today()
     # get up to seven events to display on the homepage
     event_base_queryset = Event.objects.select_related('country').filter(
@@ -285,6 +286,150 @@ def sync_timestamp(request):
 def admin_pending(request):
     return render(request, 'core/admin_pending.html', {
         'app_list': get_all_pending_moderations(),
+    })
+
+
+def _send_moderation_message(request, obj, message, notice, what):
+    if message and notice:
+        msg = "{}\n\nThe following further information was provided:\n{}".format(message, notice)
+    elif notice:
+        msg = notice
+    else:
+        msg = message
+
+    n = ModerationNotification(
+        objectid=obj.id,
+        objecttype=type(obj).__name__,
+        text=msg,
+        author=request.user,
+    )
+    n.save()
+
+    # In the email, add a link back to the item in the bottom
+    msg += "\n\nYou can view your {} by going to\n{}/account/edit/{}/".format(
+        obj._meta.verbose_name,
+        settings.SITE_ROOT,
+        obj.account_edit_suburl,
+    )
+
+    # Send message to org admin
+    if isinstance(obj, Organisation):
+        orgemail = obj.email
+    else:
+        orgemail = obj.org.email
+
+    send_simple_mail(
+        settings.NOTIFICATION_FROM,
+        orgemail,
+        "Your submitted {} with title {}".format(obj._meta.verbose_name, obj.title),
+        msg,
+        suppress_auto_replies=False,
+    )
+
+    # Send notification to admins
+    if what:
+        admmsg = message
+        if obj.is_approved:
+            admmsg += "\n\nNOTE! This {} was previously approved!!".format(obj._meta.verbose_name)
+
+        if notice:
+            admmsg += "\n\nModeration notice:\n{}".format(notice)
+
+        admmsg += "\n\nEdit at: {}/admin/_moderate/{}/{}/\n".format(settings.SITE_ROOT, obj._meta.model_name, obj.id)
+
+        send_simple_mail(settings.NOTIFICATION_FROM,
+                         settings.NOTIFICATION_EMAIL,
+                         "{} {} by {}".format(obj._meta.verbose_name.capitalize(), what, request.user),
+                         admmsg)
+
+
+# Moderate a single item
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='pgweb moderators').exists())
+@transaction.atomic
+def admin_moderate(request, objtype, objid):
+    model = get_moderation_model(objtype)
+    obj = get_object_or_404(model, pk=objid)
+
+    initdata = {
+        'oldmodstate': obj.modstate_string,
+        'modstate': obj.modstate,
+    }
+    # Else deal with it as a form
+    if request.method == 'POST':
+        form = ModerationForm(request.POST, twostate=hasattr(obj, 'approved'), initial=initdata)
+        if form.is_valid():
+            # Ok, do something!
+            modstate = int(form.cleaned_data['modstate'])
+            modnote = form.cleaned_data['modnote']
+            if modstate == obj.modstate:
+                # No change in moderation state, but did we want to send a message?
+                if modnote:
+                    _send_moderation_message(request, obj, None, modnote, None)
+                    messages.info(request, "Moderation message sent, no state changed.")
+                    return HttpResponseRedirect("/admin/pending/")
+                else:
+                    messages.warning(request, "Moderation state not changed and no moderation note added.")
+                    return HttpResponseRedirect(".")
+            # Ok, we have a moderation state change!
+            if modstate == ModerationState.CREATED:
+                # Returned to editing again (for two-state, this means de-moderated)
+                _send_moderation_message(request,
+                                         obj,
+                                         "The {} with title {}\nhas been returned for further editing.\nPlease re-submit when you have adjusted it.".format(
+                                             obj._meta.verbose_name,
+                                             obj.title
+                                         ),
+                                         modnote,
+                                         "returned")
+            elif modstate == ModerationState.PENDING:
+                # Pending moderation should never happen if we actually *change* the value
+                messages.warning(request, "Cannot change state to 'pending moderation'")
+                return HttpResponseRedirect(".")
+            elif modstate == ModerationState.APPROVED:
+                _send_moderation_message(request,
+                                         obj,
+                                         "The {} with title {}\nhas been approved and is now published.".format(obj._meta.verbose_name, obj.title),
+                                         modnote,
+                                         "approved")
+            elif modstate == ModerationState.REJECTED:
+                _send_moderation_message(request,
+                                         obj,
+                                         "The {} with title {}\nhas been rejected and is now deleted.".format(obj._meta.verbose_name, obj.title),
+                                         modnote,
+                                         "rejected")
+                messages.info(request, "{} rejected and deleted".format(obj._meta.verbose_name))
+                obj.send_notification = False
+                obj.delete()
+                return HttpResponseRedirect("/admin/pending")
+            else:
+                raise Exception("Can't happen.")
+
+            if hasattr(obj, 'approved'):
+                # This is a two-state one!
+                obj.approved = (modstate == ModerationState.APPROVED)
+            else:
+                # Three-state moderation
+                obj.modstate = modstate
+
+            # Suppress notifications as we're sending our own
+            obj.send_notification = False
+            obj.save()
+            messages.info(request, "Moderation state changed to {}".format(obj.modstate_string))
+            return HttpResponseRedirect("/admin/pending/")
+    else:
+        form = ModerationForm(twostate=hasattr(obj, 'approved'), initial=initdata)
+
+    return render(request, 'core/admin_moderation_form.html', {
+        'obj': obj,
+        'form': form,
+        'app': obj._meta.app_label,
+        'model': obj._meta.model_name,
+        'itemtype': obj._meta.verbose_name,
+        'itemtypeplural': obj._meta.verbose_name_plural,
+        'notices': ModerationNotification.objects.filter(objectid=obj.id, objecttype=type(obj).__name__).order_by('date'),
+        'previous': hasattr(obj, 'org') and type(obj).objects.filter(org=obj.org).exclude(id=obj.id).order_by('-id')[:10] or None,
+        'object_fields': obj.get_moderation_preview_fields(),
     })
 
 

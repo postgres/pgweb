@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
 from pgweb.core.models import Organisation
+from pgweb.util.moderation import TristateModerateModel, ModerationState
 
 
 class NewsTag(models.Model):
@@ -15,18 +16,19 @@ class NewsTag(models.Model):
         ordering = ('urlname', )
 
 
-class NewsArticle(models.Model):
+class NewsArticle(TristateModerateModel):
     org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.", on_delete=models.CASCADE)
-    approved = models.BooleanField(null=False, blank=False, default=False)
     date = models.DateField(null=False, blank=False, default=date.today)
     title = models.CharField(max_length=200, null=False, blank=False)
     content = models.TextField(null=False, blank=False)
     tweeted = models.BooleanField(null=False, blank=False, default=False)
     tags = models.ManyToManyField(NewsTag, blank=False, help_text="Select the tags appropriate for this post")
 
-    send_notification = True
-    send_m2m_notification = True
+    account_edit_suburl = 'news'
     markdown_fields = ('content',)
+    moderation_fields = ('org', 'date', 'title', 'content', 'taglist')
+    preview_fields = ('title', 'content', 'taglist')
+    extramodnotice = "In particular, note that news articles will be sent by email to subscribers, and therefor cannot be recalled in any way once sent."
 
     def purge_urls(self):
         yield '/about/news/%s/' % self.pk
@@ -48,8 +50,22 @@ class NewsArticle(models.Model):
         return False
 
     @property
+    def taglist(self):
+        return ", ".join([t.name for t in self.tags.all()])
+
+    @property
     def displaydate(self):
         return self.date.strftime("%Y-%m-%d")
 
     class Meta:
         ordering = ('-date',)
+
+    @classmethod
+    def get_formclass(self):
+        from pgweb.news.forms import NewsArticleForm
+        return NewsArticleForm
+
+    @property
+    def block_edit(self):
+        # Don't allow editing of news articles that have been published
+        return self.modstate in (ModerationState.PENDING, ModerationState.APPROVED)

@@ -1,11 +1,10 @@
 from django.db import models
 
 from pgweb.core.models import Country, Language, Organisation
+from pgweb.util.moderation import TwostateModerateModel
 
 
-class Event(models.Model):
-    approved = models.BooleanField(null=False, blank=False, default=False)
-
+class Event(TwostateModerateModel):
     org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.", on_delete=models.CASCADE)
     title = models.CharField(max_length=100, null=False, blank=False)
     isonline = models.BooleanField(null=False, default=False, verbose_name="Online event")
@@ -22,8 +21,9 @@ class Event(models.Model):
     summary = models.TextField(blank=False, null=False, help_text="A short introduction (shown on the events listing page)")
     details = models.TextField(blank=False, null=False, help_text="Complete event description")
 
-    send_notification = True
+    account_edit_suburl = 'events'
     markdown_fields = ('details', 'summary', )
+    moderation_fields = ['org', 'title', 'isonline', 'city', 'state', 'country', 'language', 'badged', 'description_for_badged', 'startdate', 'enddate', 'summary', 'details']
 
     def purge_urls(self):
         yield '/about/event/%s/' % self.pk
@@ -69,3 +69,8 @@ class Event(models.Model):
 
     class Meta:
         ordering = ('-startdate', '-enddate', )
+
+    @classmethod
+    def get_formclass(self):
+        from pgweb.events.forms import EventForm
+        return EventForm

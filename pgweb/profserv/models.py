@@ -1,11 +1,10 @@
 from django.db import models
 
 from pgweb.core.models import Organisation
+from pgweb.util.moderation import TwostateModerateModel
 
 
-class ProfessionalService(models.Model):
-    approved = models.BooleanField(null=False, blank=False, default=False)
-
+class ProfessionalService(TwostateModerateModel):
     org = models.OneToOneField(Organisation, null=False, blank=False,
                                db_column="organisation_id", on_delete=models.CASCADE,
                                verbose_name="organisation",
@@ -29,9 +28,11 @@ class ProfessionalService(models.Model):
     provides_hosting = models.BooleanField(null=False, default=False)
     interfaces = models.CharField(max_length=512, null=True, blank=True, verbose_name="Interfaces (for hosting)")
 
+    account_edit_suburl = 'services'
+    moderation_fields = ('org', 'description', 'employees', 'locations', 'region_africa', 'region_asia', 'region_europe',
+                         'region_northamerica', 'region_oceania', 'region_southamerica', 'hours', 'languages',
+                         'customerexample', 'experience', 'contact', 'url', 'provides_support', 'provides_hosting', 'interfaces')
     purge_urls = ('/support/professional_', )
-
-    send_notification = True
 
     def verify_submitter(self, user):
         return (len(self.org.managers.filter(pk=user.pk)) == 1)
@@ -39,5 +40,14 @@ class ProfessionalService(models.Model):
     def __str__(self):
         return self.org.name
 
+    @property
+    def title(self):
+        return self.org.name
+
     class Meta:
         ordering = ('org__name',)
+
+    @classmethod
+    def get_formclass(self):
+        from pgweb.profserv.forms import ProfessionalServiceForm
+        return ProfessionalServiceForm

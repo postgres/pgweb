@@ -34,58 +34,18 @@ please contact <a href="webmaster@postgresql.org">webmaster@postgresql.org</a>
 and let us know which objects to connect together.
 </p>
 
-{%if newsarticles or events or organisations or products or profservs %}
-<h2>Submissions awaiting moderation</h2>
-<p>
-You have submitted the following objects that are still waiting moderator
-approval before they are published:
-</p>
-
-{%if newsarticles%}
-<h3>News articles</h3>
+{% for cat in modobjects %}
+<h2>Items {{cat.title}}</h2>
+{%for l in cat.objects %}
+{%if l %}
+<h3><a href="/account/edit/{{l.editurl}}/">{{l.title}}</a></h3>
+{%for o in l.objects %}
 <ul>
-{%for article in newsarticles%}
-<li><a href="/account/news/{{article.id}}/">{{article}}</a></li>
-{%endfor%}
+<li>{{o.title}}</li>
 </ul>
-{%endif%}
-
-{%if events%}
-<h3>Events</h3>
-<ul>
-{%for event in events%}
-<li><a href="/account/events/{{event.id}}/">{{event}}</a></li>
 {%endfor%}
-</ul>
 {%endif%}
-
-{%if organisations%}
-<h3>Organisations</h3>
-<ul>
-{%for org in organisations%}
-<li><a href="/account/organisations/{{org.id}}">{{org}}</a></li>
 {%endfor%}
-</ul>
-{%endif%}
-
-{%if products%}
-<h3>Products</h3>
-<ul>
-{%for product in products%}
-<li><a href="/account/products/{{product.id}}">{{product}}</a></li>
 {%endfor%}
-</ul>
-{%endif%}
-
-{%if profservs%}
-<h3>Professional Services</h3>
-<ul>
-{%for profserv in profservs%}
-<li><a href="/account/services/{{profserv.id}}">{{profserv}}</a></li>
-{%endfor%}
-</ul>
-{%endif%}
-
-{%endif%}
 
 {%endblock%}

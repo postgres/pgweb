@@ -197,6 +197,11 @@ p, ul, ol, dl, table {
   padding: 1em 2em;
 }
 
+/* Utility */
+.ws-pre {
+  white-space: pre;
+}
+
 /* #BLOCKQUOTE */
 
 blockquote {

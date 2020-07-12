@@ -6,6 +6,7 @@ import difflib
 
 from pgweb.util.middleware import get_current_user
 from pgweb.util.misc import varnish_purge
+from pgweb.util.moderation import ModerationState
 from pgweb.mailqueue.util import send_simple_mail
 
 
@@ -51,7 +52,7 @@ def _get_all_notification_fields(obj):
     else:
         # Include all field names except specified ones,
         # that are local to this model (not auto created)
-        return [f.name for f in obj._meta.get_fields() if f.name not in ('approved', 'submitter', 'id', ) and not f.auto_created]
+        return [f.name for f in obj._meta.get_fields() if f.name not in ('approved', 'modstate', 'submitter', 'id', ) and not f.auto_created]
 
 
 def _get_attr_value(obj, fieldname):
@@ -82,21 +83,29 @@ def _get_notification_text(obj):
         return ('A new {0} has been added'.format(obj._meta.verbose_name),
                 _get_full_text_representation(obj))
 
-    if hasattr(obj, 'approved'):
+    if hasattr(obj, 'approved') or hasattr(obj, 'modstate'):
             # This object has the capability to do approving. Apply the following logic:
             # 1. If object was unapproved, and is still unapproved, don't send notification
             # 2. If object was unapproved, and is now approved, send "object approved" notification
             # 3. If object was approved, and is no longer approved, send "object unapproved" notification
             # 4. (FIXME: configurable?) If object was approved and is still approved, send changes notification
-        if not obj.approved:
-            if not oldobj.approved:
+
+        if hasattr(obj, 'approved'):
+            approved = obj.approved
+            oldapproved = oldobj.approved
+        else:
+            approved = obj.modstate != ModerationState.CREATED
+            oldapproved = oldobj.modstate != ModerationState.CREATED
+
+        if not approved:
+            if not oldapproved:
                 # Was approved, still approved -> no notification
                 return (None, None)
             # From approved to unapproved
             return ('{0} id {1} has been unapproved'.format(obj._meta.verbose_name, obj.id),
                     _get_full_text_representation(obj))
         else:
-            if not oldobj.approved:
+            if not oldapproved:
                 # Object went from unapproved to approved
                 return ('{0} id {1} has been approved'.format(obj._meta.verbose_name, obj.id),
                         _get_full_text_representation(obj))
