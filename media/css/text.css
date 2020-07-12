@@ -161,7 +161,7 @@ a:hover                         { color:#000000; text-decoration: underline; }
 #txtFrontUserName a:active              { color:#666; text-decoration: underline; }
 #txtFrontUserName a:hover               { color:#000; text-decoration: underline; }
 
-#txtArchives a:visited	{ color:#00536E; text-decoration: underline; }
+#txtArchives a:visited  { color:#00536E; text-decoration: underline; }
 #txtArchives pre        { word-wrap: break-word; font-size: 150%; }
 #txtArchives tt         { word-wrap: break-word; font-size: 150%; }
 
