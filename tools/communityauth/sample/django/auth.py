@@ -28,7 +28,7 @@ from django.conf import settings
 import base64
 import json
 import socket
-from urllib.parse import urlparse, urlencode, parse_qs
+from urllib.parse import urlencode, parse_qs
 import requests
 from Cryptodome.Cipher import AES
 from Cryptodome.Hash import SHA

@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import user_passes_test
 from pgweb.util.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Count
 from django.db import connection, transaction
 from django.utils.http import http_date, parse_http_date
 from django.conf import settings
