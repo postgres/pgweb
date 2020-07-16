@@ -11,6 +11,9 @@ class NewsTag(models.Model):
                                           help_text="Organisations allowed to use this tag")
     sortkey = models.IntegerField(null=False, blank=False, default=100)
 
+    def purge_urls(self):
+        yield '/about/news/taglist.json/'
+
     def __str__(self):
         return self.name
 
