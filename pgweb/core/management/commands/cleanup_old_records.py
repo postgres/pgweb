@@ -28,9 +28,9 @@ class Command(BaseCommand):
         curs = connection.cursor()
         curs.execute("SELECT pg_try_advisory_lock(2896719)")
         if not curs.fetchall()[0][0]:
-                print("Failed to get advisory lock, existing cleanup_old_records process stuck?")
-                sys.exit(1)
+            print("Failed to get advisory lock, existing cleanup_old_records process stuck?")
+            sys.exit(1)
 
         # Clean up old email change tokens
         with transaction.atomic():
-                EmailChangeToken.objects.filter(sentat__lt=datetime.now() - timedelta(hours=24)).delete()
+            EmailChangeToken.objects.filter(sentat__lt=datetime.now() - timedelta(hours=24)).delete()
