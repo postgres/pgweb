@@ -72,7 +72,7 @@ The flow of an authentication in the 2.0 system is fairly simple:
    <redirection_url>?i=<iv>&d=<encrypted data>
 #. The user browser is redirected to this URL.
 #. The community website detects that this is a redirected authentication
-   response, and stars processing it specifically.
+   response, and starts processing it specifically.
 #. Using the shared key, the data is decrypted (while first being base64
    decoded, of course)
 #. The resulting string is urldecoded - and if any errors occur in the
