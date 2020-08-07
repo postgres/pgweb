@@ -109,18 +109,18 @@ def auth_receive(request):
     try:
         user = User.objects.get(username=data['u'][0])
         # User found, let's see if any important fields have changed
-        changed = False
+        changed = []
         if user.first_name != data['f'][0]:
             user.first_name = data['f'][0]
-            changed = True
+            changed.append('first_name')
         if user.last_name != data['l'][0]:
             user.last_name = data['l'][0]
-            changed = True
+            changed.append('last_name')
         if user.email != data['e'][0]:
             user.email = data['e'][0]
-            changed = True
+            changed.append('email')
         if changed:
-            user.save()
+            user.save(update_fields=changed)
     except User.DoesNotExist:
         # User not found, create it!
 
