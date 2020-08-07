@@ -162,5 +162,15 @@ FRONTEND_SMTP_RELAY = "magus.postgresql.org"                # Where to relay use
 OAUTH = {}                                                  # OAuth providers and keys
 PGDG_ORG_ID = -1                                            # id of the PGDG organisation entry
 
+# For debug toolbar, can then be fully configured in settings_local.py
+DEBUG_TOOLBAR = False
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
 # Load local settings overrides
 from .settings_local import *
+
+if DEBUG and DEBUG_TOOLBAR:
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+    INSTALLED_APPS.append('debug_toolbar')

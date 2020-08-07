@@ -1,5 +1,7 @@
 from django.conf.urls import include, url
+from django.urls import path
 from django.views.generic import RedirectView
+from django.conf import settings
 
 import pgweb.contributors.views
 import pgweb.core.views
@@ -156,3 +158,10 @@ urlpatterns = [
     # Fallback for static pages, must be at the bottom
     url(r'^(.*)/$', pgweb.core.views.fallback),
 ]
+
+
+if settings.DEBUG_TOOLBAR:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
