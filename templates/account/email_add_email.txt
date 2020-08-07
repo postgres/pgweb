@@ -1,0 +1,9 @@
+Somebody, probably you, attempted to add this email address to
+the PostgreSQL community account {{user.username}}.
+
+To confirm the addition of this email address, please click
+the following link:
+
+{{link_root}}/account/profile/add_email/{{secondaryemail.token}}/
+
+If you do not approve of this, you can ignore this email.

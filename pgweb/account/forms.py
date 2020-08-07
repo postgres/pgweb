@@ -6,6 +6,7 @@ import re
 from django.contrib.auth.models import User
 from pgweb.core.models import UserProfile
 from pgweb.contributors.models import Contributor
+from .models import SecondaryEmail
 
 from .recaptcha import ReCaptchaField
 
@@ -121,14 +122,25 @@ class UserProfileForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
+    primaryemail = forms.ChoiceField(choices=[], required=True, label='Primary email address')
+
+    def __init__(self, can_change_email, secondaryaddresses, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].required = True
         self.fields['last_name'].required = True
+        if can_change_email:
+            self.fields['primaryemail'].choices = [(self.instance.email, self.instance.email), ] + [(a.email, a.email) for a in secondaryaddresses if a.confirmed]
+            if not secondaryaddresses:
+                self.fields['primaryemail'].help_text = "To change the primary email address, first add it as a secondary address below"
+        else:
+            self.fields['primaryemail'].choices = [(self.instance.email, self.instance.email), ]
+            self.fields['primaryemail'].help_text = "You cannot change the primary email of this account since it is connected to an external authentication system"
+            self.fields['primaryemail'].widget.attrs['disabled'] = True
+            self.fields['primaryemail'].required = False
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', )
+        fields = ('primaryemail', 'first_name', 'last_name', )
 
 
 class ContributorForm(forms.ModelForm):
@@ -137,16 +149,16 @@ class ContributorForm(forms.ModelForm):
         exclude = ('ctype', 'lastname', 'firstname', 'user', )
 
 
-class ChangeEmailForm(forms.Form):
-    email = forms.EmailField()
-    email2 = forms.EmailField(label="Repeat email")
+class AddEmailForm(forms.Form):
+    email1 = forms.EmailField(label="New email", required=False)
+    email2 = forms.EmailField(label="Repeat email", required=False)
 
     def __init__(self, user, *args, **kwargs):
-        super(ChangeEmailForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.user = user
 
-    def clean_email(self):
-        email = self.cleaned_data['email'].lower()
+    def clean_email1(self):
+        email = self.cleaned_data['email1'].lower()
 
         if email == self.user.email:
             raise forms.ValidationError("This is your existing email address!")
@@ -154,14 +166,23 @@ class ChangeEmailForm(forms.Form):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError("A user with this email address is already registered")
 
+        try:
+            s = SecondaryEmail.objects.get(email=email)
+            if s.user == self.user:
+                raise forms.ValidationError("This email address is already connected to your account")
+            else:
+                raise forms.ValidationError("A user with this email address is already registered")
+        except SecondaryEmail.DoesNotExist:
+            pass
+
         return email
 
     def clean_email2(self):
         # If the primary email checker had an exception, the data will be gone
         # from the cleaned_data structure
-        if 'email' not in self.cleaned_data:
+        if 'email1' not in self.cleaned_data:
             return self.cleaned_data['email2'].lower()
-        email1 = self.cleaned_data['email'].lower()
+        email1 = self.cleaned_data['email1'].lower()
         email2 = self.cleaned_data['email2'].lower()
 
         if email1 != email2:

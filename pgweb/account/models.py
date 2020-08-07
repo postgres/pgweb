@@ -35,8 +35,12 @@ class CommunityAuthConsent(models.Model):
         unique_together = (('user', 'org'), )
 
 
-class EmailChangeToken(models.Model):
-    user = models.OneToOneField(User, null=False, blank=False, on_delete=models.CASCADE)
-    email = models.EmailField(max_length=75, null=False, blank=False)
+class SecondaryEmail(models.Model):
+    user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    email = models.EmailField(max_length=75, null=False, blank=False, unique=True)
+    confirmed = models.BooleanField(null=False, blank=False, default=False)
     token = models.CharField(max_length=100, null=False, blank=False)
     sentat = models.DateTimeField(null=False, blank=False, auto_now=True)
+
+    class Meta:
+        ordering = ('email', )

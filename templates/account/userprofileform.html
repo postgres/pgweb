@@ -17,19 +17,6 @@
       {{ user.username }}
     </div>
   </div>
-  <div class="form-group row">
-    <label class="col-form-label col-sm-3">Email:</label>
-    <div class="col-sm-9">
-      {{ user.email }}
-      {% if can_change_email %}
-        (<em><a href="change_email/">change</a></em>)
-      {% else %}
-        <p><em>The email address of this account cannot be changed, because the account does
-        not have a local password, most likely because it's connected to a third
-        party system (such as Google or Facebook).</em></p>
-      {% endif %}
-    </div>
-  </div>
   {% for field in userform %}
     <div class="form-group row">
       {% if field.errors %}
@@ -66,6 +53,47 @@
       </div>
     </div>
   {% endfor %}
+
+    <h2>Secondary email addresses</h2>
+    <p>You can add one or more secondary email addresses to your account, which can be used for example to subscribe to mailing lists.</p>
+    {%if secondaryaddresses%}
+    <p>Note that deleting any address here will cascade to connected system and can for example lead to being unsubscribed from mailing lists automatically.</p>
+    <p></p>
+    <p>The following secondary addresses are currently registered with your account:</p>
+    <ul>
+      {% for a in secondaryaddresses %}
+      <li>{{a.email}}{%if not a.confirmed%} <em>(awaiting confirmation since {{a.sentat}})</em>{%endif%} (<input type="checkbox" name="deladdr_{{a.id}}" value="1"> Delete)</li>
+      {%endfor%}
+    </ul>
+    {%if secondarypending %}
+    <p>
+      One or more of the secondary addresses on your account are listed as pending. An email has been sent to the address to confirm that
+      you are in control of the address. Open the link in this email (while logged in to this account) to confirm the account. If an email
+      address is not confirmed within approximately 24 hours, it will be deleted. If you have not received the confirmation token, you
+      can delete the address and re-add it, to have the system re-send the verification email.
+    </p>
+    {%endif%}
+    {%endif%}
+    <h3>Add new email address</h3>
+    {%for field in secondaryemailform%}
+      <div class="form-group row">
+        {% if field.errors %}
+          {% for e in field.errors %}
+            <div class="col-lg-12 alert alert-danger">{{e}}</div>
+          {% endfor %}
+        {% endif %}
+        <label class="col-form-label col-sm-3" for="{{ field.id }}">
+          {{ field.label }}
+          {% if field.help_text %}
+            <p><small>{{ field.help_text }}</small></p>
+          {% endif %}
+        </label>
+        <div class="col-sm-9">
+          {{ field|field_class:"form-control" }}
+        </div>
+      </div>
+    {%endfor%}
+
   {% if contribform %}
     <h2>Edit contributor information</h2>
     <p>You can edit the information that's shown on the <a href="/community/contributors/" target="_blank">contributors</a> page. Please be careful as your changes will take effect immediately!
@@ -89,6 +117,7 @@
       </div>
     {% endfor %}
   {% endif %}
+
   <div class="submit-row">
     <input class="btn btn-primary" type="submit" value="Save" />
   </div>

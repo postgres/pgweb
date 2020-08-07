@@ -18,8 +18,7 @@ urlpatterns = [
 
     # Profile
     url(r'^profile/$', pgweb.account.views.profile),
-    url(r'^profile/change_email/$', pgweb.account.views.change_email),
-    url(r'^profile/change_email/([0-9a-f]+)/$', pgweb.account.views.confirm_change_email),
+    url(r'^profile/add_email/([0-9a-f]+)/$', pgweb.account.views.confirm_add_email),
 
     # List of items to edit
     url(r'^edit/(.*)/$', pgweb.account.views.listobjects),

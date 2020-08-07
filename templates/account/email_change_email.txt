@@ -1,8 +1,0 @@
-Somebody, probably you, attempted to change the email of the
-PostgreSQL community account {{user.username}} to this email address.
-
-To confirm this change of email address, please click the following
-link:
-
-{{link_root}}/account/profile/change_email/{{token.token}}/
-

@@ -10,7 +10,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import logout as django_logout
 from django.conf import settings
 from django.db import transaction, connection
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 
 import base64
 import urllib.parse
@@ -32,12 +32,12 @@ from pgweb.contributors.models import Contributor
 from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
 
-from .models import CommunityAuthSite, CommunityAuthConsent, EmailChangeToken
+from .models import CommunityAuthSite, CommunityAuthConsent, SecondaryEmail
 from .forms import PgwebAuthenticationForm
 from .forms import CommunityAuthConsentForm
 from .forms import SignupForm, SignupOauthForm
 from .forms import UserForm, UserProfileForm, ContributorForm
-from .forms import ChangeEmailForm, PgwebPasswordResetForm
+from .forms import AddEmailForm, PgwebPasswordResetForm
 
 import logging
 log = logging.getLogger(__name__)
@@ -110,96 +110,81 @@ def profile(request):
 
     contribform = None
 
+    secondaryaddresses = SecondaryEmail.objects.filter(user=request.user)
+
     if request.method == 'POST':
         # Process this form
-        userform = UserForm(data=request.POST, instance=request.user)
+        userform = UserForm(can_change_email, secondaryaddresses, data=request.POST, instance=request.user)
         profileform = UserProfileForm(data=request.POST, instance=profile)
+        secondaryemailform = AddEmailForm(request.user, data=request.POST)
         if contrib:
             contribform = ContributorForm(data=request.POST, instance=contrib)
 
-        if userform.is_valid() and profileform.is_valid() and (not contrib or contribform.is_valid()):
-            userform.save()
+        if userform.is_valid() and profileform.is_valid() and secondaryemailform.is_valid() and (not contrib or contribform.is_valid()):
+            user = userform.save()
+
+            # Email takes some magic special handling, since we only allow picking of existing secondary emails, but it's
+            # not a foreign key (due to how the django auth model works).
+            if can_change_email and userform.cleaned_data['primaryemail'] != user.email:
+                # Changed it!
+                oldemail = user.email
+                # Create a secondary email for the old primary one
+                SecondaryEmail(user=user, email=oldemail, confirmed=True, token='').save()
+                # Flip the main email
+                user.email = userform.cleaned_data['primaryemail']
+                user.save(update_fields=['email', ])
+                # Finally remove the old secondary address, since it can`'t be both primary and secondary at the same time
+                SecondaryEmail.objects.filter(user=user, email=user.email).delete()
+                log.info("User {} changed primary email from {} to {}".format(user.username, oldemail, user.email))
+
             profileform.save()
             if contrib:
                 contribform.save()
-            return HttpResponseRedirect("/account/")
+            if secondaryemailform.cleaned_data.get('email1', ''):
+                sa = SecondaryEmail(user=request.user, email=secondaryemailform.cleaned_data['email1'], token=generate_random_token())
+                sa.save()
+                send_template_mail(
+                    settings.ACCOUNTS_NOREPLY_FROM,
+                    sa.email,
+                    'Your postgresql.org community account',
+                    'account/email_add_email.txt',
+                    {'secondaryemail': sa, 'user': request.user, }
+                )
+
+            for k, v in request.POST.items():
+                if k.startswith('deladdr_') and v == '1':
+                    ii = int(k[len('deladdr_'):])
+                    SecondaryEmail.objects.filter(user=request.user, id=ii).delete()
+
+            return HttpResponseRedirect(".")
     else:
         # Generate form
-        userform = UserForm(instance=request.user)
+        userform = UserForm(can_change_email, secondaryaddresses, instance=request.user)
         profileform = UserProfileForm(instance=profile)
+        secondaryemailform = AddEmailForm(request.user)
         if contrib:
             contribform = ContributorForm(instance=contrib)
 
     return render_pgweb(request, 'account', 'account/userprofileform.html', {
         'userform': userform,
         'profileform': profileform,
+        'secondaryemailform': secondaryemailform,
+        'secondaryaddresses': secondaryaddresses,
+        'secondarypending': any(not a.confirmed for a in secondaryaddresses),
         'contribform': contribform,
-        'can_change_email': can_change_email,
     })
 
 
 @login_required
 @transaction.atomic
-def change_email(request):
-    tokens = EmailChangeToken.objects.filter(user=request.user)
-    token = len(tokens) and tokens[0] or None
+def confirm_add_email(request, tokenhash):
+    addr = get_object_or_404(SecondaryEmail, user=request.user, token=tokenhash)
 
-    if request.user.password == OAUTH_PASSWORD_STORE:
-        # Link shouldn't exist in this case, so just throw an unfriendly
-        # error message.
-        return HttpSimpleResponse(request, "Account error", "This account cannot change email address as it's connected to a third party login site.")
-
-    if request.method == 'POST':
-        form = ChangeEmailForm(request.user, data=request.POST)
-        if form.is_valid():
-            # If there is an existing token, delete it
-            if token:
-                token.delete()
-
-            # Create a new token
-            token = EmailChangeToken(user=request.user,
-                                     email=form.cleaned_data['email'].lower(),
-                                     token=generate_random_token())
-            token.save()
-
-            send_template_mail(
-                settings.ACCOUNTS_NOREPLY_FROM,
-                form.cleaned_data['email'],
-                'Your postgresql.org community account',
-                'account/email_change_email.txt',
-                {'token': token, 'user': request.user, }
-            )
-            return HttpResponseRedirect('done/')
-    else:
-        form = ChangeEmailForm(request.user)
-
-    return render_pgweb(request, 'account', 'account/emailchangeform.html', {
-        'form': form,
-        'token': token,
-    })
-
-
-@login_required
-@transaction.atomic
-def confirm_change_email(request, tokenhash):
-    tokens = EmailChangeToken.objects.filter(user=request.user, token=tokenhash)
-    token = len(tokens) and tokens[0] or None
-
-    if request.user.password == OAUTH_PASSWORD_STORE:
-        # Link shouldn't exist in this case, so just throw an unfriendly
-        # error message.
-        return HttpSimpleResponse(request, "Account error", "This account cannot change email address as it's connected to a third party login site.")
-
-    if token:
-        # Valid token find, so change the email address
-        request.user.email = token.email.lower()
-        request.user.save()
-        token.delete()
-
-    return render_pgweb(request, 'account', 'account/emailchangecompleted.html', {
-        'token': tokenhash,
-        'success': token and True or False,
-    })
+    # Valid token found, so mark the address as confirmed.
+    addr.confirmed = True
+    addr.token = ''
+    addr.save()
+    return HttpResponseRedirect('/account/profile/')
 
 
 @login_required
@@ -538,6 +523,7 @@ def communityauth(request, siteid):
         'f': request.user.first_name.encode('utf-8'),
         'l': request.user.last_name.encode('utf-8'),
         'e': request.user.email.encode('utf-8'),
+        'se': ','.join([a.email for a in SecondaryEmail.objects.filter(user=request.user, confirmed=True).order_by('email')]).encode('utf8'),
     }
     if d:
         info['d'] = d.encode('utf-8')
@@ -626,9 +612,15 @@ def communityauth_search(request, siteid):
     else:
         raise Http404('No search term specified')
 
-    users = User.objects.filter(q)
+    users = User.objects.prefetch_related(Prefetch('secondaryemail_set', queryset=SecondaryEmail.objects.filter(confirmed=True))).filter(q)
 
-    j = json.dumps([{'u': u.username, 'e': u.email, 'f': u.first_name, 'l': u.last_name} for u in users])
+    j = json.dumps([{
+        'u': u.username,
+        'e': u.email,
+        'f': u.first_name,
+        'l': u.last_name,
+        'se': [a.email for a in u.secondaryemail_set.all()],
+    } for u in users])
 
     return HttpResponse(_encrypt_site_response(site, j))
 

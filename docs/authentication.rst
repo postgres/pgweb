@@ -48,7 +48,9 @@ The flow of an authentication in the 2.0 system is fairly simple:
    l
      The last name of the user logged in
    e
-     The email address of the user logged in
+     The primary email address of the user logged in
+   se
+     A comma separated list of secondary email addresses for the user logged in
    d
      base64 encoded data block to be passed along in confirmation (optional)
    su
@@ -148,8 +150,10 @@ The flow for search is:
    u
     Username
    e
-    Email
+    Primary email
    f
     First name
    l
     Last name
+   se
+    Array of secondary email addresses
