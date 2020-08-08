@@ -34,7 +34,7 @@ class CommunityAuthSiteAdmin(admin.ModelAdmin):
 
 
 class PGUserChangeForm(UserChangeForm):
-    logininfo = forms.CharField(label="Community login history")
+    logininfo = forms.CharField(label="Community login history", required=False)
 
     def __init__(self, *args, **kwargs):
         super(PGUserChangeForm, self).__init__(*args, **kwargs)
