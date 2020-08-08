@@ -8,6 +8,10 @@
 # * Make sure the view "login" from this module is used for login
 # * Map an url somwehere (typically /auth_receive/) to the auth_receive
 #   view.
+# * To receive live updates (not just during login), map an url somewhere
+#   (typically /auth_api/) to the auth_api view.
+# * To receive live updates, also connect to the signal auth_user_data_received.
+#   This signal will fire *both* on login events *and* on background updates.
 # * In settings.py, set AUTHENTICATION_BACKENDS to point to the class
 #   AuthBackend in this module.
 # * (And of course, register for a crypto key with the main authentication
@@ -19,21 +23,31 @@
 #
 
 from django.http import HttpResponse, HttpResponseRedirect
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth import login as django_login
 from django.contrib.auth import logout as django_logout
+from django.dispatch import Signal
+from django.db import transaction
 from django.conf import settings
 
 import base64
 import json
 import socket
+import hmac
 from urllib.parse import urlencode, parse_qs
 import requests
 from Cryptodome.Cipher import AES
 from Cryptodome.Hash import SHA
 from Cryptodome import Random
 import time
+
+
+# This signal fires whenever new user data has been received. Note that this
+# happens *after* first_name, last_name and email has been updated on the user
+# record, so those are not included in the userdata struct.
+auth_user_data_received = Signal(providing_args=['user', 'userdata'])
 
 
 class AuthBackend(ModelBackend):
@@ -166,6 +180,11 @@ We apologize for the inconvenience.
     user.backend = "%s.%s" % (AuthBackend.__module__, AuthBackend.__name__)
     django_login(request, user)
 
+    # Signal that we have information about this user
+    auth_user_data_received.send(sender=auth_receive, user=user, userdata={
+        'secondaryemails': data['se'][0].split(',') if 'se' in data else []
+    })
+
     # Finally, check of we have a data package that tells us where to
     # redirect the user.
     if 'd' in data:
@@ -185,6 +204,73 @@ We apologize for the inconvenience.
     if hasattr(settings, 'PGAUTH_REDIRECT_SUCCESS'):
         return HttpResponseRedirect(settings.PGAUTH_REDIRECT_SUCCESS)
     return HttpResponse("Authentication successful, but don't know where to redirect!", status=500)
+
+
+# Receive API calls from upstream, such as push changes to users
+@csrf_exempt
+def auth_api(request):
+    if 'X-pgauth-sig' not in request.headers:
+        return HttpResponse("Missing signature header!", status=400)
+
+    try:
+        sig = base64.b64decode(request.headers['X-pgauth-sig'])
+    except Exception:
+        return HttpResponse("Invalid signature header!", status=400)
+
+    try:
+        h = hmac.digest(
+            base64.b64decode(settings.PGAUTH_KEY),
+            msg=request.body,
+            digest='sha512',
+        )
+        if not hmac.compare_digest(h, sig):
+            return HttpResponse("Invalid signature!", status=401)
+    except Exception:
+        return HttpResponse("Unable to compute hmac", status=400)
+
+    try:
+        pushstruct = json.loads(request.body)
+    except Exception:
+        return HttpResponse("Invalid JSON!", status=400)
+
+    def _conditionally_update_record(rectype, recordkey, structkey, fieldmap, struct):
+        try:
+            obj = rectype.objects.get(**{recordkey: struct[structkey]})
+            ufields = []
+            for k, v in fieldmap.items():
+                if struct[k] != getattr(obj, v):
+                    setattr(obj, v, struct[k])
+                    ufields.append(v)
+            if ufields:
+                obj.save(update_fields=ufields)
+            return obj
+        except rectype.DoesNotExist:
+            # If the record doesn't exist, we just ignore it
+            return None
+
+    # Process the received structure
+    if pushstruct.get('type', None) == 'update':
+        # Process updates!
+        with transaction.atomic():
+            for u in pushstruct.get('users', []):
+                user = _conditionally_update_record(
+                    User,
+                    'username', 'username',
+                    {
+                        'firstname': 'first_name',
+                        'lastname': 'last_name',
+                        'email': 'email',
+                    },
+                    u,
+                )
+
+                # Signal that we have information about this user (only if it exists)
+                if user:
+                    auth_user_data_received.send(sender=auth_api, user=user, userdata={
+                        k: u[k] for k in u.keys() if k not in ['firstname', 'lastname', 'email', ]
+                    })
+
+    return HttpResponse("OK", status=200)
 
 
 # Perform a search in the central system. Note that the results are returned as an

@@ -1,0 +1,10 @@
+[receiver]
+plugin=redmine
+key=1xWzS4MW7JHlJgc618WaeTqfXaH0152xP7hZtnRe73w=
+
+[mediawiki]
+connstr=dbname=postgres
+schema=mediawiki
+
+[redmine]
+connstr=dbname=postgres

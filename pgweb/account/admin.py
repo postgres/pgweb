@@ -28,8 +28,20 @@ class CommunityAuthSiteAdminForm(forms.ModelForm):
             raise forms.ValidationError("Crypto key must be 16, 24 or 32 bytes before being base64-encoded")
         return self.cleaned_data['cryptkey']
 
+    def clean(self):
+        d = super().clean()
+
+        if d.get('push_changes', False) and not d['apiurl']:
+            self.add_error('push_changes', 'API url must be specified to enable push changes!')
+
+        if d.get('push_ssh', False) and not d.get('push_changes', False):
+            self.add_error('push_ssh', 'SSH changes can only be pushed if general change push is enabled')
+
+        return d
+
 
 class CommunityAuthSiteAdmin(admin.ModelAdmin):
+    list_display = ('name', 'cooloff_hours', 'push_changes', 'push_ssh', 'org')
     form = CommunityAuthSiteAdminForm
 
 
