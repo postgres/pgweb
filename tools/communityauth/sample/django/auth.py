@@ -240,9 +240,13 @@ def user_import(uid):
     if User.objects.filter(username=u['u']).exists():
         raise Exception("User already exists")
 
-    User(username=u['u'],
-         first_name=u['f'],
-         last_name=u['l'],
-         email=u['e'],
-         password='setbypluginnotsha1',
-         ).save()
+    u = User(
+        username=u['u'],
+        first_name=u['f'],
+        last_name=u['l'],
+        email=u['e'],
+        password='setbypluginnotsha1',
+    )
+    u.save()
+
+    return u
