@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3 -u
 #
 # auth_changetrack.py - tracks changes to users and distributes them
 #
