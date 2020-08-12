@@ -26,7 +26,7 @@ class ReceiverPlugin:
 
     def push_user(self, user):
         # Update the user if it has changed, ignore it if it's not present
-        self.curs.execute("UPDATE {}.mwuser SET user_real_name=%(realname)s, user_email=%(email)s WHERE user_name=%(username)s AND (user_real_name != %(realname)s OR user_email != %(email)s)".format(self.schema), {
+        self.curs.execute("UPDATE {}.mwuser SET user_real_name=%(realname)s, user_email=%(email)s WHERE user_name=%(username)s AND (user_real_name, user_email) IS DISTINCT FROM (%(realname)s, %(email)s)".format(self.schema), {
             'realname': user['firstname'] + ' ' + user['lastname'],
             'email': user['email'],
             'username': user['username'].capitalize(),
