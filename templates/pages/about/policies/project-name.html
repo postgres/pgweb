@@ -1,10 +1,11 @@
 {%extends "base/page.html"%}
+{%load pgfilters%}
 {%block title%}Project Name{%endblock%}
 {%block contents%}
 
 <h1>Project Name <i class="fas fa-gavel"></i></h1>
 
-<p><em>Last updated: July 5, 2018</em></p>
+<p><em>Last updated: July 5, 2018. {%git_changes_link%}</em></p>
 
 <h2>"PostgreSQL" versus "Postgres"</h2>
 

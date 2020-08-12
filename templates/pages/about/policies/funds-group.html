@@ -1,10 +1,11 @@
 {%extends "base/page.html"%}
+{%load pgfilters%}
 {%block title%}Funds Group{%endblock%}
 
 {%block contents%}
 <h1>PostgreSQL Funds Group <i class="far fa-money-bill-alt"></i></h1>
 
-<p><em>Last updated: March 1, 2019</em></p>
+<p><em>Last updated: March 1, 2019. {%git_changes_link%}</em></p>
 
 <h2 id="charter">Charter</h2>
 

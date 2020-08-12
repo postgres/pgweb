@@ -1,5 +1,6 @@
 from django.template.defaultfilters import stringfilter
 from django import template
+from django.utils.safestring import mark_safe
 import json
 
 
@@ -80,3 +81,8 @@ def release_notes_pg_minor_version(minor_version, major_version):
     if str(major_version) in ['0', '1']:
         return str(minor_version)[2:4]
     return minor_version
+
+
+@register.simple_tag(takes_context=True)
+def git_changes_link(context):
+    return mark_safe('<a href="https://git.postgresql.org/gitweb/?p=pgweb.git;a=history;f=templates/{}">View</a> change history.'.format(context.template_name))

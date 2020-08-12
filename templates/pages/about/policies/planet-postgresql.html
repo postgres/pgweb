@@ -1,10 +1,11 @@
 {%extends "base/page.html"%}
+{%load pgfilters%}
 {%block title%}Planet PostgreSQL{%endblock%}
 {%block contents%}
 
 <h1>Planet PostgreSQL <i class="fas fa-gavel"></i></h1>
 
-<p><em>Last updated: October 12, 2016</em></p>
+<p><em>Last updated: October 12, 2016. {%git_changes_link%}</em></p>
 
 <p><a href="https://planet.postgresql.org/">Planet PostgreSQL</a> is a blog
     aggregation service run by the PostgreSQL community. In addition to the main
