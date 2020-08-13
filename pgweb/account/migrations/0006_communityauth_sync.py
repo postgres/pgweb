@@ -78,10 +78,10 @@ $$ language 'plpgsql'""",
             """CREATE FUNCTION account_secondaryemail_changetrack () RETURNS trigger AS $$
 BEGIN
    INSERT INTO account_communityauthchangelog (user_id, site_id, changedat)
-            SELECT NEW.user_id, s.id, CURRENT_TIMESTAMP
+            SELECT OLD.user_id, s.id, CURRENT_TIMESTAMP
             FROM account_communityauthsite s
             INNER JOIN account_communityauthlastlogin ll ON ll.site_id=s.id
-            WHERE s.push_changes AND ll.user_id=NEW.user_id
+            WHERE s.push_changes AND ll.user_id=OLD.user_id
     ON CONFLICT (user_id, site_id) DO UPDATE SET changedat=greatest(account_communityauthchangelog.changedat, CURRENT_TIMESTAMP);
    NOTIFY communityauth_changetrack;
    RETURN NEW;
