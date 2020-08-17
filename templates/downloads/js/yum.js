@@ -134,7 +134,7 @@ function archChanged() {
 
    var installer = get_installer(plat);
    scriptBox.innerHTML = '# Install the repository RPM:\n';
-   scriptBox.innerHTML += installer + ' install ' + url + '\n\n';
+   scriptBox.innerHTML += installer + ' install -y ' + url + '\n\n';
 
    if (disable_module_on(plat)) {
       scriptBox.innerHTML += '# Disable the built-in PostgreSQL module:\n';
@@ -142,7 +142,7 @@ function archChanged() {
    }
 
    scriptBox.innerHTML += '# Install PostgreSQL:\n';
-   scriptBox.innerHTML += installer + ' install postgresql' + shortver + '-server\n\n';
+   scriptBox.innerHTML += installer + ' install -y postgresql' + shortver + '-server\n\n';
 
    scriptBox.innerHTML += '# Optionally initialize the database and enable automatic start:\n';
    if (uses_systemd(plat)) {
