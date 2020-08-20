@@ -7,6 +7,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('account', '0006_communityauth_sync'),
+        ('auth', '0008_alter_user_username_max_length'),
     ]
 
     operations = [
