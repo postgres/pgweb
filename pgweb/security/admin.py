@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django import forms
 from django.conf import settings
+from django.utils.safestring import mark_safe
 
 from pgweb.core.models import Version
 from pgweb.news.models import NewsArticle
@@ -48,7 +49,7 @@ class SecurityPatchAdmin(admin.ModelAdmin):
     def cvssvector(self, obj):
         if not obj.cvssvector:
             return ''
-        return '<a href="https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector={0}">{0}</a>'.format(
+        return mark_safe('<a href="https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector={0}">{0}</a>'.format)(
             obj.cvssvector)
     cvssvector.allow_tags = True
     cvssvector.short_description = "CVSS vector link"
