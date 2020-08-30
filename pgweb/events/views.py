@@ -20,7 +20,7 @@ def main(request):
 
 def _eventarchive(request, title):
     # Hardcode to the latest 100 events. Do we need paging too?
-    events = Event.objects.select_related('country').filter(approved=True).filter(enddate__lte=date.today()).order_by('-enddate', '-startdate',)[:100]
+    events = Event.objects.select_related('country', 'language').filter(approved=True).filter(enddate__lte=date.today()).order_by('-enddate', '-startdate',)[:100]
     return render_pgweb(request, 'about', 'events/archive.html', {
         'title': '%s Archive' % title,
         'archive': True,

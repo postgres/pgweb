@@ -14,10 +14,10 @@ import json
 def archive(request, tag=None, paging=None):
     if tag:
         tag = get_object_or_404(NewsTag, urlname=tag.strip('/'))
-        news = NewsArticle.objects.filter(approved=True, tags=tag)
+        news = NewsArticle.objects.select_related('org').filter(approved=True, tags=tag)
     else:
         tag = None
-        news = NewsArticle.objects.filter(approved=True)
+        news = NewsArticle.objects.select_related('org').filter(approved=True)
     return render_pgweb(request, 'about', 'news/newsarchive.html', {
         'news': news,
         'tag': tag,
