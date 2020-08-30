@@ -5,7 +5,7 @@
 <h1>Feature Description</h1>
 <h2>{{feature.featurename}}</h2>
 <p>
-{% if feature.featurelink|truncatechars:4 == "http" %}
+{% if feature.featuredescription_is_url %}
   For more information, please visit : <a href="{{ feature.featurelink }}">{{ feature.featurelink }}</a>
 {% else %}
   {{ feature.featuredescription|markdown:"safe" }}

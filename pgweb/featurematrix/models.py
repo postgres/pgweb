@@ -59,9 +59,16 @@ class Feature(models.Model):
         # Get a list of column based on all versions that are visible_default
         return [choices_map[getattr(self, a)] for a, b in versions]
 
+    def featuredescription_is_url(self):
+        """
+        Returns true if the entirety of the feautre description is a URL, or
+        at least gives off the appearance that it is.
+        """
+        return self.featuredescription.startswith('https://') or self.featuredescription.startswith('http://')
+
     @property
     def featurelink(self):
-        if self.featuredescription.startswith('https://') or self.featuredescription.startswith('http://'):
+        if self.featuredescription_is_url():
             return self.featuredescription
         else:
             return 'detail/%s/' % self.id
