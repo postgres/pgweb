@@ -47,6 +47,7 @@ class Feature(models.Model):
     v10 = models.IntegerField(verbose_name="10", null=False, blank=False, default=0, choices=choices)
     v11 = models.IntegerField(verbose_name="11", null=False, blank=False, default=0, choices=choices)
     v12 = models.IntegerField(verbose_name="12", null=False, blank=False, default=0, choices=choices)
+    v13 = models.IntegerField(verbose_name="13", null=False, blank=False, default=0, choices=choices)
 
     purge_urls = ('/about/featurematrix/.*', )
 
