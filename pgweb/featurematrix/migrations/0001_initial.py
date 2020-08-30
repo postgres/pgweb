@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('featurename', models.CharField(max_length=100)),
-                ('featuredescription', models.TextField(blank=True)),
+                ('featuredescription', models.TextField(blank=True, help_text="""Supports Markdown. A single, plain URL will link directly to that URL.""")),
                 ('v74', models.IntegerField(default=0, verbose_name='7.4', choices=[(0, 'No'), (1, 'Yes'), (2, 'Obsolete'), (3, '?')])),
                 ('v80', models.IntegerField(default=0, verbose_name='8.0', choices=[(0, 'No'), (1, 'Yes'), (2, 'Obsolete'), (3, '?')])),
                 ('v81', models.IntegerField(default=0, verbose_name='8.1', choices=[(0, 'No'), (1, 'Yes'), (2, 'Obsolete'), (3, '?')])),

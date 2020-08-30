@@ -1,9 +1,10 @@
 {%extends "base/page.html"%}
+{% load markup %}
 {%block title%}Feature Description{%endblock%}
 {%block contents%}
 <h1>Feature Description</h1>
 <h2>{{feature.featurename}}</h2>
 <p>
-{{feature.featuredescription}}
+{{feature.featuredescription|markdown:"safe"}}
 </p>
 {%endblock%}
