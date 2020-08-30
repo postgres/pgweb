@@ -27,7 +27,7 @@ class FeatureGroup(models.Model):
 class Feature(models.Model):
     group = models.ForeignKey(FeatureGroup, null=False, blank=False, on_delete=models.CASCADE)
     featurename = models.CharField(max_length=100, null=False, blank=False)
-    featuredescription = models.TextField(null=False, blank=True, help_text="""Supports Markdown. A plain URL will link directly to that URL.""")
+    featuredescription = models.TextField(null=False, blank=True, help_text="""Supports Markdown. A single, plain URL will link directly to that URL.""")
     # WARNING! All fields that start with "v" will be considered versions!
     v74 = models.IntegerField(verbose_name="7.4", null=False, blank=False, default=0, choices=choices)
     v74.visible_default = False
