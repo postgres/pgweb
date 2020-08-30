@@ -25,7 +25,7 @@ whatsoever.</em>
 <div>Location: <strong>{{event.locationstring}}</strong></div>
 {%if event.language%}<div>Language: <strong>{{event.language}}</strong></div>{%endif%}
 <div class="newseventwrap">
-{{event.summary|markdown:"safe"}}
+{{event.summary|markdown:"safe"|striptags}}
 </div>
 {%endfor%}
 {%if not archive%}
