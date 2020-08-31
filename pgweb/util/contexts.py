@@ -32,7 +32,7 @@ sitenav = {
             {'title': 'Archive', 'link': '/docs/manuals/archive/'},
             {'title': 'Chinese', 'link': 'http://www.postgres.cn/docs'},
             {'title': 'French', 'link': 'https://docs.postgresql.fr/'},
-            {'title': 'Japanese', 'link': 'http://www.postgresql.jp/document/'},
+            {'title': 'Japanese', 'link': 'https://www.postgresql.jp/document/'},
             {'title': 'Russian', 'link': 'https://postgrespro.ru/docs/postgresql'},
         ]},
         {'title': 'Release Notes', 'link': '/docs/release/'},
