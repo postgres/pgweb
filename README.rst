@@ -8,9 +8,9 @@ free to be mirrored anywhere.
 
 Technology
 ----------
-The website code is written in `Python <http://www.python.org>`_ using
-the `Django <http://www.djangoproject.com/>`_ framework. Not surprisingly,
-`PostgreSQL <http://www.postgresql.org>`_ is used as the database. Further details
+The website code is written in `Python <https://www.python.org>`_ using
+the `Django <https://www.djangoproject.com/>`_ framework. Not surprisingly,
+`PostgreSQL <https://www.postgresql.org>`_ is used as the database. Further details
 about the code and technology can be found in the different documents in the
 docs directory.
 
@@ -33,7 +33,7 @@ want to make any major changes, be sure to have discussed those on the list firs
 Licence
 -------
 The code for the website is licensed under
-`The PostgreSQL Licence <http://www.opensource.org/licenses/postgresql>`_, which is
+`The PostgreSQL Licence <https://www.opensource.org/licenses/postgresql>`_, which is
 closely related to the BSD licence.
 
 Django is released under its `BSD Licence <https://github.com/django/django/blob/master/LICENSE>`_.

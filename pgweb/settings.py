@@ -139,7 +139,7 @@ CSRF_COOKIE_SECURE = SESSION_COOKIE_SECURE
 CSRF_COOKIE_DOMAIN = SESSION_COOKIE_DOMAIN
 CSRF_COOKIE_HTTPONLY = SESSION_COOKIE_HTTPONLY
 
-SITE_ROOT = "http://www.postgresql.org"                     # Root of working URLs
+SITE_ROOT = "https://www.postgresql.org"                     # Root of working URLs
 FTP_PICKLE = "/usr/local/pgweb/ftpsite.pickle"              # Location of file with current contents from ftp site
 YUM_JSON = "/usr/local/pgweb/external/yum.json"
 STATIC_CHECKOUT = "/usr/local/pgweb-static"                 # Location of a checked out pgweb-static project
