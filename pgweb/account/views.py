@@ -206,7 +206,7 @@ def listobjects(request, objtype):
 
 @login_required
 def orglist(request):
-    orgs = Organisation.objects.filter(approved=True)
+    orgs = Organisation.objects.prefetch_related('managers').filter(approved=True)
 
     return render_pgweb(request, 'account', 'account/orglist.html', {
         'orgs': orgs,
