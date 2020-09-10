@@ -1,6 +1,8 @@
 from datetime import date, timedelta
 from .models import NewsArticle
 
+from pgweb.util.moderation import ModerationState
+
 
 def get_struct():
     now = date.today()
@@ -10,7 +12,7 @@ def get_struct():
     # since we don't care about getting it indexed.
     # Also, don't bother indexing anything > 4 years old
 
-    for n in NewsArticle.objects.filter(approved=True, date__gt=fouryearsago):
+    for n in NewsArticle.objects.filter(modstate=ModerationState.APPROVED, date__gt=fouryearsago):
         yearsold = (now - n.date).days / 365
         if yearsold > 4:
             yearsold = 4

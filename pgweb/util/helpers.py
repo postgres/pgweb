@@ -7,6 +7,7 @@ import django.utils.xmlutils
 from django.conf import settings
 
 from pgweb.util.contexts import render_pgweb
+from pgweb.util.moderation import ModerationState
 
 import io
 import re
@@ -34,7 +35,7 @@ def MarkdownValidator(val):
     return val
 
 
-def simple_form(instancetype, itemid, request, formclass, formtemplate='base/form.html', redirect='/account/', navsection='account', fixedfields=None, createifempty=False):
+def simple_form(instancetype, itemid, request, formclass, formtemplate='base/form.html', redirect='/account/', navsection='account', fixedfields=None, createifempty=False, extracontext={}):
     if itemid == 'new':
         instance = instancetype()
         is_new = True
@@ -56,6 +57,9 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
             if not instance.verify_submitter(request.user):
                 raise PermissionDenied("You are not the owner of this item!")
 
+        if getattr(instance, 'block_edit', False):
+            raise PermissionDenied("You cannot edit this item")
+
     if request.method == 'POST':
         # Process this form
         form = formclass(data=request.POST, instance=instance)
@@ -72,13 +76,18 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
             do_notify = getattr(instance, 'send_notification', False)
             instance.send_notification = False
 
-            if not getattr(instance, 'approved', True) and not is_new:
-                # If the object has an "approved" field and it's set to false, we don't
-                # bother notifying about the changes. But if it lacks this field, we notify
-                # about everything, as well as if the field exists and the item has already
-                # been approved.
-                # Newly added objects are always notified.
-                do_notify = False
+            # If the object has an "approved" field and it's set to false, we don't
+            # bother notifying about the changes. But if it lacks this field, we notify
+            # about everything, as well as if the field exists and the item has already
+            # been approved.
+            # Newly added objects are always notified.
+            if not is_new:
+                if hasattr(instance, 'approved'):
+                    if not getattr(instance, 'approved', True):
+                        do_notify = False
+                elif hasattr(instance, 'modstate'):
+                    if getattr(instance, 'modstate', None) == ModerationState.CREATED:
+                        do_notify = False
 
             notify = io.StringIO()
 
@@ -176,14 +185,17 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
             'class': 'toggle-checkbox',
         })
 
-    return render_pgweb(request, navsection, formtemplate, {
+    ctx = {
         'form': form,
         'formitemtype': instance._meta.verbose_name,
         'form_intro': hasattr(form, 'form_intro') and form.form_intro or None,
         'described_checkboxes': getattr(form, 'described_checkboxes', {}),
         'savebutton': (itemid == "new") and "Submit New" or "Save",
         'operation': (itemid == "new") and "New" or "Edit",
-    })
+    }
+    ctx.update(extracontext)
+
+    return render_pgweb(request, navsection, formtemplate, ctx)
 
 
 def template_to_string(templatename, attrs={}):

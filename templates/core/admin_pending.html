@@ -17,7 +17,10 @@
       <caption><a class="section">Pending {{app.name}}</a></caption>
       {%for entry in app.entries%}
       <tr class="row{%cycle '1' '2'%}">
-	<td><a href="{{entry.url}}">{{entry.title}}</a></td>
+	<td class="nowrap"><a href="{{entry.url}}">{{entry.title}}</a></td>
+{%if entry.twomoderators%}
+	<td width="100%">{{entry.twomoderators}}</td>
+{%endif%}
       </tr>
       {%endfor%}
     </table>

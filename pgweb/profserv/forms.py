@@ -5,9 +5,6 @@ from .models import ProfessionalService
 
 
 class ProfessionalServiceForm(forms.ModelForm):
-    form_intro = """Note that in order to register a new professional service, you must first register an organisation.
-If you have not done so, use <a href="/account/organisations/new/">this form</a>."""
-
     def __init__(self, *args, **kwargs):
         super(ProfessionalServiceForm, self).__init__(*args, **kwargs)
 

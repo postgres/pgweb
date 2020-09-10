@@ -23,19 +23,12 @@ urlpatterns = [
     # List of items to edit
     url(r'^edit/(.*)/$', pgweb.account.views.listobjects),
 
-    # News & Events
-    url(r'^news/(.*)/$', pgweb.news.views.form),
-    url(r'^events/(.*)/$', pgweb.events.views.form),
-
-    # Software catalogue
-    url(r'^organisations/(.*)/$', pgweb.core.views.organisationform),
-    url(r'^products/(.*)/$', pgweb.downloads.views.productform),
+    # Submitted items
+    url(r'^(?P<objtype>news)/(?P<item>\d+)/(?P<what>submit|withdraw)/$', pgweb.account.views.submitted_item_submitwithdraw),
+    url(r'^(?P<objtype>news|events|products|organisations|services)/(?P<item>\d+|new)/$', pgweb.account.views.submitted_item_form),
 
     # Organisation information
     url(r'^orglist/$', pgweb.account.views.orglist),
-
-    # Professional services
-    url(r'^services/(.*)/$', pgweb.profserv.views.profservform),
 
     # Docs comments
     url(r'^comments/(new)/([^/]+)/([^/]+)/$', pgweb.docs.views.commentform),

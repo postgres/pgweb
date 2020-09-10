@@ -2,8 +2,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login as django_login
 import django.contrib.auth.views as authviews
 from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
-from pgweb.util.decorators import login_required, script_sources, frame_sources
+from pgweb.util.decorators import login_required, script_sources, frame_sources, content_sources
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
@@ -23,23 +24,28 @@ import itertools
 
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.misc import send_template_mail, generate_random_token, get_client_ip
-from pgweb.util.helpers import HttpSimpleResponse
+from pgweb.util.helpers import HttpSimpleResponse, simple_form
+from pgweb.util.moderation import ModerationState
 
 from pgweb.news.models import NewsArticle
 from pgweb.events.models import Event
-from pgweb.core.models import Organisation, UserProfile
+from pgweb.core.models import Organisation, UserProfile, ModerationNotification
 from pgweb.contributors.models import Contributor
 from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
 
 from .models import CommunityAuthSite, CommunityAuthConsent, SecondaryEmail
-from .forms import PgwebAuthenticationForm
+from .forms import PgwebAuthenticationForm, ConfirmSubmitForm
 from .forms import CommunityAuthConsentForm
 from .forms import SignupForm, SignupOauthForm
 from .forms import UserForm, UserProfileForm, ContributorForm
 from .forms import AddEmailForm, PgwebPasswordResetForm
 
 import logging
+
+from pgweb.util.moderation import get_moderation_model_from_suburl
+from pgweb.mailqueue.util import send_simple_mail
+
 log = logging.getLogger(__name__)
 
 # The value we store in user.password for oauth logins. This is
@@ -47,43 +53,69 @@ log = logging.getLogger(__name__)
 OAUTH_PASSWORD_STORE = 'oauth_signin_account_no_password'
 
 
+def _modobjs(qs):
+    l = list(qs)
+    if l:
+        return {
+            'title': l[0]._meta.verbose_name_plural.capitalize(),
+            'objects': l,
+            'editurl': l[0].account_edit_suburl,
+        }
+    else:
+        return None
+
+
 @login_required
 def home(request):
-    myarticles = NewsArticle.objects.filter(org__managers=request.user, approved=False)
-    myevents = Event.objects.filter(org__managers=request.user, approved=False)
-    myorgs = Organisation.objects.filter(managers=request.user, approved=False)
-    myproducts = Product.objects.filter(org__managers=request.user, approved=False)
-    myprofservs = ProfessionalService.objects.filter(org__managers=request.user, approved=False)
     return render_pgweb(request, 'account', 'account/index.html', {
-        'newsarticles': myarticles,
-        'events': myevents,
-        'organisations': myorgs,
-        'products': myproducts,
-        'profservs': myprofservs,
+        'modobjects': [
+            {
+                'title': 'not submitted yet',
+                'objects': [
+                    _modobjs(NewsArticle.objects.filter(org__managers=request.user, modstate=ModerationState.CREATED)),
+                ],
+            },
+            {
+                'title': 'waiting for moderator approval',
+                'objects': [
+                    _modobjs(NewsArticle.objects.filter(org__managers=request.user, modstate=ModerationState.PENDING)),
+                    _modobjs(Event.objects.filter(org__managers=request.user, approved=False)),
+                    _modobjs(Organisation.objects.filter(managers=request.user, approved=False)),
+                    _modobjs(Product.objects.filter(org__managers=request.user, approved=False)),
+                    _modobjs(ProfessionalService.objects.filter(org__managers=request.user, approved=False))
+                ],
+            },
+        ],
     })
 
 
 objtypes = {
     'news': {
-        'title': 'News Article',
+        'title': 'news article',
         'objects': lambda u: NewsArticle.objects.filter(org__managers=u),
+        'tristate': True,
+        'editapproved': False,
     },
     'events': {
-        'title': 'Event',
+        'title': 'event',
         'objects': lambda u: Event.objects.filter(org__managers=u),
+        'editapproved': True,
     },
     'products': {
-        'title': 'Product',
+        'title': 'product',
         'objects': lambda u: Product.objects.filter(org__managers=u),
+        'editapproved': True,
     },
     'services': {
-        'title': 'Professional Service',
+        'title': 'professional service',
         'objects': lambda u: ProfessionalService.objects.filter(org__managers=u),
+        'editapproved': True,
     },
     'organisations': {
-        'title': 'Organisation',
+        'title': 'organisation',
         'objects': lambda u: Organisation.objects.filter(managers=u),
         'submit_header': 'Before submitting a new Organisation, please verify on the list of <a href="/account/orglist/">current organisations</a> if the organisation already exists. If it does, please contact the manager of the organisation to gain permissions.',
+        'editapproved': True,
     },
 }
 
@@ -193,14 +225,25 @@ def listobjects(request, objtype):
         raise Http404("Object type not found")
     o = objtypes[objtype]
 
-    return render_pgweb(request, 'account', 'account/objectlist.html', {
-        'objects': {
+    if o.get('tristate', False):
+        objects = {
+            'approved': o['objects'](request.user).filter(modstate=ModerationState.APPROVED),
+            'unapproved': o['objects'](request.user).filter(modstate=ModerationState.PENDING),
+            'inprogress': o['objects'](request.user).filter(modstate=ModerationState.CREATED),
+        }
+    else:
+        objects = {
             'approved': o['objects'](request.user).filter(approved=True),
             'unapproved': o['objects'](request.user).filter(approved=False),
-        },
+        }
+
+    return render_pgweb(request, 'account', 'account/objectlist.html', {
+        'objects': objects,
         'title': o['title'],
+        'editapproved': o['editapproved'],
         'submit_header': o.get('submit_header', None),
         'suburl': objtype,
+        'tristate': o.get('tristate', False),
     })
 
 
@@ -211,6 +254,105 @@ def orglist(request):
     return render_pgweb(request, 'account', 'account/orglist.html', {
         'orgs': orgs,
     })
+
+
+@login_required
+@transaction.atomic
+def submitted_item_form(request, objtype, item):
+    model = get_moderation_model_from_suburl(objtype)
+
+    if item == 'new':
+        extracontext = {}
+    else:
+        extracontext = {
+            'notices': ModerationNotification.objects.filter(
+                objecttype=model.__name__,
+                objectid=item,
+            ).order_by('-date')
+        }
+
+    return simple_form(model, item, request, model.get_formclass(),
+                       redirect='/account/edit/{}/'.format(objtype),
+                       formtemplate='account/submit_form.html',
+                       extracontext=extracontext)
+
+
+@content_sources('style', "'unsafe-inline'")
+def _submitted_item_submit(request, objtype, model, obj):
+    if obj.modstate != ModerationState.CREATED:
+        # Can only submit if state is created
+        return HttpResponseRedirect("/account/edit/{}/".format(objtype))
+
+    if request.method == 'POST':
+        form = ConfirmSubmitForm(obj._meta.verbose_name, data=request.POST)
+        if form.is_valid():
+            with transaction.atomic():
+                obj.modstate = ModerationState.PENDING
+                obj.send_notification = False
+                obj.save()
+
+                send_simple_mail(settings.NOTIFICATION_FROM,
+                                 settings.NOTIFICATION_EMAIL,
+                                 "{} {} submitted".format(obj._meta.verbose_name.capitalize(), obj.id),
+                                 "{} {} with title '{}' submitted for moderation by {}".format(
+                                     obj._meta.verbose_name.capitalize(),
+                                     obj.id,
+                                     obj.title,
+                                     request.user.username
+                                 ),
+                                 )
+                return HttpResponseRedirect("/account/edit/{}/".format(objtype))
+    else:
+        form = ConfirmSubmitForm(obj._meta.verbose_name)
+
+    return render_pgweb(request, 'account', 'account/submit_preview.html', {
+        'obj': obj,
+        'form': form,
+        'objtype': obj._meta.verbose_name,
+        'preview': obj.get_preview_fields(),
+    })
+
+
+def _submitted_item_withdraw(request, objtype, model, obj):
+    if obj.modstate != ModerationState.PENDING:
+        # Can only withdraw if it's in pending state
+        return HttpResponseRedirect("/account/edit/{}/".format(objtype))
+
+    obj.modstate = ModerationState.CREATED
+    obj.send_notification = False
+    if obj.twomoderators:
+        obj.firstmoderator = None
+        obj.save(update_fields=['modstate', 'firstmoderator'])
+    else:
+        obj.save(update_fields=['modstate', ])
+
+    send_simple_mail(
+        settings.NOTIFICATION_FROM,
+        settings.NOTIFICATION_EMAIL,
+        "{} {} withdrawn from moderation".format(model._meta.verbose_name.capitalize(), obj.id),
+        "{} {} with title {} withdrawn from moderation by {}".format(
+            model._meta.verbose_name.capitalize(),
+            obj.id,
+            obj.title,
+            request.user.username
+        ),
+    )
+    return HttpResponseRedirect("/account/edit/{}/".format(objtype))
+
+
+@login_required
+@transaction.atomic
+def submitted_item_submitwithdraw(request, objtype, item, what):
+    model = get_moderation_model_from_suburl(objtype)
+
+    obj = get_object_or_404(model, pk=item)
+    if not obj.verify_submitter(request.user):
+        raise PermissionDenied("You are not the owner of this item!")
+
+    if what == 'submit':
+        return _submitted_item_submit(request, objtype, model, obj)
+    else:
+        return _submitted_item_withdraw(request, objtype, model, obj)
 
 
 def login(request):

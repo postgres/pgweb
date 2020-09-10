@@ -1,27 +1,67 @@
 {%extends "base/page.html"%}
 {%block title%}Your account{%endblock%}
 {%block contents%}
-<h1>{{title}}s <i class="fas fa-th-list"></i></h1>
+<h1>{{title|title}}s <i class="fas fa-th-list"></i></h1>
 <p>
-Objects that are awaiting moderator approval are listed in their own category.
-Note that modifying anything that was previously approved might result in
-additional moderation based upon what has changed in the content.
+  The following {{title}}s are associated with an organisation you are a manager for.
 </p>
 
+{%if objects.inprogress %}
+<h3>Not submitted</h3>
+<p>
+  You can edit these {{title}}s an unlimited number of times, but they will not
+  be visible to anybody.
+<ul>
+  {%for o in objects.inprogress %}
+    <li><a href="/account/{{suburl}}/{{o.id}}/">{{o}}</a> (<a href="/account/{{suburl}}/{{o.id}}/submit/">Submit for moderation</a>)</li>
+  {%endfor%}
+</ul>
+{%endif%}
+
 {% if objects.unapproved %}
-<h3>Awaiting Moderation</h3>
+<h3>Waiting for moderator approval</h3>
+<p>
+  These {{title}}s are pending moderator approval. As soon as a moderator has reviewed them,
+  they will be published.
+{%if not tristate%}
+  You can make further changes to them while you wait for moderator approval.
+{%else%}
+  If you withdraw a submission, it will return to <i>Not submitted</i> status and you can make
+  further changes.
+{%endif%}
+</p>
 <ul>
   {%for o in objects.unapproved %}
+{%if tristate%}
+    <li>{{o}} (<a href="/account/{{suburl}}/{{o.id}}/withdraw/">Withdraw</a>)</li>
+{%else%}{# one-step approval allows editing in unapproved state #}
     <li><a href="/account/{{suburl}}/{{o.id}}/">{{o}}</a></li>
+{%endif%}
   {%endfor%}
 </ul>
 {% endif %}
 
 {% if objects.approved %}
 <h3>Approved</h3>
+{%if not editapproved%}
+<p>
+  These {{title}}s are approved and published, and can no longer be edited. If you need to make
+  any changes to these objects, please contact
+  <a href="mailto:webmaster@postgresql.org">webmaster@postgresql.org</a>.
+</p>
+{%else%}
+<p>
+  These objects are approved and published, but you can still edit them. Any changes you make
+  will notify moderators, who may decide to reject the object based on the changes.
+</p>
+{%endif%}
 <ul>
   {%for o in objects.approved %}
+{%if editapproved%}
     <li><a href="/account/{{suburl}}/{{o.id}}/">{{o}}</a></li>
+{%else%}
+    <li>{{o}}</li>
+{%endif%}
   {%endfor%}
 </ul>
 {% endif %}

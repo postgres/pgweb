@@ -1,3 +1,62 @@
+a.admbutton {
+    padding: 10px 15px;
+}
+
+div.modadmfield input,
+div.modadmfield select,
+div.modadmfield textarea {
+    width: 500px;
+}
+
+.moderation-form-row div {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.moderation-form-row div.txtpreview {
+    border: 1px solid gray;
+    padding: 5px;
+    border-radius: 5px;
+    white-space: pre;
+    width: 500px;
+    overflow-x: auto;
+    margin-right: 20px;
+}
+
+.moderation-form-row iframe.mdpreview {
+    border: 1px solid gray;
+    padding: 5px;
+    border-radius: 5px;
+    width: 500px;
+    overflow-x: auto;
+}
+
+.moderation-form-row div.mdpreview-data {
+    display: none;
+}
+
+.moderation-form-row div.simplepreview {
+    max-width: 800px;
+}
+
+.moderror {
+    color: red !important;
+}
+
+div.modhelp {
+    display: block;
+    color: #999;
+    font-size: 11px;
+}
+
 #new_notification {
     width: 400px;
+}
+
+.wspre {
+    white-space: pre;
+}
+
+.nowrap {
+    white-space: nowrap;
 }

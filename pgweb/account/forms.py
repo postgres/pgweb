@@ -192,3 +192,11 @@ class AddEmailForm(forms.Form):
 
 class PgwebPasswordResetForm(forms.Form):
     email = forms.EmailField()
+
+
+class ConfirmSubmitForm(forms.Form):
+    confirm = forms.BooleanField(required=True, help_text='Confirm')
+
+    def __init__(self, objtype, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['confirm'].help_text = 'Confirm that you are ready to submit this {}.'.format(objtype)

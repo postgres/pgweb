@@ -5,6 +5,8 @@ from pgweb.util.misc import varnish_purge
 
 import base64
 
+from pgweb.util.moderation import TwostateModerateModel
+
 TESTING_CHOICES = (
     (0, 'Release'),
     (1, 'Release candidate'),
@@ -121,9 +123,8 @@ class OrganisationType(models.Model):
         return self.typename
 
 
-class Organisation(models.Model):
+class Organisation(TwostateModerateModel):
     name = models.CharField(max_length=100, null=False, blank=False, unique=True)
-    approved = models.BooleanField(null=False, default=False)
     address = models.TextField(null=False, blank=True)
     url = models.URLField(null=False, blank=False)
     email = models.EmailField(null=False, blank=True)
@@ -132,14 +133,23 @@ class Organisation(models.Model):
     managers = models.ManyToManyField(User, blank=False)
     lastconfirmed = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 
-    send_notification = True
-    send_m2m_notification = True
+    account_edit_suburl = 'organisations'
+    moderation_fields = ['address', 'url', 'email', 'phone', 'orgtype', 'managers']
 
     def __str__(self):
         return self.name
 
+    @property
+    def title(self):
+        return self.name
+
     class Meta:
         ordering = ('name',)
+
+    @classmethod
+    def get_formclass(self):
+        from pgweb.core.forms import OrganisationForm
+        return OrganisationForm
 
 
 # Basic classes for importing external RSS feeds, such as planet

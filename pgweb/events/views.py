@@ -1,14 +1,11 @@
 from django.shortcuts import get_object_or_404
 from django.http import Http404
-from pgweb.util.decorators import login_required
 
 from datetime import date
 
 from pgweb.util.contexts import render_pgweb
-from pgweb.util.helpers import simple_form
 
 from .models import Event
-from .forms import EventForm
 
 
 def main(request):
@@ -39,9 +36,3 @@ def item(request, itemid, throwaway=None):
     return render_pgweb(request, 'about', 'events/item.html', {
         'obj': event,
     })
-
-
-@login_required
-def form(request, itemid):
-    return simple_form(Event, itemid, request, EventForm,
-                       redirect='/account/edit/events/')

@@ -1,6 +1,7 @@
 from django.db import models
 
 from pgweb.core.models import Organisation
+from pgweb.util.moderation import TwostateModerateModel
 
 
 class Category(models.Model):
@@ -24,9 +25,8 @@ class LicenceType(models.Model):
         ordering = ('typename',)
 
 
-class Product(models.Model):
+class Product(TwostateModerateModel):
     name = models.CharField(max_length=100, null=False, blank=False, unique=True)
-    approved = models.BooleanField(null=False, default=False)
     org = models.ForeignKey(Organisation, db_column="publisher_id", null=False, verbose_name="Organisation", on_delete=models.CASCADE)
     url = models.URLField(null=False, blank=False)
     category = models.ForeignKey(Category, null=False, on_delete=models.CASCADE)
@@ -35,10 +35,15 @@ class Product(models.Model):
     price = models.CharField(max_length=200, null=False, blank=True)
     lastconfirmed = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 
-    send_notification = True
+    account_edit_suburl = 'products'
     markdown_fields = ('description', )
+    moderation_fields = ('org', 'url', 'category', 'licencetype', 'description', 'price')
 
     def __str__(self):
+        return self.name
+
+    @property
+    def title(self):
         return self.name
 
     def verify_submitter(self, user):
@@ -46,6 +51,11 @@ class Product(models.Model):
 
     class Meta:
         ordering = ('name',)
+
+    @classmethod
+    def get_formclass(self):
+        from pgweb.downloads.forms import ProductForm
+        return ProductForm
 
 
 class StackBuilderApp(models.Model):

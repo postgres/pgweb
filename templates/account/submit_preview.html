@@ -1,0 +1,28 @@
+{%extends "base/form.html"%}
+{%load markup%}
+{%block title%}Confirm {{objtype}} submission{%endblock%}
+{%block contents%}
+<h1>Confirm {{objtype}} submission</h1>
+
+<p>
+  You are about to submit the following {{objtype}} for moderation. Note that once submitted,
+  the contents can no longer be changed.
+</p>
+{%if obj.extramodnotice %}
+<p>
+  {{obj.extramodnotice}}
+</p>
+{%endif%}
+
+<h2>Your {{objtype}}</h2>
+{%for fld, title, contents, mdcontents, note in preview %}
+<div class="row">
+  <div class="col-sm-2 col-form-label"><strong>{{title}}</strong></div>
+  <div class="col-sm-10">{%if mdcontents%}{{mdcontents|safe}}{%else%}{{contents}}{%endif%}</div>
+</div>
+{%endfor%}
+
+<h2>Confirm</h2>
+{%include "base/form_contents.html" with savebutton="Submit for moderation"%}
+
+{%endblock%}

@@ -6,6 +6,7 @@ from .models import Organisation
 from django.contrib.auth.models import User
 
 from pgweb.util.middleware import get_current_user
+from pgweb.util.moderation import ModerationState
 from pgweb.mailqueue.util import send_simple_mail
 
 
@@ -79,3 +80,42 @@ class MergeOrgsForm(forms.Form):
         if self.cleaned_data['merge_into'] == self.cleaned_data['merge_from']:
             raise ValidationError("The two organisations selected must be different!")
         return self.cleaned_data
+
+
+class ModerationForm(forms.Form):
+    modnote = forms.CharField(label='Moderation notice', widget=forms.Textarea, required=False,
+                              help_text="This note will be sent to the creator of the object regardless of if the moderation state has changed.")
+    oldmodstate = forms.CharField(label='Current moderation state', disabled=True)
+    modstate = forms.ChoiceField(label='New moderation status', choices=ModerationState.CHOICES + (
+        (ModerationState.REJECTED, 'Reject and delete'),
+    ))
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user')
+        self.obj = kwargs.pop('obj')
+        self.twostate = hasattr(self.obj, 'approved')
+
+        super().__init__(*args, **kwargs)
+        if self.twostate:
+            self.fields['modstate'].choices = [(k, v) for k, v in self.fields['modstate'].choices if int(k) != 1]
+        if self.obj.twomoderators:
+            if self.obj.firstmoderator:
+                self.fields['modstate'].help_text = 'This object requires approval from two moderators. It has already been approved by {}.'.format(self.obj.firstmoderator)
+            else:
+                self.fields['modstate'].help_text = 'This object requires approval from two moderators.'
+
+    def clean_modstate(self):
+        state = int(self.cleaned_data['modstate'])
+        if state == ModerationState.APPROVED and self.obj.twomoderators and self.obj.firstmoderator == self.user:
+            raise ValidationError("You already moderated this object, waiting for a *different* moderator")
+        return state
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        note = cleaned_data['modnote']
+
+        if note and int(cleaned_data['modstate']) == ModerationState.APPROVED and self.obj.twomoderators and not self.obj.firstmoderator:
+            self.add_error('modnote', ("Moderation notices cannot be sent on first-moderator approvals for objects that require two moderators."))
+
+        return cleaned_data

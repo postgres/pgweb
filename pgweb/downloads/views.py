@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.exceptions import PermissionDenied
-from pgweb.util.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
@@ -11,12 +10,11 @@ import json
 
 from pgweb.util.decorators import nocache
 from pgweb.util.contexts import render_pgweb
-from pgweb.util.helpers import simple_form, PgXmlHelper, HttpServerError
+from pgweb.util.helpers import PgXmlHelper, HttpServerError
 from pgweb.util.misc import varnish_purge, version_sort
 
 from pgweb.core.models import Version
 from .models import Category, Product, StackBuilderApp
-from .forms import ProductForm
 
 
 #######
@@ -222,12 +220,6 @@ def productlist(request, catid, junk=None):
         'products': products,
         'productcount': len(products),
     })
-
-
-@login_required
-def productform(request, itemid):
-    return simple_form(Product, itemid, request, ProductForm,
-                       redirect='/account/edit/products/')
 
 
 #######

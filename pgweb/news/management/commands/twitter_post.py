@@ -11,6 +11,7 @@ from django.conf import settings
 from datetime import datetime, timedelta
 import time
 
+from pgweb.util.moderation import ModerationState
 from pgweb.news.models import NewsArticle
 
 import requests_oauthlib
@@ -25,7 +26,7 @@ class Command(BaseCommand):
         if not curs.fetchall()[0][0]:
             raise CommandError("Failed to get advisory lock, existing twitter_post process stuck?")
 
-        articles = list(NewsArticle.objects.filter(tweeted=False, approved=True, date__gt=datetime.now() - timedelta(days=7)).order_by('date'))
+        articles = list(NewsArticle.objects.filter(tweeted=False, modstate=ModerationState.APPROVED, date__gt=datetime.now() - timedelta(days=7)).order_by('date'))
         if not len(articles):
             return
 
