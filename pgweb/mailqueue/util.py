@@ -51,8 +51,12 @@ def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, userge
     elif not usergenerated:
         msg['Auto-Submitted'] = 'auto-generated'
 
-    for h in headers.keys():
-        msg[h] = headers[h]
+    for h, v in headers.items():
+        if h in msg:
+            # Replace the existing header -- the one specified is supposedly overriding it
+            msg.replace_header(h, v)
+        else:
+            msg.add_header(h, v)
 
     if htmlbody:
         mpart = MIMEMultipart("alternative")
