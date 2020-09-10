@@ -143,7 +143,7 @@ class Organisation(TwostateModerateModel):
     lastconfirmed = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 
     account_edit_suburl = 'organisations'
-    moderation_fields = ['address', 'url', 'orgtype', 'managers']
+    moderation_fields = ['address', 'url', 'orgtype', 'managers_string']
 
     def __str__(self):
         return self.name
@@ -159,6 +159,14 @@ class Organisation(TwostateModerateModel):
     def get_formclass(self):
         from pgweb.core.forms import OrganisationForm
         return OrganisationForm
+
+    @property
+    def managers_string(self):
+        return ", ".join(["{} {} ({})".format(u.first_name, u.last_name, u.email) for u in self.managers.all()])
+
+    def get_field_description(self, f):
+        if f == 'managers_string':
+            return 'managers'
 
 
 class OrganisationEmail(models.Model):
