@@ -86,7 +86,7 @@ class OrganisationForm(forms.ModelForm):
             ops.append('Added email {}, confirmation request sent'.format(e.address))
         if self.cleaned_data.get('remove_email', None):
             for e in self.cleaned_data['remove_email']:
-                ops.append('Removed email {}'.format(e.email))
+                ops.append('Removed email {}'.format(e.address))
                 e.delete()
 
         if 'add_manager' in self.cleaned_data and self.cleaned_data['add_manager']:
