@@ -302,19 +302,21 @@ def _send_moderation_message(request, obj, message, notice, what):
         obj.account_edit_suburl,
     )
 
-    # Send message to org admin
+    # Send message to org admins
     if isinstance(obj, Organisation):
-        orgemail = obj.email
+        org = obj
     else:
-        orgemail = obj.org.email
+        org = obj.org
 
-    send_simple_mail(
-        settings.NOTIFICATION_FROM,
-        orgemail,
-        "Your submitted {} with title {}".format(obj._meta.verbose_name, obj.title),
-        msg,
-        suppress_auto_replies=False,
-    )
+    for m in org.managers.all():
+        send_simple_mail(
+            settings.NOTIFICATION_FROM,
+            m.email,
+            "Your submitted {} with title {}".format(obj._meta.verbose_name, obj.title),
+            msg,
+            suppress_auto_replies=False,
+            receivername='{} {}'.format(m.first_name, m.last_name),
+        )
 
     # Send notification to admins
     if what:
