@@ -24,16 +24,6 @@ managers for that organisation. You can find a list of organisations
 and managers <a href="orglist/">here</a>.
 </p>
 
-<h2>Migrated data</h2>
-<p>
-For most of the data migrated from the old website has unfortunately not
-been connected to the proper organisations and accounts. If you have any
-data submitted that is not properly connected to you (most likely this
-will be your account not being connected to the proper organisation(s)),
-please contact <a href="webmaster@postgresql.org">webmaster@postgresql.org</a>
-and let us know which objects to connect together.
-</p>
-
 {% for cat in modobjects %}
 <h2>Items {{cat.title}}</h2>
 {%for l in cat.objects %}
