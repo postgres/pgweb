@@ -16,6 +16,7 @@ from django.db import connection, transaction
 from datetime import datetime, timedelta
 
 from pgweb.account.models import SecondaryEmail
+from pgweb.core.models import OrganisationEmail
 
 
 class Command(BaseCommand):
@@ -34,3 +35,4 @@ class Command(BaseCommand):
         # Clean up old email change tokens
         with transaction.atomic():
             SecondaryEmail.objects.filter(confirmed=False, sentat__lt=datetime.now() - timedelta(hours=24)).delete()
+            OrganisationEmail.objects.filter(confirmed=False, added__lt=datetime.now() - timedelta(hours=72)).delete()

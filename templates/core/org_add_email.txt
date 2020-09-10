@@ -1,0 +1,13 @@
+Hello!
+
+You are receiving this email because this address was added
+to the organisation {{org}}
+on www.postgresql.org.
+
+If this is not correct, please ignore this email and the
+record of the address will be automatically deleted.
+
+If this is correct, please click the below link to confirm
+this email address.
+
+{{link_root}}/account/organisations/confirm/{{email.token}}/

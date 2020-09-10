@@ -30,6 +30,7 @@ from pgweb.util.moderation import ModerationState
 from pgweb.news.models import NewsArticle
 from pgweb.events.models import Event
 from pgweb.core.models import Organisation, UserProfile, ModerationNotification
+from pgweb.core.models import OrganisationEmail
 from pgweb.contributors.models import Contributor
 from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
@@ -275,6 +276,24 @@ def submitted_item_form(request, objtype, item):
                        redirect='/account/edit/{}/'.format(objtype),
                        formtemplate='account/submit_form.html',
                        extracontext=extracontext)
+
+
+@login_required
+@transaction.atomic
+def confirm_org_email(request, token):
+    try:
+        email = OrganisationEmail.objects.get(token=token)
+    except OrganisationEmail.DoesNotExist:
+        raise Http404()
+
+    if not email.org.managers.filter(pk=request.user.pk).exists():
+        raise PermissionDenied("You are not a manager of the associated organisation")
+
+    email.confirmed = True
+    email.token = None
+    email.save()
+
+    return HttpResponseRedirect('/account/organisations/{}/'.format(email.org.id))
 
 
 @content_sources('style', "'unsafe-inline'")

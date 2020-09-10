@@ -26,6 +26,7 @@ urlpatterns = [
     # Submitted items
     url(r'^(?P<objtype>news)/(?P<item>\d+)/(?P<what>submit|withdraw)/$', pgweb.account.views.submitted_item_submitwithdraw),
     url(r'^(?P<objtype>news|events|products|organisations|services)/(?P<item>\d+|new)/$', pgweb.account.views.submitted_item_form),
+    url(r'^organisations/confirm/([0-9a-f]+)/$', pgweb.account.views.confirm_org_email),
 
     # Organisation information
     url(r'^orglist/$', pgweb.account.views.orglist),

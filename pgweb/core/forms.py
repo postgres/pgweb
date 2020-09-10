@@ -2,15 +2,18 @@ from django import forms
 from django.forms import ValidationError
 from django.conf import settings
 
-from .models import Organisation
+from .models import Organisation, OrganisationEmail
 from django.contrib.auth.models import User
 
 from pgweb.util.middleware import get_current_user
 from pgweb.util.moderation import ModerationState
 from pgweb.mailqueue.util import send_simple_mail
+from pgweb.util.misc import send_template_mail, generate_random_token
 
 
 class OrganisationForm(forms.ModelForm):
+    remove_email = forms.ModelMultipleChoiceField(required=False, queryset=None, label="Current email addresses", help_text="Select one or more email addresses to remove")
+    add_email = forms.EmailField(required=False, help_text="Enter an email address to add")
     remove_manager = forms.ModelMultipleChoiceField(required=False, queryset=None, label="Current manager(s)", help_text="Select one or more managers to remove")
     add_manager = forms.EmailField(required=False)
 
@@ -25,6 +28,19 @@ class OrganisationForm(forms.ModelForm):
         else:
             del self.fields['remove_manager']
             del self.fields['add_manager']
+
+        if self.instance and self.instance.pk and self.instance.is_approved:
+            # Only allow adding/removing emails on orgs that are actually approved
+            self.fields['remove_email'].queryset = OrganisationEmail.objects.filter(org=self.instance)
+        else:
+            del self.fields['remove_email']
+            del self.fields['add_email']
+
+    def clean_add_email(self):
+        if self.cleaned_data['add_email']:
+            if OrganisationEmail.objects.filter(org=self.instance, address=self.cleaned_data['add_email'].lower()).exists():
+                raise ValidationError("This email is already registered for your organisation.")
+        return self.cleaned_data['add_email']
 
     def clean_add_manager(self):
         if self.cleaned_data['add_manager']:
@@ -49,7 +65,30 @@ class OrganisationForm(forms.ModelForm):
 
     def save(self, commit=True):
         model = super(OrganisationForm, self).save(commit=False)
+
         ops = []
+        if self.cleaned_data.get('add_email', None):
+            # Create the email record
+            e = OrganisationEmail(org=model, address=self.cleaned_data['add_email'].lower(), token=generate_random_token())
+            e.save()
+
+            # Send email for confirmation
+            send_template_mail(
+                settings.NOTIFICATION_FROM,
+                e.address,
+                "Email address added to postgresql.org organisation",
+                'core/org_add_email.txt',
+                {
+                    'org': model,
+                    'email': e,
+                },
+            )
+            ops.append('Added email {}, confirmation request sent'.format(e.address))
+        if self.cleaned_data.get('remove_email', None):
+            for e in self.cleaned_data['remove_email']:
+                ops.append('Removed email {}'.format(e.email))
+                e.delete()
+
         if 'add_manager' in self.cleaned_data and self.cleaned_data['add_manager']:
             u = User.objects.get(email=self.cleaned_data['add_manager'].lower())
             model.managers.add(u)
@@ -63,8 +102,8 @@ class OrganisationForm(forms.ModelForm):
             send_simple_mail(
                 settings.NOTIFICATION_FROM,
                 settings.NOTIFICATION_EMAIL,
-                "{0} modified managers of {1}".format(get_current_user().username, model),
-                "The following changes were made to managers:\n\n{0}".format("\n".join(ops))
+                "{0} modified {1}".format(get_current_user().username, model),
+                "The following changes were made to {}:\n\n{}".format(model, "\n".join(ops))
             )
         return model
 

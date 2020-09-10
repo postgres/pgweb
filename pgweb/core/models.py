@@ -133,8 +133,6 @@ class Organisation(TwostateModerateModel):
     name = models.CharField(max_length=100, null=False, blank=False, unique=True)
     address = models.TextField(null=False, blank=True)
     url = models.URLField(null=False, blank=False)
-    email = models.EmailField(null=False, blank=True)
-    phone = models.CharField(max_length=100, null=False, blank=True)
     orgtype = models.ForeignKey(OrganisationType, null=False, blank=False, verbose_name="Organisation type", on_delete=models.CASCADE)
     managers = models.ManyToManyField(User, blank=False)
     mailtemplate = models.CharField(max_length=50, null=False, blank=False, default='default', choices=_mail_template_choices,
@@ -145,7 +143,7 @@ class Organisation(TwostateModerateModel):
     lastconfirmed = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 
     account_edit_suburl = 'organisations'
-    moderation_fields = ['address', 'url', 'email', 'phone', 'orgtype', 'managers']
+    moderation_fields = ['address', 'url', 'orgtype', 'managers']
 
     def __str__(self):
         return self.name
@@ -161,6 +159,25 @@ class Organisation(TwostateModerateModel):
     def get_formclass(self):
         from pgweb.core.forms import OrganisationForm
         return OrganisationForm
+
+
+class OrganisationEmail(models.Model):
+    org = models.ForeignKey(Organisation, null=False, blank=False, on_delete=models.CASCADE)
+    address = models.EmailField(null=False, blank=False)
+    confirmed = models.BooleanField(null=False, blank=False, default=False)
+    token = models.CharField(max_length=100, null=True, blank=True)
+    added = models.DateTimeField(null=False, blank=False, auto_now_add=True)
+
+    class Meta:
+        ordering = ('org', 'address')
+        unique_together = (
+            ('org', 'address', ),
+        )
+
+    def __str__(self):
+        if self.confirmed:
+            return self.address
+        return "{} (not confirmed yet)".format(self.address)
 
 
 # Basic classes for importing external RSS feeds, such as planet

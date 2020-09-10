@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import date
-from pgweb.core.models import Organisation
+from pgweb.core.models import Organisation, OrganisationEmail
 from pgweb.util.moderation import TristateModerateModel, ModerationState, TwoModeratorsMixin
 
 from .util import send_news_email, render_news_template, embed_images_in_html
@@ -26,6 +26,7 @@ class NewsTag(models.Model):
 
 class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
     org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.", on_delete=models.CASCADE)
+    email = models.ForeignKey(OrganisationEmail, null=True, blank=True, verbose_name="Reply email", help_text="Pick a confirmed email associated with the organisation. This will be used as the reply address of posted news.", on_delete=models.CASCADE)
     date = models.DateField(null=False, blank=False, default=date.today)
     title = models.CharField(max_length=200, null=False, blank=False)
     content = models.TextField(null=False, blank=False)
@@ -34,8 +35,9 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
 
     account_edit_suburl = 'news'
     markdown_fields = ('content',)
-    moderation_fields = ('org', 'sentfrom', 'replyto', 'date', 'title', 'content', 'taglist')
-    preview_fields = ('title', 'sentfrom', 'replyto', 'content', 'taglist')
+    moderation_fields = ('org', 'sentfrom', 'email', 'date', 'title', 'content', 'taglist')
+    preview_fields = ('title', 'sentfrom', 'email', 'content', 'taglist')
+    notify_fields = ('org', 'email', 'date', 'title', 'content', 'tags')
     rendered_preview_fields = ('content', )
     extramodnotice = "In particular, note that news articles will be sent by email to subscribers, and therefor cannot be recalled in any way once sent."
 
@@ -61,10 +63,6 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
     @property
     def taglist(self):
         return ", ".join([t.name for t in self.tags.all()])
-
-    @property
-    def replyto(self):
-        return self.org.email
 
     @property
     def sentfrom(self):
@@ -100,7 +98,7 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
             return 'Title/subject'
         elif f == 'sentfrom':
             return 'Sent from'
-        elif f == 'replyto':
+        elif f == 'email':
             return 'Direct replies to'
         elif f == 'taglist':
             return 'List of tags'

@@ -91,7 +91,7 @@ def send_news_email(news):
         settings.NEWS_MAIL_RECEIVER,
         news.title,
         news.content,
-        replyto=news.replyto,
+        replyto=news.email.address,
         sendername=news.sentfrom,
         receivername=settings.NEWS_MAIL_RECEIVER_NAME,
         messageid=messageid,
