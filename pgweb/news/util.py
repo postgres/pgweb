@@ -98,5 +98,4 @@ def send_news_email(news):
         htmlbody=html,
         attachments=attachments,
         headers=headers,
-        usergenerated=True,
     )

@@ -48,7 +48,6 @@ def submitbug(request):
                         'bugid': bugid,
                         'bug': form.cleaned_data,
                     },
-                    usergenerated=True,
                     cc=form.cleaned_data['email'],
                     replyto='%s, %s' % (form.cleaned_data['email'], settings.BUGREPORT_EMAIL),
                     sendername="PG Bug reporting form",

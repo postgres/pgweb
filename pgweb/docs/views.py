@@ -339,7 +339,6 @@ def commentform(request, itemid, version, filename):
                     'filename': filename,
                     'details': form.cleaned_data['details'],
                 },
-                usergenerated=True,
                 cc=form.cleaned_data['email'],
                 replyto='%s, %s' % (form.cleaned_data['email'], settings.DOCSREPORT_EMAIL),
                 sendername='PG Doc comments form'
