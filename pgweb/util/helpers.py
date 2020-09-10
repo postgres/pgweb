@@ -80,8 +80,14 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
             # bother notifying about the changes. But if it lacks this field, we notify
             # about everything, as well as if the field exists and the item has already
             # been approved.
-            # Newly added objects are always notified.
-            if not is_new:
+            # Newly added objects are always notified if they are two-state, but not if they
+            # are tri-state (in which case they get notified when submitted for
+            # moderation).
+            if is_new:
+                if hasattr(instance, 'modstate'):
+                    # Tri-state indicated by the existence of the modstate field
+                    do_notify = False
+            else:
                 if hasattr(instance, 'approved'):
                     if not getattr(instance, 'approved', True):
                         do_notify = False
