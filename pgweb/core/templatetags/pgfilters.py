@@ -83,6 +83,19 @@ def release_notes_pg_minor_version(minor_version, major_version):
     return minor_version
 
 
+@register.filter()
+def joinandor(value, andor):
+    # Value is a list of objects. Join them on comma, add "and" or "or" before the last.
+    if len(value) == 1:
+        return str(value[0])
+
+    if not isinstance(value, list):
+        # Must have a list to index from the end
+        value = list(value)
+
+    return ", ".join([str(x) for x in value[:-1]]) + ' ' + andor + ' ' + str(value[-1])
+
+
 @register.simple_tag(takes_context=True)
 def git_changes_link(context):
     return mark_safe('<a href="https://git.postgresql.org/gitweb/?p=pgweb.git;a=history;f=templates/{}">View</a> change history.'.format(context.template_name))
