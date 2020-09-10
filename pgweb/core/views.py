@@ -412,6 +412,8 @@ def admin_moderate(request, objtype, objid):
                     obj.date = date.today()
                     savefields.append('date')
 
+                if hasattr(obj, 'on_approval'):
+                    obj.on_approval(request)
             elif modstate == ModerationState.REJECTED:
                 _send_moderation_message(request,
                                          obj,

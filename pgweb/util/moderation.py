@@ -12,12 +12,23 @@ class ModerateModel(models.Model):
         yield k
 
         try:
-            yield self._meta.get_field(k).verbose_name.capitalize()
+            d = self.get_field_description(k)
         except Exception:
-            yield k.capitalize()
+            d = None
+
+        if d:
+            yield d.capitalize()
+        else:
+            try:
+                yield self._meta.get_field(k).verbose_name.capitalize()
+            except Exception:
+                yield k.capitalize()
+
         yield val
 
-        if k in getattr(self, 'markdown_fields', []):
+        if k in getattr(self, 'rendered_preview_fields', []):
+            yield self.render_preview_field(k, val)
+        elif k in getattr(self, 'markdown_fields', []):
             yield markdown.markdown(val)
         else:
             yield None

@@ -11,13 +11,11 @@ window.onload = function() {
     let previews = document.getElementsByClassName('mdpreview');
     for (let i = 0; i < previews.length; i++) {
         let iframe = previews[i];
-        let textdiv = iframe.previousElementSibling;
+        let textdiv = iframe.parentElement.previousElementSibling.getElementsByClassName('txtpreview')[0]
         let hiddendiv = iframe.nextElementSibling;
 
         /* Copy the HTML into the iframe */
         iframe.srcdoc = hiddendiv.innerHTML;
-
-        /* Maybe we should apply *some* stylesheet here? */
 
         /* Resize the height to to be the same */
         if (textdiv.offsetHeight > iframe.offsetHeight)

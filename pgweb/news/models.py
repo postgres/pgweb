@@ -3,6 +3,8 @@ from datetime import date
 from pgweb.core.models import Organisation
 from pgweb.util.moderation import TristateModerateModel, ModerationState, TwoModeratorsMixin
 
+from .util import send_news_email, render_news_template, embed_images_in_html
+
 
 class NewsTag(models.Model):
     urlname = models.CharField(max_length=20, null=False, blank=False, unique=True)
@@ -32,8 +34,9 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
 
     account_edit_suburl = 'news'
     markdown_fields = ('content',)
-    moderation_fields = ('org', 'date', 'title', 'content', 'taglist')
-    preview_fields = ('title', 'content', 'taglist')
+    moderation_fields = ('org', 'sentfrom', 'replyto', 'date', 'title', 'content', 'taglist')
+    preview_fields = ('title', 'sentfrom', 'replyto', 'content', 'taglist')
+    rendered_preview_fields = ('content', )
     extramodnotice = "In particular, note that news articles will be sent by email to subscribers, and therefor cannot be recalled in any way once sent."
 
     def purge_urls(self):
@@ -60,6 +63,14 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
         return ", ".join([t.name for t in self.tags.all()])
 
     @property
+    def replyto(self):
+        return self.org.email
+
+    @property
+    def sentfrom(self):
+        return self.org.fromnameoverride if self.org.fromnameoverride else '{} via PostgreSQL Announce'.format(self.org.name)
+
+    @property
     def displaydate(self):
         return self.date.strftime("%Y-%m-%d")
 
@@ -75,3 +86,23 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
     def block_edit(self):
         # Don't allow editing of news articles that have been published
         return self.modstate in (ModerationState.PENDING, ModerationState.APPROVED)
+
+    def on_approval(self, request):
+        send_news_email(self)
+
+    def render_preview_field(self, fieldname, val):
+        if fieldname == 'content':
+            html, attachments = render_news_template(self)
+            return embed_images_in_html(html, attachments)
+
+    def get_field_description(self, f):
+        if f == 'title':
+            return 'Title/subject'
+        elif f == 'sentfrom':
+            return 'Sent from'
+        elif f == 'replyto':
+            return 'Direct replies to'
+        elif f == 'taglist':
+            return 'List of tags'
+        elif f == 'content':
+            return 'Content preview'

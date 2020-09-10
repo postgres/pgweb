@@ -18,7 +18,7 @@
 {%for fld, title, contents, mdcontents, note in preview %}
 <div class="row">
   <div class="col-sm-2 col-form-label"><strong>{{title}}</strong></div>
-  <div class="col-sm-10">{%if mdcontents%}{{mdcontents|safe}}{%else%}{{contents}}{%endif%}</div>
+  <div class="col-sm-10">{%if mdcontents%}<div class="moderation-mdpreview-wrap">{{mdcontents|safe}}</div>{%else%}{{contents}}{%endif%}</div>
 </div>
 {%endfor%}
 

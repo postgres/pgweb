@@ -1447,6 +1447,11 @@ table.sponsor-table tbody tr td:nth-child(3) {
   display: block;
 }
 
+/* Moderation preview */
+.moderation-mdpreview-wrap {
+    max-width: 650px;
+}
+
 
 /** ALL RESPONSIVE QUERIES HERE */
 /* Small devices (landscape phones, 576px and up)*/

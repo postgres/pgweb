@@ -39,9 +39,15 @@
       <div class="form-row moderation-form-row">
         <div style="width: 200px;">{{title}}</div>
 {%if mdcontents%}
+	<div class="txtpreviewwrap">
+	  <h3>Markdown/text preview</h3>
           <div class="txtpreview">{{contents}}</div>
+	</div>
+	<div class="mdpreviewwrap">
+	  <h3>HTML preview</h3>
 	  <iframe class="mdpreview" src="about:blank" sandbox="allow-same-origin"></iframe>
           <div class="mdpreview-data">{{mdcontents|safe}}</div>
+	</div>
 {%else%}
           <div class="simplepreview">{{contents}}
 {%if note%}<div class="modhelp">{{note}}</div>{%endif%}

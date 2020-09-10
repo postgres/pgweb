@@ -16,7 +16,7 @@ class OrganisationForm(forms.ModelForm):
 
     class Meta:
         model = Organisation
-        exclude = ('lastconfirmed', 'approved', 'managers', )
+        exclude = ('lastconfirmed', 'approved', 'managers', 'mailtemplate', 'fromnameoverride')
 
     def __init__(self, *args, **kwargs):
         super(OrganisationForm, self).__init__(*args, **kwargs)
