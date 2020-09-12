@@ -30,7 +30,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^$', pgweb.core.views.home),
-    url(r'^dyncss/(?P<css>base|docs).css$', pgweb.core.views.dynamic_css),
+    url(r'^dyncss/(?P<css>base).css$', pgweb.core.views.dynamic_css),
 
     url(r'^about/$', pgweb.core.views.about),
     url(r'^about/newsarchive/([^/]+/)?$', pgweb.news.views.archive),
