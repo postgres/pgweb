@@ -41,7 +41,7 @@ Django is released under its `BSD Licence <https://github.com/django/django/blob
 Bootstrap is released under the `MIT Licence <https://github.com/twbs/bootstrap/blob/master/LICENSE>`_.
 and includes the following software as well:
 
-- jQuery & jQuery UI under the `MIT Licence <https://jquery.org/license/>`_
+- jQuery under the `MIT Licence <https://jquery.org/license/>`_
 - Popper under the `MIT Licence <https://github.com/FezVrasta/popper.js/blob/master/LICENSE.md>`_
 
 Font Awesome has a `combination of licences <https://fontawesome.com/license>`_:
