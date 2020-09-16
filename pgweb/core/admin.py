@@ -2,6 +2,7 @@ from django import forms
 from django.contrib import admin
 
 from pgweb.core.models import Version, OrganisationType, Organisation
+from pgweb.core.models import OrganisationEmail
 from pgweb.core.models import ImportedRSSFeed, ImportedRSSItem
 from pgweb.core.models import ModerationNotification
 
@@ -15,6 +16,10 @@ class OrganisationAdminForm(forms.ModelForm):
         super(OrganisationAdminForm, self).__init__(*args, **kwargs)
 
 
+class OrganisationEmailInline(admin.TabularInline):
+    model = OrganisationEmail
+
+
 class OrganisationAdmin(admin.ModelAdmin):
     form = OrganisationAdminForm
     list_display = ('name', 'approved', 'lastconfirmed',)
@@ -22,6 +27,9 @@ class OrganisationAdmin(admin.ModelAdmin):
     ordering = ('name', )
     search_fields = ('name', )
     autocomplete_fields = ['managers', ]
+    inlines = [
+        OrganisationEmailInline,
+    ]
 
 
 class VersionAdmin(admin.ModelAdmin):
