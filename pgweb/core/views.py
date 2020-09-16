@@ -322,7 +322,9 @@ def _send_moderation_message(request, obj, message, notice, what):
         if notice:
             admmsg += "\n\nModeration notice:\n{}".format(notice)
 
-        admmsg += "\n\nEdit at: {}/admin/_moderate/{}/{}/\n".format(settings.SITE_ROOT, obj._meta.model_name, obj.id)
+        if what != "rejected":
+            # No point in sending an edit link to a page that doesn't exist anymore
+            admmsg += "\n\nEdit at: {}/admin/_moderate/{}/{}/\n".format(settings.SITE_ROOT, obj._meta.model_name, obj.id)
 
         if obj.twomoderators:
             modname = "{} and {}".format(obj.firstmoderator, request.user)
