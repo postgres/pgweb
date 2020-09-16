@@ -7,21 +7,11 @@ from pgweb.core.models import ImportedRSSFeed, ImportedRSSItem
 from pgweb.core.models import ModerationNotification
 
 
-class OrganisationAdminForm(forms.ModelForm):
-    class Meta:
-        model = Organisation
-        exclude = ()
-
-    def __init__(self, *args, **kwargs):
-        super(OrganisationAdminForm, self).__init__(*args, **kwargs)
-
-
 class OrganisationEmailInline(admin.TabularInline):
     model = OrganisationEmail
 
 
 class OrganisationAdmin(admin.ModelAdmin):
-    form = OrganisationAdminForm
     list_display = ('name', 'approved', 'lastconfirmed',)
     list_filter = ('approved',)
     ordering = ('name', )
