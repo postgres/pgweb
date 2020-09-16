@@ -20,7 +20,7 @@ import hashlib
 
 from pgweb.util.decorators import cache, nocache
 from pgweb.util.contexts import render_pgweb, get_nav_menu, PGWebContextProcessor
-from pgweb.util.helpers import simple_form, PgXmlHelper
+from pgweb.util.helpers import PgXmlHelper
 from pgweb.util.moderation import get_all_pending_moderations, get_moderation_model, ModerationState
 from pgweb.util.misc import get_client_ip, varnish_purge, varnish_purge_expr, varnish_purge_xkey
 from pgweb.util.sitestruct import get_all_pages_struct
