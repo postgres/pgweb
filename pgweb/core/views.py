@@ -326,7 +326,9 @@ def _send_moderation_message(request, obj, message, notice, what):
             # No point in sending an edit link to a page that doesn't exist anymore
             admmsg += "\n\nEdit at: {}/admin/_moderate/{}/{}/\n".format(settings.SITE_ROOT, obj._meta.model_name, obj.id)
 
-        if obj.twomoderators:
+        if obj.twomoderators and obj.firstmoderator:
+            # For two-moderator objects, only one is required to reject or send back for editing. In that case,
+            # just log the current user who is the one that did that.
             modname = "{} and {}".format(obj.firstmoderator, request.user)
         else:
             modname = request.user
