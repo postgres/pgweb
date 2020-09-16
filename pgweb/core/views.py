@@ -16,6 +16,7 @@ from datetime import date, datetime, timedelta
 import os
 import re
 import urllib.parse
+import hashlib
 
 from pgweb.util.decorators import cache, nocache
 from pgweb.util.contexts import render_pgweb, get_nav_menu, PGWebContextProcessor
@@ -471,19 +472,28 @@ def admin_purge(request):
     if request.method == 'POST':
         url = request.POST['url']
         expr = request.POST['expr']
+        template = request.POST['template']
         xkey = request.POST['xkey']
-        l = len([_f for _f in [url, expr, xkey] if _f])
+        l = len([_f for _f in [url, expr, template, xkey] if _f])
         if l == 0:
             # Nothing specified
             return HttpResponseRedirect('.')
         elif l > 1:
-            messages.error(request, "Can only specify one of url, expression and xkey!")
+            messages.error(request, "Can only specify one of url, expression, template and xkey!")
             return HttpResponseRedirect('.')
 
         if url:
             varnish_purge(url)
         elif expr:
             varnish_purge_expr(expr)
+        elif template:
+            path = os.path.abspath(os.path.join(settings.PROJECT_ROOT, '../templates', template))
+            if not os.path.isfile(path):
+                messages.error(request, "Template {} does not exist!".format(template))
+                return HttpResponseRedirect('.')
+            # Calculate the xkey
+            xkey = "pgwt_{}".format(hashlib.md5(template.encode('ascii')).hexdigest())
+            varnish_purge_xkey(xkey)
         else:
             varnish_purge_xkey(xkey)
 
