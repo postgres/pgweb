@@ -15,7 +15,7 @@ import requests
 
 # Directories, specified from the root of the ftp tree and down, that
 # will be recursively excluded from the pickle.
-exclude_roots = ['/repos', ]
+exclude_roots = ['/repos', '/pgadmin/pgadmin4/apt', '/pgadmin/pgadmin4/yum']
 
 allnodes = {}
 
