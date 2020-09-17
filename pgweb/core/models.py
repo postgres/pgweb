@@ -168,6 +168,9 @@ class Organisation(TwostateModerateModel):
         if f == 'managers_string':
             return 'managers'
 
+    def verify_submitter(self, user):
+        return self.managers.filter(pk=user.pk).exists()
+
 
 class OrganisationEmail(models.Model):
     org = models.ForeignKey(Organisation, null=False, blank=False, on_delete=models.CASCADE)
