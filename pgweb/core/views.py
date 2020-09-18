@@ -378,7 +378,7 @@ def _send_moderation_message(request, obj, message, notice, what):
 
         send_simple_mail(settings.NOTIFICATION_FROM,
                          settings.NOTIFICATION_EMAIL,
-                         "{} {} by {}".format(obj._meta.verbose_name.capitalize(), what, modname),
+                         "{} '{}' {} by {}".format(obj._meta.verbose_name.capitalize(), obj.title, what, modname),
                          admmsg)
 
 

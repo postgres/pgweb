@@ -312,12 +312,13 @@ def _submitted_item_submit(request, objtype, model, obj):
 
                 send_simple_mail(settings.NOTIFICATION_FROM,
                                  settings.NOTIFICATION_EMAIL,
-                                 "{} {} submitted".format(obj._meta.verbose_name.capitalize(), obj.id),
-                                 "{} {} with title '{}' submitted for moderation by {}".format(
+                                 "{} '{}' submitted for moderation".format(obj._meta.verbose_name.capitalize(), obj.title),
+                                 "{} {} with title '{}' submitted for moderation by {}\n\nModerate at: {}\n".format(
                                      obj._meta.verbose_name.capitalize(),
                                      obj.id,
                                      obj.title,
-                                     request.user.username
+                                     request.user.username,
+                                     '{}/admin/_moderate/{}/{}/'.format(settings.SITE_ROOT, obj._meta.model_name, obj.pk),
                                  ),
                                  )
                 return HttpResponseRedirect("/account/edit/{}/".format(objtype))
@@ -348,7 +349,7 @@ def _submitted_item_withdraw(request, objtype, model, obj):
     send_simple_mail(
         settings.NOTIFICATION_FROM,
         settings.NOTIFICATION_EMAIL,
-        "{} {} withdrawn from moderation".format(model._meta.verbose_name.capitalize(), obj.id),
+        "{} '{}' withdrawn from moderation".format(model._meta.verbose_name.capitalize(), obj.title),
         "{} {} with title {} withdrawn from moderation by {}".format(
             model._meta.verbose_name.capitalize(),
             obj.id,
