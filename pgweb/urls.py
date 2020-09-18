@@ -149,6 +149,7 @@ urlpatterns = [
     url(r'^admin/purge/$', pgweb.core.views.admin_purge),
     url(r'^admin/mergeorg/$', pgweb.core.views.admin_mergeorg),
     url(r'^admin/_moderate/(\w+)/(\d+)/$', pgweb.core.views.admin_moderate),
+    url(r'^admin/auth/user/(\d+)/change/resetpassword/$', pgweb.core.views.admin_resetpassword),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', admin.site.urls),

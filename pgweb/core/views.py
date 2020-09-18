@@ -3,12 +3,16 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.http import HttpResponseNotModified
 from django.core.exceptions import PermissionDenied
 from django.template import TemplateDoesNotExist, loader
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.tokens import default_token_generator
 from pgweb.util.decorators import login_required, content_sources
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.db import connection, transaction
 from django.utils.http import http_date, parse_http_date
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
 from django.conf import settings
 import django
 
@@ -17,14 +21,17 @@ import os
 import re
 import urllib.parse
 import hashlib
+import logging
 
 from pgweb.util.decorators import cache, nocache
 from pgweb.util.contexts import render_pgweb, get_nav_menu, PGWebContextProcessor
 from pgweb.util.helpers import PgXmlHelper
 from pgweb.util.moderation import get_all_pending_moderations, get_moderation_model, ModerationState
 from pgweb.util.misc import get_client_ip, varnish_purge, varnish_purge_expr, varnish_purge_xkey
+from pgweb.util.misc import send_template_mail
 from pgweb.util.sitestruct import get_all_pages_struct
 from pgweb.mailqueue.util import send_simple_mail
+from pgweb.account.views import OAUTH_PASSWORD_STORE
 
 # models needed for the pieces on the frontpage
 from pgweb.news.models import NewsArticle, NewsTag
@@ -37,7 +44,9 @@ from pgweb.survey.models import Survey
 
 # models and forms needed for core objects
 from .models import Organisation
-from .forms import MergeOrgsForm, ModerationForm
+from .forms import MergeOrgsForm, ModerationForm, AdminResetPasswordForm
+
+log = logging.getLogger(__name__)
 
 
 # Front page view
@@ -263,6 +272,39 @@ def sync_timestamp(request):
     r = HttpResponse(s, content_type='text/plain')
     r['Content-Length'] = len(s)
     return r
+
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def admin_resetpassword(request, userid):
+    user = get_object_or_404(User, pk=userid)
+
+    if request.method == 'POST':
+        form = AdminResetPasswordForm(data=request.POST)
+        if form.is_valid():
+            log.info("Admin {0} initiating password reset for {1}".format(request.user.username, user.email))
+            token = default_token_generator.make_token(user)
+            send_template_mail(
+                settings.ACCOUNTS_NOREPLY_FROM,
+                user.email,
+                'Password reset for your postgresql.org account',
+                'account/password_reset_email.txt',
+                {
+                    'user': user,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': token,
+                },
+            )
+            messages.info(request, "Password reset token sent.")
+            return HttpResponseRedirect("../")
+    else:
+        form = AdminResetPasswordForm()
+
+    return render(request, 'core/admin_reset_password.html', {
+        'is_oauth': user.password == OAUTH_PASSWORD_STORE,
+        'user': user,
+        'form': form,
+    })
 
 
 # List of all unapproved objects, for the special admin page

@@ -5,9 +5,11 @@ from django.contrib.auth.models import User
 from django import forms
 
 import base64
+import re
 
 from pgweb.util.widgets import TemplateRenderWidget
 from pgweb.util.db import exec_to_dict
+from pgweb.account.views import OAUTH_PASSWORD_STORE
 
 from .models import CommunityAuthSite, CommunityAuthOrg
 
@@ -46,6 +48,7 @@ class CommunityAuthSiteAdmin(admin.ModelAdmin):
 
 
 class PGUserChangeForm(UserChangeForm):
+    passwordinfo = forms.CharField(label="Password information", required=False)
     logininfo = forms.CharField(label="Community login history", required=False)
 
     def __init__(self, *args, **kwargs):
@@ -57,6 +60,13 @@ class PGUserChangeForm(UserChangeForm):
         if self.fields.get('username'):
             del self.fields['username']
 
+        self.fields['passwordinfo'].widget = TemplateRenderWidget(
+            template='forms/widgets/community_auth_password_info.html',
+            context={
+                'type': self.password_type(self.instance),
+            },
+        )
+
         self.fields['logininfo'].widget = TemplateRenderWidget(
             template='forms/widgets/community_auth_usage_widget.html',
             context={
@@ -64,6 +74,18 @@ class PGUserChangeForm(UserChangeForm):
                     'userid': self.instance.pk,
                 }),
             })
+
+    def password_type(self, obj):
+        if obj.password == OAUTH_PASSWORD_STORE:
+            return "OAuth integrated"
+        elif obj.password.startswith('pbkdf2_'):
+            return "Regular password"
+        elif obj.password.startswith('sha1_'):
+            return "Old SHA1 password"
+        elif re.match('^[a-z0-9]{64}'):
+            return "Old unknown hash"
+        else:
+            return "Unknown"
 
 
 class PGUserAdmin(UserAdmin):
@@ -82,6 +104,8 @@ class PGUserAdmin(UserAdmin):
         fs.append(
             ('Community authentication', {'fields': ('logininfo', )}),
         )
+        if 'passwordinfo' not in fs[0][1]['fields']:
+            fs[0][1]['fields'] = list(fs[0][1]['fields']) + ['passwordinfo', ]
         return fs
 
 

@@ -158,3 +158,7 @@ class ModerationForm(forms.Form):
             self.add_error('modnote', ("Moderation notices cannot be sent on first-moderator approvals for objects that require two moderators."))
 
         return cleaned_data
+
+
+class AdminResetPasswordForm(forms.Form):
+    confirm = forms.BooleanField(required=True, label="Confirm that you want to reset this password")
