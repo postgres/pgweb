@@ -1,0 +1,139 @@
+{% extends "pages/about/press/presskit13/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 13 Released!</h1>
+
+<p>오늘, PostgreSQL 글로벌 개발 그룹은
+<a href="https://www.postgresql.org/">세상에서 가장 진보적인 공개 소스 데이터베이스</a>의
+가장 최신 버전인 <a href="/docs/13/release-13.html">PostgreSQL 13</a>이
+출시되었음을 알립니다.</p>
+<p>PostgreSQL 13에는 인덱스 공간 절약 및 성능 향상, 집계 또는 파티션을 사용하는 쿼리에서
+더 빠른 응답 시간, 향상된 통계 정보를 사용해서 더 나은 쿼리 실행 계획 만들기 등이
+포함되었습니다. 그래서, 대규모 데이터베이스에 필요한 빠른 인덱스 처리와 빠른 조회
+처리 부분이 이전 버전보다 더 좋아졌습니다.</p>
+
+<p><a href="/docs/13/sql-vacuum.html">병렬 청소</a>나
+<a href="/docs/13/runtime-config-query.html#GUC-ENABLE-INCREMENTAL-SORT">증분 정렬</a> 같이
+요청이 많은 기능을 포함해서 PostgreSQL 13은 일상적인 관리 업무 최적화,
+응용프로그램 개발자를 위한 더 많은 편의성 및 보안 강화를 통해,
+크고 작은 업무량에 대해 더 나은 데이터 관리 경험을 제공합니다.</p>
+<p>PostgreSQL 코어 팀원인 Peter Eisentraut는 &quot;세상에서 가장 진보적인 공개 소스 관계형
+데이터베이스인 PostgreSQL 13의 성능과 기능 향상은 우리 글로벌 커뮤니티의 협력과 헌신으로
+나왔습니다. 새 버전이 나올 때 마다 보여준 혁신과 안정성 대한 평판이
+더 많은 사람들이 응용 프로그램에서 PostgreSQL을 사용하는 이유입니다.&quot;
+라고 말했습니다.</p>
+
+<p>신뢰성과 견고성으로 유명한 혁신적인 데이터 관리 시스템인
+<a href="https://www.postgresql.org">PostgreSQL</a>은
+<a href="/community/">글로벌 개발자 커뮤니티</a>에서
+25년 이상 공개 소스로 개발하고 있습니다. 이렇게 해서  모든 규모의 조직에서 사용하는
+공개 소스 관계형 데이터베이스가 되었습니다.</p>
+
+<h3 id="-">계속되는 성능 향상</h3>
+
+<p>이전 PostgreSQL 배포판에 이어, PostgreSQL 13에서는 표준 데이터베이스 인덱스인
+<a href="/docs/13/btree-implementation.html#BTREE-DEDUPLICATION">B-트리 인덱스에서 중복 제거</a> 기능이
+추가되었습니다. 링크에서 소개한 기법을 통해
+B-트리 인덱스 크기를 줄이고, 쿼리 성능을 개선했습니다.</p>
+
+<p>PostgreSQL 13에서는 증분 정렬 기능이 추가되었습니다. 정렬을 추가로
+더 해야 할 경우, 이전에 작업한 정렬 자료를 다시 사용해서, 후속 정렬
+작업 속도를 높였습니다. 또한 <a href="/docs/13/sql-createstatistics.html"><code>CREATE STATISTICS</code></a> 명령을
+제공해 <a href="/docs/13/planner-stats.html#PLANNER-STATS-EXTENDED">확장된 통계정보</a>를
+만들 수 있었는데, 이번 버전에서는 여기서 <code>OR</code>, <code>IN</code>/<code>ANY</code>  조건 검색 성능을 높였습니다.</p>
+
+<p>PostgreSQL 13에서는 <a href="/docs/13/functions-aggregate.html">집계 함수</a>나
+<a href="/docs/13/queries-table-expressions.html#QUERIES-GROUPING-SETS">그룹 집합</a>을
+사용하는 쿼리에서 해시 집계 기능이 도입되었습니다.
+이렇게 해서 메모리를 용량보다 많은 집계 작업에서 그 처리량을 줄일 수 있어,
+성능을 개선했습니다. 또한 <a href="/docs/13/ddl-partitioning.html">파티션 테이블</a>을
+사용하는 쿼리에서 하위 파티션 테이블 선별 기능이 이전 버전보다 개선되어,
+이전보다 많은 종류의 쿼리에서 원하는 하위 파티션 테이블만 조회할 수 있게 되었습니다.</p>
+
+<h3 id="-">관리 최적화</h3>
+
+<p>변경된 옛 자료나, 지워진 자료를 정리해서 저장 공간을 효율화하는
+<a href="/docs/13/routine-vacuuming.html">테이블 청소, vacuum</a> 기능은
+PostgreSQL 관리 부분 가운데 핵심적인 부분입니다. 하지만 이 작업은 데이터베이스 관리
+입장에서 항상 부담이기에 예전 버전부터 이 기능 개선점을 꾸준히 도입하고 있었습니다.</p>
+
+<p>PostgreSQL 13에서도 이 청소 작업 개선 작업의 하나로,
+<a href="/docs/13/sql-vacuum.html">병렬 인덱스 청소</a> 기능을
+도입했습니다. 또한 관리자가 직접, 이 병렬 작업 프로세스 개수를 청소 작업을 지시할 때
+지정할 수도 있습니다. 또한 자료 삽입 작업 대상도 이제 autovacuum 프로세스가
+작동되도록 지정할 수 있습니다.</p>
+
+<p>복제 환경에서 미리 쓰기 로그(WAL)를 보조 서버로 넘겨주기도 전에 그것이 지워지는 문제를
+막기 위해 도입한 <a href="/docs/13/warm-standby.html#STREAMING-REPLICATION-SLOTS">복제 슬롯</a>과
+관련해서 <a href="/docs/13/runtime-config-replication.html#GUC-MAX-SLOT-WAL-KEEP-SIZE">남길 최대 WAL 파일 수</a>를
+지정할 수 있습니다. 이렇게 해서 디스크 여유 공간이 없어 발생할 수 있는 장애를 피할 수 있습니다.</p>
+
+<p>PostgreSQL 13에서는 관리자가 데이터베이스를 모니터링하는데 편리한 기능들이
+추가되었습니다. <code>EXPLAIN</code> 결과에서 WAL 사용 통계 정보를 볼 수 있고,
+베이스 백업 작업의 진행 상태를 볼 수 있고,
+<code>ANALYZE</code> 진행 상태를 볼 수 있습니다.
+또한, <a href="/docs/13/app-pgbasebackup.html"><code>pg_basebackup</code></a> 작업 결과물이
+정상적인지 확인하는 <a href="/docs/13/app-pgverifybackup.html"><code>pg_verifybackup</code></a> 명령어도
+새로 제공합니다.</p>
+
+<h3 id="-">응용 프로그램 개발 편의성</h3>
+
+<p>PostgreSQL 13에서는 다양한 외부 자료형을 PostgreSQL 내부 자료형으로 바꾸는 것이 더
+편해졌습니다.  이번 배포판에는 SQL/JSON 패스에서 사용하는
+ISO 8601 문자열 형식의 시간 값을 PostgreSQL 기본 자료형으로 변환하는
+<a href="/docs/13/functions-json.html#FUNCTIONS-SQLJSON-OP-TABLE"><code>datetime()</code></a>
+함수가 추가되었습니다.  또한, UUID v4 형식의 값을 만드는
+<a href="/docs/13/functions-uuid.html"><code>gen_random_uuid()</code></a> 함수도
+메인 코드 안에 포함되었습니다. 이제 확장 모듈을 추가하지 않아도 됩니다.</p>
+
+<p>파티션 테이블 기능들이 좀 더 유연해졌습니다. 이제 논리 복제에서도 파티션 테이블을
+사용할 수 있으며, 로우 수준 BEFORE 트리거도 사용할 수 있습니다.</p>
+
+<p>SELECT 구문에서 사용하는
+<a href="/docs/13/sql-select.html#SQL-LIMIT"><code>FETCH FIRST</code></a> 옵션에서
+<code>WITH TIES</code> 구문이 추가되었습니다.  이 구문이 추가되면,
+해당 <code>ORDER BY</code> 조건에 만족하는 모든 자료가 &quot;묶여서&quot; 출력됩니다.</p>
+
+<h3 id="-">보안 기능 향상</h3>
+
+<p>PostgreSQL 확장 기능은 개발자가 직접 데이터베이스 기능을 확장할 수 있는
+확장 모듈을 만들어서 쓸 방법을 제공합니다.  이전 버전까지는
+이 새 확장 모듈은 데이터베이스 슈퍼유저만 설치할 수 있었습니다.
+이제 슈퍼유저가 해당 확장 모듈에 &quot;신뢰할 수 있는&quot; 표시를 해두면,
+일반 사용자 권한으로도
+&quot;<a href="/docs/13/sql-createextension.html">신뢰할 수 있는 확장 모듈</a>&quot;을
+직접 설치해서 사용할 수 있습니다.
+기본 제공하고 있는
+<a href="/docs/13/pgcrypto.html"><code>pgcrypto</code></a>,
+<a href="/docs/13/tablefunc.html"><code>tablefunc</code></a>,
+<a href="/docs/13/hstore.html"><code>hstore</code></a>, 등 여러 모듈은
+이제 신뢰할 수 있는 모듈로 지정되었고, 일반 사용자가 바로 설치해서 사용할 수 있습니다.</p>
+
+<p>응용 프로그램 접속에서,
+PostgreSQL 13에서는 <a href="/docs/13/sasl-authentication.html#SASL-SCRAM-SHA-256">SCRAM 인증</a>을
+사용하는 경우 <a href="/docs/13/libpq-connect.html#LIBPQ-CONNECT-CHANNEL-BINDING">채널 바인딩 필요</a> 옵션을
+사용할 수 있으며, PostgreSQL 외부 자료 싸개 확장
+모듈(<a href="/docs/13/postgres-fdw.html"><code>postgres_fdw</code></a>)에서 이제 인증서 기반 인증을
+사용할 수 있습니다.</p>
+
+<h3 id="postgresql-">PostgreSQL이란?</h3>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a>은 수천 명의 사용자, 공헌자, 회사 및
+조직의 범세계적 커뮤니티가 사용, 개발하는 세계에서 가장 진보적인 공개 소스
+데이터베이스입니다. PostgreSQL 프로젝트는 캘리포니아 버클리 대학에서 시작하여
+30년이 넘는 공학을 기반으로 빠른 속도로 계속 개발되고 있습니다. PostgreSQL의
+완성도 높은 기능들은 상용 데이터베이스 시스템과 거의 같으며, 확장성, 보안 및
+안정성 측면의 한 발 앞선 기능들은 더 뛰어납니다.</p>
+
+<h3 id="links">Links</h3>
+
+<ul>
+  <li><a href="/download/">Download</a></li>
+  <li><a href="/docs/13/release-13.html">Release Notes</a></li>
+  <li><a href="/about/press/">Press Kit</a></li>
+  <li><a href="/support/security/">Security Page</a></li>
+  <li><a href="/support/versioning/">Versioning Policy</a></li>
+  <li><a href="https://twitter.com/postgresql">Follow @postgresql on Twitter</a></li>
+</ul>
+
+{% endblock presskit_content %}

@@ -1,0 +1,99 @@
+{% extends "pages/about/press/presskit13/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 13 Released!</h1>
+
+<p>
+  PostgreSQL Global Development Groupは本日、世界で<a href="https://www.postgresql.org/">最も高度なオープンソースデータベース</a>の最新バージョンである<a href="/docs/13/release-13.html">PostgreSQL13</a>のリリースを発表しました。
+</p>
+
+<p>
+  PostgreSQL13では、インデックス作成およびルックアップシステムが大幅に改善されています。これにより、インデックスのスペース節約とパフォーマンス向上、集約またはパーティションを使用するクエリの応答時間の高速化、拡張された統計情報を使用する場合のクエリ計画の改善など、大規模なデータベースにメリットがあります。
+</p>
+
+<p>
+  <a href="/docs/13/sql-vacuum.html">並列バキューム処理</a>や<a href="/docs/13/runtime-config-query.html#GUC-ENABLE-INCREMENTAL-SORT">インクリメンタルソート</a>などの要求の高い機能に加えて、PostgreSQL13は、日々の管理のための最適化、アプリケーション開発者の利便性の向上、セキュリティの強化により、大小のワークロードに対してより良いデータ管理エクスペリエンスを提供します。
+</p>
+
+<p>
+  「PostgreSQL13は、世界で最も先進的なオープンソースのリレーショナルデータベースの能力をさらに高めるために、我々のグローバルコミュニティが協力し、献身していることを示しています。」PostgreSQL Core Teamのメンバーであるピーター・アイゼントラウト氏はこのように述べています。「各リリースがもたらす革新と、その信頼性と安定性に対する評判が、より多くの人々がアプリケーションにPostgreSQLを使うことを選択する理由です。」
+</p>
+
+<p>
+  信頼性と堅牢性で知られる革新的なデータ管理システムである<a href="https://www.postgresql.org">PostgreSQL</a>は、<a href="/community/">グローバルな開発者コミュニティ</a>による25年以上にわたるオープンソース開発の恩恵を受けており、あらゆる規模の組織にとって好ましいオープンソースリレーショナルデータベースとなっています。
+</p>
+
+<h3 id="-">継続的なパフォーマンス向上</h3>
+
+<p>
+  PostgreSQL13では、以前のPostgreSQLリリースからの作業を基に、標準データベースインデックスである<a href="/docs/13/btree-implementation.html#BTREE-DEDUPLICATION">B-treeインデックスの重複データ</a>を効率的に処理することができます。これにより、B-treeインデックスが必要とする全体的な領域使用量が削減されると同時に、全体的なクエリパフォーマンスが向上します。
+</p>
+
+<p>
+  PostgreSQL13ではインクリメンタルソートが導入されており、問い合わせの前のステップでソートされたデータを後のステップで高速にソートすることができます。さらに、PostgreSQLは<a href="/docs/13/planner-stats.html#PLANNER-STATS-EXTENDED">拡張された統計</a>システム(<a href="/docs/13/sql-createstatistics.html"><code>CREATE STATISTICS</code></a>経由でアクセス)を使用して、<code>OR</code> 句を持つ問い合わせやリストに対する<code>IN</code>/<code>ANY</code> ルックアップのための改善された計画を作成できるようになりました。
+</p>
+
+<p>
+  PostgreSQL13では、より多くのタイプの<a href="/docs/13/functions-aggregate.html">集約クエリ</a>と<a href="/docs/13/queries-table-expressions.html#QUERIES-GROUPING-SETS">グループ化セットクエリ</a>が、PostgreSQLの効率的なハッシュ集約機能を利用できます。これは、大きな集約を持つクエリが完全にメモリに収まる必要がないためです。<a href="/docs/13/ddl-partitioning.html">パーティション化</a>されたテーブルを持つクエリのパフォーマンスが向上しました。これは、パーティションをプルーニングしたり、パーティションを直接結合したりできるケースが増えたためです。
+</p>
+
+<h3 id="-">管理の最適化</h3>
+
+<p>
+  <a href="/docs/13/routine-vacuuming.html">vacuum</a>はPostgreSQLの管理に不可欠な部分であり、行が更新されたり削除されたりした後にデータベースが記憶領域を再利用できるようにします。以前のPostgreSQLリリースではバキューム処理のオーバーヘッドを軽減するための作業が行われていましたが、このプロセスには管理上の問題もあります。
+</p>
+
+<p>
+  PostgreSQL13では、インデックスに<a href="/docs/13/sql-vacuum.html">並列化されたバキューム</a>を導入することで、バキュームシステムの改善を続けています。バキューム処理のパフォーマンスのメリットに加え、管理者は実行する並列ワーカーの数を選択できるため、この新機能の使用を特定のワークロードに合わせて調整できます。これらのパフォーマンス上のメリットに加えて、データ挿入によって自動バキューム・プロセスを起動できるようになりました。
+</p>
+
+<p>
+  レプリカによって受信される前に先行書き込みログ(WAL)が削除されないようにするために使用される<a href="/docs/13/warm-standby.html#STREAMING-REPLICATION-SLOTS">レプリケーションスロット</a>は、PostgreSQL13において、<a href="/docs/13/runtime-config-replication.html#GUC-MAX-SLOT-WAL-KEEP-SIZE">保持するWALファイルの最大数</a>を指定するように調整することができ、ディスク外エラーの回避に役立ちます。
+</p>
+
+<p>
+  また、PostgreSQL13では、<code>EXPLAIN</code> からのWAL使用統計の参照、ストリーミングベースバックアップの進行状況、<code>ANALYZE</code> コマンドの進行状況など、管理者がデータベースの動作を監視する方法が追加されています。さらに、<a href="/docs/13/app-pgbasebackup.html"><code>pg_basebackup</code></a>コマンドの出力の完全性は、新たな<a href="/docs/13/app-pgverifybackup.html"><code>pg_verifybackup</code></a>コマンドを使用して検査できます。
+</p>
+
+<h3 id="-">アプリケーション開発の利便性</h3>
+
+<p>
+  PostgreSQL13では、異なるデータソースからのPostgreSQLデータ型をより簡単に扱うことができます。このリリースでは、<a href="/docs/13/functions-json.html#FUNCTIONS-SQLJSON-OP-TABLE"><code>datetime()</code></a> 関数がSQL/JSONパスサポートに追加され、有効な時刻フォーマット(例えばISO8601文字列)をPostgreSQLのネイティブ型に変換します。さらに、UUID v4生成関数である <a href="/docs/13/functions-uuid.html"><code>gen_random_uuid()</code></a>が拡張機能をインストールしなくても使用できるようになりました。
+</p>
+
+<p>
+  PostgreSQLのパーティショニングシステムは、パーティショニングされたテーブルが論理的な複製とBEFORE行レベルのトリガを完全にサポートするため、より柔軟です。
+</p>
+
+<p>
+  PostgreSQL13の <a href="/docs/13/sql-select.html#SQL-LIMIT"><code>FETCH FIRST</code></a> 構文がWITH TIES句を含むように拡張されました。<code>WITH TIES</code> を指定すると、<code>ORDER BY</code> 句に基づいて、結果セットの最後の行と同順「タイ」の行が含まれます。
+</p>
+
+<h3 id="-">セキュリティの強化</h3>
+
+<p>
+  PostgreSQLの拡張システムは、開発者がその機能を拡張できるようにするため、その堅牢性の重要な要素です。以前のリリースでは、新しい拡張機能をインストールできるのはデータベーススーパーユーザのみでした。PostgreSQLの拡張性を利用しやすくするために、PostgreSQL13には「<a href="/docs/13/sql-createextension.html">信頼できる拡張機能</a>」という概念が追加されています。これにより、データベースユーザは、スーパーユーザが「信頼できる」とマークした拡張機能をインストールできます。<a href="/docs/13/pgcrypto.html"><code>pgcrypto</code></a>、<a href="/docs/13/tablefunc.html"><code>tablefunc</code></a>、<a href="/docs/13/hstore.html"><code>hstore</code></a>など、特定の組み込み拡張はデフォルトでtrustedとマークされます。
+</p>
+
+<p>
+  セキュアな認証方式を必要とするアプリケーションの場合、PostgreSQL13では、クライアントが<a href="/docs/13/sasl-authentication.html#SASL-SCRAM-SHA-256">SCRAM認証</a>を使用する際に<a href="/docs/13/libpq-connect.html#LIBPQ-CONNECT-CHANNEL-BINDING">チャネルバインディングを要求</a>できるようになっており、PostgreSQLの外部データラッパー(<a href="/docs/13/postgres-fdw.html"><code>postgres_fdw</code></a>)は証明書ベースの認証を使用できるようになりました。
+</p>
+
+<h3 id="postgresql-">PostgreSQLについて</h3>
+
+<p>
+  <a href="https://www.postgresql.org">PostgreSQL</a>は世界で最も高度なオープンソースデータベースであり、数1000人のユーザ、貢献者、企業、組織からなるグローバルコミュニティを持っています。カリフォルニア大学バークレー校、カリフォルニア大学バークレー校を皮切りに30年以上に構築されたPostgreSQLは、比類のない速さで開発を続けてきました。PostgreSQLの成熟した機能セットは、トッププロプライエタリなデータベースシステムに匹敵するだけでなく、高度なデータベース機能、拡張性、セキュリティ、安定性においても優れています。
+</p>
+
+<h3 id="-">リンク</h3>
+
+<ul>
+  <li><a href="/download/">ダウンロード</a></li>
+  <li><a href="/docs/13/release-13.html">リリースノート</a></li>
+  <li><a href="/about/press/">プレスキット</a></li>
+  <li><a href="/support/security/">Securityページ</a></li>
+  <li><a href="/support/versioning/">バージョン管理ポリシー</a></li>
+  <li><a href="https://twitter.com/postgresql">Twitterで @postgresql をフォローする</a></li>
+</ul>
+
+{% endblock presskit_content %}

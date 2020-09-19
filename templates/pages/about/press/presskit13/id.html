@@ -1,0 +1,190 @@
+{% extends "pages/about/press/presskit13/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 13 Released!</h1>
+
+<p>
+  Grup PostgreSQL Global Development mengumumkan peluncuran
+  <a href="/docs/13/release-13.html">PostgreSQL 13</a>, versi terbaru dari
+  <a href="/">database open source tercanggih</a> di dunia.
+</p>
+
+<p>
+  PostgreSQL 13 menyertakan peningkatan secara signifikan pada pengindeksan dan
+  sistem pencarian yang sangat menguntungkan database berukuran besar, termasuk
+  juga penghematan ruang penyimpanan dan peningkatan kinerja indeks, respon
+  lebih cepat terhadap kueri yang menggunakan agregat atau partisi, perencanaan
+  kueri yang lebih baik dengan menggunakan statistik yang disempurnakan, dan
+  banyak lagi.
+</p>
+
+<p>
+  Bersama dengan fitur yang sudah ditunggu-tunggu seperti
+  <a href="/docs/13/sql-vacuum.html">proses vacuum secara parallel</a> dan
+  <a href="/docs/13/runtime-config-query.html#GUC-ENABLE-INCREMENTAL-SORT">penyortiran bertahap</a>,
+  PostgreSQL 13 memberikan pengalaman manajemen data yang lebih baik untuk beban
+  kerja yang besar maupun kecil, beserta optimasi dalam administrasi harian,
+  kemudahan untuk pengembang aplikasi dan berbagai peningkatan keamanan.
+</p>
+
+<p>
+  "PostgreSQL 13 menampilkan kolaborasi dan dedikasi komunitas global kami dalam
+  memajukan kemampuan database relasional dan open source tercanggih di dunia",
+  kata Peter Eisentraut, sebagai anggota tim inti PostgreSQL. "Inovasi dari
+  setiap rilis bersama dengan reputasinya untuk keandalan dan stabilitas adalah
+  alasan mengapa lebih banyak orang memilih untuk menggunakan PostgreSQL untuk
+  aplikasi mereka".
+</p>
+
+<p>
+  <a href="https://www.postgresql.org">PostgreSQL</a>, sebuah sistem manajemen
+  data yang inovatif dan diakui keandalan dan ketahanannya, telah memanfaatkan
+  lebih dari 25 tahun pengembangan secara open source dari
+  <a href="/community/">global developer community</a> dan telah menjadi
+  database relasional open source pilihan untuk semua bentuk organisasi.
+</p>
+
+<h3 id="peningkatan-kinerja">Peningkatan Kinerja</h3>
+
+<p>
+  Melalui pengembangan pekerjaan dari rilis PostgreSQL sebelumnya, PostgreSQL 13
+  mampu menangani secara efisien
+  <a href="/docs/13/btree-implementation.html#BTREE-DEDUPLICATION">duplikat data pada B-tree indeks</a>,
+  yang merupakan indeks standard database. Dengan begitu, penggunaan keseluruhan
+  ruang penyimpanan yang dibutuhkan B-tree indeks dapat berkurang sementara
+  kinerja kueri secara keseluruhan semakin membaik.
+</p>
+
+<p>
+  PostgreSQL 13 memperkenalkan penyortiran inkremental, dimana di dalam sebuah
+  kueri, data yang sudah diurutkan di langkah awal dapat mempercepat penyortiran
+  di langkah selanjutnya. Selain itu, PostgreSQL dapat menggunakan sistem
+  <a href="/docs/13/planner-stats.html#PLANNER-STATS-EXTENDED">statistik yang dilengkapi</a>
+  (diakses melalui <a href="/docs/13/sql-createstatistics.html"><code>CREATE STATISTICS</code></a>)
+  guna membuat rancangan yang lebih baik untuk kueri dengan klausa
+  <code>OR</code> dan pencarian <code>IN</code> / <code>ANY</code> atas berbagai
+  daftar.
+</p>
+
+<p>
+  Di dalam PostgreSQL 13, lebih banyak lagi tipe kueri
+  <a href="/docs/13/functions-aggregate.html">agregat</a> dan
+  <a href="/docs/13/queries-table-expressions.html#QUERIES-GROUPING-SETS">kumpulan dari pengelompokan</a>
+  yang dapat memanfaatkan fungsionalitas agregasi hash yang efisien dari
+  PostgreSQL. Hal ini dikarenakan kueri dengan agregat besar tidak harus
+  sepenuhnya masuk ke dalam memori. Kueri dengan <a href="/docs/13/ddl-partitioning.html">tabel yang dipartisi</a>
+  telah memperoleh peningkatan kinerja, karena meningkatnya kasus dimana partisi
+  dapat dipangkas dan dapat langsung digabungkan.
+</p>
+
+<h3 id="pengoptimalan-administrasi">Pengoptimalan Administrasi</h3>
+
+<p>
+  <a href="/docs/13/routine-vacuuming.html">Proses vacuum</a> adalah bagian
+  penting dari administrasi PostgreSQL, yang memungkinkan database untuk klaim
+  ruang penyimpanan kembali setelah baris diperbarui dan dihapus. Proses ini
+  masih menjadi tantangan administratif, meskipun rilis PostgreSQL sebelumnya
+  telah berhasil meringankan overhead dari proses vacuum.
+</p>
+
+<p>
+  PostgreSQL 13 terus meningkatkan sistem vacuum dengan memperkenalkan
+  <a href="/docs/13/sql-vacuum.html">vacuum paralel untuk indeks</a>. Selain
+  meningkatkan kinerja dari proses vacuum, penggunaan dari fitur terbaru ini
+  juga dapat disesuaikan terhadap beban kerja tertentu dengan cara memilih
+  jumlah pekerja paralel yang ingin dijalankan. Selain manfaat kinerja sekarang
+  adapun juga, penyisipan data dapat memicu proses autovacuum.
+</p>
+
+<p>
+  <a href="/docs/13/warm-standby.html#STREAMING-REPLICATION-SLOTS">Slot replikasi</a>,
+  yang digunakan untuk mencegah Write-Ahead Logs (WAL) dihapus sebelum mereka
+  diterima oleh replika, dapat dikonfigurasi di PostgreSQL 13 untuk menentukan
+  <a href="/docs/13/runtime-config-replication.html#GUC-MAX-SLOT-WAL-KEEP-SIZE">jumlah maksimum file WAL untuk disimpan</a>
+  dan membantu menghindari terjadinya penuhnya disk.
+</p>
+
+<p>
+  PostgreSQL 13 juga menambahkan lebih banyak cara bagi admin untuk memantau
+  aktivitas database, termasuk mereferensikan statistik penggunaan WAL dari
+  <code>EXPLAIN</code>, perkembangan streaming <em>base backup</em>, dan
+  perkembangan perintah <code>ANALYZE</code>. Selain itu, integritas dari hasil
+  perintah <a href="/docs/13/app-pgbasebackup.html"><code>pg_basebackup</code></a>
+  dapat diperiksa menggunakan perintah baru yaitu
+  <a href="/docs/13/app-pgverifybackup.html"><code>pg_verifybackup</code></a>.
+</p>
+
+<h3 id="kemudahan-dalam-pengembangan-aplikasi">Kemudahan dalam Pengembangan Aplikasi</h3>
+
+<p>
+  PostgreSQL 13 memudahkan untuk bekerja dengan tipe data PostgreSQL yang datang
+  dari sumber data yang berbeda. Rilis ini menambahkan fungsi
+  <a href="/docs/13/functions-json.html#FUNCTIONS-SQLJSON-OP-TABLE"><code>datetime()</code></a>
+  ke dukungan jalur SQL/JSON-nya, guna mengubah format waktu yang valid
+  (contohnya string ISO 8601) ke tipe natif PostgreSQL. Selain itu, fungsi
+  generator UUID v4, <a href="/docs/13/functions-uuid.html"><code>gen_random_uuid()</code></a>,
+  sekarang tersedia tanpa harus memasang ekstensi apa pun.
+</p>
+
+<p>
+  Sistem partisi PostgreSQL sekarang lebih fleksibel, karena tabel yang
+  dipartisi sepenuhnya mendukung logical replication dan trigger BEFORE di
+  tingkat baris.
+</p>
+
+<p>
+  Sintaks <a href="/docs/13/sql-select.html#SQL-LIMIT"><code>FETCH FIRST</code></a>
+  di PostgreSQL 13 sekarang diperluas untuk menyertakan klausa <code>WITH TIES</code>.
+  Ketika ditentukan, <code>WITH TIES</code> akan menyertai baris yang "terikat"
+  dengan baris terakhir dalam set hasil, berdasarkan klausa <code>ORDER BY</code>.
+</p>
+
+<h3 id="peningkatan-keamanan">Peningkatan Keamanan</h3>
+
+<p>
+  Sistem ekstensi PostgreSQL adalah kunci dari ketahanannya yang memungkinkan
+  pengembang untuk memperluas fungsinya. Di dalam rilis sebelumnya, ekstensi
+  baru hanya dapat dipasang oleh superuser database. Agar memudahkan pemanfaatan
+  ekstensibilitas PostgreSQL, PostgreSQL 13 menambahkan konsep
+  "<a href="/docs/13/sql-createextension.html">ekstensi tepercaya</a>," yang
+  memungkinkan pengguna database untuk memasang ekstensi yang ditandai oleh
+  superuser sebagai "terpercaya." Adapula ekstensi bawaan yang sudah ditandai
+  sebagai "terpercaya", termasuk <a href="/docs/13/pgcrypto.html"><code>pgcrypto</code></a>,
+  <a href="/docs/13/tablefunc.html"><code>tablefunc</code></a>,
+  <a href="/docs/13/hstore.html"><code>hstore</code></a>, dan lainnya.
+</p>
+
+<p>
+  Untuk aplikasi yang membutuhkan metode otentikasi aman, PostgreSQL 13
+  memperbolehkan klien untuk
+  <a href="/docs/13/libpq-connect.html#LIBPQ-CONNECT-CHANNEL-BINDING">meminta pengikatan saluran</a>
+  saat menggunakan <a href="/docs/13/sasl-authentication.html#SASL-SCRAM-SHA-256">otentikasi SCRAM</a>,
+  dan Foreign Data Wrapper PostgreSQL (<a href="/docs/13/postgres-fdw.html"><code>postgres_fdw</code></a>)
+  sekarang dapat menggunakan otentikasi berbasis sertifikat.
+</p>
+
+<h3 id="tentang-postgresql">Tentang PostgreSQL</h3>
+
+<p>
+  <a href="https://www.postgresql.org">PostgreSQL</a> adalah database open
+  source paling canggih di dunia, dengan komunitas global dari ribuan pengguna,
+  kontributor, perusahaan dan organisasi. Dibangun melalui pengembangan selama
+  lebih dari 30 tahun, dimulai di University of California, Berkeley, PostgreSQL
+  telah berlangsung dengan kecepatan pengembangan yang tak tertandingi. Kumpulan
+  fitur yang matang dari PostgreSQL tidak hanya bersaing dengan sistem database
+  proprietary teratas, tetapi melampaui mereka dalam kecanggihan fitur database,
+  ekstensibilitas, keamanan, dan stabilitas.
+</p>
+
+<h3 id="links">Links</h3>
+
+<ul>
+  <li><a href="/download/">Download</a></li>
+  <li><a href="/docs/13/release-13.html">Release Notes</a></li>
+  <li><a href="/about/press/">Press Kit</a></li>
+  <li><a href="/support/security/">Security Page</a></li>
+  <li><a href="/support/versioning/">Versioning Policy</a></li>
+  <li><a href="https://twitter.com/postgresql">Follow @postgresql on Twitter</a></li>
+</ul>
+
+{% endblock presskit_content %}

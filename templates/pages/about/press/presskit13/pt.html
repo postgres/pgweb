@@ -1,0 +1,190 @@
+{% extends "pages/about/press/presskit13/base.html" %}
+
+{% block presskit_content %}
+<p>
+  O Grupo de Desenvolvimento Global do PostgreSQL anunciou hoje o lançamento do
+  <a href="/docs/13/release-13.html">PostgreSQL 13</a>, a versão mais recente do
+  <a href="https://www.postgresql.org/">banco de dados de código aberto mais avançado do mundo</a>.
+</p>
+
+<p>
+  PostgreSQL 13 inclui melhorias significativas no seu sistema de indexação e
+  busca que beneficia grandes bancos de dados, incluindo economia de espaço e
+  ganho de desempenho para índices, tempos de resposta mais rápidos para
+  consultas que usam agregações ou partições, melhor planejamento de consultas ao
+  utilizar estatísticas aprimoradas e muito mais.
+</p>
+
+<p>
+  Junto com recursos altamente solicitados como <a href="/docs/13/sql-vacuum.html">VACUUM paralelizado</a>
+  e <a href="/docs/13/runtime-config-query.html#GUC-ENABLE-INCREMENTAL-SORT">ordenação incremental</a>,
+  o PostgreSQL 13 fornece uma melhor experiência de gerenciamento de dados para
+  cargas de trabalho grandes e pequenas, com otimizações para administração
+  diária, mais conveniências para desenvolvedores de aplicações e melhorias de
+  segurança.
+</p>
+
+<p>
+  "PostgreSQL 13 mostra a colaboração e dedicação de nossa comunidade global em
+  promover as habilidades do banco de dados relacional de código aberto mais
+  avançado do mundo", disse Peter Eisentraut, um membro do Grupo de
+  Desenvolvimento Global do PostgreSQL. "As inovações que cada versão traz junto
+  com sua reputação de confiabilidade e estabilidade é o motivo pelo qual mais
+  pessoas optam pelo uso do PostgreSQL em suas aplicações."
+</p>
+
+<p>
+  <a href="https://www.postgresql.org">PostgreSQL</a>, um sistema de
+  gerenciamento de dados inovador conhecido pela sua confiabilidade e robustez,
+  se beneficia de mais de 25 anos de desenvolvimento de código aberto de uma
+  <a href="/community/">comunidade global de desenvolvedores</a> e se tornou o
+  banco de dados relacional de código aberto preferido pelas organizações de
+  todos os tamanhos.</p>
+
+<h3 id="ganhos-de-desempenho-cont-nuo">Ganhos de Desempenho Contínuo</h3>
+
+<p>
+  Baseado no trabalho da versão anterior do PostgreSQL, PostgreSQL 13 pode
+  eficientemente lidar com
+  <a href="/docs/13/btree-implementation.html#BTREE-DEDUPLICATION">dados duplicados em índices B-tree</a>,
+  o índice padrão do banco de dados. Isso diminui o uso geral de espaço que os
+  índices B-tree exigem, melhorando o desempenho geral da consulta.
+</p>
+
+<p>
+  PostgreSQL 13 introduz a ordenação incremental, em que os dados ordenados em
+  uma etapa anterior de uma consulta pode acelerar a ordenação em uma etapa
+  posterior. Além disso, o PostgreSQL pode utilizar o sistema de
+  <a href="/docs/13/planner-stats.html#PLANNER-STATS-EXTENDED">estatísticas estendidas</a>
+  (criadas com <a href="/docs/13/sql-createstatistics.html"><code>CREATE STATISTICS</code></a>)
+  para criar planos aprimorados para consultas com cláusulas <code>OR</code> e
+  buscas <code>IN</code>/<code>ANY</code> em listas.
+</p>
+
+<p>
+  No PostgreSQL 13, mais tipos de consultas de
+  <a href="/docs/13/functions-aggregate.html">agregação</a> e
+  <a href="/docs/13/queries-table-expressions.html#QUERIES-GROUPING-SETS">conjunto de agrupamento</a>
+  podem aproveitar a funcionalidade de agregação hash eficiente do PostgreSQL,
+  já que as consultas com agregações grandes não cabem inteiramente na memória.
+  Consultas com tabelas particionadas receberam um aumento de desempenho, agora
+  há mais casos onde partições podem ser removidas e onde as partições podem ser
+  juntadas diretamente.
+</p>
+
+<h3 id="otimiza-es-na-administra-o">Otimizações na Administração</h3>
+
+<p>
+  <a href="/docs/13/routine-vacuuming.html">VACUUM</a> é uma parte essencial da
+  administração do PostgreSQL, permitindo que o banco de dados recupere espaço
+  de armazenamento após registros serem atualizados ou removidos. Este processo
+  também pode impor desafios administrativos, embora as versões anteriores do
+  PostgreSQL tenham feito um trabalho para minimizar a sobrecarga do VACUUM.
+</p>
+
+<p>
+  PostgreSQL 13 continua a melhorar o sistema de limpeza de dados com a
+  introdução do <a href="/docs/13/sql-vacuum.html">VACUUM paralelizado para índices</a>.
+  Além dos benefícios de desempenho do VACUUM que ele oferece, o uso desta nova
+  funcionalidade pode ser ajustado para cargas de trabalho específicas já que os
+  administradores podem escolher o número de processos paralelos a serem
+  utilizados. Além desses benefícios de performance, as inserções de dados podem
+  disparar o processo do autovacuum.
+</p>
+
+<p>
+  <a href="/docs/13/warm-standby.html#STREAMING-REPLICATION-SLOTS">Slots de replicação</a>,
+  que são utilizados para evitar que os logs de transação (WAL) sejam removidos
+  antes que eles sejam recebidos pela réplica, podem ser ajustados no
+  PostgreSQL 13 para especificar o
+  <a href="/docs/13/runtime-config-replication.html#GUC-MAX-SLOT-WAL-KEEP-SIZE">número máximo de arquivos do WAL retidos</a>
+  e ajudar a evitar erros de falta de espaço em disco.
+</p>
+
+<p>
+  PostgreSQL 13 também adiciona algumas maneiras que o administrador pode
+  monitorar a atividade do banco de dados, incluindo estatísticas de uso do WAL
+  no <code>EXPLAIN</code>, o progresso de cópia de segurança base e o progresso
+  de comandos <code>ANALYZE</code>. Além disso, a integridade da saída do
+  comando <a href="/docs/13/app-pgbasebackup.html"><code>pg_basebackup</code></a>
+  pode ser verificado utilizando o novo comando
+  <a href="/docs/13/app-pgverifybackup.html"><code>pg_verifybackup</code></a>.
+</p>
+
+<h3 id="conveni-ncias-para-desenvolvimento-de-aplica-es">Conveniências para Desenvolvimento de Aplicações</h3>
+
+<p>
+  O PostgreSQL 13 torna ainda mais fácil trabalhar com tipos de dados do
+  PostgreSQL provenientes de diferentes fontes de dados. Esta versão adiciona a
+  função <a href="/docs/13/functions-json.html#FUNCTIONS-SQLJSON-OP-TABLE"><code>datetime()</code></a>
+  para seu suporte SQL/JSON path, que converte formatos de tempo válidos (e.g.
+  cadeia de caracteres ISO 8601) para tipos nativos do PostgreSQL.  Além disso, a
+  função UUID v4, <a href="/docs/13/functions-uuid.html"><code>gen_random_uuid()</code></a>,
+  também está disponível sem precisar instalar nenhuma extensão.
+</p>
+
+<p>
+  Sistema de particionamento do PostgreSQL está mais flexível, já que tabelas
+  particionadas suportam totalmente replicação lógica e gatilhos BEFORE a nível
+  de registro.
+</p>
+
+<p>
+  A sintaxe <a href="/docs/13/sql-select.html#SQL-LIMIT"><code>FETCH FIRST</code></a> no
+  PostgreSQL 13 foi expandida para incluir a cláusula <code>WITH TIES</code>.
+  Quando especificada, <code>WITH TIES</code> inclui qualquer registro que,
+  baseado na cláusula <code>ORDER BY</code>, corresponde ao último lugar no
+  conjunto de resultados.
+</p>
+
+<h3 id="melhorias-de-seguran-a">Melhorias de Segurança</h3>
+
+<p>
+  O sistema de extensões do PostgreSQL é um componente-chave de sua robustez
+  pois permite que os desenvolvedores expandam sua funcionalidade. Em versões
+  anteriores, novas extensões só podiam ser instaladas por um super-usuário do
+  banco de dados. Para maximizar o aproveitamento da extensibilidade do
+  PostgreSQL, PostgreSQL 13 adiciona o conceito de uma
+  "<a href="/docs/13/sql-createextension.html">extensão confiável</a>", que
+  permite usuários de banco de dados instalar extensões que um super-usuário
+  marcou como "confiável". Algumas extensões embutidas são marcadas como
+  confiáveis por padrão, incluindo
+  <a href="/docs/13/pgcrypto.html"><code>pgcrypto</code></a>,
+  <a href="/docs/13/tablefunc.html"><code>tablefunc</code></a>,
+  <a href="/docs/13/hstore.html"><code>hstore</code></a> e mais.
+</p>
+
+<p>
+  Para aplicações que exigem métodos de autenticação seguros, o PostgreSQL 13
+  permite que clientes possam
+  <a href="/docs/13/libpq-connect.html#LIBPQ-CONNECT-CHANNEL-BINDING">exigir ligação de canal</a>
+  ao utilizar <a href="/docs/13/sasl-authentication.html#SASL-SCRAM-SHA-256">autenticação SCRAM</a>
+  e o adaptador de dados externos do PostgreSQL
+  (<a href="/docs/13/postgres-fdw.html"><code>postgres_fdw</code></a>) pode
+  utilizar autenticação baseada em certificados.
+</p>
+
+<h3 id="sobre-postgresql">Sobre PostgreSQL</h3>
+
+<p>
+  <a href="https://www.postgresql.org">PostgreSQL</a> é o banco de dados mais
+  avançado do mundo, com uma comunidade global de milhares de usuários,
+  colaboradores, empresas e organizações. O Projeto PostgreSQL baseia-se em mais
+  de 30 anos de engenharia, iniciando na Universidade da Califórnia, Berkeley, e
+  continua em um ritmo inigualável de desenvolvimento. Conjunto de
+  funcionalidades maduras do PostgreSQL não só se igualam aos principais
+  sistemas de bancos de dados proprietários, mas os supera em funcionalidades
+  avançadas, extensibilidade, segurança e estabilidade.
+</p>
+
+<h3 id="links">Links</h3>
+
+<ul>
+  <li><a href="/download/">Download</a></li>
+  <li><a href="/docs/13/release-13.html">Notas de Lançamento</a></li>
+  <li><a href="/about/press/">Kit à Imprensa</a></li>
+  <li><a href="/support/security/">Informação de Segurança</a></li>
+  <li><a href="/support/versioning/">Política de Versionamento</a></li>
+  <li><a href="https://twitter.com/postgresql">Siga @postgresql no Twitter</a></li>
+</ul>
+{% endblock presskit_content %}
