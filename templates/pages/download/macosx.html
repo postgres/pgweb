@@ -3,19 +3,8 @@
 {%block contents%}
 
 <h1><span class="text-lowercase">mac</span>OS packages <img class="logo" src="/media/img/apple.png" alt="Apple Logo" /></h1>
-<p>
-PostgreSQL is the default database on macOS Server as of OS X Server version 10.7.
-macOS without the macOS Server add-on installed includes only the PostgreSQL
-libpq shared library.
-</p>
-<p>
-macOS Server 10.12 ships with PostgreSQL 9.4. Minor updates are provided
-by Apple, but not necessarily right after a new PostgreSQL minor release.
-</p>
-<p>
-There are several other installers available for PostgreSQL on macOS,
-which is the recommended way to install.
-</p>
+
+<p>You can get macOS PostgreSQL packages from several different sources.</p>
 
 <h2>Interactive installer by EDB</h2>
 
@@ -91,18 +80,18 @@ This download is intended for users who wish to include PostgreSQL as part of an
 ready and awaiting new connections. Close the app, and the server shuts down.
 </p>
 
-<h2>Fink</h2>
+<h2>Homebrew</h2>
 
 <p>
-PostgreSQL packages are available for macOS from the
-<a href="https://www.finkproject.org/">Fink Project</a>.
-Please see the Fink documentation for information on how to install packages.
+PostgreSQL can also be installed on macOS
+using <a href="https://brew.sh">Homebrew</a>. Please see the Homebrew
+documentation for information on how to install packages.
 </p>
 
 <p>
-A list of
-<a href="https://pdb.finkproject.org/pdb/browse.php?summary=postgresql">PostgreSQL packages</a>
-can be found using the package search tool on the Fink website.
+A list
+of <a href="https://formulae.brew.sh/formula/postgresql">PostgreSQL
+packages</a> can be found using the Braumeister search tool.
 </p>
 
 <h2>MacPorts</h2>
@@ -119,18 +108,17 @@ A list of
 can be found using the portfiles search tool on the MacPorts website.
 </p>
 
-<h2>Homebrew</h2>
+<h2>Fink</h2>
 
 <p>
-PostgreSQL can also be installed on macOS
-using <a href="https://brew.sh">Homebrew</a>. Please see the Homebrew
-documentation for information on how to install packages.
+PostgreSQL packages are available for macOS from the
+<a href="https://www.finkproject.org/">Fink Project</a>.
+Please see the Fink documentation for information on how to install packages.
 </p>
 
 <p>
-A list
-of <a href="https://formulae.brew.sh/formula/postgresql">PostgreSQL
-packages</a> can be found using the Braumeister search tool.
+A list of
+<a href="https://pdb.finkproject.org/pdb/browse.php?summary=postgresql">PostgreSQL packages</a>
+can be found using the package search tool on the Fink website.
 </p>
-
 {%endblock%}
