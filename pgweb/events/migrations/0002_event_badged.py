@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='badged',
-            field=models.BooleanField(default=False, help_text='Choose "Community event" if this is a community recognized event following the <a href="/community/recognition/#conferences" target="_blank">community event guidelines</a>.', verbose_name='Community event'),
+            field=models.BooleanField(default=False, help_text='Choose "Community event" if this is a community recognized event following the <a href="/community/recognition/#conferences" target="_blank" rel="noopener">community event guidelines</a>.', verbose_name='Community event'),
         ),
         migrations.AddField(
             model_name='event',

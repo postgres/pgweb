@@ -29,7 +29,7 @@ function attach_showdown_preview(objid, admin) {
 
     obj.parentNode.insertBefore(newdiv, obj.nextSibling);
 
-    obj.infospan_html_base = admin ? '' : 'This field supports <a href="https://daringfireball.net/projects/markdown/basics" target="_blank">markdown</a>. See below for a preview.';
+    obj.infospan_html_base = admin ? '' : 'This field supports <a href="https://daringfireball.net/projects/markdown/basics" target="_blank" rel="noopener">markdown</a>. See below for a preview.';
 
     obj.infospan = document.createElement('span');
     obj.infospan.innerHTML = obj.infospan_html_base;

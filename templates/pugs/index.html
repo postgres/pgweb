@@ -13,17 +13,17 @@
     <li>
       <strong>{{ pug.locale }}</strong>:
       {% if pug.website_url %}
-        <a href="{{ pug.website_url }}" target="_blank">
+        <a href="{{ pug.website_url }}" target="_blank" rel="noopener">
       {% endif %}
       {{ pug.title }}
       {% if pug.website_url %}
         </a>
       {% endif %}
       {% if pug.website_url %}
-        (<a href="{{ pug.website_url }}" target="_blank">website</a>)
+        (<a href="{{ pug.website_url }}" target="_blank" rel="noopener">website</a>)
       {% endif %}
       {% if pug.mailing_list_url %}
-        (<a href="{{ pug.mailing_list_url }}" target="_blank">mailing list</a>)
+        (<a href="{{ pug.mailing_list_url }}" target="_blank" rel="noopener">mailing list</a>)
       {% endif %}
     </li>
   {% endfor %}

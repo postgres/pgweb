@@ -57,7 +57,7 @@ Ainsi, la prochaine version mineure de PostgreSQL sera la 10.1 et la prochaine v
 <p> La réplication logique élargit les possibilités des fonctionnalités actuelles de réplication de PostgreSQL avec la capacité d'envoyer les modifications sur un ensemble de bases PostgreSQL tout en filtrant les données pour ne répliquer que certaine(s) base(s) ou certaine(s) table(s).
 Les utilisateurs pourront ensuite envoyer les données répliquées sur plusieurs clusters PostgreSQL et pourront même effectuer une migration vers une future version majeure sans impact utilisateur.</p>
 
-<p>&laquo;&nbsp;Nous avons beaucoup utilisé PostgreSQL depuis la version 9.3 et sommes vraiment impatients de voir arriver la version 10 car elle apporte les bases d'un vrai partitionnement, fonctionnalité très attendue, et qu'elle permet la réplication logique native. Cela va nous permettre d'utiliser encore plus PostgreSQL pour nos services,&nbsp;&raquo; a annoncé Vladimir Boroin, Responsable DBA chez <a href="https://www.yandex.com/" target="_blank">Yandex</a>.</p>
+<p>&laquo;&nbsp;Nous avons beaucoup utilisé PostgreSQL depuis la version 9.3 et sommes vraiment impatients de voir arriver la version 10 car elle apporte les bases d'un vrai partitionnement, fonctionnalité très attendue, et qu'elle permet la réplication logique native. Cela va nous permettre d'utiliser encore plus PostgreSQL pour nos services,&nbsp;&raquo; a annoncé Vladimir Boroin, Responsable DBA chez <a href="https://www.yandex.com/" target="_blank" rel="noopener">Yandex</a>.</p>
 
 <b>Partitionnement de table déclaratif - La division facile de vos données</b>
 
@@ -71,14 +71,14 @@ Les utilisateurs pourront ensuite envoyer les données répliquées sur plusieur
 
 <p>PostgreSQL 10 ajoute une validation par quorum pour les réplications synchrones, ce qui permet plus de flexibilité sur la manière dont le nœud primaire reçoit les acquittements d'écriture sur disque des réplications. Un administrateur peut maintenant préciser le nombre de réplicas qui doivent valider la réelle écriture des données dans la base pour que les données soient considérées comme enregistrées en toute sécurité.</p>
 
-<p>&laquo;&nbsp;La validation par quorum pour les réplications synchrones dans PostgreSQL 10 offre plus de possibilités de promotion d'une infrastructure en quasi-continuité de service du point de vue de l'application. Cela nous permet de déployer en continu et de mettre à jour notre base de données sans avoir recours à de longues fenêtres de maintenance,&nbsp;&raquo; a déclaré Curt Micol, ingénieur de production chez <a href="https://www.simple.com/" target="_blank">Simple Finance</a>.</p>
+<p>&laquo;&nbsp;La validation par quorum pour les réplications synchrones dans PostgreSQL 10 offre plus de possibilités de promotion d'une infrastructure en quasi-continuité de service du point de vue de l'application. Cela nous permet de déployer en continu et de mettre à jour notre base de données sans avoir recours à de longues fenêtres de maintenance,&nbsp;&raquo; a déclaré Curt Micol, ingénieur de production chez <a href="https://www.simple.com/" target="_blank" rel="noopener">Simple Finance</a>.</p>
 
 <b>Authentification SCRAM-SHA-256 - La sécurisation de l'accès à vos données</b>
 
-<p>L'authentification SCRAM (Salted Challenge Response Authentication Mechanism), définie dans la  <a href="https://tools.ietf.org/html/rfc5802" target="_blank">RFC5802</a>,
+<p>L'authentification SCRAM (Salted Challenge Response Authentication Mechanism), définie dans la  <a href="https://tools.ietf.org/html/rfc5802" target="_blank" rel="noopener">RFC5802</a>,
 décrit un protocole pour améliorer la sécurisation du stockage et de la transmission du mot de passe en fournissant un cadre pour la négociation de mots de passe forts.
 PostgreSQL 10 ajoute la méthode d'authentification SCRAM-SHA-256, telle que définie dans la
-<a href="https://tools.ietf.org/html/rfc7677" target="_blank">RFC7677</a>, pour proposer une solution plus sécurisée que la méthode d'authentification actuelle, basée sur MD5.</p>
+<a href="https://tools.ietf.org/html/rfc7677" target="_blank" rel="noopener">RFC7677</a>, pour proposer une solution plus sécurisée que la méthode d'authentification actuelle, basée sur MD5.</p>
 
 
 <a name="features"></a><h2>Plus d'informations à propos des nouveautés</h2>
@@ -176,26 +176,26 @@ PostgreSQL et participer à la communauté :
 &laquo;&nbsp;Des fonctionnalités comme la réplication logique et l'amélioration du parallélisme représentent des années de travail et prouvent le dévouement constant de la communauté pour assurer la suprématie de Postgres alors que la demande évolue.&nbsp;&raquo;
 </p>
 <p>
-&laquo;&nbsp;Nous avons beaucoup utilisé PostgreSQL depuis la version 9.3 et sommes vraiment impatients de voir arriver la version 10 car elle apporte les bases d'un vrai partitionnement, fonctionnalité très attendue, et qu'elle permet la réplication logique native. Cela va nous permettre d'utiliser encore plus PostgreSQL pour nos services, &nbsp;&raquo;a annoncé Vladimir Boroin, Responsable DBA chez  <a href="https://www.yandex.com/" target="_blank">Yandex</a>.
+&laquo;&nbsp;Nous avons beaucoup utilisé PostgreSQL depuis la version 9.3 et sommes vraiment impatients de voir arriver la version 10 car elle apporte les bases d'un vrai partitionnement, fonctionnalité très attendue, et qu'elle permet la réplication logique native. Cela va nous permettre d'utiliser encore plus PostgreSQL pour nos services, &nbsp;&raquo;a annoncé Vladimir Boroin, Responsable DBA chez  <a href="https://www.yandex.com/" target="_blank" rel="noopener">Yandex</a>.
 </p>
 <p>
-<a href="https://yandex.com/" target="_blank">Yandex</a> est une entreprise de technologie
+<a href="https://yandex.com/" target="_blank" rel="noopener">Yandex</a> est une entreprise de technologie
 qui construit des produits intelligents et des services animés par le Machine Learning.
 Le but de Yandex est d'aider les personnes et les entreprises  à mieux naviguer entre le monde connecté et déconnecté.
 Depuis 1997, Yandex fourni internationalement des services d'information et de recherches d'informations pertientes localement.
 De plus, Yandex est leader sur le marché des services de transport à la demande et développe les produits de navigation ainsi que d'autres applications mobiles qui touchent des millions de personnes dans le monde.
 Pour contacter Yandex, veuillez visiter
-<a href="https://yandex.com/company/contacts/" target="_blank">https://yandex.com/company/contacts/</a>
+<a href="https://yandex.com/company/contacts/" target="_blank" rel="noopener">https://yandex.com/company/contacts/</a>
 </p>
 <p>
 &laquo;&nbsp;La validation par quorum pour les réplications synchrones dans PostgreSQL 10 offre plus de possibilités de promotion d'une infrastructure en quasi-continuité de service du point de vue de l'application. Cela nous permet de déployer en continu et de mettre à jour notre base de données sans avoir recours à de longues fenêtres de maintenance.&quot;  a déclaré Curt Micol, ingénieur de production chez
-<a href="https://www.simple.com/" target="_blank">Simple Finance</a>.
+<a href="https://www.simple.com/" target="_blank" rel="noopener">Simple Finance</a>.
 </p>
 <p>
-Créée en 2009, <a href="https://www.simple.com/" target="_blank">Simple</a>
+Créée en 2009, <a href="https://www.simple.com/" target="_blank" rel="noopener">Simple</a>
 est une entreprise de technologie qui souhaite changer la manière dont les gens épargnent et pensent leur argent.
 Simple permet de mêler la gestion de son budget et de sa banque dans une seule application, avec des outils qui aident les gens à épargner pour acheter ce dont ils ont besoin et à dépenser raisonnablement pour ce qu'ils veulent avoir.
-Vous pouvez contacter  <a href="https://www.simple.com/" target="_blank">Simple</a> à cette adresse
+Vous pouvez contacter  <a href="https://www.simple.com/" target="_blank" rel="noopener">Simple</a> à cette adresse
   <a href="mailto:press@simple.com">press@simple.com</a>.
 </p>
 

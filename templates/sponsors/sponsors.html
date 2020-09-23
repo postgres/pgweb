@@ -20,12 +20,12 @@ for each company shown.</p>
         {% endifchanged%}
           <tr>
             <th scope="row">
-              <a href="{{ sponsor.url }}" target="_blank">
+              <a href="{{ sponsor.url }}" target="_blank" rel="noopener">
                 <img width="150" src="/media/img/about/sponsors/{{ sponsor.logoname }}" alt="{{ sponsor.name }}" />
               </a>
             </th>
             <td>
-              <a href="{{ sponsor.url }}" target="_blank">{{ sponsor.name }}</a>
+              <a href="{{ sponsor.url }}" target="_blank" rel="noopener">{{ sponsor.name }}</a>
             </td>
             <td>{{ sponsor.country }}</td>
           </tr>

@@ -6,14 +6,14 @@
 
 {% for s in services %}
   <h2 class="news">
-    <a href="{{s.url}}" target="_blank">{{ s.org.name }}</a>
+    <a href="{{s.url}}" target="_blank" rel="noopener">{{ s.org.name }}</a>
   </h2>
   <table class="table table-striped profserv-table">
     <tbody>
       {% if s.url %}
          <tr>
           <th scope="row">Website</th>
-          <td><a href="{{s.url}}" target="_blank">{{s.url}}</a></td>
+          <td><a href="{{s.url}}" target="_blank" rel="noopener">{{s.url}}</a></td>
          </tr>
       {% endif %}
       <tr>

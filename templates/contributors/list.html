@@ -31,7 +31,7 @@
        <td>{{c.firstname}} {{c.lastname}} {%if t.showemail and c.email%}({{c.email|hidemail}}){%endif%}
           {%if c.company %}
           <br/>
-          <a href="{{c.companyurl}}" target="_blank">{{c.company}}</a>{%endif%}
+          <a href="{{c.companyurl}}" target="_blank" rel="noopener">{{c.company}}</a>{%endif%}
           <br/>
           {{c.location}}
         </td>

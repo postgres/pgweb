@@ -6,7 +6,7 @@
 
 <h2>What is PostgreSQL?</h2>
 <p>PostgreSQL is a powerful, open source object-relational database system that uses and extends the SQL language combined with many features that safely store and scale the most complicated data workloads.  The origins of PostgreSQL date back to 1986 as part of the <a href="/docs/current/history.html">POSTGRES</a> project at the University of California at Berkeley and has more than 30 years of active development on the core platform.</p>
-<p>PostgreSQL has earned a strong reputation for its proven architecture, reliability, data integrity, robust feature set, extensibility, and the dedication of the open source community behind the software to consistently deliver performant and innovative solutions.  PostgreSQL runs on <a href="/download/">all major operating systems</a>, has been <a href="https://en.wikipedia.org/wiki/ACID" target="_blank">ACID</a>-compliant since 2001, and has powerful add-ons such as the popular <a href="https://postgis.net/" target="_blank">PostGIS</a> geospatial database extender.  It is no surprise that PostgreSQL has become the open source relational database of choice for many people and organisations.</p>
+<p>PostgreSQL has earned a strong reputation for its proven architecture, reliability, data integrity, robust feature set, extensibility, and the dedication of the open source community behind the software to consistently deliver performant and innovative solutions.  PostgreSQL runs on <a href="/download/">all major operating systems</a>, has been <a href="https://en.wikipedia.org/wiki/ACID" target="_blank" rel="noopener">ACID</a>-compliant since 2001, and has powerful add-ons such as the popular <a href="https://postgis.net/" target="_blank" rel="noopener">PostGIS</a> geospatial database extender.  It is no surprise that PostgreSQL has become the open source relational database of choice for many people and organisations.</p>
 <p><a href="/docs/current/tutorial.html">Getting started</a> with using PostgreSQL has never been easier - pick a project you want to build, and let PostgreSQL safely and robustly store your data.</p>
 
 <h2>Why use PostgreSQL?</h2>
@@ -116,7 +116,7 @@
         {% for quote in quotes %}
           <div class="item carousel-item {% if forloop.first %}active{% endif %}">
             <p class="testimonial">{{ quote.quote }}</p>
-            <p class="overview">{{ quote.who }}, <a href="{{ quote.link }}" target="_blank">{{ quote.org }}</a></p>
+            <p class="overview">{{ quote.who }}, <a href="{{ quote.link }}" target="_blank" rel="noopener">{{ quote.org }}</a></p>
           </div>
         {% endfor %}
 			</div>

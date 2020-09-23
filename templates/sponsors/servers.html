@@ -27,7 +27,7 @@ different companies and organisations around the world.
         <th scope="row">{{ server.name }}</th>
         <td>
           {% for sponsor in server.sponsors.all %}
-            <a href="{{ sponsor.url }}" target="_blank">{{ sponsor.name }}</a>{%if not forloop.last%}, {%endif%}
+            <a href="{{ sponsor.url }}" target="_blank" rel="noopener">{{ sponsor.name }}</a>{%if not forloop.last%}, {%endif%}
           {% endfor %}
         </td>
         <td>{{ server.dedicated|yesno:"Yes,No" }}</td>
