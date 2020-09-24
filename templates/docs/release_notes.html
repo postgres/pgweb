@@ -79,12 +79,12 @@
         {% for release_note_group in release_note_groups %}
           {% with major_version=release_note_group.grouper %}
             <li>
-              <a class="collapsed" href="#release{{ major_version }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="release{{ major_version }}">
+              <a class="collapsed" href="#release{{ major_version|cut:"." }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="release{{ major_version|cut:"." }}">
                 <span class="fa-li right"><i class="fas fa-angle-right"></i></span>
                 <span class="fa-li down"><i class="fas fa-angle-down"></i></span>
                 {% if major_version == 0 %}Postgres95{% else %}PostgreSQL {{ major_version }}{% endif %}
               </a>
-              <ul class="collapse release-notes-list" id="release{{ major_version }}">
+              <ul class="collapse release-notes-list" id="release{{ major_version|cut:"." }}">
                 {% for release_note in release_note_group.list %}
                   <li>
                     <a href="/docs/release/{{ major_version }}.{{ release_note.minor|release_notes_pg_minor_version:major_version }}/">
