@@ -218,7 +218,7 @@
         <ul class="divided">
           {% for n in news %}
             <li>
-              <h3><a href="/about/news/{{ n.id }}/">{{ n.title }}</a></h3>
+              <h3><a href="/about/news/{{ n.title|slugify }}-{{ n.id }}/">{{ n.title }}</a></h3>
               <ul class="meta">
                 <li><i class="far fa-clock"></i>&nbsp;{{ n.displaydate }} by {{ n.org.name }}</li>
               </ul>

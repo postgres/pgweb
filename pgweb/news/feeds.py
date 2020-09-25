@@ -1,4 +1,5 @@
 from django.contrib.syndication.views import Feed
+from django.template.defaultfilters import slugify
 
 from pgweb.util.moderation import ModerationState
 from .models import NewsArticle
@@ -23,7 +24,7 @@ class NewsFeed(Feed):
             return NewsArticle.objects.filter(modstate=ModerationState.APPROVED)[:10]
 
     def item_link(self, obj):
-        return "https://www.postgresql.org/about/news/%s/" % obj.id
+        return "https://www.postgresql.org/about/news/{}-{}/".format(slugify(obj.title), obj.id)
 
     def item_pubdate(self, obj):
         return datetime.combine(obj.date, time.min)

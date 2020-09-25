@@ -76,7 +76,7 @@ You can filter the view of patches to show just patches for version:<br/>
       <tr>
         <td>
           {%if p.cve%}<nobr>{%if p.cve_visible%}<a href="{{p.cvelink}}">CVE-{{p.cve}}</a>{%else%}CVE-{{p.cve}}{%endif%}</nobr><br/>{%endif%}
-          {%if p.newspost%}<a href="/about/news/{{p.newspost.id}}/">Announcement</a><br/>{%endif%}
+          {%if p.newspost%}<a href="/about/news/{{p.newspost.title|slugify}}-{{p.newspost.id}}/">Announcement</a><br/>{%endif%}
         </td>
         <td>{{p.affected|join:", "}}</td>
         <td>{{p.fixed|join:", "}}</td>

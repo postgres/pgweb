@@ -43,6 +43,7 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
 
     def purge_urls(self):
         yield '/about/news/%s/' % self.pk
+        yield '/about/news/.*-%s/' % self.pk
         yield '/about/newsarchive/'
         yield '/news.rss'
         yield '/news/.*.rss'

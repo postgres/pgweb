@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponsePermanentRedirect
+from django.template.defaultfilters import slugify
 
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.moderation import ModerationState
@@ -23,10 +24,12 @@ def archive(request, tag=None, paging=None):
     })
 
 
-def item(request, itemid, throwaway=None):
+def item(request, itemid, slug=None):
     news = get_object_or_404(NewsArticle, pk=itemid)
     if news.modstate != ModerationState.APPROVED:
         raise Http404
+    if slug != slugify(news.title):
+        return HttpResponsePermanentRedirect('/about/news/{}-{}/'.format(slugify(news.title), news.id))
     return render_pgweb(request, 'about', 'news/item.html', {
         'obj': news,
         'newstags': NewsTag.objects.all(),

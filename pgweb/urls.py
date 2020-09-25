@@ -34,7 +34,8 @@ urlpatterns = [
 
     url(r'^about/$', pgweb.core.views.about),
     url(r'^about/newsarchive/([^/]+/)?$', pgweb.news.views.archive),
-    url(r'^about/news/(\d+)(-.*)?/$', pgweb.news.views.item),
+    url(r'^about/news/(?P<itemid>\d+)(?P<slug>-.*)?/$', pgweb.news.views.item),
+    url(r'^about/news/(?P<slug>[^/]+)-(?P<itemid>\d+)/$', pgweb.news.views.item),
     url(r'^about/news/taglist.json/$', pgweb.news.views.taglist_json),
     url(r'^about/events/$', pgweb.events.views.main),
     url(r'^about/eventarchive/$', pgweb.events.views.archive),
