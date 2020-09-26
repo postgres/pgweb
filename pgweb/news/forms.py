@@ -7,6 +7,8 @@ from .models import NewsArticle, NewsTag
 
 
 class NewsArticleForm(forms.ModelForm):
+    form_intro = 'Before submitting news, please read the <a href="/about/policies/news-and-events/">current policy</a> for News and Events'
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email'].required = True

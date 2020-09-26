@@ -6,6 +6,8 @@ from .models import Event
 
 
 class EventForm(forms.ModelForm):
+    form_intro = 'Before submitting an event, please read the <a href="/about/policies/news-and-events/">current policy</a> for News and Events'
+
     toggle_fields = [
         {
             'name': 'isonline',

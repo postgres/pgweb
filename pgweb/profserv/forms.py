@@ -5,6 +5,8 @@ from .models import ProfessionalService
 
 
 class ProfessionalServiceForm(forms.ModelForm):
+    form_intro = 'Before submitting an entry, please read the <a href="/about/policies/services-and-hosting/">current policy</a> for Professional Services and Hosting'
+
     def __init__(self, *args, **kwargs):
         super(ProfessionalServiceForm, self).__init__(*args, **kwargs)
 
