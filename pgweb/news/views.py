@@ -15,7 +15,7 @@ NEWS_ITEMS_PER_PAGE = 10
 
 
 def archive(request, tag=None, paginator=None):
-    if tag and tag.strip('/'):
+    if tag and tag.strip('/') != '-':
         tag = get_object_or_404(NewsTag, urlname=tag.strip('/'))
         news = NewsArticle.objects.select_related('org').filter(modstate=ModerationState.APPROVED, tags=tag)
     else:

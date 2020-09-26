@@ -18,7 +18,7 @@
 {%endfor%}
 
 {%if paginator%}
-<a class="btn btn-primary" href="/about/newsarchive/{{tag.urlname|default:""}}/{{paginator}}/">Older news...</a>
+<a class="btn btn-primary" href="/about/newsarchive/{{tag.urlname|default:"-"}}/{{paginator}}/">Older news...</a>
 {%endif%}
 
 <p>
