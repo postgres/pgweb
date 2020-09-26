@@ -1368,6 +1368,20 @@ table.contributor-table thead tr th {
   width: 50%;
 }
 
+/* News archive */
+#pgContentWrap span.newstag {
+    white-space: nowrap;
+}
+#pgContentWrap span.newstag a i.fa {
+    color: white;
+}
+#pgContentWrap div.newsdate span.badge i.fa {
+    color: white;
+}
+#pgContentWrap div.newstags {
+    padding-bottom: 3rem;
+}
+
 /* Downloads/products */
 
 .btn-download {

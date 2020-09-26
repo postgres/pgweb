@@ -24,7 +24,7 @@ def archive(request, tag=None, paginator=None):
     if paginator and paginator.strip('/'):
         news = news.filter(date__lte=datetime.datetime.strptime(paginator.strip('/'), '%Y%m%d'))
 
-    allnews = list(news.order_by('-date')[:NEWS_ITEMS_PER_PAGE + 1])
+    allnews = list(news.prefetch_related('tags').order_by('-date')[:NEWS_ITEMS_PER_PAGE + 1])
     if len(allnews) == NEWS_ITEMS_PER_PAGE + 1:
         # 11 means we have a second page, so set a paginator link
         paginator = allnews[9].date.strftime("%Y%m%d")

@@ -5,12 +5,14 @@
 <h1><a href="/about/newsarchive/">News Archive</a>{%if tag%} - {{tag.name}}{%endif%} <i class="far fa-newspaper"></i></h1>
 
 <p>
-{%for t in newstags%}<span class="newstag"><a class="btn btn-primary" href="/about/newsarchive/{{t.urlname}}/">{{t.name}}</a></span> {%endfor%}
+{%for t in newstags%}<span class="newstag"><a class="btn btn-primary" href="/about/newsarchive/{{t.urlname}}/"><i class="fa fa-tag"></i> {{t.name}}</a></span> {%endfor%}
 </p>
 
 {%for obj in news %}
 <h2 class="news"><a href="/about/news/{{obj.title|slugify}}-{{obj.id}}/">{{obj.title}}</a></h2>
-<div class="newsdate">Posted on <strong>{{obj.displaydate}}</strong>{% if obj.org.name != '_migrated' %} by {{ obj.org.name }}{% endif %}</div>
+<div class="newsdate">Posted on <strong>{{obj.displaydate}}</strong>{% if obj.org.name != '_migrated' %} by {{ obj.org.name }}{% endif %}
+{%for t in obj.tags.all%}<span class="badge badge-pill badge-secondary"><i class="fa fa-tag"></i> {{t}}</span> {%endfor%}
+</div>
 {{obj.content|markdown:"safe"|striptags|truncatewords:20}}
 <p><a href="/about/news/{{obj.title|slugify}}-{{obj.id}}/">Read more...</a></p>
 {%endfor%}
