@@ -2,7 +2,7 @@
 {%load markup%}
 {%block title%}News Archive{%if tag%} - {{tag.name}}{%endif%}{%endblock%}
 {%block contents%}
-<h1>News Archive{%if tag%} - {{tag.name}}{%endif%} <i class="far fa-newspaper"></i></h1>
+<h1><a href="/about/newsarchive/">News Archive</a>{%if tag%} - {{tag.name}}{%endif%} <i class="far fa-newspaper"></i></h1>
 
 <p>
 {%for t in newstags%}<span class="newstag"><a class="btn btn-primary" href="/about/newsarchive/{{t.urlname}}/">{{t.name}}</a></span> {%endfor%}
@@ -14,5 +14,13 @@
 {{obj.content|markdown:"safe"|striptags|truncatewords:20}}
 <p><a href="/about/news/{{obj.title|slugify}}-{{obj.id}}/">Read more...</a></p>
 {%endfor%}
-<p><a href="/account/news/new/">Submit news</a></p>
+
+{%if paginator%}
+<a class="btn btn-primary" href="/about/newsarchive/{{tag.urlname|default:""}}/{{paginator}}/">Older news...</a>
+{%endif%}
+
+<p>
+  News articles are either from the PostgreSQL project or contributeed by other related organisations. If you with to share news
+  related to PostgreSQL, you may <a href="/account/news/new/">submit</a> your own articles for consideration after logging in.
+</p>
 {%endblock%}

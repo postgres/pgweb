@@ -7,18 +7,33 @@ from pgweb.util.moderation import ModerationState
 
 from .models import NewsArticle, NewsTag
 
+import datetime
 import json
 
+# Number of items per page in the news archive
+NEWS_ITEMS_PER_PAGE = 10
 
-def archive(request, tag=None, paging=None):
-    if tag:
+
+def archive(request, tag=None, paginator=None):
+    if tag and tag.strip('/'):
         tag = get_object_or_404(NewsTag, urlname=tag.strip('/'))
         news = NewsArticle.objects.select_related('org').filter(modstate=ModerationState.APPROVED, tags=tag)
     else:
         tag = None
         news = NewsArticle.objects.select_related('org').filter(modstate=ModerationState.APPROVED)
+    if paginator and paginator.strip('/'):
+        news = news.filter(date__lte=datetime.datetime.strptime(paginator.strip('/'), '%Y%m%d'))
+
+    allnews = list(news.order_by('-date')[:NEWS_ITEMS_PER_PAGE + 1])
+    if len(allnews) == NEWS_ITEMS_PER_PAGE + 1:
+        # 11 means we have a second page, so set a paginator link
+        paginator = allnews[9].date.strftime("%Y%m%d")
+    else:
+        paginator = None
+
     return render_pgweb(request, 'about', 'news/newsarchive.html', {
-        'news': news,
+        'news': allnews[:NEWS_ITEMS_PER_PAGE],
+        'paginator': paginator,
         'tag': tag,
         'newstags': NewsTag.objects.all(),
     })
