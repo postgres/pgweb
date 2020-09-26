@@ -85,11 +85,13 @@ class SignupForm(forms.Form):
     def clean_email(self):
         email = self.cleaned_data['email'].lower()
 
-        try:
-            User.objects.get(email=email)
-        except User.DoesNotExist:
-            return email
-        raise forms.ValidationError("A user with this email address is already registered")
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("A user with this email address is already registered")
+
+        if SecondaryEmail.objects.filter(email=email).exists():
+            raise forms.ValidationError("This email address is already attached to a different user")
+
+        return email
 
 
 class SignupOauthForm(forms.Form):

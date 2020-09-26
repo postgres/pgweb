@@ -525,6 +525,10 @@ def signup_oauth(request):
        or 'oauth_lastname' not in request.session:
         return HttpSimpleResponse(request, "OAuth error", 'Invalid redirect received')
 
+    # Is this email already on a different account as a secondary one?
+    if SecondaryEmail.objects.filter(email=request.session['oauth_email'].lower()).exists():
+        return HttpSimpleResponse(request, "OAuth error", 'This email address is already attached to a different account')
+
     if request.method == 'POST':
         # Second stage, so create the account. But verify that the
         # nonce matches.
