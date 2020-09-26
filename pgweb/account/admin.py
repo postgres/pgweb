@@ -80,9 +80,9 @@ class PGUserChangeForm(UserChangeForm):
             return "OAuth integrated"
         elif obj.password.startswith('pbkdf2_'):
             return "Regular password"
-        elif obj.password.startswith('sha1_'):
+        elif obj.password.startswith('sha1$'):
             return "Old SHA1 password"
-        elif re.match('^[a-z0-9]{64}'):
+        elif re.match('^[a-z0-9]{64}', obj.password):
             return "Old unknown hash"
         else:
             return "Unknown"
