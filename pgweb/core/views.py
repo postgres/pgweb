@@ -590,11 +590,17 @@ def admin_mergeorg(request):
             for p in f.product_set.all():
                 p.org = t
                 p.save()
-            for p in f.professionalservice_set.all():
-                p.organisation = t
+            if hasattr(f, 'professionalservice'):
+                p = f.professionalservice
+                p.org = t
+                p.save()
+            for p in f.pug_set.all():
+                p.org = t
                 p.save()
             # Now that everything is moved, we can delete the organisation
             f.delete()
+
+            messages.info(request, "Organisations merged")
 
             return HttpResponseRedirect("/admin/core/organisation/")
         # Else fall through to re-render form with errors
