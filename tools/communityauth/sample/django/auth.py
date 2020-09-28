@@ -281,7 +281,7 @@ def auth_api(request):
 # Unlike the authentication, searching does not involve the browser - we just make
 # a direct http call.
 def user_search(searchterm=None, userid=None):
-    # If upsteam isn't responding quickly, it's not going to respond at all, and
+    # If upstream isn't responding quickly, it's not going to respond at all, and
     # 10 seconds is already quite long.
     socket.setdefaulttimeout(10)
     if userid:
