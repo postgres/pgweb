@@ -28,11 +28,11 @@ whatsoever.</em>
 {{event.summary|markdown:"safe"|striptags}}
 </div>
 {%endfor%}
-{%if not archive%}
-<p><a href="/about/eventarchive/">Older events</a></p>
-{%endif%}
 
-{%if not archive%}
-<p><a href="/account/events/new/">Submit event</a></p>
-{%endif%}
+<p><a class="btn btn-primary" href="/about/{{ archive|yesno:"events,eventarchive"}}/">{{ archive|yesno:"Upcoming,Past"}} events</a></p>
+
+<p>
+  Events are organized by PostgreSQL related associations or third parties. If you wish to list an event related to
+  PostgreSQL, you may <a href="/account/events/new/">submit</a> your own events for consideration after logging in.
+</p>
 {%endblock%}
