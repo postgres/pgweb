@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
-from django.http import Http404
+from django.http import Http404, HttpResponsePermanentRedirect
+from django.template.defaultfilters import slugify
 
 from datetime import date
 
@@ -29,10 +30,14 @@ def archive(request):
     return _eventarchive(request, 'Event')
 
 
-def item(request, itemid, throwaway=None):
+def item(request, itemid, slug=None):
     event = get_object_or_404(Event, pk=itemid)
     if not event.approved:
         raise Http404
+
+    if slug != slugify(event.title):
+        return HttpResponsePermanentRedirect('/about/event/{}-{}/'.format(slugify(event.title), event.id))
+
     return render_pgweb(request, 'about', 'events/item.html', {
         'obj': event,
     })

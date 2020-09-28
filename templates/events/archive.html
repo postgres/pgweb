@@ -19,7 +19,7 @@ whatsoever.</em>
   {% if event.badged %}
     <img src="/media/img/PostgreSQL_Badge1.svg" class="community" alt="PostgreSQL Community Event">
   {% endif %}
-  <a href="/about/event/{{event.id}}/">{{event.title}}</a>
+  <a href="/about/event/{{event.title|slugify}}-{{event.id}}/">{{event.title}}</a>
 </div>
 <div>Date: <strong>{{event.displaydate|safe}}</strong></div>
 <div>Location: <strong>{{event.locationstring}}</strong></div>

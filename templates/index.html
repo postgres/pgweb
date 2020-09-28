@@ -104,7 +104,7 @@
               {% if event.badged %}
                 <img src="/media/img/PostgreSQL_Badge1.svg" class="community" alt="PostgreSQL Community Event">
               {% endif %}
-              {{ event.displaydate|safe }} &middot; <a href="/about/event/{{ event.id }}/">{{ event.title }}</a>
+              {{ event.displaydate|safe }} &middot; <a href="/about/event/{{ event.title|slugify }}-{{ event.id }}/">{{ event.title }}</a>
             </li>
           {% endfor %}
         </ul>

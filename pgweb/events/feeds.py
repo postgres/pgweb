@@ -1,4 +1,5 @@
 from django.contrib.syndication.views import Feed
+from django.template.defaultfilters import slugify
 
 from .models import Event
 
@@ -16,7 +17,7 @@ class EventFeed(Feed):
         return Event.objects.filter(approved=True)[:10]
 
     def item_link(self, obj):
-        return "https://www.postgresql.org/about/event/%s/" % obj.id
+        return "https://www.postgresql.org/about/event/{}-{}/".format(slugify(event.title), obj.id)
 
     def item_pubdate(self, obj):
         return datetime.combine(obj.startdate, time.min)

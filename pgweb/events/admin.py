@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django import forms
+from django.template.defaultfilters import slugify
 
 from pgweb.util.admin import PgwebAdmin
 from .models import Event
@@ -34,11 +35,14 @@ class EventAdminForm(forms.ModelForm):
 
 
 class EventAdmin(PgwebAdmin):
-    list_display = ('title', 'org', 'startdate', 'enddate', 'approved',)
+    list_display = ('title', 'org', 'startdate', 'enddate', 'approved', 'posturl')
     list_filter = ('approved',)
     search_fields = ('summary', 'details', 'title', )
     actions = [approve_event, ]
     form = EventAdminForm
+
+    def posturl(self, obj):
+        return '/about/event/{}-{}/'.format(slugify(obj.title), obj.id)
 
 
 admin.site.register(Event, EventAdmin)

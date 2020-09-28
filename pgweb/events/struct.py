@@ -1,3 +1,5 @@
+from django.template.defaultfilters import slugify
+
 from datetime import date
 from .models import Event
 
@@ -14,5 +16,5 @@ def get_struct():
         yearsold = (now - n.startdate).days / 365
         if yearsold > 4:
             yearsold = 4
-        yield ('about/event/%s/' % n.id,
+        yield ('about/event/{}-{}/'.format(slugify(n.title), n.id),
                0.5 - (yearsold / 10.0))
