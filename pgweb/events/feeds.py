@@ -17,7 +17,7 @@ class EventFeed(Feed):
         return Event.objects.filter(approved=True)[:10]
 
     def item_link(self, obj):
-        return "https://www.postgresql.org/about/event/{}-{}/".format(slugify(event.title), obj.id)
+        return "https://www.postgresql.org/about/event/{}-{}/".format(slugify(obj.title), obj.id)
 
     def item_pubdate(self, obj):
         return datetime.combine(obj.startdate, time.min)
