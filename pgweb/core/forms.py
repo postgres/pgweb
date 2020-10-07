@@ -49,6 +49,8 @@ class OrganisationForm(forms.ModelForm):
         else:
             del self.fields['remove_manager']
             del self.fields['add_manager']
+            # remove the managers fieldset
+            self.fieldsets = [fs for fs in self.fieldsets if fs['id'] != 'managers']
 
         if self.instance and self.instance.pk and self.instance.is_approved:
             # Only allow adding/removing emails on orgs that are actually approved
@@ -56,6 +58,8 @@ class OrganisationForm(forms.ModelForm):
         else:
             del self.fields['remove_email']
             del self.fields['add_email']
+            # remove the emails fieldset
+            self.fieldsets = [fs for fs in self.fieldsets if fs['id'] != 'emails']
 
     def clean_add_email(self):
         if self.cleaned_data['add_email']:
