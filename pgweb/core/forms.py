@@ -17,6 +17,27 @@ class OrganisationForm(forms.ModelForm):
     remove_manager = forms.ModelMultipleChoiceField(required=False, queryset=None, label="Current manager(s)", help_text="Select one or more managers to remove")
     add_manager = forms.EmailField(required=False, help_text="Enter an email address of an existing account to add as manager")
 
+    fieldsets = [
+        {
+            'id': 'general',
+            'legend': 'General',
+            'description': '',
+            'fields': ['name', 'address', 'url', 'orgtype', ],
+        },
+        {
+            'id': 'managers',
+            'legend': 'Managers',
+            'description': 'Managers are the accounts that can use and modify this organisation. To add a manager they must have an existing account.',
+            'fields': ['remove_manager', 'add_manager'],
+        },
+        {
+            'id': 'emails',
+            'legend': 'E-mail addresses',
+            'description': 'E-mail addresses registered here can be used to post news. If no news will be posted, there is no need to register one or more email addresses.',
+            'fields': ['remove_email', 'add_email'],
+        },
+    ]
+
     class Meta:
         model = Organisation
         exclude = ('lastconfirmed', 'approved', 'managers', 'mailtemplate', 'fromnameoverride')
