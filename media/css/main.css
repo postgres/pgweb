@@ -1262,6 +1262,15 @@ th.formfieldnamecontainer {
   height: 3.5em;
 }
 
+fieldset.form-group {
+    border: 1px groove #ddd;
+}
+fieldset.form-group legend {
+    width:inherit;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
 /** This code is for pgarchives */
 
 /**

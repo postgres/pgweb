@@ -70,6 +70,11 @@ def dictlookup(value, key):
     return value.get(key, None)
 
 
+@register.filter(name='keylookup')
+def keylookup(value, key):
+    return value[key]
+
+
 @register.filter(name='json')
 def tojson(value):
     return json.dumps(value)
