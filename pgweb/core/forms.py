@@ -15,7 +15,7 @@ class OrganisationForm(forms.ModelForm):
     remove_email = forms.ModelMultipleChoiceField(required=False, queryset=None, label="Current email addresses", help_text="Select one or more email addresses to remove")
     add_email = forms.EmailField(required=False, help_text="Enter an email address to add")
     remove_manager = forms.ModelMultipleChoiceField(required=False, queryset=None, label="Current manager(s)", help_text="Select one or more managers to remove")
-    add_manager = forms.EmailField(required=False)
+    add_manager = forms.EmailField(required=False, help_text="Enter an email address of an existing account to add as manager")
 
     class Meta:
         model = Organisation
