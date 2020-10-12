@@ -268,6 +268,16 @@ def release_notes(request, major_version=None, minor_version=None):
     # notes
     # otherwise ensure the release notes are returned in order
     if major_version is not None and minor_version is not None:
+        # a quick check to see if major is one of 6 - 9 as a whole number. If
+        # it is, this may be because someone is trying to up a major version
+        # directly from the URL, e.g. "9.1", even through officially the release
+        # number was "9.1.0".
+        # anyway, we shouldn't 404, but instead transpose from "9.1" to "9.1.0".
+        # if it's not an actual PostgreSQL release (e.g. "9.9"), then it will
+        # 404 at a later step.
+        if major_version in ['6', '7', '8', '9']:
+            major_version = "{}.{}".format(major_version, minor_version)
+            minor_version = '0'
         # at this point, include the content
         sql = sql.format(content="content,")
         # restrict to the major version, order from latest to earliest minor
