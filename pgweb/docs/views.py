@@ -97,7 +97,7 @@ def docpage(request, version, filename):
     # try to get the page outright. If it's not found, check to see if it's a
     # doc alias with a redirect, and if so, redirect to that page
     try:
-        page = DocPage.objects.get(version=ver, file=fullname)
+        page = DocPage.objects.select_related('version').get(version=ver, file=fullname)
     except DocPage.DoesNotExist:
         # if the page does not exist but there is a special pgae redirect, check
         # for the existence of that. if that does not exist, then we're really
@@ -106,19 +106,16 @@ def docpage(request, version, filename):
         url = "/docs/{}/{}".format(version, page_redirect.redirect_to)
         return HttpResponsePermanentRedirect(url)
 
-    versions = DocPage.objects.extra(
+    versions = DocPage.objects.select_related('version').extra(
         where=["file=%s OR file IN (SELECT file2 FROM docsalias WHERE file1=%s) OR file IN (SELECT file1 FROM docsalias WHERE file2=%s)"],
         params=[fullname, fullname, fullname],
-        select={
-            'supported': "COALESCE((SELECT supported FROM core_version v WHERE v.tree=version), 'f')",
-            'testing': "COALESCE((SELECT testing FROM core_version v WHERE v.tree=version),0)",
-        }).order_by('-supported', 'version').only('version', 'file')
+    ).order_by('-version__supported', 'version').only('version', 'file')
 
     return render(request, 'docs/docspage.html', {
         'page': page,
-        'supported_versions': [v for v in versions if v.supported],
-        'devel_versions': [v for v in versions if not v.supported and v.testing],
-        'unsupported_versions': [v for v in versions if not v.supported and not v.testing],
+        'supported_versions': [v for v in versions if v.version.supported],
+        'devel_versions': [v for v in versions if not v.version.supported and v.version.testing],
+        'unsupported_versions': [v for v in versions if not v.version.supported and not v.version.testing],
         'title': page.title,
         'doc_index_filename': indexname,
         'loaddate': loaddate,
