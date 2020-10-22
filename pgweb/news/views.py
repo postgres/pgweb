@@ -43,11 +43,23 @@ def item(request, itemid, slug=None):
     news = get_object_or_404(NewsArticle, pk=itemid)
     if news.modstate != ModerationState.APPROVED:
         raise Http404
+
+    fullurl = '/about/news/{}-{}/'.format(slugify(news.title), news.id)
     if slug != slugify(news.title):
-        return HttpResponsePermanentRedirect('/about/news/{}-{}/'.format(slugify(news.title), news.id))
+        return HttpResponsePermanentRedirect(fullurl)
+
     return render_pgweb(request, 'about', 'news/item.html', {
         'obj': news,
         'newstags': NewsTag.objects.all(),
+        'og': {
+            'url': fullurl,
+            'author': news.org.name if news.org.name != '_migrated' else '',
+            'time': datetime.datetime.combine(news.date, datetime.datetime.min.time()),
+            'title': news.title,
+            'description': news.content,
+            'noimage': news.org.mailtemplate == 'default',  # For now, control image by "using a custom logo"
+            'sitename': 'PostgreSQL News',
+        }
     })
 
 

@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
 from django.http import HttpResponse, Http404
 from pgweb.util.decorators import login_required, allow_frames, content_sources
+from django.template.defaultfilters import strip_tags
 from django.db.models import Q
 from django.conf import settings
 
@@ -111,6 +112,14 @@ def docpage(request, version, filename):
         params=[fullname, fullname, fullname],
     ).order_by('-version__supported', 'version').only('version', 'file')
 
+    # If possible (e.g. if we match), remove the header part of the docs so that we can generate a plain text
+    # preview. For older versions where this doesn't match, we just leave it empty.
+    m = re.match(r'^<div [^>]*class="navheader"[^>]*>.*?</div>(.*)$', page.content, re.S)
+    if m:
+        contentpreview = strip_tags(m.group(1))
+    else:
+        contentpreview = ''
+
     return render(request, 'docs/docspage.html', {
         'page': page,
         'supported_versions': [v for v in versions if v.version.supported],
@@ -119,6 +128,13 @@ def docpage(request, version, filename):
         'title': page.title,
         'doc_index_filename': indexname,
         'loaddate': loaddate,
+        'og': {
+            'url': '/docs/{}/{}'.format(page.display_version(), page.file),
+            'time': page.version.docsloaded,
+            'title': page.title.strip(),
+            'description': contentpreview,
+            'sitename': 'PostgreSQL Documentation',
+        }
     })
 
 

@@ -6,7 +6,14 @@
   <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
   {%block meta%}{%endblock%} {# used for custom meta tags such as description which we don't want for every page #}
   <meta name="theme-color" content="#336791"/>
-  <meta name="copyright" content="The PostgreSQL Global Development Group" />
+  <meta name="copyright" content="The PostgreSQL Global Development Group" />{%if og%}
+  <meta property="og:url" content="https://www.postgresql.org{{og.url}}" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="{{og.time|date:"c"}}" />
+{%if not og.noimage%}  <meta property="og:image" content="https://www.postgresql.org/media/img/about/press/elephant.png" />{%endif%}
+  <meta property="og:title" content="{{og.title}}" />
+{%if og.description%}  <meta property="og:description" content="{{og.description|truncatewords:"20"}}" />{%endif%}
+  <meta property="og:site_name" content="{{og.sitename|default:"PostgreSQL"}}" />{%endif%}
   <link href="/media/css/fontawesome.css?{{gitrev}}" rel="stylesheet">
   <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
   <link rel="shortcut icon" href="/favicon.ico" />
