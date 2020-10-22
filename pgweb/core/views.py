@@ -78,6 +78,13 @@ def home(request):
         'events': events,
         'versions': versions,
         'planet': planet,
+        'og': {
+            'url': '/',
+            'author': 'PostgreSQL Global Development Group',
+            'time': datetime.now(),
+            'title': 'PostgreSQL',
+            'description': "The world's most advanced open source database.",
+        },
     })
 
 
