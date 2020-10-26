@@ -14,6 +14,9 @@ def get_all_pages_struct(method='get_struct'):
     for app in settings.INSTALLED_APPS:
         if app.startswith('pgweb.'):
             try:
+                if '.apps.' in app:
+                    # If the app has a specific appconfig, we still go directly for struct,so remove it
+                    app = app[:app.index('.apps.')]
                 m = __import__(app + ".struct", {}, {}, method)
             except Exception as e:
                 # Failed to import - probably module didnd't exist
