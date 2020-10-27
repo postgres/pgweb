@@ -1,4 +1,5 @@
 {%extends "base/page.html"%}
+{%load pgfilters%}
 {%block contents%}
 <div class="row">
   <div class="col-lg-9">
@@ -8,7 +9,9 @@
     <h1>Translations</h1>
     <ul>
       <li><span lang="en"><a href="/about/policies/coc/">English</a></span></li>
-      <li><span lang="ja"><a href="/about/policies/coc/ja/">Japanese</a></span></li>
+{%for l in "pages/about/policies/coc"|list_templates|dictsort:"lower"%}
+      <li><span lang="{{l}}"><a href="/about/policies/coc/{{l}}/">{{l|languagename}}</a></span></li>
+{%endfor%}
     </ul>
     <h1>Committee</h1>
     <ul>
@@ -16,8 +19,9 @@
     </ul>
     <h1>Annual Reports</h1>
     <ul>
-      <li><a href="/about/policies/coc/reports/2019/">2019</a></li>
-      <li><a href="/about/policies/coc/reports/2018/">2018</a></li>
+{% for t in "pages/about/policies/coc/reports"|list_templates|dictsortreversed:"lower" %}
+      <li><a href="/about/policies/coc/reports/{{t}}/">{{t}}</a></li>
+{%endfor%}
     </ul>
   </div>
 </div>
