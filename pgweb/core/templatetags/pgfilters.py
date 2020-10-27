@@ -2,7 +2,10 @@ from django.template.defaultfilters import stringfilter
 from django import template
 from django.utils.safestring import mark_safe
 from django.template.loader import get_template
+from django.conf import settings
 
+import os
+from pathlib import Path
 import json
 import pynliner
 
@@ -101,6 +104,13 @@ def joinandor(value, andor):
         value = list(value)
 
     return ", ".join([str(x) for x in value[:-1]]) + ' ' + andor + ' ' + str(value[-1])
+
+
+@register.filter()
+def list_templates(value):
+    for f in Path(os.path.join(settings.PROJECT_ROOT, '../templates/', value)).iterdir():
+        if f.is_file() and f.suffix == '.html':
+            yield f.stem
 
 
 @register.simple_tag(takes_context=True)
