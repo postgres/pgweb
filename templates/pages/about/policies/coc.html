@@ -1,10 +1,7 @@
-{%extends "base/page.html"%}
+{%extends "base/cocpage.html"%}
 {%load pgfilters%}
 {%block title%}Code of Conduct{%endblock%}
-{%block contents%}
-
-<div class="row">
-  <div class="col-lg-9">
+{%block cocmain%}
     <h1>Code of Conduct <i class="fas fa-gavel"></i></h1>
 
     <p><em>Last updated: August 18, 2020. {%git_changes_link%}</em></p>
@@ -240,9 +237,4 @@
     <p>In all interactions with the community, use your professional judgment, and
         keep the discussion focused on moving our project and our community forward
         in a positive direction for all.</p>
-
-    {% include "pages/about/policies/coc/_translations.html" %}
-  </div>
-{%include "pages/about/policies/coc/_reportlist.html" %}
-</div>
 {%endblock%}
