@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import json
 import pynliner
+import babel
 
 register = template.Library()
 
@@ -111,6 +112,14 @@ def list_templates(value):
     for f in Path(os.path.join(settings.PROJECT_ROOT, '../templates/', value)).iterdir():
         if f.is_file() and f.suffix == '.html':
             yield f.stem
+
+
+@register.filter()
+def languagename(lang):
+    try:
+        return babel.Locale(lang).english_name
+    except Exception:
+        return lang
 
 
 @register.simple_tag(takes_context=True)

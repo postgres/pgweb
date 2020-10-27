@@ -8,3 +8,4 @@ cvss==2.1
 pytidylib==0.3.2
 pycodestyle==2.4.0
 pynliner==0.8.0
+Babel=2.6.0
