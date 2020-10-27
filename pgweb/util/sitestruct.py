@@ -18,7 +18,7 @@ def get_all_pages_struct(method='get_struct'):
                     # If the app has a specific appconfig, we still go directly for struct,so remove it
                     app = app[:app.index('.apps.')]
                 m = __import__(app + ".struct", {}, {}, method)
-            except Exception as e:
+            except Exception:
                 # Failed to import - probably module didnd't exist
                 continue
 
