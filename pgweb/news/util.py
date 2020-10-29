@@ -1,6 +1,7 @@
 from django.template.loader import get_template
 from django.conf import settings
 
+from datetime import timedelta
 import os
 import hmac
 import hashlib
@@ -98,4 +99,6 @@ def send_news_email(news):
         htmlbody=html,
         attachments=attachments,
         headers=headers,
+        staggertype='news',
+        stagger=timedelta(minutes=30),
     )
