@@ -9,6 +9,7 @@ from .models import QueuedMail
 class QueuedMailAdmin(admin.ModelAdmin):
     model = QueuedMail
     readonly_fields = ('parsed_content', )
+    list_display = ('pk', 'sender', 'receiver', 'sendat')
 
     def parsed_content(self, obj):
         # We only try to parse the *first* piece, because we assume

@@ -1,3 +1,6 @@
+from django.db import transaction
+
+from datetime import datetime
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.nonmultipart import MIMENonMultipart
@@ -6,7 +9,7 @@ from email.utils import make_msgid
 from email import encoders, charset
 from email.header import Header
 
-from .models import QueuedMail
+from .models import QueuedMail, LastSent
 
 
 def _encoded_email_header(name, email):
@@ -22,7 +25,7 @@ _utf8_charset.header_encoding = charset.QP
 _utf8_charset.body_encoding = charset.QP
 
 
-def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False, cc=None, replyto=None, sendername=None, receivername=None, messageid=None, suppress_auto_replies=True, is_auto_reply=False, htmlbody=None, headers={}):
+def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False, cc=None, replyto=None, sendername=None, receivername=None, messageid=None, suppress_auto_replies=True, is_auto_reply=False, htmlbody=None, headers={}, staggertype=None, stagger=None):
     # attachment format, each is a tuple of (name, mimetype,contents)
     # content should be *binary* and not base64 encoded, since we need to
     # use the base64 routines from the email library to get a properly
@@ -79,10 +82,20 @@ def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, userge
             encoders.encode_base64(part)
             msg.attach(part)
 
-    # Just write it to the queue, so it will be transactionally rolled back
-    QueuedMail(sender=sender, receiver=receiver, fullmsg=msg.as_string(), usergenerated=usergenerated).save()
-    if cc:
-        # Write a second copy for the cc, wihch will be delivered
-        # directly to the recipient. (The sender doesn't parse the
-        # message content to extract cc fields).
-        QueuedMail(sender=sender, receiver=cc, fullmsg=msg.as_string(), usergenerated=usergenerated).save()
+    with transaction.atomic():
+        if staggertype and stagger:
+            # Don't send a second one too close after another one of this class.
+            ls, created = LastSent.objects.get_or_create(type=staggertype, defaults={'lastsent': datetime.now()})
+
+            sendat = ls.lastsent = ls.lastsent + stagger
+            ls.save(update_fields=['lastsent'])
+        else:
+            sendat = datetime.now()
+
+        # Just write it to the queue, so it will be transactionally rolled back
+        QueuedMail(sender=sender, receiver=receiver, fullmsg=msg.as_string(), usergenerated=usergenerated, sendat=sendat).save()
+        if cc:
+            # Write a second copy for the cc, wihch will be delivered
+            # directly to the recipient. (The sender doesn't parse the
+            # message content to extract cc fields).
+            QueuedMail(sender=sender, receiver=cc, fullmsg=msg.as_string(), usergenerated=usergenerated, sendat=sendat).save()

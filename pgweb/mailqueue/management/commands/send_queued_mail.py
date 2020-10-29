@@ -9,6 +9,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import connection
 from django.conf import settings
 
+import datetime
 import smtplib
 
 from pgweb.mailqueue.models import QueuedMail
@@ -26,7 +27,7 @@ class Command(BaseCommand):
         if not curs.fetchall()[0][0]:
             raise CommandError("Failed to get advisory lock, existing send_queued_mail process stuck?")
 
-        for m in QueuedMail.objects.all():
+        for m in QueuedMail.objects.filter(sendat__lte=datetime.datetime.now()):
             # Yes, we do a new connection for each run. Just because we can.
             # If it fails we'll throw an exception and just come back on the
             # next cron job. And local delivery should never fail...
