@@ -86,8 +86,3 @@ def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, userge
         # directly to the recipient. (The sender doesn't parse the
         # message content to extract cc fields).
         QueuedMail(sender=sender, receiver=cc, fullmsg=msg.as_string(), usergenerated=usergenerated).save()
-
-
-def send_mail(sender, receiver, fullmsg, usergenerated=False):
-    # Send an email, prepared as the full MIME encoded mail already
-    QueuedMail(sender=sender, receiver=receiver, fullmsg=fullmsg, usergenerated=False).save()
