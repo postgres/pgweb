@@ -134,15 +134,15 @@ function archChanged() {
 
    var installer = get_installer(plat);
    scriptBox.innerHTML = '# Install the repository RPM:\n';
-   scriptBox.innerHTML += installer + ' install -y ' + url + '\n\n';
+   scriptBox.innerHTML += 'sudo ' + installer + ' install -y ' + url + '\n\n';
 
    if (disable_module_on(plat)) {
       scriptBox.innerHTML += '# Disable the built-in PostgreSQL module:\n';
-      scriptBox.innerHTML += 'dnf -qy module disable postgresql\n\n';
+      scriptBox.innerHTML += 'sudo dnf -qy module disable postgresql\n\n';
    }
 
    scriptBox.innerHTML += '# Install PostgreSQL:\n';
-   scriptBox.innerHTML += installer + ' install -y postgresql' + shortver + '-server\n\n';
+   scriptBox.innerHTML += 'sudo ' + installer + ' install -y postgresql' + shortver + '-server\n\n';
 
    scriptBox.innerHTML += '# Optionally initialize the database and enable automatic start:\n';
    if (uses_systemd(plat)) {
@@ -150,10 +150,10 @@ function archChanged() {
        if (ver < 10) {
 	       setupcmd = 'postgresql' + shortver + '-setup';
        }
-       scriptBox.innerHTML += '/usr/pgsql-' + ver + '/bin/' + setupcmd + ' initdb\nsystemctl enable postgresql-' + ver + '\nsystemctl start postgresql-' + ver;
+       scriptBox.innerHTML += 'sudo /usr/pgsql-' + ver + '/bin/' + setupcmd + ' initdb\nsudo systemctl enable postgresql-' + ver + '\nsudo systemctl start postgresql-' + ver;
    }
    else {
-       scriptBox.innerHTML += 'service postgresql-' + ver + ' initdb\nchkconfig postgresql-' + ver + ' on\nservice postgresql-' + ver + ' start';
+       scriptBox.innerHTML += 'sudo service postgresql-' + ver + ' initdb\nsudo chkconfig postgresql-' + ver + ' on\nsudo service postgresql-' + ver + ' start';
    }
 
    document.getElementById('copy-btn').style.display = 'block';
