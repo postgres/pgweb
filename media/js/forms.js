@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('textarea.markdown-content').each(function(idx, e) {
-        attach_showdown_preview(e.id, 0);
+        attach_markdown_preview(e.id, 0);
     });
 
     $('input.toggle-checkbox').each(function(idx, e) {

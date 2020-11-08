@@ -16,12 +16,11 @@
 
 {% block extrahead %}
 {{ block.super }}
-<link rel="stylesheet" type="text/css" href="/media/css/showdown_preview.css?{{gitrev}}" />
+<link rel="stylesheet" type="text/css" href="/media/css/markdown_preview.css?{{gitrev}}" />
 {%endblock%}
 
 {%block extrascript%}
-<script type="text/javascript" src="/media/showdown/showdown.js?{{gitrev}}"></script>
-<script type="text/javascript" src="/media/js/showdown_preview.js?{{gitrev}}"></script>
+<script type="text/javascript" src="/media/js/markdown_preview.js?{{gitrev}}"></script>
 <script type="text/javascript" src="/media/js/forms.js?{{gitrev}}"></script>
 {%if recaptcha%}
 <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en" async defer></script>

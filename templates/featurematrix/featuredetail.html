@@ -1,5 +1,5 @@
 {%extends "base/page.html"%}
-{% load markup %}
+{% load pgmarkdown %}
 {%block title%}Feature Description{%endblock%}
 {%block contents%}
 <h1>Feature Description</h1>
@@ -8,7 +8,7 @@
 {% if feature.featuredescription_is_url %}
   For more information, please visit : <a href="{{ feature.featurelink }}">{{ feature.featurelink }}</a>
 {% else %}
-  {{ feature.featuredescription|markdown:"safe" }}
+  {{ feature.featuredescription|markdown }}
 {% endif %}
 </p>
 {%endblock%}

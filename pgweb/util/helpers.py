@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.exceptions import PermissionDenied
-from django.core.validators import ValidationError
 from django.http import HttpResponseRedirect, Http404
 from django.template.loader import get_template
 import django.utils.xmlutils
@@ -10,29 +9,14 @@ from pgweb.util.contexts import render_pgweb
 from pgweb.util.moderation import ModerationState
 
 import io
-import re
 import difflib
-import markdown
 
 from pgweb.mailqueue.util import send_simple_mail
-
-
-_re_img = re.compile('<img ', re.I)
-_re_html_open = re.compile(r'<([^\s/][^>]*)>')
+from pgweb.util.markup import pgmarkdown
 
 
 def MarkdownValidator(val):
-    if _re_html_open.search(val):
-        raise ValidationError('Embedding HTML in markdown is not allowed')
-
-    out = markdown.markdown(val)
-
-    # We find images with a regexp, because it works... For now, nothing more advanced
-    # is needed.
-    if _re_img.search(out):
-        raise ValidationError('Image references are not allowed in this field')
-
-    return val
+    return pgmarkdown(val)
 
 
 def simple_form(instancetype, itemid, request, formclass, formtemplate='base/form.html', redirect='/account/', navsection='account', fixedfields=None, createifempty=False, extracontext={}):

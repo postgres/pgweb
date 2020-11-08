@@ -1,5 +1,5 @@
 {%extends "base/page.html"%}
-{%load markup%}
+{%load pgmarkdown%}
 {%block title%}Software Catalogue - {{category.catname}}{%endblock%}
 {%block contents%}
 
@@ -22,7 +22,7 @@
     </thead>
     <tbody>
       <tr>
-      	<td>{{product.description|markdown:"safe"}}</td>
+        <td>{{product.description|markdown}}</td>
         <td>{{product.licencetype}}</td>
         <td>{{product.price}}</td>
         <td><a href="{{product.org.url}}" target="_blank" rel="noopener">{{product.org.name}}</a></td>

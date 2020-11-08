@@ -1,5 +1,5 @@
 {%extends "base/page.html"%}
-{%load markup%}
+{%load pgmarkdown%}
 {%block title%}{{obj.title}}{%endblock%}
 {%block contents%}
 <h1>{{obj.title}}</h1>
@@ -9,7 +9,7 @@
 {%endfor%}
 </div>
 
-{{obj.content|markdown:"safe"}}
+{{obj.content|markdown}}
 {%if obj.is_migrated%}
 <p><em>This post has been migrated from a previous version of the PostgreSQL
 website. We apologise for any formatting issues caused by the migration.</em></p>

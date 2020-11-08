@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
 from pgweb.util.decorators import login_required, script_sources, frame_sources, content_sources
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
@@ -26,6 +27,7 @@ from pgweb.util.contexts import render_pgweb
 from pgweb.util.misc import send_template_mail, generate_random_token, get_client_ip
 from pgweb.util.helpers import HttpSimpleResponse, simple_form
 from pgweb.util.moderation import ModerationState
+from pgweb.util.markup import pgmarkdown
 
 from pgweb.news.models import NewsArticle
 from pgweb.events.models import Event
@@ -373,6 +375,18 @@ def submitted_item_submitwithdraw(request, objtype, item, what):
         return _submitted_item_submit(request, objtype, model, obj)
     else:
         return _submitted_item_withdraw(request, objtype, model, obj)
+
+
+@login_required
+@csrf_exempt
+def markdown_preview(request):
+    if request.method != 'POST':
+        return HttpResponse("POST only please", status=405)
+
+    if request.headers.get('x-preview', None) != 'md':
+        raise Http404()
+
+    return HttpResponse(pgmarkdown(request.body.decode('utf8', 'ignore')))
 
 
 def login(request):

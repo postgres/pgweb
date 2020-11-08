@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 import datetime
 
-import markdown
+from pgweb.util.markup import pgmarkdown
 
 
 class ModerateModel(models.Model):
@@ -29,7 +29,7 @@ class ModerateModel(models.Model):
         if k in getattr(self, 'rendered_preview_fields', []):
             yield self.render_preview_field(k, val)
         elif k in getattr(self, 'markdown_fields', []):
-            yield markdown.markdown(val)
+            yield pgmarkdown(val)
         else:
             yield None
 

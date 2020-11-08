@@ -1,5 +1,5 @@
 {%extends "base/page.html"%}
-{%load markup%}
+{%load pgmarkdown%}
 {%block title%}News Archive{%if tag%} - {{tag.name}}{%endif%}{%endblock%}
 {%block contents%}
 <h1><a href="/about/newsarchive/">News Archive</a>{%if tag%} - {{tag.name}}{%endif%} <i class="far fa-newspaper"></i></h1>
@@ -13,7 +13,7 @@
 <div class="newsdate">Posted on <strong>{{obj.displaydate}}</strong>{% if obj.org.name != '_migrated' %} by {{ obj.org.name }}{% endif %}
 {%for t in obj.tags.all%}<span class="badge badge-pill badge-secondary"><i class="fa fa-tag"></i> {{t}}</span> {%endfor%}
 </div>
-{{obj.content|markdown:"safe"|striptags|truncatewords:20}}
+{{obj.content|markdown|striptags|truncatewords:20}}
 <p><a href="/about/news/{{obj.title|slugify}}-{{obj.id}}/">Read more...</a></p>
 {%endfor%}
 

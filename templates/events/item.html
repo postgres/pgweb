@@ -1,12 +1,12 @@
 {%extends "base/page.html"%}
-{%load markup%}
+{%load pgmarkdown%}
 {%block title%}{{obj.title}}{%endblock%}
 {%block contents%}
 <h1>{{obj.title}}</h1>
 <div class="eventdate">Date: <strong>{{obj.displaydate|safe}}</strong></div>
 <div>Location: {{obj.locationstring}}</div>
 {%if obj.language%}<div>Language: {{obj.language}}</div>{%endif%}
-{{obj.details|markdown:"safe"}}
+{{obj.details|markdown}}
 {%if obj.has_organisation%}
 <p>Posted by {{obj.org}}{%if obj.org.email%} ({{obj.org.email}}){%endif%}.</p>
 {%else%}
