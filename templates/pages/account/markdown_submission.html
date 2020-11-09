@@ -1,0 +1,44 @@
+{%extends "base/page.html"%}
+{%block title%}Markdown submission{%endblock%}
+{%block contents%}
+<h1>Markdown submission</h1>
+
+<p>
+ Some forms on the postgresql.org website allows you to submit text
+ in <em>markdown</em> format. This is a simple markup format that lets
+ you do basic formatting inline.
+</p>
+
+<p>
+ You can find a basic introduction to markdown at
+ <a href="https://www.markdownguide.org/">markdownguide.org</a>.
+</p>
+
+<p>
+ This site
+ supports <a href="https://www.markdownguide.org/basic-syntax/">basic</a>
+ markdown syntax with the following exceptions:
+</p>
+
+<ul>
+ <li>Images are not allowed</li>
+ <li>Relative links are not allowed, only absolute links</li>
+ <li>Links to any protocol other than <em>http</em>, <em>https</em>
+  or <em>mailto</em> are not allowed.</li>
+ <li>Inline HTML may be used, but it is only allowed to use the same
+  tags and attributes produced by markdown. It is strongly
+  recommended to use vanilla markdown.</li>
+</ul>
+
+<h2>Preview</h2>
+<p>
+ The <em>live preview</em> of markdown fields does not work on
+ Internet Explorer.
+</p>
+<p>
+ The preview is updated asynchronously, so there may be a few seconds
+ delay between making a change and the preview updating, depending on
+ network speed.
+</p>
+
+{%endblock%}
