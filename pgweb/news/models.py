@@ -26,7 +26,7 @@ class NewsTag(models.Model):
 
 class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
     org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.", on_delete=models.CASCADE)
-    email = models.ForeignKey(OrganisationEmail, null=True, blank=True, verbose_name="Reply email", help_text="Pick a confirmed email associated with the organisation. This will be used as the reply address of posted news.", on_delete=models.CASCADE)
+    email = models.ForeignKey(OrganisationEmail, null=True, blank=True, verbose_name="Reply email", help_text="Pick a confirmed email associated with the organisation. This will be used as the reply address of posted news.", on_delete=models.PROTECT)
     date = models.DateField(null=False, blank=False, default=date.today, db_index=True)
     title = models.CharField(max_length=200, null=False, blank=False)
     content = models.TextField(null=False, blank=False)

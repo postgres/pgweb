@@ -88,6 +88,13 @@ class OrganisationForm(forms.ModelForm):
                 raise ValidationError("Cannot remove all managers from an organsation!")
         return self.cleaned_data['remove_manager']
 
+    def clean_remove_email(self):
+        if self.cleaned_data['remove_email']:
+            for e in self.cleaned_data['remove_email']:
+                if e.newsarticle_set.exists():
+                    raise ValidationError("Cannot remove an email address that has been used to post news articles. Please contact webmaster@postgresql.org to have this removed.")
+        return self.cleaned_data['remove_email']
+
     def save(self, commit=True):
         model = super(OrganisationForm, self).save(commit=False)
 

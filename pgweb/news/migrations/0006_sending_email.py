@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='newsarticle',
             name='email',
-            field=models.ForeignKey(blank=True, help_text='Pick a confirmed email associated with the organisation. This will be used as the reply address of posted news.', null=True, on_delete=django.db.models.deletion.CASCADE, to='core.OrganisationEmail', verbose_name='Reply email'),
+            field=models.ForeignKey(blank=True, help_text='Pick a confirmed email associated with the organisation. This will be used as the reply address of posted news.', null=True, on_delete=django.db.models.deletion.PROTECT, to='core.OrganisationEmail', verbose_name='Reply email'),
         ),
     ]
