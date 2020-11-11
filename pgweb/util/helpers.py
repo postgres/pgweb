@@ -175,10 +175,17 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
             'class': 'toggle-checkbox',
         })
 
+    if itemid == 'new' and hasattr(form, 'new_form_intro'):
+        form_intro = form.new_form_intro
+    elif hasattr(form, 'form_intro'):
+        form_intro = form.form_intro
+    else:
+        form_intro = None
+
     ctx = {
         'form': form,
         'formitemtype': instance._meta.verbose_name,
-        'form_intro': hasattr(form, 'form_intro') and form.form_intro or None,
+        'form_intro': form_intro,
         'described_checkboxes': getattr(form, 'described_checkboxes', {}),
         'savebutton': (itemid == "new") and "Submit New" or "Save",
         'operation': (itemid == "new") and "New" or "Edit",
