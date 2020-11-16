@@ -229,7 +229,7 @@ def search(request):
             'query': request.GET['q'],
             'pagelinks': "&nbsp;".join(
                 generate_pagelinks(pagenum,
-                                   totalhits // hitsperpage + 1,
+                                   (totalhits - 1) // hitsperpage + 1,
                                    querystr)),
             'hits': [{
                 'date': h['d'],
@@ -305,7 +305,7 @@ def search(request):
             'query': request.GET['q'],
             'pagelinks': "&nbsp;".join(
                 generate_pagelinks(pagenum,
-                                   totalhits // hitsperpage + 1,
+                                   (totalhits - 1) // hitsperpage + 1,
                                    querystr)),
             'hits': [{
                 'title': h[3],
