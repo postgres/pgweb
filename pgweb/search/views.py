@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
@@ -63,7 +63,16 @@ def search(request):
         if request.GET.get('l', '') != '':
             try:
                 listid = int(request.GET['l'])
-            except Exception as e:
+                if listid >= 0:
+                    # Make sure the list exists
+                    if not MailingList.objects.filter(id=listid).exists():
+                        raise Http404()
+                else:
+                    # Negative means it's a group, so verify that it exists
+                    if not MailingList.objects.filter(group=-listid).exists():
+                        raise Http404()
+            except ValueError:
+                # If it's not an integer we just don't care
                 listid = None
         else:
             # Listid not specified. But do we have the name?
