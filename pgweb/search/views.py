@@ -130,7 +130,7 @@ def search(request):
                 'search_error': "No search term specified.",
             })
     query = request.GET['q'].strip()
-    if '\0' in query or '\0' in suburl:
+    if '\0' in query or ((not searchlists) and suburl and '\0' in suburl):
         return render(request, 'search/sitesearch.html', {
             'search_error': "Invalid character in search.",
         })
