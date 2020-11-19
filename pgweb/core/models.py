@@ -143,7 +143,7 @@ class Organisation(TwostateModerateModel):
     lastconfirmed = models.DateTimeField(null=False, blank=False, auto_now_add=True)
 
     account_edit_suburl = 'organisations'
-    moderation_fields = ['address', 'url', 'orgtype', 'managers_string']
+    moderation_fields = ['name', 'address', 'url', 'orgtype', 'managers_string']
 
     def __str__(self):
         return self.name
