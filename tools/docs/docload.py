@@ -193,37 +193,43 @@ if curs.rowcount != pagecount:
     print("Loaded invalid number of rows! {} rows for {} pages!".format(curs.rowcount, pagecount))
     sys.exit(1)
 
+numchanges = 0
+
 # If the previous step succeeded, delete all the documentation for the specified version
 # and insert into / updatethe doc table the content that was loaded into the temporary table
 curs.execute("DELETE FROM docs WHERE version=%(version)s AND NOT EXISTS (SELECT 1 FROM docsload WHERE docsload.file=docs.file)", {
     'version': ver,
 })
+numchanges += curs.rowcount
 if not quiet:
     print("Deleted {} orphaned doc pages".format(curs.rowcount))
 
 curs.execute("INSERT INTO docs (file, version, title, content) SELECT file, version, title, content FROM docsload WHERE NOT EXISTS (SELECT 1 FROM docs WHERE docs.file=docsload.file AND docs.version=%(version)s)", {
     'version': ver,
 })
+numchanges += curs.rowcount
 if not quiet:
     print("Inserted {} new doc pages.".format(curs.rowcount))
 
 curs.execute("UPDATE docs SET title=l.title, content=l.content FROM docsload l WHERE docs.version=%(version)s AND docs.file=l.file AND (docs.title != l.title OR docs.content != l.content)", {
     'version': ver,
 })
+numchanges += curs.rowcount
 if not quiet:
     print("Updated {} changed doc pages.".format(curs.rowcount))
 
-# Update the docs loaded timestamp
-curs.execute("UPDATE core_version SET docsloaded=CURRENT_TIMESTAMP WHERE tree=%(v)s", {'v': ver})
+if numchanges > 0:
+    # Update the docs loaded timestamp
+    curs.execute("UPDATE core_version SET docsloaded=CURRENT_TIMESTAMP WHERE tree=%(v)s", {'v': ver})
 
-# Issue varnish purge for all docs of this version
-if ver == "0":
-    # Special handling of developer docs...
-    ver = "devel"
+    # Issue varnish purge for all docs of this version
+    if ver == "0":
+        # Special handling of developer docs...
+        ver = "devel"
 
-curs.execute("SELECT varnish_purge('^/docs/' || %(v)s || '/')", {'v': ver})
-if iscurrent:
-    curs.execute("SELECT varnish_purge('^/docs/current/')")
+    curs.execute("SELECT varnish_purge('^/docs/' || %(v)s || '/')", {'v': ver})
+    if iscurrent:
+        curs.execute("SELECT varnish_purge('^/docs/current/')")
 
 # ensure the changes are committed, and close the connection
 connection.commit()
