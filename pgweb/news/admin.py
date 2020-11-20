@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django import forms
-from django.template.defaultfilters import slugify
 
 from pgweb.util.admin import PgwebAdmin
 from pgweb.core.models import OrganisationEmail
@@ -17,15 +16,12 @@ class NewsArticleAdminForm(forms.ModelForm):
 
 
 class NewsArticleAdmin(PgwebAdmin):
-    list_display = ('title', 'org', 'date', 'modstate', 'posturl')
+    list_display = ('title', 'org', 'date', 'modstate', 'permanenturl')
     list_filter = ('modstate', )
     filter_horizontal = ('tags', )
     search_fields = ('content', 'title', )
     exclude = ('modstate', 'firstmoderator', )
     form = NewsArticleAdminForm
-
-    def posturl(self, obj):
-        return '/about/news/{}-{}/'.format(slugify(obj.title), obj.id)
 
 
 class NewsTagAdmin(PgwebAdmin):

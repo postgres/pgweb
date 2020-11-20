@@ -2,6 +2,7 @@ from django.db import models
 from datetime import date
 from pgweb.core.models import Organisation, OrganisationEmail
 from pgweb.util.moderation import TristateModerateModel, ModerationState, TwoModeratorsMixin
+from django.template.defaultfilters import slugify
 
 from .util import send_news_email, render_news_template, embed_images_in_html
 
@@ -35,7 +36,7 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
 
     account_edit_suburl = 'news'
     markdown_fields = ('content',)
-    moderation_fields = ('org', 'sentfrom', 'email', 'date', 'title', 'content', 'taglist')
+    moderation_fields = ('permanenturl', 'org', 'sentfrom', 'email', 'date', 'title', 'content', 'taglist')
     preview_fields = ('title', 'sentfrom', 'email', 'content', 'taglist')
     notify_fields = ('org', 'email', 'date', 'title', 'content', 'tags')
     rendered_preview_fields = ('content', )
@@ -52,6 +53,10 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
 
     def __str__(self):
         return "%s: %s" % (self.date, self.title)
+
+    @property
+    def permanenturl(self):
+        return '/about/news/{}-{}/'.format(slugify(self.title), self.id)
 
     def verify_submitter(self, user):
         return (len(self.org.managers.filter(pk=user.pk)) == 1)
@@ -105,3 +110,5 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
             return 'List of tags'
         elif f == 'content':
             return 'Content preview'
+        elif f == 'permanenturl':
+            return 'Permanent URL'
