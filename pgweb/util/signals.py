@@ -102,18 +102,18 @@ def _get_notification_text(obj):
                 # Was approved, still approved -> no notification
                 return (None, None)
             # From approved to unapproved
-            return ('{0} id {1} has been unapproved'.format(obj._meta.verbose_name, obj.id),
+            return ('{0} id {1} ({2}) has been unapproved'.format(obj._meta.verbose_name, obj.id, str(obj)),
                     _get_full_text_representation(obj))
         else:
             if not oldapproved:
                 # Object went from unapproved to approved
-                return ('{0} id {1} has been approved'.format(obj._meta.verbose_name, obj.id),
+                return ('{0} id {1} ({2}) has been approved'.format(obj._meta.verbose_name, obj.id, str(obj)),
                         _get_full_text_representation(obj))
             # Object contents have changed. Generate a diff!
         diff = _get_full_text_diff(obj, oldobj)
         if not diff:
             return (None, None)
-        return ('{0} id {1} has been modified'.format(obj._meta.verbose_name, obj.id),
+        return ('{0} id {1} ({2}) has been modified'.format(obj._meta.verbose_name, obj.id, str(obj)),
                 'The following fields have been modified:\n\n%s' % diff)
     else:
         # If there is no approved field, but send_notifications was set
@@ -121,7 +121,7 @@ def _get_notification_text(obj):
         diff = _get_full_text_diff(obj, oldobj)
         if not diff:
             return (None, None)
-        return ('{0} id {1} has been modified'.format(obj._meta.verbose_name, obj.id),
+        return ('{0} id {1} ({2}) has been modified'.format(obj._meta.verbose_name, obj.id, str(obj)),
                 'The following fields have been modified:\n\n%s' % diff)
 
 
