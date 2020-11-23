@@ -14,7 +14,9 @@ sitenav = {
             {'title': 'Servers', 'link': '/about/servers/'},
         ]},
         {'title': 'Latest News', 'link': '/about/newsarchive/'},
-        {'title': 'Upcoming Events', 'link': '/about/events/'},
+        {'title': 'Upcoming Events', 'link': '/about/events/', 'submenu': [
+            {'title': 'Past events', 'link': '/about/eventarchive/'},
+        ]},
         {'title': 'Press', 'link': '/about/press/'},
         {'title': 'Licence', 'link': '/about/licence/'},
     ],
