@@ -7,35 +7,58 @@
       <section>
         <h1>Documentation <i class="far fa-file-alt"></i></h1>
       </section>
-      <p>This section contains <a href="/docs/manuals/">current</a>
-      and <a href="/docs/manuals/archive/">archived</a> manuals for PostgreSQL users. You can read the <a href="/docs/current/release.html">release notes</a>, and view a listing of <a href="/docs/books/">books</a>
-      written about PostgreSQL.</p>
+      <p>
+       <a class="btn btn-primary btn-double-width" href="/docs/current/">View the manual</a>
+      </p>
+
+      <h2>Manuals <i class="fas fa-book"></i></h2>
+      <p>
+       You can view the manual for an older version or download a PDF of a manual from the below table.
+      </p>
+      <table class="table table-striped">
+       <thead class="thead-light">
+	<tr>
+	 <th class="w-25">Online Version</th>
+	 <th>PDF Version</th>
+	</tr>
+       </thead>
+       <tbody>
+	{%for v in versions%}
+	<tr>
+	 <td>
+	  <a href="/docs/{{v.numtree}}/index.html">{{v.treestring}}</a>
+	 </td>
+	 <td>
+	  {%if v.a4pdf or v.uspdf%}
+	  {%if v.a4pdf%}<a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-A4.pdf">A4 PDF</a> <span class="txtMediumGrey">({{v.a4pdf|filesizeformat}})</span>{%endif%}
+	  {%if v.a4pdf and v.uspdf%}&bull;{%endif%}
+	  {%if v.uspdf%}<a href="/files/documentation/pdf/{{v.numtree}}/postgresql-{{v.numtree}}-US.pdf">US PDF</a> <span class="txtMediumGrey">({{v.uspdf|filesizeformat}})</span>{%endif%}
+	  {%else%}PDF version not available
+	  {%endif%}
+	</tr>
+	{%endfor%}
+	<tr>
+	 <td><a href="/docs/devel/index.html">Development snapshot</a></td>
+	 <td>PDF version not available</td>
+	</tr>
+       </tbody>
+      </table>
+
+      <p>
+       Looking for documentation for an older, unsupported, version? Check the
+       <a href="/docs/manuals/archive/">archive</a> of older manuals.
+      </p>
     </div>
     <div class="col-md-3">
       <section>
-        <h2>Online Manuals</h2>
+        <h2>Translated Manuals</h2>
       </section>
-      <dl>
-        <dd>
-          <ul>
-            {% for version in versions %}
-              <li>
-                <a href="/docs/{{ version.numtree }}/index.html">{{ version.treestring }}</a>
-              </li>
-            {%endfor%}
-          </ul>
-        </dd>
-        <dt>Translated Manuals</dt>
-        <dd>
-            <ul>
-              <li><a href="http://www.postgres.cn/docs" target="_blank" rel="noopener">Chinese</a></li>
-              <li><a href="https://docs.postgresql.fr" target="_blank" rel="noopener">French</a></li>
-              <li><a href="https://www.postgresql.jp/document/" target="_blank" rel="noopener">Japanese</a></li>
-              <li><a href="https://postgrespro.ru/docs/postgresql" target="_blank" rel="noopener">Russian</a></li>
-            </ul>
-        </dd>
-        <dd><p></p><a href="/docs/manuals/">More manuals</a></dd>
-      </dl>
+      <ul>
+       <li><a href="http://www.postgres.cn/docs" target="_blank" rel="noopener">Chinese</a></li>
+       <li><a href="https://docs.postgresql.fr" target="_blank" rel="noopener">French</a></li>
+       <li><a href="https://www.postgresql.jp/document/" target="_blank" rel="noopener">Japanese</a></li>
+       <li><a href="https://postgrespro.ru/docs/postgresql" target="_blank" rel="noopener">Russian</a></li>
+      </ul>
     </div>
   </div>
 

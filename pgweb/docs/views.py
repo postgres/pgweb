@@ -182,7 +182,7 @@ def redirect_root(request, version):
 def root(request):
     versions = Version.objects.filter(Q(supported=True) | Q(testing__gt=0, tree__gt=0)).order_by('-tree')
     return render_pgweb(request, 'docs', 'docs/index.html', {
-        'versions': versions,
+        'versions': [_VersionPdfWrapper(v) for v in versions],
     })
 
 
@@ -216,10 +216,8 @@ class _VersionPdfWrapper(object):
 
 
 def manuals(request):
-    versions = Version.objects.filter(Q(supported=True) | Q(testing__gt=0, tree__gt=0)).order_by('-tree')
-    return render_pgweb(request, 'docs', 'docs/manuals.html', {
-        'versions': [_VersionPdfWrapper(v) for v in versions],
-    })
+    # Legacy URL for manuals, redirect to the main docs page
+    return HttpResponsePermanentRedirect('/docs/')
 
 
 def manualarchive(request):

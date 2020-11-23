@@ -1161,6 +1161,10 @@ hr.eventseparator {
   margin: 1em auto;
 }
 
+.btn-double-width {
+  width: 28em;
+}
+
 .btn-center {
   text-align: center;
   display: block;
