@@ -105,7 +105,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
                         notify.write("{}\n".format(str(form.cleaned_data[f])))
                     notify.write("\n")
             else:
-                subj = '{0} id {1} has been modified'.format(instance._meta.verbose_name, instance.id)
+                subj = '{0} id {1} ({2}) has been modified'.format(instance._meta.verbose_name, instance.id, str(instance))
 
                 for fn in form.changed_data:
                     if not hasattr(instance, fn):
