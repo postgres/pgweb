@@ -120,7 +120,7 @@ def docpage(request, version, filename):
     else:
         contentpreview = ''
 
-    return render(request, 'docs/docspage.html', {
+    r = render(request, 'docs/docspage.html', {
         'page': page,
         'supported_versions': [v for v in versions if v.version.supported],
         'devel_versions': [v for v in versions if not v.version.supported and v.version.testing],
@@ -136,6 +136,8 @@ def docpage(request, version, filename):
             'sitename': 'PostgreSQL Documentation',
         }
     })
+    r['xkey'] = 'pgdocs_{}'.format(page.display_version())
+    return r
 
 
 @allow_frames
@@ -154,7 +156,9 @@ def docsvg(request, version, filename):
 
     page = get_object_or_404(DocPage, version=ver, file="{0}.svg".format(filename))
 
-    return HttpResponse(page.content, content_type="image/svg+xml")
+    r = HttpResponse(page.content, content_type="image/svg+xml")
+    r['xkey'] = 'pgdocs_{}'.format(page.display_version())
+    return r
 
 
 def docspermanentredirect(request, version, typ, page, *args):
