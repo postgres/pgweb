@@ -40,7 +40,7 @@ class PgMiddleware(object):
             response['x-do-esi'] = "1"
             tlist.remove('base/esi.html')
         if tlist:
-            response['xkey'] = ' '.join(["pgwt_{0}".format(hashlib.md5(t.encode('ascii', errors='replace')).hexdigest()) for t in tlist])
+            response['xkey'] = ' '.join(["pgwt_{0}".format(hashlib.md5(t.encode('ascii', errors='replace')).hexdigest()) for t in tlist] + [response.get('xkey', '')])
 
         # Set security headers
         sources = OrderedDict([
