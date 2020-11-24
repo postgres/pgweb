@@ -13,7 +13,7 @@ class Event(TwostateModerateModel):
     country = models.ForeignKey(Country, null=True, blank=True, on_delete=models.CASCADE)
     language = models.ForeignKey(Language, null=True, blank=True, default='eng', help_text="Primary language for event. When multiple languages, specify this in the event description", on_delete=models.CASCADE)
 
-    badged = models.BooleanField(null=False, blank=False, default=False, verbose_name='Community event', help_text='Choose "Community event" if this is a community recognized event following the <a href="/community/recognition/#conferences" target="_blank" rel="noopener">community event guidelines</a>.')
+    badged = models.BooleanField(null=False, blank=False, default=False, verbose_name='Community event', help_text='Choose "Community event" if this is a community recognized event following the <a href="/about/policies/conferences/" target="_blank" rel="noopener">community event guidelines</a>.')
     description_for_badged = models.TextField(blank=True, null=True, verbose_name='Description for community event', help_text='DEPRECRATED: This was used in the beginning of community events to collect additional information.')
     startdate = models.DateField(null=False, blank=False, verbose_name="Start date")
     enddate = models.DateField(null=False, blank=False, verbose_name="End date")

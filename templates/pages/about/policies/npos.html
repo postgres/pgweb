@@ -1,0 +1,48 @@
+{%extends "base/page.html"%}
+{%load pgfilters%}
+{%block title%}Recognised PostgreSQL Nonprofit Organisations{%endblock%}
+{%block contents%}
+
+<h1>Recognised PostgreSQL Nonprofit Organisations <i class="fas fa-gavel"></i></h1>
+
+<p><em>Last updated: July 29, 2017. {%git_changes_link%} <a href="https://git.postgresql.org/gitweb/?p=pgweb.git;a=history;f=templates/pages/community/recognition.html">View</a> history before December 8, 2020.</em></p>
+
+<p>Recognised PostgreSQL Nonprofit Organisations (NPOs) will be listed on the <a href="/">PostgreSQL Website</a> as such. To become recognised as an NPO, the organisation must self-certify that they meet the criteria below, aimed at ensuring they meet the standards of openness expected in the PostgreSQL Community.
+</p>
+<p>
+  Use of the terms "MUST", "MUST NOT", "SHOULD" and "SHOULD NOT" in the criteria below should be interpreted per <a href="https://www.ietf.org/rfc/rfc2119.txt" target="_blank" rel="noopener">RFC2119</a>.
+</p>
+
+<h3>General</h3>
+
+<ul>
+  <li>A Code of Conduct SHOULD be adopted and apply to all members and directors.</li>
+  <li>The organisation MUST be registered as a Non Profit Organisation in the territory in which it operates.</li>
+  <li>No payments may be made to directors or members for their service with the exception of reimbursement of expenses incurred on the organisation's business, and sponsorship of conference attendance where deemed appropriate to help ensure the success of an event.</li>
+  <li>The organisation MUST work towards the betterment of the PostgreSQL Project and/or community. It may not participate in any activities which may bring the project into disrepute or otherwise work against the interests of the project or the community.</li>
+  <li>The <a href="/developer/core/">PostgreSQL Core Team</a> may recognise, not recognise, or rescind a previous recognition of any organisation without justification, regardless of whether or not the criteria above are met.</li>
+  <li>These criteria may be reviewed and potentially updated at any time.</li>
+</ul>
+
+<h3>Membership</h3>
+<ul>
+  <li>Membership MUST be open to anyone, limited only to the geographic area in which the NPO operates or a specific spoken language, if desired.</li>
+  <li>Membership MUST be at zero cost or a nominal cost (up to US $50 per year) to allow participation from any interested community members.</li>
+  <li>Corporate memberships may be allowed, at higher cost than individual membership if desired, provided the same membership terms are available to any company.</li>
+  <li>Membership MUST be renewed at least once every three years. "Lifetime" memberships MUST NOT be allowed.</li>
+</ul>
+
+<h3>Directors</h3>
+<ul>
+  <li>The board of directors MUST be elected by the membership, and all members including any corporate members MUST have an equal vote.</li>
+  <li>The board of directors SHOULD NOT consist of 50% or more directors working for the same company or group of companies under the same ultimate ownership or management, a situation which MUST be actively avoided as much as is possible. Should such a situation arise, for example, following the resignation of a director, an election SHOULD be held as soon as possible to restore the balance of the board.</li>
+  <li>Director terms MUST last no longer than three years without re-election. A limit on the number of terms served may be set. "Lifetime" directorships MUST NOT be allowed.</li>
+</ul>
+
+<h3>Vetting</h3>
+<ul>
+  <li>Voting for the board of directors MUST be done in a way that may be externally vetted.</li>
+  <li>Financial reports MUST be published at least annually for review by the membership.</li>
+  <li>The organisation MUST make its financial reports and voting processes and records available to the <a href="/developer/core/">PostgreSQL Core Team</a> or their nominated representative for review if requested.</li>
+</ul>
+{%endblock%}

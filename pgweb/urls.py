@@ -72,6 +72,7 @@ urlpatterns = [
     url(r'^community/lists/subscribe/$', RedirectView.as_view(url='https://lists.postgresql.org/', permanent=True)),
 
     url(r'^community/lists/listinfo/$', pgweb.lists.views.listinfo),
+    url(r'^community/recognition/$', RedirectView.as_view(url='/about/policies/', permanent=True)),
     url(r'^community/survey/vote/(\d+)/$', pgweb.survey.views.vote),
     url(r'^community/survey[/\.](\d+)(-.*)?/$', pgweb.survey.views.results),
     url(r'^community/user-groups/$', pgweb.pugs.views.index),

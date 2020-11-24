@@ -1,69 +1,11 @@
 {%extends "base/page.html"%}
-{%block title%}Community Guidelines{%endblock%}
+{%load pgfilters%}
+{%block title%}Community Conference Recognition{%endblock%}
 {%block contents%}
 
-<h1>Community Recognition Guidelines <i class="fa fa-users"></i></h1>
+<h1>Community Conference Recognition <i class="fas fa-gavel"></i></h1>
 
-<p>The PostgreSQL community is comprised of an international group of individuals and 3rd-party organisations who contribute to the PostgreSQL Development Group through various efforts.  In order to help recognise the efforts of everyone contributing to the PostgreSQL project, the <a href="/developer/core/">PostgreSQL Core Committee</a> has put together a set of guidelines to fairly recognise these contributions to the community.</p>
-
-<p>The following sections provide the guidelines for how various affiliates of the PostgreSQL community can qualify for official recognition by the PostgreSQL Development Group.</p>
-
-<ul>
-  <li>
-    <a href="#npos">Recognised PostgreSQL Nonprofit Organisations (NPOs)</a>
-  </li>
-  <li>
-    <a href="#conferences">Community Conference Recognition</a>
-  </li>
-</ul>
-
-<a name="npos" />
-
-<h2>Recognised PostgreSQL Nonprofit Organisations (NPOs)</h2>
-<p><em>Last updated: July 29, 2017</em></p>
-
-<p>Recognised PostgreSQL Nonprofit Organisations (NPOs) will be listed on the <a href="/">PostgreSQL Website</a> as such. To become recognised as an NPO, the organisation must self-certify that they meet the criteria below, aimed at ensuring they meet the standards of openness expected in the PostgreSQL Community.
-</p>
-<p>
-  Use of the terms "MUST", "MUST NOT", "SHOULD" and "SHOULD NOT" in the criteria below should be interpreted per <a href="https://www.ietf.org/rfc/rfc2119.txt" target="_blank" rel="noopener">RFC2119</a>.
-</p>
-
-<h3>General</h3>
-
-<ul>
-  <li>A Code of Conduct SHOULD be adopted and apply to all members and directors.</li>
-  <li>The organisation MUST be registered as a Non Profit Organisation in the territory in which it operates.</li>
-  <li>No payments may be made to directors or members for their service with the exception of reimbursement of expenses incurred on the organisation's business, and sponsorship of conference attendance where deemed appropriate to help ensure the success of an event.</li>
-  <li>The organisation MUST work towards the betterment of the PostgreSQL Project and/or community. It may not participate in any activities which may bring the project into disrepute or otherwise work against the interests of the project or the community.</li>
-  <li>The <a href="/developer/core/">PostgreSQL Core Team</a> may recognise, not recognise, or rescind a previous recognition of any organisation without justification, regardless of whether or not the criteria above are met.</li>
-  <li>These criteria may be reviewed and potentially updated at any time.</li>
-</ul>
-
-<h3>Membership</h3>
-<ul>
-  <li>Membership MUST be open to anyone, limited only to the geographic area in which the NPO operates or a specific spoken language, if desired.</li>
-  <li>Membership MUST be at zero cost or a nominal cost (up to US $50 per year) to allow participation from any interested community members.</li>
-  <li>Corporate memberships may be allowed, at higher cost than individual membership if desired, provided the same membership terms are available to any company.</li>
-  <li>Membership MUST be renewed at least once every three years. "Lifetime" memberships MUST NOT be allowed.</li>
-</ul>
-
-<h3>Directors</h3>
-<ul>
-  <li>The board of directors MUST be elected by the membership, and all members including any corporate members MUST have an equal vote.</li>
-  <li>The board of directors SHOULD NOT consist of 50% or more directors working for the same company or group of companies under the same ultimate ownership or management, a situation which MUST be actively avoided as much as is possible. Should such a situation arise, for example, following the resignation of a director, an election SHOULD be held as soon as possible to restore the balance of the board.</li>
-  <li>Director terms MUST last no longer than three years without re-election. A limit on the number of terms served may be set. "Lifetime" directorships MUST NOT be allowed.</li>
-</ul>
-
-<h3>Vetting</h3>
-<ul>
-  <li>Voting for the board of directors MUST be done in a way that may be externally vetted.</li>
-  <li>Financial reports MUST be published at least annually for review by the membership.</li>
-  <li>The organisation MUST make its financial reports and voting processes and records available to the <a href="/developer/core/">PostgreSQL Core Team</a> or their nominated representative for review if requested.</li>
-</ul>
-
-<a name="conferences" />
-<h2>Community Conference Recognition</h2>
-<p><em>Last updated: January 28, 2020</em></p>
+<p><em>Last updated: January 28, 2020. {%git_changes_link%} <a href="https://git.postgresql.org/gitweb/?p=pgweb.git;a=history;f=templates/pages/community/recognition.html">View</a> history before December 8, 2020.</em></p>
 
 <p>The Community Conference Recognition programme is a voluntary scheme under which submitters of events to the <a href="/about/events/">PostgreSQL Website listings</a> may self-assess their entry against the criteria below, and if they comply may market their event as a PostgreSQL Community event.</p>
 
@@ -123,7 +65,7 @@
   <li>
     A statement on the event website MUST indicate where any profits from the event will go, which specifically MUST support PostgreSQL community activities, either through:
     <ol>
-      <li>a <a href="#npos">recognized PostgreSQL Nonprofit Organisation</a></li>
+      <li>a <a href="/about/policies/npos/">recognized PostgreSQL Nonprofit Organisation</a></li>
       <li>a detailed list of how the profits will support
       ongoing PostgreSQL Global Development Group development</li>
       <li>to the future growth and expansion of the event, OR</li>
