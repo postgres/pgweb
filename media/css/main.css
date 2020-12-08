@@ -1100,6 +1100,10 @@ code,
   margin: 0 5px;
 }
 
+#pgContentWrap .logo-preview {
+  max-width: 10% !important;
+}
+
 i.fas.fa-search {
   color: #336791;
 }
