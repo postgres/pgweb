@@ -958,9 +958,16 @@ code,
   border-color: #FFD7D7;
 }
 
-#docContent table.CAUTION, table.WARNING,
-#docContent blockquote.CAUTION p, #docContent blockquote.NOTE p, #docContent blockquote.TIP p, #docContent blockquote.WARNING p,
-#docContent .caution p, #docContent .note p, #docContent .tip p, #docContent .warning p
+#docContent table.CAUTION,
+#docContent table.WARNING,
+#docContent blockquote.CAUTION p:last-child,
+#docContent blockquote.NOTE p:last-child,
+#docContent blockquote.TIP p:last-child,
+#docContent blockquote.WARNING p:last-child,
+#docContent .caution p:last-child,
+#docContent .note p:last-child,
+#docContent .tip p:last-child,
+#docContent .warning p:last-child
 {
   margin-bottom: 0 !important;
 }
