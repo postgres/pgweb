@@ -38,7 +38,7 @@ with. Here's a quick step-by-step on how to do that:
    tables and indexes, as well as create a superuser for your local
    installation::
 
-   ./manage.py migrate
+       ./manage.py migrate
 
 #. A few functions are required, or at least recommended in order to
    test all of the system. The SQL scripts in the directory sql/ needs
@@ -46,24 +46,24 @@ with. Here's a quick step-by-step on how to do that:
    without varnish frontends, you should use the *varnish_local.sql*
    script, and not use the *varnish.sql* script.
 
-   Load these files with something like
+   Load these files with something like::
 
-   psql -d pgweb -f sql/varnish_local.sql
+       psql -d pgweb -f sql/varnish_local.sql
 
 #. To load some initial data for some tables (far from all at this
    point), in the pgweb directory, run the following command::
 
-   pgweb/load_initial_data.sh
+       pgweb/load_initial_data.sh
 
 #. You'll want to creaet a superuser so you can access the `/admin/`
-   interface:
+   interface::
 
-   ./manage.py createsuperuser
+       ./manage.py createsuperuser
 
 #. At this point, you're ready to get started. Start your local server
    by running::
 
-   ./manage.py runserver
+       ./manage.py runserver
 
 #. Now load up the website by going to http://localhost:8000
 
