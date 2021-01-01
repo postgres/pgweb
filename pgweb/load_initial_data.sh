@@ -8,6 +8,8 @@ echo WARNING: this may overwrite some data in the database with an initial set o
 echo 'Are you sure you want this (answer "yes" to overwrite)'
 read R
 
+cd $(dirname $0)
+
 if [ "$R" == "yes" ]; then
    find . -name data.yaml | xargs ../manage.py loaddata
 fi
