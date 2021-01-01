@@ -5,15 +5,16 @@ So, you're ready to contribute to pgweb, and you want to set up a
 local working copy of the website code, so you have something to work
 with. Here's a quick step-by-step on how to do that:
 
-#. Make sure you have downloaded and installed django *version 1.11*
-   You will also need the dependencies *psycopg2*, *yaml*
-   and *markdown* (these are python libraries, so prefix python- for Debian
-   packages, for example). There is a `requirements.txt` file available
-   for pip installs.
+#. Make sure you have downloaded and installed django *version 2.2*,
+   and python 3 (tested with version 3.7).
 
-#. Make sure you have downloaded and installed PostgreSQL (tested only
-   with *version 9.0* and later, but doesn't use any advanced
-   functionality so it should work with other versions)
+   You will also need a few other dependencies, see the
+   `requirements.txt` in the root directory.
+
+   It is recommended to make the installation using a `virtualenv`
+
+#. Make sure you have downloaded and installed PostgreSQL (tested
+   with version 11, but should work fine with anything newer)
 
 #. Create a database in your PostgreSQL installation called pgweb
    (other names are of course possible, but that's the standard one)
@@ -27,6 +28,12 @@ with. Here's a quick step-by-step on how to do that:
 	SITE_ROOT="http://localhost:8000"
 	SESSION_COOKIE_SECURE=False
 	SESSION_COOKIE_DOMAIN=None
+	CSRF_COOKIE_SECURE=False
+	CSRF_COOKIE_DOMAIN=None
+
+   There are some parts of the site that require further settings, but
+   this should be enough to get the basics up and running.
+
 #. In the pgweb directory run the following command to create all
    tables and indexes, as well as create a superuser for your local
    installation::
@@ -39,14 +46,25 @@ with. Here's a quick step-by-step on how to do that:
    without varnish frontends, you should use the *varnish_local.sql*
    script, and not use the *varnish.sql* script.
 
+   Load these files with something like
+
+   psql -d pgweb -f sql/varnish_local.sql
+
 #. To load some initial data for some tables (far from all at this
    point), in the pgweb directory, run the following command::
 
-   ./load_initial_data.sh
+   pgweb/load_initial_data.sh
+
+#. You'll want to creaet a superuser so you can access the `/admin/`
+   interface:
+
+   ./manage.py createsuperuser
+
 #. At this point, you're ready to get started. Start your local server
    by running::
 
    ./manage.py runserver
+
 #. Now load up the website by going to http://localhost:8000
 
 Future improvements

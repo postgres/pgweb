@@ -30,6 +30,11 @@ contribute, be sure to sign up to the `pgsql-www <https://www.postgresql.org/lis
 mailinglist for any discussions, and post any suggested patches there. If you
 want to make any major changes, be sure to have discussed those on the list first.
 
+Setting up a local instance
++++++++++++++++++++++++++++
+To set up a local instance for testing or building patches, please see the
+`docs/dev_install.rst <docs/dev_install.rst>`_ document.
+
 Licence
 -------
 The code for the website is licensed under
