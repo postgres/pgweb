@@ -10,12 +10,16 @@
 <h3>Not submitted</h3>
 <p>
   You can edit these {{title}}s an unlimited number of times, but they will not
-  be visible to anybody.
+  be published until they are submitted for moderation and approved.
+</p>
 <ul>
   {%for o in objects.inprogress %}
-    <li><a href="/account/{{suburl}}/{{o.id}}/">{{o}}</a> (<a href="/account/{{suburl}}/{{o.id}}/submit/">Submit for moderation</a>)</li>
+    <li><a href="/account/{{suburl}}/{{o.id}}/">{{o}}</a> &mdash; (<a href="/account/{{suburl}}/{{o.id}}/submit/">Submit for moderation</a>)</li>
   {%endfor%}
 </ul>
+<p>
+  <strong>Note</strong>: Each individual {{title}} needs to be submitted for moderation.
+</p>
 {%endif%}
 
 {% if objects.unapproved %}
