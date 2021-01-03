@@ -70,25 +70,27 @@ def _modobjs(qs):
 
 @login_required
 def home(request):
+    modobjects = [
+        {
+            'title': 'not submitted yet',
+            'objects': [
+                _modobjs(NewsArticle.objects.filter(org__managers=request.user, modstate=ModerationState.CREATED)),
+            ],
+        },
+        {
+            'title': 'waiting for moderator approval',
+            'objects': [
+                _modobjs(NewsArticle.objects.filter(org__managers=request.user, modstate=ModerationState.PENDING)),
+                _modobjs(Event.objects.filter(org__managers=request.user, approved=False)),
+                _modobjs(Organisation.objects.filter(managers=request.user, approved=False)),
+                _modobjs(Product.objects.filter(org__managers=request.user, approved=False)),
+                _modobjs(ProfessionalService.objects.filter(org__managers=request.user, approved=False))
+            ],
+        },
+    ]
+
     return render_pgweb(request, 'account', 'account/index.html', {
-        'modobjects': [
-            {
-                'title': 'not submitted yet',
-                'objects': [
-                    _modobjs(NewsArticle.objects.filter(org__managers=request.user, modstate=ModerationState.CREATED)),
-                ],
-            },
-            {
-                'title': 'waiting for moderator approval',
-                'objects': [
-                    _modobjs(NewsArticle.objects.filter(org__managers=request.user, modstate=ModerationState.PENDING)),
-                    _modobjs(Event.objects.filter(org__managers=request.user, approved=False)),
-                    _modobjs(Organisation.objects.filter(managers=request.user, approved=False)),
-                    _modobjs(Product.objects.filter(org__managers=request.user, approved=False)),
-                    _modobjs(ProfessionalService.objects.filter(org__managers=request.user, approved=False))
-                ],
-            },
-        ],
+        'modobjects': filter(lambda x: any(x['objects']), modobjects),
     })
 
 
