@@ -1247,6 +1247,11 @@ input[type=checkbox]:focus {
   margin: 2px;
 }
 
+/* For the thread viewer, keep the width inline with the parent element */
+#thread_select.custom-select {
+  width: auto;
+}
+
 th.formfieldnamecontainer {
   padding-right: 1em;
 }
