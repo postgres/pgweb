@@ -1,6 +1,7 @@
 from django.db import models
 
 from pgweb.core.models import Organisation
+from pgweb.core.text import ORGANISATION_HINT_TEXT
 from pgweb.util.moderation import TwostateModerateModel
 
 
@@ -8,7 +9,7 @@ class ProfessionalService(TwostateModerateModel):
     org = models.OneToOneField(Organisation, null=False, blank=False,
                                db_column="organisation_id", on_delete=models.CASCADE,
                                verbose_name="organisation",
-                               help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.")
+                               help_text=ORGANISATION_HINT_TEXT)
     description = models.TextField(null=False, blank=False)
     employees = models.CharField(max_length=32, null=True, blank=True)
     locations = models.CharField(max_length=128, null=True, blank=True)

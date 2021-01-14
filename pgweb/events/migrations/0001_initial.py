@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 
+from pgweb.core.text import ORGANISATION_HINT_TEXT
+
 
 class Migration(migrations.Migration):
 
@@ -27,7 +29,7 @@ class Migration(migrations.Migration):
                 ('details', models.TextField(help_text='Complete event description')),
                 ('country', models.ForeignKey(blank=True, to='core.Country', null=True, on_delete=models.CASCADE)),
                 ('language', models.ForeignKey(default='eng', blank=True, to='core.Language', help_text='Primary language for event. When multiple languages, specify this in the event description', null=True, on_delete=models.CASCADE)),
-                ('org', models.ForeignKey(verbose_name='Organisation', to='core.Organisation', help_text='If no organisations are listed, please check the <a href="/account/orglist/">organisation list</a> and contact the organisation manager or <a href="mailto:webmaster@postgresql.org">webmaster@postgresql.org</a> if none are listed.', on_delete=models.CASCADE)),
+                ('org', models.ForeignKey(verbose_name='Organisation', to='core.Organisation', help_text=ORGANISATION_HINT_TEXT, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('-startdate', '-enddate'),

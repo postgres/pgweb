@@ -1,11 +1,12 @@
 from django.db import models
 
 from pgweb.core.models import Country, Language, Organisation
+from pgweb.core.text import ORGANISATION_HINT_TEXT
 from pgweb.util.moderation import TwostateModerateModel
 
 
 class Event(TwostateModerateModel):
-    org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text="If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed.", on_delete=models.CASCADE)
+    org = models.ForeignKey(Organisation, null=False, blank=False, verbose_name="Organisation", help_text=ORGANISATION_HINT_TEXT, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, null=False, blank=False)
     isonline = models.BooleanField(null=False, default=False, verbose_name="Online event")
     city = models.CharField(max_length=50, null=False, blank=True)

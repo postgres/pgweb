@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import datetime
 
+from pgweb.core.text import ORGANISATION_HINT_TEXT
+
 
 class Migration(migrations.Migration):
 
@@ -20,7 +22,7 @@ class Migration(migrations.Migration):
                 ('date', models.DateField(default=datetime.date.today)),
                 ('title', models.CharField(max_length=200)),
                 ('content', models.TextField()),
-                ('org', models.ForeignKey(verbose_name='Organisation', to='core.Organisation', help_text='If no organisations are listed, please check the <a href="/account/orglist/">organisation list</a> and contact the organisation manager or <a href="mailto:webmaster@postgresql.org">webmaster@postgresql.org</a> if none are listed.', on_delete=models.CASCADE)),
+                ('org', models.ForeignKey(verbose_name='Organisation', to='core.Organisation', help_text=ORGANISATION_HINT_TEXT, on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('-date',),

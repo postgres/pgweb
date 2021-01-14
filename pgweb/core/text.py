@@ -1,0 +1,1 @@
+ORGANISATION_HINT_TEXT = "If no organisations are listed, please check the <a href=\"/account/orglist/\">organisation list</a> and contact the organisation manager or <a href=\"mailto:webmaster@postgresql.org\">webmaster@postgresql.org</a> if none are listed."

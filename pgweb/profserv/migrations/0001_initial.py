@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 
+from pgweb.core.text import ORGANISATION_HINT_TEXT
+
 
 class Migration(migrations.Migration):
 
@@ -34,7 +36,7 @@ class Migration(migrations.Migration):
                 ('provides_support', models.BooleanField(default=False)),
                 ('provides_hosting', models.BooleanField(default=False)),
                 ('interfaces', models.CharField(max_length=512, null=True, verbose_name='Interfaces (for hosting)', blank=True)),
-                ('org', models.OneToOneField(db_column='organisation_id', to='core.Organisation', help_text='If no organisations are listed, please check the <a href="/account/orglist/">organisation list</a> and contact the organisation manager or <a href="mailto:webmaster@postgresql.org">webmaster@postgresql.org</a> if none are listed.', verbose_name='organisation', on_delete=models.CASCADE)),
+                ('org', models.OneToOneField(db_column='organisation_id', to='core.Organisation', help_text=ORGANISATION_HINT_TEXT, verbose_name='organisation', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ('org__name',),
