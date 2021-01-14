@@ -119,7 +119,7 @@ objtypes = {
     'organisations': {
         'title': 'organisation',
         'objects': lambda u: Organisation.objects.filter(managers=u),
-        'submit_header': 'Before submitting a new Organisation, please verify on the list of <a href="/account/orglist/">current organisations</a> if the organisation already exists. If it does, please contact the manager of the organisation to gain permissions.',
+        'submit_header': '<h3>Submit organisation</h3>Before submitting a new Organisation, please verify on the list of <a href="/account/orglist/">current organisations</a> if the organisation already exists. If it does, please contact the manager of the organisation to gain permissions.',
         'editapproved': True,
     },
 }
