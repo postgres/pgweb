@@ -364,7 +364,15 @@ def _send_moderation_message(request, obj, message, notice, what):
         )
 
     # Send notification to admins
+    if obj.twomoderators and obj.firstmoderator:
+        # For two-moderator objects, only one is required to reject or send back for editing. In that case,
+        # just log the current user who is the one that did that.
+        modname = "{} and {}".format(obj.firstmoderator, request.user)
+    else:
+        modname = request.user
+
     if what:
+        # If an actual change happened, notify of that
         admmsg = message
         if obj.is_approved:
             admmsg += "\n\nNOTE! This {} was previously approved!!".format(obj._meta.verbose_name)
@@ -376,16 +384,21 @@ def _send_moderation_message(request, obj, message, notice, what):
             # No point in sending an edit link to a page that doesn't exist anymore
             admmsg += "\n\nEdit at: {}/admin/_moderate/{}/{}/\n".format(settings.SITE_ROOT, obj._meta.model_name, obj.id)
 
-        if obj.twomoderators and obj.firstmoderator:
-            # For two-moderator objects, only one is required to reject or send back for editing. In that case,
-            # just log the current user who is the one that did that.
-            modname = "{} and {}".format(obj.firstmoderator, request.user)
-        else:
-            modname = request.user
-
         send_simple_mail(settings.NOTIFICATION_FROM,
                          settings.NOTIFICATION_EMAIL,
                          "{} '{}' {} by {}".format(obj._meta.verbose_name.capitalize(), obj.title, what, modname),
+                         admmsg)
+    elif notice:
+        # There was no change, but there was a moderation notice. We still want to inform the moderators that this happened
+        admmsg = "No changes were made, but the following notice was sent:\n{}\n\nEdit at: {}/admin/_moderate/{}/{}/\n".format(
+            notice,
+            settings.SITE_ROOT,
+            obj._meta.model_name,
+            obj.id,
+        )
+        send_simple_mail(settings.NOTIFICATION_FROM,
+                         settings.NOTIFICATION_EMAIL,
+                         "Moderation notice on '{}' {} by {}".format(obj._meta.verbose_name.capitalize(), obj.title, modname),
                          admmsg)
 
 
