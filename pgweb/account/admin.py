@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.core.validators import ValidationError
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
@@ -95,6 +96,15 @@ class PGUserChangeForm(UserChangeForm):
             return "Old unknown hash"
         else:
             return "Unknown"
+
+    def clean_email(self):
+        e = self.cleaned_data['email'].lower()
+        if User.objects.filter(email=e).exclude(pk=self.instance.pk):
+            raise ValidationError("There already exists a different user with this address")
+        if SecondaryEmail.objects.filter(email=e):
+            raise ValidationError("This address is already a secondary address attached to a user")
+
+        return e
 
 
 class PGUserAdmin(UserAdmin):
