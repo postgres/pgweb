@@ -1,0 +1,4 @@
+<ul>
+{%for e in emails%}  <li>{{e.email}}{%if not e.confirmed%} (NOT CONFIRMED){%endif%}
+{%endfor%}
+</ul>

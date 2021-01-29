@@ -11,7 +11,7 @@ from pgweb.util.widgets import TemplateRenderWidget
 from pgweb.util.db import exec_to_dict
 from pgweb.account.views import OAUTH_PASSWORD_STORE
 
-from .models import CommunityAuthSite, CommunityAuthOrg
+from .models import CommunityAuthSite, CommunityAuthOrg, SecondaryEmail
 
 
 class CommunityAuthSiteAdminForm(forms.ModelForm):
@@ -50,6 +50,7 @@ class CommunityAuthSiteAdmin(admin.ModelAdmin):
 class PGUserChangeForm(UserChangeForm):
     passwordinfo = forms.CharField(label="Password information", required=False)
     logininfo = forms.CharField(label="Community login history", required=False)
+    extraemail = forms.CharField(label="Additional email addresses", required=False)
 
     def __init__(self, *args, **kwargs):
         super(PGUserChangeForm, self).__init__(*args, **kwargs)
@@ -74,6 +75,14 @@ class PGUserChangeForm(UserChangeForm):
                     'userid': self.instance.pk,
                 }),
             })
+
+        self.fields['email'].help_text = "Be EXTREMELY careful when changing an email address! It is almost ALWAYS better to reset the password on the user and have them change it on their own! Sync issues are common!"
+        self.fields['extraemail'].widget = TemplateRenderWidget(
+            template='forms/widgets/extra_email_list_widget.html',
+            context={
+                'emails': SecondaryEmail.objects.filter(user=self.instance).order_by('-confirmed', 'email'),
+            },
+        )
 
     def password_type(self, obj):
         if obj.password == OAUTH_PASSWORD_STORE:
@@ -106,6 +115,8 @@ class PGUserAdmin(UserAdmin):
         )
         if 'passwordinfo' not in fs[0][1]['fields']:
             fs[0][1]['fields'] = list(fs[0][1]['fields']) + ['passwordinfo', ]
+        if 'extraemail' not in fs[1][1]['fields']:
+            fs[1][1]['fields'] = list(fs[1][1]['fields']) + ['extraemail', ]
         return fs
 
 
