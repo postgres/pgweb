@@ -129,6 +129,11 @@ class PGUserAdmin(UserAdmin):
             fs[1][1]['fields'] = list(fs[1][1]['fields']) + ['extraemail', ]
         return fs
 
+    @property
+    def search_fields(self):
+        sf = list(super().search_fields)
+        return sf + ['secondaryemail__email', ]
+
 
 admin.site.register(CommunityAuthSite, CommunityAuthSiteAdmin)
 admin.site.register(CommunityAuthOrg)
