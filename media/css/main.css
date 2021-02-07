@@ -16,6 +16,7 @@
 
 /** CUSTOM FONTS */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,800');
 
 /** GLOBAL CONFIGURATION */
 body {
@@ -39,7 +40,7 @@ dl, ol, ul {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Open Sans', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   color: #336791;
   /*margin: 0 0 0.5em 0;*/
 }
@@ -122,7 +123,7 @@ a:hover, a:active {
 }
 
 b, strong, th {
-  font-weight: 700;
+  font-weight: 600;
   color: #474747 !important;
 }
 
@@ -576,6 +577,10 @@ ul.actions {
   margin-bottom: 0;
 }
 
+.nav-item > a {
+  font-weight: 400;
+}
+
 .logo {
   height: 2rem;
   margin-left: 5px;
@@ -595,6 +600,7 @@ ul.actions {
 
 #pgSideNav a {
   color: #336791;
+  font-weight: normal;
 }
 
 #pgSideNav ul {
@@ -611,7 +617,7 @@ ul.actions {
  */
 
 .docs-version-selected {
-  font-weight: 900;
+  font-weight: 600;
   text-decoration: underline;
 }
 
@@ -666,7 +672,7 @@ code,
   background-color: #f8f9fa;
   border-radius: .25rem;
   margin: .6rem 0;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 #docContent .note pre,
@@ -701,19 +707,19 @@ code,
 
 #docContent .USERINPUT > code,
 #docContent .userinput > code {
-  font-weight: bolder;
+  font-weight: 600;
 }
 
 #docContent .REPLACEABLE,
 #docContent tt.REPLACEABLE,
 #docContent .replaceable {
-  font-weight: 900;
+  font-weight: 800;
   font-style: italic;
 }
 
 #docContent .REPLACEABLE > code,
 #docContent .replaceable > code {
-  font-weight: 900;
+  font-weight: 800;
 }
 
 /**
@@ -723,7 +729,7 @@ code,
 #docContent .TABLE,
 #docContent .TABLE b {
   color: #336791 !important;
-  font-weight: 900;
+  font-weight: 600;
 }
 
  #docContent table.table,
@@ -892,7 +898,7 @@ code,
 
 #docContent .TOC tt, #docContent .TOC dt a,
 #docContent .toc tt, #docContent .toc dt a {
-  font-weight: 300!important;
+  font-weight: 400;
 }
 
 #docContent .TOC dd, #docContent .TOC dl,
@@ -1039,13 +1045,13 @@ code,
 #docContent .VARIABLELIST dt,
 #docContent .variablelist dt {
   font-family: monospace;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 #docContent .VARIABLELIST dt,
 #docContent .variablelist dt {
   font-family: monospace;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 #docContent .variablelist dd {
@@ -1139,6 +1145,9 @@ pre.code {
 }
 #pgContentWrap .newseventwrap h3 {
   font-size: 1.0em;
+}
+#pgContentWrap strong.event-highlight {
+  font-weight: 600;
 }
 hr.eventseparator {
   width: 80%;
@@ -1590,7 +1599,6 @@ table.sponsor-table tbody tr td:nth-child(3) {
   /** NAVBAR */
   .nav-item > a {
     font-size: 0.95rem;
-    font-weight: 600;
   }
 }
 @media (max-width: 575px) {
