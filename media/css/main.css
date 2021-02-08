@@ -639,6 +639,10 @@ ul.actions {
   margin-bottom: 1rem;
 }
 
+#docContent dt {
+  font-weight: 600;
+}
+
 #docContent hr {
   margin: 0 0 0.5em 0;
 }
@@ -893,6 +897,7 @@ code,
 
 #docContent div.TOC > dl > dt.c2,
 #docContent div.toc > dl > dt.c2 {
+  font-weight: 400;
   margin-bottom: 1rem;
 }
 
