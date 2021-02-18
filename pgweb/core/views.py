@@ -89,7 +89,7 @@ def home(request):
 
 
 # About page view (contains information about PostgreSQL + random quotes)
-@cache(minutes=10)
+@cache(minutes=30)
 def about(request):
     # get 5 random quotes
     quotes = Quote.objects.filter(approved=True).order_by('?').all()[:5]
@@ -212,7 +212,7 @@ _dynamic_cssmap = {
 }
 
 
-@cache(hours=6)
+@cache(hours=48)
 def dynamic_css(request, css):
     if css not in _dynamic_cssmap:
         raise Http404('CSS not found')

@@ -47,7 +47,7 @@ def generate_pagelinks(pagenum, totalpages, querystring):
 
 
 @csrf_exempt
-@cache(minutes=15)
+@cache(minutes=30)
 def search(request):
     # Perform a general web search
     # Since this lives in a different database, we open a direct
