@@ -47,7 +47,7 @@ def generate_pagelinks(pagenum, totalpages, querystring):
 
 
 @csrf_exempt
-@queryparams('a', 'd', 'l', 'ln', 'm', 'p', 'q', 's', 'u')
+@queryparams('d', 'l', 'ln', 'm', 'p', 'q', 's', 'u')
 @cache(minutes=30)
 def search(request):
     # Perform a general web search
@@ -122,7 +122,6 @@ def search(request):
     else:
         searchlists = False
         suburl = request.GET.get('u', None)
-        allsites = request.GET.get('a', None) == "1"
 
     # Check that we actually have something to search for
     if request.GET.get('q', '') == '':
@@ -277,11 +276,10 @@ def search(request):
 
         # perform the query for general web search
         try:
-            curs.execute("SELECT * FROM site_search(%(query)s, %(firsthit)s, %(hitsperpage)s, %(allsites)s, %(suburl)s, %(internal)s)", {
+            curs.execute("SELECT * FROM site_search(%(query)s, %(firsthit)s, %(hitsperpage)s, %(suburl)s, %(internal)s)", {
                 'query': query,
                 'firsthit': firsthit - 1,
                 'hitsperpage': hitsperpage,
-                'allsites': allsites,
                 'suburl': suburl,
                 'internal': include_internal,
             })
@@ -300,15 +298,13 @@ def search(request):
                 quoted_suburl = ''
         except Exception as e:
             quoted_suburl = ''
-        querystr = "?q=%s&a=%s&u=%s" % (
+        querystr = "?q=%s&u=%s" % (
             urllib.parse.quote_plus(query.encode('utf-8')),
-            allsites and "1" or "0",
             quoted_suburl,
         )
 
         return render(request, 'search/sitesearch.html', {
             'suburl': suburl,
-            'allsites': allsites,
             'hitcount': totalhits,
             'firsthit': firsthit,
             'lasthit': min(totalhits, firsthit + hitsperpage - 1),

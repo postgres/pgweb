@@ -1227,11 +1227,6 @@ button.btn.btn-default {
 
 /* Input */
 
-input#allsites {
-  margin-top: 10px;
-  margin-left: 0;
-}
-
 input.form-control {
   height: 2.5em;
   margin: auto 0;
@@ -1281,15 +1276,6 @@ th.formfieldnamecontainer {
 
 .form-check-input[type=radio] {
   margin-top: .4rem;
-}
-
-.form-check.search {
-  padding-left: 0;
-}
-
-.form-check.search label.form-check-label {
-  margin-left: 1rem;
-  vertical-align: middle;
 }
 
 .text-center.fixed-height h3 {
