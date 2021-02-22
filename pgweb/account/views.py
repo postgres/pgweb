@@ -4,7 +4,7 @@ import django.contrib.auth.views as authviews
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404
-from pgweb.util.decorators import login_required, script_sources, frame_sources, content_sources
+from pgweb.util.decorators import login_required, script_sources, frame_sources, content_sources, queryparams
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
@@ -535,6 +535,7 @@ def signup_complete(request):
 @script_sources('https://www.gstatic.com/recaptcha/')
 @frame_sources('https://www.google.com/')
 @transaction.atomic
+@queryparams('do_abort')
 def signup_oauth(request):
     if 'oauth_email' not in request.session \
        or 'oauth_firstname' not in request.session \
@@ -618,6 +619,7 @@ def signup_oauth(request):
 ####
 # Community authentication endpoint
 ####
+@queryparams('d', 'su')
 def communityauth(request, siteid):
     # Get whatever site the user is trying to log in to.
     site = get_object_or_404(CommunityAuthSite, pk=siteid)
@@ -742,6 +744,7 @@ def communityauth_logout(request, siteid):
 
 
 @login_required
+@queryparams('next')
 def communityauth_consent(request, siteid):
     org = get_object_or_404(CommunityAuthSite, id=siteid).org
     if request.method == 'POST':
@@ -776,6 +779,7 @@ def _encrypt_site_response(site, s):
     )
 
 
+@queryparams('s', 'e', 'n', 'u')
 def communityauth_search(request, siteid):
     # Perform a search for users. The response will be encrypted with the site
     # key to prevent abuse, therefor we need the site.

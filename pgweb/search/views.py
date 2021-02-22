@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
-from pgweb.util.decorators import cache
+from pgweb.util.decorators import cache, queryparams
 
 import urllib.parse
 import requests
@@ -47,6 +47,7 @@ def generate_pagelinks(pagenum, totalpages, querystring):
 
 
 @csrf_exempt
+@queryparams('a', 'd', 'l', 'ln', 'm', 'p', 'q', 's', 'u')
 @cache(minutes=30)
 def search(request):
     # Perform a general web search

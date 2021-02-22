@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.http import QueryDict
 
 from pgweb.util.templateloader import initialize_template_collection, get_all_templates
 
@@ -76,3 +77,29 @@ class PgMiddleware(object):
 
         response['X-XSS-Protection'] = "1; mode=block"
         return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        # Filter out any query parameters that are not explicitly allowed. We do the same thing in Varnish,
+        # and it's better to also do it in django if they show up here, so issues because of it are caught
+        # in local testing where there is no Varnish.
+        if not request.GET:
+            # If there are no parameters, just skip this whole process
+            return None
+
+        if request.path.startswith('/admin/'):
+            # django-admin uses it a lot and it's not for us to change
+            return None
+
+        allowed = getattr(view_func, 'queryparams', None)
+
+        if allowed:
+            # Filter the QueryDict for only the allowed parameters
+            result = request.GET.copy()
+            for k in request.GET.keys():
+                if k not in allowed:
+                    del result[k]
+            result.mutable = False
+            request.GET = result
+        else:
+            request.GET = QueryDict()
+        return None

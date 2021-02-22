@@ -24,6 +24,17 @@ def cache(days=0, hours=0, minutes=0, seconds=0):
     return _cache
 
 
+def queryparams(*args):
+    """
+    Allow specified query parameters when calling function.
+    NOTE! Must be the "outermost" decorator!!!
+    """
+    def _queryparams(fn):
+        fn.queryparams = args
+        return fn
+    return _queryparams
+
+
 def allow_frames(fn):
     def _allow_frames(request, *_args, **_kwargs):
         resp = fn(request, *_args, **_kwargs)
