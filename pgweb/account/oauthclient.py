@@ -7,6 +7,7 @@ import os
 import sys
 
 from pgweb.util.misc import get_client_ip
+from pgweb.util.decorators import queryparams
 from pgweb.core.models import UserProfile
 
 import logging
@@ -283,6 +284,7 @@ def oauth_login_twitter(request):
         _twitter_auth_data)
 
 
+@queryparams('code', 'state', 'next')
 def login_oauth(request, provider):
     fn = 'oauth_login_{0}'.format(provider)
     m = sys.modules[__name__]
