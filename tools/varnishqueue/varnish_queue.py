@@ -16,8 +16,10 @@ import psycopg2
 from setproctitle import setproctitle
 
 
-def do_purge(consumername, headers):
+def do_purge(consumername, extraheaders):
     try:
+        headers = {'Host': 'www.postgresql.org'}
+        headers.update(extraheaders)
         r = requests.get("https://{}.postgresql.org/varnish-purge-url".format(consumername),
                          headers=headers,
                          timeout=10)
