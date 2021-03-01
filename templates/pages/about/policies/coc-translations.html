@@ -1,0 +1,65 @@
+{%extends "base/cocpage.html"%}
+{%load pgfilters%}
+{%block title%}Code of Conduct Translation &amp; Approval Process{%endblock%}
+{%block cocmain%}
+
+<h1>Code of Conduct Translation &amp; Approval Process <i class="fas fa-gavel"></i></h1>
+
+<p><em>Last updated: February 26, 2021. {%git_changes_link%}</em></p>
+
+<p>
+  The PostgreSQL <a href="/about/policies/coc_committee/">Code of Conduct Committee</a>
+  manages the process for approving translations of the <a href="/about/policies/coc/">Code of Conduct</a>
+  from English into other languages, and for updating the translations when the
+  policy is revised.
+</p>
+
+<ol>
+  <li>
+    The proposed translation should be reviewed by at least one other fluent
+    speaker of the language prior to submitting it to the Committee.
+  </li>
+  <li>
+    The proposed translation is sent to the Committee
+    (<a href="mailto:coc@postgresql.org">coc@postgresql.org</a>) as follows:
+    <ul>
+      <li>The document should be submitted as both .txt and .pdf</li>
+      <li>The email should include the name(s) of the initial translator(s)</li>
+      <li>The email should include the name(s) of the reviewer(s)</li>
+    </ul>
+  </li>
+  <li>
+    The Committee will review the information, and contact the submitter for any
+    additional information needed.
+  </li>
+  <li>
+    Once the Committee has completed its review, the translation is submitted
+    for discussion to the ~general list, with a one week deadline for comments.
+  </li>
+  <li>
+    Any comments or suggestions for revisions are sent to the submitter for
+    consideration. If an updated version is needed, the updated version would be
+    posted to the <a href="mailto:pgsql-general@lists.postgresql.org">pgsql-general</a>
+    mailing list for a one week comment period.
+  </li>
+  <li>
+    If there are no comments or revisions to make, the translation is sent to
+    <a href="mailto:pgsql-general@lists.postgresql.org">pgsql-www</a> to be
+    added to the website.
+  </li>
+  <li>
+    Once the new translation is posted, the Committee posts a message to the
+    <a href="/about/newsarchive/">PostgreSQL news announcements</a>.
+  </li>
+  <li>
+    The Committee maintains a list of all current translations, and will work
+    with the original translators to update the policy as needed. If the
+    original translator is unavailable to do the update, the Committee will
+    post for a volunteer to do so.
+  </li>
+  <li>
+    Out-of-date policies will be marked as such on the website while the
+    updates are pending.
+  </li>
+</ol>
+{%endblock%}
