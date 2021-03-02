@@ -5,9 +5,13 @@ function sortNumeric(a,b) {
    return a-b;
 }
 
-function get_platform_name(plat) {
-    if (plat == 'EL')
-	return "Red Hat Enterprise, CentOS, Scientific or Oracle";
+function get_platform_name(plat, ver) {
+    if (plat == 'EL') {
+        if (parseFloat(ver) <= 7)
+	    return "Red Hat Enterprise, CentOS, Scientific or Oracle";
+        else
+	    return "Red Hat Enterprise, CentOS or Oracle";
+    }
     else if (plat == 'F')
 	return "Fedora";
     return "Undefined distribution";
@@ -52,7 +56,7 @@ function uses_systemd(plat) {
 
 function get_platform_text(p) {
     var a = p.split('-');
-    return get_platform_name(a[0]) + ' version ' + a[1];
+    return get_platform_name(a[0], a[1]) + ' version ' + a[1];
 }
 
 window.onload = function() {
