@@ -284,7 +284,7 @@ def oauth_login_twitter(request):
         _twitter_auth_data)
 
 
-@queryparams('code', 'state', 'next')
+@queryparams('code', 'state', 'next', 'oauth_verifier')
 def login_oauth(request, provider):
     fn = 'oauth_login_{0}'.format(provider)
     m = sys.modules[__name__]
