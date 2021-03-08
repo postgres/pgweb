@@ -60,9 +60,9 @@ urlpatterns = [
     url(r'^docs/release/$', pgweb.docs.views.release_notes),
     url(r'^docs/release/((?P<major_version>(\d+\.\d+)|\d+)\.(?P<minor_version>\d+))/$', pgweb.docs.views.release_notes),
     # Legacy URLs for accessing the docs page; provides a permanent redirect
-    url(r'^docs/(current|devel|\d+(?:\.\d)?)/(static|interactive)/((.*).html?)?$', pgweb.docs.views.docspermanentredirect),
-    url(r'^docs/(current|devel|\d+(?:\.\d)?)/(.*).html?$', pgweb.docs.views.docpage),
-    url(r'^docs/(current|devel|\d+(?:\.\d)?)/(.*).svg$', pgweb.docs.views.docsvg),
+    url(r'^docs/(current|devel|\d+(?:\.\d)?)/(static|interactive)/(([^/]+).html?)?$', pgweb.docs.views.docspermanentredirect),
+    url(r'^docs/(current|devel|\d+(?:\.\d)?)/([^/]+).html?$', pgweb.docs.views.docpage),
+    url(r'^docs/(current|devel|\d+(?:\.\d)?)/([^/]+).svg$', pgweb.docs.views.docsvg),
     url(r'^docs/(current|devel|\d+(?:\.\d)?)/$', pgweb.docs.views.docsrootpage),
     url(r'^docs/(current|devel|\d+(?:\.\d)?)/$', pgweb.docs.views.redirect_root),
 
