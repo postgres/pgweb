@@ -1392,6 +1392,10 @@ table.cocc-table tbody tr td:nth-child(1) {
   width: 20%;
 }
 
+table.coc-report-table thead tr th:nth-child(1) {
+  width: 50%;
+}
+
 /* Contributors */
 table.contributor-table thead tr th {
   width: 50%;
