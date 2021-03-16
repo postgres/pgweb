@@ -67,7 +67,7 @@ function update_markdown(obj) {
 function _do_update_markdown(obj) {
     if (obj.value == '') {
         /* Short-circuit the empty field case */
-        obj.infospan.innerHTML = '';
+        obj.preview_div.innerHTML = '';
         return;
     }
 
