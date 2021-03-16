@@ -12,6 +12,7 @@ class NewsArticleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email'].required = True
+        self.fields['email'].help_text = "Pick a confirmed email associated with the organisation. This will be used as the reply address of posted news. If no correct address is available, you need to register one on the <a href=\"/account/edit/organisations/\">organisation</a> before submitting."
 
     def filter_by_user(self, user):
         self.fields['org'].queryset = Organisation.objects.filter(managers=user, approved=True)
