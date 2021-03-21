@@ -70,6 +70,7 @@ class SecurityPatch(models.Model):
     cvenumber = models.IntegerField(null=False, blank=False, db_index=True)
     detailslink = models.URLField(null=False, blank=True)
     description = models.TextField(null=False, blank=False)
+    details = models.TextField(blank=True, null=True, help_text="Additional details about the security patch")
     component = models.CharField(max_length=32, null=False, blank=False, help_text="If multiple components, choose the most critical one", choices=component_choices)
 
     versions = models.ManyToManyField(Version, through='SecurityPatchVersion')
@@ -84,7 +85,9 @@ class SecurityPatch(models.Model):
     vector_a = models.CharField(max_length=1, null=False, blank=True, verbose_name="Availability Impact", choices=vector_choices['A'])
     legacyscore = models.CharField(max_length=1, null=False, blank=True, verbose_name='Legacy score', choices=(('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')))
 
-    purge_urls = ('/support/security/', )
+    def purge_urls(self):
+        yield '/support/security/CVE-%s/' % self.cve
+        yield '/support/security/'
 
     def save(self, force_insert=False, force_update=False):
         # Calculate a number from the CVE, that we can use to sort by. We need to

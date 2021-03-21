@@ -75,7 +75,7 @@ You can filter the view of patches to show just patches for version:<br/>
     {%for p in patches%}
       <tr>
         <td>
-          {%if p.cve%}<nobr>{%if p.cve_visible%}<a href="{{p.cvelink}}">CVE-{{p.cve}}</a>{%else%}CVE-{{p.cve}}{%endif%}</nobr><br/>{%endif%}
+          {%if p.cve%}<nobr><a href="/support/security/CVE-{{ p.cve }}/">CVE-{{p.cve}}</a></nobr><br/>{%endif%}
           {%if p.newspost%}<a href="/about/news/{{p.newspost.title|slugify}}-{{p.newspost.id}}/">Announcement</a><br/>{%endif%}
         </td>
         <td>{{p.affected|join:", "}}</td>
@@ -83,7 +83,7 @@ You can filter the view of patches to show just patches for version:<br/>
         <td>{{p.component}}<br/>
           {%if p.cvssscore >= 0%}<a href="https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector={{p.cvssvector}}">{{p.cvssscore}}</a><br/><span class="cvssvector">{{p.cvssvector}}</span>
     {%else%}Legacy: {{p.legacyscore}}{%endif%}</td>
-        <td>{{p.description}}{%if p.detailslink%}<br/><br/><a href="{{p.detailslink}}">more details</a>{%endif%}</td>
+        <td>{{p.description}}<br/><br/><a href="/support/security/CVE-{{ p.cve }}/">more details</a></td>
       </tr>
     {% endfor %}
   </tbody>

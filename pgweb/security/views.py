@@ -1,9 +1,11 @@
-from django.shortcuts import get_object_or_404
+from django.core.validators import ValidationError
+from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect
 
 from pgweb.util.contexts import render_pgweb
 
 from pgweb.core.models import Version
-from .models import SecurityPatch
+from .models import SecurityPatch, make_cvenumber
 
 
 def GetPatchesList(filt):
@@ -19,6 +21,33 @@ def _list_patches(request, filt):
         'unsupported': Version.objects.filter(supported=False, tree__gt=0).extra(
             where=["EXISTS (SELECT 1 FROM security_securitypatchversion pv WHERE pv.version_id=core_version.id)"],
         ),
+    })
+
+
+def details(request, cve_prefix, cve):
+    """Provides additional details about a specific CVE"""
+    # First determine if the entrypoint of the URL is a lowercase "cve". If it
+    # is, redirect to the uppercase
+    if cve_prefix != "CVE":
+        return redirect('/support/security/CVE-{}/'.format(cve), permanent=True)
+    # Get the CVE number from the CVE ID string so we can look it up
+    # against the database. This shouldn't fail due to an ill-formatted CVE,
+    # as both use the same validation check, but we will wrap it just in case.
+    #
+    # However, we do need to ensure that the CVE does both exist and
+    # is published.
+    try:
+        security_patch = get_object_or_404(
+            SecurityPatch,
+            cvenumber=make_cvenumber(cve),
+            public=True,
+        )
+    except ValidationError:
+        raise Http404()
+
+    return render_pgweb(request, 'support', 'security/details.html', {
+        'security_patch': security_patch,
+        'versions': security_patch.securitypatchversion_set.select_related('version').order_by('-version__tree').all(),
     })
 
 

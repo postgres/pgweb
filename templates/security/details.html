@@ -1,0 +1,95 @@
+{%extends "base/page.html"%}
+{%block title%}CVE-{{ security_patch.cve }}: {{ security_patch.description }}{%endblock%}
+{%block contents%}
+
+<h1>CVE-{{ security_patch.cve }} <i class="fas fa-lock"></i></h1>
+<h3>{{ security_patch.description }}</h3>
+
+{% if security_patch.details %}
+<p>{{ security_patch.details }}</p>
+{% endif %}
+
+<h2>Version Information</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Affected Version</th>
+      <th>Fixed In</th>
+      {% if security_patch.newspost %}
+      <th>Fix Published</th>
+      {% endif %}
+  </thead>
+  <tbody>
+    {% for version in versions %}
+    <tr>
+      <td>
+        {% if version.version.tree >= 10 %}
+          {{ version.version.tree|floatformat:"0" }}
+        {% else %}
+          {{ version.version.tree }}
+        {% endif %}
+      </td>
+      <td>
+        <a href="/docs/release/{% if version.version.tree >= 10 %}{{ version.version.tree|floatformat:"0" }}.{{ version.fixed_minor }}{% else %}{{ version.version.tree }}.{{ version.fixed_minor }}{% endif %}">
+          {% if version.version.tree >= 10 %}
+            {{ version.version.tree|floatformat:"0" }}.{{ version.fixed_minor }}
+          {% else %}
+            {{ version.version.tree }}.{{ version.fixed_minor }}
+          {% endif %}
+        </a>
+      </td>
+      {% if security_patch.newspost %}
+      <td>
+        <a href="/about/news/{{ security_patch.newspost.title|slugify }}-{{ security_patch.newspost.id }}/">
+          {{ security_patch.newspost.date }}
+        </a>
+      </td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p>
+  For more information about <a href="/support/versioning/">PostgreSQL versioning</a>,
+  please visit the <a href="/support/versioning/">versioning page</a>.
+</p>
+
+{% if security_patch.cvssscore >= 0 %}
+<h2>CVSS 3.0</h2>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Overall Score</th>
+      <td><strong>{{ security_patch.cvssscore }}</strong></td>
+    </tr>
+    <tr>
+      <th>Component</th>
+      <td>{{ security_patch.component }}</td>
+    </tr>
+    <tr>
+      <th>Vector</th>
+      <td>
+        <a href="https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector={{ security_patch.cvssvector }}&version=3.0" target="_blank" rel="noopener noreferer">
+          {{ security_patch.cvssvector }}
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endif %}
+
+<h2>Reporting Security Vulnerabilities</h2>
+
+<p>
+  If you wish to report a new security vulnerability in PostgreSQL, please
+  send an email to
+  <a href="mailto:security@postgresql.org">security@postgresql.org</a>.
+</p>
+
+<p>
+  For reporting non-security bugs, please see the <a href="/account/submitbug/">Report a Bug</a> page.
+</p>
+{%endblock%}
