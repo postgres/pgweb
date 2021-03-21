@@ -28,6 +28,18 @@ def cve_validator(val):
         raise ValidationError("Enter CVE in format (YYYY-NNNN (up to 7 N) without the CVE text")
 
 
+def make_cvenumber(cve):
+    """
+    creates a ``cvenumber`` from a CVE ID string (e.g. YYYY-DDDDD).
+
+    raises a validation error if the CVE ID string is invalid
+    """
+    m = re_cve.match(cve)
+    if not m:
+        raise ValidationError("Invalid CVE")
+    return 100000 * int(m.groups(0)[0]) + int(m.groups(0)[1])
+
+
 def other_vectors_validator(val):
     if val != val.upper():
         raise ValidationError("Vector must be uppercase")
@@ -80,10 +92,9 @@ class SecurityPatch(models.Model):
         if self.cve == '':
             self.cvenumber = 0
         else:
-            m = re_cve.match(self.cve)
-            if not m:
-                raise ValidationError("Invalid CVE, should not get here!")
-            self.cvenumber = 100000 * int(m.groups(0)[0]) + int(m.groups(0)[1])
+            # note that the make_cvenumber function can raise a validation error
+            # if the value of CVE is not a valid CVE identifier
+            self.cvenumber = make_cvenumber(self.cve)
         super(SecurityPatch, self).save(force_insert, force_update)
 
     def __str__(self):
