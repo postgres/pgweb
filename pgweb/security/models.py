@@ -20,12 +20,12 @@ component_choices = (
 )
 
 
-re_cve = re.compile(r'^(\d{4})-(\d{4,5})$')
+re_cve = re.compile(r'^(\d{4})-(\d{4,7})$')
 
 
 def cve_validator(val):
     if not re_cve.match(val):
-        raise ValidationError("Enter CVE in format 0000-0000 without the CVE text")
+        raise ValidationError("Enter CVE in format (YYYY-NNNN (up to 7 N) without the CVE text")
 
 
 def other_vectors_validator(val):
