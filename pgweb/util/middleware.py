@@ -90,6 +90,10 @@ class PgMiddleware(object):
             # django-admin uses it a lot and it's not for us to change
             return None
 
+        if settings.DEBUG_TOOLBAR and request.path.startswith('/__debug__/'):
+            # The debug toolbar also uses a lot
+            return None
+
         allowed = getattr(view_func, 'queryparams', None)
 
         if allowed:
