@@ -9,4 +9,4 @@ pycodestyle==2.4.0
 pynliner==0.8.0
 Babel==2.6.0
 bleach==3.1.4
-PyYAML==3.13
+PyYAML==5.4
