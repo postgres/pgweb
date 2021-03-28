@@ -1,4 +1,5 @@
 {%extends "base/page.html"%}
+{%load pgmarkdown%}
 {%block title%}CVE-{{ security_patch.cve }}: {{ security_patch.description }}{%endblock%}
 {%block contents%}
 
@@ -6,7 +7,7 @@
 <h3>{{ security_patch.description }}</h3>
 
 {% if security_patch.details %}
-<p>{{ security_patch.details }}</p>
+{{ security_patch.details|markdown }}
 {% endif %}
 
 <h2>Version Information</h2>
