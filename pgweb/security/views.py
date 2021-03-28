@@ -9,7 +9,7 @@ from .models import SecurityPatch, make_cvenumber
 
 
 def GetPatchesList(filt):
-    return SecurityPatch.objects.raw("SELECT p.*, array_agg(CASE WHEN v.tree >= 10 THEN v.tree::int ELSE v.tree END ORDER BY v.tree) AS affected, array_agg(CASE WHEN v.tree >= 10 THEN v.tree::int ELSE v.tree END || '.' || fixed_minor ORDER BY v.tree) AS fixed FROM security_securitypatch p INNER JOIN security_securitypatchversion sv ON p.id=sv.patch_id INNER JOIN core_version v ON v.id=sv.version_id WHERE p.public AND {0} GROUP BY p.id ORDER BY cvenumber DESC".format(filt))
+    return SecurityPatch.objects.raw("SELECT p.*, array_agg(CASE WHEN v.tree >= 10 THEN v.tree::int ELSE v.tree END ORDER BY v.tree DESC) AS affected, array_agg(CASE WHEN v.tree >= 10 THEN v.tree::int ELSE v.tree END || '.' || fixed_minor ORDER BY v.tree DESC) AS fixed FROM security_securitypatch p INNER JOIN security_securitypatchversion sv ON p.id=sv.patch_id INNER JOIN core_version v ON v.id=sv.version_id WHERE p.public AND {0} GROUP BY p.id ORDER BY cvenumber DESC".format(filt))
 
 
 def _list_patches(request, filt):
