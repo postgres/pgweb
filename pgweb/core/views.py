@@ -164,6 +164,7 @@ Disallow: /list/
 Disallow: /search/
 Disallow: /message-id/raw/
 Disallow: /message-id/flat/
+Disallow: /message-id/resend/
 
 Sitemap: https://www.postgresql.org/sitemap.xml
 """, content_type='text/plain')
