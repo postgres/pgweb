@@ -24,7 +24,7 @@ class CommunityAuthSiteAdminForm(forms.ModelForm):
         x = None
         try:
             x = base64.b64decode(self.cleaned_data['cryptkey'])
-        except TypeError:
+        except Exception:
             raise forms.ValidationError("Crypto key must be base64 encoded")
 
         if (len(x) != 16 and len(x) != 24 and len(x) != 32):
