@@ -40,6 +40,9 @@ class CommunityAuthSiteAdminForm(forms.ModelForm):
         if d.get('push_ssh', False) and not d.get('push_changes', False):
             self.add_error('push_ssh', 'SSH changes can only be pushed if general change push is enabled')
 
+        if d.get('cooloff_hours', 0) > 0 and not d.get('cooloff_message', ''):
+            self.add_error('cooloff_message', 'Cooloff message must be specified if cooloff period is')
+
         return d
 
 

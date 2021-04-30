@@ -20,8 +20,10 @@ class CommunityAuthSite(models.Model):
                                 help_text="Use tools/communityauth/generate_cryptkey.py to create a key")
     comment = models.TextField(null=False, blank=True)
     org = models.ForeignKey(CommunityAuthOrg, null=False, blank=False, on_delete=models.CASCADE)
-    cooloff_hours = models.IntegerField(null=False, blank=False, default=0,
-                                        help_text="Number of hours a user must have existed in the systems before allowed to log in to this site")
+    cooloff_hours = models.PositiveIntegerField(null=False, blank=False, default=0,
+                                                help_text="Number of hours a user must have existed in the systems before allowed to log in to this site")
+    cooloff_message = models.TextField(null=False, blank=True,
+                                       help_text="Message (HTML format allowed, will be wrapped in <P>) to show users who have not passed the cool-off period")
     push_changes = models.BooleanField(null=False, blank=False, default=False,
                                        help_text="Supports receiving http POSTs with changes to accounts")
     push_ssh = models.BooleanField(null=False, blank=False, default=False,
