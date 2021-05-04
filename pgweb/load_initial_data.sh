@@ -11,5 +11,5 @@ read R
 cd $(dirname $0)
 
 if [ "$R" == "yes" ]; then
-   find . -name data.yaml | xargs ../manage.py loaddata
+   find . -name data.json | xargs ../manage.py loaddata
 fi
