@@ -1,0 +1,82 @@
+[
+{
+ "model": "docs.docpagealias",
+ "pk": 1,
+ "fields": {
+  "file1": "app-pgreceivexlog.html",
+  "file2": "app-pgreceivewal.html"
+ }
+},
+{
+ "model": "docs.docpagealias",
+ "pk": 2,
+ "fields": {
+  "file1": "legalnotice.html",
+  "file2": "LEGALNOTICE.html"
+ }
+},
+{
+ "model": "docs.docpagealias",
+ "pk": 3,
+ "fields": {
+  "file1": "app-pgresetxlog.html",
+  "file2": "app-pgresetwal.html"
+ }
+},
+{
+ "model": "docs.docpagealias",
+ "pk": 5,
+ "fields": {
+  "file1": "pgxlogdump.html",
+  "file2": "pgwaldump.html"
+ }
+},
+{
+ "model": "docs.docpagealias",
+ "pk": 6,
+ "fields": {
+  "file1": "catalog-pg-replication-slots.html",
+  "file2": "view-pg-replication-slots.html"
+ }
+},
+{
+ "model": "docs.docpageredirect",
+ "pk": 1,
+ "fields": {
+  "redirect_from": "pgxlogdump.html",
+  "redirect_to": "pgwaldump.html"
+ }
+},
+{
+ "model": "docs.docpageredirect",
+ "pk": 2,
+ "fields": {
+  "redirect_from": "catalog-pg-replication-slots.html",
+  "redirect_to": "view-pg-replication-slots.html"
+ }
+},
+{
+ "model": "docs.docpageredirect",
+ "pk": 3,
+ "fields": {
+  "redirect_from": "app-pgresetxlog.html",
+  "redirect_to": "app-pgresetwal.html"
+ }
+},
+{
+ "model": "docs.docpageredirect",
+ "pk": 4,
+ "fields": {
+  "redirect_from": "LEGALNOTICE.html",
+  "redirect_to": "legalnotice.html"
+ }
+},
+{
+ "model": "docs.docpageredirect",
+ "pk": 5,
+ "fields": {
+  "redirect_from": "app-pgreceivexlog.html",
+  "redirect_to": "app-pgreceivewal.html"
+ }
+}
+]

@@ -1,0 +1,94 @@
+[
+{
+ "model": "downloads.category",
+ "pk": 1,
+ "fields": {
+  "catname": "Administration/development tools",
+  "blurb": ""
+ }
+},
+{
+ "model": "downloads.category",
+ "pk": 2,
+ "fields": {
+  "catname": "Drivers and interfaces",
+  "blurb": ""
+ }
+},
+{
+ "model": "downloads.category",
+ "pk": 3,
+ "fields": {
+  "catname": "Clustering/replication",
+  "blurb": ""
+ }
+},
+{
+ "model": "downloads.category",
+ "pk": 4,
+ "fields": {
+  "catname": "Procedural languages",
+  "blurb": "Note: Postgres has four languages that are part of the core distribution:\r\n<a href=\"https://www.postgresql.org/docs/current/interactive/plpgsql.html\">PL/pgSQL</a>, <a href=\"https://www.postgresql.org/docs/current/interactive/pltcl.html\">PL/Tcl</a>, <a href=\"https://www.postgresql.org/docs/current/interactive/plperl.html\">PL/Perl</a>, and <a href=\"https://www.postgresql.org/docs/current/interactive/plpython.html\">PL/Python</a>."
+ }
+},
+{
+ "model": "downloads.category",
+ "pk": 5,
+ "fields": {
+  "catname": "Reporting tools",
+  "blurb": ""
+ }
+},
+{
+ "model": "downloads.category",
+ "pk": 6,
+ "fields": {
+  "catname": "PostgreSQL extensions",
+  "blurb": ""
+ }
+},
+{
+ "model": "downloads.category",
+ "pk": 7,
+ "fields": {
+  "catname": "Applications",
+  "blurb": ""
+ }
+},
+{
+ "model": "downloads.category",
+ "pk": 8,
+ "fields": {
+  "catname": "PostgreSQL-derived servers",
+  "blurb": ""
+ }
+},
+{
+ "model": "downloads.licencetype",
+ "pk": 1,
+ "fields": {
+  "typename": "Open source"
+ }
+},
+{
+ "model": "downloads.licencetype",
+ "pk": 2,
+ "fields": {
+  "typename": "Freeware"
+ }
+},
+{
+ "model": "downloads.licencetype",
+ "pk": 3,
+ "fields": {
+  "typename": "Commercial"
+ }
+},
+{
+ "model": "downloads.licencetype",
+ "pk": 4,
+ "fields": {
+  "typename": "Multiple"
+ }
+}
+]

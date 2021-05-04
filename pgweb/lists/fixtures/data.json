@@ -1,0 +1,58 @@
+[
+{
+ "model": "lists.mailinglistgroup",
+ "pk": 1,
+ "fields": {
+  "groupname": "Developer lists",
+  "sortkey": 20
+ }
+},
+{
+ "model": "lists.mailinglistgroup",
+ "pk": 2,
+ "fields": {
+  "groupname": "User lists",
+  "sortkey": 10
+ }
+},
+{
+ "model": "lists.mailinglistgroup",
+ "pk": 4,
+ "fields": {
+  "groupname": "Regional lists",
+  "sortkey": 30
+ }
+},
+{
+ "model": "lists.mailinglistgroup",
+ "pk": 5,
+ "fields": {
+  "groupname": "Project lists",
+  "sortkey": 50
+ }
+},
+{
+ "model": "lists.mailinglistgroup",
+ "pk": 6,
+ "fields": {
+  "groupname": "User groups",
+  "sortkey": 40
+ }
+},
+{
+ "model": "lists.mailinglistgroup",
+ "pk": 7,
+ "fields": {
+  "groupname": "Inactive lists",
+  "sortkey": 1000
+ }
+},
+{
+ "model": "lists.mailinglistgroup",
+ "pk": 8,
+ "fields": {
+  "groupname": "Associations",
+  "sortkey": 35
+ }
+}
+]

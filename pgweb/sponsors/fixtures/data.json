@@ -1,0 +1,29 @@
+[
+{
+ "model": "sponsors.sponsortype",
+ "pk": 7,
+ "fields": {
+  "typename": "Other (not listed)",
+  "description": "This type is for server sponsors that aren't listed in the regular sponsor list. This is accomplished by setting sortkey=0",
+  "sortkey": 0
+ }
+},
+{
+ "model": "sponsors.sponsortype",
+ "pk": 8,
+ "fields": {
+  "typename": "Major Sponsor",
+  "description": "To be considered a Major Sponsor, must have been a Sponsor for more than one year, and have contributed visibly and substantially in at least two different categories above in the past 12 months, or has contributed very substantially in one category for four years or more. To be awarded a Major Sponsor label based on a financial contribution alone, the aggregate value of the donations in the past year should be at least $25,000USD.\r\n\r\nExamples:\r\n* a company which employs two contributors who spend a majority of their work time on PostgreSQL\r\n* a company which employs one heavy contributor, and organizes an annual community conference.\r\n* a company which has supplied substantial sysadmin staffing and hosting resources for the PostgreSQL project (several servers), and has done so for several years.",
+  "sortkey": 10
+ }
+},
+{
+ "model": "sponsors.sponsortype",
+ "pk": 9,
+ "fields": {
+  "typename": "Sponsor",
+  "description": "To be considered a Sponsor, an organization must have contributed significantly and visibly to PostgreSQL in at least one of the above categories for at least a year. To be awarded a Sponsor label based on a financial contribution alone, the aggregate value of the donations in the past two years should be equivalent to at least $2,000USD.\r\n\r\nExamples:\r\n* a company which hosts a PostgreSQL webserver and a buildfarm member.\r\n* a company which employs one contributor, who spends a minority of their work time on PostgreSQL.\r\n* a company which donates $1000 every year to PostgreSQL Brasil's general fund.",
+  "sortkey": 20
+ }
+}
+]
