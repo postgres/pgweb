@@ -24,7 +24,13 @@ if __name__ == "__main__":
     curs = conn.cursor()
 
     for l in sys.stdin:
-        if l.startswith('templates/'):
+        if '--static' in sys.argv:
+            # For the static files part, we always purge just on filename, with a prefix
+            curs.execute("SELECT varnish_purge('^/files/' || %(u)s || '$')", {
+                'u': l.strip(),
+            })
+        elif l.startswith('templates/'):
+            # On regular website, if it's a template do an xkey purge of all pages using that template
             tmpl = l[len('templates/'):].strip()
             if tmpl not in BANNED_TEMPLATES:
                 curs.execute("SELECT varnish_purge_xkey(%(key)s)", {
