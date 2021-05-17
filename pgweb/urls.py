@@ -23,6 +23,7 @@ import pgweb.survey.views
 from pgweb.core.feeds import VersionFeed
 from pgweb.news.feeds import NewsFeed
 from pgweb.events.feeds import EventFeed
+from pgweb.core.json import versions_json
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -103,6 +104,11 @@ urlpatterns = [
     url(r'^versions.rss$', VersionFeed()),
     url(r'^news(/(?P<tagurl>[^/]+))?.rss$', NewsFeed()),
     url(r'^events.rss$', EventFeed()),
+
+    ###
+    # JSON feeds
+    ###
+    url(r'^versions.json$', versions_json),
 
     ###
     # Special sections

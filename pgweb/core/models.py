@@ -83,6 +83,7 @@ class Version(models.Model):
         yield '/docs/manuals'
         yield '/about/featurematrix/$'
         yield '/versions.rss'
+        yield '/versions.json'
 
 
 class Country(models.Model):
