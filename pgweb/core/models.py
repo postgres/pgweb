@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from pgweb.util.misc import varnish_purge
 
 import base64
+from decimal import Decimal
 
 from pgweb.util.moderation import TwostateModerateModel
 
@@ -20,7 +21,6 @@ class Version(models.Model):
     tree = models.DecimalField(max_digits=3, decimal_places=1, null=False, blank=False, unique=True)
     latestminor = models.IntegerField(null=False, blank=False, default=0, help_text="For testing versions, latestminor means latest beta/rc number. For other releases, it's the latest minor release number in the tree.")
     reldate = models.DateField(null=False, blank=False)
-    relnotes = models.CharField(max_length=32, null=False, blank=False)
     current = models.BooleanField(null=False, blank=False, default=False)
     supported = models.BooleanField(null=False, blank=False, default=True)
     testing = models.IntegerField(null=False, blank=False, default=0, help_text="Testing level of this release. latestminor indicates beta/rc number", choices=TESTING_CHOICES)
@@ -43,6 +43,20 @@ class Version(models.Model):
             return int(self.tree)
         else:
             return self.tree
+
+    @property
+    def relnotes(self):
+        if self.tree >= Decimal('8.2'):
+            return 'release-{}-{}.html'.format(str(self.numtree).replace('.', '-'), self.latestminor)
+        elif self.tree >= Decimal('7.1'):
+            return 'release.html'
+        elif self.tree >= Decimal('6.4'):
+            return 'release.htm'
+        elif self.tree >= Decimal('6.3'):
+            return 'c2701.htm'
+        else:
+            # Should never happen so return something broken
+            return 'x'
 
     def buildversionstring(self, minor):
         if not self.testing:
