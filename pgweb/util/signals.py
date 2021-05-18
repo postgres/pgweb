@@ -5,7 +5,7 @@ from django.conf import settings
 import difflib
 
 from pgweb.util.middleware import get_current_user
-from pgweb.util.misc import varnish_purge
+from pgweb.util.misc import varnish_purge, varnish_purge_xkey
 from pgweb.util.moderation import ModerationState
 from pgweb.mailqueue.util import send_simple_mail
 
@@ -157,6 +157,12 @@ def my_post_save_handler(sender, **kwargs):
         else:
             purgelist = instance.purge_urls
         list(map(varnish_purge, purgelist))
+    if hasattr(instance, 'purge_xkeys'):
+        if callable(instance.purge_xkeys):
+            purgelist = instance.purge_xkeys()
+        else:
+            purgelist = instance.purge_xkeys
+        list(map(varnish_purge_xkey, purgelist))
 
 
 def register_basic_signal_handlers():

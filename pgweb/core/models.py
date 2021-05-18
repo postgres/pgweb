@@ -79,11 +79,12 @@ class Version(models.Model):
         yield '/$'
         yield '/support/versioning'
         yield '/support/security'
-        yield '/docs/$'
-        yield '/docs/manuals'
         yield '/about/featurematrix/$'
         yield '/versions.rss'
         yield '/versions.json'
+
+    def purge_xkeys(self):
+        yield 'pgdocs_all'
 
 
 class Country(models.Model):

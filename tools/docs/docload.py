@@ -227,9 +227,10 @@ if numchanges > 0:
         # Special handling of developer docs...
         ver = "devel"
 
-    curs.execute("SELECT varnish_purge('^/docs/' || %(v)s || '/')", {'v': ver})
+    curs.execute("SELECT varnish_purge_xkey('pgdocs_{}')".format(ver))
+    curs.execute("SELECT varnish_purge_xkey('pgdocs_all')")
     if iscurrent:
-        curs.execute("SELECT varnish_purge('^/docs/current/')")
+        curs.execute("SELECT varnish_purge_xkey('pgdocs_current')")
 
 # ensure the changes are committed, and close the connection
 connection.commit()

@@ -56,6 +56,10 @@ purge "/" since that will remove everything from the cache completely).
 This makes it possible to have frontends react instantly to changes,
 while maintaining high cacheability.
 
+Any model can also define a tuple or function called *purge_xkeys*.
+This work exactly the same way except it purges based on xkey instead
+of URL, which is usually the better choice.
+
 Finally, there is a form on the admin web interface that lets the
 administrator manually purge pages from the caches. This may be
 necessary if changes have been made to static pages and/or site
