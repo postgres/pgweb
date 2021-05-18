@@ -137,6 +137,8 @@ def docpage(request, version, filename):
         }
     })
     r['xkey'] = 'pgdocs_{}'.format(page.display_version())
+    if version == 'current':
+        r['xkey'] += ' pgdocs_current'
     return r
 
 
@@ -158,6 +160,8 @@ def docsvg(request, version, filename):
 
     r = HttpResponse(page.content, content_type="image/svg+xml")
     r['xkey'] = 'pgdocs_{}'.format(page.display_version())
+    if version == 'current':
+        r['xkey'] += ' pgdocs_current'
     return r
 
 
@@ -181,9 +185,11 @@ def redirect_root(request, version):
 
 def root(request):
     versions = Version.objects.filter(Q(supported=True) | Q(testing__gt=0, tree__gt=0)).order_by('-tree')
-    return render_pgweb(request, 'docs', 'docs/index.html', {
+    r = render_pgweb(request, 'docs', 'docs/index.html', {
         'versions': [_VersionPdfWrapper(v) for v in versions],
     })
+    r['xkey'] = 'pgdocs_all pgdocs_pdf'
+    return r
 
 
 class _VersionPdfWrapper(object):
@@ -222,9 +228,11 @@ def manuals(request):
 
 def manualarchive(request):
     versions = Version.objects.filter(testing=0, supported=False, tree__gt=0).order_by('-tree')
-    return render_pgweb(request, 'docs', 'docs/archive.html', {
+    r = render_pgweb(request, 'docs', 'docs/archive.html', {
         'versions': [_VersionPdfWrapper(v) for v in versions],
     })
+    r['xkey'] = 'pgdocs_all pgdocs_pdf'
+    return r
 
 
 def release_notes(request, major_version=None, minor_version=None):
@@ -336,7 +344,13 @@ def release_notes(request, major_version=None, minor_version=None):
         }
     else:
         context = {'release_notes': release_notes}
-    return render_pgweb(request, 'docs', 'docs/release_notes.html', context)
+
+    r = render_pgweb(request, 'docs', 'docs/release_notes.html', context)
+    if major_version:
+        r['xkey'] = 'pgdocs_{}'.format(major_version)
+    else:
+        r['xkey'] = 'pgdocs_all'
+    return r
 
 
 @login_required
