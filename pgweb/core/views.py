@@ -52,7 +52,7 @@ log = logging.getLogger(__name__)
 # Front page view
 @cache(minutes=10)
 def home(request):
-    news = NewsArticle.objects.filter(modstate=ModerationState.APPROVED)[:5]
+    news = NewsArticle.objects.select_related('org').filter(modstate=ModerationState.APPROVED)[:5]
     today = date.today()
     # get up to seven events to display on the homepage
     event_base_queryset = Event.objects.select_related('country').filter(
@@ -74,7 +74,6 @@ def home(request):
     return render(request, 'index.html', {
         'title': 'The world\'s most advanced open source database',
         'news': news,
-        'newstags': NewsTag.objects.all(),
         'events': events,
         'versions': versions,
         'planet': planet,
