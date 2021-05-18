@@ -29,6 +29,11 @@ if __name__ == "__main__":
             curs.execute("SELECT varnish_purge('^/files/' || %(u)s || '$')", {
                 'u': l.strip(),
             })
+
+            # If the purge is for documentation PDF, also purge the xkey for docs pdfs,
+            # so we update the list of which are available.
+            if l.startswith('documentation/pdf/'):
+                curs.execute("SELECT varnish_purge_xkey('pgdocs_pdf')")
         elif l.startswith('templates/'):
             # On regular website, if it's a template do an xkey purge of all pages using that template
             tmpl = l[len('templates/'):].strip()
