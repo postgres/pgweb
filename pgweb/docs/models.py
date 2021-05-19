@@ -42,5 +42,8 @@ class DocPageRedirect(models.Model):
     redirect_from = models.CharField(max_length=64, null=False, blank=False, unique=True, help_text='Page to redirect from, e.g. "old_page.html"')
     redirect_to = models.CharField(max_length=64, null=False, blank=False, unique=True, help_text='Page to redirect to, e.g. "new_page.html"')
 
+    def __str__(self):
+        return "%s => %s" % (self.redirect_from, self.redirect_to)
+
     class Meta:
         verbose_name_plural = "Doc page redirects"
