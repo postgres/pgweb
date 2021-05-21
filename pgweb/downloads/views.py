@@ -77,7 +77,7 @@ def ftpbrowser(request, subpath):
     # Add all symlinks (only directories supported)
     directories.extend([{'link': k, 'url': v['d'], 'type': 'l'} for k, v in list(node.items()) if v['t'] == 'l'])
 
-    # A ittle early sorting wouldn't go amiss, so .. ends up at the top
+    # A little early sorting wouldn't go amiss, so .. ends up at the top
     directories.sort(key=version_sort, reverse=True)
 
     # Add a link to the parent directory
