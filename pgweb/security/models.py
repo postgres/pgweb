@@ -66,7 +66,6 @@ class SecurityPatch(models.Model):
     public = models.BooleanField(null=False, blank=False, default=False)
     newspost = models.ForeignKey(NewsArticle, null=True, blank=True, on_delete=models.CASCADE)
     cve = models.CharField(max_length=32, null=False, blank=True, validators=[cve_validator, ])
-    cve_visible = models.BooleanField(null=False, blank=False, default=False)
     cvenumber = models.IntegerField(null=False, blank=False, db_index=True)
     detailslink = models.URLField(null=False, blank=True)
     description = models.TextField(null=False, blank=False)
