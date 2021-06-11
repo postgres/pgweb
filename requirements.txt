@@ -10,3 +10,5 @@ pynliner==0.8.0
 Babel==2.6.0
 bleach==3.1.4
 PyYAML==3.13
+pytest>=6.1,<7.0
+pytest-django>=4.1.0,<5.0
