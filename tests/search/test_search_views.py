@@ -5,7 +5,7 @@ class TestSearchViews(TestCase):
     def setUp(self):
         self.client = Client()
 
-    def testSearchViewIsResolved(self):
+    def test_search_view_is_resolved(self):
         response = self.client.get('/search/', {}, True)
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'search/sitesearch.html')
