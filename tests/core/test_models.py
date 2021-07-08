@@ -1,9 +1,9 @@
 import pytest
 import random
 import string
-from .factories import QuoteFactory, VersionFactory, UserProfileFactory, OrganisationFactory, UserFactory, OrganisationEmailFactory
+from .factories import QuoteFactory, VersionFactory, UserProfileFactory, OrganisationFactory, UserFactory, OrganisationEmailFactory, ImportedRSSFeedFactory, ImportedRSSItemFactory
 from django.test import TestCase
-from pgweb.core.models import Country, Language, ModerationNotification, Version, UserProfile, Organisation
+from pgweb.core.models import Country, Language, ModerationNotification, Version, UserProfile, Organisation, ImportedRSSFeed, ImportedRSSItem
 import datetime
 
 
@@ -65,7 +65,7 @@ class TestUserProfileModel(TestCase):
 
 
 @pytest.mark.django_db
-class OrganisationModel(TestCase):
+class TestOrganisationModel(TestCase):
     def setUp(self):
         self.user = UserFactory(first_name="John", last_name="Doe", email="johndoe@test.com")
         self.user_not_manager = UserFactory()
@@ -97,6 +97,21 @@ class OrganisationModel(TestCase):
     def test_organisation_mail(self):
         self.assertEquals(str(self.organisation_email), "test address (not confirmed yet)")
         self.assertEquals(str(self.organisation_email_confirmed), "test address 1")
+
+
+@pytest.mark.django_db
+class TestImportedRSSItem(TestCase):
+    def setUp(self):
+        self.imported_RSS_feed = ImportedRSSFeedFactory(internalname="test")
+        self.imported_RSS_item = ImportedRSSItemFactory(title="PostgreSQL", feed=self.imported_RSS_feed)
+
+    def test_instance(self):
+        self.assertIsInstance(self.imported_RSS_feed, ImportedRSSFeed)
+        self.assertIsInstance(self.imported_RSS_item, ImportedRSSItem)
+
+    def test_display_name(self):
+        self.assertEquals(str(self.imported_RSS_feed), "test")
+        self.assertEquals(str(self.imported_RSS_item), "PostgreSQL")
 
 
 @pytest.mark.django_db

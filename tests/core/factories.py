@@ -1,6 +1,6 @@
 import factory
 from factory.django import DjangoModelFactory
-from pgweb.core.models import Version, UserProfile, Organisation, OrganisationEmail, OrganisationType, OrganisationEmail
+from pgweb.core.models import Version, UserProfile, Organisation, OrganisationEmail, OrganisationType, OrganisationEmail, ImportedRSSFeed, ImportedRSSItem
 from pgweb.quotes.models import Quote
 from django.contrib.auth.models import User
 import datetime
@@ -90,3 +90,22 @@ class OrganisationEmailFactory(DjangoModelFactory):
     address = factory.Faker('address')
     confirmed = False
     token = factory.Faker('first_name')
+
+
+class ImportedRSSFeedFactory(DjangoModelFactory):
+    class Meta:
+        model = ImportedRSSFeed
+
+    internalname = "planet"
+    url = "https://www.postgresql.org/"
+    purgepattern = "/"
+
+
+class ImportedRSSItemFactory(DjangoModelFactory):
+    class Meta:
+        model = ImportedRSSItem
+
+    feed = factory.SubFactory(ImportedRSSFeedFactory)
+    title = "title"
+    url = "https://www.postgresql.org/"
+    posttime = datetime.datetime.now()
