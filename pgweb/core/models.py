@@ -71,7 +71,7 @@ class Version(models.Model):
         else:
             return "%s %s" % (self.numtree, TESTING_SHORTSTRING[self.testing])
 
-    def save(self):
+    def save(self, *args, **kwargs):
         # Make sure only one version at a time can be the current one.
         # (there may be some small race conditions here, but the likelyhood
         # that two admins are editing the version list at the same time...)
