@@ -1,9 +1,9 @@
 import pytest
 import random
 import string
-from .factories import QuoteFactory, VersionFactory
+from .factories import QuoteFactory, VersionFactory, UserProfileFactory, OrganisationFactory, UserFactory, OrganisationEmailFactory
 from django.test import TestCase
-from pgweb.core.models import Country, Language, ModerationNotification, Version
+from pgweb.core.models import Country, Language, ModerationNotification, Version, UserProfile, Organisation
 import datetime
 
 
@@ -53,6 +53,50 @@ class TestVersionModel(TestCase):
         assert str(self.testing_version_alpha) == "12alpha3"
         assert self.testing_version_alpha.treestring == "12 alpha"
         assert self.testing_version_alpha.relnotes == "release-12-3.html"
+
+
+@pytest.mark.django_db
+class TestUserProfileModel(TestCase):
+    def setUp(self):
+        self.user = UserProfileFactory()
+
+    def test_user_profile_instance(self):
+        self.assertIsInstance(self.user, UserProfile)
+
+
+@pytest.mark.django_db
+class OrganisationModel(TestCase):
+    def setUp(self):
+        self.user = UserFactory(first_name="John", last_name="Doe", email="johndoe@test.com")
+        self.user_not_manager = UserFactory()
+        self.organisation = OrganisationFactory(name="PostgreSQL", managers=[self.user])
+        self.organisation_email = OrganisationEmailFactory(org=self.organisation, address="test address")
+        self.organisation_email_confirmed = OrganisationEmailFactory(org=self.organisation, address="test address 1", confirmed=True)
+
+    def test_organisation_instance(self):
+        self.assertIsInstance(self.organisation, Organisation)
+
+    def test_organisation_type_name(self):
+        self.assertEquals(str(self.organisation.orgtype), "test")
+
+    def test_organisation_display_name(self):
+        self.assertEquals(str(self.organisation), "PostgreSQL")
+        self.assertEquals(self.organisation.title, "PostgreSQL")
+
+    def test_managers_string_property(self):
+        self.assertEquals(self.organisation.managers_string, "John Doe (johndoe@test.com)")
+
+    def test_verify_submitters(self):
+        self.assertEquals(self.organisation.verify_submitter(self.user_not_manager), False)
+        self.assertEquals(self.organisation.verify_submitter(self.user), True)
+
+    def test_get_field_description(self):
+        self.assertEquals(self.organisation.get_field_description("managers_string"), "managers")
+        self.assertEquals(self.organisation.get_field_description("random"), None)
+
+    def test_organisation_mail(self):
+        self.assertEquals(str(self.organisation_email), "test address (not confirmed yet)")
+        self.assertEquals(str(self.organisation_email_confirmed), "test address 1")
 
 
 @pytest.mark.django_db
