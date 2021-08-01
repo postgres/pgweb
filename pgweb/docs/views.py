@@ -128,11 +128,30 @@ def docpage(request, version, filename):
     else:
         contentpreview = ''
 
+    # determine the canonical version of the page
+    # if the doc page is in the current version, then we set it to current
+    # otherwise, check the supported and unsupported versions and find the
+    # last version that the page appeared
+    # we exclude "devel" as development docs are disallowed in robots.txt
+    canonical_version = ""
+    if len(list(filter(lambda v: v.version.current, versions))):
+        canonical_version = "current"
+    else:
+        version_max = None
+        for v in versions:
+            if version_max is None:
+                version_max = v
+            elif v.version.tree > version_max.version.tree:
+                version_max = v
+        if version_max.version.tree > Decimal(0):
+            canonical_version = version_max.display_version()
+
     r = render(request, 'docs/docspage.html', {
         'page': page,
         'supported_versions': [v for v in versions if v.version.supported],
         'devel_versions': [v for v in versions if not v.version.supported and v.version.testing],
         'unsupported_versions': [v for v in versions if not v.version.supported and not v.version.testing],
+        'canonical_version': canonical_version,
         'title': page.title,
         'doc_index_filename': indexname,
         'loaddate': loaddate,

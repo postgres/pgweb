@@ -27,6 +27,9 @@
 	<tr>
 	 <td>
 	  <a href="/docs/{{v.numtree}}/index.html">{{v.treestring}}</a>
+    {% if v.current %}
+      / <a href="/docs/current/index.html">Current</a>
+    {% endif %}
 	 </td>
 	 <td>
 	  {%if v.a4pdf or v.uspdf%}
