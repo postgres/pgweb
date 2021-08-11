@@ -21,6 +21,8 @@ BOOTSTRAP_FIGURE_CLASS = r'<div\1class="figure col-xl-8 col-lg-10 col-md-12"'
 pagecount = 0
 # if set to "True" -- mutes any output from the script. Controlled by an option
 quiet = False
+# if set to "True" -- outputs extra much data (row-per-file)
+verbose = False
 # regular expression used to search and extract the title on a given piece of
 # documentation, for further use in the application
 re_titlematch = re.compile(r'<title\s*>([^<]+)</title\s*>', re.IGNORECASE)
@@ -76,8 +78,8 @@ def load_doc_file(filename, f, c):
     # in order to ensure they are able to display responsively
     contents = re_figure_match.sub(BOOTSTRAP_FIGURE_CLASS, contents)
 
-    # if not in quiet mode, output the (filename, title) pair of the docpage that is being processed
-    if not quiet:
+    # in verbose mode, output the (filename, title) pair of the docpage that is being processed
+    if verbose:
         print("--- file: %s (%s) ---" % (filename, title))
 
     # run libtidy on the content
@@ -99,7 +101,9 @@ def load_svg_file(filename, f, c):
 # Main execution
 parser = OptionParser(usage="usage: %prog [options] <version> <tarfile>")
 parser.add_option("-q", "--quiet", action="store_true", dest="quiet",
-                  help="Run quietly")
+                  help="Run quietly (no output at all)")
+parser.add_option("-v", "--verbose", action="store_true", dest="verbose",
+                  help="Run verbosely")
 (options, args) = parser.parse_args()
 
 if len(args) != 2:
@@ -107,6 +111,12 @@ if len(args) != 2:
     sys.exit(1)
 
 quiet = options.quiet
+verbose = options.verbose
+
+if verbose and quiet:
+    print("Can't be both verbose and quiet at the same time!")
+    sys.exit(1)
+
 ver = sys.argv[1]
 tarfilename = sys.argv[2]
 
@@ -123,6 +133,9 @@ if not os.path.isfile(tarfilename):
 tf = tarfile.open(tarfilename)
 
 connection = psycopg2.connect(config.get('db', 'dsn'))
+
+if not quiet:
+    print("Starting load of documentation for version %s." % (ver, ))
 
 curs = connection.cursor()
 # Verify that the version exists, and what we're loading
@@ -237,4 +250,4 @@ connection.commit()
 connection.close()
 
 if not quiet:
-    print("Done (%i pages)." % pagecount)
+    print("Done loading docs version %s (%i pages)." % (ver, pagecount))
