@@ -100,7 +100,7 @@ def docpage(request, version, filename):
     try:
         page = DocPage.objects.select_related('version').get(version=ver, file=fullname)
     except DocPage.DoesNotExist:
-        # if the page does not exist but there is a special pgae redirect, check
+        # if the page does not exist but there is a special page redirect, check
         # for the existence of that. if that does not exist, then we're really
         # done and can 404
         page_redirect = get_object_or_404(DocPageRedirect, redirect_from=fullname)
