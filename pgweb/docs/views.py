@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
+from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponseNotFound
 from django.http import HttpResponse, Http404
 from pgweb.util.decorators import login_required, allow_frames, content_sources
 from django.template.defaultfilters import strip_tags
@@ -21,6 +21,12 @@ from .models import DocPage, DocPageRedirect
 from .forms import DocCommentForm
 
 
+def _versioned_404(msg, version):
+    r = HttpResponseNotFound(msg)
+    r['xkey'] = 'pgdocs_{}'.format(version)
+    return r
+
+
 @allow_frames
 @content_sources('style', "'unsafe-inline'")
 def docpage(request, version, filename):
@@ -33,7 +39,7 @@ def docpage(request, version, filename):
     else:
         ver = Decimal(version)
         if ver == Decimal(0):
-            raise Http404("Version not found")
+            return _versioned_404("Version not found", "all")
 
     if ver < Decimal("7.1") and ver > Decimal(0):
         extension = "htm"
@@ -103,9 +109,12 @@ def docpage(request, version, filename):
         # if the page does not exist but there is a special page redirect, check
         # for the existence of that. if that does not exist, then we're really
         # done and can 404
-        page_redirect = get_object_or_404(DocPageRedirect, redirect_from=fullname)
-        url = "/docs/{}/{}".format(version, page_redirect.redirect_to)
-        return HttpResponsePermanentRedirect(url)
+        try:
+            page_redirect = DocPageRedirect.objects.get(redirect_from=fullname)
+            url = "/docs/{}/{}".format(version, page_redirect.redirect_to)
+            return HttpResponsePermanentRedirect(url)
+        except DocPageRedirect.DoesNotExist:
+            return _versioned_404("Page not found", ver)
 
     versions = DocPage.objects.select_related('version').extra(
         where=["file=%s OR file IN (SELECT file2 FROM docsalias WHERE file1=%s) OR file IN (SELECT file1 FROM docsalias WHERE file2=%s)"],
@@ -151,7 +160,7 @@ def docsvg(request, version, filename):
     else:
         ver = Decimal(version)
         if ver == Decimal(0):
-            raise Http404("Version not found")
+            return _versioned_404("Version not found", "all")
 
     if ver < Decimal(12) and ver > Decimal(0):
         raise Http404("SVG images don't exist in this version")

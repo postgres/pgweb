@@ -17,7 +17,9 @@ pgdocs_current
   Set on all documentation pages that are in the current version at
   the time of setting.
 pgdocs_all
-  Set on documentation pages that are cross-version, such as index pages.
+  Set on documentation pages that are cross-version, such as index pages,
+  as well as on 404 pages for versions that is unknown (in case this version
+  is loaded later).
 pgdocs_<version>
   Set on documentation of the specified version.
 pgdocs_pdf
