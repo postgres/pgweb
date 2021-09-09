@@ -34,7 +34,7 @@ class CommunityAuthSiteAdminForm(forms.ModelForm):
     def clean(self):
         d = super().clean()
 
-        if d.get('push_changes', False) and not d['apiurl']:
+        if d.get('push_changes', False) and not d.get('apiurl', ''):
             self.add_error('push_changes', 'API url must be specified to enable push changes!')
 
         if d.get('push_ssh', False) and not d.get('push_changes', False):
