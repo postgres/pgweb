@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, HttpResponseNotFound
 from django.http import HttpResponse, Http404
-from pgweb.util.decorators import login_required, content_sources
+from pgweb.util.decorators import login_required, content_sources, allow_frames
 from django.template.defaultfilters import strip_tags
 from django.db.models import Q
 from django.conf import settings
@@ -150,6 +150,7 @@ def docpage(request, version, filename):
     return r
 
 
+@allow_frames
 def docsvg(request, version, filename):
     if version == 'current':
         ver = Version.objects.filter(current=True)[0].tree
