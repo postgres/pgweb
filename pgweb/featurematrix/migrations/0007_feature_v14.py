@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='feature',
             name='v14',
-            field=models.IntegerField(choices=[(0, 'No'), (1, 'Yes'), (2, 'Obsolete'), (3, '?')], default=0, verbose_name='13'),
+            field=models.IntegerField(choices=[(0, 'No'), (1, 'Yes'), (2, 'Obsolete'), (3, '?')], default=0, verbose_name='14'),
         ),
         migrations.RunSQL("UPDATE featurematrix_feature SET v14=v13"),
     ]
