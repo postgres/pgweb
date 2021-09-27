@@ -5,13 +5,13 @@
 <h1>Frequently Asked Questions</h1>
 
 <p><strong>Q: What is the current version of PostgreSQL?</strong><br />
-A: 13, which was released September 24, 2020. This is our 31th major release in over 30 years of development. We release a new version of PostgreSQL every year, which is unique among SQL databases.</p>
+A: 14, which was released on September 30, 2020. This is our 31th major release in over 30 years of development. We release a new version of PostgreSQL every year, which is unique among SQL databases.</p>
 
 <p><strong>Q: Does the PostgreSQL Project have a Code of Conduct?</strong><br />
 A: The PostgreSQL Project prides itself on the quality of our code and our work, and the technical and professional accomplishments of our community. We expect everyone who participates to conduct themselves in a professional manner, acting with common courtesy and in the common interest, with respect for all users and developers. To that end, we established a <a href="/about/policies/coc/">Code of Conduct</a> for community interaction and participation in the project’s work and the community at large.
 
 <p><strong>Q: What will the version number of the next major release be?  What will the version number of the next patch release be?</strong><br />
-A: The next major release of PostgreSQL will be version 14, and follows a two-part version numbering scheme.  So the first patch release for 13 will be 13.1. The version of PostgreSQL released in 2021 will be version 14. you can read more about the <a href="/developer/roadmap/">roadmap</a> and release schedule <a href="/developer/roadmap/">here</a>.
+A: The next major release of PostgreSQL will be version 14, and follows a two-part version numbering scheme.  So the first patch release for 14 will be 14.1. The version of PostgreSQL released in 2022 will be version 15. you can read more about the <a href="/developer/roadmap/">roadmap</a> and release schedule <a href="/developer/roadmap/">here</a>.
 </p>
 
 <p><strong>Q: Why are older versions that are labeled 9.6.6 or 9.5.9?</strong><br />
@@ -21,10 +21,10 @@ A: Because of the long history of our project the first two decimals are major r
 A: PostgreSQL is released under the OSI-approved PostgreSQL Licence.  There is no fee, even for use in commercial software products.  Please see <a href="/about/licence/">the PostgreSQL Licence</a>.</p>
 
 <p><strong>Q: How many developers work on PostgreSQL?</strong><br />
-A: Over 600 on the core database software.  As with other open source projects, of course, we depend on hundreds of community members for documentation, translations, advocacy, conferences, website development, infrastructure, and peer-to-peer support. There are also many other projects associated with PostgreSQL, including drivers, libraries, extensions and more, so there are thousands of people contributing to the PostgreSQL ecosystem at any one time!</p>
+A: Over 650 on the core database software.  As with other open source projects, of course, we depend on hundreds of community members for documentation, translations, advocacy, conferences, website development, infrastructure, and peer-to-peer support. There are also many other projects associated with PostgreSQL, including drivers, libraries, extensions and more, so there are thousands of people contributing to the PostgreSQL ecosystem at any one time!</p>
 
 <p><strong>Q: How many PostgreSQL users are there, worldwide?</strong><br />
-A: Our wide distribution through the open source world and liberal licensing make that a difficult question to answer with any accuracy. Most users get PostgreSQL with a Linux distribution, or with some of the many other products, OSS software, and hardware devices that include PostgreSQL. Many indexes, such as the <a href="https://db-engines.com/en/ranking" target="_blank" rel="noopener">DB-Engines Ranking</a>, demonstrate that PostgreSQL adoption continues to grow at a rapid pace, including DB-Engines recognition of PostgreSQL as the <a href="https://db-engines.com/en/blog_post/76" target="_blank" rel="noopener">DBMS of the Year in 2017</a> and <a href="https://db-engines.com/en/blog_post/79" target="_blank" rel="noopener">2018</a>. What we do know is that PostgreSQL is more popular than ever, with the number of downloads and installations increasing year-over-year.</p>
+A: Our wide distribution through the open source world and liberal licensing make that a difficult question to answer with any accuracy. Most users get PostgreSQL with a Linux distribution, or with some of the many other products, OSS software, and hardware devices that include PostgreSQL. Many indexes, such as the <a href="https://db-engines.com/en/ranking" target="_blank" rel="noopener">DB-Engines Ranking</a>, demonstrate that PostgreSQL adoption continues to grow at a rapid pace, including DB-Engines recognition of PostgreSQL as the <a href="https://db-engines.com/en/blog_post/76" target="_blank" rel="noopener">DBMS of the Year in 2017</a>, <a href="https://db-engines.com/en/blog_post/79" target="_blank" rel="noopener">2018</a>, and <a href="https://db-engines.com/en/blog_post/85" target="_blank" rel="noopener">2020</a>. What we do know is that PostgreSQL is more popular than ever, with the number of downloads and installations increasing year-over-year.</p>
 
 <p><strong>Q: Can we talk to some of your users?</strong><br />
 A: Please contact <a href="mailto:press@postgresql.org">press@postgresql.org</a> and our press volunteers will try to arrange a contact.</p>
@@ -48,16 +48,17 @@ A: This is a topic that can start several hours of discussion.  As a quick summa
 A: Our feature set is generally considered to be very competitive with other leading SQL RDBMSes.  Certainly there are features some of them have which we don't, and the reverse is also true.  To date, only a few benchmarks have been published showing PostgreSQL to be within 10-30% of proprietary competitors (sometimes faster, sometimes slower).  However, we have had many users migrate from other database systems and they are completely satisfied with the performance of their PostgreSQL systems.</p>
 
 <p><strong>Q: How does PostgreSQL compare to "NoSQL"?</strong><br />
-A: The term "NoSQL" covers such a diverse array of non-relational database implementations, from tiny embedded databases like BerkeleyDB to massive clustered data processing platforms like Hadoop, that it's impossible to comment on them as a general class.  Non-relational databases preceded relational databases and have existed alongside them for forty years, so choosing between relational and nonrelational databases is nothing new.  Users should choose the database whose features, implementation, and community support their current application needs. Further, using multiple different databases for large projects is fast becoming the norm, and PostgreSQL users are no exception.</p>
+A: The term "NoSQL" covers such a diverse array of non-relational database implementations, from tiny embedded databases like BerkeleyDB to massive clustered data processing platforms like Hadoop, that it's impossible to comment on them as a general class.  Non-relational databases preceded relational databases and have existed alongside them for forty years, so choosing between relational and nonrelational databases is nothing new.  Users should choose the database whose features, implementation, and community support their current application needs. Further, using multiple different databases for large projects is fast becoming the norm, and PostgreSQL users are no exception.<br /><br />
+Additionally, PostgreSQL has supported storing "unstructured" data types such as JSON and XML for many years.</p>
 
 <p><strong>Q: When will PostgreSQL get database server clustering?</strong><br />
 A: We already have it.  Since no one type of clustering satisfies all needs, we have several different clustering tools which take various clustering approaches.  The open source projects PostgresXC and Postgres-XL are available, as well as open source forks and proprietary tools such as Greenplum Database, Citus Data and several others.  Also, PostgreSQL is supported by filesystem-based clustering systems for failover, including ones from Red Hat, Microsoft, Veritas and Oracle.</p>
 
-<p><strong>Q: When will PostgreSQL 14 come out?</strong><br />
-A: The PostgreSQL project begins work on the next version of PostgreSQL in July of each year, and it generally takes 12 to 15 months to work to a release. So expect version 14 around September 2021.</p>
+<p><strong>Q: When will PostgreSQL 15 come out?</strong><br />
+A: The PostgreSQL project begins work on the next version of PostgreSQL in July of each year, and it generally takes 12 to 15 months to work to a release. So expect version 15 around September 2022.</p>
 
-<p><strong>Q: What features will 14 have?</strong><br />
-A: As always, we can't be certain what will go in and what won't; the project has strict quality standards that not all patches can make before deadline. All we can tell you is what's currently being worked on, which includes significant performance improvements due to optimizations in connection handling, continued work on the pluggable storage interface (including plugins such as zheap or zedstore), native transparent data encryption support, continued improvements to parallelism and partitioning, and many more features. By the time 14 is released, though, this list may have changed considerably.</p>
+<p><strong>Q: What features will 15 have?</strong><br />
+A: As always, we can't be certain what will go in and what won't; the project has strict quality standards that not all patches can make before deadline. All we can tell you is what's currently being worked on, which includes native transparent data encryption support, continued improvements to parallelism and partitioning, and many more features. By the time 15 is released, though, this list may have changed considerably.</p>
 
 <p><strong>Q: How do you pronounce PostgreSQL</strong><br />
 A: post-GRES-que-ell, per this <a href="/files/postgresql.mp3">audio file</a>.  Many people, however, just say "post-GRES" or "post-GREZ".</p>
