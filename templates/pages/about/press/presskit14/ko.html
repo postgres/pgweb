@@ -1,0 +1,177 @@
+{% extends "pages/about/press/presskit14/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 14 Released!</h1>
+
+<p>오늘, PostgreSQL 글로벌 개발 그룹은 세상에서
+<a href="https://www.postgresql.org/">가장 진보적인 공개 소스 데이터베이스</a>의
+가장 최신 버전인 <a href="https://www.postgresql.org/docs/14/release-14.html">PostgreSQL 14</a>가
+출시되었음을 알립니다.</p>
+
+<p>PostgreSQL 14는 개발자와 관리자가 데이터 기반 응용프로그램을 배포하는 데
+도움이 되는 여러 기능을 제공합니다. PostgreSQL은 JSON 자료를 더 쉽게
+다루는 방법과 범위 자료형에서 비연속적인 범위 검색을 지원해서, 복합 자료형
+처리의 혁신을 계속 하고 있습니다.  이 최신 배포판은 동시 접속 처리,
+많은 쓰기 작업 처리, 쿼리 병렬 처리 및 논리 복제 기능을 개선 했습니다.
+이는 고성능 및 대용량 분산 데이터 처리를 지향하는 PostgreSQL 개발 방향성에
+따른 것입니다.</p>
+
+<p>PostgreSQL 코어 팀 소속 망누스 하간더 Magnus Hagander는 다음과 같이 말했습니다.
+&quot;PostgreSQL 이번 최신 릴리즈는 대규모 데이터를 관리하는데 사용자 능력을
+향상시키고, 모니터링 기능이 향상되었고, 응용 프로그램 개발자들을 돕는
+새 기능들이 포함되었습니다.  PostgreSQL 14는 피드백을 처리하고,
+크고 작은 조직에서 배포되는 혁신적인 데이터베이스 소프트웨어를
+지속적으로 제공하는 글로벌 PostgreSQL 커뮤니티의 헌신으로 만들어진
+산출물입니다.&quot;</p>
+
+<p>신뢰성과 견고성으로 유명한 혁신적인 데이터 관리 시스템인
+<a href="https://www.postgresql.org">PostgreSQL</a>은 글로벌 개발자 커뮤니티에서
+25년 이상 공개 소스로 개발하고 있습니다. 이렇게 해서 모든 규모의 조직에서
+사용하는 공개 소스 관계형 데이터베이스가 되었습니다.</p>
+
+<h3 id="json-">JSON 편의성과 다중범위</h3>
+
+<p>PostgreSQL은 9.2 버전부터 <a href="https://www.postgresql.org/docs/14/datatype-json.html">JSON</a>
+자료 처리를 지원했지만, 그 안에 있는 자료를 찾을 때
+PostgreSQL 고유 문법을 사용했습니다.
+PostgreSQL 14에서는
+<code>SELECT (&#39;{ &quot;postgres&quot;: { &quot;release&quot;: 14 }}&#39;::jsonb)[&#39;postgres&#39;][&#39;release&#39;];</code>
+이렇게 <a href="https://www.postgresql.org/docs/14/datatype-json.html#JSONB-SUBSCRIPTING">서브스크립트를 이용한 JSON 자료 찾기</a>를
+지원합니다.  이 문법은 요즘 범용적으로 사용되는 방법으로
+PostgreSQL은 이 문법을 이 버전에서 도입했습니다.  이 서브스크립트 기법은
+다른 중첩된 자료 구조로 된 자료형에 대해서도 일반적으로 확장 가능합니다.
+PostgreSQL 14에서는 <a href="https://www.postgresql.org/docs/14/hstore.html"><code>hstore</code></a>
+자료형에서도 이 서브스크립트를 지정해서 자료를 찾을 수 있습니다.</p>
+
+<p><a href="https://www.postgresql.org/docs/14/rangetypes.html">범위 자료형</a> 또한
+9.2 버전에서 처음 도입되었는데, 이제 비연속적인 범위 검색도 가능해졌습니다.
+이 부분에 대해서는 &quot;<a href="https://www.postgresql.org/docs/14/rangetypes.html#RANGETYPES-BUILTIN">다중범위</a>&quot;
+자료형 부분에서 자세히 소개하고 있습니다.
+다중범위는 겹치지 않는 범위의 정렬된 목록으로, 개발자가
+복잡한 범위 나열들을 처리할 때 더 간단한 쿼리를 작성할 수 있습니다. PostgreSQL
+고유 범위 자료형(날짜, 시간, 숫자)은 다중 범위를 지원하고 다른 자료형들도 다중 범위 검색을 할 수
+있도록 확장가능합니다.</p>
+
+<h3 id="-">과중한 작업 처리를 위한 성능 개선</h3>
+
+<p>PostgreSQL 14는 많은 연결을 사용할 경우 그 성능이 일부 성능 테스트에서는
+두배 빠른 속도가 나올 정도로 눈에 띄게 좋아졌습니다. 작년 릴리즈에 이어
+(13 버전에서 인덱스 중복 키에 대한 공간 절약 기법이 도입되었다. - 옮긴이)
+잦은 업데이트로 생길 수 있는 B-트리 인덱스 부풀림 문제를 개선했습니다.
+자세한 설명은 <a href="https://www.postgresql.org/docs/14/btree-implementation.html#BTREE-DELETION">빈번하게 변경 되는 인덱스</a>
+항목을 참조하십시오.</p>
+
+<p>PostgreSQL 14에서는 데이터베이스를 사용할 때,
+<a href="https://www.postgresql.org/docs/14/libpq-pipeline-mode.html">파이프라인 쿼리</a> 모드 기능이
+새롭게 추가되었습니다. 이 기능 도입으로 응답 속도가 느린 연결 환경이나,
+작은 쓰기 작업(<code>INSERT</code>/<code>UPDATE</code>/<code>DELETE</code>)이지만 이것이 아주 잦게 발생하는
+환경에서 성능이 현저하게 좋아졌습니다. 이 기능은 클라이언트 측 기능입니다.
+이 기능을 사용하려면, 14 버전 서버와 클라이언트
+드라이버를 사용해야합니다. 배포판에 포함된
+<a href="https://wiki.postgresql.org/wiki/List_of_drivers">libpq</a> 드라이브는
+이 모드를 지원합니다.</p>
+
+<h3 id="-">분산 작업 처리를 위한 성능 개선</h3>
+
+<p>PostgreSQL 14 버전은 분산 데이터베이스 환경에서도 성능을 개선 했습니다.
+<a href="https://www.postgresql.org/docs/current/logical-replication.html">논리 복제</a>
+기능을 사용할 때, 이제 구독 서버 쪽으로 트랜젹션 과정 정보도
+전달합니다. 이렇게 해서, 큰 트랜잭션에 대한 구독 서버의 반영도
+빠르게 진행됩니다.  PostgreSQL 14에서는 논리 복제의 근간이 되는
+논리적 디코딩 기능의 기타 성능들도 여럿 개선되었습니다.</p>
+
+<p>다른 PostgreSQL 데이터베이스 자료를 활용할 수 있는
+<a href="https://www.postgresql.org/docs/14/sql-createforeigndatawrapper.html">외부 자료 싸개</a>에서
+이제 병렬 쿼리를 지원합니다.  PostgreSQL 14 배포판에 내장된
+<a href="https://www.postgresql.org/docs/14/postgres-fdw.html"><code>postgres_fdw</code></a>
+확장 모듈에 이 기능을 구현했습니다.</p>
+
+<p>병렬 쿼리 지원에 대해서 추가적으로, <code>postgres_fdw</code> 확장 모듈은
+외부 테이블에 대량 일괄 자료 INSERT 작업에서도 병렬 처리가 가능합니다.
+또한 <a href="https://www.postgresql.org/docs/14/sql-importforeignschema.html"><code>IMPORT FOREIGN SCHEMA</code></a>
+작업이 대상 테이블이 파티션 테이블인 경우 병렬 쿼리로 처리할 수 있습니다.</p>
+
+<h3 id="-">관리와 모니터링</h3>
+
+<p>PostgreSQL 14에서는 <a href="https://www.postgresql.org/docs/14/routine-vacuuming.html">테이블 청소</a>
+작업의 성능도 개선했습니다. B-트리 인덱스 정리 작업이 보다 최적화 되었습니다.
+이 버전에서는 VACUUM 작업을 할 때 &quot;긴급 모드&quot;를 추가 했습니다.
+이 모드는 트랜잭션 ID 겹침 방지 작업을 보다 유연하게 할 수 있습니다.
+데이터베이스 통계 정보를 갱신하는
+<a href="https://www.postgresql.org/docs/14/sql-analyze.html"><code>ANALYZE</code></a> 작업도
+이전 버전 보다 빨라졌습니다.</p>
+
+<p>긴 문자열이나, 공간 정보 같이 자료량이 큰 경우, 그 자료를
+PostgreSQL <a href="https://www.postgresql.org/docs/14/storage-toast.html">TOAST</a>
+기법으로 처리하는데, 이 때 자료를 압축하는 방식으로
+LZ4 방식을 지원합니다. 이 <a href="https://www.postgresql.org/docs/14/runtime-config-client.html#GUC-DEFAULT-TOAST-COMPRESSION">새로운 설정</a>으로
+사용자가 지정할 수 있습니다. 기존에 압축 방식인 &#39;pglz&#39; 방식도 여전히 지원합니다.</p>
+
+<p>PostgreSQL 14에서는 모니터링과 관찰 가능성을 높이는 여러
+새 기능들이 추가되었습니다. <a href="https://www.postgresql.org/docs/14/progress-reporting.html#COPY-PROGRESS-REPORTING"><code>COPY</code> 명령의 실행 상황</a>,
+<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-WAL-VIEW">WAL 작업 상황</a>,
+<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW">복제 슬롯 통계</a> 뷰가 추가되었고,
+<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>,
+<a href="https://www.postgresql.org/docs/14/sql-explain.html"><code>EXPLAIN VERBOSE</code></a> 등 여러 곳에서
+<a href="https://www.postgresql.org/docs/14/runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID"><code>compute_query_id</code></a> 값을
+볼 수 있습니다.</p>
+
+<h3 id="sql-">SQL 성능, 적합성, 편의성</h3>
+
+<p>PostgreSQL 14에서는 쿼리 실행 계획, 실행 성능이 좋아졌습니다.
+자료 전체 순차 탐색하는 부분을 포함한, 쿼리 병렬 처리 관련해서 이전 버전보다 더 개선했으며,
+<a href="https://www.postgresql.org/docs/14/plpgsql.html"><code>PL/pgSQL</code></a>에서
+<code>RETURN QUERY</code> 구문에서 사용되는 쿼리가 병렬 쿼리로 실행될 수 있으며,
+<a href="https://www.postgresql.org/docs/14/sql-refreshmaterializedview.html"><code>REFRESH MATERIALIZED VIEW</code></a>
+명령 실행에서도 병렬 처리를 합니다. 추가로, nested loop join 작업시,
+추가 캐싱 기능을 추가해서 성능을 높혔습니다.</p>
+
+<p><a href="https://www.postgresql.org/docs/14/planner-stats.html#PLANNER-STATS-EXTENDED">확장된 통계정보</a>
+작업을 개선해서 좀 더 섬세하게 통계 정보를 수집할 수 있으며(옮긴이 의역), 추가로,
+<a href="https://www.postgresql.org/about/news/postgresql-13-released-2077/">PostgreSQL 13</a>에서
+처음 소개한
+<a href="https://www.postgresql.org/docs/14/functions-window.html">윈도우 함수</a> 실행 시
+증분 정렬하는 기능이 더 개선되었습니다.</p>
+
+<p><a href="https://www.postgresql.org/docs/14/sql-createprocedure.html">프로시져</a>에서
+매개 변수에 <code>OUT</code> 속성을 지정해서 결과값을 반환할 수 있습니다.</p>
+
+<p>PostgreSQL 14에서는
+<a href="https://www.postgresql.org/docs/14/functions-datetime.html#FUNCTIONS-DATETIME-BIN"><code>date_bin</code></a>
+함수가 새로 추가 되었습니다.
+또한, 재귀 호출 <a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-RECURSIVE">CTE, common table expressions</a>
+쿼리에서 자료 정렬을 지정할 수 있는,
+<a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-SEARCH"><code>SEARCH</code></a>
+, <a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-CYCLE"><code>CYCLE</code></a>
+구문이 추가되었습니다.</p>
+
+<h3 id="-">보안 개선</h3>
+
+<p><a href="https://www.postgresql.org/docs/14/predefined-roles.html">미리 정의된 롤</a>로
+<code>pg_read_all_data</code>, <code>pg_write_all_data</code> 롤이 추가 되었습니다.
+읽기 쓰기 역할을 지정하는데 좀 더 편해졌습니다.</p>
+
+<p>추가로, PostgreSQL 14에서는 이제
+표준 준수 <a href="https://www.postgresql.org/docs/14/auth-password.html"><code>SCRAM-SHA-256</code></a> 비밀번호
+관리 및 인증을 기본값으로 합니다.</p>
+
+<h3 id="postgresql-">PostgreSQL이란?</h3>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a>은 수천 명의 사용자, 공헌자, 회사
+및 조직의 범세계적 커뮤니티가 사용, 개발하는 세계에서 가장 진보적인 공개 소스
+데이터베이스입니다. PostgreSQL 프로젝트는 캘리포니아 버클리 대학에서 시작하여
+30년이 넘는 공학을 기반으로 빠른 속도로 계속 개발되고 있습니다. PostgreSQL의
+완성도 높은 기능들은 상용 데이터베이스 시스템과 거의 같으며, 확장성, 보안 및
+안정성 측면의 한 발 앞선 기능들은 더 뛰어납니다.</p>
+
+<h3 id="links">Links</h3>
+
+<ul>
+  <li><a href="https://www.postgresql.org/download/">Download</a></li>
+  <li><a href="https://www.postgresql.org/docs/14/release-14.html">Release Notes</a></li>
+  <li><a href="https://www.postgresql.org/about/press/">Press Kit</a></li>
+  <li><a href="https://www.postgresql.org/support/security/">Security Page</a></li>
+  <li><a href="https://www.postgresql.org/support/versioning/">Versioning Policy</a></li>
+  <li><a href="https://twitter.com/postgresql">Follow @postgresql on Twitter</a></li>
+</ul>
+{% endblock presskit_content %}

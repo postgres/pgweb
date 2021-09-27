@@ -1,0 +1,85 @@
+{% extends "pages/about/press/presskit13/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 14 Released!</h1>
+
+<p>Всемирная группа разработки PostgreSQL объявила сегодня о выходе <a href="https://www.postgresql.org/docs/14/release-14.html">PostgreSQL 14</a>, новейшей версии <a href="https://www.postgresql.org/">лидирующей реляционной системы управления базами данных (СУБД) с открытым исходным кодом</a>.</p>
+
+<p>PostgreSQL 14 содержит широкий спектр возможностей, призванных помочь разработчикам и администраторам выпускать активно работающие с данными приложения. PostgreSQL продолжает развивать инновации в области работы со сложными типами данных, включая более удобный доступ к JSON и поддержку несмежных интервалов данных. Улучшения производительности и нагрузок, ориентированных на работу с распределёнными данными, традиционно присутствуют и в новом релизе: в этот раз акцент сделан на следующее:</p>
+
+<ul>
+  <li>оптимизации производительности для ситуаций с большим количеством соединений,</li>
+  <li>оптимизации производительности для нагрузок с большой долей модифицирующих запросов,</li>
+  <li>дальнейшее развитие параллельного выполнения запросов,</li>
+  <li>многочисленные улучшения логической репликации.</li>
+</ul>
+
+<p>"Новейший релиз PostgreSQL развивает возможности наших пользователей работать с нагрузками на базы данных в больших масштабах, а также улучшает наблюдаемость и привносит новый функционал, помогающий разработчикам приложений, — комментирует Магнус Хагандер (Magnus Hagander), член Основной Команды (Core Team) PostgreSQL, – Выпуск PostgreSQL 14 свидетельствует о приверженности глобального PostgreSQL-сообщества подходу, при котором внимательно анализируется обратная связь от пользователей системы и продолжается развитие инновационного продукта в области баз данных, используемого и в малых, и в крупных организациях."</p>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a>, инновационная система управления данными, известная своей надёжностью и производительностью, пользуется плодами 26 лет открытой разработки, осуществляемой <a href="https://www.postgresql.org/community">глобальным сообществом разработчиков</a>). В результате сегодня во всём мире организации любого размера отдают предпочтение PostgreSQL как СУБД с открытым иходным кодом.</p>
+
+<h3 id="-json-">Удобство работы с JSON. Мульти-интервалы</h3>
+
+<p>Поддержка <a href="https://www.postgresql.org/docs/14/datatype-json.html">JSON</a> появилась в PostgreSQL впервые в версии 9.2, при этом получение различных значений из JSON-данных осуществлялось с помощью уникального синтаксиса. В PostgreSQL 14 же становится возможным осуществлять доступ к частям JSON с помощью <a href="https://www.postgresql.org/docs/14/datatype-json.html#JSONB-SUBSCRIPTING">адресации подобной той, которая используется для массивов</a>. Например, теперь можно использовать запросы вроде <code>SELECT (&#39;{ "postgres": { "release": 14 }}&#39;::jsonb)[&#39;postgres&#39;][&#39;release&#39;];</code>. Это делает синтаксис запросов PostgreSQL соответствующим ожиданиям пользователей, работающих с JSON в других системах. Фреймворк адресации JSON, появившийся в PostgreSQL 14, может быть использользован для других данных с вложенной структурой — и это уже сделано для типа данных <a href="https://www.postgresql.org/docs/14/hstore.html">hstore</a>.</p>
+
+<p><a href="https://www.postgresql.org/docs/14/rangetypes.html">Интервальные типы данных</a>, также впервые появившиеся в PostgreSQL 9.2, теперь поддерживают интервалы с прерываниями — это достигается за счёт появления <a href="https://www.postgresql.org/docs/14/rangetypes.html#RANGETYPES-BUILTIN">&quot;мульти-интервальных&quot;</a> типов данных. Мульти-интервал — это упорядоченный список непересекающихся интервалов, который позволяет разработчикам создавать более простые запросы, когда речь идёт о сложных последовательностях интервалов. &quot;Родные&quot; интервальные типы данных PostgreSQL — интервалы дат, времени, чисел — теперь поддерживают этот функционал, а остальные типы могут быть расширены, чтобы его задействовать.</p>
+
+<h3 id="-">Улучшения производительности для высоконагруженных систем</h3>
+
+<p>В PostgreSQL 14 осуществлён существенный прорыв в оптимизации для нагрузок, использующих большое количество соединений — некоторые бенчмарки показывают улучшение производительности в 2 раза. Также этот релиз привносит очередные оптимизации для индексов типа "B-дерево" (основной тип индексов, используемый по умолчанию): существенно уменьшены темпы распухания (bloat) индексов <a href="https://www.postgresql.org/docs/14/btree-implementation.html#BTREE-DELETION">в ситуациях с частыми обновлениями</a>.</p>
+
+<p>В PostgreSQL 14 можно использовать <a href="https://www.postgresql.org/docs/14/libpq-pipeline-mode.html">конвейерный режим запросов</a> к базе данных, что может существенно улучшить производительность в ситуациях с высокими задержками соединения, а также при нагрузках с большим количеством легковесных операций записи (<code>INSERT</code>/<code>UPDATE</code>/<code>DELETE</code>). Так как эта возможность реализована на "клиентской" стороне, вы можете использовать конвейерный режим с любой современной версией PostgreSQL при условии, что применяется клиенское ПО версии 14 или же драйвер работы с PostgreSQL <a href="https://wiki.postgresql.org/wiki/List_of_drivers">скомпилирован с поддержкой библиотеки libpq версии 14</a>.</p>
+
+<h3 id="-">Улучшения для распределённых нагрузок</h3>
+
+<p>Распределенные базы данных PostgreSQL выиграют от перехода на версию 14. При использовании <a href="https://www.postgresql.org/docs/current/logical-replication.html">логической репликации</a> PostgreSQL теперь может отправлять подписчикам информацию о незавершённых транзакциях, что приводит к значительным улучшениям производительности при применении больших транзакций на подписчиках. PostgreSQL 14 также содержит несколько оптимизаций производительности в системе логического декодирования, что усиливает возможности логической репликации.</p>
+
+<p><a href="https://www.postgresql.org/docs/14/sql-createforeigndatawrapper.html">Обёртки сторонних данных (foreign data wrappers)</a>, которые используются для работы с объединёнными PostgreSQL базами данных и другими системами, в PostgreSQL 14 могут задействовать параллелизм выполнения запросов. В этом релизе данная возможность реализована в <a href="https://www.postgresql.org/docs/14/postgres-fdw.html"><code>postgres_fdw</code></a>, обёртке сторонних данных для работы с внешними базами данных PostgreSQL.</p>
+
+<p>В дополнение к поддержки параллельного выполнения запросов, <code>postgres_fdw</code> теперь может осуществлять массовую вставку данных и импорт секционированных таблиц с помощью директивы <a href="https://www.postgresql.org/docs/14/sql-importforeignschema.html"><code>IMPORT FOREIGN SCHEMA</code></a>.</p>
+
+<h3 id="-">Администрирование и наблюдаемость</h3>
+
+<p>В PostgreSQL 14 представлены новые улучшения производительности <a href="https://www.postgresql.org/docs/14/routine-vacuuming.html">системы очистки (vacuuming)</a>, включая оптимизации для индексов типа B-дерево. В этом релизе добавлен "аварийный режим" очистки, предназначенный для предотвращения переполнения счётчика транзакций (transaction ID wraparound). Операция <a href="https://www.postgresql.org/docs/14/sql-analyze.html"><code>ANALYZE</code></a>, используемая для сбора статистики, теперь работает значительно быстрее благодаря ряду оптимизаций производительности.</p>
+
+<p>Сжатие для <a href="https://www.postgresql.org/docs/14/storage-toast.html">TOAST-системы</a>, которая используется для хранения больших данных, таких как блоки текстов, теперь может <a href="https://www.postgresql.org/docs/14/runtime-config-client.html#GUC-DEFAULT-TOAST-COMPRESSION">настраиваться</a>. В PostgreSQL 14 добавлена поддержка алгоритма сжатия LZ4 для TOAST-столбцов, в дополнение к существующей поддержке <code>pglz</code>.</p>
+
+<p>В PostgreSQL 14 появляются несколько новых функций для мониторинга и наблюдаемости, включая:</p>
+
+<ul>
+  <li>возможность следить за <a href="https://www.postgresql.org/docs/14/progress-reporting.html#COPY-PROGRESS-REPORTING">прогрессом выполнения команд <code>COPY</code></a>,</li>
+  <li>наблюдение за <a href="https://www.postgresql.org/docs/14/progress-reporting.html#COPY-PROGRESS-REPORTING">активностью журнала опережающей записи (WAL, write-ahead log)</a> и</li>
+  <li><a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW">статистику слотов репликации</a>.
+  А включение <a href="https://www.postgresql.org/docs/14/runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID"><code>compute_query_id</code></a> позволит вам отслеживать конкретный запрос, используя различные системы PostgreSQL – такие как <a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>, <a href="https://www.postgresql.org/docs/14/sql-explain.html"><code>EXPLAIN VERBOSE</code></a> и т.д.</li>
+</ul>
+
+<h3 id="-sql-">Производительность SQL, стандартные выражения и удобство</h3>
+
+<p>Улучшения в PostgreSQL вносят свой вклад в процессы планирования и выполнения запросов. В этом релизе включены несколько оптимизаций параллельного выполнения запросов, в том числе улучшенное параллельное выполнений последовательного сканирования, возможности для <a href="https://www.postgresql.org/docs/14/plpgsql.html"><code>PL/pgSQL</code></a> выполнять параллельные запросы при использовании команды <code>RETURN QUERY</code>, а также возможность задействовать параллельное выполнение запросов для <a href="https://www.postgresql.org/docs/14/sql-refreshmaterializedview.html"><code>REFRESH MATERIALIZED VIEW</code></a>. Кроме этого, запросы, использующие соединения на основе вложенных циклов, могут выполняться более эффективно за счёт дополнительного кэширования, реализованного в PostgreSQL 14.</p>
+
+<p><a href="https://www.postgresql.org/docs/14/planner-stats.html#PLANNER-STATS-EXTENDED">Расширенная статистика</a> теперь может быть использована для выражений. А также, производительность работы с <a href="https://www.postgresql.org/docs/14/planner-stats.html#PLANNER-STATS-EXTENDED">оконными функциями</a> выигрывает от использования инкрементальных сортировок — возможности, появившейся <a href="https://www.postgresql.org/about/news/postgresql-13-released-2077/">в PostgreSQL 13</a>.</p>
+
+<p><a href="https://www.postgresql.org/docs/14/sql-createprocedure.html">Хранимые процедуры</a>, которые позволяют управлять транзакциями в блоках кода, теперь поддерживают параметры <code>OUT</code> для определения возвращаемых данных.</p>
+
+<p>PostgreSQL 14 предоставляет возможность "связывать" или, другими словами, выравнивать значения типа timestamp с конкретном интервалам времени, используя функцию <a href="https://www.postgresql.org/docs/14/functions-datetime.html#FUNCTIONS-DATETIME-BIN"><code>date_bin</code></a>. В этом релизе также добавлены соответствующие стандарту выражения <a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-SEARCH"><code>SEARCH</code></a> и <a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-CYCLE"><code>CYCLE</code></a>, помогающие с сортировкой и определениям циклов в <a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-RECURSIVE">рекурсивных CTE</a>.</p>
+
+<h3 id="-">Улучшения в области безопасности</h3>
+
+<p>PostgreSQL 14 позволяет удобно управлять привилегиями "только на чтение" и "только на запись" для таблиц, представлений и схем, используя <a href="https://www.postgresql.org/docs/14/predefined-roles.html">предопределённые роли <code>pg_read_all_data</code> и <code>pg_write_all_data</code></a>.</p>
+<p>Кроме этого, в этом релизе соответствующее стандартам система управления паролями и аутентификации <a href="https://www.postgresql.org/docs/14/auth-password.html"><code>SCRAM-SHA-256</code></a> становится системой по умолчанию для новых экземпляров PostgreSQL.</p>
+
+<h3 id="-postgresql">О PostgreSQL</h3>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a> является ведущей СУБД с открытыми исходными текстами, с глобальным сообществом из тысяч пользователей и разработчиков, объединяющим множество компаний и организаций. Проект PostgreSQL базируется на более чем 30-летнем опыте проектирования и разработки, начавшихся в Калифорнийском университете Беркли, и в настоящее время продолжает развиваться беспрецедентными темпами. Богатый набор возможностей PostgreSQL не только не уступает ведущим коммерческим СУБД, но и превосходит их развитой функциональностью, расширяемостью, безопасностью и стабильностью.</p>
+
+<h3 id="links">Links</h3>
+
+<ul>
+  <li><a href="https://www.postgresql.org/download/">Скачать</a></li>
+  <li><a href="https://www.postgresql.org/docs/14/release-14.html">Release Notes</a></li>
+  <li><a href="https://www.postgresql.org/about/press/">Пресс-кит</a></li>
+  <li><a href="https://www.postgresql.org/support/security/">Страница безопасности</a></li>
+  <li><a href="https://www.postgresql.org/support/versioning/">Политика управления версиями</a></li>
+  <li><a href="https://twitter.com/postgresql">Подпишитесь на @postgresql в Twitter</a></li>
+</ul>
+{% endblock presskit_content %}

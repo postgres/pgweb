@@ -1,0 +1,124 @@
+{% extends "pages/about/press/presskit14/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 14 Released!</h1>
+
+<p>PostgreSQL全球开发组今天宣布<a href="https://www.postgresql.org/docs/14/release-14.html">PostgreSQL 14</a>正式发布,  这是世界上<a href="https://www.postgresql.org/">最先进的开源数据库</a>
+的最新版本。</p>
+
+<p>PostgreSQL 14 带来了很多新特性，可以帮助开发人员和管理员部署以数据为支撑的应
+用程序。PostgreSQL 持续在复杂数据类型上添加创新特性，包括更便利地访问JSON和对非
+连续数据范围的支持。此次最新版本还增加了 PostgreSQL 在高性能和分布式数据工作负载
+方面的改进趋势，在支持连接并发、高写入工作负载、并行查询和逻辑复制方面进行了改进
+。</p>
+
+<p>“PostgreSQL 的最新版本提高了我们用户大规模管理数据工作负载的能力，增强了可观察性
+，并包含有助于应用程序开发人员的新功能，”，PostgreSQL 核心团队成员Magnus
+Hagander 说，&quot;PostgreSQL 14 证明了全球 PostgreSQL 社区致力于解决反馈并继续
+提供由大大小小的组织部署的创新数据库软件。”</p>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a>是一种创新的数据管理系统，以其可靠性和健壮性著称，得益于<a href="https://www.postgresql.org/community/">全球开发者社区</a>
+超过25年的开源开发，它已成为各种规模组织首选的开源关系型数据库。</p>
+
+<h3 id="json-">JSON 便利和多范围</h3>
+
+<p>PostgreSQL 从PostgreSQL 版本9.2开始就已经支持操作<a href="https://www.postgresql.org/docs/14/datatype-json.html">JSON</a>数据，只是检索时所使用的语
+法比较独特。PostgreSQL 14 可以<a href="https://www.postgresql.org/docs/14/datatype-json.html#JSONB-SUBSCRIPTING">使用下标访问 JSON 数据</a>。
+比如现在支持这样查询：
+<code>SELECT (&#39;{ &quot;postgres&quot;: { &quot;release&quot;: 14 }}&#39;::jsonb)[&#39;postgres&#39;][&#39;release&#39;];</code></p>
+
+<p>这使PostgreSQL与从JSON数据中检索信息时的通用语法保持一致。PostgreSQL 14 中添加的
+下标框架一般可以扩展到其他嵌套数据结构，同时也适用于本次发布的<a href="https://www.postgresql.org/docs/14/hstore.html"><code>hstore</code></a>数据类型。</p>
+
+<p><a href="https://www.postgresql.org/docs/14/rangetypes.html">Range 类型</a>同样也是在PostgreSQL 版本9.2首次发布的，现在引入了&quot;<a href="https://www.postgresql.org/docs/14/rangetypes.html#RANGETYPES-BUILTIN">multirange</a>&quot;数据类型
+来支持非连续范围的数据。multirange是非重叠范围的有序列表，它让开发人员通过编写更
+简单的查询来处理复杂的范围序列。PostgreSQL原生的范围类型（dates, times, numbers）
+支持multirange，其他数据类型被扩展后也可以使用multirange。</p>
+
+<h3 id="-">高工作负载的性能改进</h3>
+
+<p>PostgreSQL 14 为使用多连接的工作负载提供了显著的吞吐量提升，在一些基准测试中，
+速度提高了2倍。此版本继续通过在<a href="https://www.postgresql.org/docs/14/btree-implementation.html#BTREE-DELETION">频繁更新索引</a>的表上减少索引膨胀来改进B树索引的整体
+管理。</p>
+
+<p>PostgreSQL 14 引入了<a href="https://www.postgresql.org/docs/14/libpq-pipeline-mode.html">管道查询</a>的能力，这可以显著提升高延迟连接或具有许多小量写
+(<code>INSERT</code>/<code>UPDATE</code>/<code>DELETE</code>)操作的工作负载性能。由于这是客户端功能，因此只要使用版本14
+的客户端或使用<a href="https://wiki.postgresql.org/wiki/List_of_drivers">通过版本14的libpq构建的客户端驱动程序</a>，就可以对任何现代 PostgreSQL
+数据库使用管道模式。</p>
+
+<h3 id="-">分布式工作负载的增强功能</h3>
+
+<p>分布式 PostgreSQL 数据库将从 PostgreSQL 14 中受益。使用<a href="https://www.postgresql.org/docs/current/logical-replication.html">逻辑复制</a>时，PostgreSQL 现
+在可以将正在进行的事务以流复制形式传输给订阅者，这对订阅大型事务的应用具有显著
+的性能优势。PostgreSQL 14 还为支持逻辑复制的逻辑解码系统添加了一些其他性能改进。</p>
+
+<p>过去用于处理跨 PostgreSQL 和其他数据库的联合工作负载的<a href="https://www.postgresql.org/docs/14/sql-createforeigndatawrapper.html">外部数据包装器</a>，现在可以利
+用 PostgreSQL 14 中的并行查询特性。
+本版本在 <a href="https://www.postgresql.org/docs/14/postgres-fdw.html"><code>postgres_fdw</code></a>（与其他 PostgreSQL 数据库接口的外部数据包装器）中实现了此
+功能。</p>
+
+<p>除了支持并行查询之外，<code>postgres_fdw</code> 现在也可以使用<a href="https://www.postgresql.org/docs/14/sql-importforeignschema.html"><code>IMPORT FOREIGN SCHEMA</code></a> 指令在
+外部表上批量插入数据并导入表分区。</p>
+
+<h3 id="-">管理和可观察性</h3>
+
+<p>PostgreSQL 14 将其性能提升扩展到了其 <a href="https://www.postgresql.org/docs/14/routine-vacuuming.html">vacuuming</a>系统。
+本版本包括用于减少 B 树索引开销的优化。此版本还添加了一个vacuum的&quot;紧急模式&quot;，旨
+在防止事务ID环绕。
+<a href="https://www.postgresql.org/docs/14/sql-analyze.html"><code>ANALYZE</code></a>用于收集数据库统计信息，基于其自身的性能改进，现在在
+PostgreSQL 14中运行速
+度明显更快。</p>
+
+<p><a href="https://www.postgresql.org/docs/14/runtime-config-client.html#GUC-DEFAULT-TOAST-COMPRESSION">现在可以配置</a>PostgreSQL的<a href="https://www.postgresql.org/docs/14/storage-toast.html">TOAST</a> 系统的压缩选项，该系统用于存储较大的数据，如文本块
+或几何图形。</p>
+
+<p>PostgreSQL 14 为 TOAST 列添加了 LZ4 压缩，同时保留对 <code>pglz</code> 压缩的支持。</p>
+
+<p>PostgreSQL 14 添加了几个新功能来帮助监控和可观察性，包括<a href="https://www.postgresql.org/docs/14/progress-reporting.html#COPY-PROGRESS-REPORTING">跟踪“COPY”命令的进度</a>、
+<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-WAL-VIEW">预写日志 (WAL) 活动</a>和<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW">复制槽统计信息</a>。</p>
+<p>启用<a href="https://www.postgresql.org/docs/14/runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID"><code>compute_query_id</code></a>可以让您通过多个 PostgreSQL特性（包括 <a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>、
+<a href="https://www.postgresql.org/docs/14/sql-explain.html"><code>EXPLAIN VERBOSE</code></a>和其他更多特性）来唯一跟踪某个查询。</p>
+
+<h3 id="sql-">SQL 性能、一致性和便利性</h3>
+
+<p>查询计划和执行在PostgreSQL 14中也进行了改进。此版本包括对 PostgreSQL 并行查询支
+持的多项改进，包括更好的并行顺序扫描性能、<a href="https://www.postgresql.org/docs/14/plpgsql.html"><code>PL/pgSQL</code></a>在使用 <code>RETURN QUERY</code> 命令时执行
+并行查询的能力、以及启用 <a href="https://www.postgresql.org/docs/14/sql-refreshmaterializedview.html"><code>REFRESH MATERIALIZED VIEW</code></a> 执行并行查询。
+此外，PostgreSQL 14中新增的附加缓存让嵌套查询性能得到提升。</p>
+
+<p><a href="(https://www.postgresql.org/docs/14/planner-stats.html#PLANNER-STATS-EXTENDED">扩展统计</a>)现在可以在 PostgreSQL 14 中用于表达式。此外，<a href="https://www.postgresql.org/about/news/postgresql-13-released-2077/">PostgreSQL 13</a>中引入的一个
+[窗口函数]功能(<a href="https://www.postgresql.org/docs/14/functions-window.html)现在也可以">https://www.postgresql.org/docs/14/functions-window.html)现在也可以</a>
+从增量排序中得到提升。</p>
+
+<p><a href="https://www.postgresql.org/docs/14/sql-createprocedure.html">存储过程</a>允许在代码块中进行事务控制，现在可以使用<code>OUT</code>参数返回数据。</p>
+
+<p>PostgreSQL 14 引入了使用 <a href="https://www.postgresql.org/docs/14/functions-datetime.html#FUNCTIONS-DATETIME-BIN"><code>date_bin</code></a>函数，可以将时间戳按照任意间隔进行分组或对齐。</p>
+
+<p>此版本还添加了符合SQL的<a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-SEARCH"><code>SEARCH</code></a>和<a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-CYCLE"><code>CYCLE</code></a> 子句，以帮助递归<a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-RECURSIVE">公用表表达式</a>的排序和循环
+检测。</p>
+
+<h3 id="-">安全性改善</h3>
+
+<p>PostgreSQL 14 可以方便地使用 <code>pg_read_all_data</code> 和 <code>pg_write_all_data</code> <a href="https://www.postgresql.org/docs/14/predefined-roles.html">预定义角色</a>为
+用户分配表、视图和模式的只读和只写权限。</p>
+
+<p>此外，此版本现在将符合标准的<a href="https://www.postgresql.org/docs/14/auth-password.html"><code>SCRAM-SHA-256</code></a>密码管理和身份验证系统做为PostgreSQL
+新实例的默认设置。</p>
+<h3 id="-postgresql">关于PostgreSQL</h3>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a>是世界上最先进的开源数据库，它的全球社区是一个由成千上万的用户、开发
+人员、公司或其他组织组成的。PostgreSQL起源于加利福尼亚大学伯克利分校，已经有30
+多年的历史，并且以无与伦比的开发速度继续发展。 PostgreSQL的成熟功能不仅与顶级商
+业数据库系统匹配，而且在高级数据库功能、可扩展性、安全性和稳定性方面超过了它们。</p>
+
+<h3 id="-">链接</h3>
+
+<ul>
+  <li><a href="https://www.postgresql.org/download/">下载</a></li>
+  <li><a href="https://www.postgresql.org/docs/14/release-14.html">发行说明</a></li>
+  <li><a href="https://www.postgresql.org/about/press/">新闻资料</a></li>
+  <li><a href="https://www.postgresql.org/support/security/">安全</a></li>
+  <li><a href="https://www.postgresql.org/support/versioning/">版本政策</a></li>
+  <li><a href="https://twitter.com/postgresql">在Twitter上关注@postgresql</a></li>
+</ul>
+{% endblock presskit_content %}

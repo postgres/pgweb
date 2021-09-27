@@ -1,0 +1,98 @@
+{% extends "pages/about/press/presskit14/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 14 Released!</h1>
+
+<p>El Grupo Global de Desarrollo de PostgreSQL ha anunciado hoy el lanzamiento de
+<a href="https://www.postgresql.org/docs/14/release-14.html">PostgreSQL 14</a>, la última versión de la <a href="https://www.postgresql.org/">base de datos de código abierto más avanzada del mundo</a>.</p>
+
+<p>PostgreSQL 14 introduce una variedad de características que ayudarán a desarrolladores y administradores a implementar sus aplicaciones para el manejo de datos. PostgreSQL sigue añadiendo innovaciones para tipos de datos complejos, que incluyen mayor facilidad de acceso a datos JSON y soporte para rangos de datos no contiguos. Esta última versión refuerza la tendencia de PostgreSQL hacia las mejoras para el alto rendimiento y las cargas de trabajo de datos distribuidos, presentando avances en la concurrencia de conexiones, cargas de trabajo con elevado nivel de escritura, paralelismo de consultas y replicación lógica.</p>
+
+<p>"Esta última versión de PostgreSQL incrementa la capacidad de nuestros usuarios de administrar cargas de trabajo de datos a gran escala, mejora la observabilidad e incluye nuevas características que facilitan el trabajo de los desarrolladores de aplicaciones", dijo Magnus Hagander, miembro del Core Team de PostgreSQL. "PostgreSQL 14 constituye la prueba del compromiso de la comunidad global de PostgreSQL para analizar sugerencias y opiniones recibidas y continuar ofreciendo un software de base de datos innovador utilizado por organizaciones grandes y pequeñas."</p>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a> es un innovador sistema de gestión de datos conocido por su fiabilidad y solidez. Gracias a los más de 25 años de desarrollo de código abierto realizado por una <a href="https://www.postgresql.org/community/">comunidad mundial de desarrolladores</a>, se ha convertido en la base de datos relacional de código abierto preferida por organizaciones de todos los tamaños.</p>
+
+<h3 id="utilidades-para-json-y-rangos-m-ltiples">Utilidades para JSON y rangos múltiples</h3>
+
+<p>PostgreSQL ha ofrecido soporte para la manipulación de datos <a href="https://www.postgresql.org/docs/14/datatype-json.html">JSON</a>
+desde el lanzamiento de su versión 9.2, aunque hasta ahora para obtener los valores se utilizaba una sintaxis única. Con PostgreSQL 14, en cambio, es posible <a href="https://www.postgresql.org/docs/14/datatype-json.html#JSONB-SUBSCRIPTING">acceder a datos JSON usando subíndices</a>. Por ejemplo, ahora es posible realizar una consulta como <code>SELECT (&#39;{ "postgres": { "release": 14 }}&#39;::jsonb)[&#39;postgres&#39;][&#39;release&#39;];</code>
+. Esto alinea a PostgreSQL con la sintaxis comúnmente reconocida para obtener información de datos JSON. El sistema de subíndices añadido a PostgreSQL 14 es generalmente extensible a otras estructuras de datos anidadas, y se aplica también al tipo de dato <a href="https://www.postgresql.org/docs/14/hstore.html"><code>hstore</code></a>
+presente en esta versión.</p>
+
+<p>Los <a href="https://www.postgresql.org/docs/14/rangetypes.html">tipos de rangos</a> (que también fueron introducidos en PostgreSQL 9.2) ahora cuentan con el soporte para rangos no contiguos a través de la introducción del tipo de datos "<a href="https://www.postgresql.org/docs/14/rangetypes.html#RANGETYPES-BUILTIN">multirango</a>".
+Un rango múltiple consiste en una lista ordenada de rangos que no se superponen, lo cual permite a los desarrolladores escribir consultas más sencillas para manejar secuencias complejas de rangos. Los tipos de rango nativos de PostgreSQL (fechas, horas, números) soportan los rangos múltiples. Asimismo, es posible extender el soporte de rangos múltiples a otros tipos de datos.</p>
+
+<h3 id="mejoras-de-rendimiento-para-cargas-de-trabajo-intensivas">Mejoras de rendimiento para cargas de trabajo intensivas</h3>
+
+<p>PostgreSQL 14 ofrece un importante incremento de rendimiento en las cargas de trabajo con un alto número de conexiones. Algunas pruebas de rendimiento indican un aumento de velocidad equivalente al doble. Esta versión continúa con las recientes mejoras en la gestión de los índices B-tree, al reducir el sobredimensionamiento de los índices en aquellas tablas cuyos <a href="https://www.postgresql.org/docs/14/btree-implementation.html#BTREE-DELETION">índices se actualizan con frecuencia</a>.</p>
+
+<p>PostgreSQL 14 introduce la posibilidad de <a href="https://www.postgresql.org/docs/14/libpq-pipeline-mode.html">canalizar consultas</a>
+hacia una base de datos, lo cual puede mejorar significativamente el rendimiento en las conexiones de alta latencia o para cargas de trabajo con un gran número de pequeñas operaciones de escritura (<code>INSERT</code>/<code>UPDATE</code>/<code>DELETE</code>). Al tratarse de una característica del lado cliente, es posible utilizar el modo pipeline con cualquier base de datos PostgreSQL actual que cuente con la versión 14 del cliente o con un <a href="https://wiki.postgresql.org/wiki/List_of_drivers">controlador de cliente creado con la versión 14 de libpq</a>.</p>
+
+<h3 id="mejoras-para-cargas-de-trabajo-distribuidas">Mejoras para cargas de trabajo distribuidas</h3>
+
+<p>También las bases de datos PostgreSQL distribuidas se benefician de PostgreSQL 14. Al utilizar la <a href="https://www.postgresql.org/docs/current/logical-replication.html">replicación lógica</a>,
+PostgreSQL puede ahora enviar las transacciones en curso a los suscriptores, con importantes ventajas de rendimiento cuando se aplican a los mismos transacciones de gran volumen. Además, PostgreSQL 14 añade otras mejoras de rendimiento al sistema de decodificación lógica, en el que se basa la replicación lógica.</p>
+
+<p>Los <a href="https://www.postgresql.org/docs/14/sql-createforeigndatawrapper.html">conectores de datos externos</a>, empleados para manejar cargas de trabajo federadas entre PostgreSQL y otras bases de datos, ahora pueden aprovechar el paralelismo de consultas que ofrece PostgreSQL 14. En esta versión se implementa dicha funcionalidad a través de <a href="https://www.postgresql.org/docs/14/postgres-fdw.html"><code>postgres_fdw</code></a>,
+el conector de datos externos que interactúa con otras bases de datos PostgreSQL.</p>
+
+<p>Además de ofrecer soporte para el paralelismo de consultas, <code>postgres_fdw</code> permite ahora la inserción masiva de datos en tablas foráneas y la importación de particiones de tablas a través de la directiva <a href="https://www.postgresql.org/docs/14/sql-importforeignschema.html"><code>IMPORT FOREIGN SCHEMA</code></a>.</p>
+
+<h3 id="administraci-n-y-observabilidad">Administración y observabilidad</h3>
+
+<p>PostgreSQL 14 extiende sus incrementos de rendimiento al sistema de <a href="https://www.postgresql.org/docs/14/routine-vacuuming.html">vacuum</a>, incluyendo optimizaciones que reducen la sobrecarga de los B-Trees. Esta versión introduce también en vacuum una "modalidad de emergencia" diseñada para prevenir el wraparound del ID de transacción. Gracias a las mejoras de rendimiento realizadas en PostgreSQL 14,  <a href="https://www.postgresql.org/docs/14/sql-analyze.html"><code>ANALYZE</code></a> (utilizado para recopilar estadísticas de la base de datos) ahora se ejecuta con mucha más rapidez.</p>
+
+<p>Ahora es <a href="https://www.postgresql.org/docs/14/runtime-config-client.html#GUC-DEFAULT-TOAST-COMPRESSION">posible configurar</a>
+la compresión para el sistema <a href="https://www.postgresql.org/docs/14/storage-toast.html">TOAST</a> de PostgreSQL, utilizado para almacenar datos de mayor tamaño como bloques de texto o geometrías. PostgreSQL 14 añade la compresión LZ4 para las columnas TOAST, conservando al mismo tiempo el soporte para la compresión <code>pglz</code>.</p>
+
+<p>PostgreSQL 14 incorpora varias características nuevas que facilitan el monitoreo y la observabilidad, incluyendo la posibilidad de <a href="https://www.postgresql.org/docs/14/progress-reporting.html#COPY-PROGRESS-REPORTING">dar seguimiento al progreso de los comandos <code>COPY</code></a>,
+<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-WAL-VIEW">la actividad del WAL (write-ahead-log)</a>,
+y <a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW">las estadísticas de los slots de replicación</a>.
+Al habilitar <a href="https://www.postgresql.org/docs/14/runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID"><code>compute_query_id</code></a>
+es posible realizar el seguimiento único de una consulta a través de varias características de PostgreSQL, que incluyen
+<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>,
+<a href="https://www.postgresql.org/docs/14/sql-explain.html"><code>EXPLAIN VERBOSE</code></a>, y más.</p>
+<h3 id="rendimiento-conformidad-y-utilidad-para-sql">Rendimiento, conformidad y utilidad para SQL</h3>
+
+<p>La planificación y ejecución de consultas se benefician de las mejoras introducidas en PostgreSQL 14. Esta versión incluye varias mejoras en el soporte al paralelismo de consultas de PostgreSQL. Entre ellas, un mejor desempeño de los escaneos secuenciales paralelos, la capacidad de
+<a href="https://www.postgresql.org/docs/14/plpgsql.html"><code>PL/pgSQL</code></a> de realizar consultas paralelas utilizando el comando <code>RETURN QUERY</code>, y la posibilidad de permitirle a
+<a href="https://www.postgresql.org/docs/14/sql-refreshmaterializedview.html"><code>REFRESH MATERIALIZED VIEW</code></a>
+ejecutar consultas paralelas. Adicionalmente, las consultas que usan <em>nested loop joins</em> pueden obtener beneficios de rendimiento a través del caché adicional que ha sido añadido en PostgreSQL 14.</p>
+
+<p>Las <a href="https://www.postgresql.org/docs/14/planner-stats.html#PLANNER-STATS-EXTENDED">estadísticas extendidas</a>
+pueden ahora ser utilizadas en PostgreSQL 14 para las expresiones. Asimismo, las <a href="https://www.postgresql.org/docs/14/functions-window.html">funciones de ventana deslizante</a> pueden beneficiarse del ordenamiento incremental, característica introducida en
+<a href="https://www.postgresql.org/about/news/postgresql-13-released-2077/">PostgreSQL 13</a>.</p>
+
+<p>Los <a href="https://www.postgresql.org/docs/14/sql-createprocedure.html">procedimientos almacenados</a>,
+que permiten controlar las transacciones en un bloque de código, pueden ahora devolver datos utilizando parámetros <code>OUT</code>.</p>
+
+<p>PostgreSQL 14 introduce la posibilidad de realizar un "bin", o alinear, los timestamps a un intervalo determinado utilizando la función <a href="https://www.postgresql.org/docs/14/functions-datetime.html#FUNCTIONS-DATETIME-BIN"><code>date_bin</code></a>
+. En esta versión se añaden también las cláusulas
+<a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-SEARCH"><code>SEARCH</code></a>
+y <a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-CYCLE"><code>CYCLE</code></a>
+ (conformes al estándar SQL) que ayudan a ordenar y detectar la existencia de ciclos en las
+<a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-RECURSIVE">expresiones recursivas de tablas comunes</a>.</p>
+
+<h3 id="mejoras-en-la-seguridad">Mejoras en la seguridad</h3>
+
+<p>Gracias a los <a href="https://www.postgresql.org/docs/14/predefined-roles.html">roles predefinidos</a> <code>pg_read_all_data</code> y
+<code>pg_write_all_data</code>, en PostgreSQL 14 es más fácil asignar a los usuarios privilegios de sólo lectura y sólo escritura para tablas, vistas y esquemas.</p>
+
+<p>Además, a partir de esta versión, el sistema de gestión de contraseñas y autenticación, conforme con el estándar <a href="https://www.postgresql.org/docs/14/auth-password.html"><code>SCRAM-SHA-256</code></a>, será el predeterminado en todas las nuevas instancias de PostgreSQL.</p>
+
+<h3 id="informaci-n-sobre-postgresql">Información sobre PostgreSQL</h3>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a> es la base de datos de código abierto más avanzada del mundo, que cuenta con una comunidad global de miles de usuarios, colaboradores, empresas y organizaciones. Basada en más de 30 años de ingeniería, que comenzaron en la Universidad de Berkeley en California, PostgreSQL ha continuado con un ritmo de desarrollo inigualable. El maduro conjunto de características de PostgreSQL no sólo iguala a los principales sistemas de bases de datos propietarios, sino que los supera en términos de características avanzadas, extensibilidad, seguridad y estabilidad.</p>
+
+<h3 id="enlaces">Enlaces</h3>
+
+<ul>
+  <li><a href="https://www.postgresql.org/download/">Descargas</a></li>
+  <li><a href="https://www.postgresql.org/docs/14/release-14.html">Notas de la versión</a></li>
+  <li><a href="https://www.postgresql.org/about/press/">Kit de prensa</a></li>
+  <li><a href="https://www.postgresql.org/support/security/">Información de seguridad</a></li>
+  <li><a href="https://www.postgresql.org/support/versioning/">Directiva de versiones</a></li>
+  <li><a href="https://twitter.com/postgresql">Sígannos en Twitter @postgresql</a></li>
+</ul>
+{% endblock presskit_content %}

@@ -1,0 +1,168 @@
+{% extends "pages/about/press/presskit14/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 14 Released!</h1>
+
+<p><strong>SEPTEMBER 30, 2021</strong> - The PostgreSQL Global Development Group today announced the release of
+<a href="https://www.postgresql.org/docs/14/release-14.html">PostgreSQL 14</a>, the latest
+version of the world’s <a href="https://www.postgresql.org/">most advanced open source database</a>.</p>
+<p>PostgreSQL 14 brings a variety of features that help developers and
+administrators deploy their data-backed applications. PostgreSQL continues to
+add innovations on complex data types, including more convenient access for
+JSON and support for noncontiguous ranges of data. This latest release adds
+to PostgreSQL's trend on improving high performance and distributed
+data workloads, with advances in connection concurrency, high-write
+workloads, query parallelism and logical replication.</p>
+
+<p>"This latest release of PostgreSQL advances our users' ability to manage data
+workloads at scale, enhances observability, and contains new features that help
+application developers," said Magnus Hagander, a PostgreSQL Core Team member.
+"PostgreSQL 14 is a testament to the dedication of the global PostgreSQL
+community in addressing feedback and continuing to deliver innovative database
+software that is deployed by organizations large and small."</p>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a>, an innovative data management system
+known for its reliability and robustness, benefits from over 25 years of open
+source development from a <a href="https://www.postgresql.org/community/">global developer community</a>
+and has become the preferred open source relational database for organizations
+of all sizes.</p>
+
+<h3 id="json-conveniences-and-multiranges">JSON Conveniences and Multiranges</h3>
+
+<p>PostgreSQL has supported manipulating <a href="https://www.postgresql.org/docs/14/datatype-json.html">JSON</a>
+data since the release of PostgreSQL 9.2, though retrieval of values used a
+unique syntax. PostgreSQL 14 now lets you <a href="https://www.postgresql.org/docs/14/datatype-json.html#JSONB-SUBSCRIPTING">access JSON data using subscripts</a>, e.g. a query like <code>SELECT ('{ "postgres": { "release": 14 }}'::jsonb)['postgres']['release'];</code>
+now works. This aligns PostgreSQL with syntax that is commonly recognized for
+retrieving information from JSON data. The subscripting framework added to
+PostgreSQL 14 can be generally extended to other nested data structures, and is
+also applied to the <a href="https://www.postgresql.org/docs/14/hstore.html"><code>hstore</code></a>
+data type in this release.</p>
+
+<p><a href="https://www.postgresql.org/docs/14/rangetypes.html">Range types</a>, also first
+released in PostgreSQL 9.2, now have support for noncontiguous ranges through
+the introduction of the "<a href="https://www.postgresql.org/docs/14/rangetypes.html#RANGETYPES-BUILTIN">multirange</a>"
+data type. A multirange is an ordered list of ranges that are nonoverlapping,
+which lets developers write simpler queries for dealing with complex sequences
+of ranges. The range types native to PostgreSQL (dates, times, numbers) support
+multiranges, and other data types can be extended to use multirange support.</p>
+
+<h3 id="performance-improvements-for-heavy-workloads">Performance Improvements for Heavy Workloads</h3>
+
+<p>PostgreSQL 14 provides a significant throughput boost on workloads that use many
+connections, with some benchmarks showing a 2x speedup. This release continues
+on the recent improvements to the management of B-tree indexes by reducing index
+bloat on tables with <a href="https://www.postgresql.org/docs/14/btree-implementation.html#BTREE-DELETION">frequently updated indexes</a>.</p>
+
+<p>PostgreSQL 14 introduces the ability to <a href="https://www.postgresql.org/docs/14/libpq-pipeline-mode.html">pipeline queries</a>
+to a database, which can significantly improve performance over high latency
+connections or for workloads with many small write (<code>INSERT</code>/<code>UPDATE</code>/<code>DELETE</code>)
+operations. As this is a client-side feature, you can use pipeline mode with any
+modern PostgreSQL database with the version 14 client
+or <a href="https://wiki.postgresql.org/wiki/List_of_drivers">a client driver built with version 14 of libpq</a>.</p>
+
+<h3 id="enhancements-for-distributed-workloads">Enhancements for Distributed Workloads</h3>
+
+<p>Distributed PostgreSQL databases stand to benefit from PostgreSQL 14. When using
+<a href="https://www.postgresql.org/docs/current/logical-replication.html">logical replication</a>,
+PostgreSQL can now stream in-progress transactions to subscribers, with
+significant performance benefits for applying large transactions on subscribers.
+PostgreSQL 14 also adds several other performance enhancements to the logical
+decoding system that powers logical replication.</p>
+
+<p><a href="https://www.postgresql.org/docs/14/sql-createforeigndatawrapper.html">Foreign data wrappers</a>,
+which are used for working with federated workloads across PostgreSQL and other
+databases, can now leverage query parallelism in PostgreSQL 14. This release
+implements this ability in the <a href="https://www.postgresql.org/docs/14/postgres-fdw.html"><code>postgres_fdw</code></a>,
+the foreign data wrapper that interfaces with other PostgreSQL databases.</p>
+
+<p>In addition to supporting query parallelism, <code>postgres_fdw</code> can now bulk insert
+data on foreign tables and import table partitions with the
+<a href="https://www.postgresql.org/docs/14/sql-importforeignschema.html"><code>IMPORT FOREIGN SCHEMA</code></a>
+directive.</p>
+
+<h3 id="administration-and-observability">Administration and Observability</h3>
+
+<p>PostgreSQL 14 extends its performance gains to the <a href="https://www.postgresql.org/docs/14/routine-vacuuming.html">vacuuming</a>
+system, including optimizations for reducing overhead from B-Trees. This release
+also adds a vacuum "emergency mode" that is designed to prevent transaction ID
+wraparound. <a href="https://www.postgresql.org/docs/14/sql-analyze.html"><code>ANALYZE</code></a>,
+used to collect database statistics, now runs significantly faster in
+PostgreSQL 14 due to its own performance improvements.</p>
+
+<p>Compression for PostgreSQL's <a href="https://www.postgresql.org/docs/14/storage-toast.html">TOAST</a>
+system, which is used to store larger data like blocks of text or geometries,
+can <a href="https://www.postgresql.org/docs/14/runtime-config-client.html#GUC-DEFAULT-TOAST-COMPRESSION">now be configured</a>.
+PostgreSQL 14 adds LZ4 compression for TOAST columns while retaining support for
+<code>pglz</code> compression.</p>
+
+<p>PostgreSQL 14 adds several new features to help with monitoring and
+observability, including the ability to <a href="https://www.postgresql.org/docs/14/progress-reporting.html#COPY-PROGRESS-REPORTING">track the progress of <code>COPY</code> commands</a>,
+<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-WAL-VIEW">write-ahead-log (WAL) activity</a>,
+and <a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW">statistics on replication slots</a>.
+Enabling <a href="https://www.postgresql.org/docs/14/runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID"><code>compute_query_id</code></a>
+lets you uniquely track a query through several PostgreSQL features, including
+<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>,
+<a href="https://www.postgresql.org/docs/14/sql-explain.html"><code>EXPLAIN VERBOSE</code></a>, and
+more.</p>
+
+<h3 id="sql-performance-conformance-and-convenience">SQL Performance, Conformance, and Convenience</h3>
+
+<p>Query planning and execution benefit from enhancements in PostgreSQL 14. This
+release includes several improvements to PostgreSQL's query parallelism support,
+including better performance of parallel sequential scans, the ability for
+<a href="https://www.postgresql.org/docs/14/plpgsql.html"><code>PL/pgSQL</code></a> to execute
+parallel queries when using the <code>RETURN QUERY</code> command, and enabling
+<a href="https://www.postgresql.org/docs/14/sql-refreshmaterializedview.html"><code>REFRESH MATERIALIZED VIEW</code></a>
+to execute parallel queries. Additionally, queries that use nested loop joins
+may see performance benefits through additional caching that is added in
+PostgreSQL 14.</p>
+
+<p><a href="https://www.postgresql.org/docs/14/planner-stats.html#PLANNER-STATS-EXTENDED">Extended statistics</a>
+can now be used in PostgreSQL 14 for expressions. Additionally,
+<a href="https://www.postgresql.org/docs/14/functions-window.html">window functions</a> can
+now benefit from incremental sorts, a feature introduced in
+<a href="https://www.postgresql.org/about/news/postgresql-13-released-2077/">PostgreSQL 13</a>.</p>
+
+<p><a href="https://www.postgresql.org/docs/14/sql-createprocedure.html">Stored procedures</a>,
+which allow for transaction control in a block of code, can now return data by
+using <code>OUT</code> parameters.</p>
+
+<p>PostgreSQL 14 introduces the ability to "bin", or align, timestamps to a
+particular interval using the <a href="https://www.postgresql.org/docs/14/functions-datetime.html#FUNCTIONS-DATETIME-BIN"><code>date_bin</code></a>
+function. This release also adds the SQL conforming
+<a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-SEARCH"><code>SEARCH</code></a>
+and <a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-CYCLE"><code>CYCLE</code></a>
+clauses to help with ordering and cycle detection for recursive
+<a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-RECURSIVE">common table expressions</a>.</p>
+
+<h3 id="security-enhancements">Security Enhancements</h3>
+
+<p>PostgreSQL 14 makes it convenient to assign read-only and write-only privileges
+to users on tables, views, and schemas using the <code>pg_read_all_data</code> and
+<code>pg_write_all_data</code> <a href="https://www.postgresql.org/docs/14/predefined-roles.html">predefined roles</a>.</p>
+
+<p>Additionally, this release now makes the standard compliant
+<a href="https://www.postgresql.org/docs/14/auth-password.html"><code>SCRAM-SHA-256</code></a> password
+management and authentication system the default on new PostgreSQL instances.</p>
+
+<h3 id="about-postgresql">About PostgreSQL</h3>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a> is the world's most advanced open
+source database, with a global community of thousands of users, contributors,
+companies and organizations. Built on over 30 years of engineering, starting at
+the University of California, Berkeley, PostgreSQL has continued with an
+unmatched pace of development. PostgreSQL's mature feature set not only matches
+top proprietary database systems, but exceeds them in advanced database
+features, extensibility, security, and stability.</p>
+
+<h3 id="links">Links</h3>
+
+<ul>
+  <li><a href="https://www.postgresql.org/download/">Download</a></li>
+  <li><a href="https://www.postgresql.org/docs/14/release-14.html">Release Notes</a></li>
+  <li><a href="https://www.postgresql.org/about/press/">Press Kit</a></li>
+  <li><a href="https://www.postgresql.org/support/security/">Security Page</a></li>
+  <li><a href="https://www.postgresql.org/support/versioning/">Versioning Policy</a></li>
+  <li><a href="https://twitter.com/postgresql">Follow @postgresql on Twitter</a></li>
+</ul>
+{% endblock presskit_content %}

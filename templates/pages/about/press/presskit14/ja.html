@@ -1,0 +1,97 @@
+{% extends "pages/about/press/presskit14/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 14 Released!</h1>
+
+<p>PostgreSQL Global Development Groupは本日、<a href="https://www.postgresql.org/">世界で最も高度なオープンソースデータベース</a>の最新バージョンである<a href="https://www.postgresql.org/docs/14/release-14.html">PostgreSQL 14</a>のリリースを発表しました。</p>
+
+<p>PostgreSQL14には、開発者や管理者がデータバックアップアプリケーションを配備するのに役立つさまざまな機能が用意されています。PostgreSQLは、複雑なデータ型に対して革新的な機能を追加し続けています。
+これには、JSONへのより便利なアクセスや、連続していないデータ範囲のサポートなどが含まれます。今回の最新リリースでは、接続の同時実行性、大量書き込みワークロード、クエリの並列性、および論理レプリケーションの向上に伴い、PostgreSQLのハイパフォーマンスおよび分散データワークロードの改善傾向がさらに強化されています。</p>
+
+<p>PostgreSQLコアチームのメンバーであるMagnus Hagander氏は次のように述べています。「PostgreSQLのこの最新リリースは、ユーザのデータワークロードを大規模に管理する能力を向上させ、可観測性を高め、アプリケーション開発者を支援する新機能を含んでいます。」
+「PostgreSQL14は、グローバルなPostgreSQLコミュニティがフィードバックに対応し、大小さまざまな組織が導入する革新的なデータベースソフトウェアを提供し続けていることを示すものです。」</p>
+
+<p>革新的なデータ管理システムである<a href="https://www.postgresql.org">PostgreSQL</a>は、信頼性と堅牢性で知られており、世界中の開発者コミュニティによる25年以上にわたるオープンソース開発の恩恵を受けており、あらゆる規模の組織に好まれるオープンソースリレーショナルデータベースとなっています。</p>
+
+<h3 id="json-">JSON利便性とマルチ範囲</h3>
+
+<p>PostgreSQLはPostgreSQL9.2のリリース以来、<a href="https://www.postgresql.org/docs/14/datatype-json.html">JSON</a>データの操作をサポートしてきましたが、値の取得には固有の構文が使用されていました。PostgreSQL14では、<a href="https://www.postgresql.org/docs/14/datatype-json.html#JSONB-SUBSCRIPTING">添字を使用してJSONデータにアクセス</a>できるようになりました。例えば、「SELECT (&#39;{ &quot;postgres&quot;: { &quot;release&quot;: 14 }}&#39;::jsonb)[&#39;postgres&#39;][&#39;release&#39;];」のようなクエリが動作するようになりました。
+これにより、PostgreSQLは、JSONデータから情報を取得するために一般的に認識されている構文と整合します。PostgreSQL14に追加された添字フレームワークは、一般に他のネストされたデータ構造に拡張することができ、このリリースでは「<a href="https://www.postgresql.org/docs/14/hstore.html">hstore</a>」データ型にも適用されます。</p>
+
+<p>同じくPostgreSQL9.2で最初にリリースされた<a href="https://www.postgresql.org/docs/14/rangetypes.html">範囲型</a>は、「<a href="https://www.postgresql.org/docs/14/rangetypes.html#RANGETYPES-BUILTIN">マルチ範囲</a>」データ型の導入により、非隣接範囲をサポートするようになりました。マルチ範囲は、重複しない範囲の順序付きリストです。これにより、開発者は、範囲の複雑なシーケンスを処理するためのより単純な問合せを作成できます。PostgreSQL固有の範囲型(日付、時刻、数値)はマルチ範囲をサポートしており、その他のデータ型も拡張してマルチレンジのサポートを使用できます。</p>
+
+<h3 id="-">高負荷ワークロードに対する性能改善</h3>
+
+<p>PostgreSQL14では、多くの接続を使用するワークロードのスループットが大幅に向上し、ベンチマークによっては2倍の高速化が示されています。
+このリリースでは、<a href="https://www.postgresql.org/docs/14/btree-implementation.html#BTREE-DELETION">頻繁に更新されるインデックス</a>を持つテーブルのインデックスの膨張を軽減することにより、B-treeインデックスの管理に対する最近の改善が継続されています。</p>
+
+<p>PostgreSQL14では<a href="https://www.postgresql.org/docs/14/libpq-pipeline-mode.html">問い合わせをパイプライン化</a>する機能が導入されました。
+これにより、遅延の大きい接続や多くの小さな書き込み(INSERT/UPDATE/DELETE)操作を伴うワークロードのパフォーマンスが大幅に向上します。
+これはクライアント側の機能であるため、最新のPostgreSQLデータベースで、バージョン14クライアントまたは<a href="https://wiki.postgresql.org/wiki/List_of_drivers">バージョン14のlibpqで作成されたクライアントドライバ</a>を使って、パイプラインモードを使用できます。</p>
+
+<h3 id="-">分散ワークロードに対する強化</h3>
+
+<p>分散PostgreSQLデータベースはPostgreSQL14から恩恵を受けることができます。<a href="https://www.postgresql.org/docs/current/logical-replication.html">論理レプリケーション</a>を使用する場合、PostgreSQLは進行中のトランザクションをサブスクライバにストリーミングできるようになりました。これにより、サブスクライバに大規模なトランザクションを適用する際のパフォーマンスが大幅に向上します。
+PostgreSQL14では、論理レプリケーションを実行する論理デコード・システムに対して、他にもいくつかのパフォーマンス拡張が追加されています。</p>
+
+<p>PostgreSQLおよび他のデータベース間の連合ワークロードを処理するために使用される<a href="https://www.postgresql.org/docs/14/sql-createforeigndatawrapper.html">外部データラッパー</a>は、PostgreSQL14の問い合わせ並列性を利用できるようになりました。このリリースでは、他のPostgreSQLデータベースとインタフェースする外部データラッパーである「<a href="https://www.postgresql.org/docs/14/postgres-fdw.html">postgres_fdw</a>」でこの機能を実装しています。</p>
+
+<p>「postgres_fdw」では、クエリの並列処理のサポートに加えて、外部テーブルにデータを一括挿入したり、「<a href="https://www.postgresql.org/docs/14/sql-importforeignschema.html">IMPORT FOREIGN SCHEMA</a>」指定を使用してテーブルパーティションをインポートできるようになりました。</p>
+
+<h3 id="-">管理と可観測性</h3>
+
+<p>PostgreSQL14では、B-Treesによるオーバーヘッドを削減するための最適化を含め、パフォーマンスの向上が<a href="https://www.postgresql.org/docs/14/routine-vacuuming.html">バキューム</a>システムにまで拡張されました。
+このリリースでは、トランザクションIDのラップアラウンドを防止するように設計されたバキューム「緊急モード」も追加されました。
+データベース統計を収集するために使用される「<a href="https://www.postgresql.org/docs/14/sql-analyze.html">ANALYZE</a>」は、独自のパフォーマンス改善により、PostgreSQL14で大幅に高速に動作するようになりました。</p>
+
+<p>PostgreSQLの<a href="https://www.postgresql.org/docs/14/storage-toast.html">TOAST</a>システム用の圧縮は、テキストやジオメトリのブロックのような大きなデータを格納するために使用されますが、これを<a href="https://www.postgresql.org/docs/14/runtime-config-client.html#GUC-DEFAULT-TOAST-COMPRESSION">設定できるようになりました</a>。
+PostgreSQL14でTOAST列用にLZ4圧縮が追加されていますが、「pglz」圧縮のサポートは維持されています。</p>
+
+<p>PostgreSQL 14 adds several new features to help with monitoring and
+observability, including the ability to <a href="https://www.postgresql.org/docs/14/progress-reporting.html#COPY-PROGRESS-REPORTING">track the progress of <code>COPY</code> commands</a>,
+<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-WAL-VIEW">write-ahead-log (WAL) activity</a>,
+and <a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW">statistics on replication slots</a>.
+Enabling <a href="https://www.postgresql.org/docs/14/runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID"><code>compute_query_id</code></a>
+lets you uniquely track a query through several PostgreSQL features, including
+<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>,
+<a href="https://www.postgresql.org/docs/14/sql-explain.html"><code>EXPLAIN VERBOSE</code></a>, and
+more.</p>
+
+<p>PostgreSQL14には、<a href="https://www.postgresql.org/docs/14/progress-reporting.html#COPY-PROGRESS-REPORTING">「COPY」コマンドの進行状況を追跡する</a>、<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-WAL-VIEW">Write Ahead-log(WAL)アクティビティ</a>、<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW">レプリケーションスロットに関する統計情報</a>など、監視と可観測性を支援するいくつかの新機能が追加されています。
+「<a href="https://www.postgresql.org/docs/14/runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID">compute_query_id</a>」を有効にすると、「<a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW">pg_stat_activity</a>」や「<a href="https://www.postgresql.org/docs/14/sql-explain.html">EXPLAIN VERBOSE</a>」など、PostgreSQLのいくつかの機能を使ってクエリを一意に追跡することができます。</p>
+
+<h3 id="sql-">SQLの性能、標準準拠、利便性</h3>
+
+<p>クエリの計画と実行には、PostgreSQL14の拡張による利点があります。
+このリリースでは、PostgreSQLのクエリ並列処理のサポートにいくつかの改善が加えられました。
+具体的には、並列シーケンシャルスキャンのパフォーマンスの向上、「<a href="https://www.postgresql.org/docs/14/plpgsql.html">PL/pgSQL</a>」が「RETURN QUERY」コマンドを使用して並列クエリを実行する機能、「<a href="https://www.postgresql.org/docs/14/sql-refreshmaterializedview.html">REFRESH MATERIALIZED VIEW</a>」が並列クエリを実行する機能などです。
+さらに、ネストされたループ結合を使用するクエリでは、PostgreSQL14で追加された追加のキャッシュによってパフォーマンスの利点が得られる可能性があります。</p>
+
+<p>PostgreSQL14では、<a href="https://www.postgresql.org/docs/14/planner-stats.html#PLANNER-STATS-EXTENDED">拡張統計</a>に式を使えるようになりました。
+加えて、<a href="https://www.postgresql.org/docs/14/functions-window.html">ウィンドウ関数</a>が、<a href="https://www.postgresql.org/about/news/postgresql-13-released-2077/">PostgreSQL13</a>で導入された機能であるインクリメンタルソートの恩恵を受けられるようになりました。</p>
+
+<p>コードのブロックでトランザクション制御ができる、<a href="https://www.postgresql.org/docs/14/sql-createprocedure.html">ストアドプロシージャ</a>は、「OUT」パラメータでデータを返せるようになりました。</p>
+
+<p>PostgreSQL14では、「<a href="https://www.postgresql.org/docs/14/functions-datetime.html#FUNCTIONS-DATETIME-BIN">date_bin</a>」関数を使用して、特定の間隔にタイムスタンプをbinする(大箱に入れる)、あるいは、揃える、機能が導入されています。
+このリリースでは、「<a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-SEARCH">SEARCH</a>」および「<a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-CYCLE">CYCLE</a>」句に準拠するSQLも追加されており、再帰的な<a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-RECURSIVE">共通テーブル式</a>の順序付けとサイクル検出に役立ちます。</p>
+
+<h3 id="-">セキュリティ強化</h3>
+
+<p>PostgreSQL14では、「pg_read_all_data」と「pg_write_all_data」<a href="https://www.postgresql.org/docs/14/predefined-roles.html">事前定義されたロール</a>を使用して、テーブル、ビュー、スキーマ上のユーザに対して読み取り専用と書き込み専用の権限を割り当てることができます。
+さらに今回のリリースでは、標準に準拠した「<a href="https://www.postgresql.org/docs/14/auth-password.html">SCRAM-SHA-256</a>」のパスワード管理と認証システムが新しいPostgreSQLインスタンスのデフォルトになりました。</p>
+
+<h3 id="postgresql-">PostgreSQLについて</h3>
+
+<p><a href="https://www.postgresql.org">PostgreSQL</a>は世界で最も先進的なオープンソースデータベースであり、数千人のユーザー、貢献者、企業、組織からなるグローバルコミュニティが存在します。PostgreSQLは、カリフォルニア大学バークレー校で始まった30年以上のエンジニアリングの上に構築されたものですが、その開発ペースは他に類を見ません。PostgreSQLの成熟した機能セットは最上のプロプライエタリなデータベースシステムに匹敵するだけでなく、先進的なデータベース機能、拡張性、セキュリティ、および安定性においてそれらを上回ってもいます。</p>
+
+<h3 id="-">リンク</h3>
+
+<ul>
+  <li><a href="https://www.postgresql.org/download/">ダウンロード</a></li>
+  <li><a href="https://www.postgresql.org/docs/14/release-14.html">リリースノート</a></li>
+  <li><a href="https://www.postgresql.org/about/press/">プレスキット</a></li>
+  <li><a href="https://www.postgresql.org/support/security/">セキュリティページ</a></li>
+  <li><a href="https://www.postgresql.org/support/versioning/">バージョンポリシー</a></li>
+  <li><a href="https://twitter.com/postgresql">Twitter @postgresql フォロー</a></li>
+</ul>
+{% endblock presskit_content %}

@@ -1,0 +1,257 @@
+{% extends "pages/about/press/presskit14/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 14 Released!</h1>
+
+<p dir="rtl">
+    קבוצת הפיתוח הגלובלית של PostgreSQL הודיעה היום על שחרורה של
+    <a href="https://www.postgresql.org/docs/14/release-14.html">PostgreSQL 14</a>
+    , הגרסה העדכנית ביותר של
+    <a href="https://www.postgresql.org/"> מסד הנתונים המתקדם בעולם עם קוד פתוח </a>
+</p>
+
+<p dir="rtl">
+    PostgreSQL 14 מביא מגוון תכונות המסייעות למפתחים ומנהלי מערכת להריץ את היישומים המגובים בנתונים שלהם. PostgreSQL
+    ממשיכה להוסיף חידושים בנושא סוגי נתונים מורכבים, כולל גישה נוחה יותר ל- JSON ותמיכה בטווחי נתונים לא רציפים. מהדורה
+    אחרונה זו מוסיפה למגמה של PostgreSQL לשיפור ביצועים גבוהים ועומסי עבודה עם נתונים מבוזרים, עם חידושים בחיבורים
+    מקביליים, עומסי עבודה גבוהים, מקביליות שאילתות ושכפול לוגי.
+</p>
+
+<p dir="rtl">
+    "המהדורה האחרונה של PostgreSQL מקדמת את היכולת של המשתמשים שלנו לנהל עומסי עבודה בקנה מידה גדול, משפרת את שקיפות
+    ונראות ומכילה תכונות חדשות המסייעות למפתחי יישומים", אמר מגנוס האגנדר, חבר צוות ליבה של PostgreSQL.
+    כ תמיד PostgreSQL 14 מהווה עדות למסירותה של קהילת PostgreSQL העולמית בהתייחסות למשוב והמשך אספקת מסד נתונים חדשני
+    אשר מתאים לארגונים גדולים וקטנים ".
+</p>
+
+<p dir="rtl">
+    <a href="https://www.postgresql.org">PostgreSQL</a>
+    זאת מערכת ניהול נתונים חדשנית הידועה באמינותה ובחוסנה, נהנית ממעל 25 שנות פיתוח קוד פתוח מ
+    <a href="https://www.postgresql.org/community">קהילת מפתחים עולמית</a>
+    והפכה לבסיס נתונים רלציוני הפתוח המועדף על ארגונים מכל הגדלים.
+</p>
+
+<h3 dir="rtl">
+    JSON תוספות נוחות וטווחים מרובים
+</h3>
+
+<p dir="rtl">
+    PostgreSQL תמך במניפולציות נתונים של
+    <a href="https://www.postgresql.org/docs/14/datatype-json.html">JSON</a>
+    מאז פרסום PostgreSQL 9.2, אם כי אחזור הערכים השתמש בתחביר ייחודי.
+    כעת PostgreSQL 14 מאפשר
+    <a href="https://www.postgresql.org/docs/14/datatype-json.html#JSONB-SUBSCRIPTING">לגשת לנתוני JSON באמצעות סאב
+        סקריפטים</a>
+    למשל. שאילתה כמו
+</p>
+
+<p>
+    <code>SELECT ('{ "postgres": { "release": 14 }}'::jsonb)['postgres']['release'];</code>
+</p>
+
+<p dir="rtl">
+    תעבוד עכשיו. זה מתאם את PostgreSQL עם תחביר שמוכר בדרך כלל של אחזור מידע מנתוני JSON. בדרך כלל ניתן להרחיב את המערכת
+    של סאב סקריפטים שנוספה ל- PostgreSQL 14 למבני נתונים מקוננים אחרים, והיא מיושמת גם על סוג הנתונים
+    <a href="https://www.postgresql.org/docs/14/hstore.html">hstore</a>
+    במהדורה זו.
+</p>
+
+<p dir="rtl">
+    <a href="https://www.postgresql.org/docs/14/rangetypes.html">סוגי טווחים</a>
+    , שפורסמו גם לראשונה ב- PostgreSQL 9.2, מציעים כעת תמיכה בטווחים לא רציפים באמצעות הכנסת של סוג נתונים
+    <a href="https://www.postgresql.org/docs/14/rangetypes.html#RANGETYPES-BUILTIN">multirange</a>
+    טווחים מרובים הם רשימות מסודרת של טווחים שאינם חופפים, המאפשרות למפתחים לכתוב שאילתות פשוטות יותר להתמודדות עם רצפים
+    מורכבים של טווחים. סוגי הטווחים המקוריים של PostgreSQL (תאריכים, שעות, מספרים) תומכים בטווחים מרובים וניתן להרחיב
+    סוגי נתונים אחרים לשימוש בטווחים מרובים.
+</p>
+
+<h3 dir="rtl">
+    שיפורי ביצועים בעומסי עבודה כבדים
+</h3>
+
+<p dir="rtl">
+    PostgreSQL 14 מספק שיפור משמעותי בתפוקה בעומסי עבודה המשתמשים בחיבורים רבים, כאשר כמה מדדים הציגו הגדלת המהירות פי 2
+    מהרגיל. מהדורה זו ממשיכה בשיפורים האחרונים בניהול אינדקסים עץ B על ידי הפחתת נפיחות האינדקסים בטבלאות עם
+    <a href="https://www.postgresql.org/docs/14/btree-implementation.html#BTREE-DELETION">האינדקסים המתעדכנים לעתים
+        קרובות</a>
+    .
+</p>
+
+<p dir="rtl">
+    PostgreSQL 14 מכניסה את היכולת
+    <a href="https://www.postgresql.org/docs/14/libpq-pipeline-mode.html">שאילתות pipeline</a>
+    למסד נתונים מה שיכול לשפר משמעותית את הביצועים בחיבורים עם latency גבוה או לעומסי עבודה עם הרבה כתיבות קטנות גמו
+<p>
+    <code>INSERT/UPDATE/DELETE</code>
+</p>
+
+<p dir="rtl">
+    מכיוון שזו תכונת צד לקוח, תוכלו להשתמש במצב pipeline עם כל מסד נתונים עכשיווי של PostgreSQL באמצעות גירסת לקוח 14 או
+    <a href="https://wiki.postgresql.org/wiki/List_of_drivers">דרייבר לקוח אשר נבנה עם גרסת 14 של libpq</a>.
+</p>
+
+<h3 dir="rtl">
+    שיפורים בעומסי עבודה מבוזרים
+</h3>
+
+<p dir="rtl">
+    PostgreSQL 14 מועילה גם למאגרי PostgreSQL מבוזרים.
+    בעת שימוש ב
+    <a href="https://www.postgresql.org/docs/current/logical-replication.html">רפליקציה לוגי</a>
+    ,
+    PostgreSQL יכולה כעת להזרים טרנזקציות אשר עדיין בתהליך למנויים, עם יתרונות ביצועים משמעותיים ליישום טרנזקציות גדולות
+    על מנויים. PostgreSQL 14 מוסיף גם מספר שיפורי ביצועים אחרים למערכת הפענוח הלוגית המפעילה רפליקציה לוגי.
+</p>
+
+<p dir="rtl">
+    <a href="https://www.postgresql.org/docs/14/sql-createforeigndatawrapper.html">עטיפות נתונים זרים</a>
+    , המשמשות לעבודה עם עומסי עבודה מאוחדים על פני PostgreSQL ומאגרי מידע אחרים, יכולות כעת למנף מקביליות שאילתות ב-
+    PostgreSQL 14. המהדורה הזו מיישמת יכולת זו ב-
+    <a href="https://www.postgresql.org/docs/14/postgres-fdw.html"><code>postgres_fdw</code></a>
+    , עטיפת הנתונים הזרים המתממשקת עם מסדי נתונים אחרים של PostgreSQL.
+</p>
+
+<p dir="rtl">
+    בנוסף לתמיכה במקבילויות שאילתות, <code>postgres_fdw</code> יכולה כעת להכניס נתונים בכמויות גדולות לטבלאות זרות
+    ולייבא מחיצות טבלאות עם הוראת
+    <a href="https://www.postgresql.org/docs/14/sql-importforeignschema.html"><code>IMPORT FOREIGN SCHEMA</code></a>.
+</p>
+
+<h3 dir="rtl">
+    ניהול ויכולות תצפית
+</h3>
+
+<p dir="rtl">
+    PostgreSQL 14 מרחיבה את שיפורי הביצועים שלה למערכת
+    <a href="https://www.postgresql.org/docs/14/routine-vacuuming.html">vacuuming</a>
+    , כולל אופטימיזציות להפחתת תקורה מעצי B. מהדורה זו מוסיפה גם "מצב חירום" ל vacuum אשר נועד למנוע wraparound של מספרי
+    טרנזקציות.
+    <a href="https://www.postgresql.org/docs/14/sql-analyze.html"><code>ANALYZE</code></a>
+    אשר משמש לאיסוף נתונים סטטיסטיים של מסדי נתונים, פועל כעת מהר יותר באופן משמעותי ב
+    PostgreSQL 14 בשל שיפורי הביצועים שלה.
+</p>
+
+<p dir="rtl">
+    דחיסה עבור מערכות
+    <a href="https://www.postgresql.org/docs/14/storage-toast.html">TOAST</a>
+    המשמשת לאחסון נתונים גדולים יותר כמו בלוקים של טקסט או נתונים גיאומטריים, עכשיו
+    <a href="https://www.postgresql.org/docs/14/runtime-config-client.html#GUC-DEFAULT-TOAST-COMPRESSION">ניתן כעת
+        להגדיר</a>.
+    PostgreSQL 14 מוסיף דחיסת LZ4 לעמודות TOAST תוך שמירה על תמיכה בדחיסת<code>pglz</code>.
+</p>
+
+<p dir="rtl">
+    PostgreSQL 14 מוסיפה מספר תכונות חדשות שיסייעו בניטור והתצפיות, כולל היכולת
+    <a href="https://www.postgresql.org/docs/14/progress-reporting.html#COPY-PROGRESS-REPORTING">לעקוב אחר פקודת COPY
+        והתקדמותה</a>
+    ,
+    <a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-WAL-VIEW">לנתר פעילות WAL</a>
+    ו
+    <a href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-REPLICATION-SLOTS-VIEW">לאסוף
+        סטטיסטיקה על סלוטים של רפליקציה</a>.
+    הפעלת
+    <a
+        href="https://www.postgresql.org/docs/14/runtime-config-statistics.html#GUC-COMPUTE-QUERY-ID"><code>compute_query_id</code></a>
+    מאפשרת לך לעקוב אחר שאילתה באופן ייחודי באמצעות מספר תכונות של PostgreSQL, כולל
+    <a
+        href="https://www.postgresql.org/docs/14/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>,
+    <a href="https://www.postgresql.org/docs/14/sql-explain.html"><code>EXPLAIN VERBOSE </code></a>
+    ועוד רבים אחרים.
+</p>
+
+<h3 dir="rtl">
+    ביצועי SQL, התאמה ותוספות נוחות
+</h3>
+
+<p dir="rtl">
+    תכנון וביצוע שאילתות נהנים משיפורים ב- PostgreSQL 14. מהדורה זו כוללת מספר שיפורים בתמיכת במקביליות השאילתות של
+    PostgreSQL, כולל ביצועים טובים יותר של סריקות רצופות מקביליות, היכולת
+    <a href="https://www.postgresql.org/docs/14/plpgsql.html"><code>PL/pgSQL</code></a>
+    לבצע שאילתות מקבילות בעת שימוש בפקודה
+    <code>RETURN QUERY</code>,
+    ומאפשרת
+    <a
+        href="https://www.postgresql.org/docs/14/sql-refreshmaterializedview.html"><code>REFRESH MATERIALIZED VIEW</code></a>
+    לבצע שאילתות מקביליות. בנוסף, שאילתות המשתמשות באיחוד nested loop עשויות לראות יתרונות ביצועים באמצעות מטמון נוסף
+    שהתווסף ל- PostgreSQL 14.
+</p>
+
+<p dir="rtl">
+    ניתן כעת ב- PostgreSQL 14 להשתמש ב-
+    <a href="https://www.postgresql.org/docs/14/planner-stats.html#PLANNER-STATS-EXTENDED">סטטיסטיקה מורחבת</a>
+    לביטויים. בנוסף,
+    <a href="https://www.postgresql.org/docs/14/functions-window.html">פונקציות חלונות</a>
+    יכולות כעת להפיק תועלת ממיונים מצטברים, תכונה שהוצגה ב-
+    <a href="https://www.postgresql.org/about/news/postgresql-13-released-2077/"> PostgreSQL 13 </a>
+</p>
+
+<p dir="rtl">
+    <a href="https://www.postgresql.org/docs/14/sql-createprocedure.html">פרוצדורה מאוחסנת</a>
+    , המאפשרות שליטה בטרנזאקציות בתוך קוד, יכולות כעת להחזיר נתונים באמצעות פרמטרים 'OUT'.
+</p>
+
+<p dir="rtl">
+    PostgreSQL 14 מציגה את היכולת ליישר חותמות זמן למרווח מסוים באמצעות הפונקציה
+    <a
+        href="https://www.postgresql.org/docs/14/functions-datetime.html#FUNCTIONS-DATETIME-BIN"><code>date_bin</code></a>.
+    מהדורה זו גם מוסיפה את תאימות ל SQL ע״י
+    <a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-SEARCH"><code>SEARCH</code></a>
+    ו
+    <a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-CYCLE"><code> CYCLE</code></a>.
+    אשר שיעזרו עם הסדרה וזיהוי מחזורים עבור רקורסיה ב
+    <a href="https://www.postgresql.org/docs/14/queries-with.html#QUERIES-WITH-RECURSIVE">common table expressions</a>.
+</p>
+
+<h3 dir="rtl">
+    שיפורי אבטחה
+</h3>
+
+<p dir="rtl">
+    PostgreSQL 14 מקל להקצות למשתמשים הרשאות לקריאה ולכתיבה בלבד בטבלאות, views וסכימות באמצעות
+    <code>pg_read_all_data</code>
+    ו
+    <code>pg_write_all_data</code>
+    <a href="https://www.postgresql.org/docs/14/predefined-roles.html">תפקידים מוגדרים מראש</a>.
+
+
+    בנוסף, מהדורה זו הופכת התאמה לתקן של מערכת ניהול סיסמאות ואימות
+    <a href="https://www.postgresql.org/docs/14/auth-password.html"><code>SCRAM-SHA-256</code></a>
+    כ ברירת המחדל בהתקנות חדשות של PostgreSQL.
+</p>
+
+<h3 dir="rtl">
+    אודות PostgreSQL
+</h3>
+<p dir="rtl">
+    <a href="https://www.postgresql.org/">PostgreSQL</a>
+    הוא מסד נתונים בקוד פתוח המתקדם ביותר בעולם, עם קהילה גלובלית של אלפי משתמשים, תורמים, חברות וארגונים. הפרויקט
+    PostgreSQL נבנה על מעל 30 שנות הנדסה, החל באוניברסיטת קליפורניה, ברקלי, והמשיך להתפתח עם קצב ללא תחרות. ערכת התכונות
+    הבשלות של PostgreSQL לא רק תואמת מערכות נתונים קנייניות מובילות, אלא עולה עליהן במאפיינים של מסדי נתונים מתקדמים
+    ,הרחבה, אבטחה ויציבות.
+    תרגומי הודעה לעיתונות
+</p>
+
+<h3 dir="rtl">
+    קישורים
+</h3>
+<ul dir="rtl">
+    <li>
+        <a href="https://www.postgresql.org/download/"> הורדות </a>
+    </li>
+    <li>
+        <a href="https://www.postgresql.org/docs/14/release-14.htm"> הערות מהדורה </a>
+    </li>
+    <li>
+        <a href="https://www.postgresql.org/about/press/"> ערכת עיתונות </a>
+    </li>
+    <li>
+        <a href="https://www.postgresql.org/support/security/"> עמוד אבטחה </a>
+    </li>
+    <li>
+        <a href="https://www.postgresql.org/support/versioning/"> מדיניות גרסאות </a>
+    </li>
+    <li>
+        <a href="https://twitter.com/postgresql"> עקוב אחרי @postgresql בטוויטר </a>
+    </li>
+</ul>
+{% endblock presskit_content %}
