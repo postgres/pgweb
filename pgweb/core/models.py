@@ -47,6 +47,8 @@ class Version(models.Model):
     @property
     def relnotes(self):
         if self.tree >= Decimal('8.2'):
+            if self.latestminor == 0:
+                return 'release-{}.html'.format(str(self.numtree).replace('.', '-'))
             return 'release-{}-{}.html'.format(str(self.numtree).replace('.', '-'), self.latestminor)
         elif self.tree >= Decimal('7.1'):
             return 'release.html'
