@@ -1,0 +1,328 @@
+{%extends "base/cocpage.html"%}
+{%load pgfilters%}
+{%block title%}Code of Conduct - French Translation{%endblock%}
+
+{% block cocmain %}
+<h1>Code de Conduite <i class="fas fa-gavel"></i></h1>
+
+<p>
+  <em>Dernière mise à jour : 18 août 2020. Consulter l’historique des modifications.</em>
+</p>
+
+<h2>Introduction</h2>
+
+<p>
+  Le Projet PostgreSQL est fier de la qualité de son code et de son travail, et
+  des réalisations techniques et professionnelles de sa communauté. Nous
+  attendons de tous les participants qu'ils se conduisent de manière
+  professionnelle, en agissant avec courtoisie et dans l'intérêt commun, dans le
+  respect de tous les utilisateurs et développeurs.
+</p>
+
+<p>
+  À ces fins, nous avons établi ce Code de conduite pour l'interaction et la
+  participation de la communauté aux travaux du projet et à la communauté dans
+  son ensemble. Ce Code est censé couvrir toute interaction entre les membres de
+  la communauté, qu'elle ait lieu ou non au sein de l'infrastructure
+  postgresql.org, pour autant qu'aucun autre Code de Conduite ne prévale (tel
+  que le Code de Conduite d'une conférence).
+</p>
+
+<h2>Inclusivité et conduite appropriée</h2>
+
+<p>
+  Le Projet PostgreSQL est ouvert à la participation de toute personne
+  intéressée par le travail avec PostgreSQL, quel que soit son niveau
+  d'expérience avec le logiciel, ou avec la technologie en général. Nous
+  encourageons le développement et les contributions de tous les utilisateurs,
+  quelle que soit leur formation.
+</p>
+
+<p>
+  Nous encourageons les discussions réfléchies et constructives sur le logiciel
+  et cette communauté, leur état actuel et les possibles directions de
+  développement. Nos discussions doivent se concentrer sur le code et la
+  technologie associée, les projets communautaires et l'infrastructure.
+</p>
+
+<p>
+  Les attaques personnelles et les commentaires négatifs sur des
+  caractéristiques personnelles sont inacceptables et ne seront pas autorisés.
+  Les exemples de caractéristiques personnelles comprennent, de façon non
+  exhaustive, l'âge, la race, les origines nationales ou les ascendances, la
+  religion, le genre ou l'orientation sexuelle.
+</p>
+
+<p>
+  D'autres exemples de comportements représentant également des violations de ce
+  Code de Conduite sont : les menaces de violence à l'encontre d'un individu ou
+  d'un groupe, les menaces de sabotage professionnel, communautaire et/ou de
+  projets, les sollicitations sexuelles importunes de quelque forme que ce soit,
+  les comportements susceptibles de discréditer le projet PostgreSQL, et le
+  refus de stopper un comportement inapproprié malgré une demande en ce sens.
+</p>
+
+<h2>Représailles</h2>
+
+<p>
+  Il est également expressément interdit à quiconque d'exercer des représailles
+  à l'encontre d'une personne qui dépose une plainte en vertu du présent Code de
+  Conduite, ou qui contribue à l'instruction d'une telle plainte. Les
+  représailles peuvent, entre autres, se manifester par les actions suivantes :
+</p>
+
+<ul>
+  <li>de nouvelles attaques personnelles (publiques ou privées) ;</li>
+  <li>
+    des actions qui nuisent au statut professionnel d'une personne et/ou à son
+    statut auprès de son employeur, de ses collègues, de ses clients ou de la
+    communauté ;
+  </li>
+  <li>
+    des actions qui menacent la vie privée de l'individu, sa personne physique,
+    son bien-être, son domicile et/ou sa famille.
+  </li>
+</ul>
+
+<p>
+  Les actes de représailles seront traités de la même manière que toute autre
+  violation du présent Code de Conduite.
+<p>
+
+<h2>Comité du Code de Conduite</h2>
+
+<p>
+  La Core Team nommera un Comité du Code de Conduite chargé de recevoir et
+  d'examiner toutes les plaintes, ainsi qu'un président pour ce Comité. Tout
+  membre de la communauté peut se porter volontaire pour faire partie du Comité,
+  à l'exception des membres de la Core Team. Étant donné que la Core Team
+  supervise le Comité, les membres de la Core Team ne siégeront pas au Comité
+  afin d'éviter tout conflit d'intérêt. La liste des membres du Comité sera
+  accessible au public à tout moment et peut être consultée
+  <a href="/about/policies/coc_committee/">ici</a>.
+</p>
+
+<p>
+  La composition du Comité sera renouvelée annuellement. La Core Team ou le
+  président du Comité annonceront les dates d'ouverture et de clôture du
+  processus annuel de sélection des membres par le biais des canaux de
+  communication habituels de la communauté.
+</p>
+
+<p>
+  Tout membre de la communauté souhaitant s'engager auprès du Comité remplira un
+  questionnaire initial qui sera examiné par la Core Team et le Comité en
+  exercice. Les membres du Comité en exercice examineront les candidats et
+  mèneront des entretiens, si nécessaire. Le Comité en exercice émettra des
+  recommandations et la Core Team choisira les nouveaux membres du Comité.
+</p>
+
+<p>
+  Le Comité peut disposer d’une période de transition d'un mois maximum pour
+  permettre le transfert de connaissances et de responsabilités entre les
+  membres sortants et les nouveaux membres.
+</p>
+
+<p>
+  Bien qu'il n'y ait pas de nombre défini de membres du Comité pouvant siéger
+  simultanément, le Comité sera composé d'au moins quatre personnes à tout
+  moment. Les membres du Comité sont tenus de s'engager pour un minimum d'un an,
+  cet engagement pouvant être prolongé s'ils le souhaitent, jusqu'à un maximum
+  de trois ans.
+</p>
+
+<p>
+  Les membres du Comité exercent leurs fonctions à la discrétion de la Core
+  Team, qui peut les relever de leurs fonctions si elle estime qu'ils ne
+  s'acquittent pas des responsabilités induites par leur fonction.
+</p>
+
+<p>
+  Le Comité peut également demander à la Core Team de coordonner la révocation
+  d'un membre sur sa propre initiative si cette personne ne peut ou ne veut pas
+  assumer les responsabilités liées à sa fonction.
+</p>
+
+<h2>Signalement</h2>
+
+<p>
+  Si vous êtes victime d'un comportement inapproprié ou si vous êtes témoin d'un
+  tel comportement, veuillez le signaler rapidement au Comité du Code de
+  Conduite à l'adresse <a href="mailto:coc@postgresql.org">coc@postgresql.org</a>.
+  Dans le cas malencontreux où vous souhaiteriez déposer une plainte contre un
+  membre du Comité, vous pouvez alors contacter individuellement l'un des autres
+  membres du Comité.
+</p>
+
+<p>
+  Dans votre rapport, de signalement veuillez inclure autant de détails que
+  possible :
+</p>
+
+<ul>
+  <li>une description de l'incident ;</li>
+  <li>la chronologie des événements ;</li>
+  <li>des captures d'écran de toute discussion électronique ;</li>
+  <li>les noms et, si possible, les coordonnées de tout témoin ;</li>
+  <li>
+    toute autre information qui, selon vous, pourrait être utile à l'enquête.
+  </li>
+</ul>
+
+<h2>Traitement des plaintes</h2>
+
+<p>
+  Sans délai, le Comité accusera réception et enquêtera sur chaque incident
+  signalé. Avec la coopération de toutes les parties, le Comité aura pour
+  objectif de terminer l'enquête dans un délai de deux semaines à compter de la
+  réception de la plainte.
+</p>
+
+<p>
+  Les signalements d'incidents et les activités d'investigation seront gardés
+  confidentiels autant que possible, en fonction des contraintes liées à la
+  conduite d'une enquête convenable.
+</p>
+
+<p>
+  Le Comité informera le plaignant et le présumé contrevenant de sa décision au
+  plus tard à la fin de ce délai. Si l'enquête est toujours en cours, le Comité
+  fournira aux parties un rapport de situation et une date d'achèvement estimée.
+</p>
+
+<p>
+  Un défaut de coopération pourrait prolonger l'enquête. Le Comité s'efforcera
+  de mener à bien l'enquête et de communiquer les résultats au plaignant et au
+  contrevenant présumé dès que possible, en les informant de sa décision une
+  fois l'enquête terminée.
+</p>
+
+<p>
+  Dans le cas d'une plainte déposée par ou contre un membre du Comité du CoC ou
+  un membre de la Core Team, le traitement de la plainte se déroulera comme
+  d'habitude, à l'exception de la personne impliquée dans la plainte, qui sera
+  exclue de la procédure dans son rôle au sein du Comité ou de la Core Team.
+</p>
+
+<p>
+  Les résultats possibles incluent, mais ne sont pas limités à :
+</p>
+
+<ul>
+  <li>Une détermination de l'absence de violation du Code de Conduite ;</li>
+  <li>
+    Un blâme privé, avec des conseils spécifiques sur le comportement
+    acceptable, pour la ou les personnes concernées ;
+  </li>
+  <li>
+    Un blâme public, accompagné de conseils spécifiques sur le comportement
+    acceptable, de la ou des personnes concernées ;
+  </li>
+  <li>
+    Une exclusion temporaire ou permanente de certains ou de tous les espaces
+    gérés par la communauté, y compris, mais sans s'y limiter, les listes de
+    diffusion de la communauté, les forums, IRC, et la perte des droits de
+    commit ;
+  </li>
+  <li>Une demande d'excuses publiques et/ou privées.</li>
+</ul>
+
+<p>
+  En raison de la gravité d'une décision impliquant une exclusion temporaire ou
+  permanente, et des actions techniques et d'infrastructure associées induites
+  par un tel résultat, une telle conclusion devra être soumise à l'examen de la
+  Core Team avant que les parties concernées ne soient informées de la décision.
+  Si la Core Team n’était pas d'accord avec les conclusions du Comité, elle
+  devrait alors présenter son raisonnement au Comité. Le Comité pourrait
+  examiner les recommandations de la Core Team et engager une discussion plus
+  approfondie, si nécessaire. Si la Core Team et le Comité ne parvenaient pas à
+  un consensus, la décision de la Core Team prévaudrait.
+</p>
+
+<p>
+  Le Comité peut déterminer qu'une violation de cette politique a été commise
+  par inadvertance, peut-être en raison de différences culturelles (par exemple,
+  l'utilisation d'un terme d'argot inoffensif dans une langue et offensant dans
+  une autre) ou d'une malheureuse tentative d'humour. De tels cas seront traités
+  comme des occasions de sensibilisation plutôt que de blâme. Si le Comité
+  détermine qu'un incident signalé entre dans la catégorie des violations par
+  inadvertance, le Comité décidera si l'incident est susceptible d'être réitéré
+  par d'autres personnes et, si tel est le cas, il partagera l'information de
+  manière générale avec la communauté afin de prévenir d'autres incidents.
+</p>
+
+<p>
+  Si l'une des parties estime que la décision est incorrecte, un appel peut être
+  déposé auprès du Comité dans un délai d'une semaine après sa décision. L'appel
+  devra inclure de nouvelles informations, sources, témoins, etc. afin de
+  fournir au Comité des informations supplémentaires pour réexaminer l'incident.
+</p>
+
+<p>
+  Les enregistrements des rapports d'incidents, des enquêtes, des décisions du
+  Comité et de toute question connexe seront conservés pendant une période de
+  trois années calendaires à compter de la date du dernier élément du dossier
+  d'incident. Le Comité prendra les mesures appropriées pour assurer la
+  confidentialité de tous les rapports et discussions.
+</p>
+
+<p>
+  Le Comité établira un rapport annuel résumant les types de plaintes reçues et
+  les actions entreprises pour y répondre avant la fin du premier trimestre de
+  chaque année, portant sur l'année précédente, et partagera ce rapport avec la
+  communauté. Les plaintes et les actions seront anonymisées afin de protéger
+  l'identité de toutes les parties impliquées.
+</p>
+
+<h2>Agir en toute bonne foi</h2>
+
+<p>
+  Il est attendu de toute personne déposant une plainte relative à un incident
+  qu'elle soit de bonne foi et ait des motifs raisonnables de croire que les
+  informations divulguées indiquent une violation de cette politique. Toute
+  allégation qui s'avérerait ne pas être fondée et avoir été formulée avec
+  malveillance, ou en toute connaissance de cause, sera considérée comme un
+  délit communautaire grave et une violation du présent Code de Conduite.
+</p>
+
+<h2>Mises à jour du Code de Conduite</h2>
+
+<p>
+  Le Comité et/ou la Core Team envisageront de mettre à jour ce Code de Conduite
+  si nécessaire, et au moins une fois par an, en fonction des incidents
+  signalés, des recommandations de juristes professionnels, des suggestions des
+  membres de la communauté, des développements culturels de la communauté, ou de
+  tout autre événement qui entraînerait un besoin de révision.
+</p>
+
+<p>
+  Les membres de la communauté ayant une suggestion de révision du Code de
+  Conduite peuvent soumettre leurs idées au Comité par courrier électronique à
+  l'adresse suivante : <a href="mailto:coc@postgresql.org">coc@postgresql.org</a>.
+</p>
+
+<h2>Conférences et événements</h2>
+
+<p>
+  Le projet encourage chaque organisateur d'événement à créer et à maintenir un
+  Code de Conduite pour son événement. Ces Codes de Conduite peuvent être
+  identiques ou non au présent Code de Conduite. Chaque organisateur d'événement
+  est responsable de la gestion rapide et objective des comportements
+  inappropriés lors de son événement.
+</p>
+
+<h2>Conclusion</h2>
+
+<p>
+  Nous encourageons les relations appropriées et collaboratives entre les
+  membres de la communauté, cependant, les membres doivent être conscients des
+  comportements qui peuvent être considérés comme offensants par les autres
+  membres et doivent s'abstenir d'adopter de tels comportements.
+</p>
+
+<p>
+  Dans toutes les interactions avec la communauté, utilisez votre jugement
+  professionnel et gardez la discussion centrée sur l'avancement de notre projet
+  et de notre communauté dans une direction positive pour tous.
+</p>
+{% endblock cocmain %}
