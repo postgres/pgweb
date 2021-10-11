@@ -6,6 +6,7 @@
 <div class="eventdate">Date: <strong>{{obj.displaydate|safe}}</strong></div>
 <div>Location: {{obj.locationstring}}</div>
 {%if obj.language%}<div>Language: {{obj.language}}</div>{%endif%}
+{%if obj.badged%}<img src="/media/img/PostgreSQL_Badge1.svg" class="community" alt="PostgreSQL Community Event">  This event is recognised under the <a href="/about/policies/conferences/">community event guidelines</a>.{%endif%}
 {{obj.details|markdown}}
 {%if obj.has_organisation%}
 <p>Posted by {{obj.org}}{%if obj.org.email%} ({{obj.org.email}}){%endif%}.</p>
