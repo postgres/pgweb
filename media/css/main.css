@@ -1613,3 +1613,7 @@ table.sponsor-table tbody tr td:nth-child(3) {
   top: 8px;
   right: 8px;
 }
+
+.nobr {
+  white-space: nowrap;
+}
