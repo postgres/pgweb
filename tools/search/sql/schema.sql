@@ -23,6 +23,7 @@ ALTER TABLE messages ADD CONSTRAINT pk_messages PRIMARY KEY (list,year,month,msg
 CREATE TABLE sites (
    id int NOT NULL PRIMARY KEY,
    hostname text NOT NULL UNIQUE,
+   baseurl text NOT NULL,
    description text NOT NULL,
    https boolean NOT NULL DEFAULT 'f',
    pagecount int NOT NULL
