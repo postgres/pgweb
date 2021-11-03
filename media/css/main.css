@@ -1601,6 +1601,10 @@ table.sponsor-table tbody tr td:nth-child(3) {
   .pg-jumbotron-header {
     font-size: 1.5rem;
   }
+
+  .btn-double-width {
+    width: 18em;
+  }
 }
 
 /* Script copy buttons */
