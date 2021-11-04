@@ -1,6 +1,5 @@
 from django.conf import settings
-from django.http import QueryDict
-from django.core.exceptions import SuspiciousOperation
+from django.http import QueryDict, HttpResponse
 
 from pgweb.util.templateloader import initialize_template_collection, get_all_templates
 
@@ -104,7 +103,11 @@ class PgMiddleware(object):
                 if k not in allowed:
                     del result[k]
                 if "\0" in request.GET[k]:
-                    raise SuspiciousOperation("NUL escapes not allowed in query parameters")
+                    return HttpResponse(
+                        "NUL escapes not allowed in query parameters",
+                        content_type='text/plain',
+                        status=400
+                    )
             result.mutable = False
             request.GET = result
         else:
