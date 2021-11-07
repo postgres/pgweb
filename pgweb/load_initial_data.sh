@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # We keep this in a separate script because using initial_data.xxx in django will overwrite
 # critical data in the database when running a 'syncdb'. We'd like to keep the ability to
