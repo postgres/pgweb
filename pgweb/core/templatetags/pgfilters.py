@@ -1,5 +1,5 @@
 from django.template.defaultfilters import stringfilter
-from django import template
+from django import template, forms
 from django.utils.safestring import mark_safe
 from django.template.loader import get_template
 from django.conf import settings
@@ -71,7 +71,12 @@ def planet_title(obj):
 
 @register.filter(name='dictlookup')
 def dictlookup(value, key):
-    return value.get(key, None)
+    if hasattr(key, 'value'):
+        # Django 3.1 made this a ModelChoiceIteratorValue -- while we support both 2.2 and 3.2,
+        # we need to treat them differently.
+        return value.get(key.value, None)
+    else:
+        return value.get(key, None)
 
 
 @register.filter(name='keylookup')
