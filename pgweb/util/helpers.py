@@ -182,12 +182,25 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
     else:
         form_intro = None
 
+    savebutton = 'Save'
+    if itemid == 'new':
+        if 'modstate' in (f.name for f in instance._meta.get_fields()):
+            # This is a three-state moderated entry, so don't say "submit new" for new
+            savebutton = 'Save draft'
+        else:
+            savebutton = 'Submit New'
+    else:
+        # If it's a three-state moderated entry that is not yet approved, we are still editing the draft
+        if 'modstate' in (f.name for f in instance._meta.get_fields()):
+            if instance.modstate == ModerationState.CREATED:
+                savebutton = 'Save draft'
+
     ctx = {
         'form': form,
         'formitemtype': instance._meta.verbose_name,
         'form_intro': form_intro,
         'described_checkboxes': getattr(form, 'described_checkboxes', {}),
-        'savebutton': (itemid == "new") and "Submit New" or "Save",
+        'savebutton': savebutton,
         'operation': (itemid == "new") and "New" or "Edit",
     }
     ctx.update(extracontext)
