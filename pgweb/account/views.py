@@ -297,6 +297,10 @@ def confirm_org_email(request, token):
     email.token = None
     email.save()
 
+    return render_pgweb(request, 'account', 'account/orgemail_confirmed.html', {
+        'org': email.org,
+        'email': email.address,
+    })
     return HttpResponseRedirect('/account/organisations/{}/'.format(email.org.id))
 
 

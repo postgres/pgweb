@@ -1,0 +1,11 @@
+{%extends "base/page.html"%}
+{%block title%}Email confirmed{%endblock%}
+{%block contents%}
+<p>
+  The email <em>{{email}}</em> has been confirmed for use in <em>{{org.name}}</em>,
+  and can now be used for submitting news.
+</p>
+<p>
+  <a class="btn btn-primary" href="/account/organisations/{{org.id}}/">Return to organisation</a>
+</p>
+{%endblock%}
