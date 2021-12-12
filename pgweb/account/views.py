@@ -301,7 +301,6 @@ def confirm_org_email(request, token):
         'org': email.org,
         'email': email.address,
     })
-    return HttpResponseRedirect('/account/organisations/{}/'.format(email.org.id))
 
 
 @content_sources('style', "'unsafe-inline'")
