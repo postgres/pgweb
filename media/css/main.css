@@ -877,6 +877,14 @@ code,
   font-size: inherit !important;
 }
 
+#docContent h2 code {
+  font-size: inherit !important;
+  margin-bottom: 0em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  margin-top: 0em;
+}
+
 #docContent .NAVHEADER table th,
 #docContent .navheader table th {
   text-align: center;
