@@ -1,4 +1,4 @@
-Django>=2.2,<2.3
+Django>=3.2,<3.3
 psycopg2==2.8.5
 pycryptodomex>=3.4.7,<3.5
 Markdown==3.0.1
