@@ -45,7 +45,7 @@ urlpatterns = [
     url(r'^changepwd/done/$', pgweb.account.views.change_done),
     url(r'^reset/$', pgweb.account.views.resetpwd),
     url(r'^reset/done/$', pgweb.account.views.reset_done),
-    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)-(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', pgweb.account.views.reset_confirm),
+    url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)-(?P<token>[0-9A-Za-z]+-[0-9A-Za-z]+)/$', pgweb.account.views.reset_confirm),
     url(r'^reset/complete/$', pgweb.account.views.reset_complete),
     url(r'^signup/$', pgweb.account.views.signup),
     url(r'^signup/complete/$', pgweb.account.views.signup_complete),
