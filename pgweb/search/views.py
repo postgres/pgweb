@@ -133,6 +133,7 @@ def search(request):
                 'listid': listid,
                 'dates': dateoptions,
                 'dateval': dateval,
+                'archives_root': settings.ARCHIVES_FRONT_ADDRESS,
             })
         else:
             return render(request, 'search/sitesearch.html', {
@@ -236,6 +237,7 @@ def search(request):
             'firsthit': firsthit,
             'lasthit': min(totalhits, firsthit + hitsperpage - 1),
             'query': request.GET['q'],
+            'archives_root': settings.ARCHIVES_FRONT_ADDRESS,
             'pagelinks': "&nbsp;".join(
                 generate_pagelinks(pagenum,
                                    (totalhits - 1) // hitsperpage + 1,

@@ -167,6 +167,7 @@ VARNISH_PURGERS = ()                                        # Extra servers that
 DO_ESI = False                                              # Generate ESI tags
 ARCHIVES_SEARCH_SERVER = "archives.postgresql.org"          # Where to post REST request for archives search
 ARCHIVES_SEARCH_PLAINTEXT = False                           # Contact ARCHIVES_SEARCH_SERVER with http instead of https
+ARCHIVES_FRONT_ADDRESS = "https://www.postgresql.org"       # Domain to read archives messages
 FRONTEND_SMTP_RELAY = "magus.postgresql.org"                # Where to relay user generated email
 OAUTH = {}                                                  # OAuth providers and keys
 PGDG_ORG_ID = -1                                            # id of the PGDG organisation entry
