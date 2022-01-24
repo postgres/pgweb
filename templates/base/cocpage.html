@@ -9,7 +9,7 @@
     <h1>Translations</h1>
     <ul>
       <li><span lang="en"><a href="/about/policies/coc/">English</a></span></li>
-{%for l in "pages/about/policies/coc"|list_templates|dictsort:"lower"%}
+{%for l in "pages/about/policies/coc"|list_templates|sort_lower%}
       <li><span lang="{{l}}"><a href="/about/policies/coc/{{l}}/">{{l|languagename}}</a></span></li>
 {%endfor%}
       <li><a href="/about/policies/coc-translations/">How to Translate</a></li>
@@ -20,7 +20,7 @@
     </ul>
     <h1>Annual Reports</h1>
     <ul>
-{% for t in "pages/about/policies/coc/reports"|list_templates|dictsortreversed:"lower" %}
+{% for t in "pages/about/policies/coc/reports"|list_templates|sort_lower:True %}
       <li><a href="/about/policies/coc/reports/{{t}}/">{{t}}</a></li>
 {%endfor%}
     </ul>

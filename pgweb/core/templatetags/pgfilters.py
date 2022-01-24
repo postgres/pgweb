@@ -120,6 +120,11 @@ def list_templates(value):
 
 
 @register.filter()
+def sort_lower(value, reverse=False):
+    return sorted(value, key=lambda x: x.lower(), reverse=reverse)
+
+
+@register.filter()
 def languagename(lang):
     try:
         return babel.Locale(lang).english_name
