@@ -14,6 +14,7 @@
   <meta property="og:title" content="{{og.title}}" />
 {%if og.description%}  <meta property="og:description" content="{{og.description|truncatewords:"20"}}" />{%endif%}
   <meta property="og:site_name" content="{{og.sitename|default:"PostgreSQL"}}" />{%endif%}
+{%if not page.version.supported%}  <meta name="robots" content="nofollow" />{%endif%}
   <link href="/media/css/fontawesome.css?{{gitrev}}" rel="stylesheet">
   <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
   <link rel="shortcut icon" href="/favicon.ico" />
