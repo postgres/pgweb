@@ -1473,6 +1473,16 @@ table.sponsor-table tbody tr td:nth-child(3) {
   width: 30%;
 }
 
+/**
+* This sets the rule for the rendering in the sponsors table. The name is chosen
+* to ensure compatibility with various browser plugins that may otherwise hide
+* images.
+**/
+img.organisation-logo {
+  max-height: 65px;
+  max-width: 150px;
+}
+
 /** Release Notes */
 #release-notes .navheader,
 #release-notes .navfooter,
