@@ -1,0 +1,227 @@
+{%extends "base/cocpage.html"%}
+{%load pgfilters%}
+{%block title%}Code of Conduct - German Translation{%endblock%}
+
+{% block cocmain %}
+<h1>Code of Conduct <i class="fas fa-gavel"></i></h1>
+
+<p>
+  <em>Zuletzt aktualisiert: 18. August 2020. {%git_changes_link%}</em>
+</p>
+
+<h2>Einführung</h2>
+
+<p>Das PostgreSQL-Projekt ist stolz auf die Qualität unseres Codes und unserer Arbeit sowie auf
+die technischen und professionellen Leistungen unserer Community. Wir erwarten von jedem
+Mitglied der Community, dass es sich professionell verhält, mit Höflichkeit und im gemeinsamen
+Interesse mit Respekt gegenüber allen Benutzern und Entwicklern handelt.</p>
+
+<p>Zu diesem Zweck haben wir für die Interaktion mit und innerhalb der Gemeinschaft, die
+Beteiligung an der Arbeit des Projekts und die Gemeinschaft insgesamt diesen Verhaltenskodex
+erstellt. Dieser Kodex soll alle Interaktionen zwischen Community-Mitgliedern abdecken,
+unabhängig davon, ob sie innerhalb oder außerhalb der postgresql.org-Infrastruktur stattfinden,
+solange kein anderer Verhaltenskodex (wie z.B. der Verhaltenskodex einer Konferenz) Vorrang
+hat.</p>
+
+<h2>Inklusivität und angemessenes Verhalten</h2>
+
+<p>Das PostgreSQL-Projekt steht jedem offen, der Interesse an der Arbeit mit PostgreSQL hat,
+unabhängig von seinem Erfahrungsstand mit der Software oder mit Technologie im
+Allgemeinen. Wir fördern die Entwicklung und Beiträge aller Benutzer, ungeachtet ihres
+Hintergrunds.</p>
+
+<p>Wir fördern eine durchdachte und konstruktive Diskussion über die Software und diese
+Community, ihren aktuellen Stand und mögliche Entwicklungsrichtungen. Der Schwerpunkt
+unserer Diskussionen sollte der Code und die damit verbundene Technologie,
+Community-Projekte sowie die Infrastruktur sein.</p>
+
+<p>Persönliche Angriffe und negative Kommentare über persönliche Eigenschaften sind
+inakzeptabel und nicht gestattet. Beispiele für persönliche Eigenschaften sind unter anderem
+Alter, Herkunft oder Abstammung, Religion, Geschlecht und sexuelle Orientierung.</p>
+
+<p>Weitere Verhaltensweisen, die ebenfalls gegen diesen Verhaltenskodex verstoßen, sind unter
+anderem die Androhung von Gewalt gegen eine Einzelperson oder eine Gruppe, Androhung
+von Berufs-, Gemeinschafts- oder Projektsabotage, jegliche Form von unerwünschter sexueller
+Annäherung, Verhaltensweisen, die das PostgreSQL-Projekt in Verruf bringen können, sowie
+die Weigerung, unangemessenes Verhalten einzustellen, wenn dazu aufgefordert wird.</p>
+
+<h2>Vergeltung</h2>
+
+<p>Es ist ebenfalls ausdrücklich verboten, gegenüber einer Person, die eine Beschwerde nach
+diesem Verhaltenskodex einreicht oder bei der Untersuchung einer solchen Beschwerde hilft,</p>
+
+<p>Vergeltungsmaßnahmen zu verüben. Vergeltungsmaßnahmen können unter anderem folgende
+Formen annehmen:</p>
+
+<ul>
+  <li>weitere persönliche Angriffe (öffentlich oder privat);</li>
+  <li>Handlungen, die den beruflichen Status einer Person und/oder ihren Status am Arbeitsplatz, bei Kunden oder in der Community untergraben;</li>
+  <li>Handlungen, die die Privatsphäre, die körperliche Unversehrtheit, das Wohlbefinden, das Zuhause und/oder die Familie der betroffenen Person bedrohen.</li>
+</ul>
+
+<p>Vergeltungsmaßnahmen werden genauso behandelt wie jeder andere Verstoß gegen diesen Verhaltenskodex.</p>
+
+<h2>Code of Conduct Committee</h2>
+
+<p>Das Core-Team ernennt ein Komitee für den Verhaltenskodex, welches alle Beschwerden
+entgegennimmt und untersucht, sowie eine(n) Vorsitzende(n) für dieses Komitee. Jedes Mitglied
+der Community kann sich freiwillig als Mitglied des Komitees melden, mit Ausnahme der
+Mitglieder des Core-Teams. Da das Core-Team das Komitee beaufsichtigt, werden Mitglieder
+des Core-Teams nicht im Komitee tätig sein, um Interessenkonflikte zu vermeiden. Die
+Mitgliederliste des Komitees wird jederzeit öffentlich zugänglich sein und kann <a href="https://www.postgresql.org/about/policies/coc_committee/">hier eingesehen</a>
+werden.</p>
+
+<p>Die Mitgliedschaft im Komitee wird auf jährlicher Basis erneuert. Das Core-Team oder die/der
+Vorsitzende des Komitees werden den Anfang und das Ende des jährlichen
+Mitgliederauswahlverfahrens über die üblichen Kommunikationskanäle der Community bekannt
+geben.</p>
+
+<p>Jedes Community-Mitglied, welches im Komitee mitarbeiten möchte, wird einen ersten
+Fragebogen zur Überprüfung durch das Core-Team und das aktuelle Komitee ausfüllen. Die
+aktuellen Komiteemitglieder prüfen die Kandidaten und führen bei Bedarf
+Vorstellungsgespräche. Das derzeitige Komitee wird Empfehlungen abgeben und das
+Core-Team wählt die neuen Mitglieder des Komitees aus.</p>
+
+<p>Das Komitee kann eine Übergangsfrist von bis zu einem Monat haben, um einen Wissens- und
+Verantwortungstransfer zwischen den ausscheidenden Mitgliedern und den neuen Mitgliedern
+zu ermöglichen.</p>
+
+<p>Obwohl es keine festgelegte Anzahl an Komiteemitgliedern gibt, die gleichzeitig im Amt sein
+können, besteht das Komitee jederzeit aus mindestens vier Personen. Die Mitglieder des
+Komitees sind angehalten, sich zu einer mindestens einjährigen Amtszeit zu verpflichten und
+können auf eigenen Wunsch bis zu drei Jahre im Amt sein.</p>
+
+<p>Komiteemitglieder handeln im Interesse und Auftrag des Core-Teams und das Core-Team kann
+ein Komiteemitglied von seinen Aufgaben entbinden, wenn das Core-Team der Ansicht ist, dass
+dieses Mitglied seiner Verantwortung nicht gerecht wird.</p>
+
+<p>Das Komitee kann sich auch an das Core-Team wenden, um die Abberufung eines Mitglieds auf
+eigene Initiative zu koordinieren, wenn diese Person nicht in der Lage oder gewillt ist, die
+Aufgaben der Position zu erfüllen.</p>
+
+<h2>Beschwerde</h2>
+
+<p>Wenn Sie von unangemessenem Verhalten betroffen oder Zeuge eines solchen Verhaltens
+sind, melden Sie dies bitte umgehend dem CoC-Komitee unter <a href="mailto:coc@postgresql.org">coc@postgresql.org</a>. Sollten Sie
+eine Beschwerde gegen ein Mitglied des Komitee einreichen wollen, können Sie sich alternativ
+an jedes der anderen Komiteemitglieder wenden.</p>
+
+<p>Bitte geben sie in Ihrem Bericht so viele Details wie möglich an:</p>
+
+<ul>
+  <li>Eine Beschreibung des Vorfalls</li>
+  <li>Den zeitlichen Ablauf der Ereignisse</li>
+  <li>Screenshots aller elektronischen Diskussionen</li>
+  <li>Namen und wenn möglich Kontaktdaten von Zeugen</li>
+  <li>Alle anderen Informationen, die Ihrer Meinung nach für die Untersuchung hilfreich sein
+  könnten</li>
+</ul>
+
+<h2>Bearbeitung von Beschwerden</h2>
+
+<p>Das Komitee wird den Empfang jedes gemeldeten Vorfalls unverzüglich bestätigen und den
+Vorfall untersuchen. In Zusammenarbeit mit allen Parteien strebt das Komitee an, die
+Untersuchung innerhalb von zwei Wochen nach Eingang der Beschwerde abzuschließen.</p>
+
+<p>Berichte über Vorfälle und Untersuchungstätigkeiten werden soweit wie möglich vertraulich
+behandelt, um eine angemessene Untersuchung durchzuführen.</p>
+
+<p>Das Komitee wird sowohl die beschwerdeführende als auch die beschuldigte Person zu diesem
+Zeitpunkt über ihre Entscheidung informieren. Wenn die Untersuchung noch andauert,
+übermittelt das Komitee den Parteien einen Statusbericht und einen voraussichtlichen
+Abschlusstermin.</p>
+
+<p>Mangelnde Kooperation kann die Ermittlungen verlängern. Das Komitee wird alle
+Anstrengungen unternehmen, um die Untersuchung so schnell wie möglich abzuschließen. Das</p>
+
+<p>Ergebnis wird der beschwerdeführenden als auch der beschuldigten Person nach Abschluss
+der Untersuchung übermittelt.</p>
+
+<p>Im Falle einer Beschwerde von oder gegen ein Mitglied des CoC-Komitee oder des Core-Teams
+erfolgt die Beschwerdebearbeitung wie gewohnt, mit der Ausnahme, dass die Person, die in die
+Beschwerde involviert ist, in ihrer Funktion im Komitee oder dem Core-Team vom Verfahren
+ausgeschlossen wird.</p>
+
+<p>Mögliche Ergebnisse sind unter anderem:</p>
+
+<ul>
+  <li>Feststellung, dass kein Verstoß gegen den Verhaltenskodex vorliegt.</li>
+  <li>Eine persönliche Verwarnung mit spezifischer Anleitung zu akzeptablem Verhalten für die involvierte(n) Person(en).</li>
+  <li>Eine öffentliche Verwarnung mit spezifischer Anleitung zu akzeptablem Verhalten für die involvierte(n) Person(en).</li>
+  <li>Ein vorübergehender oder dauerhafter Ausschluss von einigen oder allen community-verwalteten Plattformen, einschließlich, aber nicht beschränkt auf Community-Mailinglisten, Foren, IRC und Verlust von Commit-Privilegien.</li>
+  <li>Eine Aufforderung zu einer öffentlichen und/oder privaten Entschuldigung.</li>
+</ul>
+
+<p>Aufgrund der Schwere einer Entscheidung, die einen vorübergehenden oder dauerhaften
+Ausschluss beinhaltet, und der damit verbundenen technischen und infrastrukturellen
+Maßnahmen, die durch eine solche Entscheidung erforderlich sind, wird eine solche
+Feststellung vom Core-Team überprüft, bevor die Beteiligten über die Entscheidung informiert
+werden. Wenn das Core-Team mit der Entscheidung des Komitees nicht einverstanden ist, wird
+das Core-Team dem Komitee eine entsprechende Begründung vorlegen. Das Komitee wird die
+Empfehlungen des Core-Teams prüfen und bei Bedarf weitere Diskussionen führen. Können
+sich Core-Team und Komitee nicht auf eine Entscheidung einigen, hat die Entscheidung des
+Core-Teams Vorrang.</p>
+
+<p>Das Komitee kann feststellen, dass ein Verstoß gegen diese Richtlinie unbeabsichtigt war,
+möglicherweise aufgrund kultureller Unterschiede (z. B. Verwendung eines
+umgangssprachlichen Begriffs, der in einer Sprache harmlos und in einer anderen anstößig ist)
+oder ein fehlgeschlagener Versuch, humorvoll zu sein. Solche Fälle werden als Gelegenheit zu
+Aufklärung statt Verwarnung genutzt. Wenn das Komitee feststellt, dass ein gemeldeter Vorfall
+in die Kategorie des unbeabsichtigten Verstoßes fällt, entscheidet das Komitee, ob die
+Wahrscheinlichkeit einer Wiederholung durch andere gegeben ist, und gibt die Informationen in
+diesem Fall ohne direkten Bezug zum Vorfall an die Community weiter, um eine Wiederholung
+zu vermeiden.</p>
+
+<p>Ist eine der Parteien der Ansicht, dass die Entscheidung nicht korrekt ist, kann innerhalb einer
+Woche nach der Entscheidung beim Komitee Einspruch eingelegt werden. Der Einspruch sollte
+neue Informationen, Quellen, Zeugen usw. enthalten, die es dem Komitee ermöglichen, den
+Vorfall neu zu bewerten.</p>
+
+<p>Aufzeichnungen über Vorfallberichte, Untersuchungen, Entscheidungen des Komitees und alle
+damit zusammenhängenden Angelegenheiten werden für einen Zeitraum von drei
+Kalenderjahren ab dem Datum des letzten Eintrags in der Vorgangsakte aufbewahrt. Das
+Komitee wird geeignete Maßnahmen ergreifen, um die Vertraulichkeit aller Berichte und
+Diskussionen zu gewährleisten.</p>
+
+<p>Das Komitee erstellt zum Ende des ersten Quartals eines jeden Jahres einen Jahresbericht mit
+einer Zusammenfassung der Art der eingegangenen Beschwerden sowie der ergriffenen
+Maßnahmen und teilt diesen Bericht der Community mit. Die Beschwerden und Maßnahmen
+werden anonymisiert, um die Identität aller Beteiligten zu schützen.</p>
+
+<h2>In gutem Glauben handeln</h2>
+
+<p>Von jeder beschwerdeführenden Person wird erwartet, dass sie in gutem Glauben handelt und
+begründeten Anlass zu der Annahme hat, dass die dargelegten Informationen einen Verstoß
+gegen diesen Kodex darstellen. Anschuldigungen, die sich als nicht begründet und böswillig
+oder wissentlich falsch erhoben erweisen, werden als schweres Delikt gegen die Gemeinschaft
+und als Verstoß gegen diesen Verhaltenskodex angesehen.</p>
+
+<h2>Aktualisierungen des Verhaltenskodex</h2>
+
+<p>Das Komitee und/oder das Core-Team werden Aktualisierungen dieses Verhaltenskodex nach
+Bedarf und mindestens einmal im Jahr vornehmen. Dies geschieht auf Grundlage von
+gemeldeten Vorfällen, Empfehlungen von Juristen, Vorschlägen von Community-Mitgliedern,
+kulturellen Entwicklungen in der Community oder anderen Ereignissen, die eine Überarbeitung
+erforderlich machen.</p>
+
+<p>Community-Mitglieder, die einen Vorschlag für eine Überarbeitung des Verhaltenskodex haben,
+können dem Komitee ihre Ideen per E-Mail an <a href="mailto:coc@postgresql.org">coc@postgresql.org</a> übermitteln.</p>
+
+<h2>Konferenzen und Veranstaltungen</h2>
+
+<p>Das Projekt ermutigt Veranstalter, Verhaltenskodexe für ihre Veranstaltungen zu erstellen und
+zu pflegen. Solche Verhaltenskodexe können, müssen aber nicht mit diesem Verhaltenskodex
+identisch sein. Die Veranstalter sind selbst dafür verantwortlich, unangemessenes Verhalten bei
+ihren Veranstaltungen zeitnah und objektiv zu behandeln.</p>
+
+<h2>Fazit</h2>
+
+<p>Wir fördern angemessene und kollegiale Beziehungen zwischen den Mitgliedern der
+Community. Mitglieder müssen sich jedoch Verhaltensweisen bewusst sein, die von anderen
+Mitgliedern als beleidigend angesehen werden können, und müssen solches Verhalten
+vermeiden.</p>
+
+<p>Setzen Sie bei allen Interaktionen mit der Community auf Ihr professionelles Urteilsvermögen
+und fokussieren Sie die Diskussion darauf, unser Projekt und unsere Community in eine für alle
+positive Richtung voranzubringen.</p>
+{% endblock cocmain %}
