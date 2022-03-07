@@ -22,6 +22,7 @@ import time
 import json
 from datetime import datetime, timedelta
 import itertools
+import hmac
 
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.misc import send_template_mail, generate_random_token, get_client_ip
@@ -828,3 +829,47 @@ def communityauth_getkeys(request, siteid, since=None):
     j = json.dumps([{'u': k.user.username, 's': k.sshkey.replace("\r", "\n")} for k in keys])
 
     return HttpResponse(_encrypt_site_response(site, j))
+
+
+@csrf_exempt
+def communityauth_subscribe(request, siteid):
+    if 'X-pgauth-sig' not in request.headers:
+        return HttpResponse("Missing signature header!", status=400)
+
+    try:
+        sig = base64.b64decode(request.headers['X-pgauth-sig'])
+    except Exception:
+        return HttpResponse("Invalid signature header!", status=400)
+
+    site = get_object_or_404(CommunityAuthSite, pk=siteid)
+
+    h = hmac.digest(
+        base64.b64decode(site.cryptkey),
+        msg=request.body,
+        digest='sha512',
+    )
+    if not hmac.compare_digest(h, sig):
+        return HttpResponse("Invalid signature!", status=401)
+
+    try:
+        j = json.loads(request.body)
+    except Exception:
+        return HttpResponse("Invalid JSON!", status=400)
+
+    if 'u' not in j:
+        return HttpResponse("Missing parameter", status=400)
+
+    u = get_object_or_404(User, username=j['u'])
+
+    with connection.cursor() as curs:
+        # We handle the subscription by recording a fake login on this site
+        curs.execute("INSERT INTO account_communityauthlastlogin (user_id, site_id, lastlogin, logincount) VALUES (%(userid)s, %(siteid)s, CURRENT_TIMESTAMP, 1) ON CONFLICT (user_id, site_id) DO UPDATE SET lastlogin=CURRENT_TIMESTAMP, logincount=account_communityauthlastlogin.logincount+1", {
+            'userid': u.id,
+            'siteid': site.id,
+        })
+
+        # And when we've done that, we also trigger a sync on this particular site
+        curs.execute("INSERT INTO account_communityauthchangelog (user_id, site_id, changedat) VALUES (%(userid)s, %(siteid)s, CURRENT_TIMESTAMP) ON CONFLICT (user_id, site_id) DO UPDATE SET changedat=greatest(account_communityauthchangelog.changedat, CURRENT_TIMESTAMP)", {
+            'userid': u.id,
+            'siteid': site.id,
+        })

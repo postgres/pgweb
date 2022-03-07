@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^auth/(\d+)/consent/$', pgweb.account.views.communityauth_consent),
     url(r'^auth/(\d+)/search/$', pgweb.account.views.communityauth_search),
     url(r'^auth/(\d+)/getkeys/(\d+/)?$', pgweb.account.views.communityauth_getkeys),
+    url(r'^auth/(\d+)/subscribe/$', pgweb.account.views.communityauth_subscribe),
 
     # Profile
     url(r'^profile/$', pgweb.account.views.profile),
