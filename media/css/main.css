@@ -15,8 +15,8 @@
 */
 
 /** CUSTOM FONTS */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,800');
+@import url('/media/css/open-sans-woff.css');
+@import url('/media/css/open-sans-woff2.css');
 
 /** GLOBAL CONFIGURATION */
 body {
