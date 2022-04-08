@@ -873,3 +873,5 @@ def communityauth_subscribe(request, siteid):
             'userid': u.id,
             'siteid': site.id,
         })
+
+    return HttpResponse(status=201)
