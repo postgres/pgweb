@@ -221,7 +221,7 @@ if curs.rowcount != pagecount:
 numchanges = 0
 
 # If the previous step succeeded, delete all the documentation for the specified version
-# and insert into / updatethe doc table the content that was loaded into the temporary table
+# and insert into / update the doc table the content that was loaded into the temporary table
 curs.execute("DELETE FROM docs WHERE version=%(version)s AND NOT EXISTS (SELECT 1 FROM docsload WHERE docsload.file=docs.file)", {
     'version': ver,
 })
