@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Script to load documentation from tarballs
+# Script to load documentation from a tarball or source directory
 
 import sys
 import os
@@ -98,8 +98,42 @@ def load_svg_file(filename, f, c):
     c.writerow([filename, ver, None, svg.decode('utf-8')])
 
 
+def parse_tarfile(tarfilename):
+    # this regular expression is for "newer" versions of PostgreSQL that keep all of
+    # the HTML documentation built out
+    re_htmlfile = re.compile('[^/]*/doc/src/sgml/html/.*')
+    # this regular expression is for "older" versions of PostgreSQL that keep the
+    # HTML documentation in a tarball within the tarball
+    re_tarfile = re.compile('[^/]*/doc/postgres.tar.gz$')
+
+    tf = tarfile.open(tarfilename)
+
+    for member in tf:
+        if re_htmlfile.match(member.name):
+            yield member.name, lambda: tf.extractfile(member)
+        elif re_tarfile.match(member.name):
+            # older versions of PostgreSQL kept a tarball of the documentation within the source
+            # tarball, and as such will go down this path
+            f = tf.extractfile(member)
+            inner_tar = tarfile.open(fileobj=f)
+            for inner_member in inner_tar:
+                # Some old versions have index.html as a symlink - so let's
+                # just ignore all symlinks to be on the safe side.
+                if inner_member.issym():
+                    continue
+
+                if inner_member.name.endswith('.html') or inner_member.name.endswith('.htm'):
+                    yield inner_member.name, lambda: inner_tar.extractfile(inner_member)
+
+
+def parse_directory(dirname):
+    for fn in os.listdir(dirname):
+        if fn.endswith('.html') or fn.endswith('.svg'):
+            yield fn, lambda: open(os.path.join(dirname, fn), 'rb')
+
+
 # Main execution
-parser = OptionParser(usage="usage: %prog [options] <version> <tarfile>")
+parser = OptionParser(usage="usage: %prog [options] <version> <tarfile|directory>")
 parser.add_option("-q", "--quiet", action="store_true", dest="quiet",
                   help="Run quietly (no output at all)")
 parser.add_option("-v", "--verbose", action="store_true", dest="verbose",
@@ -120,19 +154,20 @@ if verbose and quiet:
     sys.exit(1)
 
 ver = args[0]
-tarfilename = args[1]
 
 # load the configuration that is used to connect to the database
 config = ConfigParser()
 config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'docload.ini'))
 
-# determine if the referenced tarball exists; if not, exit
-if not os.path.isfile(tarfilename):
-    print("File %s not found" % tarfilename)
+# Load a tarfile or a "naked" directory
+if os.path.isfile(args[1]):
+    generator = parse_tarfile(args[1])
+elif os.path.isdir(args[1]):
+    generator = parse_directory(args[1])
+else:
+    print("File or directory %s not found" % args[1])
     sys.exit(1)
 
-# open up the tarball as well as a connection to the database
-tf = tarfile.open(tarfilename)
 
 connection = psycopg2.connect(config.get('db', 'dsn'))
 
@@ -153,45 +188,20 @@ iscurrent = r[0][0]
 s = io.StringIO()
 c = csv.writer(s, delimiter=';', quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
 
-# this regular expression is for "newer" versions of PostgreSQL that keep all of
-# the HTML documentation built out
-re_htmlfile = re.compile('[^/]*/doc/src/sgml/html/.*')
-# this regular expression is for "older" versions of PostgreSQL that keep the
-# HTML documentation in a tarball within the tarball
-re_tarfile = re.compile('[^/]*/doc/postgres.tar.gz$')
-# go through each file of the tarball to determine if the file is documentation
-# that should be imported
-for member in tf:
-    # newer versions of PostgreSQL will go down this path to find docfiles
-    if re_htmlfile.match(member.name):
-        # get the filename and a reference to the contents of the file
-        filename = os.path.basename(member.name)
-        f = tf.extractfile(member)
-        # determine if the file being loaded is an SVG or a regular doc file
-        if filename.endswith('.svg'):
-            load_svg_file(filename, f, c)
-        else:
-            load_doc_file(filename, f, c)
-        # after successfully preparing the file for load, increase the page count
-        pagecount += 1
-    # older versions of PostgreSQL kept a tarball of the documentation within the source
-    # tarball, and as such will go down this path
-    # SVG support was added for PostgreSQL 12, so the explicitly SVG check is not
-    # present in this path
-    if re_tarfile.match(member.name):
-        f = tf.extractfile(member)
-        inner_tar = tarfile.open(fileobj=f)
-        for inner_member in inner_tar:
-            # Some old versions have index.html as a symlink - so let's
-            # just ignore all symlinks to be on the safe side.
-            if inner_member.issym():
-                continue
+# Import each page of documentation
+for filename, getter in generator:
+    filename = os.path.basename(filename)
+    f = getter()
 
-            if inner_member.name.endswith('.html') or inner_member.name.endswith('.htm'):
-                load_doc_file(inner_member.name, inner_tar.extractfile(inner_member), c)
-                # after successfully preparing the file for load, increase the page count
-                pagecount += 1
-tf.close()
+    # determine if the file being loaded is an SVG or a regular doc file
+    if filename.endswith('.svg'):
+        load_svg_file(filename, f, c)
+    else:
+        load_doc_file(filename, f, c)
+
+    # after successfully preparing the file for load, increase the page count
+    pagecount += 1
+
 
 if not quiet:
     print("Total parsed doc size: {:.1f} MB".format(s.tell() / (1024 * 1024)))
