@@ -104,6 +104,8 @@ parser.add_option("-q", "--quiet", action="store_true", dest="quiet",
                   help="Run quietly (no output at all)")
 parser.add_option("-v", "--verbose", action="store_true", dest="verbose",
                   help="Run verbosely")
+parser.add_option("-g", "--git", type=str,
+                  help="Specify git hash used to load")
 (options, args) = parser.parse_args()
 
 if len(args) != 2:
@@ -233,7 +235,15 @@ if not quiet:
 
 if numchanges > 0:
     # Update the docs loaded timestamp
-    curs.execute("UPDATE core_version SET docsloaded=CURRENT_TIMESTAMP WHERE tree=%(v)s", {'v': ver})
+    if ver == "0" and options.git:
+        githash = options.git
+    else:
+        githash = ''
+
+    curs.execute("UPDATE core_version SET docsloaded=CURRENT_TIMESTAMP, docsgit=%(git)s WHERE tree=%(v)s", {
+        'v': ver,
+        'git': githash,
+    })
 
     # Issue varnish purge for all docs of this version
     if ver == "0":

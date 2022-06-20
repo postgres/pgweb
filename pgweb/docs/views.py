@@ -30,11 +30,14 @@ def _versioned_404(msg, version):
 @content_sources('style', "'unsafe-inline'")
 def docpage(request, version, filename):
     loaddate = None
+    loadgit = None
     if version == 'current':
         ver = Version.objects.filter(current=True)[0].tree
     elif version == 'devel':
         ver = Decimal(0)
-        loaddate = Version.objects.get(tree=Decimal(0)).docsloaded
+        verobj = Version.objects.get(tree=Decimal(0))
+        loaddate = verobj.docsloaded
+        loadgit = verobj.docsgit
     else:
         ver = Decimal(version)
         if ver == Decimal(0):
@@ -155,6 +158,7 @@ def docpage(request, version, filename):
         'title': page.title,
         'doc_index_filename': indexname,
         'loaddate': loaddate,
+        'loadgit': loadgit,
         'og': {
             'url': '/docs/{}/{}'.format(page.display_version(), page.file),
             'time': page.version.docsloaded,

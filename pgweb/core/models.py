@@ -25,6 +25,7 @@ class Version(models.Model):
     supported = models.BooleanField(null=False, blank=False, default=True)
     testing = models.IntegerField(null=False, blank=False, default=0, help_text="Testing level of this release. latestminor indicates beta/rc number", choices=TESTING_CHOICES)
     docsloaded = models.DateTimeField(null=True, blank=True, help_text="The timestamp of the latest docs load. Used to control indexing and info on developer docs.")
+    docsgit = models.CharField(max_length=40, null=False, blank=True, help_text="The git hash of the loaded docs, for devel version")
     firstreldate = models.DateField(null=False, blank=False, help_text="The date of the .0 release in this tree")
     eoldate = models.DateField(null=False, blank=False, help_text="The final release date for this tree")
 

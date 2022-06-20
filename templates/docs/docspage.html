@@ -80,7 +80,7 @@
               <div class="row">
                 <div class="col">
                   <div>
-                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/{{page.display_version}}/{{doc_index_filename}}">PostgreSQL {{page.display_version}}</a>{%if loaddate%} ({{loaddate|date:"Y-m-d H:i:s"}}){%endif%}
+                    <a href="/docs/" title="Documentation">Documentation</a> &rarr; <a href="/docs/{{page.display_version}}/{{doc_index_filename}}">PostgreSQL {{page.display_version}}</a>{%if loaddate%} ({{loaddate|date:"Y-m-d H:i:s"}}{%if loadgit%} - git commit <a href="https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit;h={{loadgit}}">{{loadgit}}</a>{%endif%}){%endif%}
                   </div>
                 </div>
               </div>
