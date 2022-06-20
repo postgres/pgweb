@@ -117,8 +117,8 @@ if verbose and quiet:
     print("Can't be both verbose and quiet at the same time!")
     sys.exit(1)
 
-ver = sys.argv[1]
-tarfilename = sys.argv[2]
+ver = args[0]
+tarfilename = args[1]
 
 # load the configuration that is used to connect to the database
 config = ConfigParser()
