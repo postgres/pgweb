@@ -84,11 +84,11 @@ def _get_notification_text(obj):
                 _get_full_text_representation(obj))
 
     if hasattr(obj, 'approved') or hasattr(obj, 'modstate'):
-            # This object has the capability to do approving. Apply the following logic:
-            # 1. If object was unapproved, and is still unapproved, don't send notification
-            # 2. If object was unapproved, and is now approved, send "object approved" notification
-            # 3. If object was approved, and is no longer approved, send "object unapproved" notification
-            # 4. (FIXME: configurable?) If object was approved and is still approved, send changes notification
+        # This object has the capability to do approving. Apply the following logic:
+        # 1. If object was unapproved, and is still unapproved, don't send notification
+        # 2. If object was unapproved, and is now approved, send "object approved" notification
+        # 3. If object was approved, and is no longer approved, send "object unapproved" notification
+        # 4. (FIXME: configurable?) If object was approved and is still approved, send changes notification
 
         if hasattr(obj, 'approved'):
             approved = obj.approved

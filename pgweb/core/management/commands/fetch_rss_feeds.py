@@ -49,6 +49,6 @@ class Command(BaseCommand):
                             fetchedsomething = True
 
                     if fetchedsomething:
-                            importfeed.purge_related()
+                        importfeed.purge_related()
                 except Exception as e:
                     print("Failed to load %s: %s" % (importfeed, e))
