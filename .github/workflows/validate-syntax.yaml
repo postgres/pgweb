@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pycodestyle==2.4.0
+        pip install pycodestyle==2.6.0
     - name: Validate with pycodestyle
       run: |
         pycodestyle
