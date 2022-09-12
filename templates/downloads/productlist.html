@@ -9,7 +9,7 @@
 <p>{{category.blurb|safe}}</p>
 
 {% for product in products %}
-  <h2 class="news"><a href="{{product.url}}" target="_blank" rel="noopener">{{product.name}}</a></h2>
+  <h2 class="news"><a href="{{product.url}}" target="_blank" rel="noopener nofollow">{{product.name}}</a></h2>
   <table class="table table-striped product-table">
     <thead class="thead-light">
       <tr>
@@ -25,8 +25,8 @@
         <td>{{product.description|markdown}}</td>
         <td>{{product.licencetype}}</td>
         <td>{{product.price}}</td>
-        <td><a href="{{product.org.url}}" target="_blank" rel="noopener">{{product.org.name}}</a></td>
-        <td><a href="{{product.url}}" target="_blank" rel="noopener">View</a></td>
+        <td><a href="{{product.org.url}}" target="_blank" rel="noopener nofollow">{{product.org.name}}</a></td>
+        <td><a href="{{product.url}}" target="_blank" rel="noopener nofollow">View</a></td>
       </tr>
     </tbody>
   </table>
