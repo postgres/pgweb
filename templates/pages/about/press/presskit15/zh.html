@@ -1,0 +1,97 @@
+{% extends "pages/about/press/presskit15/base.html" %}
+
+{% block presskit_content %}
+<p><strong>2022年10月13日</strong> - PostgreSQL全球开发组今天宣布<a href="https://www.postgresql.org/docs/15/release-15.html">PostgreSQL 15</a> 正式发布, 这是世界上<a href="https://www.postgresql.org/">最先进的开源数据库</a> 的最新版本。</p>
+<p>PostgreSQL 15 版本的发布主要侧重于性能提升上，在管理本地和分布式部署中的工作负载方面成效显著，包括改进的排序功能。此版本通过添加流行的 <a href="https://www.postgresql.org/docs/15/sql-merge.html"><code>MERGE</code></a> 命令改善了开发人员的体验，并添加了更多用于监测数据库状态的能力。</p>
+<p>PostgreSQL核心组成员Jonathan Katz表示：“PostgreSQL开发者社区持续构建那些改善开发人员体验，并简化那些支持高性能数据工作负载的功能， PostgreSQL 15 展示了如何通过开放式软件开发，为我们的用户提供一个非常适合应用程序开发并保证其关键数据安全的数据库。”</p>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> 是一个创新的数据管理系统，以其可靠性和健壮性著称，得益于<a href="https://www.postgresql.org/community/">全球开发者社区</a> 超过25年的开源开发，它已成为各种规模组织首选的开源关系型数据库。</p>
+<h3 id="排序及压缩性能提升">排序及压缩性能提升</h3>
+<p>在这个最新版本中，PostgreSQL 改进了其内存和磁盘<a href="https://www.postgresql.org/docs/15/queries-order.html">排序</a> 算法，基准测试显示，在对不同数据类型的排序时，速度可提高25%到400%不等 。使用 <code>row_number()</code>、<code>rank()</code>、<code>dense_rank()</code> 和 <code>count()</code> 作为<a href="https://www.postgresql.org/docs/15/functions-window.html">窗口函数</a> 在 PostgreSQL 15 中也有性能上的优化。使用 <a href="https://www.postgresql.org/docs/15/queries-select-lists.html#QUERIES-DISTINCT"><code>SELECT DISTINCT</code></a>  的查询现在可以<a href="https://www.postgresql.org/docs/15/parallel-query.html">并行执行</a> 。</p>
+<p>基于<a href="https://www.postgresql.org/about/press/presskit14/">之前PostgreSQL版本</a> 的异步远程查询功能，<a href="https://www.postgresql.org/docs/15/postgres-fdw.html">PostgreSQL外部数据包装器</a> ，<a href="https://www.postgresql.org/docs/15/postgres-fdw.html"><code>postgres_fdw</code></a> ，现在可支持<a href="https://www.postgresql.org/docs/15/postgres-fdw.html#id-1.11.7.47.11.7">异步提交</a> 。</p>
+<p>PostgreSQL 15 的性能改进也扩展到了归档和备份工具。 PostgreSQL 15 增加了对 <a href="https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-WAL-COMPRESSION">预写日志(WAL) 文件</a> LZ4和Zstandard (zstd)的压缩支持，这可以在一定的工作负载下获得空间和性能上的改进。在一些操作系统上，PostgreSQL 15 增加了对<a href="https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-RECOVERY-PREFETCH">WAL页面的预载支持</a> 以帮助加快恢复时间。 PostgreSQL内置备份命令<a href="https://www.postgresql.org/docs/15/app-pgbasebackup.html"><code>pg_basebackup</code></a> ，现在支持服务器端的备份文件压缩，可以选择gzip、LZ4和zstd格式。 PostgreSQL 15 包含了使用<a href="https://www.postgresql.org/docs/15/archive-modules.html">自定义模块进行归档</a> 的能力，从而减少了使用 shell 命令的开销。</p>
+<h3 id="开发人员特色功能">开发人员特色功能</h3>
+<p>PostgreSQL 15 包含 SQL 标准的 <a href="https://www.postgresql.org/docs/15/sql-merge.html"><code>MERGE</code></a> 命令。<code>MERGE</code>允许用户编写包含 <code>INSERT</code>、<code>UPDATE</code>和<code>DELETE</code>操作的SQL语句。</p>
+<p>最新版本增加了<a href="https://www.postgresql.org/docs/15/functions-matching.html#FUNCTIONS-POSIX-REGEXP">使用正则表达式的新函数</a> 来检查字符串： <code>regexp_count()</code>, <code>regexp_instr()</code>, <code>regexp_like()</code>，和 <code>regexp_substr()</code>。 PostgreSQL 15还扩展了 <code>range_agg</code> 函数来聚合<a href="https://www.postgresql.org/about/press/presskit14/">上一个版本</a> 引入的 <a href="https://www.postgresql.org/docs/15/rangetypes.html"><code>multirange</code> 数据类型</a> 。</p>
+<p>PostgreSQL 15 允许用户<a href="https://www.postgresql.org/docs/15/sql-createview.html">使用访客权限而不是视图创建者权限创建视图</a> 。这个选项被称为 <code>security_invoker</code>，它增加了一层额外的保护，以确保视图调用者使用正确权限处理底层数据。</p>
+<h3 id="更多逻辑复制选项">更多逻辑复制选项</h3>
+<p>PostgreSQL 15 为管理<a href="https://www.postgresql.org/docs/15/logical-replication.html">逻辑复制</a> 提供了更多的灵活性。这个版本为<a href="https://www.postgresql.org/docs/15/logical-replication-publication.html">Publishers</a>引入了<a href="https://www.postgresql.org/docs/15/logical-replication-row-filter.html">行筛选</a>和<a href="https://www.postgresql.org/docs/15/logical-replication-col-lists.html">数据列列表</a> 来允许用户选择从表中复制数据的子集。PostgreSQL 15 增加了一些功能来简化<a href="https://www.postgresql.org/docs/15/logical-replication-conflicts.html">冲突管理</a> ，包括跳过重新执行冲突事务的能力，以及在检测到错误时自动停止订阅的能力。该版本还支持在逻辑复制中使用两阶段提交(2PC)。</p>
+<h3 id="日志和配置增强">日志和配置增强</h3>
+<p>PostgreSQL 15 引入了一种新的日志格式:<a href="https://www.postgresql.org/docs/15/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-JSONLOG"><code>jsonlog</code></a> 。 这种新格式使用JSON结构输出日志数据，这允许在结构化日志系统中处理PostgreSQL日志。</p>
+<p>该版本在管理PostgreSQL配置方面为数据库管理员提供了更大的灵活性，增加了授予用户更改服务器级配置参数的权限的能力。此外，用户现在可以使用<a href="https://www.postgresql.org/docs/15/app-psql.html"><code>psql</code></a> 命令行工具中的<code>\dconfig</code>命令搜索有关配置的信息。</p>
+<h3 id="其他值得关注的改动">其他值得关注的改动</h3>
+<p>PostgreSQL<a href="https://www.postgresql.org/docs/15/monitoring-stats.html">服务器级的统计数据</a>现在收集到共享内存，去除了统计收集进程以及定期将这些数据写入磁盘的过程。</p>
+<p>PostgreSQL 15 使<a href="https://www.postgresql.org/docs/15/collation.html">ICU 排序</a> 作为集群或单个数据库的默认排序规则成为可能。</p>
+<p>该版本还增加了一个新的内置扩展<a href="https://www.postgresql.org/docs/15/pgwalinspect.html"><code>pg_walinspect</code></a> ，它允许用户直接从SQL接口检查预写日志文件的内容。</p>
+<p>PostgreSQL 15 还允许除数据库所有者之外，从 <code>public</code> (或default)模式的数据库中 <a href="https://www.postgresql.org/docs/15/ddl-schemas.html#DDL-SCHEMAS-PATTERNS">撤销所有用户的<code>CREATE</code>权限</a> 。</p>
+<p>PostgreSQL 15 删除了长期被弃用的“独占备份”模式，也删除了PL/Python中对Python 2的支持。</p>
+<h3 id="关于postgresql">关于PostgreSQL</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> 是世界上最先进的开源数据库，拥有数以千计的用户、贡献者、公司和组织的全球社区。从加州大学伯克利分校开始，PostgreSQL建立在超过35年的工程基础上，一直延续着无与伦比的发展速度。PostgreSQL成熟的特性集不仅与顶级专有数据库系统相匹配，而且在高级数据库特性、可扩展性、安全性和稳定性方面都超过了顶级专有数据库系统。</p>
+<h3 id="链接">链接</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">下载</a></li>
+<li><a href="https://www.postgresql.org/docs/15/release-15.html">发行说明</a></li>
+<li><a href="https://www.postgresql.org/about/press/">新闻资料</a></li>
+<li><a href="https://www.postgresql.org/support/security/">安全页</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">版本政策</a></li>
+<li><a href="https://twitter.com/postgresql">在Twitter上关注@postgresql</a></li>
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2 id="关于postgresql">关于PostgreSQL</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> 是世界上最先进的开源数据库，拥有数以千计的用户、贡献者、公司和组织的全球社区。从加州大学伯克利分校开始，PostgreSQL建立在超过35年的工程基础上，一直延续着无与伦比的发展速度。PostgreSQL成熟的特性集不仅与顶级专有数据库系统相匹配，而且在高级数据库特性、可扩展性、安全性和稳定性方面都超过了顶级专有数据库系统。</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="更多关于功能的信息">更多关于功能的信息</h2>
+<p>有关上述功能和其他功能的解释，请参阅以下资源:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/15/release-15.html">发行说明</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">详情参考</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="下载地址">下载地址</h2>
+<p>有几种方法可以下载PostgreSQL 15，包括:</p>
+<ul>
+<li><a href="https://www.postgresql.org/download/">官方下载</a> 页， 包括<a href="https://www.postgresql.org/download/windows/">Windows</a> ，<a href="https://www.postgresql.org/download/">Linux</a> ，<a href="https://www.postgresql.org/download/macosx/">macOS</a> 等平台下的安装程序和工具</li>
+<li><a href="https://www.postgresql.org/ftp/source/v15.0">源代码</a></li>
+</ul>
+<p>其他工具和扩展可在<a href="http://pgxn.org/">PostgreSQL Extension Network</a> 查看。</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="文档">文档</h2>
+<p>PostgreSQL 15 提供了HTML文档和手册页，您还可以在线浏览 <a href="https://www.postgresql.org/docs/15/">HTML</a> 和<a href="https://www.postgresql.org/files/documentation/pdf/15/postgresql-15-US.pdf">PDF</a> 格式的文档。</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="许可证">许可证</h2>
+<p>PostgreSQL使用<a href="https://www.postgresql.org/about/licence/">PostgreSQL License</a> ，一种类似bsd的“许可”License。这个<a href="http://www.opensource.org/licenses/postgresql/">OSI认证的license</a> 因其灵活和业务友好而受到广泛赞赏，因为它不限制在商业和专有应用程序中使用PostgreSQL。 加上多公司的支持和代码的公共所有权，我们的许可证使得PostgreSQL非常受欢迎，因为供应商希望在自己的产品中嵌入数据库，而不必担心费用、供应商锁定或许可证条款的更改。</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="联系方式">联系方式</h2>
+<p>网址</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>邮箱</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="图片和标志">图片和标志</h2>
+<p>Postgres和PostgreSQL以及大象标志(Slonik)都是<a href="https://www.postgres.ca">加拿大PostgreSQL社区协会</a>注册的商标。如果您希望使用这些标志，您必须遵守<a href="https://www.postgresql.org/about/policies/trademarks/">商标政策</a> 。</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="公司支持">公司支持</h2>
+<p>PostgreSQL得到了许多公司的支持，他们赞助开发人员，提供托管资源，并给予我们财政支持。请查看我们的<a href="https://www.postgresql.org/about/sponsors/">赞助人</a> 页面，了解这些项目的支持者。</p>
+<p>也有大量<a href="https://www.postgresql.org/support/professional_support/">提供PostgreSQL支持的公司</a> ，从个人顾问到跨国公司。</p>
+<p>如果您希望为PostgreSQL全球发展小组或一个公认的社区非营利组织作出经济贡献，请访问我们的<a href="https://www.postgresql.org/about/donate/">捐赠</a>页面 。 </p>
+{% endblock presskit_corporate %}

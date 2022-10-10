@@ -1,0 +1,153 @@
+{% extends "pages/about/press/presskit15/base.html" %}
+
+{% block presskit_content %}
+<p><strong>13 de octubre de 2022</strong> - El Grupo Global de Desarrollo de PostgreSQL ha anunciado hoy el lanzamiento de <a href="https://www.postgresql.org/docs/15/release-15.html">PostgreSQL 15</a>,
+la versión más reciente de la
+<a href="https://www.postgresql.org/">base de datos de código abierto más avanzada</a> del mundo.</p>
+<p>PostgreSQL 15 aprovecha las mejoras de rendimiento de las versiones más recientes y ofrece importantes beneficios en la gestión de cargas de trabajo, tanto en implementaciones locales como distribuidas, incluyendo un ordenamiento más eficiente. Esta versión mejora la experiencia del desarrollador introduciendo el popular comando
+<a href="https://www.postgresql.org/docs/15/sql-merge.html"><code>MERGE</code></a>, así como funciones adicionales que permiten monitorear el estado de la base de datos.</p>
+<p>&quot;La comunidad de desarrolladores de PostgreSQL sigue creando características que simplifican la ejecución de cargas de trabajo de datos de alto rendimiento y, al mismo tiempo, mejoran la experiencia de los desarrolladores&quot;, comentó Jonathan Katz, miembro del Core Team de PostgreSQL. &quot;PostgreSQL 15 demuestra cómo, a través del desarrollo de software libre, podemos ofrecer a nuestros usuarios una base de datos excelente para el desarrollo de aplicaciones y segura para sus datos críticos&quot;.</p>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> es un innovador sistema de gestión de datos conocido por su confiabilidad y robustez. Cuenta con más de 25 años de desarrollo de código abierto por parte de una <a href="https://www.postgresql.org/community/">comunidad global de desarrolladores</a>
+y se ha convertido en la base de datos relacional de código abierto preferida por organizaciones de todos los tamaños.</p>
+<h3 id="rendimiento-del-ordenamiento-y-compresión-mejorados">Rendimiento del ordenamiento y compresión mejorados</h3>
+<p>En esta última versión, PostgreSQL mejora sus algoritmos de
+<a href="https://www.postgresql.org/docs/15/queries-order.html">ordenamiento</a> en memoria y en disco, con pruebas comparativas que muestran aumentos de velocidad de entre el 25% y el 400%, según los tipos de datos ordenados. El uso de <code>row_number()</code>, <code>rank()</code>, <code>dense_rank()</code>, y <code>count()</code> como
+<a href="https://www.postgresql.org/docs/15/functions-window.html">funciones de ventana deslizante</a>
+también ofrece ventajas de rendimiento en PostgreSQL 15. Las consultas que utilizan
+<a href="https://www.postgresql.org/docs/15/queries-select-lists.html#QUERIES-DISTINCT"><code>SELECT DISTINCT</code></a>
+ahora pueden
+<a href="https://www.postgresql.org/docs/15/parallel-query.html">ejecutarse en paralelo</a>.</p>
+<p>Basándose en el trabajo de la <a href="https://www.postgresql.org/about/press/presskit14/">versión anterior de PostgreSQL</a>, con respecto a permitir consultas remotas asíncronas, el
+<a href="https://www.postgresql.org/docs/15/postgres-fdw.html">conector de datos externos de PostgreSQL</a>,
+<a href="https://www.postgresql.org/docs/15/postgres-fdw.html"><code>postgres_fdw</code></a>,
+ahora admite
+<a href="https://www.postgresql.org/docs/15/postgres-fdw.html#id-1.11.7.47.11.7">commits asíncronos</a>.</p>
+<p>Las mejoras en el rendimiento de PostgreSQL 15 se extienden a sus funciones de archivado y respaldo. PostgreSQL 15 añade soporte para la
+<a href="https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-WAL-COMPRESSION">compresión de archivos de WAL (write-ahead log)</a>,
+con LZ4 y Zstandard (zstd), lo cual puede aportar beneficios en términos de espacio y rendimiento para determinadas cargas de trabajo. En ciertos sistemas operativos, PostgreSQL 15 añade soporte para la
+<a href="https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-RECOVERY-PREFETCH">carga previa (prefetch) de páginas referenciadas en el WAL</a>
+con el fin de disminuir los tiempos de recuperación.
+<a href="https://www.postgresql.org/docs/15/app-pgbasebackup.html"><code>pg_basebackup</code></a>, el comando integrado en PostgreSQL para realizar respaldos, ahora admite la compresión de archivos de respaldo en el lado del servidor, con los formatos gzip, LZ4 y zstd. PostgreSQL 15 incluye la posibilidad de utilizar
+<a href="https://www.postgresql.org/docs/15/archive-modules.html">módulos personalizados para el archivado</a>,
+lo cual elimina la sobrecarga derivada del uso de un comando de shell.</p>
+<h3 id="características-expresivas-para-el-desarrollador">Características expresivas para el desarrollador</h3>
+<p>PostgreSQL 15 incluye el comando
+<a href="https://www.postgresql.org/docs/15/sql-merge.html"><code>MERGE</code></a> del estándar SQL. Con <code>MERGE</code> es posible escribir sentencias SQL condicionales que pueden incluir acciones <code>INSERT</code>,
+<code>UPDATE</code>, y <code>DELETE</code> dentro de la misma sentencia.</p>
+<p>Esta última versión añade
+<a href="https://www.postgresql.org/docs/15/functions-matching.html#FUNCTIONS-POSIX-REGEXP">nuevas funciones que permiten utilizar expresiones regulares</a>
+para inspeccionar cadenas: <code>regexp_count()</code>, <code>regexp_instr()</code>, <code>regexp_like()</code>, y
+<code>regexp_substr()</code>. PostgreSQL 15 también amplía la función <code>range_agg</code> para agregar los
+<a href="https://www.postgresql.org/docs/15/rangetypes.html">tipos de datos <code>multirange</code></a>,
+introducidos en la
+<a href="https://www.postgresql.org/about/press/presskit14/">versión anterior</a>.</p>
+<p>PostgreSQL 15 permite a los usuarios
+<a href="https://www.postgresql.org/docs/15/sql-createview.html">crear vistas para consultar datos usando los permisos de quien invoca la vista, no del creador de la misma</a>.
+Esta opción, llamada <code>security_invoker</code>, añade una capa adicional de protección para asegurar que los que invocan la vista cuenten con los permisos correctos para trabajar con los datos subyacentes.</p>
+<h3 id="más-opciones-para-la-replicación-lógica">Más opciones para la replicación lógica</h3>
+<p>PostgreSQL 15 ofrece más flexibilidad para la gestión de la <a href="https://www.postgresql.org/docs/15/logical-replication.html">replicación lógica</a>.
+En esta versión se introducen el
+<a href="https://www.postgresql.org/docs/15/logical-replication-row-filter.html">filtrado de filas</a>
+y las
+<a href="https://www.postgresql.org/docs/15/logical-replication-col-lists.html">listas de columnas</a>
+para los
+<a href="https://www.postgresql.org/docs/15/logical-replication-publication.html">publicadores</a>,
+lo cual permite a los usuarios elegir replicar un subconjunto de datos procedentes de una tabla. PostgreSQL 15 añade características que simplifican la
+<a href="https://www.postgresql.org/docs/15/logical-replication-conflicts.html">gestión de conflictos</a>,
+incluyendo la posibilidad de omitir la reproducción de una transacción conflictiva y de desactivar de forma automática una suscripción al detectar un error. Esta versión también incluye soporte para el uso en la replicación lógica de la confirmación en dos fases (2PC).</p>
+<h3 id="mejoras-en-el-registro-y-la-configuración">Mejoras en el registro y la configuración</h3>
+<p>PostgreSQL 15 introduce el nuevo formato de registro
+<a href="https://www.postgresql.org/docs/15/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-JSONLOG"><code>jsonlog</code></a>.
+Este nuevo formato genera datos de registro utilizando una estructura JSON definida, permitiendo que los registros de PostgreSQL sean procesados en sistemas de registro estructurados.</p>
+<p>Esta versión ofrece a los administradores de bases de datos más flexibilidad en la forma en que los usuarios pueden gestionar la configuración de PostgreSQL, añadiendo la posibilidad de otorgar a los usuarios permisos para alterar los parámetros de configuración a nivel de servidor. Además, ahora los usuarios pueden buscar información sobre la configuración utilizando el comando <code>\dconfig</code> desde la herramienta de línea de comandos de
+<a href="https://www.postgresql.org/docs/15/app-psql.html"><code>psql</code></a>.</p>
+<h3 id="otros-cambios-destacados">Otros cambios destacados</h3>
+<p>Las
+<a href="https://www.postgresql.org/docs/15/monitoring-stats.html">estadísticas a nivel de servidor</a>
+de PostgreSQL se recogen ahora en la memoria compartida, eliminando tanto el proceso de recopilación de estadísticas como la escritura periódica de estos datos en el disco.</p>
+<p>PostgreSQL 15 permite hacer una
+<a href="https://www.postgresql.org/docs/15/collation.html">intercalación de ICU</a>, sea la intercalación por defecto para un clúster o para una base de datos individual.</p>
+<p>Esta versión también añade una nueva extensión integrada,
+<a href="https://www.postgresql.org/docs/15/pgwalinspect.html"><code>pg_walinspect</code></a>, que permite a los usuarios inspeccionar el contenido de los archivos WAL directamente desde una interfaz SQL.</p>
+<p>Además, PostgreSQL 15
+<a href="https://www.postgresql.org/docs/15/ddl-schemas.html#DDL-SCHEMAS-PATTERNS">revoca el permiso <code>CREATE</code> a todos los usuarios</a>
+(excepto al propietario de la base de datos) en el esquema <code>public</code> o en el predefinido.</p>
+<p>PostgreSQL 15 elimina tanto la obsoleta modalidad de &quot;respaldo exclusivo&quot;, como el soporte para Python 2 de PL/Python.</p>
+<h3 id="sobre-postgresql">Sobre PostgreSQL</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> es la base de datos de código abierto más avanzada del mundo, que cuenta con una comunidad global de miles de usuarios, contribuidores, empresas y organizaciones. Basada en más de 35 años de ingeniería, que comenzaron en la Universidad de Berkeley en California, PostgreSQL ha continuado con un ritmo de desarrollo inigualable. El maduro conjunto de características de PostgreSQL no sólo iguala a los principales sistemas de bases de datos propietarios, sino que los supera en términos de características avanzadas, extensibilidad, seguridad y estabilidad.</p>
+<h3 id="enlaces">Enlaces</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Descargas</a></li>
+<li><a href="https://www.postgresql.org/docs/15/release-15.html">Notas de la versión</a></li>
+<li><a href="https://www.postgresql.org/about/press/">Kit de prensa</a></li>
+<li><a href="https://www.postgresql.org/support/security/">Información de seguridad</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">Política de versiones</a></li>
+<li><a href="https://twitter.com/postgresql">Sigan @postgresql en Twitter</a></li>
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2>Sobre PostgreSQL</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> es la base de datos de código abierto más avanzada del mundo, que cuenta con una comunidad global de miles de usuarios, contribuidores, empresas y organizaciones. Basada en más de 35 años de ingeniería, que comenzaron en la Universidad de Berkeley en California, PostgreSQL ha continuado con un ritmo de desarrollo inigualable. El maduro conjunto de características de PostgreSQL no sólo iguala a los principales sistemas de bases de datos propietarios, sino que los supera en términos de características avanzadas, extensibilidad, seguridad y estabilidad.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2>Más información sobre las características</h2>
+<p>Para más información sobre las características antes mencionadas y otras más, consulten los siguientes recursos:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/15/release-15.html">Notas de la versión</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">Tabla de características</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2>Dónde descargarlo</h2>
+<p>Hay varias maneras de descargar PostgreSQL 15, que incluyen:</p>
+<ul>
+<li>La <a href="https://www.postgresql.org/download/">página oficial de descargas</a> que contiene instaladores y herramientas para <a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a>, etc.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v15.0">Código fuente</a></li>
+</ul>
+<p>Otras herramientas y extensiones están disponibles en el
+<a href="http://pgxn.org/">PostgreSQL Extension Network</a>.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2>Documentación</h2>
+<p>PostgreSQL 15 incluye documentos HTML y páginas de manual. Es posible también consultar la documentación en línea en formato <a href="https://www.postgresql.org/docs/15/">HTML</a> y <a href="https://www.postgresql.org/files/documentation/pdf/15/postgresql-15-US.pdf">PDF</a>.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2>Licencia</h2>
+<p>PostgreSQL utiliza la <a href="https://www.postgresql.org/about/licence/">PostgreSQL License</a>,
+una licencia &quot;permisiva&quot; de tipo BSD. Esta
+<a href="http://www.opensource.org/licenses/postgresql/">licencia certificada por la OSI</a> es ampliamente apreciada por ser flexible y adecuada para las empresas, ya que no limita el uso de PostgreSQL con aplicaciones comerciales y propietarias. Junto con el soporte para múltiples empresas y la propiedad pública del código, nuestra licencia hace que PostgreSQL sea muy popular entre los proveedores que desean integrar una base de datos en sus propios productos sin tener que preocuparse por tarifas, dependencia de un único proveedor o cambios en los términos de la licencia.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2>Contactos</h2>
+<p>Sitio web</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>Correo electrónico</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2>Imágenes y logotipos</h2>
+<p>Postgres, PostgreSQL y el logo del elefante (Slonik) son todas marcas registradas de la <a href="https://www.postgres.ca">PostgreSQL Community Association of Canada</a>.
+Quien desee utilizar estas marcas, deberá cumplir con la <a href="https://www.postgresql.org/about/policies/trademarks/">política de marca</a>.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2>Soporte corporativo</h2>
+<p>PostgreSQL cuenta con el soporte de numerosas empresas, que patrocinan a los desarrolladores, ofrecen recursos de hosting y nos dan apoyo financiero. Consulten nuestra página de
+<a href="https://www.postgresql.org/about/sponsors/">patrocinadores</a> para conocer algunos de los que dan soporte al proyecto.</p>
+<p>Existe también una gran comunidad de
+<a href="https://www.postgresql.org/support/professional_support/">empresas que ofrecen soporte para PostgreSQL</a>,
+desde consultores individuales hasta empresas multinacionales.</p>
+<p>Si desean hacer una contribución financiera al Grupo Global de Desarrollo de PostgreSQL o a una de las organizaciones sin fines de lucro reconocidas por la comunidad, visiten nuestra página de <a href="https://www.postgresql.org/about/donate/">donaciones</a>.</p>
+{% endblock presskit_corporate %}

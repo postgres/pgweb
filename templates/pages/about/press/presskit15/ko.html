@@ -1,0 +1,207 @@
+{% extends "pages/about/press/presskit15/base.html" %}
+
+{% block presskit_content %}
+<p>2022년 10월 13일, PostgreSQL 글로벌 개발 그룹은 세상에서
+<a href="https://www.postgresql.org/">가장 진보적인 공개 소스 데이터베이스</a>의
+가장 최신 버전인 <a href="https://www.postgresql.org/docs/15/release-15.html">PostgreSQL 15</a>가
+출시되었음을 알립니다.</p>
+<p>PostgreSQL 15는 향상된 정렬 성능을 포함해서, 로컬 환경과 분산 배포 환경
+모두를 고려한 성능 관리를 위한 눈에 띄는 성능 개선을 했습니다.  이번 배포판에는
+대중적인 <a href="https://www.postgresql.org/docs/15/sql-merge.html"><code>MERGE</code></a> 명령과
+데이터베이스 상태를 좀 더 자세히 살펴볼 수 있는 기능들을 추가해서
+개발자 편의성을 좀 더 높혔습니다.</p>
+<p>&quot;PostgreSQL 개발자 커뮤니티는 개발자 경험을 향상시킴과 함께 자료 처리 성능도
+보다 좋아지도록 계속 개선해 왔습니다. PostgreSQL 15는 이 데이터베이스를
+사용해서 훌륭한 응용 프로그램을 개발하고 그들의 중요한 자료를 안전하게
+지킬 수 있도록 하겠다는 목표 아래 공개 소프트웨어 개발 방식으로 만들어지고
+있다는 것이 주목할 점입니다.&quot; - PostgreSQL 코어팀 구성원, 조나단 캐츠</p>
+<p>신뢰성과 견고성으로 유명한 혁신적인 데이터 관리 시스템인
+<a href="https://www.postgresql.org">PostgreSQL</a>은
+<a href="https://www.postgresql.org/community/">글로벌 개발자 커뮤니티</a>에서
+25년 이상 공개 소스로 개발하고 있습니다.  이렇게 해서 모든 규모의 조직에서
+사용하는 공개 소스 관계형 데이터베이스가 되었습니다.</p>
+<h3 id="정렬-속도-향상과-압축">정렬 속도 향상과 압축</h3>
+<p>이번 배포판에서는 메모리 기반, 디스크 기반 모두
+<a href="https://www.postgresql.org/docs/15/queries-order.html">정렬</a> 알고리즘을
+개선해서, 자료형에 따라 25% - 400% 가량 빠르게 처리할 수 있습니다.
+<code>row_number()</code>, <code>rank()</code>, <code>dense_rank()</code>, <code>count()</code> 같은
+<a href="https://www.postgresql.org/docs/15/functions-window.html">윈도우 함수</a>에서도
+PostgreSQL 15에서 성능이 나아졌습니다.
+<a href="https://www.postgresql.org/docs/15/queries-select-lists.html#QUERIES-DISTINCT"><code>SELECT DISTINCT</code></a>
+쿼리가 이제
+<a href="https://www.postgresql.org/docs/15/parallel-query.html">병렬 쿼리</a>로 실행될 수 있습니다.</p>
+<p><a href="https://www.postgresql.org/docs/15/postgres-fdw.html">PostgreSQL 외부 자료 싸개</a>인,
+<a href="https://www.postgresql.org/docs/15/postgres-fdw.html"><code>postgres_fdw</code></a>는
+<a href="https://www.postgresql.org/about/press/presskit14/">이전 PostgreSQL 배포판</a>에서
+비동기식 원격 쿼리를 처음 지원했고, 이제
+<a href="https://www.postgresql.org/docs/15/postgres-fdw.html#id-1.11.7.47.11.7">비동기식 커밋</a>을 지원합니다.</p>
+<p>PostgreSQL 15에서는 아카이빙과 백업 기능도 개선했습니다.
+PostgreSQL 15는 이제 LZ4, Zstandard (zstd) 알고리즘을 이용한
+<a href="https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-WAL-COMPRESSION">미리쓰기 로그 파일 압축</a>을
+지원합니다. 이렇게 함으로 기능 향상과 공간 절약을 할 수 있습니다.
+또한 대부분 OS에서는
+<a href="https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-RECOVERY-PREFETCH">prefetch pages referenced in WAL</a>
+환경 설정을 이용해 복구 시간을 보다 빠르게 할 수 있습니다.
+PostgreSQL 기본 제공 백업 도구인
+<a href="https://www.postgresql.org/docs/15/app-pgbasebackup.html"><code>pg_basebackup</code></a>은
+압축 기법으로 gzip, LZ4, zstd 방식을 사용할 수 있습니다. 또한
+아카이빙 작업에서 쉘 명령을 이용함으로 발생하는 부가 비용을 줄일 수 있는
+<a href="https://www.postgresql.org/docs/15/archive-modules.html">아카이빙용 사용자 정의 모듈</a>을 지원합니다.</p>
+<h3 id="눈에-띄는-개발자-기능">눈에 띄는 개발자 기능</h3>
+<p>PostgreSQL 15는 표준 SQL 명령어인
+<a href="https://www.postgresql.org/docs/15/sql-merge.html"><code>MERGE</code></a>를 지원합니다.
+<code>MERGE</code> 명령은 <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> 명령을 상황에 맞게 하나의 명령으로
+처리할 수 있습니다.</p>
+<p>이번 최근 배포판은 <code>regexp_count()</code>, <code>regexp_instr()</code>, <code>regexp_like()</code>,
+<code>regexp_substr()</code> 같은
+<a href="https://www.postgresql.org/docs/15/functions-matching.html#FUNCTIONS-POSIX-REGEXP">정규식을 다루는 새 함수들</a>을
+추가했습니다.
+또한 <a href="https://www.postgresql.org/about/press/presskit14/ko/">이전 배포판</a>에 처음 소개한
+<a href="https://www.postgresql.org/docs/15/rangetypes.html"><code>multirange</code> 자료형</a>을 대상으로
+<code>range_agg</code> 함수도 쓸 수 있습니다.</p>
+<p>PostgreSQL 15에서는 함수의 <code>security_invoker</code> 옵션을 뷰에서도 사용할 수 있습니다.
+이 옵션은 기존 함수처럼 뷰 소유주만 자료를 다루지 않고 뷰를 사용하는 롤도 다룰 수 있게합니다.
+(많은 이야기가 있는데, 여기서는 여기까지만. - 옮긴이)</p>
+<h3 id="논리-복제-기능에-더-추가된-옵션">논리 복제 기능에 더 추가된 옵션</h3>
+<p>PostgreSQL 15는
+<a href="https://www.postgresql.org/docs/15/logical-replication.html">논리 복제</a> 관리를
+보다 쉽게 할 수 있습니다.
+<a href="https://www.postgresql.org/docs/15/logical-replication-publication.html">배포</a>에서
+<a href="https://www.postgresql.org/docs/15/logical-replication-row-filter.html">로우 거르기</a>,
+<a href="https://www.postgresql.org/docs/15/logical-replication-col-lists.html">칼럼 목록지정</a>을
+할 수 있습니다.
+이렇게 함으로 테이블의 원하는 부분만 복제할 수 있습니다.
+PostgreSQL 15는
+충돌하는 트랜잭션 재실행을 건너뛰는 것과 오류 발생시 구독을 자동으로 중지함으로
+<a href="https://www.postgresql.org/docs/15/logical-replication-conflicts.html">자료 충돌 관리</a>가
+보다 간단해졌습니다.
+아울러, 이제 논리 복제에서는 2단계 커밋(2PC)을 사용할 수 있습니다.</p>
+<h3 id="로깅과-환경-설정-확장">로깅과 환경 설정 확장</h3>
+<p>PostgreSQL 15에서는 새로운 로그 출력 양식을 제공합니다:
+<a href="https://www.postgresql.org/docs/15/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-JSONLOG"><code>jsonlog</code></a>.
+이 설정은 로그를 JSON 양식으로 출력할 수 있습니다.</p>
+<p>이번 배포판은 데이터베이스 관리자가
+일반 사용자에게 서버 차원의 환경 설정 매개변수를 직접 수정할 수
+있도록 권한을 부여할 있어 PostgreSQL 환경 설정을 보다
+유연하게 할 수 있도록 제공합니다. </p>
+<p>아울러, <a href="https://www.postgresql.org/docs/15/app-psql.html"><code>psql</code></a>에서
+<code>\dconfig</code> 내장 명령어가 추가 되었습니다. 직접 살펴보세요.</p>
+<h3 id="기타-소개할-것들">기타 소개할 것들</h3>
+<p><a href="https://www.postgresql.org/docs/15/monitoring-stats.html">인스턴스 통계 정보</a>
+는 통계 수집기 프로세스와 주기적인 디스크 기록 없이 이제 공유 메모리에서 수집됩니다. </p>
+<p><a href="https://www.postgresql.org/docs/15/collation.html">ICU 정렬규칙</a>을
+클러스터 단위나 개별 데이터베이스 단위로 이제 기본값으로 지정할 수 있습니다.</p>
+<p><a href="https://www.postgresql.org/docs/15/pgwalinspect.html"><code>pg_walinspect</code></a> 확장 모듈이
+새롭게 추가 되었습니다.</p>
+<p>또한, PostgreSQL 15에서는
+일반 사용자가 <code>public</code> (또는 기본) 스키마에서 더 이상
+<a href="https://www.postgresql.org/docs/15/ddl-schemas.html#DDL-SCHEMAS-PATTERNS"><code>CREATE</code> 권한이 없습니다</a>.
+이게 기본 설정입니다.</p>
+<p>PostgreSQL 15에서는 &quot;exclusive backup&quot; 모드가 사라졌으며,
+PL/Python은 더 이상 Python 2버전을 지원하지 않습니다.</p>
+<h3 id="postgresql이란">PostgreSQL이란?</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a>은 수천 명의 사용자, 공헌자, 회사
+및 조직의 범세계적 커뮤니티가 사용, 개발하는 세계에서 가장 진보적인 공개 소스
+데이터베이스입니다. PostgreSQL 프로젝트는 캘리포니아 버클리 대학에서 시작하여
+35년이 넘는 공학을 기반으로 빠른 속도로 계속 개발되고 있습니다. PostgreSQL의
+완성도 높은 기능들은 상용 데이터베이스 시스템과 거의 같으며, 확장성, 보안 및
+안정성 측면의 한 발 앞선 기능들은 더 뛰어납니다.</p>
+<h3 id="링크들">링크들</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">다운로드</a></li>
+<li><a href="https://www.postgresql.org/docs/15/release-15.html">출시 소식</a></li>
+<li><a href="https://www.postgresql.org/about/press/">홍보글</a></li>
+<li><a href="https://www.postgresql.org/support/security/">보안 정보</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">버전 정책</a></li>
+<li><a href="https://twitter.com/postgresql">트위트 팔로우 @postgresql</a></li>
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2>PostgreSQL이란?</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a>은 수천 명의 사용자, 공헌자, 회사
+및 조직의 범세계적 커뮤니티가 사용, 개발하는 세계에서 가장 진보적인 공개 소스
+데이터베이스입니다. PostgreSQL 프로젝트는 캘리포니아 버클리 대학에서 시작하여
+35년이 넘는 공학을 기반으로 빠른 속도로 계속 개발되고 있습니다. PostgreSQL의
+완성도 높은 기능들은 상용 데이터베이스 시스템과 거의 같으며, 확장성, 보안 및
+안정성 측면의 한 발 앞선 기능들은 더 뛰어납니다.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2>기능에 대해서 더 살펴볼 것들</h2>
+<p>기능이나 기타 사항에 대해 더 자세히 알고 싶다면, 다음 자료를 살펴보세요:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/15/release-15.html">출시 소식</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">기능표</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="다운로드-받는-곳">다운로드 받는 곳</h2>
+<p>PostgreSQL 15 버전을 다운로드 할 수 있는 방법은 다음과 같습니다:</p>
+<ul>
+<li><a href="https://www.postgresql.org/download/">공식 다운로드</a> 페이지에서
+<a href="https://www.postgresql.org/download/windows/">Windows</a>,
+<a href="https://www.postgresql.org/download/">Linux</a>,
+<a href="https://www.postgresql.org/download/macosx/">macOS</a> 외 기타 운영체제용 설치파일과
+도구들을 다운로드 할 수 있습니다.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v15.0">소스 코드</a></li>
+</ul>
+<p>그 외 도구들과 확장모듈은
+<a href="http://pgxn.org/">PostgreSQL Extension Network</a>에서 구할 수 있습니다.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2>문서</h2>
+<p>PostgreSQL 15는 맨페이지와 HTML 문서를 제공합니다.
+또한 온라인으로 <a href="https://www.postgresql.org/docs/15/">HTML</a> 양식과
+<a href="https://www.postgresql.org/files/documentation/pdf/15/postgresql-15-US.pdf">PDF</a> 양식도
+제공합니다.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="사용허가권">사용허가권</h2>
+<p>PostgreSQL은 BSD와 같은 &quot;허용&quot; 라이선스인
+<a href="http://www.opensource.org/licenses/postgresql/">PostgreSQL 라이선스</a>를 사용합니다.
+이 OSI 인증 라이선스는 상용 또는 독점 응용 프로그램에서
+PostgreSQL 사용을 제한하지 않기 때문에 유연하고 비즈니스
+친화적이라는 평가를 받고 있습니다. 여러 회사들의 지원과 코드 공개로
+이 라이선스는 PostgreSQL을 사용료, 공급업체 종속성, 라이선스 조건 변경에
+대한 두려움 없이 자체 제품에 데이터베이스를 내장하려는 공급업체에게 인기가 많습니다.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="연락처">연락처</h2>
+<p>홈페이지</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>이메일</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="이미지와-로고">이미지와 로고</h2>
+<p>Postgres, PostgreSQL, 코끼리 로고(슬로닉)는
+<a href="https://www.postgres.ca">캐나다 PostgreSQL 커뮤니티 협회</a>의 고유 상표권으로
+등록되어 있습니다.
+이 이미지와 로고를 사용하려면,
+<a href="https://www.postgresql.org/about/policies/trademarks/">상표 정책</a>을 준수해야합니다.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="협력-지원">협력 지원</h2>
+<p>PostgreSQL은 개발자 후원, IT 자원 제공, 재정 지원 등 다양한 캠페인 형태의
+지원을 환영합니다.
+현재 지원하고 있는 <a href="https://www.postgresql.org/about/sponsors/">후원</a> 목록을
+살펴보세요.</p>
+<p>또한 개별 컨설턴트에서 다국적 기업에 이르기까지
+<a href="https://www.postgresql.org/support/professional_support/">PostgreSQL 지원</a>을
+제공하는 대규모 커뮤니티가 있습니다.</p>
+<p>PostgreSQL 글로벌 개발 그룹이나
+기타 PostgreSQL 관련 분명한 비영리 커뮤니티에 재정적 기부를 하려면
+<a href="https://www.postgresql.org/about/donate/">기부</a> 페이지를 살펴보십시오.</p>
+{% endblock presskit_corporate %}

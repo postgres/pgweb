@@ -1,0 +1,465 @@
+{% extends "pages/about/press/presskit15/base.html" %}
+
+{% block presskit_content %}
+<p dir="rtl">
+<strong>אוקטובר 13, 2022</strong> -
+קבוצת הפיתוח הגלובלית של PostgreSQL הודיעה היום על שחרורה של
+<a href="https://www.postgresql.org/docs/15/release-15.html">PostgreSQL 15</a>
+, הגרסה העדכנית ביותר של
+<a href="https://www.postgresql.org/"> מסד הנתונים המתקדם בעולם עם קוד פתוח </a>
+</p>
+
+
+<p dir="rtl">
+PostgreSQL 15 מתבססת על שיפורי הביצועים של מהדורות אחרונות עם רווחים ניכרים לניהול עומסי עבודה הן בפריסות מקומיות והן בפריסות מבוזרות, כולל מיון משופר. מהדורה
+זו משפרת את חוויית המפתח עם הוספת הפקודה הפופולרית
+
+<a href="https://www.postgresql.org/docs/15/sql-merge.html"><code>MERGE</code></a>
+
+, ומוסיפה עוד יכולות לצפייה במצב מסד הנתונים.
+</p>
+
+<p dir="rtl">
+
+"קהילת המפתחים של PostgreSQL ממשיכה לבנות תכונות המפשטות את הפעלת עומסי נתונים בביצועים גבוהים תוך שיפור חווית המפתחים", אמר Jonathan Katz, חבר ב - PostgreSQL
+Core Team
+.
+
+"מהדורה אחרונה מדגישה כיצד, באמצעות פיתוח כם קוד פתוח, אנו יכולים לספק למשתמשים שלנו מסד נתונים נהדר לפיתוח יישומים ובטוח עבור הנתונים הקריטיים שלהם."
+</p>
+
+<p dir="rtl">
+<a href="https://www.postgresql.org">PostgreSQL</a>
+זאת מערכת ניהול נתונים חדשנית הידועה באמינותה ובחוסנה, נהנית ממעל 25 שנות פיתוח קוד פתוח מ
+<a href="https://www.postgresql.org/community">קהילת מפתחים עולמית</a>
+ והפכה לבסיס נתונים רלציוני הפתוח המועדף על ארגונים מכל הגדלים.
+</p>
+
+
+<h3 dir="rtl">
+
+ביצועי מיון ודחיסה משופרים
+</h3>
+
+<p dir="rtl">
+במהדורה האחרונה הזו, PostgreSQL משפרת את
+
+<a href="https://www.postgresql.org/docs/15/queries-order.html"> אלגוריתמי המיון  </a>
+
+
+בזיכרון ובדיסקים, עם מדדים המציגים מהירות של 25% - 400% על סמך סוגי מיון.
+
+שימוש ב-
+<code>row_number</code>
+,
+<code>rank</code>
+,
+<code>dense_rank</code>
+ו-
+<code>count</code>
+
+
+<a href="https://www.postgresql.org/docs/15/functions-window.html"> כפונקציות חלון  </a>
+
+ נהנה משיפור ביצועים ב-PostgreSQL 15, ושאילתות המשתמשות ב-
+
+<a href="https://www.postgresql.org/docs/15/queries-select-lists.html#QUERIES-DISTINCT"> <code>SELECT DISTINCT</code>  </a>
+
+ ניתנות כעת
+<a href="https://www.postgresql.org/docs/15/parallel-query.html">לביצוע במקביל</a>.
+</p>
+
+<p dir="rtl">
+בהתבסס על עבודה
+<a href="https://www.postgresql.org/about/press/presskit14/"> מהגרסה הקודמת של PostgreSQL  </a>
+
+לאפשר שאילתות מרחוקות אסינכרוניות, עוטף
+הנתונים הזרים
+<a href="https://www.postgresql.org/docs/15/postgres-fdw.html"> <code>postgres_fdw</code>  </a>
+
+  , תומך כעת
+<a href="https://www.postgresql.org/docs/15/postgres-fdw.html#id-1.11.7.47.11.7"> ב-commits אסינכרוני </a>
+.
+</p>
+
+<p dir="rtl">
+שיפורי הביצועים ב-PostgreSQL 15 משתרעים על מתקני הארכיון והגיבוי שלו. PostgreSQL 15 מוסיפה תמיכה בדחיסת LZ4 ו- Zstandard
+<code>(zstd)</code>
+ל
+<a href="https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-WAL-COMPRESSION"> לקבצי יומן כתיבה קדימה (WAL)  </a>
+
+
+
+, שיכולים להיות להם יתרונות לגודלם בדיסק וביצועים עבור עומסי עבודה מסוימים. במערכות הפעלה מסוימות, PostgreSQL 15 תומכת ביכולת
+
+<a href="https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-RECOVERY-PREFETCH"> לשלוף מראש תוכן קבצי WAL   </a>
+
+ולהאיץ את זמני השחזור. פקודת הגיבוי המובנית
+
+<a href="https://www.postgresql.org/docs/15/app-pgbasebackup.html"> <code>pg_basebackup</code> </a>
+
+ תומכת כעת בדחיסת קבצי גיבוי בצד השרת עם בחירה של gzip, LZ4 ו-zstd.
+
+</p>
+<p dir="rtl">
+PostgreSQL 15 כוללת את היכולת להשתמש במודולים מותאמים אישית
+<a href="https://www.postgresql.org/docs/15/archive-modules.html"> לארכיון </a>
+
+, מה שמבטל את התקורה של שימוש בפקודת מעטפת.
+
+</p>
+
+
+<h3 dir="rtl">
+
+תכונות מפתח אקספרסיביות
+</h3>
+
+<p dir="rtl">
+PostgreSQL 15 כוללת את הפקודה
+ <a href="https://www.postgresql.org/docs/15/sql-merge.html"> <code>MERGE</code>
+ </a>
+ מתקן SQL.
+פקודת
+
+<code>MERGE</code>
+ מאפשרת לכתוב משפטי SQL מותנים הכוללים פעולות
+<code>UPDATE</code>
+,
+<code>INSERT</code>
+ ו-
+<code>DELETE</code>
+ בתוך משפט בודד.
+</p>
+
+<p dir="rtl">
+מהדורה אחרונה זו מוסיפה
+
+ <a href="https://www.postgresql.org/docs/15/functions-matching.html#FUNCTIONS-POSIX-REGEXP"> פונקציות חדשות לשימוש בביטויים רגולריים
+ </a>
+לבדיקת מחרוזות:
+
+<code>regexp_count</code>
+,
+<code>regexp_instr</code>
+,
+<code>regexp_like</code>
+ו-
+<code>regexp_substr</code>
+.
+</p>
+
+<p dir="rtl">
+
+PostgreSQL 15 מרחיבה גם את פונקציית
+<code>range_agg</code>
+ לצבירה של סוגי נתונים
+  <a href="https://www.postgresql.org/docs/15/rangetypes.html"><code>multirange</code></a>
+
+, שהוצגו
+ <a href="https://www.postgresql.org/about/press/presskit14/">במהדורה הקודמת</a>.
+</p>
+
+<p dir="rtl">
+PostgreSQL 15 מאפשרת למשתמש
+  <a href="https://www.postgresql.org/docs/15/sql-createview.html">ליצור תצוגות שמבצעות שאילתות נתונים תוך שימוש בהרשאות של המבצע, ולא של יוצר התצוגה</a>
+. אפשרות זו, הנקראת
+<code>security_invoker</code>
+, מוסיפה שכבת הגנה נוספת כדי להבטיח שלצופה יש את ההרשאות הנכונות לעבודה עם הנתונים הבסיסיים.
+</p>
+
+<h3 dir="rtl">
+
+אפשרויות נוספות עם שכפול לוגי
+</h3>
+
+<p dir="rtl">
+PostgreSQL 15 מספקת גמישות רבה יותר לניהול
+<a href="https://www.postgresql.org/docs/15/logical-replication.html">שכפול לוגי</a>
+. מהדורה זו מציגה
+<a href="https://www.postgresql.org/docs/15/logical-replication-row-filter.html"> סינון שורות
+ </a>
+
+
+ו
+<a href="https://www.postgresql.org/docs/15/logical-replication-col-lists.html"> רשימות עמודות
+ </a>
+עבור
+<a href="https://www.postgresql.org/docs/15/logical-replication-publication.html">publishers</a>
+
+, ומאפשרת למשתמשים לבחור לשכפל תת-קבוצת נתונים מטבלה.
+</p>
+<p dir="rtl">
+ PostgreSQL 15 מוסיפה תכונות כדי לפשט את
+<a href="https://www.postgresql.org/docs/15/logical-replication-conflicts.html">ניהול קונפליקטים</a>
+, כולל היכולת לדלג על הפעלה חוזרת של טרנזקציה מתנגשת ולהשבית אוטומטית subscription אם מתגלה שגיאה. מהדורה זו כוללת גם תמיכה בשימוש ב two-phase commit (2PC) עם
+שכפול לוגי.
+</p>
+
+<h3 dir="rtl">
+
+שיפורים בכתיבת לוגים והגדרות תצורה
+</h3>
+
+<p dir="rtl">
+PostgreSQL 15 מציגה פורמט רישום חדש:
+
+<a href="https://www.postgresql.org/docs/15/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-JSONLOG"><code>jsonlog</code></a>
+. פורמט חדש זה מוציא נתוני יומן באמצעות מבנה JSON מוגדר, המאפשר לעבד יומני PostgreSQL במערכות רישום מובנות..
+</p>
+
+<p dir="rtl">
+PostgreSQL 15 מעניקה למנהלי מסד נתונים גמישות רבה יותר כיצד משתמשים יכולים לנהל את תצורת PostgreSQL, ומוסיפה את היכולת להעניק למשתמשים הרשאה לשנות פרמטרים של
+תצורה ברמת השרת. בנוסף, משתמשים יכולים כעת לחפש מידע על תצורה והגדרותיה באמצעות הפקודה
+<code dir="ltr">\dconfig</code>
+מכלי שורת הפקודה
+
+<a href="https://www.postgresql.org/docs/15/app-psql.html"><code>psql</code></a>
+.
+</p>
+
+
+<h3 dir="rtl">
+שינויים בולטים אחרים
+</h3>
+
+<p dir="rtl">
+<a href="https://www.postgresql.org/docs/15/monitoring-stats.html"> נתונים סטטיסטיים ברמת שרת </a>
+של PostgreSQL נאספים כעת בזיכרון משותף, זה מבטל את תהליך אספן הסטטיסטיקה וכתיבת הנתונים הסטטיסטיים הללו לדיסק.
+</p>
+
+<p dir="rtl">
+
+PostgreSQL 15 מאפשרת להפוך
+<a href="https://www.postgresql.org/docs/15/collation.html">
+ICU collation</a>
+
+
+ל collation ברירת המחדל עבור אשכול או מסד נתונים בודד.
+</p>
+
+<p dir="rtl">
+
+מהדורה זו מוסיפה גם הרחבה מובנית חדשה,
+<a href="https://www.postgresql.org/docs/15/pgwalinspect.html"><code>pg_walinspect</code></a>
+
+
+
+, המאפשרת למשתמשים לבדוק את התוכן של קובצי יומן כתיבה קדימה ישירות מממשק SQL.
+</p>
+
+<p dir="rtl">
+PostgreSQL 15 גם
+<a href="https://www.postgresql.org/docs/15/ddl-schemas.html#DDL-SCHEMAS-PATTERNS">
+מבטלת את הרשאת
+<code>CREATE</code>
+ מכל המשתמשים
+</a>
+ מלבד בעל מסד נתונים מסכימה ברירת המחדל
+<code>public</code>
+.
+</p>
+
+<p dir="rtl">
+PostgreSQL 15 מסירה גם את מצב "exclusive backup" שהוצא משימוש זה זמן רב וגם את התמיכה ב-Python 2 מ-PL/Python.
+</p>
+
+
+<h3 dir="rtl">
+אודות PostgreSQL
+</h3>
+<p dir="rtl">
+<a href="https://www.postgresql.org/">PostgreSQL</a>
+ הוא מסד נתונים בקוד פתוח המתקדם ביותר בעולם, עם קהילה גלובלית של אלפי משתמשים, תורמים, חברות וארגונים. הפרויקט PostgreSQL נבנה על מעל 35 שנות הנדסה, החל
+באוניברסיטת קליפורניה, ברקלי, והמשיך להתפתח עם קצב ללא תחרות. ערכת התכונות הבשלות של PostgreSQL לא רק תואמת מערכות נתונים קנייניות מובילות, אלא עולה עליהן
+במאפיינים של מסדי נתונים מתקדמים ,יכולות הרחבה, אבטחה ויציבות.
+</p>
+
+<h3 dir="rtl">
+קישורים
+</h3>
+<ul dir="rtl">
+<li>
+<a href="https://www.postgresql.org/download/"> הורדות </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/docs/15/release-15.htm"> הערות מהדורה </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/about/press/"> ערכת עיתונות </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/support/security/"> עמוד אבטחה </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/support/versioning/"> מדיניות גרסאות </a>
+</li>
+<li>
+<a href="https://twitter.com/postgresql"> עקבו אחרי @postgresql בטוויטר </a>
+</li>
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2 dir="rtl">
+אודות PostgreSQL
+</h2>
+<p dir="rtl">
+<a href="https://www.postgresql.org/">PostgreSQL</a>
+ הוא מסד נתונים בקוד פתוח המתקדם ביותר בעולם, עם קהילה גלובלית של אלפי משתמשים, תורמים, חברות וארגונים. הפרויקט PostgreSQL נבנה על מעל 35 שנות הנדסה, החל
+באוניברסיטת קליפורניה, ברקלי, והמשיך להתפתח עם קצב ללא תחרות. ערכת התכונות הבשלות של PostgreSQL לא רק תואמת מערכות נתונים קנייניות מובילות, אלא עולה עליהן
+במאפיינים של מסדי נתונים מתקדמים ,יכולות הרחבה, אבטחה ויציבות.
+</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 dir="rtl">
+עוד על התכונות
+</h2>
+
+<p dir="rtl">
+להסברים על התכונות לעיל ואחרות, עיין במשאבים הבאים:
+</p>
+
+<ul dir="rtl">
+<li>
+<a href="https://www.postgresql.org/docs/15/release-15.html"> הערות פרסום </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/about/featurematrix/"> מטריצת תכונות </a>
+</li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 dir="rtl">
+היכן להוריד
+</h2>
+
+<p dir="rtl">
+ישנן מספר דרכים שבהן תוכלו להוריד את PostgreSQL 15, כולל:
+</p>
+
+<ul dir="rtl">
+<li>
+דף
+<a href="https://www.postgresql.org/download/">ההורדות הרשמי</a>
+, המכיל מתקינים וכלים עבור
+<a href="https://www.postgresql.org/download/windows/">Windows</a>
+,
+<a href="https://www.postgresql.org/download/">Linux</a>
+,
+<a href="https://www.postgresql.org/download/macosx/">macOS</a>
+ועוד.
+</li>
+<li>
+<a href="https://www.postgresql.org/ftp/source/v15.0">קוד מקור</a>
+</li>
+</ul>
+
+<p dir="rtl">
+כלים והרחבות אחרים זמינים
+<a href="http://pgxn.org/">ברשת ההרחבות של PostgreSQL</a>
+.
+</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 dir="rtl">
+תיעוד
+</h2>
+
+<p dir="rtl">
+PostgreSQL 15 מגיע עם תיעוד HTML כמו גם דפי man, תוכלו גם לעיין בתיעוד באופן מקוון בפורמט
+<a href="https://www.postgresql.org/docs/15/">HTML</a>
+
+ וגם בפורמט
+<a href="https://www.postgresql.org/files/documentation/pdf/15/postgresql-15-US.pdf">PDF</a>
+.
+</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 dir="rtl">
+רישיון
+</h2>
+
+<p dir="rtl">
+
+  משתמש ב
+<a href="https://www.postgresql.org/about/licence/">רישיון PostgreSQL</a>
+, רישיון "מתירני" דמוי BSD. רישיון זה
+<a href="http://www.opensource.org/licenses/postgresql/">מאושר OSI</a>
+
+זוכה להערכה רבה כגמיש וידידותי לעסקים, מכיוון שהוא אינו מגביל את השימוש ב-PostgreSQL עם יישומים מסחריים וקנייניים. יחד עם תמיכה מרובת חברות ובעלות ציבורית על
+הקוד, הרישיון שלנו הופך את PostgreSQL לפופולרי מאוד בקרב הספקים המעוניינים להטמיע מסד נתונים במוצרים שלהם ללא חשש מעמלות, נעילת ספקים או שינויים בתנאי הרישוי.
+</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 dir="rtl">
+יצירת קשר
+</h2>
+
+<p dir="rtl">
+אתר אינטרנט
+</p>
+<ul dir="rtl">
+<li>
+<a href="https://www.postgresql.org/">https://www.postgresql.org </a>
+</li>
+</ul>
+
+<p dir="rtl">
+אימייל
+</p>
+<ul dir="rtl">
+<li>
+<a href="mailto:press@postgresql.org">press@postgresql.org</a>
+</li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 dir="rtl">
+תמונות ולוגו
+</h2>
+
+<p dir="rtl">
+Postgres ו-PostgreSQL ולוגו הפיל (Slonik) הם כולם סימנים מסחריים רשומים של
+<a href="https://www.postgres.ca">PostgreSQL Community Association of Canada</a>
+
+. אם ברצונך להשתמש בסימנים אלה, עליך לציית ל
+
+<a href="https://www.postgresql.org/about/policies/trademarks/">מדיניות הסימנים המסחריים</a>
+.
+</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 dir="rtl">
+תמיכה ארגונית
+</h2>
+
+<p dir="rtl">
+PostgreSQL נהנית מתמיכתן של חברות רבות, שנותנות חסות למפתחים, מספקות משאבי אירוח ונותנות לנו תמיכה כספית. עיין בדף
+<a href="https://www.postgresql.org/about/sponsors/">נותני החסות</a>
+שלנו עבור חלק מתומכי הפרויקט הללו.
+</p>
+
+<p dir="rtl">
+יש גם קהילה גדולה של
+<a href="https://www.postgresql.org/support/professional_support/">חברות המציעות תמיכה ב-PostgreSQL</a>
+, מיועצים בודדים ועד לחברות רב לאומיות.
+
+</p>
+
+<p dir="rtl">
+אם ברצונך לתרום תרומה כספית לקבוצת הפיתוח העולמית PostgreSQL או לאחד מארגוני הקהילה המוכרים ללא מטרות רווח, אנא בקר ב
+
+<a href="https://www.postgresql.org/about/donate/">דף התרומות</a>
+שלנו.
+
+</p>
+{% endblock presskit_corporate %}

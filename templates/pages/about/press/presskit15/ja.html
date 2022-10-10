@@ -1,0 +1,97 @@
+{% extends "pages/about/press/presskit15/base.html" %}
+
+{% block presskit_content %}
+<p>2022年10月13日 - PostgreSQLグローバル開発グループは、本日、<a href="https://www.postgresql.org/">最も先進的なオープンソースデータベース</a>の最新版である<a href="https://www.postgresql.org/docs/15/release-15.html">PostgreSQL 15</a>のリリースを発表しました。</p>
+<p>PostgreSQL 15では、最近のリリースの性能向上に加えて、ソートの改良を含む、ローカルと分散環境の両方でワークロードを管理するための顕著な利点を備えています。このリリースでは、人気の高い<a href="https://www.postgresql.org/docs/15/sql-merge.html"><code>MERGE</code></a> コマンドを追加し、開発者の使い勝手を向上させました。また、データベースの状態を監視する機能が追加されています。
+PostgreSQLのコアチームメンバーであるJonathan Katzは、「PostgreSQLの開発者コミュニティは、開発者体験を改善しながら、高性能なデータワークロードの実行を単純化する機能を構築し続けています」と述べています。「PostgreSQL 15は、オープンなソフトウェア開発を通じて、アプリケーション開発に最適で、重要なデータを安全に保護するデータベースをユーザに提供できることを強調しています。」</p>
+<p><a href="https://www.postgresql.org">PostgreSQL</a>は、<a href="https://www.postgresql.org/community/">グローバル開発コミュニティ</a>による25年以上にわたるオープンソース開発の恩恵を受けており、その信頼性と堅牢性で知られる革新的なデータ管理システムです。そしてあらゆる規模の組織に好まれるオープンソースリレーショナルデータベースになっています。</p>
+<h3 id="ソート性能と圧縮率の向上">ソート性能と圧縮率の向上</h3>
+<p>この最新リリースでは、PostgreSQLはインメモリとディスク上の<a href="https://www.postgresql.org/docs/15/queries-order.html">ソート</a>アルゴリズムを改善し、ベンチマークではどのデータ型をソートするかによって25%から400%の速度向上を示しています。PostgreSQL 15 では<a href="https://www.postgresql.org/docs/15/functions-window.html">ウィンドウ関数</a> <code>row_number()</code>, <code>rank()</code>, <code>dense_rank()</code>, <code>count()</code> を使用することも 性能上の利点があります。<a href="https://www.postgresql.org/docs/15/queries-select-lists.html#QUERIES-DISTINCT"><code>SELECT DISTINCT</code></a> を使用した問い合わせが <a href="https://www.postgresql.org/docs/15/parallel-query.html">並列に実行</a> できるようになりました。</p>
+<p>非同期リモートクエリを可能にする <a href="https://www.postgresql.org/about/press/presskit14/">以前の PostgreSQL リリース</a> を基に、 <a href="https://www.postgresql.org/docs/15/postgres-fdw.html">PostgreSQL 外部データラッパー</a>, <a href="https://www.postgresql.org/docs/15/postgres-fdw.html"><code>postgres_fdw</code></a> で <a href="https://www.postgresql.org/docs/15/postgres-fdw.html#id-1.11.7.47.11.7">非同期コミット</a> をサポートするようにしました。</p>
+<p>PostgreSQL 15の性能向上はアーカイブとバックアップの機能にも及んでいます。PostgreSQL 15はLZ4とZstandard (zstd) <a href="https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-WAL-COMPRESSION">ライトアヘッドログ (WAL) ファイルへの圧縮</a>のサポートを追加しました。 これは、特定の作業負荷に対して容量と性能の両方の利点をもたらすことができます。特定のオペレーティングシステムでは、PostgreSQL 15はリカバリ時間を短縮するために<a href="https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-RECOVERY-PREFETCH">WALによって参照されるページのプリフェッチ</a>のサポートを追加しています。PostgreSQLの組み込みバックアップコマンドである<a href="https://www.postgresql.org/docs/15/app-pgbasebackup.html"><code>pg_basebackup</code></a>は、gzip、LZ4、zstdから選択できるバックアップファイルのサーバサイド圧縮をサポートするようになりました。PostgreSQL 15では、<a href="https://www.postgresql.org/docs/15/archive-modules.html">アーカイブのためのカスタムモジュール</a>を使用することで、シェルコマンドを使用するオーバーヘッドをなくすことができるようになりました。</p>
+<h3 id="表現力豊かな開発者向け機能">表現力豊かな開発者向け機能</h3>
+<p>PostgreSQL 15 には、標準SQLの <a href="https://www.postgresql.org/docs/15/sql-merge.html"><code>MERGE</code></a> コマンドが含まれています。<code>MERGE</code> を使うと、<code>INSERT</code>、<code>UPDATE</code>、<code>DELETE</code> の操作を一つの文に含めることができる条件付き SQL 文を書くことができます。</p>
+<p>この最新リリースでは、文字列を検査するための <a href="https://www.postgresql.org/docs/15/functions-matching.html#FUNCTIONS-POSIX-REGEXP">正規表現を使用するための新しい関数</a> が追加されています。<code>regexp_count()</code>、 <code>regexp_instr()</code>、 <code>regexp_like()</code>、そして <code>regexp_substr()</code> です。PostgreSQL 15 では、<code>range_agg</code> 関数を拡張して、<a href="https://www.postgresql.org/about/press/presskit14/">以前のリリース</a> で導入された <a href="https://www.postgresql.org/docs/15/rangetypes.html">multirange データ型</a> を集約することもできます。</p>
+<p>PostgreSQL 15では、ユーザが<a href="https://www.postgresql.org/docs/15/sql-createview.html">ビューの作成者ではなく呼び出し元の権限を使用してデータを問い合わせるビューを作成する</a>ことができます。このオプションは <code>security_invoker</code> と呼ばれ、ビューの呼び出し元が基礎となるデータを操作するための正しい権限を持っていることを保証するために、追加の保護レイヤーを追加します。</p>
+<h3 id="論理レプリケーションで広がる選択肢">論理レプリケーションで広がる選択肢</h3>
+<p>PostgreSQL 15では、<a href="https://www.postgresql.org/docs/15/logical-replication.html">論理レプリケーション</a>をより柔軟に管理することができます。このリリースでは、<a href="https://www.postgresql.org/docs/15/logical-replication-publication.html">パブリッシャ</a>に<a href="https://www.postgresql.org/docs/15/logical-replication-row-filter.html">行フィルタリング</a>と<a href="https://www.postgresql.org/docs/15/logical-replication-col-lists.html">列リスト</a>を導入し、ユーザがテーブルからデータのサブセットを複製することを選択できるようにしています。PostgreSQL 15では、競合するトランザクションの再生をスキップする機能や、エラーが検出された場合に自動的にサブスクリプションを無効にする機能など、<a href="https://www.postgresql.org/docs/15/logical-replication-conflicts.html">競合管理</a>を簡素化する機能が追加されています。このリリースでは、論理レプリケーションでの2相コミット(2PC)の使用もサポートされています。</p>
+<h3 id="ログ出力と設定手法の強化">ログ出力と設定手法の強化</h3>
+<p>PostgreSQL 15 では、新しいログ記録形式が導入されました。<a href="https://www.postgresql.org/docs/15/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-JSONLOG"><code>jsonlog</code></a>です。この新しい書式は定義されたJSON構造を使用してログデータを出力し、これによりPostgreSQLのログを構造化されたログ記録システムで処理することができます。</p>
+<p>このリリースでは、データベース管理者が、ユーザがPostgreSQLの設定を管理する方法をより柔軟に変更できるようになりました。サーバレベルの設定パラメータを変更する権限をユーザに付与する機能が追加されました。さらに、<a href="https://www.postgresql.org/docs/15/app-psql.html"><code>psql</code></a> コマンドラインツールから <code>dconfig</code> コマンドを使用して、設定に関する情報を検索できるようになりました。</p>
+<h3 id="その他の主な変更点">その他の主な変更点</h3>
+<p>PostgreSQLの<a href="https://www.postgresql.org/docs/15/monitoring-stats.html">サーバレベル統計</a>が共有メモリで収集されるようになり、統計収集プロセスとこのデータのディスクへの定期的な書き込みの両方が不要になりました。</p>
+<p>PostgreSQL 15では、クラスタや個々のデータベースのデフォルト照合順序を<a href="https://www.postgresql.org/docs/15/collation.html">ICU照合順序</a>にすることが可能です。</p>
+<p>このリリースでは、新しい組み込みの拡張機能である <a href="https://www.postgresql.org/docs/15/pgwalinspect.html"><code>pg_walinspect</code></a> も追加され、ユーザは SQL インターフェースから直接、先行書き込みログファイルの内容を検査できるようになりました。</p>
+<p>PostgreSQL 15では、<a href="https://www.postgresql.org/docs/15/ddl-schemas.html#DDL-SCHEMAS-PATTERNS"><code>public</code>（またはデフォルト）スキーマのデータベース所有者を除くすべてのユーザから<code>CREATE</code>権限を剥奪します</a>。</p>
+<p>PostgreSQL 15では、長い間非推奨だった &quot;排他的バックアップ &quot;モードの削除と、PL/Pythonから、Python 2のサポートが削除されました。</p>
+<h3 id="postgresqlについて">PostgreSQLについて</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a>は、世界で最も先進的なオープンソースデータベースで、何千人ものユーザ、貢献者、企業、組織からなるグローバルコミュニティがあります。カリフォルニア大学バークレー校から始まった35年以上のエンジニアリングを基に、PostgreSQLは比類のないペースで開発を続けてきました。PostgreSQLの成熟した機能セットは、トップクラスのプロプライエタリデータベースシステムに匹敵するだけでなく、先進のデータベース機能、拡張性、セキュリティ、安定性においてそれらを凌駕しています。</p>
+<h3 id="リンク">リンク</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">ダウンロード</a></li>
+<li><a href="https://www.postgresql.org/docs/15/release-15.html">リリースノート</a></li>
+<li><a href="https://www.postgresql.org/about/press/">プレスキット</a></li>
+<li><a href="https://www.postgresql.org/support/security/">セキュリティ</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">バージョンポリシー</a></li>
+<li><a href="https://twitter.com/postgresql">Twitter</a></li>
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2>PostgreSQLについて</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a>は、世界で最も先進的なオープンソースデータベースで、何千人ものユーザ、貢献者、企業、組織からなるグローバルコミュニティがあります。カリフォルニア大学バークレー校から始まった35年以上のエンジニアリングを基に、PostgreSQLは比類のないペースで開発を続けてきました。PostgreSQLの成熟した機能セットは、トップクラスのプロプライエタリデータベースシステムに匹敵するだけでなく、先進のデータベース機能、拡張性、セキュリティ、安定性においてそれらを凌駕しています。</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2>機能についての詳細</h2>
+<p>上記の機能などの説明については、以下の資料をご覧ください。</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/15/release-15.html">リリースノート</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">機能一覧表</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2>ダウンロード先</h2>
+<p>PostgreSQL 15をダウンロードするには、以下のような方法があります。</p>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Official Downloads</a> のページには、<a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a> などのインストーラやツールを含みます。</li>
+<li><a href="https://www.postgresql.org/ftp/source/v15.0">ソースコード</a></li>
+</ul>
+<p>その他のツールや拡張機能は、<a href="http://pgxn.org/">PostgreSQL Extension Network</a>で入手できます。</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2>ドキュメンテーション</h2>
+<p>PostgreSQL 15 には man ページだけでなく HTML ドキュメントも付属しており、オンラインでも <a href="https://www.postgresql.org/docs/15/">HTML</a> と <a href="https://www.postgresql.org/files/documentation/pdf/15/postgresql-15-US.pdf">PDF</a> の両方の形式でドキュメントを閲覧することが可能です。</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2>ライセンス</h2>
+<p>PostgreSQLは、BSDに似た「寛容な」ライセンスである<a href="https://www.postgresql.org/about/licence/">PostgreSQLライセンス</a>を使用しています。この<a href="http://www.opensource.org/licenses/postgresql/">OSI認証ライセンス</a>は、PostgreSQLを商用およびプロプライエタリなアプリケーションで使用することを制限しないため、柔軟でビジネスフレンドリーであると広く評価されています。複数企業のサポートやコードの公的所有権とともに、このライセンスは、料金やベンダロックイン、ライセンス条項の変更を心配せずにデータベースを自社製品に組み込みたいと考えるベンダにとってPostgreSQLを非常に人気のあるものにしています。</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2>お問い合わせ先</h2>
+<p>ウェブサイト</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>Email</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2>画像とロゴ</h2>
+<p>Postgres、PostgreSQL、象のロゴ(Slonik)は、すべて<a href="https://www.postgres.ca">PostgreSQL Community Association of Canada</a>の登録商標です。これらのマークの使用を希望する場合は、<a href="https://www.postgresql.org/about/policies/trademarks/">商標ポリシー</a>に従わなければなりません。</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2>コーポレートサポート</h2>
+<p>PostgreSQLは、開発者のスポンサーとなり、ホスティングリソースを提供し、財政的なサポートを提供してくれる多くの企業の支援を受けています。これらのプロジェクト支援者の一部は <a href="https://www.postgresql.org/about/sponsors/">スポンサー</a> のページを参照してください。</p>
+<p>また、個人のコンサルタントから多国籍企業まで、<a href="https://www.postgresql.org/support/professional_support/">PostgreSQLサポートを提供する企業</a>の大きなコミュニティがあります。</p>
+<p>PostgreSQL グローバル開発グループ、または認定されたコミュニティの非営利団体に金銭的な寄付をしたい場合は、 <a href="https://www.postgresql.org/about/donate/">寄付</a> のページを参照してください。</p>
+{% endblock presskit_corporate %}

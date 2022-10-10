@@ -1,0 +1,176 @@
+{% extends "pages/about/press/presskit15/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 15 Released!</h1>
+<p>
+  <strong>October 13, 2022</strong> - The PostgreSQL Global Development Group today announced the
+  release of <a href="https://www.postgresql.org/docs/15/release-15.html">PostgreSQL 15</a>,
+  the latest version of the world’s
+  <a href="https://www.postgresql.org/">most advanced open source database</a>.
+</p>
+<p>
+  PostgreSQL 15 builds on the performance improvements of recent releases with
+  noticeable gains for managing workloads in both local and distributed
+  deployments, including improved sorting. This release improves the developer
+  experience with the addition of the popular
+  <a href="https://www.postgresql.org/docs/15/sql-merge.html"><code>MERGE</code></a> command, and adds
+  more capabilities for observing the state of the database.
+</p>
+<p>
+  &quot;The PostgreSQL developer community continues to build features that simplify
+  running high performance data workloads while improving the developer
+  experience,&quot; said Jonathan Katz, a PostgreSQL Core Team member. &quot;PostgreSQL 15
+  highlights how, through open software development, we can deliver to our users a
+  database that is great for application development and safe for their critical
+  data.&quot;
+</p>
+<p>
+  <a href="https://www.postgresql.org">PostgreSQL</a>, an innovative data management system
+  known for its reliability and robustness, benefits from over 25 years of open
+  source development from a <a href="https://www.postgresql.org/community/">global developer community</a>
+  and has become the preferred open source relational database for organizations
+  of all sizes.
+</p>
+
+<h3 id="improved-sort-performance-and-compression">Improved Sort Performance and Compression</h3>
+<p>
+  In this latest release, PostgreSQL improves on its in-memory and on-disk
+  <a href="https://www.postgresql.org/docs/15/queries-order.html">sorting</a> algorithms,
+  with benchmarks showing speedups of 25% - 400% based on which data types are
+  sorted. Using <code>row_number()</code>, <code>rank()</code>, <code>dense_rank()</code>, and <code>count()</code> as
+  <a href="https://www.postgresql.org/docs/15/functions-window.html">window functions</a>
+  also have performance benefits in PostgreSQL 15. Queries using
+  <a href="https://www.postgresql.org/docs/15/queries-select-lists.html#QUERIES-DISTINCT"><code>SELECT DISTINCT</code></a>
+  can now be
+  <a href="https://www.postgresql.org/docs/15/parallel-query.html">executed in parallel</a>.
+</p>
+<p>
+  Building on work from the <a href="https://www.postgresql.org/about/press/presskit14/">previous PostgreSQL release</a>
+  for allowing async remote queries, the
+  <a href="https://www.postgresql.org/docs/15/postgres-fdw.html">PostgreSQL foreign data wrapper</a>,
+  <a href="https://www.postgresql.org/docs/15/postgres-fdw.html"><code>postgres_fdw</code></a>,
+  now supports
+  <a href="https://www.postgresql.org/docs/15/postgres-fdw.html#id-1.11.7.47.11.7">asynchronous commits</a>.</p>
+  <p>The performance improvements in PostgreSQL 15 extend to its archiving and backup
+  facilities. PostgreSQL 15 adds support for LZ4 and Zstandard (zstd)
+  <a href="https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-WAL-COMPRESSION">compression to write-ahead log (WAL) files</a>,
+  which can have both space and performance benefits for certain workloads. On
+  certain operating systems, PostgreSQL 15 adds support to
+  <a href="https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-RECOVERY-PREFETCH">prefetch pages referenced in WAL</a>
+  to help speed up recovery times. PostgreSQL&#39;s built-in backup command,
+  <a href="https://www.postgresql.org/docs/15/app-pgbasebackup.html"><code>pg_basebackup</code></a>, now
+  supports server-side compression of backup files with a choice of gzip, LZ4, and
+  zstd. PostgreSQL 15 includes the ability to use
+  <a href="https://www.postgresql.org/docs/15/archive-modules.html">custom modules for archiving</a>,
+  which eliminates the overhead of using a shell command.
+</p>
+
+<h3 id="expressive-developer-features">Expressive Developer Features</h3>
+<p>
+  PostgreSQL 15 includes the SQL standard
+  <a href="https://www.postgresql.org/docs/15/sql-merge.html"><code>MERGE</code></a> command.
+  <code>MERGE</code> lets you write conditional SQL statements that can include <code>INSERT</code>,
+  <code>UPDATE</code>, and <code>DELETE</code> actions within a single statement.</p>
+  <p>This latest release adds
+  <a href="https://www.postgresql.org/docs/15/functions-matching.html#FUNCTIONS-POSIX-REGEXP">new functions for using regular expressions</a>
+  to inspect strings: <code>regexp_count()</code>, <code>regexp_instr()</code>, <code>regexp_like()</code>, and
+  <code>regexp_substr()</code>. PostgreSQL 15 also extends the <code>range_agg</code> function to
+  aggregate
+  <a href="https://www.postgresql.org/docs/15/rangetypes.html"><code>multirange</code> data types</a>,
+  which were introduced in the
+  <a href="https://www.postgresql.org/about/press/presskit14/">previous release</a>.</p>
+  <p>PostgreSQL 15 lets users
+  <a href="https://www.postgresql.org/docs/15/sql-createview.html">create views that query data using the permissions of the caller, not the view creator</a>.
+  This option, called <code>security_invoker</code>, adds an additional layer of protection
+  to ensure that view callers have the correct permissions for working with the
+  underlying data.
+</p>
+
+<h3 id="more-options-with-logical-replication">More Options with Logical Replication</h3>
+<p>
+  PostgreSQL 15 provides more flexibility for managing
+  <a href="https://www.postgresql.org/docs/15/logical-replication.html">logical replication</a>.
+  This release introduces
+  <a href="https://www.postgresql.org/docs/15/logical-replication-row-filter.html">row filtering</a>
+  and
+  <a href="https://www.postgresql.org/docs/15/logical-replication-col-lists.html">column lists</a>
+  for
+  <a href="https://www.postgresql.org/docs/15/logical-replication-publication.html">publishers</a>,
+  letting users choose to replicate a subset of data from a table. PostgreSQL 15
+  adds features to simplify
+  <a href="https://www.postgresql.org/docs/15/logical-replication-conflicts.html">conflict management</a>,
+  including the ability to skip replaying a conflicting transaction and to
+  automatically disable a subscription if an error is detected. This release also
+  includes support for using two-phase commit (2PC) with logical replication.
+</p>
+
+<h3 id="logging-and-configuration-enhancements">Logging and Configuration Enhancements</h3>
+<p>
+  PostgreSQL 15 introduces a new logging format:
+  <a href="https://www.postgresql.org/docs/15/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-JSONLOG"><code>jsonlog</code></a>.
+  This new format outputs log data using a defined JSON structure, which allows
+  PostgreSQL logs to be processed in structured logging systems.</p>
+
+<p>
+  This release gives database administrators more flexibility in how users can
+  manage PostgreSQL configuration, adding the ability to grant users permission to
+  alter server-level configuration parameters. Additionally, users can now search
+  for information about configuration using the <code>\dconfig</code> command from the
+  <a href="https://www.postgresql.org/docs/15/app-psql.html"><code>psql</code></a> command-line tool.
+</p>
+
+<h3 id="other-notable-changes">Other Notable Changes</h3>
+
+<p>
+  PostgreSQL
+  <a href="https://www.postgresql.org/docs/15/monitoring-stats.html">server-level statistics</a>
+  are now collected in shared memory, eliminating both the statistics collector
+  process and periodically writing this data to disk.
+</p>
+<p>
+  PostgreSQL 15 makes it possible to make an
+  <a href="https://www.postgresql.org/docs/15/collation.html">ICU collation</a> the default
+  collation for a cluster or an individual database.
+</p>
+
+<p>
+  This release also
+  adds a new built-in extension,
+  <a href="https://www.postgresql.org/docs/15/pgwalinspect.html"><code>pg_walinspect</code></a>, that
+  lets users inspect the contents of write-ahead log files directly from a SQL
+  interface.
+</p>
+
+<p>
+  PostgreSQL 15 also
+<a href="https://www.postgresql.org/docs/15/ddl-schemas.html#DDL-SCHEMAS-PATTERNS">revokes the <code>CREATE</code> permission from all users</a>
+except a database owner from the <code>public</code> (or default) schema.
+</p>
+
+<p>
+  PostgreSQL 15 removes both the long-deprecated &quot;exclusive backup&quot; mode and
+  support for Python 2 from PL/Python.
+</p>
+
+<h3 id="about-postgresql">About PostgreSQL</h3>
+
+<p>
+  <a href="https://www.postgresql.org">PostgreSQL</a> is the world's most advanced open
+  source database, with a global community of thousands of users, contributors,
+  companies and organizations. Built on over 30 years of engineering, starting at
+  the University of California, Berkeley, PostgreSQL has continued with an
+  unmatched pace of development. PostgreSQL's mature feature set not only matches
+  top proprietary database systems, but exceeds them in advanced database
+  features, extensibility, security, and stability.
+</p>
+
+<h3 id="links">Links</h3>
+<ul>
+  <li><a href="https://www.postgresql.org/download/">Download</a></li>
+  <li><a href="https://www.postgresql.org/docs/14/release-14.html">Release Notes</a></li>
+  <li><a href="https://www.postgresql.org/about/press/">Press Kit</a></li>
+  <li><a href="https://www.postgresql.org/support/security/">Security Page</a></li>
+  <li><a href="https://www.postgresql.org/support/versioning/">Versioning Policy</a></li>
+  <li><a href="https://twitter.com/postgresql">Follow @postgresql on Twitter</a></li>
+</ul>
+{% endblock presskit_content %}
