@@ -114,6 +114,7 @@
   --navbar-bg-color: inherit;
   --navbar-fg-color: inherit;
   --navbar-sdw-color: rgba(0,0,0,0.2);
+  --navbar-toggler-img: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
   --pg-bdr-blue-color: #336791;
   --pg-bg-blue-color: #336791;
   --pg-bg-gray-color: #e7eae8;
@@ -199,6 +200,7 @@
     --i-fas-search-fg-color: #f3f5f9;
     --navbar-bg-color: #212121;
     --navbar-fg-color: #f3f5f9;
+    --navbar-toggler-img: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(243, 245, 249, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
     --pg-bg-gray-color: #2e2e2e;
     --pg-shoutbox-bg-color: #2b6da3;
     --pg-sidenav-a-fg-color: #2b6da3;
@@ -788,6 +790,10 @@ ul.actions {
   height: 2rem;
   margin-left: 0;
   margin-bottom: 0;
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: var(--navbar-toggler-img)
 }
 
 .nav-item > a {
