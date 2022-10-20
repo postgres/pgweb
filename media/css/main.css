@@ -179,10 +179,12 @@
     --custom-select-bg-color: #4a4a4a;
     --custom-select-fg-color: #f3f5f9;
     --cta-header-fg-color: #f3f5f9;
+    --doccontent-blockquote-table-caution-bg-color: #171709;
     --doccontent-blockquote-table-note-bdr-color: #84c578;
     --doccontent-blockquote-table-note-bg-color: #4a4a4a;
     --doccontent-blockquote-table-tip-bdr-color: #84c578;
-    --doccontent-blockquote-table-tip-bg-color: #4a4a4a;
+    --doccontent-blockquote-table-tip-bg-color: none;
+    --doccontent-blockquote-table-warning-bg-color: #1e0c0c;
     --doccontent-callout-fg-color: #f3f5f9;
     --doccontent-pre-code-bg-color: #4a4a4a;
     --doccontent-table-bdr-color: #6b6b6b;
