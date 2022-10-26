@@ -234,9 +234,9 @@ body {
 }
 
 input, select, textarea, .btn-default {
-  background-color: var(--button-input-bg-color) !important;
-  border-color: var(--button-input-bdr-color) !important;
-  color: var(--button-input-fg-color) !important;
+  background-color: var(--button-input-bg-color);
+  border-color: var(--button-input-bdr-color);
+  color: var(--button-input-fg-color);
 }
 
 .table th {
