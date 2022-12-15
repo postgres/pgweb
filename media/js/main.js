@@ -98,3 +98,18 @@ function showDistros(btn, osDiv) {
     btn.style.background = active_color;
     document.getElementById(osDiv).style.display = 'block';
 }
+
+
+/*
+ * Register a confirm handler for forms that, well, requires confirmation
+ * for someting.
+ */
+document.querySelectorAll('button[data-confirm]').forEach((button) => {
+    button.addEventListener('click', (event) => {
+        if (confirm(event.target.dataset.confirm)) {
+            return true;
+        }
+        event.preventDefault();
+        return false;
+    });
+});

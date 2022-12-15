@@ -45,6 +45,11 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
             raise PermissionDenied("You cannot edit this item")
 
     if request.method == 'POST':
+        if 'modstate' in (f.name for f in instance._meta.get_fields()) and instance.modstate == ModerationState.CREATED and request.POST.get('delete', '') == 'delete':
+            # Don't care to validate, just delete.
+            instance.delete()
+            return HttpResponseRedirect(redirect)
+
         # Process this form
         form = formclass(data=request.POST, instance=instance)
         for fn in form.fields:
@@ -183,6 +188,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
         form_intro = None
 
     savebutton = 'Save'
+    deletebutton = None
     if itemid == 'new':
         if 'modstate' in (f.name for f in instance._meta.get_fields()):
             # This is a three-state moderated entry, so don't say "submit new" for new
@@ -194,6 +200,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
         if 'modstate' in (f.name for f in instance._meta.get_fields()):
             if instance.modstate == ModerationState.CREATED:
                 savebutton = 'Save draft'
+                deletebutton = 'Delete draft'
 
     ctx = {
         'form': form,
@@ -201,6 +208,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
         'form_intro': form_intro,
         'described_checkboxes': getattr(form, 'described_checkboxes', {}),
         'savebutton': savebutton,
+        'deletebutton': deletebutton,
         'operation': (itemid == "new") and "New" or "Edit",
     }
     ctx.update(extracontext)
