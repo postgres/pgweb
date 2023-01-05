@@ -79,14 +79,23 @@ function copyScript(trigger, elem) {
  * families on the Download page
  */
 function showDistros(btn, osDiv) {
+    var default_color = '#FFFFFF';
+    var active_color = '#e7eae8';
+
+    // dark mode
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        default_color = '#212121';
+        active_color = '#4A4A4A';
+    }
+
     // Disable everything
-    document.getElementById('btn-download-bsd').classList.remove("btn-download-active");;
+    document.getElementById('btn-download-bsd').style.background = default_color;
     document.getElementById('download-subnav-bsd').style.display = 'none';
-    document.getElementById('btn-download-linux').classList.remove("btn-download-active");
+    document.getElementById('btn-download-linux').style.background = default_color;
     document.getElementById('download-subnav-linux').style.display = 'none';
 
     // Enable the one we want
-    btn.classList.add("btn-download-active");
+    btn.style.background = active_color;
     document.getElementById(osDiv).style.display = 'block';
 }
 
@@ -104,45 +113,3 @@ document.querySelectorAll('button[data-confirm]').forEach((button) => {
         return false;
     });
 });
-
-
-/*
- * Theme switching
- */
-function theme_apply() {
-  'use strict';
-  if (theme === 'light') {
-    document.getElementById('btn-theme').innerHTML = '<i class="fas fa-moon"></i>';
-    document.documentElement.setAttribute('data-theme', 'light');
-    localStorage.setItem('theme', 'light');
-  } else {
-    document.getElementById('btn-theme').innerHTML = '<i class="fas fa-lightbulb"></i>';
-    document.documentElement.setAttribute('data-theme', 'dark');
-    localStorage.setItem('theme', 'dark');
-  }
-}
-
-theme_apply();
-document.getElementById("form-theme").style.display="block";
-
-function theme_switch() {
-  'use strict';
-  if (theme === 'light') {
-    theme = 'dark';
-  } else {
-    theme = 'light';
-  }
-  theme_apply();
-}
-
-let theme_OS = window.matchMedia('(prefers-color-scheme: light)');
-theme_OS.addEventListener('change', function (e) {
-  'use strict';
-  if (e.matches) {
-    theme = 'light';
-  } else {
-    theme = 'dark';
-  }
-  theme_apply();
-});
-
