@@ -19,14 +19,28 @@
   <link rel="stylesheet" href="/media/css/bootstrap-4.4.1.min.css">
   <link rel="shortcut icon" href="/favicon.ico" />
   {%if newstags %}
-    {%comment%}Default RSS links are only shown on pages that have newstags set{%endcomment%}
-    <link rel="alternate" type="application/rss+xml" title="All PostgreSQL News" href="/news.rss" />
-    {%for t in newstags%}
-      <link rel="alternate" type="application/rss+xml" title="PostgreSQL News about {{t.name}}" href="/news/{{t.urlname}}.rss" />
-    {%endfor%}
-    <link rel="alternate" type="application/rss+xml" title="PostgreSQL Events" href="/events.rss" />
+  {%comment%}Default RSS links are only shown on pages that have newstags set{%endcomment%}
+  <link rel="alternate" type="application/rss+xml" title="All PostgreSQL News" href="/news.rss" />
+  {%for t in newstags%}
+    <link rel="alternate" type="application/rss+xml" title="PostgreSQL News about {{t.name}}" href="/news/{{t.urlname}}.rss" />
+  {%endfor%}
+  <link rel="alternate" type="application/rss+xml" title="PostgreSQL Events" href="/events.rss" />
   {%endif%}
-    <link rel="stylesheet" type="text/css" href="/dyncss/base.css?{{gitrev}}">
+  <link rel="stylesheet" type="text/css" href="/dyncss/base.css?{{gitrev}}">
+
+  <script>
+    let theme = 'light';
+    if (localStorage.getItem('theme')) {
+      if (localStorage.getItem('theme') === 'dark') {
+        theme = 'dark';
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      theme = 'dark';
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+
   {%block extrahead%}{%endblock%}
   </head>
   <body>
@@ -53,14 +67,17 @@
                 <li class="nav-item p-2"><a href="/about/donate/" title="Donate">Donate</a></li>
                 <li class="nav-item p-2"><a href="/account/" title="Your account">Your account</a></li>
               </ul>
-             <form role="search" method="get" action="/search/">
-               <div class="input-group">
-                 <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
-                 <span class="input-group-btn">
-                   <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
-                 </span>
-               </div><!-- /input-group -->
-             </form>
+              <form role="search" method="get" action="/search/">
+                <div class="input-group">
+                  <input id="q" name="q" type="text" size="20" maxlength="255" accesskey="s"  class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fas fa-search"></i></button>
+                  </span>
+                </div><!-- /input-group -->
+              </form>
+              <form id="form-theme" class="form-inline" style="display: none;">
+                <button id="btn-theme" class="btn btn-default ml-1" type="button" onclick="theme_switch()"></button>
+              </form>
             </div>
           </nav>
         </div>
