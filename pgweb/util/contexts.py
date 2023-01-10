@@ -44,7 +44,7 @@ sitenav = {
         {'title': 'Contributors', 'link': '/community/contributors/'},
         {'title': 'Mailing Lists', 'link': '/list/'},
         {'title': 'IRC', 'link': '/community/irc/'},
-        {'title': 'Slack', 'link': 'https://postgres-slack.herokuapp.com/'},
+        {'title': 'Slack', 'link': 'https://postgresteam.slack.com'},
         {'title': 'Local User Groups', 'link': '/community/user-groups/'},
         {'title': 'Events', 'link': '/about/events/'},
         {'title': 'International Sites', 'link': '/community/international/'},
