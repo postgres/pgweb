@@ -1,0 +1,55 @@
+{%extends "base/page.html"%}
+{%block title%}Core Team Report: January 2022 - December 2022{%endblock%}
+{%block contents%}
+
+<h1>Core Team Report: January 2022 - December 2022<i class="fas fa-comments"></i></h1>
+
+<p>
+  This is a high level report of the activities of the
+  <a href="/developer/core">PostgreSQL Core Team</a> during the period of
+  January 2022 to December 2022. While we aim for full transparency, some
+  activities may be kept confidential for privacy and other reasons.
+</p>
+
+<ul>
+  <li>
+    <p><strong>Code of Conduct and Code of Conduct Committee</strong></p>
+    <p>
+      The PostgreSQL Core Team accepted changes to the Code of Conduct to
+      clarify
+      <a href="https://git.postgresql.org/gitweb/?p=pgweb.git;a=commitdiff;h=76ea6e51d7e74e93f82b93630e10da51906e1a4d;hp=de0364bf011eae2eecf74075ab8e3be6c6a7e608">
+        term limits</a>.
+    </p>
+  </li>
+  <li>
+    <p><strong>War in Ukraine and its impact to the PostgreSQL project</strong></p>
+    <p>
+      The Core Team handled several different situations that were related to
+      the war in Ukraine and its impact to the project.
+    </p>
+  </li>
+  <li>
+    <p><strong>Time Zone Database changes</strong></p>
+    <p>
+      PostgreSQL includes a copy of the Time Zone Database (tzdata) to ensure
+      that PostgreSQL will work on systems that do not include tzdata. In 2022,
+      there were changes in the Time Zone Database (tzdata) that would affect
+      the display of historical timestamps and different options on how to
+      maintain backwards compatibility. Based on an evaluation of what major
+      operating systems were doing, the Core Team opted to continue shipping the
+      standard tzdata build.
+    </p>
+  </li>
+  <li>
+    <p><strong>Trademark management and disputes</strong></p>
+    <p>
+      The Core Team delegates trademark management to the
+      <a href="https://www.postgres.ca/">PostgreSQL Community Association of Canada</a>
+      (PGCAC). The Core Team was made aware of several ongoing trademark
+      disputes that PGCAC and, in some cases,
+      <a href="https://www.postgresql.eu/">PostgreSQL Europe</a> (PGEU) are
+      engaged in. These disputes are ongoing as of the writing of this report.
+    </p>
+  </li>
+</ul>
+{%endblock%}
