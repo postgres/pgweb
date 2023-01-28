@@ -132,6 +132,17 @@ class PGUserAdmin(UserAdmin):
             fs[1][1]['fields'] = list(fs[1][1]['fields']) + ['extraemail', ]
         return fs
 
+    def has_view_permission(self, request, obj=None):
+        """
+        We have a special check for view permissions here based on if the user
+        has access to modifying contributors. This allows us to allow the
+        editor to return a list of usernames from the dropdown. If this is not
+        the autocomplete / user editor workflow, then we proceed as normal.
+        """
+        if request.path == '/admin/autocomplete/' and request.GET.get('app_label') == 'contributors' and request.GET.get('model_name') == 'contributor' and request.user.has_perm("contributors.change_contributor"):
+            return True
+        return super().has_view_permission(request, obj)
+
     @property
     def search_fields(self):
         sf = list(super().search_fields)
