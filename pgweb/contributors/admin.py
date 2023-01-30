@@ -16,6 +16,10 @@ class ContributorAdminForm(forms.ModelForm):
 class ContributorAdmin(admin.ModelAdmin):
     form = ContributorAdminForm
     autocomplete_fields = ['user', ]
+    list_display = ('__str__', 'user', 'ctype',)
+    list_filter = ('ctype',)
+    ordering = ('firstname', 'lastname',)
+    search_fields = ('firstname', 'lastname', 'user__username',)
 
 
 admin.site.register(ContributorType)

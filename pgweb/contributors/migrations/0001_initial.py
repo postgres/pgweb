@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contributor',
             name='ctype',
-            field=models.ForeignKey(to='contributors.ContributorType', on_delete=models.CASCADE),
+            field=models.ForeignKey(to='contributors.ContributorType', on_delete=models.CASCADE, verbose_name='Contributor Type'),
         ),
         migrations.AddField(
             model_name='contributor',
