@@ -99,6 +99,12 @@ class Version(models.Model):
         yield '/about/featurematrix/$'
         yield '/versions.rss'
         yield '/versions.json'
+        # the next two purge the cache for the release notes.
+        # note that we need to purge all the release notes for a major version
+        # tree as we currently have a sidebar that links to all of the minor
+        # versions within a tree on an individual release notes page.
+        yield '/docs/release/{:.0f}'.format(self.tree)
+        yield '/docs/release/$'
 
     def purge_xkeys(self):
         yield 'pgdocs_all'
