@@ -54,6 +54,14 @@ class CommunityAuthConsentForm(forms.Form):
 
         self.fields['consent'].label = 'Consent to sharing data with {0}'.format(self.orgname)
 
+    def clean(self):
+        cleaned_data = super().clean()
+        if 'next' not in cleaned_data:
+            self.add_error(None, "Next URL must be set")
+        if not cleaned_data['next'].startswith('/'):
+            self.add_error(None, "Invalid next url")
+        return cleaned_data
+
 
 class SignupForm(forms.Form):
     username = forms.CharField(max_length=30)
