@@ -802,7 +802,7 @@ def communityauth_search(request, siteid):
     else:
         raise Http404('No search term specified')
 
-    users = User.objects.prefetch_related(Prefetch('secondaryemail_set', queryset=SecondaryEmail.objects.filter(confirmed=True))).filter(q)
+    users = User.objects.prefetch_related(Prefetch('secondaryemail_set', queryset=SecondaryEmail.objects.filter(confirmed=True))).filter(q)[:100]
 
     j = json.dumps([{
         'u': u.username,
