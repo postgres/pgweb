@@ -174,6 +174,7 @@ def docpage(request, version, filename):
 
 
 @allow_frames
+@content_sources('style', "'unsafe-inline'")
 def docsvg(request, version, filename):
     if version == 'current':
         ver = Version.objects.filter(current=True)[0].tree
