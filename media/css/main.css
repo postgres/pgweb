@@ -1169,6 +1169,12 @@ code,
   color: var(--doccontent-code-fg-color) !important;
 }
 
+/** Additional formatting for "simplelist" structures */
+#docContent table.simplelist td {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
 /**
   * Various callout boxes for docs, including warning, caution, note, tip
   */
