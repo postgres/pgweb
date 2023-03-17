@@ -54,6 +54,7 @@ sitenav = {
         {'title': 'Core Team', 'link': '/developer/core/'},
         {'title': 'Roadmap', 'link': '/developer/roadmap/'},
         {'title': 'Coding', 'link': '/developer/coding/'},
+        {'title': 'CommitFests', 'link': 'https://commitfest.postgresql.org'},
         {'title': 'Testing', 'link': '/developer/testing/', 'submenu': [
             {'title': 'Beta Information', 'link': '/developer/beta/'},
         ]},
