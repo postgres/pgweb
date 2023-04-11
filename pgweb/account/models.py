@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class CommunityAuthOrg(models.Model):
-    orgname = models.CharField(max_length=100, null=False, blank=False,
+    orgname = models.CharField(max_length=100, null=False, blank=False, unique=True,
                                help_text="Name of the organisation")
     require_consent = models.BooleanField(null=False, blank=False, default=True)
 
@@ -12,7 +12,7 @@ class CommunityAuthOrg(models.Model):
 
 
 class CommunityAuthSite(models.Model):
-    name = models.CharField(max_length=100, null=False, blank=False,
+    name = models.CharField(max_length=100, null=False, blank=False, unique=True,
                             help_text="Note that the value in this field is shown on the login page, so make sure it's user-friendly!")
     redirecturl = models.URLField(max_length=200, null=False, blank=False)
     apiurl = models.URLField(max_length=200, null=False, blank=True)
