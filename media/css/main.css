@@ -1176,6 +1176,20 @@ code,
 }
 
 /**
+ * Styles for anchors to deeper documentation links. This makes an element
+ * (currently "#") appear next to links, so a reader can click on it and have
+ * the anchor appear in the URL.
+ */
+#docContent a.id_link {
+  color: inherit;
+  visibility: hidden;
+}
+
+#docContent *:hover > a.id_link {
+  visibility: visible;
+}
+
+/**
   * Various callout boxes for docs, including warning, caution, note, tip
   */
 #docContent table.CAUTION, table.WARNING,
