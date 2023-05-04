@@ -318,7 +318,7 @@ def release_notes(request, version):
         if minor_version > 0:
             version_file = 'release-{}-{}.html'.format(str(major_version).replace('.', '-'), minor_version)
         else:
-            version_file = 'release-{}-{}.html'.format(str(major_version).replace('.', '-'))
+            version_file = 'release-{}.html'.format(str(major_version).replace('.', '-'))
     elif len(version_pieces) == 2:
         # This can be either a full version (10.3) *or* it can be
         # a major version without minor (9.5).
