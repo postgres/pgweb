@@ -322,9 +322,9 @@ def release_notes(request, version):
     elif len(version_pieces) == 2:
         # This can be either a full version (10.3) *or* it can be
         # a major version without minor (9.5).
+        major_version = Decimal(version_pieces[0])
+        minor_version = Decimal(version_pieces[1])
         if int(version_pieces[0]) >= 10 or int(version_pieces[0]) <= 1:
-            major_version = Decimal(version_pieces[0])
-            minor_version = Decimal(version_pieces[1])
             if major_version > 1:
                 if minor_version == 0:
                     version_file = 'release-{}.html'.format(major_version)
