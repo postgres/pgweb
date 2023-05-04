@@ -348,7 +348,7 @@ def release_notes(request, version):
 
     # If we have an exact match for our major version, get that one. If not, get the release
     # notes from the highest available version.
-    release_notes = exec_to_dict("SELECT content FROM docs WHERE file=%(filename)s ORDER BY version=%(major_version)s DESC, version DESC LIMIT 1", {
+    release_notes = exec_to_dict("SELECT content FROM docs WHERE file=%(filename)s AND version > 0 ORDER BY version=%(major_version)s DESC, version DESC LIMIT 1", {
         'filename': version_file,
         'major_version': major_version,
     })
