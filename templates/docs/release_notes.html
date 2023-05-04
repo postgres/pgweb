@@ -13,13 +13,12 @@
 {% regroup release_notes by major as release_note_groups %}
 
 <div id="release-notes" class="row">
-  {% if major_version is not None and minor_version is not None %}
     <div class="col-md-10">
       <section>
         <h1>Release Notes <i class="far fa-file-alt"></i></h1>
         <h2>
-          {% if major_version == '0' %}Postgres95{% else %}PostgreSQL{% endif %}
-          {{ major_version }}.{{ release_note.minor|release_notes_pg_minor_version:major_version }}
+          {% if major_version == 0 %}Postgres95{% else %}PostgreSQL{% endif %}
+          {{ major_version }}.{{ minor_version|release_notes_pg_minor_version:major_version }}
         </h2>
       </section>
       <div id="docContent">
@@ -27,8 +26,8 @@
       </div>
       <div class="row">
         <div class="col-md-3">
-          {% if release_note.previous is not None %}
-            <a href="/docs/release/{{ major_version }}.{{ release_note.previous|release_notes_pg_minor_version:major_version }}/">
+	  {%if previous_minor_release is not None %}
+            <a href="/docs/release/{{ major_version }}.{{ previous_minor_release|release_notes_pg_minor_version:major_version }}/">
               Previous
             </a>
           {% endif %}
@@ -41,8 +40,8 @@
           </p>
         </div>
         <div class="col-md-3 text-right">
-          {% if release_note.next is not None %}
-            <a href="/docs/release/{{ major_version }}.{{ release_note.next|release_notes_pg_minor_version:major_version }}/">
+	   {% if next_minor_release is not None %}
+            <a href="/docs/release/{{ major_version }}.{{ next_minor_release|release_notes_pg_minor_version:major_version }}/">
               Next
             </a>
           {% endif %}
@@ -54,9 +53,9 @@
         <h2>Versions</h2>
       </section>
       <ul>
-        {% for r in release_notes %}
+        {% for r in available_minor_versions %}
           <li>
-            {% if r.minor == release_note.minor %}
+            {% if r.minor == minor_version %}
               <strong>
                 {{ major_version }}.{{ r.minor|release_notes_pg_minor_version:major_version }}
               </strong>
@@ -69,36 +68,6 @@
         {% endfor %}
       </ul>
     </div>
-  {% else %}
-    <div class="col-md-9">
-      <section>
-        <h1>Release Notes <i class="far fa-file-alt"></i></h1>
-      </section>
-      <p>Below is the complete archive of release notes for every version of PostgreSQL.</p>
-      <ul class="release-notes-list fa-ul">
-        {% for release_note_group in release_note_groups %}
-          {% with major_version=release_note_group.grouper %}
-            <li>
-              <a class="collapsed" href="#release{{ major_version|cut:"." }}" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="release{{ major_version|cut:"." }}">
-                <span class="fa-li right"><i class="fas fa-angle-right"></i></span>
-                <span class="fa-li down"><i class="fas fa-angle-down"></i></span>
-                {% if major_version == 0 %}Postgres95{% else %}PostgreSQL {{ major_version }}{% endif %}
-              </a>
-              <ul class="collapse release-notes-list" id="release{{ major_version|cut:"." }}">
-                {% for release_note in release_note_group.list %}
-                  <li>
-                    <a href="/docs/release/{{ major_version }}.{{ release_note.minor|release_notes_pg_minor_version:major_version }}/">
-                      {{ major_version }}.{{ release_note.minor|release_notes_pg_minor_version:major_version }}
-                    </a>
-                  </li>
-                {% endfor %}
-              </ul>
-            </li>
-          {% endwith %}
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
 </div>
 
 {% endblock %}

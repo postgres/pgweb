@@ -4,6 +4,7 @@ from django.utils.safestring import mark_safe
 from django.template.loader import get_template
 from django.conf import settings
 
+from decimal import Decimal
 import os
 from pathlib import Path
 import json
@@ -90,12 +91,28 @@ def tojson(value):
 
 
 @register.filter()
+def pg_major_version(major_version):
+    """
+    Turn a major version into a string. This means before 10 it's 2-digit,
+    and after 10 it's 1-digit.
+    """
+    d = Decimal(major_version)
+    if d >= 10 or d <= 1:
+        return '{:f}'.format(d.normalize())
+    else:
+        return str(d)
+
+
+@register.filter()
 def release_notes_pg_minor_version(minor_version, major_version):
     """Formats the minor version number to the appropriate PostgreSQL version.
     This is particularly for very old version of PostgreSQL.
     """
-    if str(major_version) in ['0', '1']:
-        return str(minor_version)[2:4]
+    if str(major_version) in ['0', '1', '1.0']:
+        if minor_version == 0:
+            return '0'
+        else:
+            return '{:02}'.format(minor_version)
     return minor_version
 
 

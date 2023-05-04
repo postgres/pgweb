@@ -267,121 +267,127 @@ def manualarchive(request):
     return r
 
 
-def release_notes(request, major_version=None, minor_version=None):
-    """Contains the main archive of release notes."""
-    # this query gets a list of a unique set of release notes for each version of
-    # PostgreSQL. From PostgreSQL 9.4+, release notes are only present for their
-    # specific version of PostgreSQL, so all legacy release notes are present in
-    # 9.3 and older
-    # First the query identifies all of the release note files that have been loaded
-    # into the docs. We will limit our lookup to release notes from 9.3 on up,
-    # given 9.3 has all the release notes for PostgreSQL 9.3 and older
-    # From there, it parses the version the release notes are for
-    # from the file name, and breaks it up into "major" and "minor" version from
-    # our understanding of how PostgreSQL version numbering is handled, which is
-    # in 3 camps: 1 and older, 6.0 - 9.6, 10 - current
-    # It is then put into a unique set
-    # Lastly, we determine the next/previous versions (lead/lag) so we are able
-    # to easily page between the different versions in the unique release note view
-    # We only include the content if we are doing an actual lookup on an exact
-    # major/minor release pair, to limit how much data we load into memory
-    sql = """
-    SELECT
-        {content}
-        file, major, minor,
-        lag(minor) OVER (PARTITION BY major ORDER BY minor) AS previous,
-        lead(minor) OVER (PARTITION BY major ORDER BY minor) AS next
-    FROM (
-        SELECT DISTINCT ON (file, major, minor)
-            {content}
-            file,
-            CASE
-                WHEN v[1]::int >= 10 THEN v[1]::numeric
-                WHEN v[1]::int <= 1 THEN v[1]::int
-                ELSE array_to_string(v[1:2], '.')::numeric END AS major,
-            COALESCE(
-                CASE
-                    WHEN v[1]::int >= 10 THEN v[2]
-                    WHEN v[1]::int <= 1 THEN '.' || v[2]
-                    ELSE v[3]
-                END::numeric, 0
-            ) AS minor
-        FROM (
-            SELECT
-                {content}
-                file,
-                string_to_array(regexp_replace(file, 'release-(.*)\\.htm.*', '\\1'), '-') AS v
-            FROM docs
-            WHERE file ~ '^release-\\d+' AND version >= 9.3
-        ) r
-    ) rr
-    """
-    params = []
-    # if the major + minor version are provided, then we want to narrow down
-    # the results to all the release notes for the minor version, as we need the
-    # list of the entire set in order to generate the nice side bar in the release
-    # notes
-    # otherwise ensure the release notes are returned in order
-    if major_version is not None and minor_version is not None:
-        # a quick check to see if major is one of 6 - 9 as a whole number. If
-        # it is, this may be because someone is trying to up a major version
-        # directly from the URL, e.g. "9.1", even through officially the release
-        # number was "9.1.0".
-        # anyway, we shouldn't 404, but instead transpose from "9.1" to "9.1.0".
-        # if it's not an actual PostgreSQL release (e.g. "9.9"), then it will
-        # 404 at a later step.
-        if major_version in ['6', '7', '8', '9']:
-            major_version = "{}.{}".format(major_version, minor_version)
-            minor_version = '0'
-        # at this point, include the content
-        sql = sql.format(content="content,")
-        # restrict to the major version, order from latest to earliest minor
-        sql = """{}
-        WHERE rr.major = %s
-        ORDER BY rr.minor DESC""".format(sql)
-        params += [major_version]
-    else:
-        sql = sql.format(content="")
-        sql += """
-        ORDER BY rr.major DESC, rr.minor DESC;
-        """
-    # run the query, loading a list of dict that contain all of the release
-    # notes that are filtered out by the query
-    release_notes = exec_to_dict(sql, params)
-    # determine which set of data to pass to the template:
-    # if both major/minor versions are present, we will load the release notes
-    # if neither are present, we load the list of all of the release notes to list out
-    if major_version is not None and minor_version is not None:
-        # first, see if any release notes were returned; if not, raise a 404
-        if not release_notes:
-            raise Http404()
-        # next, see if we can find the specific release notes we are looking for
-        # format what the "minor" version should look like
-        try:
-            minor = Decimal('0.{}'.format(minor_version) if major_version in ['0', '1'] else minor_version)
-        except TypeError:
-            raise Http404()
-        try:
-            release_note = [r for r in release_notes if r['minor'] == minor][0]
-        except IndexError:
-            raise Http404()
-        # of course, if nothing is found, return a 404
-        if not release_note:
-            raise Http404()
-        context = {
-            'major_version': major_version,
-            'minor_version': minor_version,
-            'release_note': release_note,
-            'release_notes': release_notes
-        }
-    else:
-        context = {'release_notes': release_notes}
+# Store a list of versions for which we have release notes, but nothing else,
+# so we don't have to add them to core_version.
+# NOTE! Order-sensitive!
+_release_notes_only_versions = [
+    # PostgreSQL 6.2
+    [Decimal('6.2'), 1],
+    [Decimal('6.2'), 0],
+    # PostgreSQL 6.1
+    [Decimal('6.1'), 1],
+    [Decimal('6.1'), 0],
+    # PostgreSQL 6.0
+    [Decimal('6.0'), 0],
+    # PostgresSQL 1
+    [1, 9],
+    [1, 2],
+    [1, 1],
+    [1, 0],
+    # Postgres95
+    [0, 3],
+    [0, 2],
+    [0, 1],
+]
+release_notes_only_versions = [{'major': major, 'minor': minor} for major, minor in _release_notes_only_versions]
 
-    r = render_pgweb(request, 'docs', 'docs/release_notes.html', context)
-    if major_version:
-        r['xkey'] = 'pgdocs_{}'.format(major_version)
+
+def release_notes_list(request):
+    """Lists the available release notes"""
+    # We only keep 6.3 and newer in core_version (for legacy reasons)
+    releases = exec_to_dict("SELECT tree AS major, minor FROM core_version INNER JOIN generate_series(0, latestminor) g(minor) ON true WHERE testing=0 AND tree > 6.2 ORDER BY tree DESC, minor DESC")
+
+    r = render_pgweb(request, 'docs', 'docs/release_notes_list.html', {
+        'releases': releases + release_notes_only_versions,
+    })
+    r['xkey'] = 'pgdocs_all'
+    return r
+
+
+def release_notes(request, version):
+    """Contains the main archive of release notes."""
+
+    version_pieces = version.split('.')  # Gives 1, 2 or 3 pieces due to regexp
+    if len(version_pieces) == 3:
+        # This is always major.major.minor
+        major_version = Decimal('.'.join(version_pieces[0:2]))
+        minor_version = Decimal(version_pieces[2])
+        if major_version >= 10:
+            # There is no three-digit version for 10+, so redirect back
+            return HttpResponseRedirect('/docs/release/{}/'.format(major_version))
+        if minor_version > 0:
+            version_file = 'release-{}-{}.html'.format(str(major_version).replace('.', '-'), minor_version)
+        else:
+            version_file = 'release-{}-{}.html'.format(str(major_version).replace('.', '-'))
+    elif len(version_pieces) == 2:
+        # This can be either a full version (10.3) *or* it can be
+        # a major version without minor (9.5).
+        if int(version_pieces[0]) >= 10 or int(version_pieces[0]) <= 1:
+            major_version = Decimal(version_pieces[0])
+            minor_version = Decimal(version_pieces[1])
+            if major_version > 1:
+                if minor_version == 0:
+                    version_file = 'release-{}.html'.format(major_version)
+                else:
+                    version_file = 'release-{}-{}.html'.format(major_version, minor_version)
+            elif major_version in (0, 1):
+                if minor_version == 0:
+                    version_file = 'release-{}-0.html'.format(major_version)
+                else:
+                    version_file = 'release-{}-{:02}.html'.format(major_version, minor_version)
+        else:
+            # Major version without a minor we redirect to the .0 minor
+            return HttpResponseRedirect('/docs/release/{}.{}.0/'.format(major_version, minor_version))
     else:
-        r['xkey'] = 'pgdocs_all'
+        # Single digit major version, so redirect to a point-zero version of it
+        if version_pieces[0] == '0':
+            # Postgres95 did not have a .0 version :O
+            return HttpResponseRedirect('/docs/release/0.1/')
+        else:
+            return HttpResponseRedirect('/docs/release/{}.0/'.format(Decimal(version_pieces[0])))
+
+    # If we have an exact match for our major version, get that one. If not, get the release
+    # notes from the highest available version.
+    release_notes = exec_to_dict("SELECT content FROM docs WHERE file=%(filename)s ORDER BY version=%(major_version)s DESC, version DESC LIMIT 1", {
+        'filename': version_file,
+        'major_version': major_version,
+    })
+    try:
+        release_note = release_notes[0]
+    except IndexError:
+        # Must version this one, as this minor version can show up later and in that case we
+        # need it to render once purged.
+        return _versioned_404("Minor version release notes not found", major_version)
+
+    # We only keep 6.3 and newer in core_version (for legacy reasons)
+    if major_version > 6.2:
+        available_minor_versions = exec_to_dict("SELECT minor FROM generate_series(0, (SELECT latestminor FROM core_version WHERE tree=%(major_version)s)) g(minor) ORDER BY minor DESC", {
+            'major_version': major_version,
+        })
+        previous_minor = minor_version - 1 if minor_version > 0 else None
+        next_minor = minor_version + 1 if minor_version < available_minor_versions[0]['minor'] else None
+    else:
+        available_minor_versions = [v for v in release_notes_only_versions if v['major'] == major_version]
+        # Ugh, there are gaps, so we have to do it the ugly way
+        previous_minor = None
+        next_minor = None
+        for i, v in enumerate(available_minor_versions):
+            if v['minor'] == minor_version:
+                if i > 0:
+                    next_minor = available_minor_versions[i - 1]['minor']
+                if v != available_minor_versions[-1]:
+                    previous_minor = available_minor_versions[i + 1]['minor']
+                break
+
+    r = render_pgweb(request, 'docs', 'docs/release_notes.html', {
+        'major_version': major_version,
+        'minor_version': minor_version,
+        'release_note': release_note,
+        'available_minor_versions': available_minor_versions,
+        'previous_minor_release': previous_minor,
+        'next_minor_release': next_minor,
+    })
+    r['xkey'] = 'pgdocs_{}'.format(major_version)
     return r
 
 
