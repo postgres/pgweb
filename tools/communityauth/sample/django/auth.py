@@ -109,10 +109,15 @@ def auth_receive(request):
         return HttpResponse("Missing data in url!", status=400)
 
     # Set up an AES object and decrypt the data we received
-    decryptor = AES.new(base64.b64decode(settings.PGAUTH_KEY),
-                        AES.MODE_CBC,
-                        base64.b64decode(str(request.GET['i']), "-_"))
-    s = decryptor.decrypt(base64.b64decode(str(request.GET['d']), "-_")).rstrip(b' ').decode('utf8')
+    try:
+        decryptor = AES.new(base64.b64decode(settings.PGAUTH_KEY),
+                            AES.MODE_CBC,
+                            base64.b64decode(str(request.GET['i']), "-_"))
+        s = decryptor.decrypt(base64.b64decode(str(request.GET['d']), "-_")).rstrip(b' ').decode('utf8')
+    except UnicodeDecodeError:
+        return HttpResponse("Badly encoded data found", 400)
+    except Exception:
+        return HttpResponse("Could not decrypt data", status=400)
 
     # Now un-urlencode it
     try:
