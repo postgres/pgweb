@@ -8,6 +8,8 @@
 # * Make sure the view "login" from this module is used for login
 # * Map an url somwehere (typically /auth_receive/) to the auth_receive
 #   view.
+# * To get notified when a user is created from upstream, connect to the signal
+#   auth_user_created_from_upstream.
 # * To receive live updates (not just during login), map an url somewhere
 #   (typically /auth_api/) to the auth_api view.
 # * To receive live updates, also connect to the signal auth_user_data_received.
@@ -43,6 +45,9 @@ from Cryptodome.Hash import SHA
 from Cryptodome import Random
 import time
 
+
+# This signal fires when a user is created based on data from upstream.
+auth_user_created_from_upstream = Signal(providing_args=['user', ])
 
 # This signal fires whenever new user data has been received. Note that this
 # happens *after* first_name, last_name and email has been updated on the user
@@ -173,6 +178,8 @@ We apologize for the inconvenience.
                     password='setbypluginnotasha1',
                     )
         user.save()
+
+        auth_user_created_from_upstream.send(user)
 
     # Ok, we have a proper user record. Now tell django that
     # we're authenticated so it persists it in the session. Before
@@ -358,5 +365,7 @@ def user_import(uid):
         password='setbypluginnotsha1',
     )
     u.save()
+
+    auth_user_created_from_upstream.send(user)
 
     return u
