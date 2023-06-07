@@ -184,7 +184,7 @@ We apologize for the inconvenience.
                     )
         user.save()
 
-        auth_user_created_from_upstream.send(user)
+        auth_user_created_from_upstream.send(sender=auth_receive, user=user)
 
     # Ok, we have a proper user record. Now tell django that
     # we're authenticated so it persists it in the session. Before
@@ -371,6 +371,6 @@ def user_import(uid):
     )
     u.save()
 
-    auth_user_created_from_upstream.send(user)
+    auth_user_created_from_upstream.send(sender=user_import, user=u)
 
     return u
