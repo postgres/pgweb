@@ -308,6 +308,30 @@ def user_search(searchterm=None, userid=None):
     return j
 
 
+# Subscribe to any changes about this user on the community auth upstream
+def subscribe_to_user_changes(userid):
+    socket.setdefaulttimeout(10)
+
+    body = json.dumps({
+        'u': userid,
+    })
+
+    h = hmac.digest(
+        base64.b64decode(settings.PGAUTH_KEY),
+        msg=bytes(body, 'utf-8'),
+        digest='sha512',
+    )
+
+    # Ignore the result code, just post it
+    requests.post(
+        '{0}subscribe/'.format(settings.PGAUTH_REDIRECT),
+        data=body,
+        headers={
+            'X-pgauth-sig': base64.b64encode(h),
+        },
+    )
+
+
 # Import a user into the local authentication system. Will initially
 # make a search for it, and if anything other than one entry is returned
 # the import will fail.
