@@ -55,4 +55,6 @@ The code of Font Awesome is released under the `MIT Licence <https://opensource.
 The icons of Font Awesome are released under the `CC BY 4.0 Licence <https://creativecommons.org/licenses/by/4.0/>`_.
 The fonts of Font Awesome are released under the `SIL OFL 1.1 License <http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL>`_.
 
-normalize.css uses the `MIT License <https://github.com/necolas/normalize.css/blob/master/LICENSE.md>`_
+normalize.css uses the `MIT License <https://github.com/necolas/normalize.css/blob/master/LICENSE.md>`
+
+static
