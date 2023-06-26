@@ -39,10 +39,10 @@ class Command(BaseCommand):
         for a in articles:
             # We hardcode 30 chars for the URL shortener. And then 10 to cover the intro and spacing.
             statusstr = "News: {0} {1}/about/news/{2}-{3}/".format(a.title[:140 - 40], settings.SITE_ROOT, slugify(a.title), a.id)
-            r = tw.post('https://api.twitter.com/1.1/statuses/update.json', data={
-                'status': statusstr,
+            r = tw.post('https://api.twitter.com/2/tweets', data={
+                'text': statusstr,
             })
-            if r.status_code != 200:
+            if r.status_code != 201:
                 print("Failed to post to twitter: %s " % r)
             else:
                 a.tweeted = True

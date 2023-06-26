@@ -24,7 +24,7 @@ class Command(BaseCommand):
             raise CommandError("TWITTER_TOKENSECRET is already set in settings_local.py")
 
         # OK, now we're good to go :)
-        oauth = requests_oauthlib.OAuth1Session(settings.TWITTER_CLIENT, settings.TWITTER_CLIENTSECRET)
+        oauth = requests_oauthlib.OAuth1Session(settings.TWITTER_CLIENT, settings.TWITTER_CLIENTSECRET, callback_uri='oob')
         fetch_response = oauth.fetch_request_token('https://api.twitter.com/oauth/request_token')
 
         authorization_url = oauth.authorization_url('https://api.twitter.com/oauth/authorize')
