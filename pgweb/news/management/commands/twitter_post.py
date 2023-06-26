@@ -44,6 +44,7 @@ class Command(BaseCommand):
             })
             if r.status_code != 201:
                 print("Failed to post to twitter: %s " % r)
+                print(r.text)
             else:
                 a.tweeted = True
                 a.save()
