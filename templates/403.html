@@ -1,0 +1,9 @@
+{%extends "base/page.html"%}
+{%block title%}Forbidden{%endblock%}
+{%block contents%}
+<h1>Forbidden</h1>
+
+<p>
+{%if exception%}{{exception}}{%else%}Forbidden{%endif%}
+</p>
+{%endblock%}
