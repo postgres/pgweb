@@ -93,15 +93,23 @@ ready and awaiting new connections. Close the app, and the server shuts down.
 <h2>Homebrew</h2>
 
 <p>
-PostgreSQL can also be installed on macOS
-using <a href="https://brew.sh">Homebrew</a>. Please see the Homebrew
-documentation for information on how to install packages.
+PostgreSQL can also be installed on macOS using
+<a href="https://brew.sh">Homebrew</a>. For example, to install PostgreSQL 15,
+you can use the following command:
 </p>
 
 <p>
-A list
-of <a href="https://formulae.brew.sh/formula/postgresql">PostgreSQL
-packages</a> can be found using the Braumeister search tool.
+  <code>
+    brew install postgresql@15
+  </code>
+</p>
+
+<p>
+  You can use <a href="https://formulae.brew.sh">Homebrew Formulae</a> to
+  search for PostgreSQL and other packages. To find a specific major version of
+  PostgreSQL, search for <code>postgresql@NN</code>, where <code>NN</code>
+  represents the major version. For example,
+  <a href="https://formulae.brew.sh/formula/postgresql@15"><code>postgresql@15</code></a>.
 </p>
 
 <h2>MacPorts</h2>
