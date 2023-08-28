@@ -374,3 +374,13 @@ def user_import(uid):
     auth_user_created_from_upstream.send(sender=user_import, user=u)
 
     return u
+
+
+# Try to load the key (and throw it away) to verify that the format is
+# correct.
+try:
+    k = base64.b64decode(settings.PGAUTH_KEY)
+    if len(k) != 32:
+        raise Exception("PGAUTH_KEY must be 32 bytes long")
+except Exception as e:
+    raise Exception("Invalid PGAUTH_KEY: {}".format(e))
