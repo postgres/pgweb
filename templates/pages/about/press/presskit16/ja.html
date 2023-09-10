@@ -1,0 +1,121 @@
+{% extends "pages/about/press/presskit16/base.html" %}
+
+{% block presskit_content %}
+<p>2023 年 9 月 14 日 - PostgreSQLグローバル開発グループは本日、世界で最も先進的なオープンソースデータベースの最新バージョンである PostgreSQL 16 のリリースを発表しました。</p>
+<p><a href="https://www.postgresql.org/docs/16/release-16.html">PostgreSQL 16</a> は、クエリの並列処理、バルクデータローディング、論理レプリケーションが顕著に改善され、性能が向上しました。このリリースには、SQL/JSON 構文の追加、ワークロードの新しい監視統計、大規模な要素群にわたるポリシーの管理のためのアクセス制御ルールの定義の柔軟性の向上など、開発者や管理者向けの多くの機能があります。</p>
+<p>PostgreSQL コアチームのメンバーである Dave Page は次のように述べています。
+「リレーショナルデータベースのパターンが進化する中で、PostgreSQL は大規模なデータの検索と管理における性能向上を続けています。
+PostgreSQL 16 は、ユーザにワークロードをスケールアップおよびスケールアウトするためにより多くの方法を提供し、同時に、ユーザが洞察を得てデータ管理方法を最適化するための新しい方法を提供します。」</p>
+<p>PostgreSQL は、信頼性と堅牢性で知られる革新的なデータ管理システムであり、グローバルな開発者コミュニティによる 35 年以上にわたるオープンソース開発の恩恵を受けて、あらゆる規模の組織に好まれるオープンソースリレーショナルデータベースとなっています。</p>
+<h3 id="-">パフォーマンスの向上</h3>
+<p>PostgreSQL 16 では、新しい問い合わせプランナが最適化され、既存の PostgreSQL 機能の性能が向上しました。この最新リリースでは、<code>FULL</code> と <code>RIGHT</code> の <a href="https://www.postgresql.org/docs/16/queries-table-expressions.html#QUERIES-JOIN">JOIN</a> を <a href="https://www.postgresql.org/docs/16/parallel-query.html">問い合わせプランナが並列化</a> できるようになります。
+<code>DISTINCT</code> 節または <code>ORDER BY</code> 節を使用する <a href="https://www.postgresql.org/docs/16/functions-aggregate.html">集約関数</a> を使ったクエリに対してはより最適化された計画を生成し、 <a href="https://www.postgresql.org/docs/16/queries-select-lists.html#QUERIES-DISTINCT"><code>SELECT DISTINCT</code></a> クエリに対してインクリメンタルソートを利用し、<a href="https://www.postgresql.org/docs/16/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS">WINDOW 関数</a> が最適化されより効率的に実行できるようになります。
+また、<code>RIGHT</code> と<code>OUTER</code> の &quot;アンチジョイン&quot; を改良し、JOIN されたテーブルに存在しない行を識別できるようにした。</p>
+<p>このリリースでは、単一操作と同時操作の両方で <a href="https://www.postgresql.org/docs/16/sql-copy.html"><code>COPY</code></a> を使用した一括ロードが改善され、いくつかのテストでは最大 300 % の性能向上が確認されました。
+PostgreSQL 16 では、<code>libpq</code> を使用するクライアントの <a href="https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-LOAD-BALANCE-HOSTS">負荷分散</a> がサポートされ、VACUUM 戦略の改善によりテーブル全体を FREEZE する必要性が減少しました。
+さらに、PostgreSQL 16 では、x86 と ARM の両方のアーキテクチャで <code>SIMD</code> を使用した CPU 高速化が導入され、ASCII と JSON 文字列の処理や、配列検索とサブトランザクション検索の実行時の性能が向上しました。</p>
+<h3 id="-">論理レプリケーション</h3>
+<p><a href="https://www.postgresql.org/docs/16/logical-replication.html">論理レプリケーション</a> を使用すると、PostgreSQL の論理レプリケーションプロトコルを解釈できる他の PostgreSQL インスタンスやサブスクライバに、データをストリームすることができます。
+PostgreSQL 16 では、ユーザはスタンバイインスタンスから論理レプリケーションを実行することができ、開発者に新しい負荷分散の選択肢が提供されます。例えば、下流のシステムに変更を論理的に複製するために、忙しいプライマリではなく、スタンバイを使用することができます。</p>
+<p>さらに、PostgreSQL 16 では論理レプリケーションの性能がいくつか向上しています。
+サブスクライバが、並列ワーカを使用して大きなトランザクションを適用できるようになりました。
+<a href="https://www.postgresql.org/docs/16/ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS">主キー</a> を持たないテーブルでは、サブスクライバは逐次走査の代わりに B-tree インデックスを使用して、行を見つけることができます。
+特定の条件下では、バイナリ形式を使用して、テーブルの初期同期を高速化することもできます。</p>
+<p>PostgreSQL 16 では、論理レプリケーションに対するいくつかのアクセス制御が改善されました。新しい <a href="https://www.postgresql.org/docs/16/predefined-roles.html">定義済みロール</a> <code>pg_create_subscription</code> が追加されて、ユーザに新しい論理サブスクリプションを作成する権限を与えます。
+最後に、このリリースでは双方向での論理レプリケーションのサポートが追加され、異なる発行元にある 2つのテーブル間でデータを複製する機能が導入されました。</p>
+<h3 id="-">開発者体験</h3>
+<p>PostgreSQL 16 では、<code>JSON_ARRAY()</code>、<code>JSON_ARRAYAGG()</code>、<code>IS JSON</code> といった、コンストラクタや述語を含む <a href="https://www.postgresql.org/docs/16/functions-json.html">SQL/JSON</a> 標準の構文が追加されました。
+このリリースでは、アンダースコアを数千の区切り文字（例えば <code>5_432_000</code>）に使用できるようになりました。
+また、<code>0x1538</code>, <code>0o12470</code>, <code>0b1010100111000</code> などの 10 進数以外の整数リテラルも使用できるようになりました。</p>
+<p>PostgreSQL 16 を使用している開発者は、<code>psql</code> の新しいコマンドの恩恵を受けることもできます。
+これには <a href="https://www.postgresql.org/docs/16/app-psql.html#APP-PSQL-META-COMMAND-BIND"><code>\bind</code></a> が含まれ、パラメータ化されたクエリを準備して、<code>bind</code> を使用して変数を置換することができます
+（例： <code>SELECT $1::int + $2::int ￤bind 1 2 ￤g</code>）。</p>
+<p>PostgreSQL 16 では、文字列のソート方法の規則を提供する <a href="https://www.postgresql.org/docs/16/collation.html">文字列の照合順序</a> の一般的なサポートが改善されました。
+PostgreSQL 16 はデフォルトで ICU をサポートして構築され、環境からデフォルトの ICU ロケールを決定し、ユーザが独自の ICU 照合規則を定義することができます。</p>
+<h3 id="-">モニタリング</h3>
+<p>データベースワークロードの性能をチューニングする上で重要なことは、I/O 操作がシステムに与える影響を理解することです。PostgreSQL 16 は <a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW"><code>pg_stat_io</code></a> を導入しました。
+これは、I/O アクセスパターンを詳細に分析するための主要な I/O 指標の新しい情報源です。</p>
+<p>さらに、このリリースでは、<a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"><code>pg_stat_all_tables</code></a> ビューに、テーブルやインデックスが最後にスキャンされた日時を示すタイムスタンプを記録する新しいフィールドが追加されました。
+また、PostgreSQL 16 では、パラメータ化された文に渡された値を記録することで、<a href="https://www.postgresql.org/docs/16/auto-explain.html"><code>auto_explain</code></a> がより読みやすくなり、<a href="https://www.postgresql.org/docs/16/pgstatstatements.html"><code>pg_stat_statements</code></a> と <a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a> で使用される問い合わせ追跡アルゴリズムの精度が向上しました。</p>
+<h3 id="-">アクセスコントロールとセキュリティ</h3>
+<p>PostgreSQL 16 はアクセス制御のより細かいオプションを提供し、他のセキュリティ機能を強化します。
+このリリースでは、<a href="https://www.postgresql.org/docs/16/auth-pg-hba-conf.html"><code>pg_hba.conf</code></a> と <a href="https://www.postgresql.org/docs/16/auth-username-maps.html"><code>pg_ident.conf</code></a> ファイルの管理が改善され、ユーザ名とデータベース名の正規表現マッチングや外部設定ファイルの <code>include</code> ディレクティブが使用できるようになりました。
+このリリースでは、サーバからどの認証パラメータを受け付けるかをクライアントに指定できるようにする <code>require_auth</code> や、PostgreSQL がクライアントのオペレーティングシステムから提供された信頼された認証局（CA）ストアを使用することを示す <a href="https://www.postgresql.org/docs/15/libpq-connect.html#LIBPQ-CONNECT-SSLROOTCERT"><code>sslrootcert=&quot;system&quot;</code></a> など、セキュリティ指向のクライアント接続パラメータがいくつか追加されました。
+さらに、このリリースでは Kerberos 認証情報の委譲のサポートが追加され、<a href="https://www.postgresql.org/docs/16/postgres-fdw.html"><code>postgres_fdw</code></a> や <a href="https://www.postgresql.org/docs/16/dblink.html"><code>dblink</code></a> などの拡張が、認証された認証情報を使用して信頼されたサービスに接続できるようになりました。</p>
+<h3 id="postgresql-">PostgreSQL について</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> は、世界で最も先進的なオープンソースデータベースであり、何千ものユーザ、貢献者、企業、組織からなるグローバルコミュニティを有しています。
+PostgreSQL は、カリフォルニア大学バークレー校で始まった 35 年以上のエンジニアリングを基盤として、他に類を見ないペースで開発を続けてきました。
+PostgreSQL の成熟した機能セットは、トップクラスのプロプライエタリなデータベースシステムに匹敵するだけでなく、高度なデータベース機能、拡張性、セキュリティ、安定性においてそれらを凌駕しています。</p>
+<h3 id="-">リンク</h3>
+<p>​</p>
+<ul>
+<li><a href="https://www.postgresql.org/download/">ダウンロード</a></li>
+<li><a href="https://www.postgresql.org/docs/16/release-16.html">リリースノート</a></li>
+<li><a href="https://www.postgresql.org/about/press/">プレスキット</a></li>
+<li><a href="https://www.postgresql.org/support/security/">セキュリティ</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">バージョンポリシー</a></li>
+<li><a href="https://twitter.com/postgresql">@postgresql をフォロー</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">寄付</a></li>
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2>PostgreSQL について</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> は、世界で最も先進的なオープンソースデータベースであり、何千ものユーザ、貢献者、企業、組織からなるグローバルコミュニティを有しています。
+  PostgreSQL は、カリフォルニア大学バークレー校で始まった 35 年以上のエンジニアリングを基盤として、他に類を見ないペースで開発を続けてきました。
+  PostgreSQL の成熟した機能セットは、トップクラスのプロプライエタリなデータベースシステムに匹敵するだけでなく、高度なデータベース機能、拡張性、セキュリティ、安定性においてそれらを凌駕しています。</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="-">特徴についての詳細</h2>
+<p>上記の機能やその他の機能については、以下を参照してください。</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/16/release-16.html">リリースノート</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">機能マトリックス</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="-">ダウンロード</h2>
+<p>PostgreSQL 16 をダウンロードする方法はいくつかあります。</p>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Official Downloads</a> に <a href="https://www.postgresql.org/download/windows/">Windows</a>、<a href="https://www.postgresql.org/download/linux/">Linux</a>、<a href="https://www.postgresql.org/download/macosx/">macOS</a> などのインストーラやツールがあります。</li>
+<li><a href="https://www.postgresql.org/ftp/source/v16.0">ソースコード</a></li>
+</ul>
+<p>その他のツールや拡張機能は <a href="http://pgxn.org/">PostgreSQL Extension Network</a> にあります。</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="-">ドキュメント</h2>
+<p>PostgreSQL 16 には HTML ドキュメントと man ページが付属しており、<a href="https://www.postgresql.org/docs/16/">HTML</a> 形式と <a href="https://www.postgresql.org/files/documentation/pdf/16/postgresql-16-US.pdf">PDF</a> 形式の両方のドキュメントをオンラインで閲覧することができます。</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2>ライセンス</h2>
+<p>PostgreSQL は、BSD に似た「寛容な」ライセンスである <a href="https://www.postgresql.org/about/licence/"></a>PostgreSQL ライセンス</p>a>を使用しています。この <a href="http://www.opensource.org/licenses/postgresql/">OSI 認証ライセンス</a>は、PostgreSQL を商用およびプロプライエタリなアプリケーションで使用することを制限しないため、柔軟でビジネスフレンドリーであると広く評価されています。複数企業のサポートやコードの公的所有権とともに、このライセンスは、料金やベンダロックイン、ライセンス条項の変更を心配せずにデータベースを自社製品に組み込みたいと考えるベンダにとって PostgreSQL を非常に人気のあるものにしています。</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="-">お問い合わせ先</h2>
+<p>Web サイト</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>メールアドレス</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2>画像とロゴ</h2>
+<p>Postgres、PostgreSQL、象のロゴ (Slonik)は、すべて <a href="https://www.postgres.ca">PostgreSQL Community Association</a> の登録商標です。これらのマークの使用を希望する場合は、<a href="https://www.postgresql.org/about/policies/trademarks/">trademark policy</a> に従わなければなりません。</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2>コーポレートサポート</h2>
+<p>PostgreSQL は、開発者のスポンサーとなり、ホスティングリソースを提供し、財政的なサポートを提供してくれる多くの企業の支援を受けています。これらのプロジェクト支援者の一部は <a href="https://www.postgresql.org/about/sponsors/">スポンサー</a> のページを参照してください。</p>
+<p>また、個人のコンサルタントから多国籍企業まで、<a href="https://www.postgresql.org/support/professional_support/">PostgreSQL サポートを提供する企業</a> の大きなコミュニティがあります。</p>
+<p>PostgreSQL グローバル開発グループ、または認定されたコミュニティの非営利団体に金銭的な寄付をしたい場合は、<a href="https://www.postgresql.org/about/donate/">寄付</a> のページを参照してください。</p>
+{% endblock presskit_corporate %}

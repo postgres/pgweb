@@ -1,0 +1,393 @@
+{% extends "pages/about/press/presskit16/base.html" %}
+
+{% block presskit_content %}
+<p dir="rtl">
+ספטמבר 14, 2023 -  קבוצת הפיתוח הגלובלית של PostgreSQL הודיעה היום על שחרורה של PostgreSQL 16, הגרסה העדכנית ביותר של מסד הנתונים המתקדם בעולם עם קוד פתוח.
+</p>
+
+
+<p dir="rtl">
+
+<a href="https://www.postgresql.org/docs/16/release-16.html">PostgreSQL 16</a>
+מעלה את הביצועים שלה, עם שיפורים בולטים במקביליות שאילתות, טעינת נתונים בכמויות גדולות ורפליקציה לוגית. ישנן תכונות רבות במהדורה זו עבור מפתחים ומנהלי מערכות, כולל תחביר נוסף של SQL/JSON, סטטיסטיקות ניטור חדשות לעומסי העבודה שלכם וגמישות רבה יותר בהגדרת כללי בקרת גישה לניהול מדיניות לציי שרתים גדולים.
+
+<p dir="rtl">
+
+"ככל שדפוסי מסדי נתונים יחסיים מתפתחים, PostgreSQL ממשיכה להשיג שיפורי ביצועים בחיפוש וניהול נתונים בקנה מידה גדול", אמר Dave Page, חבר ב-PostgreSQL Core Team. "מהדורה זו נותנת למשתמשים שיטות נוספות לשלוט בקנה מידה של עומסי העבודה שלהם, תוך שהיא נותנת להם דרכים חדשות להשיג תובנות ולייעל את האופן שבו הם מנהלים את הנתונים שלהם."
+
+"מהדורה אחרונה מדגישה כיצד, באמצעות פיתוח כם קוד פתוח, אנו יכולים לספק למשתמשים שלנו מסד נתונים נהדר לפיתוח יישומים ובטוח עבור הנתונים הקריטיים שלהם."
+</p>
+
+<p dir="rtl">
+<a href="https://www.postgresql.org">PostgreSQL</a>
+זאת מערכת ניהול נתונים חדשנית הידועה באמינותה ובחוסנה, נהנית ממעל 35 שנות פיתוח קוד פתוח מ 
+<a href="https://www.postgresql.org/community">קהילת מפתחים עולמית</a>
+  והפכה לבסיס נתונים רלציוני הפתוח המועדף על ארגונים מכל הגדלים.
+</p>
+
+
+<h3 dir="rtl">
+
+שיפורי ביצועים
+</h3>
+
+<p dir="rtl">
+PostgreSQL 16 משפרת את הביצועים של הפונקציונליות הקיימת של PostgreSQL באמצעות אופטימיזציות חדשות של מתכנן שאילתות. במהדורה האחרונה הזו, 
+<a href="https://www.postgresql.org/docs/16/parallel-query.html"> מתכנן השאילתות יכול לעשות במקביל </a>
+  את 
+<a href="https://www.postgresql.org/docs/16/queries-table-expressions.html#QUERIES-JOIN"> צירוף </a> 
+
+<code> FULL </code>
+  ו- 
+<code> RIGHT </code>
+, ליצור תוכניות יעילות יותר עבור שאילתות אשר משתמשות ב
+<a href="https://www.postgresql.org/docs/16/functions-aggregate.html"> פונקציות מצטברות </a>
+עם סעיף
+<code>DISTINCT</code>
+או
+<code>ORDER BY</code>
+, להשתמש במיון מצטבר עבור שאילתות 
+<a href="https://www.postgresql.org/docs/16/queries-select-lists.html#QUERIES-DISTINCT"> <code>SELECT DISTINCT</code> </a>
+
+, לבצע אופטימיזציה של 
+<a href="https://www.postgresql.org/docs/16/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS"> פונקציות החלונות </a>
+
+כך שיפעלו ביעילות רבה יותר. זה גם משפר את ה-
+<code>RIGHT</code>
+ו-
+<code>OUTER</code>
+
+"anti-joins", מה שמאפשר למשתמשים לזהות שורות שאינן נמצאות בטבלה מצורפת.
+
+</p>
+
+<p dir="rtl">
+מהדורה זו כוללת שיפורים לטעינה כמויות גדולות של נתונים באמצעות 
+<a href="https://www.postgresql.org/docs/16/sql-copy.html"> <code>COPY</code> </a>
+
+  בפעולות בודדות ובמקבילות, עם בדיקות שמראות שיפור של עד 300% בביצועים במקרים מסוימים. PostgreSQL 16 מוסיפה תמיכה ל
+<a href="https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-LOAD-BALANCE-HOST"> איזון עומסים </a>
+במערכות אשר משתמשות ב-
+<code>libpq</code>
+, ושיפורים באסטרטגיית ואקום המפחיתה את הצורך בהקפאות טבלה מלאה. בנוסף, PostgreSQL 16 מציגה האצת מעבד באמצעות
+<code>SIMD</code>
+  הן בארכיטקטורות x86 והן בארכיטקטורות ARM, וכתוצאה מכך שיפורי ביצועים בעת עיבוד מחרוזות ASCII ו-JSON, וביצוע חיפושי מערך ותת עסקאות.
+</p>
+
+
+<h3 dir="rtl">
+
+שכפול לוגי
+</h3>
+
+<p dir="rtl">
+<a href="https://www.postgresql.org/docs/16/logical-replication.html"> שכפול לוגי</a>
+
+מאפשרת למשתמשים להזרים נתונים לשרתים PostgreSQL אחרים או למנויים שיכולים לפרש את פרוטוקול השכפול הלוגי של PostgreSQL. ב-PostgreSQL 16, משתמשים יכולים לבצע שכפול לוגי משרת standby, כלומר standby יכול לפרסם שינויים לוגיים לשרתים אחרים. זה מספק למפתחים אפשרויות חדשות לחלוקת עומסי עבודה, למשל, תוך שימוש בstandby במקום השרת הראשי העמוס יותר כדי לשכפל שינויים למערכות downstream.
+</p>
+<p dir="rtl">
+בנוסף, ישנם מספר שיפורים בביצועים ב-PostgreSQL 16 בשכפול לוגי. מנויים יכולים כעת לבצע טרנזקציות  גדולות באמצעות workers מקביליים. עבור טבלאות שאין להן 
+<a href="https://www.postgresql.org/docs/16/ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS"> מפתח ראשי</a>
+, מנויים יכולים להשתמש באינדקסים של עץ B במקום סריקות רציפות כדי למצוא שורות. בתנאים מסוימים, משתמשים יכולים גם להאיץ את סנכרון הטבלה הראשוני באמצעות הפורמט הבינארי.
+</p>
+
+<p dir="rtl">
+ישנם מספר שיפורים בבקרת גישה לשכפול לוגי ב-PostgreSQL 16, כולל 
+<a href="https://www.postgresql.org/docs/16/predefined-roles.html"> role החדש המוגדר מראש </a>
+<code>pg_create_subscription</code>
+  , המעניק למשתמשים את היכולת ליצור מנויים לוגיים חדשים. לבסוף, מהדורה זו מתחילה להוסיף תמיכה בשכפול לוגי דו-כיווני, ומציגה פונקציונליות לשכפול נתונים בין שתי טבלאות מpublishers שונים.
+</p>
+
+
+<h3 dir="rtl">
+חווית המפתחים
+</h3>
+
+<p dir="rtl">
+PostgreSQL 16 מוסיפה תחביר נוסף מ
+<a href="https://www.postgresql.org/docs/16/functions-json.html"> <code>SQL/JSON</code> </a>
+
+, כולל בנאים ופרדיקטים כגון 
+<code>JSON_ARRAYAGG</code>
+,
+<code>JSON_ARRAYAGG</code>
+ו- 
+<code>IS_JSON</code>
+
+. מהדורה זו מציגה גם את היכולת להשתמש בקווים תחתונים (underscores) עבור אלפי מפרידים (למשל 
+<code>5_432_000</code>
+) ובמחרוזות של שלמים שאינם עשרוניים, כגון 
+<code>0x1538</code>
+,
+<code>0o12470</code>
+ו-
+<code>0b1010100111000</code>
+.
+</p>
+<p dir="rtl">
+
+מפתחים המשתמשים ב-PostgreSQL 16 נהנים גם מפקודות חדשות ב-
+<code>psql</code>
+. זה כולל 
+<a href="https://www.postgresql.org/docs/16/app-psql.html#APP-PSQL-META-COMMAND-BIND"> <code>\bind</code></a>
+, המאפשרת למשתמשים להכין שאילתות עם פרמטרים ולהשתמש ב-
+<code>\bind</code>
+כדי להחליף את המשתנים (למשל 
+<code>SELECT $1::int + $2::int \bind 1 2 \g</code>
+.
+</p>
+
+<p dir="rtl">
+PostgreSQL 16 משפרת את התמיכה הכללית ב 
+<a href="https://www.postgresql.org/docs/16/collation.html"> text collations </a>
+, המספקת כללים איך למיין את הטקסט. PostgreSQL 16 נבנה עם תמיכת ICU כברירת מחדל, קובע את ברירת המחדל של ICU מהסביבה, ומאפשרת למשתמשים להגדיר כללי ICU collation מותאמים אישית.
+</p>
+
+
+<h3 dir="rtl">
+ניטור
+</h3>
+
+<p dir="rtl">
+היבט מרכזי בכוונון הביצועים של עומסי עבודה של מסד נתונים הוא הבנת ההשפעה של פעולות ה-I/O על המערכת. PostgreSQL 16 מציג את 
+<a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW"> <code>pg_stat_io</code></a>
+, מקור חדש של מדדי קלט/פלט מרכזיים לניתוח פרטני של דפוסי גישה לקלט/פלט.
+
+</p>
+
+<p dir="rtl">
+בנוסף, מהדורה זו מוסיפה שדה חדש ל view 
+  <a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"> <code>pg_stat_all_tables</code></a>
+  שמתעד את חותמת זמן המייצגת מתי טבלה או אינדקס נסרקו לאחרונה. PostgreSQL 16 גם הופכת את ה-
+  <a href="https://www.postgresql.org/docs/16/auto-explain.html"> <code>auto_explain</code> </a>
+  לקריא יותר על ידי רישום ערכים המועברים ל שאילתות עם פרמטרים, ומשפרת את הדיוק של אלגוריתם מעקב השאילתות אשר משמש את 
+  <a href="https://www.postgresql.org/docs/16/pgstatstatements.html"> <code>pg_stat_statements</code></a>
+ו-
+  <a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"> <code>pg_stat_activity</code></a>
+.
+</p>
+
+
+<h3 dir="rtl">
+בקרת גישה ואבטחה
+</h3>
+
+<p dir="rtl">
+PostgreSQL 16 מספקת אפשרויות עדינות יותר לבקרת גישה ומשפרת תכונות אבטחה אחרות. המהדורה משפרת את הניהול של קבצי 
+  <a href="https://www.postgresql.org/docs/16/auth-pg-hba-conf.html"> <code>pg_hba.conf</code></a>
+ו-
+<a href="https://www.postgresql.org/docs/16/auth-username-maps.htm"> <code>pg_ident.conf</code></a>
+, כולל התאמת ביטויים רגולריים עבור שמות משתמשים ומסדי נתונים והנחיות 
+<code>include</code>
+  עבור קבצי תצורה חיצוניים.
+</p>
+
+<p dir="rtl">
+מהדורה זו מוסיפה מספר פרמטרים להתחברות מאובטחת של לקוחות, כולל 
+<code>require_auth</code>
+, המאפשרת ללקוחות לציין אילו פרמטרים של אימות הם מוכנים לקבל משרת, ו-
+  <a href="https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-SSLROOTCERTl"> <code>sslrootcert="system"</code></a>
+
+, המציין ש-PostgreSQL צריכה להשתמש במאגר של trusted certificate authority (CA) המסופק על ידי מערכת ההפעלה של הלקוח. בנוסף, המהדורה מוסיפה תמיכה ב Kerberos credential delegation, ומאפשרת להרחבות כגון 
+  <a href="https://www.postgresql.org/docs/16/postgres-fdw.html"> <code>postgres_fdw</code></a>
+ו-
+  <a href="https://www.postgresql.org/docs/16/dblink.html"> <code>dblink</code></a>
+  להשתמש באישורים מאומתים כדי להתחבר לשירותים מהימנים.
+</p>
+
+
+<h3 dir="rtl">
+אודות PostgreSQL
+</h3>
+<p dir="rtl">
+<a href="https://www.postgresql.org/">PostgreSQL</a>
+  הוא מסד נתונים בקוד פתוח המתקדם ביותר בעולם, עם קהילה גלובלית של אלפי משתמשים, תורמים, חברות וארגונים. הפרויקט PostgreSQL נבנה על מעל 35 שנות הנדסה, החל באוניברסיטת קליפורניה, ברקלי, והמשיך להתפתח עם קצב ללא תחרות. ערכת התכונות הבשלות של PostgreSQL לא רק תואמת מערכות נתונים קנייניות מובילות, אלא עולה עליהן במאפיינים של מסדי נתונים מתקדמים ,יכולות הרחבה, אבטחה ויציבות.
+</p>
+
+<h3 dir="rtl">
+קישורים
+</h3>
+<ul dir="rtl">
+<li>
+<a href="https://www.postgresql.org/download/"> הורדות </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/docs/16/release-16.htm"> הערות מהדורה </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/about/press/"> ערכת עיתונות </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/support/security/"> עמוד אבטחה </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/support/versioning/"> מדיניות גרסאות </a>
+</li>
+<li>
+<a href="https://twitter.com/postgresql"> עקבו אחרי @postgresql בטוויטר </a>
+</li> 
+<li>
+<a href="https://www.postgresql.org/about/donate/"> לתרום לקהילה </a>
+</li> 
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2 dir="rtl">
+אודות PostgreSQL
+</h2>
+<p dir="rtl">
+<a href="https://www.postgresql.org/">PostgreSQL</a>
+  הוא מסד נתונים בקוד פתוח המתקדם ביותר בעולם, עם קהילה גלובלית של אלפי משתמשים, תורמים, חברות וארגונים. הפרויקט PostgreSQL נבנה על מעל 35 שנות הנדסה, החל באוניברסיטת קליפורניה, ברקלי, והמשיך להתפתח עם קצב ללא תחרות. ערכת התכונות הבשלות של PostgreSQL לא רק תואמת מערכות נתונים קנייניות מובילות, אלא עולה עליהן במאפיינים של מסדי נתונים מתקדמים ,יכולות הרחבה, אבטחה ויציבות.
+</p>  
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 dir="rtl">
+עוד על התכונות
+</h2>
+
+<p dir="rtl">
+להסברים על התכונות לעיל ואחרות, עיין במשאבים הבאים:
+</p>
+
+<ul dir="rtl">
+<li>
+<a href="https://www.postgresql.org/docs/16/release-16.html"> הערות פרסום </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/about/featurematrix/"> מטריצת תכונות </a>
+</li>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 dir="rtl">
+היכן להוריד
+</h2>
+
+<p dir="rtl">
+ישנן מספר דרכים שבהן תוכלו להוריד את PostgreSQL 16, כולל:
+</p>
+
+<ul dir="rtl">
+<li>
+דף
+<a href="https://www.postgresql.org/download/">ההורדות הרשמי</a>
+, המכיל מתקינים וכלים עבור
+<a href="https://www.postgresql.org/download/windows/">Windows</a>
+,
+<a href="https://www.postgresql.org/download/">Linux</a>
+,
+<a href="https://www.postgresql.org/download/macosx/">macOS</a>
+ועוד.
+</li>
+<li>
+<a href="https://www.postgresql.org/ftp/source/v16.0">קוד מקור</a>
+</li>
+</ul>
+
+<p dir="rtl">
+כלים והרחבות אחרים זמינים 
+<a href="http://pgxn.org/">ברשת ההרחבות של PostgreSQL</a>
+.
+</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 dir="rtl">
+תיעוד
+</h2>
+
+<p dir="rtl">
+PostgreSQL 16 מגיע עם תיעוד HTML כמו גם דפי man, תוכלו גם לעיין בתיעוד באופן מקוון בפורמט
+<a href="https://www.postgresql.org/docs/16/">HTML</a>
+
+  וגם בפורמט 
+<a href="https://www.postgresql.org/files/documentation/pdf/16/postgresql-16-US.pdf">PDF</a>
+.
+</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 dir="rtl">
+רישיון
+</h2>
+
+<p dir="rtl">
+  
+  משתמש ב
+<a href="https://www.postgresql.org/about/licence/">רישיון PostgreSQL</a>
+, רישיון "מתירני" דמוי BSD. רישיון זה 
+<a href="http://www.opensource.org/licenses/postgresql/">מאושר OSI</a>
+
+זוכה להערכה רבה כגמיש וידידותי לעסקים, מכיוון שהוא אינו מגביל את השימוש ב-PostgreSQL עם יישומים מסחריים וקנייניים. יחד עם תמיכה מרובת חברות ובעלות ציבורית על הקוד, הרישיון שלנו הופך את PostgreSQL לפופולרי מאוד בקרב הספקים המעוניינים להטמיע מסד נתונים במוצרים שלהם ללא חשש מעמלות, נעילת ספקים או שינויים בתנאי הרישוי.
+</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 dir="rtl">
+יצירת קשר
+</h2>
+
+<p dir="rtl">
+אתר אינטרנט 
+</p>
+<ul dir="rtl">
+<li>
+<a href="https://www.postgresql.org/">https://www.postgresql.org </a>
+</li>
+</ul>
+
+<p dir="rtl">
+אימייל 
+</p>
+<ul dir="rtl">
+<li>
+<a href="mailto:press@postgresql.org">press@postgresql.org</a>
+</li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 dir="rtl">
+תמונות ולוגו
+</h2>
+
+<p dir="rtl">
+Postgres ו-PostgreSQL ולוגו הפיל (Slonik) הם כולם סימנים מסחריים רשומים של 
+<a href="https://www.postgres.ca">PostgreSQL Community Association</a>
+
+. אם ברצונך להשתמש בסימנים אלה, עליך לציית ל
+
+<a href="https://www.postgresql.org/about/policies/trademarks/">מדיניות הסימנים המסחריים</a>
+.
+</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 dir="rtl">
+תמיכה ארגונית
+</h2>
+
+<p dir="rtl">
+PostgreSQL נהנית מתמיכתן של חברות רבות, שנותנות חסות למפתחים, מספקות משאבי אירוח ונותנות לנו תמיכה כספית. עיין בדף 
+<a href="https://www.postgresql.org/about/sponsors/">נותני החסות</a>
+שלנו עבור חלק מתומכי הפרויקט הללו.
+</p>
+
+<p dir="rtl">
+יש גם קהילה גדולה של 
+<a href="https://www.postgresql.org/support/professional_support/">חברות המציעות תמיכה ב-PostgreSQL</a>
+, מיועצים בודדים ועד לחברות רב לאומיות.
+
+</p>
+
+<p dir="rtl">
+אם ברצונך לתרום תרומה כספית לקבוצת הפיתוח העולמית PostgreSQL או לאחד מארגוני הקהילה המוכרים ללא מטרות רווח, אנא בקר ב
+
+<a href="https://www.postgresql.org/about/donate/">דף התרומות</a>
+שלנו.
+
+</p>
+{% endblock presskit_corporate %}

@@ -1,0 +1,138 @@
+{% extends "pages/about/press/presskit16/base.html" %}
+
+{% block presskit_content %}
+<p>14 de septiembre de 2023 - El Grupo Global de Desarrollo de PostgreSQL ha anunciado hoy el lanzamiento de PostgreSQL 16, la versión más reciente de la base de datos de código abierto más avanzada del mundo.</p>
+<p><a href="https://www.postgresql.org/docs/16/release-16.html">PostgreSQL 16</a> eleva su rendimiento, con notables mejoras en el paralelismo de consultas, la carga masiva de datos y la replicación lógica. Esta versión contiene muchas características para desarrolladores y administradores, como más sintaxis SQL/JSON, nuevas estadísticas de monitoreo para cargas de trabajo y mayor flexibilidad en la definición de reglas de control de acceso para la gestión de políticas en flotas de gran tamaño.</p>
+<p>&quot;A medida que evolucionan los patrones de las bases de datos relacionales, PostgreSQL continúa mejorando el rendimiento en la búsqueda y gestión de datos a gran escala&quot;, dijo Dave Page, miembro del Core Team de PostgreSQL. &quot;PostgreSQL 16 ofrece a los usuarios nuevos métodos para escalar vertical y horizontalmente sus cargas de trabajo, ofreciéndoles al mismo tiempo nuevas formas de adquirir información del funcionamiento interno y optimizar la gestión de sus datos.&quot;</p>
+<p>PostgreSQL es un innovador sistema de gestión de datos conocido por su confiabilidad y robustez. Cuenta con más de 35 años de desarrollo de código abierto por parte de una comunidad global de desarrolladores y se ha convertido en la base de datos relacional de código abierto preferida por organizaciones de todos los tamaños.</p>
+<h3 id="mejoras-de-rendimiento">Mejoras de rendimiento</h3>
+<p>PostgreSQL 16 mejora el rendimiento de las actuales funcionalidades de PostgreSQL a través de nuevas optimizaciones del planificador de consultas. En esta nueva versión, el
+<a href="https://www.postgresql.org/docs/16/parallel-query.html">planificador de consultas puede paralelizar</a> los
+<a href="https://www.postgresql.org/docs/16/queries-table-expressions.html#QUERIES-JOIN">joins</a> <code>FULL</code> y <code>RIGHT</code>,
+generar planes mejor optimizados para consultas que usan
+<a href="https://www.postgresql.org/docs/16/functions-aggregate.html">funciones de agregado</a>
+con cláusulas <code>DISTINCT</code> u <code>ORDER BY</code>, utilizar ordenamientos incrementales para consultas
+<a href="https://www.postgresql.org/docs/16/queries-select-lists.html#QUERIES-DISTINCT"><code>SELECT DISTINCT</code></a>
+, y optimizar
+<a href="https://www.postgresql.org/docs/16/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS">funciones de ventana deslizante</a>
+para que se ejecuten de forma más eficiente. También mejora los &quot;anti-joins&quot; <code>RIGHT</code> y <code>OUTER</code>, lo cual permite a los usuarios identificar registros no presentes en una tabla unida.</p>
+<p>Esta versión incluye mejoras para la carga masiva de datos utilizando
+<a href="https://www.postgresql.org/docs/16/sql-copy.html"><code>COPY</code></a> tanto en operaciones individuales como simultáneas, con pruebas que muestran, en algunos casos, una mejora del rendimiento de hasta el 300%. PostgreSQL 16 añade soporte para el
+<a href="https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-LOAD-BALANCE-HOSTS">balanceo de carga</a>
+en clientes que utilizan <code>libpq</code>, y mejoras en la estrategia de vacuum que reducen la necesidad de congelar tablas completas. Además, PostgreSQL 16 introduce la aceleración de CPU mediante <code>SIMD</code> en arquitecturas x86 y ARM, lo cual resulta en mejoras de rendimiento al procesar cadenas ASCII y JSON, y al realizar búsquedas en matrices y sub transacciones.</p>
+<h3 id="replicaci-n-l-gica">Replicación lógica</h3>
+<p>La <a href="https://www.postgresql.org/docs/16/logical-replication.html">replicación lógica</a>
+permite a los usuarios transmitir datos a otras instancias PostgreSQL o a suscriptores que puedan interpretar el protocolo de replicación lógica de PostgreSQL. En PostgreSQL 16, los usuarios pueden realizar la replicación lógica a partir de una instancia standby, lo cual significa que un standby puede publicar cambios lógicos a otros servidores. Esto proporciona a los desarrolladores nuevas opciones de distribución de cargas de trabajo - por ejemplo, utilizar una instancia standby en lugar de la instancia primaria más concurrida para replicar de forma lógica los cambios a los sistemas downstream.</p>
+<p>Además, se han realizado varias mejoras de rendimiento en PostgreSQL 16 con respecto a la replicación lógica. Los suscriptores ahora pueden aplicar transacciones de gran tamaño utilizando workers en paralelo. En tablas que no disponen de una <a href="https://www.postgresql.org/docs/16/ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS">clave primaria</a>, para encontrar registros los suscriptores pueden usar índices B-tree en lugar de lecturas secuenciales. Bajo ciertas condiciones, los usuarios también pueden acelerar la sincronización inicial de tablas utilizando el formato binario.</p>
+<p>En PostgreSQL 16 se han introducido varias mejoras en el control de acceso a la replicación lógica, que incluyen el nuevo
+<a href="https://www.postgresql.org/docs/16/predefined-roles.html">rol predefinido</a>
+<code>pg_create_subscription</code>, el cual otorga a los usuarios la posibilidad de crear nuevas suscripciones lógicas. Por último, con esta versión se empieza a añadir soporte para la replicación lógica bidireccional, introduciendo funcionalidad para replicar datos entre dos tablas de diferentes editores.</p>
+<h3 id="experiencia-para-los-desarrolladores">Experiencia para los desarrolladores</h3>
+<p>PostgreSQL 16 añade más sintaxis del estándar
+<a href="https://www.postgresql.org/docs/16/functions-json.html">SQL/JSON</a>,
+lo que incluye constructores y predicados como <code>JSON_ARRAY()</code>, <code>JSON_ARRAYAGG()</code>,
+e <code>IS JSON</code>. En esta versión también se introduce la posibilidad de utilizar guiones bajos como separadores de miles (por ejemplo, <code>5_432_000</code>) y literales enteros no decimales, como <code>0x1538</code>, <code>0o12470</code>, y <code>0b1010100111000</code>.</p>
+<p>Los desarrolladores que utilizan PostgreSQL 16 también se benefician de los nuevos comandos en <code>psql</code>. Estos incluyen
+<a href="https://www.postgresql.org/docs/16/app-psql.html#APP-PSQL-META-COMMAND-BIND"><code>\bind</code></a>,
+que permite a los usuarios preparar consultas parametrizadas y utilizar <code>\bind</code> para sustituir las variables (por ejemplo <code>SELECT $1::int + $2::int \bind 1 2 \g</code>). </p>
+<p>PostgreSQL 16 mejora el soporte general para
+<a href="https://www.postgresql.org/docs/16/collation.html">intercalaciones de texto</a>, las cuales proporcionan reglas sobre cómo ordenar el texto. PostgreSQL 16 se compila con soporte ICU por defecto, determina la configuración regional ICU por defecto a partir del entorno y permite a los usuarios definir reglas de intercalación ICU personalizadas.</p>
+<h3 id="monitoreo">Monitoreo</h3>
+<p>Un elemento clave a la hora de optimizar el rendimiento de las cargas de trabajo de las bases de datos es comprender el impacto que tienen las operaciones de E/S en el sistema. PostgreSQL 16 introduce
+<a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW"><code>pg_stat_io</code></a>,
+una nueva fuente de métricas clave de E/S para el análisis granular de los patrones de acceso de E/S.</p>
+<p>Además, esta versión añade un nuevo campo a la vista 
+<a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"><code>pg_stat_all_tables</code></a>
+el cual registra un timestamp para indicar cuándo se escaneó por última vez una tabla o índice. PostgreSQL 16 también mejora la legibilidad de
+<a href="https://www.postgresql.org/docs/16/auto-explain.html"><code>auto_explain</code></a> mediante el registro de valores transferidos a sentencias parametrizadas, así como la precisión del algoritmo de seguimiento de consultas utilizado por
+<a href="https://www.postgresql.org/docs/16/pgstatstatements.html"><code>pg_stat_statements</code></a>
+y <a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>.</p>
+<h3 id="control-de-acceso-y-seguridad">Control de acceso y seguridad</h3>
+<p>PostgreSQL 16 proporciona opciones más detalladas para el control de acceso y mejora otras características de seguridad. Esta versión mejora la gestión de los archivos
+<a href="https://www.postgresql.org/docs/16/auth-pg-hba-conf.html"><code>pg_hba.conf</code></a> y 
+<a href="https://www.postgresql.org/docs/16/auth-username-maps.html"><code>pg_ident.conf</code></a>
+permitiendo la coincidencia de expresiones regulares para nombres de usuarios y bases de datos, y directivas <code>include</code> para la inclusión de archivos de configuración externos.</p>
+<p>Se han añadido varios parámetros de conexión cliente orientados a la seguridad, incluido <code>require_auth</code>, que permite a los clientes especificar qué parámetros de autenticación están dispuestos a aceptar de un servidor, y
+<a href="https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-SSLROOTCERT"><code>sslrootcert=&quot;system&quot;</code></a>,
+que indica que PostgreSQL debe utilizar el almacén de autoridades de certificación (CA) de confianza proporcionado por el sistema operativo del cliente. Además, la versión añade soporte para la delegación de credenciales Kerberos, lo cual permite a extensiones como
+<a href="https://www.postgresql.org/docs/16/postgres-fdw.html"><code>postgres_fdw</code></a> y
+<a href="https://www.postgresql.org/docs/16/dblink.html"><code>dblink</code></a> utilizar credenciales autenticadas para conectarse a servicios de confianza.</p>
+<h3 id="sobre-postgresql">Sobre PostgreSQL</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> es la base de datos de código abierto más avanzada del mundo, que cuenta con una comunidad global de miles de usuarios, contribuidores, empresas y organizaciones. Basada en más de 35 años de ingeniería, que comenzaron en la Universidad de Berkeley en California, PostgreSQL ha continuado con un ritmo de desarrollo inigualable. El maduro conjunto de características de PostgreSQL no sólo iguala a los principales sistemas de bases de datos propietarios, sino que los supera en términos de características avanzadas, extensibilidad, seguridad y estabilidad.</p>
+<h3 id="enlaces">Enlaces</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Descargas</a></li>
+<li><a href="https://www.postgresql.org/docs/16/release-16.html">Notas de la versión</a></li>
+<li><a href="https://www.postgresql.org/about/press/">Kit de prensa</a></li>
+<li><a href="https://www.postgresql.org/support/security/">Información de seguridad</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">Política de versiones</a></li>
+<li><a href="https://twitter.com/postgresql">Sigan @postgresql en Twitter</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">Donaciones</a></li>
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2>Sobre PostgreSQL</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> es la base de datos de código abierto más avanzada del mundo, que cuenta con una comunidad global de miles de usuarios, contribuidores, empresas y organizaciones. Basada en más de 35 años de ingeniería, que comenzaron en la Universidad de Berkeley en California, PostgreSQL ha continuado con un ritmo de desarrollo inigualable. El maduro conjunto de características de PostgreSQL no sólo iguala a los principales sistemas de bases de datos propietarios, sino que los supera en términos de características avanzadas, extensibilidad, seguridad y estabilidad.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="m-s-informaci-n-sobre-las-caracter-sticas">Más información sobre las características</h2>
+<p>Para más información sobre las características antes mencionadas y otras más, consulten los siguientes recursos:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/16/release-16.html">Notas de la versión</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">Tabla de características</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="d-nde-descargarlo">Dónde descargarlo</h2>
+<p>Hay varias maneras de descargar PostgreSQL 16, que incluyen:</p>
+<ul>
+<li>La <a href="https://www.postgresql.org/download/">página oficial de descargas</a> que contiene instaladores y herramientas para <a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/linux/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a>, etc.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v16.0">Código fuente</a></li>
+</ul>
+<p>Otras herramientas y extensiones están disponibles en el
+<a href="http://pgxn.org/">PostgreSQL Extension Network</a>.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="documentaci-n">Documentación</h2>
+<p>PostgreSQL 16 incluye documentos HTML y páginas de manual. Es posible también consultar la documentación en línea en formato <a href="https://www.postgresql.org/docs/16/">HTML</a> y <a href="https://www.postgresql.org/files/documentation/pdf/16/postgresql-16-US.pdf">PDF</a>.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="licencia">Licencia</h2>
+<p>PostgreSQL utiliza la <a href="https://www.postgresql.org/about/licence/">PostgreSQL License</a>,
+una licencia &quot;permisiva&quot; de tipo BSD. Esta
+<a href="http://www.opensource.org/licenses/postgresql/">licencia certificada por la OSI</a> es ampliamente apreciada por ser flexible y adecuada para las empresas, ya que no limita el uso de PostgreSQL con aplicaciones comerciales y propietarias. Junto con el soporte para múltiples empresas y la propiedad pública del código, nuestra licencia hace que PostgreSQL sea muy popular entre los proveedores que desean integrar una base de datos en sus propios productos sin tener que preocuparse por tarifas, dependencia de un único proveedor o cambios en los términos de la licencia.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="contactos">Contactos</h2>
+<p>Sitio web</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>Correo electrónico</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="im-genes-y-logotipos">Imágenes y logotipos</h2>
+<p>Postgres, PostgreSQL y el logo del elefante (Slonik) son todas marcas registradas de la <a href="https://www.postgres.ca">PostgreSQL Community Association</a>.
+Quien desee utilizar estas marcas, deberá cumplir con la <a href="https://www.postgresql.org/about/policies/trademarks/">política de marca</a>.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="soporte-corporativo">Soporte corporativo</h2>
+<p>PostgreSQL cuenta con el soporte de numerosas empresas, que patrocinan a los desarrolladores, ofrecen recursos de hosting y nos dan apoyo financiero. Consulten nuestra página de
+<a href="https://www.postgresql.org/about/sponsors/">patrocinadores</a> para conocer algunos de los que dan soporte al proyecto.</p>
+<p>Existe también una gran comunidad de
+<a href="https://www.postgresql.org/support/professional_support/">empresas que ofrecen soporte para PostgreSQL</a>,
+desde consultores individuales hasta empresas multinacionales.</p>
+<p>Si desean hacer una contribución financiera al Grupo Global de Desarrollo de PostgreSQL o a una de las organizaciones sin fines de lucro reconocidas por la comunidad, visiten nuestra página de <a href="https://www.postgresql.org/about/donate/">donaciones</a>.</p>
+{% endblock presskit_corporate %}

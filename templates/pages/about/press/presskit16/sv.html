@@ -1,0 +1,229 @@
+{% extends "pages/about/press/presskit16/base.html" %}
+
+{% block presskit_content %}
+<p>14 September 2023 - PostgreSQL Global Development Group presenterade idag
+  PostgreSQL 16, den senaste versionen av världens mest avancerade databas
+  byggd med öppen källkod.</p>
+  <p><a href="https://www.postgresql.org/docs/16/release-16.html">PostgreSQL 16</a> höjer
+  prestandan, med tydliga förbättringar för parallella databasfrågor, inläsning
+  av data i stora volymer och logisk replikering. Den nya versionen innehåller mycket ny
+  funktionalitet för både utvecklare och databasadministratörer, bland annat
+  utökat stöd för SQL/JSON syntax, bättre övervakning av arbetsbelastning samt
+  utökad flexibilitet i hur åtkomstregler kan hanteras över många databaser i
+  större installationer.</p>
+  <p>&quot;Medan användningsmönster för relationsdatabaser utvecklas
+  och ändras så fortsätter PostgreSQL att förbättra prestandan för att hantera
+  stora datamängder&quot;, säger Dave Page, medlem i PostgreSQL core team. &quot;PostgreSQL
+  16 ger bättre möjligheter för att både skala up och skala ut installationer,
+  och ger samtidigt nya och bättre insikter i hur datahantering kan optimeras.&quot;</p>
+  <p>PostgreSQL är känt för pålitlighet, stabilitet och tillförlitlighet. Med mer än
+  35 års utveckling som öppen källkod av en global grupp av utvecklare har
+  PostgreSQL blivit den mest populära relationsdatabasen byggd på öppen källkod
+  för organisationer av alla storlekar.</p>
+  <h3 id="prestandaf-rb-ttringar">Prestandaförbättringar</h3>
+  <p>PostgreSQL 16 förbättrar prestandan av redan befintlig funktionalitet genom
+  nya optimeringar vid frågeplanering. <code>FULL</code> och <code>RIGHT</code> 
+  <a href="https://www.postgresql.org/docs/16/queries-table-expressions.html#QUERIES-JOIN">joins</a>,
+  kan i denna versionen generera en mer optimerad frågeplan för frågor som 
+  använder
+  <a href="https://www.postgresql.org/docs/16/functions-aggregate.html">aggregatfunktioner</a>
+  med en <code>DISTINCT</code> eller <code>ORDER BY</code> klausul. Vidare kan inkrementell sortering
+  också användas för
+  <a href="https://www.postgresql.org/docs/16/queries-select-lists.html#QUERIES-DISTINCT"><code>SELECT DISTINCT</code></a>
+  frågor, och
+  <a href="https://www.postgresql.org/docs/16/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS">fönsterfunktioner</a>
+  kan optimeras för att exekvera snabbare.  <code>RIGHT</code> och <code>OUTER</code> &quot;anti-joins&quot;,
+  vilka möjliggör att identifiera rader som inte finns i en tabell, är också
+  förbättrade.</p>
+  <p>Denna version innehåller förbättringar för inläsning av stora volymer med 
+  <a href="https://www.postgresql.org/docs/16/sql-copy.html"><code>COPY</code></a> för både
+  enskilda och parallella operationer, med upp till 300% prestandaförbättring
+  under vissa omständigheter.  PostgreSQL 16 adderar också stöd för 
+  <a href="https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-LOAD-BALANCE-HOSTS">lastbalansering</a>
+  för klienter som använder <code>libpq</code>, samt förbättringar kring vacuum-strategier
+  som minskar behovet av frysning av en hel tabell. Utöver det introduceras
+  även CPU-acceleration med hjälp av <code>SIMD</code> för både x86 och ARM arkitekturer vilket
+  leder till förbättrad prestanda för hantering av ASCII och JSON strängar samt
+  vid sökning i arrayer och subtransaktioner.</p>
+  <h3 id="logisk-replikering">Logisk replikering</h3>
+  <p><a href="https://www.postgresql.org/docs/16/logical-replication.html">Logisk replikering</a>
+  ger användare möjlighet att strömma data till andra PostgreSQL instanser eller
+  prenumeranter som kan tolka PostgreSQL-protokollet för logisk replikering. Med
+  PostgreSQL 16 kan användare utföra logisk replikering från en standby, vilket
+  betyder att en standby kan publicera logiska förändringar till andra servrar.
+  Detta ger utvecklare nya möjligheter för distribution av last, till exempel
+  genom att avlasta den primära noden genom att använda en standby för att 
+  replikera förändringar till konsumenter av datan.</p>
+  <p>Utöver det innehåller PostgreSQL 16 många förbättringar för logisk replikering.
+  Prenumeranter kan nu applicera stora transaktioner med hjälp av parallella
+  processer. För tabeller som inte har en 
+  <a href="https://www.postgresql.org/docs/16/ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS">primärnyckel</a>
+  kan prenumeranter nu använda ett B-tree index istället för sekventiell sökning
+  för att hitta matchande rader. I speciella fall kan användare också öka
+  hastigheten av initial tabellsynkronisering med hjälp av binärformatet.</p>
+  <p>Det finns många förbättringar kring rättighetshantering för logisk replikering
+  i PostgreSQL 16, bland annat den nya 
+  <a href="https://www.postgresql.org/docs/16/predefined-roles.html">fördefinierade rollen</a>
+  <code>pg_create_subscription</code>, vilket ger användare möjlighet att skapa en nya
+  prenumerationer av logiska förändringar. Slutligen så har arbetet med att
+  stödja dubbelriktad logisk replikering påbörjats i och med denna versionen,
+  där funktionalitet för att replikera data mellan två tabeller från olika
+  publiceringar medges.</p>
+  <h3 id="utvecklarfunktioner">Utvecklarfunktioner</h3>
+  <p>PostgreSQL 16 har adderat stöd för mer syntax från
+  <a href="https://www.postgresql.org/docs/16/functions-json.html">SQL/JSON</a> standarden,
+  bland annat konstruktörer och predikat som <code>JSON_ARRAY()</code>, <code>JSON_ARRAYAGG()</code>
+  och <code>IS JSON</code>. Denna versionen introducerar också möjligheten att använda
+  understreck som tusenseparator (t.ex <code>5_432_000</code>) och heltal i andra baser,
+  som <code>0x1538</code>, <code>0o12470</code> och <code>0b1010100111000</code>.</p>
+  <p>Användare av PostgreSQL 16 kan också dra nytta från nya kommandon i <code>psql</code>.
+  Dessa inkluderar bland annat 
+  <a href="https://www.postgresql.org/docs/16/app-psql.html#APP-PSQL-META-COMMAND-BIND"><code>\bind</code></a>,
+  vilket medger att förbereda parameteriserade frågor och med <code>\bind</code> ersätta
+  variablerna (t.ex <code>SELECT $1::int + $2::int \bind 1 2 \g</code>).</p>
+  <p>Stödet för
+  <a href="https://www.postgresql.org/docs/16/collation.html">text jämförelser</a> är
+  förbättrat i PostgreSQL 16, med nya regler för hur text sorteras. PostgreSQL
+  16 byggs ny som standard med stöd för ICU, använder standard locale från
+  exekveringsmiljön och ger möjlighet för att skapa egna regler för jämförelser
+  med ICU.</p>
+  <h3 id="-vervakning">Övervakning</h3>
+  <p>För att kunna optimera prestandan av databasen är det mycket viktigt att
+  förstå vilken påverkan I/O-operationer har på systemet. PostgreSQL 16
+  introducerar
+  <a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW"><code>pg_stat_io</code></a>,
+  en ny källa till mätpunkter för noggrann analys av I/O-accessmönster.</p>
+  <p>Utöver har en ny kolumn lagts till i
+  <a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"><code>pg_stat_all_tables</code></a>
+  vilken innehåller en tidstämpel för när en tabell eller ett index senast
+  lästes. PostgreSQL 16 förbättrar också 
+  <a href="https://www.postgresql.org/docs/16/auto-explain.html"><code>auto_explain</code></a>
+  genom att inkludera värden som skickats till parameteriserade frågor, samt
+  utvecklar spårningen av frågor till
+  <a href="https://www.postgresql.org/docs/16/pgstatstatements.html"><code>pg_stat_statements</code></a>
+  och <a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>.</p>
+  <h3 id="r-ttighetshantering-och-s-kerhet">Rättighetshantering och säkerhet</h3>
+  <p>PostgreSQL 16 tillåter detaljerad konfiguration av rättighetshantering och
+  förbättrar ett flertal säkerhetsfunktioner.
+  Förbättringar i denna versionen är hanteringen av 
+  <a href="https://www.postgresql.org/docs/16/auth-pg-hba-conf.html"><code>pg_hba.conf</code></a> och
+  <a href="https://www.postgresql.org/docs/16/auth-username-maps.html"><code>pg_ident.conf</code></a>
+  med bland annat stöd för reguljära uttryck för matchning av användarnamn och
+  databasnamn and <code>include</code> direktiv för externa konfigurationsfiler.</p>
+  <p>Nytt i denna versionen är ett flertal säkerhetsorienterade anslutningsparametrar
+  för klienter, bland dem <code>require_auth</code> vilken ger klienter möjlighet att
+  specificera vilka autentiseringsparametrar de är villiga att acceptera från
+  en server, och 
+  <a href="https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-SSLROOTCERT"><code>sslrootcert=&quot;system&quot;</code></a>,
+  vilken indikerar att PostgreSQL ska använda operativsystemets källa för
+  certifikatsutfärdare (CA). Utöver det stöds identitetsdelegering för
+  Kerberos, vilket ger tilläggsmoduler såsom 
+  <a href="https://www.postgresql.org/docs/16/postgres-fdw.html"><code>postgres_fdw</code></a> och
+  <a href="https://www.postgresql.org/docs/16/dblink.html"><code>dblink</code></a> möjlighet att
+  använda autentiserade identiteter för att anslutningar till tjänster.</p>
+  <h3 id="om-postgresql">Om PostgreSQL</h3>
+  <p><a href="https://www.postgresql.org">PostgreSQL</a> är världens mest avancerade databas
+  byggd på öppen källkod, med tusentals användare, utvecklare, företag och 
+  organisationer världen över. Med över 35 års utveckling, med start på
+  University of California, Berkeley, har PostgreSQL fortsatt utvecklas med
+  en enastående fart. PostgreSQL:s väl etablerade funktioner är inte bara
+  jämförbara med proprietära databassystem, utan överträffar dem när det gäller
+  avancerade databas funktioner, utbyggbarhet, säkerhet och stabilitet.</p>
+  <h3 id="l-nkar">Länkar</h3>
+  <ul>
+  <li><a href="https://www.postgresql.org/download/">Nerladdning</a></li>
+  <li><a href="https://www.postgresql.org/docs/16/release-16.html">Nyheter i version 16</a></li>
+  <li><a href="https://www.postgresql.org/about/press/">Press Kit</a></li>
+  <li><a href="https://www.postgresql.org/support/security/">Säkerhet</a></li>
+  <li><a href="https://www.postgresql.org/support/versioning/">Versionspolicy</a></li>
+  <li><a href="https://twitter.com/postgresql">Följ @postgresql</a></li>
+  <li><a href="https://www.postgresql.org/about/donate/">Donera</a></li>
+  </ul>
+  {% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2>Om PostgreSQL</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> är världens mest avancerade databas
+byggd på öppen källkod, med tusentals användare, utvecklare, företag och 
+organisationer världen över. Med över 35 års utveckling, med start på
+University of California, Berkeley, har PostgreSQL fortsatt utvecklas med
+en enastående fart. PostgreSQL:s väl etablerade funktioner är inte bara
+jämförbara med proprietära databassystem, utan överträffar dem när det gäller
+avancerade databas funktioner, utbyggbarhet, säkerhet och stabilitet.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="mer-om-funktionerna">Mer om funktionerna</h2>
+<p>För förklaringar och dokumentation av de ovan nämnda funktionerna, och mer,
+se följande resurser:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/16/release-16.html">Nyheter i version 16</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">Funktionsmatris</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="nerladdning">Nerladdning</h2>
+<p>PostgreSQL 16 kan laddas ner på ett flertal olika sätt, bland annat:</p>
+<ul>
+<li>Sidan med <a href="https://www.postgresql.org/download/">officiella nerladdningar</a>, vilken innehåller installationspaket för <a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/linux/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a> med flera.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v16.0">Källkod</a></li>
+</ul>
+<p>Andra verktyg och tilläggsmoduler finns tillgängliga på
+<a href="http://pgxn.org/">PostgreSQL Extension Network</a>.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="dokumentation">Dokumentation</h2>
+<p>PostgreSQL 16 levereras med dokumentation i HTML-format samt man-sidor, och
+dokumentationen kan också läsas online i både <a href="https://www.postgresql.org/docs/16/">HTML-format</a> och
+som <a href="https://www.postgresql.org/files/documentation/pdf/16/postgresql-16-US.pdf">PDF</a>.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="licens">Licens</h2>
+<p>PostgreSQL använder <a href="https://www.postgresql.org/about/licence/">PostgreSQL
+Licensen</a>, en BSD-liknande
+&quot;tillåtande&quot; licens. Denna
+<a href="http://www.opensource.org/licenses/postgresql/">OSI-certifierade licens</a> anses
+flexibel och företagsvänlig eftersom den inte begränsar användningen av
+PostgreSQL i kommersiella eller proprietära applikationer. Licensen, tillsammans
+med brett stöd från många företag och ett publikt ägande av koden, gör att
+PostgreSQL är väldigt populär bland tillverkare som vill bygga in en databas
+i sin produkt utan att riskera avgifter, inlåsning eller förändrade licensvillkor.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="kontakter">Kontakter</h2>
+<p>Hemsida</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>E-post</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="bilder-och-logotyper">Bilder och logotyper</h2>
+<p>Postgres, PostgreSQL, och elefantlogotypen (Slonik) är av
+<a href="https://www.postgres.ca">PostgreSQL Community Association</a> registrerade
+varumärken. Användning av dess varumärken måste följa dess
+<a href="https://www.postgresql.org/about/policies/trademarks/">varumärkespolicy</a>.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="kommersiell-support">Kommersiell support</h2>
+<p>PostgreSQL projektet stöttas av ett stort antal företag som bland annat
+sponsrar utvecklare, erbjuder infrastruktur och ger finansiellt stöd. Se listan
+över PostgreSQL:s <a href="https://www.postgresql.org/about/sponsors/">sponsors</a> för
+mer information om vem de är.</p>
+<p>Det finns också en stor grupp
+<a href="https://www.postgresql.org/support/professional_support/">företag som säljer PostgreSQL Support</a>,
+allt från små konsultbolag till multinationella företag.</p>
+<p>För att ge ett ekonomiskt bidrag till PostgreSQL Global Development Group eller
+en av de officiella ideella organisationerna, se sidan för
+<a href="https://www.postgresql.org/about/donate/">donations</a> för mer information.</p>
+{% endblock presskit_corporate %}

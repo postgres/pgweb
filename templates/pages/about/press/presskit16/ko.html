@@ -1,0 +1,151 @@
+{% extends "pages/about/press/presskit16/base.html" %}
+
+{% block presskit_content %}
+<p>2023년 9월 14일, PostgreSQL 글로벌 개발 그룹은 세계에서 가장 진보적인 공개 소스 데이터베이스의 
+가장 최신 버전인 PostgreSQL 16의 출시를 알립니다.</p>
+<p>PostgreSQL 16은 향상된 쿼리 병렬화, 대용량 데이터 로드 및 논리적 복제 기능이 눈에 띄게 성능을 개선했습니다. 
+이번 배포판에는 더 많은 SQL/JSON 구문과 워크로드에 대한 새로운 모니터링 통계, 대규모 집단의 정책 관리를 위한 
+접근 제어 규칙을 정의하는 유연성을 포함하여 개발자와 관리자 모두를 위한 많은 기능들이 포함되었습니다.</p>
+<p>PostgreSQL Core Team 멤버인 Dave Page는 "관계형 데이터베이스 패턴이 진화함에 따라 PostgreSQL은 
+규모에 맞는 데이터 검색 및 관리기능을 향상시키고 있습니다."라고 말했습니다.
+"PostgreSQL 16은 사용자에게 워크로드를 스케일업 및 스케일아웃할 수 있는 많은 방법을 제공하는 
+동시에 통찰력을 얻고 데이터 관리를 최적화할 수 있는 새로운 방법도 제공합니다."</p>
+<p>신뢰성과 견고성으로 유명한 혁신적인 데이터 관리 시스템인 PostgreSQL은 글로벌 개발자 커뮤니티에서 35년 이상 공개 
+소스로 개발하고 있습니다. 이렇게 해서 모든 규모의 조직에서 사용하는 공개 소스 관계형 데이터베이스가 되었습니다.</p>
+<h3 id="-">성능 향상</h3>
+<p>PostgreSQL 16은 새로운 쿼리 플랜 최적화를 통해 기존 PostgreSQL 기능의 성능을 향상시켰습니다.
+이번 최신 배포판에서 쿼리 플래너는 <code>FULL</code>과 <code>RIGHT</code> 조인을 병렬화하고 <code>SELECT DISTINCT</code>
+쿼리에 대한 증분 정렬을 사용하고 윈도우 함수 실행을 최적화하여 효율적으로 실행할 수 있습니다.
+또한 <code>RIGHT</code>와 <code>OUTER</code> &quot;anti-joins&quot;을 도입하여 사용자가 결합된 테이블에 존재하지 않는 행을 식별할 수 있도록 합니다.</p>
+<p>이번 배포판에는 단일 작업과 동시 작업 모두에서 <code>COPY</code>를 이용한 대량 로드에 대한 개선 사항이 포함되어 있으며, 
+특정 테스트에서는 성능이 최대 300%가량 향상된 것으로 나타났습니다. PostgreSQL은 <code>libpq</code>를 사용하는 클라이언트에서 
+로드 밸런싱을 지원하고, 테이블 전체 프리징 작업을 줄이기 위해 VACUUM 방법을 개선했습니다. 또한 PostgreSQL 16은 
+x86과 ARM 아키텍처에서 <code>SIMD</code>를 사용하여 CPU를 가속화해 ASCII 및 JSON 문자열을 처리할 때 성능을 향상시키고 
+배열 및 서브 트랜잭션 검색을 수행할 수 있습니다.</p>
+<h3 id="-">논리적 복제</h3>
+<p>논리적 복제를 통해 PostgreSQL 사용자는 PostgreSQL 논리적 복제 프로토콜을 해석할 수 있는 다른 PostgreSQL 
+인스턴스 또는 구독자에게 데이터를 스트리밍할 수 있습니다. PostgreSQL 16에서 사용자는 스탠바이 인스턴스에서 논리적 디코딩을 
+수행할 수 있고, 이는 스탠바이가 논리적 변경 사항을 다른 서버에 게시할 수 있음을 의미합니다. 
+이것은 개발자들에게 새로운 워크로드 배포 옵션을 제공합니다. 예를 들어, 더 바쁜 기본 작업이 아닌 대기 작업을 사용하여 변경 사항을 
+논리적으로 다운스트림 시스템에 복제합니다.</p>
+<p>또한 논리적 복제에 대한 몇가지 성능이 PostgreSQL 16에서 개선되었습니다. 현재 구독서버는 병렬 작업자를 사용하여 
+대규모 트랜잭션을 적용할 수 있습니다. <code>PRIMARY KEY</code>가 없는 테이블의 경우, 구독서버는 데이터를 찾기 위해 
+시퀀스 스캔 대신 B-트리 인덱스를 사용할 수 있습니다. 특정 조건에서는 초기 테이블 동기화 때 이진 양식을 사용하여 
+속도를 높일 수도 있습니다.</p>
+<p>PostgreSQL 16의 논리적 복제에는 사용자에게 새 논리적 구독을 생성할 수 있는 권한을 부여하는 새롭게 정의된 
+pg_create_subscription 롤이 추가되었고, 몇 가지 액세스 제어 기능이 향상되었습니다.
+마지막으로 이번 배포판에서는 양방향 논리 복제 지원을 추가하여 서로 발행서버의 두 테이블 간에 데이터를 복제할 수 있는 기능을 도입했습니다.</p>
+<h3 id="-">개발자 경험</h3>
+<p>PostgreSQL 16은 SQL/JSON 표준 규약을 따르는 <code>JSON_ARRAY()</code>, <code>JSON_ARRAYAGG()</code>, <code>IS JSON</code>
+과 같은 생성자와 술어 구문을 추가했습니다. 또한 이번 배포판에서는 <code>0x1538</code>, <code>0o12470</code>, 및 <code>0b1010100111000</code>과
+  같은 십진수가 아닌 정수 리터럴과 밑줄(_)을 천단위 구분자로 (예: <code>5_432_000</code>)쓸 수 있는 기능도 포함했습니다.</p>
+<p>PostgreSQL 16을 사용하는 개발자들은 <code>psql</code> 클라이언트 프로토콜에 여러 개의 명령어를 추가함으로써 혜택을 얻을 수 있을 것입니다. 
+또한, 매개변수화된 쿼리(예: <code>SELECT $1 + $2</code>)를 실행한 후 변수를 대체하기 위해 <code>\bind</code>를 사용할 수 있습니다.</p>
+<p>PostgreSQL 16은 문자 정렬 규칙을 제공하는 텍스트 대조에 대한 일반적인 지원 기능을 향상시켰습니다. PostgreSQL 16은 기본적으로 
+ICU를 지원하고 환경설정에 따라 기본 ICU 로케일을 결정하며 사용자 지정 ICU 대조 규칙을 정의할 수 있도록 빌드되었습니다.</p>
+<h3 id="-">모니터링</h3>
+<p>데이터베이스 워크로드의 성능을 조정하는데 있어 핵심적인 측면은 I/O 작업이 시스템에 미치는 영향을 이해하는 것입니다. 
+PostgreSQL 16은새로운 pg_stat_io 뷰를 통해 이러한 데이터를 분석하는 방법을 간소화할 수 있도록 지원합니다. 
+이 뷰는 shared_buffer hits 및 I/O 지연 시간과 같은 주요 I/O 통계를 추적합니다.</p>
+<p>또한 이번 배포판에서는 테이블 또는 인덱스가 마지막으로 검색된 시간을 나타내는 타임스탬프를 기록하는 컬럼을 <code>pg_stat_all_tables</code>에 
+추가했습니다. PostgreSQL은 매개 변수화된 문에 전달된 값을 기록하여 auto_explain을 더 쉽게 읽을 수 있도록 하고, 
+pg_stat_activity의 수행 쿼리 획일화 알고리즘의 정확도를 향상시켰습니다.</p>
+<h3 id="-">접근통제 및 보안</h3>
+<p>PostgreSQL 16은 액세스 제어를 위한 세분화된 옵션을 제공하고 다른 보안 기능을 강화했습니다.
+이번 배포판에는 사용자와 데이터베이스 이름에 대한 정규 표현식 일치와 외부 구성 파일에 대한 &quot;include&quot; 를 허용하는 등
+  <code>pg_hba.conf</code>와 <code>pg_ident.conf</code>파일의 관리 기능을 향상시켰습니다.</p>
+<p>이번 배포판에서는 클라이언트가 서버에서 어떤 인증 매개 변수를 받아들일 것인지 지정할 수 있는 <code>require_auth</code>와 
+PostgreSQL이 클라이언트의 운영 체제에서 제공하는 CA(신뢰할 수 있는 인증 기관) 저장소를 사용해야 한다는 것을 나타내는 
+<code>sslrootcert=&quot;system&quot;</code>을 포함한 여러보안 지향 클라이언트 연결 매개 변수가 추가되었습니다.
+또한 이번 배포판은 Kerberos 자격 증명 위임을 지원하므로 <code>postgres_fdw</code>나 <code>dblink</code>와 같은 확장모듈을 
+인증된 자격 증명을 사용하여 신뢰할 수 있는 서비스에 연결할 수 있습니다.</p>
+<h3 id="postgresql-">PostgreSQL 정보</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> 은 수천 명의 사용자, 기여자, 회사 및 조직의 세계적인 커뮤니티를 
+보유한 세계 최고 수준의오픈 소스 데이터베이스입니다. 캘리포니아, 버클리 대학교를 시작으로 35년 이상의 엔지니어링 기반으로 
+구축된 PostgreSQL은 타의 추종을 불허하는 속도로 계속 발전해왔습니다. PostgreSQL의 완성도 높은 기능들은 상용 
+데이터베이스 시스템과 거의 같으며, 확장성, 보안 및 안정성 측면에서도 뛰어납니다.</p>
+<h3 id="-">링크</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">다운로드</a></li>
+<li><a href="https://www.postgresql.org/docs/16/release-16.html">출시 소식</a></li>
+<li><a href="https://www.postgresql.org/about/press/">홍보글</a></li>
+<li><a href="https://www.postgresql.org/support/security/">보안 정보</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">버전 정책</a></li>
+<li><a href="https://twitter.com/postgresql">트위터 팔로우 @postgresql</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">기부</a></li>
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2>PostgreSQL 정보</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> 은 수천 명의 사용자, 기여자, 회사 및 조직의 세계적인 커뮤니티를 
+  보유한 세계 최고 수준의오픈 소스 데이터베이스입니다. 캘리포니아, 버클리 대학교를 시작으로 35년 이상의 엔지니어링 기반으로 
+  구축된 PostgreSQL은 타의 추종을 불허하는 속도로 계속 발전해왔습니다. PostgreSQL의 완성도 높은 기능들은 상용 
+  데이터베이스 시스템과 거의 같으며, 확장성, 보안 및 안정성 측면에서도 뛰어납니다.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="-">기능에 대해 자세히 알아보기</h2>
+<p>기능 및 기타사항에 대한 설명은 다음을 참조하시기 바랍니다.
+리소스:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/16/release-16.html">출시 소식</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">기능 매트릭</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="-">다운로드할 위치</h2>
+<p>공식 다운로드 페이지에서 Windows, Linux, macOS 외 기타 운영체제용 설치파일과 도구들을 다운로드 할 수 있습니다.
+PostgreSQL 16을 다운로드할 수 있는 방법은 다음과 같습니다:</p>
+<ul>
+<li><a href="https://www.postgresql.org/download/">공식 다운로드</a>페이지에는 <a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/linux/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a> 등의 설치 프로그램이 포함되어 있습니다.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v16.0">출처코드</a></li>
+</ul>
+<p>기타 도구 및 확장 모듈은 <a href="http://pgxn.org/">PostgreSQL Extension Network</a> 에서 확인하시면 됩니다.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="-">문서</h2>
+<p>PostgreSQL 16은 HTML 문서와 man 페이지가 함께 제공되며, 온라인으로 HTML 양식과 PDF 양식도 제공합니다. <a href="https://www.postgresql.org/docs/16/">HTML</a> <a href="https://www.postgresql.org/files/documentation/pdf/16/postgresql-16-US.pdf">PDF</a></p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="-">라이센스</h2>
+<p>PostgreSQL<a href="https://www.postgresql.org/about/licence/">PostgreSQL License</a>은 BSD와 같은 
+&quot;허용&quot; 라이센스인 PostgreSQL 라이센스를 사용합니다. <a href="http://www.opensource.org/licenses/postgresql/">OSI 인증 라이센스</a> 
+상용 또는 독점 응용 프로그램에서 PostgreSQL 사용을 제한하지 않기 때문에 유연하고 비즈니스 친화적이라는 평가를 받고 있습니다.
+여러 회사들의 지원과 코드 공개로 이 라이센스는 PostgreSQL을 사용료, 공급업체 종속성, 라이선스 조건 변경에 대한 두려움 없이 
+자체 제품에 데이터베이스를 내장하려는 공급업체에게 인기가 많습니다.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="-">연락처</h2>
+<p>홈페이지</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>이메일</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="-">이미지와 로고</h2>
+<p>Postgres, PostgreSQL, 코끼리 로고(슬로닉)는 캐나다 PostgreSQL 커뮤니티 협회의 고유 상표권으로 등록되어 있습니다. 
+<a href="https://www.postgres.ca">PostgreSQL Community Association of Canada</a>.
+이 이미지와 로고를 사용하려면, 상표 정책을 준수해야합니다.
+<a href="https://www.postgresql.org/about/policies/trademarks/">trademark policy</a>.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="-">협력 지원</h2>
+<p>PostgreSQL은 개발자 후원, IT 자원 제공, 재정 지원 등 다양한 캠페인 형태의 지원을 받고 있습니다. 
+현재 지원하고 있는 후원 목록을 살펴보세요. <a href="https://www.postgresql.org/about/sponsors/">sponsors</a></p>
+<p>또한 개별 컨설턴트에서 다국적 기업에 이르기까지 PostgreSQL 지원을 제공하는 대규모 커뮤니티가 있습니다.
+<a href="https://www.postgresql.org/support/professional_support/">companies offering PostgreSQL Support</a>,</p>
+<p>PostgreSQL 글로벌 개발 그룹이나 기타 PostgreSQL 관련 분명한 비영리 커뮤니티에 재정적 기부를 하려면 기부 페이지를 살펴보십시오. 
+<a href="https://www.postgresql.org/about/donate/">donations</a></p>
+{% endblock presskit_corporate %}

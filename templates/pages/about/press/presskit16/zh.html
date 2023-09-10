@@ -1,0 +1,97 @@
+{% extends "pages/about/press/presskit16/base.html" %}
+
+{% block presskit_content %}
+<p>2023年9月14日 - PostgreSQL全球开发组今天宣布PostgreSQL 16正式发布，作为世界上最先进的开源数据库，PostgreSQL 16是目前的最新版本。</p>
+<p><a href="https://www.postgresql.org/docs/16/release-16.html">PostgreSQL 16</a>提升了性能，尤其在并行查询、大数据量加载和逻辑复制方面有显著的改进。该版本为开发人员和管理员提供了许多新功能，包括更多的SQL/JSON语法、新的工作负载监控指标，以及大型集群间更灵活的访问控制规则定义。</p>
+<p>&quot;随着关系数据库模式的发展，PostgreSQL继续提升在查询和处理大规模数据方面的性能&quot;，PostgreSQL核心团队成员Dave Page说，&quot;PostgreSQL 16为用户提供了更多纵向扩展（scale-up）和横向扩展（scale-out）工作负载的方法，同时也为他们提供了理解和优化数据管理的新途径。&quot;</p>
+<p>PostgreSQL是一个创新的数据管理系统，以其可靠性和健壮性著称，得益于全球开发者社区超过35年的开源开发，已经成为各种规模组织的首选开源关系型数据库。</p>
+<h3 id="-">性能提升</h3>
+<p>PostgreSQL 16通过新的查询规划器优化提升了现有PostgreSQL功能的性能。在该最新版本中，<a href="https://www.postgresql.org/docs/16/parallel-query.html">查询规划器可以并行执行</a><code>FULL</code>和 <code>RIGHT</code><a href="https://www.postgresql.org/docs/16/queries-table-expressions.html#QUERIES-JOIN">连接</a>，为使用带有<code>DISTINCT</code>或<code>ORDER BY</code>子句的<a href="https://www.postgresql.org/docs/16/functions-aggregate.html">聚合函数</a>的查询生成更优的执行计划，利用增量排序来处理<a href="https://www.postgresql.org/docs/16/queries-select-lists.html#QUERIES-DISTINCT"><code>SELECT DISTINCT</code></a>查询，并优化<a href="https://www.postgresql.org/docs/16/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS">窗口函数</a>，使其执行更加高效。它还改进了<code>RIGHT</code>和<code>OUTER</code>“反连接（anti-joins）”，使用户能够识别出不在已连接表中的数据行。</p>
+<p>该版本包含单一和并发操作中使用<a href="https://www.postgresql.org/docs/16/sql-copy.html"><code>COPY</code></a>进行批量加载的改进，测试显示在某些情况下性能提升高达300%。PostgreSQL 16增加了对使用libpq的客户端的<a href="https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-LOAD-BALANCE-HOSTS">负载均衡</a>支持，并改进了vacuum策略，减少全表冻结的必要性。此外，PostgreSQL 16引入了在x86和ARM架构上使用 <code>SIMD</code> 的CPU加速，从而在处理ASCII和JSON字符串以及执行数组和子事务搜索时，性能有所提升。</p>
+<h3 id="-">逻辑复制</h3>
+<p><a href="https://www.postgresql.org/docs/16/logical-replication.html">逻辑复制</a>允许用户将数据流复制到其他可以解析PostgreSQL逻辑复制协议的节点或订阅者。在PostgreSQL 16中，用户可以从备节点（standby）执行逻辑复制，这意味着备节点可以将逻辑变更发布到其他服务器。这为开发者提供了新的工作负载分布选项——例如，使用备节点而不是更繁忙的主节点通过逻辑复制将更改应用到下级订阅端。</p>
+<p>此外，PostgreSQL 16中对逻辑复制进行了多项性能改进。订阅者现在可以使用并行方式来处理大型事务。对于没有<a href="https://www.postgresql.org/docs/16/ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS">主键</a>的表，订阅者可以使用B-tree索引而不是顺序扫描来查找行。在某些条件下，用户还可以使用二进制格式加速初始表同步。</p>
+<p>PostgreSQL 16逻辑复制的访问控制做了多项改进，包括新的<a href="https://www.postgresql.org/docs/16/predefined-roles.html">预定义角色</a> <code>pg_create_subscription</code>，该角色允许用户新建逻辑订阅。</p>
+<p>该版本开始支持双向逻辑复制功能，可以在两个不同发布者的表之间进行数据复制。</p>
+<h3 id="-">开发者体验</h3>
+<p>PostgreSQL 16 添加了更多<a href="https://www.postgresql.org/docs/16/functions-json.html">SQL/JSON</a>标准的语法，包括构造函数和谓词，比如 <code>JSON_ARRAY()</code>、<code>JSON_ARRAYAGG()</code> 和 <code>IS JSON</code>。该版本允许使用下划线作为千位分隔符（例如 <code>5_432_000</code>），并支持非十进制整数常量（如 <code>0x1538</code>、<code>0o12470</code>和<code>0b1010100111000</code>）。</p>
+<p>PostgreSQL 16 为开发者提供更多 <code>psql</code> 命令，包括<a href="https://www.postgresql.org/docs/16/app-psql.html#APP-PSQL-META-COMMAND-BIND"><code>\bind</code></a>，该命令允许用户使用带参数的查询，并使用 <code>\bind</code> 来代替变量（例如 <code>SELECT $1::int + $2::int \bind 1 2 \g</code>）。</p>
+<p>PostgreSQL 16 对规定如何排序文本的<a href="https://www.postgresql.org/docs/16/collation.html">文本排序规则（text collations）</a>进行了改进。PostgreSQL 16构建（Build）时默认启用ICU（国际化组件），并从系统环境中确定默认的ICU区域设置，允许用户自定义ICU排序规则。</p>
+<h3 id="-">监控</h3>
+<p>理解I/O操作对系统的影响是优化数据库工作负载性能的一个关键方面。PostgreSQL 16 引入了一项与I/O操作相关的关键性新指标<a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW"><code>pg_stat_io</code></a>，用于详细分析I/O访问模式。</p>
+<p>此外，该版本在<a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"><code>pg_stat_all_tables</code></a>视图中添加了一个新字段，该字段记录了最后一次扫描表或索引的时间戳。PostgreSQL 16通过记录语句中传进来的参数值，提升了<a href="https://www.postgresql.org/docs/16/auto-explain.html"><code>auto_explain</code></a>的可读性，以及<a href="https://www.postgresql.org/docs/16/pgstatstatements.html"><code>pg_stat_statements</code></a>和<a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>使用查询跟踪算法的准确性。</p>
+<h3 id="-">访问控制与安全性</h3>
+<p>PostgreSQL 16 提供了更精细的访问控制选项，并增强了相关安全功能。该版本对<a href="https://www.postgresql.org/docs/16/auth-pg-hba-conf.html"><code>pg_hba.conf</code></a>和<a href="https://www.postgresql.org/docs/16/auth-username-maps.html"><code>pg_ident.conf</code></a>的管理做了改进，包括允许使用正则表达式匹配用户和数据库名称，并支持使用<code>include</code>指令来引入外部配置文件。</p>
+<p>该版本添加了几个有关安全性的客户端连接参数，包括<code>require_auth</code>，它允许客户端指定可接受的来自服务器端的身份验证参数，以及<a href="https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-SSLROOTCERT"><code>sslrootcert=&quot;system&quot;</code></a>，该参数表示PostgreSQL将使用客户端操作系统提供的可信证书（CA）。此外，该版本增加了对 Kerberos 信任委托的支持，允许诸如 <a href="https://www.postgresql.org/docs/16/postgres-fdw.html"><code>postgres_fdw</code></a> 和 <a href="https://www.postgresql.org/docs/16/dblink.html"><code>dblink</code></a> 这样的扩展（extension）使用经过身份验证的凭证连接到受信任的服务。</p>
+<h3 id="-postgresql">关于PostgreSQL</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> 是全球最先进的开源数据库，它的全球社区是一个拥有数以千计的用户、贡献者、公司和组织组成的。PostgreSQL起源于加利福尼亚大学伯克利分校，已经有超过35年的历史，并且以无与伦比的速度持续发展。PostgreSQL成熟的特性不仅与顶级商业数据库系统匹配，而且在高级数据库功能、可扩展性、安全性和稳定性方面超过了它们。</p>
+<h3 id="-">链接</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">下载</a></li>
+<li><a href="https://www.postgresql.org/docs/16/release-16.html">发行说明</a></li>
+<li><a href="https://www.postgresql.org/about/press/">新闻资料</a></li>
+<li><a href="https://www.postgresql.org/support/security/">安全</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">版本政策</a></li>
+<li><a href="https://twitter.com/postgresql">在Twitter上关注@postgresql</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">捐赠</a></li>
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2 id="关于postgresql">关于PostgreSQL</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> 是全球最先进的开源数据库，它的全球社区是一个拥有数以千计的用户、贡献者、公司和组织组成的。PostgreSQL起源于加利福尼亚大学伯克利分校，已经有超过35年的历史，并且以无与伦比的速度持续发展。PostgreSQL成熟的特性不仅与顶级商业数据库系统匹配，而且在高级数据库功能、可扩展性、安全性和稳定性方面超过了它们。</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="-">更多功能信息</h2>
+<p>有关上述功能和其他信息的解释，请参考以下资源:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/16/release-16.html">发行说明</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">功能列表</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="-">下载地址</h2>
+<p>您可以通过多种方式下载PostgreSQL 16，包括：</p>
+<ul>
+<li><a href="https://www.postgresql.org/download/">官方下载</a>页面，包含用于<a href="https://www.postgresql.org/download/windows/">Windows</a>、<a href="https://www.postgresql.org/download/linux/">Linux</a>、<a href="https://www.postgresql.org/download/macosx/">macOS</a> 等多个平台的安装程序和工具。</li>
+<li><a href="https://www.postgresql.org/ftp/source/v16.0">源代码</a></li>
+</ul>
+<p>其他工具和扩展可在<a href="http://pgxn.org/">PostgreSQL Extension Network</a>上找到。</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="-">文档</h2>
+<p>PostgreSQL 16 附带了HTML文档和手册，您还可以在线浏览<a href="https://www.postgresql.org/docs/16/">HTML</a>和<a href="https://www.postgresql.org/files/documentation/pdf/16/postgresql-16-US.pdf">PDF</a>格式的文档。</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="-">许可证</h2>
+<p>PostgreSQL使用<a href="https://www.postgresql.org/about/licence/">PostgreSQL 许可证</a>，这是一个类似 BSD 的“宽松”许可证。这个<a href="http://www.opensource.org/licenses/postgresql/">OSI认证的许可证</a> 因其灵活性和适用于商业环境而受到广泛赞誉，因为它不限制在商业和专有应用程序中使用PostgreSQL。加上多公司支持和代码的公共所有权，该许可证使PostgreSQL非常受欢迎，因为供应商希望在自己的产品中嵌入数据库，而无需担心费用、供应商锁定或许可条款变更。</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="-">联系方式</h2>
+<p>网址</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>邮箱</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="-">图像和标志</h2>
+<p>Postgres、PostgreSQL和大象标志（Slonik）都是<a href="https://www.postgres.ca">PostgreSQL 社区协会</a>的注册商标。如果您希望使用这些标志，您必须遵守<a href="https://www.postgresql.org/about/policies/trademarks/">商标政策</a>。</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="-">企业支持</h2>
+<p>PostgreSQL得到了许多公司的支持，他们赞助开发人员，提供托管资源，并给予我们财务支持。请查看我们的<a href="https://www.postgresql.org/about/sponsors/">赞助商</a>页面，了解这些项目的支持者。</p>
+<p>还有大量<a href="https://www.postgresql.org/support/professional_support/">提供PostgreSQL支持的公司</a> ，包括个人顾问到跨国公司。</p>
+<p>如果您希望对PostgreSQL全球开发组或其中一个公认的社群非营利组织进行捐赠，请访问我们的<a href="https://www.postgresql.org/about/donate/">捐赠</a>页面。</p>
+{% endblock presskit_corporate %}

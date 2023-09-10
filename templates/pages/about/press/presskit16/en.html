@@ -1,0 +1,181 @@
+{% extends "pages/about/press/presskit16/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 16 Released!</h1>
+<p>
+  <strong>September 14, 2023</strong> - The PostgreSQL Global Development
+  Group today announced the release of PostgreSQL 16, the latest version of
+  the world's most advanced open source database.
+</p>
+<p>
+  <a href="https://www.postgresql.org/docs/16/release-16.html">PostgreSQL 16</a>
+  raises its performance, with notable improvements to query parallelism, bulk
+  data loading, and logical replication. There are many features in this
+  release for developers and administrators alike, including more SQL/JSON 
+  syntax, new monitoring stats for your workloads, and greater flexibility in
+  defining access control rules for management of policies across large fleets.
+</p>
+
+<p>
+  "As relational database patterns evolve, PostgreSQL continues to make
+  performance gains in searching and managing data at scale," said Dave Page, a
+  PostgreSQL Core Team member. "PostgreSQL 16 gives users more methods to scale-up
+  and scale-out their workloads, while giving them new ways to gain insights and
+  optimize how they manage their data."
+</p>
+<p>
+  PostgreSQL, an innovative data management system known for its reliability
+  and robustness, benefits from over 35 years of open source development from
+  a global developer community and has become the preferred open source
+  relational database for organizations of all sizes.
+</p>
+
+<h3 id="performance-improvements">Performance Improvements</h3>
+<p>
+  PostgreSQL 16 improves the performance of existing PostgreSQL functionality
+  through new query planner optimizations. In this latest release, the
+  <a href="https://www.postgresql.org/docs/16/parallel-query.html">query planner can parallelize</a>
+  <code>FULL</code> and <code>RIGHT</code>
+  <a href="https://www.postgresql.org/docs/16/queries-table-expressions.html#QUERIES-JOIN">joins</a>,
+  generate better optimized plans for queries that use
+  <a href="https://www.postgresql.org/docs/16/functions-aggregate.html">aggregate functions</a>
+  with a <code>DISTINCT</code> or <code>ORDER BY</code> clause, utilize
+  incremental sorts for
+  <a href="https://www.postgresql.org/docs/16/queries-select-lists.html#QUERIES-DISTINCT"><code>SELECT DISTINCT</code></a>
+  queries, and optimize
+  <a href="https://www.postgresql.org/docs/16/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS">window functions</a>
+  so they execute more efficiently. It also improves <code>RIGHT</code> and
+  <code>OUTER</code> "anti-joins", which enables users to identify rows not
+  present in a joined table.
+</p>
+<p>
+  This release includes improvements for bulk loading using
+  <a href="https://www.postgresql.org/docs/16/sql-copy.html"><code>COPY</code></a>
+  in both single and concurrent operations, with tests showing up to a 300%
+  performance improvement in some cases. PostgreSQL 16 adds support for
+  <a href="https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-LOAD-BALANCE-HOSTS">load balancing</a>
+  in clients that use <code>libpq</code>, and improvements to vacuum strategy
+  that reduce the necessity of full-table freezes. Additionally, PostgreSQL 16
+  introduces CPU acceleration using <code>SIMD</code> in both x86 and ARM
+  architectures, resulting in performance gains when processing ASCII and JSON
+  strings, and performing array and subtransaction searches.
+</p>
+
+<h3 id="logical-replication">Logical replication</h3>
+<p>
+  <a href="https://www.postgresql.org/docs/16/logical-replication.html">Logical replication</a>
+  lets users stream data to other PostgreSQL instances or subscribers that can
+  interpret the PostgreSQL logical replication protocol. In PostgreSQL 16, users
+  can perform logical replication from a standby instance, meaning a standby can
+  publish logical changes to other servers. This provides developers with new
+  workload distribution options, for example, using a standby rather than the
+  busier primary to logically replicate changes to downstream systems.
+</p>
+<p>
+  Additionally, there are several performance improvements in PostgreSQL 16 to
+  logical replication. Subscribers can now apply large transactions using parallel
+  workers. For tables that do not have a
+  <a href="https://www.postgresql.org/docs/16/ddl-constraints.html#DDL-CONSTRAINTS-PRIMARY-KEYS">primary key</a>,
+  subscribers can use B-tree indexes instead of sequential scans to find rows.
+  Under certain conditions, users can also speed up initial table
+  synchronization using the binary format.
+</p>
+<p>
+  There are several access control improvements to logical replication in
+  PostgreSQL 16, including the new
+  <a href="https://www.postgresql.org/docs/16/predefined-roles.html">predefined role</a>
+  <code>pg_create_subscription</code>, which grants users the ability to create
+  new logical subscriptions. Finally, this release begins adding support for
+  bidirectional logical replication, introducing functionality to replicate data
+  between two tables from different publishers.
+</p>
+
+<h3 id="developer-experience">Developer Experience</h3>
+<p>
+  PostgreSQL 16 adds more syntax from the
+<a href="https://www.postgresql.org/docs/16/functions-json.html">SQL/JSON</a> standard,
+including constructors and predicates such as <code>JSON_ARRAY()</code>,
+<code>JSON_ARRAYAGG()</code>, and <code>IS JSON</code>. This release also
+introduces the ability to use underscores for thousands separators
+(e.g. <code>5_432_000</code>) and non-decimal integer literals, such as
+<code>0x1538</code>, <code>0o12470</code>, and <code>0b1010100111000</code>.
+</p>
+<p>
+  Developers using PostgreSQL 16 also benefit from new commands in
+  <code>psql</code>. This includes
+  <a href="https://www.postgresql.org/docs/16/app-psql.html#APP-PSQL-META-COMMAND-BIND"><code>\bind</code></a>,
+  which allows users to prepare parameterized queries and use <code>\bind</code>
+  to substitute the variables (e.g <code>SELECT $1::int + $2::int \bind 1 2 \g</code>).
+</p>
+<p>PostgreSQL 16 improves general support for
+  <a href="https://www.postgresql.org/docs/16/collation.html">text collations</a>,
+  which provide rules for how text is sorted. PostgreSQL 16 builds with ICU support
+  by default, determines the default ICU locale from the environment, and allows
+  users to define custom ICU collation rules.
+</p>
+
+<h3 id="monitoring">Monitoring</h3>
+<p>
+  A key aspect of tuning the performance of database workloads is understanding
+  the impact of your I/O operations on your system. PostgreSQL 16 introduces
+  <a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW"><code>pg_stat_io</code></a>,
+  a new source of key I/O metrics for granular analysis of I/O access patterns.
+</p>
+<p>
+  Additionally, this release adds a new field to the
+  <a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"><code>pg_stat_all_tables</code></a>
+  view that records a timestamp representing when a table or index was last
+  scanned. PostgreSQL 16 also makes
+  <a href="https://www.postgresql.org/docs/16/auto-explain.html"><code>auto_explain</code></a>
+  more readable by logging values passed into parameterized statements, and
+  improves the accuracy of the query tracking algorithm used by
+  <a href="https://www.postgresql.org/docs/16/pgstatstatements.html"><code>pg_stat_statements</code></a>
+  and
+  <a href="https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>.
+</p>
+
+<h3 id="access-control-security">Access Control &amp; Security</h3>
+<p>
+  PostgreSQL 16 provides finer-grained options for access control and enhances
+  other security features. The release improves management of
+  <a href="https://www.postgresql.org/docs/16/auth-pg-hba-conf.html"><code>pg_hba.conf</code></a> and
+  <a href="https://www.postgresql.org/docs/16/auth-username-maps.html"><code>pg_ident.conf</code></a>
+  files, including allowing regular expression matching for user and database
+  names and <code>include</code> directives for external configuration files.
+</p>
+<p>
+  This release adds several security-oriented client connection parameters,
+  including <code>require_auth</code>, which allows clients to specify which
+  authentication parameters they are willing to accept from a server, and
+  <a href="https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-SSLROOTCERT"><code>sslrootcert="system"</code></a>,
+  which indicates that PostgreSQL should use the trusted certificate authority
+  (CA) store provided by the client's operating system. Additionally, the
+  release adds support for Kerberos credential delegation, allowing extensions
+  such as
+  <a href="https://www.postgresql.org/docs/16/postgres-fdw.html"><code>postgres_fdw</code></a> and
+  <a href="https://www.postgresql.org/docs/16/dblink.html"><code>dblink</code></a>
+  to use authenticated credentials to connect to trusted services.
+</p>
+
+<h3 id="about-postgresql">About PostgreSQL</h3>
+<p>
+  <a href="https://www.postgresql.org">PostgreSQL</a> is the world's most
+  advanced open source database, with a global community of thousands of users,
+  contributors, companies and organizations. Built on over 35 years of
+  engineering, starting at the University of California, Berkeley, PostgreSQL
+  has continued with an unmatched pace of development. PostgreSQL's mature
+  feature set not only matches top proprietary database systems, but exceeds
+  them in advanced database features, extensibility, security, and stability.
+</p>
+
+<h3 id="links">Links</h3>
+<ul>
+  <li><a href="https://www.postgresql.org/download/">Download</a></li>
+  <li><a href="https://www.postgresql.org/docs/16/release-16.html">Release Notes</a></li>
+  <li><a href="https://www.postgresql.org/about/press/">Press Kit</a></li>
+  <li><a href="https://www.postgresql.org/support/security/">Security Page</a></li>
+  <li><a href="https://www.postgresql.org/support/versioning/">Versioning Policy</a></li>
+  <li><a href="https://twitter.com/postgresql">Follow @postgresql on Twitter</a></li>
+  <li><a href="https://www.postgresql.org/about/donate/">Donate</a></li>
+</ul>
+{% endblock presskit_content %}
