@@ -47,10 +47,10 @@ To use the apt repository, follow these steps:
 
 <div class="pg-script-container">
     <pre id="script-box" class="code"># Create the file repository configuration:
-sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+sudo sh -c 'echo "deb [signed-by=/etc/apt/trusted.gpg.d/ACCC4CF8.gpg] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 
 # Import the repository signing key:
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo sh -c "gpg -o /etc/apt/trusted.gpg.d/ACCC4CF8.gpg --dearmor"
 
 # Update the package lists:
 sudo apt-get update
