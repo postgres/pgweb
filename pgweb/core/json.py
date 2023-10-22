@@ -8,6 +8,7 @@ def version_to_json(version):
         'major': str(version.numtree),
         'latestMinor': str(version.latestminor),
         'relDate': version.reldate,
+        'firstRelDate': version.firstreldate,
         'eolDate': version.eoldate,
         'current': version.current,
         'supported': version.supported,
