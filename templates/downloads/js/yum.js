@@ -10,7 +10,7 @@ function get_platform_name(plat, ver) {
         if (parseFloat(ver) <= 7)
 	    return "Red Hat Enterprise, CentOS, Scientific or Oracle";
         else
-	    return "Red Hat Enterprise, Rocky, or Oracle";
+	    return "Red Hat Enterprise, Rocky, AlmaLinux or Oracle";
     }
     else if (plat == 'F')
 	return "Fedora";
