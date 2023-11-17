@@ -27,45 +27,6 @@
   vulnerabilities, and how fixes for security vulnerabilities are released.
 </p>
 
-<p>
-  Please note that the PostgreSQL Project does not offer bug bounties.
-</p>
-
-<h2>CVE Numbering Authority</h2>
-
-<p>
-  The PostgreSQL Project is a CVE Numbering Authority (CNA), working with Red Hat
-  as our CNA Root. This allows us to assign our own CVE numbers and publish CVE
-  records for PostgreSQL and closely related projects.
-</p>
-
-<p>
-  We will currently assign CVE numbers for the following projects upon request to
-  <a href="mailto:cna@postgresql.org">cna@postgresql.org</a>:
-</p>
-
-<ul>
-  <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-  <li><a href="https://yum.postgresql.org/">PostgreSQL RPM packaging</a></li>
-  <li><a href="https://apt.postgresql.org/">PostgreSQL DEB packaging</a></li>
-  <li><a href="https://github.com/EnterpriseDB/edb-installers">PostgreSQL Windows/macOS installers (EDB)</a></li>
-  <li><a href="https://jdbc.postgresql.org/">pgJDBC</a></li>
-  <li><a href="https://odbc.postgresql.org/">psqlODBC</a></li>
-  <li><a href="https://www.pgadmin.org/">pgAdmin</a></li>
-</ul>
-
-<p>
-  Additional projects may request inclusion on the list above by emailing
-  <a href="mailto:cna@postgresql.org">cna@postgresql.org</a>.
-</p>
-
-<p>
-  <strong>NOTE:</strong> The security team will only assign CVEs to projects
-  when requested by members of the project. If you think you've found a security
-  issue in a project other than PostgreSQL or it's packages and installers,
-  please contact the security team for that project. See below for more details.
-</p>
-
 <h2>What is a Security Vulnerability in PostgreSQL?</h2>
 
 <p>
@@ -126,11 +87,7 @@
     <a href="mailto:pgsql-jdbc-security@lists.postgresql.org">pgsql-jdbc-security@lists.postgresql.org</a>.
   </li>
   <li>
-    For security vulnerabilities in <a href="https://www.pgadmin.org/">pgAdmin</a>,
-    please email <a href="mailto:security@pgadmin.org">security@pgadmin.org</a>.
-  </li>
-  <li>
-    If you wish to report a security vulnerability for any other open source project in
+    If you wish to report a security vulnerability for an open source project in
     the PostgreSQL ecosystem (e.g. a driver, an extension, or an installer) and
     need a secure communication channel, please email
     <a href="mailto:security@postgresql.org">security@postgresql.org</a>.
@@ -156,6 +113,13 @@
   Team will credit you in the release notes and register a CVE for the
   vulnerability. <strong>Please do not register a CVE independently of the
   PostgreSQL Security Team</strong>.
+</p>
+
+<p>
+  The PostgreSQL Security Team does not file a CVE for vulnerabilities in
+  PostgreSQL-related projects nor does it list those vulnerabilities in the
+  section below. It is up to external project maintainers to register a CVE for
+  a security vulnerability.
 </p>
 
 <h2>PostgreSQL Security Notifications</h2>
