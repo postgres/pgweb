@@ -14,7 +14,7 @@
 \set ON_ERROR_STOP 1
 BEGIN;
 
--- Commnity auth sites need reset crypto keys
+-- reset crypto keys of community auth sites
 -- The actual sites and id's are not secret.
 UPDATE account_communityauthsite SET cryptkey='XXX';
 
