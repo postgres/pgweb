@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunSQL("""CREATE TABLE account_communityauthlastlogin (
-   user_id int NOT NULL REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED ON DELETE CASCADE,
+   user_id int NOT NULL REFERENCES auth_user(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
    site_id int NOT NULL REFERENCES account_communityauthsite (id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED,
    lastlogin timestamptz NOT NULL,
    logincount bigint NOT NULL,
