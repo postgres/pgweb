@@ -94,6 +94,8 @@ urlpatterns = [
     url(r'^bugs_redir/(\d+)/$', pgweb.misc.views.bugs_redir),
 
     url(r'^about/sponsors/$', pgweb.sponsors.views.sponsors),
+    url(r'^about/contributing/$', pgweb.sponsors.views.contributing),
+    url(r'^about/financial/$', pgweb.sponsors.views.financial),
     url(r'^about/servers/$', pgweb.sponsors.views.servers),
 
     url(r'^robots.txt$', pgweb.core.views.robots),

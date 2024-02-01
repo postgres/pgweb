@@ -1,0 +1,41 @@
+{%extends "base/page.html"%}
+{%block title%}Contributing Sponsors{%endblock%}
+{%block contents%}
+
+<h1>Contributing Sponsors <i class="fa fa-users"></i></h1>
+
+<p>The following is a categorized list of significant contributing sponsors to PostgreSQL. These are
+  sponsors who contribute their employee time to furthering the PostgreSQL project.
+  Sponsors are listed in no particular order within each section, with just the location of the head
+  office for each company shown.</p>
+
+{% for sponsor in sponsors %}
+  {% ifchanged sponsor.sponsortype %}
+    {% if not forloop.first %}
+          </tbody>
+        </table>
+    {% endif %}
+    <h2>{{ sponsor.sponsortype.typename }}</h2>
+    <table class="table table-striped sponsor-table">
+      <tbody>
+        {% endifchanged%}
+          <tr>
+            <th scope="row">
+              <a href="{{ sponsor.url }}" target="_blank" rel="noopener">
+                <img class="organisation-logo" src="/media/img/about/sponsors/{{ sponsor.logoname }}" alt="{{ sponsor.name }}" />
+              </a>
+            </th>
+            <td>
+              <a href="{{ sponsor.url }}" target="_blank" rel="noopener">{{ sponsor.name }}</a>
+            </td>
+            <td>{{ sponsor.country }}</td>
+          </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+
+<h2>Sponsorship Recognition</h2>
+<p>
+  Sponsorship recognition is wholly determined by the <a href="/about/policies/sponsorship/">Sponsorship Committee</a> and was last updated in March, 2023.
+</p>
+{%endblock%}

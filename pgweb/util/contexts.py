@@ -11,6 +11,8 @@ sitenav = {
         {'title': 'Donate', 'link': '/about/donate/'},
         {'title': 'History', 'link': '/docs/current/history.html'},
         {'title': 'Sponsors', 'link': '/about/sponsors/', 'submenu': [
+            {'title': 'Contributing', 'link': '/about/contributing/'},
+            {'title': 'Financial', 'link': '/about/financial/'},
             {'title': 'Servers', 'link': '/about/servers/'},
         ]},
         {'title': 'Latest News', 'link': '/about/newsarchive/'},

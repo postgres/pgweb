@@ -9,7 +9,7 @@ class SponsorType(models.Model):
     sortkey = models.IntegerField(null=False, default=10)
     # sortkey==0 --> do not show in list
 
-    purge_urls = ('/about/servers/', '/about/sponsors/', )
+    purge_urls = ('/about/servers/', '/about/contributing/', )
 
     def __str__(self):
         return self.typename
@@ -25,7 +25,7 @@ class Sponsor(models.Model):
     logoname = models.CharField(max_length=64, null=False, blank=False)
     country = models.ForeignKey(Country, null=False, on_delete=models.CASCADE)
 
-    purge_urls = ('/about/sponsors/', '/about/servers/', )
+    purge_urls = ('/about/servers/', '/about/contributing/', )
 
     def __str__(self):
         return self.name
