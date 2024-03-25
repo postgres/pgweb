@@ -71,7 +71,7 @@ def application(environ, start_response):
             ('Content-type', 'text/plain'),
         ])
         return [
-            "OK",
+            b"OK",
         ]
     except Exception as e:
         print("Error receiving cauth call: {}".format(e), file=sys.stderr)
@@ -81,5 +81,5 @@ def application(environ, start_response):
         ])
 
         return [
-            "An internal server error occurred.\n",
+            b"An internal server error occurred.\n",
         ]
