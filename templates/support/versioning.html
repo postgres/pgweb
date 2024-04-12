@@ -21,9 +21,8 @@ a release available outside of the minor release roadmap.
 
 <p>
 The PostgreSQL Global Development Group supports a major version for 5 years
-after its initial release. After its five year anniversary, a major version will
-have one last minor release containing any fixes and will be considered
-end-of-life (EOL) and no longer supported.
+after its initial release. After this, a final minor version will be released
+and the software will then be unsupported (end-of-life).
 </p>
 
 <h2>Version Numbering</h2>
@@ -45,17 +44,10 @@ number, e.g. 9.5.3 to 9.5.4.
 <h2>Upgrading</h2>
 
 <p>
-  <strong>
-    We always recommend that all users run the latest available minor
-    release for whatever major version is in use.
-  </strong>
-</p>
-
-<p>
-Major versions usually change the internal format of system tables and data
-files.  These changes are often complex, so we do not maintain backward
-compatibility of all stored data.  A dump/reload of the database or use of the
-<a href="/docs/current/pgupgrade.html">pg_upgrade</a> module is required
+Major versions make complex changes, so the contents of the data directory
+cannot be maintained in a backward compatible way.  A dump/reload of the
+database or use of the
+<a href="/docs/current/pgupgrade.html">pg_upgrade</a> application is required
 for major upgrades. We also recommend reading the
 <a href="/docs/current/upgrading.html">upgrading</a> section of the major
 version you are planning to upgrade to. You can upgrade from one major version
@@ -65,18 +57,24 @@ versions prior to doing so.
 </p>
 
 <p>
-Upgrading to a minor release does not normally require a dump and restore;  you
-can stop the database server, install the updated binaries, and restart the
-server.  For some releases, manual changes may be required to complete the
-upgrade, so always read the release notes before upgrading.
+  Minor release upgrades do not require a dump and restore;  you simply stop
+  the database server, install the updated binaries, and restart the server.
+  Such upgrades might require additional steps so always read
+  the release notes first.
 </p>
 
 <p>
-While upgrading will always contain some level of risk, PostgreSQL minor releases
-fix only frequently-encountered bugs, <a href="/support/security/">security</a>
-issues, and data corruption problems to reduce the risk associated with
-upgrading. For minor releases, <em>the community considers not upgrading to be
-riskier than upgrading.</em>
+  Minor releases only contain fixes for frequently-encountered bugs,
+  low-risk fixes, <a href="/support/security/">security</a> issues, and
+  data corruption problems.  <em>The community considers performing minor
+  upgrades to be less risky than continuing to run an old minor version.</em>
+</p>
+
+<p>
+  <strong>
+    We recommend that users always run the current minor release associated
+    with their major version.
+  </strong>
 </p>
 
 <h2>Releases</h2>
