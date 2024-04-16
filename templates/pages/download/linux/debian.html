@@ -7,12 +7,21 @@
 
 <h1>Linux downloads (Debian) <img class="logo" src="/media/img/debian.svg" alt="Debian Logo" /></h1>
 <p>
-PostgreSQL is available in all Debian versions by default. However, the
-stable versions of Debians "snapshot" a specific version of PostgreSQL
-that is then supported throughout the lifetime of that Debian version.
-The PostgreSQL project also maintains an <a href="#apt">apt repository</a> with all supported
+PostgreSQL is available in all Debian versions by default. However, Debian
+"snapshots" a specific version of PostgreSQL that is then supported throughout
+the lifetime of that Debian version.
+The PostgreSQL project maintains an <a href="#apt">Apt repository</a> with all supported
 of PostgreSQL available.
 </p>
+
+<h2>Included in Distribution</h2>
+<p>
+Debian includes PostgreSQL by default. To install PostgreSQL on Debian,
+use the <code>apt</code> (or other apt-driving) command:
+</p>
+<pre class="code">
+apt install postgresql
+</pre>
 
 <a name="apt"></a>
 <h2>PostgreSQL Apt Repository</h2>
@@ -24,8 +33,7 @@ updates for all supported versions of PostgreSQL throughout the support
 <a href="/support/versioning/">lifetime</a> of PostgreSQL.
 </p>
 <p>
-The PostgreSQL apt repository supports the currently supported stable
-versions of Debian:
+The PostgreSQL Apt repository supports the current versions of Debian:
 </p>
 <ul>
   <li>bookworm (12.x)</li>
@@ -33,47 +41,56 @@ versions of Debian:
   <li>buster (10.x)</li>
   <li>sid (unstable)</li>
 </ul>
-<p>on the following architectures:</p>
+<p>
+on the following architectures:
+</p>
 <ul>
   <li>amd64</li>
   <li>arm64</li>
   <li>i386 (buster and older)</li>
   <li>ppc64el</li>
+  <li>s390x</li>
 </ul>
+
 <p>
-To use the apt repository, follow these steps:
+Automated repository configuration:
 </p>
 
 <div class="pg-script-container">
-    <pre id="script-box" class="code"># Create the file repository configuration:
-sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+    <pre id="script-box" class="code">sudo apt install -y postgresql-common
+sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh</pre>
+    <button id="copy-btn" class="pg-script-copy-btn">Copy Script</button>
+</div>
 
-# Import the repository signing key:
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+<p>
+To manually configure the Apt repository, follow these steps:
+</p>
+
+<div class="pg-script-container">
+    <pre id="script-box" class="code"># Import the repository signing key:
+sudo apt install curl ca-certificates
+sudo install -d /usr/share/postgresql-common/pgdg
+sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
+
+# Create the repository configuration file:
+sudo sh -c 'echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 
 # Update the package lists:
-sudo apt-get update
+sudo apt update
 
-# Install the latest version of PostgreSQL.
-# If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
-sudo apt-get -y install postgresql</pre>
+# Install the latest version of PostgreSQL:
+# If you want a specific version, use 'postgresql-16' or similar instead of 'postgresql'
+sudo apt -y install postgresql</pre>
     <button id="copy-btn" class="pg-script-copy-btn">Copy Script</button>
 </div>
 
 <p>
 For more information about the apt repository, including answers to frequent
-questions, please see the apt page on
-<a href="https://wiki.postgresql.org/wiki/Apt" target="_blank" rel="noopener">the wiki</a>.
+questions, please see the
+<a href="https://wiki.postgresql.org/wiki/Apt" target="_blank" rel="noopener">PostgreSQL Apt Repository wiki page</a>.
 </p>
 
-<h2>Included in distribution</h2>
-<p>
-Debian includes PostgreSQL by default. To install PostgreSQL on
-Debian, use the <code>apt-get</code> (or other apt-driving) command:
-</p>
-<pre class="code">
-  apt-get install postgresql-12
-</pre>
+<h2>Packages</h2>
 <p>
 The repository contains many different packages including third party
 addons. The most common and important packages are (substitute the
@@ -82,19 +99,23 @@ version number as required):
 <table class="table table-striped">
   <tbody>
     <tr>
-     <th scope="row">postgresql-client-12</th>
+     <th scope="row">postgresql-client-16</th>
      <td>client libraries and client binaries</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-12</th>
+     <th scope="row">postgresql-16</th>
      <td>core database server</td>
+    </tr>
+    <tr>
+     <th scope="row">postgresql-doc-16</th>
+     <td>documentation</td>
     </tr>
     <tr>
      <th scope="row">libpq-dev</th>
      <td>libraries and headers for C language frontend development</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-server-dev-12</th>
+     <th scope="row">postgresql-server-dev-16</th>
      <td>libraries and headers for C language backend development</td>
     </tr>
   </tbody>
