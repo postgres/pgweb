@@ -16,10 +16,15 @@ function setupHandlers() {
         });
     }
 
-    /* Copy Script button on /download/linux/debian and /download/linux/ubuntu */
+    /* Copy Script buttons on /download/linux/debian and /download/linux/ubuntu */
     if (document.getElementById("copy-btn") && document.getElementById("script-box")) {
         document.getElementById('copy-btn').addEventListener('click', function () {
             copyScript(this, 'script-box');
+        });
+    }
+    if (document.getElementById("copy-btn2") && document.getElementById("script-box2")) {
+        document.getElementById('copy-btn2').addEventListener('click', function () {
+            copyScript(this, 'script-box2');
         });
     }
 }
