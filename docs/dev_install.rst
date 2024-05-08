@@ -5,8 +5,8 @@ So, you're ready to contribute to pgweb, and you want to set up a
 local working copy of the website code, so you have something to work
 with. Here's a quick step-by-step on how to do that:
 
-#. Make sure you have downloaded and installed django *version 3.2*,
-   and python 3 (tested with version 3.7).
+#. Make sure you have downloaded and installed django *version 4.2*,
+   and python 3 (tested with version 3.9).
 
    You will also need a few other dependencies, see the
    `requirements.txt` in the root directory.
