@@ -6,6 +6,7 @@ from django.conf import settings
 sitenav = {
     'about': [
         {'title': 'About', 'link': '/about/'},
+        {'title': 'Governance', 'link': '/about/governance/'},
         {'title': 'Policies', 'link': '/about/policies/'},
         {'title': 'Feature Matrix', 'link': '/about/featurematrix/'},
         {'title': 'Donate', 'link': '/about/donate/'},
@@ -54,6 +55,7 @@ sitenav = {
     'developer': [
         {'title': 'Developers', 'link': '/developer/'},
         {'title': 'Core Team', 'link': '/developer/core/'},
+        {'title': 'Committers', 'link': '/developer/committers/'},
         {'title': 'Roadmap', 'link': '/developer/roadmap/'},
         {'title': 'Coding', 'link': '/developer/coding/'},
         {'title': 'CommitFests', 'link': 'https://commitfest.postgresql.org'},

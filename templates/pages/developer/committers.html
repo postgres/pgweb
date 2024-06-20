@@ -1,0 +1,98 @@
+{%extends "base/page.html"%}
+{%block title%}Committers{%endblock%}
+{%block contents%}
+
+<h1>Committers <i class="fa fa-users"></i></h1>
+
+<p>
+  This is the current list of people with access to push to the
+  <a href="https://git.postgresql.org/gitweb/?p=postgresql.git">git repository</a>.
+  For technical details on how committing works, see
+  <a href="https://wiki.postgresql.org/wiki/Committing_with_Git">Committing with Git</a>.
+  This is just a list of people who currently have access to push to git; for
+  information on current and previous contributors, see the contributor profiles
+  section of the web site.
+</p>
+
+<h2>Committers</h2>
+
+<p>
+  The names are listed here in order of first commit or when added
+  as a committer, oldest first; this isn't intended to imply anything
+  about depth of contribution.
+</p>
+<ul>
+  <li>Bruce Momjian</li>
+  <li>Tom Lane</li>
+  <li>Tatsuo Ishii</li>
+  <li>Peter Eisentraut</li>
+  <li>Joe Conway</li>
+  <li>&Aacute;lvaro Herrera</li>
+  <li>Andrew Dunstan</li>
+  <li>Magnus Hagander</li>
+  <li>Heikki Linnakangas</li>
+  <li>Robert Haas</li>
+  <li>Jeff Davis</li>
+  <li>Fujii Masao</li>
+  <li>Noah Misch</li>
+  <li>Andres Freund</li>
+  <li>Dean Rasheed</li>
+  <li>Alexander Korotkov</li>
+  <li>Amit Kapila</li>
+  <li>Tomas Vondra</li>
+  <li>Michael Paquier</li>
+  <li>Thomas Munro</li>
+  <li>Peter Geoghegan</li>
+  <li>Etsuro Fujita</li>
+  <li>David Rowley</li>
+  <li>Daniel Gustafsson</li>
+  <li>John Naylor</li>
+  <li>Nathan Bossart</li>
+  <li>Amit Langote</li>
+  <li>Masahiko Sawada</li>
+  <li>Melanie Plageman</li>
+  <li>Richard Guo</li>
+</ul>
+
+<h2>Notes on the Commit Log</h2>
+<p>
+  Hundreds of developers have successfully contributed work to PostgreSQL
+  over decades, many acting as individuals, though also many representing
+  academic institutions and both user and vendor companies. Both the "Author"
+  and "Committer" fields of such patches will reflect the committer. The actual
+  author of a patch, if different, is generally listed in the commit message;
+  reviewers or others who contributed ideas or otherwise helped with the patch
+  may also be listed. Many patches, in the form in which they are committed,
+  are the work of multiple people: original author or authors, reviewer(s),
+  and/or committer. As a result, no simple analysis of duration or depth of
+  contribution over time is possible from the commit log. The project operates
+  a system of careful peer review and even committers have their work checked
+  by other committers and the community as a whole.
+</p>
+
+<h2>New Committers and Removing Committers</h2>
+<p>
+  New committers are added approximately annually after discussions
+  and vote among the existing committers. Contributors to PostgreSQL
+  are selected to be committers based on the following loose criteria:
+</p>
+<ul>
+  <li>several years of substantial contributions to the project</li>
+  <li>multiple and continuing code contributions</li>
+  <li>responsibility for maintenance of one or more areas of the codebase</li>
+  <li>track record of reviewing and helping other contributors with their patches</li>
+  <li>high quality code contributions which require very little revision or correction for commit</li>
+  <li>demonstrated understanding of the process and criteria for patch acceptance</li>
+</ul>
+<p>
+  Generally, new committers are selected March or April and announced on the
+  <a href="/list/pgsql-hackers/">Hackers mailing list</a>.
+</p>
+
+<p>
+  Committers who have become inactive and have not contributed significantly
+  to the PostgreSQL project in several years are removed as committers. Again,
+  the review process for this is approximately annual.
+</p>
+
+{%endblock%}
