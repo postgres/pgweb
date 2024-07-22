@@ -1779,6 +1779,12 @@ img.organisation-logo {
   max-height: 65px;
   max-width: 150px;
 }
+th.organisation-logo {
+  height: 65px;
+  width: 150px;
+  background-color: white !important;
+  text-align: center;
+}
 
 /** Release Notes */
 #release-notes .navheader,
