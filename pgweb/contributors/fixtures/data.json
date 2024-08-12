@@ -25,9 +25,9 @@
  "model": "contributors.contributortype",
  "pk": 3,
  "fields": {
-  "typename": "Hackers Emeritus",
+  "typename": "Past Major Contributors",
   "sortorder": 400,
-  "extrainfo": "The following hackers were previously part of the core team. Although they no longer work on the project, they are included here in recognition of their valuable contributions over the years.",
+  "extrainfo": "The following people were previously Major Contributors to PostgreSQL. Although they no longer work on the project, they are included here in recognition of their valuable contributions over the years.",
   "detailed": true,
   "showemail": true
  }
