@@ -1,0 +1,199 @@
+{%extends "base/page.html"%}
+{%block title%}PostgreSQL 17 Press Kit{%endblock%}
+{%block contents%}
+
+
+<div><span>This page in:</span>
+    <span lang="zh"><a href="/about/press/presskit17/zh/">Chinese</a></span>
+    / <span lang="en"><a href="/about/press/presskit17/">English</a></span>
+    / <span lang="fr"><a href="/about/press/presskit17/fr/">French</a></span>
+    / <span lang="de"><a href="/about/press/presskit17/de/">German</a></span>
+    / <span lang="el"><a href="/about/press/presskit17/el/">Greek</a></span>
+    / <span lang="he"><a href="/about/press/presskit17/he/">Hebrew</a></span>
+    / <span lang="it"><a href="/about/press/presskit17/id/">Indonesian</a></span>
+    / <span lang="it"><a href="/about/press/presskit17/it/">Italian</a></span>
+    / <span lang="ja"><a href="/about/press/presskit17/ja/">Japanese</a></span>
+    / <span lang="ko"><a href="/about/press/presskit17/ko/">Korean</a></span>
+    / <span lang="it"><a href="/about/press/presskit17/pl/">Polish</a></span>
+    / <span lang="pt"><a href="/about/press/presskit17/pt/">Portuguese</a></span>
+    / <span lang="ru"><a href="/about/press/presskit17/ru/">Russian</a></span>
+    / <span lang="es"><a href="/about/press/presskit17/es/">Spanish</a></span>
+    / <span lang="sv"><a href="/about/press/presskit17/sv/">Swedish</a></span>
+    / <span lang="uk"><a href="/about/press/presskit17/uk/">Ukrainian</a></span>
+    <br/><br/>
+</div>
+
+
+<h1>
+  PostgreSQL 17 Press Kit {% block presskit_language %}{% endblock presskit_language %}
+  <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo" />
+</h1>
+
+<h2>Contents</h2>
+
+<ul>
+  <li><a href="#original_release">Original Press Release</a></li>
+  <li><a href="#about">About PostgreSQL</a></li>
+  <li><a href="#features">More About The Features</a></li>
+  <li><a href="#download">Where to Download</a></li>
+  <li><a href="#docs">Documentation</a></li>
+  <li><a href="#licence">Licence</a></li>
+  <li><a href="#contact">Contacts</a></li>
+  <li><a href="#graphics">Images and Logos</a></li>
+  <li><a href="#companies">Corporate Support</a></li>
+</ul>
+
+<a name="original_release"></a><h2>Original Press Release</h2>
+
+{% block presskit_content %}{% endblock presskit_content %}
+
+<a name="about"></a>
+{% block presskit_about %}
+<h2>About PostgreSQL</h2>
+
+<p>
+  <a href="https://www.postgresql.org">PostgreSQL</a> is the world's most
+  advanced open source database, with a global community of thousands of users,
+  contributors, companies and organizations. Built on over 35 years of
+  engineering, starting at the University of California, Berkeley, PostgreSQL
+  has continued with an unmatched pace of development. PostgreSQL's mature
+  feature set not only matches top proprietary database systems, but exceeds
+  them in advanced database features, extensibility, security, and stability.
+</p>
+{% endblock presskit_about %}
+
+<p>
+  Learn more about PostgreSQL and participate in our community at
+  <a href="/">PostgreSQL.org</a>.
+</p>
+
+<a name="features"></a>
+{% block presskit_features %}
+<h2>More About the Features</h2>
+<p>
+For explanations of the above features and others, please see the following
+resources:
+</p>
+
+<ul>
+  <li><a href="/docs/17/release-17.html">Release Notes</a></li>
+  <li><a href="/about/featurematrix/">Feature Matrix</a></li>
+</ul>
+{% endblock presskit_features %}
+
+<a name="download"></a>
+{% block presskit_download %}
+<h2>Where to Download</h2>
+<p>There are several ways you can download PostgreSQL 17, including:</p>
+
+<ul>
+  <li>
+    The <a href="/download/">Official Downloads</a> page, with contains
+    installers and tools for <a href="/download/windows/">Windows</a>, <a href="/download/">Linux</a>,
+    <a href="https://www.postgresql.org/download/macosx/">macOS</a>, and more.
+  </li>
+  <li><a href="/ftp/source/v17.0">Source Code</a></li>
+</ul>
+
+<p>
+  Other tools and extensions are available on the
+  <a href="http://pgxn.org">PostgreSQL Extension Network</a>.
+</p>
+{% endblock presskit_download%}
+
+<a name="docs"></a>
+
+{% block presskit_docs %}
+<h2>Documentation</h2>
+<p>
+  PostgreSQL 17 comes with HTML documentation HTML documentation as well as man
+  pages, and you can also browse the documentation online in both
+  <a href="/docs/17/">HTML</a> and <a href="/files/documentation/pdf/17/postgresql-17-US.pdf">PDF</a> formats.
+</p>
+{% endblock presskit_docs %}
+
+<a name="licence"></a>
+{% block presskit_licence %}
+<h2>Licence</h2>
+<p>
+  PostgreSQL uses the <a href="/about/licence/">PostgreSQL License</a>, a
+  BSD-like "permissive" license. This <a href="http://www.opensource.org/licenses/postgresql/">OSI-certified license</a>
+  is widely appreciated as flexible and business-friendly, since it does not
+  restrict the use of PostgreSQL with commercial and proprietary applications.
+  Together with multi-company support and public ownership of the code, our
+  license makes PostgreSQL very popular with vendors wanting to embed a database
+  in their own products without fear of fees, vendor lock-in, or changes in
+  licensing terms.
+</p>
+{% endblock presskit_licence %}
+
+<a name="contact"></a>
+{% block presskit_contact %}
+<h2>Contacts</h2>
+
+<p>Website</p>
+<ul>
+  <li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+
+<p>Email</p>
+<ul>
+  <li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+<a name="graphics"></a>
+
+{% block presskit_images %}
+<h2>Images and Logos</h2>
+
+<p>
+  Postgres and PostgreSQL and the Elephant Logo (Slonik) are all registered
+  trademarks of the <a href="https://www.postgres.ca">PostgreSQL Community Association</a>.
+  If you wish to use these marks, you must comply with the <a href="https://www.postgresql.org/about/policies/trademarks/">trademark policy</a>.
+</p>
+{% endblock presskit_images %}
+
+<img class="img-fluid logo-preview" src="https://www.postgresql.org/media/img/about/press/elephant.png" alt="PostgreSQL Logo" />
+
+<ul>
+  <li>
+    <a href="https://www.postgresql.org/media/img/about/press/elephant.png">
+      PostgreSQL Elephant Logo, PNG format
+    </a>
+  </li>
+  <li>
+    <a href="https://www.postgresql.org/media/img/about/press/elephant64.png">
+      PostgreSQL Elephant Icon
+    </a>
+  </li>
+  <li>
+    <a href="https://www.postgresql.org/media/img/about/press/slonik_with_black_text_and_tagline.gif">
+      PostgreSQL Banner with Logo, Elephant and Slogan
+    </a>
+  </li>
+</ul>
+
+<a name="companies"></a>
+{% block presskit_corporate %}
+<h2>Corporate Support and Donations</h2>
+
+<p>
+  PostgreSQL enjoys the support of numerous companies, who sponsor developers,
+  provide hosting resources, and give us financial support. See our
+  <a href="https://www.postgresql.org/about/sponsors/">sponsors</a> page for
+  some of these project supporters.
+</p>
+<p>
+  There is also a large community of
+  <a href="https://www.postgresql.org/support/professional_support/">companies offering PostgreSQL Support</a>,
+  from individual consultants to multinational companies.
+</p>
+<p>
+  If you wish to make a financial contribution to the PostgreSQL Global
+  Development Group or one of the recognized community non-profit organizations,
+  please visit our <a href="https://www.postgresql.org/about/donate/">donations</a>
+  page.
+</p>
+{% endblock presskit_corporate %}
+{% endblock %}

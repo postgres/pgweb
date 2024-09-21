@@ -1,0 +1,96 @@
+{% extends "pages/about/press/presskit17/base.html" %}
+
+{% block presskit_content %}
+<p><strong>26 September 2024</strong> - <a href="https://www.postgresql.org">PostgreSQL Global Development Group</a> hari ini mengumumkan perilisan <a href="https://www.postgresql.org/docs/17/release-17.html">PostgreSQL 17</a>, versi terbaru dari database Open Source paling canggih di dunia.</p>
+<p>PostgreSQL 17 dibangun berdasarkan puluhan tahun pengembangan Open Source dengan peningkatan performa dan skalabilitas, serta penyesuaian terhadap pola akses dan penyimpanan data terbaru. Rilis <a href="https://www.postgresql.org">PostgreSQL</a> ini menambahkan peningkatan performa yang signifikan, termasuk implementasi manajemen memori yang lebih efisien untuk vacuum, optimasi akses penyimpanan, dan peningkatan untuk beban kerja dengan tingkat concurrency tinggi. Selain itu, ada peningkatan kecepatan dalam pemrosesan bulk loading dan ekspor data, serta perbaikan dalam eksekusi query untuk indeks.. PostgreSQL 17 memiliki fitur yang menguntungkan, baik untuk beban kerja baru maupun sistem bermisi kritis, seperti penambahan perintah SQL/JSON JSON_TABLE, dan peningkatan replikasi logis yang menyederhanakan manajemen beban kerja High Availability (HA) dan peningkatan versi utama.</p>
+<p>&quot;PostgreSQL 17 menunjukkan bagaimana komunitas Open Source global, yang memimpin pengembangan PostgreSQL, terus menghadirkan inovasi yang membantu pengguna di berbagai tahap perjalanan database mereka,&quot; ucap Jonathan Katz, anggota tim inti PostgreSQL. &quot;Baik itu peningkatan untuk mengoperasikan database dalam skala besar atau fitur baru yang membangun pengalaman pengembang yang menyenangkan, PostgreSQL 17 akan meningkatkan pengalaman pengelolaan data Anda.&quot;</p>
+<p>PostgreSQL, sistem manajemen data yang inovatif yang dikenal karena keandalannya, ketangguhannya, dan ekstensibilitasnya, mendapat manfaat dari lebih dari 25 tahun pengembangan Open Source oleh komunitas pengembang global dan telah menjadi database relasional Open Source pilihan bagi berbagai ukuran organisasi. </p>
+<h3 id="peningkatan-kinerja-secara-menyeluruh">Peningkatan Kinerja Secara Menyeluruh</h3>
+<p>Proses <a href="https://www.postgresql.org/docs/17/routine-vacuuming.html">vacuum</a> PostgreSQL sangat penting untuk operasi yang sehat, membutuhkan sumber daya server untuk beroperasi. PostgreSQL 17 memperkenalkan struktur memori internal baru untuk vacuum yang mengonsumsi hingga 20x lipat lebih sedikit memori. Hal ini meningkatkan kecepatan vacuum dan juga mengurangi penggunaan sumber daya bersama sehingga lebih banyak yang tersedia untuk beban kerja Anda.</p>
+<p>PostgreSQL 17 terus meningkatkan kinerja lapisan I/O-nya. Beban kerja dengan concurrency tinggi dapat melihat throughput penulisan hingga 2x lebih baik berkat peningkatan dalam pemrosesan <a href="https://www.postgresql.org/docs/17/wal-intro.html">write-ahead log</a> (<a href="https://www.postgresql.org/docs/17/wal-intro.html">WAL</a>). Selain itu, antarmuka streaming I/O yang baru mempercepat pemindaian berurutan (membaca semua data dari tabel) dan mempercepat pembaruan statistik perencana melalui perintah <a href="https://www.postgresql.org/docs/17/sql-analyze.html">ANALYZE</a>.</p>
+<p>PostgreSQL 17 juga memperluas peningkatan kinerjanya ke eksekusi query. PostgreSQL 17 meningkatkan kinerja query dengan klausa IN yang menggunakan indeks <a href="https://www.postgresql.org/docs/17/indexes-types.html#INDEXES-TYPES-BTREE">B-tree</a>, metode indeks default di PostgreSQL. Selain itu, indeks <a href="https://www.postgresql.org/docs/17/brin.html">BRIN</a> sekarang mendukung pembuatan paralel. PostgreSQL 17 mencakup beberapa peningkatan untuk perencanaan query, termasuk optimasi untuk constraint NOT NULL, dan peningkatan dalam pemrosesan <a href="https://www.postgresql.org/docs/17/queries-with.html">common table expressions</a> (<a href="https://www.postgresql.org/docs/17/queries-with.html">WITH</a><a href="https://www.postgresql.org/docs/17/queries-with.html"> queries</a>). Rilis ini menambahkan lebih banyak dukungan SIMD (Single Instruction/Multiple Data) untuk mempercepat perhitungan, termasuk menggunakan AVX-512 untuk fungsi <a href="https://www.postgresql.org/docs/17/functions-bitstring.html">bit_count</a>.</p>
+<h3 id="ekspansi-lebih-lanjut-pengalaman-pengembang-yang-kuat">Ekspansi Lebih Lanjut Pengalaman Pengembang yang Kuat</h3>
+<p>PostgreSQL adalah <a href="https://www.postgresql.org/about/news/postgresql-92-released-1415/">database relasional pertama yang menambahkan dukungan JSON (2012)</a>, dan PostgreSQL 17 menambahkan pada implementasinya standar SQL/JSON. <a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-TABLE">JSON_TABLE</a> sekarang tersedia di PostgreSQL 17 yang memungkinkan pengembang mengonversi data JSON menjadi tabel PostgreSQL standar. PostgreSQL 17 sekarang mendukung <a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-JSON-CREATION-TABLE">konstruktor SQL/JSON</a> (JSON, JSON_SCALAR, JSON_SERIALIZE) dan <a href="https://www.postgresql.org/docs/17/functions-json.html#SQLJSON-QUERY-FUNCTIONS">fungsi query</a> (JSON_EXISTS, JSON_QUERY, JSON_VALUE), memberikan pengembang cara lain untuk berinteraksi dengan data JSON mereka. Rilis ini menambahkan lebih banyak ekspresi <a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS">jsonpath</a>, dengan penekanan pada pengonversian data JSON ke tipe data asli PostgreSQL, termasuk tipe numerik, boolean, string, dan tanggal/waktu.</p>
+<p>PostgreSQL 17 menambahkan lebih banyak fitur ke <a href="https://www.postgresql.org/docs/17/sql-merge.html">MERGE</a>, yang digunakan untuk pembaruan bersyarat, termasuk klausa RETURNING dan kemampuan untuk memperbarui <a href="https://www.postgresql.org/docs/17/sql-createview.html">views</a>. Selain itu, PostgreSQL 17 memiliki kemampuan baru untuk pemuatan massal dan ekspor data, termasuk peningkatan kinerja hingga 2x saat mengekspor baris besar menggunakan perintah <a href="https://www.postgresql.org/docs/17/sql-copy.html">COPY</a>. Kinerja COPY juga mengalami peningkatan ketika encoding sumber dan tujuan cocok, dan mencakup opsi baru, ON_ERROR, yang memungkinkan impor untuk terus berlanjut bahkan jika ada kesalahan saat menyisipkan.</p>
+<p>Rilis ini memperluas fungsionalitas baik untuk mengelola data dalam partisi maupun data yang didistribusikan di antar-instance PostgreSQL jarak jauh. PostgreSQL 17 mendukung penggunaan kolom identitas dan constraint pengecualian pada <a href="https://www.postgresql.org/docs/17/ddl-partitioning.html">tabel yang dipartisi</a>. <a href="https://www.postgresql.org/docs/17/postgres-fdw.html">PostgreSQL foreign data wrapper</a> (<a href="https://www.postgresql.org/docs/17/postgres-fdw.html">postgres_fdw</a>), yang digunakan untuk menjalankan query di instance PostgreSQL jarak jauh, sekarang dapat mendorong subquery EXISTS dan IN ke server jarak jauh untuk pemrosesan yang lebih efisien.</p>
+<p>PostgreSQL 17 juga mencakup penyedia kolasi built-in, platform independent, yang dijamin immutable dan menyediakan semantik pengurutan yang mirip dengan kolasi C kecuali dengan encoding UTF-8 daripada SQL_ASCII. Menggunakan penyedia kolasi baru ini menjamin bahwa query berbasis teks Anda akan mengembalikan hasil yang diurutkan sama di mana pun PostgreSQL dijalankan.</p>
+<h3 id="peningkatan-logical-replication-untuk-ketersediaan-tinggi-high-availability-dan-peningkatan-versi-utama">Peningkatan Logical Replication untuk Ketersediaan Tinggi (High Availability) dan Peningkatan Versi Utama</h3>
+<p><a href="https://www.postgresql.org/docs/17/logical-replication.html">Replikasi logis</a> digunakan untuk mengalirkan data secara real-time di berbagai kasus penggunaan. Namun, sebelum rilis ini, pengguna yang ingin melakukan peningkatan versi utama harus menghapus <a href="https://www.postgresql.org/docs/17/logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT">slot replikasi logis</a>, yang memerlukan sinkronisasi ulang data ke pelanggan setelah peningkatan. Mulai dengan peningkatan dari PostgreSQL 17, pengguna tidak perlu menghapus slot replikasi logis, menyederhanakan proses peningkatan saat menggunakan replikasi logis.</p>
+<p>PostgreSQL 17 sekarang menyertakan kontrol failover untuk replikasi logis, membuatnya lebih tangguh ketika digunakan dalam lingkungan ketersediaan tinggi. Selain itu, PostgreSQL 17 memperkenalkan alat baris perintah <a href="https://www.postgresql.org/docs/17/app-pgcreatesubscriber.html">pg_createsubscriber</a> untuk mengonversi replika fisik menjadi replika logis baru.</p>
+<h3 id="lebih-banyak-opsi-untuk-mengelola-keamanan-dan-operasi">Lebih Banyak Opsi untuk Mengelola Keamanan dan Operasi</h3>
+<p>PostgreSQL 17 lebih memperluas bagaimana pengguna dapat mengelola siklus hidup keseluruhan sistem basis data mereka. PostgreSQL memiliki opsi TLS baru, ‘sslnegotiation’, yang memungkinkan pengguna melakukan jabat tangan TLS langsung saat menggunakan <a href="https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation">ALPN</a> (terdaftar sebagai postgresql dalam direktori ALPN). PostgreSQL 17 juga menambahkan pg_maintain <a href="https://www.postgresql.org/docs/17/predefined-roles.html">peran yang telah ditentukan</a>, yang memberikan pengguna izin untuk melakukan operasi pemeliharaan.</p>
+<p><a href="https://www.postgresql.org/docs/17/app-pgbasebackup.html">pg_basebackup</a>, utilitas cadangan yang disertakan dalam PostgreSQL, sekarang mendukung cadangan inkremental dan menambahkan utilitas <a href="https://www.postgresql.org/docs/17/app-pgcombinebackup.html">pg_combinebackup</a> untuk merekonstruksi cadangan penuh. Selain itu, <a href="https://www.postgresql.org/docs/17/app-pgdump.html">pg_dump</a> menyertakan opsi baru yang disebut--filter yang memungkinkan Anda memilih objek apa yang akan disertakan saat menghasilkan file dump.</p>
+<p>PostgreSQL 17 juga menyertakan peningkatan fitur pemantauan dan analisis. <a href="https://www.postgresql.org/docs/17/sql-explain.html">EXPLAIN</a> sekarang menunjukkan waktu yang dihabiskan untuk pembacaan dan penulisan blok I/O lokal, dan menyertakan dua opsi baru: SERIALIZE dan MEMORY, berguna untuk melihat waktu yang dihabiskan dalam konversi data untuk transmisi jaringan, dan berapa banyak memori yang digunakan. PostgreSQL 17 sekarang melaporkan <a href="https://www.postgresql.org/docs/17/progress-reporting.html#VACUUM-PROGRESS-REPORTING">kemajuan vakum indeks</a>, dan menambahkan tampilan sistem <a href="https://www.postgresql.org/docs/17/view-pg-wait-events.html">pg_wait_events</a> yang, bila dikombinasikan dengan <a href="https://www.postgresql.org/docs/17/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW">pg_stat_activity</a>, memberikan wawasan lebih lanjut tentang mengapa sesi aktif sedang menunggu.</p>
+<h3 id="fitur-tambahan">Fitur Tambahan</h3>
+<p>Banyak fitur dan peningkatan baru lainnya telah ditambahkan ke PostgreSQL 17 yang mungkin juga berguna untuk kasus penggunaan Anda. Silakan lihat <a href="https://www.postgresql.org/docs/17/release-17.html">catatan rilis</a> untuk daftar lengkap fitur baru dan fitur yang diubah.</p>
+<h3 id="tentang-postgresql">Tentang PostgreSQL</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> adalah basis data Open Source paling canggih di dunia, dengan komunitas global ribuan pengguna, kontributor, perusahaan, dan organisasi. Dibangun di atas lebih dari 35 tahun rekayasa, dimulai di Universitas California, Berkeley, PostgreSQL terus berlanjut dengan kecepatan pengembangan yang tak tertandingi. Set fitur yang sudah matang dari PostgreSQL tidak hanya cocok dengan sistem basis data proprieter teratas, tetapi melebihi mereka dalam fitur basis data canggih, ekstensibilitas, keamanan, dan stabilitas.</p>
+<h3 id="tautan">Tautan</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Unduh</a></li>
+<li><a href="https://www.postgresql.org/docs/17/release-17.html">Catatan Rilis</a></li>
+<li><a href="https://www.postgresql.org/about/press/">Kit Pers</a></li>
+<li><a href="https://www.postgresql.org/support/security/">Halaman Keamanan</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">Kebijakan Versi</a></li>
+<li><a href="https://twitter.com/postgresql">Ikuti @postgresql</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">Donasi</a></li>
+</ul>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2>Tentang PostgreSQL</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> adalah basis data Open Source paling canggih di dunia, dengan komunitas global ribuan pengguna, kontributor, perusahaan, dan organisasi. Dibangun di atas lebih dari 35 tahun rekayasa, dimulai di Universitas California, Berkeley, PostgreSQL terus berlanjut dengan kecepatan pengembangan yang tak tertandingi. Set fitur yang sudah matang dari PostgreSQL tidak hanya cocok dengan sistem basis data proprieter teratas, tetapi melebihi mereka dalam fitur basis data canggih, ekstensibilitas, keamanan, dan stabilitas.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="lebih-lanjut-tentang-fitur-fitur">Lebih Lanjut Tentang Fitur-fitur</h2>
+<p>Untuk penjelasan tentang fitur-fitur lebih lanjut di atas dan lainnya, silakan lihat sumber berikut:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/17/release-17.html">Catatan Rilis</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">Matriks Fitur</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="tempat-mengunduh">Tempat Mengunduh</h2>
+<p>Terdapat beberapa cara yang dapat Anda gunakan untuk mengunduh PostgreSQL 17, yaitu:</p>
+<ul>
+<li>Halaman <a href="https://www.postgresql.org/download/">Unduhan Resmi</a>, yang berisi installer dan alat untuk <a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/linux/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a>, dan lainnya.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v17.0">Kode Sumber</a></li>
+</ul>
+<p>Alat dan ekstensi lainnya tersedia di <a href="http://pgxn.org/">Jaringan Ekstensi PostgreSQL</a>.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="dokumentasi">Dokumentasi</h2>
+<p>PostgreSQL 17 hadir dengan dokumentasi HTML serta halaman manual, dan Anda juga dapat menjelajahi dokumentasi secara online dalam format <a href="https://www.postgresql.org/docs/17/">HTML</a> dan <a href="https://www.postgresql.org/files/documentation/pdf/17/postgresql-17-US.pdf">PDF</a>.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="lisensi">Lisensi</h2>
+<p>PostgreSQL menggunakan <a href="https://www.postgresql.org/about/licence/">Lisensi PostgreSQL</a>, sebuah lisensi BSD Like &quot;permisif&quot;. Lisensi <a href="http://www.opensource.org/licenses/postgresql/">bersertifikat OSI</a> ini sangat dihargai karena fleksibel dan ramah bisnis, karena tidak membatasi penggunaan PostgreSQL dengan aplikasi komersial dan proprietary. Bersama dengan dukungan multi-perusahaan dan kepemilikan publik atas kode, lisensi kami membuat PostgreSQL sangat populer di kalangan vendor yang ingin menanamkan database dalam produk mereka sendiri tanpa takut akan biaya, vendor lock-in, atau perubahan dalam ketentuan lisensi.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="kontak">Kontak</h2>
+<p>Situs Web</p>
+<ul>
+<li><a href="https://www.postgresql.org">https://www.postgresql.org/</a></li>
+</ul>
+<p>Email</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="gambar-dan-logo">Gambar dan Logo</h2>
+<p>Postgres, PostgreSQL, dan Logo Gajah (Slonik) semuanya adalah merek dagang terdaftar dari <a href="https://www.postgres.ca/">Asosiasi Komunitas PostgreSQL</a>. Jika Anda ingin menggunakan merek ini, Anda harus mematuhi <a href="https://www.postgresql.org/about/policies/trademarks/">kebijakan merek dagang</a>.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="dukungan-perusahaan-dan-donasi">Dukungan Perusahaan dan Donasi</h2>
+<p>PostgreSQL mendapat dukungan dari berbagai perusahaan, yang mensponsori pengembang, menyediakan sumber daya hosting, dan memberi kami dukungan finansial. Lihat halaman <a href="https://www.postgresql.org/about/sponsors/">sponsor</a> kami untuk beberapa pendukung proyek ini.</p>
+<p>Terdapat juga komunitas besar <a href="https://www.postgresql.org/support/professional_support/">perusahaan yang menawarkan Dukungan PostgreSQL</a>, mulai dari konsultan individu hingga perusahaan multinasional.</p>
+<p>Jika Anda ingin memberikan kontribusi finansial kepada PostgreSQL Global Development Group atau salah satu organisasi nirlaba komunitas yang diakui, silakan kunjungi halaman <a href="https://www.postgresql.org/about/donate/">donasi</a> kami.</p>
+{% endblock presskit_corporate %}

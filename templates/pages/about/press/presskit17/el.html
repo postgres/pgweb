@@ -1,0 +1,98 @@
+{% extends "pages/about/press/presskit17/base.html" %}
+
+{% block presskit_content %}
+<p><strong>26 Σεπτεμβρίου 2024</strong> - Το <a href="https://www.postgresql.org">PostgreSQL Global Development Group</a> ανακοίνωσε σήμερα την κυκλοφορία της <a href="https://www.postgresql.org/docs/17/release-17.html">PostgreSQL 17</a>, της πιο πρόσφατης έκδοσης της πιο προηγμένης βάσης δεδομένων ανοιχτού κώδικα στον κόσμο.</p>
+<p>Η PostgreSQL 17 είναι χτισμένη πάνω σε δεκαετίες ανάπτυξης ανοιχτού κώδικα, βελτιώνοντας τις επιδόσεις και τις δυνατότητες κλιμάκωσής της, με ταυτόχρονη προσαρμογή της σε νέες τάσεις πρόσβασης και αποθήκευσης δεδομένων. Αυτή η έκδοση της <a href="https://www.postgresql.org">PostgreSQL</a> βελτιώνει σημαντικά τη συνολική επίδοση και περιλαμβάνει βελτιωμένη διαχείριση μνήμης για το vacuum, βελτιστοποιήσεις στην πρόσβαση στον αποθηκευτικό χώρο και άλλες βελτιώσεις για βαρύ φόρτο συντρέχουσων εργασιών, ταχύτερη μαζική εισαγωγή και εξαγωγή δεδομένων, καθώς και βελτιωμένη εκτέλεση αναζητήσεων με ευρετήρια. Η PostgreSQL 17 προσφέρει λειτουργίες που ωφελούν τόσο νέους τύπους φόρτου εργασίας όσο και υπάρχοντα κρίσιμα συστήματα, όπως καλύτερη εμπειρία για τους προγραμματιστές με την προσθήκη της εντολής SQL/JSON <code>JSON_TABLE</code> και βελτιώσεις στο logical replication οι οποίες απλοποιούν την υψηλή διαθεσιμότητα και τις αναβαθμίσεις σε νέες πλήρεις εκδόσεις.</p>
+<p>«Η PostgreSQL 17 αναδεικνύει το πώς η παγκόσμια κοινότητα ανοιχτού κώδικα, η οποία κινεί την ανάπτυξη της PostgreSQL, φτιάχνει βελτιώσεις που βοηθούν τους χρήστες σε κάθε στάδιο της πορείας τους με τις βάσεις δεδομένων», δήλωσε ο Jonathan Katz, μέλος της κεντρικής ομάδας της PostgreSQL. «Είτε πρόκειται για βελτιώσεις στη λειτουργία βάσεων δεδομένων μεγάλης κλίμακας είτε για νέες δυνατότητες που εμπλουτίζουν την εμπειρία του προγραμματιστή, η PostgreSQL 17 θα βελτιώσει το πώς διαχειρίζεστε τα δεδομένα σας».</p>
+<p>Η PostgreSQL, που αποτελεί ένα καινοτόμο σύστημα διαχείρισης δεδομένων γνωστό για την αξιοπιστία, την αντοχή και την επεκτασιμότητά του, επωφελείται από περισσότερα από 25 χρόνια ανάπτυξης ανοιχτού κώδικα από μια παγκόσμια κοινότητα προγραμματιστών και έχει γίνει η προτιμώμενη σχεσιακή βάση δεδομένων ανοιχτού κώδικα για οργανισμούς κάθε μεγέθους.</p>
+<h3 id="-">Σημαντικές βελτιώσεις επιδόσεων</h3>
+<p>Η διαδικασία <a href="https://www.postgresql.org/docs/17/routine-vacuuming.html">vacuum</a> της PostgreSQL είναι κρίσιμη για την υγιή λειτουργία της και απαιτεί πόρους του διακομιστή για να τρέξει. Η PostgreSQL 17 εισάγει μια νέα εσωτερική δομή μνήμης για το vacuum η οποία χρησιμοποιεί έως και 20 φορές λιγότερη μνήμη. Έτσι βελτιώνεται η ταχύτητα του vacuum και μειώνεται η χρήση των κοινών πόρων, αφήνοντας περισσότερους διαθέσιμους για τις εργασίες σας.</p>
+<p>Η PostgreSQL 17 συνεχίζει να βελτιώνει τις επιδόσεις της σε επίπεδο I/O. Σε φόρτο με πολλές συντρέχουσες εργασίες μπορεί να παρατηρηθεί έως και 2 φορές καλύτερη απόδοση στην εγγραφή, λόγω βελτιώσεων στην επεξεργασία του <a href="https://www.postgresql.org/docs/17/wal-intro.html">write-ahead log</a> (<a href="https://www.postgresql.org/docs/17/wal-intro.html">WAL</a>). Επιπλέον, η νέα διεπαφή streaming I/O επιταχύνει τη σειριακή σάρωση (ανάγνωση όλων των δεδομένων από έναν πίνακα) και βελτιώνει την ταχύτητα με την οποία η εντολή <a href="https://www.postgresql.org/docs/17/sql-analyze.html"><code>ANALYZE</code></a> ενημερώνει τα στατιστικά στοιχεία για τον σχεδιαστή εκτέλεσης (query planner).</p>
+<p>Η PostgreSQL 17 επεκτείνει επίσης τις βελτιώσεις της και στην εκτέλεση ερωτημάτων. Βελτιώνει την ταχύτητα των ερωτημάτων με όρο <code>IN</code> που χρησιμοποιούν <a href="https://www.postgresql.org/docs/17/indexes-types.html#INDEXES-TYPES-BTREE">ευρετήρια B-tree</a>, την προεπιλεγμένη μορφή ευρετηρίων στην PostgreSQL. Επιπλέον, υποστηρίζεται πλέον η παράλληλη δημιουργία ευρετηρίων <a href="https://www.postgresql.org/docs/17/brin.html">BRIN</a>. Η PostgreSQL 17 περιλαμβάνει επίσης βελτιώσεις στο σχεδιασμό ερωτημάτων (query planning), όπως βελτιστοποιήσεις για τους περιορισμούς <code>NOT NULL</code> και στην επεξεργασία <a href="https://www.postgresql.org/docs/17/queries-with.html">ονοματιζόμενων προσωρινών αποτελεσμάτων (common table expressions)</a> (<a href="https://www.postgresql.org/docs/17/queries-with.html">ερωτήματα <code>WITH</code></a>). Στις βελτιώσεις αυτής της έκδοσης για την επιτάχυνση υπολογισμών με υποστήριξη SIMD (Single Instruction/Multiple Data), περιλαμβάνεται και η χρήση AVX-512 για τη συνάρτηση <a href="https://www.postgresql.org/docs/17/functions-bitstring.html"><code>bit_count</code></a>.</p>
+<h3 id="-">Βελτίωση της ήδη δυνατής εμπειρίας για τους προγραμματιστές</h3>
+<p>Η PostgreSQL ήταν η <a href="https://www.postgresql.org/about/news/postgresql-92-released-1415/">πρώτη σχεσιακή βάση δεδομένων που προσέθεσε υποστήριξη JSON (2012)</a> και η PostgreSQL 17 εμπλουτίζει την υλοποίησή της του προτύπου SQL/JSON. Πλέον διαθέσιμη στην PostgreSQL 17 είναι η <a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-TABLE"><code>JSON_TABLE</code></a> που επιτρέπει στους προγραμματιστές να μετατρέψουν δεδομένα JSON σε κανονικό πίνακα της PostgreSQL. Η PostgreSQL 17 τώρα υποστηρίζει τους <a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-JSON-CREATION-TABLE">κατασκευαστές (constructors) SQL/JSON</a> (<code>JSON</code>, <code>JSON_SCALAR</code>, <code>JSON_SERIALIZE</code>) και τις <a href="https://www.postgresql.org/docs/17/functions-json.html#SQLJSON-QUERY-FUNCTIONS">συναρτήσεις ερωτημάτων</a> (<code>JSON_EXISTS</code>, <code>JSON_QUERY</code>, <code>JSON_VALUE</code>), δίνοντας στους προγραμματιστές περισσότερους τρόπους διαχείρισης για δεδομένα JSON. Σε αυτή την έκδοση προστέθηκαν περισσότερες <a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS">εκφράσεις <code>jsonpath</code></a>, με έμφαση στη μετατροπή δεδομένων JSON σε εγγενείς τύπους δεδομένων της PostgreSQL, όπως αριθμητικούς τύπους, boolean, συμβολοσειρές και τύπους ημερομηνίας/ώρας.</p>
+<p>Στην PostgreSQL 17, οι νέες λειτουργίες της λειτουργίας <a href="https://www.postgresql.org/docs/17/sql-merge.html"><code>MERGE</code></a>, που χρησιμοποιείται για ενημέρωση υπό συνθήκες, περιλαμβάνουν τον όρο <code>RETURNING</code> και τη δυνατότητα ενημέρωσης <a href="https://www.postgresql.org/docs/17/sql-createview.html">όψεων (views)</a>. Επιπλέον, η PostgreSQL 17 έχει νέες δυνατότητες για μαζική εισαγωγή και εξαγωγή δεδομένων, με βελτίωση απόδοσης έως και 2 φορές κατά την εξαγωγή μεγάλων γραμμών από πίνακες χρησιμοποιώντας την εντολή <a href="https://www.postgresql.org/docs/17/sql-copy.html"><code>COPY</code></a>. Οι επιδόσεις της εντολής <code>COPY</code> βελτιώθηκαν επίσης όπου συμφωνούν οι κωδικοποιήσεις πηγής και προορισμού, και η εντολή πλέον υποστηρίζει τη νέα επιλογή <code>ON_ERROR</code>, που επιτρέπει να συνεχιστεί η εισαγωγή ακόμη και αν παρουσιαστεί κάποιο σφάλμα.</p>
+<p>Η νέα έκδοση επεκτείνει τις δυνατότητες διαχείρισης δεδομένων σε κατατμήσεις πινάκων καθώς και δεδομένων κατανεμημένων σε απομακρυσμένες εγκαταστάσεις PostgreSQL. Η PostgreSQL 17 υποστηρίζει τη χρήση στηλών ταυτότητας (identity columns) και περιορισμών αποκλεισμού (exclusion constraints) σε <a href="https://www.postgresql.org/docs/17/ddl-partitioning.html">κατατμημένους πίνακες</a>.</p>
+<p>Το <a href="https://www.postgresql.org/docs/17/postgres-fdw.html">PostgreSQL foreign data wrapper</a>
+(<a href="https://www.postgresql.org/docs/17/postgres-fdw.html"><code>postgres_fdw</code></a>), που χρησιμοποιείται για την εκτέλεση ερωτημάτων σε απομακρυσμένες εγκαταστάσεις PostgreSQL, μπορεί πλέον να προωθήσει υποερωτήματα <code>EXISTS</code> και <code>IN</code> στον απομακρυσμένο εξυπηρετητή για πιο αποδοτική επεξεργασία.</p>
+<p>Η PostgreSQL 17 περιλαμβάνει επίσης έναν ενσωματωμένο, ανεξάρτητο από πλατφόρμες, πάροχο ταξινόμησης χαρακτήρων (collation provider) που είναι εγγυημένα αμετάβλητος και παρέχει παρόμοια σημασιολογία ταξινόμησης με την ταξινόμηση <code>C</code>, αλλά με κωδικοποίηση <code>UTF-8</code> αντί για <code>SQL_ASCII</code>. Όταν χρησιμοποιείτε αυτόν τον νέο πάροχο ταξινόμησης, εξασφαλίζεται ότι τα ερωτήματά σας που έχουν βάση κείμενο θα επιστρέφουν τα αποτελέσματά τους με την ίδια ταξινόμηση, ανεξαρτήτως πού τρέχετε την PostgreSQL.</p>
+<h3 id="-logical-replication-">Βελτιώσεις στο logical replication για υψηλή διαθεσιμότητα και αναβαθμίσεις πλήρων εκδόσεων</h3>
+<p>Το <a href="https://www.postgresql.org/docs/17/logical-replication.html">logical replication</a> χρησιμοποιείται για τη μετάδοση δεδομένων σε πραγματικό χρόνο για πολλαπλές χρήσεις. Ωστόσο, πριν από αυτή την έκδοση της PostgreSQL, οι χρήστες που ήθελαν να κάνουν αναβάθμιση πλήρους έκδοσης έπρεπε να διαγράψουν τα <a href="https://www.postgresql.org/docs/17/logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT">logical replication slots</a>, κάτι που απαιτούσε εκ νέου συγχρονισμό των δεδομένων στους συνδρομητές (subscribers) μετά την αναβάθμιση. Για αναβαθμίσεις από την PostgreSQL 17 και μετά, οι χρήστες δε θα χρειάζεται να διαγράφουν τα logical replication slots, απλοποιώντας έτσι τη διαδικασία αναβάθμισης όταν χρησιμοποιείται logical replication.</p>
+<p>Η PostgreSQL 17 περιλαμβάνει πλέον έλεγχο του failover για το logical replication, καθιστώντας την πιο ανθεκτική όταν χρησιμοποιείται σε περιβάλλοντα υψηλής διαθεσιμότητας. Επιπλέον, η PostgreSQL 17 προσθέτει στη γραμμή εντολών το εργαλείο <a href="https://www.postgresql.org/docs/17/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a> για τη μετατροπή ενός φυσικού αντιγράφου (physical replica) σε ένα νέο λογικό αντίγραφο (logical replica).</p>
+<h3 id="-">Περισσότερες επιλογές για τη διαχείριση ασφάλειας και τη λειτουργική διαχείριση</h3>
+<p>Η PostgreSQL 17 επεκτείνει κι άλλο τους τρόπους με τους οποίους οι χρήστες μπορούν να διαχειριστούν τον κύκλο ζωής των συστημάτων βάσεων δεδομένων τους. Η PostgreSQL έχει μια νέα επιλογή TLS, <code>sslnegotiation</code>, που επιτρέπει στους χρήστες να εκτελούν απευθείας διαπραγμάτευση TLS όταν χρησιμοποιούν το <a href="https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation">ALPN</a> (καταχωρημένο ως <code>postgresql</code> στον κατάλογο ALPN). Η PostgreSQL 17 προσθέτει επίσης τον <a href="https://www.postgresql.org/docs/17/predefined-roles.html">προκαθορισμένο ρόλο</a> <code>pg_maintain</code>, ο οποίος δίνει στους χρήστες δικαιώματα για την εκτέλεση εργασιών συντήρησης.</p>
+<p>Το <a href="https://www.postgresql.org/docs/17/app-pgbasebackup.html"><code>pg_basebackup</code></a>, το εργαλείο δημιουργίας αντιγράφων ασφαλείας που παρέχεται με την PostgreSQL, υποστηρίζει πλέον επαυξητικά αντίγραφα ασφαλείας (incremental backups) και προσθέτει το εργαλείο <a href="https://www.postgresql.org/docs/17/app-pgcombinebackup.html"><code>pg_combinebackup</code></a> για την ανασυγκρότηση ενός πλήρους αντιγράφου ασφαλείας. Επιπλέον, το <a href="https://www.postgresql.org/docs/17/app-pgdump.html"><code>pg_dump</code></a> περιλαμβάνει τη νέα επιλογή <code>--filter</code>, η οποία επιτρέπει την επιλογή των αντικειμένων που θα συμπεριληφθούν κατά τη δημιουργία ενός αρχείου αντιγράφου (dump file).</p>
+<p>Η PostgreSQL 17 έχει επίσης βελτιώσεις στις δυνατότητες παρακολούθησης και ανάλυσης. Το <a href="https://www.postgresql.org/docs/17/sql-explain.html"><code>EXPLAIN</code></a> δείχνει τώρα τον χρόνο που δαπανάται για αναγνώσεις και εγγραφές τοπικών I/O blocks και περιλαμβάνει δύο νέες επιλογές: <code>SERIALIZE</code> και <code>MEMORY</code>, που χρησιμεύουν στο να δει κανείς πόσος χρόνος δαπανήθηκε κατά τη μετατροπή δεδομένων για μετάδοση μέσω δικτύου και πόση μνήμη χρησιμοποιήθηκε. Η PostgreSQL 17 τώρα αναφέρει την <a href="https://www.postgresql.org/docs/17/progress-reporting.html#VACUUM-PROGRESS-REPORTING">πρόοδο του vacuum σε ευρετήρια</a> και προσθέτει την όψη συστήματος (system view) <a href="https://www.postgresql.org/docs/17/view-pg-wait-events.html"><code>pg_wait_events</code></a>, η οποία, σε συνδυασμό με την <a href="https://www.postgresql.org/docs/17/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>, παρέχει περισσότερες λεπτομέρειες για το λόγο που βρίσκεται σε αναμονή μια ενεργή συνεδρία.</p>
+<h3 id="-">Πρόσθετες λειτουργίες</h3>
+<p>Στην PostgreSQL 17 έχουν προστεθεί πολλές άλλες νέες λειτουργίες και βελτιώσεις που μπορεί να σας χρησιμεύσουν σε πολλαπλές περιπτώσεις. Παρακαλούμε να δείτε τις <a href="https://www.postgresql.org/docs/17/release-17.html">σημειώσεις έκδοσης</a> για τον πλήρη κατάλογο των λειτουργιών που έχουν προστεθεί ή έχουν αλλάξει.</p>
+<h3 id="-postgresql">Σχετικά με την PostgreSQL</h3>
+<p>Η <a href="https://www.postgresql.org">PostgreSQL</a> είναι η πιο προηγμένη βάση δεδομένων ανοιχτού κώδικα στον κόσμο, με μια παγκόσμια κοινότητα χιλιάδων χρηστών, συντελεστών, εταιρειών και οργανισμών. Χτισμένη σε περισσότερα από 35 χρόνια ανάπτυξης λογισμικού, που ξεκίνησαν από το Πανεπιστήμιο της Καλιφόρνια στο Μπέρκλεϊ, η PostgreSQL έχει συνεχίσει με έναν απαράμιλλο ρυθμό ανάπτυξης. Το ώριμο σύνολο δυνατοτήτων της PostgreSQL όχι μόνο ανταγωνίζεται κορυφαία συστήματα βάσεων δεδομένων ιδιόκτητου λογισμικού, αλλά τα υπερβαίνει σε προηγμένα χαρακτηριστικά βάσεων δεδομένων, επεκτασιμότητα, ασφάλεια και σταθερότητα.</p>
+<h3 id="-">Σύνδεσμοι</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Λήψη</a></li>
+<li><a href="https://www.postgresql.org/docs/17/release-17.html">Σημειώσεις έκδοσης</a></li>
+<li><a href="https://www.postgresql.org/about/press/">Πακέτο τύπου</a></li>
+<li><a href="https://www.postgresql.org/support/security/">Σελίδα ασφαλείας</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">Πολιτική αρίθμησης εκδόσεων</a></li>
+<li><a href="https://twitter.com/postgresql">Ακολουθήστε την @postgresql</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">Κάντε δωρεά</a></li>
+</ul>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2>Σχετικά με την PostgreSQL</h2>
+<p>Η <a href="https://www.postgresql.org">PostgreSQL</a> είναι η πιο προηγμένη βάση δεδομένων ανοιχτού κώδικα στον κόσμο, με μια παγκόσμια κοινότητα χιλιάδων χρηστών, συντελεστών, εταιρειών και οργανισμών. Χτισμένη σε περισσότερα από 35 χρόνια ανάπτυξης λογισμικού, που ξεκίνησαν από το Πανεπιστήμιο της Καλιφόρνια στο Μπέρκλεϊ, η PostgreSQL έχει συνεχίσει με έναν απαράμιλλο ρυθμό ανάπτυξης. Το ώριμο σύνολο δυνατοτήτων της PostgreSQL όχι μόνο ανταγωνίζεται κορυφαία συστήματα βάσεων δεδομένων ιδιόκτητου λογισμικού, αλλά τα υπερβαίνει σε προηγμένα χαρακτηριστικά βάσεων δεδομένων, επεκτασιμότητα, ασφάλεια και σταθερότητα.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="-">Περισσότερα για τις λειτουργίες</h3>
+<p>Για επεξηγήσεις των παραπάνω λειτουργιών και άλλων, δείτε τις παρακάτω πηγές:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/17/release-17.html">Σημειώσεις Έκδοσης</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">Πίνακας Λειτουργιών</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="-">Τρόποι λήψης</h3>
+<p>Υπάρχουν αρκετοί τρόποι λήψης της PostgreSQL 17, όπως:</p>
+<ul>
+<li>Η <a href="https://www.postgresql.org/download/">Επίσημη Σελίδα Λήψεων</a>, που περιέχει προγράμματα εγκατάστασης και εργαλεία για <a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/linux/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a> και άλλα.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v17.0">Πηγαίος Κώδικας</a></li>
+</ul>
+<p>Μπορείτε να βρείτε άλλα εργαλεία και επεκτάσεις στο <a href="http://pgxn.org/">PostgreSQL Extension Network</a>.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="-">Τεκμηρίωση</h2>
+<p>Η PostgreSQL 17 συνοδεύεται από τεκμηρίωση σε μορφή HTML καθώς και από σελίδες εγχειριδίου (man pages). Μπορείτε επίσης να περιηγηθείτε στην τεκμηρίωση διαδικτυακά σε μορφή <a href="https://www.postgresql.org/docs/17/">HTML</a> και <a href="https://www.postgresql.org/files/documentation/pdf/17/postgresql-17-US.pdf">PDF</a>.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="-">Άδεια χρήσης</h2>
+<p>Το PostgreSQL χρησιμοποιεί την <a href="https://www.postgresql.org/about/licence/">Άδεια Χρήσης PostgreSQL (PostgreSQL License)</a>, μια &quot;επιτρεπτική&quot; άδεια παρόμοια με την Άδεια Χρήσης BSD. Αυτή η άδεια, <a href="http://www.opensource.org/licenses/postgresql/">πιστοποιημένη από το OSI</a>, χαίρει ευρείας εκτίμησης για την ευελιξία της και τη φιλικότητά της προς τις επιχειρήσεις, καθώς δεν περιορίζει τη χρησιμοποίηση της PostgreSQL με εμπορικές και ιδιόκτητες εφαρμογές. Μαζί με την υποστήριξη από πολλές εταιρείες και τη δημόσια ιδιοκτησία του κώδικα, η άδειά μας καθιστά την PostgreSQL πολύ δημοφιλή σε προμηθευτές που επιθυμούν να ενσωματώσουν μια βάση δεδομένων στα προϊόντα τους χωρίς τον φόβο χρεώσεων, κλειδώματος σε προμηθευτή, ή αλλαγών στους όρους άδειας χρήσης.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="-">Επικοινωνία</h2>
+<p>Ιστοσελίδα</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>Email</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="-">Εικόνες και λογότυπα</h2>
+<p>Τα Postgres, PostgreSQL και το Λογότυπο του Ελέφαντα (Slonik) είναι όλα κατοχυρωμένα εμπορικά σήματα της <a href="https://www.postgres.ca">PostgreSQL Community Association</a>. Εάν επιθυμείτε να χρησιμοποιήσετε αυτά τα σήματα, πρέπει να συμμορφωθείτε με την <a href="https://www.postgresql.org/about/policies/trademarks/">πολιτική εμπορικών σημάτων</a>.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="-">Εταιρική υποστήριξη και δωρεές</h2>
+<p>Η PostgreSQL χαίρει της υποστήριξης πολλών εταιρειών, οι οποίες χορηγούν προγραμματιστές, παρέχουν πόρους φιλοξενίας και μας προσφέρουν οικονομική υποστήριξη. Δείτε τη σελίδα των <a href="https://www.postgresql.org/about/sponsors/">χορηγών</a> για ορισμένους από αυτούς τους υποστηρικτές του έργου.</p>
+<p>Υπάρχει επίσης μια μεγάλη κοινότητα <a href="https://www.postgresql.org/support/professional_support/">εταιρειών που προσφέρουν υποστήριξη PostgreSQL</a>, από μεμονωμένους συμβούλους έως πολυεθνικές εταιρείες.</p>
+<p>Εάν επιθυμείτε να κάνετε μια οικονομική συνεισφορά στο PostgreSQL Global Development Group ή σε έναν από τους αναγνωρισμένους μη κερδοσκοπικούς οργανισμούς της κοινότητας, επισκεφτείτε τη σελίδα <a href="https://www.postgresql.org/about/donate/">δωρεών</a>.</p>
+{% endblock presskit_corporate %}

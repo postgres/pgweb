@@ -1,0 +1,132 @@
+{% extends "pages/about/press/presskit17/base.html" %}
+
+{% block presskit_content %}
+<p><strong>2024 年 9 月 26 日</strong> - <a href="https://www.postgresql.org">PostgreSQL Global Development Group</a> は本日、世界で最も高度かつ進化したオープンソースデータベースの最新バージョンである <a href="https://www.postgresql.org/docs/17/release-17.html">PostgreSQL 17</a> を発表しました。</p>
+<p>PostgreSQL 17 は、数十年にわたるオープンソース開発の成果を基に構築され、そのパフォーマンスとスケーラビリティがさらに強化され、新しいデータアクセスおよびストレージパターンに適応しています。
+ <a href="https://www.postgresql.org">PostgreSQL</a> のこのリリースでは、全体的なパフォーマンスの大幅な向上が図られており、特にバキューム処理のメモリ管理の実装を全面的に見直し、ストレージアクセスの最適化や高い並行処理ワークロードへの対応が改善され、大量データの読み込みやエクスポートの速度が大幅に向上し、インデックスに対するクエリ実行の効率も改善されています。
+PostgreSQL 17 は、全く新しいワークロードにも、重要なシステムにもメリットをもたらし、開発者体験をさらに強化する SQL/JSON の <code>JSON_TABLE</code> コマンドの追加や、高可用性ワークロードの管理とメジャーバージョンアップを簡素化する論理レプリケーションの強化など、多くの重要な新機能が追加されています。</p>
+<p>「PostgreSQL 17 は、PostgreSQL の開発を推進するグローバルなオープンソースコミュニティが、あらゆる段階のデータベース利用者に対して大きな改善をもたらしていることを示しています」と、PostgreSQL のコアチームメンバーである Jonathan Katz 氏は述べています。
+「大規模データベースの運用性の大幅な向上から、開発者体験を劇的に向上させる新機能に至るまで、PostgreSQL 17 はデータ管理の体験を改善します。」</p>
+<p>PostgreSQL は、その高い信頼性、堅牢性、そして拡張性で知られる革新的なデータ管理システムであり、25 年以上にわたるオープンソース開発の恩恵を受けています。グローバルな開発者コミュニティの尽力により、PostgreSQL はあらゆる規模の組織にとって最も信頼されるオープンソースのリレーショナルデータベースとなっています。</p>
+<h3 id="-">システム全体の大幅なパフォーマンス向上</h3>
+<p>PostgreSQL の <a href="https://www.postgresql.org/docs/17/routine-vacuuming.html">vacuum</a> プロセスは、健全な運用に不可欠であり、サーバインスタンスのリソースを必要とします。
+PostgreSQL 17 は、バキュームのための新しい内部メモリ構造を導入しており、最善のケースでは従来の 1 / 20 のメモリで済むようになります。
+これにより、バキュームの速度が向上し、共有リソースの使用が削減され、ワークロードに利用できるリソースが増加します。</p>
+<p>PostgreSQL 17 は、I/O レイヤのパフォーマンスを引き続き向上させています。
+高並行処理ワークロードでは、<a href="https://www.postgresql.org/docs/17/wal-intro.html">先行書き込みログ</a>（<a href="https://www.postgresql.org/docs/17/wal-intro.html">WAL</a>）処理の改善により、書き込みスループットが最大で 2 倍に向上する可能性があります。
+さらに、新しいストリーミング I/O インターフェースにより、シーケンシャルスキャン（テーブルの全データの読み込み）や、<a href="https://www.postgresql.org/docs/17/sql-analyze.html"><code>ANALYZE</code></a> がプランナ統計を更新する速度が向上します。</p>
+<p>PostgreSQL 17 は、クエリ実行においてもパフォーマンスの向上を実現しています。
+PostgreSQL 17 では、PostgreSQL のデフォルトのインデックス メソッドである <a href="https://www.postgresql.org/docs/17/indexes-types.html#INDEXES-TYPES-BTREE">B-Tree</a> インデックスを使用する <code>IN</code> 句を含むクエリのパフォーマンスが向上しています。
+さらに、<a href="https://www.postgresql.org/docs/17/brin.html">BRIN</a> インデックスは並列ビルドをサポートするようになりました。
+PostgreSQL 17 には、<code>NOT NULL</code> 制約の最適化や、<a href="https://www.postgresql.org/docs/17/queries-with.html">共通テーブル式</a>（<a href="https://www.postgresql.org/docs/17/queries-with.html"><code>WITH</code> クエリ</a>）の処理改善を含む、クエリプランニングの複数の改善が含まれています。
+また、このリリースでは、計算を高速化するためにさらに多くの SIMD（単一命令・複数データ）サポートが追加され、<a href="https://www.postgresql.org/docs/17/functions-bitstring.html"><code>bit_count</code></a> 関数で AVX-512 を使用できるようになりました。</p>
+<h3 id="-">堅牢な開発者体験のさらなる拡充</h3>
+<p>PostgreSQL は <a href="https://www.postgresql.org/about/news/postgresql-92-released-1415/">JSON サポートを追加した最初のリレーショナルデータベース（2012 年）</a> であり、PostgreSQL 17 は SQL/JSON 標準の実装をさらに強化しています。
+PostgreSQL 17 では、<a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-TABLE"><code>JSON_TABLE</code></a> が利用可能となり、開発者は JSON データを標準の PostgreSQL テーブルに変換できるようになりました。
+また、PostgreSQL 17 は <a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-JSON-CREATION-TABLE">SQL/JSON コンストラクタ</a>（<code>JSON</code>、<code>JSON_SCALAR</code>、<code>JSON_SERIALIZE</code>）や <a href="https://www.postgresql.org/docs/17/functions-json.html#SQLJSON-QUERY-FUNCTIONS">クエリ関数</a>（<code>JSON_EXISTS</code>、<code>JSON_QUERY</code>、<code>JSON_VALUE</code>）をサポートし、開発者が JSON データと対話するためのさらなる手段を提供しています。
+このリリースでは、<a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS"><code>jsonpath</code> 式</a> が追加されており、JSON データを数値、ブール値、文字列、日付/時刻型などのネイティブな PostgreSQL データ型に変換することに重点を置いています。</p>
+<p>PostgreSQL 17 では、条件付きの更新に使用される <a href="https://www.postgresql.org/docs/17/sql-merge.html"><code>MERGE</code></a> にさらに多くの機能が追加され、<code>RETURNING</code> 句や <a href="https://www.postgresql.org/docs/17/sql-createview.html">ビュー</a> を更新する機能が含まれています。
+さらに、PostgreSQL 17 では、大規模な行をエクスポートする際に <a href="https://www.postgresql.org/docs/17/sql-copy.html"><code>COPY</code></a> コマンドを使用すると、パフォーマンスが最大で 2 倍向上するなど、大量データのロードやエクスポートに関する新機能も追加されています。
+<code>COPY</code> のパフォーマンスは、ソースと宛先のエンコーディングが一致する場合にも改善され、新しいオプションとして、挿入エラーが発生してもインポートを継続できる <code>ON_ERROR</code> が追加されています。</p>
+<p>このリリースでは、パーティション化されたデータやリモートの PostgreSQL インスタンスに分散されたデータの管理機能が拡張されています。
+PostgreSQL 17 は、<a href="https://www.postgresql.org/docs/17/ddl-partitioning.html">パーティションテーブル</a> で識別列と排他制約を使用することをサポートしています。
+リモートの PostgreSQL インスタンスでクエリを実行するために使用される <a href="https://www.postgresql.org/docs/17/postgres-fdw.html">PostgreSQL 外部データラッパ</a>（<a href="https://www.postgresql.org/docs/17/postgres-fdw.html"><code>postgres_fdw</code></a>）は、より効率的な処理のために <code>EXISTS</code> や <code>IN</code> サブクエリをリモートサーバにプッシュできるようになりました。</p>
+<p>PostgreSQL 17 には、プラットフォームに依存しないビルトインのイミュータブルコレーションプロバイダが含まれており、<code>SQL_ASCII</code> ではなく <code>UTF-8</code> エンコーディングを使用しながら、<code>C</code> コレーションに類似した並べ替えセマンティクスを提供します。
+この新しいコレーションプロバイダを使用することで、PostgreSQL をどこで実行しても、テキストベースのクエリが同じ並べ替え結果を返すことが保証されます。</p>
+<h3 id="-">高可用性とメジャーバージョンアップのための論理レプリケーションの強化</h3>
+<p><a href="https://www.postgresql.org/docs/17/logical-replication.html">論理レプリケーション</a> は、さまざまなユースケースでデータをリアルタイムにストリーミングするために使用されます。
+しかし、このリリース以前は、メジャーバージョンアップを行う際に <a href="https://www.postgresql.org/docs/17/logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT">論理レプリケーションスロット</a> を削除する必要があり、アップグレード後にデータをサブスクライバに再同期する必要がありました。
+PostgreSQL 17 以降のアップグレードでは、論理レプリケーションスロットを削除する必要がなくなり、論理レプリケーションを使用する際のアップグレードプロセスが簡素化されます。</p>
+<p>PostgreSQL 17 には、論理レプリケーションのフェイルオーバ制御が追加されており、高可用性環境での耐障害性が向上しています。
+さらに、PostgreSQL 17 では、物理レプリカを新しい論理レプリカに変換するためのコマンドラインツール <a href="https://www.postgresql.org/docs/17/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a> が導入されています。</p>
+<h3 id="-">セキュリティと運用管理のためのオプションの追加</h3>
+<p>PostgreSQL 17 は、ユーザがデータベースシステムのライフサイクル全体を管理する方法をさらに拡張しています。
+PostgreSQL には新しい TLS オプション <code>sslnegotiation</code> が追加され、<a href="https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation">ALPN</a>（ALPN ディレクトリに <code>postgresql</code> として登録済み）を使用して直接 TLS ハンドシェイクを行うことが可能です。
+PostgreSQL 17 では、メンテナンス操作を実行するための権限をユーザに付与する <code>pg_maintain</code> <a href="https://www.postgresql.org/docs/17/predefined-roles.html">事前定義ロール</a> も追加されています。</p>
+<p>PostgreSQL に含まれるバックアップユーティリティ <a href="https://www.postgresql.org/docs/17/app-pgbasebackup.html"><code>pg_basebackup</code></a> は、増分バックアップをサポートし、フルバックアップを再構築するための <a href="https://www.postgresql.org/docs/17/app-pgcombinebackup.html"><code>pg_combinebackup</code></a> ユーティリティが追加されました。
+さらに、<a href="https://www.postgresql.org/docs/17/app-pgdump.html"><code>pg_dump</code></a> には <code>--filter</code> という新しいオプションが追加され、ダンプファイルを生成する際に含めるオブジェクトを選択できるようになっています。</p>
+<p>PostgreSQL 17 には、監視と分析機能の強化も含まれています。
+<a href="https://www.postgresql.org/docs/17/sql-explain.html"><code>EXPLAIN</code></a> は、ローカル I/O ブロックの読み書きにかかる時間を表示するようになり、ネットワーク伝送用のデータ変換にかかる時間を確認できる <code>SERIALIZE</code> オプションと、使用メモリ量を確認できる <code>MEMORY</code> オプションが追加されました。
+PostgreSQL 17 は、<a href="https://www.postgresql.org/docs/17/progress-reporting.html#VACUUM-PROGRESS-REPORTING">インデックスのバキューム進行状況</a> を報告し、<a href="https://www.postgresql.org/docs/17/view-pg-wait-events.html"><code>pg_wait_events</code></a> システムビューを追加しました。
+これにより、<a href="https://www.postgresql.org/docs/17/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a> と組み合わせて使用することで、アクティブなセッションがなぜ待機しているのかをより詳細に把握できます。</p>
+<h3 id="-">追加機能</h3>
+<p>PostgreSQL 17 には、他にも多くの新機能や改善が追加されており、さまざまなユースケースで役立つ可能性があります。
+新機能および変更点の完全な一覧については、<a href="https://www.postgresql.org/docs/17/release-17.html">リリースノート</a> をご覧ください。</p>
+<h3 id="postgresql-">PostgreSQL について</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> は、世界で最も高度なオープンソースデータベースであり、数千人のユーザー、コントリビューター、企業、組織からなるグローバルコミュニティによって支えられています。
+カリフォルニア大学バークレー校で始まり 35 年以上にわたるエンジニアリングの成果を基に構築された PostgreSQL は、比類のない開発ペースで進化を続けています。
+PostgreSQL の成熟した機能セットは、主要な商用データベースシステムと同等であるだけでなく、高度なデータベース機能、拡張性、セキュリティ、安定性の面でそれらを凌駕しています。</p>
+<h3 id="-">リンク</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">ダウンロード</a></li>
+<li><a href="https://www.postgresql.org/docs/17/release-17.html">リリースノート</a></li>
+<li><a href="https://www.postgresql.org/about/press/">プレスキット</a></li>
+<li><a href="https://www.postgresql.org/support/security/">セキュリティページ</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">バージョンポリシー</a></li>
+<li><a href="https://twitter.com/postgresql">@postgresql をフォロー</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">寄付</a></li>
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2>PostgreSQL について</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> は、世界で最も高度なオープンソースデータベースであり、数千人のユーザー、コントリビューター、企業、組織からなるグローバルコミュニティによって支えられています。
+カリフォルニア大学バークレー校で始まり 35 年以上にわたるエンジニアリングの成果を基に構築された PostgreSQL は、比類のない開発ペースで進化を続けています。
+PostgreSQL の成熟した機能セットは、主要な商用データベースシステムと同等であるだけでなく、高度なデータベース機能、拡張性、セキュリティ、安定性の面でそれらを凌駕しています。</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="-">機能の詳細</h2>
+<p>上記の機能やその他の説明については、以下のリソースをご覧ください：</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/17/release-17.html">リリースノート</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">機能マトリックス</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="-">ダウンロード方法</h2>
+<p>PostgreSQL 17 をダウンロードする方法はいくつかあります：</p>
+<ul>
+<li><a href="https://www.postgresql.org/download/">公式ダウンロード</a> ページには、<a href="https://www.postgresql.org/download/windows/">Windows</a>、<a href="https://www.postgresql.org/download/linux/">Linux</a>、<a href="https://www.postgresql.org/download/macosx/">macOS</a> などのインストーラやツールが含まれています。</li>
+<li><a href="https://www.postgresql.org/ftp/source/v17.0">ソースコード</a></li>
+</ul>
+<p>その他のツールや拡張機能は <a href="http://pgxn.org/">PostgreSQL Extension Network</a> で利用可能です。</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="-">ドキュメント</h2>
+<p>PostgreSQL 17 には、HTML ドキュメントおよび man ページが付属しており、<a href="https://www.postgresql.org/docs/17/">HTML</a> 形式および <a href="https://www.postgresql.org/files/documentation/pdf/17/postgresql-17-US.pdf">PDF</a> 形式の両方でオンラインでも閲覧できます。</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="-">ライセンス</h2>
+<p>PostgreSQL は、BSD に似た「許容的」なライセンスである <a href="https://www.postgresql.org/about/licence/">PostgreSQL ライセンス</a> を使用しています。
+この <a href="http://www.opensource.org/licenses/postgresql/">OSI 認定ライセンス</a> は、商業的およびプロプライエタリなアプリケーションと PostgreSQL を併用する際に制限がないため、柔軟でビジネスフレンドリーなものとして広く評価されています。
+複数の企業によるサポートとコードの公開所有権と相まって、このライセンスは、ベンダーがデータベースを自社製品に組み込む際に、料金、ベンダーロックイン、ライセンス条件の変更を心配することなく利用できるため、PostgreSQL を非常に人気のある選択肢にしています。</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="-">連絡先</h2>
+<p>Web サイト</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>E メール</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="-">画像およびロゴ</h2>
+<p>Postgres、PostgreSQL、および象のロゴ（Slonik）はすべて <a href="https://www.postgres.ca">PostgreSQL Community Association</a> の登録商標です。これらのマークを使用する場合は、<a href="https://www.postgresql.org/about/policies/trademarks/">商標ポリシー</a> に従う必要があります。</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="-">コーポレートサポートと寄付</h2>
+<p>PostgreSQL は、多くの企業からサポートを受けており、これらの企業は開発者をスポンサーし、ホスティングリソースを提供し、財政的な支援を行っています。これらのプロジェクト支援者の一部については、<a href="https://www.postgresql.org/about/sponsors/">スポンサー</a> ページをご覧ください。</p>
+<p>また、個人コンサルタントから多国籍企業に至るまで、<a href="https://www.postgresql.org/support/professional_support/">PostgreSQL サポートを提供する企業</a> の大規模なコミュニティも存在します。</p>
+<p>PostgreSQL Global Development Group または認定されたコミュニティの非営利団体への寄付を希望される方は、<a href="https://www.postgresql.org/about/donate/">寄付</a> ページをご覧ください。</p>
+{% endblock presskit_corporate %}

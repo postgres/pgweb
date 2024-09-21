@@ -1,0 +1,457 @@
+{% extends "pages/about/press/presskit17/base.html" %}
+
+{% block presskit_content %}
+<p dir="rtl">
+ספטמבר 26, 2024 -  קבוצת הפיתוח הגלובלית של PostgreSQL הודיעה היום על שחרורה של PostgreSQL 17, הגרסה העדכנית ביותר של מסד הנתונים המתקדם בעולם עם קוד פתוח.
+</p>
+
+
+<p dir="rtl">
+PostgreSQL 17 מתבססת על עשרות שנים של פיתוח קוד פתוח, משפרת את הביצועים ואת יכולת ההרחבה שלה תוך התאמה לדפוסי גישה לנתונים ולדפוסי אחסון. מהדורה זו של
+<a href="https://www.postgresql.org">PostgreSQL</a>
+מוסיף רווחי ביצועים משמעותיים, כולל הטמעת ניהול זיכרון משופרת עבור ואקום, אופטימיזציות לגישה לאחסון ושיפורים לעומסי עבודה גבוהים במקביל, האצה בטעינה וייצוא בכמות גדולה, ושיפורי ביצוע שאילתות עבור אינדקסים. ל-PostgreSQL 17 יש תכונות המועילות לעומסי עבודה חדשים לגמרי ולמערכות קריטיות כאחד, כגון תוספות לחוויית המפתחים עם פקודת SQL/JSON
+<code>JSON_TABLE</code>
+ושיפורים לשכפול לוגי המפשטים את הניהול של עומסי עבודה בזמינות גבוהה ושדרוגי גרסאות גדולים.
+</p>
+
+
+<p dir="rtl">
+"PostgreSQL 17 מדגישה כיצד קהילת הקוד הפתוח העולמית, המניעה את הפיתוח של PostgreSQL, בונה שיפורים המסייעים למשתמשים בכל שלבי המסע שלהם במסד הנתונים", אמר Jonathan Katz, חבר ב-PostgreSQL Core Team. "בין אם זה שיפורים להפעלת מסדי נתונים בקנה מידה גדולים או תכונות חדשות המשפרות את חוויית המפתח, PostgreSQL 17 תשפר את חוויית הניהול הנתונים שלך."
+
+
+</p>
+
+
+<p dir="rtl">
+PostgreSQL זאת מערכת ניהול נתונים חדשנית הידועה באמינות, בחוסנה וביכולת הרחבה שלה, נהנית ממעל 25 שנות פיתוח קוד פתוח מ 
+<a href="https://www.postgresql.org/community">קהילת מפתחים עולמית</a>
+    והפכה לבסיס נתונים רלציוני הפתוח המועדף על ארגונים מכל הגדלים.
+</p>
+
+
+
+
+<h3 dir="rtl">
+
+
+רווחי ביצועים כלל מערכתיים
+</h3>
+
+
+<p dir="rtl">
+תאליך 
+<a href="https://www.postgresql.org/docs/17/routine-vacuuming.html">וואקום</a>
+ב PostgreSQL הוא התהליך הוא קריטי לפעילות תקינה, ודורש משאבי שרת לפעול. PostgreSQL 17 מציג מבנה זיכרון פנימי חדש לוואקום שצורך עד פי 20 פחות זיכרון. זה משפר את מהירות הוואקום וגם מפחית את השימוש במשאבים המשותפים, מה שהופך אותו למתאים יותר לעומסי העבודה שלך.
+</p>
+
+
+<p dir="rtl">
+PostgreSQL 17 ממשיכה לשפר את הביצועים של שכבת ה-I/O שלה. עומסי עבודה בו-זמניים גבוהים עשויים לראות תפוקת כתיבה טובה יותר עד פי 2 עקב שיפורים עם עיבוד של
+<a href="https://www.postgresql.org/docs/17/wal-intro.html">write-ahead log</a>
+(<a href="https://www.postgresql.org/docs/17/wal-intro.html">WAL</a>)
+. בנוסף, ממשק ה-I/O הזורם החדש מאיץ sequential scans (קריאת כל הנתונים מטבלה) איך מהר
+<a href="https://www.postgresql.org/docs/17/sql-analyze.html">ANALYZE</a>
+    יכול לעדכן את הנתונים הסטטיסטיים של מתכנן השאילתות.
+
+
+</p>
+<p dir="rtl">
+PostgreSQL 17 גם מרחיבה את רווחי הביצועים שלה בביצוע שאילתות. 
+PostgreSQL 17 משפרת את הביצועים של שאילתות עם סעיפי 
+<code>IN</code>
+    המשתמשים באינדקסים של 
+<a href="https://www.postgresql.org/docs/17/indexes-types.html#INDEXES-TYPES-BTREE">B-tree</a>
+, ברירת המחדל שיטת אינדקס ב-PostgreSQL. בנוסף, אינדקסים של 
+<a href="https://www.postgresql.org/docs/17/brin.html">BRIN</a>
+    תומכים כעת בבנייה מקבילה. PostgreSQL 17 כוללת מספר שיפורים לתכנון שאילתות, כולל אופטימיזציות לאילוצי 
+<code>NOT NULL</code>
+    ושיפורים בעיבוד 
+<a href="https://www.postgresql.org/docs/17/queries-with.html">common table expressions</a>
+(<a href="https://www.postgresql.org/docs/17/queries-with.html"><code>WITH</code> queries</a>)
+. מהדורה זו מוסיפה עוד תמיכת SIMD (Single Instruction/Multiple Data) להאצת חישובים, כולל שימוש ב-AVX-512 עבור הפונקציה 
+<a href="https://www.postgresql.org/docs/17/functions-bitstring.html"><code>bit_count</code></a>
+.
+</p>
+
+
+<h3 dir="rtl">
+
+
+הרחבה נוספת של חוויית המפתח עמידה
+</h3>
+
+
+<p dir="rtl">
+PostgreSQL היה 
+<a href="https://www.postgresql.org/about/news/postgresql-92-released-1415/">מסד הנתונים הרלציוני הראשון שהוסיף תמיכה ב-JSON</a>
+
+
+    ו-PostgreSQL 17 מוסיף להטמעתו של תקן SQL/JSON. 
+<a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-TABLE"><code>JSON_TABLE</code></a>
+
+
+
+
+זמין כעת ב-PostgreSQL 17, ומאפשר למפתחים להמיר נתוני JSON לטבלת PostgreSQL סטנדרטית. PostgreSQL 17 תומך כעת ב
+<a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-JSON-CREATION-TABLE">SQL/JSON constructors</a>
+    
+(<code>JSON</code>, <code>JSON_SCALAR</code>, <code>JSON_SERIALIZE</code>)
+    ו-
+<a href="https://www.postgresql.org/docs/17/functions-json.html#SQLJSON-QUERY-FUNCTIONS">פונקציות שאילתה</a> 
+(<code>JSON_EXISTS</code>, <code>JSON_QUERY</code>, <code>JSON_VALUE</code>)
+אשר נותנים למפתחים דרכים אחרות להתממשקות עם נתוני ה-JSON שלהם.
+    מהדורה זו מוסיפה עוד ביטויי 
+<a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS"><code>jsonpath</code></a> 
+, עם דגש של המרת נתוני JSON לסוגי נתונים מקוריים של PostgreSQL כולל מספר, בוליאני, מחרוזת וסוגי תאריך/שעה.
+</p>
+
+
+<p dir="rtl">
+PostgreSQL 17 מוסיפה תכונות נוספות ל-
+<a href="https://www.postgresql.org/docs/17/sql-merge.html"><code>MERGE</code></a>
+, המשמש לעדכונים מותנים, כולל סעיף 
+<code>RETURNING</code>
+    והיכולת לעדכן 
+<a href="https://www.postgresql.org/docs/17/sql-createview.html">views</a>
+. בנוסף, ל-PostgreSQL 17 יכולות חדשות לטעינה וייצוא של נתונים בכמויות גדולות, כולל שיפור ביצועים של עד פי 2 בעת ייצוא שורות גדולות באמצעות פקודת 
+<a href="https://www.postgresql.org/docs/17/sql-copy.html"><code>COPY</code></a>
+
+
+. לביצועי 
+<code>COPY</code>
+נוספו גם שיפורים כאשר קידוד המקור והיעד תואמים, וכולל אפשרות חדשה, 
+<code>ON_ERROR</code>
+, המאפשרת המשך יבוא ​​גם אם יש שגיאת הוספה.
+</p>
+
+
+<p dir="rtl">
+מהדורה זו מרחיבה את הפונקציונליות הן לניהול נתונים במחיצות והן לנתונים המופצים על פני מופעי PostgreSQL מרוחקים. PostgreSQL 17 תומכת בשימוש בעמודות זהות ובאילוצי אי הכללה על 
+<a href="https://www.postgresql.org/docs/17/ddl-partitioning.html">טבלאות מחולקות</a>
+. 
+<a href="https://www.postgresql.org/docs/17/postgres-fdw.html">מעטפת הנתונים הזרים של PostgreSQL</a> 
+(<a href="https://www.postgresql.org/docs/17/postgres-fdw.html"><code>postgres_fdw</code></a>) 
+
+
+    המשמשת לביצוע שאילתות במופעי PostgreSQL מרוחקים, יכולה כעת לבצע שאילתות משנה 
+<code>EXISTS</code>
+    ו-
+<code>IN</code>
+    בשרת המרוחק לעיבוד יעיל יותר.
+</p>
+
+
+<p dir="rtl">
+PostgreSQL 17 כוללת גם collation provider מובנה, בלתי תלוי בפלטפורמה ובלתי ניתן לשינוי, שמובטח שהוא בלתי ניתן לשינוי ומספק סמנטיקת מיון דומה ל collation 
+<code>C</code>
+    למעט קידוד 
+<code>UTF-8</code>
+    ולא 
+<code>SQL_ASCII</code>
+. השימוש ב collation provider החדש הזה מבטיח שהשאילתות שלך המבוססות על הטקסט יחזירו את אותן תוצאות ממוינות ללא קשר למקום שבו אתה מפעיל את PostgreSQL.
+</p>
+
+
+<h3 dir="rtl">
+שיפורים לשכפול לוגי לזמינות גבוהה ושדרוגי גרסאות גדולים
+</h3>
+<p dir="rtl">
+<a href="https://www.postgresql.org/docs/17/logical-replication.html">שכפול לוגי</a> 
+
+
+משמש להזרמת נתונים בזמן אמת על פני מקרי שימוש רבים. עם זאת, לפני מהדורה זו, משתמשים שרצו לבצע שדרוג גרסה גדול היו חייבים להוריד את 
+<a href="https://www.postgresql.org/docs/17/logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT">סלוטים של שכפול לוגי</a> 
+    כאשר הפעולה דרשה סנכרון מחדש של נתונים למנויים לאחר שדרוג. החל משדרוגים מ-PostgreSQL 17, משתמשים לא צריכים להוריד את הסלוטים של שכפול לוגי, מה שמפשט את תהליך השדרוג בעת שימוש בשכפול לוגי.
+</p>
+
+
+<p dir="rtl">
+PostgreSQL 17 כוללת כעת בקרת כשל של שכפול לוגי, מה שהופך אותו לגמיש יותר בעת פריסה בסביבות עם זמינות גבוהה. בנוסף, PostgreSQL 17 מציגה את 
+<a href="https://www.postgresql.org/docs/17/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a>
+-  כלי שורת פקודה להמרת עותק פיזי לעותק לוגי חדש.
+</p>
+
+
+<h3 dir="rtl">
+אפשרויות נוספות לניהול אבטחה ותפעול
+</h3>
+<p dir="rtl">
+PostgreSQL 17 מרחיבה עוד יותר כיצד משתמשים יכולים לנהל את מחזור החיים הכולל של מערכות מסד הנתונים שלהם. ל-PostgreSQL יש אפשרות TLS חדשה, 
+<code>sslnegotiation</code>
+, המאפשרת למשתמשים לבצע TLS handshakes בעת שימוש ב-
+<a href="https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation">ALPN</a>
+(רשום בתור 
+<code>postgresql</code>
+    בספריית ALPN).
+PostgreSQL 17 מוסיפה גם את 
+<code>pg_maintain</code>
+<a href="https://www.postgresql.org/docs/17/predefined-roles.html">תפקיד מוגדר מראש</a>
+, המעניק למשתמשים הרשאה לבצע פעולות תחזוקה.
+</p>
+
+
+<p dir="rtl">
+<a href="https://www.postgresql.org/docs/17/app-pgbasebackup.html"><code>pg_basebackup</code></a>
+- כלי הגיבוי המובנה ב-PostgreSQL, תומך כעת בגיבויים מצטברים ומוסיף את 
+<a href="https://www.postgresql.org/docs/17/app-pgcombinebackup.html"><code>pg_combinebackup</code></a>
+- כלי לשחזור גיבוי מלא. בנוסף, 
+<a href="https://www.postgresql.org/docs/17/app-pgdump.html"><code>pg_dump</code></a>
+    כולל אופציה חדשה בשם 
+<code>--filter</code>
+    המאפשרת לבחור אילו אובייקטים לכלול בעת יצירת קובץ dump.
+</p>
+
+
+<p dir="rtl">
+PostgreSQL 17 כוללת גם שיפורים לתכונות ניטור וניתוח. 
+<a href="https://www.postgresql.org/docs/17/sql-explain.html"><code>EXPLAIN</code></a>
+מציג כעת את הזמן הקריאה והכתיבה של בלוק קלט/פלט מקומי, וכולל שתי אפשרויות חדשות: 
+<code>SERIALISE</code>
+
+
+    ו-
+<code>MEMORY</code>
+
+
+אשר משמשים לבדיקת הזמן המושקע בהמרת נתונים עבור שידור רשת וכמה זיכרון היה בשימוש. PostgreSQL 17 מדווחת כעת על 
+<a href="https://www.postgresql.org/docs/17/progress-reporting.html#VACUUM-PROGRESS-REPORTING">התקדמות האינדקסים של וואקום</a>
+    ומוסיפה את תצוגת המערכת 
+<a href="https://www.postgresql.org/docs/17/view-pg-wait-events.html"><code>pg_wait_events</code></a>
+שבשילוב עם 
+<a href="https://www.postgresql.org/docs/17/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>
+    נותן הרבה יותר תובנות מדוע הפעלה נמצאת במצב של waiting.
+
+
+</p>
+
+
+<h3 dir="rtl">
+תכונות נוספות
+</h3>
+<p dir="rtl">
+תכונות חדשות ושיפורים רבים אחרים נוספו ל-PostgreSQL 17 שעשויים גם להיות מועילים למקרי השימוש שלכם.
+אנא עיינו ב
+<a href="https://www.postgresql.org/docs/17/release-17.html"> הערות מהדורה </a>
+לקבלת רשימה מלאה של תכונות חדשות ושונות.
+</p>
+
+
+<h3 dir="rtl">
+אודות PostgreSQL
+</h3>
+<p dir="rtl">
+<a href="https://www.postgresql.org/">PostgreSQL</a>
+    הוא מסד נתונים בקוד פתוח המתקדם ביותר בעולם, עם קהילה גלובלית של אלפי משתמשים, תורמים, חברות וארגונים. הפרויקט PostgreSQL נבנה על מעל 35 שנות הנדסה, החל באוניברסיטת קליפורניה, ברקלי, והמשיך להתפתח עם קצב ללא תחרות. ערכת התכונות הבשלות של PostgreSQL לא רק תואמת מערכות נתונים קנייניות מובילות, אלא עולה עליהן במאפיינים של מסדי נתונים מתקדמים ,יכולות הרחבה, אבטחה ויציבות.
+</p>
+
+
+<h3 dir="rtl">
+קישורים
+</h3>
+<ul dir="rtl">
+<li>
+<a href="https://www.postgresql.org/download/"> הורדות </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/docs/17/release-17.html"> הערות מהדורה </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/about/press/"> ערכת עיתונות </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/support/security/"> עמוד אבטחה </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/support/versioning/"> מדיניות גרסאות </a>
+</li>
+<li>
+<a href="https://twitter.com/postgresql"> עקבו אחרי @postgresql בטוויטר </a>
+</li> 
+<li>
+<a href="https://www.postgresql.org/about/donate/"> לתרום לקהילה </a>
+</li> 
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2 dir="rtl">
+אודות PostgreSQL
+</h2>
+<p dir="rtl">
+<a href="https://www.postgresql.org/">PostgreSQL</a>
+    הוא מסד נתונים בקוד פתוח המתקדם ביותר בעולם, עם קהילה גלובלית של אלפי משתמשים, תורמים, חברות וארגונים. הפרויקט PostgreSQL נבנה על מעל 35 שנות הנדסה, החל באוניברסיטת קליפורניה, ברקלי, והמשיך להתפתח עם קצב ללא תחרות. ערכת התכונות הבשלות של PostgreSQL לא רק תואמת מערכות נתונים קנייניות מובילות, אלא עולה עליהן במאפיינים של מסדי נתונים מתקדמים ,יכולות הרחבה, אבטחה ויציבות.
+</p>    
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 dir="rtl">
+עוד על התכונות
+</h2>
+
+
+<p dir="rtl">
+להסברים על התכונות לעיל ואחרות, עיין במשאבים הבאים:
+</p>
+
+
+<ul dir="rtl">
+<li>
+<a href="https://www.postgresql.org/docs/17/release-17.html"> הערות פרסום </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/about/featurematrix/"> מטריצת תכונות </a>
+</li>
+</ul>    
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 dir="rtl">
+היכן להוריד
+</h2>
+
+
+<p dir="rtl">
+ישנן מספר דרכים שבהן תוכלו להוריד את PostgreSQL 17, כולל:
+</p>
+
+
+<ul dir="rtl">
+<li>
+דף
+<a href="https://www.postgresql.org/download/">ההורדות הרשמי</a>
+, המכיל מתקינים וכלים עבור
+<a href="https://www.postgresql.org/download/windows/">Windows</a>
+,
+<a href="https://www.postgresql.org/download/">Linux</a>
+,
+<a href="https://www.postgresql.org/download/macosx/">macOS</a>
+ועוד.
+</li>
+<li>
+<a href="https://www.postgresql.org/ftp/source/v17.0">קוד מקור</a>
+</li>
+</ul>
+
+
+<p dir="rtl">
+כלים והרחבות אחרים זמינים 
+<a href="http://pgxn.org/">ברשת ההרחבות של PostgreSQL</a>
+.
+</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 dir="rtl">
+תיעוד
+</h2>
+
+
+<p dir="rtl">
+PostgreSQL 17 מגיע עם תיעוד HTML כמו גם דפי man, תוכלו גם לעיין בתיעוד באופן מקוון בפורמט
+<a href="https://www.postgresql.org/docs/17/">HTML</a>
+
+
+    וגם בפורמט 
+<a href="https://www.postgresql.org/files/documentation/pdf/17/postgresql-17-US.pdf">PDF</a>
+.
+</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 dir="rtl">
+רישיון
+</h2>
+
+
+<p dir="rtl">
+
+
+    משתמש ב
+<a href="https://www.postgresql.org/about/licence/">רישיון PostgreSQL</a>
+, רישיון "מתירני" דמוי BSD. רישיון זה 
+<a href="http://www.opensource.org/licenses/postgresql/">מאושר OSI</a>
+
+
+זוכה להערכה רבה כגמיש וידידותי לעסקים, מכיוון שהוא אינו מגביל את השימוש ב-PostgreSQL עם יישומים מסחריים וקנייניים. יחד עם תמיכה מרובת חברות ובעלות ציבורית על הקוד, הרישיון שלנו הופך את PostgreSQL לפופולרי מאוד בקרב הספקים המעוניינים להטמיע מסד נתונים במוצרים שלהם ללא חשש מעמלות, נעילת ספקים או שינויים בתנאי הרישוי.
+</p>
+    
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 dir="rtl">
+יצירת קשר
+</h2>
+
+
+<p dir="rtl">
+אתר אינטרנט 
+</p>
+<ul dir="rtl">
+<li>
+<a href="https://www.postgresql.org/">https://www.postgresql.org </a>
+</li>
+</ul>
+
+
+<p dir="rtl">
+אימייל 
+</p>
+<ul dir="rtl">
+<li>
+<a href="mailto:press@postgresql.org">press@postgresql.org</a>
+</li>
+</ul>    
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 dir="rtl">
+תמונות ולוגו
+</h2>
+
+
+<p dir="rtl">
+Postgres ו-PostgreSQL ולוגו הפיל (Slonik) הם כולם סימנים מסחריים רשומים של 
+<a href="https://www.postgres.ca">PostgreSQL Community Association</a>
+
+
+. אם ברצונך להשתמש בסימנים אלה, עליך לציית ל
+
+
+<a href="https://www.postgresql.org/about/policies/trademarks/">מדיניות הסימנים המסחריים</a>
+.
+</p>    
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 dir="rtl">
+תמיכה ארגונית
+</h2>
+
+
+<p dir="rtl">
+PostgreSQL נהנית מתמיכתן של חברות רבות, שנותנות חסות למפתחים, מספקות משאבי אירוח ונותנות לנו תמיכה כספית. עיין בדף 
+<a href="https://www.postgresql.org/about/sponsors/">נותני החסות</a>
+שלנו עבור חלק מתומכי הפרויקט הללו.
+</p>
+
+
+<p dir="rtl">
+יש גם קהילה גדולה של 
+<a href="https://www.postgresql.org/support/professional_support/">חברות המציעות תמיכה ב-PostgreSQL</a>
+, מיועצים בודדים ועד לחברות רב לאומיות.
+
+
+</p>
+
+
+<p dir="rtl">
+אם ברצונך לתרום תרומה כספית לקבוצת הפיתוח העולמית PostgreSQL או לאחד מארגוני הקהילה המוכרים ללא מטרות רווח, אנא בקר ב
+
+
+<a href="https://www.postgresql.org/about/donate/">דף התרומות</a>
+שלנו.
+
+
+</p>
+{% endblock presskit_corporate %}

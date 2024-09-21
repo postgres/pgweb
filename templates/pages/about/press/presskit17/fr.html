@@ -1,0 +1,288 @@
+{% extends "pages/about/press/presskit17/base.html" %}
+
+{% block presskit_content %}
+<p><strong>26 septembre 2024</strong> - Le <a href="https://www.postgresql.org">PostgreSQL Global Development
+Group</a> annonce aujourd&#39;hui la publication de
+<a href="https://www.postgresql.org/docs/17/release-17.html">PostgreSQL 17</a>, dernière
+version de la base de données open source de référence.</p>
+<p>PostgreSQL 17 repose sur plusieurs décennies de développement, améliorant ses
+performances et sa mise à l&#39;échelle tout en s&#39;adaptant aux modèles émergents
+d&#39;accès aux données et à leur stockage. Cette version de
+<a href="https://www.postgresql.org">PostgreSQL</a> amène des gains de performance
+généralisés, dont une révision complète de l&#39;implantation de la gestion de la
+mémoire des opérations de vacuum, des optimisations de l&#39;accès au stockage, des
+améliorations pour les charges de travail fortement concurrentielles,
+l&#39;accélération des chargements et exports en masse et des améliorations de
+l&#39;exécution des requêtes <!--pour--> utilisant les index. PostgreSQL 17 possède
+des fonctionnalités qui profitent aussi bien aux nouvelles charges de travail
+qu&#39;aux systèmes critiques. On peut citer les ajouts à l&#39;expérience développeur
+avec la commande SQL/JSON <code>JSON_TABLE</code> et les améliorations de réplication
+logique qui simplifient la gestion de la haute disponibilité et des mises à jour
+de version majeures.</p>
+<p>«&nbsp;PostgreSQL 17 souligne la manière dont la communauté open source
+mondiale, qui pilote le développement de PostgreSQL, construit les améliorations
+qui aident les utilisateurs à tous les niveaux de leur expérience avec la base
+de données&nbsp;» dit Jonathan Katz, un membre de la «&nbsp;core team&nbsp;» de
+PostgreSQL. «&nbsp;Qu&#39;il s&#39;agisse d&#39;améliorations pour opérer les bases de
+données à l&#39;échelle ou de nouvelles fonctionnalités qui contribuent à une
+expérience développeur agréable, PostgreSQL va parfaire votre expérience de la
+gestion de données.&nbsp;»</p>
+<p>PostgreSQL, système innovant de gestion des données, reconnu pour sa fiabilité
+et sa robustesse, bénéficie depuis plus de 25 ans d&#39;un développement open source
+par une communauté mondiale de développeurs et développeuses. Il est devenu le
+système de gestion de bases de données relationnelles de référence pour les
+organisations de toute taille.</p>
+<h3 id="des-gains-de-performance-sur-l-ensemble-du-moteur">Des gains de performance sur l&#39;ensemble du moteur</h3>
+<p>Le processus de
+<a href="https://www.postgresql.org/docs/17/routine-vacuuming.html">vacuum</a> de
+PostgreSQL, critique pour le bon déroulement des opérations, nécessite des
+ressources du serveur de l&#39;instance pour s&#39;exécuter. PostgreSQL 17 introduit une
+nouvelle structure interne de la mémoire pour vacuum qui divise par 20
+l&#39;utilisation mémoire. PostgreSQL améliore ainsi la vitesse des opérations de
+vacuum tout en réduisant l&#39;usage des ressources partagées, les rendant
+disponibles à votre charge de travail.</p>
+<p>PostgreSQL 17 poursuit l&#39;amélioration des performances de sa couche
+d&#39;entrées/sorties. Les charges de travail hautement concurrentes pourront voir
+leurs performances en écriture doubler grâce à une amélioration sur le
+traitement du <a href="https://www.postgresql.org/docs/17/wal-intro.html">write-ahead
+log</a>
+(<a href="https://www.postgresql.org/docs/17/wal-intro.html">WAL</a>). De plus, la nouvelle
+interface d&#39;entrées/sorties par flux accélère les lectures séquentielles
+(lecture de toutes les données d&#39;une table). Cette même fonctionnalité bénéficie
+aussi à <a href="https://www.postgresql.org/docs/17/sql-analyze.html"><code>ANALYZE</code></a> qui
+peut ainsi mettre à jour les statistiques du planificateur de requêtes bien plus
+rapidement.</p>
+<p>PostgreSQL 17 étend ses gains de performance à l&#39;exécution de requêtes. Il
+améliore la performance des requêtes avec des clauses <code>IN</code> utilisant des index
+de type
+<a href="https://www.postgresql.org/docs/17/indexes-types.html#INDEXES-TYPES-BTREE">B-tree</a>,
+la méthode d&#39;indexation par défaut de PostgreSQL. De plus, il est maintenant
+possible de paralléliser la construction des index
+<a href="https://www.postgresql.org/docs/17/brin.html">BRIN</a>. PostgreSQL 17 comporte
+plusieurs améliorations dans la planification des requêtes, dont des
+optimisations sur les contraintes <code>NOT NULL</code> et des améliorations dans le
+traitement des <a href="https://www.postgresql.org/docs/17/queries-with.html">common table
+expressions</a> (<a href="https://www.postgresql.org/docs/17/queries-with.html">les
+requêtes<code>WITH</code></a>). Cette
+version prend en charge plus d&#39;instructions SIMD (Single Instruction/Multiple
+Data) pour accélérer les calculs, incluant l&#39;usage d&#39;AVX-512 pour la fonction
+<a href="https://www.postgresql.org/docs/17/functions-bitstring.html"><code>bit_count</code></a>.</p>
+<h3 id="am-lioration-pour-les-d-veloppeurs">Amélioration pour les développeurs</h3>
+<p>PostgreSQL a été la <a href="https://www.postgresql.org/about/news/postgresql-92-released-1415/">première base de données relationnelle à ajouter le support
+de JSON
+(2012)</a>, et
+PostgreSQL 17 complète son implantation du standard SQL/JSON.
+<a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-TABLE"><code>JSON_TABLE</code></a>
+est maintenant disponible dans PostgreSQL 17, permettant aux développeurs de
+convertir des données JSON dans une table standard PostgreSQL. PostgreSQL 17
+supporte maintenant les <a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-JSON-CREATION-TABLE">constructeurs
+SQL/JSON</a>
+(<code>JSON</code>, <code>JSON_SCALAR</code>, <code>JSON_SERIALIZE</code>) et <a href="https://www.postgresql.org/docs/17/functions-json.html#SQLJSON-QUERY-FUNCTIONS">les fonctions de
+requêtage</a>
+(<code>JSON_EXISTS</code>, <code>JSON_QUERY</code>, <code>JSON_VALUE</code>), offrant de nouvelles possibilités
+aux développeurs d&#39;interagir avec leurs données JSON. Cette version ajoute plus
+d&#39;<a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS">expressions
+<code>jsonpath</code></a>,
+avec un accent sur la conversion de données JSON vers des types de données
+natifs de PostgreSQL comme les types numériques, booléens, chaînes de caractères
+et date/heure.</p>
+<p>PostgreSQL 17 rajoute des fonctionnalités à la commande
+<a href="https://www.postgresql.org/docs/17/sql-merge.html"><code>MERGE</code></a>, utilisée pour les
+mises à jour conditionnelles, en incluant une clause <code>RETURNING</code> et la capacité
+de mettre à jour les
+<a href="https://www.postgresql.org/docs/17/sql-createview.html">vues</a>. En prime,
+PostgreSQL 17 dispose de nouvelles capacités de chargement et d&#39;export de
+données en masse pouvant aller jusqu&#39;à doubler la performance lors de l&#39;export
+de grandes lignes en utilisant la commande
+<a href="https://www.postgresql.org/docs/17/sql-copy.html"><code>COPY</code></a>. <code>COPY</code> bénéficie
+d&#39;améliorations de performance, lorsque les encodages de la source et de la
+destination correspondent et inclut une nouvelle option, <code>ON_ERROR</code>, qui permet
+la poursuite d&#39;un import même en cas d&#39;erreur d&#39;insertion.</p>
+<p>Cette version étend les fonctionnalités de gestion des données à la fois dans
+les partitions et dans les données distribuées sur des instances PostgreSQL
+distantes. PostgreSQL 17 supporte l&#39;utilisation de colonnes identité et des
+contraintes d&#39;exclusions sur des <a href="https://www.postgresql.org/docs/17/ddl-partitioning.html">tables
+partitionnées</a>. Les
+<a href="https://www.postgresql.org/docs/17/postgres-fdw.html">foreign data wrapper
+PostgreSQL</a>
+(<a href="https://www.postgresql.org/docs/17/postgres-fdw.html"><code>postgres_fdw</code></a>), qui
+sont utilisés pour exécuter des requêtes sur des instances PostgreSQL distantes,
+peuvent maintenant transmettre les sous-requêtes <code>EXISTS</code> et <code>IN</code> vers un
+serveur distant pour un traitement plus efficace.</p>
+<p>PostgreSQL 17 inclut un fournisseur de collation interne, indépendant de la
+plateforme et immutable permettant de garantir l&#39;immutabilité des résultats et
+fournit une sémantique de tri similaire à la collation <code>C</code>  mais avec l&#39;encodage
+<code>UTF-8</code> au lieu de <code>SQL_ASCII</code>. L&#39;utilisation de ce nouveau fournisseur de
+collation garantit que les résultats triés des requêtes basées sur du texte
+seront identiques, indépendamment de l&#39;environnement.</p>
+<h3 id="am-liorations-de-la-r-plication-logique-pour-la-haute-disponibilit-et-les-mises-jour-majeures">Améliorations de la réplication logique pour la haute disponibilité et les mises à jour majeures</h3>
+<p>La <a href="https://www.postgresql.org/docs/17/logical-replication.html">réplication
+logique</a> est
+utilisée pour transmettre des données en temps réel dans de nombreux cas
+d&#39;usage. Toutefois, avant cette version, une mise à jour majeure nécessitait de
+supprimer les <a href="https://www.postgresql.org/docs/17/logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT">slots de réplication
+logique</a>,
+ce qui obligeait à resynchroniser les données vers les souscripteurs après la
+mise à jour. À partir de PostgreSQL 17, les mises à jour utilisant la
+réplication logique seront simplifiées : elles ne nécessiteront plus de supprimer
+les slots de réplication logique.</p>
+<p>PostgreSQL 17 inclut désormais un contrôle des bascules sur incident pour la
+réplication logique, ce qui la rend plus résiliente dans les environnements
+hautement disponibles.</p>
+<p>Enfin, PostgreSQL 17 introduit l&#39;outil en ligne de commande
+<a href="https://www.postgresql.org/docs/17/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a>
+pour convertir un réplica physique en réplica logique.</p>
+<h3 id="autres-options-de-gestion-de-la-s-curit-et-des-op-rations-de-maintenance">Autres options de gestion de la sécurité et des opérations de maintenance</h3>
+<p>PostgreSQL 17 étend les possibilités de gestion du cycle de vie des systèmes de
+bases de données. Une nouvelle option TLS, <code>sslnegotiation</code>, est ajoutée, qui
+permet aux utilisateurs d&#39;effectuer une <!-- poignée de main--> négociation TLS
+directe lors de l&#39;utilisation
+d&#39;<a href="https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation">ALPN</a>
+(enregistrée comme <code>postgresql</code> dans le répertoire ALPN). PostgreSQL 17 ajoute
+le <a href="https://www.postgresql.org/docs/17/predefined-roles.html">rôle prédéfini</a>
+<code>pg_maintain</code>, qui donne les privilèges d&#39;effectuer des opérations de
+maintenance aux utilisateurs.</p>
+<p><a href="https://www.postgresql.org/docs/17/app-pgbasebackup.html"><code>pg_basebackup</code></a>,
+l&#39;utilitaire de sauvegarde intégré à PostgreSQL, supporte désormais les
+sauvegardes incrémentales et ajoute l&#39;utilitaire
+<a href="https://www.postgresql.org/docs/17/app-pgcombinebackup.html"><code>pg_combinebackup</code></a>
+pour reconstruire une sauvegarde complète.
+En complément, <a href="https://www.postgresql.org/docs/17/app-pgdump.html"><code>pg_dump</code></a>
+intègre une nouvelle option, appelée <code>--filter</code>, qui permet de préciser un
+fichier contenant la liste des objets à intégrer lors de la génération d&#39;un
+export.</p>
+<p>PostgreSQL 17 ajoute des améliorations aux fonctionnalités de supervision et
+d&#39;analyse.
+<a href="https://www.postgresql.org/docs/17/sql-explain.html"><code>EXPLAIN</code></a> présente
+maintenant le temps passé sur les lectures et écritures de blocs et intègre deux
+nouvelles options : <code>SERIALIZE</code> et <code>MEMORY</code>, utiles pour voir le temps passé
+dans la conversion de données lors des transmissions réseau, et la quantité de
+mémoire utilisée.
+PostgreSQL 17 indique désormais la <a href="https://www.postgresql.org/docs/17/progress-reporting.html#VACUUM-PROGRESS-REPORTING">progression du vacuum des
+index</a>. 
+Cette version ajoute la vue système
+<a href="https://www.postgresql.org/docs/17/view-pg-wait-events.html"><code>pg_wait_events</code></a>,
+qui combinée avec
+<a href="https://www.postgresql.org/docs/17/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>,
+donne plus d&#39;informations sur les raisons pour lesquelles une session active est
+en attente.</p>
+<h3 id="fonctionnalit-s-additionnelles">Fonctionnalités additionnelles</h3>
+<p>De nombreuses autres fonctionnalités ont été ajoutées à PostgreSQL 17. Elles
+peuvent aussi être utiles dans vos cas d&#39;usage. Vous pouvez vous référer aux
+<a href="https://www.postgresql.org/docs/17/release-17.html">notes de version</a> (en
+anglais) pour consulter la liste complète des fonctionnalités modifiées ou
+ajoutées.</p>
+<h3 id="-propos-de-postgresql">À propos de PostgreSQL</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> est le système de gestion de bases de
+données libre de référence. Sa communauté mondiale est composée de plusieurs
+milliers d’utilisateurs, utilisatrices, contributeurs, contributrices,
+entreprises et institutions. Le projet PostgreSQL, démarré il y a plus de 30 ans
+à l’université de Californie, à Berkeley, a atteint aujourd’hui un rythme de
+développement sans pareil. L’ensemble des fonctionnalités proposées est mature,
+et dépasse même celui des systèmes commerciaux leaders sur les fonctionnalités
+avancées, les extensions, la sécurité et la stabilité.</p>
+<h3 id="liens">Liens</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Téléchargements</a></li>
+<li><a href="https://www.postgresql.org/docs/17/release-17.html">Notes de version</a></li>
+<li><a href="https://www.postgresql.org/about/press/">Dossier de presse</a></li>
+<li><a href="https://www.postgresql.org/support/security/">Page sécurité</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">Politique des versions</a></li>
+<li><a href="https://twitter.com/postgresql">Suivre @postgresql sur Twitter</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">Dons</a></li>
+</ul>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2>À propos de PostgreSQL</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> est le système de gestion de bases de
+données libre de référence. Sa communauté mondiale est composée de plusieurs
+milliers d’utilisateurs, utilisatrices, contributeurs, contributrices,
+entreprises et institutions. Le projet PostgreSQL, démarré il y a plus de 30 ans
+à l’université de Californie, à Berkeley, a atteint aujourd’hui un rythme de
+développement sans pareil. L’ensemble des fonctionnalités proposées est mature,
+et dépasse même celui des systèmes commerciaux leaders sur les fonctionnalités
+avancées, les extensions, la sécurité et la stabilité.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="en-savoir-plus-sur-les-fonctionnalit-s">En savoir plus sur les fonctionnalités</h2>
+<p>Pour de plus amples informations sur les fonctionnalités ci-dessus et toutes
+les autres, vous pouvez consulter les liens suivants :</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/17/release-17.html">Notes de version</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">Matrice de fonctionnalités</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="o-t-l-charger">Où télécharger</h2>
+<p>Il existe plusieurs façons de télécharger PostgreSQL 17, dont :</p>
+<ul>
+<li>la <a href="https://www.postgresql.org/download/">page de téléchargement</a>, qui
+contient les installeurs et les outils pour
+<a href="https://www.postgresql.org/download/windows/">Windows</a>,
+<a href="https://www.postgresql.org/download/">Linux</a>,
+<a href="https://www.postgresql.org/download/macosx/">macOS</a>, et bien plus ;</li>
+<li>le <a href="https://www.postgresql.org/ftp/source/v17.0">code source</a>.</li>
+</ul>
+<p>D&#39;autres outils et extensions sont disponibles sur le <a href="http://pgxn.org/">PostgreSQL Extension
+Network</a>.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="documentation">Documentation</h2>
+<p>La documentation au format HTML et les pages de manuel sont installées avec
+PostgreSQL. La documentation peut également être <a href="https://www.postgresql.org/docs/17/">consultée en
+ligne</a> ou récupérée au format
+<a href="https://www.postgresql.org/files/documentation/pdf/17/postgresql-17-A4.pdf">PDF</a>.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="licence">Licence</h2>
+<p>PostgreSQL utilise la <a href="https://www.postgresql.org/about/licence/">licence
+PostgreSQL</a>, licence
+«&nbsp;permissive&nbsp;» de type BSD. Cette <a href="http://www.opensource.org/licenses/postgresql/">licence certifiée
+OSI</a> est largement appréciée
+pour sa flexibilité et sa compatibilité avec le monde des affaires, puisqu&#39;elle
+ne restreint pas l&#39;utilisation de PostgreSQL dans les applications propriétaires
+ou commerciales. Associée à un support proposé par de multiples sociétés et une
+propriété publique du code, sa licence rend PostgreSQL très populaire parmi les
+revendeurs souhaitant embarquer une base de données dans leurs produits sans
+avoir à se soucier des prix de licence, des verrous commerciaux ou modifications
+des termes de licence.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="contacts">Contacts</h2>
+<p>Site internet</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>Courriel</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a> ou</li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="images-et-logos">Images et logos</h2>
+<p>Postgres, PostgreSQL et le logo éléphant (Slonik) sont des marques déposées de
+l&#39;<a href="https://www.postgres.ca">Association de la Communauté PostgreSQL</a>. Si vous
+souhaitez utiliser ces marques, vous devez vous conformer à la <a href="https://www.postgresql.org/about/policies/trademarks/">politique de la
+marque</a>.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="support-professionnel-et-dons">Support professionnel et dons</h2>
+<p>PostgreSQL bénéficie du support de nombreuses sociétés, qui financent des
+développeurs et développeuses, fournissent l&#39;hébergement ou un support
+financier. Les plus fervents supporters sont listés sur la page des
+<a href="https://www.postgresql.org/about/sponsors/">sponsors</a>.</p>
+<p>Il existe également une très grande communauté de <a href="https://www.postgresql.org/support/professional_support/">sociétés offrant du support
+PostgreSQL</a>, du
+consultant indépendant aux entreprises multinationales.</p>
+<p>Les <a href="https://www.postgresql.org/about/donate/">dons</a> au PostgreSQL Global
+Development Group, ou à l&#39;une des associations à but non lucratif, sont acceptés
+et encouragés.</p>
+{% endblock presskit_corporate %}

@@ -1,0 +1,205 @@
+{% extends "pages/about/press/presskit17/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 17 Released!</h1>
+
+<p>
+  <strong>September 26, 2024</strong> - The
+  <a href="https://www.postgresql.org">PostgreSQL Global Development Group</a>
+  today announced the release of <a href="https://www.postgresql.org/docs/17/release-17.html">PostgreSQL 17</a>,
+  the latest version of the world's most advanced open source database.
+</p>
+
+<p>
+  PostgreSQL 17 builds on decades of open source development, improving its
+  performance and scalability while adapting to emergent data access and storage
+  patterns. This release of <a href="https://www.postgresql.org">PostgreSQL</a> adds
+  significant overall performance gains, including an overhauled memory management
+  implementation for vacuum, optimizations to storage access and improvements for
+  high concurrency workloads, speedups in bulk loading and exports, and query
+  execution improvements for indexes. PostgreSQL 17 has features that benefit
+  brand new workloads and critical systems alike, such as additions to the
+  developer experience with the SQL/JSON <code>JSON_TABLE</code> command, and
+  enhancements to logical replication that simplify management of high
+  availability workloads and major version upgrades.
+</p>
+
+<p>
+  "PostgreSQL 17 highlights how the global open source community, which drives
+  the development of PostgreSQL, builds enhancements that help users at all
+  stages of their database journey," said Jonathan Katz, a member of the
+  PostgreSQL core team. "Whether it's improvements for operating databases at
+  scale or new features that build on a delightful developer experience,
+  PostgreSQL 17 will enhance your data management experience."
+</p>
+
+<p>
+  PostgreSQL, an innovative data management system known for its reliability,
+  robustness, and extensibility, benefits from over 25 years of open source
+  development from a global developer community and has become the preferred open
+  source relational database for organizations of all sizes.
+</p>
+
+<h3 id="system-wide-performance-gains">System-wide performance gains</h3>
+<p>
+  The PostgreSQL <a href="https://www.postgresql.org/docs/17/routine-vacuuming.html">vacuum</a>
+  process is critical for healthy operations, requiring server instance resources
+  to operate. PostgreSQL 17 introduces a new internal memory structure for vacuum
+  that consumes up to 20x less memory. This improves vacuum speed and
+  also reduces the use of shared resources, making more available for your
+  workload.
+</p>
+<p>
+  PostgreSQL 17 continues to improve performance of its I/O layer. High
+  concurrency workloads may see up to 2x better write throughput due to
+  improvements with <a href="https://www.postgresql.org/docs/17/wal-intro.html">write-ahead log</a>
+  (<a href="https://www.postgresql.org/docs/17/wal-intro.html">WAL</a>)
+  processing. Additionally, the new streaming I/O interface speeds up sequential
+  scans (reading all the data from a table) and how quickly
+  <a href="https://www.postgresql.org/docs/17/sql-analyze.html"><code>ANALYZE</code></a>
+  can update planner statistics.
+</p>
+<p>
+  PostgreSQL 17 also extends its performance gains to query execution.
+  PostgreSQL 17 improves the performance of queries with <code>IN</code> clauses that use
+  <a href="https://www.postgresql.org/docs/17/indexes-types.html#INDEXES-TYPES-BTREE">B-tree</a>
+  indexes, the default index method in PostgreSQL. Additionally,
+  <a href="https://www.postgresql.org/docs/17/brin.html">BRIN</a> indexes now support
+  parallel builds. PostgreSQL 17 includes several improvements for query planning,
+  including optimizations for <code>NOT NULL</code> constraints, and improvements in
+  processing <a href="https://www.postgresql.org/docs/17/queries-with.html">common table expressions</a>
+  (<a href="https://www.postgresql.org/docs/17/queries-with.html"><code>WITH</code> queries</a>). This
+  release adds more SIMD (Single Instruction/Multiple Data) support for
+  accelerating computations, including using AVX-512 for the
+  <a href="https://www.postgresql.org/docs/17/functions-bitstring.html"><code>bit_count</code></a>
+  function.
+</p>
+
+<h3 id="further-expansion-of-a-robust-developer-experience">Further expansion of a robust developer experience</h3>
+<p>
+  PostgreSQL was the <a href="https://www.postgresql.org/about/news/postgresql-92-released-1415/">first relational database to add JSON support (2012)</a>,
+  and PostgreSQL 17 adds to its implementation of the SQL/JSON standard.
+  <a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-TABLE"><code>JSON_TABLE</code></a>
+  is now available in PostgreSQL 17, letting developers convert JSON data into a
+  standard PostgreSQL table. PostgreSQL 17 now supports <a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-JSON-CREATION-TABLE">SQL/JSON constructors</a>
+  (<code>JSON</code>, <code>JSON_SCALAR</code>, <code>JSON_SERIALIZE</code>) and
+  <a href="https://www.postgresql.org/docs/17/functions-json.html#SQLJSON-QUERY-FUNCTIONS">query functions</a>
+  (<code>JSON_EXISTS</code>, <code>JSON_QUERY</code>, <code>JSON_VALUE</code>), giving developers other ways of
+  interfacing with their JSON data. This release adds more
+  <a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS"><code>jsonpath</code> expressions</a>,
+  with an emphasis of converting JSON data to a native PostgreSQL data type,
+  including numeric, boolean, string, and date/time types.
+</p>
+
+<p>
+  PostgreSQL 17 adds more features to <a href="https://www.postgresql.org/docs/17/sql-merge.html"><code>MERGE</code></a>,
+  which is used for conditional updates, including a <code>RETURNING</code> clause and the
+  ability to update <a href="https://www.postgresql.org/docs/17/sql-createview.html">views</a>.
+  Additionally, PostgreSQL 17 has new capabilities for bulk loading and data
+  exporting, including up to a 2x performance improvement when exporting large rows
+  using the <a href="https://www.postgresql.org/docs/17/sql-copy.html"><code>COPY</code></a> command.
+  <code>COPY</code> performance also has improvements when the source and destination
+  encodings match, and includes a new option, <code>ON_ERROR</code>, that allows an import to
+  continue even if there is an insert error.
+</p>
+
+<p>
+  This release expands on functionality both for managing data in partitions and
+  data distributed across remote PostgreSQL instances. PostgreSQL 17 supports
+  using identity columns and exclusion constraints on
+  <a href="https://www.postgresql.org/docs/17/ddl-partitioning.html">partitioned tables</a>.
+  The <a href="https://www.postgresql.org/docs/17/postgres-fdw.html">PostgreSQL foreign data wrapper</a>
+  (<a href="https://www.postgresql.org/docs/17/postgres-fdw.html"><code>postgres_fdw</code></a>), used
+  to execute queries on remote PostgreSQL instances, can now push <code>EXISTS</code> and
+  <code>IN</code> subqueries to the remote server for more efficient processing.
+</p>
+
+<p>
+  PostgreSQL 17 also includes a built-in, platform independent, immutable
+  collation provider that's guaranteed to be immutable and provides similar
+  sorting semantics to the <code>C</code> collation except with <code>UTF-8</code> encoding rather than
+  <code>SQL_ASCII</code>. Using this new collation provider guarantees that your text-based
+  queries will return the same sorted results regardless of where you run
+  PostgreSQL.
+</p>
+
+<h3 id="logical-replication-enhancements-for-high-availability-and-major-version-upgrades">Logical replication enhancements for high availability and major version upgrades</h3>
+<p>
+  <a href="https://www.postgresql.org/docs/17/logical-replication.html">Logical replication</a>
+  is used to stream data in real-time across many use cases. However, prior to
+  this release, users who wanted to perform a major version upgrade would have to
+  drop <a href="https://www.postgresql.org/docs/17/logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT">logical replication slots</a>,
+  which requires resynchronizing data to subscribers after an upgrade. Starting
+  with upgrades from PostgreSQL 17, users don't have to drop logical replication
+  slots, simplifying the upgrade process when using logical replication.
+</p>
+<p>
+  PostgreSQL 17 now includes failover control for logical replication, making it
+  more resilient when deployed in high availability environments. Additionally,
+  PostgreSQL 17 introduces the
+  <a href="https://www.postgresql.org/docs/17/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a>
+  command-line tool for converting a physical replica into a new logical replica.
+</p>
+
+<h3 id="more-options-for-managing-security-and-operations">More options for managing security and operations</h3>
+<p>
+  PostgreSQL 17 further extends how users can manage the overall lifecycle of
+  their database systems. PostgreSQL has a new TLS option, <code>sslnegotiation</code>,
+  that lets users perform a direct TLS handshakes when using
+  <a href="https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation">ALPN</a>
+  (registered as <code>postgresql</code> in the ALPN directory). PostgreSQL 17
+  also adds the <code>pg_maintain</code> <a href="https://www.postgresql.org/docs/17/predefined-roles.html">predefined role</a>,
+  which gives users permission to perform maintenance operations.
+</p>
+<p>
+  <a href="https://www.postgresql.org/docs/17/app-pgbasebackup.html"><code>pg_basebackup</code></a>,
+  the backup utility included in PostgreSQL, now supports incremental backups
+  and adds the <a href="https://www.postgresql.org/docs/17/app-pgcombinebackup.html"><code>pg_combinebackup</code></a>
+  utility to reconstruct a full backup. Additionally,
+  <a href="https://www.postgresql.org/docs/17/app-pgdump.html"><code>pg_dump</code></a>
+  includes a new option called <code>--filter</code> that lets you select what
+  objects to include when generating a dump file.
+</p>
+<p>
+  PostgreSQL 17 also includes enhancements to monitoring and analysis features.
+  <a href="https://www.postgresql.org/docs/17/sql-explain.html"><code>EXPLAIN</code></a>
+  now shows the time spent for local I/O block reads and writes, and includes
+  two new options: <code>SERIALIZE</code> and <code>MEMORY</code>, useful for
+  seeing the time spent in data conversion for network transmission, and how
+  much memory was used. PostgreSQL 17 now reports the
+  <a href="https://www.postgresql.org/docs/17/progress-reporting.html#VACUUM-PROGRESS-REPORTING">progress of vacuuming indexes</a>,
+  and adds the <a href="https://www.postgresql.org/docs/17/view-pg-wait-events.html"><code>pg_wait_events</code></a>
+  system view that, when combined with <a href="https://www.postgresql.org/docs/17/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>,
+  gives more insight into why an active session is waiting.
+</p>
+
+<h3 id="additional-features">Additional Features</h3>
+<p>
+  Many other new features and improvements have been added to PostgreSQL 17 that
+  may also be helpful for your use cases. Please see the
+  <a href="https://www.postgresql.org/docs/17/release-17.html">release notes</a>
+  for a complete list of new and changed features.
+</p>
+
+<h3 id="about-postgresql">About PostgreSQL</h3>
+<p>
+  <a href="https://www.postgresql.org">PostgreSQL</a> is the world's most
+  advanced open source database, with a global community of thousands of users,
+  contributors, companies and organizations. Built on over 35 years of
+  engineering, starting a the University of California, Berkeley, PostgreSQL has
+  continued with an unmatched pace of development. PostgreSQL's mature feature
+  set not only matches top proprietary database systems, but exceeds them in
+  advanced database features, extensibility, security, and stability.
+</p>
+
+<h3 id="links">Links</h3>
+<ul>
+  <li><a href="https://www.postgresql.org/download/">Download</a></li>
+  <li><a href="https://www.postgresql.org/docs/17/release-17.html">Release Notes</a></li>
+  <li><a href="https://www.postgresql.org/about/press/">Press Kit</a></li>
+  <li><a href="https://www.postgresql.org/support/security/">Security Page</a></li>
+  <li><a href="https://www.postgresql.org/support/versioning/">Versioning Policy</a></li>
+  <li><a href="https://twitter.com/postgresql">Follow @postgresql on Twitter</a></li>
+  <li><a href="https://www.postgresql.org/about/donate/">Donate</a></li>
+</ul>
+{% endblock presskit_content %}

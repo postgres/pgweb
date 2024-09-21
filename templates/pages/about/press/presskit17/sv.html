@@ -1,0 +1,255 @@
+{% extends "pages/about/press/presskit17/base.html" %}
+
+{% block presskit_content %}
+<p><strong>26 September 2024</strong> - <a href="https://www.postgresql.org">PostgreSQL Global Development Group</a>
+presenterade idag <a href="https://www.postgresql.org/docs/17/release-17.html">PostgreSQL 17</a>,
+den senaste versionen av världens mest avancerade databas byggd med öppen källkod.</p>
+<p>PostgreSQL 17 bygger vidare på årtionden av utveckling med öppen källkod, och
+fortsätter förbättra prestandan och skalbarheten samtidigt som databasen
+anpassas för nya användningsmönster och trender inom databashantering. Denna
+versionen av <a href="https://www.postgresql.org">PostgreSQL</a> har betydligt förbättrad
+systemprestanda, bland annat genom optimerad minneshantering för vacuum,
+optimering av I/O operationer och parallellisering, förbättringar för
+import av data samt bättre utnyttjande av index vid
+databasfrågor.  PostgreSQL 17 passar de flesta typer av användningsmönster, och
+adderar nya funktioner för utvecklare som SQL/JSON <code>JSON_TABLE</code> och
+förbättringar av logisk replikering för att ge högre tillgänglighet och
+förenklad uppgradering.</p>
+<p>&quot;PostgreSQL 17 visar hur den globala gruppen utvecklare, vilka ligger bakom 
+utvecklingen av PostgreSQL, fortsätter att förbättra och förenkla för alla
+databasanvändare&quot;, säger Jonathan Katz, ledamot i PostgreSQL core team.
+&quot;Oavsett om det är förenkling av storskalig databasdrift eller nya funktioner
+för förenkla för utvecklare, så kommer PostgreSQL 17 förbättra din organisations
+datahantering.&quot;</p>
+<p>PostgreSQL är känt för pålitlighet, stabilitet och tillförlitlighet. Med mer än
+25 års utveckling med öppen källkod av en global grupp av utvecklare har
+PostgreSQL blivit den mest populära relationsdatabasen byggd på öppen källkod
+för organisationer av alla storlekar.</p>
+<h3 id="prestandaf-rb-ttringar">Prestandaförbättringar</h3>
+<p><a href="https://www.postgresql.org/docs/17/routine-vacuuming.html">Vacuum</a> är en
+kritisk komponent för PostgreSQL i produktion.  I PostgreSQL 17 har
+minneshanteringen för vacuum effektiviserats och använder nu upp till 20 gånger
+mindre minne. Detta gör vacuum snabbare samtidigt som det frigör mer 
+systemresurser för databasfrågor.</p>
+<p>PostgreSQL 17 har också förbättrad prestanda för I/O-operationer, upp till
+fördubblad prestanda vid skrivning tack vare förbättringar av
+<a href="https://www.postgresql.org/docs/17/wal-intro.html">write-ahead log</a>
+(<a href="https://www.postgresql.org/docs/17/wal-intro.html">WAL</a>) hantering.</p>
+<p>Utöver det finns också ny funktionalitet för strömmande I/O vilket gör
+sekventiell läsning av tabeller snabbare samt effektiviserar uppdatering av
+statistik med <a href="https://www.postgresql.org/docs/17/sql-analyze.html"><code>ANALYZE</code></a>.</p>
+<p>Prestanda för databasfrågor har också förbättrats i PostgreSQL 17. Frågor med
+<code>IN</code> satser som använder
+<a href="https://www.postgresql.org/docs/17/indexes-types.html#INDEXES-TYPES-BTREE">B-tree</a>
+index, vilket är standard indexmetod i PostgreSQL, är nu snabbare.
+<a href="https://www.postgresql.org/docs/17/brin.html">BRIN</a> index kan nu byggas med
+parallella processer och frågeplanering har förbättrats avsevärt. Bland annat
+har <code>NOT NULL</code> begränsningar och 
+<a href="https://www.postgresql.org/docs/17/queries-with.html">common table expressions</a>
+(<a href="https://www.postgresql.org/docs/17/queries-with.html"><code>WITH</code> frågor</a>) optimerats.
+Denna versionen utökar också användningen av CPU-acceleration med SIMD (Single
+Instruction/Multiple Data), bland annat med AVX-512 för
+<a href="https://www.postgresql.org/docs/17/functions-bitstring.html"><code>bit_count</code></a>
+funktionen.</p>
+<h3 id="utvecklarupplevelse">Utvecklarupplevelse</h3>
+<p>PostgreSQL var 2012
+<a href="https://www.postgresql.org/about/news/postgresql-92-released-1415/">den första relationsdatabasen att addera stöd för JSON</a>,
+och PostgreSQL 17 fortsätter att utöka SQL/JSON stödet.
+<a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-TABLE"><code>JSON_TABLE</code></a>
+låter utvecklare konvertera JSON data till en normal databas tabell. PostgreSQL
+17 utökar stöd för att skapa
+<a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-JSON-CREATION-TABLE">SQL/JSON</a>
+med standardiserade funktioner (<code>JSON</code>, <code>JSON_SCALAR</code>, <code>JSON_SERIALIZE</code>), och
+skriva databasfrågor med
+<a href="https://www.postgresql.org/docs/17/functions-json.html#SQLJSON-QUERY-FUNCTIONS">SQL/JSON funktioner</a>
+(<code>JSON_EXISTS</code>, <code>JSON_QUERY</code>, <code>JSON_VALUE</code>). Detta ger utvecklare större
+flexibilitet i hur data i JSON format kan användas.  Fler
+<a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS"><code>jsonpath</code> operationer</a>,
+stöds också, speciellt för konvertering av JSON data till PostgreSQL&#39;s datatyper
+för numeriska värden, datum/tid, strängar m.fl.</p>
+<p>Stödet för <a href="https://www.postgresql.org/docs/17/sql-merge.html"><code>MERGE</code></a>, vilken
+används för villkorade uppdateringar, utökas med en <code>RETURNING</code> sats samt
+funktion för att uppdatera
+<a href="https://www.postgresql.org/docs/17/sql-createview.html">databasvyer</a>.
+PostgreSQL 17 har också nya funktioner för import eller export av stora volymer
+med upp fördubblad prestanda i
+<a href="https://www.postgresql.org/docs/17/sql-copy.html"><code>COPY</code></a> operationen. <code>COPY</code>
+kan också känna av om datakällan har samma kodning som destinationen och kan
+optimera för detta. Funktionen <code>ON_ERROR</code> medger fortsatt import av data även om
+det uppstår fel vid inläsning.</p>
+<p>PostgreSQL 17 innehåller också förbättringar för hantering av data som fördelats
+i partitioner samt data distribuerad över flera PostgreSQL instanser på
+fjärrservrar.
+Identity kolumner och exclusion constraints stöds i och med PostgreSQL 17 för
+<a href="https://www.postgresql.org/docs/17/ddl-partitioning.html">partitionerade tabeller</a>.
+<a href="https://www.postgresql.org/docs/17/postgres-fdw.html">PostgreSQL foreign data wrapper</a>
+(<a href="https://www.postgresql.org/docs/17/postgres-fdw.html"><code>postgres_fdw</code></a>), vilken
+används för att exekvera frågor på andra PostgreSQL instanser, kan nu flytta
+hantering av <code>EXISTS</code> och <code>IN</code> satser till fjärrservern för effektivare
+databasfrågor.</p>
+<p>PostgreSQL 17 inkluderar också en inbyggd plattformsoberoende sorteringsordning
+som garanterar konsekvent och oförändrad sortering med <code>UTF-8</code> stöd liknande
+hur <code>C</code> sortering fungerar för <code>SQL_ASCII</code>. Med denna kommer
+databasfrågor över text-data returnera samma sorteringsordning oavsett var
+PostgreSQL körs.</p>
+<h3 id="f-rb-ttring-av-logisk-replikering-f-r-h-g-tillg-nglighet-och-systemuppgradering">Förbättring av logisk replikering för hög tillgänglighet och systemuppgradering</h3>
+<p><a href="https://www.postgresql.org/docs/17/logical-replication.html">Logisk replikering</a>
+kan användas för att strömma data i realtid för en mängd användningsområden. Före
+denna versionen behövde användare ta bort
+<a href="https://www.postgresql.org/docs/17/logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT">slots för logisk replikering</a>
+vid uppgradering mellan huvudversioner, vilket krävde omsynkronisering av data
+mellan prenumeranter efter uppgraderingen. I och med uppgraderingar från 
+PostgreSQL 17 behöver dessa inte längre tas bort, vilket förenklar processen.</p>
+<p>PostgreSQL 17 inkluderar kontroll vid failover för logisk replikering vilket
+gör det enklare att använda i miljöer vilka kräver hög tillgänglighet.
+Kommandoradsverktyget
+<a href="https://www.postgresql.org/docs/17/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a>
+har också lagts till vilket används för att konvertera en fysiskt replikerad
+nod till en logiskt replikerad nod.</p>
+<h3 id="ut-kad-funktionalitet-f-r-hantering-av-s-kerhet-och-drift">Utökad funktionalitet för hantering av säkerhet och drift</h3>
+<p>PostgreSQL 17 har vidareutvecklats för att ge utökad flexibilitet vid drift.
+En ny TLS parameter, <code>sslnegotiation</code>,
+har adderats vilken låter användare direkt utföra en TLS anslutning vid användning av
+<a href="https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation">ALPN</a>
+(registrerat som <code>postgresql</code> i ALPN katalogen).
+PostgreSQL 17 har också utökats med den 
+<a href="https://www.postgresql.org/docs/17/predefined-roles.html">fördefinierade rollen</a>,
+<code>pg_maintain</code> vilken ger användare rättigheter att utföra olika former av
+underhållsarbeten.</p>
+<p><a href="https://www.postgresql.org/docs/17/app-pgbasebackup.html"><code>pg_basebackup</code></a>,
+säkerhetskopieringsverktyget som ingår i PostgreSQL, stödjer nu inkrementell
+säkerhetskopiering och har utökats med
+<a href="https://www.postgresql.org/docs/17/app-pgcombinebackup.html"><code>pg_combinebackup</code></a>,
+ett verktyg för att rekonstruera en full säkerhetskopia. Utöver det har
+<a href="https://www.postgresql.org/docs/17/app-pgdump.html"><code>pg_dump</code></a> en ny funktion,
+<code>--filter</code>, vilken ger större kontroll över vilka objekt som ska ingå i en
+databasdump.</p>
+<p>PostgreSQL 17 har också förbättrats gällande övervakning och systemanalys.
+<a href="https://www.postgresql.org/docs/17/sql-explain.html"><code>EXPLAIN</code></a> visar nu tid
+spenderad för läsning och skrivning; och har två nya parametrar <code>SERIALIZE</code> och
+<code>MEMORY</code> vilka är användbara för att se hur mycket tid som spenderats med att
+konvertera och skicka data över nätverket, samt hur mycket minne som använts.
+I PostgreSQL 17 visas nu hur långt
+<a href="https://www.postgresql.org/docs/17/progress-reporting.html#VACUUM-PROGRESS-REPORTING">vacuum av index</a>
+har kommit, och den nya systemvyn
+<a href="https://www.postgresql.org/docs/17/view-pg-wait-events.html"><code>pg_wait_events</code></a>
+kan i kombination med
+<a href="https://www.postgresql.org/docs/17/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>
+användas för att ta reda på varför aktiva sessioner väntar.</p>
+<h3 id="mer-f-rb-ttringar">Mer förbättringar</h3>
+<p>Mycket fler förbättringar och fler nya funktion har också adderats till
+PostgreSQL 17 för att bättre hantera alla användningsfall.  Se 
+<a href="https://www.postgresql.org/docs/17/release-17.html">listan över nyheter</a> för
+en överblick över alla nya och förbättrade funktioner.</p>
+<h3 id="om-postgresql">Om PostgreSQL</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> är världens mest avancerade databas
+byggd på öppen källkod, med tusentals användare, utvecklare, företag och 
+organisationer världen över. Med över 35 års utveckling sedan starten på
+University of California, Berkeley, har PostgreSQL fortsatt utvecklas med
+en enastående fart. PostgreSQL:s väl etablerade funktioner är inte bara
+jämförbara med proprietära databassystem, utan överträffar dem när det gäller
+avancerade databasfunktioner, utbyggbarhet och modularitet, säkerhet och
+stabilitet.</p>
+<h3 id="l-nkar">Länkar</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Nerladdning</a></li>
+<li><a href="https://www.postgresql.org/docs/17/release-17.html">Nyheter i version 17</a></li>
+<li><a href="https://www.postgresql.org/about/press/">Press Kit</a></li>
+<li><a href="https://www.postgresql.org/support/security/">Säkerhet</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">Versionspolicy</a></li>
+<li><a href="https://twitter.com/postgresql">Följ @postgresql</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">Donationer</a></li>
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2>Om PostgreSQL</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> är världens mest avancerade databas
+byggd på öppen källkod, med tusentals användare, utvecklare, företag och 
+organisationer världen över. Med över 35 års utveckling sedan starten på
+University of California, Berkeley, har PostgreSQL fortsatt utvecklas med
+en enastående fart. PostgreSQL:s väl etablerade funktioner är inte bara
+jämförbara med proprietära databassystem, utan överträffar dem när det gäller
+avancerade databasfunktioner, utbyggbarhet och modularitet, säkerhet och
+stabilitet.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="f-rdjupad-information">Fördjupad information</h2>
+<p>För ingående förklaringar och dokumentation av de ovan nämnda funktionerna, och
+mer, se följande resurser:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/17/release-17.html">Nyheter i version 17</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">Funktioner per version</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="nerladdning">Nerladdning</h2>
+<p>PostgreSQL 17 kan laddas ner på ett flertal olika sätt, bland annat:</p>
+<ul>
+<li>De <a href="https://www.postgresql.org/download/">officiella nerladdningarna</a>,
+vilka tillhandahåller installationspaket för
+<a href="https://www.postgresql.org/download/windows/">Windows</a>,
+<a href="https://www.postgresql.org/download/linux/">Linux</a>,
+<a href="https://www.postgresql.org/download/macosx/">macOS</a> med flera.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v17.0">Källkod</a></li>
+</ul>
+<p>Andra verktyg och tilläggsmoduler finns tillgängliga via
+<a href="http://pgxn.org/">PostgreSQL Extension Network</a>.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="dokumentation">Dokumentation</h2>
+<p>PostgreSQL 17 levereras med dokumentation i HTML-format samt man-sidor, och
+dokumentationen kan också läsas online i både
+<a href="https://www.postgresql.org/docs/17/">HTML-format</a> och som
+<a href="https://www.postgresql.org/files/documentation/pdf/17/postgresql-17-A4.pdf">PDF</a>.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="licens">Licens</h2>
+<p>PostgreSQL är licensierad med <a href="https://www.postgresql.org/about/licence/">PostgreSQL Licensen</a>,
+en BSD-liknande &quot;tillåtande&quot; licens.
+Denna <a href="http://www.opensource.org/licenses/postgresql/">OSI-certifierade licens</a>
+anses flexibel och företagsvänlig eftersom den inte begränsar användningen av
+PostgreSQL i kommersiella eller proprietära applikationer. Licensen,
+tillsammans med brett stöd från många företag och ett publikt ägande av koden,
+gör att PostgreSQL är väldigt populär bland tillverkare som vill bygga in en
+databas i sin produkt utan att riskera avgifter, inlåsning eller förändrade
+licensvillkor.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="kontaktinformation">Kontaktinformation</h2>
+<p>Hemsida</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>E-post</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="bilder-och-logotyper">Bilder och logotyper</h2>
+<p>Postgres, PostgreSQL, och elefantlogotypen (Slonik) är av
+<a href="https://www.postgres.ca">PostgreSQL Community Association</a> registrerade
+varumärken. Användning av dess varumärken måste följa dess
+<a href="https://www.postgresql.org/about/policies/trademarks/">varumärkespolicy</a>.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="kommersiell-support">Kommersiell support</h2>
+<p>PostgreSQL projektet stöttas av ett stort antal företag som sponsrar utvecklare,
+erbjuder infrastruktur och ger finansiellt stöd. Se listan över PostgreSQL:s
+<a href="https://www.postgresql.org/about/sponsors/">sponsors</a> för mer information.</p>
+<p>Det finns också många
+<a href="https://www.postgresql.org/support/professional_support/">företag som säljer tjänster kring PostgreSQL</a>,
+allt från små konsultbolag till multinationella företag.</p>
+<p>För att ge ett ekonomiskt bidrag till PostgreSQL Global Development Group eller
+till en av de officiellt erkända ideella organisationerna, se sidan för
+<a href="https://www.postgresql.org/about/donate/">donationer</a> för mer information.</p>
+{% endblock presskit_corporate %}

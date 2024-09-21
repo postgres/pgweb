@@ -1,0 +1,100 @@
+{% extends "pages/about/press/presskit17/base.html" %}
+
+{% block presskit_content %}
+<p><strong>2024年9月26日</strong> - <a href="https://www.postgresql.org">PostgreSQL全球开发组</a>宣布<a href="(https://www.postgresql.org/docs/17/release-17.html">PostgreSQL 17</a>)正式发布，作为世界上最先进的开源数据库，PostgreSQL 17 是目前的最新版本。</p>
+<p>PostgreSQL 17在数十年的开源开发的基础上，提升了其性能和可扩展性，同时适应新兴的数据访问和存储模式。这个版本的<a href="https://www.postgresql.org">PostgreSQL</a>在整体性能上有显著提升，包括对vacuum的内存管理实现进行了全面改进，优化了存储访问和高并发工作负载，加快了批量加载和导出速度，以及改进了索引的查询执行。PostgreSQL 17 引入了一系列新特性，这些特性既适用于全新的工作负载，也能满足关键系统的需求，例如通过SQL/JSON的 <code>JSON_TABLE</code> 命令改善了开发者体验，以及增强了逻辑复制功能，简化了高可用工作负载和主要版本升级的管理。</p>
+<p>“PostgreSQL 17 突出展示了全球开源社区（推动PostgreSQL开发的力量）如何帮助不同阶段数据库用户构建增强功能”， PostgreSQL 核心团队成员 Jonathan Katz 说，“无论是提升大规模数据库的操作性能，还是使开发者拥有愉悦体验的新特性，PostgreSQL 17 都将提升您的数据管理体验。”</p>
+<p>PostgreSQL是一个创新的数据管理系统，以其可靠性和健壮性著称，得益于全球开发者社区超过25年的开源开发，已经成为各种规模组织的首选开源关系型数据库。</p>
+<h3 id="-">系统级性能提升</h3>
+<p>PostgreSQL的<a href="https://www.postgresql.org/docs/17/routine-vacuuming.html">vacuum</a>进程对于数据库的健康运行至关重要，它需要消耗服务器实例的资源来执行操作。PostgreSQL 17 引入了一种新的vacuum内部内存结构用于 vacuum 操作，最高可以减少20倍内存消耗。这不仅提高了 vacuum 的执行速度，还减少了对共享资源的使用，从而为您的工作负载腾出更多资源。</p>
+<p>PostgreSQL 17 继续提升 I/O 层的性能。由于改进了<a href="https://www.postgresql.org/docs/17/wal-intro.html">预写日志</a>(<a href="https://www.postgresql.org/docs/17/wal-intro.html">WAL</a>)处理，高并发工作负载的写入吞吐量提升最多高达2倍。此外，新的流式 I/O 接口加快了顺序扫描（读取表中所有数据）和<a href="https://www.postgresql.org/docs/17/sql-analyze.html"><code>ANALYZE</code></a>更新查询规划器统计信息的速度。</p>
+<p>PostgreSQL 17还将其性能提升扩展到查询执行。PostgreSQL 17改进了使用<a href="https://www.postgresql.org/docs/17/indexes-types.html#INDEXES-TYPES-BTREE">B-tree</a>索引（PostgreSQL 中的默认索引方法）的 <code>IN</code> 子句查询的性能。此外，<a href="https://www.postgresql.org/docs/17/brin.html">BRIN</a>索引现在支持并行构建。PostgreSQL 17 引入多个查询规划方面的改进，包括对 <code>NOT NULL</code> 约束的优化以及对<a href="https://www.postgresql.org/docs/17/queries-with.html">公共表表达式</a>（<a href="https://www.postgresql.org/docs/17/queries-with.html"><code>WITH</code>查询</a>）的改进。这个版本增加了更多的SIMD（单指令/多数据）支持以加速计算，包括使用AVX-512加速<a href="https://www.postgresql.org/docs/17/functions-bitstring.html"><code>bit_count</code></a> 函数。</p>
+<h3 id="-">进一步提升开发者体验</h3>
+<p>PostgreSQL 是<a href="https://www.postgresql.org/about/news/postgresql-92-released-1415/">第一个添加JSON支持的关系型数据库（2012年）</a>，而 PostgreSQL 17 进一步完善了 SQL/JSON 标准的实现。现在，PostgreSQL 17 中引入了<a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-TABLE"><code>JSON_TABLE</code></a>，允许开发者将 JSON 数据转换为标准的 PostgreSQL 表。此外，PostgreSQL 17 现在支持 <a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-JSON-CREATION-TABLE">SQL/JSON 构造函数</a>(<code>JSON</code>, <code>JSON_SCALAR</code>, <code>JSON_SERIALIZE</code>) 和<a href="https://www.postgresql.org/docs/17/functions-json.html#SQLJSON-QUERY-FUNCTIONS">查询函数</a>(<code>JSON_EXISTS</code>, <code>JSON_QUERY</code>, <code>JSON_VALUE</code>)，为开发者提供更多与 JSON 数据交互的方式。此版本还增加了更多的<a href="https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS"><code>jsonpath</code> 表达式</a>，重点是将 JSON 数据转换为原生PostgreSQL数据类型，包括数值、布尔值、字符串和日期/时间类型。</p>
+<p>PostgreSQL 17 为<a href="https://www.postgresql.org/docs/17/sql-merge.html"><code>MERGE</code>命令</a>添加了更多功能，包括 <code>RETURNING</code> 子句和更新<a href="https://www.postgresql.org/docs/17/sql-createview.html">视图</a>的能力，这用于条件更新。此外，PostgreSQL 17 在批量加载和数据导出方面增加了新功能，包括使用<a href="https://www.postgresql.org/docs/17/sql-copy.html"><code>COPY</code></a>命令导出大行时性能提升高达2倍。</p>
+<p>当源编码和目标编码匹配时，<code>COPY</code>性能也有所提升，并且包括一个新选项<code>ON_ERROR</code>，允许在插入错误时继续导入。</p>
+<p>这个版本扩展了管理分区数据和分布在远程PostgreSQL实例上的数据的功能。PostgreSQL 17 支持在<a href="https://www.postgresql.org/docs/17/ddl-partitioning.html">分区表</a>上使用身份列和排除约束。用于在远程PostgreSQL实例上执行查询的PostgreSQL<a href="(https://www.postgresql.org/docs/17/postgres-fdw.html">外部数据封装器</a>)(<a href="https://www.postgresql.org/docs/17/postgres-fdw.html"><code>postgres_fdw</code></a>)现在可以将 <code>EXISTS</code> 和 <code>IN</code> 子查询下推到远程服务器以进行更高效的处理。</p>
+<p>PostgreSQL 17 还包括一个内置的、跨平台的、保证不可变的排序规则提供程序。它提供类似于 <code>C</code> 排序规则的排序语义，但使用的是 <code>UTF-8</code> 编码而非 <code>SQL_ASCII</code>。通过使用这个新的排序规则提供程序，可以确保无论 PostgreSQL 运行在哪，基于文本的查询都能返回相同的排序结果。</p>
+<h3 id="-">高可用环境和主版本升级时的逻辑复制增强功能</h3>
+<p><a href="https://www.postgresql.org/docs/17/logical-replication.html">逻辑复制</a>用于在许多场景下实时流式传输数据。然而，在此版本之前，想要执行主版本升级的用户必须删除<a href="https://www.postgresql.org/docs/17/logical-replication-subscription.html#LOGICAL-REPLICATION-SUBSCRIPTION-SLOT">逻辑复制槽</a>，这需要在升级后重新同步订阅者的数据。从PostgreSQL 17开始，用户无需删除逻辑复制槽，从而简化了使用逻辑复制时的升级过程。</p>
+<p>PostgreSQL 17 现在包括对逻辑复制的故障切换控制，使其在高可用环境中更加可靠。此外，PostgreSQL 17 引入了 <a href="https://www.postgresql.org/docs/17/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a>命令行工具，用于在使用物理复制的副本从库上创建逻辑复制。</p>
+<h3 id="-">更多安全性和操作管理选项</h3>
+<p>PostgreSQL 17进一步扩展了用户管理其数据库系统整个生命周期的方式。PostgreSQL引入了一个新的 TLS 选项
+<code>sslnegotiation</code>，允许用户在使用<a href="https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation">ALPN</a>时直接进行TLS握手（在ALPN目录中注册为<code>postgresql</code>）。
+PostgreSQL 17还增加了<code>pg_maintain</code><a href="https://www.postgresql.org/docs/17/predefined-roles.html">预定义角色</a>，该角色授予用户执行维护操作的权限。</p>
+<p>PostgreSQL自带的备份工具<a href="https://www.postgresql.org/docs/17/app-pgbasebackup.html"><code>pg_basebackup</code></a>现在支持增量备份，并添加了<a href="https://www.postgresql.org/docs/17/app-pgcombinebackup.html"><code>pg_combinebackup</code></a>工具来重建完整备份。此外，<a href="https://www.postgresql.org/docs/17/app-pgdump.html"><code>pg_dump</code></a>增加了一个新选项 <code>--filter</code>，允许用户在生成转储文件时选择要包含的对象。</p>
+<p>PostgreSQL 17还增强了监控和分析功能。<a href="https://www.postgresql.org/docs/17/sql-explain.html"><code>EXPLAIN</code></a>现在显示本地 I/O 块读取和写入所花费的时间，并包括两个新选项：<code>SERIALIZE</code>和<code>MEMORY</code>，对于查看用于网络传输的数据转换所花费的时间以及使用了多少内存很有用。PostgreSQL 17现在报告<a href="https://www.postgresql.org/docs/17/progress-reporting.html#VACUUM-PROGRESS-REPORTING">索引清理的进度</a>，并添加了 <a href="https://www.postgresql.org/docs/17/view-pg-wait-events.html"><code>pg_wait_events</code></a> 系统视图，结合<a href="https://www.postgresql.org/docs/17/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW"><code>pg_stat_activity</code></a>可以更深入了解活动会话为什么在等待。</p>
+<h3 id="-">其他功能</h3>
+<p>PostgreSQL 17 还新增了许多其他新功能和改进，这些可能对您的使用场景有所帮助。请查看 <a href="https://www.postgresql.org/docs/17/release-17.html">发布说明</a> 以获取完整的新功能和更改列表。</p>
+<h3 id="-postgresql">关于PostgreSQL</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a>是世界上最先进的开源数据库，它的全球社区是一个拥有数以千计的用户、贡献者、公司和组织组成的。PostgreSQL起源于加利福尼亚大学伯克利分校，已经有超过35年的历史，并且以无与伦比的速度持续发展。PostgreSQL成熟的特性不仅与顶级商业数据库系统匹配，而且在高级数据库功能、可扩展性、安全性和稳定性方面超过了它们。</p>
+<h3 id="-">链接</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">下载</a></li>
+<li><a href="https://www.postgresql.org/docs/17/release-17.html">发行说明</a></li>
+<li><a href="https://www.postgresql.org/about/press/">新闻资料</a></li>
+<li><a href="https://www.postgresql.org/support/security/">安全</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">版本政策</a></li>
+<li><a href="https://twitter.com/postgresql">关注@postgresql</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">捐赠</a></li>
+</ul>
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2 id="关于postgresql">关于PostgreSQL</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a>是世界上最先进的开源数据库，它的全球社区是一个拥有数以千计的用户、贡献者、公司和组织组成的。PostgreSQL起源于加利福尼亚大学伯克利分校，已经有超过35年的历史，并且以无与伦比的速度持续发展。PostgreSQL成熟的特性不仅与顶级商业数据库系统匹配，而且在高级数据库功能、可扩展性、安全性和稳定性方面超过了它们。</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="-">更多功能信息</h2>
+<p>有关上述功能和其他信息的解释，请参考以下资源:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/17/release-17.html">发行说明</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">功能列表</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="-">下载地址</h2>
+<p>您可以通过多种方式下载PostgreSQL 17，包括：</p>
+<ul>
+<li><a href="https://www.postgresql.org/download/">官方下载页面</a>，包含用于<a href="https://www.postgresql.org/download/windows/">Windows</a>、<a href="https://www.postgresql.org/download/linux/">Linux</a>、<a href="https://www.postgresql.org/download/macosx/">macOS</a>等多个平台的安装程序和工具。</li>
+<li><a href="https://www.postgresql.org/ftp/source/v17.0">源代码</a></li>
+</ul>
+<p>其他工具和扩展可在<a href="http://pgxn.org/">PostgreSQL Extension Network</a>上找到。</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="-">文档</h2>
+<p>PostgreSQL 17 附带了HTML文档和手册，您还可以在线浏览<a href="https://www.postgresql.org/docs/17/">HTML</a>和<a href="https://www.postgresql.org/files/documentation/pdf/17/postgresql-17-US.pdf">PDF</a>格式的文档。</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="-">许可证</h2>
+<p>PostgreSQL使用<a href="https://www.postgresql.org/about/licence/">PostgreSQL 许可证</a>，这是一个类似 BSD 的“宽松”许可证。这个<a href="http://www.opensource.org/licenses/postgresql/">OSI认证的许可证</a>因其灵活性和适用于商业环境而受到广泛赞誉，因为它不限制在商业和专有应用程序中使用PostgreSQL。加上多公司支持和代码的公共所有权，该许可证使PostgreSQL非常受欢迎，因为供应商希望在自己的产品中嵌入数据库，而无需担心费用、供应商锁定或许可条款变更。</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="-">联系方式</h2>
+<p>网址</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>邮箱</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="-">图像和标志</h2>
+<p>Postgres、PostgreSQL和大象标志（Slonik）都是<a href="https://www.postgres.ca">PostgreSQL 社区协会</a>的注册商标。如果您希望使用这些标志，您必须遵守<a href="https://www.postgresql.org/about/policies/trademarks/">商标政策</a>。</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="-">企业支持和捐赠</h2>
+<p>PostgreSQL得到了许多公司的支持，他们赞助开发人员，提供托管资源，并给予我们财务支持。请查看我们的<a href="https://www.postgresql.org/support/professional_support/">赞助商</a>页面，了解这些项目的支持者。</p>
+<p>还有大量<a href="https://www.postgresql.org/support/professional_support/">提供PostgreSQL支持的公司</a>，包括个人顾问和跨国公司。</p>
+<p>如果您希望对PostgreSQL全球开发组或其中一个公认的社群非营利组织进行捐赠，请访问我们的<a href="https://www.postgresql.org/about/donate/">捐赠</a>页面。</p>
+{% endblock presskit_corporate %}
