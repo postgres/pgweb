@@ -1183,6 +1183,20 @@ code,
 #docContent a.id_link {
   color: inherit;
   visibility: hidden;
+  text-decoration: none;
+}
+
+#docContent a.id_link:hover:after {
+  content: "Permalink to this heading";
+  font-size: 10px;
+  font-weight: normal;
+  text-decoration: none;
+  border: 1px solid #444444;
+  text-align: center;
+  border-radius: 5px 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
+  position: relative;
+  top: 20px;
 }
 
 #docContent *:hover > a.id_link {
