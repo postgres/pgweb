@@ -49,6 +49,7 @@ sitenav = {
         {'title': 'IRC', 'link': '/community/irc/'},
         # {'title': 'Slack', 'link': 'https://join.slack.com/t/postgresteam/shared_invite/zt-1qj14i9sj-E9WqIFlvcOiHsEk2yFEMjA'},
         {'title': 'Local User Groups', 'link': '/community/user-groups/'},
+        {'title': 'Recognised NPOs', 'link': '/community/recognised-npos/'},
         {'title': 'Events', 'link': '/about/events/'},
         {'title': 'International Sites', 'link': '/community/international/'},
     ],
