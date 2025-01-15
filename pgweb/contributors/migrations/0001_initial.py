@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('company', models.CharField(max_length=100, null=True, blank=True)),
                 ('companyurl', models.URLField(max_length=100, null=True, verbose_name='Company URL', blank=True)),
                 ('location', models.CharField(max_length=100, null=True, blank=True)),
-                ('contribution', models.TextField(null=True, blank=True)),
+                ('contribution', models.TextField(null=True, blank=True, help_text='This description is currently used for major contributors only')),
             ],
             options={
                 'ordering': ('lastname', 'firstname'),

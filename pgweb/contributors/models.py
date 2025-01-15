@@ -26,7 +26,8 @@ class Contributor(models.Model):
     company = models.CharField(max_length=100, null=True, blank=True)
     companyurl = models.URLField(max_length=100, null=True, blank=True, verbose_name='Company URL')
     location = models.CharField(max_length=100, null=True, blank=True)
-    contribution = models.TextField(null=True, blank=True)
+    contribution = models.TextField(null=True, blank=True,
+                                    help_text='This description is currently used for major contributors only')
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
 
     send_notification = True
