@@ -62,26 +62,26 @@ The flow of an authentication in the 2.0 system is fairly simple:
 
 #. This dictionary of information is then URL-encoded.
 #. The resulting URL-encoded string is padded with spaces to an even
-   16 bytes, and is then AES encrypted with a shared key. This key
-   is stored in the main website system and indexed by the site id,
-   and it is stored in the settings of the community website somewhere.
-   Since this key is what protects the authentication, it should be
-   treated as very valuable.
-#. The resulting encrypted string and the IV used for the encryption are
-   base64-encoded (in URL mode, meaning it uses - and _ instead of + and /.
+   16 bytes, and is then AES-SIV encrypted with a shared key and a 16
+   byte nonce. This key is stored in the main website system and
+   indexed by the site id, and it is stored in the settings of the
+   community website somewhere.  Since this key is what protects the
+   authentication, it should be treated as very valuable.
+#. The resulting encrypted string, the nonce used for the encryption
+   and the tag from the digest are base64-encoded (in URL mode,
+   meaning it uses - and _ instead of + and /.
 #. The main website looks up the redirection URL registered for this site
    (again indexed by the site id), and constructs an URL of the format
-   <redirection_url>?i=<iv>&d=<encrypted data>
+   <redirection_url>?n=<nonce>&d=<encrypted data>&t=<tag>
 #. The user browser is redirected to this URL.
 #. The community website detects that this is a redirected authentication
    response, and starts processing it specifically.
 #. Using the shared key, the data is decrypted (while first being base64
-   decoded, of course)
+   decoded, of course). Since authenticated encryption using AES-SIV
+   is used, this step will fail if there has been any tampering with the
+   data.
 #. The resulting string is urldecoded - and if any errors occur in the
-   decoding, the authentication will fail. This step is guaranteed to fail
-   if the encryption key is mismatching between the community site and
-   the main website, since it is going to end up with something that is
-   definitely not an url-decodeable string.
+   decoding, the authentication will fail.
 #. The community site will look up an existing user record under this
    username, or create a new one if one does not exist already (assuming
    the site keeps local track of users at all - if it just deals with
@@ -94,10 +94,6 @@ The flow of an authentication in the 2.0 system is fairly simple:
 #. If the *d* key is present in the data structure handed over, the
    community site implements a site-specific action based on this data,
    such as redirecting the user to the original location.
-#. *DEPRECATED* If the *su* key is present in the data structure handed over, the
-   community site redirects to this location. If it's not present, then
-   the community site will redirect so some default location on the
-   site.
 
 Logging out
 -----------

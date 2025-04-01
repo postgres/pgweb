@@ -54,12 +54,19 @@ if __name__ == "__main__":
     s = "t=%s&%s" % (int(time.time() + 300), urllib.parse.urlencode(info))
 
     r = Random.new()
-    iv = r.read(16)
-    encryptor = AES.new(base64.b64decode(options.key), AES.MODE_CBC, iv)
-    cipher = encryptor.encrypt(s.encode('ascii') + b' ' * (16 - (len(s) % 16)))
+    nonce = r.read(16)
+    encryptor = AES.new(
+        base64.b64decode(options.key),
+        AES.MODE_SIV,
+        nonce=nonce,
+    )
+    cipher, tag = encryptor.encrypt_and_digest(s.encode('ascii'))
+
+    redirparams = {
+        'd': base64.b64encode(cipher, b"-_").decode('ascii'),
+        'n': base64.b64encode(nonce, b"-_").decode('ascii'),
+        't': base64.b64encode(tag, b"-_").decode('ascii'),
+    }
 
     print("Paste the following after the receiving url:")
-    print("?i=%s&d=%s" % (
-        base64.b64encode(iv, b"-_").decode('ascii'),
-        base64.b64encode(cipher, b"-_").decode('ascii'),
-    ))
+    print("?" + urllib.parse.urlencode(redirparams))

@@ -41,7 +41,7 @@ import hmac
 from urllib.parse import urlencode, parse_qs
 import requests
 from Cryptodome.Cipher import AES
-from Cryptodome.Hash import SHA
+from Cryptodome.Hash import SHA256
 from Cryptodome import Random
 import time
 
@@ -75,15 +75,19 @@ def login(request):
         s = "t=%s&%s" % (int(time.time()), urlencode({'r': request.GET['next']}))
         # Now encrypt it
         r = Random.new()
-        iv = r.read(16)
-        encryptor = AES.new(SHA.new(settings.SECRET_KEY.encode('ascii')).digest()[:16], AES.MODE_CBC, iv)
-        cipher = encryptor.encrypt(s.encode('ascii') + b' ' * (16 - (len(s) % 16)))  # pad to 16 bytes
+        nonce = r.read(16)
+        encryptor = AES.new(
+            SHA256.new(settings.SECRET_KEY.encode('ascii')).digest()[:32], AES.MODE_SIV, nonce=nonce
+        )
+        cipher, tag = encryptor.encrypt_and_digest(s.encode('ascii'))
 
-        return HttpResponseRedirect("%s?d=%s$%s" % (
-            settings.PGAUTH_REDIRECT,
-            base64.b64encode(iv, b"-_").decode('utf8'),
-            base64.b64encode(cipher, b"-_").decode('utf8'),
-        ))
+        return HttpResponseRedirect("%s?%s" % (settings.PGAUTH_REDIRECT, urlencode({
+            'd': '$'.join((
+                base64.b64encode(nonce, b"-_").decode('utf8'),
+                base64.b64encode(cipher, b"-_").decode('utf8'),
+                base64.b64encode(tag, b"-_").decode('utf8'),
+            )),
+        })))
     else:
         return HttpResponseRedirect(settings.PGAUTH_REDIRECT)
 
@@ -103,17 +107,24 @@ def auth_receive(request):
         # This was a logout request
         return HttpResponseRedirect('/')
 
-    if 'i' not in request.GET:
-        return HttpResponse("Missing IV in url!", status=400)
+    if 'n' not in request.GET:
+        return HttpResponse("Missing nonce in url!", status=400)
     if 'd' not in request.GET:
         return HttpResponse("Missing data in url!", status=400)
+    if 't' not in request.GET:
+        return HttpResponse("Missing tag in url!", status=400)
 
     # Set up an AES object and decrypt the data we received
     try:
-        decryptor = AES.new(base64.b64decode(settings.PGAUTH_KEY),
-                            AES.MODE_CBC,
-                            base64.b64decode(str(request.GET['i']), "-_"))
-        s = decryptor.decrypt(base64.b64decode(str(request.GET['d']), "-_")).rstrip(b' ').decode('utf8')
+        decryptor = AES.new(
+            base64.b64decode(settings.PGAUTH_KEY),
+            AES.MODE_SIV,
+            nonce=base64.b64decode(str(request.GET['n']), "-_"),
+        )
+        s = decryptor.decrypt_and_verify(
+            base64.b64decode(str(request.GET['d']), "-_"),
+            base64.b64decode(str(request.GET['t']), "-_"),
+        ).rstrip(b' ').decode('utf8')
     except UnicodeDecodeError:
         return HttpResponse("Badly encoded data found", 400)
     except Exception:
@@ -200,11 +211,16 @@ We apologize for the inconvenience.
     # Finally, check of we have a data package that tells us where to
     # redirect the user.
     if 'd' in data:
-        (ivs, datas) = data['d'][0].split('$')
-        decryptor = AES.new(SHA.new(settings.SECRET_KEY.encode('ascii')).digest()[:16],
-                            AES.MODE_CBC,
-                            base64.b64decode(ivs, b"-_"))
-        s = decryptor.decrypt(base64.b64decode(datas, "-_")).rstrip(b' ').decode('utf8')
+        (nonces, datas, tags) = data['d'][0].split('$')
+        decryptor = AES.new(
+            SHA256.new(settings.SECRET_KEY.encode('ascii')).digest()[:32],
+            AES.MODE_SIV,
+            nonce=base64.b64decode(nonces, b"-_"),
+        )
+        s = decryptor.decrypt_and_verify(
+            base64.b64decode(datas, "-_"),
+            base64.b64decode(tags, "-_"),
+        ).rstrip(b' ').decode('utf8')
         try:
             rdata = parse_qs(s, strict_parsing=True)
         except ValueError:
@@ -304,17 +320,24 @@ def user_search(searchterm=None, userid=None):
     r = requests.get(
         '{0}search/'.format(settings.PGAUTH_REDIRECT),
         params=q,
+        timeout=10,
     )
     if r.status_code != 200:
         return []
 
-    (ivs, datas) = r.text.encode('utf8').split(b'&')
+    (nonces, datas, tags) = r.text.encode('utf8').split(b'&')
 
     # Decryption time
-    decryptor = AES.new(base64.b64decode(settings.PGAUTH_KEY),
-                        AES.MODE_CBC,
-                        base64.b64decode(ivs, "-_"))
-    s = decryptor.decrypt(base64.b64decode(datas, "-_")).rstrip(b' ').decode('utf8')
+    decryptor = AES.new(
+        base64.b64decode(settings.PGAUTH_KEY),
+        AES.MODE_SIV,
+        nonce=base64.b64decode(nonces, "-_")
+    )
+    s = decryptor.decrypt_and_verify(
+        base64.b64decode(datas, "-_"),
+        base64.b64decode(tags, "-_"),
+    ).rstrip(b' ').decode('utf8')
+
     j = json.loads(s)
 
     return j

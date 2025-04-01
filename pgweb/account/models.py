@@ -18,6 +18,7 @@ class CommunityAuthSite(models.Model):
     apiurl = models.URLField(max_length=200, null=False, blank=True)
     cryptkey = models.CharField(max_length=100, null=False, blank=False,
                                 help_text="Use tools/communityauth/generate_cryptkey.py to create a key")
+    version = models.IntegerField(choices=((2, 2), (3, 3)), default=2)
     comment = models.TextField(null=False, blank=True)
     org = models.ForeignKey(CommunityAuthOrg, null=False, blank=False, on_delete=models.CASCADE)
     cooloff_hours = models.PositiveIntegerField(null=False, blank=False, default=0,

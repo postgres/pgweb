@@ -722,17 +722,33 @@ def communityauth(request, siteid):
     # the first block more random..
     s = "t=%s&%s" % (int(time.time()), urllib.parse.urlencode(info))
 
-    # Encrypt it with the shared key (and IV!)
-    r = Random.new()
-    iv = r.read(16)  # Always 16 bytes for AES
-    encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_CBC, iv)
-    cipher = encryptor.encrypt(s.encode('ascii') + b' ' * (16 - (len(s) % 16)))  # Pad to even 16 bytes
+    if site.version == 3:
+        # v3 = authenticated encryption
+        r = Random.new()
+        nonce = r.read(16)
+        encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_SIV, nonce=nonce)
+        cipher, tag = encryptor.encrypt_and_digest(s.encode('ascii'))
+        redirparams = {
+            'd': base64.b64encode(cipher, b"-_").decode('ascii'),
+            'n': base64.b64encode(nonce, b"-_").decode('ascii'),
+            't': base64.b64encode(tag, b"-_").decode('ascii'),
+        }
+    else:
+        # v2 = plain AES
+        # Encrypt it with the shared key (and IV!)
+        r = Random.new()
+        iv = r.read(16)  # Always 16 bytes for AES
+        encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_CBC, iv)
+        cipher = encryptor.encrypt(s.encode('ascii') + b' ' * (16 - (len(s) % 16)))  # Pad to even 16 bytes
+        redirparams = {
+            'i': base64.b64encode(iv, b"-_").decode('ascii'),
+            'd': base64.b64encode(cipher, b"-_").decode('ascii'),
+        }
 
     # Generate redirect
-    return HttpResponseRedirect("%s?i=%s&d=%s" % (
+    return HttpResponseRedirect("%s?%s" % (
         site.redirecturl,
-        base64.b64encode(iv, b"-_").decode('ascii'),
-        base64.b64encode(cipher, b"-_").decode('ascii'),
+        urllib.parse.urlencode(redirparams),
     ))
 
 
@@ -769,18 +785,30 @@ def communityauth_consent(request, siteid):
     })
 
 
-def _encrypt_site_response(site, s):
-    # Encrypt it with the shared key (and IV!)
-    r = Random.new()
-    iv = r.read(16)  # Always 16 bytes for AES
-    encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_CBC, iv)
-    cipher = encryptor.encrypt(s.encode('ascii') + b' ' * (16 - (len(s) % 16)))  # Pad to even 16 bytes
+def _encrypt_site_response(site, s, version):
+    if version == 3:
+        # Use authenticated encryption
+        r = Random.new()
+        nonce = r.read(16)
+        encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_SIV, nonce=nonce)
+        cipher, tag = encryptor.encrypt_and_digest(s.encode('ascii'))
 
-    # Base64-encode the response, just to be consistent
-    return "%s&%s" % (
-        base64.b64encode(iv, b'-_').decode('ascii'),
-        base64.b64encode(cipher, b'-_').decode('ascii'),
-    )
+        return "&".join((
+            base64.b64encode(nonce, b'-_').decode('ascii'),
+            base64.b64encode(cipher, b'-_').decode('ascii'),
+            base64.b64encode(tag, b'-_').decode('ascii'),
+        ))
+    else:
+        # Encrypt it with the shared key (and IVs)
+        r = Random.new()
+        iv = r.read(16)  # Always 16 bytes for AES
+        encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_CBC, iv)
+        cipher = encryptor.encrypt(s.encode('ascii') + b' ' * (16 - (len(s) % 16)))  # Pad to even 16 bytes
+
+        return "&".join((
+            base64.b64encode(iv, b'-_').decode('ascii'),
+            base64.b64encode(cipher, b'-_').decode('ascii'),
+        ))
 
 
 @queryparams('s', 'e', 'n', 'u')
@@ -812,7 +840,7 @@ def communityauth_search(request, siteid):
         'se': [a.email for a in u.secondaryemail_set.all()],
     } for u in users])
 
-    return HttpResponse(_encrypt_site_response(site, j))
+    return HttpResponse(_encrypt_site_response(site, j, site.version))
 
 
 def communityauth_getkeys(request, siteid, since=None):
@@ -828,7 +856,7 @@ def communityauth_getkeys(request, siteid, since=None):
 
     j = json.dumps([{'u': k.user.username, 's': k.sshkey.replace("\r", "\n")} for k in keys])
 
-    return HttpResponse(_encrypt_site_response(site, j))
+    return HttpResponse(_encrypt_site_response(site, j, site.version))
 
 
 @csrf_exempt
