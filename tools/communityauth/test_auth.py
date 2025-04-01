@@ -21,7 +21,6 @@ if __name__ == "__main__":
     parser.add_option("-f", "--first", dest="first")
     parser.add_option("-l", "--last", dest="last")
     parser.add_option("-e", "--email", dest="email")
-    parser.add_option("-s", "--suburl", dest="suburl")
 
     (options, args) = parser.parse_args()
 
@@ -47,8 +46,6 @@ if __name__ == "__main__":
         'l': options.last,
         'e': options.email,
     }
-    if options.suburl:
-        info['su'] = options.suburl
 
     # Turn this into an URL. Make sure the timestamp is always first, that makes
     # the first block more random..
