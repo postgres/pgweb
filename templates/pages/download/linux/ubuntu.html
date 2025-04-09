@@ -33,11 +33,12 @@ updates for all supported versions of PostgreSQL throughout the support
 <a href="/support/versioning/">lifetime</a> of PostgreSQL.
 </p>
 <p>
-The PostgreSQL Apt Repository supports the current versions of Ubuntu:
+The PostgreSQL Apt repository supports the current versions of Ubuntu:
 </p>
 <ul>
+  <li>plucky (25.04, non-LTS)</li>
+  <li>oracular (24.10, non-LTS)</li>
   <li>noble (24.04, LTS)</li>
-  <li>mantic (23.10, non-LTS)</li>
   <li>jammy (22.04, LTS)</li>
   <li>focal (20.04, LTS)</li>
 </ul>
@@ -48,7 +49,6 @@ on the following architectures:
   <li>amd64</li>
   <li>arm64 (LTS releases only)</li>
   <li>ppc64el (LTS releases only)</li>
-  <li>s390x (LTS releases only)</li>
 </ul>
 
 <p>
@@ -72,13 +72,14 @@ sudo install -d /usr/share/postgresql-common/pgdg
 sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
 
 # Create the repository configuration file:
-sudo sh -c 'echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+. /etc/os-release
+sudo sh -c "echo 'deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $VERSION_CODENAME-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
 
 # Update the package lists:
 sudo apt update
 
 # Install the latest version of PostgreSQL:
-# If you want a specific version, use 'postgresql-16' or similar instead of 'postgresql'
+# If you want a specific version, use 'postgresql-17' or similar instead of 'postgresql'
 sudo apt -y install postgresql</pre>
     <button id="copy-btn2" class="pg-script-copy-btn">Copy Script</button>
 </div>
@@ -98,15 +99,15 @@ version number as required):
 <table class="table table-striped">
   <tbody>
     <tr>
-     <th scope="row">postgresql-client-16</th>
+     <th scope="row">postgresql-client-17</th>
      <td>client libraries and client binaries</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-16</th>
+     <th scope="row">postgresql-17</th>
      <td>core database server</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-doc-16</th>
+     <th scope="row">postgresql-doc-17</th>
      <td>documentation</td>
     </tr>
     <tr>
@@ -114,7 +115,7 @@ version number as required):
      <td>libraries and headers for C language frontend development</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-server-dev-16</th>
+     <th scope="row">postgresql-server-dev-17</th>
      <td>libraries and headers for C language backend development</td>
     </tr>
   </tbody>
