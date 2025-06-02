@@ -14,7 +14,6 @@ The Red Hat family of distributions includes:
     <li>Red Hat Enterprise Linux</li>
     <li>Rocky Linux</li>
     <li>AlmaLinux</li>
-    <li>CentOS (7 only)</li>
     <li>Fedora</li>
     <li>Oracle Linux</li>
   </ul>
@@ -45,7 +44,6 @@ The PostgreSQL Yum Repository currently supports:
     <li>Red Hat Enterprise Linux</li>
     <li>Rocky Linux</li>
     <li>AlmaLinux</li>
-    <li>CentOS (7 only)</li>
     <li>Oracle Linux</li>
     <li>Fedora<sup>*</sup></li>
   </ul>
@@ -100,6 +98,10 @@ the distribution:
   </thead>
   <tbody>
     <tr>
+     <th scope="row">RHEL / AlmaLinux 10</th>
+     <td>16</td>
+    </tr>
+    <tr>
      <th scope="row">RHEL / Rocky Linux / AlmaLinux 9</th>
      <td>16, 15 and 13 (via modules)</td>
     </tr>
@@ -108,15 +110,11 @@ the distribution:
      <td>15, 13, 12, 10 and 9.6 via modules</td>
     </tr>
     <tr>
-     <th scope="row">RHEL / CentOS / OL 7</th>
-     <td>9.2 (also supplies package rh-postgresql10, rh-postgresql96, rh-postgresql95 and rh-postgresql94 via SCL)</td>
-    </tr>
-    <tr>
-     <th scope="row">Fedora 41</th>
+     <th scope="row">Fedora 42</th>
      <td>16</td>
     </tr>
     <tr>
-     <th scope="row">Fedora 40</th>
+     <th scope="row">Fedora 41</th>
      <td>16</td>
     </tr>
   </tbody>
@@ -158,7 +156,7 @@ Due to policies for Red Hat family distributions, the PostgreSQL installation
 will not be enabled for automatic start or have the database initialized
 automatically. To make your database installation complete, you need to
 perform the following steps, based on your distribution:
-<h4>For RHEL / Rocky Linux / AlmaLinux / CentOS / OL 7, 8, 9 or Fedora 40 and later derived distributions:</h4>
+<h4>For RHEL / Rocky Linux / AlmaLinux / CentOS / OL 10, 9, 8 or Fedora 41 and later derived distributions:</h4>
 <pre class="code">
   postgresql-setup --initdb
   systemctl enable postgresql.service
