@@ -63,9 +63,9 @@ if __name__ == "__main__":
     cipher, tag = encryptor.encrypt_and_digest(s.encode('ascii'))
 
     redirparams = {
-        'd': base64.b64encode(cipher, b"-_").decode('ascii'),
-        'n': base64.b64encode(nonce, b"-_").decode('ascii'),
-        't': base64.b64encode(tag, b"-_").decode('ascii'),
+        'd': base64.urlsafe_b64encode(cipher).decode('ascii'),
+        'n': base64.urlsafe_b64encode(nonce).decode('ascii'),
+        't': base64.urlsafe_b64encode(tag).decode('ascii'),
     }
 
     print("Paste the following after the receiving url:")

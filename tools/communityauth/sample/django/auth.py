@@ -83,9 +83,9 @@ def login(request):
 
         return HttpResponseRedirect("%s?%s" % (settings.PGAUTH_REDIRECT, urlencode({
             'd': '$'.join((
-                base64.b64encode(nonce, b"-_").decode('utf8'),
-                base64.b64encode(cipher, b"-_").decode('utf8'),
-                base64.b64encode(tag, b"-_").decode('utf8'),
+                base64.urlsafe_b64encode(nonce).decode('utf8'),
+                base64.urlsafe_b64encode(cipher).decode('utf8'),
+                base64.urlsafe_b64encode(tag).decode('utf8'),
             )),
         })))
     else:
@@ -119,11 +119,11 @@ def auth_receive(request):
         decryptor = AES.new(
             base64.b64decode(settings.PGAUTH_KEY),
             AES.MODE_SIV,
-            nonce=base64.b64decode(str(request.GET['n']), "-_"),
+            nonce=base64.urlsafe_b64decode(str(request.GET['n'])),
         )
         s = decryptor.decrypt_and_verify(
-            base64.b64decode(str(request.GET['d']), "-_"),
-            base64.b64decode(str(request.GET['t']), "-_"),
+            base64.urlsafe_b64decode(str(request.GET['d'])),
+            base64.urlsafe_b64decode(str(request.GET['t'])),
         ).rstrip(b' ').decode('utf8')
     except UnicodeDecodeError:
         return HttpResponse("Badly encoded data found", 400)
@@ -215,11 +215,11 @@ We apologize for the inconvenience.
         decryptor = AES.new(
             SHA256.new(settings.SECRET_KEY.encode('ascii')).digest()[:32],
             AES.MODE_SIV,
-            nonce=base64.b64decode(nonces, b"-_"),
+            nonce=base64.urlsafe_b64decode(nonces),
         )
         s = decryptor.decrypt_and_verify(
-            base64.b64decode(datas, "-_"),
-            base64.b64decode(tags, "-_"),
+            base64.urlsafe_b64decode(datas),
+            base64.urlsafe_b64decode(tags),
         ).rstrip(b' ').decode('utf8')
         try:
             rdata = parse_qs(s, strict_parsing=True)
@@ -331,11 +331,11 @@ def user_search(searchterm=None, userid=None):
     decryptor = AES.new(
         base64.b64decode(settings.PGAUTH_KEY),
         AES.MODE_SIV,
-        nonce=base64.b64decode(nonces, "-_")
+        nonce=base64.urlsafe_b64decode(nonces)
     )
     s = decryptor.decrypt_and_verify(
-        base64.b64decode(datas, "-_"),
-        base64.b64decode(tags, "-_"),
+        base64.urlsafe_b64decode(datas),
+        base64.urlsafe_b64decode(tags),
     ).rstrip(b' ').decode('utf8')
 
     j = json.loads(s)

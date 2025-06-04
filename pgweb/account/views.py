@@ -729,9 +729,9 @@ def communityauth(request, siteid):
         encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_SIV, nonce=nonce)
         cipher, tag = encryptor.encrypt_and_digest(s.encode('ascii'))
         redirparams = {
-            'd': base64.b64encode(cipher, b"-_").decode('ascii'),
-            'n': base64.b64encode(nonce, b"-_").decode('ascii'),
-            't': base64.b64encode(tag, b"-_").decode('ascii'),
+            'd': base64.urlsafe_b64encode(cipher),
+            'n': base64.urlsafe_b64encode(nonce),
+            't': base64.urlsafe_b64encode(tag),
         }
     else:
         # v2 = plain AES
@@ -741,8 +741,8 @@ def communityauth(request, siteid):
         encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_CBC, iv)
         cipher = encryptor.encrypt(s.encode('ascii') + b' ' * (16 - (len(s) % 16)))  # Pad to even 16 bytes
         redirparams = {
-            'i': base64.b64encode(iv, b"-_").decode('ascii'),
-            'd': base64.b64encode(cipher, b"-_").decode('ascii'),
+            'i': base64.urlsafe_b64encode(iv),
+            'd': base64.urlsafe_b64encode(cipher),
         }
 
     # Generate redirect
@@ -794,9 +794,9 @@ def _encrypt_site_response(site, s, version):
         cipher, tag = encryptor.encrypt_and_digest(s.encode('ascii'))
 
         return "&".join((
-            base64.b64encode(nonce, b'-_').decode('ascii'),
-            base64.b64encode(cipher, b'-_').decode('ascii'),
-            base64.b64encode(tag, b'-_').decode('ascii'),
+            base64.urlsafe_b64encode(nonce).decode('ascii'),
+            base64.urlsafe_b64encode(cipher).decode('ascii'),
+            base64.urlsafe_b64encode(tag).decode('ascii'),
         ))
     else:
         # Encrypt it with the shared key (and IVs)
@@ -806,8 +806,8 @@ def _encrypt_site_response(site, s, version):
         cipher = encryptor.encrypt(s.encode('ascii') + b' ' * (16 - (len(s) % 16)))  # Pad to even 16 bytes
 
         return "&".join((
-            base64.b64encode(iv, b'-_').decode('ascii'),
-            base64.b64encode(cipher, b'-_').decode('ascii'),
+            base64.urlsafe_b64encode(iv).decode('ascii'),
+            base64.urlsafe_b64encode(cipher).decode('ascii'),
         ))
 
 
