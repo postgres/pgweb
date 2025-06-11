@@ -5,8 +5,14 @@ from django.views.decorators.http import require_POST, require_GET
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 
+import base64
+import hashlib
+import json
 import os
 import sys
+import urllib.parse
+from Cryptodome import Random
+from Cryptodome.Cipher import AES
 
 from pgweb.util.misc import get_client_ip
 from pgweb.util.decorators import queryparams
@@ -28,7 +34,54 @@ def configure():
     os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = '1'
 
 
-def _perform_oauth_login(request, provider, email, firstname, lastname):
+_cookie_key = hashlib.sha512(settings.SECRET_KEY.encode()).digest()
+
+
+def set_encrypted_oauth_cookie_on(response, cookiecontent, path=None):
+    cookiedata = json.dumps(cookiecontent)
+    r = Random.new()
+    nonce = r.read(16)
+    encryptor = AES.new(_cookie_key, AES.MODE_SIV, nonce=nonce)
+    cipher, tag = encryptor.encrypt_and_digest(cookiedata.encode('ascii'))
+    response.set_cookie(
+        'pgweb_oauth',
+        urllib.parse.urlencode({
+            'n': base64.urlsafe_b64encode(nonce),
+            'c': base64.urlsafe_b64encode(cipher),
+            't': base64.urlsafe_b64encode(tag),
+        }),
+        secure=settings.SESSION_COOKIE_SECURE,
+        httponly=True,
+        path=path or '/account/login/',
+    )
+    return response
+
+
+def get_encrypted_oauth_cookie(request):
+    if 'pgweb_oauth' not in request.COOKIES:
+        raise OAuthException("Secure cookie missing")
+
+    parts = urllib.parse.parse_qs(request.COOKIES['pgweb_oauth'])
+
+    decryptor = AES.new(
+        _cookie_key,
+        AES.MODE_SIV,
+        base64.urlsafe_b64decode(parts['n'][0]),
+    )
+    s = decryptor.decrypt_and_verify(
+        base64.urlsafe_b64decode(parts['c'][0]),
+        base64.urlsafe_b64decode(parts['t'][0]),
+    )
+
+    return json.loads(s)
+
+
+def delete_encrypted_oauth_cookie_on(response):
+    response.delete_cookie('pgweb_oauth')
+    return response
+
+
+def _perform_oauth_login(request, provider, email, firstname, lastname, nexturl):
     try:
         user = User.objects.get(email=email)
     except User.DoesNotExist:
@@ -36,11 +89,12 @@ def _perform_oauth_login(request, provider, email, firstname, lastname):
 
         # Offer the user a chance to sign up. The full flow is
         # handled elsewhere, so store the details we got from
-        # the oauth login in the session, and pass the user on.
-        request.session['oauth_email'] = email
-        request.session['oauth_firstname'] = firstname or ''
-        request.session['oauth_lastname'] = lastname or ''
-        return HttpResponseRedirect('/account/signup/oauth/')
+        # the oauth login in a secure cookie, and pass the user on.
+        return set_encrypted_oauth_cookie_on(HttpResponseRedirect('/account/signup/oauth/'), {
+            'oauth_email': email,
+            'oauth_firstname': firstname or '',
+            'oauth_lastname': lastname or '',
+        }, '/account/signup/oauth/')
 
     log.info("Oauth signin of {0} using {1} from {2}.".format(email, provider, get_client_ip(request)))
     if UserProfile.objects.filter(user=user).exists():
@@ -50,11 +104,7 @@ def _perform_oauth_login(request, provider, email, firstname, lastname):
 
     user.backend = settings.AUTHENTICATION_BACKENDS[0]
     django_login(request, user)
-    n = request.session.pop('login_next')
-    if n:
-        return HttpResponseRedirect(n)
-    else:
-        return HttpResponseRedirect('/account/')
+    return delete_encrypted_oauth_cookie_on(HttpResponseRedirect(nexturl or '/account/'))
 
 
 #
@@ -76,7 +126,9 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
 
         # Receiving a login request from the provider, so validate data
         # and log the user in.
-        if request.GET.get('state', '') != request.session.pop('oauth_state'):
+        oauthdata = get_encrypted_oauth_cookie(request)
+
+        if request.GET.get('state', '') != oauthdata['oauth_state']:
             log.warning("Invalid state received in {0} oauth2 step from {1}".format(provider, get_client_ip(request)))
             raise OAuthException("Invalid OAuth state received")
 
@@ -93,7 +145,7 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
             log.warning("Oauth signing using {0} was missing data: {1}".format(provider, e))
             return HttpResponse('OAuth login was missing critical data. To log in, you need to allow access to email, first name and last name!')
 
-        return _perform_oauth_login(request, provider, email, firstname, lastname)
+        return _perform_oauth_login(request, provider, email, firstname, lastname, oauthdata['next'])
     else:
         log.info("Initiating {0} oauth2 step from {1}".format(provider, get_client_ip(request)))
         # First step is redirect to provider
@@ -101,10 +153,10 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
             authurl,
             prompt='consent',
         )
-        request.session['login_next'] = request.GET.get('next', '')
-        request.session['oauth_state'] = state
-        request.session.modified = True
-        return HttpResponseRedirect(authorization_url)
+        return set_encrypted_oauth_cookie_on(HttpResponseRedirect(authorization_url), {
+            'next': request.POST.get('next', ''),
+            'oauth_state': state,
+        })
 
 
 #
@@ -124,8 +176,10 @@ def _login_oauth1(request, provider, requesturl, accessurl, baseauthurl, authdat
         r = oa.parse_authorization_response(request.build_absolute_uri())
         verifier = r.get('oauth_verifier')
 
-        ro_key = request.session.pop('ro_key')
-        ro_secret = request.session.pop('ro_secret')
+        oauthdata = get_encrypted_oauth_cookie(request)
+
+        ro_key = oauthdata['ro_key']
+        ro_secret = oauthdata['ro_secret']
 
         oa = OAuth1Session(client_id, client_secret, ro_key, ro_secret, verifier=verifier)
         tokens = oa.fetch_access_token(accessurl)
@@ -137,7 +191,7 @@ def _login_oauth1(request, provider, requesturl, accessurl, baseauthurl, authdat
             log.warning("Oauth1 signing using {0} was missing data: {1}".format(provider, e))
             return HttpResponse('OAuth login was missing critical data. To log in, you need to allow access to email, first name and last name!')
 
-        return _perform_oauth_login(request, provider, email, firstname, lastname)
+        return _perform_oauth_login(request, provider, email, firstname, lastname, oauthdata['next'])
     else:
         log.info("Initiating {0} oauth1 step from {1}".format(provider, get_client_ip(request)))
 
@@ -145,11 +199,11 @@ def _login_oauth1(request, provider, requesturl, accessurl, baseauthurl, authdat
         fr = oa.fetch_request_token(requesturl)
         authorization_url = oa.authorization_url(baseauthurl)
 
-        request.session['login_next'] = request.GET.get('next', '')
-        request.session['ro_key'] = fr.get('oauth_token')
-        request.session['ro_secret'] = fr.get('oauth_token_secret')
-        request.session.modified = True
-        return HttpResponseRedirect(authorization_url)
+        return set_encrypted_oauth_cookie_on(HttpResponseRedirect(authorization_url), {
+            'next': request.POST.get('next', ''),
+            'ro_key': fr.get('oauth_token'),
+            'ro_secret': fr.get('oauth_token_secret'),
+        })
 
 
 #

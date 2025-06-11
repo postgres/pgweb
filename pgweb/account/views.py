@@ -44,6 +44,7 @@ from .forms import CommunityAuthConsentForm
 from .forms import SignupForm, SignupOauthForm
 from .forms import UserForm, UserProfileForm, ContributorForm
 from .forms import AddEmailForm, PgwebPasswordResetForm
+from .oauthclient import get_encrypted_oauth_cookie, delete_encrypted_oauth_cookie_on
 
 import logging
 
@@ -541,61 +542,55 @@ def signup_complete(request):
 @transaction.atomic
 @queryparams('do_abort')
 def signup_oauth(request):
-    if 'oauth_email' not in request.session \
-       or 'oauth_firstname' not in request.session \
-       or 'oauth_lastname' not in request.session:
+    cookiedata = get_encrypted_oauth_cookie(request)
+
+    if 'oauth_email' not in cookiedata \
+       or 'oauth_firstname' not in cookiedata \
+       or 'oauth_lastname' not in cookiedata:
         return HttpSimpleResponse(request, "OAuth error", 'Invalid redirect received')
 
     # Is this email already on a different account as a secondary one?
-    if SecondaryEmail.objects.filter(email=request.session['oauth_email'].lower()).exists():
+    if SecondaryEmail.objects.filter(email=cookiedata['oauth_email'].lower()).exists():
         return HttpSimpleResponse(request, "OAuth error", 'This email address is already attached to a different account')
 
     if request.method == 'POST':
         # Second stage, so create the account. But verify that the
         # nonce matches.
         data = request.POST.copy()
-        data['email'] = request.session['oauth_email'].lower()
-        data['first_name'] = request.session['oauth_firstname']
-        data['last_name'] = request.session['oauth_lastname']
+        data['email'] = cookiedata['oauth_email'].lower()
+        data['first_name'] = cookiedata['oauth_firstname']
+        data['last_name'] = cookiedata['oauth_lastname']
         form = SignupOauthForm(data=data)
         if form.is_valid():
-            log.info("Creating user for {0} from {1} from oauth signin of email {2}".format(form.cleaned_data['username'], get_client_ip(request), request.session['oauth_email']))
+            log.info("Creating user for {0} from {1} from oauth signin of email {2}".format(form.cleaned_data['username'], get_client_ip(request), cookiedata['oauth_email']))
 
             user = User.objects.create_user(form.cleaned_data['username'].lower(),
-                                            request.session['oauth_email'].lower(),
+                                            cookiedata['oauth_email'].lower(),
                                             last_login=datetime.now())
-            user.first_name = request.session['oauth_firstname']
-            user.last_name = request.session['oauth_lastname']
+            user.first_name = cookiedata['oauth_firstname']
+            user.last_name = cookiedata['oauth_lastname']
             user.password = OAUTH_PASSWORD_STORE
             user.save()
-
-            # Clean up our session
-            del request.session['oauth_email']
-            del request.session['oauth_firstname']
-            del request.session['oauth_lastname']
-            request.session.modified = True
 
             # We can immediately log the user in because their email
             # is confirmed.
             user.backend = settings.AUTHENTICATION_BACKENDS[0]
             django_login(request, user)
 
-            # Redirect to the sessions page, or to the account page
+            # Redirect to the  page stored in the cookie, or to the account page
             # if none was given.
-            return HttpResponseRedirect(request.session.pop('login_next', '/account/'))
+            return delete_encrypted_oauth_cookie_on(
+                HttpResponseRedirect(cookiedata.get('login_next', '/account/'))
+            )
     elif 'do_abort' in request.GET:
-        del request.session['oauth_email']
-        del request.session['oauth_firstname']
-        del request.session['oauth_lastname']
-        request.session.modified = True
-        return HttpResponseRedirect(request.session.pop('login_next', '/'))
+        return delete_encrypted_oauth_cookie_on(HttpResponseRedirect(cookiedata.get('login_next', '/')))
     else:
         # Generate possible new username
-        suggested_username = request.session['oauth_email'].replace('@', '.')[:30]
+        suggested_username = cookiedata['oauth_email'].replace('@', '.')[:30]
 
         # Auto generation requires firstname and lastname to be specified
-        f = request.session['oauth_firstname'].lower()
-        l = request.session['oauth_lastname'].lower()
+        f = cookiedata['oauth_firstname'].lower()
+        l = cookiedata['oauth_lastname'].lower()
         if f and l:
             for u in itertools.chain([
                     "{0}{1}".format(f, l[0]),
@@ -607,9 +602,9 @@ def signup_oauth(request):
 
         form = SignupOauthForm(initial={
             'username': suggested_username,
-            'email': request.session['oauth_email'].lower(),
-            'first_name': request.session['oauth_firstname'][:30],
-            'last_name': request.session['oauth_lastname'][:30],
+            'email': cookiedata['oauth_email'].lower(),
+            'first_name': cookiedata['oauth_firstname'][:30],
+            'last_name': cookiedata['oauth_lastname'][:30],
         })
 
     return render_pgweb(request, 'account', 'account/signup_oauth.html', {
