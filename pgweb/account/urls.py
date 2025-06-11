@@ -41,6 +41,7 @@ urlpatterns = [
 
     # Log in, logout, change password etc
     re_path(r'^login/$', pgweb.account.views.login),
+    re_path(r'^login/oauth/$', pgweb.account.oauthclient.initiate_oauth_login),
     re_path(r'^logout/$', pgweb.account.views.logout),
     re_path(r'^changepwd/$', pgweb.account.views.changepwd),
     re_path(r'^changepwd/done/$', pgweb.account.views.change_done),

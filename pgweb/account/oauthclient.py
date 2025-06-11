@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.contrib.auth import login as django_login
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.views.decorators.http import require_POST, require_GET
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 
 import os
@@ -66,7 +68,10 @@ def _login_oauth(request, provider, authurl, tokenurl, scope, authdatafunc):
     redir = '{0}/account/login/{1}/'.format(settings.SITE_ROOT, provider)
 
     oa = OAuth2Session(client_id, scope=scope, redirect_uri=redir)
-    if 'code' in request.GET:
+    if request.method == 'GET':
+        if 'code' not in request.GET:
+            raise OAuthException("No code provided")
+
         log.info("Completing {0} oauth2 step from {1}".format(provider, get_client_ip(request)))
 
         # Receiving a login request from the provider, so validate data
@@ -284,8 +289,21 @@ def oauth_login_twitter(request):
         _twitter_auth_data)
 
 
+@require_POST
+@csrf_exempt
+def initiate_oauth_login(request):
+    if 'submit' not in request.POST:
+        return HttpResponse("Invalid post", status=400)
+    return _oauth_login_dispatch(request.POST['submit'], request)
+
+
+@require_GET
 @queryparams('code', 'state', 'next', 'oauth_verifier')
 def login_oauth(request, provider):
+    return _oauth_login_dispatch(provider, request)
+
+
+def _oauth_login_dispatch(provider, request):
     fn = 'oauth_login_{0}'.format(provider)
     m = sys.modules[__name__]
     if hasattr(m, fn):
@@ -294,5 +312,7 @@ def login_oauth(request, provider):
         except OAuthException as e:
             return HttpResponse(e)
         except Exception as e:
-            log.error('Exception during OAuth: %s' % e)
+            log.error('Exception during OAuth: {}'.format(e))
             return HttpResponse('An unhandled exception occurred during the authentication process')
+    else:
+        raise Http404()

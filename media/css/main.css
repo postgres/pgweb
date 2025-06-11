@@ -1834,6 +1834,12 @@ th.organisation-logo {
     max-width: 650px;
 }
 
+/* Buttons that are images */
+button.imagebutton {
+    border: 0;
+    padding: 0;
+}
+
 
 /** ALL RESPONSIVE QUERIES HERE */
 /* Small devices (landscape phones, 576px and up)*/
