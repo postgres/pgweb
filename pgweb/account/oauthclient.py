@@ -10,6 +10,7 @@ import hashlib
 import json
 import os
 import sys
+import time
 import urllib.parse
 from Cryptodome import Random
 from Cryptodome.Cipher import AES
@@ -38,6 +39,7 @@ _cookie_key = hashlib.sha512(settings.SECRET_KEY.encode()).digest()
 
 
 def set_encrypted_oauth_cookie_on(response, cookiecontent, path=None):
+    cookiecontent['_ts'] = time.time()
     cookiedata = json.dumps(cookiecontent)
     r = Random.new()
     nonce = r.read(16)
@@ -73,7 +75,13 @@ def get_encrypted_oauth_cookie(request):
         base64.urlsafe_b64decode(parts['t'][0]),
     )
 
-    return json.loads(s)
+    d = json.loads(s)
+    if time.time() - d['_ts'] > 10 * 60:
+        # 10 minutes to complete oauth login
+        raise OAuthException("Cookie expired")
+    del d['_ts']
+
+    return d
 
 
 def delete_encrypted_oauth_cookie_on(response):
