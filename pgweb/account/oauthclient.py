@@ -372,7 +372,7 @@ def _oauth_login_dispatch(provider, request):
         try:
             return getattr(m, fn)(request)
         except OAuthException as e:
-            return HttpResponse(e)
+            return HttpResponse(e, status=400)
         except Exception as e:
             log.error('Exception during OAuth: {}'.format(e))
             return HttpResponse('An unhandled exception occurred during the authentication process')
