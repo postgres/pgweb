@@ -45,6 +45,7 @@ from .forms import SignupForm, SignupOauthForm
 from .forms import UserForm, UserProfileForm, ContributorForm
 from .forms import AddEmailForm, PgwebPasswordResetForm
 from .oauthclient import get_encrypted_oauth_cookie, delete_encrypted_oauth_cookie_on
+from .oauthclient import OAuthException
 
 import logging
 
@@ -542,7 +543,10 @@ def signup_complete(request):
 @transaction.atomic
 @queryparams('do_abort')
 def signup_oauth(request):
-    cookiedata = get_encrypted_oauth_cookie(request)
+    try:
+        cookiedata = get_encrypted_oauth_cookie(request)
+    except OAuthException as e:
+        return HttpResponse(e, status=400)
 
     if 'oauth_email' not in cookiedata \
        or 'oauth_firstname' not in cookiedata \
