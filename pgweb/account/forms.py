@@ -28,6 +28,18 @@ def _clean_username(username):
     raise forms.ValidationError("This username is already in use")
 
 
+def _clean_email(email):
+    email = email.lower()
+
+    if User.objects.filter(email=email).exists():
+        raise forms.ValidationError("A user with this email address is already registered")
+
+    if SecondaryEmail.objects.filter(email=email).exists():
+        raise forms.ValidationError("This email address is already attached to a different user")
+
+    return email
+
+
 # Override some error handling only in the default authentication form
 class PgwebAuthenticationForm(AuthenticationForm):
     def clean(self):
@@ -91,15 +103,7 @@ class SignupForm(forms.Form):
         return _clean_username(self.cleaned_data['username'])
 
     def clean_email(self):
-        email = self.cleaned_data['email'].lower()
-
-        if User.objects.filter(email=email).exists():
-            raise forms.ValidationError("A user with this email address is already registered")
-
-        if SecondaryEmail.objects.filter(email=email).exists():
-            raise forms.ValidationError("This email address is already attached to a different user")
-
-        return email
+        return _clean_email(self.cleaned_data['email'])
 
 
 class SignupOauthForm(forms.Form):
@@ -122,7 +126,7 @@ class SignupOauthForm(forms.Form):
         return _clean_username(self.cleaned_data['username'])
 
     def clean_email(self):
-        return self.cleaned_data['email'].lower()
+        return _clean_email(self.cleaned_data['email'])
 
 
 class UserProfileForm(forms.ModelForm):
