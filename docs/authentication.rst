@@ -63,7 +63,7 @@ The flow of an authentication in the 2.0 system is fairly simple:
 #. This dictionary of information is then URL-encoded.
 #. The resulting URL-encoded string is padded with spaces to an even
    16 bytes, and is then AES-SIV encrypted with a shared key and a 16
-   byte nonce (v4 uses ChaCha20_Poly1305 with standard size key and nonce,
+   byte nonce (v4 uses XChaCha20_Poly1305 with standard size key and nonce,
    but v3 is the preferred version). This key is stored in the main website system and
    indexed by the site id, and it is stored in the settings of the
    community website somewhere.  Since this key is what protects the
@@ -78,7 +78,7 @@ The flow of an authentication in the 2.0 system is fairly simple:
 #. The community website detects that this is a redirected authentication
    response, and starts processing it specifically.
 #. Using the shared key, the data is decrypted (while first being base64
-   decoded, of course). Since authenticated encryption using AES-SIV or ChaCha20_Poly1305
+   decoded, of course). Since authenticated encryption using AES-SIV or XChaCha20_Poly1305
    is used, this step will fail if there has been any tampering with the
    data.
 #. The resulting string is urldecoded - and if any errors occur in the
@@ -123,7 +123,7 @@ encryption algorithms.
 
 v2 uses standard AES without authentication. This version is *deprecated*.
 v3 uses AES-SIV authenticated encryption. This is the *recommended* vcersion.
-v4 uses ChaCha20_Poly1305 authenticated encryption, for platforms that don't
+v4 uses XChaCha20_Poly1305 authenticated encryption, for platforms that don't
    support AES-SIV.
 
 
