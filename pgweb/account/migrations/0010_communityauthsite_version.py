@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='communityauthsite',
             name='version',
-            field=models.IntegerField(choices=[(2, 2), (3, 3), (4, 4)], default=2),
+            field=models.IntegerField(choices=[(2, "v2 - DEPRECATED"), (3, "v3 - recommended"), (4, "v4 - ChaCha20_Poly1305 compatibility")], default=2),
         ),
     ]
