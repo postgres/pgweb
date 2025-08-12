@@ -1,11 +1,13 @@
 from django.shortcuts import get_object_or_404
 
 from pgweb.util.contexts import render_pgweb
+from pgweb.util.decorators import content_sources
 
 from pgweb.core.models import Version
 from .models import Feature
 
 
+@content_sources('style', "'unsafe-inline'")
 def root(request):
     features = Feature.objects.all().select_related().order_by('group__groupsort', 'group__groupname', 'featurename')
     groups = []

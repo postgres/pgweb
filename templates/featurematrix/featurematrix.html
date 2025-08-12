@@ -1,6 +1,26 @@
 {%extends "base/page.html"%}
 {%block title%}Feature Matrix{%endblock%}
 
+{% block extrahead %}
+{{ block.super }}
+<style>
+table.matrix tr th,
+table.matrix tr td {
+    display: none;
+}
+table.matrix tr th:nth-child(1),
+table.matrix tr td:nth-child(1) {
+    display: table-cell;
+}
+{% for version in versions %}
+body:has(input#toggle_{{ version.numtree|cut:"." }}:checked) table.matrix th:nth-child({{forloop.counter|add:1}}),
+body:has(input#toggle_{{ version.numtree|cut:"." }}:checked) table.matrix td:nth-child({{forloop.counter|add:1}}) {
+    display: table-cell;
+}
+{% endfor %}
+</style>
+{%endblock%}
+
 {%block extrascript%}
 <script type="text/javascript" src="/media/js/featurematrix.js?{{gitrev}}"></script>
 {%endblock%}
@@ -38,12 +58,12 @@ the text.
   <h2>
     <a name="{{group.group.groupname|slugify}}">{{ group.group.groupname }}</a>
   </h2>
-  <table class="table table-striped table-sm">
+  <table class="table table-striped table-sm matrix">
     <thead>
       <tr>
         <th scope="col" width="30%">&nbsp;</th>
         {% for col in group.group.columns %}
-          <th scope="col" class="feature-version-col">{{col}}</th>
+          <th scope="col">{{col}}</th>
         {% endfor %}
       </tr>
     </thead>
@@ -58,7 +78,7 @@ the text.
             {%endif%}
           </th>
           {%for col in feature.columns%}
-            <td class="fm_{{col.class}}">{{col.str}}</td>
+            <td class="fm_{{col.class}}"></td>
           {%endfor%}
         </tr>
       {%endfor%}

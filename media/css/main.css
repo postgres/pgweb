@@ -1683,17 +1683,29 @@ td.fm_no {
   background-color: var(--td-fm-no-bg-color);
   color: var(--td-fm-no-fg-color);
 }
+td.fm_no::before {
+    content: "No";
+}
 td.fm_yes {
   background-color: var(--td-fm-yes-bg-color);
   color: var(--td-fm-yes-fg-color);
+}
+td.fm_yes::before {
+    content: "Yes";
 }
 td.fm_obs {
   background-color: var(--td-fm-obs-bg-color);
   color: var(--td-fm-obs-fg-color);
 }
+td.fm_obs::before {
+    content: "Obsolete";
+}
 td.fm_unk {
   background-color: var(--td-fm-unk-bg-color);
   color: var(--td-fm-unk-fg-color);
+}
+td.fm_unk::before {
+    content: "?";
 }
 
 div#feature-matrix-filter {
