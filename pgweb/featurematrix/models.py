@@ -1,10 +1,10 @@
 from django.db import models
 
 choices_map = {
-    0: {'str': 'No', 'class': 'no', 'bgcolor': '#ffdddd'},
-    1: {'str': 'Yes', 'class': 'yes', 'bgcolor': '#ddffdd'},
-    2: {'str': 'Obsolete', 'class': 'obs', 'bgcolor': '#ddddff'},
-    3: {'str': '?', 'class': 'unk', 'bgcolor': '#ffffaa'},
+    0: {'str': 'No', 'class': 'no'},
+    1: {'str': 'Yes', 'class': 'yes'},
+    2: {'str': 'Obsolete', 'class': 'obs'},
+    3: {'str': '?', 'class': 'unk'},
 }
 choices = [(k, v['str']) for k, v in list(choices_map.items())]
 
