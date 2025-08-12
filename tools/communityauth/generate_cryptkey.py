@@ -7,13 +7,29 @@
 
 from Cryptodome import Random
 import base64
+import sys
+
+
+def usage():
+    print("Usage: generate_cryptkey.py <version>")
+    print("")
+    print("Version must be 3 or 4, representing the version of community authentication encryption to use")
+    sys.exit(0)
+
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        usage()
+    if sys.argv[1] not in ("3", "4"):
+        usage()
+
+    version = int(sys.argv[1])
+
     print("The next row contains a 64-byte (512-bit) symmetric crypto key.")
     print("This key should be used to integrate a community auth site.")
     print("Note that each site should have it's own key!!")
     print("")
 
     r = Random.new()
-    key = r.read(64)
+    key = r.read(64 if version == 3 else 32)
     print(base64.b64encode(key).decode('ascii'))

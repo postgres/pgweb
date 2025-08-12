@@ -17,6 +17,7 @@ from django.db.models import Q, Prefetch
 import base64
 import urllib.parse
 from Cryptodome.Cipher import AES
+from Cryptodome.Cipher import ChaCha20_Poly1305
 from Cryptodome import Random
 import time
 import json
@@ -721,11 +722,14 @@ def communityauth(request, siteid):
     # the first block more random..
     s = "t=%s&%s" % (int(time.time()), urllib.parse.urlencode(info))
 
-    if site.version == 3:
-        # v3 = authenticated encryption
+    if site.version in (3, 4):
+        # v3 = authenticated encryption, v4 = authenticated encryption with XChaCha20-Poly1305
         r = Random.new()
-        nonce = r.read(16)
-        encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_SIV, nonce=nonce)
+        nonce = r.read(16 if site.version == 3 else 24)
+        if site.version == 3:
+            encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_SIV, nonce=nonce)
+        else:
+            encryptor = ChaCha20_Poly1305.new(key=base64.b64decode(site.cryptkey), nonce=nonce)
         cipher, tag = encryptor.encrypt_and_digest(s.encode('ascii'))
         redirparams = {
             'd': base64.urlsafe_b64encode(cipher),
@@ -785,11 +789,14 @@ def communityauth_consent(request, siteid):
 
 
 def _encrypt_site_response(site, s, version):
-    if version == 3:
-        # Use authenticated encryption
+    if version in (3, 4):
+        # Use authenticated encryption (v3 = SIV, v4 = ChaCha20_Poly1305
         r = Random.new()
-        nonce = r.read(16)
-        encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_SIV, nonce=nonce)
+        nonce = r.read(16 if site.version == 3 else 24)
+        if site.version == 3:
+            encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_SIV, nonce=nonce)
+        else:
+            encryptor = ChaCha20_Poly1305.new(key=site.cryptkey, nonce=nonce)
         cipher, tag = encryptor.encrypt_and_digest(s.encode('ascii'))
 
         return "&".join((

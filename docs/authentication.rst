@@ -1,5 +1,5 @@
-Community authentication 2.0
-============================
+Community authentication 2.0-4.0
+================================
 While the old community authentication system was simply having the
 clients call a PostgreSQL function on the main website server, version
 2.0 of the system uses browser redirects to perform this. This allows
@@ -63,7 +63,8 @@ The flow of an authentication in the 2.0 system is fairly simple:
 #. This dictionary of information is then URL-encoded.
 #. The resulting URL-encoded string is padded with spaces to an even
    16 bytes, and is then AES-SIV encrypted with a shared key and a 16
-   byte nonce. This key is stored in the main website system and
+   byte nonce (v4 uses ChaCha20_Poly1305 with standard size key and nonce,
+   but v3 is the preferred version). This key is stored in the main website system and
    indexed by the site id, and it is stored in the settings of the
    community website somewhere.  Since this key is what protects the
    authentication, it should be treated as very valuable.
@@ -77,7 +78,7 @@ The flow of an authentication in the 2.0 system is fairly simple:
 #. The community website detects that this is a redirected authentication
    response, and starts processing it specifically.
 #. Using the shared key, the data is decrypted (while first being base64
-   decoded, of course). Since authenticated encryption using AES-SIV
+   decoded, of course). Since authenticated encryption using AES-SIV or ChaCha20_Poly1305
    is used, this step will fail if there has been any tampering with the
    data.
 #. The resulting string is urldecoded - and if any errors occur in the
@@ -114,6 +115,17 @@ The flow for a logout request is trivial:
 #. The main website redirects the user back to the community website,
    at the URL <redirection_url>?s=logout (where redirection_url is the
    same URL as when logging in)
+
+Versions
+--------
+The different versions are primarily different in that they use different
+encryption algorithms.
+
+v2 uses standard AES without authentication. This version is *deprecated*.
+v3 uses AES-SIV authenticated encryption. This is the *recommended* vcersion.
+v4 uses ChaCha20_Poly1305 authenticated encryption, for platforms that don't
+   support AES-SIV.
+
 
 Searching
 ---------

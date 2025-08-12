@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='communityauthsite',
             name='version',
-            field=models.IntegerField(choices=[(2, 2), (3, 3)], default=2),
+            field=models.IntegerField(choices=[(2, 2), (3, 3), (4, 4)], default=2),
         ),
     ]
