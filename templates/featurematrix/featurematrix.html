@@ -25,7 +25,7 @@ the text.
   <div id="feature-matrix-filter" class="col-8 offset-2 border">
     <form id="featurematrix_version_filter"><h5>Filter by version</h5>
       {% for version in versions %}
-        <label for="{{ version.numtree|cut:"." }}">{{ version.numtree }}</label>
+        <label for="toggle_{{ version.numtree|cut:"." }}">{{ version.numtree }}</label>
         <input type="checkbox" id="toggle_{{ version.numtree|cut:"." }}" class="featurematrix_version" {% if version.supported or version.testing %}checked{% endif %} value="{{ version.numtree }}" />
       {% endfor %}
       <hr id="featurematrix_version_divider" />
