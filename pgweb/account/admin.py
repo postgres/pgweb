@@ -34,6 +34,20 @@ class CommunityAuthSiteAdminForm(forms.ModelForm):
     def clean(self):
         d = super().clean()
 
+        if 'cryptkey' in self.cleaned_data:
+            key = base64.b64decode(self.cleaned_data['cryptkey'])
+            if self.cleaned_data['version'] == 2:
+                keylen = 32
+            elif self.cleaned_data['version'] == 3:
+                keylen = 64
+            elif self.cleaned_data['version'] == 4:
+                keylen = 32
+            else:
+                self.add_error('version', 'Unknown version')
+                keylen = 0
+            if len(key) != keylen:
+                self.add_error('cryptkey', 'For version {}, crypto keys muyst be {} bytes'.format(self.cleaned_data['version'], keylen))
+
         if d.get('push_changes', False) and not d.get('apiurl', ''):
             self.add_error('push_changes', 'API url must be specified to enable push changes!')
 
