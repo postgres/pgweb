@@ -24,12 +24,13 @@ if __name__ == "__main__":
         usage()
 
     version = int(sys.argv[1])
+    keylen = 64 if version == 3 else 32
 
-    print("The next row contains a 64-byte (512-bit) symmetric crypto key.")
+    print("The next row contains a {}-byte ({}-bit) symmetric crypto key.".format(keylen, keylen * 8))
     print("This key should be used to integrate a community auth site.")
     print("Note that each site should have it's own key!!")
     print("")
 
     r = Random.new()
-    key = r.read(64 if version == 3 else 32)
+    key = r.read(keylen)
     print(base64.b64encode(key).decode('ascii'))
