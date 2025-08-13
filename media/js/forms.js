@@ -1,30 +1,22 @@
-$(document).ready(function(){
-    $('textarea.markdown-content').each(function(idx, e) {
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('textarea.markdown-content').forEach((e) => {
         attach_markdown_preview(e.id, 0);
     });
 
-    $('input.toggle-checkbox').each(function(idx, e) {
-        $(this).change(function(e) {
-            update_form_toggles($(this));
+    document.querySelectorAll('input.toggle-checkbox').forEach((e) => {
+        e.addEventListener('change', (ev) => {
+            update_form_toggles(ev.target);
         });
-        update_form_toggles($(e));
+        update_form_toggles(e);
     });
-
 });
 
 function update_form_toggles(e) {
-    var toggles = e.data('toggles').split(',');
-    var invert = e.data('toggle-invert');
-    var show = e.is(':checked');
-    if (invert) {
-        show = !show;
-    }
-    $.each(toggles, function(i, name) {
-        var e = $('#id_' + name);
-        if (show) {
-            $(e).parents('div.form-group').show();
-        } else {
-            $(e).parents('div.form-group').hide();
-        }
+    const show = e.checked ^ (e.dataset.toggleInvert === 'true');
+    console.log("checked: " + e.checked + ", toggle: " + (e.dataset.toggleInvert === 'true') + ", show: " + show);
+
+    e.dataset.toggles.split(',').forEach((t) => {
+        console.log('set for ' + t + ' to ' + show);
+        document.getElementById('id_' + t).closest('div.form-group').style.display = show ? '' : 'none';
     });
 }
