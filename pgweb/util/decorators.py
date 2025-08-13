@@ -24,6 +24,20 @@ def cache(days=0, hours=0, minutes=0, seconds=0):
     return _cache
 
 
+def xkey(key):
+    "Add a specific xkey to the page, other than the auto-generated ones"
+    def _xkey(fn):
+        def __xkey(request, *_args, **_kwargs):
+            resp = fn(request, *_args, **_kwargs)
+            if 'xkey' in resp:
+                resp['xkey'] += ' ' + key
+            else:
+                resp['xkey'] = key
+            return resp
+        return __xkey
+    return _xkey
+
+
 def queryparams(*args):
     """
     Allow specified query parameters when calling function.
