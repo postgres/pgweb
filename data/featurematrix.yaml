@@ -1,0 +1,2144 @@
+versions:
+  min: 8.1
+  max: 17
+featurematrix:
+  Backend:
+  - name: 64-bit large objects
+    versions:
+      '9.3': 'Yes'
+    description: Large objects are now 64-bit and can now be up to 4TB where before
+      it was up to 2GB.
+  - name: Advisory locks
+    versions:
+      '8.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/explicit-locking.html#ADVISORY-LOCKS
+  - name: Custom background workers
+    versions:
+      '9.3': 'Yes'
+    description: Background worker processes can now be added that can attach to PostgreSQL's
+      shared memory.
+  - name: Disk based FSM
+    versions:
+      '8.4': 'Yes'
+    description: replaces the shared memory fixed size free space map with an on-disk
+      implemenation
+  - name: Dynamic Background Workers
+    versions:
+      '9.4': 'Yes'
+    description: Allows background workers to be started and stopped dynamically by
+      any user process.
+  - name: EXPLAIN (BUFFERS) support
+    versions:
+      '9.0': 'Yes'
+    description: adds the ability to show buffer-usage statistics for a query
+  - name: EXPLAIN (MEMORY)
+    versions:
+      '17': 'Yes'
+    description: The `EXPLAIN` option `MEMORY` reports optimizer memory usage .
+  - name: EXPLAIN (SERIALIZE) support
+    versions:
+      '17': 'Yes'
+    description: The `EXPLAIN` option `SERIALIZE` reports the cost of converting data
+      for network transmission.
+  - name: EXPLAIN (WAL) support
+    versions:
+      '13': 'Yes'
+    description: "[EXPLAIN](https://www.postgresql.org/docs/13/sql-explain.html) can\
+      \ now track WAL usage information along with [auto_explain](https://www.postgresql.org/docs/13/auto-explain.html),\
+      \ [autovacuum](https://www.postgresql.org/docs/13/routine-vacuuming.html#AUTOVACUUM),\
+      \ and [pg_stat_statements](https://www.postgresql.org/docs/13/pgstatstatements.html).\r\
+      \n\r\nFor more information, please see the documentation on [EXPLAIN](https://www.postgresql.org/docs/13/sql-explain.html)."
+  - name: '"jsonlog" logging format'
+    versions:
+      '15': 'Yes'
+    description: PostgreSQL logs can now be output in  [JSON](https://www.postgresql.org/docs/15/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-JSONLOG)
+      using the [`jsonlog`](https://www.postgresql.org/docs/15/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-JSONLOG)
+      parameter when setting [`log_destination`](https://www.postgresql.org/docs/15/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHERE).
+      This provides a "structured log" that can be used by other utilities for storage
+      and analysis.
+  - name: Loadable plugin infrastructure for monitoring the planner
+    versions:
+      '8.3': 'Yes'
+    description: allows plugins to augment or even replace the planner (like for providing
+      an index advisor)
+  - name: Payload support for LISTEN/NOTIFY
+    versions:
+      '9.0': 'Yes'
+    description: '[`NOTIFY`](https://www.postgresql.org/docs/current/sql-notify.html)
+      can send payload data, which can be received by [`LISTEN`](https://www.postgresql.org/docs/current/sql-listen.html)'
+  - name: pg_stat_checkpointer system view
+    versions:
+      '17': 'Yes'
+    url: https://www.postgresql.org/docs/17/monitoring-stats.html#MONITORING-PG-STAT-CHECKPOINTER-VIEW
+  - name: pg_stat_io - I/O metrics view
+    versions:
+      '16': 'Yes'
+    url: https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW
+  - name: pg_wait_events system view
+    versions:
+      '17': 'Yes'
+    url: https://www.postgresql.org/docs/17/view-pg-wait-events.html
+  - name: Server statistics in shared memory
+    versions:
+      '15': 'Yes'
+    description: '[Server-level statistics](https://www.postgresql.org/docs/current/monitoring-stats.html)
+      are stored in shared memory. This eliminates the separate statistics collector
+      process.'
+  - name: SQL-standard information schema
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/information-schema.html
+  - name: Support for anonymous shared memory
+    versions:
+      '9.3': 'Yes'
+    description: Previously sizing shared memory often required adjusting kernel parameters
+      to accommodate the change.  This is no longer necessary.
+  - name: XML, JSON and YAML output for EXPLAIN
+    versions:
+      '9.0': 'Yes'
+    description: Adds XML, JSON and YAML output to EXPLAIN to help with automatic
+      processing of plans
+  Data Types, Functions, & Operators:
+  - name: Arrays of compound types
+    versions:
+      '8.3': 'Yes'
+    description: allows the creation of arrays of arbitrary complex compound types
+  - name: Array support
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/arrays.html
+  - name: ENUM data type
+    versions:
+      '8.3': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/datatype-enum.html
+  - name: GUID/UUID data type
+    versions:
+      '8.3': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/datatype-uuid.html
+  - name: macaddr8 data type
+    versions:
+      '10': 'Yes'
+    url: https://www.postgresql.org/docs/10/static/datatype-net-types.html#datatype-macaddr8
+  - name: Multiranges
+    versions:
+      '14': 'Yes'
+    url: https://www.postgresql.org/docs/14/rangetypes.html#RANGETYPES-BUILTIN
+  - name: NULLs in Array
+    versions:
+      '8.2': 'Yes'
+    description: array elements can contain NULL
+  - name: Phrase search
+    versions:
+      '9.6': 'Yes'
+    description: Fulltext search for phrases and word proximity.
+  - name: Range types
+    versions:
+      '9.2': 'Yes'
+    url: https://www.postgresql.org/docs/9.2/static/rangetypes.html
+  - name: smallserial type
+    versions:
+      '9.2': 'Yes'
+    description: A serial data type that uses smallint (2 byte integer) as its base
+      type, giving it a reduced numeric range, but a smaller data footprint.
+  - name: Type modifier support
+    versions:
+      '8.3': 'Yes'
+    description: allows user defined datatypes to specify a type modifier
+  - name: XML data type
+    versions:
+      '8.3': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/datatype-xml.html
+  Indexing & Constraints:
+  - name: Block-range (BRIN) indexes
+    versions:
+      '9.5': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/brin-intro.html
+  - name: B-tree bottom-up index deletion
+    versions:
+      '14': 'Yes'
+    url: https://www.postgresql.org/docs/14/btree-implementation.html#BTREE-DELETION
+  - name: B-tree deduplication
+    versions:
+      '13': 'Yes'
+    url: https://www.postgresql.org/docs/13/btree-implementation.html#BTREE-DEDUPLICATION
+  - name: Concurrent GiST indexes
+    versions:
+      '8.1': 'Yes'
+    description: Advanced locking for concurrent modification of GiST indexes
+  - name: Covering Indexes for B-trees (INCLUDE)
+    versions:
+      '11': 'Yes'
+    description: "Allows additional columns to be included in as \"non-key\" columns\
+      \ in an index, and if requirements are met, can return data from these columns\
+      \ in an index-only scan.\r\n\r\nFore more information, please see the documentation\
+      \ on [Index-Only Scans & Covering Indexes](https://www.postgresql.org/docs/current/indexes-index-only-scans.html)."
+  - name: Covering indexes for GiST (INCLUDE)
+    versions:
+      '12': 'Yes'
+    description: "Allows additional columns to be included in as \"non-key\" columns\
+      \ in a GiST index, and if requirements are met, can return data from these columns\
+      \ in an index-only scan.\r\n\r\nFore more information, please see the documentation\
+      \ on [Index-Only Scans & Covering Indexes](https://www.postgresql.org/docs/current/indexes-index-only-scans.html)."
+  - name: Deferrable unique constraints
+    versions:
+      '9.0': 'Yes'
+    description: allows unique constraint checking to be deferred until the end of
+      the transaction
+  - name: Exclusion constraints
+    versions:
+      '9.0': 'Yes'
+    description: generalizes the concept of uniqueness to support any indexable commutative
+      operator, not just equality
+  - name: GIN (Generalized Inverted Index) Indexes
+    versions:
+      '8.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/gin.html
+  - name: GIN indexes partial match
+    versions:
+      '8.4': 'Yes'
+    url: https://www.postgresql.org/docs/current/gin-implementation.html#GIN-PARTIAL-MATCH
+  - name: GIN Index performance and size improvements
+    versions:
+      '9.4': 'Yes'
+    description: GIN Indexes now take up significantly less space and perform a lot
+      faster than pre-9.4 releases.
+  - name: GiST (Generalized Search Tree) Indexes
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/gist.html
+  - name: Indexes on expressions
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/indexes-expressional.html
+  - name: Index-only scans
+    versions:
+      '9.2': 'Yes'
+    description: Also known as "covering indexes", allows data in indexes to satisfy
+      queries where all columns in a given query are covered by the index.  This removes
+      the requirement of having to visit the table pages, which was required previously
+      to get visibility information, but now the visibility map is used instead.
+  - name: Index-only scans on GiST
+    versions:
+      '9.5': 'Yes'
+    description: GiST indexes now support index-only scans.
+  - name: Index support for IS NULL
+    versions:
+      '8.3': 'Yes'
+    description: allows index usage with IS NULL expressions
+  - name: In-memory Bitmap Indexes
+    versions:
+      '8.1': 'Yes'
+    description: enabled the planner to combine multiple indexes using an in-memory
+      bitmap
+  - name: K-nearest neighbor GiST support
+    versions:
+      '9.1': 'Yes'
+    description: allows nearest-neighbor support to contrib/pg_trgm and contrib/btree_gist
+  - name: K-nearest neighbor SP-GiST Support
+    versions:
+      '12': 'Yes'
+    description: Add support for K-nearest neighbor (K-NN) searches on SP-GiST indexes
+      when the distance operator `<->` is defined.
+  - name: Non-blocking CREATE INDEX
+    versions:
+      '8.2': 'Yes'
+    description: online index creation without locking the table
+  - name: Parallel B-tree index scans
+    versions:
+      '10': 'Yes'
+    description: B-tree index pages can be searched by separate parallel workers.
+  - name: Parallelized CREATE INDEX for BRIN indexes
+    versions:
+      '17': 'Yes'
+    description: ''
+  - name: Parallelized CREATE INDEX for B-tree indexes
+    versions:
+      '11': 'Yes'
+    description: ''
+  - name: Space-Partitioned GiST (SP-GiST) Indexes
+    versions:
+      '9.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/spgist.html
+  - name: SP-GiST indexes for range types
+    versions:
+      '9.3': 'Yes'
+    description: GiST and SP-GiST indexes can be created for table columns of range
+      types.
+  - name: UNIQUE NULLS NOT DISTINCT
+    versions:
+      '15': 'Yes'
+    description: By default, `NULL` values are treated as distinct entries. Specifying
+      `NULLS NOT DISTINCT` on unique indexes / constraints will cause `NULL` to be
+      treated as not distinct, or in other words, equivalently.
+  - name: WAL support for hash indexes
+    versions:
+      '10': 'Yes'
+    description: Hash indexes have write-ahead log support, which makes them both
+      crash safe and replicable.
+  SQL:
+  - name: ANY_VALUE aggregate
+    versions:
+      '16': 'Yes'
+    url: https://www.postgresql.org/docs/16/functions-aggregate.html#id-1.5.8.27.5.2.4.1.1.1.1
+  - name: FETCH FIRST .. WITH TIES
+    versions:
+      '13': 'Yes'
+    url: https://www.postgresql.org/docs/13/sql-select.html#SQL-LIMIT
+  - name: GROUPING SETS, CUBE and ROLLUP support
+    versions:
+      '9.5': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/queries-table-expressions.html#QUERIES-GROUPING-SETS
+  - name: INSERT/UPDATE/DELETE RETURNING
+    versions:
+      '8.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-insert.html
+  - name: LATERAL clause
+    versions:
+      '9.3': 'Yes'
+    description: SQL-standard LATERAL option for FROM-clause subqueries and function
+      calls.
+  - name: MERGE
+    versions:
+      '15': 'Yes'
+    url: https://www.postgresql.org/docs/15/sql-merge.html
+  - name: MERGE ... RETURNING
+    versions:
+      '17': 'Yes'
+    description: '[MERGE](https://www.postgresql.org/docs/current/sql-merge.html)
+      can now use a `RETURNING` clause to return modified rows and what action was
+      used to modify them using the `merge_action()` function.'
+  - name: Multirow VALUES
+    versions:
+      '8.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-values.html
+  - name: Non-decimal integer literals
+    versions:
+      '16': 'Yes'
+    description: Support for non-decimal integer literals, for example `0xff`, `0o777`,
+      and `0b101010`.
+  - name: ORDER BY NULLS FIRST/LAST
+    versions:
+      '8.3': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-select.html
+  - name: range_agg range type aggregation function
+    versions:
+      '14': 'Yes'
+    description: Range types can be aggregated (e.g. in `GROUP BY` clauses) using
+      the [`range_agg`](https://www.postgresql.org/docs/15/functions-aggregate.html)
+      function.
+  - name: Recursive Queries
+    versions:
+      '8.4': 'Yes'
+    url: https://www.postgresql.org/docs/current/queries-with.html
+  - name: regexp_count, regexp_instr, regexp_like
+    versions:
+      '15': 'Yes'
+    description: "- `regexp_count`: counts the number of places that match the regular\
+      \ expression in a string\r\n- `regexp_instr `: returns the starting of the Nth\
+      \ match of a regular expression in a sting\r\n- `regexp_like`: returns true\
+      \ if a regular expression has a match in a string.\r\n\r\n[https://www.postgresql.org/docs/15/functions-matching.html#FUNCTIONS-POSIX-REGEXP](https://www.postgresql.org/docs/15/functions-matching.html#FUNCTIONS-POSIX-REGEXP)"
+  - name: Row-wise comparison
+    versions:
+      '8.2': 'Yes'
+    description: ''
+  - name: SELECT FOR NO KEY UPDATE/SELECT FOR KEY SHARE lock modes
+    versions:
+      '9.3': 'Yes'
+    description: These prevent non-key-field row updates from locking foreign key
+      rows.
+  - name: SQL standard interval handling
+    versions:
+      '8.4': 'Yes'
+    description: ''
+  - name: SYSTEM_USER
+    versions:
+      '16': 'Yes'
+    url: https://www.postgresql.org/docs/16/functions-info.html#id-1.5.8.32.3.4.2.2.24.1.1.1
+  - name: TABLE statement
+    versions:
+      '8.4': 'Yes'
+    description: "SQL standard shorthand version for `SELECT * FROM`\r\n\r\nFor more\
+      \ information, please see the documentation on [`SELECT`](https://www.postgresql.org/docs/current/sql-select.html)"
+  - name: Underscores (_) for thousands separators
+    versions:
+      '16': 'Yes'
+    description: Underscores (\_) can be used as thousand separators, for example,
+      `5_432_000`
+  - name: unnest/array_agg
+    versions:
+      '8.4': 'Yes'
+    description: "`unnest` allows for arrays to be \"unnested\" and expanded into\
+      \ a set of rows.\r\n\r\nConversely, `array_agg` can take the output of a set\
+      \ of rows and aggregate them into an array.\r\n\r\nFor more information:\r\n\
+      \r\n- [Array Functions](https://www.postgresql.org/docs/current/functions-array.html)\r\
+      \n- [Aggregation Functions](https://www.postgresql.org/docs/current/functions-aggregate.html)"
+  - name: Upsert (INSERT ... ON CONFLICT DO ...)
+    versions:
+      '9.5': 'Yes'
+    description: "Support for upsert functionality which allows either no action to\
+      \ be taken when a conflict is encountered, or convert the INSERT to an UPDATE.\r\
+      \n\r\nFor more information, please see the [INSERT](https://www.postgresql.org/docs/current/sql-insert.html)\
+      \ documentation."
+  - name: Window functions
+    versions:
+      '8.4': 'Yes'
+    url: https://www.postgresql.org/docs/current/tutorial-window.html
+  - name: WITHIN GROUP clause
+    versions:
+      '9.4': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-expressions.html#SYNTAX-AGGREGATES
+  - name: WITH ORDINALITY clause
+    versions:
+      '9.4': 'Yes'
+    url: https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-TABLEFUNCTIONS
+  - name: WITH Queries (Common Table Expressions)
+    versions:
+      '8.4': 'Yes'
+    url: https://www.postgresql.org/docs/current/queries-with.html
+  - name: Writable WITH Queries (Common Table Expressions)
+    versions:
+      '9.1': 'Yes'
+    description: Allows INSERT/UPDATE/DELETE in WITH clauses which can be used in
+      conjunction with a RETURNING clause to to pass data up to the containing query.
+  Data Definition Language (DDL):
+  - name: ALTER object IF EXISTS
+    versions:
+      '9.2': 'Yes'
+    description: Many objects now support IF EXISTS clauses on ALTER statements, such
+      as tables, foreign tables, indexes, sequences etc.
+  - name: ALTER TABLE ... ADD UNIQUE/PRIMARY KEY USING INDEX
+    versions:
+      '9.1': 'Yes'
+    description: This allows a primary key or unique constraint to be defined using
+      an existing unique index, including a concurrently created unique index.
+  - name: ALTER TABLE ... SET ACCESS METHOD
+    versions:
+      '15': 'Yes'
+    description: '[`ALTER TABLE`](https://www.postgresql.org/docs/15/sql-altertable.html)
+      can specify a different [access method](https://www.postgresql.org/docs/15/tableam.html),
+      also known as a storage interface.'
+  - name: ALTER TABLE ... SET LOGGED / UNLOGGED
+    versions:
+      '9.5': 'Yes'
+    description: Allows tables to switch between logged and unlogged states.
+  - name: Changing column types (ALTER TABLE .. ALTER COLUMN TYPE)
+    versions:
+      '8.1': 'Yes'
+    description: allows online changes of a column datatype to a different one
+  - name: CREATE ACCESS METHOD
+    versions:
+      '12': 'Yes'
+    url: https://www.postgresql.org/docs/12/sql-create-access-method.html
+  - name: CREATE TABLE ... (LIKE) with foreign tables, views and composite types
+    versions:
+      '9.2': 'Yes'
+    description: ''
+  - name: DROP object IF EXISTS
+    versions:
+      '8.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-commands.html
+  - name: ON COMMIT clause for CREATE TEMPORARY TABLE
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-createtable.html
+  - name: REINDEX CONCURRENTLY
+    versions:
+      '12': 'Yes'
+    url: https://www.postgresql.org/docs/current/sql-reindex.html#SQL-REINDEX-CONCURRENTLY
+  - name: Stored Generated Columns
+    versions:
+      '12': 'Yes'
+    url: https://www.postgresql.org/docs/current/ddl-generated-columns.html
+  - name: Typed tables
+    versions:
+      '9.0': 'Yes'
+    description: 'Adds support for syntax: CREATE TABLE name OF type'
+  Performance:
+  - name: Abbreviated Keys
+    versions:
+      '9.5': 'Yes'
+    description: The abbreviated keys optimization can be expected to greatly enhance
+      the performance of sorts in PostgreSQL, including those used for CREATE INDEX.
+      Reportedly, in some cases, CREATE INDEX on text columns can be as much as an
+      entire order of magnitude faster (3x is a more typical improvement). Numeric
+      sorts also support the optimization.
+  - name: Asynchronous Commit
+    versions:
+      '8.3': 'Yes'
+    description: Delays writes to WAL for committed transactions
+  - name: Automatic plan invalidation
+    versions:
+      '8.3': 'Yes'
+    description: automatic invalidation of cached exceutions plans
+  - name: Background Checkpointer
+    versions:
+      '9.2': 'Yes'
+    description: Originally the background writer held responsibility for writing
+      checkpoints, but it has now been moved into its own separate process and the
+      background writer is now only responsible for writing dirty pages to disk.  This
+      provides advantages related to performance and power-reduction.
+  - name: Background Writer
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/runtime-config-resource.html
+  - name: Base backup throttling
+    versions:
+      '9.4': 'Yes'
+    description: pg_basebackup now supports throttling of backups with -r <rate> or
+      --max-rate <rate>, allowing control of the data transfer rate of the base backup.
+  - name: CREATE STATISTICS - most-common values (MCV) statistics
+    versions:
+      '12': 'Yes'
+    description: CREATE STATISTICS  can collection statistics on the most common value,
+      which can improve optimizations for columns that contain nonuniform distributions.
+  - name: CREATE STATISTICS - multicolumn
+    versions:
+      '10': 'Yes'
+    description: "CREATE STATISTICS provides the ability to collect statistics over\
+      \ multiple columns, which can be used by the optimizer to generate better query\
+      \ plans.\r\n\r\nhttps://www.postgresql.org/docs/current/sql-createstatistics.html"
+  - name: CREATE STATISTICS - "OR" and "IN/ANY" statistics
+    versions:
+      '13': 'Yes'
+    description: Extend statistics can help the query planner provided better plans
+      for queries that have "OR".clauses as well as "IN/ANY" lookups over lists. For
+      more information, please see https://www.postgresql.org/docs/13/planner-stats.html#PLANNER-STATS-EXTENDED
+  - name: Cross datatype hashing support
+    versions:
+      '8.3': 'Yes'
+    description: allows hashing to be used across compatible but not identical datatypes
+  - name: Distributed checkpointing
+    versions:
+      '8.3': 'Yes'
+    description: automatic smoothening of checkpoints to reduce sudden I/O spikes
+  - name: Foreign keys marked as NOT VALID
+    versions:
+      '9.1': 'Yes'
+    description: This introduces a new option to the creation of foreign keys called
+      NOT VALID, which can later be modified to VALIDATED and validation checks performed.
+      Together these allow you to add a foreign key with minimal impact on read and
+      write operations.
+  - name: Frozen page map
+    versions:
+      '9.6': 'Yes'
+    description: Frozen page data in visibility map to prevent re-vacuuming already-frozen
+      pages during wraparound.
+  - name: Full Text Search
+    versions:
+      '8.3': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/textsearch.html
+  - name: Hash aggregation can use disk
+    versions:
+      '13': 'Yes'
+    description: "The query planner can now consider using hash aggregation if it\
+      \ expects the aggregate to exceed working memory.\r\n\r\nThis can be controlled\
+      \ by two configuration parameters:\r\n\r\n- [enable_hashagg](https://www.postgresql.org/docs/13/runtime-config-query.html#GUC-ENABLE-HASHAGG)\r\
+      \n- [hash_mem_multiplier](https://www.postgresql.org/docs/13/runtime-config-resource.html#GUC-HASH-MEM-MULTIPLIER)"
+  - name: Hashing support for DISTINCT/UNION/INTERSECT/EXCEPT
+    versions:
+      '8.4': 'Yes'
+    description: allows hashing to be used in query plans involving DISTINCT/UNION/EXCEPT/INTERSECT
+  - name: Hashing support for FULL OUTER JOIN, LEFT OUTER JOIN and RIGHT OUTER JOIN
+    versions:
+      '9.1': 'Yes'
+    description: allows FULL OUTER JOIN to be implemented as a hash join, and allow
+      either side of a LEFT OUTER JOIN or RIGHT OUTER JOIN to be hashed
+  - name: Heap Only Tuples (HOT)
+    versions:
+      '8.3': 'Yes'
+    description: optimization for heavily updated tables
+  - name: Improved performance for sorts exceeding working memory
+    versions:
+      '15': 'Yes'
+    description: Sorts for data sets that exceed [`work_mem`](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-WORK-MEM)
+      now use a batch sorting algorithm that uses more output streams and improves
+      performance.
+  - name: Improved window function performance
+    versions:
+      '15': 'Yes'
+    description: Performance optimizations for executing [window functions](https://www.postgresql.org/docs/current/functions-window.html)
+      `row_number()`, `rank()`, and `count()`.
+  - name: Incremental sort
+    versions:
+      '13': 'Yes'
+    url: https://www.postgresql.org/docs/13/runtime-config-query.html#GUC-ENABLE-INCREMENTAL-SORT
+  - name: Incremental sort for SELECT DISTINCT
+    versions:
+      '16': 'Yes'
+    description: Queries with `SELECT DISTINCT` can use [incremental sort](https://www.postgresql.org/docs/16/runtime-config-query.html#GUC-ENABLE-INCREMENTAL-SORT).
+  - name: Incremental sort for window functions
+    versions:
+      '14': 'Yes'
+    description: '[Window functions](https://www.postgresql.org/docs/14/functions-window.html)
+      can use incremental sorting'
+  - name: Inlined WITH Queries (Common Table Expressions)
+    versions:
+      '12': 'Yes'
+    description: "A WITH query that is neither recursive nor has any side-effects\
+      \ (e.g. an INSERT/UPDATE/DELETE) can be executed inline, which can lead to performance\
+      \ improvements. This behavior can be forced on a query by using the \"NOT MATERIALIZED\"\
+      \ clause, e.g.\r\n\r\n```\r\nWITH cte AS NOT MATERIALIZED (\r\n    SELECT *\
+      \ FROM a\r\n)\r\nSELECT * FROM cte\r\nJOIN b ON b.id = cte.id;\r\n```\r\n\r\n\
+      For more information, please visit [https://www.postgresql.org/docs/12/queries-with.html](https://www.postgresql.org/docs/12/queries-with.html)"
+  - name: Inlining of SQL-functions
+    versions:
+      '8.1': 'Yes'
+    description: allows the planner to inline most SQL functions into the whole query
+  - name: Just-in-Time (JIT) compilation for expression evaluation and tuple deforming
+    versions:
+      '11': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/jit.html
+  - name: Load balancing for libpq / psql
+    versions:
+      '16': 'Yes'
+    url: https://www.postgresql.org/docs/16/libpq-connect.html#LIBPQ-CONNECT-LOAD-BALANCE-HOSTS
+  - name: LZ4 compression for TOAST tables
+    versions:
+      '14': 'Yes'
+    description: The compression method for [TOAST](https://www.postgresql.org/docs/14/storage-toast.html)
+      tables is now selectable and adds support for lz4 compression.
+  - name: Multi-core scalability for read-only workloads
+    versions:
+      '9.2': 'Yes'
+    description: Improve concurrent read-only workloads on multi-core servers.  Previously
+      this had limited scalability offering performance benefits only up to a few
+      cores, but now performance gains are seen utilising all cores in 32 and 64 core
+      servers.
+  - name: Multiple temporary tablespaces
+    versions:
+      '8.3': 'Yes'
+    description: allows multiple tablespaces to be defined for temporary operations
+  - name: Outer Join reordering
+    versions:
+      '8.2': 'Yes'
+    description: enables the query planner to reorder out joins
+  - name: Parallel bitmap heap scans
+    versions:
+      '10': 'Yes'
+    description: A single index scan can dispatch parallel workers to process different
+      areas of the heap.
+  - name: Parallel FULL and RIGHT joins
+    versions:
+      '16': 'Yes'
+    description: Ability to execute in parallell `FULL` and `RIGHT OUTER` joins.
+  - name: Parallel full table scans (sequential scans)
+    versions:
+      '9.6': 'Yes'
+    url: https://www.postgresql.org/docs/current/parallel-plans.html#PARALLEL-SCANS
+  - name: Parallel hash joins
+    versions:
+      '11': 'Yes'
+    url: https://www.postgresql.org/docs/current/parallel-plans.html#PARALLEL-JOINS
+  - name: Parallel JOIN, aggregate
+    versions:
+      '9.6': 'Yes'
+    description: Ability to execute some kinds of JOINs, as well as aggregates, using
+      multiple parallel processes.
+  - name: Parallel merge joins
+    versions:
+      '10': 'Yes'
+    description: Merge joins can be performed in parallel.
+  - name: Parallel query
+    versions:
+      '9.6': 'Yes'
+    description: Ability to execute multiple query nodes in parallel processes.
+  - name: Parallel "SELECT DISTINCT"
+    versions:
+      '15': 'Yes'
+    description: A query using [`SELECT DISTINCT`](https://www.postgresql.org/docs/current/queries-select-lists.html#QUERIES-DISTINCT)
+      can now be executed using parallelism.
+  - name: Partial sort capability (top-n sorting)
+    versions:
+      '8.3': 'Yes'
+    description: optimizes sort operations for ORDER BY x LIMIT ionsy like operat
+  - name: Query pipelining
+    versions:
+      '14': 'Yes'
+    url: https://www.postgresql.org/docs/14/libpq-pipeline-mode.html
+  - name: Reduced lock levels for ALTER TABLE commands
+    versions:
+      '9.4': 'Yes'
+    description: "The following commands now have reduced lock levels for reduced\
+      \ lock contention:\r\n\r\nVALIDATE CONSTRAINT\r\n\r\nCLUSTER ON\r\nSET WITHOUT\
+      \ CLUSTER\r\n\r\nALTER COLUMN SET STATISTICS\r\nALTER COLUMN SET ()\r\nALTER\
+      \ COLUMN RESET ()"
+  - name: SELECT ... FOR UPDATE/SHARE NOWAIT
+    versions:
+      '8.1': 'Yes'
+    description: ''
+  - name: Set costs specific to TABLESPACEs
+    versions:
+      '9.0': 'Yes'
+    description: Allows for setting seq_page_cost and random_page_cost on a per tablespace
+      level
+  - name: Shared row level locking
+    versions:
+      '8.1': 'Yes'
+    description: reduces deadlock scenarios with foreign keys
+  - name: SIMD support for ARM
+    versions:
+      '16': 'Yes'
+    description: Allows for SIMD execution of vector operations on ARM architecture,
+      including JSON string parsing, including subtransaction ID searches.
+  - name: SIMD support for x86
+    versions:
+      '16': 'Yes'
+    description: Allows for SIMD execution of vector operations on x86 architecture,
+      including JSON string parsing, ASCII string detection, and subtransaction ID
+      searches.
+  - name: SKIP LOCKED clause
+    versions:
+      '9.5': 'Yes'
+    description: Skips over rows that are currently locked without waiting.
+  - name: Synchronized sequential scanning
+    versions:
+      '8.3': 'Yes'
+    description: enabled sequential scans to piggyback on concurrently running scans
+  - name: TABLESAMPLE clause
+    versions:
+      '9.5': 'Yes'
+    description: Specifies that a sample of the table is to be used, which is useful
+      for use-cases such as approximate averages.
+  - name: Tablespaces
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-createtablespace.html
+  - name: Unlogged tables
+    versions:
+      '9.1': 'Yes'
+    description: 'Such tables provide better update performance than regular tables,
+      but are not crash-safe: their contents are automatically cleared in case of
+      a server crash. Their contents do not propagate to replication slaves, either.'
+  - name: WAL Buffer auto-tuning
+    versions:
+      '9.1': 'Yes'
+    description: wal_buffers is now auto-tuned by default based on the size of shared_buffers
+  JSON:
+  - name: Improved set of JSON functions and operators
+    versions:
+      '9.3': 'Yes'
+    description: New operators and functions to extract values from JSON data strings,
+      JSON data strings can now to be converted into records and new functions to
+      convert values, records, and hstore data to JSON.
+  - name: JSONB data type
+    versions:
+      '9.4': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/datatype-json.html
+  - name: JSONB-modifying operators and functions
+    versions:
+      '9.5': 'Yes'
+    description: New operators and functions which allow deleting, modifying or inserting
+      values into JSONB values, including at specific path locations.
+  - name: JSONB Subscripting
+    versions:
+      '14': 'Yes'
+    url: https://www.postgresql.org/docs/14/datatype-json.html#JSONB-SUBSCRIPTING
+  - name: JSON data type
+    versions:
+      '9.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/datatype-json.html
+  - name: SQL/JSON constructors
+    versions:
+      '16': 'Yes'
+    description: Adds SQL/JSON constructors, including `JSON_ARRAY()`, `JSON_ARRAYAGG()`,
+      `JSON_OBJECT()`, and `JSON_OBJECTAGG()`.
+  - name: 'SQL/JSON: datetime()'
+    versions:
+      '13': 'Yes'
+    description: "The SQL/JSON path `datetime()` function in JSON path expressions\
+      \ converts valid date and time formats (e.g. ISO 8601) to their corresponding\
+      \ PostgreSQL type.\r\n\r\nFor more information, see the [JSON path documentation](https://www.postgresql.org/docs/13/functions-json.html#FUNCTIONS-SQLJSON-OP-TABLE)"
+  - name: SQL/JSON IS JSON
+    versions:
+      '16': 'Yes'
+    description: "SQL/JSON syntax for testing the type of JSON object. For example:\r\
+      \n\r\n```\r\nSELECT js,\r\n  js IS JSON \"json?\",\r\n  js IS JSON SCALAR \"\
+      scalar?\",\r\n  js IS JSON OBJECT \"object?\",\r\n  js IS JSON ARRAY \"array?\"\
+      \r\nFROM (VALUES\r\n      ('123'), ('\"abc\"'), ('{\"a\": \"b\"}'), ('[1,2]'),('abc'))\
+      \ foo(js);\r\n```"
+  - name: SQL/JSON JSON_TABLE
+    versions:
+      '17': 'Yes'
+    url: https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-TABLE
+  - name: SQL/JSON path expressions
+    versions:
+      '12': 'Yes'
+    url: https://www.postgresql.org/docs/current/functions-json.html#FUNCTIONS-SQLJSON-PATH
+  - name: SQL/JSON query functions
+    versions:
+      '17': 'Yes'
+    url: https://www.postgresql.org/docs/17/functions-json.html#FUNCTIONS-SQLJSON-QUERYING
+  Partitioning & Inheritance:
+  - name: Accelerated partition pruning
+    versions:
+      '12': 'Yes'
+    description: Performance improvements for queries on tables with thousands of
+      partitions when only a limited subset of partitions need to be accessed.
+  - name: Declarative table partitioning
+    versions:
+      '10': 'Yes'
+    url: https://www.postgresql.org/docs/10/static/ddl-partitioning.html#ddl-partitioning-declarative
+  - name: Default Partition
+    versions:
+      '11': 'Yes'
+    description: A default partition stores data that does not match the partition
+      key for any other partition, i.e. it is a "catch all" partition.
+  - name: Foreign Key references for partitioned tables
+    versions:
+      '12': 'Yes'
+    description: A foreign key can reference a partitioned table.
+  - name: Foreign table inheritance
+    versions:
+      '9.5': 'Yes'
+    description: Foreign tables can now inherit from other foreign tables or other
+      regular tables.  The reverse also applies.
+  - name: Partitioning by a hash key
+    versions:
+      '11': 'Yes'
+    description: ''
+  - name: Partition pruning during query execution
+    versions:
+      '11': 'Yes'
+    description: Queries on partitioned tables can eliminate partitions during query
+      execution time, instead of only at query planning time. This allows PostgreSQL
+      to use information that becomes available during query execution to further
+      prune the number of partitions it needs to use, leading to improved query performance.
+  - name: Support for PRIMARY KEY, FOREIGN KEY, indexes, and triggers on partitioned
+      tables
+    versions:
+      '11': 'Yes'
+    description: ''
+  - name: Table Partitioning
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/ddl-partitioning.html
+  - name: UPDATE on a partition key
+    versions:
+      '11': 'Yes'
+    description: When a partition key is updated on a row, the row is moved to the
+      appropriate partition.
+  Views & Materialized Views:
+  - name: Materialized Views
+    versions:
+      '9.3': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/rules-materializedviews.html
+  - name: Materialized views with concurrent refresh
+    versions:
+      '9.4': 'Yes'
+    description: Materialized views which can be refreshed with REFRESH MATERIALIZED
+      VIEW CONCURRENTLY name;
+  - name: SECURITY INVOKER views
+    versions:
+      '15': 'Yes'
+    description: '[Views](https://www.postgresql.org/docs/15/sql-createview.html)
+      can be created using the `SECURITY INVOKER` parameter, which executes the view
+      with the privileges of the caller instead of the privileges of the owner.'
+  - name: Temporary VIEWs
+    versions:
+      '8.1': 'Yes'
+    description: allows the creation of temporary VIEWs
+  - name: Updatable views
+    versions:
+      '9.3': 'Yes'
+    description: Simple views can now have UPDATE/INSERT/DELETE performed against
+      them.
+  - name: WITH CHECK clause
+    versions:
+      '9.4': 'Yes'
+    description: Auto-updatable views can now specify whether an INSERT or UPDATE
+      would change the state of the row so that it would no longer be visible in the
+      view.  Using WITH CHECK OPTION will prevent any such changes from occuring.
+  Replication:
+  - name: ALTER SUBSCRIPTION ... SKIP
+    versions:
+      '15': 'Yes'
+    description: '[`ALTER SUBSCRIPTION ... SKIP`] allows a subscriber to skip replaying
+      a transaction. For more information, please read the section on handling [conflicts](https://www.postgresql.org/docs/15/logical-replication-conflicts.html)
+      with logical replication.'
+  - name: Cascading streaming replication
+    versions:
+      '9.2': 'Yes'
+    description: Standbys can now stream to other standbys, reducing replication load
+      on the primary server.
+  - name: Configure max WAL retention for replication slots
+    versions:
+      '13': 'Yes'
+    url: https://www.postgresql.org/docs/13/runtime-config-replication.html#GUC-MAX-SLOT-WAL-KEEP-SIZE
+  - name: Failover support for logical replication slots
+    versions:
+      '17': 'Yes'
+    url: https://www.postgresql.org/docs/17/logical-replication-failover.html
+  - name: Logical replication
+    versions:
+      '10': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/logical-replication.html
+  - name: Logical replication avoids replication loops
+    versions:
+      '16': 'Yes'
+    url: https://www.postgresql.org/docs/16/sql-createsubscription.html#SQL-CREATESUBSCRIPTION-WITH-ORIGIN
+  - name: Logical replication column lists
+    versions:
+      '15': 'Yes'
+    description: '[Publications](https://www.postgresql.org/docs/15/logical-replication-publication.html)
+      for logical replication can now specify which columns to publish. Previously,
+      a publication would publish all columns in a table.'
+  - name: Logical replication for partitioned tables
+    versions:
+      '13': 'Yes'
+    description: Fully supports logical replication of partitioned tables.
+  - name: Logical replication from standbys
+    versions:
+      '16': 'Yes'
+    description: Logical replication publishers can be created from standby instances.
+  - name: Logical replication initial sync using binary protocol
+    versions:
+      '16': 'Yes'
+    url: https://www.postgresql.org/docs/16/sql-createsubscription.html#SQL-CREATESUBSCRIPTION-WITH-BINARY
+  - name: Logical replication lookups with additional indexes
+    versions:
+      '16': 'Yes'
+    description: "A logical replication subscriber can use indexes other than the\
+      \ `PRIMARY KEY` to perform lookups during\r\n`UPDATE` or `DELETE` operations,"
+  - name: Logical replication parallel apply of transactions
+    versions:
+      '16': 'Yes'
+    url: https://www.postgresql.org/docs/16/sql-createsubscription.html#SQL-CREATESUBSCRIPTION-WITH-STREAMING
+  - name: Logical replication publish all tables in schema
+    versions:
+      '15': 'Yes'
+    description: When creating a logical replication publication, a user can specify
+      to publish all the tables within a schema , e.g. [`CREATE PUBLICATION ... FOR
+      TABLES IN SCHEMA ...`](https://www.postgresql.org/docs/15/sql-createpublication.html).
+  - name: Logical replication row filtering
+    versions:
+      '15': 'Yes'
+    url: https://www.postgresql.org/docs/15/logical-replication-row-filter.html
+  - name: Logical replication slots migrate through pg_upgrade migrate
+    versions:
+      '17': 'Yes'
+    description: This allows logical replication to continue quickly after the upgrade.
+      This only works for old PostgreSQL clusters that are version 17 or later.
+  - name: Logical replication stream in-progress transactions
+    versions:
+      '14': 'Yes'
+    description: In-progress transactions can be streamed when using [logical replication](https://www.postgresql.org/docs/current/logical-replication.html),
+      versus having to wait for the transaction to be completed first.
+  - name: Logical replication subscriber can disable on error
+    versions:
+      '15': 'Yes'
+    description: Logical replication subscribers can be automatically disabled using
+      the [`disable_on_error`](https://www.postgresql.org/docs/15/logical-replication-conflicts.html)
+      setting.
+  - name: Quorum commit for synchronous replication
+    versions:
+      '10': 'Yes'
+    description: Using the synchronous_standby_names configuration parameter, synchronous
+      replication can be setup to allow for any number of standbys to confirm writes
+      have been committed, irrespective of their ordering. This is also known as "quorum
+      commit."
+  - name: Replication Slots
+    versions:
+      '9.4': 'Yes'
+    url: https://www.postgresql.org/docs/9.4/static/warm-standby.html#STREAMING-REPLICATION-SLOTS
+  - name: Streaming-only cascading replication
+    versions:
+      '9.3': 'Yes'
+    description: Cascading replication previously required that an xlog archive be
+      available in order for a standbys of the new primary to correctly switch to
+      the new timeline.  This change removes this dependency.
+  - name: Streaming Replication
+    versions:
+      '9.0': 'Yes'
+    description: Integrated replication support based on streaming WAL data
+  - name: Synchronous replication
+    versions:
+      '9.1': 'Yes'
+    description: This allows the primary to wait for a standby to write the transaction
+      information to disk before acknowledging the commit. One standby at a time can
+      take the role of the synchronous standby, as controlled by the synchronous_standby_names
+      setting. Synchronous replication can be enabled or disabled on a per-transaction
+      basis using the synchronous_commit setting.
+  Backup, Restore, & Data Integrity:
+  - name: Archive modules
+    versions:
+      '15': 'Yes'
+    url: https://www.postgresql.org/docs/15/archive-modules.html
+  - name: Checksum on data pages
+    versions:
+      '9.3': 'Yes'
+    description: Clusters can now be created with checksums on pages to detect and
+      report page corruption.
+  - name: Enable/Disable page checksums in an offline cluster
+    versions:
+      '12': 'Yes'
+    description: "Page checksums can be enabled or disabled in an offline PostgreSQL\
+      \ cluster via the pg_checksums command:\r\n\r\nhttps://www.postgresql.org/docs/12/app-pgchecksums.html"
+  - name: Generic WAL facility
+    versions:
+      '9.6': 'Yes'
+    description: Consistent, simple API for WAL-logging of database objects, supporting
+      new index access methods and other storage objects.
+  - name: Hot Standby
+    versions:
+      '9.0': 'Yes'
+    description: allow read only connections during recovery
+  - name: lz4 and Zstandard (zstd) compression for WAL full page writes
+    versions:
+      '15': 'Yes'
+    url: https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-WAL-COMPRESSION
+  - name: min_wal_size / max_wal_size
+    versions:
+      '9.5': 'Yes'
+    description: "Replaces `checkpoint_segments` parameter.\r\n\r\nFor more information,\
+      \ please see the [WAL configuration](https://www.postgresql.org/docs/current/wal-configuration.html)\
+      \ documentation."
+  - name: Multiple synchronous standbys
+    versions:
+      '9.6': 'Yes'
+    description: Ability to require synch messages from multiple prioritized standbys
+      when committing a synchronous transaction.
+  - name: Named restore points
+    versions:
+      '9.1': 'Yes'
+    description: Create a named point for performing restore using pg_create_restore_point
+  - name: Parallel pg_dump
+    versions:
+      '9.3': 'Yes'
+    description: pg_dump now has a --jobs option to dump tables in parallel.
+  - name: Parallel restore
+    versions:
+      '8.4': 'Yes'
+    description: allows pg_restore to restore data from custom format dumps in parallel
+  - name: pg_basebackup client decompression
+    versions:
+      '15': 'Yes'
+    description: '[`pg_basebackup`](https://www.postgresql.org/docs/15/app-pgbasebackup.html)
+      can now decompress backups using `lz4` and `zstd` (Zstandard) compression.'
+  - name: pg_basebackup incremental backup
+    versions:
+      '17': 'Yes'
+    description: Incremental backups can be created using the `--incremental` option
+      for [`pg_basebackup`](https://www.postgresql.org/docs/current/app-pgbasebackup.html).
+      The new application [pg_combinebackup](https://www.postgresql.org/docs/17/app-pgcombinebackup.html)
+      allows manipulation of base and incremental file system backups.
+  - name: pg_basebackup server-side compression
+    versions:
+      '15': 'Yes'
+    description: '[`pg_basebackup`](https://www.postgresql.org/docs/current/app-pgbasebackup.html)
+      now supports server-side compression when creating a backup using the `--compress`
+      flag. This includes `gzip`, `lz4`, and `zstd` (Zstandard) compression.'
+  - name: pg_basebackup tool
+    versions:
+      '9.1': 'Yes'
+    description: pg_basebackup is a tool to take a base backup of a PostgreSQL cluster
+  - name: pg_dump, pg_dumpall, pg_restore --filter
+    versions:
+      '17': 'Yes'
+    description: Allow [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html),
+      [pg_dumpall](https://www.postgresql.org/docs/current/app-pg-dumpall.html), and
+      [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html) to
+      specify include/exclude objects in a file using the `--filter` option.
+  - name: pg_receivewal (formerly pg_receivexlog)
+    versions:
+      '9.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/app-pgreceivewal.html
+  - name: Point-in-Time Recovery
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/continuous-archiving.html
+  - name: Pre-fetch WAL during recovery
+    versions:
+      '15': 'Yes'
+    url: https://www.postgresql.org/docs/15/runtime-config-wal.html#GUC-RECOVERY-PREFETCH
+  - name: remote_apply mode
+    versions:
+      '9.6': 'Yes'
+    description: Ability to require that synchronous replicas be caught up with the
+      master in applying changes before commit.  Supports "consistent clustering".
+  - name: Time-delayed Standbys
+    versions:
+      '9.4': 'Yes'
+    description: A new setting called recovery_min_apply_delay will allow a standby
+      to lag behind the primary by a specified amount of time.
+  - name: Verify backup integrity (pg_verifybackup)
+    versions:
+      '13': 'Yes'
+    url: https://www.postgresql.org/docs/13/app-pgverifybackup.html
+  - name: Warm Standby
+    versions:
+      '8.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/warm-standby.html
+  Data Import & Export:
+  - name: COPY from/to STDIN/STDOUT
+    versions:
+      '9.3': 'Yes'
+    description: COPY and psql's \copy now support piping from and to STDIN and STDOUT
+      respectively.
+  - name: COPY FROM ... WHERE
+    versions:
+      '12': 'Yes'
+    description: Specify which rows are loaded from a data source via a WHERE clause
+      when using COPY FROM
+  - name: COPY ... ON_ERROR
+    versions:
+      '17': 'Yes'
+    description: "The new `ON_ERROR` option for COPY provides the option to ignore\
+      \ and discard error rows. The default behavior is ON_ERROR stop the import.\r\
+      \n\r\nSee [`COPY`](https://www.postgresql.org/docs/current/sql-copy.html)."
+  - name: COPY with arbitrary SELECT
+    versions:
+      '8.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-copy.html
+  - name: CSV support for COPY
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-copy.html
+  Configuration Management:
+  - name: ALTER SYSTEM
+    versions:
+      '9.4': 'Yes'
+    url: https://www.postgresql.org/docs/9.4/static/sql-altersystem.html
+  - name: Fractional input for "integer" values
+    versions:
+      '12': 'Yes'
+    description: "Fractional input for \"integer\" server variables is now accepted\
+      \ e.g.\r\n\r\nSET work_mem = '24.2MB'"
+  - name: Include directives for pg_hba.conf and pg_ident.conf
+    versions:
+      '16': 'Yes'
+    description: 'Both [`pg_hba.conf`](https://www.postgresql.org/docs/16/auth-pg-hba-conf.html)
+      and [`pg_ident.conf`](https://www.postgresql.org/docs/16/auth-username-maps.html)
+      support include directives that let you specify additional files for loading
+      rules. These include: `include`, `include_if_exists`, and `include_dir`.'
+  - name: Per user/database server configuration settings
+    versions:
+      '9.0': 'Yes'
+    description: provides for per user/database server configuration settings
+  - name: pg_config system view
+    versions:
+      '9.6': 'Yes'
+    description: New system view to display information about the PostgreSQL build,
+      storage, and build configuration options.
+  - name: Regular expression matching in pg_hba.conf and pg_ident.conf
+    versions:
+      '16': 'Yes'
+    description: Both [`pg_hba.conf`](https://www.postgresql.org/docs/16/auth-pg-hba-conf.html)
+      and [`pg_ident.conf`](https://www.postgresql.org/docs/16/auth-username-maps.html)
+      allow for regular expression matching on usernames. `pg_hba.conf` also supports
+      regular expression matching on database names.
+  Security:
+  - name: Channel binding for SCRAM authentication
+    versions:
+      '11': 'Yes'
+    url: https://www.postgresql.org/docs/current/sasl-authentication.html#SASL-SCRAM-SHA-256
+  - name: Client can require SCRAM channel binding
+    versions:
+      '13': 'Yes'
+    url: https://www.postgresql.org/docs/13/libpq-connect.html#LIBPQ-CONNECT-CHANNEL-BINDING
+  - name: Client-specified requirements for authentication
+    versions:
+      '16': 'Yes'
+    url: https://www.postgresql.org/docs/devel/libpq-connect.html#LIBPQ-CONNECT-REQUIRE-AUTH
+  - name: Column level permissions
+    versions:
+      '8.4': 'Yes'
+    description: allows specification of granular column-level permissions in addition
+      to table level grants
+  - name: Default permissions
+    versions:
+      '9.0': 'Yes'
+    description: allows the specification of default permissions for objects
+  - name: Direct TLS negotiation ("sslnegotiation")
+    versions:
+      '17': 'Yes'
+    url: https://www.postgresql.org/docs/17/libpq-connect.html#LIBPQ-CONNECT-SSLNEGOTIATION
+  - name: GRANT/REVOKE ON ALL TABLES/SEQUENCES/FUNCTIONS
+    versions:
+      '9.0': 'Yes'
+    description: simplifies permission management by allowing mass changes of GRANTS
+  - name: GSSAPI client and server-side encryption
+    versions:
+      '12': 'Yes'
+    description: "Support for client and server-side connection encryption when using\
+      \ GSSAPI for authentication.\r\n\r\nhttps://www.postgresql.org/docs/12/gssapi-auth.html"
+  - name: GSSAPI support
+    versions:
+      '8.3': 'Yes'
+    url: https://www.postgresql.org/docs/current/gssapi-auth.html
+  - name: Kerberos credential delegation
+    versions:
+      '16': 'Yes'
+    url: https://www.postgresql.org/docs/16/runtime-config-connection.html#GUC-GSS-ACCEPT-DELEGATION
+  - name: krb5 authentication (without gssapi)
+    versions:
+      '8.1': 'Yes'
+      '9.4': Obsolete
+    description: native Kerberos 5 wire authentication (replaced with GSSAPI)
+  - name: Large object access controls
+    versions:
+      '9.0': 'Yes'
+    description: Access controls on large objects
+  - name: LDAP server discovery
+    versions:
+      '12': 'Yes'
+    description: "LDAP servers with DNS SRV can be discovered if PostgreSQL is built\
+      \ with OpenLDAP\r\n\r\nhttps://www.postgresql.org/docs/12/auth-ldap.html"
+  - name: Multifactor authentication via valid client SSL/TLS certificate
+    versions:
+      '12': 'Yes'
+    description: "If an authentication entry in the pg_hba.conf specifies the `clientcert=verify-full`,\
+      \ then the client must present a valid SSL certificate that matches the login\
+      \ name, or the client name based on a map.\r\n\r\n[https://www.postgresql.org/docs/12/ssl-tcp.html#SSL-CLIENT-CERTIFICATES](https://www.postgresql.org/docs/12/ssl-tcp.html#SSL-CLIENT-CERTIFICATES)"
+  - name: Native LDAP authentication
+    versions:
+      '8.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/auth-methods.html#AUTH-LDAP
+  - name: Native RADIUS authentication
+    versions:
+      '9.0': 'Yes'
+    description: adds support for authentictaing against a RADIUS server
+  - name: Per user/database connection limits
+    versions:
+      '8.1': 'Yes'
+    description: allows restrictions on the number of connections a given user or
+      database will be allowed to make or accept
+  - name: Predefined roles
+    versions:
+      '9.6': 'Yes'
+    url: https://www.postgresql.org/docs/current/predefined-roles.html
+  - name: Privileges for setting configuration parameters
+    versions:
+      '15': 'Yes'
+    description: Unprivileged users can be [granted permission](https://www.postgresql.org/docs/15/sql-grant.html)
+      to change server variables via [`SET`](https://www.postgresql.org/docs/current/sql-set.html)
+      and [`ALTER SYSTEM`](https://www.postgresql.org/docs/current/sql-altersystem.html)
+  - name: ROLES
+    versions:
+      '8.1': 'Yes'
+    description: replaces user and group concept by a more generalizes role based
+      concept
+  - name: Row-Level Security
+    versions:
+      '9.5': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-createpolicy.html
+  - name: SCRAM-SHA-256 Authentication
+    versions:
+      '10': 'Yes'
+    description: "As described in RFC 7677, SCRAM-SHA-256 authentication provides\
+      \ challenge-response scheme, that prevents password sniffing on untrusted connections.\
+      \ It is more secure than the md5 method, but might not be supported by older\
+      \ clients.\r\n\r\nSCRAM-SHA-256 authentication can be enabled in the host-based\
+      \ authentication configuration file."
+  - name: Search+bind mode operation for LDAP authentication
+    versions:
+      '9.0': 'Yes'
+    description: Allows searching for the user in the directory first, and then binds
+      with the DN found for this user
+  - name: security_barrier option on views
+    versions:
+      '9.2': 'Yes'
+    description: This prevents security_barrier views from being moved into other
+      scopes, preventing possible leakage of view-prohibited data.
+  - name: Security Service Provider Interface (SSPI)
+    versions:
+      '8.3': 'Yes'
+    description: full integration with the native authentication framework in Microsoft
+      Windows
+  - name: SSL certificate validation in libpq
+    versions:
+      '8.4': 'Yes'
+    description: certificate validation in libpq
+  - name: SSL client certificate authentication
+    versions:
+      '8.4': 'Yes'
+    description: allows authentication of clients by the use of an SSL certificate
+  - name: SSPI authentication via GSSAPI
+    versions:
+      '9.1': 'Yes'
+    description: allows Unix-based GSSAPI clients to do SSPI authentication with Windows
+      servers.
+  - name: Support using the client's OS trusted CA.
+    versions:
+      '16': 'Yes'
+    description: Specifying `sslroot=system` instructs PostgreSQL to use the trusted
+      certificate authority (CA) store provided by the client's operating system.
+  Transactions and Visibility:
+  - name: Cursors
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-declare.html
+  - name: Savepoints
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-savepoint.html
+  - name: Serializable Snapshot Isolation
+    versions:
+      '9.1': 'Yes'
+    description: This implements true serializable snapshot isolation. Previously,
+      asking for serializable isolation guaranteed only that a single MVCC snapshot
+      would be used for the entire transaction, which allowed certain documented anomalies.
+  - name: Two Phase commit
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-prepare-transaction.html
+  - name: Updatable cursors
+    versions:
+      '8.3': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-declare.html
+  VACUUM and Maintenance:
+  - name: Inserted data can trigger autovacuum
+    versions:
+      '13': 'Yes'
+    description: This new behavior reduces the work necessary when the table needs
+      to be frozen and allows pages to be set as all-visible. All-visible pages allow
+      index-only scans to access fewer heap rows.
+  - name: Integrated autovacuum daemon
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/routine-vacuuming.html#AUTOVACUUM
+  - name: Page freezing optimizations
+    versions:
+      '16': 'Yes'
+    description: Improvements to the page freezing strategy helps the general performance
+      of vacuuming and other maintenance operations.
+  - name: Parallelized VACUUM for Indexes
+    versions:
+      '13': 'Yes'
+    description: "The VACUUM process can be parallelized for indexes. The number of\
+      \ VACUUM jobs for an index can be specified.\r\n\r\nFor more information, please\
+      \ see the [VACUUM documentation](https://www.postgresql.org/docs/current/sql-vacuum.html)"
+  - name: Parallel vacuumdb jobs
+    versions:
+      '9.5': 'Yes'
+    description: The vacuumdb tool now supports an option to define the number of
+      jobs in which to run VACUUM.
+  - name: Radix tree memory structure for vacuum
+    versions:
+      '17': 'Yes'
+    description: The internal structure for vacuum now uses a radix tree structure,
+      which reduces the amount of memory required for the vacuum process. Additionally,
+      vacuum is no longer limited to 1GB of memory even when `maintenance_work_mem`
+      or `autovacuum_work_mem` are set to higher values.
+  - name: Vacuum "emergency mode"
+    versions:
+      '14': 'Yes'
+    description: PostgreSQL will vacuum aggressively when it detects the possibility
+      of transaction ID wraparound. This is controlled with the [`vacuum_failsafe_age
+      `](https://www.postgresql.org/docs/14/runtime-config-client.html#GUC-VACUUM-FAILSAFE-AGE)
+      and [`vacuum_multixact_failsafe_age `](https://www.postgresql.org/docs/14/runtime-config-client.html#GUC-MULTIXACT-FAILSAFE-AGE)
+      configuration parameters.
+  - name: Visibility Map for Vacuuming
+    versions:
+      '8.4': 'Yes'
+    description: This reduces the overhead of vacuuming as the visibility map tracks
+      only the pages that need to be vacuumed.
+  Foreign Data Wrappers:
+  - name: Certificate authentication with postgres_fdw
+    versions:
+      '13': 'Yes'
+    description: "The [postgres_fdw](https://www.postgresql.org/docs/13/postgres-fdw.html)\
+      \ can now use the built-in [certificate authentication](https://www.postgresql.org/docs/current/auth-cert.html)\
+      \ mechanism.\r\n\r\nFor more information, please visit the [postgres_fdw documentation](https://www.postgresql.org/docs/13/postgres-fdw.html#id-1.11.7.42.10)"
+  - name: Foreign data wrapper query parallelism
+    versions:
+      '14': 'Yes'
+    description: Queries that reference multiple foreign tables can perform table
+      scans in parallel. This is implemented in the [`postgres_fdw`](https://www.postgresql.org/docs/14/postgres-fdw.html)
+  - name: Foreign data wrappers
+    versions:
+      '9.1': 'Yes'
+    description: Foreign data wrappers allow access to external data for querying.
+  - name: Foreign Tables
+    versions:
+      '9.1': 'Yes'
+    description: This allows data stored outside the database to be used like native
+      PostgreSQL-stored data.
+  - name: IMPORT FOREIGN SCHEMA
+    versions:
+      '9.5': 'Yes'
+    url: https://www.postgresql.org/docs/9.5/static/sql-importforeignschema.html
+  - name: Import foreign table partitions
+    versions:
+      '14': 'Yes'
+    description: '[`IMPORT FOREIGN SCHEMA`](https://www.postgresql.org/docs/14/sql-importforeignschema.html)
+      can import the schema of partitioned tables.'
+  - name: Parallel query execution on remote databases
+    versions:
+      '14': 'Yes'
+    description: Support for leveraging query parallelism on remote databases. This
+      is implemented in the [`postgres_fdw`](https://www.postgresql.org/docs/current/postgres-fdw.html)
+      available with PostgreSQL.
+  - name: postgres_fdw parallel commit
+    versions:
+      '15': 'Yes'
+    url: https://www.postgresql.org/docs/15/postgres-fdw.html#id-1.11.7.47.11.7
+  - name: postgres_fdw pushdown
+    versions:
+      '9.6': 'Yes'
+    description: Ability to push down JOIN, Sorts, UPDATEs and DELETEs to the remote
+      database in postgres_fdw driver, and theoretically in other drivers.  Also some
+      generic operator/function pushdown.
+  - name: PostgreSQL Foreign Data Wrapper
+    versions:
+      '9.3': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/postgres-fdw.html
+  - name: Writable Foreign Data Wrappers
+    versions:
+      '9.3': 'Yes'
+    description: The foreign data wrapper infrastructure now supports INSERT/DELETE/UPDATE
+      operations which individual FDWs can now add support for.
+  Custom Functions, Stored Procedures, & Triggers:
+  - name: ALTER TABLE ENABLE/DISABLE TRIGGER
+    versions:
+      '8.1': 'Yes'
+    description: allows for disabling and enabling a specific or all triggers on a
+      given table
+  - name: ALTER TABLE / ENABLE REPLICA TRIGGER/RULE
+    versions:
+      '8.3': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/sql-altertable.html
+  - name: BEGIN ATOMIC function bodies
+    versions:
+      '14': 'Yes'
+    description: "PostgreSQL functions and stored procedures can now be created using\
+      \ the SQL-standard `BEGIN ATOMIC` definition. Using `BEGIN ATOMIC` allows function\
+      \ bodies to be parsed on creation and also provides dependency. For example:\r\
+      \n\r\n```\r\nCREATE FUNCTION add(int, int)\r\nRETURNS int\r\nIMMUTABLE PARALLEL\
+      \ SAFE\r\nBEGIN ATOMIC;\r\n  SELECT $1 + $2;\r\nEND;\r\n```"
+  - name: CALL syntax for executing procedures
+    versions:
+      '11': 'Yes'
+    url: https://www.postgresql.org/docs/11/static/sql-call.html
+  - name: Column level triggers
+    versions:
+      '9.0': 'Yes'
+    description: adds support for SQL standard column level trigger support, by allowing
+      triggers to only fire if specific columns are mentioned in the UPDATEs SET list
+  - name: CREATE PROCEDURE syntax for SQL stored procedures
+    versions:
+      '11': 'Yes'
+    url: https://www.postgresql.org/docs/11/static/sql-createprocedure.html
+  - name: Event triggers
+    versions:
+      '9.3': 'Yes'
+    description: Support for creating triggers for DDL events.
+  - name: FILTER clause for aggregate functions
+    versions:
+      '9.4': 'Yes'
+    description: 'Aggregate functions can now be filtered with the FILTER clause.  For
+      example: count(col_a) FILTER (WHERE col_b > 5)'
+  - name: ORDER BY support within aggregates
+    versions:
+      '9.0': 'Yes'
+    description: allows controlling the order of values fed into an aggregate function
+  - name: Per function GUC settings
+    versions:
+      '8.3': 'Yes'
+    description: Server configuration parameters can now be set on a per-function
+      basis
+  - name: Per function statistics
+    versions:
+      '8.4': 'Yes'
+    description: runtime statistics for user-defined functions
+  - name: RETURN QUERY EXECUTE
+    versions:
+      '8.4': 'Yes'
+    description: allows for returning the result of a dynamically generated query
+  - name: RETURNS TABLE
+    versions:
+      '8.4': 'Yes'
+    description: SQL standard RETURNS TABLE clause for CREATE FUNCTION
+  - name: Statement level triggers
+    versions:
+      '8.1': 'Yes'
+    description: Triggers that fire on a per statement level instead of a per row
+      level
+  - name: Statement level TRUNCATE triggers
+    versions:
+      '8.4': 'Yes'
+    description: Trigger support for TRUNCATE
+  - name: Triggers on views
+    versions:
+      '9.1': 'Yes'
+    description: This adds support for INSTEAD OF triggers on views which can be used
+      to implement fully updatable views.
+  - name: Variadic functions
+    versions:
+      '8.4': 'Yes'
+    description: Allows a variable number of function parameters
+  - name: WHEN clause for CREATE TRIGGER
+    versions:
+      '9.0': 'Yes'
+    description: adds support for a boolean expression to be checked if a trigger
+      should be fired or not
+  Procedural Languages:
+  - name: CASE in pl/pgsql
+    versions:
+      '8.4': 'Yes'
+    description: allows the use of CASE as a conditional expression in addition to
+      IF-THEN
+  - name: CONTINUE statement for PL/pgSQL
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/plpgsql-control-structures.html#id-1.8.8.8.7.6
+  - name: CREATE TRANSFORM
+    versions:
+      '9.5': 'Yes'
+    url: https://www.postgresql.org/docs/9.5/static/sql-createtransform.html
+  - name: DO statement for pl/perl
+    versions:
+      '9.0': 'Yes'
+    description: allows the execution of anonymous code blocks in pl/perl
+  - name: DO statement for pl/pgsql
+    versions:
+      '9.0': 'Yes'
+    description: allows the execution of anonymous code blocks in pl/pgsql
+  - name: EXCEPTION support in PL/pgSQL
+    versions:
+      '8.1': 'Yes'
+    description: full exception handling support in pl/pgsql
+  - name: EXECUTE USING in PL/pgSQL
+    versions:
+      '8.4': 'Yes'
+    description: ''
+  - name: FOREACH IN ARRAY in pl/pgsql
+    versions:
+      '9.1': 'Yes'
+    description: This is more efficient and readable than previous methods of iterating
+      through the elements of an array value.
+  - name: IN/OUT/INOUT parameters for pl/pgsql and PL/SQL
+    versions:
+      '8.1': 'Yes'
+    description: ''
+  - name: Named parameters
+    versions:
+      '8.1': 'Yes'
+    description: allows the use of named parameters in pl/pgsql
+  - name: Non-superuser language creation
+    versions:
+      '8.3': 'Yes'
+    description: database owners can now create trusted languages
+  - name: pl/pgsql installed by default
+    versions:
+      '9.0': 'Yes'
+    description: pl/pgsql is now installed by default in all newly created database
+  - name: Polymorphic functions
+    versions:
+      '8.1': 'Yes'
+    description: ''
+  - name: Python 3 support for pl/python
+    versions:
+      '9.0': 'Yes'
+    description: support for Python 3 in pl/python
+  - name: 'Qualified function parameters '
+    versions:
+      '8.3': 'Yes'
+    description: ''
+  - name: Query parallelism for RETURN QUERY
+    versions:
+      '14': 'Yes'
+    description: The `RETURN QUERY` directive in PL/pgSQL supports executing queries
+      with parallelism.
+  - name: RETURN QUERY in pl/pgsql
+    versions:
+      '8.3': 'Yes'
+    description: simply way to return the result of an arbitrary query in pl/pgsql
+  - name: ROWS and COST specification for functions
+    versions:
+      '8.3': 'Yes'
+    description: CPU costs and the number of expected rows can now be specified for
+      procedural functions to give better hints to the planner
+  - name: Scrollable and updatable cursor support for pl/pgsql
+    versions:
+      '8.3': 'Yes'
+    description: support for scroll- and updatable cursors in pl/pgsql functions
+  - name: SQLERRM/SQLSTATE for pl/pgsql
+    versions:
+      '8.1': 'Yes'
+    description: allows simple access to the SQL error state and the associated error
+      text if an exception happened
+  - name: Unicode object support in PL/python
+    versions:
+      '9.0': 'Yes'
+    description: ''
+  - name: User defined exceptions
+    versions:
+      '8.4': 'Yes'
+    description: allows to generate user defined exceptions through RAISE
+  - name: Validator function for pl/perl
+    versions:
+      '8.1': 'Yes'
+    description: compile time validation of pl/pgsql code
+  Extensions:
+  - name: CREATE EXTENSION .. CASCADE
+    versions:
+      '9.6': 'Yes'
+    description: Ability to automatically pull in required additional extensions for
+      an extension dependency tree.
+  - name: Extension Installation
+    versions:
+      '9.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/external-extensions.html
+  - name: Trusted Extensions
+    versions:
+      '13': 'Yes'
+    description: "Extensions that are marked as \"trusted\" by a superuser can subsequently\
+      \ be installed via `CREATE EXTENSION` by unprivileged users. Some functions\
+      \ are marked as \"trusted\" by default.\r\n\r\nFor more information, please\
+      \ see the [`CREATE EXTENSION`](https://www.postgresql.org/docs/current/sql-createextension.html)\
+      \ documentation."
+  Internationalisation:
+  - name: Built-in, platform independent immutable collation
+    versions:
+      '17': 'Yes'
+    description: PostgreSQL has a built-in, platform independent immutable collation
+      provider that supports C and C.UTF-8 collations. For more information, see [standard
+      collations](https://www.postgresql.org/docs/17/collation.html#COLLATION-MANAGING-STANDARD).
+  - name: Column-level collation support
+    versions:
+      '9.1': 'Yes'
+    description: Previously collation could only be set at database creation. Collation
+      can now be set per column, domain, index, or expression, via the SQL-standard
+      COLLATE clause.
+  - name: Database level Collation
+    versions:
+      '8.4': 'Yes'
+    description: Support for different collation order and character categories on
+      a per database level
+  - name: Default ICU collations for clusters/databases
+    versions:
+      '15': 'Yes'
+    description: ICU collations can be set as the default collation type for an entire
+      PostgreSQL clusters or for individual databases.
+  - name: EUC_JIS_2004/ SHIFT_JIS_2004 support
+    versions:
+      '8.3': 'Yes'
+    description: ''
+  - name: ICU collations
+    versions:
+      '10': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/collation.html#id-1.6.10.4.5.7.5
+  - name: Multibyte encoding support, incl. UTF8
+    versions:
+      '8.1': 'Yes'
+    description: full support for using UTF8 and other multibyte encodings
+  - name: Multiple language support
+    versions:
+      '8.1': 'Yes'
+    url: https://babel.postgresql.org/
+  - name: Nondeterministic collations
+    versions:
+      '12': 'Yes'
+    url: https://www.postgresql.org/docs/12/collation.html#COLLATION-NONDETERMINISTIC
+  - name: Unicode string literals and identifiers
+    versions:
+      '8.4': 'Yes'
+    description: allows specification of unicode string literals and identifiers using
+      code points
+  - name: UTF8 support on Windows
+    versions:
+      '8.1': 'Yes'
+    description: full support for using UTF8 on microsoft windows
+  Client Applications:
+  - name: pgbench
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/pgbench.html
+  - name: pg_combinebackup
+    versions:
+      '17': 'Yes'
+    url: https://www.postgresql.org/docs/17/app-pgcombinebackup.html
+  - name: pg_createsubscriber
+    versions:
+      '17': 'Yes'
+    url: https://www.postgresql.org/docs/17/app-pgcreatesubscriber.html
+  - name: pg_prewarm
+    versions:
+      '9.4': 'Yes'
+    url: https://www.postgresql.org/docs/9.4/static/pgprewarm.html
+  - name: pg_rewind
+    versions:
+      '9.5': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/app-pgrewind.html
+  - name: pg_standby
+    versions:
+      '8.3': 'Yes'
+      '14': Obsolete
+    description: Was used to initialize standbys. Removed in PostgreSQL 14.
+  - name: pg_upgrade
+    versions:
+      '9.0': 'Yes'
+    url: https://www.postgresql.org/docs/current/pgupgrade.html
+  - name: pg_waldump
+    versions:
+      '10': 'Yes'
+    url: https://www.postgresql.org/docs/current/pgwaldump.html
+  - name: pg_walsummary
+    versions:
+      '17': 'Yes'
+    url: https://www.postgresql.org/docs/17/app-pgwalsummary.html
+  - name: pg_xlogdump
+    versions:
+      '9.3': 'Yes'
+      '10': Obsolete
+    description: Renamed to [`pg_waldump`](https://www.postgresql.org/docs/current/pgwaldump.html)
+      in PostgreSQL 10.
+  - name: psql \bind
+    versions:
+      '16': 'Yes'
+    url: https://www.postgresql.org/docs/16/app-psql.html#APP-PSQL-META-COMMAND-BIND
+  - name: psql \dconfig
+    versions:
+      '15': 'Yes'
+    description: The [`psql`](https://www.postgresql.org/docs/15/app-psql.html) client
+      includes a `\dconfig` command for inspecting and finding the values of configuration
+      parameters.
+  - name: Version aware psql
+    versions:
+      '8.4': 'Yes'
+    description: Allows [psql](https://www.postgresql.org/docs/current/app-psql.html)
+      to work with older versions of PostgreSQL.
+  Additional Modules (contrib):
+  - name: adminpack
+    versions:
+      '8.2': 'Yes'
+      '17': 'No'
+    url: https://www.postgresql.org/docs/current/static/adminpack.html
+  - name: auth_delay
+    versions:
+      '9.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/auth-delay.html
+  - name: auto_explain
+    versions:
+      '8.4': 'Yes'
+    url: https://www.postgresql.org/docs/current/auto-explain.html
+  - name: btree_gin
+    versions:
+      '8.4': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/btree-gin.html
+  - name: btree_gist
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/8.3/static/btree-gist.html
+  - name: citext
+    versions:
+      '8.4': 'Yes'
+    url: https://www.postgresql.org/docs/current/citext.html
+  - name: dblink
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/dblink.html
+  - name: dblink asyncronous notification support
+    versions:
+      '9.0': 'Yes'
+    description: Add the ability to retrieve asynchronous notifications using dblink
+  - name: file_fdw
+    versions:
+      '9.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/file-fdw.html
+  - name: fuzzystrmatch
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/fuzzystrmatch.html
+  - name: hstore
+    versions:
+      '8.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/hstore.html
+  - name: intarray
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/intarray.html
+  - name: isn (ISBN)
+    versions:
+      '8.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/isn.html
+  - name: KNN support for CUBE
+    versions:
+      '9.6': 'Yes'
+    description: KNN indexing support for the CUBE module.  Supports n-dimensional
+      nearest neighbor searches.
+  - name: ltree
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/ltree.html
+  - name: pageinspect
+    versions:
+      '8.3': 'Yes'
+    url: https://www.postgresql.org/docs/current/pageinspect.html
+  - name: passwordcheck
+    versions:
+      '9.0': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/passwordcheck.html
+  - name: pg_buffercache
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/pgbuffercache.html
+  - name: pg_freespacemap
+    versions:
+      '8.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/pgfreespacemap.html
+  - name: pg_stat_statements
+    versions:
+      '8.4': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/pgstatstatements.html
+  - name: pg_stat_statements improvements
+    versions:
+      '9.2': 'Yes'
+    description: pg_stat_statements now aggregates similar queries so that such data
+      is no longer confined to just prepared queries.
+  - name: pgstattuple
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/pgstattuple.html
+  - name: pg_trgm
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/pgtrgm.html
+  - name: pg_trgm regular expressions indexing
+    versions:
+      '9.3': 'Yes'
+    description: Regular expressions can now be indexed using GIN in [`pg_trgm`](https://www.postgresql.org/docs/current/pgtrgm.html).
+  - name: pg_walinspect
+    versions:
+      '15': 'Yes'
+    description: '[`pg_walinspect`](https://www.postgresql.org/docs/15/pgwalinspect.html)
+      allows for the contents of write-ahead logs (WAL) files to be inspected from
+      SQL.'
+  - name: seg
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/seg.html
+  - name: sepgsql
+    versions:
+      '9.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/sepgsql.html
+  - name: sslinfo
+    versions:
+      '8.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/sslinfo.html
+  - name: tablefunc
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/tablefunc.html
+  - name: tcn
+    versions:
+      '9.2': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/tcn.html
+  - name: tsearch2 compatibility wrapper
+    versions:
+      '8.3': 'Yes'
+      '10': Obsolete
+    description: compatibility wrapper for migrating from contrib/tsearch2 to the
+      integrated full text search in 8.3
+  - name: unaccent
+    versions:
+      '9.0': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/unaccent.html
+  - name: uuid-ossp
+    versions:
+      '8.3': 'Yes'
+    url: https://www.postgresql.org/docs/current/uuid-ossp.html
+  - name: xml2
+    versions:
+      '8.1': 'Yes'
+      '8.4': Obsolete
+    url: https://www.postgresql.org/docs/current/xml2.html
+  Network:
+  - name: Full SSL support
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/ssl-tcp.html
+  - name: IPv6 Support
+    versions:
+      '8.1': 'Yes'
+    description: Full Support for IPv6
+  - name: V2 client protocol
+    versions:
+      '8.1': Obsolete
+      '14': 'No'
+    description: obsoleted client protocol interface
+  - name: V3 client protocol
+    versions:
+      '8.1': 'Yes'
+    url: https://www.postgresql.org/docs/current/static/protocol.html
+  Platforms:
+  - name: Microsoft Visual C++ Support
+    versions:
+      '8.3': 'Yes'
+    description: allows the backend to be compiled with Microsoft Visual Studio
+  - name: Native Windows Port
+    versions:
+      '8.1': 'Yes'
+    description: Native Port to the Microsoft Windows Platform
+  - name: Spinlock support for the SuperH hardware platform
+    versions:
+      '9.0': 'Yes'
+    description: s_lock support for the SuperH CPU
+  - name: Sun Studio compiler on Linux
+    versions:
+      '8.4': 'Yes'
+    description: support for compiling PostgreSQL using the Sun Studio compiler on
+      Linux
+  - name: Windows x64 support
+    versions:
+      '9.0': 'Yes'
+    description: support for compiling PostgreSQL as a 64bit binary on Microsoft Windows
+legacymap:  # This maps old id based URLs to the new titles and will generate redirects to the new page
+  4: Heap Only Tuples (HOT)
+  8: Asynchronous Commit
+  11: Distributed checkpointing
+  13: Scrollable and updatable cursor support for pl/pgsql
+  14: ROWS and COST specification for functions
+  15: SQLERRM/SQLSTATE for pl/pgsql
+  19: EUC_JIS_2004/ SHIFT_JIS_2004 support
+  20: Per function GUC settings
+  24: Partial sort capability (top-n sorting)
+  26: Synchronized sequential scanning
+  27: Loadable plugin infrastructure for monitoring the planner
+  28: Multiple temporary tablespaces
+  29: Arrays of compound types
+  34: Automatic plan invalidation
+  35: Microsoft Visual C++ Support
+  38: NULLs in Array
+  39: Non-blocking CREATE INDEX
+  42: Outer Join reordering
+  45: Row-wise comparison
+  49: ROLES
+  50: In-memory Bitmap Indexes
+  53: Shared row level locking
+  55: Per user/database connection limits
+  56: Temporary VIEWs
+  57: SELECT ... FOR UPDATE/SHARE NOWAIT
+  58: ALTER TABLE ENABLE/DISABLE TRIGGER
+  59: Native Windows Port
+  63: Changing column types (ALTER TABLE .. ALTER COLUMN TYPE)
+  67: IPv6 Support
+  68: Inlining of SQL-functions
+  73: Statement level triggers
+  78: RETURN QUERY in pl/pgsql
+  79: 'Qualified function parameters '
+  80: IN/OUT/INOUT parameters for pl/pgsql and PL/SQL
+  82: Validator function for pl/perl
+  83: Named parameters
+  84: EXCEPTION support in PL/pgSQL
+  85: Polymorphic functions
+  89: pg_standby
+  100: UTF8 support on Windows
+  108: Security Service Provider Interface (SSPI)
+  110: Index support for IS NULL
+  111: Cross datatype hashing support
+  112: Type modifier support
+  113: Non-superuser language creation
+  117: V2 client protocol
+  118: Concurrent GiST indexes
+  119: Multibyte encoding support, incl. UTF8
+  127: tsearch2 compatibility wrapper
+  128: Statement level TRUNCATE triggers
+  129: EXECUTE USING in PL/pgSQL
+  130: CASE in pl/pgsql
+  133: Database level Collation
+  135: Hashing support for DISTINCT/UNION/INTERSECT/EXCEPT
+  136: RETURNS TABLE
+  137: Variadic functions
+  138: User defined exceptions
+  139: unnest/array_agg
+  140: Disk based FSM
+  141: Per function statistics
+  142: RETURN QUERY EXECUTE
+  143: SQL standard interval handling
+  144: SSL certificate validation in libpq
+  146: TABLE statement
+  147: SSL client certificate authentication
+  151: Column level permissions
+  152: Parallel restore
+  154: Version aware psql
+  157: Unicode string literals and identifiers
+  158: Visibility Map for Vacuuming
+  161: Sun Studio compiler on Linux
+  162: Column level triggers
+  163: Deferrable unique constraints
+  165: XML, JSON and YAML output for EXPLAIN
+  166: Default permissions
+  167: DO statement for pl/pgsql
+  168: GRANT/REVOKE ON ALL TABLES/SEQUENCES/FUNCTIONS
+  170: Per user/database server configuration settings
+  171: Unicode object support in PL/python
+  175: dblink asyncronous notification support
+  176: Spinlock support for the SuperH hardware platform
+  178: WHEN clause for CREATE TRIGGER
+  179: Exclusion constraints
+  180: ORDER BY support within aggregates
+  181: EXPLAIN (BUFFERS) support
+  183: Large object access controls
+  184: Search+bind mode operation for LDAP authentication
+  185: pl/pgsql installed by default
+  186: DO statement for pl/perl
+  187: Python 3 support for pl/python
+  188: Hot Standby
+  189: Typed tables
+  190: Payload support for LISTEN/NOTIFY
+  191: Set costs specific to TABLESPACEs
+  192: Streaming Replication
+  193: Native RADIUS authentication
+  195: Windows x64 support
+  200: K-nearest neighbor GiST support
+  201: Unlogged tables
+  202: Hashing support for FULL OUTER JOIN, LEFT OUTER JOIN and RIGHT OUTER JOIN
+  203: SSPI authentication via GSSAPI
+  204: WAL Buffer auto-tuning
+  205: Synchronous replication
+  206: pg_basebackup tool
+  207: Named restore points
+  208: Writable WITH Queries (Common Table Expressions)
+  209: Serializable Snapshot Isolation
+  210: Column-level collation support
+  212: Foreign Tables
+  213: ALTER TABLE ... ADD UNIQUE/PRIMARY KEY USING INDEX
+  214: Foreign keys marked as NOT VALID
+  215: Triggers on views
+  216: FOREACH IN ARRAY in pl/pgsql
+  217: Index-only scans
+  218: Multi-core scalability for read-only workloads
+  219: Cascading streaming replication
+  223: smallserial type
+  226: pg_stat_statements improvements
+  227: Background Checkpointer
+  228: ALTER object IF EXISTS
+  229: CREATE TABLE ... (LIKE) with foreign tables, views and composite types
+  230: security_barrier option on views
+  231: LATERAL clause
+  232: 64-bit large objects
+  233: Event triggers
+  234: Updatable views
+  235: Parallel pg_dump
+  237: Writable Foreign Data Wrappers
+  238: Foreign data wrappers
+  240: Support for anonymous shared memory
+  241: Custom background workers
+  242: SELECT FOR NO KEY UPDATE/SELECT FOR KEY SHARE lock modes
+  243: Checksum on data pages
+  244: Streaming-only cascading replication
+  245: pg_xlogdump
+  246: pg_trgm regular expressions indexing
+  247: SP-GiST indexes for range types
+  248: COPY from/to STDIN/STDOUT
+  249: Improved set of JSON functions and operators
+  251: Materialized views with concurrent refresh
+  253: krb5 authentication (without gssapi)
+  254: Dynamic Background Workers
+  256: GIN Index performance and size improvements
+  257: Time-delayed Standbys
+  258: Reduced lock levels for ALTER TABLE commands
+  260: Base backup throttling
+  263: FILTER clause for aggregate functions
+  264: WITH CHECK clause
+  266: ALTER TABLE ... SET LOGGED / UNLOGGED
+  268: SKIP LOCKED clause
+  270: Parallel vacuumdb jobs
+  271: Foreign table inheritance
+  273: Index-only scans on GiST
+  275: Upsert (INSERT ... ON CONFLICT DO ...)
+  276: JSONB-modifying operators and functions
+  277: TABLESAMPLE clause
+  279: Abbreviated Keys
+  280: min_wal_size / max_wal_size
+  281: Parallel query
+  283: Parallel JOIN, aggregate
+  284: postgres_fdw pushdown
+  285: Multiple synchronous standbys
+  286: remote_apply mode
+  287: Frozen page map
+  288: KNN support for CUBE
+  289: Phrase search
+  290: pg_config system view
+  291: Generic WAL facility
+  292: CREATE EXTENSION .. CASCADE
+  295: SCRAM-SHA-256 Authentication
+  296: Quorum commit for synchronous replication
+  297: Parallel B-tree index scans
+  298: Parallel bitmap heap scans
+  299: Parallel merge joins
+  300: WAL support for hash indexes
+  302: Partitioning by a hash key
+  303: Parallelized CREATE INDEX for B-tree indexes
+  304: Support for PRIMARY KEY, FOREIGN KEY, indexes, and triggers on partitioned
+    tables
+  311: Default Partition
+  312: UPDATE on a partition key
+  313: Covering Indexes for B-trees (INCLUDE)
+  314: Covering indexes for GiST (INCLUDE)
+  316: K-nearest neighbor SP-GiST Support
+  317: CREATE STATISTICS - multicolumn
+  318: CREATE STATISTICS - most-common values (MCV) statistics
+  319: Foreign Key references for partitioned tables
+  320: Accelerated partition pruning
+  321: Inlined WITH Queries (Common Table Expressions)
+  324: GSSAPI client and server-side encryption
+  325: LDAP server discovery
+  326: Multifactor authentication via valid client SSL/TLS certificate
+  328: Enable/Disable page checksums in an offline cluster
+  329: Fractional input for "integer" values
+  330: COPY FROM ... WHERE
+  332: Partition pruning during query execution
+  335: CREATE STATISTICS - "OR" and "IN/ANY" statistics
+  336: Hash aggregation can use disk
+  339: Certificate authentication with postgres_fdw
+  340: Parallelized VACUUM for Indexes
+  341: Inserted data can trigger autovacuum
+  345: Logical replication for partitioned tables
+  346: 'SQL/JSON: datetime()'
+  347: Trusted Extensions
+  348: EXPLAIN (WAL) support
+  349: Query parallelism for RETURN QUERY
+  350: Parallel query execution on remote databases
+  351: Incremental sort for window functions
+  352: LZ4 compression for TOAST tables
+  357: Logical replication stream in-progress transactions
+  358: Foreign data wrapper query parallelism
+  359: Import foreign table partitions
+  360: Vacuum "emergency mode"
+  366: range_agg range type aggregation function
+  367: regexp_count, regexp_instr, regexp_like
+  368: Improved performance for sorts exceeding working memory
+  369: Parallel "SELECT DISTINCT"
+  370: Improved window function performance
+  373: pg_basebackup server-side compression
+  374: pg_basebackup client decompression
+  376: pg_walinspect
+  380: Logical replication column lists
+  381: ALTER SUBSCRIPTION ... SKIP
+  382: Logical replication subscriber can disable on error
+  383: '"jsonlog" logging format'
+  384: psql \dconfig
+  386: Server statistics in shared memory
+  387: ALTER TABLE ... SET ACCESS METHOD
+  389: SECURITY INVOKER views
+  390: Privileges for setting configuration parameters
+  391: Logical replication publish all tables in schema
+  392: UNIQUE NULLS NOT DISTINCT
+  393: BEGIN ATOMIC function bodies
+  394: Default ICU collations for clusters/databases
+  395: SQL/JSON constructors
+  396: SQL/JSON IS JSON
+  397: Parallel FULL and RIGHT joins
+  398: Incremental sort for SELECT DISTINCT
+  399: SIMD support for x86
+  400: SIMD support for ARM
+  402: Logical replication from standbys
+  404: Logical replication lookups with additional indexes
+  407: Non-decimal integer literals
+  408: Underscores (_) for thousands separators
+  413: Include directives for pg_hba.conf and pg_ident.conf
+  414: Regular expression matching in pg_hba.conf and pg_ident.conf
+  415: Support using the client's OS trusted CA.
+  417: Page freezing optimizations
+  419: Radix tree memory structure for vacuum
+  421: Parallelized CREATE INDEX for BRIN indexes
+  425: MERGE ... RETURNING
+  426: Built-in, platform independent immutable collation
+  429: pg_basebackup incremental backup
+  432: Logical replication slots migrate through pg_upgrade migrate
+  433: COPY ... ON_ERROR
+  434: EXPLAIN (SERIALIZE) support
+  435: EXPLAIN (MEMORY)
+  437: pg_dump, pg_dumpall, pg_restore --filter

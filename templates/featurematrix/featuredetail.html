@@ -3,12 +3,12 @@
 {%block title%}Feature Description{%endblock%}
 {%block contents%}
 <h1>Feature Description</h1>
-<h2>{{feature.featurename}}</h2>
+<h2>{{feature.name}}</h2>
 <p>
-{% if feature.featuredescription_is_url %}
-  For more information, please visit : <a href="{{ feature.featurelink }}">{{ feature.featurelink }}</a>
+{% if feature.description|slice:":8" == "https://" %}
+  For more information, please visit : <a href="{{ feature.description }}">{{ feature.description }}</a>
 {% else %}
-  {{ feature.featuredescription|markdown }}
+  {{ feature.description|markdown }}
 {% endif %}
 </p>
 {%endblock%}

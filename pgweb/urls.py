@@ -43,7 +43,8 @@ urlpatterns = [
     re_path(r'^about/event/(?P<itemid>\d+)(<?P<slug>-.*)?/$', pgweb.events.views.item),
     re_path(r'^about/event/(?P<slug>[^/]+)-(?P<itemid>\d+)/$', pgweb.events.views.item),
     re_path(r'^about/featurematrix/$', pgweb.featurematrix.views.root),
-    re_path(r'^about/featurematrix/detail/(\d+)/$', pgweb.featurematrix.views.detail),
+    re_path(r'^about/featurematrix/detail/(\d+)/$', pgweb.featurematrix.views.detail_legacy),
+    re_path(r'^about/featurematrix/detail/([^/]+)/$', pgweb.featurematrix.views.detail),
     re_path(r'^about/privacypolicy/$', RedirectView.as_view(url='/about/policies/privacy/', permanent=True)),
 
     re_path(r'^ftp/(.*/)?$', pgweb.downloads.views.ftpbrowser),

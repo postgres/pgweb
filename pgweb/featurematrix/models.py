@@ -58,25 +58,3 @@ class Feature(models.Model):
     def __str__(self):
         # To make it look good in the admin interface, just don't render it
         return ''
-
-    def columns(self):
-        # Get a list of column based on all versions that are visible_default
-        return [choices_map[getattr(self, a)] for a, b in versions]
-
-    def featuredescription_is_url(self):
-        """
-        Returns true if the entirety of the feautre description is a URL, or
-        at least gives off the appearance that it is.
-        """
-        return self.featuredescription.startswith('https://') or self.featuredescription.startswith('http://')
-
-    @property
-    def featurelink(self):
-        if self.featuredescription_is_url():
-            return self.featuredescription
-        else:
-            return 'detail/%s/' % self.id
-
-
-versions = [(f.name, f.verbose_name) for f in Feature()._meta.fields if f.name.startswith('v') and getattr(f, 'visible_default', True)]
-versions = sorted(versions, key=lambda f: -float(f[1]))

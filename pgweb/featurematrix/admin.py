@@ -19,5 +19,5 @@ class FeatureAdmin(admin.ModelAdmin):
     search_fields = ('featurename',)
 
 
-admin.site.register(FeatureGroup, FeatureGroupAdmin)
-admin.site.register(Feature, FeatureAdmin)
+# admin.site.register(FeatureGroup, FeatureGroupAdmin)
+# admin.site.register(Feature, FeatureAdmin)
