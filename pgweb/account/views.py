@@ -796,7 +796,7 @@ def _encrypt_site_response(site, s, version):
         if site.version == 3:
             encryptor = AES.new(base64.b64decode(site.cryptkey), AES.MODE_SIV, nonce=nonce)
         else:
-            encryptor = ChaCha20_Poly1305.new(key=site.cryptkey, nonce=nonce)
+            encryptor = ChaCha20_Poly1305.new(key=base64.b64decode(site.cryptkey), nonce=nonce)
         cipher, tag = encryptor.encrypt_and_digest(s.encode('ascii'))
 
         return "&".join((
