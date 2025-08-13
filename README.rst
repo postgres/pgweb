@@ -47,7 +47,6 @@ Bootstrap is released under the `MIT Licence <https://github.com/twbs/bootstrap/
 and includes the following software as well:
 
 - jQuery under the `MIT Licence <https://jquery.org/license/>`_
-- Popper under the `MIT Licence <https://github.com/FezVrasta/popper.js/blob/master/LICENSE.md>`_
 
 Font Awesome has a `combination of licences <https://fontawesome.com/license>`_:
 
