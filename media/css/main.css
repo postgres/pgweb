@@ -1658,7 +1658,6 @@ h3.messages {
   font-size: 0.7em;
   line-height: 1.2em;
 }
-
 /* Message Subjects */
 h1.subject {
   text-transform: none;
@@ -1827,18 +1826,12 @@ th.organisation-logo {
   content: none;
 }
 
-.release-notes-list {
+details.release-notes-list ul {
   list-style-type: none;
 }
 
-.release-notes-list :not(.collapsed) > .right,
-.release-notes-list .collapsed > .down {
-  display: none;
-}
-
-.release-notes-list .collapsed > .right,
-.release-notes-list :not(.collapsed) > .down {
-  display: block;
+details.release-notes-list {
+  margin-bottom: 0.3rem;
 }
 
 /* Moderation preview */
