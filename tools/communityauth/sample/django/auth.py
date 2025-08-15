@@ -211,7 +211,10 @@ We apologize for the inconvenience.
     # Finally, check of we have a data package that tells us where to
     # redirect the user.
     if 'd' in data:
-        (nonces, datas, tags) = data['d'][0].split('$')
+        splitdata = data['d'][0].split('$')
+        if len(splitdata) != 3:
+            return HttpResponse("Invalid login pass-through data received, likely because of an old link. Please try again.")
+        (nonces, datas, tags) = splitdata
         decryptor = AES.new(
             SHA256.new(settings.SECRET_KEY.encode('ascii')).digest()[:32],
             AES.MODE_SIV,
