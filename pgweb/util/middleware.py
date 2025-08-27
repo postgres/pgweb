@@ -75,6 +75,8 @@ class PgMiddleware(object):
             else:
                 response['Content-Security-Policy'] = " ; ".join(security_policies)
 
+        response['Cross-Origin-Opener-Policy'] = getattr(response, 'x_origin_opener_policy', 'same-origin')
+
         response['X-XSS-Protection'] = "1; mode=block"
         return response
 

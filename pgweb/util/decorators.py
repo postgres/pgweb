@@ -57,6 +57,17 @@ def allow_frames(fn):
     return _allow_frames
 
 
+def origin_opener_policy(policy):
+    def _origin_opener_policy(fn):
+        def __origin_opener_policy(request, *_args, **_kwargs):
+            resp = fn(request, *_args, **_kwargs)
+            resp.x_origin_opener_policy = policy
+
+            return resp
+        return __origin_opener_policy
+    return _origin_opener_policy
+
+
 def content_sources(what, source):
     def _script_sources(fn):
         def __script_sources(request, *_args, **_kwargs):
