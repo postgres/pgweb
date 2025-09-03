@@ -1,4 +1,17 @@
 /*
+ * Keyboard-accessible nav toggle
+ */
+document.getElementById('navbar-toggler-label').addEventListener('keydown', (e) => {
+    if (e.key == ' ') {
+        document.getElementById('navbar-toggler').checked ^= true;
+        e.preventDefault();
+    }
+});
+document.getElementById('navbar-toggler').addEventListener('change', (e) => {
+    document.getElementById('navbar-toggler').setAttribute('aria-expanded', document.getElementById('navbar-toggler').checked);
+});
+
+/*
  * Initialize google tag manager for analytics integration
  */
 var DNT = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack || window.msDoNotTrack;

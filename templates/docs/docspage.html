@@ -44,10 +44,9 @@
             <a class="navbar-brand p-0" href="/">
               <img class="logo" src="/media/img/about/press/elephant.png" alt="PostgreSQL Elephant Logo">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#pgNavbar" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="pgNavbar">
+            <input type="checkbox" id="navbar-toggler" aria-controls="pgNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <label for="navbar-toggler" id="navbar-toggler-label" class="navbar-toggler" tabindex="0"><span class="navbar-toggler-icon"></span></label>
+            <div class="navbar-collapse" id="pgNavbar">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item p-2"><a href="/" title="Home">Home</a></li>
                 <li class="nav-item p-2"><a href="/about/" title="About">About</a></li>
@@ -178,8 +177,6 @@
         <p>Copyright &copy; 1996-{% now "Y" %} The PostgreSQL Global Development Group</p>
       </div>
     </footer>
-    <script src="/media/js/jquery-3.4.1.slim.min.js"></script>
-    <script src="/media/js/bootstrap-4.4.1.min.js"></script>
     <script src="/media/js/main.js?{{gitrev}}"></script>
   </body>
 </html>

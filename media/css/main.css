@@ -825,6 +825,18 @@ ul.actions {
   transition: all 0.3s;
 }
 
+/* Burger menu */
+input#navbar-toggler {
+  display: none;
+}
+#pgNavbar {
+  display: none;
+}
+#navbar-toggler:checked ~ #pgNavbar {
+  display: block;
+}
+
+
 /* #SIDEBAR UL STYLING */
 
 #pgSideNav {
