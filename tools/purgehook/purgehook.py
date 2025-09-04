@@ -49,7 +49,7 @@ if __name__ == "__main__":
             })
 
             # If it's a CSS file, we also need to purge /dyncss/
-            if l.endswith('.css'):
+            if l.strip().endswith('.css'):
                 curs.execute("SELECT varnish_purge('^/dyncss/')")
         elif l.startswith('data/'):
             # Data files map to xkeys with the same name as the file prefixed by data_
