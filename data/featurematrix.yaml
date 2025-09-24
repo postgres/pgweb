@@ -1,6 +1,6 @@
 versions:
   min: 8.1
-  max: 17
+  max: 18
 featurematrix:
   Backend:
   - name: 64-bit large objects
@@ -144,6 +144,10 @@ featurematrix:
     versions:
       '8.3': 'Yes'
     description: allows user defined datatypes to specify a type modifier
+  - name: UUIDv7
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE
   - name: XML data type
     versions:
       '8.3': 'Yes'
@@ -255,6 +259,14 @@ featurematrix:
     versions:
       '11': 'Yes'
     description: ''
+  - name: Parallelized CREATE INDEX for GIN indexes
+    versions:
+      '18': 'Yes'
+  - name: Skip scan on multicolumn B-tree indexes
+    versions:
+      '18': 'Yes'
+    description: "Improve execution time for queries that omit an `=` condition\
+      \ on one or more prefix index columns."
   - name: Space-Partitioned GiST (SP-GiST) Indexes
     versions:
       '9.2': 'Yes'
@@ -337,6 +349,10 @@ featurematrix:
       \ expression in a string\r\n- `regexp_instr `: returns the starting of the Nth\
       \ match of a regular expression in a sting\r\n- `regexp_like`: returns true\
       \ if a regular expression has a match in a string.\r\n\r\n[https://www.postgresql.org/docs/15/functions-matching.html#FUNCTIONS-POSIX-REGEXP](https://www.postgresql.org/docs/15/functions-matching.html#FUNCTIONS-POSIX-REGEXP)"
+  - name: Return OLD and NEW values from modified rows
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/18/dml-returning.html
   - name: Row-wise comparison
     versions:
       '8.2': 'Yes'
@@ -449,10 +465,23 @@ featurematrix:
     versions:
       '12': 'Yes'
     url: https://www.postgresql.org/docs/current/ddl-generated-columns.html
+  - name: Temporal constraints
+    versions:
+      '18': 'Yes'
+    description: "Temporal constraints are constraints over ranges. These are\
+      \ available for both [`PRIMARY KEY`](https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-PRIMARY-KEY)\
+      \ and [`UNIQUE`](https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-UNIQUE)\
+      \ constraints using the `WITHOUT OVERLAPS` clause, and\
+      \ [`FOREIGN KEY`](https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-REFERENCES)\
+      \ constraints using the `PERIOD` clause."
   - name: Typed tables
     versions:
       '9.0': 'Yes'
     description: 'Adds support for syntax: CREATE TABLE name OF type'
+  - name: Virtual Generated Columns
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/current/ddl-generated-columns.html
   Performance:
   - name: Abbreviated Keys
     versions:
@@ -466,6 +495,14 @@ featurematrix:
     versions:
       '8.3': 'Yes'
     description: Delays writes to WAL for committed transactions
+  - name: Asynchronous I/O (AIO)
+    versions:
+      '18': 'Yes'
+    description: "New I/O subsystem PostgreSQL issue multiple I/O requests\
+      \ concurrently instead of waiting for each to finish in sequence. This\
+      \ expands existing readahead and improves overall throughput. AIO\
+      \ supported in PostgreSQL 18 include sequential scans, bitmap heap scans,\
+      \ and vacuum. For more information see [`io_method`](https://www.postgresql.org/docs/18/runtime-config-resource.html#GUC-IO-METHOD)."
   - name: Automatic plan invalidation
     versions:
       '8.3': 'Yes'
@@ -890,6 +927,10 @@ featurematrix:
     versions:
       '16': 'Yes'
     description: Logical replication publishers can be created from standby instances.
+  - name: Logical replication of stored generated columns
+    versions:
+      '18': 'Yes'
+    description: "Stored generated columns are logically replicated."
   - name: Logical replication initial sync using binary protocol
     versions:
       '16': 'Yes'
@@ -929,6 +970,13 @@ featurematrix:
     description: Logical replication subscribers can be automatically disabled using
       the [`disable_on_error`](https://www.postgresql.org/docs/15/logical-replication-conflicts.html)
       setting.
+  - name: Logical replication write conflict logging
+    versions:
+      '18': 'Yes'
+    description: "Write conflicts that occur during ogical replication are\
+      \ reported both in logs and in the\
+      \ [`pg_stat_subscription_stats`](https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION-STATS)\
+      \ view."
   - name: Quorum commit for synchronous replication
     versions:
       '10': 'Yes'
@@ -1068,6 +1116,23 @@ featurematrix:
     versions:
       '8.2': 'Yes'
     url: https://www.postgresql.org/docs/current/static/warm-standby.html
+  Upgrade:
+  - name: pg_upgrade --swap
+    versions:
+      '18': 'Yes'
+    description: "The `--swap` option moves the data directories from the old\
+      \ cluster to the new cluster and then replaces catalog files with those\
+      \ generated for the new cluster. See\
+      [`pg_upgrade`](https://www.postgresql.org/docs/18/pgupgrade.html)\
+      \ for more information."
+  - name: Planner statistics preserved on major version upgrade
+    versions:
+      '18': 'Yes'
+    description: "PostgreSQL now keeps planner statistics\
+      \ through a major version upgrade, which helps an upgraded cluster\
+      \ reach expected performance more quickly after the upgrade. See the\
+      \ statistics section in [`pg_upgrade`](https://www.postgresql.org/docs/18/pgupgrade.html)\
+      \ for more information."
   Data Import & Export:
   - name: COPY from/to STDIN/STDOUT
     versions:
@@ -1152,6 +1217,10 @@ featurematrix:
     versions:
       '17': 'Yes'
     url: https://www.postgresql.org/docs/17/libpq-connect.html#LIBPQ-CONNECT-SSLNEGOTIATION
+  - name: FIPS mode validation
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/18/pgcrypto.html#PGCRYPTO-OPENSSL-SUPPORT-FUNCS
   - name: GRANT/REVOKE ON ALL TABLES/SEQUENCES/FUNCTIONS
     versions:
       '9.0': 'Yes'
@@ -1197,6 +1266,10 @@ featurematrix:
     versions:
       '9.0': 'Yes'
     description: adds support for authentictaing against a RADIUS server
+  - name: OAuth Authentication / Authorization
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/18/auth-oauth.html
   - name: Per user/database connection limits
     versions:
       '8.1': 'Yes'
@@ -1244,6 +1317,10 @@ featurematrix:
       '8.3': 'Yes'
     description: full integration with the native authentication framework in Microsoft
       Windows
+  - name: SHA-2 encryption for password hashing
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/18/pgcrypto.html#PGCRYPTO-CRYPT-ALGORITHMS
   - name: SSL certificate validation in libpq
     versions:
       '8.4': 'Yes'
@@ -1262,6 +1339,10 @@ featurematrix:
       '16': 'Yes'
     description: Specifying `sslroot=system` instructs PostgreSQL to use the trusted
       certificate authority (CA) store provided by the client's operating system.
+  - name: TLS v1.3 cipher suite allowlisting
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/18/runtime-config-connection.html#GUC-SSL-TLS13-CIPHERS
   Transactions and Visibility:
   - name: Cursors
     versions:
@@ -1339,6 +1420,12 @@ featurematrix:
     description: "The [postgres_fdw](https://www.postgresql.org/docs/13/postgres-fdw.html)\
       \ can now use the built-in [certificate authentication](https://www.postgresql.org/docs/current/auth-cert.html)\
       \ mechanism.\r\n\r\nFor more information, please visit the [postgres_fdw documentation](https://www.postgresql.org/docs/13/postgres-fdw.html#id-1.11.7.42.10)"
+  - name: CREATE FOREIGN TABLE ... LIKE
+    versions:
+      '18': 'Yes'
+    description: "Specify a source table from which the new table automatically\
+      \ copies all column names, their data types, and their not-null\
+      \ constraints."
   - name: Foreign data wrapper query parallelism
     versions:
       '14': 'Yes'
@@ -1378,6 +1465,10 @@ featurematrix:
     description: Ability to push down JOIN, Sorts, UPDATEs and DELETEs to the remote
       database in postgres_fdw driver, and theoretically in other drivers.  Also some
       generic operator/function pushdown.
+  - name: postgres_fdw SCRAM authentication passthrough
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/18/postgres-fdw.html#POSTGRES-FDW-OPTION-USE-SCRAM-PASSTHROUGH
   - name: PostgreSQL Foreign Data Wrapper
     versions:
       '9.3': 'Yes'
@@ -1594,6 +1685,10 @@ featurematrix:
     description: PostgreSQL has a built-in, platform independent immutable collation
       provider that supports C and C.UTF-8 collations. For more information, see [standard
       collations](https://www.postgresql.org/docs/17/collation.html#COLLATION-MANAGING-STANDARD).
+  - name: casefold
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/18/functions-string.html#id-1.5.8.10.7.2.2.8.1.1.1
   - name: Column-level collation support
     versions:
       '9.1': 'Yes'
@@ -1618,6 +1713,10 @@ featurematrix:
     versions:
       '10': 'Yes'
     url: https://www.postgresql.org/docs/current/static/collation.html#id-1.6.10.4.5.7.5
+  - name: LIKE comparisons for nondeterministic collations
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/18/collation.html#COLLATION-NONDETERMINISTIC
   - name: Multibyte encoding support, incl. UTF8
     versions:
       '8.1': 'Yes'
@@ -1630,6 +1729,10 @@ featurematrix:
     versions:
       '12': 'Yes'
     url: https://www.postgresql.org/docs/12/collation.html#COLLATION-NONDETERMINISTIC
+  - name: pg_unicode_fast collation
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/18/collation.html#COLLATION-MANAGING-STANDARD
   - name: Unicode string literals and identifiers
     versions:
       '8.4': 'Yes'
@@ -1693,6 +1796,24 @@ featurematrix:
     description: The [`psql`](https://www.postgresql.org/docs/15/app-psql.html) client
       includes a `\dconfig` command for inspecting and finding the values of configuration
       parameters.
+  - name: psql pipeline queries
+    versions:
+      '18': 'Yes'
+    description: "psql can issue pipeline queries using the commands\
+      \ [`\\startpipeline`](https://www.postgresql.org/docs/18/app-psql.html#APP-PSQL-META-COMMAND-PIPELINE),\
+      \ [`\\syncpipeline`](https://www.postgresql.org/docs/18/app-psql.html#APP-PSQL-META-COMMAND-PIPELINE),\
+      \ [`\\sendpipeline`](https://www.postgresql.org/docs/18/app-psql.html#APP-PSQL-META-COMMAND-PIPELINE),\
+      \ [`\\endpipeline`](https://www.postgresql.org/docs/18/app-psql.html#APP-PSQL-META-COMMAND-PIPELINE),\
+      \ [`\\flushrequest`](https://www.postgresql.org/docs/18/app-psql.html#APP-PSQL-META-COMMAND-PIPELINE),\
+      \ [`\\flush`](https://www.postgresql.org/docs/18/app-psql.html#APP-PSQL-META-COMMAND-PIPELINE), and\
+      \ [`\\getresults`](https://www.postgresql.org/docs/18/app-psql.html#APP-PSQL-META-COMMAND-PIPELINE)."
+  - name: psql named prepared statements
+    versions:
+      '18': 'Yes'
+    description: "psql can parse ([`\\parse`](https://www.postgresql.org/docs/18/app-psql.html#APP-PSQL-META-COMMAND-PARSE)),\
+      \ bind ([`\\bind_named`](https://www.postgresql.org/docs/18/app-psql.html#APP-PSQL-META-COMMAND-BIND-NAMED)),\
+      \ and close ([`\\close_prepared`](https://www.postgresql.org/docs/18/app-psql.html#APP-PSQL-META-COMMAND-CLOSE-PREPARED))\
+      \ named prepared statements."
   - name: Version aware psql
     versions:
       '8.4': 'Yes'
@@ -1777,6 +1898,14 @@ featurematrix:
     versions:
       '8.2': 'Yes'
     url: https://www.postgresql.org/docs/current/pgfreespacemap.html
+  - name: pg_logicalinspect
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/18/pglogicalinspect.html
+  - name: pg_overexplain
+    versions:
+      '18': 'Yes'
+    url: https://www.postgresql.org/docs/18/pgoverexplain.html
   - name: pg_stat_statements
     versions:
       '8.4': 'Yes'
