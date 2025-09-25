@@ -1,0 +1,755 @@
+{% extends "pages/about/press/presskit18/base.html" %}
+
+{% block presskit_content %}
+<p dir="rtl">
+
+25 בספטמבר 2025 – 
+<a href="https://www.postgresql.org">קבוצת הפיתוח הגלובלית של PostgreSQL</a>
+
+
+מודיעה היום על שחרור 
+<a href="https://www.postgresql.org/docs/18/release-18.html">PostgreSQL&nbsp;18</a>
+,
+הגרסה העדכנית ביותר של מסד הנתונים בקוד פתוח המתקדם בעולם.
+</p>
+
+
+<p dir="rtl">
+
+
+PostgreSQL 18 משפרת את הביצועים עבור עומסי עבודה בכל הגדלים באמצעות תת־מערכת I/O חדשה,
+שהדגימה שיפורי ביצועים של עד פ 3 בקריאות מהאחסון, ומגדילה גם את מספר השאילתות היכולות להשתמש באינדקסים.
+מהדורה זו מצמצמת את ההפרעה בתהליכי שדרוג גרסה ראשית, מקצרת את זמני השדרוג ומפחיתה את הזמן הנדרש להגיע לביצועים הצפויים לאחר סיום השדרוג.
+
+
+מפתחים מרוויחים מתכונות חדשות ב‑PostgreSQL 18, כולל עמודות מחושבות וירטואליות (Virtual Generated Columns) שמחשבות ערכים בזמן שאילתה,
+
+
+ופונקציית
+    <code>uuidv7()</code> 
+הידידותית למסדי נתונים המספקת אינדוקס וקריאה מהירים יותר עבור UUID.
+
+
+PostgreSQL 18 גם מקלה על אינטגרציה עם מערכות
+SSO (Single‑Sign On)
+    בעזרת תמיכה באימות OAuth 2.0.
+</p>
+
+
+<p dir="rtl">
+
+
+"המאמץ של קהילת הקוד הפתוח הגלובלית מעצב כל מהדורה של PostgreSQL ועוזר לה לספק תכונות שמגיעות אל המשתמשים היכן שהנתונים שלהם נמצאים", אמר
+Jonathan Katz, חבר ב‑PostgreSQL Core Team.
+"PostgreSQL 18 נבנה על ההיסטוריה הארוכה והעשירה של הפרויקט במתן חוויית ניהול נתונים אמינה וחסינה, תוך המשך הרחבת מגוון עומסי העבודה שהוא יכול לתמוך בהם."
+</p>
+
+
+<p dir="rtl">
+PostgreSQL זאת מערכת ניהול נתונים חדשנית הידועה באמינות, בחוסנה וביכולת הרחבה שלה, נהנית ממעל 25 שנות פיתוח קוד פתוח מקהילת המפתחים העולמית והפכה לבסיס נתונים רלציוני הפתוח המועדף על ארגונים מכל הגדלים.
+</p>
+
+
+
+
+<h3 dir="rtl">
+מבוא ל‑Asynchronous I/O
+</h3>
+
+
+<p dir="rtl">
+PostgreSQL הסתמכה בעבר על מנגנוני readahead של מערכת ההפעלה כדי להאיץ שליפת נתונים.
+עם זאת, מכיוון שלמערכות ההפעלה אין ידע על דפוסי הגישה הייחודיים למסד הנתונים, הן אינן תמיד מסוגלות לצפות אילו נתונים יידרשו, מה שמוביל לביצועים פחות מיטביים תחת עומסי עבודה רבים.
+</p>
+
+
+
+
+<p dir="rtl">
+PostgreSQL 18 מציגה תת־מערכת חדשה של קלט/פלט אסינכרוני (AIO) שנועדה לטפל במגבלה הזו.
+AIO מאפשרת ל-PostgreSQL להנפיק כמה בקשות I/O במקביל, במקום להמתין שכל בקשה תסתיים ברצף. בכך היא מרחיבה את מנגנון ה-readahead הקיים ומשפרת את התפוקה הכוללת.
+ב-PostgreSQL 18 נתמכות פעולות AIO כגון סריקות רציפות (sequential scans), סריקות bitmap של ערימת הטבלה (bitmap heap scans) ו-
+    <code>VACUUM</code>
+.
+מדדי ביצועים הראו שיפורים של עד פי 3 בתרחישים מסוימים.
+</p>
+
+
+<p dir="rtl">
+הגדרת
+<a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#GUC-IO-METHOD"><code>io_method</code></a>
+החדשה מאפשרת לבחור בין שיטות AIO, כולל 
+    <code>worker</code>
+    ו-
+    <code>io_uring</code>
+, או לשמור על ההתנהגות הנוכחית של PostgreSQL באמצעות ההגדרה
+    <code>sync</code>
+.
+כעת קיימים עוד פרמטרים שכדאי לשקול לכייל יחד עם AIO, ועליהם ניתן לקרוא ב
+<a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-IO">תיעוד</a>.
+</p>
+
+
+
+
+<h3 dir="rtl">
+שדרוגים מהירים יותר וביצועים טובים יותר לאחר השדרוג
+</h3>
+
+
+<p dir="rtl">
+
+
+מאפיין מרכזי ב‑PostgreSQL הוא יצירה ואחסון של 
+<a href="https://www.postgresql.org/docs/18/planner-stats.html">סטטיסטיקות</a>
+המסייעות לבחור את תכנית השאילתה היעילה ביותר.
+
+
+לפני PostgreSQL 18, סטטיסטיקות אלה לא נשמרו בעת 
+<a href="https://www.postgresql.org/docs/18/pgupgrade.html">שדרוג גרסה ראשית</a>,
+מה שעלול היה לגרום לירידה זמנית בביצועי שאילתות במערכות עמוסות עד לסיום
+
+
+<a href="https://www.postgresql.org/docs/18/sql-analyze.html"><code>ANALYZE</code></a>.
+
+
+ב‑PostgreSQL 18 ניתן לשמר את סטטיסטיקות של המתכנן במהלך שדרוג גרסה ראשית, ובכך לסייע לבסיס הנתונים המשודרג להגיע מהר יותר לביצועים הצפויים.
+
+
+</p>
+
+
+<p dir="rtl">
+
+
+בנוסף, כלי השדרוג 
+<a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>
+    קיבל מספר שיפורים ב‑PostgreSQL 18,
+לרבות שדרוגים מהירים יותר כאשר במסד הנתונים יש הרבה אובייקטים (כגון טבלאות ורצפים).
+מהדורה זו גם מאפשרת ל‑
+<code>pg_upgrade</code> 
+להריץ בדיקות במקביל בהתאם לפרמטר 
+<code>--jobs</code>
+, ומוסיפה את הדגל 
+<code>--swap</code>
+שמבצע החלפה בין ספריות השדרוג במקום העתקה, שכפול או קישור קבצים.
+</p>
+
+
+
+
+<h3 dir="rtl">
+שיפורי ביצועים כלליים וביצוע שאילתות
+</h3>
+
+
+<p dir="rtl">
+
+
+PostgreSQL 18 ממשיכה להאיץ את ביצועי השאילתות בעזרת יכולות שמזרזות את העומסים שלכם באופן אוטומטי. 
+מהדורה זו מציגה חיפושי “skip scan” על 
+<a href="https://www.postgresql.org/docs/18/indexes-multicolumn.html">אינדקסי B-tree מרובי עמודות</a>
+, המשפרים את זמן הביצוע עבור שאילתות שמדלגות על תנאי = באחת או יותר עמודת הפריפיקס של האינדקס.
+היא יכולה גם לאפטם שאילתות המשתמשות בתנאי 
+<code>OR</code>
+    
+    בתוך סעיף 
+<code>WHERE</code>
+    כך שיוכלו להשתמש באינדקס, דבר שמוביל לביצוע מהיר משמעותית.
+נוסף על כך, בוצעו שיפורים רבים באופן שבו PostgreSQL מתכננת ומבצעת חיבורים בין טבלאות (joins) — מהאצת
+<code>hash join</code>
+    ועד מתן אפשרות ל-
+<code>merge join</code>
+    להשתמש במיונים אינקרמנטליים.
+PostgreSQL 18 תומכת גם בבנייה מקבילית של 
+<a href="https://www.postgresql.org/docs/18/gin.html">אינדקסי GIN</a>
+
+
+, ומצטרפת בכך לאינדקסי B-tree ו-
+
+
+    שכבר תומכים ביכולת זו.
+</p>
+
+
+<p dir="rtl">
+
+
+מהדורה זו גם מרחיבה את התמיכה של PostgreSQL בהאצת חומרה, כולל תמיכה באינטרינזיקות מעבד ARM NEON ו-SVE עבור הפונקציה
+<code>popcount</code>
+, המשמשת את
+<a href="https://www.postgresql.org/docs/18/functions-bitstring.html"><code>bit_count</code></a>
+
+
+    ויכולות פנימיות נוספות.
+</p>
+
+
+
+
+<h3 dir="rtl">
+שיפור חוויית המפתחים
+</h3>
+
+
+<p dir="rtl">
+PostgreSQL 18 מציגה עמודות מחושבות וירטואליות (Virtual Generated Columns) שמחשבות ערכים בזמן הרצת השאילתה במקום לאחסן אותם. זהו כעת ברירת המחדל עבור עמודות מחושבות. בנוסף, ניתן כעת לשכפל לוגית עמודות מחושבות מאוחסנות.
+</p>
+<p dir="rtl">
+מהדורה זו מוסיפה אפשרות לגשת גם לערכים הקודמים (
+<code>OLD</code>
+) וגם לערכים הנוכחיים (
+<code>NEW</code>
+) בסעיף
+<a href="https://www.postgresql.org/docs/18/dml-returning.html"><code>RETURNING</code></a>
+עבור הפקודות
+<code>INSERT</code>
+,
+<code>UPDATE</code>
+,
+<code>DELETE</code>
+ו-
+<code>MERGE</code>
+.
+PostgreSQL 18 מוסיפה גם יצירת UUIDv7 באמצעות הפונקציה
+<a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv7()</code></a>
+    , המאפשרת להפיק מזהי UUID אקראיים המסודרים לפי חותמת זמן, לטובת אסטרטגיות קאשינג יעילות יותר.
+PostgreSQL 18 כוללת את
+<a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv4()</code></a>
+    ככינוי ל-
+<code>gen_random_uuid()</code>
+.
+</p>
+
+
+<p dir="rtl">
+PostgreSQL 18 מוסיפה
+<a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-UNIQUE"> אילוצים טמפורליים</a>
+
+
+    - אילוצים על פני תחומים- ל-
+<code>PRIMARY KEY</code>
+
+
+    ול-
+<code>UNIQUE</code>
+- באמצעות הסעיף
+<code>WITHOUT OVERLAPS</code>
+
+
+, וכן ל-
+<code>FOREIGN KEY</code>
+    באמצעות הסעיף
+<code>PERIOD</code>
+.
+</p>
+
+
+<p dir="rtl">
+לבסוף, PostgreSQL 18 מקלה על יצירת הגדרת הסכימה של טבלת חוץ (foreign table) על בסיס ההגדרה של טבלה מקומית באמצעות הפקודה
+<a href="https://www.postgresql.org/docs/18/sql-createforeigntable.html"><code>CREATE FOREIGN TABLE ... LIKE</code></a>
+.
+</p>
+
+
+
+
+<h3 dir="rtl">
+עיבוד טקסט משופר
+</h3>
+
+
+<p dir="rtl">
+
+
+PostgreSQL 18 מקלה ומאיצה את עיבוד הטקסט בעזרת מספר שיפורים חדשים. 
+
+
+מהדורה זו מוסיפה את המיון
+<a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-MANAGING-STANDARD"><code>PG_UNICODE_FAST</code></a>
+
+
+, המספק סמנטיקה מלאה של Unicode להמרות רישיות (case) ובמקביל מסייע להאיץ השוואות רבות.
+
+
+זה כולל את פונקציות
+<code>upper</code>
+    ו-
+<code>lower</code>
+, וכן את הפונקציה החדשה
+<a href="https://www.postgresql.org/docs/18/functions-string.html#FUNCTIONS-STRING-OTHER"><code>casefold</code></a>
+
+
+    להשוואות שאינן תלויות רישיות.
+בנוסף, PostgreSQL 18 תומכת כעת בביצוע השוואות
+<code>LIKE</code>
+    על טקסט המשתמש ב
+<a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-NONDETERMINISTIC">מיון לא-דטרמיניסטי</a>
+
+
+, מה שמפשט ביצוע התאמות תבנית מורכבות יותר.
+מהדורה זו גם משנה את
+
+
+<a href="https://www.postgresql.org/docs/18/textsearch.html">חיפוש הטקסט המלא</a>
+    כך שישתמש בספק המיון (collation provider) ברירת-המחדל של בסיס נתונים במקום תמיד להשתמש ב-
+<code>libc</code>
+, שינוי שעשוי לדרוש אינדוקס מחדש של כל אינדקסי
+
+
+<a href="https://www.postgresql.org/docs/18/textsearch-tables.html#TEXTSEARCH-TABLES-INDEX"> חיפוש הטקסט המלא</a>
+    ואינדקסי
+<a href="https://www.postgresql.org/docs/18/pgtrgm.html#PGTRGM-INDEX"><code>pg_trgm</code></a>
+    לאחר הרצת
+<a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>
+.
+</p>
+
+
+<h3 dir="rtl">
+אימות ואבטחה
+</h3>
+
+
+<p dir="rtl">
+
+
+PostgreSQL 18 מציגה אימות
+<a href="https://www.postgresql.org/docs/18/auth-oauth.html"><code>oauth</code></a>
+, המאפשר למשתמשים לבצע אימות באמצעות מנגנוני OAuth 2.0 הנתמכים דרך הרחבות PostgreSQL.
+בנוסף, PostgreSQL 18 כוללת ולידציה עבור
+<a href="https://www.postgresql.org/docs/18/pgcrypto.html#PGCRYPTO-OPENSSL-SUPPORT-FUNCS">מצב FIPS</a>
+, ומוסיפה את הפרמטר
+<a href="https://www.postgresql.org/docs/18/runtime-config-connection.html#GUC-SSL-TLS13-CIPHERS"><code>ssl_tls13_ciphers</code></a>
+    להגדרת מערכי הצפנים (cipher suites) של TLS v1.3 בצד השרת.
+</p>
+
+
+<p dir="rtl">
+
+
+מהדורה זו מכריזה על מנגנון האימות בסיסמה
+<code>md5</code>
+    כמיושן (deprecated), והוא יוסר באחת המהדורות הבאות. 
+אם נדרש לכם אימות מבוסס סיסמה ב-PostgreSQL, השתמשו באימות 
+<a href="https://www.postgresql.org/docs/18/auth-password.html"><code>SCRAM</code></a>
+של PostgreSQL 18.
+
+
+</p>
+<p dir="rtl">
+SCRAM תומכת גם ב-SCRAM passthrough הן עם
+<a href="https://www.postgresql.org/docs/18/postgres-fdw.html"><code>postgres_fdw</code></a>
+    והן עם
+<a href="https://www.postgresql.org/docs/18/dblink.html"><code>dblink</code></a>
+    לצורך אימות מול מופעי PostgreSQL מרוחקים.
+    בנוסף, 
+<a href="https://www.postgresql.org/docs/18/pgcrypto.html"><code>pgcrypto</code></a>
+
+
+    תומכת כעת ב
+<a href="https://www.postgresql.org/docs/18/pgcrypto.html#PGCRYPTO-CRYPT-ALGORITHMS">SHA-2 לצורך גיבוב סיסמאות</a>
+.
+</p>
+
+
+<h3 dir="rtl">
+שכפול (Replication)
+</h3>
+
+
+<p dir="rtl">
+
+
+
+
+PostgreSQL 18 תומכת בדיווח על התנגשויות כתיבה בשכפול לוגי (logical replication write conflicts) ביומנים (logs) ובתצוגה
+<a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION-STATSl"><code>pg_stat_subscription_stats</code></a>
+
+
+. 
+בנוסף,
+<a href="https://www.postgresql.org/docs/18/sql-createsubscription.html"><code>CREATE SUBSCRIPTION</code></a>
+
+
+    משתמשת כעת כברירת מחדל בהזרמה מקבילית (parallel streaming) ליישום עסקאות, מה שיכול לשפר את הביצועים. 
+לכלי 
+
+
+<a href="https://www.postgresql.org/docs/18/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a>
+    נוסף הדגל
+<code>--all</code>
+
+
+, כך שניתן ליצור רפליקות לוגיות לכל מסדי הנתונים במופע בפקודה אחת.
+PostgreSQL 18 מאפשרת גם
+<a href="https://www.postgresql.org/docs/18/runtime-config-replication.html#GUC-IDLE-REPLICATION-SLOT-TIMEOUT">להסיר אוטומטית סלוטי שכפול לא פעילים (idle replication slots)</a>
+    כדי לסייע במניעת אגירה של יותר מדי קובצי WAL בצד המפרסם.
+</p>
+
+
+
+
+<h3 dir="rtl">
+תחזוקה ותצפיות (Observability)
+</h3>
+
+
+<p dir="rtl">
+
+
+
+
+PostgreSQL 18 משפרת את אסטרטגיית ה- 
+<a href="https://www.postgresql.org/docs/18/routine-vacuuming.html"><code>VACUUM</code></a>
+- על-ידי הקפאה יזומה של יותר דפים במהלך פעולות
+<code>VACUUM</code>
+    רגילות, מה שמפחית תקורה ותורם במצבים הדורשים פעולות
+<code>VACUUM</code>
+    אגרסיביות.
+</p>
+
+
+<p dir="rtl">
+PostgreSQL 18 מוסיפה פרטים נוספים ל-
+<a href="https://www.postgresql.org/docs/18/using-explain.html"><code>EXPLAIN</code></a>
+, המספק מידע על ביצוע תוכנית השאילתה, וכעת מציגה אוטומטית כמה באפרים (יחידת האחסון הבסיסית) נגישים בעת הרצת
+<code>EXPLAIN ANALYZE</code>
+. 
+בנוסף,
+<code>EXPLAIN ANALYZE</code>
+    מציג כעת כמה פניות לאינדקס מתבצעות במהלך סריקת אינדקס, ו-
+<code>EXPLAIN ANALYZE VERBOSE</code>
+    כולל סטטיסטיקות על CPU, ‏WAL וזמני קריאה ממוצעים.
+PostgreSQL 18 כוללת יותר מידע ב
+<a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"><code>pg_stat_all_tables</code></a>
+- על זמן שהוקדש ל-
+<code>VACUUM</code>
+    ולפעולות קשורות, וכן סטטיסטיקות לפי-חיבור על ניצול I/O ו-WAL.
+</p>
+
+
+
+
+
+
+<h3 dir="rtl">
+שינויים בולטים נוספים
+</h3>
+
+
+<p dir="rtl">
+מסדי נתונים שמאותחלים עם
+<a href="https://www.postgresql.org/docs/18/app-initdb.html"><code>initdb</code></a>
+    של PostgreSQL 18 מופעלים כברירת־מחדל עם בדיקות page checksums. 
+הדבר עשוי להשפיע על שדרוגים מבסיסי נתונים שבהם בדיקות page checksums אינן מופעלות: במקרה כזה, בעת שימוש ב
+<a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>־pg_upgrade</code></a>
+יהיה צורך ליצור בסיס נתונים PostgreSQL 18 חדש עם האפשרות
+<code>--no-data-checksums</code>
+.
+</p>
+
+
+<p dir="rtl">
+PostgreSQL 18 מציגה גם גרסה חדשה (3.2) של פרוטוקול ה-WIRE של PostgreSQL - הגרסה החדשה הראשונה מאז 
+PostgreSQL 7.4 (2003). 
+
+
+הספרייה
+<a href="https://www.postgresql.org/docs/18/libpq-connect.html"><code>libpq</code></a>
+    עדיין משתמשת בגרסה 3.0 כברירת־מחדל, בעוד ש clients (למשל דרייברים, מאגרים, פרוקסים) מוסיפים תמיכה בגרסת הפרוטוקול החדשה.
+</p>
+
+
+
+
+<h3 dir="rtl">
+תכונות נוספות
+</h3>
+
+
+<p dir="rtl">
+
+
+תכונות חדשות ושיפורים רבים אחרים נוספו ל‑PostgreSQL 18 שעשויים גם להועיל למקרי השימוש שלכם.
+אנא עיינו ב-
+
+
+<a href="https://www.postgresql.org/docs/18/release-18.html">הערות המהדורה</a>
+
+
+    לקבלת רשימה מלאה של תכונות חדשות ושונות.
+</p>
+
+
+
+
+<h3 dir="rtl">
+אודות PostgreSQL
+</h3>
+
+
+<p dir="rtl">
+
+
+<a href="https://www.postgresql.org/">PostgreSQL</a>
+
+
+    הוא מסד נתונים בקוד פתוח המתקדם ביותר בעולם, עם קהילה גלובלית של אלפי משתמשים, תורמים, חברות וארגונים. 
+הפרויקט PostgreSQL נבנה על מעל 40 שנות הנדסה, החל באוניברסיטת קליפורניה, ברקלי, והמשיך להתפתח עם קצב ללא תחרות. 
+ערכת התכונות הבשלות של PostgreSQL לא רק תואמת מערכות נתונים קנייניות מובילות, אלא עולה עליהן במאפיינים של מסדי נתונים מתקדמים ,יכולות הרחבה, אבטחה ויציבות.
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 dir="rtl">
+קישורים
+</h3>
+<ul dir="rtl">
+<li>
+<a href="https://www.postgresql.org/download/"> הורדות </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/docs/18/release-18.html"> הערות מהדורה </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/about/press/"> ערכת עיתונות </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/support/security/"> עמוד אבטחה </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/support/versioning/"> מדיניות גרסאות </a>
+</li>
+<li>
+<a href="https://www.postgresql.org/about/contact/">יצירת קשר</a>
+</li>
+<li>
+<a href="https://www.postgresql.org/about/donate/">תרומות</a>
+</li>
+</ul>    
+{% endblock presskit_content %}
+
+
+{% block presskit_about %}
+<h2 dir="rtl">
+אודות PostgreSQL
+</h2>
+
+<p dir="rtl">
+
+
+    <a href="https://www.postgresql.org/">PostgreSQL</a>
+    
+    
+        הוא מסד נתונים בקוד פתוח המתקדם ביותר בעולם, עם קהילה גלובלית של אלפי משתמשים, תורמים, חברות וארגונים. 
+    הפרויקט PostgreSQL נבנה על מעל 40 שנות הנדסה, החל באוניברסיטת קליפורניה, ברקלי, והמשיך להתפתח עם קצב ללא תחרות. 
+    ערכת התכונות הבשלות של PostgreSQL לא רק תואמת מערכות נתונים קנייניות מובילות, אלא עולה עליהן במאפיינים של מסדי נתונים מתקדמים ,יכולות הרחבה, אבטחה ויציבות.
+    </p>    
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 dir="rtl">
+עוד על התכונות
+</h2>
+
+
+<p dir="rtl">
+
+
+להסברים על התכונות שלעיל ואחרות, עיינו במשאבים הבאים:
+</p>
+
+
+<ul dir="rtl">
+<li>
+<a href="https://www.postgresql.org/docs/18/release-18.html">הערות המהדורה</a>
+</li>
+<li>
+<a href="https://www.postgresql.org/about/featurematrix/">מטריצת תכונות</a>
+</li>
+</ul>
+    
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 dir="rtl">
+היכן להוריד
+</h2>
+
+
+<p dir="rtl">
+
+
+ישנן מספר דרכים להוריד את PostgreSQL18, כולל:
+
+
+</p>
+
+
+<ul dir="rtl">
+<li>
+דף
+<a href="https://www.postgresql.org/download/">ההורדות הרשמי</a>
+, הכולל מתקינים וכלי עזר עבור
+<a href="https://www.postgresql.org/download/windows/">Windows</a>
+,
+<a href="https://www.postgresql.org/download/">Linux</a>
+,
+<a href="https://www.postgresql.org/download/macosx/">macOS</a>
+    ועוד.
+</li>
+<li>
+<a href="https://www.postgresql.org/ftp/source/v18.0">קוד מקור</a>
+</li>
+</ul>
+
+
+<p dir="rtl">
+כלים והרחבות נוספים זמינים ב-
+<a href="http://pgxn.org/">PostgreSQL Extension Network</a>
+.
+</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 dir="rtl">
+תיעוד
+</h2>
+
+
+<p dir="rtl">
+
+
+PostgreSQL 18 מגיע עם תיעוד HTML וכן דפי man. 
+ניתן לעיין בתיעוד גם באופן מקוון בפורמט
+<a href="https://www.postgresql.org/docs/18/">HTML</a>
+ובפורמט
+<a href="https://www.postgresql.org/files/documentation/pdf/18/postgresql-18-US.pdf">PDF</a>
+.
+</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 dir="rtl">
+רישיון
+</h2>
+
+
+<p dir="rtl">
+
+
+PostgreSQL משתמשת ב
+<a href="https://www.postgresql.org/about/licence/">רישיון PostgreSQL</a>
+
+
+    , רישיון “מתירני” הדומה ל-BSD. 
+רישיון זה, 
+<a href="http://www.opensource.org/licenses/postgresql/">המאושר על-ידי OSI</a>
+, מוערך כגמיש וידידותי לעסקים, שכן הוא אינו מגביל את השימוש ב-PostgreSQL יחד עם יישומים מסחריים וקנייניים. 
+בשילוב עם תמיכה של חברות רבות ובעלות ציבורית על הקוד, רישיוננו הופך את PostgreSQL לפופולרית מאוד בקרב ספקים המבקשים לשלב מסד נתונים במוצריהם ללא חשש מעמלות, נעילת ספקים או שינויי תנאי רישוי.
+</p>    
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 dir="rtl">
+יצירת קשר
+</h2>
+
+
+<p dir="rtl">
+אתר:
+</p>
+
+
+<ul dir="rtl">
+<li>
+<a href="https://www.postgresql.org/">https://www.postgresql.org</a>
+</li>
+</ul>
+
+
+<p dir="rtl">
+אימייל:
+</p>
+<ul dir="rtl">
+<li>
+<a href="mailto:press@postgresql.org">press@postgresql.org</a>
+</li>
+    </ul>    
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 dir="rtl">
+    תמונות ולוגו
+</h2>
+
+
+<p dir="rtl">
+
+
+Postgres ו-PostgreSQL ולוגו הפיל (Slonik) הם כולם סימנים מסחריים רשומים של 
+<a href="https://www.postgres.ca">PostgreSQL Community Association</a>
+
+
+. אם ברצונך להשתמש בסימנים אלה, עליך לציית ל
+
+
+<a href="https://www.postgresql.org/about/policies/trademarks/">מדיניות הסימנים המסחריים</a>
+.
+
+
+
+
+</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 dir="rtl">
+תמיכה ארגונית ותרומות
+</h2>
+
+
+<p dir="rtl">
+PostgreSQL נהנית מתמיכתן של חברות רבות, שנותנות חסות למפתחים, מספקות משאבי אירוח ונותנות לנו תמיכה כספית. עיין בדף 
+<a href="https://www.postgresql.org/about/sponsors/">נותני החסות</a>
+שלנו עבור חלק מתומכי הפרויקט הללו.
+</p>
+
+
+<p dir="rtl">
+יש גם קהילה גדולה של 
+<a href="https://www.postgresql.org/support/professional_support/">חברות המציעות תמיכה ב-PostgreSQL</a>
+, מיועצים בודדים ועד לחברות רב לאומיות.
+
+
+</p>
+
+
+<p dir="rtl">
+אם ברצונך לתרום תרומה כספית לקבוצת הפיתוח העולמית PostgreSQL או לאחד מארגוני הקהילה המוכרים ללא מטרות רווח, אנא בקר ב
+
+
+<a href="https://www.postgresql.org/about/donate/">דף התרומות</a>
+שלנו.
+
+
+</p>
+{% endblock presskit_corporate %}

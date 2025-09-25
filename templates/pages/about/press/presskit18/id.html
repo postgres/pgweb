@@ -1,0 +1,110 @@
+{% extends "pages/about/press/presskit18/base.html" %}
+
+{% block presskit_content %}
+<p><strong>25 September 2025</strong> - <a href="https://www.postgresql.org">PostgreSQL Global Development Group</a> hari ini mengumumkan perilisan <a href="https://www.postgresql.org/docs/18/release-18.html">PostgreSQL 18</a>, versi terbaru dari database open source paling canggih di dunia.</p>
+<p>PostgreSQL 18 meningkatkan performa untuk workload dengan berbagai skala melalui subsistem I/O baru yang telah menunjukkan peningkatan performa hingga 3× saat membaca dari storage, serta meningkatkan jumlah query yang dapat menggunakan indeks. Rilis ini membuat upgrade versi mayor menjadi lebih mulus, mempercepat waktu upgrade dan mengurangi waktu yang diperlukan untuk mencapai performa yang diharapkan setelah upgrade selesai. Developer juga mendapat manfaat dari fitur-fitur PostgreSQL 18, termasuk virtual generated columns yang menghitung nilai pada saat query dieksekusi, dan fungsi <code>uuidv7()</code> yang lebih ramah terhadap database serta memberikan performa indexing dan read yang lebih baik untuk UUID. PostgreSQL 18 juga mempermudah integrasi dengan sistem Single-Sign On (SSO) melalui dukungan autentikasi OAuth 2.0.</p>
+<p>"Upaya komunitas Open Source global membentuk setiap rilis PostgreSQL dan membantu menghadirkan fitur yang relevan dengan kebutuhan pengguna di mana data mereka berada," ujar Jonathan Katz, anggota tim inti PostgreSQL. "PostgreSQL 18 dibangun berdasarkan proyek panjang dan kaya akan sejarah dalam menghadirkan pengalaman manajemen data yang andal dan kuat, sambil terus memperluas jenis workload yang dapat didukung."</p>
+<p>PostgreSQL, sebuah sistem manajemen data inovatif yang dikenal karena keandalan, ketangguhan, dan ekstensibilitasnya, mendapat manfaat dari hampir 30 tahun pengembangan Open Source dari komunitas developer global dan telah menjadi database relasional Open Source pilihan untuk berbagai skala organisasi.</p>
+<h3 id="memperkenalkan-asynchronous-io">Memperkenalkan asynchronous I/O</h3>
+<p>Sebelumnya, PostgreSQL mengandalkan mekanisme readahead pada sistem operasi untuk mempercepat pengambilan data. Namun, karena sistem operasi tidak mengenali pola akses spesifik database, sering kali data yang diperlukan tidak terantisipasi yang menyebabkan performa yang tidak optimal pada banyak workload.</p>
+<p>PostgreSQL 18 memperkenalkan subsistem asynchronous I/O (AIO) baru yang dirancang untuk mengatasi keterbatasan ini. AIO memungkinkan PostgreSQL mengeluarkan beberapa permintaan I/O sekaligus alih-alih menunggu satu per satu selesai. Hal ini memperluas kemampuan readahead yang ada dan meningkatkan throughput keseluruhan. Operasi AIO yang didukung dalam PostgreSQL 18 meliputi sequential scan, bitmap heap scan, dan vacuum. Benchmarking telah menunjukkan peningkatan performa hingga 3x dalam skenario tertentu.</p>
+<p>Pengaturan baru <a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#GUC-IO-METHOD"><code>io_method</code></a> memungkinkan Anda memilih metode AIO, termasuk <code>worker</code> dan <code>io_uring</code>, atau tetap menggunakan metode PostgreSQL saat ini dengan pengaturan <code>sync</code>. Kini ada lebih banyak parameter yang perlu dipertimbangkan untuk tuning dengan AIO, yang dapat <a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-IO">Anda pelajari lebih lanjut dalam dokumentasi</a>.</p>
+<h3 id="upgrade-lebih-cepat-performa-post-upgrade-yang-lebih-baik">Upgrade lebih cepat, performa post-upgrade yang lebih baik</h3>
+<p>Salah satu fitur kunci PostgreSQL adalah pembuatan dan penyimpanan <a href="https://www.postgresql.org/docs/18/planner-stats.html">statistics</a> yang membantu PostgreSQL memilih query plan yang paling efisien. Sebelum PostgreSQL 18, statistics ini tidak terbawa saat <a href="https://www.postgresql.org/docs/18/pgupgrade.html">upgrade versi mayor</a>, yang dapat menyebabkan degradasi performa query signifikan pada sistem yang sibuk sampai <a href="https://www.postgresql.org/docs/18/sql-analyze.html"><code>ANALYZE</code></a> selesai berjalan. PostgreSQL 18 memperkenalkan kemampuan untuk mempertahankan statistics planner saat terjadi upgrade versi mayor, sehingga cluster yang di-upgrade dapat lebih cepat mencapai performa yang diharapkan.</p>
+<p>Selain itu, <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>, utilitas yang melakukan upgrade versi mayor, menyertakan sejumlah peningkatan dalam PostgreSQL 18, antara lain upgrade yang lebih cepat ketika database berisi banyak objek seperti tabel dan sequence. Rilis ini juga memungkinkan <code>pg_upgrade</code> memproses pemeriksaannya secara paralel berdasarkan pengaturan flag <code>--jobs</code>, dan menambahkan flag <code>--swap</code> yang menukar direktori upgrade alih-alih menyalin, mengkloning, atau menghubungkan file.</p>
+<h3 id="peningkatan-performa-query-dan-umum">Peningkatan performa query dan umum</h3>
+<p>PostgreSQL 18 semakin mempercepat performa query dengan fitur yang secara otomatis membuat workload Anda lebih cepat. Rilis ini memperkenalkan pencarian "skip scan" pada <a href="https://www.postgresql.org/docs/18/indexes-multicolumn.html">indeks B-tree multikolom</a> yang meningkatkan waktu eksekusi untuk query tanpa kondisi <code>=</code> pada satu atau lebih kolom indeks prefiks. Lookup ini juga dapat mengoptimalkan query yang menggunakan kondisi <code>OR</code> dalam <code>WHERE</code> untuk menggunakan indeks, menghasilkan eksekusi yang jauh lebih cepat. Ada juga banyak peningkatan dalam cara PostgreSQL merencanakan dan mengeksekusi table join, mulai dari meningkatkan performa hash join hingga memungkinkan merge join menggunakan incremental sort. PostgreSQL 18 kini juga mendukung pembuatan paralel untuk <a href="https://www.postgresql.org/docs/18/gin.html">indeks GIN</a>, menyusul indeks B-tree dan <a href="https://www.postgresql.org/docs/current/brin.html">BRIN</a> yang telah mendukung kapabilitas ini.</p>
+<p>Rilis ini juga memperluas dukungan PostgreSQL untuk akselerasi hardware, termasuk dukungan intrinsik CPU ARM NEON dan SVE untuk fungsi <code>popcount</code> yang digunakan oleh <a href="https://www.postgresql.org/docs/18/functions-bitstring.html"><code>bit_count</code></a> dan kemampuan internal lainnya.</p>
+<h3 id="meningkatkan-pengalaman-developer">Meningkatkan pengalaman developer</h3>
+<p>PostgreSQL 18 memperkenalkan <a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-GENERATED-STORED">virtual generated columns</a> yang menghitung nilai pada saat query dijalankan alih-alih menyimpannya. Opsi ini kini menjadi default untuk generated columns. Selain itu, stored generated columns kini dapat direplikasi secara logical.</p>
+<p>Rilis ini menambahkan kemampuan untuk mengakses nilai sebelumnya (<code>OLD</code>) dan nilai saat ini (<code>NEW</code>) dalam <a href="https://www.postgresql.org/docs/18/dml-returning.html">klausa <code>RETURNING</code></a> untuk perintah <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> dan <code>MERGE</code>. PostgreSQL 18 juga menambahkan pembuatan UUIDv7 melalui fungsi <a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv7()</code></a>, memungkinkan Anda menghasilkan UUID acak yang diurutkan berdasarkan timestamp untuk mendukung strategi caching yang lebih baik. PostgreSQL 18 menyertakan <a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv4()</code></a> sebagai alias untuk <code>gen_random_uuid()</code>.</p>
+<p>PostgreSQL 18 menambahkan <a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-UNIQUE">temporal constraints</a> -- pembatasan atas rentang -- untuk constraint <code>PRIMARY KEY</code> dan <code>UNIQUE</code> menggunakan klausa <code>WITHOUT OVERLAPS</code>, dan pada constraint <code>FOREIGN KEY</code> menggunakan klausa <code>PERIOD</code>.</p>
+<p>Akhirnya, PostgreSQL 18 memudahkan pembuatan definisi schema dari foreign table menggunakan definisi tabel lokal dengan perintah <a href="https://www.postgresql.org/docs/18/sql-createforeigntable.html"><code>CREATE FOREIGN TABLE ... LIKE</code></a>.</p>
+<h3 id="pemrosesan-teks-yang-lebih-baik">Pemrosesan teks yang lebih baik</h3>
+<p>PostgreSQL 18 membuat pemrosesan teks lebih mudah dan cepat dengan sejumlah peningkatan baru. Rilis ini menambahkan collation <a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-MANAGING-STANDARD"><code>PG_UNICODE_FAST</code></a>, yang menyediakan semantik Unicode penuh untuk transformasi huruf sambil membantu mempercepat banyak perbandingan. Hal ini mencakup fungsi perbandingan string <code>upper</code> dan <code>lower</code>, serta fungsi <a href="https://www.postgresql.org/docs/18/functions-string.html#FUNCTIONS-STRING-OTHER"><code>casefold</code></a> baru untuk perbandingan yang tidak peka besar-kecilnya huruf. Selain itu, PostgreSQL 18 sekarang mendukung perbandingan <code>LIKE</code> pada teks yang menggunakan <a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-NONDETERMINISTIC">nondeterministic collation</a>, sehingga memudahkan pencocokan pola yang lebih kompleks. Rilis ini juga mengubah <a href="https://www.postgresql.org/docs/18/textsearch.html">full text search</a> untuk menggunakan penyedia collation default (bawaan) dari cluster alih-alih selalu menggunakan libc, yang mungkin mengharuskan Anda untuk melakukan reindex pada semua indeks <a href="https://www.postgresql.org/docs/18/textsearch-tables.html#TEXTSEARCH-TABLES-INDEX">full text search</a> dan <a href="https://www.postgresql.org/docs/18/pgtrgm.html#PGTRGM-INDEX"><code>pg_trgm</code></a> setelah menjalankan <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>.</p>
+<h3 id="replikasi">Replikasi</h3>
+<p>PostgreSQL 18 mendukung pelaporan konflik penulisan logical replication dalam log dan dalam tampilan <a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION-STATS"><code>pg_stat_subscription_stats</code></a>. Selain itu, <a href="https://www.postgresql.org/docs/18/sql-createsubscription.html"><code>CREATE SUBSCRIPTION</code></a> kini secara default menggunakan parallel streaming untuk menerapkan transaksi, yang dapat membantu meningkatkan performa. Utilitas <a href="https://www.postgresql.org/docs/18/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a> sekarang memiliki flag <code>--all</code> sehingga Anda dapat membuat replika logical untuk semua database dalam instance dengan satu perintah. PostgreSQL 18 juga memungkinkan Anda secara otomatis <a href="https://www.postgresql.org/docs/18/runtime-config-replication.html#GUC-IDLE-REPLICATION-SLOT-TIMEOUT">menghapus idle replication slot</a> untuk membantu mencegah penyimpanan terlalu banyak file write-ahead log pada publisher.</p>
+<h3 id="maintenance-dan-observability">Maintenance dan observability</h3>
+<p>PostgreSQL 18 meningkatkan strategi <a href="https://www.postgresql.org/docs/18/routine-vacuuming.html">vacuum</a> dengan secara proaktif membekukan lebih banyak halaman selama vacuum reguler, mengurangi overhead dan membantu dalam situasi yang memerlukan vacuum agresif.</p>
+<p>PostgreSQL 18 menambahkan lebih banyak detail pada <a href="https://www.postgresql.org/docs/18/using-explain.html"><code>EXPLAIN</code></a>, yang menyediakan informasi tentang eksekusi query plan, dan mulai rilis ini secara otomatis menampilkan berapa banyak buffer (unit fundamental dari penyimpanan data) yang diakses saat mengeksekusi <code>EXPLAIN ANALYZE</code>. Selain itu, <code>EXPLAIN ANALYZE</code> kini menunjukkan berapa banyak pencarian indeks (index lookup) yang terjadi selama index scan, dan <code>EXPLAIN ANALYZE VERBOSE</code> mencakup statistik CPU, WAL, dan rata-rata pembacaan (read). PostgreSQL 18 juga menambahkan lebih banyak informasi dalam <a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"><code>pg_stat_all_tables</code></a> mengenai waktu yang dihabiskan untuk vacuum dan operasi terkait, serta statistik per koneksi tentang pemanfaatan I/O dan WAL.</p>
+<h3 id="perubahan-penting-lainnya">Perubahan penting lainnya</h3>
+<p>Database yang diinisialisasi dengan <a href="https://www.postgresql.org/docs/18/app-initdb.html"><code>initdb</code></a> PostgreSQL 18 sekarang memiliki page checksum yang aktif secara default. Hal ini dapat memengaruhi upgrade dari cluster tanpa checksum, yang akan mengharuskan Anda membuat cluster PostgreSQL 18 baru dengan opsi <code>--no-data-checksums</code> saat menggunakan <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>.</p>
+<p>PostgreSQL 18 juga memperkenalkan PostgreSQL wire protocol 3.2, protokol versi terbaru pertama sejak PostgreSQL 7.4 (2003). <a href="https://www.postgresql.org/docs/18/libpq-connect.html"><code>libpq</code></a> masih menggunakan versi 3.0 secara default sementara client (seperti driver, pooler, proxy) menambahkan dukungan untuk versi protokol baru.</p>
+<h3 id="fitur-tambahan">Fitur tambahan</h3>
+<p>Banyak fitur dan peningkatan baru lainnya telah ditambahkan ke PostgreSQL 18 yang mungkin juga berguna untuk kasus penggunaan Anda. Silakan lihat <a href="https://www.postgresql.org/docs/18/release-18.html">catatan rilis</a> untuk daftar lengkap fitur baru dan fitur yang diubah.</p>
+<h3>Tentang PostgreSQL</h3>
+<p>
+    <a href="https://www.postgresql.org">PostgreSQL</a> adalah database Open Source paling canggih di dunia, dengan komunitas global ribuan pengguna, kontributor, perusahaan, dan organisasi. Sejak awal dikembangkan di University of California, Berkeley lebih dari 40 tahun yang lalu, PostgreSQL terus berkembang dengan kecepatan yang tak tertandingi. Kumpulan fiturnya yang matang tidak hanya menyamai sistem database proprietary teratas, tetapi juga melampaui dalam hal fitur database tingkat lanjut, ekstensibilitas, keamanan, dan stabilitas.
+</p>
+<h3 id="link">Link</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Download</a></li>
+<li><a href="https://www.postgresql.org/docs/18/release-18.html">Catatan Rilis</a></li>
+<li><a href="https://www.postgresql.org/about/press/">Press Kit</a></li>
+<li><a href="https://www.postgresql.org/support/security/">Halaman Keamanan</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">Kebijakan Versioning</a></li>
+<li><a href="https://www.postgresql.org/about/contact/">Kontak</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">Donasi</a></li>
+</ul>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2>Tentang PostgreSQL</h2>
+<p>
+    <a href="https://www.postgresql.org">PostgreSQL</a> adalah database Open Source paling canggih di dunia, dengan komunitas global ribuan pengguna, kontributor, perusahaan, dan organisasi. Sejak awal dikembangkan di University of California, Berkeley lebih dari 40 tahun yang lalu, PostgreSQL terus berkembang dengan kecepatan yang tak tertandingi. Kumpulan fiturnya yang matang tidak hanya menyamai sistem database proprietary teratas, tetapi juga melampaui dalam hal fitur database tingkat lanjut, ekstensibilitas, keamanan, dan stabilitas.
+</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="lebih-lanjut-tentang-fitur">Lebih Lanjut tentang Fitur</h2>
+<p>Untuk penjelasan fitur di atas dan lainnya, silakan lihat sumber-sumber berikut:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/18/release-18.html">Catatan Rilis</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">Matriks Fitur</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="tempat-download">Tempat Download</h2>
+<p>Ada beberapa cara Anda dapat mendownload PostgreSQL 18, termasuk:</p>
+<ul>
+<li>Halaman <a href="https://www.postgresql.org/download/">Download Resmi</a>, yang berisi installer dan tools untuk <a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/linux/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a>, dan lainnya.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v18.0">Source Code</a></li>
+</ul>
+<p>Tool dan extension lainnya tersedia di <a href="http://pgxn.org/">PostgreSQL Extension Network</a>.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="dokumentasi">Dokumentasi</h2>
+<p>PostgreSQL 18 dilengkapi dengan dokumentasi HTML serta manual. Anda juga dapat menjelajahi dokumentasi secara online dalam format <a href="https://www.postgresql.org/docs/18/">HTML</a> dan <a href="https://www.postgresql.org/files/documentation/pdf/18/postgresql-18-US.pdf">PDF</a>.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="lisensi">Lisensi</h2>
+<p>PostgreSQL menggunakan <a href="https://www.postgresql.org/about/licence/">PostgreSQL License</a>, sebuah lisensi "permisif" yang mirip seperti BSD. <a href="http://www.opensource.org/licenses/postgresql/">Lisensi bersertifikat OSI</a> ini sangat dihargai karena fleksibel dan ramah bisnis, tidak membatasi penggunaan PostgreSQL dengan aplikasi komersial dan proprietary. Bersama dengan dukungan dari berbagai perusahaan dan kepemilikan publik atas kode, lisensi kami membuat PostgreSQL sangat populer di kalangan vendor yang ingin menanamkan database dalam produk mereka sendiri tanpa khawatir akan biaya, vendor lock-in, atau perubahan ketentuan lisensi.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="kontak">Kontak</h2>
+<p>Website</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>Email</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="gambar-dan-logo">Gambar dan Logo</h2>
+<p>Postgres, PostgreSQL, dan Logo Gajah (Slonik) semuanya merupakan merek dagang terdaftar dari <a href="https://www.postgres.ca">PostgreSQL Community Association</a>. Jika Anda ingin menggunakan merek ini, Anda harus mematuhi <a href="https://www.postgresql.org/about/policies/trademarks/">kebijakan merek dagang</a>.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="dukungan-perusahaan-dan-donasi">Dukungan Perusahaan dan Donasi</h2>
+<p>PostgreSQL mendapat dukungan dari banyak perusahaan, yang mensponsori developer, menyediakan sumber daya hosting, dan memberikan dukungan finansial kepada kami. Lihat halaman <a href="https://www.postgresql.org/about/sponsors/">sponsor</a> kami untuk beberapa pendukung proyek ini.</p>
+<p>Ada juga komunitas besar <a href="https://www.postgresql.org/support/professional_support/">perusahaan yang menawarkan Dukungan PostgreSQL</a>, dari konsultan individu hingga perusahaan multinasional.</p>
+<p>Jika Anda ingin memberikan kontribusi finansial kepada PostgreSQL Global Development Group atau salah satu organisasi nirlaba komunitas yang diakui, silakan kunjungi halaman <a href="https://www.postgresql.org/about/donate/">donasi</a> kami.</p>
+{% endblock presskit_corporate %}
+

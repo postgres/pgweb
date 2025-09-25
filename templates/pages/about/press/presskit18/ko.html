@@ -1,0 +1,110 @@
+{% extends "pages/about/press/presskit18/base.html" %}
+
+{% block presskit_content %}
+<p><strong>2025년 9월 25일</strong> - <a href="https://www.postgresql.org">PostgreSQL 글로벌 개발 그룹</a>은 세계에서 가장 진보된 오픈 소스 데이터베이스의 최신 버전인 <a href="https://www.postgresql.org/docs/18/release-18.html">PostgreSQL 18</a>의 출시를 오늘 발표했습니다.</p>
+<p>PostgreSQL 18은 새로운 I/O 서브시스템을 통해 모든 규모의 워크로드 성능을 개선해서 스토리지에서 읽을 때 최대 3배의 성능 향상을 보여주었고, 인덱스를 사용할 수 있는 쿼리 수도 늘렸습니다. 이번 릴리스는 메이져 버전 업그레이드 시 발생하는 중단을 줄여 업그레이드 시간을 단축하고, 업그레이드 완료 후 예상 성능에 도달하는 시간을 줄여줍니다. 또한 PostgreSQL 18은 쿼리 시점에 값을 계산하는 가상 미리 계산된 칼럼(virtual generated columns)과 UUID 인덱싱 및 읽기 성능을 향상시키는 <code>uuidv7()</code> 함수 같은 기능을 제공하여 개발자 경험도 향상됩니다. 아울러 OAuth 2.0 인증을 지원하여 통합 인증(Single Sign-On; SSO) 시스템과의 통합도 쉬워졌습니다.</p>
+<p>“글로벌 오픈 소스 커뮤니티의 노력은 매번 PostgreSQL 릴리스에 반영되어 사용자가 필요로 하는 기능을 제공합니다.”라고 PostgreSQL 코어 팀의 Jonathan Katz는 말했습니다. “PostgreSQL 18은 신뢰성과 안정성을 갖춘 데이터 관리 경험을 제공해온 프로젝트의 긴 역사 위에 구축되었으며, 지원 가능한 워크로드의 범위를 계속 확장하고 있습니다.”</p>
+<p>PostgreSQL은 신뢰성, 견고함, 확장성으로 잘 알려진 혁신적인 데이터 관리 시스템으로, 전 세계 개발자 커뮤니티의 약 30년간의 오픈 소스 개발 성과를 바탕으로 모든 규모의 조직에서 선호하는 오픈 소스 관계형 데이터베이스가 되었습니다.</p>
+<h3 id="비동기-io-도입">비동기 I/O 도입</h3>
+<p>이전 PostgreSQL은 데이터 검색 속도를 높이기 위해 운영체제의 미리 읽기(readahead 시스템 콜) 메커니즘에 의존했습니다. 그러나 운영체제는 데이터베이스 특화된 액세스 패턴을 알 수 없기 때문에 필요한 데이터를 항상 예측하지 못해 많은 워크로드에서 최적의 성능을 내지 못했습니다.</p>
+<p>PostgreSQL 18은 이러한 한계를 해결하기 위해 새로운 비동기 I/O(AIO) 서브시스템을 도입했습니다. AIO는 PostgreSQL이 I/O 요청을 순차적으로 기다리는 대신 동시에 여러 개를 발행할 수 있도록 하여 미리 읽기를 확장하고 전체 처리량을 개선합니다. PostgreSQL 18에서 지원되는 AIO 작업에는 순차 스캔, 비트맵 힙 스캔, 그리고 vacuum이 포함됩니다. 벤치마크 결과에 따르면 특정 시나리오에서 최대 3배의 성능 향상이 입증되었습니다.</p>
+<p>새로운 환경 설정 매개 변수 <a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#GUC-IO-METHOD"><code>io_method</code></a> 설정을 통해 <code>worker</code>, <code>io_uring</code> 등의 AIO 방식을 선택하거나, 기존 PostgreSQL 동작을 유지하는 <code>sync</code> 모드를 사용할 수 있습니다. AIO와 함께 고려할 수 있는 새로운 파라미터도 추가되었으며, 자세한 내용은 <a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-IO">공식 문서</a>를 참고하세요.</p>
+<h3 id="더-빠른-업그레이드-향상된-업그레이드-후-성능">더 빠른 업그레이드, 향상된 업그레이드 후 성능</h3>
+<p>PostgreSQL의 핵심 기능 중 하나는 가장 효율적인 쿼리 계획을 선택하는 데 도움을 주는 <a href="https://www.postgresql.org/docs/18/planner-stats.html">통계 정보</a>를 생성 및 저장하는 것입니다. 그러나 PostgreSQL 18 이전에는 <a href="https://www.postgresql.org/docs/18/pgupgrade.html">메이져 버전 업그레이드</a> 시 이러한 통계가 유지되지 않아, <a href="https://www.postgresql.org/docs/18/sql-analyze.html"><code>ANALYZE</code></a>가 완료될 때까지 바쁜 시스템에서는 심각한 성능 저하가 발생할 수 있었습니다. PostgreSQL 18에서는 주요 버전 업그레이드 시에도 실행 계획 통계 정보를 유지할 수 있어 업그레이드된 클러스터가 더 빨리 기대 성능에 도달할 수 있습니다.</p>
+<p>또한, 메이져 버전 업그레이드를 수행하는 도구인 <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>에는 테이블과 시퀀스 같은 객체가 많은 데이터베이스에서 더 빠른 업그레이드를 가능하게 하는 개선이 포함되었습니다. 이번 릴리스에서는 <code>--jobs</code> 플래그를 사용하여 병렬로 검사를 수행할 수 있으며, <code>--swap</code> 플래그를 사용하면 파일 copy, clone, link 대신 디렉터리를 교체하는 방식으로 업그레이드를 처리할 수 있습니다.</p>
+<h3 id="쿼리-및-일반-성능-향상">쿼리 및 일반 성능 향상</h3>
+<p>PostgreSQL 18은 워크로드를 자동으로 더 빠르게 만들어주는 기능으로 쿼리 성능을 한층 더 가속화합니다. 이번 릴리스에서는 <a href="https://www.postgresql.org/docs/18/indexes-multicolumn.html">다중 컬럼 B-tree 인덱스</a>에서 "skip scan" 조회 기능을 도입하여, 접두사 인덱스 컬럼 중 하나 이상에서 <code>=</code> 조건이 없는 쿼리의 실행 시간을 개선합니다. 또한 <code>WHERE</code> 절에서 <code>OR</code> 조건을 사용하는 쿼리를 인덱스를 활용해 최적화할 수 있어 실행 속도가 크게 향상됩니다.</p>
+<p>PostgreSQL은 테이블 조인 계획 및 실행 방식에서도 많은 개선을 도입했습니다. 해시 조인의 성능을 향상시키고, 머지 조인이 증분 정렬(incremental sort)을 사용할 수 있도록 했습니다. PostgreSQL 18은 <a href="https://www.postgresql.org/docs/18/gin.html">GIN 인덱스</a>의 병렬 빌드도 지원하여, 이미 지원 중인 B-tree와 <a href="https://www.postgresql.org/docs/current/brin.html">BRIN 인덱스</a>와 함께 병렬 빌드를 지원하는 인덱스 계열을 확장했습니다.</p>
+<p>또한 이번 릴리스는 하드웨어 가속 지원을 강화하여, <code>bit_count</code> 함수와 기타 내부 기능에서 사용되는 <code>popcount</code> 연산에 ARM NEON 및 SVE CPU 명령어 지원을 추가했습니다.</p>
+<h3 id="개발자-경험-향상">개발자 경험 향상</h3>
+<p>PostgreSQL 18은 값을 저장하는 대신 쿼리 시점에 계산하는 <a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-GENERATED-STORED">가상 미리 계산된 칼럼</a>을 도입했습니다. 이는 이제 미리 계산된 칼럼의 기본 옵션이며, 저장된 미리 계산된 칼럼은 논리 복제도 지원합니다.</p>
+<p>이번 릴리스에서는 <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>, <code>MERGE</code> 명령에서 <a href="https://www.postgresql.org/docs/18/dml-returning.html"><code>RETURNING</code> 절</a>을 통해 이전(<code>OLD</code>) 값과 현재(<code>NEW</code>) 값을 모두 참조할 수 있는 기능이 추가되었습니다. PostgreSQL 18은 또한 <a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv7()</code></a> 함수를 통해 UUIDv7 생성을 지원하여, 더 나은 캐싱 전략을 지원할 수 있도록 타임스탬프 순서 기반의 무작위 UUID를 생성할 수 있습니다. PostgreSQL 18에는 <code>gen_random_uuid()</code>의 별칭으로 <a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv4()</code></a> 함수도 포함되어 있습니다.</p>
+<p>PostgreSQL 18은 또한 <a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-UNIQUE">일시적 제약 조건(temporal constraints)</a> — 구간 제약 — 을 <code>WITHOUT OVERLAPS</code> 절을 통해 <code>PRIMARY KEY</code> 및 <code>UNIQUE</code> 제약 조건에 적용할 수 있으며, <code>PERIOD</code> 절을 통해 <code>FOREIGN KEY</code> 제약 조건에도 적용할 수 있습니다.</p>
+<p>마지막으로 PostgreSQL 18은 <a href="https://www.postgresql.org/docs/18/sql-createforeigntable.html"><code>CREATE FOREIGN TABLE ... LIKE</code></a> 명령을 통해 로컬 테이블 정의를 기반으로 외부 테이블의 스키마 정의를 더 쉽게 생성할 수 있도록 지원합니다.</p>
+<h3 id="텍스트-처리-개선">텍스트 처리 개선</h3>
+<p>PostgreSQL 18은 여러 새로운 기능을 통해 텍스트 처리를 더 쉽고 빠르게 만듭니다. 이번 릴리스에서는 대소문자 변환에 대해 완전한 유니코드를 제공하면서 많은 비교 연산을 가속화하는 <a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-MANAGING-STANDARD"><code>PG_UNICODE_FAST</code></a> 문자 정렬 규칙을 추가했습니다. 여기에는 <code>upper</code>, <code>lower</code> 문자열 비교 함수와 대소문자 구분 없는 비교를 위한 새로운 <a href="https://www.postgresql.org/docs/18/functions-string.html#FUNCTIONS-STRING-OTHER"><code>casefold</code></a> 함수가 포함됩니다.</p>
+<p>또한 PostgreSQL 18은 이제 <a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-NONDETERMINISTIC">비결정적 문자 정렬 규칙</a>을 사용하는 텍스트에 대해 <code>LIKE</code> 비교를 지원하여 더 복잡한 패턴 매칭을 간소화합니다.</p>
+<p>이번 릴리스에서는 <a href="https://www.postgresql.org/docs/18/textsearch.html">전문 검색(full text search)</a>이 항상 libc를 사용하는 대신 클러스터의 기본 문자 정렬 규칙 제공자를 사용하도록 변경되었습니다. 이로 인해 <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a> 실행 후 모든 <a href="https://www.postgresql.org/docs/18/textsearch-tables.html#TEXTSEARCH-TABLES-INDEX">전문 검색 인덱스</a>와 <a href="https://www.postgresql.org/docs/18/pgtrgm.html#PGTRGM-INDEX"><code>pg_trgm</code></a> 인덱스를 다시 만들어야 할 수도 있습니다.</p>
+<h3 id="복제">복제</h3>
+<p>PostgreSQL 18에서는 논리적 복제 쓰기 충돌을 로그와 <a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION-STATS"><code>pg_stat_subscription_stats</code></a> view에서 보고할 수 있습니다. 추가로, <a href="https://www.postgresql.org/docs/18/sql-createsubscription.html"><code>CREATE SUBSCRIPTION</code></a> 은 이제 트랜잭션을 적용할 때 병렬 스트리밍을 기본으로 사용하도록 설정되어, 성능 향상에 도움이 될 수 있습니다. <a href="https://www.postgresql.org/docs/18/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a> 명령에 이제 <code>--all</code> 옵션을 사용할 수 있어, 하나의 명령으로 인스턴스 내 모든 데이터베이스에 대한 논리적 복제본을 생성할 수 있습니다. PostgreSQL 18에서는 또한 자동으로 <a href="https://www.postgresql.org/docs/18/runtime-config-replication.html#GUC-IDLE-REPLICATION-SLOT-TIMEOUT">유휴 복제 슬롯</a>을 삭제할 수 있어, 발행 서버에 너무 많은 write-ahead log 파일이 저장되는 것을 방지할 수 있습니다.</p>
+<h3 id="유지관리-및-모니터링">유지관리 및 모니터링</h3>
+<p>PostgreSQL 18에서는 <a href="https://www.postgresql.org/docs/18/routine-vacuuming.html">vacuum</a> 전략을 개선하여, 정기적인 vacuum 작업을 하는 동안 더 많은 페이지를 영구보관(freezing)함으로써 적극적인 vacuum이 필요한 상황에서 오버헤드를 줄이는데 도움을 줍니다.</p>
+<p>PostgreSQL 18은 <a href="https://www.postgresql.org/docs/18/using-explain.html"><code>EXPLAIN</code></a>에 더 많은 세부 정보를 추가하여 쿼리 계획 실행에 대한 정보를 제공하며, 이번 릴리스부터는 <code>EXPLAIN ANALYZE</code>를 실행할 때 몇 개의 버퍼(데이터 저장의 기본 단위)가 접근되는지도 자동으로 표시합니다. 또한, <code>EXPLAIN ANALYZE</code>는 인덱스 스캔 시 몇 번의 인덱스 조회가 발생하는지도 보여주며, <code>EXPLAIN ANALYZE VERBOSE</code>에는 CPU, WAL, 평균 읽기 통계가 포함됩니다. PostgreSQL 18은 <a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"><code>pg_stat_all_tables</code></a>에 vacuum 및 관련 작업에 소요된 시간, 그리고 연결별 I/O 및 WAL 사용 통계에 대한 추가 정보를 제공합니다.</p>
+<h3 id="기타-살펴볼-바뀐점">기타 살펴볼 바뀐점</h3>
+<p>PostgreSQL 18 <a href="https://www.postgresql.org/docs/18/app-initdb.html"><code>initdb</code></a>로 초기화된 데이터베이스는 이제 기본적으로 페이지 체크섬이 활성화되어 있습니다. 이는 체크섬이 활성화되지 않은 클러스터에서 업그레이드할 때 영향을 미칠 수 있으며, <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>를 사용할 경우 <code>--no-data-checksums</code> 옵션으로 새로운 PostgreSQL 18 클러스터를 생성해야 합니다.</p>
+<p>PostgreSQL 18은 또한 PostgreSQL 클라이언트-서버 통신 프로토콜의 새로운 버전(3.2)을 도입하였으며, 이는 PostgreSQL 7.4(2003) 이후 처음으로 추가된 프로토콜 버전입니다. <a href="https://www.postgresql.org/docs/18/libpq-connect.html"><code>libpq</code></a>는 여전히 기본적으로 버전 3.0을 사용하며, 클라이언트(예: 드라이버, 풀러, 프록시)는 새로운 프로토콜 버전에 대한 지원을 추가합니다.</p>
+<h3 id="더-자세한-내용은">더 자세한 내용은</h3>
+<p>PostgreSQL 18에는 다양한 새로운 기능과 개선 사항이 추가되어, 사용 사례에 따라 도움이 될 수 있습니다. 새로운 기능과 변경된 기능의 전체 목록은 <a href="https://www.postgresql.org/docs/18/release-18.html">릴리즈 노트</a>를 참조하시기 바랍니다.</p>
+<h3 id="postgresql은">PostgreSQL은</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a>은 전 세계 수천 명의 사용자, 기여자, 기업 및 조직이 참여하는 가장 진보된 오픈 소스 데이터베이스입니다. 40년 이상 전 캘리포니아 대학교 버클리에서 시작된 이후, PostgreSQL은 탁월한 개발 속도를 이어왔습니다. PostgreSQL의 성숙한 기능 세트는 상용 데이터베이스 시스템과 맞먹을 뿐만 아니라, 고급 데이터베이스 기능, 확장성, 보안 및 안정성 면에서 이를 능가합니다.</p>
+<h3 id="링크들">링크들</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">다운로드</a></li>
+<li><a href="https://www.postgresql.org/docs/18/release-18.html">릴리즈 노트</a></li>
+<li><a href="https://www.postgresql.org/about/press/">홍보 자료</a></li>
+<li><a href="https://www.postgresql.org/support/security/">보안 페이지</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">버전 정책</a></li>
+<li><a href="https://www.postgresql.org/about/contact/">연락처</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">기부</a></li>
+</ul>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2 id="postgresql은">PostgreSQL은</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a>은 전 세계 수천 명의 사용자, 기여자, 기업 및 조직이 참여하는 가장 진보된 오픈 소스 데이터베이스입니다. 40년 이상 전 캘리포니아 대학교 버클리에서 시작된 이후, PostgreSQL은 탁월한 개발 속도를 이어왔습니다. PostgreSQL의 성숙한 기능 세트는 상용 데이터베이스 시스템과 맞먹을 뿐만 아니라, 고급 데이터베이스 기능, 확장성, 보안 및 안정성 면에서 이를 능가합니다.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="기능에-대해-더-자세히-알고-싶으면">기능에 대해 더 자세히 알고 싶으면</h2>
+<p>위에서 언급한 기능들에 대해서 보다 자세히 알고 싶으면 아래 링크를 참조하세요:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/18/release-18.html">릴리즈 노트</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">기능표</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="다운로드">다운로드</h2>
+<p>PostgreSQL 18을 다운로드할 수 있는 여러 가지 방법이 있으며, 그 중에는 다음이 포함됩니다:</p>
+<ul>
+<li><a href="https://www.postgresql.org/download/">공식 다운로드</a> 페이지에는 <a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/linux/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a> 등용 설치 프로그램과 도구가 포함되어 있습니다.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v18.0">소스 코드</a></li>
+</ul>
+<p>다른 도구와 확장 기능은 <a href="http://pgxn.org/">PostgreSQL Extension Network</a>에서 이용할 수 있습니다.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="문서">문서</h2>
+<p>PostgreSQL 18은 HTML 문서와 man 페이지를 함께 제공하며, <a href="https://www.postgresql.org/docs/18/">HTML</a> 및 <a href="https://www.postgresql.org/files/documentation/pdf/18/postgresql-18-US.pdf">PDF</a> 형식으로 온라인에서도 문서를 열람할 수 있습니다.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="라이선스">라이선스</h2>
+<p>PostgreSQL은 BSD와 유사한 “허용” 라이선스인 <a href="https://www.postgresql.org/about/licence/">PostgreSQL 라이선스</a>를 사용합니다.
+<a href="http://www.opensource.org/licenses/postgresql/">OSI 인증 라이선스</a>는 상용 및 독점 응용 프로그램에서 PostgreSQL의 사용을 제한하지 않기 때문에 유연하고 비즈니스 친화적인 것으로 널리 인정받고 있습니다. 
+여러 회사의 지원 및 코드의 공개 소유권과 함께, 이 라이선스는 수수료, 공급업체 종속 또는 라이선스 조건 변경에 대한 우려 없이 자체 제품에 데이터베이스를 내장하고자 하는 공급업체에게 매우 인기가 있습니다.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="연락처">연락처</h2>
+<p>웹사이트</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>이메일</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="이미지-및-로고">이미지 및 로고</h2>
+<p>Postgres, PostgreSQL, 그리고 Elephant 로고(Slonik)는 모두 <a href="https://www.postgres.ca">PostgreSQL 커뮤니티 협회</a>의 등록 상표입니다. 이 상표를 사용하려면 <a href="https://www.postgresql.org/about/policies/trademarks/">상표 정책</a>을 준수해야 합니다.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="기업-후원-및-기부">기업 후원 및 기부</h2>
+<p>PostgreSQL은 개발자를 후원하고, 호스팅 리소스를 제공하며, 재정적으로 지원하는 수많은 기업들의 후원을 받고 있습니다. 일부 후원자는 <a href="https://www.postgresql.org/about/sponsors/">후원사 페이지</a>에서 확인할 수 있습니다.</p>
+<p>또한, <a href="https://www.postgresql.org/support/professional_support/">PostgreSQL 지원</a>을 제공하는 개인 컨설턴트부터 다국적 기업까지 다양한 커뮤니티도 존재합니다.</p>
+<p>PostgreSQL 글로벌 개발 그룹 또는 공식적으로 인정된 커뮤니티 비영리 단체에 재정적 기여를 원하시면, <a href="https://www.postgresql.org/about/donate/">기부 페이지</a>를 방문하세요.</p>
+{% endblock presskit_corporate %}

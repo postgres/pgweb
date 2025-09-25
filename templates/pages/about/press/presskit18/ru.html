@@ -1,0 +1,113 @@
+{% extends "pages/about/press/presskit18/base.html" %}
+
+{% block presskit_content %}
+<p><strong>25 сентября 2025 г.</strong> — Сегодня <a href="https://www.postgresql.org">Глобальная группа разработки PostgreSQL</a> объявляет о выпуске <a href="https://www.postgresql.org/docs/18/release-18.html">PostgreSQL 18</a> — последней версии самой продвинутой в мире СУБД с открытым исходным кодом.</p>
+<p>PostgreSQL 18 повышает производительность для рабочих нагрузок любого масштаба благодаря новой подсистеме ввода-вывода, которая показала до 3× ускорение чтения из хранилища, а также увеличивает число запросов, которые могут использовать индексы. Этот релиз делает обновления мажорной версии менее разрушительными, ускоряет сам процесс обновления и сокращает время, необходимое, чтобы после обновления выйти на ожидаемую производительность. Разработчики также выигрывают от функций PostgreSQL 18 — например, виртуальных вычисляемых столбцов, которые рассчитывают значения во время выполнения запроса, и дружественной к СУБД функции <code>uuidv7()</code>, обеспечивающей более быстрые индексацию и чтение UUID. Кроме того, PostgreSQL 18 упрощает интеграцию с системами единого входа (SSO) благодаря поддержке аутентификации OAuth 2.0.</p>
+<p>«Усилия глобального сообщества разработчиков ПО с открытым исходным кодом формируют каждый релиз PostgreSQL и помогают предоставлять функции, отвечающие потребностям пользователей там, где находятся их данные, — сказал Джонатан Кац (Jonathan Katz), член основной команды PostgreSQL. — PostgreSQL 18 опирается на долгую и богатую историю проекта по предоставлению надежного и эффективного управления данными, при этом продолжая расширять спектр поддерживаемых рабочих нагрузок.»</p>
+<p>PostgreSQL — инновационная система управления данными, известная своей надёжностью, устойчивостью и расширяемостью. Она развивается уже почти 30 лет в рамках открытого сообщества разработчиков и стала предпочтительной реляционной СУБД с открытым исходным кодом для организаций любого размера.</p>
+<h3 id="появление-асинхронного-ввода-вывода-aio">Появление асинхронного ввода-вывода (AIO)</h3>
+<p>Ранее для ускорения доступа к данным PostgreSQL полагался на механизм опережающего чтения (readahead) операционной системы. Однако, поскольку операционные системы не понимают специфичных для баз данных паттернах доступа, они не всегда могут предсказать, какие данные потребуются, что приводит к неоптимальной производительности во многих рабочих нагрузках.</p>
+<p>PostgreSQL 18 внедряет новую подсистему асинхронного ввода-вывода (AIO), разработанную для устранения этого ограничения. AIO позволяет PostgreSQL отправлять несколько запросов ввода-вывода (I/O) параллельно, не дожидаясь последовательного завершения каждого. Это дополняет существующий readahead и улучшает общую пропускную способность. В PostgreSQL 18 поддерживаются операции AIO для последовательных сканирований, сканирований по битовой карте (bitmap) страниц кучи (heap) и вакуума. Сравнительное тестирование продемонстрировало прирост производительности до 3 раз в некоторых сценариях.</p>
+<p>Новый параметр <a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#GUC-IO-METHOD"><code>io_method</code></a> позволяет выбирать между реализациями AIO, включая <code>worker</code> и <code>io_uring</code>, либо сохранить текущее поведение PostgreSQL с настройкой <code>sync</code>. При включении AIO появляется больше параметров, доступных для тонкой настройки — <a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-IO">подробнее в документации</a>.</p>
+<h3 id="более-быстрые-обновления-и-улучшенная-производительность-после-обновления">Более быстрые обновления и улучшенная производительность после обновления</h3>
+<p>Ключевая особенность PostgreSQL — сбор и хранение <a href="https://www.postgresql.org/docs/18/planner-stats.html">статистики</a>, которая помогает планировщику выбирать наиболее эффективный план запроса. До PostgreSQL 18 эта статистика не переносилась между экземплярами при <a href="https://www.postgresql.org/docs/18/pgupgrade.html">обновлении мажорной версии</a>, что могло вызывать заметную деградацию производительности запросов на нагруженных системах до завершения выполнения операции <a href="https://www.postgresql.org/docs/18/sql-analyze.html"><code>ANALYZE</code></a>. В PostgreSQL 18 появилась возможность сохранять статистику планировщика при обновлении мажорной версии, что позволяет обновлённому кластеру быстрее выйти на ожидаемую производительность.</p>
+<p>Кроме того, утилита <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>, предназначенная для обновления между мажорными версиями, получила ряд улучшений в PostgreSQL 18, включая более быстрые обновления, когда в базе много объектов, таких как таблицы и последовательности. Этот выпуск также позволяет <code>pg_upgrade</code> обрабатывать свои проверки параллельно в зависимости от настроек флага <code>--jobs</code> и добавляет флаг <code>--swap</code>, позволяющий менять местами каталоги обновления вместо копирования, клонирования или связывания файлов.</p>
+<h3 id="улучшения-производительности-запросов-и-общие-оптимизации">Улучшения производительности запросов и общие оптимизации</h3>
+<p>PostgreSQL 18 дополнительно повышает производительность запросов благодаря функциям, которые автоматически ускоряют выполнение рабочих нагрузок. В этом выпуске представлены функции поиска «skip scan» по <a href="https://www.postgresql.org/docs/18/indexes-multicolumn.html">многоколоночным индексам B-дерево</a>, улучшающие время выполнения запросов, в которых отсутствует условие <code>=</code> для одной или нескольких первых колонок индекса. Также оптимизируются запросы с условиями <code>OR</code> в <code>WHERE</code>, позволяя использовать индекс и существенно сокращая время выполнения. Также внесены многочисленные улучшения в планирование и выполнение соединений таблиц PostgreSQL: от ускорения хеш-соединений (hash join) до возможности использования инкрементальных сортировок в соединениях слиянием (merge join). PostgreSQL 18 также поддерживает параллельное создание <a href="https://www.postgresql.org/docs/18/gin.html">GIN-индексов</a>, дополнив этим <a href="https://www.postgresql.org/docs/current/btree.html">B-деревья</a> и <a href="https://www.postgresql.org/docs/current/brin.html">BRIN-индексы</a>, которые уже поддерживали такую возможность.</p>
+<p>Релиз также развивает поддержку аппаратного ускорения: добавлены инструкции ARM NEON и SVE центрального процессора для встроенной функции <code>popcount</code>, которую использует <a href="https://www.postgresql.org/docs/18/functions-bitstring.html"><code>bit_count</code></a> и другие внутренние механизмы.</p>
+<h3 id="улучшение-опыта-разработчика">Улучшение опыта разработчика</h3>
+<p>PostgreSQL 18 вводит <a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-GENERATED-STORED">виртуальные вычисляемые столбцы</a>, значения которых вычисляются во время выполнения запроса вместо хранения на диске (это теперь поведение по умолчанию для вычисляемых столбцов). Кроме того, «хранимые» вычисляемые столбцы теперь поддерживаются в логической репликации.</p>
+<p>В этой версии появилась возможность получать как прежние (<code>OLD</code>), так и текущие (<code>NEW</code>) значения в <a href="https://www.postgresql.org/docs/18/dml-returning.html">предложении <code>RETURNING</code></a> для команд <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> и <code>MERGE</code>. PostgreSQL 18 также добавляет генерацию UUIDv7 с помощью функции <a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv7()</code></a>, позволяя создавать случайные UUID, упорядоченные по временной метке, что улучшает стратегии кэширования. Кроме того, в PostgreSQL 18 функция <a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv4()</code></a> добавлена как псевдоним <code>gen_random_uuid()</code>.</p>
+<p>PostgreSQL 18 добавляет <a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-UNIQUE">временные ограничения</a> — ограничения по диапазонам — для <code>PRIMARY KEY</code> и <code>UNIQUE</code> с использованием конструкции <code>WITHOUT OVERLAPS</code>, а также для <code>FOREIGN KEY</code> с использованием <code>PERIOD</code>.</p>
+<p>Наконец, стало проще создавать схему внешней таблицы на основе локальной: добавлена команда <a href="https://www.postgresql.org/docs/18/sql-createforeigntable.html"><code>CREATE FOREIGN TABLE ... LIKE</code></a>.</p>
+<h3 id="улучшенная-обработка-текста">Улучшенная обработка текста</h3>
+<p>PostgreSQL 18 упрощает и ускоряет работу со строками благодаря нескольким улучшениям. В этом выпуске добавлена сортировка <a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-MANAGING-STANDARD"><code>PG_UNICODE_FAST</code></a>, которая обеспечивает полноценную семантику Unicode для преобразования регистра, помогая ускорить многие сравнения. Это касается функций <code>upper</code> и <code>lower</code>, а также новой функции <a href="https://www.postgresql.org/docs/18/functions-string.html#FUNCTIONS-STRING-OTHER"><code>casefold</code></a> для регистронезависимых сравнений. Кроме того, PostgreSQL 18 теперь поддерживает выполнение сравнений <code>LIKE</code> над текстом с <a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-NONDETERMINISTIC">недетерминированной сортировкой</a>, что упрощает сложный поиск по шаблону. В этом релизе также изменено поведение <a href="https://www.postgresql.org/docs/18/textsearch.html">полнотекстового поиска</a>: теперь он использует поставщика сортировки по умолчанию для кластера вместо принудительного использования libc. Это может потребовать пересоздания всех индексов <a href="https://www.postgresql.org/docs/18/textsearch-tables.html#TEXTSEARCH-TABLES-INDEX">полнотекстового поиска</a> и <a href="https://www.postgresql.org/docs/18/pgtrgm.html#PGTRGM-INDEX"><code>pg_trgm</code></a> после выполнения <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>.</p>
+<h3 id="аутентификация-и-безопасность">Аутентификация и безопасность</h3>
+<p>PostgreSQL 18 добавляет <a href="https://www.postgresql.org/docs/18/auth-oauth.html">аутентификацию <code>oauth</code></a>, позволяющую пользователям проходить проверку подлинности с использованием механизмов OAuth 2.0, поддерживаемых через расширения PostgreSQL. Кроме того, PostgreSQL 18 добавляет проверку режима <a href="https://www.postgresql.org/docs/18/pgcrypto.html#PGCRYPTO-OPENSSL-SUPPORT-FUNCS">FIPS</a> и новый параметр <a href="https://www.postgresql.org/docs/18/runtime-config-connection.html#GUC-SSL-TLS13-CIPHERS"><code>ssl_tls13_ciphers</code></a> для настройки наборов шифров TLS v1.3 на стороне сервера.</p>
+<p>В этом выпуске прекращена поддержка аутентификации по паролю <code>md5</code> (будет удалена в одном из будущих релизов). Если вам требуется парольная аутентификация в PostgreSQL, используйте <a href="https://www.postgresql.org/docs/18/auth-password.html">SCRAM-аутентификацию</a>. PostgreSQL 18 также поддерживает сквозную аутентификацию SCRAM с помощью <a href="https://www.postgresql.org/docs/18/postgres-fdw.html"><code>postgres_fdw</code></a> и <a href="https://www.postgresql.org/docs/18/dblink.html"><code>dblink</code></a> для аутентификации на удалённых экземплярах PostgreSQL. Кроме того, <a href="https://www.postgresql.org/docs/18/pgcrypto.html"><code>pgcrypto</code></a> теперь поддерживает <a href="https://www.postgresql.org/docs/18/pgcrypto.html#PGCRYPTO-CRYPT-ALGORITHMS">шифрование паролей с использованием SHA-2</a>.</p>
+<h3 id="репликация">Репликация</h3>
+<p>PostgreSQL 18 поддерживает регистрацию конфликтов записи при логической репликации в журналах и в представлении <a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION-STATS"><code>pg_stat_subscription_stats</code></a>. Кроме того, теперь команда <a href="https://www.postgresql.org/docs/18/sql-createsubscription.html"><code>CREATE SUBSCRIPTION</code></a> по умолчанию применяет транзакции в несколько параллельных потоков, что может повысить производительность. Утилита <a href="https://www.postgresql.org/docs/18/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a> получила флаг <code>--all</code>, позволяющий создавать логические реплики для всех баз данных в экземпляре одной командой. Также PostgreSQL 18 позволяет автоматически <a href="https://www.postgresql.org/docs/18/runtime-config-replication.html#GUC-IDLE-REPLICATION-SLOT-TIMEOUT">удалять неактивные слоты репликации</a>, чтобы избежать избыточного накопления файлов журнала предзаписи (WAL) на стороне публикующего сервера.</p>
+<h3 id="обслуживание-и-наблюдаемость">Обслуживание и наблюдаемость</h3>
+<p>PostgreSQL 18 улучшает стратегию <a href="https://www.postgresql.org/docs/18/routine-vacuuming.html">очистки</a>, путём упреждающей заморозки большего количества страниц во время регулярной очистки, что снижает накладные расходы и помогает в ситуациях, требующих агрессивной очистки.</p>
+<p>PostgreSQL 18 добавляет больше информации в <a href="https://www.postgresql.org/docs/18/using-explain.html"><code>EXPLAIN</code></a>, который предоставляет информацию о выполнении плана запроса, и, начиная с этого выпуска, теперь автоматически показывает, сколько буферов (основной единицы хранения данных) используется при выполнении <code>EXPLAIN ANALYZE</code>. Кроме того, <code>EXPLAIN ANALYZE</code> показывает количество обращений к индексу при его сканировании, а <code>EXPLAIN ANALYZE VERBOSE</code> включает статистику использования процессора, WAL и средним временам чтения. В представлении <a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"><code>pg_stat_all_tables</code></a> появилась дополнительная информация о времени, затраченном на очистку и связанные с ней операции, а также статистику ввода-вывода и использования WAL по каждому соединению.</p>
+<h3 id="прочие-заметные-изменения">Прочие заметные изменения</h3>
+<p>Базы данных, инициализированные с помощью <a href="https://www.postgresql.org/docs/18/app-initdb.html"><code>initdb</code></a> в PostgreSQL 18, теперь по умолчанию создаются с включёнными контрольными суммами страниц. Это может повлиять на обновления с кластеров, где контрольные суммы выключены: при использовании <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a> для обновления таких кластеров потребуется создать новый кластер PostgreSQL 18 с опцией <code>--no-data-checksums</code>.</p>
+<p>Кроме того, PostgreSQL 18 представляет новую версию (3.2) протокола взаимодействия (wire protocol) PostgreSQL — первое обновление протокола с момента выхода PostgreSQL 7.4 (2003 год). При этом <a href="https://www.postgresql.org/docs/18/libpq-connect.html"><code>libpq</code></a> по умолчанию по-прежнему использует версию 3.0, пока клиенты (например, драйверы, пулеры, прокси) не добавят поддержку новой версии протокола.</p>
+<h3 id="дополнительные-возможности">Дополнительные возможности</h3>
+<p>Множество других новых функций и улучшений также вошли в PostgreSQL 18 и могут оказаться полезными для ваших сценариев. Полный список новых и изменённых возможностей приведён в <a href="https://www.postgresql.org/docs/18/release-18.html">примечаниях к релизу</a>.</p>
+<h3 id="о-postgresql">О PostgreSQL</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> — наиболее продвинутая в мире СУБД с открытым исходным кодом, за которой стоит глобальное сообщество из тысяч пользователей, разработчиков, компаний и организаций. Начиная с первых шагов в Калифорнийском университете в Беркли более 40 лет назад, PostgreSQL развивается беспрецедентными темпами. Набор зрелых возможностей PostgreSQL не только сопоставим с ведущими проприетарными СУБД, но и превосходит их по части функций, расширяемости, безопасности и стабильности.</p>
+<h3 id="ссылки">Ссылки</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Скачать</a></li>
+<li><a href="https://www.postgresql.org/docs/18/release-18.html">Примечания к релизу</a></li>
+<li><a href="https://www.postgresql.org/about/press/">Пресс-кит</a></li>
+<li><a href="https://www.postgresql.org/support/security/">Страница безопасности</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">Политика версионирования</a></li>
+<li><a href="https://www.postgresql.org/about/contact/">Контакты</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">Пожертвования</a></li>
+</ul>
+
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2 id="о-postgresql">О PostgreSQL</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> — наиболее продвинутая в мире СУБД с открытым исходным кодом, за которой стоит глобальное сообщество из тысяч пользователей, разработчиков, компаний и организаций. Начиная с первых шагов в Калифорнийском университете в Беркли более 40 лет назад, PostgreSQL развивается беспрецедентными темпами. Набор зрелых возможностей PostgreSQL не только сопоставим с ведущими проприетарными СУБД, но и превосходит их по части функций, расширяемости, безопасности и стабильности.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="подробнее-о-возможностях">Подробнее о возможностях</h2>
+<p>Подробности вышеперечисленных и других функций см. на следующих ресурсах:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/18/release-18.html">Примечания к релизу</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">Матрица функциональностей</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="где-скачать">Где скачать</h2>
+<p>Существует несколько способов получить PostgreSQL 18, включая:</p>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Официальные сборки</a>, в том числе для</li>
+</ul>
+<p><a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a> и других платформ.</p>
+<ul>
+<li><a href="https://www.postgresql.org/ftp/source/v18.0">Исходный код</a></li>
+</ul>
+<p>Другие инструменты и расширения доступны в <a href="http://pgxn.org/">PostgreSQL Extension Network</a>.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="документация">Документация</h2>
+<p>PostgreSQL 18 поставляется с документацией в формате HTML и страницами man. Ознакомиться с документацией можно также онлайн в форматах <a href="https://www.postgresql.org/docs/18/">HTML</a> и <a href="https://www.postgresql.org/files/documentation/pdf/18/postgresql-18-US.pdf">PDF</a>.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="лицензия">Лицензия</h2>
+<p>PostgreSQL распространяется по <a href="https://www.postgresql.org/about/licence/">лицензии PostgreSQL</a>, «разрешительной» лицензии, похожей на BSD. Эта <a href="http://www.opensource.org/licenses/postgresql/">лицензия, сертифицированная OSI</a>, широко ценится за гибкость и дружелюбие к бизнесу, поскольку она не ограничивает использование PostgreSQL в коммерческих и проприетарных приложениях. В сочетании с поддержкой множества компаний и публичной открытостью кода наша лицензия делает PostgreSQL популярной среди вендоров, желающих встраивать СУБД в свои продукты без опасений насчёт сборов, «привязки к поставщику» или изменения условий лицензирования.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="контакты">Контакты</h2>
+<p>Веб-сайт</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>Электронная почта</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="изображения-и-логотипы">Изображения и логотипы</h2>
+<p>Postgres, PostgreSQL и логотип слоника (Slonik) — зарегистрированные товарные знаки <a href="https://www.postgres.ca">PostgreSQL Community Association</a>. Если вы хотите использовать эти знаки, необходимо соблюдать <a href="https://www.postgresql.org/about/policies/trademarks/">политику использования товарных знаков</a>.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="поддержка-со-стороны-компаний-и-пожертвования">Поддержка со стороны компаний и пожертвования</h2>
+<p>PostgreSQL пользуется поддержкой множества компаний, которые спонсируют разработчиков, предоставляют ресурсы для хостинга и оказывают финансовую помощь. См. страницу <a href="https://www.postgresql.org/about/sponsors/">спонсоры</a> для получения информации о некоторых из участников, поддерживающих проект.</p>
+<p>Также существует большое сообщество <a href="https://www.postgresql.org/support/professional_support/">компаний, предлагающих поддержку PostgreSQL</a> — от независимых консультантов до транснациональных корпораций.</p>
+<p>Если вы хотите сделать финансовый вклад в Глобальную группу разработки PostgreSQL (PostgreSQL Global Development Group) или в одну из признанных некоммерческих организаций сообщества, посетите страницу <a href="https://www.postgresql.org/about/donate/">пожертвования</a>.</p>
+{% endblock presskit_corporate %}
+

@@ -1,0 +1,276 @@
+{% extends "pages/about/press/presskit18/base.html" %}
+
+{% block presskit_content %}
+<h1>PostgreSQL 18 Released!</h1>
+
+<p>
+  <strong>September 25, 2025</strong> - The
+  <a href="https://www.postgresql.org">PostgreSQL Global Development Group</a>
+  today announced the release of <a href="https://www.postgresql.org/docs/18/release-18.html">PostgreSQL 18</a>,
+  the latest version of the world's most advanced open source database.
+</p>
+
+<p>
+  PostgreSQL 18 improves performance for workloads of all sizes through a new
+  I/O subsystem that has demonstrated up to 3× performance improvements when
+  reading from storage, and also increases the number of queries that can use
+  indexes. This release makes major-version upgrades less disruptive,
+  accelerating upgrade times and reducing the time required to reach expected
+  performance after an upgrade completes. Developers also benefit from
+  PostgreSQL 18 features, including virtual generated columns that compute
+  values at query time, and the database-friendly <code>uuidv7()</code>
+  function that provides better indexing and read performance for UUIDs.
+  PostgreSQL 18 makes it easier to integrate with single-sign on (SSO) systems
+  with support for OAuth 2.0 authentication.
+</p>
+
+<p>
+  "The efforts of the global open source community shape every PostgreSQL
+  release and help deliver features that meet users where their data resides,"
+  said Jonathan Katz, a member of the PostgreSQL core team. "PostgreSQL 18
+  builds on the project's long, rich history of delivering a reliable and
+  robust data management experience, while continuing to expand the workloads
+  it can support."
+</p>
+
+<p>
+  PostgreSQL, an innovative data management system known for its reliability,
+  robustness, and extensibility, benefits from nearly 30 years of open source
+  development from a global developer community and has become the preferred
+  open source relational database for organizations of all sizes.
+</p>
+
+<h3>Introducing asynchronous I/O</h3>
+
+<p>
+  PostgreSQL previously relied on operating system readahead mechanisms to
+  accelerate data retrieval. However, because operating systems lack insight
+  into database-specific access patterns, they cannot always anticipate what
+  data will be required, leading to suboptimal performance in many workloads.
+</p>
+
+<p>
+  PostgreSQL 18 introduces a new asynchronous I/O (AIO) subsystem designed to
+  address this limitation. AIO lets PostgreSQL issue multiple I/O requests
+  concurrently instead of waiting for each to finish in sequence. This expands
+  existing readahead and improves overall throughput. AIO operations supported in
+  PostgreSQL 18 include sequential scans, bitmap heap scans, and vacuum.
+  Benchmarking has demonstrated performance gains of up to 3x in certain scenarios.
+</p>
+
+<p>
+  The new <a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#GUC-IO-METHOD"><code>io_method</code></a>
+  setting lets you toggle between the AIO methods, including <code>worker</code> and <code>io_uring</code>,
+  or you can choose to maintain the current PostgreSQL behavior with the <code>sync</code>
+  setting. There are now more parameters to consider tuning with AIO, which you
+  can <a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-IO">learn more about in the documentation</a>.
+</p>
+
+<h3>Faster upgrades, better post-upgrade performance</h3>
+    
+<p>A key PostgreSQL feature is the generation and storage of
+<a href="https://www.postgresql.org/docs/18/planner-stats.html">statistics</a> that help
+PostgreSQL select the most efficient query plan. Before PostgreSQL 18, these
+statistics didn't carry over on a <a href="https://www.postgresql.org/docs/18/pgupgrade.html">major version upgrade</a>,
+which could cause significant query performance degradations on busy systems
+until the <a href="https://www.postgresql.org/docs/18/sql-analyze.html"><code>ANALYZE</code></a>
+finished running. PostgreSQL 18 introduces the ability to keep planner
+statistics through a major version upgrade, which helps an upgraded cluster
+reach expected performance more quickly after the upgrade.</p>
+
+<p>Additionally, <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>,
+a utility that performs major version upgrades, includes several enhancements in
+PostgreSQL 18, such as faster upgrades when a database contains many objects
+like tables and sequences. This release also lets <code>pg_upgrade</code> process its
+checks in parallel based on the settings of the <code>--jobs</code> flag, and adds the
+<code>--swap</code> flag that swaps upgrade directories instead of copying, cloning, or
+linking files.</p>
+
+<h3>Query and general performance enhancements</h3>
+
+<p>
+  PostgreSQL 18 further accelerates query performance with features that
+  automatically make your workloads faster. This release introduces "skip scan"
+  lookups on <a href="https://www.postgresql.org/docs/18/indexes-multicolumn.html">multicolumn B-tree indexes</a>
+  that improve execution time for queries that omit an <code>=</code> condition on one or
+  more prefix index columns. It can also optimize queries that use <code>OR</code> conditions
+  in a <code>WHERE</code> to use an index, leading to significantly faster execution. There
+  are also numerous improvements for how PostgreSQL plans and executes table joins,
+  from boosting the performance of hash joins to allowing merge joins to use
+  incremental sorts. PostgreSQL 18 also supports parallel builds for
+  <a href="https://www.postgresql.org/docs/18/gin.html">GIN indexes</a>, joining B-tree and
+  <a href="https://www.postgresql.org/docs/current/brin.html">BRIN indexes</a> in supporting
+  this capability.
+</p>
+
+<p>
+  This release also builds on PostgreSQL support for hardware acceleration,
+  including support for ARM NEON and SVE CPU intrinsics for the <code>popcount</code>
+  function, which is used by the <a href="https://www.postgresql.org/docs/18/functions-bitstring.html"><code>bit_count</code></a>
+  and other internal capabilities.
+</p>
+
+<h3>Enhancing the developer experience</h3>
+
+<p>
+  PostgreSQL 18 introduces <a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-GENERATED-STORED">virtual generated columns</a>
+  that compute values at query time instead of storing them. This is now the
+  default option for generated columns. Additionally, stored generated columns
+  can now be logically replicated.
+</p>
+
+<p>
+  This release adds the capability to access both the previous (<code>OLD</code>)
+  and current (<code>NEW</code>) values in the
+  <a href="https://www.postgresql.org/docs/18/dml-returning.html"><code>RETURNING</code> clause</a>
+  for <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> and <code>MERGE</code>
+  commands. PostgreSQL 18 also adds UUIDv7 generation through the
+  <a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv7()</code></a>
+  function, letting you generate random UUIDs that are timestamp-ordered to
+  support better caching strategies. PostgreSQL 18 includes
+  <a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv4()</code></a>
+  as an alias for <code>gen_random_uuid()</code>.
+</p>
+
+<p>
+  PostgreSQL 18 adds <a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-UNIQUE">temporal constraints</a>
+  -- constraints over ranges -- for both <code>PRIMARY KEY</code> and <code>UNIQUE</code>
+  constraints using the <code>WITHOUT OVERLAPS</code> clause, and on
+  <code>FOREIGN KEY</code> constraints using the <code>PERIOD</code> clause.
+</p>
+
+<p>
+  Finally, PostgreSQL 18 makes it easier to create the schema definition of a
+  foreign table using the definition of a local table with the
+  <a href="https://www.postgresql.org/docs/18/sql-createforeigntable.html"><code>CREATE FOREIGN TABLE ... LIKE</code></a>
+  command.
+</p>
+
+<h3>Improved text processing</h3>
+
+<p>
+  PostgreSQL 18 makes text processing easier and faster with several new
+  enhancements. This release adds the <a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-MANAGING-STANDARD"><code>PG_UNICODE_FAST</code></a>
+  collation, which provides full Unicode semantics for case transformations while
+  helping to accelerate many comparisons. This includes the <code>upper</code> and <code>lower</code>
+  string comparison functions and the new <a href="https://www.postgresql.org/docs/18/functions-string.html#FUNCTIONS-STRING-OTHER"><code>casefold</code></a>
+  function for case-insensitive comparisons. Additionally, PostgreSQL 18 now
+  supports making <code>LIKE</code> comparisons over text that uses a
+  <a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-NONDETERMINISTIC">nondeterministic collation</a>,
+  simplifying how you can perform more complex pattern matching. This release also
+  changes <a href="https://www.postgresql.org/docs/18/textsearch.html">full text search</a>
+  to use the default collation provider of a cluster instead of always using libc,
+  which may require you to reindex all
+  <a href="https://www.postgresql.org/docs/18/textsearch-tables.html#TEXTSEARCH-TABLES-INDEX">full text search</a>
+  and <a href="https://www.postgresql.org/docs/18/pgtrgm.html#PGTRGM-INDEX"><code>pg_trgm</code></a>
+  indexes after running <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>.
+</p>
+
+<h3>Authentication and security features</h3>
+
+<p>
+  PostgreSQL 18 introduces <a href="https://www.postgresql.org/docs/18/auth-oauth.html"><code>oauth</code> authentication</a>,
+  which lets users authenticate using OAuth 2.0 mechanisms supported through
+  PostgreSQL extensions. Additionally, PostgreSQL 18 includes validation for
+  <a href="https://www.postgresql.org/docs/18/pgcrypto.html#PGCRYPTO-OPENSSL-SUPPORT-FUNCS">FIPS mode</a>,
+  and adds the <a href="https://www.postgresql.org/docs/18/runtime-config-connection.html#GUC-SSL-TLS13-CIPHERS"><code>ssl_tls13_ciphers</code></a>
+  parameter for configuring server-side TLS v1.3 cipher suites.
+</p>
+
+<p>
+  This release deprecates <code>md5</code> password authentication, which will
+  be removed in a future release. If you require PostgreSQL password-based
+  authentication, use <a href="https://www.postgresql.org/docs/18/auth-password.html">SCRAM authentication</a>.
+  PostgreSQL 18 also supports SCRAM passthrough authentication with both
+  <a href="https://www.postgresql.org/docs/18/postgres-fdw.html"><code>postgres_fdw</code></a>
+  and <a href="https://www.postgresql.org/docs/18/dblink.html"><code>dblink</code></a>
+  for authenticating to remote PostgreSQL instances. Additionally,
+  <a href="https://www.postgresql.org/docs/18/pgcrypto.html"><code>pgcrypto</code></a>
+  now supports <a href="https://www.postgresql.org/docs/18/pgcrypto.html#PGCRYPTO-CRYPT-ALGORITHMS">SHA-2 encryption for password hashing</a>.
+</p>
+
+<h3>Replication</h3>
+
+<p>
+  PostgreSQL 18 supports reporting logical replication write conflicts in logs and
+  in the <a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION-STATS"><code>pg_stat_subscription_stats</code></a> view. Additionally,
+  <a href="https://www.postgresql.org/docs/18/sql-createsubscription.html"><code>CREATE SUBSCRIPTION</code></a>
+  now defaults to using parallel streaming for applying transactions, which can
+  help improve performance. The
+  <a href="https://www.postgresql.org/docs/18/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a>
+  utility now has an <code>--all</code> flag so you can create logical replicas for all
+  databases in an instance with a single command. PostgreSQL 18 also lets you
+  automatically <a href="https://www.postgresql.org/docs/18/runtime-config-replication.html#GUC-IDLE-REPLICATION-SLOT-TIMEOUT">drop idle replication slots</a> to help prevent storing too many
+  write-ahead log files on a publisher.
+</p>
+
+<h3>Maintenance and observability</h3> 
+
+<p>
+  PostgreSQL 18 improves its <a href="https://www.postgresql.org/docs/18/routine-vacuuming.html">vacuum</a>
+  strategy by proactively freezing more pages during regular vacuums, reducing
+  overhead and helping in situations that require aggressive vacuums.
+</p>
+
+<p>
+  PostgreSQL 18 adds more details to <a href="https://www.postgresql.org/docs/18/using-explain.html"><code>EXPLAIN</code></a>,
+  which provides information about query plan execution, and as of this release
+  now automatically shows how many buffers (the fundamental unit of data storage)
+  are accessed when executing <code>EXPLAIN ANALYZE</code>. Additionally, <code>EXPLAIN ANALYZE</code>
+  now shows how many index lookups occur during an index scan, and <code>EXPLAIN ANALYZE VERBOSE</code>
+  includes CPU, WAL, and average read statistics. PostgreSQL 18 includes more info
+  in <a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"><code>pg_stat_all_tables</code></a>
+  on time spent on vacuum and related operations, as well as per-connection
+  statistics on I/O and WAL utilization.
+</p>
+
+<h3>Other notable changes</h3>
+
+<p>
+  Databases initialized with PostgreSQL 18 <a href="https://www.postgresql.org/docs/18/app-initdb.html"><code>initdb</code></a>
+  now have page checksums enabled by default. This can affect upgrades from
+  non-checksum enabled clusters, which would require you to create a new
+  PostgreSQL 18 cluster with the <code>--no-data-checksums</code> option when using
+  <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>.
+</p>
+
+<p>
+  PostgreSQL 18 also introduces a new version (3.2) of the PostgreSQL wire
+  protocol, the first new protocol version since PostgreSQL 7.4 (2003).
+  <a href="https://www.postgresql.org/docs/18/libpq-connect.html"><code>libpq</code></a> still uses
+  version 3.0 by default while clients (e.g., drivers, poolers, proxies) add
+  support for the new protocol version.
+</p>
+
+<h3>Additional Features</h3>
+
+<p>
+  Many other new features and improvements have been added to PostgreSQL 18 that
+  may also be helpful for your use cases. Please see the
+  <a href="https://www.postgresql.org/docs/18/release-18.html">release notes</a> for a
+  complete list of new and changed features.
+</p>
+    
+
+<h3 id="about-postgresql">About PostgreSQL</h3>
+<p>
+  <a href="https://www.postgresql.org">PostgreSQL</a> is the world's most
+  advanced open source database, with a global community of thousands of users,
+  contributors, companies and organizations. Since its beginnings at the
+  University of California, Berkeley over 40 years ago, PostgreSQL has continued
+  with an unmatched pace of development. PostgreSQL's mature feature set not
+  only matches top proprietary database systems, but exceeds them in advanced
+  database features, extensibility, security, and stability.
+</p>
+
+<h3 id="links">Links</h3>
+<ul>
+  <li><a href="https://www.postgresql.org/download/">Download</a></li>
+  <li><a href="https://www.postgresql.org/docs/18/release-18.html">Release Notes</a></li>
+  <li><a href="https://www.postgresql.org/about/press/">Press Kit</a></li>
+  <li><a href="https://www.postgresql.org/support/security/">Security Page</a></li>
+  <li><a href="https://www.postgresql.org/support/versioning/">Versioning Policy</a></li>
+  <li><a href="https://www.postgresql.org/about/contact/">Contact</a></li>
+  <li><a href="https://www.postgresql.org/about/donate/">Donate</a></li>
+</ul>
+{% endblock presskit_content %}

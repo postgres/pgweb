@@ -1,0 +1,104 @@
+{% extends "pages/about/press/presskit18/base.html" %}
+
+{% block presskit_content %}
+<p><strong>25 Σεπτεμβρίου 2025</strong> - Το <a href="https://www.postgresql.org">PostgreSQL Global Development Group</a> ανακοίνωσε σήμερα την κυκλοφορία της <a href="https://www.postgresql.org/docs/18/release-18.html">PostgreSQL 18</a>, της πιο πρόσφατης έκδοσης της πιο προηγμένης βάσης δεδομένων ανοιχτού κώδικα στον κόσμο.</p>
+<p>Η PostgreSQL 18 βελτιώνει τις επιδόσεις για τύπους φόρτου εργασίας κάθε μεγέθους μέσω ενός νέου υποσυστήματος I/O που έχει επιδείξει βελτίωση επίδοσης έως και 3 φορές κατά την ανάγνωση από τον αποθηκευτικό χώρο, και επίσης αυξάνει τον αριθμό των ερωτημάτων που μπορούν να χρησιμοποιήσουν ευρετήρια. Με αυτή την έκδοση, οι αναβαθμίσεις πλήρους έκδοσης απαιτούν μικρότερη διακοπή λειτουργίας, λόγω της ελάττωσης του χρόνου αναβάθμισης καθώς και του χρόνου που απαιτείται για την επίτευξη της αναμενόμενης επίδοσης μετά την ολοκλήρωσή τους. Επίσης επωφελούνται και οι προγραμματιστές από τις νέες λειτουργίες της PostgreSQL 18, όπως τις εικονικές παραγόμενες στήλες που υπολογίζουν τιμές κατά την εκτέλεση του ερωτήματος, και της φιλικής προς τις βάσεις δεδομένων συνάρτησης <code>uuidv7()</code> που παρέχει καλύτερη ευρετηρίαση και επιδόσεις ανάγνωσης για τα UUIDs. Η PostgreSQL 18 διευκολύνει την ενσωμάτωση με συστήματα single-sign on (SSO) με υποστήριξη για αυθεντικοποίηση OAuth 2.0.</p>
+<p>«Οι προσπάθειες της παγκόσμιας κοινότητας ανοιχτού κώδικα διαμορφώνουν κάθε έκδοση της PostgreSQL και βοηθούν στο να παραδίδουμε λειτουργίες που εξυπηρετούν τους χρήστες εκεί όπου βρίσκονται τα δεδομένα τους», δήλωσε ο Jonathan Katz, μέλος της κεντρικής ομάδας της PostgreSQL. «Η PostgreSQL 18 βασίζεται στη μακρά και πλούσια ιστορία του έργου να παρέχει μια εμπειρία διαχείρισης δεδομένων με αξιοπιστία και ανθεκτικότητα, συνεχίζοντας παράλληλα να επεκτείνεται σε εύρος τύπων φόρτου εργασίας που μπορεί να υποστηρίξει».</p>
+<p>Η PostgreSQL, ένα καινοτόμο σύστημα διαχείρισης δεδομένων γνωστό για την αξιοπιστία, την ανθεκτικότητα και την επεκτασιμότητά του, επωφελείται από σχεδόν 30 χρόνια ανάπτυξης ανοιχτού κώδικα από μια παγκόσμια κοινότητα προγραμματιστών και έχει γίνει η προτιμώμενη σχεσιακή βάση δεδομένων ανοιχτού κώδικα για οργανισμούς κάθε μεγέθους.</p>
+<h3 id="το-νέο-ασύγχρονο-io">Το νέο ασύγχρονο I/O</h3>
+<p>Η PostgreSQL βασιζόταν προηγουμένως στους μηχανισμούς readahead του λειτουργικού συστήματος για την επιτάχυνση της ανάκτησης δεδομένων. Ωστόσο, επειδή τα λειτουργικά συστήματα δεν έχουν εικόνα για το πώς γίνεται η προσπέλαση από τις βάσεις δεδομένων, δεν μπορούν πάντα να προβλέψουν ποια δεδομένα χρειάζονται, με αποτέλεσμα υποβέλτιστες επιδόσεις σε πολλούς τύπους φόρτου εργασίας.</p>
+<p>Η PostgreSQL 18 εισάγει ένα νέο υποσύστημα ασύγχρονου I/O (AIO) σχεδιασμένο για να αντιμετωπίσει αυτόν τον περιορισμό. Το AIO επιτρέπει στην PostgreSQL να στέλνει πολλαπλά αιτήματα I/O ταυτόχρονα αντί να περιμένει την ολοκλήρωση του καθενός διαδοχικά. Αυτό επεκτείνει το υπάρχον readahead και βελτιώνει τη συνολική απόδοση. Η PostgreSQL 18 υποστηρίζει λειτουργίες AIO σε σειριακές σαρώσεις (sequential scans), σαρώσεις σωρού με bitmap (bitmap heap scans) και στο vacuum. Οι μετρήσεις επιδόσεων έχουν δείξει επιτάχυνση έως και 3 φορές σε ορισμένες περιπτώσεις.</p>
+<p>Η νέα ρύθμιση <a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#GUC-IO-METHOD"><code>io_method</code></a> επιτρέπει την εναλλαγή μεθόδων AIO, όπως <code>worker</code> και <code>io_uring</code>, ή την επιλογή της διατήρησης της τρέχουσας συμπεριφοράς της PostgreSQL με τη ρύθμιση <code>sync</code>. Υπάρχουν πλέον περισσότερες παράμετροι προς ρύθμιση με το AIO, για τις οποίες μπορείτε να <a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-IO">μάθετε περισσότερα στην τεκμηρίωση</a>.</p>
+<h3 id="ταχύτερες-αναβαθμίσεις-καλύτερες-επιδόσεις-μετά-την-αναβάθμιση">Ταχύτερες αναβαθμίσεις, καλύτερες επιδόσεις μετά την αναβάθμιση</h3>
+<p>Ένα βασικό χαρακτηριστικό της PostgreSQL είναι η δημιουργία και αποθήκευση <a href="https://www.postgresql.org/docs/18/planner-stats.html">στατιστικών</a> που βοηθούν την PostgreSQL να επιλέξει το πιο οικονομικό σχέδιο εκτέλεσης ερωτήματος (query plan). Πριν από την PostgreSQL 18, αυτά τα στατιστικά στοιχεία δεν μεταφέρονταν μετά από μια <a href="https://www.postgresql.org/docs/18/pgupgrade.html">αναβάθμιση πλήρους έκδοσης</a>, και έτσι θα μπορούσαν να προκληθούν σημαντικές επιβραδύνσεις ερωτημάτων σε πολυάσχολα συστήματα έως ότου να ολοκληρωθεί το <a href="https://www.postgresql.org/docs/18/sql-analyze.html"><code>ANALYZE</code></a>. Η PostgreSQL 18 εισάγει τη δυνατότητα διατήρησης των στατιστικών του σχεδιαστή εκτέλεσης (query planner) κατά τη διάρκεια μιας αναβάθμισης πλήρους έκδοσης, βοηθώντας το αναβαθμισμένο σύστημα να φτάσει γρηγορότερα στις αναμενόμενες επιδόσεις μετά την αναβάθμιση.</p>
+<p>Επιπλέον στην PostgreSQL 18 το <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>, ένα βοηθητικό πρόγραμμα που εκτελεί αναβαθμίσεις πλήρους έκδοσης, περιλαμβάνει αρκετές βελτιώσεις όπως ταχύτερες αναβαθμίσεις όταν μια βάση δεδομένων περιέχει πολλά αντικείμενα όπως πίνακες και ακολουθίες. Αυτή η έκδοση επιτρέπει επίσης την παράλληλη επεξεργασία ελέγχων του <code>pg_upgrade</code> με τη ρύθμιση της επιλογής  <code>--jobs</code>, και προσθέτει την επιλογή <code>--swap</code> που ανταλλάσσει τους φακέλος της αναβάθμισης αντί να αντιγράφει, να κλωνοποιεί ή να συνδέει (link) αρχεία.</p>
+<h3 id="βελτιώσεις-στην-εκτέλεση-ερωτημάτων-και-γενικά-σε-επιδόσεις">Βελτιώσεις στην εκτέλεση ερωτημάτων και γενικά σε επιδόσεις</h3>
+<p>Η PostgreSQL 18 βελτιώνει κι άλλο τις επιδόσεις των ερωτημάτων με λειτουργίες που κάνουν αυτόματα ταχύτερους τον φόρτο εργασίας σας. Αυτή η έκδοση εισάγει αναζητήσεις "skip scan" σε <a href="https://www.postgresql.org/docs/18/indexes-multicolumn.html">ευρετήρια B-tree πολλαπλών στηλών</a> οι οποίες βελτιώνουν τον χρόνο εκτέλεσης για ερωτήματα που παραλείπουν μια συνθήκη <code>=</code> σε μία ή περισσότερες στήλες προθέματος του ευρετηρίου. Μπορεί επίσης να βελτιστοποιήσει ερωτήματα που χρησιμοποιούν συνθήκες <code>OR</code> μέσα σε ένα <code>WHERE</code>  με τη χρήση ενός ευρετηρίου, επιταχύνοντας σημαντικά την εκτέλεσή τους. Υπάρχουν επίσης πολλές βελτιώσεις στον τρόπο με τον οποίο η PostgreSQL σχεδιάζει και εκτελεί συνενώσεις πινάκων (table joins), από τη βελτίωση των επιδόσεων των hash joins έως τη δυνατότητα των merge joins να χρησιμοποιούν σταδιακή ταξινόμηση (incremental sort). Η PostgreSQL 18 υποστηρίζει επίσης την παράλληλη δημιουργία <a href="https://www.postgresql.org/docs/18/gin.html">ευρετηρίων GIN</a>, όπως γίνεται και στα ευρετήρια B-tree και <a href="https://www.postgresql.org/docs/current/brin.html">BRIN</a> που υποστηρίζουν αυτή τη δυνατότητα.</p>
+<p>Αυτή η έκδοση επεκτείνει επίσης την υποστήριξη της PostgreSQL για επιτάχυνση υλικού, όπως υποστήριξη εγγενών συναρτήσεων (CPU intrinsics) ARM NEON και SVE για τη συνάρτηση <code>popcount</code>, η οποία χρησιμοποιείται από τη <a href="https://www.postgresql.org/docs/18/functions-bitstring.html"><code>bit_count</code></a> και άλλες εσωτερικές δυνατότητες.</p>
+<h3 id="βελτίωση-της-εμπειρίας-για-τους-προγραμματιστές">Βελτίωση της εμπειρίας για τους προγραμματιστές</h3>
+<p>Η PostgreSQL 18 εισάγει τις <a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-GENERATED-STORED">εικονικές παραγόμενες στήλες</a> που υπολογίζουν τιμές κατά την εκτέλεση του ερωτήματος αντί να τις αποθηκεύουν. Αυτή είναι πλέον η προεπιλογή για τις παραγόμενες στήλες. Επιπλέον, είναι πλέον δυνατό το logical replication των αποθηκευμένων παραγόμενων στηλών (stored generated columns).</p>
+<p>Αυτή η έκδοση προσθέτει τη δυνατότητα πρόσβασης τόσο στις προηγούμενες (<code>OLD</code>) όσο και στις τρέχουσες (<code>NEW</code>) τιμές στη <a href="https://www.postgresql.org/docs/18/dml-returning.html">ρήτρα <code>RETURNING</code></a> για τις εντολές <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> και <code>MERGE</code>. Η PostgreSQL 18 προσθέτει επίσης τη δημιουργία UUIDv7 μέσω της συνάρτησης <a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv7()</code></a>, επιτρέποντάς σας να δημιουργήσετε τυχαία UUIDs που είναι ταξινομημένα χρονικά για την υποστήριξη καλύτερων στρατηγικών caching. Η PostgreSQL 18 περιλαμβάνει το <a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv4()</code></a> ως εναλλακτικό όνομα για το <code>gen_random_uuid()</code>.</p>
+<p>Η PostgreSQL 18 προσθέτει <a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-UNIQUE">χρονικούς περιορισμούς</a> (περιορισμούς στο εύρος τιμών) τόσο για περιορισμούς <code>PRIMARY KEY</code> όσο και <code>UNIQUE</code> χρησιμοποιώντας τη ρήτρα <code>WITHOUT OVERLAPS</code>, και σε περιορισμούς <code>FOREIGN KEY</code> χρησιμοποιώντας τη ρήτρα <code>PERIOD</code>.</p>
+<p>Τέλος, η PostgreSQL 18 διευκολύνει τη δημιουργία του ορισμού (schema definition) ενός απομακρυσμένου πίνακα (foreign table) χρησιμοποιώντας τον ορισμό ενός τοπικού πίνακα με την εντολή <a href="https://www.postgresql.org/docs/18/sql-createforeigntable.html"><code>CREATE FOREIGN TABLE ... LIKE</code></a>.</p>
+<h3 id="βελτιωμένη-επεξεργασία-κειμένου">Βελτιωμένη επεξεργασία κειμένου</h3>
+<p>Η PostgreSQL 18 κάνει την επεξεργασία κειμένου ευκολότερη και ταχύτερη με αρκετές νέες βελτιώσεις. Αυτή η έκδοση προσθέτει την ταξινόμηση (collation) <a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-MANAGING-STANDARD"><code>PG_UNICODE_FAST</code></a>, η οποία παρέχει πλήρη σημασιολογία Unicode για μετασχηματισμούς πεζών-κεφαλαίων, ενώ βοηθά και στην επιτάχυνση πολλών συγκρίσεων. Συμπεριλαβάνονται οι συναρτήσεις σύγκρισης συμβολοσειρών <code>upper</code> και <code>lower</code> και η νέα συνάρτηση <a href="https://www.postgresql.org/docs/18/functions-string.html#FUNCTIONS-STRING-OTHER"><code>casefold</code></a> για συγκρίσεις χωρίς διάκριση πεζών-κεφαλαίων. Επιπλέον, η PostgreSQL 18 υποστηρίζει πλέον συγκρίσεις <code>LIKE</code> σε κείμενο που χρησιμοποιεί μια <a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-NONDETERMINISTIC">μη προσδιοριστική ταξινόμηση</a>, απλοποιώντας τον τρόπο με τον οποίο μπορείτε να εκτελέσετε σύνθετες αντιστοιχίσεις. Αυτή η έκδοση αλλάζει επίσης την <a href="https://www.postgresql.org/docs/18/textsearch.html">αναζήτηση πλήρους κειμένου (full text search)</a> χρησιμοποιώντας τον προεπιλεγμένο πάροχο ταξινόμησης του συστήματος αντί να χρησιμοποιεί πάντα τη libc, επομένως μπορεί να απαιτηθεί να κάνετε ανακατασκευή όλων των ευρετηρίων <a href="https://www.postgresql.org/docs/18/textsearch-tables.html#TEXTSEARCH-TABLES-INDEX">αναζήτησης πλήρους κειμένου</a> και <a href="https://www.postgresql.org/docs/18/pgtrgm.html#PGTRGM-INDEX"><code>pg_trgm</code></a> μετά την εκτέλεση του <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>.</p>
+<h3 id="replication">Replication</h3>
+<p>Η PostgreSQL 18 υποστηρίζει την αναφορά συγκρούσεων εγγραφής logical replication στα αρχεία καταγραφής (logs) και στην όψη (view) <a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION-STATS"><code>pg_stat_subscription_stats</code></a>. Επιπλέον, η εντολή <a href="https://www.postgresql.org/docs/18/sql-createsubscription.html"><code>CREATE SUBSCRIPTION</code></a> χρησιμοποιεί πλέον από προεπιλογή παράλληλη ροή για την εφαρμογή των συναλλαγών, που μπορεί να βελτιώσει τις επιδόσεις. Το βοηθητικό πρόγραμμα <a href="https://www.postgresql.org/docs/18/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a> διαθέτει πλέον την επιλογή <code>--all</code> ώστε να μπορείτε να δημιουργείτε logical replicas για όλες τις βάσεις δεδομένων σε μια εγκατάσταση με μία μόνο εντολή. Η PostgreSQL 18 σας επιτρέπει επίσης να <a href="https://www.postgresql.org/docs/18/runtime-config-replication.html#GUC-IDLE-REPLICATION-SLOT-TIMEOUT">διαγράφετε αυτόματα τα ανενεργά replication slots</a> για να αποφύγετε την αποθήκευση υπερβολικά πολλών αρχείων write-ahead log σε έναν publisher.</p>
+<h3 id="συντήρηση-και-παρατηρησιμότητα">Συντήρηση και παρατηρησιμότητα</h3>
+<p>Η PostgreSQL 18 βελτιώνει τη στρατηγική <a href="https://www.postgresql.org/docs/18/routine-vacuuming.html">vacuum</a> παγώνοντας προληπτικά περισσότερες σελίδες κατά τη διάρκεια των απλών vacuums, μειώνοντας την επιβάρυνση και βοηθώντας τις περιπτώσεις που απαιτούν επιθετικά vacuums.</p>
+<p>Η PostgreSQL 18 προσθέτει περισσότερες λεπτομέρειες στην εντολή <a href="https://www.postgresql.org/docs/18/using-explain.html"><code>EXPLAIN</code></a>, η οποία παρέχει πληροφορίες σχετικά με την εκτέλεση του σχεδίου ερωτήματος, και από αυτή την έκδοση εμφανίζει πλέον αυτόματα πόσα buffers (θεμελιώδεις μονάδες αποθήκευσης δεδομένων) προσπελάστηκαν κατά την εκτέλεση της <code>EXPLAIN ANALYZE</code>. Επιπλέον, η <code>EXPLAIN ANALYZE</code> δείχνει πια πόσες αναζητήσεις ευρετηρίου πραγματοποιούνται κατά τη διάρκεια μιας σάρωσης ευρετηρίου, και η <code>EXPLAIN ANALYZE VERBOSE</code> περιλαμβάνει στατιστικά για τη CPU, το WAL και τον μέσο όρο αναγνώσεων. Η PostgreSQL 18 περιλαμβάνει περισσότερες πληροφορίες στην όψη (view) <a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"><code>pg_stat_all_tables</code></a> για τον χρόνο που δαπανάται στο vacuum και σε σχετικές λειτουργίες, καθώς και στατιστικά ανά σύνδεση για τη χρήση I/O και WAL.</p>
+<h3 id="άλλες-αξιοσημείωτες-αλλαγές">Άλλες αξιοσημείωτες αλλαγές</h3>
+<p>Οι βάσεις δεδομένων που αρχικοποιούνται με την εντολή <a href="https://www.postgresql.org/docs/18/app-initdb.html"><code>initdb</code></a> της PostgreSQL 18 έχουν πλέον page checksums ενεργοποιημένα από προεπιλογή. Αυτό μπορεί να επηρεάσει τις αναβαθμίσεις συστημάτων χωρίς ενεργοποιημένα checksums, οι οποίες απαιτούν τη δημιουργία μιας νέας εγκατάστασης PostgreSQL 18 με την επιλογή <code>--no-data-checksums</code> στη χρήση του <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a>.</p>
+<p>Η PostgreSQL 18 εισάγει επίσης μια νέα έκδοση (3.2) του πρωτοκόλλου επικοινωνίας (wire protocol) της PostgreSQL, την πρώτη νέα έκδοση πρωτοκόλλου από τον καιρό της PostgreSQL 7.4 (2003). Η <a href="https://www.postgresql.org/docs/18/libpq-connect.html"><code>libpq</code></a> εξακολουθεί να χρησιμοποιεί ως προεπιλεγμένη την έκδοση 3.0, ενώ στους πελάτες (π.χ. drivers, poolers, proxies) προστίθεται υποστήριξη για τη νέα έκδοση του πρωτοκόλλου.</p>
+<h3 id="σχετικά-με-την-postgresql">Σχετικά με την PostgreSQL</h3>
+<p>Η <a href="https://www.postgresql.org">PostgreSQL</a> είναι η πιο προηγμένη βάση δεδομένων ανοιχτού κώδικα στον κόσμο, με μια παγκόσμια κοινότητα χιλιάδων χρηστών, συντελεστών, εταιρειών και οργανισμών. Ξεκινώντας από το Πανεπιστήμιο της Καλιφόρνια στο Μπέρκλεϊ πριν περισσότερα από 40 χρόνια, η PostgreSQL έχει συνεχίσει με έναν απαράμιλλο ρυθμό ανάπτυξης. Το ώριμο σύνολο δυνατοτήτων της PostgreSQL όχι μόνο ανταγωνίζεται κορυφαία συστήματα βάσεων δεδομένων ιδιόκτητου λογισμικού, αλλά τα υπερβαίνει σε προηγμένα χαρακτηριστικά βάσεων δεδομένων, επεκτασιμότητα, ασφάλεια και σταθερότητα.</p>
+<h3 id="σύνδεσμοι">Σύνδεσμοι</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Λήψη</a></li>
+<li><a href="https://www.postgresql.org/docs/18/release-18.html">Σημειώσεις έκδοσης</a></li>
+<li><a href="https://www.postgresql.org/about/press/">Πακέτο τύπου</a></li>
+<li><a href="https://www.postgresql.org/support/security/">Σελίδα ασφαλείας</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">Πολιτική αρίθμησης εκδόσεων</a></li>
+<li><a href="https://www.postgresql.org/about/contact/">Επικοινωνία</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">Κάντε δωρεά</a></li>
+</ul>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h3 id="σχετικά-με-την-postgresql">Σχετικά με την PostgreSQL</h3>
+<p>Η <a href="https://www.postgresql.org">PostgreSQL</a> είναι η πιο προηγμένη βάση δεδομένων ανοιχτού κώδικα στον κόσμο, με μια παγκόσμια κοινότητα χιλιάδων χρηστών, συντελεστών, εταιρειών και οργανισμών. Ξεκινώντας από το Πανεπιστήμιο της Καλιφόρνια στο Μπέρκλεϊ πριν περισσότερα από 40 χρόνια, η PostgreSQL έχει συνεχίσει με έναν απαράμιλλο ρυθμό ανάπτυξης. Το ώριμο σύνολο δυνατοτήτων της PostgreSQL όχι μόνο ανταγωνίζεται κορυφαία συστήματα βάσεων δεδομένων ιδιόκτητου λογισμικού, αλλά τα υπερβαίνει σε προηγμένα χαρακτηριστικά βάσεων δεδομένων, επεκτασιμότητα, ασφάλεια και σταθερότητα.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="περισσότερα-για-τις-λειτουργίες">Περισσότερα για τις λειτουργίες</h2>
+<p>Για επεξηγήσεις των παραπάνω λειτουργιών και άλλων, δείτε τις παρακάτω πηγές:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/18/release-18.html">Σημειώσεις Έκδοσης</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">Πίνακας Λειτουργιών</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="τρόποι-λήψης">Τρόποι λήψης</h2>
+<p>Υπάρχουν αρκετοί τρόποι λήψης της PostgreSQL 18, όπως:</p>
+<ul>
+<li>Η <a href="https://www.postgresql.org/download/">Επίσημη Σελίδα Λήψεων</a>, που περιέχει προγράμματα εγκατάστασης και εργαλεία για <a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/linux/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a>, και άλλα.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v18.0">Πηγαίος Κώδικας</a></li>
+</ul>
+<p>Μπορείτε να βρείτε άλλα εργαλεία και επεκτάσεις στο <a href="http://pgxn.org/">PostgreSQL Extension Network</a>.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="τεκμηρίωση">Τεκμηρίωση</h2>
+<p>Η PostgreSQL 18 συνοδεύεται από τεκμηρίωση σε μορφή HTML καθώς και από σελίδες εγχειριδίου (man pages). Μπορείτε επίσης να περιηγηθείτε στην τεκμηρίωση διαδικτυακά σε μορφή <a href="https://www.postgresql.org/docs/18/">HTML</a> και <a href="https://www.postgresql.org/files/documentation/pdf/18/postgresql-18-US.pdf">PDF</a>.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="άδεια-χρήσης">Άδεια χρήσης</h2>
+<p>Το PostgreSQL χρησιμοποιεί την <a href="https://www.postgresql.org/about/licence/">Άδεια Χρήσης PostgreSQL (PostgreSQL License)</a>, μια "επιτρεπτική" άδεια παρόμοια με την Άδεια Χρήσης BSD. Αυτή η άδεια, <a href="http://www.opensource.org/licenses/postgresql/">πιστοποιημένη από το OSI</a>, χαίρει ευρείας εκτίμησης για την ευελιξία της και τη φιλικότητά της προς τις επιχειρήσεις, καθώς δεν περιορίζει τη χρησιμοποίηση της PostgreSQL με εμπορικές και ιδιόκτητες εφαρμογές. Μαζί με την υποστήριξη από πολλές εταιρείες και τη δημόσια ιδιοκτησία του κώδικα, η άδειά μας καθιστά την PostgreSQL πολύ δημοφιλή σε προμηθευτές που επιθυμούν να ενσωματώσουν μια βάση δεδομένων στα προϊόντα τους χωρίς τον φόβο χρεώσεων, κλειδώματος σε προμηθευτή, ή αλλαγών στους όρους άδειας χρήσης.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="επικοινωνία">Επικοινωνία</h2>
+<p>Ιστοσελίδα</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>Email</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="εικόνες-και-λογότυπα">Εικόνες και λογότυπα</h2>
+<p>Τα Postgres, PostgreSQL και το Λογότυπο του Ελέφαντα (Slonik) είναι όλα κατοχυρωμένα εμπορικά σήματα της <a href="https://www.postgres.ca">PostgreSQL Community Association</a>. Εάν επιθυμείτε να χρησιμοποιήσετε αυτά τα σήματα, πρέπει να συμμορφωθείτε με την <a href="https://www.postgresql.org/about/policies/trademarks/">πολιτική εμπορικών σημάτων</a>.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="εταιρική-υποστήριξη-και-δωρεές">Εταιρική υποστήριξη και δωρεές</h2>
+<p>Η PostgreSQL χαίρει της υποστήριξης πολλών εταιρειών, οι οποίες χορηγούν προγραμματιστές, παρέχουν πόρους φιλοξενίας και μας προσφέρουν οικονομική υποστήριξη. Δείτε τη σελίδα των <a href="https://www.postgresql.org/about/sponsors/">χορηγών</a> για ορισμένους από αυτούς τους υποστηρικτές του έργου.</p>
+<p>Υπάρχει επίσης μια μεγάλη κοινότητα <a href="https://www.postgresql.org/support/professional_support/">εταιρειών που προσφέρουν υποστήριξη PostgreSQL</a>, από μεμονωμένους συμβούλους έως πολυεθνικές εταιρείες.</p>
+<p>Εάν επιθυμείτε να κάνετε μια οικονομική συνεισφορά στο PostgreSQL Global Development Group ή σε έναν από τους αναγνωρισμένους μη κερδοσκοπικούς οργανισμούς της κοινότητας, επισκεφτείτε τη σελίδα <a href="https://www.postgresql.org/about/donate/">δωρεών</a>.</p>
+{% endblock presskit_corporate %}
+

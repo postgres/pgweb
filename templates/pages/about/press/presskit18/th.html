@@ -1,0 +1,106 @@
+{% extends "pages/about/press/presskit18/base.html" %}
+
+{% block presskit_content %}
+<p><strong>25 กันยายน 2025</strong> - <a href="https://www.postgresql.org">PostgreSQL Global Development Group</a> วันนี้ประกาศการเปิดตัว <a href="https://www.postgresql.org/docs/18/release-18.html">PostgreSQL 18</a> เวอร์ชันล่าสุดของฐานข้อมูลโอเพนซอร์สที่ทันสมัยที่สุดในโลก</p>
+<p>PostgreSQL 18 ปรับปรุงประสิทธิภาพสำหรับเวิร์กโหลดทุกขนาดผ่านระบบ I/O subsystem ใหม่ที่แสดงให้เห็นการปรับปรุงประสิทธิภาพสูงสุดถึง 3× เมื่ออ่านจากหน่วยเก็บข้อมูลและยังเพิ่มจำนวนกคิวรีที่สามารถใช้ดัชนีได้ การปล่อยเวอร์ชันใหม่นี้ทำให้การอัปเกรดเวอร์ชันหลักถูกรบกวนน้อยลง เร่งเวลา อัปเกรดและลดเวลาที่ต้องใช้เพื่อไปถึงประสิทธิภาพที่คาดหวังหลังจากอัปเกรดเสร็จสิ้น นักพัฒนายังได้รับประโยชน์จากฟีเจอร์ของ PostgreSQL 18 รวมถึงคอลัมน์ที่สร้างเสมือนที่คำนวณค่าในเวลาคิวรีและฟังก์ชัน <code>uuidv7()</code> ที่เป็นมิตรกับฐานข้อมูลซึ่งให้ประสิทธิภาพการจัดทำดัชนีและการอ่านที่ดีกว่าสำหรับ UUID PostgreSQL 18 ทำให้การผสมผสานรวมเข้ากับระบบ Single-Sign On (SSO) ง่ายขึ้นด้วยการรองรับ OAuth 2.0 Authentication</p>
+<p>"ความพยายามของชุมชน Global Open Source ช่วยกำหนดทุกการปล่อย PostgreSQL และช่วยส่งมอบฟีเจอร์ที่ตอบสนองผู้ใช้ในที่ที่ข้อมูลของพวกเขาอยู่" โจนาธาน แคทซ์ สมาชิกทีมหลักของ PostgreSQL กล่าว "PostgreSQL 18 สร้างบนประวัติศาสตร์อันยาวนานและมั่งคั่งของโครงการในการส่งมอบประสบการณ์การจัดการข้อมูลที่เชื่อถือได้และแข็งแกร่ง ขณะเดียวกันยังคงขยายเวิร์กโหลดที่สามารถรองรับได้"</p>
+<p>PostgreSQL ระบบจัดการข้อมูลเชิงนวัตกรรมที่ขึ้นชื่อเรื่องความเชื่อถือได้ ความทนทาน และความสามารถในการขยายได้รับประโยชน์จากการพัฒนาโอเพนซอร์สเกือบ 30 ปีจากชุมชนนักพัฒนาทั่วโลกและได้กลายเป็นฐานข้อมูลเชิงสัมพันธ์โอเพนซอร์สที่เป็นที่นิยมสำหรับองค์กรทุกขนาด</p>
+<h3 id="แนะนำ-asynchronous-io">แนะนำ Asynchronous I/O</h3>
+<p>ก่อนหน้านี้ PostgreSQL อาศัย Operating System Readahead Mechanism เพื่อเร่งการเรียกข้อมูล อย่างไรก็ตาม เนื่องจากระบบปฏิบัติการขาดความเข้าใจในรูปแบบการเข้าถึงเฉพาะฐานข้อมูล พวกเขาจึงไม่สามารถคาดการณ์ข้อมูลที่จะต้องใช้ได้เสมอ ทำให้เกิดประสิทธิภาพที่ไม่เหมาะสมในเวิร์กโหลดหลายประเภท</p>
+<p>PostgreSQL 18 แนะนำระบบ Asynchronous I/O (AIO) subsystem ใหม่ที่ออกแบบมาเพื่อจัดการกับข้อจำกัดนี้ AIO ให้ PostgreSQL ส่งคำขอ I/O  หลายรายการพร้อมกันแทนที่จะรอให้แต่ละรายการเสร็จสิ้นตามลำดับ สิ่งนี้ขยายการอ่านล่วงหน้าที่มีอยู่และปรับปรุงปริมาณงานโดยรวม การดำเนินการ AIO ที่รองรับใน PostgreSQL 18 รวมถึง Sequential Scan, Bitmap Heap Scan และ Vacuum Benchmarking แสดงให้เห็นการเพิ่มประสิทธิภาพการทำงานสูงสุดถึง 3x ในบางสถานการณ์</p>
+<p>การตั้งค่า <a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#GUC-IO-METHOD"><code>io_method</code></a> ใหม่ให้คุณสลับระหว่างวิธี AIO รวมถึง <code>worker</code> และ <code>io_uring</code> หรือคุณสามารถเลือกรักษาพฤติกรรม PostgreSQL ปัจจุบันด้วยการตั้งค่า <code>sync</code> ตอนนี้มีตัวแปรกำหนดค่าเพิ่มเติมที่ต้องพิจารณาปรับแต่งกับ AIO ซึ่งคุณสามารถ<a href="https://www.postgresql.org/docs/18/runtime-config-resource.html#RUNTIME-CONFIG-RESOURCE-IO">เรียนรู้เพิ่มเติมในเอกสารประกอบ</a></p>
+<h3 id="อปเกรดทเรวขนประสทธภาพหลงการอปเกรดทดกวา">อัปเกรดที่เร็วขึ้นประสิทธิภาพหลังการอัปเกรดที่ดีกว่า</h3>
+<p>ฟีเจอร์สำคัญของ PostgreSQL คือการสร้างและจัดเก็บ<a href="https://www.postgresql.org/docs/18/planner-stats.html">สถิติ</a>ที่ช่วย PostgreSQL เลือกแผนคิวรีที่มีประสิทธิภาพสูงสุด ก่อน PostgreSQL 18 สถิติเหล่านี้ไม่ถูกคงไว้ใน<a href="https://www.postgresql.org/docs/18/pgupgrade.html">อัปเกรดเวอร์ชันหลัก</a> ซึ่งอาจทำให้ประสิทธิภาพของคิวรีลดลงอย่างมากในระบบไม่ว่างจนกว่า <a href="https://www.postgresql.org/docs/18/sql-analyze.html"><code>ANALYZE</code></a> จะทำงานเสร็จ PostgreSQL 18 แนะนำความสามารถในการเก็บแผนการวิเคราะห์ทางสถิติผ่านอัปเกรดเวอร์ชันหลักซึ่งช่วยให้คลัสเตอร์ที่อัปเกรดแล้วไปถึงประสิทธิภาพที่คาดหวังได้เร็วขึ้นหลังการอัปเกรด</p>
+<p>นอกจากนี้ <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a> ยูทิลิตี้ที่ทำ อัปเกรดเวอร์ชันหลักรวมการปรับปรุงหลายอย่างใน PostgreSQL 18 เช่น อัปเกรดที่เร็วขึ้นเมื่อฐานข้อมูลมีอ็อบเจ็กต์จำนวนมากเช่น ตารางและลำดับ เวอร์ชันนี้นี้ยังให้ <code>pg_upgrade</code> ประมวลผลการตรวจสอบแบบขนานตามการตั้งค่าของแฟล็ก <code>--jobs</code> และเพิ่มแฟล็ก <code>--swap</code> ที่สลับไดเรกทอรีอัปเกรดแทนการคัดลอก โคลน หรือเชื่อมโยงไฟล์</p>
+<h3 id="การปรบปรงประสทธภาพควรและทวไป">การปรับปรุงประสิทธิภาพคิวรีและทั่วไป</h3>
+<p>PostgreSQL 18 เร่งประสิทธิภาพกคิวรีเพิ่มเติมด้วยฟีเจอร์ที่ทำให้เวิร์กโหลดของคุณเร็วขึ้นโดยอัตโนมัติ เวอร์ชันนี้แนะนำการค้นหา "ข้ามสแกน" บน <a href="https://www.postgresql.org/docs/18/indexes-multicolumn.html">Multicolumn B-tree Index</a>ที่ในการดำเนินการสำหรับการคิวรีที่ไม่มีเงื่อนไข <code>=</code> ในคอลัมน์ดัชนีคำนำหน้าหนึ่งหรือมากกว่า มันยังสามารถเพิ่มประสิทธิภาพคิวรีที่ใช้เงื่อนไข <code>OR</code> ใน <code>WHERE</code> เพื่อใช้ดัชนีทำให้การดำเนินการเร็วขึ้นอย่างมาก ยังมีการปรับปรุงมากมายในวิธีที่ PostgreSQL วางแผนและะดำเนินการการรวมตาราง ตั้งแต่เพิ่มประสิทธิภาพการรวมแฮช ไปจนถึงอนุญาตให้การรวมใช้การเรียงลำดับแบบเพิ่มหน่วย PostgreSQL 18 ยังรองรับการสร้างแบบคู่ขนานสำหรับ<a href="https://www.postgresql.org/docs/18/gin.html">ดัชนี GIN</a> เข้าร่วมกับ B-tree และ<a href="https://www.postgresql.org/docs/current/brin.html">ดัชนี BRIN</a>ในการรองรับความสามารถนี้</p>
+<p>เวอร์ชันนี้ยังสร้างบนการรองรับ PostgreSQL สำหรับการเร่งความเร็วด้วยฮาร์ดแวร์รวมถึงการรองรับ ARM NEON และ SVE CPU intrinsic สำหรับฟังก์ชัน <code>popcount</code> ซึ่งใช้โดย <a href="https://www.postgresql.org/docs/18/functions-bitstring.html"><code>bit_count</code></a> และความสามารถภายในอื่น ๆ</p>
+<h3 id="การเพมประสบการณนกพฒนา">การเพิ่มประสบการณ์นักพัฒนา</h3>
+<p>PostgreSQL 18 แนะนำ<a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-GENERATED-STORED">คอลัมน์ที่สร้างขึ้นเสมือน</a> ที่คำนวณค่าในเวลาคิวรีแทนที่จะเก็บไว้ ตอนนี้เป็นตัวเลือกเริ่มต้นสำหรับคอลัมน์ที่สร้างขึ้น นอกจากนี้คอลัมน์ที่สร้างขึ้นที่จัดเก็บไว้สามารถทำการจำลองแบบลอจิคัลได้อีกด้วย</p>
+<p>เวอร์ชันนี้เพิ่มความสามารถในการเข้าถึงทั้งค่าก่อนหน้า (<code>OLD</code>) และค่าปัจจุบัน (<code>NEW</code>) ใน<a href="https://www.postgresql.org/docs/18/dml-returning.html">คำสั่ง <code>RETURNING</code></a> สำหรับคำสั่ง <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> และ <code>MERGE</code> นอกจากนี้ PostgreSQL 18 ยังเพิ่มการสร้าง UUIDv7 ผ่านฟังก์ชัน <a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv7()</code></a> ให้คุณคุณสร้าง UUID แบบสุ่มที่เรียงลำดับตามมค่าเวลาเเพื่อรองรับกลยุทธ์การแคชที่ดีกว่า PostgreSQL 18 ได้รวม<a href="https://www.postgresql.org/docs/18/functions-uuid.html#FUNC_UUID_GEN_TABLE"><code>uuidv4()</code></a> เป็นชื่อแทนสำหรับสำหรับ <code>gen_random_uuid()</code></p>
+<p>PostgreSQL 18 เพิ่มข้อจำกัดทางเวลา <a href="https://www.postgresql.org/docs/18/sql-createtable.html#SQL-CREATETABLE-PARMS-UNIQUE">temporal constraint</a> -- ข้อจำกัดเหนือช่วง -- สำหรับทั้ง <code>PRIMARY KEY</code> และ <code>UNIQUE</code> constraint โดยใช้คำสั่ง <code>WITHOUT OVERLAPS</code> และในและข้อจำกัด <code>FOREIGN KEY</code> โดยใช้คำสั่ง <code>PERIOD</code></p>
+<p>สุดท้ายนี้ PostgreSQL 18 ทำให้การสร้างคำจำกัดความของโครงร่างของตารางภายนอกง่ายขึ้นโดยใช้คำจำกัดความของตารางภายในเครื่องด้วยคำสั่ง <a href="https://www.postgresql.org/docs/18/sql-createforeigntable.html"><code>CREATE FOREIGN TABLE ... LIKE</code></a></p>
+<h3 id="การประมวลผลขอความทปรบปรง">การประมวลผลข้อความที่ปรับปรุง</h3>
+<p>PostgreSQL 18 ทำให้การประมวลผลข้อความง่ายและเร็วขึ้นด้วยการปรับปรุงใหม่หลายอย่าง เวอรํชันนี้ฟังก์ชันการจัดเรียงข้อมูล<a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-MANAGING-STANDARD"><code>PG_UNICODE_FAST</code></a> ซึ่งให้ความหมาย Unicode เต็มรูปแบบสำหรับการแปลงตัวพิมพ์ใหญ่และเล็ก ขณะเดียวกันช่วยเร่งการเปรียบเทียบจำนวนมาก ซึ่งรวมถึงฟังก์ชันการเปรียบเทียบสตริง <code>upper</code> และ <code>lower</code> และฟังก์ชันใหม่<a href="https://www.postgresql.org/docs/18/functions-string.html#FUNCTIONS-STRING-OTHER"><code>casefold</code></a>สำหรับการเปรียบเทียบแบบไม่คำนึงถึงตัวพิมพ์ใหญ่และเล็ก นอกจากนี้ PostgreSQL 18 ตอนนี้รองรับการเปรียบเทียบแบบ <code>LIKE</code> บนข้อความที่ใช้<a href="https://www.postgresql.org/docs/18/collation.html#COLLATION-NONDETERMINISTIC">การจัดเรียงแบบไม่กำหนด</a> ซึ่งทำให้วิธีการจับคู่รูปแบบที่ซับซ้อนยิ่งขึ้นง่ายขึ้น การเปิดตัวนี้ยังเปลี่ยนแปลงการค้นหาข้อความแบบเต็ม เวอร์ชันนี้ นี้ยังเปลี่ยน<a href="https://www.postgresql.org/docs/18/textsearch.html">การค้นหาข้อความแบบเต็ม</a>ใเพื่อใช้ผู้ให้บริการการจัดเรียงเริ่มต้นของคลัสเตอร์แทนที่จะใช้ Libc เสมอ ซึ่งอาจต้องให้คุณสร้างดัชนีใหม่ทั้งหมด <a href="https://www.postgresql.org/docs/18/textsearch-tables.html#TEXTSEARCH-TABLES-INDEX">การค้นหาข้อความแบบเต็ม</a>และ<a href="https://www.postgresql.org/docs/18/pgtrgm.html#PGTRGM-INDEX"><code>pg_trgm</code></a> หลังจากรันดัชนี <a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a></p>
+<h3 id="การจำลอง">การจำลอง</h3>
+<p>PostgreSQL 18 รองรับการรายงานข้อขัดแย้งในการเขียนข้อมูลการจำลองแบบลอจิคัลในบันทึกและในมุมมอง<a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION-STATS"><code>pg_stat_subscription_stats</code></a> นอกจากนี้<a href="https://www.postgresql.org/docs/18/sql-createsubscription.html"><code>สร้างการสมัครสมาชิก</code></a>ตยังได้ตั้งค่าเริ่มต้นให้ใช้การสตรีมแบบขนานสำหรับการใช้ธุรกรรม ซึ่งจะช่วยปรับปรุงประสิทธิภาพการทำงาน ยูทิลิตี้ <a href="https://www.postgresql.org/docs/18/app-pgcreatesubscriber.html"><code>pg_createsubscriber</code></a> ตอนนี้มีแฟล็ก <code>--all</code> เพื่อให้คุณสร้าง สร้างแบบจำลองเชิงตรรกะสำหรับฐานข้อมูลทั้งหมดในอินสแตนซ์ได้ด้วยคำสั่งเดียว PostgreSQL 18 ยังให้คุณ<a href="https://www.postgresql.org/docs/18/runtime-config-replication.html#GUC-IDLE-REPLICATION-SLOT-TIMEOUT">ลบสล็อตการจำลองแบบว่างโดยอัตโนมัติ</a> เพื่อช่วยป้องกันไม่ให้มีการจัดเก็บไฟล์บันทึกการเขียนล่วงหน้ามากเกินไปใน Publisher</p>
+<h3 id="การบำรงรกษาและการตรวจสอบสถานะ">การบำรุงรักษาและการตรวจสอบสถานะ</h3>
+<p>PostgreSQL 18 ปรับปรุงกลยุทธ์ <a href="https://www.postgresql.org/docs/18/routine-vacuuming.html">การดูดสูญญากาศ</a> โดยการแช่แข็งหน้าต่าง ๆ มากขึ้นหน้าเพิ่มเติมในระหว่างการดูดสูญญากาศปกติ ลดค่าใช้จ่าย และช่วยเหลือในสถานการณ์ที่ต้องใช้การดูดสูญญากาศอย่างเข้มงวด</p>
+<p>PostgreSQL 18 เพิ่มรายละเอียดเพิ่มเติมให้<a href="https://www.postgresql.org/docs/18/using-explain.html"><code>EXPLAIN</code></a> ซึ่งให้ข้อมูลเกี่ยวกับการดำเนินการตามแผนคิวรีและตั้งแต่เวอร์ชันนี้เป็นต้นไป จะแสดงจำนวนบัฟเฟอร์ (หน่วยพื้นฐานของการจัดเก็บข้อมูล) ที่เข้าถึงโดยอัตโนมัติเมื่อดำเนินการ <code>EXPLAIN ANALYZE</code> นอกจากนี้ <code>EXPLAIN ANALYZE</code> ยังแสดงจำนวนการค้นหาดัชนีที่เกิดขึ้นระหว่างการสแกนดัชนี และ <code>EXPLAIN ANALYZE VERBOSE</code> ยังรวมสถิติการอ่าน CPU, WAL และค่าเฉลี่ย PostgreSQL 18 มีข้อมูลเพิ่มเติมใน <a href="https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-ALL-TABLES-VIEW"><code>pg_stat_all_tables</code></a> เกี่ยวกับเวลาที่ใช้ในการล้างข้อมูลและการดำเนินการที่เกี่ยวข้อง รวมถึงสถิติการใช้งาน I/O และ WAL ต่อการเชื่อมต่อ</p>
+<h3 id="การเปลยนแปลงสำคญอน-ๆ">การเปลี่ยนแปลงสำคัญอื่น ๆ</h3>
+<p>ฐานข้อมูลที่เริ่มต้นด้วย PostgreSQL 18 <a href="https://www.postgresql.org/docs/18/app-initdb.html"><code>initdb</code></a> จะมีการเปิดใช้งาน checksum ของหน้าไว้ตามค่าเริ่มต้น ซึ่งอาจส่งผลต่อการอัปเกรดจากคลัสเตอร์ที่ไม่ได้เปิดใช้งาน checksum ซึ่งคุณจะต้องสร้างคลัสเตอร์ PostgreSQL 18 ใหม่โดยใช้ตัวเลือก <code>--no-data-checksums</code> เมื่อใช้<a href="https://www.postgresql.org/docs/18/pgupgrade.html"><code>pg_upgrade</code></a></p>
+<p>PostgreSQL 18 ยังได้แนะนำโปรโตคอล PostgreSQL wire เวอร์ชันใหม่ (3.2) ซึ่งเป็นเวอร์ชันโปรโตคอลใหม่เวอร์ชันแรกนับตั้งแต่ PostgreSQL 7.4 (2003) <a href="https://www.postgresql.org/docs/18/libpq-connect.html"><code>libpq</code></a> ยังคงใช้เวอร์ชัน 3.0 ตามค่าเริ่มต้น ในขณะที่ไคลเอนต์ (เช่น ไดรเวอร์ พูลเลอร์ พร็อกซี) เพิ่มการรองรับสำหรับเวอร์ชันโปรโตคอลใหม่</p>
+<h3 id="ฟเจอรเพมเตม">ฟีเจอร์เพิ่มเติม</h3>
+<p>ฟีเจอร์และการปรับปรุงใหม่อื่น ๆ อีกมากมายได้ถูกเพิ่มเข้าใน PostgreSQL 18 ซึ่งอาจเป็นประโยชน์สำหรับการใช้งานของคุณ โปรดดู <a href="https://www.postgresql.org/docs/18/release-18.html">หมายเหตุเวอร์ชันใหม่</a>เพื่อดูรายการฟีเจอร์ใหม่และฟีเจอร์ที่เปลี่ยนแปลงทั้งหมด</p>
+<h3 id="เกี่ยวกับ-postgresql">เกี่ยวกับ PostgreSQL</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> เป็นฐานข้อมูลโอเพนซอร์สที่ทันสมัยที่สุดในโลก มีชุมชนผู้ใช้ ผู้สนับสนุน บริษัท และองค์กรทั่วโลกหลายพันราย นับตั้งแต่ก่อตั้งที่มหาวิทยาลัยแคลิฟอร์เนีย เบิร์กลีย์ เมื่อกว่า 40 ปีที่แล้ว PostgreSQL ยังคงพัฒนาอย่างต่อเนื่องด้วยความเร็วที่ไม่มีใครเทียบได้ ชุดคุณสมบัติที่ครบครันของ PostgreSQL ไม่เพียงแต่เทียบเท่ากับระบบฐานข้อมูลที่เป็นกรรมสิทธิ์ชั้นนำเท่านั้น แต่ยังเหนือกว่าในด้านคุณสมบัติฐานข้อมูลขั้นสูง ความสามารถในการขยาย ความปลอดภัย และความเสถียรอีกด้วย</p>
+<h3 id="ลงค">ลิงค์</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">ดาวน์โหลด</a></li>
+<li><a href="https://www.postgresql.org/docs/18/release-18.html">หมายเหตุเวอร์ชันใหม่</a></li>
+<li><a href="https://www.postgresql.org/about/press/">ชุดข่าว</a></li>
+<li><a href="https://www.postgresql.org/support/security/">หน้าความปลอดภัย</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">นโยบายการกำหนดเวอร์ชัน</a></li>
+<li><a href="https://www.postgresql.org/about/contact/">ติดต่อ</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">บริจาค</a></li>
+</ul>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2 id="เกี่ยวกับ-postgresql">เกี่ยวกับ PostgreSQL</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> เป็นฐานข้อมูลโอเพนซอร์สที่ทันสมัยที่สุดในโลก มีชุมชนผู้ใช้ ผู้สนับสนุน บริษัท และองค์กรทั่วโลกหลายพันราย นับตั้งแต่ก่อตั้งที่มหาวิทยาลัยแคลิฟอร์เนีย เบิร์กลีย์ เมื่อกว่า 40 ปีที่แล้ว PostgreSQL ยังคงพัฒนาอย่างต่อเนื่องด้วยความเร็วที่ไม่มีใครเทียบได้ ชุดคุณสมบัติที่ครบครันของ PostgreSQL ไม่เพียงแต่เทียบเท่ากับระบบฐานข้อมูลที่เป็นกรรมสิทธิ์ชั้นนำเท่านั้น แต่ยังเหนือกว่าในด้านคุณสมบัติฐานข้อมูลขั้นสูง ความสามารถในการขยาย ความปลอดภัย และความเสถียรอีกด้วย</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="เพมเตมเกยวกบฟเจอร">เพิ่มเติมเกี่ยวกับฟีเจอร์</h2>
+<p>สำหรับคำอธิบายของฟีเจอร์ข้างต้นและอื่น ๆ โปรดดู resource ต่อไปนี้:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/18/release-18.html">หมายเหตุเวอร์ชันใหม่</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">ตางรางฟีเจอร์</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="จะดาวนโหลดไดทไหน">จะดาวน์โหลดได้ที่ไหน</h2>
+<p>มีหลายวิธีที่คุณสามารถดาวน์โหลด PostgreSQL 18 รวมถึง:</p>
+<ul>
+<li>หน้า <a href="https://www.postgresql.org/download/">ดาวน์โหลดอย่างเป็นทางการ</a> ประกอบด้วยตัวติดตั้งและเครื่องมือสำหรับ <a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/linux/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a> และอื่น ๆ</li>
+<li><a href="https://www.postgresql.org/ftp/source/v18.0">ซอร์สโค้ด</a></li>
+</ul>
+<p>มีเครื่องมือและส่วนขยายอื่น ๆ อยู่บน <a href="http://pgxn.org/">เครือข่ายส่วนขยาย PostgreSQL</a></p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="เอกสารประกอบ">เอกสารประกอบ</h2>
+<p>PostgreSQL 18 มาพร้อมกับเอกสาร HTML เช่นเดียวกับหน้าคู่มือ และคุณยังสามารถเรียกดูเอกสารออนไลน์ได้ทั้งในรูปแบบ <a href="https://www.postgresql.org/docs/18/">HTML</a> และ <a href="https://www.postgresql.org/files/documentation/pdf/18/postgresql-18-US.pdf">PDF</a></p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="ใบอนญาต">ใบอนุญาต</h2>
+<p>PostgreSQL ใช้ <a href="https://www.postgresql.org/about/licence/">ใบอนุญาต PostgreSQL</a> ซึ่งเป็นใบอนุญาตแบบ "อนุญาต" คล้ายกับ BSD ใบอนุญาต <a href="http://www.opensource.org/licenses/postgresql/">ใบอนุญาตที่ได้รับการรับรอง OSI</a> นี้ได้รับการยอมรับอย่างกว้างขวางว่ามีความยืดหยุ่นและเป็นมิตรต่อธุรกิจ เนื่องจากไม่จำกัดการใช้ PostgreSQL กับแอปพลิเคชันเชิงพาณิชย์และแอปพลิเคชันที่เป็นกรรมสิทธิ์ ด้วยการสนับสนุนจากหลายบริษัทและการเป็นเจ้าของโค้ดโดยสาธารณะ ใบอนุญาตของเราจึงทำให้ PostgreSQL เป็นที่นิยมอย่างมากในหมู่ผู้จำหน่ายที่ต้องการฝังฐานข้อมูลในผลิตภัณฑ์ของตนเอง โดยไม่ต้องกลัวค่าธรรมเนียม การผูกขาดกับผู้จำหน่าย หรือการเปลี่ยนแปลงเงื่อนไขใบอนุญาต</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="ตดตอ">ติดต่อ</h2>
+<p>เว็บไซต์</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>อีเมล</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="รปภาพและโลโก">รูปภาพและโลโก้</h2>
+<p>โลโก้ Postgres, PostgreSQL และ Elephant (Slonik) ล้วนเป็นเครื่องหมายการค้าจดทะเบียนของ <a href="https://www.postgres.ca">PostgreSQL Community Association</a> หากท่านต้องการใช้เครื่องหมายเหล่านี้ ท่านต้องปฏิบัติตาม <a href="https://www.postgresql.org/about/policies/trademarks/">นโยบายเครื่องหมายการค้า</a></p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="การสนบสนนและการบรจาคจากองคกร">การสนับสนุนและการบริจาคจากองค์กร</h2>
+<p>PostgreSQL ได้รับการสนับสนุนจากบริษัทมากมาย ทั้งผู้สนับสนุนนักพัฒนา ผู้ให้บริการโฮสติ้ง และการสนับสนุนทางการเงิน ดูรายชื่อผู้สนับสนุนโครงการเหล่านี้ได้ที่หน้า <a href="https://www.postgresql.org/about/sponsors/">ผู้สนับสนุน</a></p>
+<p>นอกจากนี้ยังมีชุมชนขนาดใหญ่ของ <a href="https://www.postgresql.org/support/professional_support/">บริษัทต่างๆ ที่ให้การสนับสนุน PostgreSQL</a> ตั้งแต่ที่ปรึกษาส่วนบุคคลไปจนถึงบริษัทข้ามชาติ</p>
+<p>หากท่านต้องการบริจาคเงินให้กับ PostgreSQL Global Development Group หรือองค์กรไม่แสวงหาผลกำไรที่ได้รับการยอมรับในชุมชน โปรดเยี่ยมชมหน้า<a href="https://www.postgresql.org/about/donate/">การบริจาค</a> ของเรา</p>
+{% endblock presskit_corporate %}
+
