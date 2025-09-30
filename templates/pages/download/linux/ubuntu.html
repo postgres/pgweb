@@ -76,11 +76,15 @@ sudo sh -c "echo 'deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresq
 
 # Update the package lists:
 sudo apt update
-
-# Install the latest version of PostgreSQL:
-# If you want a specific version, use 'postgresql-17' or similar instead of 'postgresql'
-sudo apt -y install postgresql</pre>
     <button id="copy-btn2" class="pg-script-copy-btn">Copy Script</button>
+</div>
+
+Install PostgreSQL: (replace "18" by the version you want)
+
+<div class="pg-script-container">
+    <pre id="script-box3" class="code"># Import the repository signing key:
+sudo apt install postgresql-18</pre>
+    <button id="copy-btn3" class="pg-script-copy-btn">Copy Script</button>
 </div>
 
 <p>
@@ -98,15 +102,15 @@ version number as required):
 <table class="table table-striped">
   <tbody>
     <tr>
-     <th scope="row">postgresql-client-17</th>
+     <th scope="row">postgresql-client-18</th>
      <td>client libraries and client binaries</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-17</th>
+     <th scope="row">postgresql-18</th>
      <td>core database server</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-doc-17</th>
+     <th scope="row">postgresql-doc-18</th>
      <td>documentation</td>
     </tr>
     <tr>
@@ -114,7 +118,7 @@ version number as required):
      <td>libraries and headers for C language frontend development</td>
     </tr>
     <tr>
-     <th scope="row">postgresql-server-dev-17</th>
+     <th scope="row">postgresql-server-dev-18</th>
      <td>libraries and headers for C language backend development</td>
     </tr>
   </tbody>

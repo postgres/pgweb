@@ -27,6 +27,11 @@ function setupHandlers() {
             copyScript(this, 'script-box2');
         });
     }
+    if (document.getElementById("copy-btn3") && document.getElementById("script-box3")) {
+        document.getElementById('copy-btn3').addEventListener('click', function () {
+            copyScript(this, 'script-box3');
+        });
+    }
 }
 
 document.addEventListener("DOMContentLoaded", setupHandlers);
