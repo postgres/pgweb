@@ -122,7 +122,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
                         continue
                     f = instance._meta.get_field(fn)
                     if f in instance._meta.many_to_many:
-                        # m2m field have separate config of notificatgions
+                        # m2m field have separate config of notifications
                         if getattr(instance, 'send_m2m_notification', False):
                             for f in instance._meta.many_to_many:
                                 if f.name in form.cleaned_data:
