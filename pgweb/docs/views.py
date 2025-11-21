@@ -14,7 +14,7 @@ from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import template_to_string
 from pgweb.util.misc import send_template_mail
 
-from pgweb.core.models import Version
+from pgweb.core.models import Version, UserSubmission
 from pgweb.util.db import exec_to_dict
 
 from .models import DocPage, DocPageRedirect
@@ -420,6 +420,7 @@ def commentform(request, itemid, version, filename):
                 replyto='%s, %s' % (form.cleaned_data['email'], settings.DOCSREPORT_EMAIL),
                 sendername='PG Doc comments form'
             )
+            UserSubmission(user=request.user, what='Added comment to {}/{}'.format(version, filename)).save()
             return HttpResponseRedirect("done/")
     else:
         form = DocCommentForm(initial={

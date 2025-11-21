@@ -274,6 +274,20 @@ class UserProfile(models.Model):
                                       help_text="Disallow login to this account using OAuth providers like Google or Microsoft.")
 
 
+class UserSubmission(models.Model):
+    user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    when = models.DateTimeField(null=False, blank=False, auto_now_add=True)
+    what = models.CharField(null=False, blank=False, max_length=100)
+
+    class Meta:
+        indexes = [
+            models.Index(
+                name='core_usersubm_userwhen_idx',
+                fields=('user', 'when'),
+            ),
+        ]
+
+
 # Notifications sent for any moderated content.
 # Yes, we uglify it by storing the type of object as a string, so we don't
 # end up with a bazillion fields being foreign keys. Ugly, but works.

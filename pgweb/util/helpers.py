@@ -45,6 +45,8 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
             raise PermissionDenied("You cannot edit this item")
 
     if request.method == 'POST':
+        from pgweb.core.models import UserSubmission
+
         if 'modstate' in (f.name for f in instance._meta.get_fields()) and instance.modstate == ModerationState.CREATED and request.POST.get('delete', '') == 'delete':
             # Don't care to validate, just delete.
             instance.delete()
@@ -111,6 +113,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
                     else:
                         notify.write("{}\n".format(str(form.cleaned_data[f])))
                     notify.write("\n")
+                UserSubmission(user=request.user, what='Added {} {}'.format(instance._meta.verbose_name, instance.id)).save()
             else:
                 subj = '{0} id {1} ({2}) has been modified'.format(instance._meta.verbose_name, instance.id, str(instance))
 
@@ -150,6 +153,11 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
                         if diffrows:
                             notify.write("\n".join(diffrows))
                             notify.write("\n\n")
+                if do_notify:
+                    # We only store modification events if it's a change that would've been notified about (meaning users can edit
+                    # a pending entry an unlimited number of times without storing modification events, but once it has been approved,
+                    # any further edits are logged)
+                    UserSubmission(user=request.user, what='Modified {} {}'.format(instance._meta.verbose_name, instance.id)).save()
 
             if do_notify and notify.tell():
                 send_simple_mail(

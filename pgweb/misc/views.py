@@ -12,7 +12,7 @@ from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import template_to_string
 from pgweb.util.misc import send_template_mail
 
-from pgweb.core.models import Version
+from pgweb.core.models import Version, UserSubmission
 from pgweb.misc.models import BugIdMap
 
 from .forms import SubmitBugForm
@@ -53,6 +53,8 @@ def submitbug(request):
                     sendername="PG Bug reporting form",
                     messageid=messageid,
                 )
+
+                UserSubmission(user=request.user, what='Submitted bug {}'.format(bugid)).save()
 
                 return HttpResponseRedirect("/account/submitbug/{0}/".format(bugid))
     else:
