@@ -8,6 +8,7 @@ from django.conf import settings
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.moderation import ModerationState
 
+from datetime import datetime, timedelta
 import io
 import difflib
 
@@ -64,29 +65,35 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
         if not is_new:
             old_values = {fn: str(getattr(instance, fn)) for fn in form.changed_data if hasattr(instance, fn)}
 
-        if form.is_valid():
-            # We are handling notifications, so disable the ones we'd otherwise send
-            do_notify = getattr(instance, 'send_notification', False)
-            instance.send_notification = False
+        # We are handling notifications, so disable the ones we'd otherwise send
+        do_notify = getattr(instance, 'send_notification', False)
+        instance.send_notification = False
 
-            # If the object has an "approved" field and it's set to false, we don't
-            # bother notifying about the changes. But if it lacks this field, we notify
-            # about everything, as well as if the field exists and the item has already
-            # been approved.
-            # Newly added objects are always notified if they are two-state, but not if they
-            # are tri-state (in which case they get notified when submitted for
-            # moderation).
-            if is_new:
-                if hasattr(instance, 'modstate'):
-                    # Tri-state indicated by the existence of the modstate field
+        # If the object has an "approved" field and it's set to false, we don't
+        # bother notifying about the changes. But if it lacks this field, we notify
+        # about everything, as well as if the field exists and the item has already
+        # been approved.
+        # Newly added objects are always notified if they are two-state, but not if they
+        # are tri-state (in which case they get notified when submitted for
+        # moderation).
+        if is_new:
+            if hasattr(instance, 'modstate'):
+                # Tri-state indicated by the existence of the modstate field
+                do_notify = False
+        else:
+            if hasattr(instance, 'approved'):
+                if not getattr(instance, 'approved', True):
                     do_notify = False
-            else:
-                if hasattr(instance, 'approved'):
-                    if not getattr(instance, 'approved', True):
-                        do_notify = False
-                elif hasattr(instance, 'modstate'):
-                    if getattr(instance, 'modstate', None) == ModerationState.CREATED:
-                        do_notify = False
+            elif hasattr(instance, 'modstate'):
+                if getattr(instance, 'modstate', None) == ModerationState.CREATED:
+                    do_notify = False
+
+        # Do some very trivial rate limiting. The idea is "no more than <n> submission events in <t> time",
+        # the numbers of <n> and <t> being entirely arbitrary.
+        if do_notify and form.is_valid() and UserSubmission.objects.filter(user=request.user, when__gte=datetime.now() - timedelta(minutes=10)).count() > 2:
+            form.add_error(None, 'You have made too many submissions in a short time. Please wait a little and try again.')
+
+        if form.is_valid():
 
             notify = io.StringIO()
 
