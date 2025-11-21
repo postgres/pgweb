@@ -5,6 +5,9 @@
       Please correct the errors below, and re-submit the form.
     </div>
   {%endif%}
+{%for e in form.non_field_errors %}
+    <div class="alert alert-danger">{{e}}</div>
+{%endfor%}
 {%if form.fieldsets%}
 {%for fieldset in form.fieldsets%}
 <fieldset id="{{fieldset.id}}" class="form-group">
