@@ -5,7 +5,7 @@
  "fields": {
   "typename": "Core Team",
   "sortorder": 100,
-  "extrainfo": "For more information on the purpose of the core team, please click <a\r\nhref=\"/developer/core/\">here</a>.",
+  "extrainfo": "The role of the Core Team is described on the <a href=\"/developer/core/\">Core Team page</a>. Core Team members are also Major Contributors.",
   "detailed": true,
   "showemail": true
  }
@@ -16,7 +16,7 @@
  "fields": {
   "typename": "Major Contributors",
   "sortorder": 200,
-  "extrainfo": "",
+  "extrainfo": "Major Contributors are individuals who have provided a sustained stream of contributions, having substantial positive impact on the development of the PostgreSQL Community, over many years.",
   "detailed": true,
   "showemail": true
  }
@@ -36,9 +36,9 @@
  "model": "contributors.contributortype",
  "pk": 4,
  "fields": {
-  "typename": "Contributors",
+  "typename": "Significant Contributors",
   "sortorder": 300,
-  "extrainfo": "",
+  "extrainfo": "Significant Contributors are individuals who have provided a sustained stream of notable contributions in recent years.",
   "detailed": false,
   "showemail": true
  }
@@ -47,9 +47,9 @@
  "model": "contributors.contributortype",
  "pk": 5,
  "fields": {
-  "typename": "Past Contributors",
+  "typename": "Past Significant Contributors",
   "sortorder": 500,
-  "extrainfo": "",
+  "extrainfo": "These people have made significant contributions to PostgreSQL in the past.",
   "detailed": false,
   "showemail": false
  }
