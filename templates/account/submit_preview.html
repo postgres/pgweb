@@ -17,11 +17,24 @@
 {%for fld, title, contents, mdcontents, note in preview %}
 <div class="row">
   <div class="col-sm-2 col-form-label"><strong>{{title}}</strong></div>
-  <div class="col-sm-10">{%if mdcontents%}<div class="moderation-mdpreview-wrap">{{mdcontents|safe}}</div>{%else%}{{contents}}{%endif%}</div>
+  <div class="col-sm-10">
+    {%if mdcontents%}
+      <div class="moderation-mdpreview-wrap moderation-preview-container">
+        {# Use hidden textarea to store raw HTML without browser parsing #}
+        <textarea class="moderation-preview-data" style="display:none;">{{mdcontents}}</textarea>
+      </div>
+    {%else%}
+      {{contents}}
+    {%endif%}
+  </div>
 </div>
 {%endfor%}
 
 <h2>Confirm</h2>
 {%include "base/form_contents.html" with savebutton="Submit for moderation"%}
 
+{%endblock%}
+
+{%block extrascript%}
+<script src="/media/js/moderation_preview.js?{{gitrev}}"></script>
 {%endblock%}

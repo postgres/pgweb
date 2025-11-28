@@ -1851,6 +1851,14 @@ details.release-notes-list {
     max-width: 650px;
 }
 
+.moderation-preview-iframe {
+    width: 100%;
+    min-height: 400px;
+    border: 1px solid var(--button-input-bdr-color);
+    border-radius: 5px;
+    background-color: #fff;
+}
+
 /* Buttons that are images */
 button.imagebutton {
     border: 0;
