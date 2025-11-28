@@ -1892,6 +1892,29 @@ button.imagebutton {
   #docContent table.table {
     font-size: 70%;
   }
+
+  /* Hamburger menu */
+  /* Search and theme buttons layout */
+  #pgNavbar form[role="search"],
+  #pgNavbar #form-theme {
+    display: inline-block;
+    margin: 0.5rem 0.25rem;
+  }
+  #pgNavbar form[role="search"] .input-group {
+    width: auto;
+  }
+  #pgNavbar form[role="search"] .btn,
+  #pgNavbar #form-theme .btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #pgNavbar #form-theme .btn {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 768px) {
