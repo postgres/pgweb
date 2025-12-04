@@ -2001,10 +2001,53 @@ button.imagebutton {
   position: relative;
 }
 
+.pg-script-container pre.code {
+  padding-right: 4rem;
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
+}
+
 .pg-script-copy-btn {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  padding: 4px 6px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.pg-script-copy-btn-root {
+  right: 2rem;
+}
+
+.pg-script-copy-btn i {
+  color: #555 !important;
+  margin: 0 !important;
+  transition: color 0.2s;
+}
+
+.pg-script-copy-btn:hover i {
+  color: #336791 !important;
+}
+
+.pg-script-copy-btn.copied i {
+  color: #28a745 !important;
+}
+
+[data-theme="dark"] .pg-script-copy-btn i {
+  color: #ccc !important;
+}
+
+[data-theme="dark"] .pg-script-copy-btn:hover i {
+  color: #fff !important;
+}
+
+[data-theme="dark"] .pg-script-copy-btn.copied i {
+  color: #7dff7d !important;
 }
 
 .nobr {

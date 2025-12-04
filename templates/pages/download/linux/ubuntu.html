@@ -57,7 +57,8 @@ Automated repository configuration:
 <div class="pg-script-container">
     <pre id="script-box" class="code">sudo apt install -y postgresql-common
 sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh</pre>
-    <button id="copy-btn" class="pg-script-copy-btn">Copy Script</button>
+    <button id="copy-btn-root" class="pg-script-copy-btn pg-script-copy-btn-root" title="Copy to clipboard (without sudo, for root)"><i class="fas fa-terminal"></i></button>
+    <button id="copy-btn" class="pg-script-copy-btn" title="Copy to clipboard"><i class="far fa-copy"></i></button>
 </div>
 
 <p>
@@ -76,14 +77,16 @@ sudo sh -c "echo 'deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresq
 
 # Update the package lists:
 sudo apt update</pre>
-    <button id="copy-btn2" class="pg-script-copy-btn">Copy Script</button>
+    <button id="copy-btn2-root" class="pg-script-copy-btn pg-script-copy-btn-root" title="Copy to clipboard (without sudo, for root)"><i class="fas fa-terminal"></i></button>
+    <button id="copy-btn2" class="pg-script-copy-btn" title="Copy to clipboard"><i class="far fa-copy"></i></button>
 </div>
 
 Install PostgreSQL: (replace "18" by the version you want)
 
 <div class="pg-script-container">
     <pre id="script-box3" class="code">sudo apt install postgresql-18</pre>
-    <button id="copy-btn3" class="pg-script-copy-btn">Copy Script</button>
+    <button id="copy-btn3-root" class="pg-script-copy-btn pg-script-copy-btn-root" title="Copy to clipboard (without sudo, for root)"><i class="fas fa-terminal"></i></button>
+    <button id="copy-btn3" class="pg-script-copy-btn" title="Copy to clipboard"><i class="far fa-copy"></i></button>
 </div>
 
 <p>

@@ -151,6 +151,7 @@ function verChanged() {
 
   if (!ver || ver === "-1") {
      document.getElementById('copy-btn').style.display = 'none';
+     document.getElementById('copy-btn-root').style.display = 'none';
      scriptBox.innerHTML = 'Select platform, architecture, and version above';
      return;
   }
@@ -184,12 +185,16 @@ function verChanged() {
   }
 
   document.getElementById('copy-btn').style.display = 'block';
+  document.getElementById('copy-btn-root').style.display = 'block';
 }
 
 /* Event handlers */
 function setupHandlers() {
     document.getElementById('copy-btn').addEventListener('click', function () {
         copyScript(this, 'script-box');
+    });
+    document.getElementById('copy-btn-root').addEventListener('click', function () {
+        copyScript(this, 'script-box', true);
     });
     document.getElementById('version').addEventListener('change', verChanged);
     document.getElementById('platform').addEventListener('change', platChanged);

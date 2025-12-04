@@ -22,14 +22,29 @@ function setupHandlers() {
             copyScript(this, 'script-box');
         });
     }
+    if (document.getElementById("copy-btn-root") && document.getElementById("script-box")) {
+        document.getElementById('copy-btn-root').addEventListener('click', function () {
+            copyScript(this, 'script-box', true);
+        });
+    }
     if (document.getElementById("copy-btn2") && document.getElementById("script-box2")) {
         document.getElementById('copy-btn2').addEventListener('click', function () {
             copyScript(this, 'script-box2');
         });
     }
+    if (document.getElementById("copy-btn2-root") && document.getElementById("script-box2")) {
+        document.getElementById('copy-btn2-root').addEventListener('click', function () {
+            copyScript(this, 'script-box2', true);
+        });
+    }
     if (document.getElementById("copy-btn3") && document.getElementById("script-box3")) {
         document.getElementById('copy-btn3').addEventListener('click', function () {
             copyScript(this, 'script-box3');
+        });
+    }
+    if (document.getElementById("copy-btn3-root") && document.getElementById("script-box3")) {
+        document.getElementById('copy-btn3-root').addEventListener('click', function () {
+            copyScript(this, 'script-box3', true);
         });
     }
 }

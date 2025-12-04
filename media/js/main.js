@@ -34,31 +34,37 @@ window.addEventListener("hashchange", shiftWindow);
 /* Copy a script from an HTML element to the clipboard,
  * removing comments and blank lines.
  * Arguments:
- *   trigger: The button calling the function, whose label will be updated
+ *   trigger: The button calling the function, whose icon will be updated
  *   elem: The element containing the script to copy
+ *   stripSudo: If true, remove 'sudo ' from the start of lines
  */
 
-function copyScript(trigger, elem) {
-    var raw = document.getElementById(elem).innerHTML;
+function copyScript(trigger, elem, stripSudo = false) {
+    const raw = document.getElementById(elem).innerHTML;
 
     // Create a scratch div to copy from
-    var scratch = document.createElement("div");
+    const scratch = document.createElement("div");
     document.body.appendChild(scratch);
 
     // Copy the contents of the script box into the scratch div, removing
-    // comments and blank lines
-    var lines = raw.split("\n");
-    var output = '';
-    for (var l = 0; l < lines.length; l++) {
-        if (lines[l][0] != '#' && lines[l].trim() != '')
-            output += lines[l] + '<br />';
+    // comments and blank lines, and optionally stripping sudo
+    const lines = raw.split("\n");
+    let output = '';
+    for (let l = 0; l < lines.length; l++) {
+        if (lines[l][0] != '#' && lines[l].trim() != '') {
+            let line = lines[l];
+            if (stripSudo) {
+                line = line.replace(/^(\s*)sudo /, '$1');
+            }
+            output += line + '<br />';
+        }
     }
     scratch.innerHTML = output.trim();
 
     // Perform the copy
     if(document.body.createTextRange) {
         // IE 11
-        var range = document.body.createTextRange();
+        const range = document.body.createTextRange();
         range.moveToElementText(scratch);
         range.select();
         document.execCommand("Copy");
@@ -66,8 +72,8 @@ function copyScript(trigger, elem) {
     }
     else if(window.getSelection) {
         // Sane browsers
-        var selection = window.getSelection();
-        var range = document.createRange();
+        const selection = window.getSelection();
+        const range = document.createRange();
         range.selectNodeContents(scratch);
         selection.removeAllRanges();
         selection.addRange(range);
@@ -79,11 +85,16 @@ function copyScript(trigger, elem) {
     scratch.parentNode.removeChild(scratch);
 
     // Indicate to the user that the script was copied
-    var label = trigger.innerHTML;
-    trigger.innerHTML = 'Copied!';
+    const icon = trigger.querySelector('i');
+    const originalClass = stripSudo ? 'fa-terminal' : 'fa-copy';
+    icon.classList.remove(originalClass);
+    icon.classList.add('fa-check');
+    trigger.classList.add('copied');
 
     setTimeout(function() {
-        trigger.innerHTML = label;
+        icon.classList.remove('fa-check');
+        icon.classList.add(originalClass);
+        trigger.classList.remove('copied');
     }, 3000);
 }
 
