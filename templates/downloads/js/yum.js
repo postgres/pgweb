@@ -39,7 +39,7 @@ function get_installer(plat) {
 function disable_module_on(plat) {
     if (plat.startsWith('EL-')) {
 	var a = plat.split('-');
-	if (a[1] >= 8)
+	if (a[1] == 8)
 	    return true;
     }
     return false;
