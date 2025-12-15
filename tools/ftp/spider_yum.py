@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/share/python3/pginfra-virtualenv-yum-spider/bin/python3
 import argparse
 import sys
 import os
