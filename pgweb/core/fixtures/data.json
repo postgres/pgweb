@@ -2302,5 +2302,33 @@
   "name": "Zimbabwe",
   "tld": "zw"
  }
+},
+{
+ "model": "core.organisationtype",
+ "pk": 1,
+ "fields": {
+  "typename": "Open Source Project"
+ }
+},
+{
+ "model": "core.organisationtype",
+ "pk": 2,
+ "fields": {
+  "typename": "Individual"
+ }
+},
+{
+ "model": "core.organisationtype",
+ "pk": 3,
+ "fields": {
+  "typename": "Not for profit"
+ }
+},
+{
+ "model": "core.organisationtype",
+ "pk": 4,
+ "fields": {
+  "typename": "Company"
+ }
 }
 ]
