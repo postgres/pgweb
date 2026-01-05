@@ -44,6 +44,9 @@ should set the send_notification attribute to True. This will cause
 the system to automatically send out notifications to the NOTIFICATION_EMAIL
 address whenever a new object is created or an existing one is modified.
 
+To test moderation, create a group "pgweb moderators" and add your user to it.
+The moderation URL is /admin/pending/.
+
 If the form contains any text fields that accept markdown, the
 attribute markdown_fields should be set to a tuple containing a list
 of these fields. This will cause the system to automatically generate

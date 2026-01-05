@@ -34,7 +34,7 @@ with. Here's a quick step-by-step on how to do that:
    There are some parts of the site that require further settings, but
    this should be enough to get the basics up and running.
 
-#. In the pgweb directory run the following command to create all
+#. In the top directory run the following command to create all
    tables and indexes, as well as create a superuser for your local
    installation::
 
