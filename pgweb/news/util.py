@@ -41,7 +41,7 @@ def render_news_template(news):
                 'contenttype': '{}; name={}'.format(_get_contenttype_from_extension(f), f),
                 'filename': f,
                 'disposition': 'inline; filename="{}"'.format(f),
-                'id': '<{}>'.format(f),
+                'id': '<{}@img>'.format(f),
             }
             with open(os.path.join(basedir, f), "rb") as f:
                 a['content'] = f.read()
