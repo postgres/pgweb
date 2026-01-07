@@ -53,7 +53,7 @@ def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, userge
             mpart.attach(MIMEText(htmlbody, 'html', _charset=_utf8_charset))
     else:
         # Just a plaintext body, so append it directly
-        mpart = MIMEText(msgtxt, _charset='utf-8')
+        mpart = MIMEText(msgtxt, _charset=_utf8_charset)
 
     if attachments:
         msg = MIMEMultipart()
