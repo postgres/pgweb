@@ -25,12 +25,43 @@ _utf8_charset.header_encoding = charset.QP
 _utf8_charset.body_encoding = charset.QP
 
 
-def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False, cc=None, replyto=None, sendername=None, receivername=None, messageid=None, suppress_auto_replies=True, is_auto_reply=False, htmlbody=None, headers={}, staggertype=None, stagger=None):
-    # attachment format, each is a tuple of (name, mimetype,contents)
-    # content should be *binary* and not base64 encoded, since we need to
-    # use the base64 routines from the email library to get a properly
-    # formatted output message
-    msg = MIMEMultipart()
+def _add_attachments(attachments, msg):
+    for a in attachments:
+        main, sub = a['contenttype'].split('/')
+        part = MIMENonMultipart(main, sub)
+        part.set_payload(a['content'])
+        part.add_header('Content-Disposition', a.get('disposition', 'attachment; filename="%s"' % a['filename']))
+        if 'id' in a:
+            part.add_header('Content-ID', a['id'])
+
+        encoders.encode_base64(part)
+        msg.attach(part)
+
+
+def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, usergenerated=False, cc=None, replyto=None, sendername=None, receivername=None, messageid=None, suppress_auto_replies=True, is_auto_reply=False, htmlbody=None, headers={}, staggertype=None, stagger=None, htmlattachments=None):
+    if htmlbody:
+        mpart = MIMEMultipart("alternative")
+        mpart.attach(MIMEText(msgtxt, _charset=_utf8_charset))
+        if htmlattachments:
+            # HTML with attachments go in as a separate part that's multipart/related
+            hpart = MIMEMultipart("related")
+            hpart.attach(MIMEText(htmlbody, 'html', _charset=_utf8_charset))
+            _add_attachments(htmlattachments, hpart)
+            mpart.attach(hpart)
+        else:
+            # Just HTML with nothing more
+            mpart.attach(MIMEText(htmlbody, 'html', _charset=_utf8_charset))
+    else:
+        # Just a plaintext body, so append it directly
+        mpart = MIMEText(msgtxt, _charset='utf-8')
+
+    if attachments:
+        msg = MIMEMultipart()
+        msg.attach(mpart)
+        _add_attachments(attachments, msg)
+    else:
+        msg = mpart
+
     msg['Subject'] = subject
     msg['To'] = _encoded_email_header(receivername, receiver)
     msg['From'] = _encoded_email_header(sendername, sender)
@@ -60,27 +91,6 @@ def send_simple_mail(sender, receiver, subject, msgtxt, attachments=None, userge
             msg.replace_header(h, v)
         else:
             msg.add_header(h, v)
-
-    if htmlbody:
-        mpart = MIMEMultipart("alternative")
-        mpart.attach(MIMEText(msgtxt, _charset=_utf8_charset))
-        mpart.attach(MIMEText(htmlbody, 'html', _charset=_utf8_charset))
-        msg.attach(mpart)
-    else:
-        # Just a plaintext body, so append it directly
-        msg.attach(MIMEText(msgtxt, _charset='utf-8'))
-
-    if attachments:
-        for a in attachments:
-            main, sub = a['contenttype'].split('/')
-            part = MIMENonMultipart(main, sub)
-            part.set_payload(a['content'])
-            part.add_header('Content-Disposition', a.get('disposition', 'attachment; filename="%s"' % a['filename']))
-            if 'id' in a:
-                part.add_header('Content-ID', a['id'])
-
-            encoders.encode_base64(part)
-            msg.attach(part)
 
     with transaction.atomic():
         if staggertype and stagger:

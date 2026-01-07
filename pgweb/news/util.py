@@ -97,7 +97,7 @@ def send_news_email(news):
         receivername=settings.NEWS_MAIL_RECEIVER_NAME,
         messageid=messageid,
         htmlbody=html,
-        attachments=attachments,
+        htmlattachments=attachments,
         headers=headers,
         staggertype='news',
         stagger=timedelta(minutes=30),
