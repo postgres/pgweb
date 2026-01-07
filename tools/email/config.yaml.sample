@@ -1,0 +1,11 @@
+---
+mail:
+  server: smtp.example.com     # your server
+  port: 587
+  user: someone@example.com    # to log in with
+  sender: someone@example.com  # Email to use as envelope sender. Usually, but not always, matches user.
+  password: # Can be either a string here
+    smtp: someone@example.com  # Or a lookup of a key/value pair in the secrets store
+db:                            # List of databases that we can connect to
+  pgweb: dbname=pgweb          # Each in psyocpg2 dsn format
+  pgeu: dbname=postgresqleu
