@@ -57,7 +57,7 @@ def embed_images_in_html(html, attachments):
     amap = {a['filename']: a for a in attachments}
 
     def _replace_cid_reference(t):
-        a = amap[t.group(2).replace('cid:', '')]
+        a = amap[t.group(2).replace('cid:', '').replace('@img', '')]
         datasrc = 'data:{};base64,{}'.format(a['mimetype'], base64.b64encode(a['content']).decode('ascii'))
         return t.group(1) + datasrc + t.group(3)
 
