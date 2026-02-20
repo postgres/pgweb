@@ -12,10 +12,10 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get -y install python3 python3-psycopg2 python3-yaml python3-virtualenv python3-tidylib \
-        python3-dateutil python3-markdown python3-pycurl python3-pylibmc python3-tz \
-        pginfra-wrap-uwsgi uwsgi-plugin-python3 python3-libsass pginfra-wrap-virtualenv \
-        python3-requests python3-pycryptodome python3-sqlparse python3-qrcode python3-asgiref
-        pip install "Django>=4.2,<4.3" asgiref typing_exensions
+        python3-dateutil python3-markdown python3-pycurl python3-pylibmc python3-tz python3-libsass \
+        python3-requests python3-pycryptodome python3-sqlparse python3-qrcode python3-asgiref \
+        python3-setproctitle python3-pynliner python3-babel python3-bleach python3-feedparser
+        pip install "Django>=4.2,<4.3" cvss
     - name: Install temporary dummy configuration
       run: |
         cat <<EOF > pgweb/settings_local.py
