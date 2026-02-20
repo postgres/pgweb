@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.9, 3.11]  # Verify on bullseye and bookworm versions
+        python-version: [3.11, 3.13]  # Verify on bookworm and trixie versions
 
     steps:
     - uses: actions/checkout@v2
