@@ -360,7 +360,6 @@ def _send_moderation_message(request, obj, message, notice, what):
             m.email,
             "Your submitted {} with title {}".format(obj._meta.verbose_name, obj.title),
             msg,
-            suppress_auto_replies=False,
             receivername='{} {}'.format(m.first_name, m.last_name),
         )
 
