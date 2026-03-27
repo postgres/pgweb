@@ -47,7 +47,7 @@ The PostgreSQL Yum Repository currently supports:
   </ul>
 </p>
 <p><strong><sup>*</sup>Note</strong>: due to the shorter support cycle
-on Fedora, all supported versions of PostgreSQL are not available on this platform. We do not recommend
+on Fedora, all supported versions of PostgreSQL may not available on this platform. We do not recommend
 using Fedora for server deployments.
 </p>
 <p>
@@ -152,7 +152,7 @@ Due to policies for Red Hat family distributions, the PostgreSQL installation
 will not be enabled for automatic start or have the database initialized
 automatically. To make your database installation complete, you need to
 perform the following steps, based on your distribution:
-<h4>For RHEL / Rocky Linux / AlmaLinux 10, 9, 8 or Fedora 41 and later derived distributions:</h4>
+<h4>For RHEL / Rocky Linux / AlmaLinux 10, 9, 8 or Fedora 42 and later derived distributions:</h4>
 <pre class="code">
   postgresql-setup --initdb
   systemctl enable postgresql.service
