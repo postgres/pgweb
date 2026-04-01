@@ -126,8 +126,16 @@ INSTALLED_APPS = [
 ]
 
 # Default format for date/time (as it changes between machines)
+# Keep in sync with util/formats/en/formats.py
 DATETIME_FORMAT = "Y-m-d H:i:s"
 DATE_FORMAT = "Y-m-d"
+TIME_FORMAT = "H:i:s"
+
+FORMAT_MODULE_PATH = "pgweb.util.formats"
+
+
+# Django now needs these settings in a module, so duplicate them in both the
+# module and in settings.py to be on the safe side.
 
 # Configure recaptcha. Most details contain keys and are thus handled
 # in settings_local.py. Override NOCAPTCHA to actually use them.
