@@ -32,7 +32,7 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
     date = models.DateField(null=False, blank=False, default=date.today, db_index=True)
     title = models.CharField(max_length=200, null=False, blank=False)
     content = models.TextField(null=False, blank=False)
-    tweeted = models.BooleanField(null=False, blank=False, default=False)
+    postedto = models.JSONField(null=False, blank=True, default=dict)
     tags = models.ManyToManyField(NewsTag, blank=False, help_text="Select the tags appropriate for this post")
 
     account_edit_suburl = 'news'

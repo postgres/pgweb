@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+#
+# Script to post previously unposted news to social media providers
+#
+#
+
+from django.core.management.base import BaseCommand, CommandError
+from django.db import connection
+from django.template.defaultfilters import slugify
+from django.conf import settings
+
+from datetime import datetime, timedelta
+import time
+
+from pgweb.util.moderation import ModerationState
+from pgweb.news.models import NewsArticle
+from pgweb.util.socialposter import get_all_providers
+
+
+allproviders, allprovidernames = get_all_providers(settings)
+
+
+class Command(BaseCommand):
+    help = 'Post to social media'
+
+    def handle(self, *args, **options):
+        curs = connection.cursor()
+        curs.execute("SELECT pg_try_advisory_lock(62387372)")
+        if not curs.fetchall()[0][0]:
+            raise CommandError("Failed to get advisory lock, existing social_post process stuck?")
+
+        articles = list(NewsArticle.objects.filter(modstate=ModerationState.APPROVED, date__gt=datetime.now() - timedelta(days=7)).exclude(postedto__contains=allprovidernames).order_by('date'))
+        if not len(articles):
+            return
+
+        for i, a in enumerate(articles):
+            if i != 0:
+                # Don't post more often than once / 30 seconds, to not trigger flooding.
+                time.sleep(30)
+
+            statusstr = "News: {0}\n\n{1}/about/news/{2}-{3}/\n\n#postgresql".format(a.title[:140 - 40], settings.SITE_ROOT, slugify(a.title), a.id)
+
+            for p in allproviders:
+                if p.name not in a.postedto:
+                    postid = p.post(statusstr)
+                    if postid is not None:
+                        a.postedto[p.name] = postid
+                        a.save(update_fields=['postedto'])

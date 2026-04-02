@@ -184,6 +184,17 @@ FRONTEND_SMTP_RELAY = "magus.postgresql.org"                # Where to relay use
 OAUTH = {}                                                  # OAuth providers and keys
 PGDG_ORG_ID = -1                                            # id of the PGDG organisation entry
 
+
+# Mastodon configuriation is done using manage.py social_register
+MASTODON_BASEURL = None
+MASTODON_CLIENTID = None
+MASTODON_CLIENTSECRET = None
+MASTODON_TOKEN = None
+# Bluesky is configured in settings_local.py
+BLUESKY_USER = None
+BLUESKY_PASSWORD = None                                     # NOTE! This should be an "app password", not the main password!
+
+
 # For debug toolbar, can then be fully configured in settings_local.py
 DEBUG_TOOLBAR = False
 INTERNAL_IPS = [
