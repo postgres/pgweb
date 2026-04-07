@@ -24,6 +24,10 @@ class Command(BaseCommand):
     help = 'Post to social media'
 
     def handle(self, *args, **options):
+        if not allprovidernames:
+            # If we have no providers, there is no posting
+            return
+
         curs = connection.cursor()
         curs.execute("SELECT pg_try_advisory_lock(62387372)")
         if not curs.fetchall()[0][0]:
