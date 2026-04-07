@@ -49,7 +49,7 @@ class Mastodon(SocialPoster):
         # First we have to see if there is an existing pin that has to be removed. To do that, we
         # have to fetch our account id.
         r = requests.get(
-            '{}/api/v1/accounts/verify_credentials '.format(self.settings.MASTODON_BASEURL),
+            '{}/api/v1/accounts/verify_credentials'.format(self.settings.MASTODON_BASEURL),
             headers={'Authorization': 'Bearer {}'.format(self.settings.MASTODON_TOKEN)},
             timeout=10,
         )
