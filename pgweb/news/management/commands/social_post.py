@@ -33,7 +33,7 @@ class Command(BaseCommand):
         if not curs.fetchall()[0][0]:
             raise CommandError("Failed to get advisory lock, existing social_post process stuck?")
 
-        articles = list(NewsArticle.objects.filter(modstate=ModerationState.APPROVED, date__gt=datetime.now() - timedelta(days=7)).exclude(postedto__contains=allprovidernames).order_by('date'))
+        articles = list(NewsArticle.objects.filter(modstate=ModerationState.APPROVED, date__gt=datetime.now() - timedelta(days=7)).exclude(postedto__has_keys=allprovidernames).order_by('date'))
         if not len(articles):
             return
 
