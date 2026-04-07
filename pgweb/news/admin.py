@@ -2,8 +2,11 @@ from django.contrib import admin
 from django import forms
 
 from pgweb.util.admin import PgwebAdmin
+from pgweb.util.moderation import ModerationState
 from pgweb.core.models import OrganisationEmail
-from .models import NewsArticle, NewsTag
+from .models import NewsArticle, NewsTag, PinnedNewsArticle
+
+from datetime import datetime, timedelta
 
 
 class NewsArticleAdminForm(forms.ModelForm):
@@ -20,8 +23,29 @@ class NewsArticleAdmin(PgwebAdmin):
     list_filter = ('modstate', )
     filter_horizontal = ('tags', )
     search_fields = ('content', 'title', )
-    exclude = ('modstate', 'firstmoderator', )
+    exclude = ('modstate', 'firstmoderator', 'ispinned', )
     form = NewsArticleAdminForm
+
+
+class PinnedNewsArticleAdminForm(forms.ModelForm):
+    model = PinnedNewsArticle
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['pinnedarticle'].queryset = NewsArticle.objects.filter(modstate=ModerationState.APPROVED, date__gt=datetime.now() - timedelta(days=365)).order_by('-date')
+        self.fields['pinnedarticle'].widget.can_delete_related = False
+        self.fields['pinnedarticle'].widget.can_add_related = False
+
+
+class PinnedNewsArticleAdmin(admin.ModelAdmin):
+    exclude = ('pinnedtoproviders', )
+    form = PinnedNewsArticleAdminForm
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 class NewsTagAdmin(PgwebAdmin):
@@ -31,3 +55,4 @@ class NewsTagAdmin(PgwebAdmin):
 
 admin.site.register(NewsArticle, NewsArticleAdmin)
 admin.site.register(NewsTag, NewsTagAdmin)
+admin.site.register(PinnedNewsArticle, PinnedNewsArticleAdmin)

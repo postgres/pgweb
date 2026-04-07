@@ -22,6 +22,9 @@ class SocialPoster:
     def register(self, clientname):
         raise NotImplementedError
 
+    def set_pin(self, postid):
+        raise NotImplementedError
+
 
 class Mastodon(SocialPoster):
     name = 'mastodon'
@@ -41,6 +44,57 @@ class Mastodon(SocialPoster):
             return None
 
         return r.json()['id']
+
+    def set_pin(self, postid):
+        # First we have to see if there is an existing pin that has to be removed. To do that, we
+        # have to fetch our account id.
+        r = requests.get(
+            '{}/api/v1/accounts/verify_credentials '.format(self.settings.MASTODON_BASEURL),
+            headers={'Authorization': 'Bearer {}'.format(self.settings.MASTODON_TOKEN)},
+            timeout=10,
+        )
+        if r.status_code != 200:
+            print("Failed to get mastodon credentials: {}".format(r.text))
+            return False
+
+        # Next, get the currently pinned ones
+        r = requests.get(
+            '{}/api/v1/accounts/{}/statuses'.format(self.settings.MASTODON_BASEURL, r.json()['id']),
+            headers={'Authorization': 'Bearer {}'.format(self.settings.MASTODON_TOKEN)},
+            params={'pinned': 'true'},
+            timeout=10,
+        )
+        if r.status_code != 200:
+            print("Failed to get list of mastodon pins: {}".format(r.text))
+            return False
+
+        found = False
+        for p in r.json():
+            if p['id'] == postid:
+                # Already pinned!
+                found = True
+            else:
+                # This should be unpinned
+                r2 = requests.post(
+                    '{}/api/v1/statuses{}/unpin'.format(self.settings.MASTODON_BASEURL, p['id']),
+                    headers={'Authorization': 'Bearer {}'.format(self.settings.MASTODON_TOKEN)},
+                    timeout=10,
+                )
+                if r.status_code != 200:
+                    print("Failed to unpin from mastodon: {}".format(r.text))
+
+        if not found:
+            # Not already pinned, so pin!
+            r2 = requests.post(
+                '{}/api/v1/statuses{}/pin'.format(self.settings.MASTODON_BASEURL, postid),
+                headers={'Authorization': 'Bearer {}'.format(self.settings.MASTODON_TOKEN)},
+                timeout=10,
+            )
+            if r.status_code != 200:
+                print("Failed to pin to mastodon: {}".format(r.text))
+                return False
+
+        return True
 
     def register(self, clientname):
         toadd = io.StringIO()
@@ -155,6 +209,55 @@ class Bluesky(SocialPoster):
             return None
 
         return r.json()['uri']
+
+    def set_pin(self, postid):
+        # Get our profile, so we can "patch" it
+        r = requests.get(
+            'https://bsky.social/xrpc/com.atproto.repo.getRecord',
+            headers={'Authorization': 'Bearer {}'.format(self.token)},
+            params={'repo': self.repo, 'collection': 'app.bsky.actor.profile', 'rkey': 'self'},
+            timeout=10,
+        )
+        if r.status_code != 200:
+            print("Failed to get bluesky profile: {}".format(r.text))
+            return False
+        record = r.json()['value']
+        if postid:
+            # We have the uri, but we need both the uri and the cid, so fetch the post
+            r2 = requests.get(
+                'https://bsky.social/xrpc/app.bsky.feed.getPosts',
+                headers={'Authorization': 'Bearer {}'.format(self.token)},
+                params={'uris': postid},
+                timeout=10,
+            )
+            if r.status_code != 200:
+                print("Failed to read back bluesky post {}: {}".format(postid, r.text))
+                return False
+
+            cid = r2.json()['posts'][0]['cid']
+
+            record['pinnedPost'] = {
+                'uri': postid,
+                'cid': cid,
+            }
+        else:
+            if 'pinnedPost' in record:
+                del record['pinnedPost']
+
+        if record != r.json()['value']:
+            # Some changes, so we need to update
+            r = requests.post(
+                'https://bsky.social/xrpc/com.atproto.repo.putRecord',
+                headers={'Authorization': 'Bearer {}'.format(self.token)},
+                json={'repo': self.repo, 'collection': 'app.bsky.actor.profile', 'rkey': 'self', 'record': record},
+                timeout=10,
+            )
+            if r.status_code != 200:
+                print("Failed to save pack bluesky profile for pinned posts: {}".format(r.text))
+                return False
+            return True
+
+        return True
 
     def register(self, clientname):
         if getattr(self.settings, 'BLUESKY_USER', None) is None or getattr(self.settings, 'BLUESKY_PASSWORD', None) is None:

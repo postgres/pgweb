@@ -2,6 +2,7 @@ from django.db import models
 from datetime import date
 from pgweb.core.models import Organisation, OrganisationEmail
 from pgweb.core.text import ORGANISATION_HINT_TEXT
+from django.core.validators import ValidationError
 from pgweb.util.moderation import TristateModerateModel, ModerationState, TwoModeratorsMixin
 from django.template.defaultfilters import slugify
 
@@ -113,3 +114,18 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
             return 'Content preview'
         elif f == 'permanenturl':
             return 'Permanent URL'
+
+
+class PinnedNewsArticle(models.Model):
+    pinnedarticle = models.ForeignKey(NewsArticle, null=True, blank=True, on_delete=models.SET_NULL)
+    pinnedtoproviders = models.JSONField(null=False, blank=True, default=dict)
+
+    def save(self, *args, **kwargs):
+        if not self.pk and PinnedNewsArticle.objects.exists():
+            raise ValidationError("Only one PinnedNewsArticle may exist!")
+        return super().save(*args, **kwargs)
+
+    def __str__(self):
+        if self.pinnedarticle:
+            return str(self.pinnedarticle)
+        return 'No article currently pinned'

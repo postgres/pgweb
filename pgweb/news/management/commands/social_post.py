@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 import time
 
 from pgweb.util.moderation import ModerationState
-from pgweb.news.models import NewsArticle
+from pgweb.news.models import NewsArticle, PinnedNewsArticle
 from pgweb.util.socialposter import get_all_providers
 
 
@@ -50,3 +50,11 @@ class Command(BaseCommand):
                     if postid is not None:
                         a.postedto[p.name] = postid
                         a.save(update_fields=['postedto'])
+
+        # Pin or unpin any articles as needed
+        pna = PinnedNewsArticle.objects.select_related('pinnedarticle').only('pinnedarticle', 'pinnedtoproviders', 'pinnedarticle__postedto').all()[0]
+        for p in allproviders:
+            if pna.pinnedtoproviders.get(p.name, None) != pna.pinnedarticle.postedto.get(p.name, None):
+                if p.set_pin(pna.pinnedarticle.postedto.get(p.name, None)):
+                    pna.pinnedtoproviders[p.name] = pna.pinnedarticle.postedto.get(p.name, None)
+                    pna.save(update_fields=['pinnedtoproviders'])
