@@ -83,7 +83,7 @@ class Mastodon(SocialPoster):
                 if r2.status_code != 200:
                     print("Failed to unpin from mastodon: {}".format(r2.text))
 
-        if not found:
+        if not found and postid is not None:
             # Not already pinned, so pin!
             r2 = requests.post(
                 '{}/api/v1/statuses/{}/pin'.format(self.settings.MASTODON_BASEURL, postid),
