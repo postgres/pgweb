@@ -19,7 +19,7 @@ class SocialPoster:
     def post(self):
         raise NotImplementedError
 
-    def register(self):
+    def register(self, clientname):
         raise NotImplementedError
 
 
@@ -156,7 +156,7 @@ class Bluesky(SocialPoster):
 
         return r.json()['uri']
 
-    def register(self):
+    def register(self, clientname):
         if getattr(self.settings, 'BLUESKY_USER', None) is None or getattr(self.settings, 'BLUESKY_PASSWORD', None) is None:
             return "For bluesky, add an 'app password' from 'Settings' -> 'Privacy and Security'.\nRegister the account email as BLUESKY_USER and the app password as BLUESKY_PASSWORD.\n"
         return ''
