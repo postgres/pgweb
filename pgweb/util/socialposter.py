@@ -114,7 +114,7 @@ class Mastodon(SocialPoster):
             r = requests.post('{}/api/v1/apps'.format(baseurl), {
                 'client_name': clientname,
                 'redirect_uris': 'urn:ietf:wg:oauth:2.0:oob',
-                'scopes': 'read write:statuses write:media',
+                'scopes': 'read write:statuses write:media write:accounts',
             })
             r.raise_for_status()
 
@@ -132,7 +132,7 @@ class Mastodon(SocialPoster):
             clientsecret = self.settings.MASTODON_CLIENTSECRET
 
         if getattr(self.settings, 'MASTODON_TOKEN', None) is None:
-            session = requests_oauthlib.OAuth2Session(clientid, redirect_uri='urn:ietf:wg:oauth:2.0:oob', scope='read write:statuses write:media')
+            session = requests_oauthlib.OAuth2Session(clientid, redirect_uri='urn:ietf:wg:oauth:2.0:oob', scope='read write:statuses write:media write:accounts')
 
             url, state = session.authorization_url("{}/oauth/authorize".format(baseurl))
             print("Please visit {} and log in.".format(url))
@@ -142,7 +142,7 @@ class Mastodon(SocialPoster):
                 '{}/oauth/token'.format(baseurl),
                 code=code.strip(),
                 client_secret=clientsecret,
-                scopes='read write:statuses write:media',
+                scopes='read write:statuses write:media write:accounts',
             )
 
             toadd.write("MASTODON_TOKEN='{}'\n".format(tokens['access_token']))
