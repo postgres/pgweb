@@ -80,8 +80,8 @@ class Mastodon(SocialPoster):
                     headers={'Authorization': 'Bearer {}'.format(self.settings.MASTODON_TOKEN)},
                     timeout=10,
                 )
-                if r.status_code != 200:
-                    print("Failed to unpin from mastodon: {}".format(r.text))
+                if r2.status_code != 200:
+                    print("Failed to unpin from mastodon: {}".format(r2.text))
 
         if not found:
             # Not already pinned, so pin!
@@ -90,8 +90,8 @@ class Mastodon(SocialPoster):
                 headers={'Authorization': 'Bearer {}'.format(self.settings.MASTODON_TOKEN)},
                 timeout=10,
             )
-            if r.status_code != 200:
-                print("Failed to pin to mastodon: {}".format(r.text))
+            if r2.status_code != 200:
+                print("Failed to pin to mastodon: {}".format(r2.text))
                 return False
 
         return True
