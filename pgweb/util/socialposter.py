@@ -76,7 +76,7 @@ class Mastodon(SocialPoster):
             else:
                 # This should be unpinned
                 r2 = requests.post(
-                    '{}/api/v1/statuses{}/unpin'.format(self.settings.MASTODON_BASEURL, p['id']),
+                    '{}/api/v1/statuses/{}/unpin'.format(self.settings.MASTODON_BASEURL, p['id']),
                     headers={'Authorization': 'Bearer {}'.format(self.settings.MASTODON_TOKEN)},
                     timeout=10,
                 )
@@ -86,7 +86,7 @@ class Mastodon(SocialPoster):
         if not found:
             # Not already pinned, so pin!
             r2 = requests.post(
-                '{}/api/v1/statuses{}/pin'.format(self.settings.MASTODON_BASEURL, postid),
+                '{}/api/v1/statuses/{}/pin'.format(self.settings.MASTODON_BASEURL, postid),
                 headers={'Authorization': 'Bearer {}'.format(self.settings.MASTODON_TOKEN)},
                 timeout=10,
             )
