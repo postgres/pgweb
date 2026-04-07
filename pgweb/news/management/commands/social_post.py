@@ -54,7 +54,8 @@ class Command(BaseCommand):
         # Pin or unpin any articles as needed
         pna = PinnedNewsArticle.objects.select_related('pinnedarticle').only('pinnedarticle', 'pinnedtoproviders', 'pinnedarticle__postedto').all()[0]
         for p in allproviders:
-            if pna.pinnedtoproviders.get(p.name, None) != pna.pinnedarticle.postedto.get(p.name, None):
-                if p.set_pin(pna.pinnedarticle.postedto.get(p.name, None)):
-                    pna.pinnedtoproviders[p.name] = pna.pinnedarticle.postedto.get(p.name, None)
+            pinnedid = pna.pinnedarticle.postedto.get(p.name, None) if pna.pinnedarticle else None
+            if pna.pinnedtoproviders.get(p.name, None) != pinnedid:
+                if p.set_pin(pinnedid):
+                    pna.pinnedtoproviders[p.name] = pinnedid
                     pna.save(update_fields=['pinnedtoproviders'])
