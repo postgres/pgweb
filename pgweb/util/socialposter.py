@@ -266,8 +266,8 @@ class Bluesky(SocialPoster):
 
     # Adapted from Bluesky examples
     _facet_parsers = (
-        ('app.bsky.richtext.facet#link', 'uri', re.compile(rb"\s+(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*[-a-zA-Z0-9@%_\+~#//=])?)")),
-        ('app.bsky.richtext.facet#tag', 'tag', re.compile(rb'\s+(#\w+)')),
+        ('app.bsky.richtext.facet#link', 'uri', re.compile(rb"\s+(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*[-a-zA-Z0-9@%_\+~#//=])?)"), 0, 0),
+        ('app.bsky.richtext.facet#tag', 'tag', re.compile(rb'\s+#(\w+)'), -1, 0),
     )
 
     def _parse_facets(self, text: bytes):
@@ -276,12 +276,12 @@ class Bluesky(SocialPoster):
 
         indexing must work with UTF-8 encoded bytestring offsets, not regular unicode string offsets, to match Bluesky API expectations
         """
-        for t, f, r in self._facet_parsers:
+        for t, f, r, startofs, endofs in self._facet_parsers:
             for m in r.finditer(text):
                 yield {
                     "index": {
-                        "byteStart": m.start(1),
-                        "byteEnd": m.end(1),
+                        "byteStart": m.start(1) + startofs,
+                        "byteEnd": m.end(1) + endofs,
                     },
                     "features": [{"$type": t, f: m.group(1).decode("UTF-8")}],
                 }
