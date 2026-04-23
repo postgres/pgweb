@@ -51,9 +51,7 @@ on the following architectures:
   <li>ppc64el</li>
 </ul>
 
-<p>
-Automated repository configuration:
-</p>
+<h3>Automated Repository Configuration</h3>
 
 <div class="pg-script-container">
     <pre id="script-box" class="code">sudo apt install -y postgresql-common
@@ -62,32 +60,39 @@ sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh</pre>
     <button id="copy-btn" class="pg-script-copy-btn" title="Copy to clipboard"><i class="far fa-copy"></i></button>
 </div>
 
+<h3>Manual Repository Configuration</h3>
+
 <p>
-To manually configure the Apt repository, follow these steps:
+Import the <a href="/media/keys/ACCC4CF8.asc">repository key</a>:
 </p>
 
 <div class="pg-script-container">
-    <pre id="script-box2" class="code"># Import the repository signing key:
-sudo apt install curl ca-certificates
+    <pre id="script-box2" class="code">sudo apt install curl ca-certificates
 sudo install -d /usr/share/postgresql-common/pgdg
-sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
-
-# Create the repository configuration file:
-. /etc/os-release
-sudo sh -c "echo 'deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $VERSION_CODENAME-pgdg main' > /etc/apt/sources.list.d/pgdg.list"
-
-# Update the package lists:
-sudo apt update</pre>
+sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc</pre>
     <button id="copy-btn2-root" class="pg-script-copy-btn pg-script-copy-btn-root" title="Copy to clipboard (without sudo, for root)"><i class="fas fa-terminal"></i></button>
     <button id="copy-btn2" class="pg-script-copy-btn" title="Copy to clipboard"><i class="far fa-copy"></i></button>
+</div>
+
+<p>
+Create <b>/etc/apt/sources.list.d/pgdg.sources</b>. The distributions are called <em>codename</em><b>-pgdg</b>. In the example, replace <em>trixie</em> with the actual distribution you are using. File contents:
+
+<div class="pg-script-container">
+    <pre id="script-box3" class="code">Types: deb deb-src
+URIs: https://apt.postgresql.org/pub/repos/apt
+Suites: trixie-pgdg
+Architectures: amd64
+Components: main
+Signed-By: /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc</pre>
+    <button id="copy-btn3-root" class="pg-script-copy-btn pg-script-copy-btn-root" title="Copy to clipboard (without sudo, for root)"><i class="fas fa-terminal"></i></button>
+    <button id="copy-btn3" class="pg-script-copy-btn" title="Copy to clipboard"><i class="far fa-copy"></i></button>
 </div>
 
 Install PostgreSQL: (replace "18" by the version you want)
 
 <div class="pg-script-container">
-    <pre id="script-box3" class="code">sudo apt install postgresql-18</pre>
-    <button id="copy-btn3-root" class="pg-script-copy-btn pg-script-copy-btn-root" title="Copy to clipboard (without sudo, for root)"><i class="fas fa-terminal"></i></button>
-    <button id="copy-btn3" class="pg-script-copy-btn" title="Copy to clipboard"><i class="far fa-copy"></i></button>
+    <pre id="script-box3" class="code">sudo apt update
+sudo apt install postgresql-18</pre>
 </div>
 
 <p>
