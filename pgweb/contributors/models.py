@@ -20,8 +20,8 @@ class ContributorType(models.Model):
 
 class Contributor(models.Model):
     ctype = models.ForeignKey(ContributorType, on_delete=models.CASCADE, verbose_name='Contributor Type')
-    lastname = models.CharField(max_length=100, null=False, blank=False)
     firstname = models.CharField(max_length=100, null=False, blank=False)
+    lastname = models.CharField(max_length=100, null=False, blank=False)
     email = models.EmailField(null=False, blank=True)
     company = models.CharField(max_length=100, null=True, blank=True)
     companyurl = models.URLField(max_length=100, null=True, blank=True, verbose_name='Company URL')

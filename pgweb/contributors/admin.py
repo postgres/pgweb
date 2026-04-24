@@ -18,7 +18,7 @@ class ContributorAdmin(admin.ModelAdmin):
     autocomplete_fields = ['user', ]
     list_display = ('__str__', 'user', 'ctype',)
     list_filter = ('ctype',)
-    ordering = ('firstname', 'lastname',)
+    ordering = ('ctype', 'lastname', 'firstname')
     search_fields = ('firstname', 'lastname', 'user__username',)
 
 

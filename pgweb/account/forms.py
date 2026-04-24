@@ -160,7 +160,7 @@ class UserForm(forms.ModelForm):
 class ContributorForm(forms.ModelForm):
     class Meta:
         model = Contributor
-        exclude = ('ctype', 'lastname', 'firstname', 'user', )
+        exclude = ('ctype', 'user', ) # these fields are not user-editable
 
 
 class AddEmailForm(forms.Form):
