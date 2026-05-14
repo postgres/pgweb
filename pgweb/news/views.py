@@ -22,7 +22,10 @@ def archive(request, tag=None, paginator=None):
         tag = None
         news = NewsArticle.objects.select_related('org').filter(modstate=ModerationState.APPROVED)
     if paginator and paginator.strip('/'):
-        news = news.filter(date__lte=datetime.datetime.strptime(paginator.strip('/'), '%Y%m%d'))
+        try:
+            news = news.filter(date__lte=datetime.datetime.strptime(paginator.strip('/'), '%Y%m%d'))
+        except ValueError:
+            raise Http404
 
     allnews = list(news.prefetch_related('tags').order_by('-date')[:NEWS_ITEMS_PER_PAGE + 1])
     if len(allnews) == NEWS_ITEMS_PER_PAGE + 1:
