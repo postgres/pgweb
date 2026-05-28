@@ -675,11 +675,16 @@ def communityauth(request, siteid):
             },
         )(request)
 
-    # When we reach this point, the user *has* already been authenticated.
-    # The request variable "su" *may* contain a suburl and should in that
-    # case be passed along to the site we're authenticating for. And of
-    # course, we fill a structure with information about the user.
+    # At this point, the user has been authenticated.
 
+    # If this site is group-restricted, verify it
+    if site.require_groups.exists() and not site.require_groups.filter(id__in=request.user.groups.all()).exists():
+        return render_pgweb(request, 'account', 'account/communityauth_nogroup.html', {
+            'site': site,
+        })
+
+    # Make sure we have some data to fill in before we redirect, so downstream consumers
+    # don't need to verify that.
     if request.user.first_name == '' or request.user.last_name == '' or request.user.email == '':
         return render_pgweb(request, 'account', 'account/communityauth_noinfo.html', {
         })

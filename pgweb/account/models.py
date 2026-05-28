@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 class CommunityAuthOrg(models.Model):
@@ -29,6 +29,8 @@ class CommunityAuthSite(models.Model):
                                        help_text="Supports receiving http POSTs with changes to accounts")
     push_ssh = models.BooleanField(null=False, blank=False, default=False,
                                    help_text="Wants to receive SSH keys in push changes")
+    require_groups = models.ManyToManyField(Group, blank=True,
+                                            help_text="Require membership in at least one of the specified groups in order to log in")
 
     def __str__(self):
         return self.name

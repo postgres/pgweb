@@ -20,6 +20,13 @@ class CommunityAuthSiteAdminForm(forms.ModelForm):
         model = CommunityAuthSite
         exclude = ()
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['org'].widget.can_add_related = False
+        self.fields['org'].widget.can_change_related = False
+        self.fields['require_groups'].widget.can_add_related = False
+
     def clean_cryptkey(self):
         x = None
         try:
