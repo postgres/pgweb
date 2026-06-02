@@ -69,6 +69,7 @@ class CommunityAuthSiteAdminForm(forms.ModelForm):
 
 class CommunityAuthSiteAdmin(admin.ModelAdmin):
     list_display = ('name', 'cooloff_hours', 'push_changes', 'push_ssh', 'version', 'org')
+    filter_horizontal = ('require_groups', )
     form = CommunityAuthSiteAdminForm
 
 
