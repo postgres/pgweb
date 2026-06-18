@@ -119,10 +119,6 @@ class SecurityPatch(models.Model):
         except Exception:
             return -1
 
-    @property
-    def cvelink(self):
-        return "https://access.redhat.com/security/cve/CVE-{0}".format(self.cve)
-
     class Meta:
         verbose_name_plural = 'Security patches'
         ordering = ('-cvenumber',)
