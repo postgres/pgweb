@@ -465,19 +465,44 @@ def admin_moderate(request, objtype, objid):
                         return HttpResponseRedirect("/admin/pending")
                     # Else we fall through and approve it, as if only a single moderator was required
 
-                _send_moderation_message(request,
-                                         obj,
-                                         "The {} with title {}\nhas been approved and is now published.".format(obj._meta.verbose_name, obj.title),
-                                         modnote,
-                                         "approved")
+                if hasattr(obj, 'check_embargo') and (embargo := obj.check_embargo()):
+                    # This item is embargoed, so flag it as approved but don't make it available yet
+                    modstate = ModerationState.EMBARGOED
+                    _send_moderation_message(
+                        request,
+                        obj,
+                        "The {} with title {}\nhas been approved but is currently under embargo and will be published once the embargo ends.".format(obj._meta.verbose_name, obj.title),
+                        "{} will not be posted until {} because of {}.".format(obj._meta.verbose_name, embargo.duration.upper.strftime("%Y-%m-%d %H:%M"), embargo.description).capitalize(),
+                        "approved",
+                    )
+                else:
+                    _send_moderation_message(
+                        request,
+                        obj,
+                        "The {} with title {}\nhas been approved and is now published.".format(obj._meta.verbose_name, obj.title),
+                        modnote,
+                        "approved",
+                    )
 
-                # If there is a field called 'date', reset it to today so that it gets slotted into the correct place in lists
+                    # If there is a field called 'date', reset it to today so that it gets slotted into the correct place in lists
+                    if hasattr(obj, 'date') and isinstance(obj.date, date):
+                        obj.date = date.today()
+                        savefields.append('date')
+
+                    if hasattr(obj, 'on_approval'):
+                        obj.on_approval(request)
+            elif modstate == ModerationState.BYPASSEMBARGO:
+                # This object was already approved (otherwise this option doesn't appear), and it's a superuser choosing to bypass the embargo,
+                # so just post it immediately.
+                modstate = ModerationState.APPROVED
+
                 if hasattr(obj, 'date') and isinstance(obj.date, date):
                     obj.date = date.today()
                     savefields.append('date')
 
                 if hasattr(obj, 'on_approval'):
                     obj.on_approval(request)
+                messages.info(request, "Embargo bypassed and {} posted".format(obj._meta.verbose_name))
             elif modstate == ModerationState.REJECTED:
                 _send_moderation_message(request,
                                          obj,
@@ -523,6 +548,7 @@ def admin_moderate(request, objtype, objid):
         'notices': ModerationNotification.objects.filter(objectid=obj.id, objecttype=type(obj).__name__).order_by('date'),
         'previous': hasattr(obj, 'org') and type(obj).objects.filter(org=obj.org).exclude(id=obj.id).order_by('-id')[:10] or None,
         'object_fields': obj.get_moderation_preview_fields(),
+        'embargo': obj.check_embargo() if hasattr(obj, 'check_embargo') else None,
     })
 
 

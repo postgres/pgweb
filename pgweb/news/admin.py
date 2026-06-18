@@ -1,10 +1,12 @@
 from django.contrib import admin
 from django import forms
+from django.contrib.postgres.fields import DateTimeRangeField
+from django.contrib.postgres.forms import RangeWidget
 
 from pgweb.util.admin import PgwebAdmin
 from pgweb.util.moderation import ModerationState
 from pgweb.core.models import OrganisationEmail
-from .models import NewsArticle, NewsTag, PinnedNewsArticle
+from .models import NewsArticle, NewsTag, PinnedNewsArticle, NewsPostingEmbargo
 
 from datetime import datetime, timedelta
 
@@ -53,6 +55,17 @@ class NewsTagAdmin(PgwebAdmin):
     filter_horizontal = ('allowed_orgs', )
 
 
+class NewsPostingEmbargoAdmin(admin.ModelAdmin):
+    list_display = ('duration', 'description')
+
+    formfield_overrides = {
+        DateTimeRangeField: {
+            'widget': RangeWidget(admin.widgets.AdminSplitDateTime),
+        }
+    }
+
+
 admin.site.register(NewsArticle, NewsArticleAdmin)
 admin.site.register(NewsTag, NewsTagAdmin)
 admin.site.register(PinnedNewsArticle, PinnedNewsArticleAdmin)
+admin.site.register(NewsPostingEmbargo, NewsPostingEmbargoAdmin)

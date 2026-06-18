@@ -101,6 +101,12 @@
 Be careful if you unapprove it!
 </p>
 {%endif%}
+
+{% if embargo %}
+<h3 class="moderror">Posting embargo</h3>
+<p>A posting embargo is currently in force until {{ embargo.duration.upper }}. Items approved now will be posted once the embargo has expired.</p>
+{% endif %}
+
 {% for field in form %}
       <div class="form-row{% if field.errors %} errors{% endif %}">
         <div class="modadmfield">

@@ -65,12 +65,15 @@ class ModerationState(object):
     CREATED = 0
     PENDING = 1
     APPROVED = 2
-    REJECTED = -1  # Never stored, so not available as a choice
+    EMBARGOED = 3
+    REJECTED = -1       # Never stored, so not available as a choice
+    BYPASSEMBARGO = -2  # Never stored, so not available as a choice
 
     CHOICES = (
         (CREATED, 'Created (submitter edits)'),
         (PENDING, 'Pending moderation'),
         (APPROVED, 'Approved and published'),
+        (EMBARGOED, 'Approved but waiting for embargo to expire'),
     )
 
     @classmethod
@@ -94,7 +97,7 @@ class TristateModerateModel(ModerateModel):
 
     @property
     def is_approved(self):
-        return self.modstate == ModerationState.APPROVED
+        return self.modstate in (ModerationState.APPROVED, ModerationState.EMBARGOED)
 
 
 class TwostateModerateModel(ModerateModel):
@@ -136,7 +139,7 @@ def _get_unapproved_list(objecttype):
     if hasattr(objecttype, 'approved'):
         objects = objecttype.objects.filter(approved=False)
     else:
-        objects = objecttype.objects.filter(modstate=ModerationState.PENDING)
+        objects = objecttype.objects.filter(modstate__in=(ModerationState.PENDING, ModerationState.EMBARGOED))
     if not len(objects):
         return None
     return {
@@ -146,6 +149,7 @@ def _get_unapproved_list(objecttype):
                 'url': '/admin/_moderate/%s/%s/' % (x._meta.model_name, x.pk),
                 'title': str(x),
                 'twomoderators': x.twomoderators_string(),
+                'embargoed': x.modstate == ModerationState.EMBARGOED,
             } for x in objects]
     }
 

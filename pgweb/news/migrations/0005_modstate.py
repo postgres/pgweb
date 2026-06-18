@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='newsarticle',
             name='modstate',
-            field=models.IntegerField(choices=[(0, 'Created (submitter edits)'), (1, 'Pending moderation'), (2, 'Approved and published')], default=0, verbose_name='Moderation state'),
+            field=models.IntegerField(choices=[(0, 'Created (submitter edits)'), (1, 'Pending moderation'), (2, 'Approved and published'), (3, 'Approved but waiting for embargo to expire')], default=0, verbose_name='Moderation state'),
         ),
         migrations.RunSQL(
             "UPDATE news_newsarticle SET modstate=CASE WHEN approved THEN 2 ELSE 0 END",

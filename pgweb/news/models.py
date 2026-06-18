@@ -1,10 +1,16 @@
 from django.db import models
-from datetime import date
+from django.core.validators import ValidationError
+from django.template.defaultfilters import slugify
+from django.contrib.postgres.fields import DateTimeRangeField
+from django.contrib.postgres.constraints import ExclusionConstraint
+from django.contrib.postgres.fields import RangeOperators
+from django.conf import settings
+
+from datetime import date, datetime
+
 from pgweb.core.models import Organisation, OrganisationEmail
 from pgweb.core.text import ORGANISATION_HINT_TEXT
-from django.core.validators import ValidationError
 from pgweb.util.moderation import TristateModerateModel, ModerationState, TwoModeratorsMixin
-from django.template.defaultfilters import slugify
 
 from .util import send_news_email, render_news_template, embed_images_in_html
 
@@ -82,6 +88,9 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
 
     class Meta:
         ordering = ('-date',)
+        indexes = [
+            models.Index(name="idx_news_modstate_not_approved", fields=['modstate', ], condition=~models.Q(modstate=ModerationState.APPROVED)),
+        ]
 
     @classmethod
     def get_formclass(self):
@@ -95,6 +104,9 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
 
     def on_approval(self, request):
         send_news_email(self)
+
+    def check_embargo(self):
+        return NewsPostingEmbargo.objects.filter(duration__contains=datetime.now()).first()
 
     def render_preview_field(self, fieldname, val):
         if fieldname == 'content':
@@ -129,3 +141,23 @@ class PinnedNewsArticle(models.Model):
         if self.pinnedarticle:
             return str(self.pinnedarticle)
         return 'No article currently pinned'
+
+
+class NewsPostingEmbargo(models.Model):
+    duration = DateTimeRangeField(null=False, blank=False)
+    description = models.CharField(max_length=200, null=False, blank=False,
+                                   help_text="Note that this text is displayed to the public!")
+
+    class Meta:
+        ordering = ('duration', )
+        constraints = (
+            ExclusionConstraint(
+                name='unique_duration',
+                expressions=[
+                    ('duration', RangeOperators.OVERLAPS),
+                ],
+            ),
+        )
+
+    def __str__(self):
+        return str(self.duration)

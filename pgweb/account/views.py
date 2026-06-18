@@ -31,7 +31,7 @@ from pgweb.util.helpers import HttpSimpleResponse, simple_form
 from pgweb.util.moderation import ModerationState
 from pgweb.util.markup import pgmarkdown
 
-from pgweb.news.models import NewsArticle
+from pgweb.news.models import NewsArticle, NewsPostingEmbargo
 from pgweb.events.models import Event
 from pgweb.core.models import Organisation, UserProfile, ModerationNotification
 from pgweb.core.models import OrganisationEmail
@@ -104,6 +104,7 @@ objtypes = {
         'objects': lambda u: NewsArticle.objects.filter(org__managers=u),
         'tristate': True,
         'editapproved': False,
+        'embargoes': lambda: NewsPostingEmbargo.objects.all(),
     },
     'events': {
         'title': 'event',
@@ -239,6 +240,7 @@ def listobjects(request, objtype):
             'approved': o['objects'](request.user).filter(modstate=ModerationState.APPROVED),
             'unapproved': o['objects'](request.user).filter(modstate=ModerationState.PENDING),
             'inprogress': o['objects'](request.user).filter(modstate=ModerationState.CREATED),
+            'embargoed': o['objects'](request.user).filter(modstate=ModerationState.EMBARGOED),
         }
     else:
         objects = {
@@ -253,6 +255,7 @@ def listobjects(request, objtype):
         'submit_header': o.get('submit_header', None),
         'suburl': objtype,
         'tristate': o.get('tristate', False),
+        'embargoes': o.get('embargoes', []),
     })
 
 

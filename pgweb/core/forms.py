@@ -164,6 +164,7 @@ class ModerationForm(forms.Form):
     oldmodstate = forms.CharField(label='Current moderation state', disabled=True)
     modstate = forms.ChoiceField(label='New moderation status', choices=ModerationState.CHOICES + (
         (ModerationState.REJECTED, 'Reject and delete'),
+        (ModerationState.BYPASSEMBARGO, 'Bypass embargo and post right away'),
     ))
 
     def __init__(self, *args, **kwargs):
@@ -172,8 +173,16 @@ class ModerationForm(forms.Form):
         self.twostate = hasattr(self.obj, 'approved')
 
         super().__init__(*args, **kwargs)
+        excludestates = [ModerationState.EMBARGOED, ModerationState.BYPASSEMBARGO]
         if self.twostate:
-            self.fields['modstate'].choices = [(k, v) for k, v in self.fields['modstate'].choices if int(k) != 1]
+            excludestates.append(ModerationState.PENDING)
+        if self.obj.modstate == ModerationState.EMBARGOED:
+            excludestates.append(ModerationState.APPROVED)  # Can't re-approve when already approved
+            if self.user.is_superuser:
+                excludestates.remove(ModerationState.BYPASSEMBARGO)  # Only superusers can bypass embargoes
+
+        self.fields['modstate'].choices = [(k, v) for k, v in self.fields['modstate'].choices if int(k) not in excludestates]
+
         if self.obj.twomoderators:
             if self.obj.firstmoderator:
                 self.fields['modstate'].help_text = 'This object requires approval from two moderators. It has already been approved by {}.'.format(self.obj.firstmoderator)

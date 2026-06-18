@@ -22,6 +22,21 @@
 </p>
 {%endif%}
 
+{% if embargoes %}
+{%if objects.unapproved or objects.embargoed %}
+<h3>Embargoes</h3>
+<p>
+  There {%if embargoes|length == 1 %}is currently an embargo{% else %}are currently embargoes{% endif %} scheduled for posting. This means that
+  any {{title}} approved during these times will be held and posted after the embargo has finished.
+</p>
+<ul>
+{% for e in embargoes %}
+  <li>{{ e.duration.lower|date:"Y-m-d H:i" }} - {{ e.duration.upper|date:"Y-m-d H:i" }}: {{ e.description }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endif %}
+
 {% if objects.unapproved %}
 <h3>Waiting for moderator approval</h3>
 <p>
@@ -45,8 +60,23 @@
 </ul>
 {% endif %}
 
-{% if objects.approved %}
+{% if objects.embargoed or objects.approved %}
 <h3>Approved</h3>
+{% endif %}
+
+{% if objects.embargoed %}
+<p>
+  These {{title}}s are approved but are waiting for an embargo to be lifted. They will
+  automatically be published soon after the embargo ends.
+</p>
+<ul>
+  {%for o in objects.embargoed %}
+    <li>{{o}}</li>
+  {%endfor%}
+</ul>
+{% endif %}
+
+{% if objects.approved %}
 {%if not editapproved%}
 <p>
   These {{title}}s are approved and published, and can no longer be edited. If you need to make
