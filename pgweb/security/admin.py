@@ -28,16 +28,6 @@ class SecurityPatchForm(forms.ModelForm):
     model = SecurityPatch
     newspost = forms.ModelChoiceField(queryset=NewsArticle.objects.filter(org=settings.PGDG_ORG_ID), required=False)
 
-    def clean(self):
-        d = super(SecurityPatchForm, self).clean()
-        vecs = [v for k, v in list(d.items()) if k.startswith('vector_')]
-        empty = [v for v in vecs if v == '']
-        if len(empty) != len(vecs) and len(empty) != 0:
-            for k in list(d.keys()):
-                if k.startswith('vector_'):
-                    self.add_error(k, 'Either specify all vector values or none')
-        return d
-
 
 class SecurityPatchAdmin(admin.ModelAdmin):
     form = SecurityPatchForm
@@ -47,7 +37,7 @@ class SecurityPatchAdmin(admin.ModelAdmin):
     actions = ['make_public', 'make_unpublic']
 
     def cvssvector(self, obj):
-        if not obj.cvssvector:
+        if not obj.vector:
             return ''
         return mark_safe('<a href="https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector={0}">{0}</a>'.format)(
             obj.cvssvector)

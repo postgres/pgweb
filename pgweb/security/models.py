@@ -1,14 +1,13 @@
 from django.db import models
-from django.core.validators import ValidationError
+from django.core.validators import ValidationError, RegexValidator
 
 import re
 
 from pgweb.core.models import Version
 from pgweb.news.models import NewsArticle
+from pgweb.security.validators import CvssValidator
 
 import cvss
-
-vector_choices = {k: list(v.items()) for k, v in list(cvss.constants3.METRICS_VALUE_NAMES.items())}
 
 component_choices = (
     ('core server', 'Core server product'),
@@ -40,28 +39,6 @@ def make_cvenumber(cve):
     return 100000 * int(m.groups(0)[0]) + int(m.groups(0)[1])
 
 
-def other_vectors_validator(val):
-    if val != val.upper():
-        raise ValidationError("Vector must be uppercase")
-
-    try:
-        for vector in val.split('/'):
-            k, v = vector.split(':')
-            if k not in cvss.constants3.METRICS_VALUES:
-                raise ValidationError("Metric {0} is unknown".format(k))
-            if k in ('AV', 'AC', 'PR', 'UI', 'S', 'C', 'I', 'A'):
-                raise ValidationError("Metric {0} must be specified in the dropdowns".format(k))
-            if v not in cvss.constants3.METRICS_VALUES[k]:
-                raise ValidationError("Metric {0} has unknown value {1}. Valind ones are: {2}".format(
-                    k, v,
-                    ", ".join(list(cvss.constants3.METRICS_VALUES[k].keys())),
-                ))
-    except ValidationError:
-        raise
-    except Exception as e:
-        raise ValidationError("Failed to parse vectors: %s" % e)
-
-
 class SecurityPatch(models.Model):
     public = models.BooleanField(null=False, blank=False, default=False)
     newspost = models.ForeignKey(NewsArticle, null=True, blank=True, on_delete=models.CASCADE)
@@ -74,14 +51,11 @@ class SecurityPatch(models.Model):
 
     versions = models.ManyToManyField(Version, through='SecurityPatchVersion')
 
-    vector_av = models.CharField(max_length=1, null=False, blank=True, verbose_name="Attack Vector", choices=vector_choices['AV'])
-    vector_ac = models.CharField(max_length=1, null=False, blank=True, verbose_name="Attack Complexity", choices=vector_choices['AC'])
-    vector_pr = models.CharField(max_length=1, null=False, blank=True, verbose_name="Privileges Required", choices=vector_choices['PR'])
-    vector_ui = models.CharField(max_length=1, null=False, blank=True, verbose_name="User Interaction", choices=vector_choices['UI'])
-    vector_s = models.CharField(max_length=1, null=False, blank=True, verbose_name="Scope", choices=vector_choices['S'])
-    vector_c = models.CharField(max_length=1, null=False, blank=True, verbose_name="Confidentiality Impact", choices=vector_choices['C'])
-    vector_i = models.CharField(max_length=1, null=False, blank=True, verbose_name="Integrity Impact", choices=vector_choices['I'])
-    vector_a = models.CharField(max_length=1, null=False, blank=True, verbose_name="Availability Impact", choices=vector_choices['A'])
+    vector = models.CharField(max_length=100, null=False, blank=True, verbose_name="CVSS vector", validators=[
+        RegexValidator('^CVSS:3.1/AV:(.)/AC:(.)/PR:(.)/UI:(.)/S:(.)/C:(.)/I:(.)/A:(.)$', 'Enter a valid CVSS vector, including version (3.1)'),
+        CvssValidator,
+    ])
+
     legacyscore = models.CharField(max_length=1, null=False, blank=True, verbose_name='Legacy score', choices=(('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')))
 
     def purge_urls(self):
@@ -104,17 +78,14 @@ class SecurityPatch(models.Model):
 
     @property
     def cvssvector(self):
-        if not self.vector_av:
+        if not self.vector:
             return None
-        s = 'AV:{0}/AC:{1}/PR:{2}/UI:{3}/S:{4}/C:{5}/I:{6}/A:{7}'.format(
-            self.vector_av, self.vector_ac, self.vector_pr, self.vector_ui,
-            self.vector_s, self.vector_c, self.vector_i, self.vector_a)
-        return s
+        return self.vector.split('/', 1)[1]  # Strip out the CVSS version (for now)
 
     @property
     def cvssscore(self):
         try:
-            c = cvss.CVSS3("CVSS:3.0/" + self.cvssvector)
+            c = cvss.CVSS3(self.vector)
             return c.base_score
         except Exception:
             return -1
