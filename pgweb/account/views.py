@@ -428,6 +428,8 @@ def resetpwd(request):
     # recover. So implement our own, since it's quite the trivial feature.
     if request.method == "POST":
         try:
+            if 'email' not in request.POST:
+                return HttpResponse("Email must be specified", status=400)
             u = User.objects.get(email__iexact=request.POST['email'])
             if u.password == OAUTH_PASSWORD_STORE:
                 return HttpSimpleResponse(request, "Account error", "This account cannot change password as it's connected to a third party login site.")
