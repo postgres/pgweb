@@ -141,6 +141,11 @@ def sort_lower(value, reverse=False):
     return sorted(value, key=lambda x: x.lower(), reverse=reverse)
 
 
+@register.filter(name="max")
+def max_filter(value):
+    return max(value)
+
+
 @register.filter()
 def languagename(lang):
     try:
