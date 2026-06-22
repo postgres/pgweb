@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
-import pgweb.security.models
 
 
 class Migration(migrations.Migration):
@@ -18,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('public', models.BooleanField(default=False)),
-                ('cve', models.CharField(blank=True, max_length=32, validators=[pgweb.security.models.cve_validator])),
+                ('cve', models.CharField(blank=True, max_length=32)),
                 ('cvenumber', models.IntegerField(db_index=True)),
                 ('detailslink', models.URLField(blank=True)),
                 ('description', models.TextField()),

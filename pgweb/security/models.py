@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Func, F, Value
+from django.db.models.functions import Cast
 from django.core.validators import ValidationError, RegexValidator
 
 import re
@@ -18,32 +20,25 @@ component_choices = (
     ('other', 'Other'),
 )
 
-
-re_cve = re.compile(r'^(\d{4})-(\d{4,7})$')
-
-
-def cve_validator(val):
-    if not re_cve.match(val):
-        raise ValidationError("Enter CVE in format (YYYY-NNNN (up to 7 N) without the CVE text")
-
-
-def make_cvenumber(cve):
-    """
-    creates a ``cvenumber`` from a CVE ID string (e.g. YYYY-DDDDD).
-
-    raises a validation error if the CVE ID string is invalid
-    """
-    m = re_cve.match(cve)
-    if not m:
-        raise ValidationError("Invalid CVE")
-    return 100000 * int(m.groups(0)[0]) + int(m.groups(0)[1])
+cve_regexp = r'^\d{4}-\d{4,5}$'
+cvss_vector_regexp = r'^CVSS:3.1/AV:(.)/AC:(.)/PR:(.)/UI:(.)/S:(.)/C:(.)/I:(.)/A:(.)$'
 
 
 class SecurityPatch(models.Model):
     public = models.BooleanField(null=False, blank=False, default=False)
     newspost = models.ForeignKey(NewsArticle, null=True, blank=True, on_delete=models.CASCADE)
-    cve = models.CharField(max_length=32, null=False, blank=True, validators=[cve_validator, ])
-    cvenumber = models.IntegerField(null=False, blank=False, db_index=True)
+    cve = models.CharField(max_length=32, null=False, blank=True, unique=True, validators=[
+        RegexValidator(cve_regexp, 'Enter CVE in format (YYYY-NNNNN (up to 5 N) without the CVE text'),
+    ])
+    cvenumber = models.GeneratedField(
+        expression=(
+            Cast(Func(F('cve'), Value('-'), Value(1), function='split_part'), output_field=models.IntegerField()) * 100000 +
+            Cast(Func(F('cve'), Value('-'), Value(2), function='split_part'), output_field=models.IntegerField())
+        ),
+        output_field=models.IntegerField(),
+        db_persist=True,
+        unique=True,
+    )
     detailslink = models.URLField(null=False, blank=True)
     description = models.TextField(null=False, blank=False)
     details = models.TextField(blank=True, null=True, help_text="Additional details about the security patch")
@@ -52,7 +47,7 @@ class SecurityPatch(models.Model):
     versions = models.ManyToManyField(Version, through='SecurityPatchVersion')
 
     vector = models.CharField(max_length=100, null=False, blank=True, verbose_name="CVSS vector", validators=[
-        RegexValidator('^CVSS:3.1/AV:(.)/AC:(.)/PR:(.)/UI:(.)/S:(.)/C:(.)/I:(.)/A:(.)$', 'Enter a valid CVSS vector, including version (3.1)'),
+        RegexValidator(cvss_vector_regexp, 'Enter a valid CVSS vector, including version (3.1)'),
         CvssValidator,
     ])
 
@@ -61,17 +56,6 @@ class SecurityPatch(models.Model):
     def purge_urls(self):
         yield '/support/security/CVE-%s/' % self.cve
         yield '/support/security/'
-
-    def save(self, force_insert=False, force_update=False):
-        # Calculate a number from the CVE, that we can use to sort by. We need to
-        # do this, because CVEs can have 4 or 5 digit second parts...
-        if self.cve == '':
-            self.cvenumber = 0
-        else:
-            # note that the make_cvenumber function can raise a validation error
-            # if the value of CVE is not a valid CVE identifier
-            self.cvenumber = make_cvenumber(self.cve)
-        super(SecurityPatch, self).save(force_insert, force_update)
 
     def __str__(self):
         return self.cve
@@ -93,6 +77,20 @@ class SecurityPatch(models.Model):
     class Meta:
         verbose_name_plural = 'Security patches'
         ordering = ('-cvenumber',)
+        constraints = (
+            models.CheckConstraint(
+                name='validate_cve_format',
+                condition=Func(F('cve'), Value(cve_regexp), function='regexp_like', output_field=models.BooleanField()),
+            ),
+            models.CheckConstraint(
+                name='validate_cvss_vector',
+                condition=models.Q(vector="") | Func(F('vector'), Value(cvss_vector_regexp), function='regexp_like', output_field=models.BooleanField()),
+            ),
+            models.CheckConstraint(
+                name='validate_component',
+                condition=models.Q(component__in=[c[0] for c in component_choices]),
+            )
+        )
 
 
 class SecurityPatchVersion(models.Model):

@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect
 from pgweb.util.contexts import render_pgweb
 
 from pgweb.core.models import Version
-from .models import SecurityPatch, make_cvenumber
+from .models import SecurityPatch
 
 
 def GetPatchesList(filt):
@@ -40,7 +40,7 @@ def details(request, cve_prefix, cve):
     try:
         security_patch = get_object_or_404(
             SecurityPatch,
-            cvenumber=make_cvenumber(cve),
+            cvenumber=int(cve.split('-')[0]) * 100000 + int(cve.split('-')[1]),
             public=True,
         )
     except ValidationError:
