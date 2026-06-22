@@ -94,6 +94,11 @@ class SecurityPatch(models.Model):
 
 
 class SecurityPatchVersion(models.Model):
-    patch = models.ForeignKey(SecurityPatch, null=False, blank=False, on_delete=models.CASCADE)
-    version = models.ForeignKey(Version, null=False, blank=False, on_delete=models.CASCADE)
+    patch = models.ForeignKey(SecurityPatch, null=False, blank=False, on_delete=models.CASCADE, db_index=True)
+    version = models.ForeignKey(Version, null=False, blank=False, on_delete=models.CASCADE, db_index=True)
     fixed_minor = models.IntegerField(null=False, blank=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(name="unique_patch_version", fields=['patch', 'version']),
+        ]
