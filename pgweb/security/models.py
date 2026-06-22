@@ -102,3 +102,6 @@ class SecurityPatchVersion(models.Model):
         constraints = [
             models.UniqueConstraint(name="unique_patch_version", fields=['patch', 'version']),
         ]
+
+    def purge_urls(self):
+        yield '/support/security/{}/'.format(self.version.numtree)
