@@ -115,7 +115,7 @@ INSTALLED_APPS = [
     'pgweb.contributors',
     'pgweb.profserv',
     'pgweb.lists',
-    'pgweb.security',
+    'pgweb.security.apps.SecurityAppConfig',
     'pgweb.sponsors',
     'pgweb.survey',
     'pgweb.misc',
