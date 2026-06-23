@@ -74,7 +74,7 @@ class Version(models.Model):
         else:
             return "%s %s" % (self.numtree, TESTING_SHORTSTRING[self.testing])
 
-    def save(self):
+    def save(self, update_fields=None):
         # Make sure only one version at a time can be the current one.
         # (there may be some small race conditions here, but the likelyhood
         # that two admins are editing the version list at the same time...)
@@ -87,7 +87,7 @@ class Version(models.Model):
 
         # Now that we've made any previously current ones non-current, we are
         # free to save this one.
-        super(Version, self).save()
+        super(Version, self).save(update_fields=update_fields)
 
     class Meta:
         ordering = ('-tree', )
