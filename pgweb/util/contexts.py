@@ -2,6 +2,8 @@ from django.utils.functional import SimpleLazyObject
 from django.shortcuts import render
 from django.conf import settings
 
+from functools import cache
+
 # This is the whole site navigation structure. Stick in a smarter file?
 sitenav = {
     'about': [
@@ -128,16 +130,23 @@ def _get_gitrev():
 # the current git revision. git revision is returned as a lazy object so
 # we don't spend effort trying to load it if we don't need it (though
 # all general pages will need it since it's used to render the css urls)
+#
+# Topbarnews needs to be available for the include topbar in cases when ESI
+# is not available. It is also evaluated lazily so on production website it
+# will only actually cause a query on the include page. PinnedNewsArticle has to
+# be imported here, to avoid recursive imports.
 def PGWebContextProcessor(request):
+    from pgweb.news.models import PinnedNewsArticle
+
     gitrev = SimpleLazyObject(_get_gitrev)
+    ctx = {
+        'gitrev': gitrev,
+        'do_esi': settings.DO_ESI,
+        'topbarnews': cache(lambda: PinnedNewsArticle.objects.select_related('pinnedarticle').only('pinnedarticle__id', 'pinnedarticle__date', 'pinnedarticle__title').first().pinnedarticle),
+    }
     if request.is_secure():
-        return {
+        return ctx | {
             'link_root': settings.SITE_ROOT,
-            'do_esi': settings.DO_ESI,
-            'gitrev': gitrev,
         }
     else:
-        return {
-            'gitrev': gitrev,
-            'do_esi': settings.DO_ESI,
-        }
+        return ctx

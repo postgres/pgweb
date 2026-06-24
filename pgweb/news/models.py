@@ -58,6 +58,9 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
         yield '/news/.*.rss'
         # FIXME: when to expire the front page?
         yield '/$'
+        # If this is the pinned article, we need to purge the include
+        if self.pinnednewsarticle_set.exists():
+            yield '/include/topbar/'
 
     def __str__(self):
         return "%s: %s" % (self.date, self.title)
@@ -131,6 +134,8 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
 class PinnedNewsArticle(models.Model):
     pinnedarticle = models.ForeignKey(NewsArticle, null=True, blank=True, on_delete=models.SET_NULL)
     pinnedtoproviders = models.JSONField(null=False, blank=True, default=dict)
+
+    purge_urls = ('/include/topbar/', )
 
     def save(self, *args, **kwargs):
         if not self.pk and PinnedNewsArticle.objects.exists():
