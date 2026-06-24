@@ -132,6 +132,7 @@ class NewsArticle(TwoModeratorsMixin, TristateModerateModel):
 
 
 class PinnedNewsArticle(models.Model):
+    uniqueness = models.GeneratedField(expression=models.Value(1), output_field=models.IntegerField(), db_persist=True, unique=True)
     pinnedarticle = models.ForeignKey(NewsArticle, null=True, blank=True, on_delete=models.SET_NULL)
     pinnedtoproviders = models.JSONField(null=False, blank=True, default=dict)
 
