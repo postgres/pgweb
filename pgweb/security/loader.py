@@ -8,8 +8,6 @@ import glob
 @transaction.atomic
 def load_security_json():
     combined_json = list(_load_all_cve_json())
-    with open('/tmp/cna/full.json', 'w') as f:
-        json.dump(combined_json, f)
     curs = connection.cursor()
     curs.execute("""WITH t AS (
 SELECT (regexp_match(cveid, '^CVE-(\\d{4}-\\d{4,5})$'))[1] AS cve, title, description, vector, fixed, component
