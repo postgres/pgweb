@@ -30,40 +30,35 @@
     are subject to changes that are backwards incompatible at any time during
     the development of the betas, and could possibly be removed altogether.</p>
 
-{% comment %}
+{% if not betaversion %}
 <p>
-  <strong>PostgreSQL 19 is released</strong>. The first beta of version 20
-  is not yet available for testing. Beta testing of version 20 will begin in
-  May 2027.
+  <strong>PostgreSQL {{ currentversion.numtree }} is released</strong>. The first beta of version {{ currentversion.numtree|add:1 }}
+  is not yet available for testing.
 </p>
-{% endcomment %}
+{% else %}
 
 <p>
-  The current beta release is <strong>PostgreSQL 19 Beta 1</strong>.  For more
+  The current beta release is <strong>PostgreSQL {{ betaversion.versionstring_spaced }}</strong>.  For more
   information on the current beta release and how to test, please view the links
   below.
 </p>
 
 <ul>
   <li>
-    <a href="/about/news/postgresql-19-beta-1-released-3313/">
-      PostgreSQL 19 Beta 1 Release Announcement
-    </a>
+    <a href="/ftp/source/v{{ betaversion.versionstring }}/">Download PostgreSQL {{ betaversion.versionstring_spaced }} source code</a>
   </li>
   <li>
-    <a href="/ftp/source/v19beta1/">Download PostgreSQL 19 Beta 1 source code</a>
+    <a href="/docs/{{ betaversion.numtree}}/">PostgreSQL {{ betaversion.numtree }} Documentation</a>
   </li>
   <li>
-    <a href="/docs/19/">PostgreSQL 19 Documentation</a>
+    <a href="/docs/{{ betaversion.numtree }}/release-{{ betaversion.numtree }}.html">PostgreSQL {{ betaversion.numtree }} Release Notes</a>
   </li>
   <li>
-    <a href="/docs/19/release-19.html">PostgreSQL 19 Release Notes</a>
-  </li>
-  <li>
-    <a href="https://wiki.postgresql.org/wiki/PostgreSQL_19_Open_Items">PostgreSQL 19 Open Items</a>
+    <a href="https://wiki.postgresql.org/wiki/PostgreSQL_{{ betaversion.numtree }}_Open_Items">PostgreSQL {{ betaversion.numtree }} Open Items</a>
   </li>
   <li>
     <a href="https://wiki.postgresql.org/wiki/HowToBetaTest" target="_blank" rel="noopener">A Guide to PostgreSQL Beta Testing</a>
   </li>
 </ul>
+{% endif %}
 {%endblock%}

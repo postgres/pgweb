@@ -56,6 +56,8 @@ urlpatterns = [
     re_path(r'^download/uploadyum/', pgweb.downloads.views.uploadyum),
     re_path(r'^download/js/yum.js', pgweb.downloads.views.yum_js),
 
+    re_path(r'^developer/beta/$', pgweb.core.views.beta_testing),
+
     re_path(r'^docs/$', pgweb.docs.views.root),
     re_path(r'^docs/manuals/$', pgweb.docs.views.manuals),
     re_path(r'^docs/manuals/archive/$', pgweb.docs.views.manualarchive),

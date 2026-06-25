@@ -97,6 +97,7 @@ class Version(models.Model):
         yield '/support/versioning'
         yield '/support/security'
         yield '/about/featurematrix/$'
+        yield '/developer/beta/$'
         yield '/versions.rss'
         yield '/versions.json'
 

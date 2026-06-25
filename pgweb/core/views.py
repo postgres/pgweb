@@ -111,6 +111,14 @@ def community(request):
     })
 
 
+# Beta testing page, driven from if there is a beta
+def beta_testing(request):
+    return render_pgweb(request, 'developer', 'developer/beta.html', {
+        'betaversion': Version.objects.filter(testing__gt=0, tree__gt=0).first(),
+        'currentversion': Version.objects.filter(current=True).first(),
+    })
+
+
 # List of supported versions
 def versions(request):
     return render_pgweb(request, 'support', 'support/versioning.html', {
