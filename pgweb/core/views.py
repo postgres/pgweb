@@ -32,6 +32,7 @@ from pgweb.util.misc import send_template_mail
 from pgweb.util.sitestruct import get_all_pages_struct
 from pgweb.mailqueue.util import send_simple_mail
 from pgweb.account.views import OAUTH_PASSWORD_STORE
+from pgweb.release.util import CurrentRelease
 
 # models needed for the pieces on the frontpage
 from pgweb.news.models import NewsArticle, NewsTag
@@ -68,8 +69,10 @@ def home(request):
     community_event_queryset = event_base_queryset.filter(badged=True).order_by('enddate', 'startdate')[:(7 - other_events.count())]
     # now, return all the events in one unioned array!
     events = community_event_queryset.union(other_events).order_by('enddate', 'startdate').all()
-    versions = Version.objects.filter(supported=True)
+    versions = list(Version.objects.filter(supported=True))
     planet = ImportedRSSItem.objects.filter(feed__internalname="planet").order_by("-posttime")[:9]
+
+    release = CurrentRelease.get()
 
     return render(request, 'index.html', {
         'title': 'The world\'s most advanced open source database',
@@ -77,6 +80,7 @@ def home(request):
         'events': events,
         'versions': versions,
         'planet': planet,
+        'release': release,
         'og': {
             'url': '/',
             'author': 'PostgreSQL Global Development Group',

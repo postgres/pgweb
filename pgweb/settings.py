@@ -104,6 +104,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.admin',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'pgweb.core.apps.CoreAppConfig',
     'pgweb.mailqueue',
     'pgweb.account',
@@ -123,6 +124,7 @@ INSTALLED_APPS = [
     'pgweb.search',
     'pgweb.pugs',
     'pgweb.util',
+    'pgweb.release.apps.ReleaseAppConfig',
 ]
 
 # Default format for date/time (as it changes between machines)

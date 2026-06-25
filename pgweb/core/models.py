@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from pgweb.util.misc import varnish_purge
 
 import base64
+from datetime import date, timedelta
 from decimal import Decimal
 
 from pgweb.util.moderation import TwostateModerateModel
@@ -37,6 +38,10 @@ class Version(models.Model):
         return self.buildversionstring(self.latestminor)
 
     @property
+    def versionstring_spaced(self):
+        return self.buildversionstring(self.latestminor, True)
+
+    @property
     def numtree(self):
         # Return the proper numeric tree version, taking into account that PostgreSQL 10
         # changed from x.y to x for major version.
@@ -61,9 +66,11 @@ class Version(models.Model):
             # Should never happen so return something broken
             return 'x'
 
-    def buildversionstring(self, minor):
+    def buildversionstring(self, minor, spaced=False):
         if not self.testing:
             return "%s.%s" % (self.numtree, minor)
+        elif spaced:
+            return "%s %s %s" % (self.numtree, TESTING_SHORTSTRING[self.testing].capitalize(), minor)
         else:
             return "%s%s%s" % (self.numtree, TESTING_SHORTSTRING[self.testing], minor)
 
@@ -88,6 +95,10 @@ class Version(models.Model):
         # Now that we've made any previously current ones non-current, we are
         # free to save this one.
         super(Version, self).save(update_fields=update_fields)
+
+    @property
+    def soon_eol(self):
+        return self.supported and self.eoldate < date.today() + timedelta(days=180)
 
     class Meta:
         ordering = ('-tree', )

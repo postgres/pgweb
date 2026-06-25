@@ -1,0 +1,11 @@
+# This is a template file with all keys that can do in a release yaml file
+date: 2026-06-04       # Date of the release, in yyyy-mm-dd format
+versions:              # List of which versions are being released. minor expects >= 1 entry, all others expect 1
+  - 19.0               # Each version should always have the full <major>.<minor> format (must be .0 for major release), or <major>beta<num> (etc for alpha and rc)
+news:
+  id: 1656             # id of the news article with the release announcement
+announcetext: |        # IFF this is type=major or override, the actual HTML to use in the text
+  <p>
+  This is the big text to be <b>overridden</b>.
+  </p>
+nooldestwarning: true  # Set to true to exclude the warning to upgrade from the oldest version

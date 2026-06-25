@@ -1,0 +1,78 @@
+{% load pgfilters %}
+{% load humanize %}
+{%if release.type == "minor" %}
+	<p>
+          The PostgreSQL Global Development Group has
+          <a href="/download/">released an update</a> to all supported versions
+          of PostgreSQL, including
+          <a href="{{ release.news.url }}">{{ release.versions | joinandor:"and" }}</a>.
+          This release fixes {% if release.cve|length > 0 %}{{ release.cve|length }} security vulnerabilities and {% endif %}
+	  many bugs reported over the last several months.
+	</p>
+	<p>
+          For the more information about this release, please review the
+          <a href="/docs/release/">release notes</a>. You can download
+          PostgreSQL from the <a href="/download/">download</a> page.
+	</p>
+{% elif release.type == "alpha" or release.type == "beta" or release.type == "rc" %}
+{%comment%}release.type gets set to alpha/beta/rc only when there is *just one* of them, so work off release.versions.0 {%endcomment%}
+        <p>
+          The PostgreSQL Global Development Group announces that the {{ release.versions.0.minor | ordinal }}
+          {{ release.type }} release of PostgreSQL {{ release.versions.0.major }} is now
+          <a href="/download/">available for download</a>. This release contains
+          PostgreSQL {{ release.versions.0.major }} feature previews ahead of general availability, though
+          some details of the release can change during the testing period.
+        </p>
+        <p>
+          You can find information about all of the PostgreSQL {{ release.versions.0.major }} features and
+          changes in the <a href="/docs/{{ release.versions.0.major }}/release-{{ release.versions.0.major }}.html">release notes</a>.
+        </p>
+        <p>
+          In the spirit of the open source PostgreSQL community, we strongly
+          encourage you to test the new features of PostgreSQL {{ release.versions.0.major }} on your
+          systems to help us eliminate bugs and other issues. While we do not
+          advise you to run {{ release.type }} versions in production environments, we
+          encourage you to find ways to run your typical application workloads
+          against this {{ release.type }} release.
+        </p>
+        <p>
+          Your testing and feedback help the community ensure that PostgreSQL {{ release.versions.0.major }}
+          upholds our standards of delivering a stable, reliable release of the
+          world's most advanced open source relational database. Please read more about
+          our <a href="/developer/beta/">testing process</a>
+          and how you can contribute.
+        </p>
+{% elif release.type == "major" %}
+{% with major=release.versions.0.major %}
+	<p>
+          The PostgreSQL Global Development Group today announced the release of
+          <a href="/docs/{{ major }}/release-{{ major }}.html">PostgreSQL {{ major }}</a>,
+	  the latest version of the world's most advanced open source database.
+	</p>
+{{ release.announcetext | safe }}
+        <p>
+          For the full list of features in PostgreSQL {{ major }}, please review the
+          <a href="/docs/{{ major }}/release-{{ major }}.html">release notes</a>. You can download
+          PostgreSQL {{ major }} from the <a href="/download/">download</a> page.
+        </p>
+        <p>
+          For the <a href="/about/press/"></a>full press release</a>
+          and <a href="/about/press/">translations of the release announcement</a>,
+          please visit the <a href="/about/press/">press kit</a>.
+       </p>
+{% endwith %}
+{% elif release.type == "override" %}
+{{ release.announcetext | safe }}
+{% endif %}
+{% if not release.nooldestwarning %}
+{% with oldestversion=versions|last %}
+{% if oldestversion.soon_eol %}
+<p>
+PostgreSQL {{ oldestversion.numtree }} will stop receiving fixes on {{ oldestversion.eoldate|date:"F j, Y"  }}.
+If you are running PostgreSQL {{ oldestversion.numtree }} in a production environment, we suggest that
+you make plans to upgrade to a newer, supported version of PostgreSQL. Please see our
+<a href="/support/versioning/">versioning policy</a> for more information.
+</p>
+{% endif %}
+{% endwith %}
+{% endif %}
