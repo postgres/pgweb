@@ -10,9 +10,9 @@ import re
 
 from pgweb.util.widgets import TemplateRenderWidget
 from pgweb.util.db import exec_to_dict
-from pgweb.account.views import OAUTH_PASSWORD_STORE
 
 from .models import CommunityAuthSite, CommunityAuthOrg, SecondaryEmail
+from .models import OAUTH_PASSWORD_STORE
 
 
 class CommunityAuthSiteAdminForm(forms.ModelForm):

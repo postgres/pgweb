@@ -1,4 +1,5 @@
 from django import forms
+from django.core.validators import ValidationError
 from django.contrib.auth.forms import AuthenticationForm
 
 import re
@@ -7,6 +8,7 @@ from django.contrib.auth.models import User
 from pgweb.core.models import UserProfile
 from pgweb.contributors.models import Contributor
 from .models import SecondaryEmail
+from .models import OAUTH_PASSWORD_STORE
 
 from .recaptcha import ReCaptchaField
 
@@ -133,6 +135,17 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         exclude = ('user',)
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super().__init__(*args, **kwargs)
+
+    def clean_block_oauth(self):
+        if self.cleaned_data.get('block_oauth', False):
+            if self.user.password == OAUTH_PASSWORD_STORE:
+                raise ValidationError("Your account used OAuth to log in, you cannot block the use of it")
+
+        return self.cleaned_data['block_oauth']
 
 
 class UserForm(forms.ModelForm):

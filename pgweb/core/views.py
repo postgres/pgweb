@@ -31,7 +31,7 @@ from pgweb.util.misc import get_client_ip, varnish_purge, varnish_purge_expr, va
 from pgweb.util.misc import send_template_mail
 from pgweb.util.sitestruct import get_all_pages_struct
 from pgweb.mailqueue.util import send_simple_mail
-from pgweb.account.views import OAUTH_PASSWORD_STORE
+from pgweb.account.models import OAUTH_PASSWORD_STORE
 from pgweb.release.util import CurrentRelease
 
 # models needed for the pieces on the frontpage

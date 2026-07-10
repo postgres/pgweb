@@ -2,6 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User, Group
 
 
+# The value we store in user.password for oauth logins. This is
+# a value that must not match any hashers.
+OAUTH_PASSWORD_STORE = 'oauth_signin_account_no_password'
+
+
 class CommunityAuthOrg(models.Model):
     orgname = models.CharField(max_length=100, null=False, blank=False, unique=True,
                                help_text="Name of the organisation")

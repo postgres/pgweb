@@ -40,6 +40,7 @@ from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
 
 from .models import CommunityAuthSite, CommunityAuthConsent, SecondaryEmail
+from .models import OAUTH_PASSWORD_STORE
 from .forms import PgwebAuthenticationForm, ConfirmSubmitForm
 from .forms import CommunityAuthConsentForm
 from .forms import SignupForm, SignupOauthForm
@@ -54,10 +55,6 @@ from pgweb.util.moderation import get_moderation_model_from_suburl
 from pgweb.mailqueue.util import send_simple_mail
 
 log = logging.getLogger(__name__)
-
-# The value we store in user.password for oauth logins. This is
-# a value that must not match any hashers.
-OAUTH_PASSWORD_STORE = 'oauth_signin_account_no_password'
 
 
 def _modobjs(qs):
@@ -157,7 +154,7 @@ def profile(request):
     if request.method == 'POST':
         # Process this form
         userform = UserForm(can_change_email, secondaryaddresses, data=request.POST, instance=request.user)
-        profileform = UserProfileForm(data=request.POST, instance=profile)
+        profileform = UserProfileForm(request.user, data=request.POST, instance=profile)
         secondaryemailform = AddEmailForm(request.user, data=request.POST)
         if contrib:
             contribform = ContributorForm(data=request.POST, instance=contrib)
@@ -202,7 +199,7 @@ def profile(request):
     else:
         # Generate form
         userform = UserForm(can_change_email, secondaryaddresses, instance=request.user)
-        profileform = UserProfileForm(instance=profile)
+        profileform = UserProfileForm(request.user, instance=profile)
         secondaryemailform = AddEmailForm(request.user)
         if contrib:
             contribform = ContributorForm(instance=contrib)
