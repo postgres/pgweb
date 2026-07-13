@@ -14,8 +14,10 @@ class NewsArticleAdminForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if self.instance:
+        if self.instance and self.instance.pk:
             self.fields['email'].queryset = OrganisationEmail.objects.filter(org=self.instance.org, confirmed=True)
+        else:
+            self.fields['email'].queryset = OrganisationEmail.objects.filter(pk=-1)
 
 
 class NewsArticleAdmin(PgwebAdmin):
