@@ -1,7 +1,5 @@
 from django.contrib import admin
 from django import forms
-from django.contrib.postgres.fields import DateTimeRangeField
-from django.contrib.postgres.forms import RangeWidget
 
 from pgweb.util.admin import PgwebAdmin
 from pgweb.util.moderation import ModerationState
@@ -57,12 +55,6 @@ class NewsTagAdmin(PgwebAdmin):
 
 class NewsPostingEmbargoAdmin(admin.ModelAdmin):
     list_display = ('duration', 'description')
-
-    formfield_overrides = {
-        DateTimeRangeField: {
-            'widget': RangeWidget(admin.widgets.AdminSplitDateTime),
-        }
-    }
 
 
 admin.site.register(NewsArticle, NewsArticleAdmin)
