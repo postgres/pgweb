@@ -254,7 +254,7 @@ class ImportedRSSItem(models.Model):
 
 
 # From man sshd, except for ssh-dss
-_valid_keytypes = ['ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'ssh-rsa']
+_valid_keytypes = ['ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-ed25519', 'ssh-rsa', 'sk-ssh-ed25519@openssh.com']
 
 
 # Options, keytype, key, comment. But we don't support options.
