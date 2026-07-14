@@ -5,54 +5,44 @@ from django.template.defaultfilters import slugify
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.decorators import content_sources
 from pgweb.util.decorators import xkey
+from pgweb.util.yamldataloader import YamlDataLoader
 
 from pgweb.core.models import Version
 from .models import Feature
 
 from collections import OrderedDict
-import os
-import yaml
 
 import logging
 log = logging.getLogger(__name__)
 
 
 # Load the feature matrix data at startup and cache it in memory
-class FeatureMatrixData:
-    def __init__(self):
-        self.fn = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../', 'data/featurematrix.yaml'))
-        self.load()
+class FeatureMatrixData(YamlDataLoader):
+    DATAFILE = "featurematrix.yaml"
 
     def load(self):
-        self.lastload = os.stat(self.fn).st_mtime
-        with open(self.fn) as f:
-            self.data = yaml.load(f, Loader=yaml.SafeLoader)
+        super().load()
         self.slugmap = {}
         for features in self.data['featurematrix'].values():
             for feature in features:
                 if 'description' in feature:
                     self.slugmap[slugify(feature['name'])] = feature
 
-    def _conditional_load(self):
-        if os.stat(self.fn).st_mtime != self.lastload:
-            log.info("Feature matrix data has changed, reloading")
-            self.load()
-
     def get(self):
-        self._conditional_load()
-        return self.data['featurematrix']
+        return super().get()['featurematrix']
 
     def feature_from_slug(self, slug):
         self._conditional_load()
         return self.slugmap.get(slug, None)
 
     def get_versions(self):
-        self._conditional_load()
-        return self.data['versions']['min'], self.data['versions']['max']
+        d = super().get()
+        return d['versions']['min'], d['versions']['max']
 
     def slug_from_legacy(self, id):
-        if id in self.data['legacymap']:
-            return slugify(self.data['legacymap'][id])
+        d = self.get()
+        if id in d['legacymap']:
+            return slugify(d['legacymap'][id])
         return None
 
 
