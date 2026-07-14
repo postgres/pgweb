@@ -13,6 +13,8 @@ import re
 from pgweb.util.contexts import render_pgweb
 from pgweb.util.helpers import template_to_string
 from pgweb.util.misc import send_template_mail
+from pgweb.util.decorators import xkey
+from pgweb.util.yamldataloader import YamlDataLoader
 
 from pgweb.core.models import Version, UserSubmission
 from pgweb.util.db import exec_to_dict
@@ -389,6 +391,20 @@ def release_notes(request, version):
     })
     r['xkey'] = 'pgdocs_{}'.format(major_version)
     return r
+
+
+class BooksData(YamlDataLoader):
+    DATAFILE = "books.yaml"
+
+
+booksdata = BooksData()
+
+
+@xkey('data_books')
+def books(request):
+    return render_pgweb(request, 'docs', 'docs/books.html', {
+        'books': booksdata.get()['books'],
+    })
 
 
 @login_required

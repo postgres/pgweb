@@ -1,0 +1,32 @@
+{%extends "base/page.html"%}
+{%block title%}Books{%endblock%}
+{%block contents%}
+<h1>Books <i class="fas fa-book"></i></h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Cover</th>
+      <th>Information</th>
+    </tr>
+  </thead>
+    <tbody>
+{% for book in books %}
+      <tr>
+        <td>
+{% if book.url %}<a href="https://leanpub.com/deep-dive-into-a-sql-query">{% endif %}
+              <img src="/media/img/docs/books/{{ book.image }}" alt="{{ book.title }}">
+{% if book.url %}</a>{% endif %}
+        <td>
+           <strong>Title</strong>: {{ book.title }}<br />
+           <strong>Author</strong>: {{ book.author }}<br />
+           <strong>Language</strong>: {{ book.language }}<br />
+           <strong>Current version at publication</strong>: {{ book.version }}<br />
+           <strong>Format</strong>: {{ book.format }}<br />
+           <strong>Published</strong>: {{ book.published }}
+        </td>
+      </tr>
+{% endfor %}
+  </tbody>
+</table>
+{%endblock%}

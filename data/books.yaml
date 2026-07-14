@@ -1,0 +1,688 @@
+books:
+  - title: 'Deep Dive Into a SQL Query: A Journey Through PostgreSQL''s Query Processing'
+    url: https://leanpub.com/deep-dive-into-a-sql-query
+    image: deep_dive_into_sql_query.png
+    author: Jesús Espino
+    language: English
+    version: '18'
+    format: eBook
+    published: April 2026
+  - title: 'Decode PostgreSQL: Understanding the World''s Most Powerful Open Source Database Without Writing Code'
+    url: https://decodepress.gumroad.com/l/postgresql
+    image: decode_postgres.png
+    author: Ellyne Phneah
+    language: English
+    version: '17'
+    format: eBook
+    published: September 2025
+  - title: PostgreSQL Mistakes and How to Avoid Them
+    url: https://www.manning.com/books/postgresql-mistakes-and-how-to-avoid-them
+    image: postgresql-mistakes-and-how-to-avoid-them.jpg
+    author: Jimmy Angelakos
+    language: English
+    version: '17'
+    format: Paperback, eBook
+    published: June 2025
+  - title: 'Lift the Elephant: Scaling PostgreSQL Beyond Query Optimization'
+    url: https://leanpub.com/lift-the-elephant/
+    image: lift_the_elephant.png
+    author: Alex Yarotsky
+    language: English
+    version: '17'
+    format: eBook
+    published: February 2025
+  - title: Introduction to PostgreSQL for the data professional
+    url: https://www.amazon.com/Introduction-PostgreSQL-data-professional-Ryan/dp/1036902374
+    image: postgresql_data_professional.png
+    author: Ryan Booz, Grant Fritchey
+    language: English
+    version: '17'
+    format: Paperback, eBook
+    published: February 2025
+  - title: Mastering PostgreSQL 17
+    url: https://www.packtpub.com/en-se/product/mastering-postgresql-17-9781836205968
+    image: mastering_postgresql17.png
+    author: Hans-Jürgen Schönig
+    language: English
+    version: '17'
+    format: Paperback, eBook
+    published: December 2024
+  - title: High Performance PostgreSQL for Rails
+    url: https://pragprog.com/titles/aapsql/high-performance-postgresql-for-rails/
+    image: postgresql_for_rails.png
+    author: Andrew Atkinson
+    language: English
+    version: '16'
+    format: Paperback, eBook
+    published: June 2024
+  - title: PostgreSQL 16 Administration Cookbook
+    url: https://www.packtpub.com/product/postgresql-16-administration-cookbook/9781835460580
+    image: postgresql-16-administration-cookbook.jpg
+    author: Gianni Ciolli, Boriss Mejías, Jimmy Angelakos, Vibhor Kumar, Simon Riggs
+    language: English
+    version: '16'
+    format: Paperback, eBook
+    published: December 2023
+  - title: Learn PostgreSQL - Second Edition
+    url: https://www.packtpub.com/product/learn-postgresql-second-edition/9781837635641
+    image: learn_postgresql_second_edition.jpg
+    author: Luca Ferrari, Enrico Pirozzi
+    language: English
+    version: '16'
+    format: Paperback, eBook
+    published: October 2023
+  - title: PostgreSQL - Architecture et notions avancées
+    url: https://www.d-booker.fr/bases-de-donnees/805-1338-postgresql-architecture-et-notions-avancees-5ed.html
+    image: architecture-et-notions-avancees-5ed.png
+    author: Guillaume Lelarge, Julien Rouhaud
+    language: French
+    version: '16'
+    format: Paperback, eBook
+    published: October 2023
+  - title: PostgreSQL for Jobseekers
+    url: https://www.amazon.com/dp/B0C8Z4C9TQ/
+    image: postgresql-for-jobseekers.png
+    author: Sonia Valeja, David Gonzalez
+    language: English
+    version: '15'
+    format: Paperback, eBook
+    published: June 2023
+  - title: 'POSTGRES: The First Experience'
+    url: https://postgrespro.com/community/books/introbook
+    image: postgres_first_experience_v9.png
+    author: Pavel Luzanov, Egor Rogov, Igor Levshin (translated by Liudmila Mantrova)
+    language: English
+    version: '15'
+    format: Paperback, eBook
+    published: April 2023
+  - title: PostgreSQL 14 Internals
+    url: https://postgrespro.com/community/books/internals
+    image: postgres_internals_14.png
+    author: Egor Rogov
+    language: English
+    version: '14'
+    format: Paperback, eBook
+    published: March 2023
+  - title: PostgreSQL - Architecture et notions avancées
+    url: https://www.d-booker.fr/postgresql/187-architecture-et-notions-avancees.html
+    image: architecture-et-notions-avancees-4ed.png
+    author: Guillaume Lelarge, Julien Rouhaud
+    language: French
+    version: '14'
+    format: Paperback, eBook
+    published: April 2022
+  - title: PostgreSQL 14 Administration Cookbook
+    url: https://www.packtpub.com/product/postgresql-14-administration-cookbook/9781803248974
+    image: packt_postgresql14_admin_cookbook.jpg
+    author: Simon Riggs, Gianni Ciolli
+    language: English
+    version: '14'
+    format: Paperback, eBook
+    published: March 2022
+  - title: Mastering PostgreSQL 13 - Fourth Edition
+    url: https://www.packtpub.com/product/mastering-postgresql-13-fourth-edition/9781800567498
+    image: packt_mastering_postgresql_13_4th.jpg
+    author: Hans-Jürgen Schönig
+    language: English
+    version: '13'
+    format: Paperback, eBook
+    published: November 2020
+  - title: Learn PostgreSQL
+    url: https://www.packtpub.com/product/learn-postgresql-12/9781838985288
+    image: learn-postgresql.png
+    author: Luca Ferrari, Enrico Pirozzi
+    language: English
+    version: '13'
+    format: Paperback, eBook
+    published: October 2020
+  - title: Fundamentos para el trabajo con PostgreSQL
+    url: https://www.amazon.com/dp/B088JZZHSR/ref=sr_1_1?dchild=1&keywords=yudisney&qid=1589400405&sr=8-1
+    image: fundamentos-postgresql.png
+    author: Yudisney Vazquez Ortíz, Anthony R. Sotolongo León
+    language: Spanish
+    version: '12'
+    format: Paperback, eBook
+    published: May 2020
+  - title: 'PostgreSQL for DBA: PostgreSQL 12'
+    url: https://www.amazon.com/dp/1796506044
+    image: postgresql-for-dba-12.jpg
+    author: Federico Campoli
+    language: English
+    version: '12'
+    format: Paperback, eBook
+    published: February 2020
+  - title: The Art of PostgreSQL
+    url: https://theartofpostgresql.com
+    image: art_of_postgresql.png
+    author: Dimitri Fontaine
+    language: English
+    version: '11'
+    format: Paperback, eBook
+    published: August 2019
+  - title: PostgreSQL 11 Administration Cookbook
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-11-administration-cookbook
+    image: postgresql-11-administration-cookbook.png
+    author: Simon Riggs, Gianni Ciolli, Sudheer Kumar Meesala
+    language: English
+    version: '11'
+    format: Paperback, eBook
+    published: May 2019
+  - title: 'PostgreSQL for DBA volume 1: Structure and Administration'
+    url: https://www.amazon.com/dp/1791794122
+    image: postgresql-for-dba-vol-1.jpg
+    author: Federico Campoli
+    language: English
+    version: '11'
+    format: Paperback, eBook
+    published: January 2019
+  - title: PostgreSQL 11 Server Side Programming Quick Start Guide
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-11-server-side-programming-quick-start-guide
+    image: packt_postgresql_11_server_side_programming.png
+    author: Luca Ferrari
+    language: English
+    version: '11'
+    format: Paperback, eBook
+    published: November 2018
+  - title: Mastering PostgreSQL 11 - Second Edition
+    url: https://www.packtpub.com/big-data-and-business-intelligence/mastering-postgresql-11-second-edition
+    image: packt_mastering_postgresql_11_2nd.png
+    author: Hans-Jürgen Schönig
+    language: English
+    version: '11'
+    format: Paperback, eBook
+    published: October 2018
+  - title: PostgreSQL 10 Administration Cookbook
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-10-administration-cookbook
+    image: packt_postgresql_10_admin_cookbook.png
+    author: Simon Riggs, Gianni Ciolli
+    language: English
+    version: '10'
+    format: Paperback, eBook
+    published: May 2018
+  - title: PostgreSQL 10 High Performance
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-10-high-performance
+    image: packt_postgresql_10_high_performance.png
+    author: Ibrar Ahmed, Gregory Smith, Enrico Pirozzi
+    language: English
+    version: '10'
+    format: Paperback, eBook
+    published: April 2018
+  - title: PostgreSQL for beginners
+    url: https://edu.postgrespro.ru/introbook_v4_en.pdf
+    image: PostgreSQL_for_beginners.png
+    author: Pavel Luzanov, Egor Rogov, Igor Levshin (translated by Liudmila Mantrova)
+    language: English
+    version: '10'
+    format: Paperback, eBook
+    published: March 2018
+  - title: PostGIS Cookbook, 2nd Edition
+    url: https://www.packtpub.com/application-development/postgis-cookbook-second-edition
+    image: packt_postgis_cookbook.png
+    author: Mayra Zurbaran et al
+    language: English
+    version: '10'
+    format: Paperback, eBook
+    published: March 2018
+  - title: Mastering PostgreSQL 10
+    url: https://www.packtpub.com/big-data-and-business-intelligence/mastering-postgresql-10
+    image: packt_mastering_postgresql_10.png
+    author: Hans-Jürgen Schönig
+    language: English
+    version: '10'
+    format: Paperback, eBook
+    published: January 2018
+  - title: A Curious Moon
+    url: https://bigmachine.io/products/a-curious-moon
+    image: a_curious_moon.jpg
+    author: Rob Conery
+    language: English
+    version: '10'
+    format: eBook
+    published: December 2017
+  - title: PostgreSQL - Architecture et notions avancées
+    url: https://www.d-booker.fr/postgresql/187-architecture-et-notions-avancees.html
+    image: architecture-et-notions-avancees.png
+    author: Guillaume Lelarge, Julien Rouhaud
+    language: French
+    version: '10'
+    format: Paperback, eBook
+    published: December 2017
+  - title: Mastering PostgreSQL In Application Development
+    url: https://masteringpostgresql.com/
+    image: dim_mastering_postgresql.png
+    author: Dimitri Fontaine
+    language: English
+    version: '10'
+    format: Paperback, eBook
+    published: November 2017
+  - title: 'PostgreSQL: Up and Running, 3rd Edition'
+    url: https://shop.oreilly.com/product/0636920052715.do
+    image: postgres_up_and_running_3.gif
+    author: Regina Obe, Leo Hsu
+    language: English
+    version: '10'
+    format: Paperback, eBook
+    published: October 2017
+  - title: PostgreSQL 9.6 High Performance
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-high-performance-second-edition
+    image: packt_pg96_high_performance.png
+    author: Ibrar Ahmed, Gregory Smith
+    language: English
+    version: '9.6'
+    format: Paperback, eBook
+    published: May 2017
+  - title: Mastering PostgreSQL 9.6
+    url: https://www.packtpub.com/big-data-and-business-intelligence/mastering-postgresql-96
+    image: packt_mastering_pg96.png
+    author: Hans-Jürgen Schönig
+    language: English
+    version: '9.6'
+    format: Paperback, eBook
+    published: May 2017
+  - title: PostgreSQL Administration Cookbook - 9.5/9.6 Edition
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-administration-cookbook-9596-edition
+    image: packt_postgresql_admin_cookbook_9596edition.png
+    author: Simon Riggs, Gianni Ciolli, Gabriele Bartolini
+    language: English
+    version: '9.6'
+    format: Paperback, eBook
+    published: April 2017
+  - title: PostgreSQL High Performance Cookbook
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-high-performance-cookbook
+    image: packt_postgresql_high_performance_cookbook.png
+    author: Chitij Chauhan, Dinesh Kumar
+    language: English
+    version: '9.6'
+    format: Paperback, eBook
+    published: March 2017
+  - title: 'Working with PostgreSQL: configuration and scaling'
+    url: https://postgresql.leopard.in.ua/
+    image: working-with-postgresql.png
+    author: Alexey Vasyliev
+    language: Russian
+    version: '9.6'
+    format: eBook
+    published: March 2017
+  - title: PostgreSQL High Availability Cookbook Second Edition
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-high-availability-cookbook-second-edition
+    image: packt_ha_cookbook_2ed.png
+    author: Shaun M. Thomas
+    language: English
+    version: '9.6'
+    format: Paperback, eBook
+    published: February 2017
+  - title: PL/pgSQL y otros lenguajes procedurales en PostgreSQL
+    url: https://www.lulu.com/shop/yudisney-vazquez-ortiz-and-anthony-r-sotolongo-león/plpgsql-y-otros-lenguajes-procedurales-en-postgresql/ebook/product-1665k4d9.html
+    image: plpgsql_y_otros_lenguajes.jpg
+    author: Anthony R. Sotolongo León, Yudisney Vazquez Ortiz
+    language: Spanish
+    version: '9.6'
+    format: eBook
+    published: June 2019
+  - title: PostgreSQL Development Essentials
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-development-essentials
+    image: packt_postgresql_development_essentials.png
+    author: Manpreet Kaur, Baji Shaik
+    language: English
+    version: '9.5'
+    format: Paperback, eBook
+    published: September 2016
+  - title: PostgreSQL - Architecture et notions avancées
+    url: https://www.d-booker.fr/postgresql/187-architecture-et-notions-avancees.html
+    image: architecture-et-notions-avancees.png
+    author: Guillaume Lelarge
+    language: French
+    version: '9.4'
+    format: Paperback, eBook
+    published: December 2015
+  - title: Learning PostgreSQL
+    url: https://www.packtpub.com/big-data-and-business-intelligence/learning-postgresql
+    image: packt_learning_postgresql.png
+    author: Salahaldin Juba, Achim Vannahme, Andrey Volkov
+    language: English
+    version: '9.4'
+    format: Paperback, eBook
+    published: November 2015
+  - title: PostgreSQL Replication - 2nd Edition
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-replication-second-edition
+    image: packt_postgresql_replication_2nd.png
+    author: Hans-Jürgen Schönig
+    language: English
+    version: '9.4'
+    format: Paperback, eBook
+    published: July 2015
+  - title: PostgreSQL 9 Administration Cookbook - Second Edition
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-9-administration-cookbook-second-edition/?utm_source=PoD&utm_medium=referral&utm_campaign=1849519064
+    image: packt_postgresql_9_admin_cookbook.png
+    author: Gabriele Bartolini, Gianni Ciolli, Simon Riggs, Hannu Krosing
+    language: English
+    version: '9.4'
+    format: Paperback, eBook
+    published: April 2015
+  - title: PostgreSQL for Data Architects
+    url: https://www.packtpub.com/product/postgresql-for-data-architects/9781783288601
+    image: packt_for_data_architects.png
+    author: Jayadevan Maymala
+    language: English
+    version: '9.4'
+    format: Paperback, eBook
+    published: March 2015
+  - title: Troubleshooting PostgreSQL
+    url: https://www.packtpub.com/big-data-and-business-intelligence/troubleshooting-postgresql/?utm_source=PoD&utm_medium=referral&utm_campaign=1783555319
+    image: packt_troubleshooting_postgresql.png
+    author: Hans-Jürgen Schönig
+    language: English
+    version: '9.4'
+    format: Paperback, eBook
+    published: March 2015
+  - title: PostgreSQL Developer's Guide
+    image: packt_developers_guide.png
+    author: Ibrar Ahmed, Asif Fayyaz, Amjad Shahzad
+    language: English
+    version: '9.4'
+    format: Paperback, eBook
+    published: February 2015
+  - title: PostgreSQL Server Programming - Second Edition
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-server-programming-second-edition/?utm_source=PoD&utm_medium=referral&utm_campaign=1783980583
+    image: packt_server_programming.png
+    author: Usama Dar, Hannu Krosing, Jim Mlodgenski, Kirk Roybal
+    language: English
+    version: '9.4'
+    format: Paperback, eBook
+    published: February 2015
+  - title: PostgreSQL Cookbook
+    image: packt_postgresql_cookbook.png
+    author: Chitij Chauhan
+    language: English
+    version: '9.3'
+    format: Paperback, eBook
+    published: January 2015
+  - title: PostgreSQL Up & Running (2nd Edition)
+    url: https://shop.oreilly.com/product/0636920032144.do
+    image: postgres_up_and_running.gif
+    author: Regina Obe, Leo Hsu
+    language: English
+    version: '9.4'
+    format: Paperback, eBook
+    published: December 2014
+  - title: PostgreSQL Administration Essentials
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-administration-essentials/?utm_source=PoD&utm_medium=referral&utm_campaign=1783988983
+    image: packt_administration_essentials.png
+    author: Hans-Jürgen Schönig
+    language: English
+    version: '9.3'
+    format: Paperback, eBook
+    published: October 2014
+  - title: PostgreSQL 9 High Availability Cookbook
+    url: https://www.packtpub.com/big-data-and-business-intelligence/postgresql-9-high-availability-cookbook/?utm_source=PoD&utm_medium=referral&utm_campaign=1849516960
+    image: packt_postgresql_9_ha_cookbook.png
+    author: Shaun M. Thomas
+    language: English
+    version: '9.3'
+    format: Paperback, eBook
+    published: July 2014
+  - title: Postgres Succinctly
+    url: https://www.syncfusion.com/resources/techportal/ebooks/postgres
+    image: postgres-succinctly.png
+    author: Peter Shaw
+    language: English
+    version: '9.3'
+    format: eBook
+    published: January 2014
+  - title: PostgreSQL Replication
+    url: https://www.packtpub.com/postgresql-replication/book
+    image: pg-replication-packt.jpg
+    author: Zoltan Böszörmenyi, Hans-Jürgen Schönig
+    language: English
+    version: '9.2'
+    format: Paperback, eBook
+    published: March 2013
+  - title: PostgreSQL Backup and Restore How-to
+    url: https://www.packtpub.com/product/instant-postgresql-backup-and-restore-how-to/9781782169109
+    image: pg-backup-restore-packt.jpg
+    author: Shaun M. Thomas
+    language: English
+    version: '9.2'
+    format: eBook
+    published: March 2013
+  - title: Instant PostgreSQL Starter
+    image: instant-pg-starter-packt.jpg
+    author: Daniel K. Lyons
+    language: English
+    version: '9.2'
+    format: eBook
+    published: March 2013
+  - title: PostgreSQL Server Programming
+    url: https://www.packtpub.com/postgresql-server-programming/book
+    image: pg-programming-packt.jpg
+    author: Hannu Krosing, Kirk Roybal
+    language: English
+    version: '9.2'
+    format: Paperback, eBook
+    published: January 2013
+  - title: 'PostgreSQL: Up and Running'
+    url: https://shop.oreilly.com/product/0636920025061.do
+    image: 51gStZeVDL._AA160_.jpg
+    author: Regina Obe, Leo Hsu
+    language: English
+    version: '9.2'
+    format: Paperback
+    published: July 2012
+  - title: Bases de données PostgreSQL, Gestion des performances
+    image: pearson_9782744024832.png
+    author: Gregory Smith
+    language: French
+    version: '9.0'
+    format: Paperback
+    published: May 2011
+  - title: PostgreSQL Reference Manual - Volume 1-3
+    image: 0954612027.92.jpg
+    author: The PostgreSQL Global Development Group
+    language: English
+    version: '9.0'
+    format: Paperback
+    published: November 2010
+  - title: PostgreSQL 9.0 High Performance
+    url: https://2ndquadrant.com/books/postgresql-9-0-high-performance/
+    image: 0301OS_MockupCover.jpg
+    author: Gregory Smith
+    language: English
+    version: '9.0'
+    format: PDF, Paperback
+    published: October 2010
+  - title: PostgreSQL 9 Administration Cookbook
+    url: https://2ndquadrant.com/books/postgresql-9-admin-cookbook/
+    image: 0288OS_MockupCover_Cookbook.jpg
+    author: Simon Riggs, Hannu Krosing
+    language: English
+    version: '9.0'
+    format: PDF, Paperback
+    published: October 2010
+  - title: Utiliser PostgreSQL
+    image: 9782815001984.jpg
+    author: Dominique Colombani
+    language: French
+    version: '8.4'
+    format: PDF
+    published: April 2010
+  - title: Installer et débuter avec PostgreSQL
+    image: 9782815001809.png
+    author: Dominique Colombani
+    language: French
+    version: '8.4'
+    format: PDF
+    published: September 2009
+  - title: PostgreSQL. Datenbankpraxis für Anwender, Administratoren und Entwickler (Broschiert)
+    url: https://postgresql-buch.de/
+    image: PB_Titel_PostgreSQL_small.png
+    author: Andreas Scherbaum
+    language: German
+    version: '8.4'
+    format: Paperback
+    published: August 2009
+  - title: PostgreSQL
+    image: 51im2FLd-IL._SL500_AA300_.jpg
+    author: François-Marie Colonna
+    language: French
+    version: '8.3'
+    format: Paperback
+    published: November 2008
+  - title: PostgreSQL-Administration
+    url: https://www.amazon.de/PostgreSQL-Administration-Peter-Eisentraut/dp/3897217775/
+    image: 21r2crI2nWL._SL500_AA180_.jpg
+    author: Peter Eisentraut, Bernd Helmle
+    language: German
+    version: '8.3'
+    format: Hardback
+    published: October 2008
+  - title: PostgreSQL - Administration et exploitation d’une base de données (2ème édition)
+    image: seblbook_ed2.jpg
+    author: Sébastien LARDIERE
+    language: French
+    version: '8.2'
+    format: Paperback
+    published: October 2007
+  - title: PostgreSQL 8 For Windows
+    url: https://www.amazon.com/PostgreSQL-Windows-Database-Professionals-Library/dp/0071485627/
+    image: 51t2AbIfT4L._SS500_.jpg
+    author: Richard Blum
+    language: English
+    version: '8.2'
+    format: Paperback
+    published: March 2007
+  - title: Beginning PHP and PostgreSQL E-Commerce
+    url: https://www.amazon.com/Beginning-PHP-PostgreSQL-E-Commerce-Professional/dp/159059648X/ref=nosim/cristiandarie-20
+    image: 159059648X.01._AA240_SCLZZZZZZZ_V46693183_.jpg
+    author: Cristian Darie, Emilian Balanescu, Mihai Bucica
+    language: English
+    version: '8.1'
+    format: Paperback
+    published: December 2006
+  - title: 'Beginning PHP & PostgreSQL 8: From Novice to Professionnal'
+    url: https://www.amazon.com/exec/obidos/redirect?link_code=as2&path=ASIN/1590595475&tag=zillablog-20&camp=1789&creative=9325
+    image: 1590595475.01._AA240_SCLZZZZZZZ_.jpg
+    author: W. Jason Gilmore, Robert H. Treat
+    language: English
+    version: '8.1'
+    format: Paperback
+    published: March 2006
+  - title: PostgreSQL ile Programlama
+    url: http://www.students.itu.edu.tr/~yazicivo/doc/postgresql-ile-programlama.html
+    image: kitap_kapak.jpg
+    author: Volkan YAZICI
+    language: Turkish
+    version: '8.1'
+    format: Paperback
+    published: February 2006
+  - title: PostgreSQL, 2nd Edition
+    url: https://www.amazon.com/exec/obidos/tg/detail/-/0672327562/qid=1127439720/sr=2-1/ref=pd_bbs_b_2_1/103-1309672-0439005?v=glance&s=books
+    image: 0735712573.01.LZZZZZZZ.jpg
+    author: Korry Douglas, Susan Douglas
+    language: English
+    version: '8.0'
+    format: Paperback
+    published: July 2005
+  - title: Beginning Databases with PostgreSQL, 2nd Edition
+    url: https://www.amazon.com/exec/obidos/tg/detail/-/1590594789/qid=1120009860/sr=1-3/ref=sr_1_3/104-6660226-5122336?v=glance&s=books
+    image: 1590594789.01.MZZZZZZZ.jpg
+    author: Neil Matthew, Richard Stone
+    language: English
+    version: '8.0'
+    format: Paperback
+    published: April 2005
+  - title: PostgreSQL GE-PACKT
+    url: https://www.amazon.de/exec/obidos/ASIN/3826614933/qid=1119990657/sr=2-1/ref=sr_2_11_1/028-1975809-0670932
+    image: 3826614933.03.MZZZZZZZ.jpg
+    author: Peter Eisentraut
+    language: German
+    version: '8.0'
+    format: Paperback
+    published: January 2005
+  - title: PostgreSQL, m. CD-ROM
+    url: https://www.amazon.de/exec/obidos/ASIN/3936546223/qid=1119990657/sr=2-3/ref=sr_2_11_3/028-1975809-0670932
+    image: 3936546223.03.MZZZZZZZ.jpg
+    author: Paul Weinstabl
+    language: German
+    version: '7.4'
+    format: Paperback
+    published: November 2004
+  - title: 'PostgreSQL: Das offizielle Handbuch'
+    url: https://www.amazon.de/exec/obidos/ASIN/3826613376/qid=1068391203/sr=2-2/ref=sr_2_11_2/302-2683521-4281640
+    image: 3826613376.03.LZZZZZZZ.jpg
+    author: Peter Eisentraut
+    language: German
+    version: <7.4
+    format: Paperback
+    published: August 2003 (auf Deutsch/in German)
+  - title: PostgreSQL. Grundlagen - Praxis - Anwendungsentwicklung mit PHP
+    url: https://www.amazon.de/exec/obidos/ASIN/3898641759/postgresql-20
+    image: 3898641759.03.MZZZZZZZ.jpg
+    author: Cornelia Boenigk
+    language: German
+    version: <7.4
+    format: Paperback
+    published: September 2002
+  - title: PHP and PostgreSQL Advanced Web Programming
+    url: https://www.amazon.com/exec/obidos/ASIN/0672323826/postgresql-20
+    image: 0672323826.01._PE30_SCMZZZZZZZ_.jpg
+    author: Ewald Geschwinde, Hans-Jürgen Schönig
+    language: English
+    version: <7.4
+    format: Paperback
+    published: June 2002
+  - title: Practical PostgreSQL (O'Reilly Unix)
+    url: https://www.amazon.com/exec/obidos/ASIN/1565928466/postgresql-20
+    image: 1565928466.01.TZZZZZZZ.jpg
+    author: Command Prompt Inc (Editor) et al
+    language: English
+    version: <7.4
+    format: Paperback
+    published: January 2002
+  - title: Postgresql Developer's Handbook
+    url: https://www.amazon.com/exec/obidos/ASIN/0672322609/postgresql-20
+    image: 0672322609.01.TZZZZZZZ.jpg
+    author: Ewald Geschwinde et al
+    language: English
+    version: <7.4
+    format: Paperback
+    published: December 2001
+  - title: PostgreSQL
+    url: https://www.amazon.com/exec/obidos/ASIN/193184142X/postgresql-20
+    image: 193184142X.01.TZZZZZZZ.jpg
+    author: Jeff Perkins
+    language: English
+    version: <7.4
+    format: Paperback
+    published: October 2001
+  - title: PostgreSQL Essential Reference
+    url: https://www.amazon.com/exec/obidos/ASIN/0735711216/postgresql-20
+    image: 0735711216.01.TZZZZZZZ.jpg
+    author: Barry Stinson
+    language: English
+    version: <7.4
+    format: Paperback
+    published: October 2001
+  - title: Beginning Databases with PostgreSQL
+    url: https://www.amazon.com/exec/obidos/ASIN/1861005156/postgresql-20
+    image: 1861005156.01.TZZZZZZZ.jpg
+    author: Richard Stones, Neil Matthew
+    language: English
+    version: <7.4
+    format: Paperback
+    published: September 2001
+  - title: 'PostgreSQL: Introduction and Concepts'
+    url: https://www.amazon.com/exec/obidos/ASIN/0201703319/postgresql-20
+    image: 0201703319.01.TZZZZZZZ.jpg
+    author: Bruce Momjian
+    language: English
+    version: <7.4
+    format: Paperback
+    published: December 2000
+  - title: Postgresql Programmer's Guide
+    url: https://www.amazon.com/exec/obidos/ASIN/0595149170/postgresql-20
+    image: 0595149170.01.TZZZZZZZ.jpg
+    author: Thomas Lockhart (Editor)
+    language: English
+    version: '7.0'
+    format: Paperback
+    published: December 2000

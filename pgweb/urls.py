@@ -59,6 +59,7 @@ urlpatterns = [
     re_path(r'^developer/beta/$', pgweb.core.views.beta_testing),
 
     re_path(r'^docs/$', pgweb.docs.views.root),
+    path(r'docs/books/', pgweb.docs.views.books),
     re_path(r'^docs/manuals/$', pgweb.docs.views.manuals),
     re_path(r'^docs/manuals/archive/$', pgweb.docs.views.manualarchive),
     re_path(r'^docs/release/$', pgweb.docs.views.release_notes_list),
