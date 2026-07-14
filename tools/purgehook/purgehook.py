@@ -54,7 +54,7 @@ if __name__ == "__main__":
         elif l.startswith('data/'):
             # Data files map to xkeys with the same name as the file prefixed by data_
             curs.execute("SELECT varnish_purge_xkey(%(key)s)", {
-                'key': 'data_{}'.format(os.path.splitext(os.path.basename(l))[0]),
+                'key': 'data_{}'.format(os.path.splitext(l[5:])[0].replace('/', '_')),
             })
     conn.commit()
     conn.close()
