@@ -28,21 +28,16 @@ class FeatureMatrixData(YamlDataLoader):
                 if 'description' in feature:
                     self.slugmap[slugify(feature['name'])] = feature
 
-    def get(self):
-        return super().get()['featurematrix']
-
     def feature_from_slug(self, slug):
         self._conditional_load()
         return self.slugmap.get(slug, None)
 
     def get_versions(self):
-        d = super().get()
-        return d['versions']['min'], d['versions']['max']
+        return self.data['versions']['min'], self.data['versions']['max']
 
     def slug_from_legacy(self, id):
-        d = self.get()
-        if id in d['legacymap']:
-            return slugify(d['legacymap'][id])
+        if id in self.data['legacymap']:
+            return slugify(self.data['legacymap'][id])
         return None
 
 
@@ -68,7 +63,7 @@ def root(request):
     versions = list(Version.objects.filter(tree__gte=minver, tree__lte=maxver).order_by('-tree'))
     versions_rev = list(reversed(versions))
 
-    matrix = matrixdata.get()
+    matrix = matrixdata.get()['featurematrix']
     # Compute the column values on each load of the page, since the list of versions may have changed.
     # (the page is cached so it's not as bad as it sounds)
     for features in matrix.values():
