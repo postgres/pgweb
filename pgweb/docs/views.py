@@ -401,6 +401,7 @@ booksdata = BooksData()
 
 
 @xkey('data_books')
+@content_sources('style', "'unsafe-inline'")
 def books(request):
     return render_pgweb(request, 'docs', 'docs/books.html', {
         'books': booksdata.get()['books'],

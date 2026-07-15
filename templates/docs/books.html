@@ -15,7 +15,7 @@
       <tr>
         <td>
 {% if book.url %}<a href="https://leanpub.com/deep-dive-into-a-sql-query">{% endif %}
-              <img src="/media/img/docs/books/{{ book.image }}" alt="{{ book.title }}">
+	    <img class="bookcover" src="/media/img/empty.png" alt="{{ book.title }}" style="background-position-x: {% widthratio forloop.counter0 1 -131 %}px">
 {% if book.url %}</a>{% endif %}
         <td>
            <strong>Title</strong>: {{ book.title }}<br />

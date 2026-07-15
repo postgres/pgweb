@@ -1807,6 +1807,13 @@ table.sponsor-table tbody tr td:nth-child(3) {
   width: 30%;
 }
 
+/* Docs/books */
+img.bookcover {
+  width: 130px;
+  height: 160px;
+  background-image: url('/media/img/docs/books/combined.webp');
+}
+
 /**
 * This sets the rule for the rendering in the sponsors table. The name is chosen
 * to ensure compatibility with various browser plugins that may otherwise hide
