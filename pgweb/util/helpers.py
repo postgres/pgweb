@@ -54,7 +54,7 @@ def simple_form(instancetype, itemid, request, formclass, formtemplate='base/for
             return HttpResponseRedirect(redirect)
 
         # Process this form
-        form = formclass(data=request.POST, instance=instance)
+        form = formclass(data=request.POST, files=request.FILES, instance=instance)
         if hasattr(form, 'filter_by_user'):
             form.filter_by_user(request.user)
         for fn in form.fields:

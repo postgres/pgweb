@@ -1,6 +1,7 @@
 Django>=5.2,<5.3
 psycopg2==2.8.5
 pycryptodomex>=3.4.7,<3.5
+Pillow>=10.0
 Markdown==3.0.1
 requests-oauthlib==1.0.0
 cvss==2.2

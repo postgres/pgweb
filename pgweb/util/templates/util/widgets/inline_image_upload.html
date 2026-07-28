@@ -1,0 +1,9 @@
+{%if widget.value %}
+<img src="data:{{widget.imagetype}};base64,{{widget.value}}" class="inline-photo-widget"><br/>
+{%endif%}
+{% if not widget.required %}
+<input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}" />
+<label for="{{ widget.checkbox_id }}">{{ widget.clear_checkbox_label }}</label>
+{% endif %}
+<input type="{{ widget.type }}" accept="image/jpeg,image/png" name="{{ widget.name }}"{% for name, value in widget.attrs.items %}{% if value is not False %} {{ name }}{% if value is not True %}="{{ value|stringformat:'s' }}"{% endif %}{% endif %}{% endfor %}
+ />
