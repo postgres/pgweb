@@ -14,7 +14,7 @@
 {% for book in books %}
       <tr>
         <td>
-{% if book.url %}<a href="https://leanpub.com/deep-dive-into-a-sql-query">{% endif %}
+{% if book.url %}<a href="{{ book.url }}">{% endif %}
 	    <img class="bookcover" src="/media/img/empty.png" alt="{{ book.title }}" style="background-position-x: {% widthratio forloop.counter0 1 -131 %}px">
 {% if book.url %}</a>{% endif %}
         <td>
