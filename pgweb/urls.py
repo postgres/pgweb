@@ -40,7 +40,7 @@ urlpatterns = [
     re_path(r'^about/news/taglist.json/$', pgweb.news.views.taglist_json),
     re_path(r'^about/events/$', pgweb.events.views.main),
     re_path(r'^about/eventarchive/$', pgweb.events.views.archive),
-    re_path(r'^about/event/(?P<itemid>\d+)(<?P<slug>-.*)?/$', pgweb.events.views.item),
+    re_path(r'^about/event/(?P<itemid>\d+)(?P<slug>-.*)?/$', pgweb.events.views.item),
     re_path(r'^about/event/(?P<slug>[^/]+)-(?P<itemid>\d+)/$', pgweb.events.views.item),
     re_path(r'^about/featurematrix/$', pgweb.featurematrix.views.root),
     re_path(r'^about/featurematrix/detail/(\d+)/$', pgweb.featurematrix.views.detail_legacy),
