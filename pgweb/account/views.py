@@ -13,6 +13,7 @@ from django.contrib.auth import logout as django_logout
 from django.conf import settings
 from django.db import transaction, connection
 from django.db.models import Q, Prefetch
+from django.db.backends.postgresql.psycopg_any import DateTimeTZRange
 
 import base64
 import urllib.parse
@@ -101,7 +102,7 @@ objtypes = {
         'objects': lambda u: NewsArticle.objects.filter(org__managers=u),
         'tristate': True,
         'editapproved': False,
-        'embargoes': lambda: NewsPostingEmbargo.objects.all(),
+        'embargoes': lambda: NewsPostingEmbargo.objects.filter(duration__overlap=DateTimeTZRange(datetime.now(), None))
     },
     'events': {
         'title': 'event',
