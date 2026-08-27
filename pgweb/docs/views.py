@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.conf import settings
 
 from decimal import Decimal, ROUND_DOWN
+import itertools
 import os
 import re
 
@@ -293,6 +294,11 @@ _release_notes_only_versions = [
 ]
 release_notes_only_versions = [{'major': major, 'minor': minor} for major, minor in _release_notes_only_versions]
 
+no_release_notes_versions = [
+    {"major": 18, "minor": 5},
+]
+no_release_notes_per_major = dict((k, list(m['minor'] for m in v)) for k, v in itertools.groupby(no_release_notes_versions, key=lambda x: x['major']))
+
 
 def release_notes_list(request):
     """Lists the available release notes"""
@@ -300,7 +306,7 @@ def release_notes_list(request):
     releases = exec_to_dict("SELECT tree AS major, minor FROM core_version INNER JOIN generate_series(0, latestminor) g(minor) ON true WHERE testing=0 AND tree > 6.2 ORDER BY tree DESC, minor DESC")
 
     r = render_pgweb(request, 'docs', 'docs/release_notes_list.html', {
-        'releases': releases + release_notes_only_versions,
+        'releases': [v for v in releases + release_notes_only_versions if v not in no_release_notes_versions],
     })
     r['xkey'] = 'pgdocs_all'
     return r
@@ -328,6 +334,10 @@ def release_notes(request, version):
         minor_version = Decimal(version_pieces[1])
         if int(version_pieces[0]) >= 10 or int(version_pieces[0]) <= 1:
             if major_version > 1:
+                if {"major": major_version, "minor": minor_version} in no_release_notes_versions:
+                    # Redirect to the following version if this one has no release notes. In the very unlikely event we have more than one
+                    # such version, we'll just redirect more than once.
+                    return HttpResponseRedirect("/docs/release/{}.{}/".format(major_version, minor_version + 1))
                 if minor_version == 0:
                     version_file = 'release-{}.html'.format(major_version)
                 else:
@@ -366,6 +376,9 @@ def release_notes(request, version):
         available_minor_versions = exec_to_dict("SELECT minor FROM generate_series(0, (SELECT latestminor FROM core_version WHERE tree=%(major_version)s)) g(minor) ORDER BY minor DESC", {
             'major_version': major_version,
         })
+        if major_version in no_release_notes_per_major:
+            available_minor_versions = [v for v in available_minor_versions if v['minor'] not in no_release_notes_per_major[major_version]]
+        print(available_minor_versions)
         previous_minor = minor_version - 1 if minor_version > 0 else None
         next_minor = minor_version + 1 if minor_version < available_minor_versions[0]['minor'] else None
     else:
