@@ -76,10 +76,11 @@ def do_migrate():
         for cve in release.get('cve', []):
             try:
                 patch = SecurityPatch.objects.get(cve=cve)
-                patch.newspost = news
-                patch.public = True
-                patch.save(update_fields=['newspost', 'public'])
-                print("Attached news article {} to CVE-{}".format(news.id, cve))
+                if patch.newspost != news or not patch.public:
+                    patch.newspost = news
+                    patch.public = True
+                    patch.save(update_fields=['newspost', 'public'])
+                    print("Attached news article {} to CVE-{}".format(news.id, cve))
             except SecurityPatch.DoesNotExist:
                 print("Could not find CVE {}, cannot connect to announcement")
 
