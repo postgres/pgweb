@@ -61,6 +61,8 @@ varnishpurge AS (
   SELECT '/support/security/CVE-' || cve || '/' FROM versionload
   UNION
   SELECT '/support/security/' || tree::text || '/' FROM versionload
+  UNION
+  SELECT '/support/security/' WHERE EXISTS (SELECT 1 FROM cveload) OR EXISTS (SELECT 1 FROM versionload)
 ),
 summary AS (
   SELECT cve, action || ' CVE' AS what FROM cveload
