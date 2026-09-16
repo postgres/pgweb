@@ -1737,6 +1737,28 @@ table.contributor-table thead tr th {
   width: 50%;
 }
 
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 4px;
+}
+.badges-grid > figure {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.badges-grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+.badges-grid figcaption {
+  text-align: center;
+  padding: 4px;
+}
+
 /* News archive */
 #pgContentWrap span.newstag {
     white-space: nowrap;

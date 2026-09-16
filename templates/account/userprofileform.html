@@ -94,9 +94,23 @@
       </div>
     {%endfor%}
 
+  {% if badges %}
+    <h2>Contributor badges</h2>
+    <div class="badges-grid">
+    {%for b in badges %}
+      <figure>
+        <a href="/community/badge/{{b.slug}}/">
+        <img src="{%if b.has_image %}/community/badge/{{b.slug}}/image/{%else%}/media/img/about/press/elephant.png{%endif%}">
+        <figcaption>{{b}}</figcaption>
+        </a>
+      </figure>
+    {%endfor%}
+    </div>
+  {% endif %}
+
   {% if contribform %}
     <h2>Edit contributor information</h2>
-    <p>You can edit the information that's shown on the <a href="/community/contributors/" target="_blank" rel="noopener">contributors</a> page. Please be careful as your changes will take effect immediately!
+    <p>You can edit the information that's shown on your <a href="/community/people/{{user.username}}/" target="_blank" rel="noopener">profile</a> page. Leave fields blank that you do not wish to make public. Please be careful as your changes will take effect immediately!
     </p>
     {% for field in contribform %}
       <div class="form-group row">
@@ -116,6 +130,12 @@
         </div>
       </div>
     {% endfor %}
+  {% elif badges %}
+    <h2>Create contributor profile</h2>
+    <p>You have been awarded contributor badges. To have your name included in the public people and badge holder lists, you can create a publicly visible profile page.</p>
+    <div>
+      <input type="checkbox" name="create_contributor_profile"> Create publicly visible profile page
+    </div>
   {% endif %}
 
   <div class="submit-row">

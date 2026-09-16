@@ -26,7 +26,7 @@ urlpatterns = [
 
     # Submitted items
     re_path(r'^(?P<objtype>news)/(?P<item>\d+)/(?P<what>submit|withdraw)/$', pgweb.account.views.submitted_item_submitwithdraw),
-    re_path(r'^(?P<objtype>news|events|products|organisations|services)/(?P<item>\d+|new)/$', pgweb.account.views.submitted_item_form),
+    re_path(r'^(?P<objtype>news|events|products|organisations|services|badges)/(?P<item>\d+|new)/$', pgweb.account.views.submitted_item_form),
     re_path(r'^organisations/confirm/([0-9a-f]+)/$', pgweb.account.views.confirm_org_email),
 
     # Markdown preview (silly to have in /account/, but that's where all the markdown forms are so meh)

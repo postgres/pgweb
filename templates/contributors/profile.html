@@ -1,0 +1,57 @@
+{%extends "base/page.html"%}
+{%load pgfilters%}
+{%block title%}{{contributor.firstname}} {{contributor.lastname}} - Contributor Profile{%endblock%}
+{%block contents%}
+<h1>{{contributor.firstname}} {{contributor.lastname}} <i class="fa fa-user"></i></h1>
+
+<div class="row">
+  <div class="col-md-8">
+    {%if badges%}
+    <h2>Contribution Badges</h2>
+      <div class="badges-grid">
+      {%for b in badges %}
+        <figure>
+          <a href="/community/badge/{{b.badge.slug}}/">
+          <img src="{%if b.badge.has_image %}/community/badge/{{b.badge.slug}}/image/{%else%}/media/img/about/press/elephant.png{%endif%}">
+          <figcaption>{{b.badge}}{%if b.date_retired%}<br><em>(retired)</em>{%endif%}</figcaption>
+          </a>
+        </figure>
+      {%endfor%}
+      </div>
+    {%endif%}
+
+    {%if contributor.contribution%}
+    <h2>Contribution</h2>
+    <p>{{contributor.contribution}}</p>
+    {%endif%}
+
+    <h2>Information</h2>
+    <dl class="row">
+      <dt class="col-sm-3">Contributor Type</dt>
+      <dd class="col-sm-9">{%if contributor.ctype%}{{contributor.ctype.typename}}{%else%}Basic contributor, not recognized{%endif%}</dd>
+
+      {%if contributor.email%}
+      <dt class="col-sm-3">Email</dt>
+      <dd class="col-sm-9">{{contributor.email|hidemail}}</dd>
+      {%endif%}
+
+      {%if contributor.location%}
+      <dt class="col-sm-3">Location</dt>
+      <dd class="col-sm-9">{{contributor.location}}</dd>
+      {%endif%}
+
+      {%if contributor.company%}
+      <dt class="col-sm-3">Company</dt>
+      <dd class="col-sm-9">
+        {%if contributor.companyurl%}
+          <a href="{{contributor.companyurl}}" target="_blank" rel="noopener">{{contributor.company}}</a>
+        {%else%}
+          {{contributor.company}}
+        {%endif%}
+      </dd>
+      {%endif%}
+    </dl>
+  </div>
+</div>
+
+{%endblock%}

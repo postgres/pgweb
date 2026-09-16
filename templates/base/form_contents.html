@@ -1,5 +1,5 @@
 {%load pgfilters%}
-<form class="form-horizontal" method="post" action=".">{%if not nocsrf%}{% csrf_token %}{%endif%}
+<form class="form-horizontal" method="post" action="."{% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>{%if not nocsrf%}{% csrf_token %}{%endif%}
   {%if form.errors %}
     <div class="alert alert-danger">
       Please correct the errors below, and re-submit the form.

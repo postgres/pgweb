@@ -160,7 +160,8 @@ def _modclasses():
     from pgweb.core.models import Organisation
     from pgweb.downloads.models import Product
     from pgweb.profserv.models import ProfessionalService
-    return [NewsArticle, Event, Organisation, Product, ProfessionalService]
+    from pgweb.contributors.models import Badge
+    return [NewsArticle, Event, Organisation, Product, ProfessionalService, Badge]
 
 
 def get_all_pending_moderations():

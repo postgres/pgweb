@@ -13,7 +13,7 @@ from pgweb.util.misc import send_template_mail, generate_random_token
 
 class OrganisationForm(forms.ModelForm):
     new_form_intro = """<em>Note!</em> An organisation record is only needed to post news, events,
-products or professional services. In particular, it is <em>not</em> necessary to register an
+products, professional services or contributor badges. In particular, it is <em>not</em> necessary to register an
 organisation in order to ask questions or otherwise participate on the PostgreSQL mailing lists, file a bug
 report, or otherwise interact with the community."""
 

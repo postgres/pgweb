@@ -1,0 +1,49 @@
+{%extends "base/page.html"%}
+{%load pgfilters%}
+{%block title%}{{badge}} - Contribution{%endblock%}
+{%block contents%}
+<h1>Badge: {{badge}} <i class="fa fa-star"></i></h1>
+<p><img src="{%if badge.has_image %}/community/badge/{{badge.slug}}/image/{%else%}/media/img/about/press/elephant.png{%endif%}" width="150"></p>
+
+{% if badge.description or badge.url %}
+<h2>Contribution</h2>
+{%endif%}
+{% if badge.description %}
+<p>{{badge.description}}</p>
+{%endif%}
+{% if badge.url %}
+<p><a href="{{badge.url}}">{{badge.url}}</a></p>
+{%endif%}
+
+{%if holders%}
+<h2>Badge Holders</h2>
+  {%if holders|length > 50%}
+    {%for u in holders.all %}
+      <nobr>{%if u.date_retired%}<em>{%endif%}<a href="/community/people/{{u.user}}/">{{u.user.contributor.firstname}} {{u.user.contributor.lastname}}</a>{%if u.date_retired%}</em>{%endif%} {%if not forloop.last%}&middot;{%endif%}</nobr>
+    {%endfor%}
+  {%else%}
+    <ul>
+      {%for u in holders.all%}
+        <li>{%if u.date_retired%}<em>{%endif%}<a href="/community/people/{{u.user}}/">{{u.user.contributor.firstname}} {{u.user.contributor.lastname}}</a>{%if u.date_retired%} (retired from this activity)</em>{%endif%}</li>
+      {%endfor%}
+    </ul>
+  {%endif%}
+{%endif%}
+
+<h2>Getting added</h2>
+{% if badge.org %}
+<p>This badge is issued by <em>{{badge.org}}</em>.</p>
+{%endif%}
+
+<p>If you think you should be listed
+  here, check your <a href="/account/profile/">account profile</a> page if the
+  badge is present there and activate your contribution profile page. If not,
+  contact the badge issuing organisation and ask to be added.</p>
+
+{% if badge.contact %}
+<p>Contact information: <em>{{badge.contact}}</em>.</p>
+{%endif%}
+
+<p>People are listed in alphabetical order.</p>
+
+{%endblock%}

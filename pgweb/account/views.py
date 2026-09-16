@@ -36,7 +36,7 @@ from pgweb.news.models import NewsArticle, NewsPostingEmbargo
 from pgweb.events.models import Event
 from pgweb.core.models import Organisation, UserProfile, ModerationNotification
 from pgweb.core.models import OrganisationEmail
-from pgweb.contributors.models import Contributor
+from pgweb.contributors.models import Contributor, Badge
 from pgweb.downloads.models import Product
 from pgweb.profserv.models import ProfessionalService
 
@@ -125,6 +125,11 @@ objtypes = {
         'submit_header': '<h3>Submit organisation</h3>Before submitting a new Organisation, please verify on the list of <a href="/account/orglist/">current organisations</a> if the organisation already exists. If it does, please contact the manager of the organisation to gain permissions.',
         'editapproved': True,
     },
+    'badges': {
+        'title': 'contributor badge',
+        'objects': lambda u: Badge.objects.filter(org__managers=u),
+        'editapproved': True,
+    },
 }
 
 
@@ -142,11 +147,13 @@ def profile(request):
     can_change_email = (request.user.password != OAUTH_PASSWORD_STORE)
 
     # We may have a contributor record - and we only show that part of the
-    # form if we have it for this user.
+    # form if we have it for this user. If the user has any badges awarded,
+    # offer them to create the contributor record.
     try:
         contrib = Contributor.objects.get(user=request.user.pk)
     except Contributor.DoesNotExist:
         contrib = None
+    badges = Badge.objects.with_has_image().filter(approved=True, holders=request.user.pk)
 
     contribform = None
 
@@ -178,7 +185,9 @@ def profile(request):
                 log.info("User {} changed primary email from {} to {}".format(user.username, oldemail, user.email))
 
             profileform.save()
-            if contrib:
+            if badges and 'create_contributor_profile' in request.POST and request.POST['create_contributor_profile']:
+                contrib = Contributor.objects.create(user=user, firstname=user.first_name, lastname=user.last_name, email=user.email)
+            elif contrib:
                 contribform.save()
             if secondaryemailform.cleaned_data.get('email1', ''):
                 sa = SecondaryEmail(user=request.user, email=secondaryemailform.cleaned_data['email1'], token=generate_random_token())
@@ -211,6 +220,7 @@ def profile(request):
         'secondaryemailform': secondaryemailform,
         'secondaryaddresses': secondaryaddresses,
         'secondarypending': any(not a.confirmed for a in secondaryaddresses),
+        'badges': badges,
         'contribform': contribform,
     })
 

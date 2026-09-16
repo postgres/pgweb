@@ -73,9 +73,13 @@ urlpatterns = [
 
     re_path(r'^community/$', pgweb.core.views.community),
     re_path(r'^community/contributors/$', pgweb.contributors.views.completelist),
+    re_path(r'^community/people/$', pgweb.contributors.views.peoplelist),
+    re_path(r'^community/people/([^/]+)/$', pgweb.contributors.views.profile),
+    re_path(r'^community/badge/(?P<slug>[-\w]+)/$', pgweb.contributors.views.badge_view),
+    re_path(r'^community/badge/(?P<slug>[-\w]+)/image/$', pgweb.contributors.views.badge_image),
+
     re_path(r'^community/lists/$', RedirectView.as_view(url='/list/', permanent=True)),
     re_path(r'^community/lists/subscribe/$', RedirectView.as_view(url='https://lists.postgresql.org/', permanent=True)),
-
     re_path(r'^community/lists/listinfo/$', pgweb.lists.views.listinfo),
     re_path(r'^community/recognition/$', RedirectView.as_view(url='/about/policies/', permanent=True)),
     re_path(r'^community/survey/vote/(\d+)/$', pgweb.survey.views.vote),
