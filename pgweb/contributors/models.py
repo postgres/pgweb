@@ -28,7 +28,7 @@ class Contributor(models.Model):
     location = models.CharField(max_length=100, null=True, blank=True)
     contribution = models.TextField(null=True, blank=True,
                                     help_text='This description is currently used for major contributors only')
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
 
     send_notification = True
     purge_urls = ('/community/contributors/', )
