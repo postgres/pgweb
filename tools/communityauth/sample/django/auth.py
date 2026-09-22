@@ -184,7 +184,7 @@ We apologize for the inconvenience.
             res = getattr(settings, 'PGAUTH_CREATEUSER_CALLBACK')(
                 data['u'][0],
                 data['e'][0],
-                ['f'][0],
+                data['f'][0],
                 data['l'][0],
             )
             # If anything is returned, we'll return that as our result.
