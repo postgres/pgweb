@@ -136,7 +136,7 @@ function archChanged() {
    }
  }
 
-  for (const a in versions.sort()) {
+  for (const a in versions.sort(sortNumeric).reverse()) {
     if (supported_versions.includes(parseInt(versions[a]))) {
       opt = document.createElement('option');
       opt.text = opt.value = versions[a];
