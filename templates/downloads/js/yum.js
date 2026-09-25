@@ -14,6 +14,8 @@ function get_platform_name(plat, ver) {
     }
     else if (plat == 'F')
 	return "Fedora";
+    else if (plat == 'AL')
+	return "Amazon Linux";
     return "Undefined distribution";
 }
 
@@ -22,11 +24,13 @@ function get_rpm_prefix(plat) {
        return 'redhat';
     else if (plat.startsWith('F-'))
 	return 'fedora';
+    else if (plat.startsWith('AL-'))
+	return 'amazonlinux';
     return 'unknown';
 }
 
 function get_installer(plat) {
-    if (plat.startsWith('F-'))
+    if (plat.startsWith('F-') || plat.startsWith('AL-'))
 	return 'dnf';
     else if (plat.startsWith('EL-')) {
 	var a = plat.split('-');
