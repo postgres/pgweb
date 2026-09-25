@@ -46,7 +46,8 @@ sitenav = {
     ],
     'community': [
         {'title': 'Community', 'link': '/community/'},
-        {'title': 'Contributors', 'link': '/community/contributors/'},
+        {'title': 'Recognized Contributors', 'link': '/community/contributors/'},
+        {'title': 'People', 'link': '/community/people/'},
         {'title': 'Mailing Lists', 'link': '/list/'},
         {'title': 'IRC', 'link': '/community/irc/'},
         # {'title': 'Slack', 'link': 'https://join.slack.com/t/postgresteam/shared_invite/zt-1qj14i9sj-E9WqIFlvcOiHsEk2yFEMjA'},

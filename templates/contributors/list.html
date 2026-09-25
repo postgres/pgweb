@@ -1,18 +1,18 @@
 {%extends "base/page.html"%}
 {%load pgfilters%}
-{%block title%}Contributor Profiles{%endblock%}
+{%block title%}Recognized Contributors{%endblock%}
 {%block contents%}
-<h1>PostgreSQL Contributor Profiles <i class="fa fa-users"></i></h1>
-
-<p>These are the fine people that make PostgreSQL what it is today!</p>
+<h1>PostgreSQL Recognized Contributors <i class="fa fa-users"></i></h1>
 
 <p>
-    For a list of all code contributions to a specific release, see the
-  <a href="/docs/release/">Release Notes</a> for released versions of PostgreSQL.
+  These are the fine people who make PostgreSQL what it is today!
+  Contributors listed here have provided a sustained stream of notable contributions in recent years.
 </p>
+
 <p>
-    Existing contributors can update their information in their
-    <a href="/account/profile/">user profile</a>.
+  A separate page lists all
+  <a href="/community/people/">people who have made contributions to PostgreSQL</a>
+  over the years.
 </p>
 
 {%for t in contributortypes%}
@@ -32,7 +32,7 @@
     {%for c in t.contributor_set.all %}
      {%if t.detailed%}
       <tr>
-       <td>{{c.firstname}} {{c.lastname}} {%if t.showemail and c.email%}({{c.email|hidemail}}){%endif%}
+       <td>{% if c.user %}<a href="/community/people/{{c.user.username}}/">{{c.firstname}} {{c.lastname}}</a>{% else %}{{c.firstname}} {{c.lastname}}{% endif %} {%if t.showemail and c.email%}({{c.email|hidemail}}){%endif%}
           {%if c.company %}
           <br/>
             {% if c.companyurl %}
@@ -41,21 +41,23 @@
               {{c.company}}
             {% endif %}
           {% endif %}
-          <br/>
-          {{c.location}}
+          {%if c.location %}
+            <br/>
+            {{c.location}}
+          {% endif %}
         </td>
         <td>{{c.contribution}}</td>
        </tr>
      {%else%}
       {%if forloop.counter0|divisibleby:"2" %}
        <tr>
-        <td>{{c.firstname}} {{c.lastname}}{%if t.showemail and c.email%} ({{c.email|hidemail}}){%endif%}</td>
+        <td>{% if c.user %}<a href="/community/people/{{c.user.username}}/">{{c.firstname}} {{c.lastname}}</a>{% else %}{{c.firstname}} {{c.lastname}}{% endif %}{%if t.showemail and c.email%} ({{c.email|hidemail}}){%endif%}</td>
         {%if forloop.last%}
         <td></td>
        </tr>
         {%endif%}
       {%else%}
-        <td>{{c.firstname}} {{c.lastname}}{%if t.showemail and c.email%} ({{c.email|hidemail}}){%endif%}</td>
+        <td>{% if c.user %}<a href="/community/people/{{c.user.username}}/">{{c.firstname}} {{c.lastname}}</a>{% else %}{{c.firstname}} {{c.lastname}}{% endif %}{%if t.showemail and c.email%} ({{c.email|hidemail}}){%endif%}</td>
        </tr>
       {%endif%}
      {%endif%}
@@ -65,6 +67,7 @@
 {%endfor%}
 
 <p>All contributors are listed in alphabetical order.
+  Existing contributors can update their information in their <a href="/account/profile/">user profile</a>.
   To suggest additions or corrections to this list, please email the
   <a href="/about/governance/contributors/">Contributors Committee</a> at
   <a href="mailto:contributors@postgresql.org">contributors@postgresql.org</a>.
