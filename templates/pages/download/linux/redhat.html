@@ -59,9 +59,30 @@ and 10.1.
 To use the PostgreSQL Yum Repository, follow these steps:
 </p>
 <ol>
-  <li>Select platform: <select id="platform" class="custom-select"></select></li>
-  <li>Select architecture: <select id="arch" class="custom-select"></select></li>
-  <li>Select version: <select id="version" class="custom-select"></select><br/></li>
+  <li>Select platform:
+    <div class="form-row align-items-end">
+      <div class="form-group col-md-6">
+        <label for="distribution">Distribution</label>
+        <select id="distribution" class="custom-select"></select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="platform">Version</label>
+        <select id="platform" class="custom-select"></select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="arch">Architecture</label>
+        <select id="arch" class="custom-select"></select>
+      </div>
+    </div>
+    <div id="minor-pin" class="custom-control custom-checkbox mb-3 d-none">
+      <input type="checkbox" class="custom-control-input" id="minor">
+      <label class="custom-control-label" for="minor">
+        Pin to an exact RHEL / Rocky Linux / AlmaLinux minor version &mdash; advanced, only if you tie your
+        system to one minor version. <a href="https://yum.postgresql.org/news/postgresql-rpms-multiple-rhel-minor-versions/" target="_blank" rel="noopener">Read this first.</a>
+      </label>
+    </div>
+  </li>
+  <li>Select PostgreSQL version: <select id="version" class="custom-select"></select><br/></li>
   <li>Copy, paste and run the relevant parts of the setup script:
     <div class="pg-script-container">
         <pre id="script-box" class="code"></pre>

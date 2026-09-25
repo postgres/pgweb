@@ -1,22 +1,41 @@
 var repodata = {{json|safe}};
 var supported_versions = [{{supported_versions}}];
 
+/* Distributions in the order they are listed, keyed by platform prefix */
+const distributions = [
+    ['EL', 'RHEL / Rocky Linux / AlmaLinux / OL'],
+    ['F', 'Fedora'],
+    ['AL', 'Amazon Linux'],
+];
+
 function sortNumeric(a,b) {
    return a-b;
 }
 
-function get_platform_name(plat, ver) {
-    if (plat == 'EL') {
-        if (parseFloat(ver) <= 7)
-	    return "Red Hat Enterprise, CentOS, Scientific or Oracle";
-        else
-	    return "Red Hat Enterprise Linux, Rocky Linux, AlmaLinux or Oracle Linux";
+/* Compare dotted versions ("10.2", "9.8") newest first */
+function sortVersionDesc(a, b) {
+    const x = a.split('.').map(Number);
+    const y = b.split('.').map(Number);
+    for (let i = 0; i < Math.max(x.length, y.length); i++) {
+        if ((x[i] || 0) != (y[i] || 0))
+            return (y[i] || 0) - (x[i] || 0);
     }
-    else if (plat == 'F')
-	return "Fedora";
-    else if (plat == 'AL')
-	return "Amazon Linux";
-    return "Undefined distribution";
+    return 0;
+}
+
+/* "EL-10.2" -> ["EL", "10.2"] */
+function split_platform(plat) {
+    const i = plat.indexOf('-');
+    return [plat.substring(0, i), plat.substring(i + 1)];
+}
+
+function get_major(plat) {
+    return parseInt(split_platform(plat)[1]);
+}
+
+/* Platforms pinned to a minor release, like EL-10.2 */
+function is_minor_platform(plat) {
+    return split_platform(plat)[1].includes('.');
 }
 
 function get_rpm_prefix(plat) {
@@ -33,8 +52,7 @@ function get_installer(plat) {
     if (plat.startsWith('F-') || plat.startsWith('AL-'))
 	return 'dnf';
     else if (plat.startsWith('EL-')) {
-	var a = plat.split('-');
-	if (a[1] >= 8)
+	if (get_major(plat) >= 8)
 	    return 'dnf';
     }
     return 'yum';
@@ -42,8 +60,7 @@ function get_installer(plat) {
 
 function disable_module_on(plat) {
     if (plat.startsWith('EL-')) {
-	var a = plat.split('-');
-	if (a[1] == 8)
+	if (get_major(plat) == 8)
 	    return true;
     }
     return false;
@@ -51,59 +68,120 @@ function disable_module_on(plat) {
 
 function uses_systemd(plat) {
     if (plat.startsWith('EL-')) {
-	var a = plat.split('-');
-	if (a[1] < 7)
+	if (get_major(plat) < 7)
 	    return false;
     }
     return true;
 }
 
-function get_platform_text(p) {
-    const a = p.split('-');
-    return get_platform_name(a[0], a[1]) + ' version ' + a[1];
+function get_arch_text(arch) {
+    if (arch == 'aarch64')
+	return 'aarch64 (arm64)';
+    return arch;
+}
+
+/* Only offer platforms that have at least one supported PostgreSQL version */
+function has_supported_versions(plat) {
+    return repodata['platforms'][plat].some(a => a['versions'].some(v => supported_versions.includes(parseInt(v))));
+}
+
+function get_platforms(dist, minor) {
+    return Object.keys(repodata['platforms'])
+        .filter(p => split_platform(p)[0] === dist && is_minor_platform(p) === minor && has_supported_versions(p))
+        .sort((a, b) => sortVersionDesc(split_platform(a)[1], split_platform(b)[1]));
+}
+
+function clear_options(box) {
+  while (box.options.length > 0) {
+    box.options.remove(0);
+  }
+}
+
+function add_option(box, text, value) {
+  const opt = document.createElement('option');
+  opt.text = text;
+  opt.value = value;
+  box.add(opt);
 }
 
 window.onload = function() {
-  const platbox = document.getElementById('platform');
-  const platkeys = Object.keys(repodata['platforms']).sort();
+  const distbox = document.getElementById('distribution');
+  const dists = distributions.filter(d => get_platforms(d[0], false).length > 0);
 
-  let opt = document.createElement('option');
-  opt.text = '* Select your platform';
-  opt.value = "-1";
-  platbox.add(opt);
-
-  for (const pp in platkeys) {
-    opt = document.createElement('option');
-    opt.text = get_platform_text(platkeys[pp]);
-    opt.value = platkeys[pp];
-    platbox.add(opt);
+  /* Platforms from distributions we don't have a name for yet */
+  for (const p of Object.keys(repodata['platforms'])) {
+    const d = split_platform(p)[0];
+    if (!dists.some(x => x[0] === d) && get_platforms(d, false).length > 0)
+      dists.push([d, d]);
   }
 
-  platChanged()
+  add_option(distbox, '* Select your distribution', '-1');
+  for (const d of dists) {
+    add_option(distbox, d[1], d[0]);
+  }
+
+  distChanged();
+}
+
+function distChanged() {
+  const dist = document.getElementById('distribution').value;
+  const minorbox = document.getElementById('minor-pin');
+  const hasminors = dist !== '-1' && get_platforms(dist, true).length > 0;
+
+  minorbox.classList.toggle('d-none', !hasminors);
+  if (!hasminors)
+    document.getElementById('minor').checked = false;
+
+  minorChanged();
+}
+
+function minorChanged() {
+  const dist = document.getElementById('distribution').value;
+  const minor = document.getElementById('minor').checked;
+  const platbox = document.getElementById('platform');
+
+  clear_options(platbox);
+
+  if (!dist || dist === "-1") {
+    platChanged();
+    return;
+  }
+
+  /* "(latest)" tells the rolling majors apart from the pinned minors */
+  const hasminors = get_platforms(dist, true).length > 0;
+  const plats = get_platforms(dist, minor);
+
+  if (plats.length > 1)
+    add_option(platbox, '* Select your distribution version', '-1');
+  for (const p of plats) {
+    let text = split_platform(p)[1];
+    if (minor)
+      text += ' (only)';
+    else if (hasminors)
+      text += ' (latest)';
+    add_option(platbox, text, p);
+  }
+
+  platChanged();
 }
 
 function platChanged() {
   const plat = document.getElementById('platform').value;
   const archbox = document.getElementById('arch');
 
-  while (archbox.options.length > 0) {
-    archbox.options.remove(0);
-  }
+  clear_options(archbox);
 
   if (!plat || plat === "-1") {
     archChanged();
     return;
   }
 
- let opt = document.createElement('option');
- opt.text = '* Select your architecture';
- opt.value = "-1";
- archbox.add(opt);
+  const archs = repodata['platforms'][plat].sort((a, b) => a['arch'].localeCompare(b['arch']));
 
-  for (const a in repodata['platforms'][plat].sort((a, b) => a['arch'].localeCompare(b['arch']))) {
-     opt = document.createElement('option');
-     opt.text = opt.value = repodata['platforms'][plat][a]['arch'];
-     archbox.add(opt);
+  if (archs.length > 1)
+    add_option(archbox, '* Select your architecture', '-1');
+  for (const a of archs) {
+    add_option(archbox, get_arch_text(a['arch']), a['arch']);
   }
 
   archChanged();
@@ -156,7 +234,7 @@ function verChanged() {
   if (!ver || ver === "-1") {
      document.getElementById('copy-btn').style.display = 'none';
      document.getElementById('copy-btn-root').style.display = 'none';
-     scriptBox.innerHTML = 'Select platform, architecture, and version above';
+     scriptBox.innerHTML = 'Select distribution, version, architecture and PostgreSQL version above';
      return;
   }
 
@@ -201,6 +279,8 @@ function setupHandlers() {
         copyScript(this, 'script-box', true);
     });
     document.getElementById('version').addEventListener('change', verChanged);
+    document.getElementById('distribution').addEventListener('change', distChanged);
+    document.getElementById('minor').addEventListener('change', minorChanged);
     document.getElementById('platform').addEventListener('change', platChanged);
     document.getElementById('arch').addEventListener('change', archChanged);
 }
