@@ -9,7 +9,7 @@ import rpmfile
 from collections import defaultdict
 from tempfile import NamedTemporaryFile
 
-re_platformdir = re.compile(r'^(\w+)-(\d+)-([^-]+)$')
+re_platformdir = re.compile(r'^(\w+)-(\d+(?:\.\d+)?)-([^-]+)$')
 re_reporpm = re.compile(r'^pgdg-(\w+)-repo-latest.noarch.rpm$')
 re_repofile = re.compile(r'^./etc/yum.repos.d/pgdg-([a-zA-Z0-9]+)-all.repo$')
 re_reposection = re.compile(r'^\[pgdg([0-9][0-9])]$')
@@ -64,7 +64,7 @@ if __name__ == "__main__":
             sys.exit(1)
 
         if r.text != "NOT CHANGED" and r.text != "OK":
-            print("Failed to upload: %s" % x)
+            print("Failed to upload: %s" % r.text)
             sys.exit(1)
     else:
         with NamedTemporaryFile(mode='w', dir=os.path.dirname(os.path.abspath(args.target))) as f:
