@@ -3,7 +3,7 @@ var supported_versions = [{{supported_versions}}];
 
 /* Distributions in the order they are listed, keyed by platform prefix */
 const distributions = [
-    ['EL', 'RHEL / Rocky Linux / AlmaLinux / OL'],
+    ['EL', 'RHEL / Rocky Linux / AlmaLinux'],
     ['F', 'Fedora'],
     ['AL', 'Amazon Linux'],
 ];
