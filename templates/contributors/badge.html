@@ -3,7 +3,7 @@
 {%block title%}{{badge}} - Contribution{%endblock%}
 {%block contents%}
 <h1>Badge: {{badge}} <i class="fa fa-star"></i></h1>
-<p><img src="{%if badge.has_image %}/community/badge/{{badge.slug}}/image/{%else%}/media/img/about/press/elephant.png{%endif%}" width="150"></p>
+<p><img src="{%if badge.has_image %}/community/badge/{{badge.slug}}/image/{%else%}/media/img/about/press/elephant.png{%endif%}" width="150" alt="{{badge}}"></p>
 
 {% if badge.description or badge.url %}
 <h2>Contribution</h2>
@@ -19,12 +19,12 @@
 <h2>Badge Holders</h2>
   {%if holders|length > 50%}
     {%for u in holders.all %}
-      <nobr>{%if u.date_retired%}<em>{%endif%}<a href="/community/people/{{u.user}}/">{{u.user.contributor.firstname}} {{u.user.contributor.lastname}}</a>{%if u.date_retired%}</em>{%endif%} {%if not forloop.last%}&middot;{%endif%}</nobr>
+      <nobr{%if u.date_retired%} class="badgeholder-retired"{%endif%}><a href="/community/people/{{u.user}}/">{{u.user.contributor.firstname}} {{u.user.contributor.lastname}}</a> {%if not forloop.last%}&middot;{%endif%}</nobr>
     {%endfor%}
   {%else%}
     <ul>
       {%for u in holders.all%}
-        <li>{%if u.date_retired%}<em>{%endif%}<a href="/community/people/{{u.user}}/">{{u.user.contributor.firstname}} {{u.user.contributor.lastname}}</a>{%if u.date_retired%} (retired from this activity)</em>{%endif%}</li>
+        <li{%if u.date_retired%} class="badgeholder-retired"{%endif%}><a href="/community/people/{{u.user}}/">{{u.user.contributor.firstname}} {{u.user.contributor.lastname}}</a>{%if u.date_retired%} (retired from this activity){%endif%}</li>
       {%endfor%}
     </ul>
   {%endif%}

@@ -53,7 +53,7 @@ class Contributor(models.Model):
     companyurl = models.URLField(max_length=100, null=True, blank=True, verbose_name='Company URL')
     location = models.CharField(max_length=100, null=True, blank=True)
     contribution = models.TextField(null=True, blank=True,
-                                    help_text='Describe what you did in the PostgreSQL community')
+                                    help_text='Describe your involvement in the PostgreSQL community')
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
 
     send_notification = True
@@ -102,7 +102,7 @@ class Badge(TwostateModerateModel):
     slug = models.SlugField(max_length=64, null=False, blank=False, unique=True, help_text='URL-friendly identifier for the badge page. Generated from the title when the badge is created, and kept fixed after that.')
     description = models.TextField(null=True, blank=True, help_text='What did the people do who contributed here?')
     url = models.URLField(max_length=100, null=True, blank=True, verbose_name='Contribution URL', help_text='URL for this contribution, e.g. the conference homepage. (Leave blank when there is no URL.)')
-    imagedata = ImageBinaryField(max_length=1000000, resolution=(150, 150), auto_scale=True, blank=True, null=True, verbose_name="Image", help_text="Square image, will be auto-scaled to 150×150. JPEG or PNG, up to 1 MB. When left blank, the Slony logo will be used.")
+    imagedata = ImageBinaryField(max_length=1000000, resolution=(150, 150), auto_scale=True, blank=True, null=True, verbose_name="Image", help_text="Square image, will be auto-scaled to 150x150. JPEG or PNG, up to 1 MB. When left blank, the PostgreSQL logo will be used.")
     contact = models.CharField(max_length=100, null=True, blank=True, verbose_name='Contact address', help_text='Contact address (email, URL, other) for people who want to be added as badge holder')
     holders = models.ManyToManyField(User, through="Badgeholder", through_fields=("badge", "user"), blank=True)
 

@@ -1758,6 +1758,9 @@ table.contributor-table thead tr th {
   text-align: center;
   padding: 4px;
 }
+.badgeholder-retired {
+  font-style: italic;
+}
 
 /* News archive */
 #pgContentWrap span.newstag {

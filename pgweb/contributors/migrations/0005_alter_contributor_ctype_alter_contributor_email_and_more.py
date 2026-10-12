@@ -82,7 +82,7 @@ class Migration(migrations.Migration):
                     "imagedata",
                     pgweb.util.fields.ImageBinaryField(
                         blank=True,
-                        help_text="Square image, will be auto-scaled to 150×150. JPEG or PNG, up to 1 MB. When left blank, the Slony logo will be used.",
+                        help_text="Square image, will be auto-scaled to 150x150. JPEG or PNG, up to 1 MB. When left blank, the PostgreSQL logo will be used.",
                         max_length=1000000,
                         null=True,
                         verbose_name="Image",

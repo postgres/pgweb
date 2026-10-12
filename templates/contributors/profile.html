@@ -12,8 +12,8 @@
       {%for b in badges %}
         <figure>
           <a href="/community/badge/{{b.badge.slug}}/">
-          <img src="{%if b.badge.has_image %}/community/badge/{{b.badge.slug}}/image/{%else%}/media/img/about/press/elephant.png{%endif%}">
-          <figcaption>{{b.badge}}{%if b.date_retired%}<br><em>(retired)</em>{%endif%}</figcaption>
+          <img src="{%if b.badge.has_image %}/community/badge/{{b.badge.slug}}/image/{%else%}/media/img/about/press/elephant.png{%endif%}" alt="{{b.badge}}">
+          <figcaption{%if b.date_retired%} class="badgeholder-retired"{%endif%}>{{b.badge}}{%if b.date_retired%}<br>(retired){%endif%}</figcaption>
           </a>
         </figure>
       {%endfor%}

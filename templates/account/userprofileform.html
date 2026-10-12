@@ -100,7 +100,7 @@
     {%for b in badges %}
       <figure>
         <a href="/community/badge/{{b.slug}}/">
-        <img src="{%if b.has_image %}/community/badge/{{b.slug}}/image/{%else%}/media/img/about/press/elephant.png{%endif%}">
+        <img src="{%if b.has_image %}/community/badge/{{b.slug}}/image/{%else%}/media/img/about/press/elephant.png{%endif%}" alt="{{b}}">
         <figcaption>{{b}}</figcaption>
         </a>
       </figure>
@@ -134,7 +134,7 @@
     <h2>Create contributor profile</h2>
     <p>You have been awarded contributor badges. To have your name included in the public people and badge holder lists, you can create a publicly visible profile page.</p>
     <div>
-      <input type="checkbox" name="create_contributor_profile"> Create publicly visible profile page
+      <input type="checkbox" name="create_contributor_profile" id="create_contributor_profile"> <label for="create_contributor_profile">Create publicly visible profile page</label>
     </div>
   {% endif %}
 
