@@ -70,7 +70,9 @@ class Version(models.Model):
         if not self.testing:
             return "%s.%s" % (self.numtree, minor)
         elif spaced:
-            return "%s %s %s" % (self.numtree, TESTING_SHORTSTRING[self.testing].capitalize(), minor)
+            testing_shortstring = TESTING_SHORTSTRING[self.testing]
+            testing_shortstring = testing_shortstring.upper() if testing_shortstring == 'rc' else testing_shortstring.capitalize()
+            return "%s %s %s" % (self.numtree, testing_shortstring, minor)
         else:
             return "%s%s%s" % (self.numtree, TESTING_SHORTSTRING[self.testing], minor)
 
