@@ -66,12 +66,20 @@ Import the <a href="/media/keys/ACCC4CF8.asc">repository key</a>:
 </p>
 
 <div class="pg-script-container">
-    <pre id="script-box2" class="code">sudo apt install curl ca-certificates
+    <pre id="script-box2" class="code">sudo apt install curl ca-certificates gpg
 sudo install -d /usr/share/postgresql-common/pgdg
 sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc</pre>
     <button id="copy-btn2-root" class="pg-script-copy-btn pg-script-copy-btn-root" title="Copy to clipboard (without sudo, for root)"><i class="fas fa-terminal"></i></button>
     <button id="copy-btn2" class="pg-script-copy-btn" title="Copy to clipboard"><i class="far fa-copy"></i></button>
 </div>
+
+<p>
+Verify the key:
+    <pre id="gpg-verify" class="code">gpg --show-key /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc
+pub   rsa4096 2011-10-13 [SC]
+      B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
+uid                      PostgreSQL Debian Repository</pre>
+</p>
 
 <p>
 Create <b>/etc/apt/sources.list.d/pgdg.sources</b>. The distributions are called <em>codename</em><b>-pgdg</b>. In the example, replace <em>resolute</em> with the actual distribution you are using. File contents:
