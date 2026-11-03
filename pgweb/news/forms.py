@@ -2,12 +2,14 @@ from django import forms
 from django.forms import ValidationError
 
 from pgweb.util.moderation import ModerationState
+from pgweb.util.forms import GroupedModelChoiceField
 from pgweb.core.models import Organisation, OrganisationEmail
 from .models import NewsArticle, NewsTag
 
 
 class NewsArticleForm(forms.ModelForm):
     form_intro = 'Before submitting news, please read the <a href="/about/policies/news-and-events/">current policy</a> for News and Events'
+    email = GroupedModelChoiceField(groupfield='org', required=True, queryset=OrganisationEmail.objects.filter(id=-1))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -16,7 +18,7 @@ class NewsArticleForm(forms.ModelForm):
 
     def filter_by_user(self, user):
         self.fields['org'].queryset = Organisation.objects.filter(managers=user, approved=True)
-        self.fields['email'].queryset = OrganisationEmail.objects.filter(org__managers=user, org__approved=True, confirmed=True)
+        self.fields['email'].queryset = OrganisationEmail.objects.select_related('org').filter(org__managers=user, org__approved=True, confirmed=True)
 
     def clean_date(self):
         if self.instance.pk and self.instance.modstate != ModerationState.CREATED:
