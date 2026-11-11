@@ -48,7 +48,7 @@ versionload AS (
   WHEN NOT MATCHED THEN
     INSERT (patch_id, version_id, fixed_minor)
     VALUES (patchid, versionid, fixedminor)
-  WHEN NOT MATCHED BY SOURCE AND patch_id > (SELECT min(id) FROM security_securitypatch WHERE cvenumber > 202500000) THEN
+  WHEN NOT MATCHED BY SOURCE AND patch_id > (SELECT min(id) FROM security_securitypatch WHERE cvenumber > 20250000000) THEN
     DELETE
   RETURNING COALESCE(cve, (SELECT cve FROM security_securitypatch WHERE id=patch_id)) AS cve,
             merge_action() AS action,
