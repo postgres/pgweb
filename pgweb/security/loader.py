@@ -10,7 +10,7 @@ def load_security_json():
     combined_json = list(_load_all_cve_json())
     curs = connection.cursor()
     curs.execute("""WITH t AS (
-SELECT (regexp_match(cveid, '^CVE-(\\d{4}-\\d{4,5})$'))[1] AS cve, title, description, vector, fixed, component
+SELECT (regexp_match(cveid, '^CVE-(\\d{4}-\\d{4,7})$'))[1] AS cve, title, description, vector, fixed, component
 FROM JSON_TABLE(%(j)s::json, '$[*]' COLUMNS (
   cveid text PATH '$.cveMetadata.cveId' ERROR ON EMPTY ERROR ON ERROR,
   title text PATH '$.containers.cna.title' ERROR ON EMPTY ERROR ON ERROR,

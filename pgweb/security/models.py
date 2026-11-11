@@ -20,7 +20,7 @@ component_choices = (
     ('other', 'Other'),
 )
 
-cve_regexp = r'^\d{4}-\d{4,5}$'
+cve_regexp = r'^\d{4}-\d{4,7}$'
 cvss_vector_regexp = r'^CVSS:3.1/AV:(.)/AC:(.)/PR:(.)/UI:(.)/S:(.)/C:(.)/I:(.)/A:(.)$'
 
 
@@ -28,14 +28,14 @@ class SecurityPatch(models.Model):
     public = models.BooleanField(null=False, blank=False, default=False)
     newspost = models.ForeignKey(NewsArticle, null=True, blank=True, on_delete=models.CASCADE)
     cve = models.CharField(max_length=32, null=False, blank=True, unique=True, validators=[
-        RegexValidator(cve_regexp, 'Enter CVE in format (YYYY-NNNNN (up to 5 N) without the CVE text'),
+        RegexValidator(cve_regexp, 'Enter CVE in format (YYYY-NNNNNNN (up to 7 N) without the CVE text'),
     ])
     cvenumber = models.GeneratedField(
         expression=(
-            Cast(Func(F('cve'), Value('-'), Value(1), function='split_part'), output_field=models.IntegerField()) * 100000 +
-            Cast(Func(F('cve'), Value('-'), Value(2), function='split_part'), output_field=models.IntegerField())
+            Cast(Func(F('cve'), Value('-'), Value(1), function='split_part'), output_field=models.BigIntegerField()) * 10000000 +
+            Cast(Func(F('cve'), Value('-'), Value(2), function='split_part'), output_field=models.BigIntegerField())
         ),
-        output_field=models.IntegerField(),
+        output_field=models.BigIntegerField(),
         db_persist=True,
         unique=True,
     )

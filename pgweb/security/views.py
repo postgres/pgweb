@@ -40,7 +40,7 @@ def details(request, cve_prefix, cve):
     try:
         security_patch = get_object_or_404(
             SecurityPatch,
-            cvenumber=int(cve.split('-')[0]) * 100000 + int(cve.split('-')[1]),
+            cvenumber=int(cve.split('-')[0]) * 10000000 + int(cve.split('-')[1]),
             public=True,
         )
     except ValidationError:
