@@ -1,0 +1,151 @@
+{% extends "pages/about/press/presskit19/base.html" %}
+
+{% block presskit_content %}
+<p><strong>19 de noviembre de 2026</strong> - El <a href="https://www.postgresql.org">Grupo Global de Desarrollo de PostgreSQL</a> ha anunciado hoy el lanzamiento de <a href="https://www.postgresql.org/docs/19/release-19.html">PostgreSQL 19</a>, la versión más reciente de la base de datos de código abierto más avanzada del mundo.</p>
+<p>La adopción de PostgreSQL en entornos de misión crítica continúa aumentando rápidamente. Para responder a esta demanda, PostgreSQL 19 facilita la administración y el desarrollo para cargas de trabajo a gran escala. Entre sus novedades destaca el comando
+<a href="https://www.postgresql.org/docs/19/sql-repack.html"><code>REPACK (CONCURRENTLY)</code></a>
+que permite reorganizar y optimizar las tablas según las necesidades de las cargas de trabajo actuales, sin afectar las operaciones en ejecución. Además, la nueva extensión <a href="https://www.postgresql.org/docs/19/pgplanadvice.html"><code>pg_plan_advice</code></a> ofrece un mayor control sobre la estabilidad de los planes de ejecución y el rendimiento de las consultas. Esta versión también incorpora numerosas mejoras para los desarrolladores, como la compatibilidad con la consistencia <em>read-your-writes</em> en los servidores de reserva (standbys) y la funcionalidad <em>get or create</em>, que evita tener que realizar una comunicación adicional de ida y vuelta con el servidor a través de la red.</p>
+<p>&quot;Durante más de 30 años, la comunidad global de código abierto ha desarrollado PostgreSQL hasta convertirlo en una base de datos en la que las organizaciones confían para gestionar sus datos más críticos&quot;, afirmó Jonathan Katz, miembro del Core Team de PostgreSQL. &quot;PostgreSQL 19 continúa con ese compromiso de fiabilidad, proporcionando a los usuarios nuevas formas de gestionar sus cargas de trabajo sin interrupciones y de desarrollar aplicaciones que abarcan múltiples sistemas&quot;.</p>
+<p>PostgreSQL es un innovador sistema de gestión de datos conocido por su confiabilidad, robustez y extensibilidad. Cuenta con casi 30 años de desarrollo de código abierto por parte de una comunidad global de desarrolladores y se ha convertido en la base de datos relacional de código abierto preferida por organizaciones de todos los tamaños.</p>
+<h3 id="simplificación-de-la-gestión-de-cargas-de-trabajo">Simplificación de la gestión de cargas de trabajo</h3>
+<p>Las tablas que reciben numerosas actualizaciones y eliminaciones pueden acumular espacio no utilizado, conocido como &quot;bloat&quot;, lo que también puede afectar significativamente el rendimiento de las consultas. Anteriormente, los comandos <code>VACUUM FULL</code> y <code>CLUSTER</code> se utilizaban para gestionar este problema, pero presentaban ciertas desventajas, entre ellas impedir el acceso a la tabla hasta que finalizara la limpieza. PostgreSQL 19 introduce el comando <a href="https://www.postgresql.org/docs/19/sql-repack.html"><code>REPACK</code></a> que recupera este espacio y puede reorganizar los datos de una tabla para que coincidan con un índice. Además, mediante <code>REPACK (CONCURRENTLY)</code>, puede realizar estas operaciones sin bloquear las lecturas ni las escrituras. <code>REPACK</code> reemplaza los comandos <code>VACUUM FULL</code> y <code>CLUSTER</code> aunque ambos permanecen disponibles por motivos de compatibilidad.</p>
+<p>El planificador de consultas de PostgreSQL suele elegir un plan de ejecución eficiente para cada consulta. Sin embargo, a medida que los datos evolucionan, las modificaciones en los datos pueden provocar cambios en el plan seleccionado y, en algunos casos, ofrecer un rendimiento inferior. PostgreSQL 19 introduce la extensión <a href="https://www.postgresql.org/docs/19/pgplanadvice.html"><code>pg_plan_advice</code></a> que permite mantener estables las decisiones del planificador y probar diferentes planes de ejecución mediante el mini lenguaje &quot;plan advice&quot;. Por su parte, la extensión complementaria <a href="https://www.postgresql.org/docs/19/pgstashadvice.html"><code>pg_stash_advice</code></a> permite almacenar estas recomendaciones y aplicarlas automáticamente a las consultas según su identificador, facilitando la corrección de planes de ejecución lentos sin necesidad de modificar el código de la aplicación.</p>
+<p>PostgreSQL 19 también incorpora mejoras que permiten a <a href="https://www.postgresql.org/docs/19/routine-vacuuming.html#AUTOVACUUM">autovacuum</a>
+gestionar de manera más eficiente los sistemas con cargas de trabajo intensivas. Ahora, autovacuum puede realizar operaciones de VACUUM sobre los índices mediante procesos de trabajo paralelos, cuya cantidad se controla con el nuevo parámetro
+<a href="https://www.postgresql.org/docs/19/runtime-config-vacuum.html#GUC-AUTOVACUUM-MAX-PARALLEL-WORKERS"><code>autovacuum_max_parallel_workers</code></a>
+Además, incorpora un nuevo <a href="https://www.postgresql.org/docs/19/routine-vacuuming.html#AUTOVACUUM-PRIORITY">sistema de puntuación</a>
+que permite establecer qué tablas deben procesarse primero. Durante su ejecución, las consultas que acceden a una tabla también pueden marcar automáticamente sus páginas como completamente visibles en el <a href="https://www.postgresql.org/docs/19/routine-vacuuming.html#VACUUM-FOR-VISIBILITY-MAP">mapa de visibilidad</a>
+lo que reduce la carga de trabajo de las futuras operaciones de VACUUM. Por otra parte,
+<a href="https://www.postgresql.org/docs/19/app-vacuumdb.html"><code>vacuumdb --analyze-only</code></a>
+ahora incluye las tablas particionadas en el análisis cuando no se especifican tablas concretas.</p>
+<p>Esta versión introduce nuevas vistas que facilitan el monitoreo de las cargas de trabajo, como
+<a href="https://www.postgresql.org/docs/19/monitoring-stats.html#PG-STAT-LOCK-VIEW"><code>pg_stat_lock</code></a>
+que proporciona estadísticas por tipo de bloqueo; <a href="https://www.postgresql.org/docs/19/monitoring-stats.html#PG-STAT-RECOVERY-VIEW"><code>pg_stat_recovery</code></a>
+que permite consultar el estado de la recuperación; y <a href="https://www.postgresql.org/docs/19/monitoring-stats.html#PG-STAT-AUTOVACUUM-SCORES-VIEW"><code>pg_stat_autovacuum_scores</code></a>
+que muestra cómo autovacuum establece las prioridades entre las tablas. Además, la nueva opción <code>IO</code> de <a href="https://www.postgresql.org/docs/19/sql-explain.html"><code>EXPLAIN ANALYZE</code></a> junto con el parámetro correspondiente de <a href="https://www.postgresql.org/docs/19/auto-explain.html#AUTO-EXPLAIN-CONFIGURATION-PARAMETERS-LOG-IO"><code>auto_explain</code></a>
+permite obtener información sobre las operaciones de entrada/salida (E/S) asíncronas. PostgreSQL 19 también permite conocer la cantidad de WAL generado por las imágenes de página completa mediante <a href="https://www.postgresql.org/docs/19/monitoring-stats.html#PG-STAT-WAL-VIEW"><code>pg_stat_wal</code></a>,
+<code>EXPLAIN (ANALYZE, WAL)</code>, y los eventos registrados en los logs de vacuum y analyze.</p>
+<h3 id="mejoras-en-la-gestión-de-datos-distribuidos">Mejoras en la gestión de datos distribuidos</h3>
+<p>Anteriormente, para habilitar la <a href="https://www.postgresql.org/docs/19/logical-replication.html">replicación lógica</a>, en PostgreSQL, con frecuencia era necesario reiniciar el servidor, lo que podía ocasionar interrupciones en los entornos de producción. PostgreSQL 19 facilita la inicialización de la replicación lógica al ajustar automáticamente el nivel efectivo de WAL a  <code>logical</code> cuando se crea el primer slot de replicación lógica. El nuevo parámetro  <a href="https://www.postgresql.org/docs/19/runtime-config-preset.html#GUC-EFFECTIVE-WAL-LEVEL"><code>effective_wal_level</code></a>
+permite consultar el nivel de WAL que se está utilizando.</p>
+<p>PostgreSQL 19 incorpora también compatibilidad con la replicación lógica de los
+<a href="https://www.postgresql.org/docs/19/logical-replication-sequences.html">valores de las secuencias</a>, que pueden incluirse en una publicación mediante <code>FOR ALL SEQUENCES</code> en
+<a href="https://www.postgresql.org/docs/19/sql-createpublication.html"><code>CREATE PUBLICATION</code></a>.
+Este comando también incorpora la cláusula <code>EXCEPT</code>, que permite excluir determinadas tablas al utilizar <code>FOR ALL TABLES</code>. Por su parte, <a href="https://www.postgresql.org/docs/19/sql-createsubscription.html"><code>CREATE SUBSCRIPTION</code></a> ahora permite obtener los parámetros de conexión desde un servidor externo, por ejemplo, uno configurado mediante <a href="https://www.postgresql.org/docs/19/postgres-fdw.html"><code>postgres_fdw</code></a>, utilizando la cláusula <code>SERVER</code>. Asimismo, la nueva opción de suscripción
+<a href="https://www.postgresql.org/docs/19/sql-createsubscription.html#SQL-CREATESUBSCRIPTION-PARAMS-WITH-RETAIN-DEAD-TUPLES"><code>retain_dead_tuples</code></a>
+permite detectar conflictos entre operaciones de actualización y eliminación que se ejecutan de forma concurrente. Estos conflictos quedan registrados en las estadísticas de
+<a href="https://www.postgresql.org/docs/19/monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION-STATS"><code>pg_stat_subscription_stats</code></a>.</p>
+<p>Para las aplicaciones que dirigen sus consultas de lectura a servidores secundarios (standbys), PostgreSQL 19 introduce la consistencia <em>read-your-writes</em> (leer las propias escrituras) mediante el nuevo comando
+<a href="https://www.postgresql.org/docs/19/sql-wait.html"><code>WAIT FOR LSN</code></a>. Este comando permite que una sesión en un servidor secundario espere hasta que se hayan reproducido los registros de escritura anticipada (WAL) correspondientes a un
+<a href="https://www.postgresql.org/docs/19/wal-internals.html">número de secuencia de registro (LSN)</a>
+determinado antes de ejecutar una consulta. De esta manera, la aplicación puede consultar los datos que acaba de escribir en el servidor primario.</p>
+<p>PostgreSQL 19 también incorpora mejoras en las consultas a tablas foráneas. Gracias a la nueva opción <a href="https://www.postgresql.org/docs/19/postgres-fdw.html#POSTGRES-FDW-OPTIONS-COST-ESTIMATION"><code>import_stats</code></a>
+, <a href="https://www.postgresql.org/docs/19/postgres-fdw.html"><code>postgres_fdw</code></a> puede importar las estadísticas de las tablas directamente desde el servidor remoto al ejecutar <code>ANALYZE</code>, sin necesidad de obtener muestras de registros de la tabla remota. Esto permite que el planificador de consultas tome decisiones más acertadas al seleccionar los planes de ejecución.</p>
+<h3 id="mejoras-en-el-rendimiento-y-la-experiencia-de-desarrollo">Mejoras en el rendimiento y la experiencia de desarrollo</h3>
+<p>PostgreSQL 19 introduce <a href="https://www.postgresql.org/docs/19/sql-insert.html#SQL-ON-CONFLICT"><code>INSERT ... ON CONFLICT DO SELECT</code></a>,
+una nueva funcionalidad que permite utilizar la cláusula <code>RETURNING</code> para recuperar registros existentes que generan conflictos durante una inserción, lo que facilita la implementación del patrón habitual &quot;obtener o crear&quot; (<em>get or create</em>). Por su parte, <a href="https://www.postgresql.org/docs/19/sql-copy.html"><code>COPY</code></a> ahora permite exportar datos en formato JSON, incluida la posibilidad de agruparlos en un único arreglo JSON. Asimismo, el
+<a href="https://www.postgresql.org/docs/19/functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS">lenguaje de rutas SQL/JSON</a>
+amplía sus capacidades con nuevos métodos de cadenas de texto, como <code>lower()</code>, <code>upper()</code>, <code>replace()</code>, <code>split_part()</code>,
+y <code>btrim()</code>. Otra mejora importante es que las <a href="https://www.postgresql.org/docs/19/functions-window.html">funciones de ventana</a> <code>lead()</code>, <code>lag()</code>, <code>first_value()</code>, <code>last_value()</code>, y <code>nth_value()</code>
+ahora admiten <code>IGNORE NULLS</code> , lo que permite omitir los valores <code>NULL</code> durante su procesamiento. Finalmente, la función <a href="https://www.postgresql.org/docs/19/functions-datetime.html#FUNCTIONS-DATETIME-TABLE"><code>random()</code></a>
+extiende sus posibilidades al permitir generar fechas y marcas de tiempo aleatorias dentro de un intervalo determinado.</p>
+<p>Esta nueva versión también mejora el rendimiento de numerosas cargas de trabajo sin que sea necesario modificar las aplicaciones. PostgreSQL 19 optimiza las verificaciones de claves foráneas, lo que permitió que las inserciones masivas fueran casi el doble de rápidas durante las pruebas. Además, incorpora nuevas optimizaciones en el planificador de consultas, como la transformación de cláusulas <code>NOT IN</code> en operaciones anti-join más eficientes cuando no existen valores <code>NULL</code>, y la ejecución de una
+<a href="https://www.postgresql.org/docs/19/runtime-config-query.html#GUC-ENABLE-EAGER-AGGREGATE">agregación anticipada</a>
+antes de realizar las uniones, reduciendo así la cantidad de registros que deben procesarse. PostgreSQL 19 también introduce mejoras en el subsistema de <a href="https://www.postgresql.org/docs/19/runtime-config-resource.html#GUC-IO-METHOD">entrada/salida (E/S) asíncrona</a>
+, incorporado originalmente en PostgreSQL 18. Cuando el parámetro <code>io_method</code> está configurado como <code>worker</code> (su valor predeterminado), PostgreSQL ajusta automáticamente la cantidad de procesos de trabajo de E/S dentro de los límites establecidos por los nuevos parámetros
+<a href="https://www.postgresql.org/docs/19/runtime-config-resource.html#GUC-IO-MIN-WORKERS"><code>io_min_workers</code></a>
+y <a href="https://www.postgresql.org/docs/19/runtime-config-resource.html#GUC-IO-MAX-WORKERS"><code>io_max_workers</code></a>
+que reemplazan al anterior <code>io_workers</code>. Asimismo, se han implementado mejoras de escalabilidad en el uso de <a href="https://www.postgresql.org/docs/19/sql-listen.html"><code>LISTEN</code></a>
+y <a href="https://www.postgresql.org/docs/19/sql-notify.html"><code>NOTIFY</code></a> para el intercambio de notificaciones en entornos con cargas de trabajo que utilizan múltiples canales.</p>
+<p>Finalmente, el nuevo parámetro <a href="https://www.postgresql.org/docs/19/runtime-config-connection.html#GUC-PASSWORD-EXPIRATION-WARNING-THRESHOLD"><code>password_expiration_warning_threshold</code></a>
+permite avisar a los usuarios cuando se aproxima la fecha de vencimiento de su contraseña.</p>
+<h3 id="otros-cambios-importantes">Otros cambios importantes</h3>
+<p>PostgreSQL 19 añade compatibilidad con
+<a href="https://www.postgresql.org/docs/19/ssl-tcp.html#SSL-SNI">Server Name Indication (SNI)</a>,
+en el servidor, lo que permite utilizar distintos certificados TLS en una misma instancia de PostgreSQL, dependiendo del nombre de host al que se conecte cada cliente. La asociación entre los nombres de host y sus correspondientes certificados y claves se configura mediante el nuevo archivo <a href="https://www.postgresql.org/docs/19/runtime-config-file-locations.html#GUC-HOSTS-FILE"><code>pg_hosts.conf</code></a>
+. Además, PostgreSQL 19 muestra ahora una advertencia cuando una autenticación mediante contraseña <code>md5</code> se completa correctamente. Esta advertencia puede deshabilitarse mediante el parámetro
+<a href="https://www.postgresql.org/docs/19/runtime-config-connection.html#GUC-MD5-PASSWORD-WARNINGS"><code>md5_password_warnings</code></a>
+. El método de autenticación <code>md5</code> fue declarado obsoleto en PostgreSQL 18 y se eliminará en una próxima versión. Para los sistemas que requieren autenticación mediante contraseñas, se recomienda utilizar la <a href="https://www.postgresql.org/docs/19/auth-password.html">autenticación SCRAM</a>.
+Asimismo, esta versión deja de admitir la autenticación RADIUS.</p>
+<p>La <a href="https://www.postgresql.org/docs/19/jit.html">compilación Just-in-Time (JIT)</a>
+ahora viene deshabilitada por defecto, debido a que las estimaciones de costos utilizadas por PostgreSQL para determinar cuándo activarla no resultaron suficientemente fiables. En entornos donde se ejecuta un número considerable de consultas analíticas complejas, puede ser conveniente habilitar JIT. Además, cuando PostgreSQL se compila con soporte para LZ4, el método de compresión predeterminado de <a href="https://www.postgresql.org/docs/19/storage-toast.html">TOAST</a> pasa a ser <code>lz4</code>.</p>
+<h3 id="características-adicionales">Características adicionales</h3>
+<p>Se han añadido numerosas nuevas características y mejoras a PostgreSQL 19 que podrían ser útiles en diferentes casos de uso. Para conocer todos los cambios y las novedades introducidas en esta versión, se recomienda consultar las <a href="https://www.postgresql.org/docs/19/release-19.html">notas de la versión</a>.</p>
+<h3 id="sobre-postgresql">Sobre PostgreSQL</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> es la base de datos de código abierto más avanzada del mundo, que cuenta con una comunidad global de miles de usuarios, contribuidores, empresas y organizaciones. Desde sus inicios en la Universidad de California, Berkeley, hace más de 40 años, PostgreSQL ha continuado con un ritmo de desarrollo inigualable. El maduro conjunto de características de PostgreSQL no sólo iguala a los principales sistemas de bases de datos propietarios, sino que los supera en términos de características avanzadas, extensibilidad, seguridad y estabilidad.</p>
+<h3 id="enlaces">Enlaces</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">Descargas</a></li>
+<li><a href="https://www.postgresql.org/docs/19/release-19.html">Notas de la versión</a></li>
+<li><a href="https://www.postgresql.org/about/press/">Kit de prensa</a></li>
+<li><a href="https://www.postgresql.org/support/security/">Información de seguridad</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">Política de versiones</a></li>
+<li><a href="https://www.postgresql.org/about/contact/">Contacto</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">Donaciones</a></li>
+</ul>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2>Sobre PostgreSQL</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a> es la base de datos de código abierto más avanzada del mundo, que cuenta con una comunidad global de miles de usuarios, contribuidores, empresas y organizaciones. Desde sus inicios en la Universidad de California, Berkeley, hace más de 40 años, PostgreSQL ha continuado con un ritmo de desarrollo inigualable. El maduro conjunto de características de PostgreSQL no sólo iguala a los principales sistemas de bases de datos propietarios, sino que los supera en términos de características avanzadas, extensibilidad, seguridad y estabilidad.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="más-información-sobre-las-características">Más información sobre las características</h2>
+<p>Para más información sobre las características antes mencionadas y otras más, se recomienda consultar los siguientes recursos:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/19/release-19.html">Notas de la versión</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">Matriz de características</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="dónde-descargarlo">Dónde descargarlo</h2>
+<p>Hay varias maneras de descargar PostgreSQL 19, entre ellas:</p>
+<ul>
+<li>La <a href="https://www.postgresql.org/download/">página oficial de descargas</a> que contiene instaladores y herramientas para <a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/linux/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a>, etc.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v19.0">Código fuente</a></li>
+</ul>
+<p>Otras herramientas y extensiones están disponibles en la
+<a href="http://pgxn.org/">PostgreSQL Extension Network</a>.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="documentación">Documentación</h2>
+<p>PostgreSQL 19 incluye documentación en HTML y páginas de manual. Es posible también consultar la documentación en línea en formato <a href="https://www.postgresql.org/docs/19/">HTML</a> y <a href="https://www.postgresql.org/files/documentation/pdf/19/postgresql-19-US.pdf">PDF</a>.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="licencia">Licencia</h2>
+<p>PostgreSQL utiliza la <a href="https://www.postgresql.org/about/licence/">PostgreSQL License</a>,
+una licencia &quot;permisiva&quot; de tipo BSD. Esta
+<a href="http://www.opensource.org/licenses/postgresql/">licencia certificada por la OSI</a> es ampliamente apreciada por ser flexible y adecuada para las empresas, ya que no limita el uso de PostgreSQL con aplicaciones comerciales y propietarias. Junto con el soporte para múltiples empresas y la propiedad pública del código, nuestra licencia hace que PostgreSQL sea muy popular entre los proveedores que desean integrar una base de datos en sus propios productos sin tener que preocuparse por tarifas, dependencia de un único proveedor o cambios en los términos de la licencia.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="contactos">Contactos</h2>
+<p>Sitio web</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>Correo electrónico</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="imágenes-y-logotipos">Imágenes y logotipos</h2>
+<p>Postgres, PostgreSQL y el logo del elefante (Slonik) son todas marcas registradas de la <a href="https://www.postgres.ca">PostgreSQL Community Association</a>.
+Quien desee utilizar estas marcas, deberá cumplir con la <a href="https://www.postgresql.org/about/policies/trademarks/">política de marca</a>.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="soporte-corporativo-y-donaciones">Soporte corporativo y donaciones</h2>
+<p>PostgreSQL cuenta con el soporte de numerosas empresas, que patrocinan a los desarrolladores, ofrecen recursos de alojamiento y nos dan apoyo financiero. Consulten nuestra página de
+<a href="https://www.postgresql.org/about/sponsors/">patrocinadores</a> para conocer algunos de los que dan soporte al proyecto.</p>
+<p>Existe también una gran comunidad de
+<a href="https://www.postgresql.org/support/professional_support/">empresas que ofrecen soporte para PostgreSQL</a>,
+desde consultores individuales hasta empresas multinacionales.</p>
+<p>Si desean hacer una contribución financiera al Grupo Global de Desarrollo de PostgreSQL o a una de las organizaciones sin fines de lucro reconocidas por la comunidad, visiten nuestra página de <a href="https://www.postgresql.org/about/donate/">donaciones</a>.</p>
+{% endblock presskit_corporate %}

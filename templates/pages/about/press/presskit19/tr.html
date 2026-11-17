@@ -1,0 +1,294 @@
+{% extends "pages/about/press/presskit19/base.html" %}
+
+{% block presskit_content %}
+<p><strong>19 Kasım 2026</strong> - <a href="https://www.postgresql.org">PostgreSQL Global Geliştirme Grubu</a>,
+dünyanın en gelişmiş açık kaynak veritabanının en son sürümü olan
+<a href="https://www.postgresql.org/docs/19/release-19.html">PostgreSQL 19</a>'un
+yayınlandığını bugün duyurdu.</p>
+<p>PostgreSQL'in kritik görevlerde kullanımı hızla artmaya devam ediyor ve
+PostgreSQL 19 bu iş yükleri için büyük ölçekte hem yönetimi hem de
+geliştirmeyi kolaylaştırarak buna yanıt veriyor. Bu sürüm, kullanıcıların
+tablolarını devam eden işlemleri kesintiye uğratmadan mevcut iş yüklerine göre
+optimize edebilmeleri için
+<a href="https://www.postgresql.org/docs/19/sql-repack.html"><code>REPACK (CONCURRENTLY)</code></a>
+komutunu sunuyor. PostgreSQL 19, yeni
+<a href="https://www.postgresql.org/docs/19/pgplanadvice.html"><code>pg_plan_advice</code></a>
+eklentisi ile kullanıcılara plan kararlılığı ve sorgu performansı üzerinde daha
+iyi denetim olanağı sağlıyor. Geliştiriciler, yedek sunucularda &quot;yazdığını okuma&quot;
+(read-your-writes) tutarlılığı desteğinden bir ağ gidiş-dönüşünü ortadan
+kaldıran &quot;getir ya da oluştur&quot; davranışına kadar bu sürümde pek çok hoş özellik
+bulacaklar.</p>
+<p>PostgreSQL çekirdek ekibi üyesi Jonathan Katz, &quot;30 yılı aşkın bir süredir
+küresel açık kaynak topluluğu, PostgreSQL'i kurumların en kritik verileri için
+güvendiği bir veritabanı haline getirdi,&quot; dedi. &quot;PostgreSQL 19, güvenilirliğe
+olan bu bağlılığı sürdürerek kullanıcılara iş yüklerini kesintisiz yönetmeleri
+ve birden çok sisteme yayılan uygulamalar geliştirmeleri için yeni yollar
+sunuyor.&quot;</p>
+<p>Güvenilirliği, sağlamlığı ve genişletilebilirliği ile bilinen yenilikçi bir veri
+yönetim sistemi olan PostgreSQL, küresel bir geliştirici topluluğunun 30 yıllık
+açık kaynak geliştirme birikiminden yararlanmaktadır ve her ölçekten kurum için
+tercih edilen açık kaynak ilişkisel veritabanı haline gelmiştir.</p>
+<h3 id="i̇ş-yükü-yönetiminin-kolaylaştırılması">İş yükü yönetiminin kolaylaştırılması</h3>
+<p>Çok sayıda güncelleme ve silme işlemi alan tablolarda &quot;şişme&quot; (bloat) olarak
+bilinen ve sorgu performansını da önemli ölçüde etkileyebilen kullanılmayan alan
+birikebilir. Daha önce bu sorunu çözmek için <code>VACUUM FULL</code> ve <code>CLUSTER</code>
+komutları kullanılıyordu; ancak bu komutların, temizlik bitene kadar tabloya
+erişimi engellemek de dahil olmak üzere çeşitli dezavantajları vardı.
+PostgreSQL 19, bu alanı geri kazanan ve tablo verisini bir dizine göre yeniden
+sıralayabilen <a href="https://www.postgresql.org/docs/19/sql-repack.html"><code>REPACK</code></a>
+komutunu sunuyor; <code>REPACK (CONCURRENTLY)</code> ile bunu okuma ya da yazma işlemlerini
+engellemeden yapabiliyor. <code>REPACK</code>, <code>VACUUM FULL</code> ve <code>CLUSTER</code> komutlarının
+yerini alıyor; bu iki komut uyumluluk için kullanılmaya devam edebilir.</p>
+<p>PostgreSQL sorgu planlayıcısı genellikle her sorgu için verimli bir plan seçer,
+ancak veriniz değiştikçe plan da değişebilir ve bazen yeni plan daha yavaş
+olabilir. PostgreSQL 19, plan seçimlerini sabitlemeyi ve &quot;plan tavsiyesi&quot;
+(plan advice) mini dilini kullanarak farklı planlarla deneme yapmayı sağlayan
+<a href="https://www.postgresql.org/docs/19/pgplanadvice.html"><code>pg_plan_advice</code></a>
+eklentisini ekliyor. Buna eşlik eden
+<a href="https://www.postgresql.org/docs/19/pgstashadvice.html"><code>pg_stash_advice</code></a>
+eklentisi ise tavsiyeleri saklayıp sorgu tanımlayıcılarına göre sorgulara
+otomatik olarak uyguluyor; böylece uygulamanızı değiştirmeden yavaş bir planı
+düzeltebiliyorsunuz.</p>
+<p>PostgreSQL 19 ayrıca yoğun sistemlerde
+<a href="https://www.postgresql.org/docs/19/routine-vacuuming.html#AUTOVACUUM">autovacuum</a>'un
+iş yüküne yetişmesine yardımcı oluyor. Autovacuum artık yeni
+<a href="https://www.postgresql.org/docs/19/runtime-config-vacuum.html#GUC-AUTOVACUUM-MAX-PARALLEL-WORKERS"><code>autovacuum_max_parallel_workers</code></a>
+ayarı ile denetlenen paralel işçiler kullanarak dizinleri vacuumlayabiliyor ve
+hangi tabloların önce işleneceğine karar vermek için yeni bir
+<a href="https://www.postgresql.org/docs/19/routine-vacuuming.html#AUTOVACUUM-PRIORITY">puanlama sistemi</a>
+kullanıyor. Bir tabloyu okuyan sorgular artık çalışma sırasında
+<a href="https://www.postgresql.org/docs/19/routine-vacuuming.html#VACUUM-FOR-VISIBILITY-MAP">görünürlük haritasındaki</a>
+sayfaları otomatik olarak &quot;tümü görünür&quot; (all-visible) olarak işaretleyebiliyor
+ve böylece gelecekteki vacuum işlemlerinin yapması gereken işi azaltıyor. Ayrıca
+<a href="https://www.postgresql.org/docs/19/app-vacuumdb.html"><code>vacuumdb --analyze-only</code></a>
+artık herhangi bir tablo belirtilmediğinde bölümlenmiş tabloları da analiz
+ediyor.</p>
+<p>Bu sürüm, iş yüklerini izlemek için yeni görünümler ekliyor: kilit türü başına
+istatistikler için
+<a href="https://www.postgresql.org/docs/19/monitoring-stats.html#PG-STAT-LOCK-VIEW"><code>pg_stat_lock</code></a>,
+kurtarma durumu için
+<a href="https://www.postgresql.org/docs/19/monitoring-stats.html#PG-STAT-RECOVERY-VIEW"><code>pg_stat_recovery</code></a>
+ve autovacuum'un tabloları nasıl önceliklendirdiğini göstermek için
+<a href="https://www.postgresql.org/docs/19/monitoring-stats.html#PG-STAT-AUTOVACUUM-SCORES-VIEW"><code>pg_stat_autovacuum_scores</code></a>.
+<a href="https://www.postgresql.org/docs/19/sql-explain.html"><code>EXPLAIN ANALYZE</code></a> için
+yeni <code>IO</code> seçeneği ve buna karşılık gelen
+<a href="https://www.postgresql.org/docs/19/auto-explain.html#AUTO-EXPLAIN-CONFIGURATION-PARAMETERS-LOG-IO"><code>auto_explain</code></a>
+ayarı, asenkron G/Ç etkinliğini raporluyor. PostgreSQL 19 ayrıca tam sayfa
+görüntüleri (full-page images) için yazılan WAL miktarını
+<a href="https://www.postgresql.org/docs/19/monitoring-stats.html#PG-STAT-WAL-VIEW"><code>pg_stat_wal</code></a>
+içinde, <code>EXPLAIN (ANALYZE, WAL)</code> çıktısında ve vacuum ile analyze günlük
+kayıtlarında raporluyor.</p>
+<h3 id="dağıtık-veri-iyileştirmeleri">Dağıtık veri iyileştirmeleri</h3>
+<p>Daha önce PostgreSQL,
+<a href="https://www.postgresql.org/docs/19/logical-replication.html">mantıksal replikasyonu</a>
+etkinleştirmek için kullanıcıların çoğu zaman sunucularını yeniden başlatmasını
+gerektiriyordu; bu da üretim iş yüklerinde kesintiye yol açabiliyordu.
+PostgreSQL 19, ilk mantıksal replikasyon yuvası (slot) oluşturulduğunda etkin
+WAL seviyesini otomatik olarak <code>logical</code> seviyesine yükselterek mantıksal
+replikasyonun başlatılmasını kolaylaştırıyor. Kullanımdaki WAL seviyesini yeni
+<a href="https://www.postgresql.org/docs/19/runtime-config-preset.html#GUC-EFFECTIVE-WAL-LEVEL"><code>effective_wal_level</code></a>
+ayarı ile görebilirsiniz.</p>
+<p>PostgreSQL 19 ayrıca
+<a href="https://www.postgresql.org/docs/19/logical-replication-sequences.html">sequence değerlerinin</a>
+mantıksal replikasyonunu ekliyor; bu değerleri
+<a href="https://www.postgresql.org/docs/19/sql-createpublication.html"><code>CREATE PUBLICATION</code></a>
+ile <code>FOR ALL SEQUENCES</code> kullanarak yayınlayabilirsiniz. <code>CREATE PUBLICATION</code>
+ayrıca <code>FOR ALL TABLES</code> ile yayın yaparken tabloları hariç tutmak için bir
+<code>EXCEPT</code> cümleciği ekliyor;
+<a href="https://www.postgresql.org/docs/19/sql-createsubscription.html"><code>CREATE SUBSCRIPTION</code></a>
+ise artık <code>SERVER</code> cümleciği ile bağlantı ayarlarını, örneğin
+<a href="https://www.postgresql.org/docs/19/postgres-fdw.html"><code>postgres_fdw</code></a> ile
+tanımlanmış bir dış sunucudan (foreign server) alabiliyor. Ayrıca yeni
+<a href="https://www.postgresql.org/docs/19/sql-createsubscription.html#SQL-CREATESUBSCRIPTION-PARAMS-WITH-RETAIN-DEAD-TUPLES"><code>retain_dead_tuples</code></a>
+abonelik (subscription) seçeneği, PostgreSQL'in eşzamanlı bir silme işlemiyle çakışan
+güncellemeleri algılamasını sağlıyor ve bu çakışmalar
+<a href="https://www.postgresql.org/docs/19/monitoring-stats.html#MONITORING-PG-STAT-SUBSCRIPTION-STATS"><code>pg_stat_subscription_stats</code></a>
+içinde sayılıyor.</p>
+<p>Okuma isteklerini yedek sunuculara gönderen uygulamalar için PostgreSQL 19, yeni
+<a href="https://www.postgresql.org/docs/19/sql-wait.html"><code>WAIT FOR LSN</code></a> komutu ile
+&quot;yazdığını okuma&quot; (read-your-writes) tutarlılığı ekliyor. Yedek sunucudaki bir
+oturum, bir sorguyu çalıştırmadan önce yedek sunucunun önceden yazma günlüğünü
+(WAL) belirli bir
+<a href="https://www.postgresql.org/docs/19/wal-internals.html">günlük sıra numarasına (LSN)</a>
+kadar yeniden oynatmasını beklemek için <code>WAIT FOR LSN</code> komutunu kullanabiliyor;
+böylece uygulama, birincil sunucuya az önce yazdığı veriyi okuyabiliyor.</p>
+<p>PostgreSQL 19 ayrıca dış tablolar (foreign tables) üzerindeki sorguları da
+iyileştiriyor. Yeni
+<a href="https://www.postgresql.org/docs/19/postgres-fdw.html#POSTGRES-FDW-OPTIONS-COST-ESTIMATION"><code>import_stats</code></a>
+seçeneği ile <a href="https://www.postgresql.org/docs/19/postgres-fdw.html"><code>postgres_fdw</code></a>,
+<code>ANALYZE</code> çalıştırdığınızda uzak tablodan satır örneklemek yerine tablo
+istatistiklerini uzak sunucudan içe aktarabiliyor; bu da sorgu planlayıcısının
+daha iyi planlar seçmesine yardımcı oluyor.</p>
+<h3 id="geliştirici-deneyimi-ve-performans-iyileştirmeleri">Geliştirici deneyimi ve performans iyileştirmeleri</h3>
+<p>PostgreSQL 19,
+<a href="https://www.postgresql.org/docs/19/sql-insert.html#SQL-ON-CONFLICT"><code>INSERT ... ON CONFLICT DO SELECT</code></a>
+sözdizimini ekliyor; bu sayede <code>RETURNING</code> cümleciği, bir ekleme işlemiyle
+çakışan mevcut satırları döndürebiliyor ve yaygın &quot;getir ya da oluştur&quot; kalıbı
+basitleşiyor. <a href="https://www.postgresql.org/docs/19/sql-copy.html"><code>COPY</code></a> artık
+veriyi, tek bir JSON dizisi biçimi de dahil olmak üzere JSON olarak çıktı
+verebiliyor;
+<a href="https://www.postgresql.org/docs/19/functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS">SQL/JSON yol dili</a>
+ise <code>lower()</code>, <code>upper()</code>, <code>replace()</code>, <code>split_part()</code> ve <code>btrim()</code> gibi metin
+yöntemleri ekliyor. Ayrıca <code>lead()</code>, <code>lag()</code>, <code>first_value()</code>, <code>last_value()</code>
+ve <code>nth_value()</code>
+<a href="https://www.postgresql.org/docs/19/functions-window.html">pencere fonksiyonları</a>
+artık <code>IGNORE NULLS</code> kullanarak <code>NULL</code> değerleri atlayabiliyor.
+<a href="https://www.postgresql.org/docs/19/functions-datetime.html#FUNCTIONS-DATETIME-TABLE"><code>random()</code></a>
+fonksiyonu da artık belirli bir aralıkta rastgele tarihler ve zaman damgaları
+üretebiliyor.</p>
+<p>Bu sürüm ayrıca uygulamanızda değişiklik yapmanıza gerek kalmadan pek çok iş
+yükünü hızlandırıyor. PostgreSQL 19, foreign key denetimlerinin
+performansını iyileştiriyor; bu iyileştirme testlerde toplu eklemeleri yaklaşık
+2 kat hızlandırdı. Ayrıca <code>NULL</code> değerler bulunmadığında <code>NOT IN</code> ifadelerini
+daha verimli anti-join'lere dönüştürmek ve işlenecek satır sayısını azaltmak
+için birleştirmelerden (join) önce
+<a href="https://www.postgresql.org/docs/19/runtime-config-query.html#GUC-ENABLE-EAGER-AGGREGATE">erken toplama (eager aggregation)</a>
+yapmak gibi ek sorgu planlayıcısı optimizasyonları ekliyor. PostgreSQL 19 ayrıca
+PostgreSQL 18'de eklenen
+<a href="https://www.postgresql.org/docs/19/runtime-config-resource.html#GUC-IO-METHOD">asenkron G/Ç</a>
+alt sistemini daha da geliştiriyor. <code>io_method</code> <code>worker</code> (varsayılan) olarak
+ayarlandığında PostgreSQL artık G/Ç işçilerinin sayısını, <code>io_workers</code> ayarının
+yerini alan yeni
+<a href="https://www.postgresql.org/docs/19/runtime-config-resource.html#GUC-IO-MIN-WORKERS"><code>io_min_workers</code></a>
+ve <a href="https://www.postgresql.org/docs/19/runtime-config-resource.html#GUC-IO-MAX-WORKERS"><code>io_max_workers</code></a>
+ayarları arasında otomatik olarak ayarlıyor. Çok kanallı iş yüklerinde bildirim
+alışverişi için <a href="https://www.postgresql.org/docs/19/sql-listen.html"><code>LISTEN</code></a>
+ve <a href="https://www.postgresql.org/docs/19/sql-notify.html"><code>NOTIFY</code></a>
+kullanıldığında da ölçeklenebilirlik iyileştirmeleri bulunuyor.</p>
+<p>Son olarak, yeni
+<a href="https://www.postgresql.org/docs/19/runtime-config-connection.html#GUC-PASSWORD-EXPIRATION-WARNING-THRESHOLD"><code>password_expiration_warning_threshold</code></a>
+ayarı, parolalarının süresi dolmak üzere olduğunda kullanıcıları uyarıyor.</p>
+<h3 id="diğer-önemli-değişiklikler">Diğer önemli değişiklikler</h3>
+<p>PostgreSQL 19,
+<a href="https://www.postgresql.org/docs/19/ssl-tcp.html#SSL-SNI">Sunucu Adı Belirtimi (Server Name Indication - SNI)</a>
+için sunucu tarafı desteği ekliyor; bu sayede tek bir PostgreSQL sunucusu,
+istemcinin bağlandığı sunucu adına göre farklı bir TLS sertifikası
+sunabiliyor. Sunucu adlarını sertifikaları ve anahtarlarıyla yeni
+<a href="https://www.postgresql.org/docs/19/runtime-config-file-locations.html#GUC-HOSTS-FILE"><code>pg_hosts.conf</code></a>
+dosyasında eşleyebilirsiniz. PostgreSQL 19 ayrıca artık başarılı bir <code>md5</code>
+parola kimlik doğrulamasından sonra bir uyarı veriyor; bu uyarıyı
+<a href="https://www.postgresql.org/docs/19/runtime-config-connection.html#GUC-MD5-PASSWORD-WARNINGS"><code>md5_password_warnings</code></a>
+ayarı ile kapatabilirsiniz. <code>md5</code> parola kimlik doğrulaması PostgreSQL 18'de
+kullanımdan kaldırılmıştı (deprecated) ve gelecekteki bir sürümde tamamen
+kaldırılacak. Parola tabanlı kimlik doğrulamaya ihtiyacınız varsa
+<a href="https://www.postgresql.org/docs/19/auth-password.html">SCRAM kimlik doğrulamasını</a>
+kullanın. Bu sürüm ayrıca RADIUS kimlik doğrulaması desteğini kaldırıyor.</p>
+<p><a href="https://www.postgresql.org/docs/19/jit.html">Anında derleme (Just-in-time compilation - JIT)</a>,
+PostgreSQL'in ne zaman kullanılacağına karar vermek için kullandığı maliyet
+tahminlerinin güvenilmez olduğu anlaşıldığından artık varsayılan olarak devre
+dışı. Çok sayıda büyük analitik sorgu çalıştırıyorsanız JIT'i etkinleştirmek
+isteyebilirsiniz. PostgreSQL LZ4 desteğiyle derlendiğinde, varsayılan
+<a href="https://www.postgresql.org/docs/19/storage-toast.html">TOAST</a> sıkıştırma
+yöntemi artık <code>lz4</code>.</p>
+<h3 id="ek-özellikler">Ek Özellikler</h3>
+<p>PostgreSQL 19'a, kullanım senaryolarınız için yararlı olabilecek pek çok başka
+yeni özellik ve iyileştirme de eklendi. Yeni ve değişen özelliklerin tam listesi
+için lütfen <a href="https://www.postgresql.org/docs/19/release-19.html">sürüm notlarına</a>
+bakın.</p>
+<h3 id="postgresql-hakkında">PostgreSQL Hakkında</h3>
+<p><a href="https://www.postgresql.org">PostgreSQL</a>, binlerce kullanıcı, katkıcı, şirket ve
+kurumdan oluşan küresel bir topluluğa sahip, dünyanın en gelişmiş açık kaynak
+veritabanıdır. 40 yılı aşkın bir süre önce Kaliforniya Üniversitesi,
+Berkeley'deki başlangıcından bu yana PostgreSQL, eşsiz bir hızla gelişimini
+sürdürmektedir. PostgreSQL'in olgun özellik seti, yalnızca önde gelen tescilli
+veritabanı sistemleriyle boy ölçüşmekle kalmaz; gelişmiş veritabanı
+özellikleri, genişletilebilirlik, güvenlik ve kararlılık açısından onları
+geride bırakır.</p>
+<h3 id="bağlantılar">Bağlantılar</h3>
+<ul>
+<li><a href="https://www.postgresql.org/download/">İndir</a></li>
+<li><a href="https://www.postgresql.org/docs/19/release-19.html">Sürüm Notları</a></li>
+<li><a href="https://www.postgresql.org/about/press/">Basın Kiti</a></li>
+<li><a href="https://www.postgresql.org/support/security/">Güvenlik Sayfası</a></li>
+<li><a href="https://www.postgresql.org/support/versioning/">Sürüm Politikası</a></li>
+<li><a href="https://www.postgresql.org/about/contact/">İletişim</a></li>
+<li><a href="https://www.postgresql.org/about/donate/">Bağış Yapın</a></li>
+</ul>
+{% endblock presskit_content %}
+
+{% block presskit_about %}
+<h2>PostgreSQL Hakkında</h2>
+<p><a href="https://www.postgresql.org">PostgreSQL</a>, binlerce kullanıcı, katkıcı, şirket ve
+kurumdan oluşan küresel bir topluluğa sahip, dünyanın en gelişmiş açık kaynak
+veritabanıdır. 40 yılı aşkın bir süre önce Kaliforniya Üniversitesi,
+Berkeley'deki başlangıcından bu yana PostgreSQL, eşsiz bir hızla gelişimini
+sürdürmektedir. PostgreSQL'in olgun özellik seti, yalnızca önde gelen tescilli
+veritabanı sistemleriyle boy ölçüşmekle kalmaz; gelişmiş veritabanı
+özellikleri, genişletilebilirlik, güvenlik ve kararlılık açısından onları
+geride bırakır.</p>
+{% endblock presskit_about %}
+
+{% block presskit_features %}
+<h2 id="özellikler-hakkında-daha-fazla-bilgi">Özellikler Hakkında Daha Fazla Bilgi</h2>
+<p>Yukarıdaki ve diğer özelliklerin açıklamaları için lütfen aşağıdaki kaynaklara
+bakın:</p>
+<ul>
+<li><a href="https://www.postgresql.org/docs/19/release-19.html">Sürüm Notları</a></li>
+<li><a href="https://www.postgresql.org/about/featurematrix/">Özellik Matrisi</a></li>
+</ul>
+{% endblock presskit_features %}
+
+{% block presskit_download %}
+<h2 id="nereden-i̇ndirilir">Nereden İndirilir</h2>
+<p>PostgreSQL 19'u indirmenin birkaç yolu vardır:</p>
+<ul>
+<li><a href="https://www.postgresql.org/download/windows/">Windows</a>, <a href="https://www.postgresql.org/download/linux/">Linux</a>, <a href="https://www.postgresql.org/download/macosx/">macOS</a> ve diğer platformlar için kurulum programları ve araçlar içeren <a href="https://www.postgresql.org/download/">Resmi İndirmeler</a> sayfası.</li>
+<li><a href="https://www.postgresql.org/ftp/source/v19.0">Kaynak Kodu</a></li>
+</ul>
+<p>Diğer araçlar ve eklentiler
+<a href="http://pgxn.org/">PostgreSQL Extension Network</a> üzerinde bulunabilir.</p>
+{% endblock presskit_download %}
+
+{% block presskit_docs %}
+<h2 id="belgeler">Belgeler</h2>
+<p>PostgreSQL 19, HTML belgelerinin yanı sıra man sayfalarıyla birlikte gelir;
+belgelere çevrimiçi olarak hem <a href="https://www.postgresql.org/docs/19/">HTML</a> hem de <a href="https://www.postgresql.org/files/documentation/pdf/19/postgresql-19-US.pdf">PDF</a> biçiminde de göz atabilirsiniz.</p>
+{% endblock presskit_docs %}
+
+{% block presskit_licence %}
+<h2 id="lisans">Lisans</h2>
+<p>PostgreSQL, BSD benzeri &quot;serbest&quot; (permissive) bir lisans olan
+<a href="https://www.postgresql.org/about/licence/">PostgreSQL Lisansı</a>'nı kullanır.
+<a href="http://www.opensource.org/licenses/postgresql/">OSI onaylı</a> bu lisans,
+PostgreSQL'in ticari ve tescilli uygulamalarla kullanımını kısıtlamadığı için
+esnek ve iş dostu olarak geniş çapta takdir görmektedir. Birden çok şirketin
+desteği ve kodun kamusal sahipliği ile birlikte lisansımız, PostgreSQL'i ücret,
+tedarikçiye bağımlılık ya da lisans koşullarındaki değişiklikler gibi
+endişeler taşımadan kendi ürünlerine bir veritabanı gömmek isteyen
+tedarikçiler arasında çok popüler kılmaktadır.</p>
+{% endblock presskit_licence %}
+
+{% block presskit_contact %}
+<h2 id="i̇letişim">İletişim</h2>
+<p>Web Sitesi</p>
+<ul>
+<li><a href="https://www.postgresql.org/">https://www.postgresql.org/</a></li>
+</ul>
+<p>E-posta</p>
+<ul>
+<li><a href="mailto:press@postgresql.org">press@postgresql.org</a></li>
+</ul>
+{% endblock presskit_contact %}
+
+{% block presskit_images %}
+<h2 id="görseller-ve-logolar">Görseller ve Logolar</h2>
+<p>Postgres, PostgreSQL ve Fil Logosu (Slonik),
+<a href="https://www.postgres.ca">PostgreSQL Community Association</a>'ın tescilli
+ticari markalarıdır. Bu markaları kullanmak istiyorsanız
+<a href="https://www.postgresql.org/about/policies/trademarks/">ticari marka politikasına</a>
+uymanız gerekir.</p>
+{% endblock presskit_images %}
+
+{% block presskit_corporate %}
+<h2 id="kurumsal-destek-ve-bağışlar">Kurumsal Destek ve Bağışlar</h2>
+<p>PostgreSQL, geliştiricilere sponsor olan, barındırma kaynakları sağlayan ve bize
+mali destek veren çok sayıda şirketin desteğinden yararlanmaktadır. Bu proje
+destekçilerinden bazıları için
+<a href="https://www.postgresql.org/about/sponsors/">sponsorlar</a> sayfamıza bakın.</p>
+<p>Bireysel danışmanlardan çok uluslu şirketlere kadar geniş bir
+<a href="https://www.postgresql.org/support/professional_support/">PostgreSQL desteği sunan şirketler</a>
+topluluğu da bulunmaktadır.</p>
+<p>PostgreSQL Global Geliştirme Grubu'na ya da tanınmış topluluk kâr amacı
+gütmeyen kuruluşlarından birine mali katkıda bulunmak isterseniz lütfen
+<a href="https://www.postgresql.org/about/donate/">bağışlar</a> sayfamızı ziyaret edin.</p>
+{% endblock presskit_corporate %}
