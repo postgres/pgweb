@@ -1,6 +1,6 @@
 versions:
   min: 8.1
-  max: 18
+  max: 19
 featurematrix:
   Backend:
   - name: 64-bit large objects
@@ -31,6 +31,13 @@ featurematrix:
     versions:
       '9.0': 'Yes'
     description: adds the ability to show buffer-usage statistics for a query
+  - name: EXPLAIN (IO)
+    versions:
+      '19': 'Yes'
+    description: "The `IO` option for\
+      \ [`EXPLAIN ANALYZE`](https://www.postgresql.org/docs/19/sql-explain.html)\
+      \ reports asynchronous I/O activity. This can also be logged using\
+      \ [`auto_explain.log_io`](https://www.postgresql.org/docs/19/auto-explain.html#AUTO-EXPLAIN-CONFIGURATION-PARAMETERS-LOG-IO)."
   - name: EXPLAIN (MEMORY)
     versions:
       '17': 'Yes'
@@ -74,6 +81,14 @@ featurematrix:
     versions:
       '16': 'Yes'
     url: https://www.postgresql.org/docs/16/monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW
+  - name: pg_stat_lock system view
+    versions:
+      '19': 'Yes'
+    url: https://www.postgresql.org/docs/19/monitoring-stats.html#PG-STAT-LOCK-VIEW
+  - name: pg_stat_recovery system view
+    versions:
+      '19': 'Yes'
+    url: https://www.postgresql.org/docs/19/monitoring-stats.html#PG-STAT-RECOVERY-VIEW
   - name: pg_wait_events system view
     versions:
       '17': 'Yes'
@@ -93,6 +108,13 @@ featurematrix:
       '9.3': 'Yes'
     description: Previously sizing shared memory often required adjusting kernel parameters
       to accommodate the change.  This is no longer necessary.
+  - name: WAL full page image size reporting
+    versions:
+      '19': 'Yes'
+    description: "The amount of WAL written for full page images is reported in\
+      \ [`pg_stat_wal`](https://www.postgresql.org/docs/19/monitoring-stats.html#PG-STAT-WAL-VIEW)\
+      \ (`wal_fpi_bytes`), `EXPLAIN (ANALYZE, WAL)`, and `VACUUM` and\
+      \ `ANALYZE` log output."
   - name: XML, JSON and YAML output for EXPLAIN
     versions:
       '9.0': 'Yes'
@@ -131,6 +153,12 @@ featurematrix:
     versions:
       '9.6': 'Yes'
     description: Fulltext search for phrases and word proximity.
+  - name: random() for dates and timestamps
+    versions:
+      '19': 'Yes'
+    description: "[`random(min, max)`](https://www.postgresql.org/docs/19/functions-datetime.html#FUNCTIONS-DATETIME-TABLE)\
+      \ can generate random `date`, `timestamp`, and `timestamptz` values\
+      \ within a range."
   - name: Range types
     versions:
       '9.2': 'Yes'
@@ -300,6 +328,19 @@ featurematrix:
     versions:
       '9.5': 'Yes'
     url: https://www.postgresql.org/docs/current/static/queries-table-expressions.html#QUERIES-GROUPING-SETS
+  - name: IGNORE NULLS / RESPECT NULLS for window functions
+    versions:
+      '19': 'Yes'
+    description: "The `lead()`, `lag()`, `first_value()`, `last_value()`, and\
+      \ `nth_value()` [window functions](https://www.postgresql.org/docs/19/functions-window.html)\
+      \ can skip `NULL` values using `IGNORE NULLS`."
+  - name: INSERT ... ON CONFLICT DO SELECT
+    versions:
+      '19': 'Yes'
+    description: "[`INSERT ... ON CONFLICT DO SELECT`](https://www.postgresql.org/docs/19/sql-insert.html#SQL-ON-CONFLICT)\
+      \ lets the `RETURNING` clause return existing rows that conflict with an\
+      \ insert, optionally locking them with `FOR UPDATE`/`FOR SHARE`. This\
+      \ simplifies the \"get or create\" pattern."
   - name: INSERT/UPDATE/DELETE RETURNING
     versions:
       '8.2': 'Yes'
@@ -507,6 +548,13 @@ featurematrix:
     versions:
       '8.3': 'Yes'
     description: automatic invalidation of cached exceutions plans
+  - name: Automatic scaling of I/O workers
+    versions:
+      '19': 'Yes'
+    description: "When [`io_method`](https://www.postgresql.org/docs/19/runtime-config-resource.html#GUC-IO-METHOD)\
+      \ is set to `worker`, PostgreSQL automatically adjusts the number of I/O\
+      \ workers between [`io_min_workers`](https://www.postgresql.org/docs/19/runtime-config-resource.html#GUC-IO-MIN-WORKERS)\
+      \ and [`io_max_workers`](https://www.postgresql.org/docs/19/runtime-config-resource.html#GUC-IO-MAX-WORKERS)."
   - name: Background Checkpointer
     versions:
       '9.2': 'Yes'
@@ -548,6 +596,12 @@ featurematrix:
     versions:
       '8.3': 'Yes'
     description: automatic smoothening of checkpoints to reduce sudden I/O spikes
+  - name: Eager aggregation
+    versions:
+      '19': 'Yes'
+    description: "The planner can perform some aggregation before joins to\
+      \ reduce the number of rows to process. This is controlled by\
+      \ [`enable_eager_aggregate`](https://www.postgresql.org/docs/19/runtime-config-query.html#GUC-ENABLE-EAGER-AGGREGATE)."
   - name: Foreign keys marked as NOT VALID
     versions:
       '9.1': 'Yes'
@@ -625,6 +679,12 @@ featurematrix:
     versions:
       '11': 'Yes'
     url: https://www.postgresql.org/docs/current/static/jit.html
+  - name: LISTEN/NOTIFY scalability
+    versions:
+      '19': 'Yes'
+    description: "[`NOTIFY`](https://www.postgresql.org/docs/19/sql-notify.html) only wakes up backends\
+      \ that are listening to the specified channel, improving scalability\
+      \ for multi-channel workloads."
   - name: Load balancing for libpq / psql
     versions:
       '16': 'Yes'
@@ -645,6 +705,11 @@ featurematrix:
     versions:
       '8.3': 'Yes'
     description: allows multiple tablespaces to be defined for temporary operations
+  - name: NOT IN converted to anti-joins
+    versions:
+      '19': 'Yes'
+    description: "`NOT IN` clauses can be converted to more efficient anti-joins\
+      \ when `NULL` values are not present."
   - name: Outer Join reordering
     versions:
       '8.2': 'Yes'
@@ -692,6 +757,14 @@ featurematrix:
     versions:
       '14': 'Yes'
     url: https://www.postgresql.org/docs/14/libpq-pipeline-mode.html
+  - name: Query plan management (pg_plan_advice, pg_stash_advice)
+    versions:
+      '19': 'Yes'
+    description: "[`pg_plan_advice`](https://www.postgresql.org/docs/19/pgplanadvice.html) allows plan\
+      \ choices to be stabilized and different plans to be tried using a\
+      \ \"plan advice\" mini-language. [`pg_stash_advice`](https://www.postgresql.org/docs/19/pgstashadvice.html)\
+      \ stores advice and automatically applies it to queries based on their\
+      \ query identifier."
   - name: Reduced lock levels for ALTER TABLE commands
     versions:
       '9.4': 'Yes'
@@ -801,6 +874,12 @@ featurematrix:
     versions:
       '12': 'Yes'
     url: https://www.postgresql.org/docs/current/functions-json.html#FUNCTIONS-SQLJSON-PATH
+  - name: SQL/JSON path string methods
+    versions:
+      '19': 'Yes'
+    description: "The [SQL/JSON path language](https://www.postgresql.org/docs/19/functions-json.html#FUNCTIONS-SQLJSON-PATH-OPERATORS)\
+      \ adds the string methods `lower()`, `upper()`, `initcap()`, `replace()`,\
+      \ `split_part()`, `btrim()`, `ltrim()`, and `rtrim()`."
   - name: SQL/JSON query functions
     versions:
       '17': 'Yes'
@@ -901,6 +980,25 @@ featurematrix:
     versions:
       '13': 'Yes'
     url: https://www.postgresql.org/docs/13/runtime-config-replication.html#GUC-MAX-SLOT-WAL-KEEP-SIZE
+  - name: CREATE PUBLICATION ... FOR ALL TABLES EXCEPT
+    versions:
+      '19': 'Yes'
+    description: "Tables can be excluded from a `FOR ALL TABLES` publication\
+      \ using the [`EXCEPT`](https://www.postgresql.org/docs/19/sql-createpublication.html#SQL-CREATEPUBLICATION-PARAMS-FOR-EXCEPT-TABLE)\
+      \ clause."
+  - name: CREATE SUBSCRIPTION ... SERVER
+    versions:
+      '19': 'Yes'
+    description: "[`CREATE SUBSCRIPTION`](https://www.postgresql.org/docs/19/sql-createsubscription.html#SQL-CREATESUBSCRIPTION-PARAMS-SERVER)\
+      \ can get its connection settings from a foreign server, such as one\
+      \ defined with [`postgres_fdw`](https://www.postgresql.org/docs/19/postgres-fdw.html)."
+  - name: Enable logical replication without a restart
+    versions:
+      '19': 'Yes'
+    description: "When `wal_level` is set to `replica`, PostgreSQL automatically\
+      \ raises the effective WAL level to `logical` when the first logical\
+      \ replication slot is created. The WAL level in use is reported by\
+      \ [`effective_wal_level`](https://www.postgresql.org/docs/19/runtime-config-preset.html#GUC-EFFECTIVE-WAL-LEVEL)."
   - name: Failover support for logical replication slots
     versions:
       '17': 'Yes'
@@ -927,6 +1025,12 @@ featurematrix:
     versions:
       '16': 'Yes'
     description: Logical replication publishers can be created from standby instances.
+  - name: Logical replication of sequences
+    versions:
+      '19': 'Yes'
+    description: "[Sequence values](https://www.postgresql.org/docs/19/logical-replication-sequences.html)\
+      \ can be logically replicated. Sequences are published using\
+      \ [`FOR ALL SEQUENCES`](https://www.postgresql.org/docs/19/sql-createpublication.html#SQL-CREATEPUBLICATION-PARAMS-FOR-ALL-SEQUENCES)."
   - name: Logical replication of stored generated columns
     versions:
       '18': 'Yes'
@@ -1006,6 +1110,12 @@ featurematrix:
       take the role of the synchronous standby, as controlled by the synchronous_standby_names
       setting. Synchronous replication can be enabled or disabled on a per-transaction
       basis using the synchronous_commit setting.
+  - name: WAIT FOR LSN
+    versions:
+      '19': 'Yes'
+    description: "[`WAIT FOR LSN`](https://www.postgresql.org/docs/19/sql-wait.html) provides\
+      \ \"read-your-writes\" consistency on standbys by waiting until a\
+      \ standby has replayed WAL up to a specific log sequence number (LSN)."
   Backup, Restore, & Data Integrity:
   - name: Archive modules
     versions:
@@ -1150,6 +1260,13 @@ featurematrix:
     description: "The new `ON_ERROR` option for COPY provides the option to ignore\
       \ and discard error rows. The default behavior is ON_ERROR stop the import.\r\
       \n\r\nSee [`COPY`](https://www.postgresql.org/docs/current/sql-copy.html)."
+  - name: COPY TO JSON format
+    versions:
+      '19': 'Yes'
+    description: "[`COPY TO`](https://www.postgresql.org/docs/19/sql-copy.html#SQL-COPY-PARAMS-FORMAT)\
+      \ can output data as JSON, including as a single JSON array using the\
+      \ [`FORCE_ARRAY`](https://www.postgresql.org/docs/19/sql-copy.html#SQL-COPY-PARAMS-FORCE-ARRAY)\
+      \ option."
   - name: COPY with arbitrary SELECT
     versions:
       '8.2': 'Yes'
@@ -1265,7 +1382,9 @@ featurematrix:
   - name: Native RADIUS authentication
     versions:
       '9.0': 'Yes'
-    description: adds support for authentictaing against a RADIUS server
+      '19': 'No'
+    description: adds support for authenticating against a RADIUS server. Removed
+      in PostgreSQL 19.
   - name: OAuth Authentication / Authorization
     versions:
       '18': 'Yes'
@@ -1317,6 +1436,13 @@ featurematrix:
       '8.3': 'Yes'
     description: full integration with the native authentication framework in Microsoft
       Windows
+  - name: Server Name Indication (SNI)
+    versions:
+      '19': 'Yes'
+    description: "A PostgreSQL server can present a different TLS certificate\
+      \ based on the hostname a client connects to. Hostnames are mapped to\
+      \ certificates and keys in [`pg_hosts.conf`](https://www.postgresql.org/docs/19/runtime-config-file-locations.html#GUC-HOSTS-FILE).\
+      \ For more information, see [SNI](https://www.postgresql.org/docs/19/ssl-tcp.html#SSL-SNI)."
   - name: SHA-2 encryption for password hashing
     versions:
       '18': 'Yes'
@@ -1367,6 +1493,12 @@ featurematrix:
       '8.3': 'Yes'
     url: https://www.postgresql.org/docs/current/static/sql-declare.html
   VACUUM and Maintenance:
+  - name: Autovacuum prioritization
+    versions:
+      '19': 'Yes'
+    description: "Autovacuum uses a [scoring system](https://www.postgresql.org/docs/19/routine-vacuuming.html#AUTOVACUUM-PRIORITY)\
+      \ to decide which tables to process first. Scores can be viewed in\
+      \ [`pg_stat_autovacuum_scores`](https://www.postgresql.org/docs/19/monitoring-stats.html#PG-STAT-AUTOVACUUM-SCORES-VIEW)."
   - name: Inserted data can trigger autovacuum
     versions:
       '13': 'Yes'
@@ -1382,6 +1514,11 @@ featurematrix:
       '16': 'Yes'
     description: Improvements to the page freezing strategy helps the general performance
       of vacuuming and other maintenance operations.
+  - name: Parallelized autovacuum for indexes
+    versions:
+      '19': 'Yes'
+    description: "Autovacuum can vacuum indexes using parallel workers,\
+      \ controlled by [`autovacuum_max_parallel_workers`](https://www.postgresql.org/docs/19/runtime-config-vacuum.html#GUC-AUTOVACUUM-MAX-PARALLEL-WORKERS)."
   - name: Parallelized VACUUM for Indexes
     versions:
       '13': 'Yes'
@@ -1400,6 +1537,15 @@ featurematrix:
       which reduces the amount of memory required for the vacuum process. Additionally,
       vacuum is no longer limited to 1GB of memory even when `maintenance_work_mem`
       or `autovacuum_work_mem` are set to higher values.
+  - name: REPACK (CONCURRENTLY)
+    versions:
+      '19': 'Yes'
+    description: "[`REPACK`](https://www.postgresql.org/docs/19/sql-repack.html) reclaims unused space in\
+      \ a table and can reorder its data to match an index. With\
+      \ [`REPACK (CONCURRENTLY)`](https://www.postgresql.org/docs/19/sql-repack.html#SQL-REPACK-NOTES-ON-CONCURRENTLY),\
+      \ it can do so without blocking reads or writes. `REPACK` replaces\
+      \ `VACUUM FULL` and `CLUSTER`, both of which remain available for\
+      \ compatibility."
   - name: Vacuum "emergency mode"
     versions:
       '14': 'Yes'
@@ -1469,6 +1615,12 @@ featurematrix:
     versions:
       '18': 'Yes'
     url: https://www.postgresql.org/docs/18/postgres-fdw.html#POSTGRES-FDW-OPTION-USE-SCRAM-PASSTHROUGH
+  - name: postgres_fdw statistics import
+    versions:
+      '19': 'Yes'
+    description: "With the [`import_stats`](https://www.postgresql.org/docs/19/postgres-fdw.html#POSTGRES-FDW-OPTIONS-COST-ESTIMATION)\
+      \ option, `ANALYZE` imports table statistics from the remote server\
+      \ instead of sampling rows from the remote table."
   - name: PostgreSQL Foreign Data Wrapper
     versions:
       '9.3': 'Yes'
@@ -1584,6 +1736,10 @@ featurematrix:
     versions:
       '9.0': 'Yes'
     description: allows the execution of anonymous code blocks in pl/pgsql
+  - name: Event triggers for PL/Python
+    versions:
+      '19': 'Yes'
+    url: https://www.postgresql.org/docs/19/plpython-event-trigger.html
   - name: EXCEPTION support in PL/pgSQL
     versions:
       '8.1': 'Yes'
