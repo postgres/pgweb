@@ -2,7 +2,7 @@ date: 2026-11-19
 versions:
   - "19.0"
 news:
-  id: 3349
+  id: 3449
 announcetext: |
   <p>
     Mission-critical usage of PostgreSQL continues to rapidly rise, and PostgreSQL 19
