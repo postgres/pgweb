@@ -1,0 +1,22 @@
+date: 2026-11-19
+versions:
+  - "19.0"
+news:
+  id: 3349
+announcetext: |
+  <p>
+    Mission-critical usage of PostgreSQL continues to rapidly rise, and PostgreSQL 19
+    responds to this by simplifying both administration and development for these
+    workloads at scale. This release introduces the <a href="https://www.postgresql.org/docs/19/sql-repack.html"><code>REPACK (CONCURRENTLY)</code></a>
+    command so users can optimize tables for their current workload without
+    disruption to ongoing operations. PostgreSQL 19 gives users better control over
+    plan stability and query performance with the new <a href="https://www.postgresql.org/docs/19/pgplanadvice.html"><code>pg_plan_advice</code></a> extension. Developers will find many delightful features in this release,
+    from support for "read-your-writes" consistency on standbys to "get or create"
+    behavior that saves a network round trip.
+  </p>
+  <p>
+    PostgreSQL, an innovative data management system known for its reliability,
+    robustness, and extensibility, benefits from 30 years of open source
+    development from a global developer community and has become the preferred open
+    source relational database for organizations of all sizes.
+  </p>
